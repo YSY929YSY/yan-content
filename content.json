@@ -1,8 +1,8 @@
 {
   "_meta": {
-    "version": "1.0",
-    "updated": "2026-04-07",
-    "note": "修改这个文件来更新内容，不需要改App代码。改完推送到GitHub，App下次打开自动更新。"
+    "version": "2.0",
+    "updated": "2026-04-12",
+    "note": "修改这个文件来更新内容。改完在GitHub上Commit，App下次打开自动更新。不需要动App.js。"
   },
 
   "culturalFusion": [
@@ -42,7 +42,7 @@
     {
       "word": "手紙",
       "theme": "⚠️ 陷阱字系列",
-      "note": "日语「手紙（てがみ）」是信件，不是卫生纸。中文「手纸」才是卫生纸。同一个汉字组合，两种截然不同的意思——这就是「言」存在的理由。",
+      "note": "日语「手紙（てがみ）」是信件，不是卫生纸。中文「手纸」才是卫生纸。同一个汉字组合，两个截然不同的意思——这就是「言」存在的理由。",
       "links": [
         { "lang": "ZH", "word": "手纸=卫生纸" },
         { "lang": "JP", "word": "手紙=信件" },
@@ -50,6 +50,355 @@
       ]
     }
   ],
+
+  "subwayAdventure": {
+    "title": "东京地铁大冒险",
+    "subtitle": "每站一关卡，通关解锁下一站",
+    "culturalNote": "东京地铁由十几家私营公司共同运营——东京Metro、都营地铁、JR、东急、京王……换乘可能就是换了一家公司，需要重新计费。IC卡帮你自动结算，但搞清楚这个逻辑，你就不会再在换乘口发呆了。",
+    "stations": [
+      {
+        "id": "shibuya",
+        "name": "渋谷",
+        "nameZh": "涩谷",
+        "level": "01",
+        "unlocked": true,
+        "stepsCount": 6,
+        "steps": [
+          {
+            "id": "entrance",
+            "step": "① 找入口",
+            "sign": "地下鉄",
+            "signSub": "SUBWAY",
+            "jp": "（无需说话）",
+            "tip": "找绿色的東京メトロ标志或蓝色的JR标志。不需要开口，跟着汉字「地下鉄」走就对了。真找不到再开口。",
+            "personPos": 15,
+            "tags": [
+              { "type": "zh", "text": "地下鉄=地铁" },
+              { "type": "en", "text": "subway / metro" },
+              { "type": "culture", "text": "东京地铁13条线，颜色区分" }
+            ]
+          },
+          {
+            "id": "ticket",
+            "step": "② 买IC卡",
+            "sign": "Suicaをください",
+            "signSub": "One Suica please",
+            "jp": "Suicaをください",
+            "tip": "第一次来日本，去绿色JR窗口说这句，买一张Suica。以后刷卡进出，再也不用每次对着机器发呆。充值说「チャージ」（charge的音译）。",
+            "personPos": 30,
+            "tags": [
+              { "type": "en", "text": "charge→チャージ（音译）" },
+              { "type": "culture", "text": "Suica全国便利店也能用" }
+            ]
+          },
+          {
+            "id": "gate",
+            "step": "③ 过改札口",
+            "sign": "改札口",
+            "signSub": "TICKET GATE",
+            "jp": "（Suica轻触，无需说话）",
+            "tip": "改札=检票，口=入口，汉字直读。听到「ピ」声就过。亮红灯=余额不足，走旁边的精算機充值，不是机器坏了。",
+            "personPos": 46,
+            "tags": [
+              { "type": "zh", "text": "改札=检票（直读）" },
+              { "type": "culture", "text": "精算機=余额补足机" },
+              { "type": "culture", "text": "闸门关得极快，不要尾随" }
+            ]
+          },
+          {
+            "id": "transfer",
+            "step": "④ 换乘陷阱",
+            "sign": "乗換",
+            "signSub": "TRANSFER",
+            "jp": "乗り換えはどこですか？",
+            "tip": "重要：换乘可能是换了一家公司！从东急换到东京Metro，要出闸重新进站，重新计费。跟着颜色走，每条线颜色固定。迷路了再说这句。",
+            "personPos": 60,
+            "tags": [
+              { "type": "zh", "text": "乗換=换乘（直读）" },
+              { "type": "culture", "text": "东京=多家私铁共存" },
+              { "type": "culture", "text": "换线=可能换公司重新付费" }
+            ]
+          },
+          {
+            "id": "platform",
+            "step": "⑤ 站台方向",
+            "sign": "次は渋谷です",
+            "signSub": "（广播）",
+            "jp": "次は渋谷です",
+            "tip": "上车前确认两件事：① 月台颜色对不对 ② 终点站名字对不对（看站台电子屏）。同一个站台可能停靠去往不同方向的车——这和大陆地铁不一样！听到「次は〇〇」就是下一站报站。",
+            "personPos": 74,
+            "tags": [
+              { "type": "zh", "text": "次=下一个（直读）" },
+              { "type": "culture", "text": "同站台可能有两个方向！" },
+              { "type": "culture", "text": "优先席=银色把手区请让座" }
+            ]
+          },
+          {
+            "id": "exit",
+            "step": "⑥ 选对出口",
+            "sign": "出口 A1",
+            "signSub": "EXIT",
+            "jp": "〇〇口はどこですか？",
+            "tip": "出口=出口，中日完全相同。但出哪个口决定你从哪条街走出来——A1和B3可能差出来300米。出站前在手机上查好对应出口，这比任何语言都重要。",
+            "personPos": 90,
+            "tags": [
+              { "type": "zh", "text": "出口（中日完全同）" },
+              { "type": "en", "text": "exit / salida（ES）" },
+              { "type": "culture", "text": "出口号决定你在哪条街" }
+            ]
+          }
+        ],
+        "phrases": [
+          { "jp": "Suicaをください", "zh": "请给我一张Suica" },
+          { "jp": "乗り換えはどこですか？", "zh": "换乘在哪里？" },
+          { "jp": "次は〇〇です", "zh": "下一站是〇〇（广播）" },
+          { "jp": "出口はどこですか？", "zh": "出口在哪里？" }
+        ]
+      },
+      {
+        "id": "shinjuku",
+        "name": "新宿",
+        "nameZh": "新宿",
+        "level": "02",
+        "unlocked": false,
+        "stepsCount": 4,
+        "steps": [
+          {
+            "id": "south_exit",
+            "step": "① 找南口",
+            "sign": "南口",
+            "signSub": "SOUTH EXIT",
+            "jp": "南口はどこですか？",
+            "tip": "新宿站有超过200个出口，是世界上出口最多的车站。南口・東口・西口是主要出口。「南」=south，汉字认识就认识方向。",
+            "personPos": 18,
+            "tags": [
+              { "type": "zh", "text": "東西南北（中日完全同）" },
+              { "type": "culture", "text": "200+出口=世界最多" }
+            ]
+          },
+          {
+            "id": "oedo",
+            "step": "② 找大江戸線",
+            "sign": "大江戸線",
+            "signSub": "OEDO LINE",
+            "jp": "大江戸線はどこですか？",
+            "tip": "大江戸线在地下极深，从新宿换乘需要走约5-10分钟。跟绿色标志走。大=大，江=江，戸=户，戸＝东京的旧称「江戸」。",
+            "personPos": 42,
+            "tags": [
+              { "type": "zh", "text": "大江戸=江户（东京旧名）" },
+              { "type": "culture", "text": "东京最深地铁线之一" }
+            ]
+          },
+          {
+            "id": "rush",
+            "step": "③ 早高峰",
+            "sign": "電車が参ります",
+            "signSub": "Train arriving",
+            "jp": "電車が参ります",
+            "tip": "「参ります」=来了（敬语形式）。这句广播提示电车进站，退到黄线后面。新宿早高峰是世界上最拥挤的地铁，真的会有工作人员把人推进去。",
+            "personPos": 65,
+            "tags": [
+              { "type": "zh", "text": "電車=电车（直读）" },
+              { "type": "culture", "text": "新宿早高峰=全球最拥挤" }
+            ]
+          },
+          {
+            "id": "west_exit",
+            "step": "④ 告诉司机",
+            "sign": "西口",
+            "signSub": "WEST EXIT",
+            "jp": "新宿の西口をお願いします",
+            "tip": "坐出租车时这样说。西口=歌舞伎町方向，东口=百货商场方向。方向汉字東西南北在日语和中文里完全相同，这是汉字圈的天然优势。",
+            "personPos": 88,
+            "tags": [
+              { "type": "zh", "text": "東西南北（完全同）" },
+              { "type": "culture", "text": "西口=歌舞伎町，东口=伊势丹" }
+            ]
+          }
+        ],
+        "phrases": [
+          { "jp": "南口はどこですか？", "zh": "南口在哪里？" },
+          { "jp": "大江戸線はどこですか？", "zh": "大江户线在哪里？" },
+          { "jp": "西口をお願いします", "zh": "请去西口（告诉司机）" }
+        ]
+      },
+      {
+        "id": "ikebukuro",
+        "name": "池袋",
+        "nameZh": "池袋",
+        "level": "03",
+        "unlocked": false,
+        "stepsCount": 3,
+        "steps": [
+          {
+            "id": "east_west",
+            "step": "① 东西出口",
+            "sign": "東口",
+            "signSub": "EAST EXIT",
+            "jp": "東口はどこですか？",
+            "tip": "池袋有东西两个完全不同的街区。東口=西武・東武百货，西口=家电量贩店（BIC CAMERA）。出错了就得绕一大圈，出站前想清楚去哪边。",
+            "personPos": 22,
+            "tags": [
+              { "type": "zh", "text": "東=东（直读）" },
+              { "type": "culture", "text": "东口vs西口=两个完全不同的世界" }
+            ]
+          },
+          {
+            "id": "buy",
+            "step": "② 购物",
+            "sign": "これをください",
+            "signSub": "I will have this",
+            "jp": "これをください",
+            "tip": "便利店、药妆店、家电店都用这句。指着商品说，完全不需要知道商品名称。これ=这个，ください=请给我，两个词学会走遍日本。",
+            "personPos": 55,
+            "tags": [
+              { "type": "zh", "text": "これ=这个" },
+              { "type": "en", "text": "this one please" }
+            ]
+          },
+          {
+            "id": "farewell",
+            "step": "③ 道别",
+            "sign": "ありがとうございました",
+            "signSub": "Thank you — farewell",
+            "jp": "ありがとうございました",
+            "tip": "注意：「ました」是过去式，道别时用。店员也会对你说同样的话。「ます」（现在式）vs「ました」（过去式）——一个字的差别，意思完全不同。",
+            "personPos": 85,
+            "tags": [
+              { "type": "zh", "text": "ました=过去式" },
+              { "type": "culture", "text": "ます vs ました——时态很重要" }
+            ]
+          }
+        ],
+        "phrases": [
+          { "jp": "東口はどこですか？", "zh": "东口在哪里？" },
+          { "jp": "これをください", "zh": "给我这个" },
+          { "jp": "ありがとうございました", "zh": "谢谢您（道别）" }
+        ]
+      },
+      {
+        "id": "ueno",
+        "name": "上野",
+        "nameZh": "上野",
+        "level": "04",
+        "unlocked": false,
+        "stepsCount": 3,
+        "steps": [
+          {
+            "id": "museum",
+            "step": "① 博物馆",
+            "sign": "博物館",
+            "signSub": "MUSEUM",
+            "jp": "博物館はどこですか？",
+            "tip": "博物館=博物馆，汉字完全直读。上野公园周边有东京国立博物馆等多个文化设施。这个句型可以替换任何地名——把「博物館」换成任何你想找的地方就行。",
+            "personPos": 20,
+            "tags": [
+              { "type": "zh", "text": "博物館（完全直读）" },
+              { "type": "culture", "text": "上野=东京文化心脏地带" }
+            ]
+          },
+          {
+            "id": "ticket",
+            "step": "② 买门票",
+            "sign": "大人一枚ください",
+            "signSub": "One adult ticket",
+            "jp": "大人一枚ください",
+            "tip": "大人=成人，一枚=一张（纸类量词）。「枚」这个量词专门用于纸类，门票、地图、照片都用「枚」。买两张就是「二枚」，三张是「三枚」。",
+            "personPos": 55,
+            "tags": [
+              { "type": "zh", "text": "大人=成人（直读）" },
+              { "type": "zh", "text": "枚=张（纸类量词）" }
+            ]
+          },
+          {
+            "id": "zoo",
+            "step": "③ 找动物园",
+            "sign": "動物園",
+            "signSub": "ZOO",
+            "jp": "動物園はどこですか？",
+            "tip": "動物=动物，園=园，完全直读。上野动物园是日本最古老的动物园，有大熊猫。这个句型是万能的——「動物園」换成任何地方名都能用。",
+            "personPos": 85,
+            "tags": [
+              { "type": "zh", "text": "動物園（完全直读）" },
+              { "type": "culture", "text": "上野动物园有大熊猫" }
+            ]
+          }
+        ],
+        "phrases": [
+          { "jp": "大人一枚ください", "zh": "一张成人票" },
+          { "jp": "動物園はどこですか？", "zh": "动物园在哪里？" },
+          { "jp": "〇〇はどこですか？", "zh": "〇〇在哪里？（万能）" }
+        ]
+      },
+      {
+        "id": "tokyo",
+        "name": "東京",
+        "nameZh": "东京站",
+        "level": "FINAL",
+        "unlocked": false,
+        "stepsCount": 4,
+        "steps": [
+          {
+            "id": "shinkansen",
+            "step": "① 新干线",
+            "sign": "新幹線",
+            "signSub": "SHINKANSEN",
+            "jp": "新幹線の乗り場はどこですか？",
+            "tip": "新幹線=新干线，汉字直读。東京駅是大多数新干线的始发站。进站找「中央口」，然后看板子找你要坐的线（东海道・东北・上越等）。",
+            "personPos": 18,
+            "tags": [
+              { "type": "zh", "text": "新幹線（直读）" },
+              { "type": "culture", "text": "东京→大阪新干线2小时16分" }
+            ]
+          },
+          {
+            "id": "marunouchi",
+            "step": "② 丸之内口",
+            "sign": "丸の内口",
+            "signSub": "MARUNOUCHI EXIT",
+            "jp": "丸の内口はどこですか？",
+            "tip": "东京站最著名的出口，对面是皇居，东侧是1914年建的红砖站舍。出这个口回头看，你会看到很多人在拍那栋建筑。",
+            "personPos": 42,
+            "tags": [
+              { "type": "zh", "text": "丸=圆形" },
+              { "type": "culture", "text": "1914年建筑，重要文化财产" }
+            ]
+          },
+          {
+            "id": "final_stop",
+            "step": "③ 终点站广播",
+            "sign": "終点です",
+            "signSub": "Final stop",
+            "jp": "終点です",
+            "tip": "「終点」=终点站，汉字直读。听到这句全车人都要下车了。和大陆不同，日本不少线路的电车到终点后会折返，方向变了但不一定换车——所以听到这句就下。",
+            "personPos": 65,
+            "tags": [
+              { "type": "zh", "text": "終点=终点（直读）" },
+              { "type": "culture", "text": "终点站=全员下车，电车折返" }
+            ]
+          },
+          {
+            "id": "complete",
+            "step": "④ 通关！",
+            "sign": "到着！",
+            "signSub": "ARRIVED",
+            "jp": "ありがとうございます！",
+            "tip": "从渋谷出发，经新宿、池袋、上野，终于到達東京駅。你已经掌握了东京地铁的核心逻辑：认汉字、跟颜色、换乘注意出闸。语言是最后的工具，空间感才是第一步。",
+            "personPos": 92,
+            "tags": [
+              { "type": "culture", "text": "通关！你会做地铁了" },
+              { "type": "en", "text": "mission complete" }
+            ]
+          }
+        ],
+        "phrases": [
+          { "jp": "新幹線の乗り場はどこですか？", "zh": "新干线乘车处在哪里？" },
+          { "jp": "終点です", "zh": "终点站（广播）" },
+          { "jp": "ありがとうございます", "zh": "非常感谢" }
+        ]
+      }
+    ]
+  },
 
   "scenes": [
     {
@@ -61,174 +410,21 @@
       "bgColor": "#fce8e0",
       "ready": true,
       "phrases": [
-        {
-          "id": 1, "jp": "すみません", "roma": "Sumimasen",
-          "zh": "不好意思", "en": "Excuse me", "jlpt": "N5",
-          "hookType": "e",
-          "hook": "万能开场白，道歉·叫人·引注意三合一。比「こんにちは」实用十倍。",
-          "links": [
-            { "lang": "EN", "word": "excuse me" },
-            { "lang": "ES", "word": "perdón" },
-            { "lang": "ZH", "word": "不好意思" }
-          ],
-          "scene": "叫服务员、拦路人问路、不小心碰到人，这句都对。"
-        },
-        {
-          "id": 2, "jp": "切符売り場はどこですか？", "roma": "Kippu uriba wa doko desu ka?",
-          "zh": "售票处在哪里？", "en": "Where is the ticket booth?", "jlpt": "N5",
-          "hookType": "d",
-          "hook": "切符(きっぷ) = 切 + 符 = 票。売り場 = 卖的地方。汉字拆开直接读！",
-          "links": [
-            { "lang": "ZH", "word": "切符≈票" },
-            { "lang": "EN", "word": "ticket" }
-          ],
-          "scene": "进站前找窗口，要买纸票时。IC卡（Suica）更方便，直接刷。"
-        },
-        {
-          "id": 3, "jp": "Suicaをください", "roma": "Suica wo kudasai",
-          "zh": "请给我一张Suica", "en": "One Suica card, please", "jlpt": "N5",
-          "hookType": "e",
-          "hook": "「ください」= please give me。买任何东西都能套用。",
-          "links": [
-            { "lang": "ES", "word": "por favor" },
-            { "lang": "EN", "word": "please give me" }
-          ],
-          "scene": "JR绿色窗口买第一张IC卡时说。关西用ICOCA，功能一样。"
-        },
-        {
-          "id": 4, "jp": "これは渋谷に行きますか？", "roma": "Kore wa Shibuya ni ikimasu ka?",
-          "zh": "这班车去涩谷吗？", "en": "Does this go to Shibuya?", "jlpt": "N5",
-          "hookType": "d",
-          "hook": "「行きます」= 去（行く）。加「か」变疑问，最简单的一步。",
-          "links": [
-            { "lang": "ES", "word": "¿va a Shibuya?" },
-            { "lang": "EN", "word": "does it go to" }
-          ],
-          "scene": "站台上不确定方向，拦准备上车的乘客快速确认。"
-        },
-        {
-          "id": 5, "jp": "何番線ですか？", "roma": "Nan-bansen desu ka?",
-          "zh": "几号站台？", "en": "Which platform?", "jlpt": "N5",
-          "hookType": "d",
-          "hook": "「何」= 几/什么。问数字套路：何 + 量词 + ですか。换成「何番出口」=几号出口。",
-          "links": [
-            { "lang": "EN", "word": "which platform?" },
-            { "lang": "ES", "word": "¿qué andén?" }
-          ],
-          "scene": "换乘时找不到站台，问工作人员。"
-        },
-        {
-          "id": 6, "jp": "乗り換えはどこですか？", "roma": "Norikae wa doko desu ka?",
-          "zh": "换乘在哪里？", "en": "Where do I transfer?", "jlpt": "N4",
-          "hookType": "d",
-          "hook": "「乗り換え」= 乗る（上车）+ 換える（换）。两个动词合体成名词，日语常见构词法。",
-          "links": [
-            { "lang": "EN", "word": "transfer" },
-            { "lang": "ES", "word": "transbordo" }
-          ],
-          "scene": "新宿、涩谷大站换乘，Google Maps比问人靠谱，但这句备用。"
-        },
-        {
-          "id": 7, "jp": "次は渋谷です", "roma": "Tsugi wa Shibuya desu",
-          "zh": "下一站是涩谷", "en": "Next stop: Shibuya", "jlpt": "N5",
-          "hookType": "d",
-          "hook": "「次」= 下一个，汉字直读。车厢广播最高频，听懂就不坐过站。",
-          "links": [
-            { "lang": "ZH", "word": "次≈次序" },
-            { "lang": "EN", "word": "next stop" }
-          ],
-          "scene": "听到这句就可以站起来靠近车门了。"
-        },
-        {
-          "id": 8, "jp": "渋谷で降ります", "roma": "Shibuya de orimasu",
-          "zh": "我在这里下车", "en": "I'm getting off here", "jlpt": "N5",
-          "hookType": "d",
-          "hook": "「降ります」= 下车，反义词「乗ります」= 上车。一对动词一起记。",
-          "links": [
-            { "lang": "ES", "word": "me bajo aquí" },
-            { "lang": "EN", "word": "getting off" }
-          ],
-          "scene": "拥挤车厢穿过人群下车，说这句旁边的人会主动让路。"
-        },
-        {
-          "id": 9, "jp": "出口はどこですか？", "roma": "Deguchi wa doko desu ka?",
-          "zh": "出口在哪里？", "en": "Where is the exit?", "jlpt": "N5",
-          "hookType": "d",
-          "hook": "「出口」中日完全相同！汉字认识就认识这词，零学习成本。",
-          "links": [
-            { "lang": "ZH", "word": "出口（完全同）" },
-            { "lang": "EN", "word": "exit" },
-            { "lang": "ES", "word": "salida" }
-          ],
-          "scene": "出闸机找出口，东京大站出口号码直接决定你从哪条街走出来。"
-        },
-        {
-          "id": 10, "jp": "改札口はどこですか？", "roma": "Kaisatsuguchi wa doko desu ka?",
-          "zh": "检票口在哪里？", "en": "Where is the ticket gate?", "jlpt": "N4",
-          "hookType": "d",
-          "hook": "「口」在地铁里到处出现：出口・改札口・乗降口。认识这个字，路牌全懂了。",
-          "links": [
-            { "lang": "ZH", "word": "改≈改变，口≈入口" }
-          ],
-          "scene": "地铁站内迷路，需要找回闸机出站时。"
-        },
-        {
-          "id": 11, "jp": "わかりません", "roma": "Wakarimasen",
-          "zh": "我听不懂", "en": "I don't understand", "jlpt": "N5",
-          "hookType": "e",
-          "hook": "「わかる」= 明白，「ません」= 否定。诚实说不懂，对方会自动换方式解释。",
-          "links": [
-            { "lang": "ES", "word": "no entiendo" },
-            { "lang": "EN", "word": "don't understand" }
-          ],
-          "scene": "直接说，别硬撑。日本人很乐意用另一种方式表达。"
-        },
-        {
-          "id": 12, "jp": "もう一度言ってください", "roma": "Mou ichido itte kudasai",
-          "zh": "请再说一遍", "en": "Could you repeat that?", "jlpt": "N5",
-          "hookType": "e",
-          "hook": "「もう一度」= one more time，可单独用。「言って」= 说（言う）的て形。",
-          "links": [
-            { "lang": "ES", "word": "una vez más" },
-            { "lang": "EN", "word": "one more time" }
-          ],
-          "scene": "地铁里嘈杂没听清，或者对方语速太快时。"
-        },
-        {
-          "id": 13, "jp": "ドアが閉まります", "roma": "Doa ga shimarimasu",
-          "zh": "门要关了", "en": "Doors are closing", "jlpt": "N4",
-          "hookType": "e",
-          "hook": "「ドア」= door，英语音译片假名。听到别冲门，日本地铁关门不留情。",
-          "links": [
-            { "lang": "EN", "word": "door→ドア" },
-            { "lang": "ES", "word": "puertas se cierran" }
-          ],
-          "scene": "广播反复播，夹到了也不会重开。"
-        },
-        {
-          "id": 14, "jp": "ありがとうございます", "roma": "Arigatou gozaimasu",
-          "zh": "非常感谢", "en": "Thank you very much", "jlpt": "N5",
-          "hookType": "e",
-          "hook": "「ありがとう」已是谢谢，「ございます」是敬语加强。越费劲发音，越诚心。",
-          "links": [
-            { "lang": "ES", "word": "muchas gracias" },
-            { "lang": "EN", "word": "thank you" },
-            { "lang": "ZH", "word": "谢谢" }
-          ],
-          "scene": "别人帮了你，鞠个头说这句，对方真的会很开心。"
-        },
-        {
-          "id": 15, "jp": "すみません、どこですか？", "roma": "Sumimasen, doko desu ka?",
-          "zh": "请问，在哪里？", "en": "Excuse me, where is it?", "jlpt": "N5",
-          "hookType": "d",
-          "hook": "「どこ」= 哪里，万能问路词。前加地点：渋谷はどこですか？",
-          "links": [
-            { "lang": "EN", "word": "where?" },
-            { "lang": "ES", "word": "¿dónde?" },
-            { "lang": "ZH", "word": "哪里" }
-          ],
-          "scene": "最简化版问路，加地点名称，哪里都能用。"
-        }
+        { "id": 1, "jp": "すみません", "roma": "Sumimasen", "zh": "不好意思", "en": "Excuse me", "jlpt": "N5", "hookType": "e", "hook": "万能开场白，道歉·叫人·引注意三合一。比「こんにちは」实用十倍。", "links": [{ "lang": "EN", "word": "excuse me" }, { "lang": "ES", "word": "perdón" }, { "lang": "ZH", "word": "不好意思" }], "scene": "叫服务员、拦路人问路、不小心碰到人，这句都对。" },
+        { "id": 2, "jp": "切符売り場はどこですか？", "roma": "Kippu uriba wa doko desu ka?", "zh": "售票处在哪里？", "en": "Where is the ticket booth?", "jlpt": "N5", "hookType": "d", "hook": "切符(きっぷ) = 切 + 符 = 票。売り場 = 卖的地方。汉字拆开直接读！", "links": [{ "lang": "ZH", "word": "切符≈票" }, { "lang": "EN", "word": "ticket" }], "scene": "进站前找窗口，要买纸票时。IC卡（Suica）更方便，直接刷。" },
+        { "id": 3, "jp": "Suicaをください", "roma": "Suica wo kudasai", "zh": "请给我一张Suica", "en": "One Suica card, please", "jlpt": "N5", "hookType": "e", "hook": "「ください」= please give me。买任何东西都能套用。", "links": [{ "lang": "ES", "word": "por favor" }, { "lang": "EN", "word": "please give me" }], "scene": "JR绿色窗口买第一张IC卡时说。关西用ICOCA，功能一样。" },
+        { "id": 4, "jp": "これは渋谷に行きますか？", "roma": "Kore wa Shibuya ni ikimasu ka?", "zh": "这班车去涩谷吗？", "en": "Does this go to Shibuya?", "jlpt": "N5", "hookType": "d", "hook": "「行きます」= 去（行く）。加「か」变疑问，最简单的一步。", "links": [{ "lang": "ES", "word": "¿va a Shibuya?" }, { "lang": "EN", "word": "does it go to" }], "scene": "站台上不确定方向，拦准备上车的乘客快速确认。" },
+        { "id": 5, "jp": "何番線ですか？", "roma": "Nan-bansen desu ka?", "zh": "几号站台？", "en": "Which platform?", "jlpt": "N5", "hookType": "d", "hook": "「何」= 几/什么。问数字套路：何 + 量词 + ですか。换成「何番出口」=几号出口。", "links": [{ "lang": "EN", "word": "which platform?" }, { "lang": "ES", "word": "¿qué andén?" }], "scene": "换乘时找不到站台，问工作人员。" },
+        { "id": 6, "jp": "乗り換えはどこですか？", "roma": "Norikae wa doko desu ka?", "zh": "换乘在哪里？", "en": "Where do I transfer?", "jlpt": "N4", "hookType": "d", "hook": "「乗り換え」= 乗る（上车）+ 換える（换）。两个动词合体成名词，日语常见构词法。", "links": [{ "lang": "EN", "word": "transfer" }, { "lang": "ES", "word": "transbordo" }], "scene": "新宿、涩谷大站换乘，Google Maps比问人靠谱，但这句备用。" },
+        { "id": 7, "jp": "次は渋谷です", "roma": "Tsugi wa Shibuya desu", "zh": "下一站是涩谷", "en": "Next stop: Shibuya", "jlpt": "N5", "hookType": "d", "hook": "「次」= 下一个，汉字直读。车厢广播最高频，听懂就不坐过站。", "links": [{ "lang": "ZH", "word": "次≈次序" }, { "lang": "EN", "word": "next stop" }], "scene": "听到这句就可以站起来靠近车门了。" },
+        { "id": 8, "jp": "渋谷で降ります", "roma": "Shibuya de orimasu", "zh": "我在这里下车", "en": "I'm getting off here", "jlpt": "N5", "hookType": "d", "hook": "「降ります」= 下车，反义词「乗ります」= 上车。一对动词一起记。", "links": [{ "lang": "ES", "word": "me bajo aquí" }, { "lang": "EN", "word": "getting off" }], "scene": "拥挤车厢穿过人群下车，说这句旁边的人会主动让路。" },
+        { "id": 9, "jp": "出口はどこですか？", "roma": "Deguchi wa doko desu ka?", "zh": "出口在哪里？", "en": "Where is the exit?", "jlpt": "N5", "hookType": "d", "hook": "「出口」中日完全相同！汉字认识就认识这词，零学习成本。", "links": [{ "lang": "ZH", "word": "出口（完全同）" }, { "lang": "EN", "word": "exit" }, { "lang": "ES", "word": "salida" }], "scene": "出闸机找出口，东京大站出口号码直接决定你从哪条街走出来。" },
+        { "id": 10, "jp": "改札口はどこですか？", "roma": "Kaisatsuguchi wa doko desu ka?", "zh": "检票口在哪里？", "en": "Where is the ticket gate?", "jlpt": "N4", "hookType": "d", "hook": "「口」在地铁里到处出现：出口・改札口・乗降口。认识这个字，路牌全懂了。", "links": [{ "lang": "ZH", "word": "改≈改变，口≈入口" }], "scene": "地铁站内迷路，需要找回闸机出站时。" },
+        { "id": 11, "jp": "わかりません", "roma": "Wakarimasen", "zh": "我听不懂", "en": "I don't understand", "jlpt": "N5", "hookType": "e", "hook": "「わかる」= 明白，「ません」= 否定。诚实说不懂，对方会自动换方式解释。", "links": [{ "lang": "ES", "word": "no entiendo" }, { "lang": "EN", "word": "don't understand" }], "scene": "直接说，别硬撑。日本人很乐意用另一种方式表达。" },
+        { "id": 12, "jp": "もう一度言ってください", "roma": "Mou ichido itte kudasai", "zh": "请再说一遍", "en": "Could you repeat that?", "jlpt": "N5", "hookType": "e", "hook": "「もう一度」= one more time，可单独用。「言って」= 说（言う）的て形。", "links": [{ "lang": "ES", "word": "una vez más" }, { "lang": "EN", "word": "one more time" }], "scene": "地铁里嘈杂没听清，或者对方语速太快时。" },
+        { "id": 13, "jp": "ドアが閉まります", "roma": "Doa ga shimarimasu", "zh": "门要关了", "en": "Doors are closing", "jlpt": "N4", "hookType": "e", "hook": "「ドア」= door，英语音译片假名。听到别冲门，日本地铁关门不留情。", "links": [{ "lang": "EN", "word": "door→ドア" }, { "lang": "ES", "word": "puertas se cierran" }], "scene": "广播反复播，夹到了也不会重开。" },
+        { "id": 14, "jp": "ありがとうございます", "roma": "Arigatou gozaimasu", "zh": "非常感谢", "en": "Thank you very much", "jlpt": "N5", "hookType": "e", "hook": "「ありがとう」已是谢谢，「ございます」是敬语加强。越费劲发音，越诚心。", "links": [{ "lang": "ES", "word": "muchas gracias" }, { "lang": "EN", "word": "thank you" }, { "lang": "ZH", "word": "谢谢" }], "scene": "别人帮了你，鞠个头说这句，对方真的会很开心。" },
+        { "id": 15, "jp": "すみません、どこですか？", "roma": "Sumimasen, doko desu ka?", "zh": "请问，在哪里？", "en": "Excuse me, where is it?", "jlpt": "N5", "hookType": "d", "hook": "「どこ」= 哪里，万能问路词。前加地点：渋谷はどこですか？", "links": [{ "lang": "EN", "word": "where?" }, { "lang": "ES", "word": "¿dónde?" }, { "lang": "ZH", "word": "哪里" }], "scene": "最简化版问路，加地点名称，哪里都能用。" }
       ]
     },
     {
@@ -245,96 +441,14 @@
         { "t": "🚫 没有小费文化", "b": "桌上留钱会被追出来还给你。服务已含在价格里，直接付正价就行。" }
       ],
       "phrases": [
-        {
-          "id": 1, "jp": "二人です。", "roma": "Futari desu",
-          "zh": "两个人。", "en": "Two, please.", "jlpt": "N5",
-          "hookType": "d",
-          "hook": "「二人」= ふたり，不规则读法。一人=ひとり，二人=ふたり，三人起才有规律。",
-          "links": [
-            { "lang": "ZH", "word": "二人（汉字同）" },
-            { "lang": "EN", "word": "two people" }
-          ],
-          "scene": "进门站在入口，等店员走来，说这句然后比两根手指。"
-        },
-        {
-          "id": 2, "jp": "すみません、注文をお願いします。", "roma": "Sumimasen, chūmon wo onegaishimasu",
-          "zh": "不好意思，要点餐。", "en": "We're ready to order.", "jlpt": "N4",
-          "hookType": "t",
-          "hook": "⚠️「注文」陷阱！不是注释文字，是点餐/订购。看到注文=可以点单了。",
-          "links": [
-            { "lang": "ZH", "word": "注文≠注释，=点餐" },
-            { "lang": "ES", "word": "pedir" }
-          ],
-          "scene": "看完菜单举手。日本服务员不会主动来问你。"
-        },
-        {
-          "id": 3, "jp": "これをください。", "roma": "Kore wo kudasai",
-          "zh": "给我这个。", "en": "I'll have this.", "jlpt": "N5",
-          "hookType": "e",
-          "hook": "「これ」= this，「ください」= please give me。指着菜单图片点完全正常。",
-          "links": [
-            { "lang": "EN", "word": "this one please" },
-            { "lang": "ES", "word": "esto por favor" }
-          ],
-          "scene": "对着图文菜单直接指，日本很多餐厅有图片菜单。"
-        },
-        {
-          "id": 4, "jp": "えびアレルギーがあります。", "roma": "Ebi arerugī ga arimasu",
-          "zh": "我对虾过敏。", "en": "I have a shrimp allergy.", "jlpt": "N3",
-          "hookType": "e",
-          "hook": "「アレルギー」= allergy，英语直接音译。换词：ナッツ・卵・牛乳。",
-          "links": [
-            { "lang": "EN", "word": "allergy→アレルギー" },
-            { "lang": "ES", "word": "alergia" }
-          ],
-          "scene": "点餐前主动说，不要等菜上来。"
-        },
-        {
-          "id": 5, "jp": "お会計をお願いします。", "roma": "Okaikei wo onegaishimasu",
-          "zh": "麻烦结账。", "en": "The bill, please.", "jlpt": "N4",
-          "hookType": "d",
-          "hook": "「会計」= 会计，汉字联想：帮你算账的人。空中做写字手势也行。",
-          "links": [
-            { "lang": "ZH", "word": "会計≈会计" },
-            { "lang": "EN", "word": "the bill" },
-            { "lang": "ES", "word": "la cuenta" }
-          ],
-          "scene": "日本餐厅不会主动给账单，吃完举手说或走到收银台。"
-        },
-        {
-          "id": 6, "jp": "おすすめは何ですか？", "roma": "Osusume wa nan desu ka?",
-          "zh": "有什么推荐吗？", "en": "What do you recommend?", "jlpt": "N4",
-          "hookType": "e",
-          "hook": "「おすすめ」= 推荐。お开头是礼貌前缀。",
-          "links": [
-            { "lang": "EN", "word": "recommendation" },
-            { "lang": "ES", "word": "¿qué recomienda?" }
-          ],
-          "scene": "菜单全是日文看不懂，让服务员帮选往往有惊喜。"
-        },
-        {
-          "id": 7, "jp": "すみません、もう一つください。", "roma": "Sumimasen, mō hitotsu kudasai",
-          "zh": "再来一个。", "en": "One more, please.", "jlpt": "N5",
-          "hookType": "e",
-          "hook": "「もう」= 再/还。もう一杯（再一杯）・もう少し（再一点儿）。",
-          "links": [
-            { "lang": "ES", "word": "uno más" },
-            { "lang": "EN", "word": "one more" }
-          ],
-          "scene": "汤喝完想续杯，或好吃想加一份。"
-        },
-        {
-          "id": 8, "jp": "おいしいです！", "roma": "Oishii desu!",
-          "zh": "好吃！", "en": "It's delicious!", "jlpt": "N5",
-          "hookType": "d",
-          "hook": "「おいしい」= 好吃。日本厨师服务员听到这句会真的很开心。",
-          "links": [
-            { "lang": "ZH", "word": "好吃" },
-            { "lang": "ES", "word": "¡qué rico!" },
-            { "lang": "EN", "word": "delicious!" }
-          ],
-          "scene": "吃到好吃的，直接说。效果比任何礼貌用语都强。"
-        }
+        { "id": 1, "jp": "二人です。", "roma": "Futari desu", "zh": "两个人。", "en": "Two, please.", "jlpt": "N5", "hookType": "d", "hook": "「二人」= ふたり，不规则读法。一人=ひとり，二人=ふたり，三人起才有规律。", "links": [{ "lang": "ZH", "word": "二人（汉字同）" }, { "lang": "EN", "word": "two people" }], "scene": "进门站在入口，等店员走来，说这句然后比两根手指。" },
+        { "id": 2, "jp": "すみません、注文をお願いします。", "roma": "Sumimasen, chūmon wo onegaishimasu", "zh": "不好意思，要点餐。", "en": "We're ready to order.", "jlpt": "N4", "hookType": "t", "hook": "注文陷阱！不是注释文字，是点餐/订购。看到注文=可以点单了。", "links": [{ "lang": "ZH", "word": "注文≠注释，=点餐" }, { "lang": "ES", "word": "pedir" }], "scene": "看完菜单举手。日本服务员不会主动来问你。" },
+        { "id": 3, "jp": "これをください。", "roma": "Kore wo kudasai", "zh": "给我这个。", "en": "I'll have this.", "jlpt": "N5", "hookType": "e", "hook": "「これ」= this，「ください」= please give me。指着菜单图片点完全正常。", "links": [{ "lang": "EN", "word": "this one please" }, { "lang": "ES", "word": "esto por favor" }], "scene": "对着图文菜单直接指，日本很多餐厅有图片菜单。" },
+        { "id": 4, "jp": "えびアレルギーがあります。", "roma": "Ebi arerugī ga arimasu", "zh": "我对虾过敏。", "en": "I have a shrimp allergy.", "jlpt": "N3", "hookType": "e", "hook": "「アレルギー」= allergy，英语直接音译。换词：ナッツ・卵・牛乳。", "links": [{ "lang": "EN", "word": "allergy→アレルギー" }, { "lang": "ES", "word": "alergia" }], "scene": "点餐前主动说，不要等菜上来。" },
+        { "id": 5, "jp": "お会計をお願いします。", "roma": "Okaikei wo onegaishimasu", "zh": "麻烦结账。", "en": "The bill, please.", "jlpt": "N4", "hookType": "d", "hook": "「会計」= 会计，汉字联想：帮你算账的人。空中做写字手势也行。", "links": [{ "lang": "ZH", "word": "会計≈会计" }, { "lang": "EN", "word": "the bill" }, { "lang": "ES", "word": "la cuenta" }], "scene": "日本餐厅不会主动给账单，吃完举手说或走到收银台。" },
+        { "id": 6, "jp": "おすすめは何ですか？", "roma": "Osusume wa nan desu ka?", "zh": "有什么推荐吗？", "en": "What do you recommend?", "jlpt": "N4", "hookType": "e", "hook": "「おすすめ」= 推荐。お开头是礼貌前缀。", "links": [{ "lang": "EN", "word": "recommendation" }, { "lang": "ES", "word": "¿qué recomienda?" }], "scene": "菜单全是日文看不懂，让服务员帮选往往有惊喜。" },
+        { "id": 7, "jp": "すみません、もう一つください。", "roma": "Sumimasen, mō hitotsu kudasai", "zh": "再来一个。", "en": "One more, please.", "jlpt": "N5", "hookType": "e", "hook": "「もう」= 再/还。もう一杯（再一杯）・もう少し（再一点儿）。", "links": [{ "lang": "ES", "word": "uno más" }, { "lang": "EN", "word": "one more" }], "scene": "汤喝完想续杯，或好吃想加一份。" },
+        { "id": 8, "jp": "おいしいです！", "roma": "Oishii desu!", "zh": "好吃！", "en": "It's delicious!", "jlpt": "N5", "hookType": "d", "hook": "「おいしい」= 好吃。日本厨师服务员听到这句会真的很开心。", "links": [{ "lang": "ZH", "word": "好吃" }, { "lang": "ES", "word": "¡qué rico!" }, { "lang": "EN", "word": "delicious!" }], "scene": "吃到好吃的，直接说。效果比任何礼貌用语都强。" }
       ]
     },
     {
@@ -346,171 +460,26 @@
       "bgColor": "#e0f0ec",
       "ready": true,
       "notes": [
-        { "t": "🔑 四个万能句型框架", "b": "「〜てください」「〜はありますか」「〜はどこですか」「いりません」——掌握这四个，便利店里90%的对话都能应付，而且在地铁、餐厅、酒店场景里反复出现。" },
-        { "t": "📱 支付方式全览", "b": "现金・IC卡（Suica/ICOCA）・信用卡・PayPay・Apple Pay，大城市便利店全支持。小城市或自动贩卖机可能只收现金，进门前可以问「カードで払えますか？」" },
-        { "t": "🕐 24小时营业的秘密", "b": "日本便利店不只卖东西：可以缴水电费、取快递、打印文件、买演唱会票。碰到问题都可以用「〜はありますか？」先问一句。" }
+        { "t": "🔑 四个万能句型框架", "b": "「〜てください」「〜はありますか」「〜はどこですか」「いりません」——掌握这四个，便利店里90%的对话都能应付。" },
+        { "t": "📱 支付方式全览", "b": "现金・IC卡（Suica/ICOCA）・信用卡・PayPay・Apple Pay，大城市便利店全支持。小城市可能只收现金，进门前可以问「カードで払えますか？」" },
+        { "t": "🕐 24小时营业的秘密", "b": "日本便利店可以缴水电费、取快递、打印文件、买演唱会票。碰到问题先用「〜はありますか？」" }
       ],
       "phrases": [
-        {
-          "id": 1, "jp": "ポイントカードはありますか？", "roma": "Pointo kādo wa arimasu ka?",
-          "zh": "您有积分卡吗？", "en": "Do you have a points card?", "jlpt": "N5",
-          "hookType": "e",
-          "hook": "「ポイント」= point，「カード」= card，英语直接音译。便利店里80%的外来词都能靠英语猜出来——这就是片假名的价值。",
-          "links": [
-            { "lang": "ZH", "word": "积分卡" },
-            { "lang": "JP", "word": "ポイント" },
-            { "lang": "EN", "word": "point card" },
-            { "lang": "ES", "word": "tarjeta de puntos" }
-          ],
-          "scene": "结账时收银员必问，几乎是条件反射。听到就回「いりません」或「あります」，不需要听懂全句。"
-        },
-        {
-          "id": 2, "jp": "いりません", "roma": "Irimasen",
-          "zh": "不需要", "en": "No, thank you", "jlpt": "N5",
-          "hookType": "d",
-          "hook": "「要る（いる）」= 需要，「ません」= 否定。万能拒绝句——袋いりません・スプーンいりません，换什么都行。",
-          "links": [
-            { "lang": "ZH", "word": "不要" },
-            { "lang": "EN", "word": "no need" },
-            { "lang": "ES", "word": "no hace falta" }
-          ],
-          "scene": "对方问你要不要袋子、筷子、叉子，统统用这一句解决。"
-        },
-        {
-          "id": 3, "jp": "温めますか？", "roma": "Atatamemasu ka?",
-          "zh": "需要加热吗？（店员说）", "en": "Shall I heat it up?", "jlpt": "N4",
-          "hookType": "d",
-          "hook": "「温」= 温暖，中日同字。「める」是使动后缀，让某物变成某种状态。温める = 让它变温 = 加热。",
-          "links": [
-            { "lang": "ZH", "word": "温热" },
-            { "lang": "JP", "word": "温(あたた)" },
-            { "lang": "EN", "word": "warm up" },
-            { "lang": "ES", "word": "calentar" }
-          ],
-          "scene": "买了便当或包子，收银员会问这句。听到「温め」就知道在问加热。"
-        },
-        {
-          "id": 4, "jp": "温めてください", "roma": "Atatamete kudasai",
-          "zh": "请帮我加热", "en": "Please heat it up", "jlpt": "N4",
-          "hookType": "d",
-          "hook": "「〜てください」= please do〜，日语最实用的请求句型。前面换任何动词的て形：見せてください（让我看看）・待ってください（等一下）。",
-          "links": [
-            { "lang": "ZH", "word": "请……" },
-            { "lang": "EN", "word": "please + verb" },
-            { "lang": "ES", "word": "por favor + infinitivo" }
-          ],
-          "scene": "对方没有主动问但你想加热时主动说。这个句型框架在全部场景都能用。"
-        },
-        {
-          "id": 5, "jp": "袋はいりますか？", "roma": "Fukuro wa irimasu ka?",
-          "zh": "需要袋子吗？（店员说）", "en": "Do you need a bag?", "jlpt": "N4",
-          "hookType": "t",
-          "hook": "⚠️「袋」不读「たい」，读「ふくろ」——训读，跟中文音完全不同。但字形认识，意思就懂了。2020年起日本便利店袋子收费，2-5日元。",
-          "links": [
-            { "lang": "ZH", "word": "袋子" },
-            { "lang": "JP", "word": "袋(ふくろ)" },
-            { "lang": "EN", "word": "bag" },
-            { "lang": "ES", "word": "bolsa" }
-          ],
-          "scene": "法规要求店员每次必问。直接回「いりません」或「ください」。"
-        },
-        {
-          "id": 6, "jp": "カードで払えますか？", "roma": "Kādo de haraemasu ka?",
-          "zh": "可以刷卡吗？", "en": "Can I pay by card?", "jlpt": "N4",
-          "hookType": "e",
-          "hook": "「カード」= card（音译）。「で」= 用……方式（工具助词）。句型：[手段]で払えますか？——現金で・Suicaで・クレジットカードで，换手段即可。",
-          "links": [
-            { "lang": "ZH", "word": "刷卡" },
-            { "lang": "EN", "word": "pay by card" },
-            { "lang": "ES", "word": "pagar con tarjeta" },
-            { "lang": "JP", "word": "払う(はらう)=支付" }
-          ],
-          "scene": "去小城市或老店，先确认能不能刷卡。东京基本都可以，但问一句没有损失。"
-        },
-        {
-          "id": 7, "jp": "領収書をください", "roma": "Ryōshūsho wo kudasai",
-          "zh": "请给我收据（正式）", "en": "Official receipt, please", "jlpt": "N3",
-          "hookType": "d",
-          "hook": "「領収書」= 领收书 = 收据。三字全认识：领（领取）+ 収（收）+ 書（书面凭证）。⚠️ 和「レシート」（普通小票）不同，这是正式收据，报销用。",
-          "links": [
-            { "lang": "ZH", "word": "收据/发票" },
-            { "lang": "JP", "word": "領収書 vs レシート" },
-            { "lang": "EN", "word": "official receipt" },
-            { "lang": "ES", "word": "recibo formal" }
-          ],
-          "scene": "出差报销或需要正式凭证时用。普通消费拿レシート（小票）就够了。"
-        },
-        {
-          "id": 8, "jp": "お弁当はどこですか？", "roma": "Obentō wa doko desu ka?",
-          "zh": "便当在哪里？", "en": "Where are the bento boxes?", "jlpt": "N5",
-          "hookType": "d",
-          "hook": "「弁当」= 便当——中文的「便当」就是从日语借来的！汉字圈词汇反向流通的经典案例。把「お弁当」换成「ATM」「トイレ」「お茶」，这句话能找便利店里任何东西。",
-          "links": [
-            { "lang": "ZH", "word": "便当（源自日语）" },
-            { "lang": "JP", "word": "弁当(べんとう)" },
-            { "lang": "EN", "word": "bento" },
-            { "lang": "ES", "word": "bento（国际通用）" }
-          ],
-          "scene": "进店找不到热食区时问。日本全家/罗森/7-11的便当区一般在中间或靠近收银台。"
-        },
-        {
-          "id": 9, "jp": "〜はありますか？", "roma": "〜wa arimasu ka?",
-          "zh": "有……吗？", "en": "Do you have 〜?", "jlpt": "N5",
-          "hookType": "e",
-          "hook": "「ある」= 存在/有（无生命物体）。和「いる」区分：物体用ある，人/动物用いる。ATMはありますか？トイレはありますか？前面换任何名词。",
-          "links": [
-            { "lang": "ZH", "word": "有……吗" },
-            { "lang": "EN", "word": "do you have" },
-            { "lang": "ES", "word": "¿tiene〜?" },
-            { "lang": "JP", "word": "ある vs いる（物 vs 人）" }
-          ],
-          "scene": "找任何东西都可以用。配合「〜はどこですか」一起记：有没有用ありますか，在哪里用どこですか。"
-        },
-        {
-          "id": 10, "jp": "ありがとうございました", "roma": "Arigatō gozaimashita",
-          "zh": "谢谢您（离开时）", "en": "Thank you — farewell", "jlpt": "N5",
-          "hookType": "e",
-          "hook": "⚠️「ございます」vs「ございました」——差一个字，意思天差地别。「ます」= 现在/将来，「ました」= 过去。道别用过去式，表示感谢这次交易已完成。",
-          "links": [
-            { "lang": "ZH", "word": "谢谢（道别）" },
-            { "lang": "EN", "word": "thank you farewell" },
-            { "lang": "ES", "word": "gracias（despedida）" },
-            { "lang": "JP", "word": "ました=过去式" }
-          ],
-          "scene": "付完款拿东西离开时说。对方也会说同样的话——这是日本便利店完整的道别仪式。"
-        }
+        { "id": 1, "jp": "ポイントカードはありますか？", "roma": "Pointo kādo wa arimasu ka?", "zh": "您有积分卡吗？", "en": "Do you have a points card?", "jlpt": "N5", "hookType": "e", "hook": "「ポイント」= point，「カード」= card，英语直接音译。便利店里80%的外来词都能靠英语猜出来。", "links": [{ "lang": "ZH", "word": "积分卡" }, { "lang": "JP", "word": "ポイント" }, { "lang": "EN", "word": "point card" }, { "lang": "ES", "word": "tarjeta de puntos" }], "scene": "结账时收银员必问。听到就回「いりません」或「あります」。" },
+        { "id": 2, "jp": "いりません", "roma": "Irimasen", "zh": "不需要", "en": "No, thank you", "jlpt": "N5", "hookType": "d", "hook": "「要る（いる）」= 需要，「ません」= 否定。万能拒绝句——袋いりません・スプーンいりません，换什么都行。", "links": [{ "lang": "ZH", "word": "不要" }, { "lang": "EN", "word": "no need" }, { "lang": "ES", "word": "no hace falta" }], "scene": "对方问你要不要袋子、筷子、叉子，统统用这一句解决。" },
+        { "id": 3, "jp": "温めますか？", "roma": "Atatamemasu ka?", "zh": "需要加热吗？（店员说）", "en": "Shall I heat it up?", "jlpt": "N4", "hookType": "d", "hook": "「温」= 温暖，中日同字。「める」是使动后缀，温める = 让它变温 = 加热。", "links": [{ "lang": "ZH", "word": "温热" }, { "lang": "JP", "word": "温(あたた)" }, { "lang": "EN", "word": "warm up" }, { "lang": "ES", "word": "calentar" }], "scene": "买了便当或包子，收银员会问这句。" },
+        { "id": 4, "jp": "温めてください", "roma": "Atatamete kudasai", "zh": "请帮我加热", "en": "Please heat it up", "jlpt": "N4", "hookType": "d", "hook": "「〜てください」= please do〜，日语最实用的请求句型。前面换任何动词的て形都能用。", "links": [{ "lang": "ZH", "word": "请……" }, { "lang": "EN", "word": "please + verb" }, { "lang": "ES", "word": "por favor + infinitivo" }], "scene": "对方没有主动问但你想加热时主动说。" },
+        { "id": 5, "jp": "袋はいりますか？", "roma": "Fukuro wa irimasu ka?", "zh": "需要袋子吗？（店员说）", "en": "Do you need a bag?", "jlpt": "N4", "hookType": "t", "hook": "袋不读「たい」，读「ふくろ」——训读，跟中文音完全不同。但字形认识，意思就懂了。2020年起袋子收费。", "links": [{ "lang": "ZH", "word": "袋子" }, { "lang": "JP", "word": "袋(ふくろ)" }, { "lang": "EN", "word": "bag" }, { "lang": "ES", "word": "bolsa" }], "scene": "法规要求店员每次必问。直接回「いりません」或「ください」。" },
+        { "id": 6, "jp": "カードで払えますか？", "roma": "Kādo de haraemasu ka?", "zh": "可以刷卡吗？", "en": "Can I pay by card?", "jlpt": "N4", "hookType": "e", "hook": "「カード」= card（音译）。「で」= 用……方式。句型：[手段]で払えますか？換現金で・Suicaで都能用。", "links": [{ "lang": "ZH", "word": "刷卡" }, { "lang": "EN", "word": "pay by card" }, { "lang": "ES", "word": "pagar con tarjeta" }, { "lang": "JP", "word": "払う(はらう)=支付" }], "scene": "去小城市或老店，先确认能不能刷卡。" },
+        { "id": 7, "jp": "領収書をください", "roma": "Ryōshūsho wo kudasai", "zh": "请给我收据（正式）", "en": "Official receipt, please", "jlpt": "N3", "hookType": "d", "hook": "「領収書」= 领收书 = 收据。三字全认识：领（领取）+ 収（收）+ 書（书面凭证）。和レシート（普通小票）不同。", "links": [{ "lang": "ZH", "word": "收据/发票" }, { "lang": "JP", "word": "領収書 vs レシート" }, { "lang": "EN", "word": "official receipt" }, { "lang": "ES", "word": "recibo formal" }], "scene": "出差报销或需要正式凭证时用。" },
+        { "id": 8, "jp": "お弁当はどこですか？", "roma": "Obentō wa doko desu ka?", "zh": "便当在哪里？", "en": "Where are the bento boxes?", "jlpt": "N5", "hookType": "d", "hook": "「弁当」= 便当——中文的便当就是从日语借来的！把お弁当换成ATM・トイレ・お茶，这句话能找便利店里任何东西。", "links": [{ "lang": "ZH", "word": "便当（源自日语）" }, { "lang": "JP", "word": "弁当(べんとう)" }, { "lang": "EN", "word": "bento" }, { "lang": "ES", "word": "bento（国际通用）" }], "scene": "进店找不到热食区时问。" },
+        { "id": 9, "jp": "〜はありますか？", "roma": "〜wa arimasu ka?", "zh": "有……吗？", "en": "Do you have 〜?", "jlpt": "N5", "hookType": "e", "hook": "「ある」= 存在/有（无生命物体）。和「いる」区分：物体用ある，人/动物用いる。前面换任何名词都能用。", "links": [{ "lang": "ZH", "word": "有……吗" }, { "lang": "EN", "word": "do you have" }, { "lang": "ES", "word": "¿tiene〜?" }, { "lang": "JP", "word": "ある vs いる（物 vs 人）" }], "scene": "找任何东西都可以用。" },
+        { "id": 10, "jp": "ありがとうございました", "roma": "Arigatō gozaimashita", "zh": "谢谢您（离开时）", "en": "Thank you — farewell", "jlpt": "N5", "hookType": "e", "hook": "「ございます」vs「ございました」——差一个字。「ます」= 现在，「ました」= 过去。道别用过去式，表示感谢这次交易已完成。", "links": [{ "lang": "ZH", "word": "谢谢（道别）" }, { "lang": "EN", "word": "thank you farewell" }, { "lang": "ES", "word": "gracias（despedida）" }, { "lang": "JP", "word": "ました=过去式" }], "scene": "付完款拿东西离开时说。" }
       ]
     },
-    {
-      "id": "hotel",
-      "label": "酒店入住",
-      "desc": "登记 · 设施 · 退房",
-      "emoji": "🏨",
-      "color": "#2d5fa0",
-      "bgColor": "#e6eef8",
-      "ready": false,
-      "phrases": []
-    },
-    {
-      "id": "directions",
-      "label": "问路 & 厕所",
-      "desc": "方向 · 地图 · 洗手间",
-      "emoji": "🚻",
-      "color": "#5a3a9a",
-      "bgColor": "#eeebff",
-      "ready": false,
-      "phrases": []
-    },
-    {
-      "id": "emergency",
-      "label": "紧急 & 就医",
-      "desc": "求助 · 医院 · 药店",
-      "emoji": "🏥",
-      "color": "#aa3355",
-      "bgColor": "#fce8ee",
-      "ready": false,
-      "phrases": []
-    }
+    { "id": "hotel", "label": "酒店入住", "desc": "登记 · 设施 · 退房", "emoji": "🏨", "color": "#2d5fa0", "bgColor": "#e6eef8", "ready": false, "phrases": [] },
+    { "id": "directions", "label": "问路 & 厕所", "desc": "方向 · 地图 · 洗手间", "emoji": "🚻", "color": "#5a3a9a", "bgColor": "#eeebff", "ready": false, "phrases": [] },
+    { "id": "emergency", "label": "紧急 & 就医", "desc": "求助 · 医院 · 药店", "emoji": "🏥", "color": "#aa3355", "bgColor": "#fce8ee", "ready": false, "phrases": [] }
   ],
 
   "mapPlaces": [
@@ -529,46 +498,46 @@
 
   "kanaRows": [
     { "row": "あ行", "chars": [
-      { "kana": "あ", "roma": "a", "hook": "张嘴说「啊」，字形像张大的嘴", "links": [{"lang":"ES","word":"a"},{"lang":"EN","word":"a"}] },
+      { "kana": "あ", "roma": "a", "hook": "张嘴说啊，字形像张大的嘴", "links": [{"lang":"ES","word":"a"},{"lang":"EN","word":"a"}] },
       { "kana": "い", "roma": "i", "hook": "两人并排站，读「伊」", "links": [{"lang":"EN","word":"i"}] },
-      { "kana": "う", "roma": "u", "hook": "皱眉说「唔」", "links": [] },
+      { "kana": "う", "roma": "u", "hook": "皱眉说唔", "links": [] },
       { "kana": "え", "roma": "e", "hook": "像「工」字，工=え", "links": [{"lang":"ZH","word":"工≈え"},{"lang":"ES","word":"e"}] },
-      { "kana": "お", "roma": "o", "hook": "带帽子的人说「哦」", "links": [{"lang":"ES","word":"o"}] }
+      { "kana": "お", "roma": "o", "hook": "带帽子的人说哦", "links": [{"lang":"ES","word":"o"}] }
     ]},
     { "row": "か行", "chars": [
-      { "kana": "か", "roma": "ka", "hook": "像加号变形，「加」=か", "links": [{"lang":"ES","word":"ca-"}] },
+      { "kana": "か", "roma": "ka", "hook": "像加号变形，加=か", "links": [{"lang":"ES","word":"ca-"}] },
       { "kana": "き", "roma": "ki", "hook": "像把钥匙，key=き", "links": [{"lang":"EN","word":"key→き"}] },
-      { "kana": "く", "roma": "ku", "hook": "张嘴喊「酷」", "links": [] },
+      { "kana": "く", "roma": "ku", "hook": "张嘴喊酷", "links": [] },
       { "kana": "け", "roma": "ke", "hook": "像一个路牌", "links": [] },
-      { "kana": "こ", "roma": "ko", "hook": "两横像「二」，读ko", "links": [{"lang":"ZH","word":"二≈こ（形）"}] }
+      { "kana": "こ", "roma": "ko", "hook": "两横像二，读ko", "links": [{"lang":"ZH","word":"二≈こ（形）"}] }
     ]},
     { "row": "さ行", "chars": [
-      { "kana": "さ", "roma": "sa", "hook": "像人撒腿跑，「撒」=さ", "links": [] },
+      { "kana": "さ", "roma": "sa", "hook": "像人撒腿跑，撒=さ", "links": [] },
       { "kana": "し", "roma": "shi", "hook": "像一把勺子，she/shi", "links": [{"lang":"EN","word":"she→し"}] },
       { "kana": "す", "roma": "su", "hook": "像鞠躬的人（すみません）", "links": [] },
-      { "kana": "せ", "roma": "se", "hook": "像「世」的变形", "links": [{"lang":"ZH","word":"世≈せ"}] },
+      { "kana": "せ", "roma": "se", "hook": "像世的变形", "links": [{"lang":"ZH","word":"世≈せ"}] },
       { "kana": "そ", "roma": "so", "hook": "像弯弯的河流", "links": [{"lang":"ES","word":"so-"}] }
     ]},
     { "row": "た行", "chars": [
-      { "kana": "た", "roma": "ta", "hook": "像把伞「他」开头，ta!", "links": [] },
-      { "kana": "ち", "roma": "chi", "hook": "像一把扳手，「知」=ち", "links": [{"lang":"ZH","word":"知≈ち"}] },
-      { "kana": "つ", "roma": "tsu", "hook": "像波浪，tsunami=「津波」，つ=tsu", "links": [{"lang":"EN","word":"tsunami→つ"}] },
+      { "kana": "た", "roma": "ta", "hook": "像把伞他开头，ta!", "links": [] },
+      { "kana": "ち", "roma": "chi", "hook": "像一把扳手，知=ち", "links": [{"lang":"ZH","word":"知≈ち"}] },
+      { "kana": "つ", "roma": "tsu", "hook": "像波浪，tsunami=津波，つ=tsu", "links": [{"lang":"EN","word":"tsunami→つ"}] },
       { "kana": "て", "roma": "te", "hook": "像晾衣架，te-ta-da", "links": [] },
-      { "kana": "と", "roma": "to", "hook": "像钉子，「到」=と", "links": [{"lang":"ZH","word":"到≈と（音）"}] }
+      { "kana": "と", "roma": "to", "hook": "像钉子，到=と", "links": [{"lang":"ZH","word":"到≈と（音）"}] }
     ]},
     { "row": "な行", "chars": [
-      { "kana": "な", "roma": "na", "hook": "像「奈」字简化，na!", "links": [] },
-      { "kana": "に", "roma": "ni", "hook": "像「二」横着写，ni二", "links": [{"lang":"ZH","word":"二≈に（音）"}] },
+      { "kana": "な", "roma": "na", "hook": "像奈字简化，na!", "links": [] },
+      { "kana": "に", "roma": "ni", "hook": "像二横着写，ni二", "links": [{"lang":"ZH","word":"二≈に（音）"}] },
       { "kana": "ぬ", "roma": "nu", "hook": "像碗里的面条 noodle=nu!", "links": [{"lang":"EN","word":"noodle→ぬ"}] },
       { "kana": "ね", "roma": "ne", "hook": "像睡觉的猫（ねこ=猫）", "links": [{"lang":"ZH","word":"猫=ねこ"}] },
-      { "kana": "の", "roma": "no", "hook": "像漩涡，「の」是日语最常见助词", "links": [] }
+      { "kana": "の", "roma": "no", "hook": "像漩涡，の是日语最常见助词", "links": [] }
     ]},
     { "row": "は行", "chars": [
-      { "kana": "は", "roma": "ha", "hook": "「は」是日语主语助词，最重要的字之一", "links": [] },
+      { "kana": "は", "roma": "ha", "hook": "は是日语主语助词，最重要的字之一", "links": [] },
       { "kana": "ひ", "roma": "hi", "hook": "像一道闪光，hi!打招呼", "links": [{"lang":"EN","word":"hi→ひ"}] },
       { "kana": "ふ", "roma": "fu", "hook": "像富士山的轮廓，ふじさん=富士山", "links": [{"lang":"ZH","word":"富士=ふじ"}] },
       { "kana": "へ", "roma": "he", "hook": "像山峰，he=山的形状", "links": [] },
-      { "kana": "ほ", "roma": "ho", "hook": "「ほ」像「保」字简化，ho!", "links": [{"lang":"ZH","word":"保≈ほ（形）"}] }
+      { "kana": "ほ", "roma": "ho", "hook": "像保字简化，ho!", "links": [{"lang":"ZH","word":"保≈ほ（形）"}] }
     ]}
   ]
 }
