@@ -964,207 +964,309 @@
         }
       ]
     },
+   {
+  "id": "restaurant",
+  "label": "餐厅点餐",
+  "desc": "点菜 · 过敏 · 结账",
+  "emoji": "🍜",
+  "color": "#a07020",
+  "bgColor": "#faf0d8",
+  "ready": true,
+  "goal": [
+    "能顺利入座和开口点单",
+    "能用模板句点具体菜品或饮料",
+    "能表达过敏、忌口和偏好",
+    "能请求推荐和结账",
+    "能自然地和店员完成一整轮基本互动"
+  ],
+  "notes": [
     {
-      "id": "restaurant",
-      "label": "餐厅点餐",
-      "desc": "点菜 · 过敏 · 结账",
-      "emoji": "🍜",
-      "color": "#a07020",
-      "bgColor": "#faf0d8",
-      "ready": true,
-      "notes": [
-        {
-          "t": "お通し · 不是免费赠品",
-          "b": "入座后端来的小碟是居酒屋的席费，约300-500日元，账单里会有。接受它就好。"
-        },
-        {
-          "t": "🚫 进店不能自己找位子",
-          "b": "看到空桌也要等店员带位，等「こちらへどうぞ」的指示。"
-        },
-        {
-          "t": "🚫 没有小费文化",
-          "b": "桌上留钱会被追出来还给你。服务已含在价格里，直接付正价就行。"
-        }
+      "t": "🍽️ 进店先等带位，不要自己坐",
+      "b": "日本很多餐厅就算有空桌，也先等店员带位。站在门口等一句招呼，比自己往里走自然得多。"
+    },
+    {
+      "t": "🧾 小菜不一定免费",
+      "b": "居酒屋常见お通し，像席费一样自动出现，通常会算进账单。不是送错，也不是坑你。"
+    },
+    {
+      "t": "💴 没有小费文化",
+      "b": "桌上留小费，店员可能会追出来还你。正常付账就好。"
+    }
+  ],
+  "phrases": [
+    {
+      "id": 1,
+      "type": "core",
+      "jp": "二人です",
+      "roma": "Futari desu",
+      "zh": "两个人",
+      "en": "Two people",
+      "jlpt": "N5",
+      "hookType": "d",
+      "hook": "二人是不规则读法，不能硬读成 ni-nin。这个得单独记一下。",
+      "links": [
+        { "lang": "ZH", "word": "二人" },
+        { "lang": "EN", "word": "two people" }
       ],
-      "phrases": [
-        {
-          "id": 1,
-          "jp": "二人です。",
-          "roma": "Futari desu",
-          "zh": "两个人。",
-          "en": "Two, please.",
-          "jlpt": "N5",
-          "hookType": "d",
-          "hook": "「二人」= ふたり，不规则读法。一人=ひとり，二人=ふたり，三人起才有规律。",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "二人（汉字同）"
-            },
-            {
-              "lang": "EN",
-              "word": "two people"
-            }
-          ],
-          "scene": "进门站在入口，等店员走来，说这句然后比两根手指。"
-        },
-        {
-          "id": 2,
-          "jp": "すみません、注文をお願いします。",
-          "roma": "Sumimasen, chūmon wo onegaishimasu",
-          "zh": "不好意思，要点餐。",
-          "en": "We're ready to order.",
-          "jlpt": "N4",
-          "hookType": "t",
-          "hook": "注文陷阱！不是注释文字，是点餐/订购。看到注文=可以点单了。",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "注文≠注释，=点餐"
-            },
-            {
-              "lang": "ES",
-              "word": "pedir"
-            }
-          ],
-          "scene": "看完菜单举手。日本服务员不会主动来问你。"
-        },
-        {
-          "id": 3,
-          "jp": "これをください。",
-          "roma": "Kore wo kudasai",
-          "zh": "给我这个。",
-          "en": "I'll have this.",
-          "jlpt": "N5",
-          "hookType": "e",
-          "hook": "「これ」= this，「ください」= please give me。指着菜单图片点完全正常。",
-          "links": [
-            {
-              "lang": "EN",
-              "word": "this one please"
-            },
-            {
-              "lang": "ES",
-              "word": "esto por favor"
-            }
-          ],
-          "scene": "对着图文菜单直接指，日本很多餐厅有图片菜单。"
-        },
-        {
-          "id": 4,
-          "jp": "えびアレルギーがあります。",
-          "roma": "Ebi arerugī ga arimasu",
-          "zh": "我对虾过敏。",
-          "en": "I have a shrimp allergy.",
-          "jlpt": "N3",
-          "hookType": "e",
-          "hook": "「アレルギー」= allergy，英语直接音译。换词：ナッツ・卵・牛乳。",
-          "links": [
-            {
-              "lang": "EN",
-              "word": "allergy→アレルギー"
-            },
-            {
-              "lang": "ES",
-              "word": "alergia"
-            }
-          ],
-          "scene": "点餐前主动说，不要等菜上来。"
-        },
-        {
-          "id": 5,
-          "jp": "お会計をお願いします。",
-          "roma": "Okaikei wo onegaishimasu",
-          "zh": "麻烦结账。",
-          "en": "The bill, please.",
-          "jlpt": "N4",
-          "hookType": "d",
-          "hook": "「会計」= 会计，汉字联想：帮你算账的人。空中做写字手势也行。",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "会計≈会计"
-            },
-            {
-              "lang": "EN",
-              "word": "the bill"
-            },
-            {
-              "lang": "ES",
-              "word": "la cuenta"
-            }
-          ],
-          "scene": "日本餐厅不会主动给账单，吃完举手说或走到收银台。"
-        },
-        {
-          "id": 6,
-          "jp": "おすすめは何ですか？",
-          "roma": "Osusume wa nan desu ka?",
-          "zh": "有什么推荐吗？",
-          "en": "What do you recommend?",
-          "jlpt": "N4",
-          "hookType": "e",
-          "hook": "「おすすめ」= 推荐。お开头是礼貌前缀。",
-          "links": [
-            {
-              "lang": "EN",
-              "word": "recommendation"
-            },
-            {
-              "lang": "ES",
-              "word": "¿qué recomienda?"
-            }
-          ],
-          "scene": "菜单全是日文看不懂，让服务员帮选往往有惊喜。"
-        },
-        {
-          "id": 7,
-          "jp": "すみません、もう一つください。",
-          "roma": "Sumimasen, mō hitotsu kudasai",
-          "zh": "再来一个。",
-          "en": "One more, please.",
-          "jlpt": "N5",
-          "hookType": "e",
-          "hook": "「もう」= 再/还。もう一杯（再一杯）・もう少し（再一点儿）。",
-          "links": [
-            {
-              "lang": "ES",
-              "word": "uno más"
-            },
-            {
-              "lang": "EN",
-              "word": "one more"
-            }
-          ],
-          "scene": "汤喝完想续杯，或好吃想加一份。"
-        },
-        {
-          "id": 8,
-          "jp": "おいしいです！",
-          "roma": "Oishii desu!",
-          "zh": "好吃！",
-          "en": "It's delicious!",
-          "jlpt": "N5",
-          "hookType": "d",
-          "hook": "「おいしい」= 好吃。日本厨师服务员听到这句会真的很开心。",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "好吃"
-            },
-            {
-              "lang": "ES",
-              "word": "¡qué rico!"
-            },
-            {
-              "lang": "EN",
-              "word": "delicious!"
-            }
-          ],
-          "scene": "吃到好吃的，直接说。效果比任何礼貌用语都强。"
-        }
+      "scene": "进门站在门口，等店员看过来时说这句最自然。",
+      "culture": "日本餐厅入店通常先报人数，再由店员带位。"
+    },
+    {
+      "id": 2,
+      "type": "core",
+      "jp": "すみません、注文をお願いします",
+      "roma": "Sumimasen, chuumon wo onegaishimasu",
+      "zh": "不好意思，我们要点餐",
+      "en": "Excuse me, we'd like to order",
+      "jlpt": "N4",
+      "hookType": "t",
+      "hook": "注文不是“注释”，是点单、下单。这个词很常见，别再看错。",
+      "links": [
+        { "lang": "ZH", "word": "注文=点单" },
+        { "lang": "EN", "word": "order" },
+        { "lang": "ES", "word": "pedir" }
+      ],
+      "scene": "日本店员通常不会频繁过来问“准备好了吗”，你要主动叫人。",
+      "culture": ""
+    },
+    {
+      "id": 3,
+      "type": "template",
+      "jp": "〇〇をください",
+      "roma": "〇〇 wo kudasai",
+      "zh": "请给我 〇〇",
+      "en": "I'll have 〇〇",
+      "jlpt": "N5",
+      "hookType": "e",
+      "hook": "ください很万能，点菜、拿勺子、要水都能用。先把这个骨架练熟。",
+      "links": [
+        { "lang": "EN", "word": "I'll have..." },
+        { "lang": "ES", "word": "quiero..." },
+        { "lang": "ZH", "word": "请给我……" }
+      ],
+      "scene": "菜单看懂了，最直接的点法就是这句。",
+      "culture": "",
+      "swappableWords": [
+        { "word": "水", "zh": "水" },
+        { "word": "ラーメン", "zh": "拉面" },
+        { "word": "ビール", "zh": "啤酒" },
+        { "word": "メニュー", "zh": "菜单" }
       ]
     },
+    {
+      "id": 4,
+      "type": "template",
+      "jp": "これをください",
+      "roma": "Kore wo kudasai",
+      "zh": "给我这个",
+      "en": "I'll have this",
+      "jlpt": "N5",
+      "hookType": "e",
+      "hook": "看不懂菜名也没关系，指着菜单说这句，完全合理，而且很常见。",
+      "links": [
+        { "lang": "EN", "word": "this one" },
+        { "lang": "ES", "word": "esto" },
+        { "lang": "ZH", "word": "这个" }
+      ],
+      "scene": "图文菜单、机器点餐、套餐选择时都很好用。",
+      "culture": ""
+    },
+    {
+      "id": 5,
+      "type": "template",
+      "jp": "〇〇アレルギーがあります",
+      "roma": "〇〇 arerugii ga arimasu",
+      "zh": "我对 〇〇 过敏",
+      "en": "I have a 〇〇 allergy",
+      "jlpt": "N4",
+      "hookType": "e",
+      "hook": "アレルギー是外来词，英语底子在这里很好使。餐厅和 emergency 都能复用。",
+      "links": [
+        { "lang": "EN", "word": "allergy→アレルギー" },
+        { "lang": "ES", "word": "alergia" },
+        { "lang": "ZH", "word": "过敏" }
+      ],
+      "scene": "别等上菜后才说。点餐前先讲，店员通常会认真确认。",
+      "culture": "",
+      "swappableWords": [
+        { "word": "えび", "zh": "虾" },
+        { "word": "ピーナッツ", "zh": "花生" },
+        { "word": "卵", "zh": "鸡蛋" },
+        { "word": "乳製品", "zh": "乳制品" }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "support",
+      "jp": "おすすめは何ですか？",
+      "roma": "Osusume wa nan desu ka?",
+      "zh": "有什么推荐吗？",
+      "en": "What do you recommend?",
+      "jlpt": "N4",
+      "hookType": "e",
+      "hook": "おすすめ就是推荐。不会点的时候，这句比自己瞎猜省事得多。",
+      "links": [
+        { "lang": "EN", "word": "recommend" },
+        { "lang": "ES", "word": "¿qué recomienda?" },
+        { "lang": "ZH", "word": "推荐" }
+      ],
+      "scene": "菜单太多、完全不认识的时候，直接让对方带路。",
+      "culture": ""
+    },
+    {
+      "id": 7,
+      "type": "support",
+      "jp": "辛くしないでください",
+      "roma": "Karakushinaide kudasai",
+      "zh": "请不要做辣",
+      "en": "Please don't make it spicy",
+      "jlpt": "N4",
+      "hookType": "d",
+      "hook": "しないでください = 请不要……，这是很有用的禁止/避免模板。",
+      "links": [
+        { "lang": "EN", "word": "not spicy" },
+        { "lang": "ES", "word": "sin picante" },
+        { "lang": "ZH", "word": "不要辣" }
+      ],
+      "scene": "担心太辣、太刺激时能救命。",
+      "culture": ""
+    },
+    {
+      "id": 8,
+      "type": "support",
+      "jp": "お会計をお願いします",
+      "roma": "Okaikei wo onegaishimasu",
+      "zh": "麻烦结账",
+      "en": "The bill, please",
+      "jlpt": "N4",
+      "hookType": "d",
+      "hook": "会計看起来就像“会计”，在餐厅里基本就是账单和结账。",
+      "links": [
+        { "lang": "ZH", "word": "会計≈结账" },
+        { "lang": "EN", "word": "the bill" },
+        { "lang": "ES", "word": "la cuenta" }
+      ],
+      "scene": "日本餐厅一般不会主动把账单拿过来，吃完要自己开口。",
+      "culture": ""
+    },
+    {
+      "id": 9,
+      "type": "support",
+      "jp": "カードで払えますか？",
+      "roma": "Kaado de haraemasu ka?",
+      "zh": "可以刷卡吗？",
+      "en": "Can I pay by card?",
+      "jlpt": "N4",
+      "hookType": "e",
+      "hook": "カード = card。〜で払えますか就是“能用……支付吗”。",
+      "links": [
+        { "lang": "EN", "word": "pay by card" },
+        { "lang": "ES", "word": "pagar con tarjeta" },
+        { "lang": "ZH", "word": "刷卡" }
+      ],
+      "scene": "小店、老店、居酒屋都值得先问一句。",
+      "culture": ""
+    },
+    {
+      "id": 10,
+      "type": "support",
+      "jp": "もう一つください",
+      "roma": "Mou hitotsu kudasai",
+      "zh": "再来一个",
+      "en": "One more, please",
+      "jlpt": "N5",
+      "hookType": "e",
+      "hook": "もう = 再，ひとつ = 一个。要加点、续点，这句非常顺手。",
+      "links": [
+        { "lang": "EN", "word": "one more" },
+        { "lang": "ES", "word": "uno más" },
+        { "lang": "ZH", "word": "再来一个" }
+      ],
+      "scene": "好吃想加一份，或者饮料想再来一杯时。",
+      "culture": ""
+    },
+    {
+      "id": 11,
+      "type": "flavor",
+      "jp": "おいしいです！",
+      "roma": "Oishii desu!",
+      "zh": "很好吃！",
+      "en": "It's delicious!",
+      "jlpt": "N5",
+      "hookType": "d",
+      "hook": "这句短得几乎没有学习成本，但情绪价值极高。",
+      "links": [
+        { "lang": "EN", "word": "delicious" },
+        { "lang": "ES", "word": "qué rico" },
+        { "lang": "ZH", "word": "好吃" }
+      ],
+      "scene": "吃到真好吃的时候直接说。很多店员会立刻笑出来。",
+      "culture": "日本服务场景里，真诚地说一句好吃，效果往往比复杂礼貌表达更强。"
+    },
+    {
+      "id": 12,
+      "type": "flavor",
+      "jp": "ごちそうさまでした",
+      "roma": "Gochisousama deshita",
+      "zh": "多谢款待",
+      "en": "Thank you for the meal",
+      "jlpt": "N5",
+      "hookType": "s",
+      "hook": "不是普通“谢谢”，而是“这顿饭承蒙照顾了”。吃完离开时特别地道。",
+      "links": [
+        { "lang": "EN", "word": "thank you for the meal" },
+        { "lang": "ZH", "word": "多谢款待" }
+      ],
+      "scene": "吃完离开、走到门口或收银台时说最自然。",
+      "culture": "这是很日本的饭后收尾句，用对了会一下子有“会吃饭”的感觉。"
+    }
+  ],
+  "inputTasks": [
+    {
+      "id": "in1",
+      "type": "scene_match",
+      "prompt": "你看不懂菜名，只想指着菜单点，哪句最合适？",
+      "answer": "これをください"
+    },
+    {
+      "id": "in2",
+      "type": "scene_match",
+      "prompt": "你想说自己对虾过敏，应该套哪种句型？",
+      "answer": "〇〇アレルギーがあります"
+    },
+    {
+      "id": "in3",
+      "type": "listen_match",
+      "prompt": "看到『お会計をお願いします』，应该理解成什么？",
+      "answer": "麻烦结账"
+    }
+  ],
+  "outputTasks": [
+    {
+      "id": "out1",
+      "type": "speak",
+      "promptZh": "不好意思，我们要点餐。",
+      "target": "すみません、注文をお願いします"
+    },
+    {
+      "id": "out2",
+      "type": "speak",
+      "promptZh": "请给我这个，再来一杯水。",
+      "target": "これをください。水をください。"
+    },
+    {
+      "id": "out3",
+      "type": "roleplay",
+      "promptZh": "你进店，两个人，想点餐，最后结账离开。",
+      "targets": [
+        "二人です",
+        "すみません、注文をお願いします",
+        "お会計をお願いします",
+        "ごちそうさまでした"
+      ]
+    }
+  ]
+},
     {
       "id": "convenience",
       "label": "便利店 & 购物",
