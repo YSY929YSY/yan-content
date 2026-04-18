@@ -2080,18 +2080,316 @@
     }
   ]
 },
+   {
+  "id": "emergency",
+  "label": "紧急 & 就医",
+  "desc": "求助 · 医院 · 药店",
+  "emoji": "🏥",
+  "color": "#aa3355",
+  "bgColor": "#fce8ee",
+  "ready": true,
+  "goal": [
+    "能表达自己不舒服或需要帮助",
+    "能问医院、药店、厕所在哪里",
+    "能说明疼痛、发烧、过敏等常见情况",
+    "能请求别人帮忙打电话或叫救护车",
+    "能在压力下说出最短、最有效的句子"
+  ],
+  "notes": [
     {
-      "id": "emergency",
-      "label": "紧急 & 就医",
-      "desc": "求助 · 医院 · 药店",
-      "emoji": "🏥",
-      "color": "#aa3355",
-      "bgColor": "#fce8ee",
-      "ready": false,
-      "phrases": []
+      "t": "🚑 紧急时先说短句，不要追求完整",
+      "b": "身体不舒服、头脑发懵的时候，最重要的是先把“我不舒服”“请帮我”“医院在哪里”说出来。短句比完整句更有用。"
+    },
+    {
+      "t": "💊 药店不等于医院",
+      "b": "药妆店可以买常见药、退烧贴、创可贴，但真遇到持续高烧、剧烈疼痛、呼吸困难，别硬扛，直接找医院或请人帮忙。"
+    },
+    {
+      "t": "🧾 护照和酒店地址最好截图存手机",
+      "b": "真到紧张场景，能把护照页、酒店名称、酒店地址给对方看，往往比你硬说更快。"
     }
   ],
-  "mapPlaces": [
+  "phrases": [
+    {
+      "id": 1,
+      "type": "core",
+      "jp": "助けてください",
+      "roma": "Tasukete kudasai",
+      "zh": "请帮帮我",
+      "en": "Please help me",
+      "jlpt": "N5",
+      "hookType": "d",
+      "hook": "助ける = 帮助、救助。汉字“助”很好认，越紧张越要先记这种短句。",
+      "links": [
+        { "lang": "ZH", "word": "帮助 / 救助" },
+        { "lang": "EN", "word": "help me" },
+        { "lang": "ES", "word": "ayúdeme" }
+      ],
+      "scene": "最短求助句。真的慌的时候，这句比任何完整说明都值钱。",
+      "culture": ""
+    },
+    {
+      "id": 2,
+      "type": "core",
+      "jp": "気分が悪いです",
+      "roma": "Kibun ga warui desu",
+      "zh": "我不舒服 / 我状态很差",
+      "en": "I feel sick",
+      "jlpt": "N4",
+      "hookType": "d",
+      "hook": "気分 = 状态、感觉；悪い = 不好。不是只指情绪，也能指身体不适。",
+      "links": [
+        { "lang": "ZH", "word": "状态不好" },
+        { "lang": "EN", "word": "feel sick" },
+        { "lang": "ES", "word": "me siento mal" }
+      ],
+      "scene": "头晕、恶心、站不稳、说不清具体哪里不对时，这句最稳。",
+      "culture": ""
+    },
+    {
+      "id": 3,
+      "type": "template",
+      "jp": "〇〇が痛いです",
+      "roma": "〇〇 ga itai desu",
+      "zh": "〇〇疼",
+      "en": "My 〇〇 hurts",
+      "jlpt": "N5",
+      "hookType": "d",
+      "hook": "痛い = 痛。最直接、最不绕弯的表达之一。",
+      "links": [
+        { "lang": "ZH", "word": "痛" },
+        { "lang": "EN", "word": "hurts" },
+        { "lang": "ES", "word": "me duele ..." }
+      ],
+      "scene": "肚子疼、头疼、喉咙疼都能用这句。",
+      "culture": "",
+      "swappableWords": [
+        { "word": "お腹", "zh": "肚子" },
+        { "word": "頭", "zh": "头" },
+        { "word": "喉", "zh": "喉咙" },
+        { "word": "歯", "zh": "牙" }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "core",
+      "jp": "熱があります",
+      "roma": "Netsu ga arimasu",
+      "zh": "我发烧了",
+      "en": "I have a fever",
+      "jlpt": "N4",
+      "hookType": "d",
+      "hook": "熱 = 热、发烧。汉字直接给你意思，不需要绕。",
+      "links": [
+        { "lang": "ZH", "word": "热 / 发烧" },
+        { "lang": "EN", "word": "fever" },
+        { "lang": "ES", "word": "tengo fiebre" }
+      ],
+      "scene": "发热、发冷、明显不对劲时，先把这个信息说清楚。",
+      "culture": ""
+    },
+    {
+      "id": 5,
+      "type": "template",
+      "jp": "〇〇はどこですか？",
+      "roma": "〇〇 wa doko desu ka?",
+      "zh": "〇〇在哪里？",
+      "en": "Where is 〇〇?",
+      "jlpt": "N5",
+      "hookType": "d",
+      "hook": "这是最万能的求助模板之一。紧张时能少想一步。",
+      "links": [
+        { "lang": "ZH", "word": "哪里" },
+        { "lang": "EN", "word": "where is" },
+        { "lang": "ES", "word": "¿dónde está?" }
+      ],
+      "scene": "找医院、药店、厕所都能直接套。",
+      "culture": "",
+      "swappableWords": [
+        { "word": "病院", "zh": "医院" },
+        { "word": "薬局", "zh": "药店" },
+        { "word": "トイレ", "zh": "厕所" },
+        { "word": "救急", "zh": "急诊 / 急救" }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "core",
+      "jp": "病院に行きたいです",
+      "roma": "Byouin ni ikitai desu",
+      "zh": "我想去医院",
+      "en": "I want to go to the hospital",
+      "jlpt": "N5",
+      "hookType": "d",
+      "hook": "病院 = 医院，汉字非常友好。行きたい = 想去，是最直接的需求表达。",
+      "links": [
+        { "lang": "ZH", "word": "医院" },
+        { "lang": "EN", "word": "hospital" },
+        { "lang": "ES", "word": "quiero ir al hospital" }
+      ],
+      "scene": "你已经判断不是小问题，想让别人帮你去医院时。",
+      "culture": ""
+    },
+    {
+      "id": 7,
+      "type": "support",
+      "jp": "救急車を呼んでください",
+      "roma": "Kyuu-kyuu-sha wo yonde kudasai",
+      "zh": "请帮我叫救护车",
+      "en": "Please call an ambulance",
+      "jlpt": "N4",
+      "hookType": "d",
+      "hook": "救急車 = 急救车。三个汉字连在一起，意思其实很清楚。",
+      "links": [
+        { "lang": "ZH", "word": "救急车" },
+        { "lang": "EN", "word": "ambulance" },
+        { "lang": "ES", "word": "llame a una ambulancia" }
+      ],
+      "scene": "明显撑不住、走不了、呼吸困难、剧烈疼痛时别犹豫。",
+      "culture": ""
+    },
+    {
+      "id": 8,
+      "type": "support",
+      "jp": "薬をください",
+      "roma": "Kusuri wo kudasai",
+      "zh": "请给我药",
+      "en": "Please give me some medicine",
+      "jlpt": "N5",
+      "hookType": "d",
+      "hook": "薬 = 药，汉字直接帮你减负。不会描述症状时，先把需求抛出来。",
+      "links": [
+        { "lang": "ZH", "word": "药" },
+        { "lang": "EN", "word": "medicine" },
+        { "lang": "ES", "word": "medicina" }
+      ],
+      "scene": "在药店先开口，后面可以再补“发烧”“头疼”“肚子疼”。",
+      "culture": ""
+    },
+    {
+      "id": 9,
+      "type": "template",
+      "jp": "〇〇アレルギーがあります",
+      "roma": "〇〇 arerugii ga arimasu",
+      "zh": "我对〇〇过敏",
+      "en": "I have a 〇〇 allergy",
+      "jlpt": "N4",
+      "hookType": "e",
+      "hook": "アレルギー = allergy，外来词，英语底子在这里很好用。",
+      "links": [
+        { "lang": "EN", "word": "allergy→アレルギー" },
+        { "lang": "ES", "word": "alergia" },
+        { "lang": "ZH", "word": "过敏" }
+      ],
+      "scene": "买药、点餐、就医时都可能需要提前说。",
+      "culture": "",
+      "swappableWords": [
+        { "word": "えび", "zh": "虾" },
+        { "word": "ピーナッツ", "zh": "花生" },
+        { "word": "卵", "zh": "鸡蛋" },
+        { "word": "薬", "zh": "药物" }
+      ]
+    },
+    {
+      "id": 10,
+      "type": "support",
+      "jp": "英語を話せますか？",
+      "roma": "Eigo wo hanasemasu ka?",
+      "zh": "你会说英语吗？",
+      "en": "Do you speak English?",
+      "jlpt": "N5",
+      "hookType": "d",
+      "hook": "英語 = 英语，汉字直接认。紧急时先确认沟通渠道很重要。",
+      "links": [
+        { "lang": "ZH", "word": "英语" },
+        { "lang": "EN", "word": "speak English" },
+        { "lang": "ES", "word": "¿habla inglés?" }
+      ],
+      "scene": "医院、药店、前台、路人都可能用到。",
+      "culture": ""
+    },
+    {
+      "id": 11,
+      "type": "support",
+      "jp": "ゆっくりお願いします",
+      "roma": "Yukkuri onegaishimasu",
+      "zh": "请说慢一点",
+      "en": "Please speak slowly",
+      "jlpt": "N5",
+      "hookType": "e",
+      "hook": "压力大时理解力会下降，这句在紧急场景里比平时更重要。",
+      "links": [
+        { "lang": "EN", "word": "slowly" },
+        { "lang": "ES", "word": "más despacio" },
+        { "lang": "ZH", "word": "慢一点" }
+      ],
+      "scene": "你知道对方在帮你，但就是跟不上速度时。",
+      "culture": ""
+    },
+    {
+      "id": 12,
+      "type": "flavor",
+      "jp": "ありがとうございました",
+      "roma": "Arigatou gozaimashita",
+      "zh": "真的谢谢你了",
+      "en": "Thank you very much",
+      "jlpt": "N5",
+      "hookType": "e",
+      "hook": "紧张场景结束后，这句能把气氛收住，也能让帮助你的人安心。",
+      "links": [
+        { "lang": "ZH", "word": "谢谢" },
+        { "lang": "EN", "word": "thank you" },
+        { "lang": "ES", "word": "muchas gracias" }
+      ],
+      "scene": "别人认真帮了你，别忘了收尾。",
+      "culture": ""
+    }
+  ],
+  "inputTasks": [
+    {
+      "id": "in1",
+      "type": "scene_match",
+      "prompt": "你肚子疼，最直接的一句是什么？",
+      "answer": "お腹が痛いです"
+    },
+    {
+      "id": "in2",
+      "type": "scene_match",
+      "prompt": "你想找药店，应该说哪句？",
+      "answer": "薬局はどこですか？"
+    },
+    {
+      "id": "in3",
+      "type": "listen_match",
+      "prompt": "看到『救急車を呼んでください』，应该理解成什么？",
+      "answer": "请帮我叫救护车"
+    }
+  ],
+  "outputTasks": [
+    {
+      "id": "out1",
+      "type": "speak",
+      "promptZh": "请帮帮我，我不舒服。",
+      "target": "助けてください。気分が悪いです。"
+    },
+    {
+      "id": "out2",
+      "type": "speak",
+      "promptZh": "我发烧了，我想去医院。",
+      "target": "熱があります。病院に行きたいです。"
+    },
+    {
+      "id": "out3",
+      "type": "roleplay",
+      "promptZh": "你头疼，想找药店，还想请对方说慢一点。",
+      "targets": [
+        "頭が痛いです",
+        "薬局はどこですか？",
+        "ゆっくりお願いします"
+      ]
+    }
+  ]
+},
     {
       "id": "mihara",
       "type": "volcano",
