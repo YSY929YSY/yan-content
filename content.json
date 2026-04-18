@@ -1817,220 +1817,298 @@
   "color": "#5a3a9a",
   "bgColor": "#eeebff",
   "ready": true,
+  "goal": [
+    "能开口找地点",
+    "能判断远近与步行时间",
+    "能听懂基础方向词",
+    "能请求对方重复或放慢语速",
+    "能礼貌结束一次问路对话"
+  ],
   "notes": [
     {
-      "t": "🇯🇵 日本人被问路会紧张",
-      "b": "陌生人搭话时日本人第一反应是紧张。先说すみません，等对方停下来看你，再开口——节奏比中文慢半拍，成功率反而更高。"
+      "t": "🇯🇵 日本人被问路会先紧张",
+      "b": "陌生人突然开口，日本人的第一反应常常是紧张。先说すみません，等对方停下来，再开始问，成功率会高很多。"
     },
     {
-      "t": "📍 便利店是最好用的地标",
-      "b": "日本人给你指路几乎必然会说「看到7-11往左转」「在全家对面」。问路时把附近便利店的位置记住，比认路牌管用。"
+      "t": "📍 真正稳的地标，不一定是便利店",
+      "b": "日本问路时，便利店确实常被拿来当参照物；但找厕所时，更稳的是车站、百货商场、公园和大型商业设施。便利店有时可以借，但不要默认每家都开放。"
     },
     {
-      "t": "🗾 距离用「步行几分钟」表达",
-      "b": "日本人描述距离几乎不说「X米」，而是「步行X分钟」。问「何分ですか」得到的答案可以直接用，不用换算。"
+      "t": "🗾 日本人更常用“走几分钟”来报距离",
+      "b": "现实里比起说多少米，日本人更常说“步行几分钟”。所以“歩いて何分ですか”非常实用。"
     },
     {
-      "t": "🗺️ 带你走到目的地才离开",
-      "b": "日本有「世話好き」文化——被外国人问路，很多人会直接带你走到目的地门口才离开。不要怕麻烦人。"
+      "t": "🗺️ 有时对方会直接带你走",
+      "b": "如果你真的迷路，对方不仅可能解释，还可能直接带你走到路口甚至门口。不是客套，是真的会发生。"
     }
   ],
   "phrases": [
     {
       "id": 1,
+      "type": "core",
       "jp": "すみません",
       "roma": "Sumimasen",
       "zh": "不好意思，打扰一下",
       "en": "Excuse me",
       "jlpt": "N5",
       "hookType": "s",
-      "hook": "汉字写法是「済みません」——「済む」=事情了结。意思是「因为打扰了你，这件事还没了结」，道歉的哲学藏在词根里。",
+      "hook": "汉字写法是「済みません」——「済む」=事情了结。不是单纯“对不起”，而是“打扰你了”。",
       "links": [
         { "lang": "EN", "word": "excuse me" },
         { "lang": "ES", "word": "perdón" },
         { "lang": "ZH", "word": "不好意思" }
       ],
-      "scene": "问路的第一句话，先说这句等对方停下来看你，再开口。日本人被陌生人叫住会紧张，这句话是「解压阀」。"
+      "scene": "问路前的第一句话。先把人叫停，再问具体内容。",
+      "culture": "日本人不喜欢被突然连珠炮式提问，先用这句缓冲。"
     },
     {
-  "id": 2,
-  "jp": "〇〇はどこですか？",
-  "roma": "〇〇 wa doko desu ka?",
-  "zh": "〇〇在哪里？",
-  "en": "Where is 〇〇?",
-  "jlpt": "N5",
-  "hookType": "d",
-  "hook": "どこ的汉字写法是「何処」——「何」（哪）+「処」（处所），和中文「何处」完全同源。现代日语简化为假名，但汉字根还在。",
-  "links": [
-    { "lang": "ZH", "word": "何处（同源）" },
-    { "lang": "EN", "word": "where is" },
-    { "lang": "ES", "word": "¿dónde está?" }
-  ],
-  "scene": "万能问路句。〇〇换成任何地名都能用：地下鉄・コンビニ・駅・病院……这一句顶十句。",
-  "swappableWords": [
-    { "word": "コンビニ", "zh": "便利店" },
-    { "word": "トイレ", "zh": "厕所" },
-    { "word": "駅", "zh": "车站" },
-    { "word": "病院", "zh": "医院" }
-  ]
-},
+      "id": 2,
+      "type": "template",
+      "jp": "〇〇はどこですか？",
+      "roma": "〇〇 wa doko desu ka?",
+      "zh": "〇〇在哪里？",
+      "en": "Where is 〇〇?",
+      "jlpt": "N5",
+      "hookType": "d",
+      "hook": "どこ的汉字写法是「何処」——「何」（哪）+「処」（处所），和中文“何处”完全同源。",
+      "links": [
+        { "lang": "ZH", "word": "何处（同源）" },
+        { "lang": "EN", "word": "where is" },
+        { "lang": "ES", "word": "¿dónde está?" }
+      ],
+      "scene": "万能问路句。地点换进去就能立刻使用。",
+      "culture": "",
+      "swappableWords": [
+        { "word": "コンビニ", "zh": "便利店" },
+        { "word": "トイレ", "zh": "厕所" },
+        { "word": "駅", "zh": "车站" },
+        { "word": "病院", "zh": "医院" },
+        { "word": "薬局", "zh": "药店" },
+        { "word": "出口", "zh": "出口" }
+      ]
+    },
     {
       "id": 3,
-      "jp": "近くにコンビニはありますか？",
-      "roma": "Chikaku ni konbini wa arimasu ka?",
-      "zh": "附近有便利店吗？",
-      "en": "Is there a convenience store nearby?",
+      "type": "template",
+      "jp": "近くに〇〇はありますか？",
+      "roma": "Chikaku ni 〇〇 wa arimasu ka?",
+      "zh": "附近有〇〇吗？",
+      "en": "Is there a 〇〇 nearby?",
       "jlpt": "N5",
       "hookType": "e",
-      "hook": "コンビニ = convenience store 的日式缩写。不是完整音译，而是日本人把英语压缩成了自己的节奏。",
+      "hook": "近く = 附近；ありますか = 有吗。比直接找一个具体店名更适合临时求助。",
       "links": [
-        { "lang": "EN", "word": "convenience store" },
-        { "lang": "ES", "word": "tienda" },
-        { "lang": "ZH", "word": "便利店" }
+        { "lang": "EN", "word": "is there ... nearby?" },
+        { "lang": "ES", "word": "¿hay ... cerca?" },
+        { "lang": "ZH", "word": "附近有……吗" }
       ],
-      "scene": "日本问路时最有用的地标往往不是银行、不是咖啡店，而是便利店。把这句学会，顺便也能换成薬局・トイレ・ATM。"
+      "scene": "你不确定具体目标，只想先找一种设施时最好用。",
+      "culture": "日本人经常会用便利店、药妆店、车站出口做参照。"
     },
     {
       "id": 4,
+      "type": "template",
       "jp": "〇〇まで歩いて何分ですか？",
       "roma": "〇〇 made aruite nan-pun desu ka?",
       "zh": "走到〇〇要几分钟？",
       "en": "How many minutes is it on foot to 〇〇?",
       "jlpt": "N4",
       "hookType": "d",
-      "hook": "歩いて = 走路去；何分 = 几分钟。日本人给距离最爱用时间，不爱用米数，这句非常地道。",
+      "hook": "歩いて = 走路去；何分 = 几分钟。日本人给距离最常用时间，不常用米数。",
       "links": [
         { "lang": "ZH", "word": "何分=几分钟" },
         { "lang": "EN", "word": "on foot" },
         { "lang": "ES", "word": "¿cuántos minutos a pie?" }
       ],
-      "scene": "导航显示不远，但你想确认是不是能走过去时，用这句最自然。"
+      "scene": "导航看着近，但你想知道到底值不值得走过去时用。",
+      "culture": ""
     },
     {
       "id": 5,
+      "type": "support",
       "jp": "もう一度お願いします",
       "roma": "Mou ichido onegaishimasu",
       "zh": "请再说一遍",
       "en": "One more time, please",
       "jlpt": "N5",
       "hookType": "e",
-      "hook": "「もう一度」= one more time。比长长的尊敬语版本更适合旅游现场：短、稳、礼貌，脑子空白时也说得出来。",
+      "hook": "比长句尊敬语更适合真实旅行：短、稳、礼貌、不会卡壳。",
       "links": [
         { "lang": "EN", "word": "one more time" },
         { "lang": "ES", "word": "otra vez, por favor" },
         { "lang": "ZH", "word": "再一次" }
       ],
-      "scene": "对方说太快、环境太吵、你一下没反应过来时，先丢这句。先活下来，再求完美。"
+      "scene": "对方说太快、环境太吵、你没听清时直接用。",
+      "culture": ""
     },
     {
       "id": 6,
+      "type": "support",
       "jp": "ゆっくりお願いします",
       "roma": "Yukkuri onegaishimasu",
       "zh": "请说慢一点",
       "en": "Please speak slowly",
       "jlpt": "N5",
       "hookType": "e",
-      "hook": "ゆっくり = slowly。旅游日语里非常高频，比背很多复杂句型更值钱。",
+      "hook": "ゆっくり = slowly。比复杂句型更常用，旅行中价值很高。",
       "links": [
         { "lang": "EN", "word": "slowly" },
         { "lang": "ES", "word": "más despacio" },
         { "lang": "ZH", "word": "慢一点" }
       ],
-      "scene": "日本人一旦意识到你是外国人，通常会真的放慢速度。你只需要把这个请求说出来。"
+      "scene": "你大概听懂了，但还需要对方放慢速度时。",
+      "culture": ""
     },
     {
       "id": 7,
+      "type": "core",
       "jp": "右に曲がってください",
       "roma": "Migi ni magatte kudasai",
       "zh": "请向右转",
       "en": "Please turn right",
       "jlpt": "N5",
       "hookType": "d",
-      "hook": "右 = みぎ，汉字和中文完全一样。曲がる = 转弯，这个动词以后看地图、听导航都常见。",
+      "hook": "右 = みぎ，汉字和中文完全一样。曲がる = 转弯。",
       "links": [
         { "lang": "ZH", "word": "右" },
         { "lang": "EN", "word": "turn right" },
         { "lang": "ES", "word": "gire a la derecha" }
       ],
-      "scene": "听懂右转，至少不会站在路口原地发呆。"
+      "scene": "你最常从别人嘴里听到的方向句之一。",
+      "culture": ""
     },
     {
       "id": 8,
+      "type": "core",
       "jp": "左に曲がってください",
       "roma": "Hidari ni magatte kudasai",
       "zh": "请向左转",
       "en": "Please turn left",
       "jlpt": "N5",
       "hookType": "d",
-      "hook": "左 = ひだり。東西南北左右这些方向词，汉字母语者天然占便宜。",
+      "hook": "左 = ひだり。方向词是汉字母语者的天然优势。",
       "links": [
         { "lang": "ZH", "word": "左" },
         { "lang": "EN", "word": "turn left" },
         { "lang": "ES", "word": "gire a la izquierda" }
       ],
-      "scene": "和右转最好成对学。问路时真正难的不是说，是把听到的方向立刻转成行动。"
+      "scene": "和右转成对学，现实里几乎一定一起出现。",
+      "culture": ""
     },
     {
       "id": 9,
-      "jp": "地図を描いてもらえますか？",
-      "roma": "Chizu wo kaite moraemasu ka?",
-      "zh": "可以帮我画一张地图吗？",
-      "en": "Could you draw me a map?",
-      "jlpt": "N4",
-      "hookType": "d",
-      "hook": "地図「ちず」——汉字完全直读，中文「地图」一字不差。",
+      "type": "core",
+      "jp": "まっすぐ行ってください",
+      "roma": "Massugu itte kudasai",
+      "zh": "请一直直走",
+      "en": "Please go straight",
+      "jlpt": "N5",
+      "hookType": "e",
+      "hook": "まっすぐ = straight。不是汉字，但频率极高，值得单独记。",
       "links": [
-        { "lang": "ZH", "word": "地图（完全同）" },
-        { "lang": "EN", "word": "draw a map" }
+        { "lang": "EN", "word": "go straight" },
+        { "lang": "ES", "word": "todo recto" },
+        { "lang": "ZH", "word": "直走" }
       ],
-      "scene": "日本人对这个请求接受度极高——很多人会非常认真地画，有时还会把你带到目的地门口才离开。不要怕麻烦人。"
+      "scene": "方向指令里最常见的一句。",
+      "culture": ""
     },
     {
       "id": 10,
+      "type": "core",
       "jp": "トイレはどこですか？",
       "roma": "Toire wa doko desu ka?",
       "zh": "厕所在哪里？",
       "en": "Where is the bathroom?",
       "jlpt": "N5",
       "hookType": "e",
-      "hook": "トイレ来自英文「toilet」，英语音译片假名。日本厕所是全球传说级——免费、干净、到处都有，便利店厕所随时可用。",
+      "hook": "トイレ来自英文 toilet，片假名外来词。非常高频。",
       "links": [
         { "lang": "EN", "word": "toilet→トイレ" },
         { "lang": "ES", "word": "baño" },
         { "lang": "ZH", "word": "厕所" }
       ],
-      "scene": "日本最不需要担心的问题——便利店、地铁站、百货商场都有免费干净的厕所。找不到就问コンビニ在哪，走进去就有。"
+      "scene": "现实里最稳的找法是先找车站、百货商场、公园、大型商场；便利店有时可以，但别默认每家都开放。",
+      "culture": "在设施内使用厕所时，必要时先向店员或工作人员打个招呼会更自然。"
     },
     {
       "id": 11,
+      "type": "core",
       "jp": "地下鉄の入口はどこですか？",
       "roma": "Chikatetsu no iriguchi wa doko desu ka?",
       "zh": "地铁入口在哪里？",
       "en": "Where is the subway entrance?",
       "jlpt": "N5",
       "hookType": "d",
-      "hook": "地下鉄 = 地下 + 铁，和中文几乎完全直读。入口也和中文一样，汉字圈优势直接吃满。",
+      "hook": "地下鉄 = 地下 + 铁；入口 = 入口，汉字优势直接成立。",
       "links": [
         { "lang": "ZH", "word": "地下铁 / 入口" },
         { "lang": "EN", "word": "subway entrance" },
         { "lang": "ES", "word": "entrada del metro" }
       ],
-      "scene": "这句保留给「人在街上，想找最近进站口」的场景。它属于问路，不属于站内换乘。"
+      "scene": "这句是街上找进站口，不是站内换乘。",
+      "culture": ""
     },
     {
       "id": 12,
+      "type": "flavor",
       "jp": "ありがとうございました。本当に助かりました。",
       "roma": "Arigatou gozaimashita. Hontou ni tasukarimashita.",
       "zh": "非常感谢。真的帮了大忙了。",
       "en": "Thank you so much. You really saved me.",
       "jlpt": "N5",
       "hookType": "d",
-      "hook": "助かる「たすかる」——「助」汉字直读，中文「得救了」「帮了大忙」。加这句，感谢从礼貌升级到真心。",
+      "hook": "助かる = 得救了、帮大忙了。比单纯ありがとう更有温度。",
       "links": [
         { "lang": "ZH", "word": "助（得救）" },
         { "lang": "EN", "word": "you saved me" }
       ],
-      "scene": "日本人被外国人真心道谢会记住这次互动很久。说完「助かりました」，对方会感到被真正需要——这比单纯的ありがとう更有分量。"
+      "scene": "对方认真帮你解释、画图、甚至带你走了一段路时，这句特别合适。",
+      "culture": "日本人对这种真诚、具体的感谢通常会很受用。"
+    }
+  ],
+  "inputTasks": [
+    {
+      "id": "in1",
+      "type": "scene_match",
+      "prompt": "你想找厕所，最直接的一句是什么？",
+      "answer": "トイレはどこですか？"
+    },
+    {
+      "id": "in2",
+      "type": "listen_match",
+      "prompt": "听到『右に曲がってください』，应该理解成什么？",
+      "answer": "请向右转"
+    },
+    {
+      "id": "in3",
+      "type": "scene_match",
+      "prompt": "对方说太快了，你想让他再说一遍，该说哪句？",
+      "answer": "もう一度お願いします"
+    }
+  ],
+  "outputTasks": [
+    {
+      "id": "out1",
+      "type": "speak",
+      "promptZh": "请问，地铁入口在哪里？",
+      "target": "すみません。地下鉄の入口はどこですか？"
+    },
+    {
+      "id": "out2",
+      "type": "speak",
+      "promptZh": "请问，走到车站要几分钟？",
+      "target": "駅まで歩いて何分ですか？"
+    },
+    {
+      "id": "out3",
+      "type": "roleplay",
+      "promptZh": "你迷路了，先开口，再问厕所在哪里，最后道谢。",
+      "targets": [
+        "すみません",
+        "トイレはどこですか？",
+        "ありがとうございました。本当に助かりました。"
+      ]
     }
   ]
 },
