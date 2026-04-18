@@ -1472,343 +1472,299 @@
         }
       ]
     },
+   {
+  "id": "hotel",
+  "label": "酒店入住",
+  "desc": "登记 · 设施 · 退房",
+  "emoji": "🏨",
+  "color": "#2d5fa0",
+  "bgColor": "#e6eef8",
+  "ready": true,
+  "goal": [
+    "能完成入住和退房",
+    "能说明自己有预约",
+    "能问早餐、Wi-Fi、毛巾、热水等基本问题",
+    "能请求寄存行李或延迟退房",
+    "能体面地结束一次酒店对话"
+  ],
+  "notes": [
     {
-      "id": "hotel",
-      "label": "酒店入住",
-      "desc": "登记 · 设施 · 退房",
-      "emoji": "🏨",
-      "color": "#2d5fa0",
-      "bgColor": "#e6eef8",
-      "ready": true,
-      "notes": [
-        {
-          "t": "🛁 浴室热水开关",
-          "b": "很多日本酒店浴室要先开墙上的总开关才有热水，不是龙头的问题。进浴室先找找墙上的开关。"
-        },
-        {
-          "t": "🩴 拖鞋只能在室内穿",
-          "b": "酒店拖鞋不能穿去电梯或走廊，更不能穿去大堂。穿浴衣出电梯也不合适——温泉旅馆例外。"
-        },
-        {
-          "t": "🚭 吸烟规定很严",
-          "b": "日本酒店禁烟房是真禁烟，在房间吸烟会被收取高额清洁费，有时超过一晚房费。"
-        }
-      ],
-      "phrases": [
-        {
-          "id": 1,
-          "jp": "チェックインをお願いします",
-          "roma": "Chekku-in wo onegaishimasu",
-          "zh": "麻烦帮我办入住",
-          "en": "Check-in, please",
-          "jlpt": "N4",
-          "hookType": "e",
-          "hook": "「チェックイン」= check-in，英语直接音译。「をお願いします」比「ください」更礼貌，酒店场景用这个更得体。",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "入住"
-            },
-            {
-              "lang": "EN",
-              "word": "check-in→チェックイン"
-            },
-            {
-              "lang": "ES",
-              "word": "check-in"
-            }
-          ],
-          "scene": "走到前台把护照递过去说这句。对方会问预约名字，准备好护照或预订确认邮件。"
-        },
-        {
-          "id": 2,
-          "jp": "予約しています、〇〇です",
-          "roma": "Yoyaku shite imasu, 〇〇 desu",
-          "zh": "我有预约，我叫〇〇",
-          "en": "I have a reservation, I'm 〇〇",
-          "jlpt": "N4",
-          "hookType": "d",
-          "hook": "「予約」= 预约，汉字直读。中文「预约」和日语「予約」完全同义——汉字圈的天然优势。",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "预约（完全同）"
-            },
-            {
-              "lang": "JP",
-              "word": "予約(よやく)"
-            },
-            {
-              "lang": "EN",
-              "word": "reservation"
-            },
-            {
-              "lang": "ES",
-              "word": "reserva"
-            }
-          ],
-          "scene": "说完①紧接着说这句。名字说清楚，前台会在系统里查，不用担心发音。"
-        },
-        {
-          "id": 3,
-          "jp": "朝食はついていますか？",
-          "roma": "Chōshoku wa tsuite imasu ka?",
-          "zh": "含早餐吗？",
-          "en": "Is breakfast included?",
-          "jlpt": "N4",
-          "hookType": "d",
-          "hook": "「朝食」= 朝（早晨）+ 食（食物）= 早餐，汉字直读。换「夕食」=晚餐，「昼食」=午餐——三餐都用「食」，认识这个字搞定全部。",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "朝食≈早食"
-            },
-            {
-              "lang": "JP",
-              "word": "朝(あさ)=早晨"
-            },
-            {
-              "lang": "EN",
-              "word": "breakfast included"
-            },
-            {
-              "lang": "ES",
-              "word": "¿incluye desayuno?"
-            }
-          ],
-          "scene": "check-in时确认。日本商务酒店经常有附带早餐选项，但要分清楚。"
-        },
-        {
-          "id": 4,
-          "jp": "Wi-Fiのパスワードを教えてもらえますか？",
-          "roma": "Wi-Fi no pasuwādo wo oshiete moraemasu ka?",
-          "zh": "可以告诉我Wi-Fi密码吗？",
-          "en": "Could you tell me the Wi-Fi password?",
-          "jlpt": "N4",
-          "hookType": "e",
-          "hook": "「パスワード」= password，英语音译。「教えてもらえますか」= 能告诉我吗，比「ください」更礼貌，适合问稍微麻烦一点的事情。",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "密码"
-            },
-            {
-              "lang": "EN",
-              "word": "password→パスワード"
-            },
-            {
-              "lang": "ES",
-              "word": "contraseña"
-            }
-          ],
-          "scene": "先找找桌子上的小卡片，找不到再问。部分酒店每层楼密码不同。"
-        },
-        {
-          "id": 5,
-          "jp": "タオルをもう一枚もらえますか？",
-          "roma": "Taoru wo mō ichimai moraemasu ka?",
-          "zh": "可以再给我一条毛巾吗？",
-          "en": "Could I have one more towel?",
-          "jlpt": "N4",
-          "hookType": "e",
-          "hook": "「タオル」= towel，英语音译。「もう一枚」= one more（枚=布/纸类量词）。换「もう一つ」就是再给我一个，可以要任何东西。",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "毛巾"
-            },
-            {
-              "lang": "EN",
-              "word": "towel→タオル"
-            },
-            {
-              "lang": "ES",
-              "word": "toalla"
-            },
-            {
-              "lang": "JP",
-              "word": "もう一枚=再一张"
-            }
-          ],
-          "scene": "日本酒店毛巾按人头给，不够用打内线或去前台说这句。"
-        },
-        {
-          "id": 6,
-          "jp": "お湯が出ないのですが…",
-          "roma": "Oyu ga denai no desu ga...",
-          "zh": "热水出不来……",
-          "en": "The hot water isn't working...",
-          "jlpt": "N4",
-          "hookType": "t",
-          "hook": "⚠️「湯」陷阱！日语「お湯」= 热水，不是汤！「〜のですが…」句尾省略表示请帮我处理，日本人立刻明白，不用说完。",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "⚠️湯≠汤，=热水"
-            },
-            {
-              "lang": "JP",
-              "word": "お湯(おゆ)"
-            },
-            {
-              "lang": "EN",
-              "word": "hot water"
-            }
-          ],
-          "scene": "先找浴室墙上的总开关，很多酒店要先开它才有热水。真的没有再打电话。"
-        },
-        {
-          "id": 7,
-          "jp": "エアコンの使い方を教えてもらえますか？",
-          "roma": "Eakon no tsukaikata wo oshiete moraemasu ka?",
-          "zh": "可以教我怎么用空调吗？",
-          "en": "Could you show me how to use the AC?",
-          "jlpt": "N4",
-          "hookType": "e",
-          "hook": "「エアコン」= air conditioner，音译。「〜の使い方」= 〜的用法，万能句型——换「テレビ」=电视怎么用，「金庫」=保险箱怎么用。",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "空调"
-            },
-            {
-              "lang": "EN",
-              "word": "air con→エアコン"
-            },
-            {
-              "lang": "ES",
-              "word": "aire acondicionado"
-            }
-          ],
-          "scene": "日本酒店空调遥控器经常全是日文，不懂就问，前台会上来演示。"
-        },
-        {
-          "id": 8,
-          "jp": "荷物を預かってもらえますか？",
-          "roma": "Nimotsu wo azukatte moraemasu ka?",
-          "zh": "可以帮我寄存行李吗？",
-          "en": "Could you store my luggage?",
-          "jlpt": "N4",
-          "hookType": "d",
-          "hook": "「荷物」= 荷（货）+ 物（物品）= 行李，汉字直读。几乎所有日本酒店都提供免费行李寄存。",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "荷物≈行李（直读）"
-            },
-            {
-              "lang": "EN",
-              "word": "luggage"
-            },
-            {
-              "lang": "ES",
-              "word": "equipaje"
-            }
-          ],
-          "scene": "早上退房但下午的飞机，行李寄存前台去逛街，晚上回来拿。"
-        },
-        {
-          "id": 9,
-          "jp": "レイトチェックアウトはできますか？",
-          "roma": "Reito chekku-auto wa dekimasu ka?",
-          "zh": "可以延迟退房吗？",
-          "en": "Is late check-out possible?",
-          "jlpt": "N4",
-          "hookType": "e",
-          "hook": "「レイトチェックアウト」= late check-out，全部音译。「できますか」= 可以吗——万能可能性询问句型：「〜はできますか？」",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "延迟退房"
-            },
-            {
-              "lang": "EN",
-              "word": "late check-out→全音译"
-            },
-            {
-              "lang": "ES",
-              "word": "check-out tardío"
-            }
-          ],
-          "scene": "通常前一天或当天早上问。旺季基本没得商量，淡季比较好说话。"
-        },
-        {
-          "id": 10,
-          "jp": "ここに名前を書けばいいですか？",
-          "roma": "Koko ni namae wo kakeba ii desu ka?",
-          "zh": "在这里签名就可以吗？",
-          "en": "Should I sign here?",
-          "jlpt": "N4",
-          "hookType": "d",
-          "hook": "「名前」= 名（名字）+ 前（处）= 姓名，汉字直读。「〜ばいいですか」= 做〜就可以吗，确认操作的万能句型。",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "名前=姓名（直读）"
-            },
-            {
-              "lang": "EN",
-              "word": "sign here"
-            },
-            {
-              "lang": "ES",
-              "word": "¿firmo aquí?"
-            }
-          ],
-          "scene": "办手续时对方把单据推过来，不确定要在哪里签时说这句，指着纸上位置。"
-        },
-        {
-          "id": 11,
-          "jp": "チェックアウトをお願いします",
-          "roma": "Chekku-auto wo onegaishimasu",
-          "zh": "麻烦帮我办退房",
-          "en": "Check-out, please",
-          "jlpt": "N4",
-          "hookType": "e",
-          "hook": "和①对称——「チェックイン」进，「チェックアウト」出。进出酒店只需这两句开口，其余交给对方操作。",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "退房"
-            },
-            {
-              "lang": "EN",
-              "word": "check-out→チェックアウト"
-            },
-            {
-              "lang": "ES",
-              "word": "check-out"
-            }
-          ],
-          "scene": "退房时把钥匙卡递过去说这句。对方会打印账单让你确认，扫一眼有没有额外消费。"
-        },
-        {
-          "id": 12,
-          "jp": "お世話になりました",
-          "roma": "Osewa ni narimashita",
-          "zh": "承蒙关照",
-          "en": "Thank you for everything",
-          "jlpt": "N4",
-          "hookType": "e",
-          "hook": "不是「谢谢」的直译，是「承蒙您照顾了」。比ありがとう更有分量，适合离开一个地方时说。日本人听到这句会真的很感动。",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "承蒙关照（同义）"
-            },
-            {
-              "lang": "JP",
-              "word": "世話(せわ)=照顾"
-            },
-            {
-              "lang": "EN",
-              "word": "thank you for your care"
-            }
-          ],
-          "scene": "退完房离开时转身说这句，前台会深深鞠躬。一句话，真实的人情味。"
-        }
-      ]
+      "t": "🛁 热水不出，先别急着怀疑人生",
+      "b": "很多日本酒店浴室有总开关，或者热水系统要先启动。先找墙上的开关、面板或说明，不行再联系前台。"
     },
+    {
+      "t": "🩴 拖鞋基本只在房间里穿",
+      "b": "商务酒店的拖鞋通常不要穿去走廊、电梯和大堂。温泉旅馆规则会宽一点，但普通酒店还是默认“只在房间里”。"
+    },
+    {
+      "t": "🚭 禁烟房不是客气，是认真的",
+      "b": "日本酒店对禁烟房很严格。在房间里抽烟，是真的可能被收清洁费，不是写着吓人的。"
+    }
+  ],
+  "phrases": [
+    {
+      "id": 1,
+      "type": "core",
+      "jp": "チェックインをお願いします",
+      "roma": "Chekku-in wo onegaishimasu",
+      "zh": "麻烦帮我办入住",
+      "en": "Check-in, please",
+      "jlpt": "N4",
+      "hookType": "e",
+      "hook": "チェックイン就是 check-in 的音译。酒店里这类词很多，英语底子在这里很好用。",
+      "links": [
+        { "lang": "ZH", "word": "入住" },
+        { "lang": "EN", "word": "check-in→チェックイン" },
+        { "lang": "ES", "word": "check-in" }
+      ],
+      "scene": "走到前台，护照和预订信息准备好，说这句就能顺利开始。",
+      "culture": "日本前台通常不会跟你寒暄太久，流程感很强，直接进入正题反而自然。"
+    },
+    {
+      "id": 2,
+      "type": "core",
+      "jp": "予約しています、〇〇です",
+      "roma": "Yoyaku shite imasu, 〇〇 desu",
+      "zh": "我有预约，我叫〇〇",
+      "en": "I have a reservation, I'm 〇〇",
+      "jlpt": "N4",
+      "hookType": "d",
+      "hook": "予約 = 预约，汉字直接帮你省力。这个词一眼就能抓住意思。",
+      "links": [
+        { "lang": "ZH", "word": "预约（完全同）" },
+        { "lang": "JP", "word": "予約(よやく)" },
+        { "lang": "EN", "word": "reservation" },
+        { "lang": "ES", "word": "reserva" }
+      ],
+      "scene": "办入住时最常接在第一句后面说。名字说清楚，前台会自己在系统里找。",
+      "culture": ""
+    },
+    {
+      "id": 3,
+      "type": "core",
+      "jp": "朝食はついていますか？",
+      "roma": "Choushoku wa tsuite imasu ka?",
+      "zh": "含早餐吗？",
+      "en": "Is breakfast included?",
+      "jlpt": "N4",
+      "hookType": "d",
+      "hook": "朝食 = 早餐。汉字非常直观，属于认字就能猜到意思的类型。",
+      "links": [
+        { "lang": "ZH", "word": "朝食≈早餐" },
+        { "lang": "EN", "word": "breakfast included" },
+        { "lang": "ES", "word": "¿incluye desayuno?" }
+      ],
+      "scene": "入住时顺手问最自然。别等第二天早上饿着肚子才开始猜自己到底订没订早餐。",
+      "culture": ""
+    },
+    {
+      "id": 4,
+      "type": "core",
+      "jp": "Wi-Fiのパスワードを教えてもらえますか？",
+      "roma": "Wi-Fi no pasuwaado wo oshiete moraemasu ka?",
+      "zh": "可以告诉我 Wi-Fi 密码吗？",
+      "en": "Could you tell me the Wi-Fi password?",
+      "jlpt": "N4",
+      "hookType": "e",
+      "hook": "パスワード = password，典型外来词。教えてもらえますか比ください更像在请对方帮个忙。",
+      "links": [
+        { "lang": "ZH", "word": "密码" },
+        { "lang": "EN", "word": "password→パスワード" },
+        { "lang": "ES", "word": "contraseña" }
+      ],
+      "scene": "先看看桌上的小卡片、电视首页或电梯口告示，再问会更像熟手。",
+      "culture": "不少酒店其实把密码写得很明显，只是第一次进房间容易漏看。"
+    },
+    {
+      "id": 5,
+      "type": "support",
+      "jp": "タオルをもう一枚もらえますか？",
+      "roma": "Taoru wo mou ichimai moraemasu ka?",
+      "zh": "可以再给我一条毛巾吗？",
+      "en": "Could I have one more towel?",
+      "jlpt": "N4",
+      "hookType": "e",
+      "hook": "タオル = towel。もう一枚 = 再一条/再一张，枚是很实用的量词。",
+      "links": [
+        { "lang": "ZH", "word": "毛巾" },
+        { "lang": "EN", "word": "towel→タオル" },
+        { "lang": "ES", "word": "toalla" }
+      ],
+      "scene": "毛巾不够、地巾湿了、两个人住但想多拿一条时都能用。",
+      "culture": ""
+    },
+    {
+      "id": 6,
+      "type": "support",
+      "jp": "お湯が出ないのですが…",
+      "roma": "Oyu ga denai no desu ga...",
+      "zh": "热水出不来……",
+      "en": "The hot water isn't working...",
+      "jlpt": "N4",
+      "hookType": "t",
+      "hook": "お湯不是“汤”，是热水。这个坑很典型，记住一次以后基本不会再错。",
+      "links": [
+        { "lang": "ZH", "word": "⚠️ 湯≠汤，=热水" },
+        { "lang": "JP", "word": "お湯(おゆ)" },
+        { "lang": "EN", "word": "hot water" }
+      ],
+      "scene": "先确认不是自己不会开，再联系前台。这个句尾留白很日式，听起来比硬邦邦地说“坏了”更自然。",
+      "culture": "很多日本服务场景里，句子故意留半截，听起来会更柔和。"
+    },
+    {
+      "id": 7,
+      "type": "support",
+      "jp": "エアコンの使い方を教えてもらえますか？",
+      "roma": "Eakon no tsukaikata wo oshiete moraemasu ka?",
+      "zh": "可以教我怎么用空调吗？",
+      "en": "Could you show me how to use the AC?",
+      "jlpt": "N4",
+      "hookType": "e",
+      "hook": "エアコン = air conditioner。〜の使い方 = 〜怎么用，这个结构以后可以套很多东西。",
+      "links": [
+        { "lang": "ZH", "word": "空调" },
+        { "lang": "EN", "word": "air con→エアコン" },
+        { "lang": "ES", "word": "aire acondicionado" }
+      ],
+      "scene": "日本酒店遥控器有时候真的很反人类。别硬研究，直接问最快。",
+      "culture": ""
+    },
+    {
+      "id": 8,
+      "type": "core",
+      "jp": "荷物を預かってもらえますか？",
+      "roma": "Nimotsu wo azukatte moraemasu ka?",
+      "zh": "可以帮我寄存行李吗？",
+      "en": "Could you store my luggage?",
+      "jlpt": "N4",
+      "hookType": "d",
+      "hook": "荷物 = 行李，汉字非常友好。看到这个词别慌，基本就是 luggage。",
+      "links": [
+        { "lang": "ZH", "word": "荷物≈行李" },
+        { "lang": "EN", "word": "luggage" },
+        { "lang": "ES", "word": "equipaje" }
+      ],
+      "scene": "退房后还想出去逛，或者到得太早还没能入住，这句都很有用。",
+      "culture": "日本酒店寄存行李非常常见，问这句不会显得失礼。"
+    },
+    {
+      "id": 9,
+      "type": "support",
+      "jp": "レイトチェックアウトはできますか？",
+      "roma": "Reito chekku-auto wa dekimasu ka?",
+      "zh": "可以延迟退房吗？",
+      "en": "Is late check-out possible?",
+      "jlpt": "N4",
+      "hookType": "e",
+      "hook": "レイトチェックアウト几乎全是英语。できますか是很实用的“可不可以”。",
+      "links": [
+        { "lang": "ZH", "word": "延迟退房" },
+        { "lang": "EN", "word": "late check-out" },
+        { "lang": "ES", "word": "check-out tardío" }
+      ],
+      "scene": "有就赚到，没有也正常。别太晚问，前一天或当天早上更合适。",
+      "culture": ""
+    },
+    {
+      "id": 10,
+      "type": "support",
+      "jp": "ここに名前を書けばいいですか？",
+      "roma": "Koko ni namae wo kakeba ii desu ka?",
+      "zh": "在这里签名就可以吗？",
+      "en": "Should I sign here?",
+      "jlpt": "N4",
+      "hookType": "d",
+      "hook": "名前 = 姓名。〜ばいいですか有“这样做就行吗”的确认感，很实用。",
+      "links": [
+        { "lang": "ZH", "word": "名前=姓名" },
+        { "lang": "EN", "word": "sign here" },
+        { "lang": "ES", "word": "¿firmo aquí?" }
+      ],
+      "scene": "手续办到一半，对方把纸推过来，你又不想乱写时，这句特别顺手。",
+      "culture": ""
+    },
+    {
+      "id": 11,
+      "type": "core",
+      "jp": "チェックアウトをお願いします",
+      "roma": "Chekku-auto wo onegaishimasu",
+      "zh": "麻烦帮我办退房",
+      "en": "Check-out, please",
+      "jlpt": "N4",
+      "hookType": "e",
+      "hook": "和 check-in 成对记最省脑子。进是チェックイン，出是チェックアウト。",
+      "links": [
+        { "lang": "ZH", "word": "退房" },
+        { "lang": "EN", "word": "check-out→チェックアウト" },
+        { "lang": "ES", "word": "check-out" }
+      ],
+      "scene": "把房卡递过去，说这句，整个退房流程就会自动启动。",
+      "culture": ""
+    },
+    {
+      "id": 12,
+      "type": "flavor",
+      "jp": "お世話になりました",
+      "roma": "Osewa ni narimashita",
+      "zh": "这几天麻烦你们照顾了",
+      "en": "Thank you for taking care of me",
+      "jlpt": "N4",
+      "hookType": "e",
+      "hook": "这不是单纯“谢谢”，而是“这段时间承蒙关照了”。比ありがとう更有人情味。",
+      "links": [
+        { "lang": "ZH", "word": "承蒙关照" },
+        { "lang": "JP", "word": "世話(せわ)=照顾" },
+        { "lang": "EN", "word": "thank you for your care" }
+      ],
+      "scene": "退房离开时回头说这句，会比普通的谢谢更像真的在日本住过几天的人。",
+      "culture": "这是很典型的日式关系型表达，适合在“相处了一段时间之后”说。"
+    }
+  ],
+  "inputTasks": [
+    {
+      "id": "in1",
+      "type": "scene_match",
+      "prompt": "你到前台，要先说哪句开始办入住？",
+      "answer": "チェックインをお願いします"
+    },
+    {
+      "id": "in2",
+      "type": "scene_match",
+      "prompt": "你想问有没有早餐，应该说哪句？",
+      "answer": "朝食はついていますか？"
+    },
+    {
+      "id": "in3",
+      "type": "listen_match",
+      "prompt": "看到『荷物を預かってもらえますか？』，应该理解成什么？",
+      "answer": "可以帮我寄存行李吗？"
+    }
+  ],
+  "outputTasks": [
+    {
+      "id": "out1",
+      "type": "speak",
+      "promptZh": "我有预约，我叫〇〇。",
+      "target": "予約しています、〇〇です"
+    },
+    {
+      "id": "out2",
+      "type": "speak",
+      "promptZh": "可以告诉我 Wi-Fi 密码吗？",
+      "target": "Wi-Fiのパスワードを教えてもらえますか？"
+    },
+    {
+      "id": "out3",
+      "type": "roleplay",
+      "promptZh": "你准备退房、寄存行李，然后礼貌地结束对话。",
+      "targets": [
+        "チェックアウトをお願いします",
+        "荷物を預かってもらえますか？",
+        "お世話になりました"
+      ]
+    }
+  ]
+},
    {
   "id": "directions",
   "label": "问路 & 导航",
