@@ -658,7 +658,9 @@
               "word": "不好意思"
             }
           ],
-          "scene": "叫服务员、拦路人问路、不小心碰到人，这句都对。"
+          "scene": "叫服务员、拦路人问路、不小心碰到人，这句都对。",
+          "type": "core",
+          "culture": ""
         },
         {
           "id": 2,
@@ -679,7 +681,9 @@
               "word": "ticket"
             }
           ],
-          "scene": "进站前找窗口，要买纸票时。IC卡（Suica）更方便，直接刷。"
+          "scene": "进站前找窗口，要买纸票时。IC卡（Suica）更方便，直接刷。",
+          "type": "core",
+          "culture": "纸票越来越少见，但售票机和窗口仍然会用到。"
         },
         {
           "id": 3,
@@ -700,7 +704,9 @@
               "word": "please give me"
             }
           ],
-          "scene": "JR绿色窗口买第一张IC卡时说。关西用ICOCA，功能一样。"
+          "scene": "JR绿色窗口买第一张IC卡时说。关西用ICOCA，功能一样。",
+          "type": "core",
+          "culture": "Suica / PASMO 这种交通卡在真实旅行里能省掉很多脑力。"
         },
         {
           "id": 4,
@@ -721,17 +727,19 @@
               "word": "does it go to"
             }
           ],
-          "scene": "站台上不确定方向，拦准备上车的乘客快速确认。"
+          "scene": "站台上不确定方向，拦准备上车的乘客快速确认。",
+          "type": "core",
+          "culture": "问方向时先盯终点站名，比盯车厢外观更靠谱。"
         },
         {
           "id": 5,
-          "jp": "何番線ですか？",
-          "roma": "Nan-bansen desu ka?",
-          "zh": "几号站台？",
-          "en": "Which platform?",
+          "jp": "何番〇〇ですか？",
+          "roma": "Nan-ban 〇〇 desu ka?",
+          "zh": "几号〇〇？",
+          "en": "Which 〇〇?",
           "jlpt": "N5",
           "hookType": "d",
-          "hook": "「何」= 几/什么。问数字套路：何 + 量词 + ですか。换成「何番出口」=几号出口。",
+          "hook": "「何」= 几/什么。问数字最实用的骨架之一：何番 + 名词。",
           "links": [
             {
               "lang": "EN",
@@ -742,7 +750,23 @@
               "word": "¿qué andén?"
             }
           ],
-          "scene": "换乘时找不到站台，问工作人员。"
+          "scene": "找站台、找出口、找月台编号时都能用。",
+          "type": "template",
+          "culture": "站台、出口、线号都能套这个骨架。",
+          "swappableWords": [
+            {
+              "word": "線",
+              "zh": "线 / 站台线"
+            },
+            {
+              "word": "ホーム",
+              "zh": "站台"
+            },
+            {
+              "word": "出口",
+              "zh": "出口"
+            }
+          ]
         },
         {
           "id": 6,
@@ -763,7 +787,9 @@
               "word": "transbordo"
             }
           ],
-          "scene": "新宿、涩谷大站换乘，Google Maps比问人靠谱，但这句备用。"
+          "scene": "新宿、涩谷大站换乘，Google Maps比问人靠谱，但这句备用。",
+          "type": "core",
+          "culture": ""
         },
         {
           "id": 7,
@@ -784,7 +810,9 @@
               "word": "next stop"
             }
           ],
-          "scene": "听到这句就可以站起来靠近车门了。"
+          "scene": "听到这句就可以站起来靠近车门了。",
+          "type": "core",
+          "culture": ""
         },
         {
           "id": 8,
@@ -805,7 +833,9 @@
               "word": "getting off"
             }
           ],
-          "scene": "拥挤车厢穿过人群下车，说这句旁边的人会主动让路。"
+          "scene": "拥挤车厢穿过人群下车，说这句旁边的人会主动让路。",
+          "type": "core",
+          "culture": ""
         },
         {
           "id": 9,
@@ -830,7 +860,27 @@
               "word": "salida"
             }
           ],
-          "scene": "出闸机找出口，东京大站出口号码直接决定你从哪条街走出来。"
+          "scene": "出闸机找出口，东京大站出口号码直接决定你从哪条街走出来。",
+          "type": "template",
+          "culture": "出口号决定你出来在哪条街，不是小事。",
+          "swappableWords": [
+            {
+              "word": "出口",
+              "zh": "出口"
+            },
+            {
+              "word": "改札口",
+              "zh": "检票口"
+            },
+            {
+              "word": "南口",
+              "zh": "南口"
+            },
+            {
+              "word": "東口",
+              "zh": "东口"
+            }
+          ]
         },
         {
           "id": 10,
@@ -847,7 +897,9 @@
               "word": "改≈改变，口≈入口"
             }
           ],
-          "scene": "地铁站内迷路，需要找回闸机出站时。"
+          "scene": "地铁站内迷路，需要找回闸机出站时。",
+          "type": "core",
+          "culture": "改札口在东京站内和换乘时会高频出现。"
         },
         {
           "id": 11,
@@ -868,7 +920,9 @@
               "word": "don't understand"
             }
           ],
-          "scene": "直接说，别硬撑。日本人很乐意用另一种方式表达。"
+          "scene": "直接说，别硬撑。日本人很乐意用另一种方式表达。",
+          "type": "support",
+          "culture": ""
         },
         {
           "id": 12,
@@ -889,7 +943,9 @@
               "word": "one more time"
             }
           ],
-          "scene": "地铁里嘈杂没听清，或者对方语速太快时。"
+          "scene": "地铁里嘈杂没听清，或者对方语速太快时。",
+          "type": "support",
+          "culture": ""
         },
         {
           "id": 13,
@@ -910,7 +966,9 @@
               "word": "puertas se cierran"
             }
           ],
-          "scene": "广播反复播，夹到了也不会重开。"
+          "scene": "广播反复播，夹到了也不会重开。",
+          "type": "flavor",
+          "culture": "日本车门广播非常直接，别挑战它。"
         },
         {
           "id": 14,
@@ -935,17 +993,19 @@
               "word": "谢谢"
             }
           ],
-          "scene": "别人帮了你，鞠个头说这句，对方真的会很开心。"
+          "scene": "别人帮了你，鞠个头说这句，对方真的会很开心。",
+          "type": "flavor",
+          "culture": ""
         },
         {
           "id": 15,
-          "jp": "すみません、どこですか？",
-          "roma": "Sumimasen, doko desu ka?",
-          "zh": "请问，在哪里？",
-          "en": "Excuse me, where is it?",
+          "jp": "〇〇はどこですか？",
+          "roma": "〇〇 wa doko desu ka?",
+          "zh": "〇〇在哪里？",
+          "en": "Where is 〇〇?",
           "jlpt": "N5",
           "hookType": "d",
-          "hook": "「どこ」= 哪里，万能问路词。前加地点：渋谷はどこですか？",
+          "hook": "这句本身就是地铁里最省脑子的万能模板。不会说长句时，先把地点名换进去。",
           "links": [
             {
               "lang": "EN",
@@ -960,313 +1020,312 @@
               "word": "哪里"
             }
           ],
-          "scene": "最简化版问路，加地点名称，哪里都能用。"
+          "scene": "出口、站台、厕所、南口、东口，全都能套。",
+          "type": "template",
+          "culture": "这句语法最省力，但现实里最好把地点名一起说完整。",
+          "swappableWords": [
+            {
+              "word": "出口",
+              "zh": "出口"
+            },
+            {
+              "word": "改札口",
+              "zh": "检票口"
+            },
+            {
+              "word": "南口",
+              "zh": "南口"
+            },
+            {
+              "word": "トイレ",
+              "zh": "厕所"
+            }
+          ]
+        }
+      ],
+      "goal": [
+        "能在车站里找票口、闸机、站台和出口",
+        "能确认列车方向、下一站和换乘位置",
+        "能在迷路时快速开口求助",
+        "能听懂最常见的广播和站内提示",
+        "能把东京地铁的空间逻辑和语言一起用起来"
+      ],
+      "notes": [
+        {
+          "t": "🎯 先认空间，再认句子",
+          "b": "东京地铁真正难的往往不是一句日语，而是出口、站台、公司线路和方向感。先看颜色、终点站、出口号，再开口问人。"
+        },
+        {
+          "t": "🚪 出口号比“出口”更重要",
+          "b": "在大站里，知道要去 A1 还是 B3，比单纯知道“出口在哪里”有用得多。东京很多站差一个口，步行距离就会差很多。"
+        },
+        {
+          "t": "🔁 换乘不一定只是换站台",
+          "b": "东京常常是换公司、换闸机、换计费体系。别把“换乘”想得太简单，跟着颜色和终点站走，比死记站名更稳。"
+        }
+      ],
+      "inputTasks": [
+        {
+          "id": "in1",
+          "type": "scene_match",
+          "prompt": "你在大站里找出口号，哪种句型最省力？",
+          "answer": "何番〇〇ですか？"
+        },
+        {
+          "id": "in2",
+          "type": "listen_match",
+          "prompt": "听到『次は渋谷です』，应该理解成什么？",
+          "answer": "下一站是涩谷"
+        },
+        {
+          "id": "in3",
+          "type": "scene_match",
+          "prompt": "你不确定这班车是不是去新宿，该怎么问？",
+          "answer": "これは新宿に行きますか？"
+        }
+      ],
+      "outputTasks": [
+        {
+          "id": "out1",
+          "type": "speak",
+          "promptZh": "请问，换乘在哪里？",
+          "target": "すみません、乗り換えはどこですか？"
+        },
+        {
+          "id": "out2",
+          "type": "speak",
+          "promptZh": "请问，几号出口？",
+          "target": "何番出口ですか？"
+        },
+        {
+          "id": "out3",
+          "type": "roleplay",
+          "promptZh": "你在站台上迷路，先开口，再确认这班车是不是去涩谷，最后问出口。",
+          "targets": [
+            "すみません",
+            "これは渋谷に行きますか？",
+            "出口はどこですか？"
+          ]
         }
       ]
     },
-   {
-  "id": "restaurant",
-  "label": "餐厅点餐",
-  "desc": "点菜 · 过敏 · 结账",
-  "emoji": "🍜",
-  "color": "#a07020",
-  "bgColor": "#faf0d8",
-  "ready": true,
-  "goal": [
-    "能顺利入座和开口点单",
-    "能用模板句点具体菜品或饮料",
-    "能表达过敏、忌口和偏好",
-    "能请求推荐和结账",
-    "能自然地和店员完成一整轮基本互动"
-  ],
-  "notes": [
     {
-      "t": "🍽️ 进店先等带位，不要自己坐",
-      "b": "日本很多餐厅就算有空桌，也先等店员带位。站在门口等一句招呼，比自己往里走自然得多。"
-    },
-    {
-      "t": "🧾 小菜不一定免费",
-      "b": "居酒屋常见お通し，像席费一样自动出现，通常会算进账单。不是送错，也不是坑你。"
-    },
-    {
-      "t": "💴 没有小费文化",
-      "b": "桌上留小费，店员可能会追出来还你。正常付账就好。"
-    }
-  ],
-  "phrases": [
-    {
-      "id": 1,
-      "type": "core",
-      "jp": "二人です",
-      "roma": "Futari desu",
-      "zh": "两个人",
-      "en": "Two people",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "二人是不规则读法，不能硬读成 ni-nin。这个得单独记一下。",
-      "links": [
-        { "lang": "ZH", "word": "二人" },
-        { "lang": "EN", "word": "two people" }
+      "id": "restaurant",
+      "label": "餐厅点餐",
+      "desc": "点菜 · 过敏 · 结账",
+      "emoji": "🍜",
+      "color": "#a07020",
+      "bgColor": "#faf0d8",
+      "ready": true,
+      "notes": [
+        {
+          "t": "お通し · 不是免费赠品",
+          "b": "入座后端来的小碟是居酒屋的席费，约300-500日元，账单里会有。接受它就好。"
+        },
+        {
+          "t": "🚫 进店不能自己找位子",
+          "b": "看到空桌也要等店员带位，等「こちらへどうぞ」的指示。"
+        },
+        {
+          "t": "🚫 没有小费文化",
+          "b": "桌上留钱会被追出来还给你。服务已含在价格里，直接付正价就行。"
+        }
       ],
-      "scene": "进门站在门口，等店员看过来时说这句最自然。",
-      "culture": "日本餐厅入店通常先报人数，再由店员带位。"
-    },
-    {
-      "id": 2,
-      "type": "core",
-      "jp": "すみません、注文をお願いします",
-      "roma": "Sumimasen, chuumon wo onegaishimasu",
-      "zh": "不好意思，我们要点餐",
-      "en": "Excuse me, we'd like to order",
-      "jlpt": "N4",
-      "hookType": "t",
-      "hook": "注文不是“注释”，是点单、下单。这个词很常见，别再看错。",
-      "links": [
-        { "lang": "ZH", "word": "注文=点单" },
-        { "lang": "EN", "word": "order" },
-        { "lang": "ES", "word": "pedir" }
-      ],
-      "scene": "日本店员通常不会频繁过来问“准备好了吗”，你要主动叫人。",
-      "culture": ""
-    },
-    {
-      "id": 3,
-      "type": "template",
-      "jp": "〇〇をください",
-      "roma": "〇〇 wo kudasai",
-      "zh": "请给我 〇〇",
-      "en": "I'll have 〇〇",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "ください很万能，点菜、拿勺子、要水都能用。先把这个骨架练熟。",
-      "links": [
-        { "lang": "EN", "word": "I'll have..." },
-        { "lang": "ES", "word": "quiero..." },
-        { "lang": "ZH", "word": "请给我……" }
-      ],
-      "scene": "菜单看懂了，最直接的点法就是这句。",
-      "culture": "",
-      "swappableWords": [
-        { "word": "水", "zh": "水" },
-        { "word": "ラーメン", "zh": "拉面" },
-        { "word": "ビール", "zh": "啤酒" },
-        { "word": "メニュー", "zh": "菜单" }
+      "phrases": [
+        {
+          "id": 1,
+          "jp": "二人です。",
+          "roma": "Futari desu",
+          "zh": "两个人。",
+          "en": "Two, please.",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "「二人」= ふたり，不规则读法。一人=ひとり，二人=ふたり，三人起才有规律。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "二人（汉字同）"
+            },
+            {
+              "lang": "EN",
+              "word": "two people"
+            }
+          ],
+          "scene": "进门站在入口，等店员走来，说这句然后比两根手指。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 2,
+          "jp": "すみません、注文をお願いします。",
+          "roma": "Sumimasen, chūmon wo onegaishimasu",
+          "zh": "不好意思，要点餐。",
+          "en": "We're ready to order.",
+          "jlpt": "N4",
+          "hookType": "t",
+          "hook": "注文陷阱！不是注释文字，是点餐/订购。看到注文=可以点单了。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "注文≠注释，=点餐"
+            },
+            {
+              "lang": "ES",
+              "word": "pedir"
+            }
+          ],
+          "scene": "看完菜单举手。日本服务员不会主动来问你。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 3,
+          "jp": "これをください。",
+          "roma": "Kore wo kudasai",
+          "zh": "给我这个。",
+          "en": "I'll have this.",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "「これ」= this，「ください」= please give me。指着菜单图片点完全正常。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "this one please"
+            },
+            {
+              "lang": "ES",
+              "word": "esto por favor"
+            }
+          ],
+          "scene": "对着图文菜单直接指，日本很多餐厅有图片菜单。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 4,
+          "jp": "えびアレルギーがあります。",
+          "roma": "Ebi arerugī ga arimasu",
+          "zh": "我对虾过敏。",
+          "en": "I have a shrimp allergy.",
+          "jlpt": "N3",
+          "hookType": "e",
+          "hook": "「アレルギー」= allergy，英语直接音译。换词：ナッツ・卵・牛乳。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "allergy→アレルギー"
+            },
+            {
+              "lang": "ES",
+              "word": "alergia"
+            }
+          ],
+          "scene": "点餐前主动说，不要等菜上来。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 5,
+          "jp": "お会計をお願いします。",
+          "roma": "Okaikei wo onegaishimasu",
+          "zh": "麻烦结账。",
+          "en": "The bill, please.",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "「会計」= 会计，汉字联想：帮你算账的人。空中做写字手势也行。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "会計≈会计"
+            },
+            {
+              "lang": "EN",
+              "word": "the bill"
+            },
+            {
+              "lang": "ES",
+              "word": "la cuenta"
+            }
+          ],
+          "scene": "日本餐厅不会主动给账单，吃完举手说或走到收银台。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 6,
+          "jp": "おすすめは何ですか？",
+          "roma": "Osusume wa nan desu ka?",
+          "zh": "有什么推荐吗？",
+          "en": "What do you recommend?",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "「おすすめ」= 推荐。お开头是礼貌前缀。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "recommendation"
+            },
+            {
+              "lang": "ES",
+              "word": "¿qué recomienda?"
+            }
+          ],
+          "scene": "菜单全是日文看不懂，让服务员帮选往往有惊喜。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 7,
+          "jp": "すみません、もう一つください。",
+          "roma": "Sumimasen, mō hitotsu kudasai",
+          "zh": "再来一个。",
+          "en": "One more, please.",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "「もう」= 再/还。もう一杯（再一杯）・もう少し（再一点儿）。",
+          "links": [
+            {
+              "lang": "ES",
+              "word": "uno más"
+            },
+            {
+              "lang": "EN",
+              "word": "one more"
+            }
+          ],
+          "scene": "汤喝完想续杯，或好吃想加一份。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 8,
+          "jp": "おいしいです！",
+          "roma": "Oishii desu!",
+          "zh": "好吃！",
+          "en": "It's delicious!",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "「おいしい」= 好吃。日本厨师服务员听到这句会真的很开心。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "好吃"
+            },
+            {
+              "lang": "ES",
+              "word": "¡qué rico!"
+            },
+            {
+              "lang": "EN",
+              "word": "delicious!"
+            }
+          ],
+          "scene": "吃到好吃的，直接说。效果比任何礼貌用语都强。",
+          "type": "core",
+          "culture": ""
+        }
       ]
     },
-    {
-      "id": 4,
-      "type": "template",
-      "jp": "これをください",
-      "roma": "Kore wo kudasai",
-      "zh": "给我这个",
-      "en": "I'll have this",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "看不懂菜名也没关系，指着菜单说这句，完全合理，而且很常见。",
-      "links": [
-        { "lang": "EN", "word": "this one" },
-        { "lang": "ES", "word": "esto" },
-        { "lang": "ZH", "word": "这个" }
-      ],
-      "scene": "图文菜单、机器点餐、套餐选择时都很好用。",
-      "culture": ""
-    },
-    {
-      "id": 5,
-      "type": "template",
-      "jp": "〇〇アレルギーがあります",
-      "roma": "〇〇 arerugii ga arimasu",
-      "zh": "我对 〇〇 过敏",
-      "en": "I have a 〇〇 allergy",
-      "jlpt": "N4",
-      "hookType": "e",
-      "hook": "アレルギー是外来词，英语底子在这里很好使。餐厅和 emergency 都能复用。",
-      "links": [
-        { "lang": "EN", "word": "allergy→アレルギー" },
-        { "lang": "ES", "word": "alergia" },
-        { "lang": "ZH", "word": "过敏" }
-      ],
-      "scene": "别等上菜后才说。点餐前先讲，店员通常会认真确认。",
-      "culture": "",
-      "swappableWords": [
-        { "word": "えび", "zh": "虾" },
-        { "word": "ピーナッツ", "zh": "花生" },
-        { "word": "卵", "zh": "鸡蛋" },
-        { "word": "乳製品", "zh": "乳制品" }
-      ]
-    },
-    {
-      "id": 6,
-      "type": "support",
-      "jp": "おすすめは何ですか？",
-      "roma": "Osusume wa nan desu ka?",
-      "zh": "有什么推荐吗？",
-      "en": "What do you recommend?",
-      "jlpt": "N4",
-      "hookType": "e",
-      "hook": "おすすめ就是推荐。不会点的时候，这句比自己瞎猜省事得多。",
-      "links": [
-        { "lang": "EN", "word": "recommend" },
-        { "lang": "ES", "word": "¿qué recomienda?" },
-        { "lang": "ZH", "word": "推荐" }
-      ],
-      "scene": "菜单太多、完全不认识的时候，直接让对方带路。",
-      "culture": ""
-    },
-    {
-      "id": 7,
-      "type": "support",
-      "jp": "辛くしないでください",
-      "roma": "Karakushinaide kudasai",
-      "zh": "请不要做辣",
-      "en": "Please don't make it spicy",
-      "jlpt": "N4",
-      "hookType": "d",
-      "hook": "しないでください = 请不要……，这是很有用的禁止/避免模板。",
-      "links": [
-        { "lang": "EN", "word": "not spicy" },
-        { "lang": "ES", "word": "sin picante" },
-        { "lang": "ZH", "word": "不要辣" }
-      ],
-      "scene": "担心太辣、太刺激时能救命。",
-      "culture": ""
-    },
-    {
-      "id": 8,
-      "type": "support",
-      "jp": "お会計をお願いします",
-      "roma": "Okaikei wo onegaishimasu",
-      "zh": "麻烦结账",
-      "en": "The bill, please",
-      "jlpt": "N4",
-      "hookType": "d",
-      "hook": "会計看起来就像“会计”，在餐厅里基本就是账单和结账。",
-      "links": [
-        { "lang": "ZH", "word": "会計≈结账" },
-        { "lang": "EN", "word": "the bill" },
-        { "lang": "ES", "word": "la cuenta" }
-      ],
-      "scene": "日本餐厅一般不会主动把账单拿过来，吃完要自己开口。",
-      "culture": ""
-    },
-    {
-      "id": 9,
-      "type": "support",
-      "jp": "カードで払えますか？",
-      "roma": "Kaado de haraemasu ka?",
-      "zh": "可以刷卡吗？",
-      "en": "Can I pay by card?",
-      "jlpt": "N4",
-      "hookType": "e",
-      "hook": "カード = card。〜で払えますか就是“能用……支付吗”。",
-      "links": [
-        { "lang": "EN", "word": "pay by card" },
-        { "lang": "ES", "word": "pagar con tarjeta" },
-        { "lang": "ZH", "word": "刷卡" }
-      ],
-      "scene": "小店、老店、居酒屋都值得先问一句。",
-      "culture": ""
-    },
-    {
-      "id": 10,
-      "type": "support",
-      "jp": "もう一つください",
-      "roma": "Mou hitotsu kudasai",
-      "zh": "再来一个",
-      "en": "One more, please",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "もう = 再，ひとつ = 一个。要加点、续点，这句非常顺手。",
-      "links": [
-        { "lang": "EN", "word": "one more" },
-        { "lang": "ES", "word": "uno más" },
-        { "lang": "ZH", "word": "再来一个" }
-      ],
-      "scene": "好吃想加一份，或者饮料想再来一杯时。",
-      "culture": ""
-    },
-    {
-      "id": 11,
-      "type": "flavor",
-      "jp": "おいしいです！",
-      "roma": "Oishii desu!",
-      "zh": "很好吃！",
-      "en": "It's delicious!",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "这句短得几乎没有学习成本，但情绪价值极高。",
-      "links": [
-        { "lang": "EN", "word": "delicious" },
-        { "lang": "ES", "word": "qué rico" },
-        { "lang": "ZH", "word": "好吃" }
-      ],
-      "scene": "吃到真好吃的时候直接说。很多店员会立刻笑出来。",
-      "culture": "日本服务场景里，真诚地说一句好吃，效果往往比复杂礼貌表达更强。"
-    },
-    {
-      "id": 12,
-      "type": "flavor",
-      "jp": "ごちそうさまでした",
-      "roma": "Gochisousama deshita",
-      "zh": "多谢款待",
-      "en": "Thank you for the meal",
-      "jlpt": "N5",
-      "hookType": "s",
-      "hook": "不是普通“谢谢”，而是“这顿饭承蒙照顾了”。吃完离开时特别地道。",
-      "links": [
-        { "lang": "EN", "word": "thank you for the meal" },
-        { "lang": "ZH", "word": "多谢款待" }
-      ],
-      "scene": "吃完离开、走到门口或收银台时说最自然。",
-      "culture": "这是很日本的饭后收尾句，用对了会一下子有“会吃饭”的感觉。"
-    }
-  ],
-  "inputTasks": [
-    {
-      "id": "in1",
-      "type": "scene_match",
-      "prompt": "你看不懂菜名，只想指着菜单点，哪句最合适？",
-      "answer": "これをください"
-    },
-    {
-      "id": "in2",
-      "type": "scene_match",
-      "prompt": "你想说自己对虾过敏，应该套哪种句型？",
-      "answer": "〇〇アレルギーがあります"
-    },
-    {
-      "id": "in3",
-      "type": "listen_match",
-      "prompt": "看到『お会計をお願いします』，应该理解成什么？",
-      "answer": "麻烦结账"
-    }
-  ],
-  "outputTasks": [
-    {
-      "id": "out1",
-      "type": "speak",
-      "promptZh": "不好意思，我们要点餐。",
-      "target": "すみません、注文をお願いします"
-    },
-    {
-      "id": "out2",
-      "type": "speak",
-      "promptZh": "请给我这个，再来一杯水。",
-      "target": "これをください。水をください。"
-    },
-    {
-      "id": "out3",
-      "type": "roleplay",
-      "promptZh": "你进店，两个人，想点餐，最后结账离开。",
-      "targets": [
-        "二人です",
-        "すみません、注文をお願いします",
-        "お会計をお願いします",
-        "ごちそうさまでした"
-      ]
-    }
-  ]
-},
     {
       "id": "convenience",
       "label": "便利店 & 购物",
@@ -1574,925 +1633,741 @@
         }
       ]
     },
-  {
-  "id": "hotel",
-  "label": "酒店入住",
-  "desc": "登记 · 设施 · 退房",
-  "emoji": "🏨",
-  "color": "#2d5fa0",
-  "bgColor": "#e6eef8",
-  "ready": true,
-  "goal": [
-    "能完成入住和退房",
-    "能说明自己有预约",
-    "能问早餐、Wi-Fi、毛巾、热水等基本问题",
-    "能请求寄存行李或延迟退房",
-    "能自然地结束一次酒店对话"
-  ],
-  "notes": [
     {
-      "t": "🛁 热水没出，先别急",
-      "b": "很多日本酒店浴室有总开关，或者热水系统要先启动。先找墙上的开关、面板或说明，不行再联系前台。"
-    },
-    {
-      "t": "🩴 拖鞋一般只在房间里穿",
-      "b": "商务酒店的拖鞋通常不要穿去走廊、电梯和大堂。温泉旅馆会宽一点，但普通酒店默认还是“只在房间里”。"
-    },
-    {
-      "t": "🚭 禁烟房不是摆设",
-      "b": "日本酒店对禁烟房很认真。在房间里抽烟，真的可能被收清洁费。"
-    }
-  ],
-  "phrases": [
-    {
-      "id": 1,
-      "type": "template",
-      "jp": "〇〇をお願いします",
-      "roma": "〇〇 wo onegaishimasu",
-      "zh": "麻烦帮我办理 / 准备 〇〇",
-      "en": "〇〇, please",
-      "jlpt": "N4",
-      "hookType": "e",
-      "hook": "お願いします很万能。酒店场景里，比一味用ください更顺口，也更稳。",
-      "links": [
-        { "lang": "ZH", "word": "麻烦请帮我……" },
-        { "lang": "EN", "word": "please" },
-        { "lang": "ES", "word": "por favor" }
+      "id": "hotel",
+      "label": "酒店入住",
+      "desc": "登记 · 设施 · 退房",
+      "emoji": "🏨",
+      "color": "#2d5fa0",
+      "bgColor": "#e6eef8",
+      "ready": true,
+      "notes": [
+        {
+          "t": "🛁 浴室热水开关",
+          "b": "很多日本酒店浴室要先开墙上的总开关才有热水，不是龙头的问题。进浴室先找找墙上的开关。"
+        },
+        {
+          "t": "🩴 拖鞋只能在室内穿",
+          "b": "酒店拖鞋不能穿去电梯或走廊，更不能穿去大堂。穿浴衣出电梯也不合适——温泉旅馆例外。"
+        },
+        {
+          "t": "🚭 吸烟规定很严",
+          "b": "日本酒店禁烟房是真禁烟，在房间吸烟会被收取高额清洁费，有时超过一晚房费。"
+        }
       ],
-      "scene": "前台最常用的模板句之一。不会太硬，也不会太书面。",
-      "culture": "日本服务场景里，请对方处理一件事，用お願いします很自然。",
-      "swappableWords": [
-        { "word": "チェックイン", "zh": "入住" },
-        { "word": "チェックアウト", "zh": "退房" },
-        { "word": "領収書", "zh": "收据" },
-        { "word": "タクシー", "zh": "出租车" }
+      "phrases": [
+        {
+          "id": 1,
+          "jp": "チェックインをお願いします",
+          "roma": "Chekku-in wo onegaishimasu",
+          "zh": "麻烦帮我办入住",
+          "en": "Check-in, please",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "「チェックイン」= check-in，英语直接音译。「をお願いします」比「ください」更礼貌，酒店场景用这个更得体。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "入住"
+            },
+            {
+              "lang": "EN",
+              "word": "check-in→チェックイン"
+            },
+            {
+              "lang": "ES",
+              "word": "check-in"
+            }
+          ],
+          "scene": "走到前台把护照递过去说这句。对方会问预约名字，准备好护照或预订确认邮件。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 2,
+          "jp": "予約しています、〇〇です",
+          "roma": "Yoyaku shite imasu, 〇〇 desu",
+          "zh": "我有预约，我叫〇〇",
+          "en": "I have a reservation, I'm 〇〇",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "「予約」= 预约，汉字直读。中文「预约」和日语「予約」完全同义——汉字圈的天然优势。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "预约（完全同）"
+            },
+            {
+              "lang": "JP",
+              "word": "予約(よやく)"
+            },
+            {
+              "lang": "EN",
+              "word": "reservation"
+            },
+            {
+              "lang": "ES",
+              "word": "reserva"
+            }
+          ],
+          "scene": "说完①紧接着说这句。名字说清楚，前台会在系统里查，不用担心发音。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 3,
+          "jp": "朝食はついていますか？",
+          "roma": "Chōshoku wa tsuite imasu ka?",
+          "zh": "含早餐吗？",
+          "en": "Is breakfast included?",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "「朝食」= 朝（早晨）+ 食（食物）= 早餐，汉字直读。换「夕食」=晚餐，「昼食」=午餐——三餐都用「食」，认识这个字搞定全部。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "朝食≈早食"
+            },
+            {
+              "lang": "JP",
+              "word": "朝(あさ)=早晨"
+            },
+            {
+              "lang": "EN",
+              "word": "breakfast included"
+            },
+            {
+              "lang": "ES",
+              "word": "¿incluye desayuno?"
+            }
+          ],
+          "scene": "check-in时确认。日本商务酒店经常有附带早餐选项，但要分清楚。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 4,
+          "jp": "Wi-Fiのパスワードを教えてもらえますか？",
+          "roma": "Wi-Fi no pasuwādo wo oshiete moraemasu ka?",
+          "zh": "可以告诉我Wi-Fi密码吗？",
+          "en": "Could you tell me the Wi-Fi password?",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "「パスワード」= password，英语音译。「教えてもらえますか」= 能告诉我吗，比「ください」更礼貌，适合问稍微麻烦一点的事情。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "密码"
+            },
+            {
+              "lang": "EN",
+              "word": "password→パスワード"
+            },
+            {
+              "lang": "ES",
+              "word": "contraseña"
+            }
+          ],
+          "scene": "先找找桌子上的小卡片，找不到再问。部分酒店每层楼密码不同。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 5,
+          "jp": "タオルをもう一枚もらえますか？",
+          "roma": "Taoru wo mō ichimai moraemasu ka?",
+          "zh": "可以再给我一条毛巾吗？",
+          "en": "Could I have one more towel?",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "「タオル」= towel，英语音译。「もう一枚」= one more（枚=布/纸类量词）。换「もう一つ」就是再给我一个，可以要任何东西。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "毛巾"
+            },
+            {
+              "lang": "EN",
+              "word": "towel→タオル"
+            },
+            {
+              "lang": "ES",
+              "word": "toalla"
+            },
+            {
+              "lang": "JP",
+              "word": "もう一枚=再一张"
+            }
+          ],
+          "scene": "日本酒店毛巾按人头给，不够用打内线或去前台说这句。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 6,
+          "jp": "お湯が出ないのですが…",
+          "roma": "Oyu ga denai no desu ga...",
+          "zh": "热水出不来……",
+          "en": "The hot water isn't working...",
+          "jlpt": "N4",
+          "hookType": "t",
+          "hook": "⚠️「湯」陷阱！日语「お湯」= 热水，不是汤！「〜のですが…」句尾省略表示请帮我处理，日本人立刻明白，不用说完。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "⚠️湯≠汤，=热水"
+            },
+            {
+              "lang": "JP",
+              "word": "お湯(おゆ)"
+            },
+            {
+              "lang": "EN",
+              "word": "hot water"
+            }
+          ],
+          "scene": "先找浴室墙上的总开关，很多酒店要先开它才有热水。真的没有再打电话。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 7,
+          "jp": "エアコンの使い方を教えてもらえますか？",
+          "roma": "Eakon no tsukaikata wo oshiete moraemasu ka?",
+          "zh": "可以教我怎么用空调吗？",
+          "en": "Could you show me how to use the AC?",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "「エアコン」= air conditioner，音译。「〜の使い方」= 〜的用法，万能句型——换「テレビ」=电视怎么用，「金庫」=保险箱怎么用。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "空调"
+            },
+            {
+              "lang": "EN",
+              "word": "air con→エアコン"
+            },
+            {
+              "lang": "ES",
+              "word": "aire acondicionado"
+            }
+          ],
+          "scene": "日本酒店空调遥控器经常全是日文，不懂就问，前台会上来演示。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 8,
+          "jp": "荷物を預かってもらえますか？",
+          "roma": "Nimotsu wo azukatte moraemasu ka?",
+          "zh": "可以帮我寄存行李吗？",
+          "en": "Could you store my luggage?",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "「荷物」= 荷（货）+ 物（物品）= 行李，汉字直读。几乎所有日本酒店都提供免费行李寄存。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "荷物≈行李（直读）"
+            },
+            {
+              "lang": "EN",
+              "word": "luggage"
+            },
+            {
+              "lang": "ES",
+              "word": "equipaje"
+            }
+          ],
+          "scene": "早上退房但下午的飞机，行李寄存前台去逛街，晚上回来拿。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 9,
+          "jp": "レイトチェックアウトはできますか？",
+          "roma": "Reito chekku-auto wa dekimasu ka?",
+          "zh": "可以延迟退房吗？",
+          "en": "Is late check-out possible?",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "「レイトチェックアウト」= late check-out，全部音译。「できますか」= 可以吗——万能可能性询问句型：「〜はできますか？」",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "延迟退房"
+            },
+            {
+              "lang": "EN",
+              "word": "late check-out→全音译"
+            },
+            {
+              "lang": "ES",
+              "word": "check-out tardío"
+            }
+          ],
+          "scene": "通常前一天或当天早上问。旺季基本没得商量，淡季比较好说话。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 10,
+          "jp": "ここに名前を書けばいいですか？",
+          "roma": "Koko ni namae wo kakeba ii desu ka?",
+          "zh": "在这里签名就可以吗？",
+          "en": "Should I sign here?",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "「名前」= 名（名字）+ 前（处）= 姓名，汉字直读。「〜ばいいですか」= 做〜就可以吗，确认操作的万能句型。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "名前=姓名（直读）"
+            },
+            {
+              "lang": "EN",
+              "word": "sign here"
+            },
+            {
+              "lang": "ES",
+              "word": "¿firmo aquí?"
+            }
+          ],
+          "scene": "办手续时对方把单据推过来，不确定要在哪里签时说这句，指着纸上位置。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 11,
+          "jp": "チェックアウトをお願いします",
+          "roma": "Chekku-auto wo onegaishimasu",
+          "zh": "麻烦帮我办退房",
+          "en": "Check-out, please",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "和①对称——「チェックイン」进，「チェックアウト」出。进出酒店只需这两句开口，其余交给对方操作。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "退房"
+            },
+            {
+              "lang": "EN",
+              "word": "check-out→チェックアウト"
+            },
+            {
+              "lang": "ES",
+              "word": "check-out"
+            }
+          ],
+          "scene": "退房时把钥匙卡递过去说这句。对方会打印账单让你确认，扫一眼有没有额外消费。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 12,
+          "jp": "お世話になりました",
+          "roma": "Osewa ni narimashita",
+          "zh": "承蒙关照",
+          "en": "Thank you for everything",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "不是「谢谢」的直译，是「承蒙您照顾了」。比ありがとう更有分量，适合离开一个地方时说。日本人听到这句会真的很感动。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "承蒙关照（同义）"
+            },
+            {
+              "lang": "JP",
+              "word": "世話(せわ)=照顾"
+            },
+            {
+              "lang": "EN",
+              "word": "thank you for your care"
+            }
+          ],
+          "scene": "退完房离开时转身说这句，前台会深深鞠躬。一句话，真实的人情味。",
+          "type": "core",
+          "culture": ""
+        }
       ]
     },
     {
-      "id": 2,
-      "type": "core",
-      "jp": "予約しています、〇〇です",
-      "roma": "Yoyaku shite imasu, 〇〇 desu",
-      "zh": "我有预约，我叫〇〇",
-      "en": "I have a reservation, I'm 〇〇",
-      "jlpt": "N4",
-      "hookType": "d",
-      "hook": "予約 = 预约，汉字直接帮你省力。这个词一眼就能抓住意思。",
-      "links": [
-        { "lang": "ZH", "word": "预约（完全同）" },
-        { "lang": "JP", "word": "予約(よやく)" },
-        { "lang": "EN", "word": "reservation" },
-        { "lang": "ES", "word": "reserva" }
+      "id": "directions",
+      "label": "问路 & 导航",
+      "desc": "开口问 · 听懂回答 · 找到目的地",
+      "emoji": "🗺️",
+      "color": "#5a3a9a",
+      "bgColor": "#eeebff",
+      "ready": true,
+      "notes": [
+        {
+          "t": "🇯🇵 日本人被问路会紧张",
+          "b": "陌生人搭话时日本人第一反应是紧张。先说すみません，等对方停下来看你，再开口——节奏比中文慢半拍，成功率反而更高。"
+        },
+        {
+          "t": "📍 便利店是最好用的地标",
+          "b": "日本人给你指路几乎必然会说「看到7-11往左转」「在全家对面」。问路时把附近便利店的位置记住，比认路牌管用。"
+        },
+        {
+          "t": "🗾 距离用「步行几分钟」表达",
+          "b": "日本人描述距离几乎不说「X米」，而是「步行X分钟」。问「何分ですか」得到的答案可以直接用，不用换算。"
+        },
+        {
+          "t": "🗺️ 带你走到目的地才离开",
+          "b": "日本有「世話好き」文化——被外国人问路，很多人会直接带你走到目的地门口才离开。不要怕麻烦人。"
+        }
       ],
-      "scene": "办入住时最常接在第一句后面说。名字说清楚，前台会自己在系统里找。",
-      "culture": ""
-    },
-    {
-      "id": 3,
-      "type": "template",
-      "jp": "〇〇はついていますか？",
-      "roma": "〇〇 wa tsuite imasu ka?",
-      "zh": "含 〇〇 吗？",
-      "en": "Is 〇〇 included?",
-      "jlpt": "N4",
-      "hookType": "d",
-      "hook": "ついていますか在酒店里很实用，核心就是“这个包不包含在里面”。",
-      "links": [
-        { "lang": "EN", "word": "included" },
-        { "lang": "ES", "word": "¿incluye ...?" },
-        { "lang": "ZH", "word": "包含 / 附带" }
-      ],
-      "scene": "不只早餐能问，凡是“房费里包不包”的东西，都能用这句。",
-      "culture": "",
-      "swappableWords": [
-        { "word": "朝食", "zh": "早餐" },
-        { "word": "Wi-Fi", "zh": "Wi-Fi" },
-        { "word": "アメニティ", "zh": "洗漱用品" },
-        { "word": "駐車場", "zh": "停车场" }
+      "phrases": [
+        {
+          "id": 1,
+          "jp": "すみません",
+          "roma": "Sumimasen",
+          "zh": "不好意思，打扰一下",
+          "en": "Excuse me",
+          "jlpt": "N5",
+          "hookType": "s",
+          "hook": "汉字写法是「済みません」——「済む」=事情了结。意思是「因为打扰了你，这件事还没了结」，道歉的哲学藏在词根里。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "excuse me"
+            },
+            {
+              "lang": "ES",
+              "word": "perdón"
+            },
+            {
+              "lang": "ZH",
+              "word": "不好意思"
+            }
+          ],
+          "scene": "问路的第一句话，先说这句等对方停下来看你，再开口。日本人被陌生人叫住会紧张，这句话是「解压阀」。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 2,
+          "jp": "〇〇はどこですか？",
+          "roma": "〇〇 wa doko desu ka?",
+          "zh": "〇〇在哪里？",
+          "en": "Where is 〇〇?",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "どこ的汉字写法是「何処」——「何」（哪）+「処」（处所），和中文「何处」完全同源。现代日语简化为假名，但汉字根还在。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "何处（同源）"
+            },
+            {
+              "lang": "EN",
+              "word": "where is"
+            },
+            {
+              "lang": "ES",
+              "word": "¿dónde está?"
+            }
+          ],
+          "scene": "万能问路句。〇〇换成任何地名都能用：地下鉄・コンビニ・駅・病院……这一句顶十句。",
+          "swappableWords": [
+            {
+              "word": "コンビニ",
+              "zh": "便利店"
+            },
+            {
+              "word": "トイレ",
+              "zh": "厕所"
+            },
+            {
+              "word": "駅",
+              "zh": "车站"
+            },
+            {
+              "word": "病院",
+              "zh": "医院"
+            }
+          ],
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 3,
+          "jp": "近くにコンビニはありますか？",
+          "roma": "Chikaku ni konbini wa arimasu ka?",
+          "zh": "附近有便利店吗？",
+          "en": "Is there a convenience store nearby?",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "コンビニ = convenience store 的日式缩写。不是完整音译，而是日本人把英语压缩成了自己的节奏。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "convenience store"
+            },
+            {
+              "lang": "ES",
+              "word": "tienda"
+            },
+            {
+              "lang": "ZH",
+              "word": "便利店"
+            }
+          ],
+          "scene": "日本问路时最有用的地标往往不是银行、不是咖啡店，而是便利店。把这句学会，顺便也能换成薬局・トイレ・ATM。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 4,
+          "jp": "〇〇まで歩いて何分ですか？",
+          "roma": "〇〇 made aruite nan-pun desu ka?",
+          "zh": "走到〇〇要几分钟？",
+          "en": "How many minutes is it on foot to 〇〇?",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "歩いて = 走路去；何分 = 几分钟。日本人给距离最爱用时间，不爱用米数，这句非常地道。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "何分=几分钟"
+            },
+            {
+              "lang": "EN",
+              "word": "on foot"
+            },
+            {
+              "lang": "ES",
+              "word": "¿cuántos minutos a pie?"
+            }
+          ],
+          "scene": "导航显示不远，但你想确认是不是能走过去时，用这句最自然。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 5,
+          "jp": "もう一度お願いします",
+          "roma": "Mou ichido onegaishimasu",
+          "zh": "请再说一遍",
+          "en": "One more time, please",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "「もう一度」= one more time。比长长的尊敬语版本更适合旅游现场：短、稳、礼貌，脑子空白时也说得出来。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "one more time"
+            },
+            {
+              "lang": "ES",
+              "word": "otra vez, por favor"
+            },
+            {
+              "lang": "ZH",
+              "word": "再一次"
+            }
+          ],
+          "scene": "对方说太快、环境太吵、你一下没反应过来时，先丢这句。先活下来，再求完美。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 6,
+          "jp": "ゆっくりお願いします",
+          "roma": "Yukkuri onegaishimasu",
+          "zh": "请说慢一点",
+          "en": "Please speak slowly",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "ゆっくり = slowly。旅游日语里非常高频，比背很多复杂句型更值钱。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "slowly"
+            },
+            {
+              "lang": "ES",
+              "word": "más despacio"
+            },
+            {
+              "lang": "ZH",
+              "word": "慢一点"
+            }
+          ],
+          "scene": "日本人一旦意识到你是外国人，通常会真的放慢速度。你只需要把这个请求说出来。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 7,
+          "jp": "右に曲がってください",
+          "roma": "Migi ni magatte kudasai",
+          "zh": "请向右转",
+          "en": "Please turn right",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "右 = みぎ，汉字和中文完全一样。曲がる = 转弯，这个动词以后看地图、听导航都常见。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "右"
+            },
+            {
+              "lang": "EN",
+              "word": "turn right"
+            },
+            {
+              "lang": "ES",
+              "word": "gire a la derecha"
+            }
+          ],
+          "scene": "听懂右转，至少不会站在路口原地发呆。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 8,
+          "jp": "左に曲がってください",
+          "roma": "Hidari ni magatte kudasai",
+          "zh": "请向左转",
+          "en": "Please turn left",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "左 = ひだり。東西南北左右这些方向词，汉字母语者天然占便宜。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "左"
+            },
+            {
+              "lang": "EN",
+              "word": "turn left"
+            },
+            {
+              "lang": "ES",
+              "word": "gire a la izquierda"
+            }
+          ],
+          "scene": "和右转最好成对学。问路时真正难的不是说，是把听到的方向立刻转成行动。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 9,
+          "jp": "地図を描いてもらえますか？",
+          "roma": "Chizu wo kaite moraemasu ka?",
+          "zh": "可以帮我画一张地图吗？",
+          "en": "Could you draw me a map?",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "地図「ちず」——汉字完全直读，中文「地图」一字不差。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "地图（完全同）"
+            },
+            {
+              "lang": "EN",
+              "word": "draw a map"
+            }
+          ],
+          "scene": "日本人对这个请求接受度极高——很多人会非常认真地画，有时还会把你带到目的地门口才离开。不要怕麻烦人。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 10,
+          "jp": "トイレはどこですか？",
+          "roma": "Toire wa doko desu ka?",
+          "zh": "厕所在哪里？",
+          "en": "Where is the bathroom?",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "トイレ来自英文「toilet」，英语音译片假名。日本厕所是全球传说级——免费、干净、到处都有，便利店厕所随时可用。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "toilet→トイレ"
+            },
+            {
+              "lang": "ES",
+              "word": "baño"
+            },
+            {
+              "lang": "ZH",
+              "word": "厕所"
+            }
+          ],
+          "scene": "日本最不需要担心的问题——便利店、地铁站、百货商场都有免费干净的厕所。找不到就问コンビニ在哪，走进去就有。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 11,
+          "jp": "地下鉄の入口はどこですか？",
+          "roma": "Chikatetsu no iriguchi wa doko desu ka?",
+          "zh": "地铁入口在哪里？",
+          "en": "Where is the subway entrance?",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "地下鉄 = 地下 + 铁，和中文几乎完全直读。入口也和中文一样，汉字圈优势直接吃满。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "地下铁 / 入口"
+            },
+            {
+              "lang": "EN",
+              "word": "subway entrance"
+            },
+            {
+              "lang": "ES",
+              "word": "entrada del metro"
+            }
+          ],
+          "scene": "这句保留给「人在街上，想找最近进站口」的场景。它属于问路，不属于站内换乘。",
+          "type": "core",
+          "culture": ""
+        },
+        {
+          "id": 12,
+          "jp": "ありがとうございました。本当に助かりました。",
+          "roma": "Arigatou gozaimashita. Hontou ni tasukarimashita.",
+          "zh": "非常感谢。真的帮了大忙了。",
+          "en": "Thank you so much. You really saved me.",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "助かる「たすかる」——「助」汉字直读，中文「得救了」「帮了大忙」。加这句，感谢从礼貌升级到真心。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "助（得救）"
+            },
+            {
+              "lang": "EN",
+              "word": "you saved me"
+            }
+          ],
+          "scene": "日本人被外国人真心道谢会记住这次互动很久。说完「助かりました」，对方会感到被真正需要——这比单纯的ありがとう更有分量。",
+          "type": "core",
+          "culture": ""
+        }
       ]
     },
     {
-      "id": 4,
-      "type": "core",
-      "jp": "Wi-Fiのパスワードを教えてもらえますか？",
-      "roma": "Wi-Fi no pasuwaado wo oshiete moraemasu ka?",
-      "zh": "可以告诉我 Wi-Fi 密码吗？",
-      "en": "Could you tell me the Wi-Fi password?",
-      "jlpt": "N4",
-      "hookType": "e",
-      "hook": "パスワード = password。教えてもらえますか比ください更像在请对方帮个忙。",
-      "links": [
-        { "lang": "ZH", "word": "密码" },
-        { "lang": "EN", "word": "password→パスワード" },
-        { "lang": "ES", "word": "contraseña" }
-      ],
-      "scene": "先看看桌上的小卡片、电视首页或电梯口告示，再问会更像熟手。",
-      "culture": "不少酒店其实把密码写得很明显，只是第一次进房间容易漏看。"
-    },
-    {
-      "id": 5,
-      "type": "support",
-      "jp": "タオルをもう一枚もらえますか？",
-      "roma": "Taoru wo mou ichimai moraemasu ka?",
-      "zh": "可以再给我一条毛巾吗？",
-      "en": "Could I have one more towel?",
-      "jlpt": "N4",
-      "hookType": "e",
-      "hook": "タオル = towel。もう一枚 = 再一条/再一张，枚是很实用的量词。",
-      "links": [
-        { "lang": "ZH", "word": "毛巾" },
-        { "lang": "EN", "word": "towel→タオル" },
-        { "lang": "ES", "word": "toalla" }
-      ],
-      "scene": "毛巾不够、地巾湿了、两个人住但想多拿一条时都能用。",
-      "culture": ""
-    },
-    {
-      "id": 6,
-      "type": "support",
-      "jp": "お湯が出ないのですが…",
-      "roma": "Oyu ga denai no desu ga...",
-      "zh": "热水出不来……",
-      "en": "The hot water isn't working...",
-      "jlpt": "N4",
-      "hookType": "t",
-      "hook": "お湯不是“汤”，是热水。这个坑记住一次，以后基本不会再错。",
-      "links": [
-        { "lang": "ZH", "word": "⚠️ 湯≠汤，=热水" },
-        { "lang": "JP", "word": "お湯(おゆ)" },
-        { "lang": "EN", "word": "hot water" }
-      ],
-      "scene": "先确认不是自己不会开，再联系前台。这个句尾留白很日式，听起来比硬说“坏了”更自然。",
-      "culture": "很多日本服务场景里，句子故意留半截，会更柔和。"
-    },
-    {
-      "id": 7,
-      "type": "support",
-      "jp": "エアコンの使い方を教えてもらえますか？",
-      "roma": "Eakon no tsukaikata wo oshiete moraemasu ka?",
-      "zh": "可以教我怎么用空调吗？",
-      "en": "Could you show me how to use the AC?",
-      "jlpt": "N4",
-      "hookType": "e",
-      "hook": "エアコン = air conditioner。〜の使い方 = 〜怎么用，这个结构以后能套很多东西。",
-      "links": [
-        { "lang": "ZH", "word": "空调" },
-        { "lang": "EN", "word": "air con→エアコン" },
-        { "lang": "ES", "word": "aire acondicionado" }
-      ],
-      "scene": "日本酒店遥控器有时候真的挺反人类。别硬研究，直接问最快。",
-      "culture": ""
-    },
-    {
-      "id": 8,
-      "type": "core",
-      "jp": "荷物を預かってもらえますか？",
-      "roma": "Nimotsu wo azukatte moraemasu ka?",
-      "zh": "可以帮我寄存行李吗？",
-      "en": "Could you store my luggage?",
-      "jlpt": "N4",
-      "hookType": "d",
-      "hook": "荷物 = 行李，汉字非常友好。看到这个词别慌，基本就是 luggage。",
-      "links": [
-        { "lang": "ZH", "word": "荷物≈行李" },
-        { "lang": "EN", "word": "luggage" },
-        { "lang": "ES", "word": "equipaje" }
-      ],
-      "scene": "退房后还想出去逛，或者到得太早还没能入住，这句都很有用。",
-      "culture": "日本酒店寄存行李非常常见，问这句不会显得失礼。"
-    },
-    {
-      "id": 9,
-      "type": "support",
-      "jp": "レイトチェックアウトはできますか？",
-      "roma": "Reito chekku-auto wa dekimasu ka?",
-      "zh": "可以延迟退房吗？",
-      "en": "Is late check-out possible?",
-      "jlpt": "N4",
-      "hookType": "e",
-      "hook": "レイトチェックアウト几乎全是英语。できますか是很好用的“可不可以”。",
-      "links": [
-        { "lang": "ZH", "word": "延迟退房" },
-        { "lang": "EN", "word": "late check-out" },
-        { "lang": "ES", "word": "check-out tardío" }
-      ],
-      "scene": "有就赚到，没有也正常。别太晚问，前一天或当天早上更合适。",
-      "culture": ""
-    },
-    {
-      "id": 10,
-      "type": "support",
-      "jp": "ここに名前を書けばいいですか？",
-      "roma": "Koko ni namae wo kakeba ii desu ka?",
-      "zh": "在这里签名就可以吗？",
-      "en": "Should I sign here?",
-      "jlpt": "N4",
-      "hookType": "d",
-      "hook": "名前 = 姓名。〜ばいいですか有“这样做就行吗”的确认感，很实用。",
-      "links": [
-        { "lang": "ZH", "word": "名前=姓名" },
-        { "lang": "EN", "word": "sign here" },
-        { "lang": "ES", "word": "¿firmo aquí?" }
-      ],
-      "scene": "手续办到一半，对方把纸推过来，你又不想乱写时，这句特别顺手。",
-      "culture": ""
-    },
-    {
-      "id": 11,
-      "type": "core",
-      "jp": "チェックアウトをお願いします",
-      "roma": "Chekku-auto wo onegaishimasu",
-      "zh": "麻烦帮我办退房",
-      "en": "Check-out, please",
-      "jlpt": "N4",
-      "hookType": "e",
-      "hook": "和 check-in 成对记最省脑子。进是チェックイン，出是チェックアウト。",
-      "links": [
-        { "lang": "ZH", "word": "退房" },
-        { "lang": "EN", "word": "check-out→チェックアウト" },
-        { "lang": "ES", "word": "check-out" }
-      ],
-      "scene": "把房卡递过去，说这句，整个退房流程就会自动启动。",
-      "culture": ""
-    },
-    {
-      "id": 12,
-      "type": "flavor",
-      "jp": "お世話になりました",
-      "roma": "Osewa ni narimashita",
-      "zh": "这几天麻烦你们照顾了",
-      "en": "Thank you for taking care of me",
-      "jlpt": "N4",
-      "hookType": "e",
-      "hook": "这不是单纯“谢谢”，而是“这段时间承蒙关照了”。比ありがとう更有人情味。",
-      "links": [
-        { "lang": "ZH", "word": "承蒙关照" },
-        { "lang": "JP", "word": "世話(せわ)=照顾" },
-        { "lang": "EN", "word": "thank you for your care" }
-      ],
-      "scene": "退房离开时回头说这句，会比普通的谢谢更像真的在日本住过几天的人。",
-      "culture": "这是很典型的日式关系型表达，适合在“相处了一段时间之后”说。"
+      "id": "emergency",
+      "label": "紧急 & 就医",
+      "desc": "求助 · 医院 · 药店",
+      "emoji": "🏥",
+      "color": "#aa3355",
+      "bgColor": "#fce8ee",
+      "ready": false,
+      "phrases": []
     }
   ],
-  "inputTasks": [
-    {
-      "id": "in1",
-      "type": "scene_match",
-      "prompt": "你到前台，要先说哪句开始办入住？",
-      "answer": "チェックインをお願いします"
-    },
-    {
-      "id": "in2",
-      "type": "scene_match",
-      "prompt": "你想问有没有早餐，应该说哪句？",
-      "answer": "朝食はついていますか？"
-    },
-    {
-      "id": "in3",
-      "type": "listen_match",
-      "prompt": "看到『荷物を預かってもらえますか？』，应该理解成什么？",
-      "answer": "可以帮我寄存行李吗？"
-    }
-  ],
-  "outputTasks": [
-    {
-      "id": "out1",
-      "type": "speak",
-      "promptZh": "我有预约，我叫〇〇。",
-      "target": "予約しています、〇〇です"
-    },
-    {
-      "id": "out2",
-      "type": "speak",
-      "promptZh": "可以告诉我 Wi-Fi 密码吗？",
-      "target": "Wi-Fiのパスワードを教えてもらえますか？"
-    },
-    {
-      "id": "out3",
-      "type": "roleplay",
-      "promptZh": "你准备退房、寄存行李，然后礼貌地结束对话。",
-      "targets": [
-        "チェックアウトをお願いします",
-        "荷物を預かってもらえますか？",
-        "お世話になりました"
-      ]
-    }
-  ]
-},
-   {
-  "id": "directions",
-  "label": "问路 & 导航",
-  "desc": "开口问 · 听懂回答 · 找到目的地",
-  "emoji": "🗺️",
-  "color": "#5a3a9a",
-  "bgColor": "#eeebff",
-  "ready": true,
-  "goal": [
-    "能开口找地点",
-    "能判断远近与步行时间",
-    "能听懂基础方向词",
-    "能请求对方重复或放慢语速",
-    "能礼貌结束一次问路对话"
-  ],
-  "notes": [
-    {
-      "t": "🇯🇵 日本人被问路会先紧张",
-      "b": "陌生人突然开口，日本人的第一反应常常是紧张。先说すみません，等对方停下来，再开始问，成功率会高很多。"
-    },
-    {
-      "t": "📍 真正稳的地标，不一定是便利店",
-      "b": "日本问路时，便利店确实常被拿来当参照物；但找厕所时，更稳的是车站、百货商场、公园和大型商业设施。便利店有时可以借，但不要默认每家都开放。"
-    },
-    {
-      "t": "🗾 日本人更常用“走几分钟”来报距离",
-      "b": "现实里比起说多少米，日本人更常说“步行几分钟”。所以“歩いて何分ですか”非常实用。"
-    },
-    {
-      "t": "🗺️ 有时对方会直接带你走",
-      "b": "如果你真的迷路，对方不仅可能解释，还可能直接带你走到路口甚至门口。不是客套，是真的会发生。"
-    }
-  ],
-  "phrases": [
-    {
-      "id": 1,
-      "type": "core",
-      "jp": "すみません",
-      "roma": "Sumimasen",
-      "zh": "不好意思，打扰一下",
-      "en": "Excuse me",
-      "jlpt": "N5",
-      "hookType": "s",
-      "hook": "汉字写法是「済みません」——「済む」=事情了结。不是单纯“对不起”，而是“打扰你了”。",
-      "links": [
-        { "lang": "EN", "word": "excuse me" },
-        { "lang": "ES", "word": "perdón" },
-        { "lang": "ZH", "word": "不好意思" }
-      ],
-      "scene": "问路前的第一句话。先把人叫停，再问具体内容。",
-      "culture": "日本人不喜欢被突然连珠炮式提问，先用这句缓冲。"
-    },
-    {
-      "id": 2,
-      "type": "template",
-      "jp": "〇〇はどこですか？",
-      "roma": "〇〇 wa doko desu ka?",
-      "zh": "〇〇在哪里？",
-      "en": "Where is 〇〇?",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "どこ的汉字写法是「何処」——「何」（哪）+「処」（处所），和中文“何处”完全同源。",
-      "links": [
-        { "lang": "ZH", "word": "何处（同源）" },
-        { "lang": "EN", "word": "where is" },
-        { "lang": "ES", "word": "¿dónde está?" }
-      ],
-      "scene": "万能问路句。地点换进去就能立刻使用。",
-      "culture": "",
-      "swappableWords": [
-        { "word": "コンビニ", "zh": "便利店" },
-        { "word": "トイレ", "zh": "厕所" },
-        { "word": "駅", "zh": "车站" },
-        { "word": "病院", "zh": "医院" },
-        { "word": "薬局", "zh": "药店" },
-        { "word": "出口", "zh": "出口" }
-      ]
-    },
-    {
-      "id": 3,
-      "type": "template",
-      "jp": "近くに〇〇はありますか？",
-      "roma": "Chikaku ni 〇〇 wa arimasu ka?",
-      "zh": "附近有〇〇吗？",
-      "en": "Is there a 〇〇 nearby?",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "近く = 附近；ありますか = 有吗。比直接找一个具体店名更适合临时求助。",
-      "links": [
-        { "lang": "EN", "word": "is there ... nearby?" },
-        { "lang": "ES", "word": "¿hay ... cerca?" },
-        { "lang": "ZH", "word": "附近有……吗" }
-      ],
-      "scene": "你不确定具体目标，只想先找一种设施时最好用。",
-      "culture": "日本人经常会用便利店、药妆店、车站出口做参照。"
-    },
-    {
-      "id": 4,
-      "type": "template",
-      "jp": "〇〇まで歩いて何分ですか？",
-      "roma": "〇〇 made aruite nan-pun desu ka?",
-      "zh": "走到〇〇要几分钟？",
-      "en": "How many minutes is it on foot to 〇〇?",
-      "jlpt": "N4",
-      "hookType": "d",
-      "hook": "歩いて = 走路去；何分 = 几分钟。日本人给距离最常用时间，不常用米数。",
-      "links": [
-        { "lang": "ZH", "word": "何分=几分钟" },
-        { "lang": "EN", "word": "on foot" },
-        { "lang": "ES", "word": "¿cuántos minutos a pie?" }
-      ],
-      "scene": "导航看着近，但你想知道到底值不值得走过去时用。",
-      "culture": ""
-    },
-    {
-      "id": 5,
-      "type": "support",
-      "jp": "もう一度お願いします",
-      "roma": "Mou ichido onegaishimasu",
-      "zh": "请再说一遍",
-      "en": "One more time, please",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "比长句尊敬语更适合真实旅行：短、稳、礼貌、不会卡壳。",
-      "links": [
-        { "lang": "EN", "word": "one more time" },
-        { "lang": "ES", "word": "otra vez, por favor" },
-        { "lang": "ZH", "word": "再一次" }
-      ],
-      "scene": "对方说太快、环境太吵、你没听清时直接用。",
-      "culture": ""
-    },
-    {
-      "id": 6,
-      "type": "support",
-      "jp": "ゆっくりお願いします",
-      "roma": "Yukkuri onegaishimasu",
-      "zh": "请说慢一点",
-      "en": "Please speak slowly",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "ゆっくり = slowly。比复杂句型更常用，旅行中价值很高。",
-      "links": [
-        { "lang": "EN", "word": "slowly" },
-        { "lang": "ES", "word": "más despacio" },
-        { "lang": "ZH", "word": "慢一点" }
-      ],
-      "scene": "你大概听懂了，但还需要对方放慢速度时。",
-      "culture": ""
-    },
-    {
-      "id": 7,
-      "type": "core",
-      "jp": "右に曲がってください",
-      "roma": "Migi ni magatte kudasai",
-      "zh": "请向右转",
-      "en": "Please turn right",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "右 = みぎ，汉字和中文完全一样。曲がる = 转弯。",
-      "links": [
-        { "lang": "ZH", "word": "右" },
-        { "lang": "EN", "word": "turn right" },
-        { "lang": "ES", "word": "gire a la derecha" }
-      ],
-      "scene": "你最常从别人嘴里听到的方向句之一。",
-      "culture": ""
-    },
-    {
-      "id": 8,
-      "type": "core",
-      "jp": "左に曲がってください",
-      "roma": "Hidari ni magatte kudasai",
-      "zh": "请向左转",
-      "en": "Please turn left",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "左 = ひだり。方向词是汉字母语者的天然优势。",
-      "links": [
-        { "lang": "ZH", "word": "左" },
-        { "lang": "EN", "word": "turn left" },
-        { "lang": "ES", "word": "gire a la izquierda" }
-      ],
-      "scene": "和右转成对学，现实里几乎一定一起出现。",
-      "culture": ""
-    },
-    {
-      "id": 9,
-      "type": "core",
-      "jp": "まっすぐ行ってください",
-      "roma": "Massugu itte kudasai",
-      "zh": "请一直直走",
-      "en": "Please go straight",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "まっすぐ = straight。不是汉字，但频率极高，值得单独记。",
-      "links": [
-        { "lang": "EN", "word": "go straight" },
-        { "lang": "ES", "word": "todo recto" },
-        { "lang": "ZH", "word": "直走" }
-      ],
-      "scene": "方向指令里最常见的一句。",
-      "culture": ""
-    },
-    {
-      "id": 10,
-      "type": "core",
-      "jp": "トイレはどこですか？",
-      "roma": "Toire wa doko desu ka?",
-      "zh": "厕所在哪里？",
-      "en": "Where is the bathroom?",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "トイレ来自英文 toilet，片假名外来词。非常高频。",
-      "links": [
-        { "lang": "EN", "word": "toilet→トイレ" },
-        { "lang": "ES", "word": "baño" },
-        { "lang": "ZH", "word": "厕所" }
-      ],
-      "scene": "现实里最稳的找法是先找车站、百货商场、公园、大型商场；便利店有时可以，但别默认每家都开放。",
-      "culture": "在设施内使用厕所时，必要时先向店员或工作人员打个招呼会更自然。"
-    },
-    {
-      "id": 11,
-      "type": "core",
-      "jp": "地下鉄の入口はどこですか？",
-      "roma": "Chikatetsu no iriguchi wa doko desu ka?",
-      "zh": "地铁入口在哪里？",
-      "en": "Where is the subway entrance?",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "地下鉄 = 地下 + 铁；入口 = 入口，汉字优势直接成立。",
-      "links": [
-        { "lang": "ZH", "word": "地下铁 / 入口" },
-        { "lang": "EN", "word": "subway entrance" },
-        { "lang": "ES", "word": "entrada del metro" }
-      ],
-      "scene": "这句是街上找进站口，不是站内换乘。",
-      "culture": ""
-    },
-    {
-      "id": 12,
-      "type": "flavor",
-      "jp": "ありがとうございました。本当に助かりました。",
-      "roma": "Arigatou gozaimashita. Hontou ni tasukarimashita.",
-      "zh": "非常感谢。真的帮了大忙了。",
-      "en": "Thank you so much. You really saved me.",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "助かる = 得救了、帮大忙了。比单纯ありがとう更有温度。",
-      "links": [
-        { "lang": "ZH", "word": "助（得救）" },
-        { "lang": "EN", "word": "you saved me" }
-      ],
-      "scene": "对方认真帮你解释、画图、甚至带你走了一段路时，这句特别合适。",
-      "culture": "日本人对这种真诚、具体的感谢通常会很受用。"
-    }
-  ],
-  "inputTasks": [
-    {
-      "id": "in1",
-      "type": "scene_match",
-      "prompt": "你想找厕所，最直接的一句是什么？",
-      "answer": "トイレはどこですか？"
-    },
-    {
-      "id": "in2",
-      "type": "listen_match",
-      "prompt": "听到『右に曲がってください』，应该理解成什么？",
-      "answer": "请向右转"
-    },
-    {
-      "id": "in3",
-      "type": "scene_match",
-      "prompt": "对方说太快了，你想让他再说一遍，该说哪句？",
-      "answer": "もう一度お願いします"
-    }
-  ],
-  "outputTasks": [
-    {
-      "id": "out1",
-      "type": "speak",
-      "promptZh": "请问，地铁入口在哪里？",
-      "target": "すみません。地下鉄の入口はどこですか？"
-    },
-    {
-      "id": "out2",
-      "type": "speak",
-      "promptZh": "请问，走到车站要几分钟？",
-      "target": "駅まで歩いて何分ですか？"
-    },
-    {
-      "id": "out3",
-      "type": "roleplay",
-      "promptZh": "你迷路了，先开口，再问厕所在哪里，最后道谢。",
-      "targets": [
-        "すみません",
-        "トイレはどこですか？",
-        "ありがとうございました。本当に助かりました。"
-      ]
-    }
-  ]
-},
-   {
-  "id": "emergency",
-  "label": "紧急 & 就医",
-  "desc": "求助 · 医院 · 药店",
-  "emoji": "🏥",
-  "color": "#aa3355",
-  "bgColor": "#fce8ee",
-  "ready": true,
-  "goal": [
-    "能表达自己不舒服或需要帮助",
-    "能问医院、药店、厕所在哪里",
-    "能说明疼痛、发烧、过敏等常见情况",
-    "能请求别人帮忙打电话或叫救护车",
-    "能在压力下说出最短、最有效的句子"
-  ],
-  "notes": [
-    {
-      "t": "🚑 紧急时先说短句，不要追求完整",
-      "b": "身体不舒服、头脑发懵的时候，最重要的是先把“我不舒服”“请帮我”“医院在哪里”说出来。短句比完整句更有用。"
-    },
-    {
-      "t": "💊 药店不等于医院",
-      "b": "药妆店可以买常见药、退烧贴、创可贴，但真遇到持续高烧、剧烈疼痛、呼吸困难，别硬扛，直接找医院或请人帮忙。"
-    },
-    {
-      "t": "🧾 护照和酒店地址最好截图存手机",
-      "b": "真到紧张场景，能把护照页、酒店名称、酒店地址给对方看，往往比你硬说更快。"
-    }
-  ],
-  "phrases": [
-    {
-      "id": 1,
-      "type": "core",
-      "jp": "助けてください",
-      "roma": "Tasukete kudasai",
-      "zh": "请帮帮我",
-      "en": "Please help me",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "助ける = 帮助、救助。汉字“助”很好认，越紧张越要先记这种短句。",
-      "links": [
-        { "lang": "ZH", "word": "帮助 / 救助" },
-        { "lang": "EN", "word": "help me" },
-        { "lang": "ES", "word": "ayúdeme" }
-      ],
-      "scene": "最短求助句。真的慌的时候，这句比任何完整说明都值钱。",
-      "culture": ""
-    },
-    {
-      "id": 2,
-      "type": "core",
-      "jp": "気分が悪いです",
-      "roma": "Kibun ga warui desu",
-      "zh": "我不舒服 / 我状态很差",
-      "en": "I feel sick",
-      "jlpt": "N4",
-      "hookType": "d",
-      "hook": "気分 = 状态、感觉；悪い = 不好。不是只指情绪，也能指身体不适。",
-      "links": [
-        { "lang": "ZH", "word": "状态不好" },
-        { "lang": "EN", "word": "feel sick" },
-        { "lang": "ES", "word": "me siento mal" }
-      ],
-      "scene": "头晕、恶心、站不稳、说不清具体哪里不对时，这句最稳。",
-      "culture": ""
-    },
-    {
-      "id": 3,
-      "type": "template",
-      "jp": "〇〇が痛いです",
-      "roma": "〇〇 ga itai desu",
-      "zh": "〇〇疼",
-      "en": "My 〇〇 hurts",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "痛い = 痛。最直接、最不绕弯的表达之一。",
-      "links": [
-        { "lang": "ZH", "word": "痛" },
-        { "lang": "EN", "word": "hurts" },
-        { "lang": "ES", "word": "me duele ..." }
-      ],
-      "scene": "肚子疼、头疼、喉咙疼都能用这句。",
-      "culture": "",
-      "swappableWords": [
-        { "word": "お腹", "zh": "肚子" },
-        { "word": "頭", "zh": "头" },
-        { "word": "喉", "zh": "喉咙" },
-        { "word": "歯", "zh": "牙" }
-      ]
-    },
-    {
-      "id": 4,
-      "type": "core",
-      "jp": "熱があります",
-      "roma": "Netsu ga arimasu",
-      "zh": "我发烧了",
-      "en": "I have a fever",
-      "jlpt": "N4",
-      "hookType": "d",
-      "hook": "熱 = 热、发烧。汉字直接给你意思，不需要绕。",
-      "links": [
-        { "lang": "ZH", "word": "热 / 发烧" },
-        { "lang": "EN", "word": "fever" },
-        { "lang": "ES", "word": "tengo fiebre" }
-      ],
-      "scene": "发热、发冷、明显不对劲时，先把这个信息说清楚。",
-      "culture": ""
-    },
-    {
-      "id": 5,
-      "type": "template",
-      "jp": "〇〇はどこですか？",
-      "roma": "〇〇 wa doko desu ka?",
-      "zh": "〇〇在哪里？",
-      "en": "Where is 〇〇?",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "这是最万能的求助模板之一。紧张时能少想一步。",
-      "links": [
-        { "lang": "ZH", "word": "哪里" },
-        { "lang": "EN", "word": "where is" },
-        { "lang": "ES", "word": "¿dónde está?" }
-      ],
-      "scene": "找医院、药店、厕所都能直接套。",
-      "culture": "",
-      "swappableWords": [
-        { "word": "病院", "zh": "医院" },
-        { "word": "薬局", "zh": "药店" },
-        { "word": "トイレ", "zh": "厕所" },
-        { "word": "救急", "zh": "急诊 / 急救" }
-      ]
-    },
-    {
-      "id": 6,
-      "type": "core",
-      "jp": "病院に行きたいです",
-      "roma": "Byouin ni ikitai desu",
-      "zh": "我想去医院",
-      "en": "I want to go to the hospital",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "病院 = 医院，汉字非常友好。行きたい = 想去，是最直接的需求表达。",
-      "links": [
-        { "lang": "ZH", "word": "医院" },
-        { "lang": "EN", "word": "hospital" },
-        { "lang": "ES", "word": "quiero ir al hospital" }
-      ],
-      "scene": "你已经判断不是小问题，想让别人帮你去医院时。",
-      "culture": ""
-    },
-    {
-      "id": 7,
-      "type": "support",
-      "jp": "救急車を呼んでください",
-      "roma": "Kyuu-kyuu-sha wo yonde kudasai",
-      "zh": "请帮我叫救护车",
-      "en": "Please call an ambulance",
-      "jlpt": "N4",
-      "hookType": "d",
-      "hook": "救急車 = 急救车。三个汉字连在一起，意思其实很清楚。",
-      "links": [
-        { "lang": "ZH", "word": "救急车" },
-        { "lang": "EN", "word": "ambulance" },
-        { "lang": "ES", "word": "llame a una ambulancia" }
-      ],
-      "scene": "明显撑不住、走不了、呼吸困难、剧烈疼痛时别犹豫。",
-      "culture": ""
-    },
-    {
-      "id": 8,
-      "type": "support",
-      "jp": "薬をください",
-      "roma": "Kusuri wo kudasai",
-      "zh": "请给我药",
-      "en": "Please give me some medicine",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "薬 = 药，汉字直接帮你减负。不会描述症状时，先把需求抛出来。",
-      "links": [
-        { "lang": "ZH", "word": "药" },
-        { "lang": "EN", "word": "medicine" },
-        { "lang": "ES", "word": "medicina" }
-      ],
-      "scene": "在药店先开口，后面可以再补“发烧”“头疼”“肚子疼”。",
-      "culture": ""
-    },
-    {
-      "id": 9,
-      "type": "template",
-      "jp": "〇〇アレルギーがあります",
-      "roma": "〇〇 arerugii ga arimasu",
-      "zh": "我对〇〇过敏",
-      "en": "I have a 〇〇 allergy",
-      "jlpt": "N4",
-      "hookType": "e",
-      "hook": "アレルギー = allergy，外来词，英语底子在这里很好用。",
-      "links": [
-        { "lang": "EN", "word": "allergy→アレルギー" },
-        { "lang": "ES", "word": "alergia" },
-        { "lang": "ZH", "word": "过敏" }
-      ],
-      "scene": "买药、点餐、就医时都可能需要提前说。",
-      "culture": "",
-      "swappableWords": [
-        { "word": "えび", "zh": "虾" },
-        { "word": "ピーナッツ", "zh": "花生" },
-        { "word": "卵", "zh": "鸡蛋" },
-        { "word": "薬", "zh": "药物" }
-      ]
-    },
-    {
-      "id": 10,
-      "type": "support",
-      "jp": "英語を話せますか？",
-      "roma": "Eigo wo hanasemasu ka?",
-      "zh": "你会说英语吗？",
-      "en": "Do you speak English?",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "英語 = 英语，汉字直接认。紧急时先确认沟通渠道很重要。",
-      "links": [
-        { "lang": "ZH", "word": "英语" },
-        { "lang": "EN", "word": "speak English" },
-        { "lang": "ES", "word": "¿habla inglés?" }
-      ],
-      "scene": "医院、药店、前台、路人都可能用到。",
-      "culture": ""
-    },
-    {
-      "id": 11,
-      "type": "support",
-      "jp": "ゆっくりお願いします",
-      "roma": "Yukkuri onegaishimasu",
-      "zh": "请说慢一点",
-      "en": "Please speak slowly",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "压力大时理解力会下降，这句在紧急场景里比平时更重要。",
-      "links": [
-        { "lang": "EN", "word": "slowly" },
-        { "lang": "ES", "word": "más despacio" },
-        { "lang": "ZH", "word": "慢一点" }
-      ],
-      "scene": "你知道对方在帮你，但就是跟不上速度时。",
-      "culture": ""
-    },
-    {
-      "id": 12,
-      "type": "flavor",
-      "jp": "ありがとうございました",
-      "roma": "Arigatou gozaimashita",
-      "zh": "真的谢谢你了",
-      "en": "Thank you very much",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "紧张场景结束后，这句能把气氛收住，也能让帮助你的人安心。",
-      "links": [
-        { "lang": "ZH", "word": "谢谢" },
-        { "lang": "EN", "word": "thank you" },
-        { "lang": "ES", "word": "muchas gracias" }
-      ],
-      "scene": "别人认真帮了你，别忘了收尾。",
-      "culture": ""
-    }
-  ],
-  "inputTasks": [
-    {
-      "id": "in1",
-      "type": "scene_match",
-      "prompt": "你肚子疼，最直接的一句是什么？",
-      "answer": "お腹が痛いです"
-    },
-    {
-      "id": "in2",
-      "type": "scene_match",
-      "prompt": "你想找药店，应该说哪句？",
-      "answer": "薬局はどこですか？"
-    },
-    {
-      "id": "in3",
-      "type": "listen_match",
-      "prompt": "看到『救急車を呼んでください』，应该理解成什么？",
-      "answer": "请帮我叫救护车"
-    }
-  ],
-  "outputTasks": [
-    {
-      "id": "out1",
-      "type": "speak",
-      "promptZh": "请帮帮我，我不舒服。",
-      "target": "助けてください。気分が悪いです。"
-    },
-    {
-      "id": "out2",
-      "type": "speak",
-      "promptZh": "我发烧了，我想去医院。",
-      "target": "熱があります。病院に行きたいです。"
-    },
-    {
-      "id": "out3",
-      "type": "roleplay",
-      "promptZh": "你头疼，想找药店，还想请对方说慢一点。",
-      "targets": [
-        "頭が痛いです",
-        "薬局はどこですか？",
-        "ゆっくりお願いします"
-       ]
-    }
-  ]
-     }
-     ],
   "mapPlaces": [
     {
       "id": "mihara",
