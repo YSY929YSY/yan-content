@@ -1,19 +1,31 @@
 {
   "_meta": {
     "version": "2.0",
-    "updated": "2026-04-20",
-    "note": "合并版：GitHub 现有 content + YAN 五十音表 + Claude 建议。结构完全保留，内容完整。"
+    "updated": "2026-04-21",
+    "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整）"
   },
   "culturalFusion": [
     {
       "word": "火山",
       "theme": "🌋 火与语言",
-      "note": "「volcano」来自罗马火神 Vulcan。日语「火山 (かざん)」和中文完全相同——汉字圈用同一个词说同一件事。西语 volcán 也来自同一词根。一个词根，四种语言全认识。",
+      "note": "「volcano」来自罗马火神 Vulcan。日语「火山(かざん)」和中文完全相同——汉字圈用同一个词说同一件事。西语 volcán 也来自同一词根。一个词根，四种语言全认识。",
       "links": [
-        { "lang": "ZH", "word": "火山" },
-        { "lang": "JP", "word": "火山 (かざん)" },
-        { "lang": "ES", "word": "volcán" },
-        { "lang": "EN", "word": "volcano" }
+        {
+          "lang": "ZH",
+          "word": "火山"
+        },
+        {
+          "lang": "JP",
+          "word": "火山(かざん)"
+        },
+        {
+          "lang": "ES",
+          "word": "volcán"
+        },
+        {
+          "lang": "EN",
+          "word": "volcano"
+        }
       ]
     },
     {
@@ -21,21 +33,45 @@
       "theme": "💹 汉字的旅行",
       "note": "「经济」是日本明治时代翻译英语 economy 时造的新汉字词，然后反向传回中文。现在中日两国用同一个汉字词，词义相同。汉字是东亚的共同遗产。",
       "links": [
-        { "lang": "ZH", "word": "经济" },
-        { "lang": "JP", "word": "経済 (けいざい)" },
-        { "lang": "EN", "word": "economy" },
-        { "lang": "ES", "word": "economía" }
+        {
+          "lang": "ZH",
+          "word": "经济"
+        },
+        {
+          "lang": "JP",
+          "word": "経済(けいざい)"
+        },
+        {
+          "lang": "EN",
+          "word": "economy"
+        },
+        {
+          "lang": "ES",
+          "word": "economía"
+        }
       ]
     },
     {
       "word": "comunicar",
       "theme": "🌿 拉丁词根",
-      "note": "西语 comunicar 和英语 communicate 都来自拉丁语 communis（共同的）。中文「交流」是同一概念的汉字版。如果你懂英语，西语词汇有超过 8000 个这样的拉丁同源词。",
+      "note": "西语 comunicar 和英语 communicate 都来自拉丁语 communis（共同的）。中文「交流」是同一概念的汉字版。如果你懂英语，西语词汇有超过8000个这样的拉丁同源词。",
       "links": [
-        { "lang": "ZH", "word": "交流" },
-        { "lang": "JP", "word": "コミュニケーション" },
-        { "lang": "ES", "word": "comunicar" },
-        { "lang": "EN", "word": "communicate" }
+        {
+          "lang": "ZH",
+          "word": "交流"
+        },
+        {
+          "lang": "JP",
+          "word": "コミュニケーション"
+        },
+        {
+          "lang": "ES",
+          "word": "comunicar"
+        },
+        {
+          "lang": "EN",
+          "word": "communicate"
+        }
       ]
     },
     {
@@ -43,16 +79,25 @@
       "theme": "⚠️ 陷阱字系列",
       "note": "日语「手紙（てがみ）」是信件，不是卫生纸。中文「手纸」才是卫生纸。同一个汉字组合，两个截然不同的意思——这就是「言」存在的理由。",
       "links": [
-        { "lang": "ZH", "word": "手纸=卫生纸" },
-        { "lang": "JP", "word": "手紙=信件" },
-        { "lang": "EN", "word": "letter (not tissue!)" }
+        {
+          "lang": "ZH",
+          "word": "手纸=卫生纸"
+        },
+        {
+          "lang": "JP",
+          "word": "手紙=信件"
+        },
+        {
+          "lang": "EN",
+          "word": "letter (not tissue!)"
+        }
       ]
     }
   ],
   "subwayAdventure": {
     "title": "东京地铁大冒险",
     "subtitle": "每站一关卡，通关解锁下一站",
-    "culturalNote": "东京地铁由十几家私营公司共同运营——东京 Metro、都营地铁、JR、东急、京王……换乘可能就是换了一家公司，需要重新计费。IC 卡帮你自动结算，但搞清楚这个逻辑，你就不会再在换乘口发呆了。",
+    "culturalNote": "东京地铁由十几家私营公司共同运营——东京Metro、都营地铁、JR、东急、京王……换乘可能就是换了一家公司，需要重新计费。IC卡帮你自动结算，但搞清楚这个逻辑，你就不会再在换乘口发呆了。",
     "stations": [
       {
         "id": "shibuya",
@@ -62,47 +107,158 @@
         "unlocked": true,
         "stepsCount": 6,
         "steps": [
-          { "id": "entrance", "step": "① 找入口", "sign": "地下鉄", "signSub": "SUBWAY", "jp": "（无需说话）", "tip": "找绿色的東京メトロ标志或蓝色的 JR 标志。不需要开口，跟着汉字「地下鉄」走就对了。真找不到再开口。", "personPos": 15, "tags": [
-              { "type": "zh", "text": "地下鉄=地铁" },
-              { "type": "en", "text": "subway / metro" },
-              { "type": "culture", "text": "东京地铁 13 条线，颜色区分" }
+          {
+            "id": "entrance",
+            "step": "① 找入口",
+            "sign": "地下鉄",
+            "signSub": "SUBWAY",
+            "jp": "（无需说话）",
+            "tip": "找绿色的東京メトロ标志或蓝色的JR标志。不需要开口，跟着汉字「地下鉄」走就对了。真找不到再开口。",
+            "personPos": 15,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "地下鉄=地铁"
+              },
+              {
+                "type": "en",
+                "text": "subway / metro"
+              },
+              {
+                "type": "culture",
+                "text": "东京地铁13条线，颜色区分"
+              }
             ]
           },
-          { "id": "ticket", "step": "② 买 IC 卡", "sign": "Suica をください", "signSub": "One Suica please", "jp": "Suica をください", "tip": "第一次来日本，去绿色 JR 窗口说这句，买一张 Suica。以后刷卡进出，再也不用每次对着机器发呆。充值说「チャージ」（charge 的音译）。", "personPos": 30, "tags": [
-              { "type": "en", "text": "charge→チャージ（音译）" },
-              { "type": "culture", "text": "Suica 全国便利店也能用" }
+          {
+            "id": "ticket",
+            "step": "② 买IC卡",
+            "sign": "Suicaをください",
+            "signSub": "One Suica please",
+            "jp": "Suicaをください",
+            "tip": "第一次来日本，去绿色JR窗口说这句，买一张Suica。以后刷卡进出，再也不用每次对着机器发呆。充值说「チャージ」（charge的音译）。",
+            "personPos": 30,
+            "tags": [
+              {
+                "type": "en",
+                "text": "charge→チャージ（音译）"
+              },
+              {
+                "type": "culture",
+                "text": "Suica全国便利店也能用"
+              }
             ]
           },
-          { "id": "gate", "step": "③ 过改札口", "sign": "改札口", "signSub": "TICKET GATE", "jp": "（Suica 轻触，无需说话）", "tip": "改札=检票，口=入口，汉字直读。听到「ピ」声就过。亮红灯=余额不足，走旁边的精算機充值，不是机器坏了。", "personPos": 46, "tags": [
-              { "type": "zh", "text": "改札=检票（直读）" },
-              { "type": "culture", "text": "精算機=余额补足机" },
-              { "type": "culture", "text": "闸门关得极快，不要尾随" }
+          {
+            "id": "gate",
+            "step": "③ 过改札口",
+            "sign": "改札口",
+            "signSub": "TICKET GATE",
+            "jp": "（Suica轻触，无需说话）",
+            "tip": "改札=检票，口=入口，汉字直读。听到「ピ」声就过。亮红灯=余额不足，走旁边的精算機充值，不是机器坏了。",
+            "personPos": 46,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "改札=检票（直读）"
+              },
+              {
+                "type": "culture",
+                "text": "精算機=余额补足机"
+              },
+              {
+                "type": "culture",
+                "text": "闸门关得极快，不要尾随"
+              }
             ]
           },
-          { "id": "transfer", "step": "④ 换乘陷阱", "sign": "乗換", "signSub": "TRANSFER", "jp": "乗り換えはどこですか？", "tip": "重要：换乘可能是换了一家公司！从东急换到东京 Metro，要出闸重新进站，重新计费。跟着颜色走，每条线颜色固定。迷路了再说这句。", "personPos": 60, "tags": [
-              { "type": "zh", "text": "乗換=换乘（直读）" },
-              { "type": "culture", "text": "东京=多家私铁共存" },
-              { "type": "culture", "text": "换线=可能换公司重新付费" }
+          {
+            "id": "transfer",
+            "step": "④ 换乘陷阱",
+            "sign": "乗換",
+            "signSub": "TRANSFER",
+            "jp": "乗り換えはどこですか？",
+            "tip": "重要：换乘可能是换了一家公司！从东急换到东京Metro，要出闸重新进站，重新计费。跟着颜色走，每条线颜色固定。迷路了再说这句。",
+            "personPos": 60,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "乗換=换乘（直读）"
+              },
+              {
+                "type": "culture",
+                "text": "东京=多家私铁共存"
+              },
+              {
+                "type": "culture",
+                "text": "换线=可能换公司重新付费"
+              }
             ]
           },
-          { "id": "platform", "step": "⑤ 站台方向", "sign": "次は渋谷です", "signSub": "（广播）", "jp": "次は渋谷です", "tip": "上车前确认两件事：① 月台颜色对不对 ② 终点站名字对不对（看站台电子屏）。同一个站台可能停靠去往不同方向的车——这和大陆地铁不一样！听到「次は〇〇」就是下一站报站。", "personPos": 74, "tags": [
-              { "type": "zh", "text": "次=下一个（直读）" },
-              { "type": "culture", "text": "同站台可能有两个方向！" },
-              { "type": "culture", "text": "优先席=银色把手区请让座" }
+          {
+            "id": "platform",
+            "step": "⑤ 站台方向",
+            "sign": "次は渋谷です",
+            "signSub": "（广播）",
+            "jp": "次は渋谷です",
+            "tip": "上车前确认两件事：① 月台颜色对不对 ② 终点站名字对不对（看站台电子屏）。同一个站台可能停靠去往不同方向的车——这和大陆地铁不一样！听到「次は〇〇」就是下一站报站。",
+            "personPos": 74,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "次=下一个（直读）"
+              },
+              {
+                "type": "culture",
+                "text": "同站台可能有两个方向！"
+              },
+              {
+                "type": "culture",
+                "text": "优先席=银色把手区请让座"
+              }
             ]
           },
-          { "id": "exit", "step": "⑥ 选对出口", "sign": "出口 A1", "signSub": "EXIT", "jp": "〇〇口はどこですか？", "tip": "出口=出口，中日完全相同。但出哪个口决定你从哪条街走出来——A1 和 B3 可能差出来 300 米。出站前在手机上查好对应出口，这比任何语言都重要。", "personPos": 90, "tags": [
-              { "type": "zh", "text": "出口（中日完全同）" },
-              { "type": "en", "text": "exit / salida（ES）" },
-              { "type": "culture", "text": "出口号决定你在哪条街" }
+          {
+            "id": "exit",
+            "step": "⑥ 选对出口",
+            "sign": "出口 A1",
+            "signSub": "EXIT",
+            "jp": "〇〇口はどこですか？",
+            "tip": "出口=出口，中日完全相同。但出哪个口决定你从哪条街走出来——A1和B3可能差出来300米。出站前在手机上查好对应出口，这比任何语言都重要。",
+            "personPos": 90,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "出口（中日完全同）"
+              },
+              {
+                "type": "en",
+                "text": "exit / salida（ES）"
+              },
+              {
+                "type": "culture",
+                "text": "出口号决定你在哪条街"
+              }
             ]
           }
         ],
         "phrases": [
-          { "jp": "Suica をください", "zh": "请给我一张 Suica" },
-          { "jp": "乗り換えはどこですか？", "zh": "换乘在哪里？" },
-          { "jp": "次は〇〇です", "zh": "下一站是〇〇（广播）" },
-          { "jp": "出口はどこですか？", "zh": "出口在哪里？" }
+          {
+            "jp": "Suicaをください",
+            "zh": "请给我一张Suica"
+          },
+          {
+            "jp": "乗り換えはどこですか？",
+            "zh": "换乘在哪里？"
+          },
+          {
+            "jp": "次は〇〇です",
+            "zh": "下一站是〇〇（广播）"
+          },
+          {
+            "jp": "出口はどこですか？",
+            "zh": "出口在哪里？"
+          }
         ]
       },
       {
@@ -113,31 +269,96 @@
         "unlocked": false,
         "stepsCount": 4,
         "steps": [
-          { "id": "south_exit", "step": "① 找南口", "sign": "南口", "signSub": "SOUTH EXIT", "jp": "南口はどこですか？", "tip": "新宿站有超过 200 个出口，是世界上出口最多的车站。南口・東口・西口是主要出口。「南」=south，汉字认识就认识方向。", "personPos": 18, "tags": [
-              { "type": "zh", "text": "東西南北（中日完全同）" },
-              { "type": "culture", "text": "200+ 出口=世界最多" }
+          {
+            "id": "south_exit",
+            "step": "① 找南口",
+            "sign": "南口",
+            "signSub": "SOUTH EXIT",
+            "jp": "南口はどこですか？",
+            "tip": "新宿站有超过200个出口，是世界上出口最多的车站。南口・東口・西口是主要出口。「南」=south，汉字认识就认识方向。",
+            "personPos": 18,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "東西南北（中日完全同）"
+              },
+              {
+                "type": "culture",
+                "text": "200+出口=世界最多"
+              }
             ]
           },
-          { "id": "oedo", "step": "② 找大江戸線", "sign": "大江戸線", "signSub": "OEDO LINE", "jp": "大江戸線はどこですか？", "tip": "大江戸线在地下极深，从新宿换乘需要走约 5-10 分钟。跟绿色标志走。大=大，江=江，戸=户，戸＝东京的旧称「江戸」。", "personPos": 42, "tags": [
-              { "type": "zh", "text": "大江戸=江户（东京旧名）" },
-              { "type": "culture", "text": "东京最深地铁线之一" }
+          {
+            "id": "oedo",
+            "step": "② 找大江戸線",
+            "sign": "大江戸線",
+            "signSub": "OEDO LINE",
+            "jp": "大江戸線はどこですか？",
+            "tip": "大江戸线在地下极深，从新宿换乘需要走约5-10分钟。跟绿色标志走。大=大，江=江，戸=户，戸＝东京的旧称「江戸」。",
+            "personPos": 42,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "大江戸=江户（东京旧名）"
+              },
+              {
+                "type": "culture",
+                "text": "东京最深地铁线之一"
+              }
             ]
           },
-          { "id": "rush", "step": "③ 早高峰", "sign": "電車が参ります", "signSub": "Train arriving", "jp": "電車が参ります", "tip": "「参ります」=来了（敬语形式）。这句广播提示电车进站，退到黄线后面。新宿早高峰是世界上最拥挤的地铁，真的会有工作人员把人推进去。", "personPos": 65, "tags": [
-              { "type": "zh", "text": "電車=电车（直读）" },
-              { "type": "culture", "text": "新宿早高峰=全球最拥挤" }
+          {
+            "id": "rush",
+            "step": "③ 早高峰",
+            "sign": "電車が参ります",
+            "signSub": "Train arriving",
+            "jp": "電車が参ります",
+            "tip": "「参ります」=来了（敬语形式）。这句广播提示电车进站，退到黄线后面。新宿早高峰是世界上最拥挤的地铁，真的会有工作人员把人推进去。",
+            "personPos": 65,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "電車=电车（直读）"
+              },
+              {
+                "type": "culture",
+                "text": "新宿早高峰=全球最拥挤"
+              }
             ]
           },
-          { "id": "west_exit", "step": "④ 告诉司机", "sign": "西口", "signSub": "WEST EXIT", "jp": "新宿の西口をお願いします", "tip": "坐出租车时这样说。西口=歌舞伎町方向，东口=百货商场方向。方向汉字東西南北在日语和中文里完全相同，这是汉字圈的天然优势。", "personPos": 88, "tags": [
-              { "type": "zh", "text": "東西南北（完全同）" },
-              { "type": "culture", "text": "西口=歌舞伎町，东口=伊势丹" }
+          {
+            "id": "west_exit",
+            "step": "④ 告诉司机",
+            "sign": "西口",
+            "signSub": "WEST EXIT",
+            "jp": "新宿の西口をお願いします",
+            "tip": "坐出租车时这样说。西口=歌舞伎町方向，东口=百货商场方向。方向汉字東西南北在日语和中文里完全相同，这是汉字圈的天然优势。",
+            "personPos": 88,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "東西南北（完全同）"
+              },
+              {
+                "type": "culture",
+                "text": "西口=歌舞伎町，东口=伊势丹"
+              }
             ]
           }
         ],
         "phrases": [
-          { "jp": "南口はどこですか？", "zh": "南口在哪里？" },
-          { "jp": "大江戸線はどこですか？", "zh": "大江户线在哪里？" },
-          { "jp": "西口をお願いします", "zh": "请去西口（告诉司机）" }
+          {
+            "jp": "南口はどこですか？",
+            "zh": "南口在哪里？"
+          },
+          {
+            "jp": "大江戸線はどこですか？",
+            "zh": "大江户线在哪里？"
+          },
+          {
+            "jp": "西口をお願いします",
+            "zh": "请去西口（告诉司机）"
+          }
         ]
       },
       {
@@ -148,26 +369,77 @@
         "unlocked": false,
         "stepsCount": 3,
         "steps": [
-          { "id": "east_west", "step": "① 东西出口", "sign": "東口", "signSub": "EAST EXIT", "jp": "東口はどこですか？", "tip": "池袋有东西两个完全不同的街区。東口=西武・東武百货，西口=家电量贩店（BIC CAMERA）。出错了就得绕一大圈，出站前想清楚去哪边。", "personPos": 22, "tags": [
-              { "type": "zh", "text": "東=东（直读）" },
-              { "type": "culture", "text": "东口 vs 西口=两个完全不同的世界" }
+          {
+            "id": "east_west",
+            "step": "① 东西出口",
+            "sign": "東口",
+            "signSub": "EAST EXIT",
+            "jp": "東口はどこですか？",
+            "tip": "池袋有东西两个完全不同的街区。東口=西武・東武百货，西口=家电量贩店（BIC CAMERA）。出错了就得绕一大圈，出站前想清楚去哪边。",
+            "personPos": 22,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "東=东（直读）"
+              },
+              {
+                "type": "culture",
+                "text": "东口vs西口=两个完全不同的世界"
+              }
             ]
           },
-          { "id": "buy", "step": "② 购物", "sign": "これをください", "signSub": "I will have this", "jp": "これをください", "tip": "便利店、药妆店、家电店都用这句。指着商品说，完全不需要知道商品名称。これ=这个，ください=请给我，两个词学会走遍日本。", "personPos": 55, "tags": [
-              { "type": "zh", "text": "これ=这个" },
-              { "type": "en", "text": "this one please" }
+          {
+            "id": "buy",
+            "step": "② 购物",
+            "sign": "これをください",
+            "signSub": "I will have this",
+            "jp": "これをください",
+            "tip": "便利店、药妆店、家电店都用这句。指着商品说，完全不需要知道商品名称。これ=这个，ください=请给我，两个词学会走遍日本。",
+            "personPos": 55,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "これ=这个"
+              },
+              {
+                "type": "en",
+                "text": "this one please"
+              }
             ]
           },
-          { "id": "farewell", "step": "③ 道别", "sign": "ありがとうございました", "signSub": "Thank you — farewell", "jp": "ありがとうございました", "tip": "注意：「ました」是过去式，道别时用。店员也会对你说同样的话。「ます」（现在式）vs「ました」（过去式）——一个字的差别，意思完全不同。", "personPos": 85, "tags": [
-              { "type": "zh", "text": "ました=过去式" },
-              { "type": "culture", "text": "ます vs ました——时态很重要" }
+          {
+            "id": "farewell",
+            "step": "③ 道别",
+            "sign": "ありがとうございました",
+            "signSub": "Thank you — farewell",
+            "jp": "ありがとうございました",
+            "tip": "注意：「ました」是过去式，道别时用。店员也会对你说同样的话。「ます」（现在式）vs「ました」（过去式）——一个字的差别，意思完全不同。",
+            "personPos": 85,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "ました=过去式"
+              },
+              {
+                "type": "culture",
+                "text": "ます vs ました——时态很重要"
+              }
             ]
           }
         ],
         "phrases": [
-          { "jp": "東口はどこですか？", "zh": "东口在哪里？" },
-          { "jp": "これをください", "zh": "给我这个" },
-          { "jp": "ありがとうございました", "zh": "谢谢您（道别）" }
+          {
+            "jp": "東口はどこですか？",
+            "zh": "东口在哪里？"
+          },
+          {
+            "jp": "これをください",
+            "zh": "给我这个"
+          },
+          {
+            "jp": "ありがとうございました",
+            "zh": "谢谢您（道别）"
+          }
         ]
       },
       {
@@ -178,26 +450,77 @@
         "unlocked": false,
         "stepsCount": 3,
         "steps": [
-          { "id": "museum", "step": "① 博物馆", "sign": "博物館", "signSub": "MUSEUM", "jp": "博物館はどこですか？", "tip": "博物館=博物馆，汉字完全直读。上野公园周边有东京国立博物馆等多个文化设施。这个句型可以替换任何地名——把「博物館」换成任何你想找的地方就行。", "personPos": 20, "tags": [
-              { "type": "zh", "text": "博物館（完全直读）" },
-              { "type": "culture", "text": "上野=东京文化心脏地带" }
+          {
+            "id": "museum",
+            "step": "① 博物馆",
+            "sign": "博物館",
+            "signSub": "MUSEUM",
+            "jp": "博物館はどこですか？",
+            "tip": "博物館=博物馆，汉字完全直读。上野公园周边有东京国立博物馆等多个文化设施。这个句型可以替换任何地名——把「博物館」换成任何你想找的地方就行。",
+            "personPos": 20,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "博物館（完全直读）"
+              },
+              {
+                "type": "culture",
+                "text": "上野=东京文化心脏地带"
+              }
             ]
           },
-          { "id": "ticket", "step": "② 买门票", "sign": "大人一枚ください", "signSub": "One adult ticket", "jp": "大人一枚ください", "tip": "大人=成人，一枚=一张（纸类量词）。「枚」这个量词专门用于纸类，门票、地图、照片都用「枚」。买两张就是「二枚」，三张是「三枚」。", "personPos": 55, "tags": [
-              { "type": "zh", "text": "大人=成人（直读）" },
-              { "type": "zh", "text": "枚=张（纸类量词）" }
+          {
+            "id": "ticket",
+            "step": "② 买门票",
+            "sign": "大人一枚ください",
+            "signSub": "One adult ticket",
+            "jp": "大人一枚ください",
+            "tip": "大人=成人，一枚=一张（纸类量词）。「枚」这个量词专门用于纸类，门票、地图、照片都用「枚」。买两张就是「二枚」，三张是「三枚」。",
+            "personPos": 55,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "大人=成人（直读）"
+              },
+              {
+                "type": "zh",
+                "text": "枚=张（纸类量词）"
+              }
             ]
           },
-          { "id": "zoo", "step": "③ 找动物园", "sign": "動物園", "signSub": "ZOO", "jp": "動物園はどこですか？", "tip": "動物=动物，園=园，完全直读。上野动物园是日本最古老的动物园，有大熊猫。这个句型是万能的——「動物園」换成任何地方名都能用。", "personPos": 85, "tags": [
-              { "type": "zh", "text": "動物園（完全直读）" },
-              { "type": "culture", "text": "上野动物园有大熊猫" }
+          {
+            "id": "zoo",
+            "step": "③ 找动物园",
+            "sign": "動物園",
+            "signSub": "ZOO",
+            "jp": "動物園はどこですか？",
+            "tip": "動物=动物，園=园，完全直读。上野动物园是日本最古老的动物园，有大熊猫。这个句型是万能的——「動物園」换成任何地方名都能用。",
+            "personPos": 85,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "動物園（完全直读）"
+              },
+              {
+                "type": "culture",
+                "text": "上野动物园有大熊猫"
+              }
             ]
           }
         ],
         "phrases": [
-          { "jp": "大人一枚ください", "zh": "一张成人票" },
-          { "jp": "動物園はどこですか？", "zh": "动物园在哪里？" },
-          { "jp": "〇〇はどこですか？", "zh": "〇〇在哪里？（万能）" }
+          {
+            "jp": "大人一枚ください",
+            "zh": "一张成人票"
+          },
+          {
+            "jp": "動物園はどこですか？",
+            "zh": "动物园在哪里？"
+          },
+          {
+            "jp": "〇〇はどこですか？",
+            "zh": "〇〇在哪里？（万能）"
+          }
         ]
       },
       {
@@ -208,209 +531,2075 @@
         "unlocked": false,
         "stepsCount": 4,
         "steps": [
-          { "id": "shinkansen", "step": "① 新干线", "sign": "新幹線", "signSub": "SHINKANSEN", "jp": "新幹線の乗り場はどこですか？", "tip": "新幹線=新干线，汉字直读。東京駅是大多数新干线的始发站。进站找「中央口」，然后看板子找你要坐的线（东海道・东北・上越等）。", "personPos": 18, "tags": [
-              { "type": "zh", "text": "新幹線（直读）" },
-              { "type": "culture", "text": "东京→大阪新干线 2 小时 16 分" }
+          {
+            "id": "shinkansen",
+            "step": "① 新干线",
+            "sign": "新幹線",
+            "signSub": "SHINKANSEN",
+            "jp": "新幹線の乗り場はどこですか？",
+            "tip": "新幹線=新干线，汉字直读。東京駅是大多数新干线的始发站。进站找「中央口」，然后看板子找你要坐的线（东海道・东北・上越等）。",
+            "personPos": 18,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "新幹線（直读）"
+              },
+              {
+                "type": "culture",
+                "text": "东京→大阪新干线2小时16分"
+              }
             ]
           },
-          { "id": "marunouchi", "step": "② 丸之内口", "sign": "丸の内口", "signSub": "MARUNOUCHI EXIT", "jp": "丸の内口はどこですか？", "tip": "东京站最著名的出口，对面是皇居，东侧是 1914 年建的红砖站舍。出这个口回头看，你会看到很多人在拍那栋建筑。", "personPos": 42, "tags": [
-              { "type": "zh", "text": "丸=圆形" },
-              { "type": "culture", "text": "1914 年建筑，重要文化财产" }
+          {
+            "id": "marunouchi",
+            "step": "② 丸之内口",
+            "sign": "丸の内口",
+            "signSub": "MARUNOUCHI EXIT",
+            "jp": "丸の内口はどこですか？",
+            "tip": "东京站最著名的出口，对面是皇居，东侧是1914年建的红砖站舍。出这个口回头看，你会看到很多人在拍那栋建筑。",
+            "personPos": 42,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "丸=圆形"
+              },
+              {
+                "type": "culture",
+                "text": "1914年建筑，重要文化财产"
+              }
             ]
           },
-          { "id": "final_stop", "step": "③ 终点站广播", "sign": "終点です", "signSub": "Final stop", "jp": "終点です", "tip": "「終点」=终点站，汉字直读。听到这句全车人都要下车了。和大陆不同，日本不少线路的电车到终点后会折返，方向变了但不一定换车——所以听到这句就下。", "personPos": 65, "tags": [
-              { "type": "zh", "text": "終点=终点（直读）" },
-              { "type": "culture", "text": "终点站=全员下车，电车折返" }
+          {
+            "id": "final_stop",
+            "step": "③ 终点站广播",
+            "sign": "終点です",
+            "signSub": "Final stop",
+            "jp": "終点です",
+            "tip": "「終点」=终点站，汉字直读。听到这句全车人都要下车了。和大陆不同，日本不少线路的电车到终点后会折返，方向变了但不一定换车——所以听到这句就下。",
+            "personPos": 65,
+            "tags": [
+              {
+                "type": "zh",
+                "text": "終点=终点（直读）"
+              },
+              {
+                "type": "culture",
+                "text": "终点站=全员下车，电车折返"
+              }
             ]
           },
-          { "id": "complete", "step": "④ 通关！", "sign": "到着！", "signSub": "ARRIVED", "jp": "ありがとうございます！", "tip": "从渋谷出发，经新宿、池袋、上野，终于到達東京駅。你已经掌握了东京地铁的核心逻辑：认汉字、跟颜色、换乘注意出闸。语言是最后的工具，空间感才是第一步。", "personPos": 92, "tags": [
-              { "type": "culture", "text": "通关！你会做地铁了" },
-              { "type": "en", "text": "mission complete" }
+          {
+            "id": "complete",
+            "step": "④ 通关！",
+            "sign": "到着！",
+            "signSub": "ARRIVED",
+            "jp": "ありがとうございます！",
+            "tip": "从渋谷出发，经新宿、池袋、上野，终于到達東京駅。你已经掌握了东京地铁的核心逻辑：认汉字、跟颜色、换乘注意出闸。语言是最后的工具，空间感才是第一步。",
+            "personPos": 92,
+            "tags": [
+              {
+                "type": "culture",
+                "text": "通关！你会做地铁了"
+              },
+              {
+                "type": "en",
+                "text": "mission complete"
+              }
             ]
           }
         ],
         "phrases": [
-          { "jp": "新幹線の乗り場はどこですか？", "zh": "新干线乘车处在哪里？" },
-          { "jp": "終点です", "zh": "终点站（广播）" },
-          { "jp": "ありがとうございます", "zh": "非常感谢" }
+          {
+            "jp": "新幹線の乗り場はどこですか？",
+            "zh": "新干线乘车处在哪里？"
+          },
+          {
+            "jp": "終点です",
+            "zh": "终点站（广播）"
+          },
+          {
+            "jp": "ありがとうございます",
+            "zh": "非常感谢"
+          }
         ]
       }
     ]
   },
-  "kanaRows": [    { "kana": "あ", "roma": "a", "category": "清音", "row": "あ行", "kanjiOrigin": "安", "shapeHook": "草书「安」的快速写法", "chineseApprox": "啊", "pronunciationTip": "嘴巴自然张开，不要过度圆唇", "confusableWith": ["お"], "distinctionTip": "あ有「安」的草书特征，お有两个「o」形", "highFreqWord": "あります", "scene": "问路/购物", "inputRule": "打「a」", "miniExercise": "听「a」音，选择あ/お" },
-    { "kana": "い", "roma": "i", "category": "清音", "row": "あ行", "kanjiOrigin": "以", "shapeHook": "草书「以」的简化", "chineseApprox": "衣", "pronunciationTip": "舌面抬高，接近「衣」但短促", "confusableWith": [], "distinctionTip": "", "highFreqWord": "います", "scene": "问路/酒店", "inputRule": "打「i」", "miniExercise": "听「i」音，选择い/う" },
-    { "kana": "う", "roma": "u", "category": "清音", "row": "あ行", "kanjiOrigin": "宇", "shapeHook": "草书「宇」的简化", "chineseApprox": "乌（嘴唇扁平）", "pronunciationTip": "嘴唇不圆，是扁平的 u", "confusableWith": ["お"], "distinctionTip": "う嘴唇扁平，お嘴唇圆", "highFreqWord": "うどん", "scene": "餐厅", "inputRule": "打「u」", "miniExercise": "听「u」音，选择う/お" },
-    { "kana": "え", "roma": "e", "category": "清音", "row": "あ行", "kanjiOrigin": "衣", "shapeHook": "草书「衣」的变形", "chineseApprox": "欸", "pronunciationTip": "单元音 e，像「欸」的开头", "confusableWith": ["お"], "distinctionTip": "え像「工」但右边出头，お有两个「o」形", "highFreqWord": "えき（駅）", "scene": "地铁", "inputRule": "打「e」", "miniExercise": "听「e」音，选择え/お" },
-    { "kana": "お", "roma": "o", "category": "清音", "row": "あ行", "kanjiOrigin": "于", "shapeHook": "草书「于」的变形", "chineseApprox": "哦", "pronunciationTip": "嘴唇圆，发音短促", "confusableWith": ["あ", "う"], "distinctionTip": "お有两个「o」形状 visible", "highFreqWord": "おねがいします", "scene": "通用礼貌语", "inputRule": "打「o」", "miniExercise": "听「o」音，选择あ/お/う" },
-    { "kana": "か", "roma": "ka", "category": "清音", "row": "か行", "kanjiOrigin": "加", "shapeHook": "草书「加」的简化", "chineseApprox": "卡", "pronunciationTip": "清音，不送气（像中文「嘎」但不浊）", "confusableWith": ["が"], "distinctionTip": "か是清音，が是浊音", "highFreqWord": "かいもの（買い物）", "scene": "购物", "inputRule": "打「ka」", "miniExercise": "听「ka」音，选择か/が" },
-    { "kana": "き", "roma": "ki", "category": "清音", "row": "か行", "kanjiOrigin": "几", "shapeHook": "草书「几」的变形", "chineseApprox": "key（钥匙）", "pronunciationTip": "接近「key」的开头", "confusableWith": [], "distinctionTip": "", "highFreqWord": "きた（北）", "scene": "问路", "inputRule": "打「ki」", "miniExercise": "听「ki」音，选择き/く" },
-    { "kana": "く", "roma": "ku", "category": "清音", "row": "か行", "kanjiOrigin": "久", "shapeHook": "草书「久」的简化", "chineseApprox": "哭", "pronunciationTip": "嘴唇不突出，短促", "confusableWith": ["す"], "distinctionTip": "く像「<」，す中间一竖穿过", "highFreqWord": "ください", "scene": "餐厅/购物", "inputRule": "打「ku」", "miniExercise": "听「ku」音，选择く/す" },
-    { "kana": "け", "roma": "ke", "category": "清音", "row": "か行", "kanjiOrigin": "介", "shapeHook": "「介」的偏旁部首", "chineseApprox": "开", "pronunciationTip": "接近「开」的韵母", "confusableWith": ["ケ"], "distinctionTip": "平假名け vs 片假名ケ", "highFreqWord": "けさ（今朝）", "scene": "酒店/时间", "inputRule": "打「ke」", "miniExercise": "听「ke」音，选择け/ケ" },
-    { "kana": "こ", "roma": "ko", "category": "清音", "row": "か行", "kanjiOrigin": "己", "shapeHook": "草书「己」的变形", "chineseApprox": "科", "pronunciationTip": "短促，不要拖长", "confusableWith": ["ご"], "distinctionTip": "こ是清音，ご是浊音", "highFreqWord": "これ", "scene": "购物/指物", "inputRule": "打「ko」", "miniExercise": "听「ko」音，选择こ/ご" },
-    { "kana": "さ", "roma": "sa", "category": "清音", "row": "さ行", "kanjiOrigin": "左", "shapeHook": "草书「左」的变形", "chineseApprox": "撒", "pronunciationTip": "舌尖抵下齿，s 音清晰", "confusableWith": ["ざ"], "distinctionTip": "さ是清音，ざ是浊音", "highFreqWord": "さようなら", "scene": "告别", "inputRule": "打「sa」", "miniExercise": "听「sa」音，选择さ/ざ" },
-    { "kana": "し", "roma": "shi", "category": "清音", "row": "さ行", "kanjiOrigin": "之", "shapeHook": "草书「之」的变形", "chineseApprox": "西", "pronunciationTip": "舌面音，不是舌尖音「诗」", "confusableWith": ["す", "つ"], "distinctionTip": "し像鱼钩🎣，す中间一竖，つ像波浪", "highFreqWord": "すみません", "scene": "通用礼貌语", "inputRule": "打「shi」或「si」", "miniExercise": "听「shi」音，选择し/す/つ" },
-    { "kana": "す", "roma": "su", "category": "清音", "row": "さ行", "kanjiOrigin": "寸", "shapeHook": "草书「寸」的变形", "chineseApprox": "苏（嘴唇扁平）", "pronunciationTip": "嘴唇不圆，接近「s」", "confusableWith": ["く"], "distinctionTip": "す中间一竖穿过，く像「<」", "highFreqWord": "すすめ（推荐）", "scene": "餐厅/购物", "inputRule": "打「su」", "miniExercise": "听「su」音，选择す/く" },
-    { "kana": "せ", "roma": "se", "category": "清音", "row": "さ行", "kanjiOrigin": "世", "shapeHook": "草书「世」的变形", "chineseApprox": "赛", "pronunciationTip": "接近「赛」的韵母", "confusableWith": ["ぜ"], "distinctionTip": "せ是清音，ぜ是浊音", "highFreqWord": "せつめい（説明）", "scene": "问路/酒店", "inputRule": "打「se」", "miniExercise": "听「se」音，选择せ/ぜ" },
-    { "kana": "そ", "roma": "so", "category": "清音", "row": "さ行", "kanjiOrigin": "曾", "shapeHook": "草书「曾」的变形", "chineseApprox": "索", "pronunciationTip": "接近「索」的韵母", "confusableWith": ["ん"], "distinctionTip": "そ两笔，ん一笔", "highFreqWord": "その", "scene": "指物/购物", "inputRule": "打「so」", "miniExercise": "听「so」音，选择そ/ん" },
-    { "kana": "た", "roma": "ta", "category": "清音", "row": "た行", "kanjiOrigin": "太", "shapeHook": "草书「太」的变形", "chineseApprox": "他", "pronunciationTip": "清音，不送气（像中文「搭」但不浊）", "confusableWith": ["だ"], "distinctionTip": "た是清音，だ是浊音", "highFreqWord": "たべます", "scene": "餐厅", "inputRule": "打「ta」", "miniExercise": "听「ta」音，选择た/だ" },
-    { "kana": "ち", "roma": "chi", "category": "清音", "row": "た行", "kanjiOrigin": "千", "shapeHook": "草书「千」的变形", "chineseApprox": "七", "pronunciationTip": "接近「七」，不是「吃」", "confusableWith": ["つ"], "distinctionTip": "ち像「ち」，つ像波浪~", "highFreqWord": "ちかてつ（地下鉄）", "scene": "地铁", "inputRule": "打「chi」或「ti」", "miniExercise": "听「chi」音，选择ち/つ" },
-    { "kana": "つ", "roma": "tsu", "category": "清音", "row": "た行", "kanjiOrigin": "川", "shapeHook": "草书「川」的变形", "chineseApprox": "次（声母 ts）", "pronunciationTip": "「ts」音，像「次」的声母", "confusableWith": ["し", "ち"], "distinctionTip": "つ像两个小波浪~，し像鱼钩", "highFreqWord": "つぎ（次）", "scene": "地铁/问路", "inputRule": "打「tsu」或「tu」", "miniExercise": "听「tsu」音，选择し/ち/つ" },
-    { "kana": "て", "roma": "te", "category": "清音", "row": "た行", "kanjiOrigin": "天", "shapeHook": "草书「天」的变形", "chineseApprox": "特", "pronunciationTip": "接近「特」的韵母", "confusableWith": ["で"], "distinctionTip": "て是清音，で是浊音", "highFreqWord": "てぶくろ（手袋）", "scene": "购物/天气", "inputRule": "打「te」", "miniExercise": "听「te」音，选择て/で" },
-    { "kana": "と", "roma": "to", "category": "清音", "row": "た行", "kanjiOrigin": "止", "shapeHook": "草书「止」的变形", "chineseApprox": "脱", "pronunciationTip": "接近「脱」的韵母", "confusableWith": ["ど"], "distinctionTip": "と是清音，ど是浊音", "highFreqWord": "とき（時）", "scene": "时间/问路", "inputRule": "打「to」", "miniExercise": "听「to」音，选择と/ど" },
-    { "kana": "な", "roma": "na", "category": "清音", "row": "な行", "kanjiOrigin": "奈", "shapeHook": "草书「奈」的变形", "chineseApprox": "那", "pronunciationTip": "接近「那」", "confusableWith": ["だ"], "distinctionTip": "な是清音，だ是浊音（字形也不同）", "highFreqWord": "なに（何）", "scene": "问路/购物", "inputRule": "打「na」", "miniExercise": "听「na」音，选择な/だ" },
-    { "kana": "に", "roma": "ni", "category": "清音", "row": "な行", "kanjiOrigin": "仁", "shapeHook": "「仁」的变形", "chineseApprox": "你", "pronunciationTip": "接近「你」", "confusableWith": [], "distinctionTip": "", "highFreqWord": "にほん（日本）", "scene": "自我介绍", "inputRule": "打「ni」", "miniExercise": "听「ni」音，选择に/ぬ" },
-    { "kana": "ぬ", "roma": "nu", "category": "清音", "row": "な行", "kanjiOrigin": "奴", "shapeHook": "「奴」的变形", "chineseApprox": "努", "pronunciationTip": "嘴唇圆，短促", "confusableWith": ["ね"], "distinctionTip": "ぬ右边封闭，ね右边开口", "highFreqWord": "ぬぎます（脱ぎます）", "scene": "酒店/更衣", "inputRule": "打「nu」", "miniExercise": "听「nu」音，选择ぬ/ね" },
-    { "kana": "ね", "roma": "ne", "category": "清音", "row": "な行", "kanjiOrigin": "祢", "shapeHook": "「祢」的变形", "chineseApprox": "内", "pronunciationTip": "接近「内」的韵母", "confusableWith": ["ぬ"], "distinctionTip": "ね右边开口，ぬ右边封闭", "highFreqWord": "ねむい（眠い）", "scene": "酒店/休息", "inputRule": "打「ne」", "miniExercise": "听「ne」音，选择ね/ぬ" },
-    { "kana": "の", "roma": "no", "category": "清音", "row": "な行", "kanjiOrigin": "乃", "shapeHook": "「乃」的变形", "chineseApprox": "诺", "pronunciationTip": "接近「诺」的韵母", "confusableWith": [], "distinctionTip": "", "highFreqWord": "のりかえ（乗り換え）", "scene": "地铁", "inputRule": "打「no」", "miniExercise": "听「no」音，选择の/ぬ" },
-    { "kana": "は", "roma": "ha", "category": "清音", "row": "は行", "kanjiOrigin": "八", "shapeHook": "「八」的变形", "chineseApprox": "哈", "pronunciationTip": "接近「哈」，作助词时读 wa", "confusableWith": ["ば", "ぱ"], "distinctionTip": "は清音，ば浊音，ぱ半浊音", "highFreqWord": "はい", "scene": "通用", "inputRule": "打「ha」", "miniExercise": "听「ha」音，选择は/ば/ぱ" },
-    { "kana": "ひ", "roma": "hi", "category": "清音", "row": "は行", "kanjiOrigin": "比", "shapeHook": "「比」的变形", "chineseApprox": "西（带 h）", "pronunciationTip": "接近「西」但带 h 音", "confusableWith": ["び", "ぴ"], "distinctionTip": "ひ清音，び浊音，ぴ半浊音", "highFreqWord": "ひだり（左）", "scene": "问路", "inputRule": "打「hi」", "miniExercise": "听「hi」音，选择ひ/び/ぴ" },
-    { "kana": "ふ", "roma": "fu", "category": "清音", "row": "は行", "kanjiOrigin": "不", "shapeHook": "「不」的变形", "chineseApprox": "夫（轻吹气）", "pronunciationTip": "嘴唇不闭合，轻吹气", "confusableWith": ["ぶ", "ぷ"], "distinctionTip": "ふ清音，ぶ浊音，ぷ半浊音", "highFreqWord": "ふゆ（冬）", "scene": "天气/购物", "inputRule": "打「fu」或「hu」", "miniExercise": "听「fu」音，选择ふ/ぶ/ぷ" },
-    { "kana": "へ", "roma": "he", "category": "清音", "row": "は行", "kanjiOrigin": "部", "shapeHook": "「部」的偏旁", "chineseApprox": "黑", "pronunciationTip": "接近「黑」的韵母", "confusableWith": ["べ", "ぺ"], "distinctionTip": "へ清音，べ浊音，ぺ半浊音", "highFreqWord": "へや（部屋）", "scene": "酒店", "inputRule": "打「he」", "miniExercise": "听「he」音，选择へ/べ/ぺ" },
-    { "kana": "ほ", "roma": "ho", "category": "清音", "row": "は行", "kanjiOrigin": "保", "shapeHook": "「保」的变形", "chineseApprox": "霍", "pronunciationTip": "接近「霍」的韵母", "confusableWith": ["ぼ", "ぽ"], "distinctionTip": "ほ清音，ぼ浊音，ぽ半浊音", "highFreqWord": "ほん（本）", "scene": "购物/学习", "inputRule": "打「ho」", "miniExercise": "听「ho」音，选择ほ/ぼ/ぽ" },
-    { "kana": "ま", "roma": "ma", "category": "清音", "row": "ま行", "kanjiOrigin": "末", "shapeHook": "「末」的变形", "chineseApprox": "妈", "pronunciationTip": "接近「妈」", "confusableWith": ["め"], "distinctionTip": "ま两横，め右边出头", "highFreqWord": "まえ（前）", "scene": "问路", "inputRule": "打「ma」", "miniExercise": "听「ma」音，选择ま/め" },
-    { "kana": "み", "roma": "mi", "category": "清音", "row": "ま行", "kanjiOrigin": "美", "shapeHook": "「美」的变形", "chineseApprox": "米", "pronunciationTip": "接近「米」", "confusableWith": ["む"], "distinctionTip": "み右边开口，む右边封闭", "highFreqWord": "みぎ（右）", "scene": "问路", "inputRule": "打「mi」", "miniExercise": "听「mi」音，选择み/む" },
-    { "kana": "む", "roma": "mu", "category": "清音", "row": "ま行", "kanjiOrigin": "武", "shapeHook": "「武」的变形", "chineseApprox": "母", "pronunciationTip": "嘴唇圆，短促", "confusableWith": ["み"], "distinctionTip": "む右边封闭，み右边开口", "highFreqWord": "むすめ（娘）", "scene": "自我介绍", "inputRule": "打「mu」", "miniExercise": "听「mu」音，选择む/み" },
-    { "kana": "め", "roma": "me", "category": "清音", "row": "ま行", "kanjiOrigin": "女", "shapeHook": "「女」的变形", "chineseApprox": "灭", "pronunciationTip": "接近「灭」的韵母", "confusableWith": ["ま"], "distinctionTip": "め右边出头，ま两横", "highFreqWord": "めし（饭）", "scene": "餐厅", "inputRule": "打「me」", "miniExercise": "听「me」音，选择め/ま" },
-    { "kana": "も", "roma": "mo", "category": "清音", "row": "ま行", "kanjiOrigin": "毛", "shapeHook": "「毛」的变形", "chineseApprox": "莫", "pronunciationTip": "接近「莫」的韵母", "confusableWith": [], "distinctionTip": "", "highFreqWord": "もっと", "scene": "餐厅/购物", "inputRule": "打「mo」", "miniExercise": "听「mo」音，选择も/む" },
-    { "kana": "や", "roma": "ya", "category": "清音", "row": "や行", "kanjiOrigin": "也", "shapeHook": "「也」的变形", "chineseApprox": "呀", "pronunciationTip": "接近「呀」", "confusableWith": ["ゆ"], "distinctionTip": "や左边开口，ゆ两点", "highFreqWord": "やすみ（休み）", "scene": "酒店/时间", "inputRule": "打「ya」", "miniExercise": "听「ya」音，选择や/ゆ" },
-    { "kana": "ゆ", "roma": "yu", "category": "清音", "row": "や行", "kanjiOrigin": "由", "shapeHook": "「由」的变形", "chineseApprox": "优", "pronunciationTip": "接近「优」", "confusableWith": ["や"], "distinctionTip": "ゆ有两点，や没有", "highFreqWord": "ゆうびんきょく（郵便局）", "scene": "问路/邮局", "inputRule": "打「yu」", "miniExercise": "听「yu」音，选择ゆ/や" },
-    { "kana": "よ", "roma": "yo", "category": "清音", "row": "や行", "kanjiOrigin": "与", "shapeHook": "「与」的变形", "chineseApprox": "哟", "pronunciationTip": "接近「哟」", "confusableWith": [], "distinctionTip": "", "highFreqWord": "よろしく", "scene": "自我介绍", "inputRule": "打「yo」", "miniExercise": "听「yo」音，选择よ/ゆ" },
-    { "kana": "ら", "roma": "ra", "category": "清音", "row": "ら行", "kanjiOrigin": "良", "shapeHook": "「良」的变形", "chineseApprox": "拉", "pronunciationTip": "r/l 之间，舌尖弹一下", "confusableWith": ["わ"], "distinctionTip": "ら有「良」特征，わ像「ワ」", "highFreqWord": "らいげつ（来月）", "scene": "时间/酒店", "inputRule": "打「ra」", "miniExercise": "听「ra」音，选择ら/わ" },
-    { "kana": "り", "roma": "ri", "category": "清音", "row": "ら行", "kanjiOrigin": "利", "shapeHook": "「利」的偏旁", "chineseApprox": "里", "pronunciationTip": "接近「里」", "confusableWith": ["る"], "distinctionTip": "り是片假名来源，る是草书", "highFreqWord": "りょう（寮）", "scene": "酒店/住宿", "inputRule": "打「ri」", "miniExercise": "听「ri」音，选择り/る" },
-    { "kana": "る", "roma": "ru", "category": "清音", "row": "ら行", "kanjiOrigin": "留", "shapeHook": "「留」的变形", "chineseApprox": "鲁", "pronunciationTip": "嘴唇圆，短促", "confusableWith": ["り"], "distinctionTip": "る像「る」，り像「リ」", "highFreqWord": "かります（借ります）", "scene": "购物/图书馆", "inputRule": "打「ru」", "miniExercise": "听「ru」音，选择る/り" },
-    { "kana": "れ", "roma": "re", "category": "清音", "row": "ら行", "kanjiOrigin": "礼", "shapeHook": "「礼」的变形", "chineseApprox": "类", "pronunciationTip": "接近「类」的韵母", "confusableWith": [], "distinctionTip": "", "highFreqWord": "れいぞうこ（冷蔵庫）", "scene": "酒店/设施", "inputRule": "打「re」", "miniExercise": "听「re」音，选择れ/る" },
-    { "kana": "ろ", "roma": "ro", "category": "清音", "row": "ら行", "kanjiOrigin": "吕", "shapeHook": "「吕」的变形", "chineseApprox": "洛", "pronunciationTip": "接近「洛」的韵母", "confusableWith": ["ん"], "distinctionTip": "ろ封闭，ん一笔", "highFreqWord": "ろぐ（日志）", "scene": "酒店/网络", "inputRule": "打「ro」", "miniExercise": "听「ro」音，选择ろ/ん" },
-    { "kana": "わ", "roma": "wa", "category": "清音", "row": "わ行", "kanjiOrigin": "和", "shapeHook": "「和」的变形", "chineseApprox": "哇", "pronunciationTip": "接近「哇」", "confusableWith": ["ら"], "distinctionTip": "わ像「ワ」，ら有「良」特征", "highFreqWord": "わかります", "scene": "通用", "inputRule": "打「wa」", "miniExercise": "听「wa」音，选择わ/ら" },
-    { "kana": "を", "roma": "wo", "category": "清音", "row": "わ行", "kanjiOrigin": "远", "shapeHook": "「远」的变形", "chineseApprox": "哦", "pronunciationTip": "作助词时读 o，同お", "confusableWith": ["お"], "distinctionTip": "を是助词专用，お是元音", "highFreqWord": "〜をください", "scene": "餐厅/购物", "inputRule": "打「wo」或「o」", "miniExercise": "听「o」音，选择在/お（语境题）" },
-    { "kana": "ん", "roma": "n", "category": "特殊", "row": "特殊", "kanjiOrigin": "无", "shapeHook": "独立鼻音", "chineseApprox": "嗯", "pronunciationTip": "鼻音，收尾音", "confusableWith": ["そ", "ろ"], "distinctionTip": "ん一笔，そ两笔，ろ封闭", "highFreqWord": "なん（何）", "scene": "通用疑问词", "inputRule": "打「nn」或「n'」", "miniExercise": "听「n」音，选择ん/そ/ろ" },
-    { "kana": "が", "roma": "ga", "category": "浊音", "row": "か行", "kanjiOrigin": "か + 浊点", "shapeHook": "か + 浊点", "chineseApprox": "嘎", "pronunciationTip": "浊音，像中文「嘎」", "confusableWith": ["か"], "distinctionTip": "が是浊音，か是清音", "highFreqWord": "がっこう（学校）", "scene": "学习/问路", "inputRule": "打「ga」", "miniExercise": "听「ga」音，选择が/か" },
-    { "kana": "ぎ", "roma": "gi", "category": "浊音", "row": "か行", "kanjiOrigin": "き + 浊点", "shapeHook": "き + 浊点", "chineseApprox": "gi", "pronunciationTip": "接近「gi」", "confusableWith": ["き"], "distinctionTip": "", "highFreqWord": "ぎゅうにゅう（牛乳）", "scene": "餐厅/购物", "inputRule": "打「gi」", "miniExercise": "听「gi」音，选择ぎ/き" },
-    { "kana": "ぐ", "roma": "gu", "category": "浊音", "row": "か行", "kanjiOrigin": "く + 浊点", "shapeHook": "く + 浊点", "chineseApprox": "gu", "pronunciationTip": "嘴唇不突出", "confusableWith": ["く"], "distinctionTip": "", "highFreqWord": "ぐすり（薬）", "scene": "便利店/药店", "inputRule": "打「gu」", "miniExercise": "听「gu」音，选择ぐ/く" },
-    { "kana": "げ", "roma": "ge", "category": "浊音", "row": "か行", "kanjiOrigin": "け + 浊点", "shapeHook": "け + 浊点", "chineseApprox": "盖", "pronunciationTip": "接近「盖」", "confusableWith": ["け"], "distinctionTip": "", "highFreqWord": "げんかん（玄関）", "scene": "酒店", "inputRule": "打「ge」", "miniExercise": "听「ge」音，选择げ/け" },
-    { "kana": "ご", "roma": "go", "category": "浊音", "row": "か行", "kanjiOrigin": "こ + 浊点", "shapeHook": "こ + 浊点", "chineseApprox": "go", "pronunciationTip": "短促", "confusableWith": ["こ"], "distinctionTip": "", "highFreqWord": "ごはん（饭）", "scene": "餐厅", "inputRule": "打「go」", "miniExercise": "听「go」音，选择ご/こ" },
-    { "kana": "ざ", "roma": "za", "category": "浊音", "row": "さ行", "kanjiOrigin": "さ + 浊点", "shapeHook": "さ + 浊点", "chineseApprox": "杂", "pronunciationTip": "接近「杂」", "confusableWith": ["さ"], "distinctionTip": "", "highFreqWord": "ざっし（雑誌）", "scene": "购物", "inputRule": "打「za」", "miniExercise": "听「za」音，选择ざ/さ" },
-    { "kana": "じ", "roma": "ji", "category": "浊音", "row": "さ行", "kanjiOrigin": "し + 浊点", "shapeHook": "し + 浊点", "chineseApprox": "机", "pronunciationTip": "接近「机」", "confusableWith": ["し"], "distinctionTip": "", "highFreqWord": "じかん（時間）", "scene": "时间/问路", "inputRule": "打「ji」或「zi」", "miniExercise": "听「ji」音，选择じ/し" },
-    { "kana": "ず", "roma": "zu", "category": "浊音", "row": "さ行", "kanjiOrigin": "す + 浊点", "shapeHook": "す + 浊点", "chineseApprox": "zu", "pronunciationTip": "嘴唇不圆", "confusableWith": ["す"], "distinctionTip": "", "highFreqWord": "ずさん（雑）", "scene": "通用", "inputRule": "打「zu」", "miniExercise": "听「zu」音，选择ず/す" },
-    { "kana": "ぜ", "roma": "ze", "category": "浊音", "row": "さ行", "kanjiOrigin": "せ + 浊点", "shapeHook": "せ + 浊点", "chineseApprox": "贼", "pronunciationTip": "接近「贼」", "confusableWith": ["せ"], "distinctionTip": "", "highFreqWord": "ぜろ（零）", "scene": "数字", "inputRule": "打「ze」", "miniExercise": "听「ze」音，选择ぜ/せ" },
-    { "kana": "ぞ", "roma": "zo", "category": "浊音", "row": "さ行", "kanjiOrigin": "そ + 浊点", "shapeHook": "そ + 浊点", "chineseApprox": "昨", "pronunciationTip": "接近「昨」", "confusableWith": ["そ"], "distinctionTip": "", "highFreqWord": "ぞうきん（雑巾）", "scene": "酒店", "inputRule": "打「zo」", "miniExercise": "听「zo」音，选择ぞ/そ" },
-    { "kana": "だ", "roma": "da", "category": "浊音", "row": "た行", "kanjiOrigin": "た + 浊点", "shapeHook": "た + 浊点", "chineseApprox": "搭（浊）", "pronunciationTip": "像中文「搭」（浊）", "confusableWith": ["た"], "distinctionTip": "", "highFreqWord": "だれ（誰）", "scene": "疑问词", "inputRule": "打「da」", "miniExercise": "听「da」音，选择だ/た" },
-    { "kana": "ぢ", "roma": "ji", "category": "浊音", "row": "た行", "kanjiOrigin": "ち + 浊点", "shapeHook": "ち + 浊点", "chineseApprox": "ji", "pronunciationTip": "同じ，极少用", "confusableWith": ["ち"], "distinctionTip": "极少用", "highFreqWord": "ぢめ（地面）", "scene": "罕见", "inputRule": "打「ji」或「di」", "miniExercise": "听「ji」音，选择ぢ/ち（高级）" },
-    { "kana": "づ", "roma": "zu", "category": "浊音", "row": "た行", "kanjiOrigin": "つ + 浊点", "shapeHook": "つ + 浊点", "chineseApprox": "zu", "pronunciationTip": "同ず，极少用", "confusableWith": ["つ"], "distinctionTip": "极少用", "highFreqWord": "ずつ（逐个）", "scene": "罕见", "inputRule": "打「zu」或「du」", "miniExercise": "听「zu」音，选择づ/つ（高级）" },
-    { "kana": "で", "roma": "de", "category": "浊音", "row": "た行", "kanjiOrigin": "て + 浊点", "shapeHook": "て + 浊点", "chineseApprox": "得", "pronunciationTip": "接近「得」", "confusableWith": ["て"], "distinctionTip": "", "highFreqWord": "でぐち（出口）", "scene": "地铁/问路", "inputRule": "打「de」", "miniExercise": "听「de」音，选择で/て" },
-    { "kana": "ど", "roma": "do", "category": "浊音", "row": "た行", "kanjiOrigin": "と + 浊点", "shapeHook": "と + 浊点", "chineseApprox": "多（浊）", "pronunciationTip": "接近「多」（浊）", "confusableWith": ["と"], "distinctionTip": "", "highFreqWord": "どこ（哪里）", "scene": "问路", "inputRule": "打「do」", "miniExercise": "听「do」音，选择ど/と" },
-    { "kana": "ば", "roma": "ba", "category": "浊音", "row": "は行", "kanjiOrigin": "は + 浊点", "shapeHook": "は + 浊点", "chineseApprox": "巴", "pronunciationTip": "接近「巴」", "confusableWith": ["は", "ぱ"], "distinctionTip": "", "highFreqWord": "ばん（番）", "scene": "酒店/问路", "inputRule": "打「ba」", "miniExercise": "听「ba」音，选择ば/は/ぱ" },
-    { "kana": "び", "roma": "bi", "category": "浊音", "row": "は行", "kanjiOrigin": "ひ + 浊点", "shapeHook": "ひ + 浊点", "chineseApprox": "比", "pronunciationTip": "接近「比」", "confusableWith": ["ひ", "ぴ"], "distinctionTip": "", "highFreqWord": "びょういん（病院）", "scene": "紧急情况", "inputRule": "打「bi」", "miniExercise": "听「bi」音，选择び/ひ/ぴ" },
-    { "kana": "ぶ", "roma": "bu", "category": "浊音", "row": "は行", "kanjiOrigin": "ふ + 浊点", "shapeHook": "ふ + 浊点", "chineseApprox": "bu", "pronunciationTip": "嘴唇圆", "confusableWith": ["ふ", "ぷ"], "distinctionTip": "", "highFreqWord": "ぶどう（葡萄）", "scene": "餐厅/购物", "inputRule": "打「bu」", "miniExercise": "听「bu」音，选择ぶ/ふ/ぷ" },
-    { "kana": "べ", "roma": "be", "category": "浊音", "row": "は行", "kanjiOrigin": "へ + 浊点", "shapeHook": "へ + 浊点", "chineseApprox": "贝", "pronunciationTip": "接近「贝」", "confusableWith": ["へ", "ぺ"], "distinctionTip": "", "highFreqWord": "べんきょう（勉強）", "scene": "学习", "inputRule": "打「be」", "miniExercise": "听「be」音，选择べ/へ/ぺ" },
-    { "kana": "ぼ", "roma": "bo", "category": "浊音", "row": "は行", "kanjiOrigin": "ほ + 浊点", "shapeHook": "ほ + 浊点", "chineseApprox": "波", "pronunciationTip": "接近「波」", "confusableWith": ["ほ", "ぽ"], "distinctionTip": "", "highFreqWord": "ぼく（我，男性自称）", "scene": "自我介绍", "inputRule": "打「bo」", "miniExercise": "听「bo」音，选择ぼ/ほ/ぽ" },
-    { "kana": "ぱ", "roma": "pa", "category": "半浊音", "row": "は行", "kanjiOrigin": "は + 半浊点", "shapeHook": "は + 半浊点", "chineseApprox": "啪", "pronunciationTip": "送气，像「啪」", "confusableWith": ["は", "ば"], "distinctionTip": "", "highFreqWord": "ぱーてぃー（派对）", "scene": "社交", "inputRule": "打「pa」", "miniExercise": "听「pa」音，选择ぱ/は/ば" },
-    { "kana": "ぴ", "roma": "pi", "category": "半浊音", "row": "は行", "kanjiOrigin": "ひ + 半浊点", "shapeHook": "ひ + 半浊点", "chineseApprox": "批", "pronunciationTip": "送气，像「批」", "confusableWith": ["ひ", "び"], "distinctionTip": "", "highFreqWord": "ぴあの（钢琴）", "scene": "兴趣", "inputRule": "打「pi」", "miniExercise": "听「pi」音，选择ぴ/ひ/び" },
-    { "kana": "ぷ", "roma": "pu", "category": "半浊音", "row": "は行", "kanjiOrigin": "ふ + 半浊点", "shapeHook": "ふ + 半浊点", "chineseApprox": "pu", "pronunciationTip": "送气，嘴唇圆", "confusableWith": ["ふ", "ぶ"], "distinctionTip": "", "highFreqWord": "ぷらす（加）", "scene": "数学/通用", "inputRule": "打「pu」", "miniExercise": "听「pu」音，选择ぷ/ふ/ぶ" },
-    { "kana": "ぺ", "roma": "pe", "category": "半浊音", "row": "は行", "kanjiOrigin": "へ + 半浊点", "shapeHook": "へ + 半浊点", "chineseApprox": "配", "pronunciationTip": "送气，像「配」", "confusableWith": ["へ", "べ"], "distinctionTip": "", "highFreqWord": "ぺん（筆）", "scene": "学习/购物", "inputRule": "打「pe」", "miniExercise": "听「pe」音，选择ぺ/へ/べ" },
-    { "kana": "ぽ", "roma": "po", "category": "半浊音", "row": "は行", "kanjiOrigin": "ほ + 半浊点", "shapeHook": "ほ + 半浊点", "chineseApprox": "坡", "pronunciationTip": "送气，像「坡」", "confusableWith": ["ほ", "ぼ"], "distinctionTip": "", "highFreqWord": "ぽけっと（口袋）", "scene": "购物/服装", "inputRule": "打「po」", "miniExercise": "听「po」音，选择ぽ/ほ/ぼ" },
-    { "kana": "っ", "roma": "xtsu", "category": "促音", "row": "特殊", "kanjiOrigin": "つ的小写", "shapeHook": "小写的つ", "chineseApprox": "（停顿一拍）", "pronunciationTip": "停顿一拍，不发音", "confusableWith": ["つ"], "distinctionTip": "っ是促音（小写），つ是正常音节", "highFreqWord": "きっと（一定）", "scene": "通用", "inputRule": "打「xtsu」或「ltsu」", "miniExercise": "听停顿，选择っ/つ" },
-    { "kana": "ゃ", "roma": "xya", "category": "拗音", "row": "や行小写", "kanjiOrigin": "や的小写", "shapeHook": "小写的や", "chineseApprox": "呀（短）", "pronunciationTip": "和前面的假名合成一个音节", "confusableWith": ["や"], "distinctionTip": "ゃ是小写，和前面假名拼读", "highFreqWord": "きゃく（客）", "scene": "餐厅/酒店", "inputRule": "打「xya」或「lya」", "miniExercise": "听「kya」音，选择きゃ/きや" },
-    { "kana": "ゅ", "roma": "xyu", "category": "拗音", "row": "や行小写", "kanjiOrigin": "ゆ的小写", "shapeHook": "小写的ゆ", "chineseApprox": "优（短）", "pronunciationTip": "和前面的假名合成一个音节", "confusableWith": ["ゆ"], "distinctionTip": "ゅ是小写，和前面假名拼读", "highFreqWord": "びょういん（病院）", "scene": "紧急情况", "inputRule": "打「xyu」或「lyu」", "miniExercise": "听「byu」音，选择びゅ/びゆ" },
-    { "kana": "ょ", "roma": "xyo", "category": "拗音", "row": "や行小写", "kanjiOrigin": "よ的小写", "shapeHook": "小写的よ", "chineseApprox": "哟（短）", "pronunciationTip": "和前面的假名合成一个音节", "confusableWith": ["よ"], "distinctionTip": "ょ是小写，和前面假名拼读", "highFreqWord": "しょくどう（食堂）", "scene": "餐厅", "inputRule": "打「xyo」或「lyo」", "miniExercise": "听「sho」音，选择しょ/しよ" },
-    { "kana": "ゔ", "roma": "vu", "category": "外来音", "row": "特殊", "kanjiOrigin": "う + 浊点", "shapeHook": "う + 浊点", "chineseApprox": "vu", "pronunciationTip": "上齿轻触下唇，发 v 音", "confusableWith": ["う"], "distinctionTip": "ゔ是 v 音，う是 u 音", "highFreqWord": "ゔぁいおりん（小提琴）", "scene": "音乐/外来语", "inputRule": "打「vu」", "miniExercise": "听「v」音，选择ゔ/う" }
+  "scenes": [
+    {
+      "id": "subway",
+      "label": "地铁 & 交通",
+      "desc": "买票 · 换乘 · 出口",
+      "emoji": "🚇",
+      "color": "#d4401a",
+      "bgColor": "#fce8e0",
+      "ready": true,
+      "phrases": [
+        {
+          "id": 1,
+          "jp": "すみません",
+          "roma": "Sumimasen",
+          "zh": "不好意思",
+          "en": "Excuse me",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "万能开场白，道歉·叫人·引注意三合一。比「こんにちは」实用十倍。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "excuse me"
+            },
+            {
+              "lang": "ES",
+              "word": "perdón"
+            },
+            {
+              "lang": "ZH",
+              "word": "不好意思"
+            }
+          ],
+          "scene": "叫服务员、拦路人问路、不小心碰到人，这句都对。"
+        },
+        {
+          "id": 2,
+          "jp": "切符売り場はどこですか？",
+          "roma": "Kippu uriba wa doko desu ka?",
+          "zh": "售票处在哪里？",
+          "en": "Where is the ticket booth?",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "切符(きっぷ) = 切 + 符 = 票。売り場 = 卖的地方。汉字拆开直接读！",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "切符≈票"
+            },
+            {
+              "lang": "EN",
+              "word": "ticket"
+            }
+          ],
+          "scene": "进站前找窗口，要买纸票时。IC卡（Suica）更方便，直接刷。"
+        },
+        {
+          "id": 3,
+          "jp": "Suicaをください",
+          "roma": "Suica wo kudasai",
+          "zh": "请给我一张Suica",
+          "en": "One Suica card, please",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "「ください」= please give me。买任何东西都能套用。",
+          "links": [
+            {
+              "lang": "ES",
+              "word": "por favor"
+            },
+            {
+              "lang": "EN",
+              "word": "please give me"
+            }
+          ],
+          "scene": "JR绿色窗口买第一张IC卡时说。关西用ICOCA，功能一样。"
+        },
+        {
+          "id": 4,
+          "jp": "これは渋谷に行きますか？",
+          "roma": "Kore wa Shibuya ni ikimasu ka?",
+          "zh": "这班车去涩谷吗？",
+          "en": "Does this go to Shibuya?",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "「行きます」= 去（行く）。加「か」变疑问，最简单的一步。",
+          "links": [
+            {
+              "lang": "ES",
+              "word": "¿va a Shibuya?"
+            },
+            {
+              "lang": "EN",
+              "word": "does it go to"
+            }
+          ],
+          "scene": "站台上不确定方向，拦准备上车的乘客快速确认。"
+        },
+        {
+          "id": 5,
+          "jp": "何番線ですか？",
+          "roma": "Nan-bansen desu ka?",
+          "zh": "几号站台？",
+          "en": "Which platform?",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "「何」= 几/什么。问数字套路：何 + 量词 + ですか。换成「何番出口」=几号出口。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "which platform?"
+            },
+            {
+              "lang": "ES",
+              "word": "¿qué andén?"
+            }
+          ],
+          "scene": "换乘时找不到站台，问工作人员。"
+        },
+        {
+          "id": 6,
+          "jp": "乗り換えはどこですか？",
+          "roma": "Norikae wa doko desu ka?",
+          "zh": "换乘在哪里？",
+          "en": "Where do I transfer?",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "「乗り換え」= 乗る（上车）+ 換える（换）。两个动词合体成名词，日语常见构词法。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "transfer"
+            },
+            {
+              "lang": "ES",
+              "word": "transbordo"
+            }
+          ],
+          "scene": "新宿、涩谷大站换乘，Google Maps比问人靠谱，但这句备用。"
+        },
+        {
+          "id": 7,
+          "jp": "次は渋谷です",
+          "roma": "Tsugi wa Shibuya desu",
+          "zh": "下一站是涩谷",
+          "en": "Next stop: Shibuya",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "「次」= 下一个，汉字直读。车厢广播最高频，听懂就不坐过站。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "次≈次序"
+            },
+            {
+              "lang": "EN",
+              "word": "next stop"
+            }
+          ],
+          "scene": "听到这句就可以站起来靠近车门了。"
+        },
+        {
+          "id": 8,
+          "jp": "渋谷で降ります",
+          "roma": "Shibuya de orimasu",
+          "zh": "我在这里下车",
+          "en": "I'm getting off here",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "「降ります」= 下车，反义词「乗ります」= 上车。一对动词一起记。",
+          "links": [
+            {
+              "lang": "ES",
+              "word": "me bajo aquí"
+            },
+            {
+              "lang": "EN",
+              "word": "getting off"
+            }
+          ],
+          "scene": "拥挤车厢穿过人群下车，说这句旁边的人会主动让路。"
+        },
+        {
+          "id": 9,
+          "jp": "出口はどこですか？",
+          "roma": "Deguchi wa doko desu ka?",
+          "zh": "出口在哪里？",
+          "en": "Where is the exit?",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "「出口」中日完全相同！汉字认识就认识这词，零学习成本。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "出口（完全同）"
+            },
+            {
+              "lang": "EN",
+              "word": "exit"
+            },
+            {
+              "lang": "ES",
+              "word": "salida"
+            }
+          ],
+          "scene": "出闸机找出口，东京大站出口号码直接决定你从哪条街走出来。"
+        },
+        {
+          "id": 10,
+          "jp": "改札口はどこですか？",
+          "roma": "Kaisatsuguchi wa doko desu ka?",
+          "zh": "检票口在哪里？",
+          "en": "Where is the ticket gate?",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "「口」在地铁里到处出现：出口・改札口・乗降口。认识这个字，路牌全懂了。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "改≈改变，口≈入口"
+            }
+          ],
+          "scene": "地铁站内迷路，需要找回闸机出站时。"
+        },
+        {
+          "id": 11,
+          "jp": "わかりません",
+          "roma": "Wakarimasen",
+          "zh": "我听不懂",
+          "en": "I don't understand",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "「わかる」= 明白，「ません」= 否定。诚实说不懂，对方会自动换方式解释。",
+          "links": [
+            {
+              "lang": "ES",
+              "word": "no entiendo"
+            },
+            {
+              "lang": "EN",
+              "word": "don't understand"
+            }
+          ],
+          "scene": "直接说，别硬撑。日本人很乐意用另一种方式表达。"
+        },
+        {
+          "id": 12,
+          "jp": "もう一度言ってください",
+          "roma": "Mou ichido itte kudasai",
+          "zh": "请再说一遍",
+          "en": "Could you repeat that?",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "「もう一度」= one more time，可单独用。「言って」= 说（言う）的て形。",
+          "links": [
+            {
+              "lang": "ES",
+              "word": "una vez más"
+            },
+            {
+              "lang": "EN",
+              "word": "one more time"
+            }
+          ],
+          "scene": "地铁里嘈杂没听清，或者对方语速太快时。"
+        },
+        {
+          "id": 13,
+          "jp": "ドアが閉まります",
+          "roma": "Doa ga shimarimasu",
+          "zh": "门要关了",
+          "en": "Doors are closing",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "「ドア」= door，英语音译片假名。听到别冲门，日本地铁关门不留情。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "door→ドア"
+            },
+            {
+              "lang": "ES",
+              "word": "puertas se cierran"
+            }
+          ],
+          "scene": "广播反复播，夹到了也不会重开。"
+        },
+        {
+          "id": 14,
+          "jp": "ありがとうございます",
+          "roma": "Arigatou gozaimasu",
+          "zh": "非常感谢",
+          "en": "Thank you very much",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "「ありがとう」已是谢谢，「ございます」是敬语加强。越费劲发音，越诚心。",
+          "links": [
+            {
+              "lang": "ES",
+              "word": "muchas gracias"
+            },
+            {
+              "lang": "EN",
+              "word": "thank you"
+            },
+            {
+              "lang": "ZH",
+              "word": "谢谢"
+            }
+          ],
+          "scene": "别人帮了你，鞠个头说这句，对方真的会很开心。"
+        },
+        {
+          "id": 15,
+          "jp": "すみません、どこですか？",
+          "roma": "Sumimasen, doko desu ka?",
+          "zh": "请问，在哪里？",
+          "en": "Excuse me, where is it?",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "「どこ」= 哪里，万能问路词。前加地点：渋谷はどこですか？",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "where?"
+            },
+            {
+              "lang": "ES",
+              "word": "¿dónde?"
+            },
+            {
+              "lang": "ZH",
+              "word": "哪里"
+            }
+          ],
+          "scene": "最简化版问路，加地点名称，哪里都能用。"
+        }
+      ]
+    },
+    {
+      "id": "restaurant",
+      "label": "餐厅点餐",
+      "desc": "点菜 · 过敏 · 结账",
+      "emoji": "🍜",
+      "color": "#a07020",
+      "bgColor": "#faf0d8",
+      "ready": true,
+      "notes": [
+        {
+          "t": "お通し · 不是免费赠品",
+          "b": "入座后端来的小碟是居酒屋的席费，约300-500日元，账单里会有。接受它就好。"
+        },
+        {
+          "t": "🚫 进店不能自己找位子",
+          "b": "看到空桌也要等店员带位，等「こちらへどうぞ」的指示。"
+        },
+        {
+          "t": "🚫 没有小费文化",
+          "b": "桌上留钱会被追出来还给你。服务已含在价格里，直接付正价就行。"
+        }
+      ],
+      "phrases": [
+        {
+          "id": 1,
+          "jp": "二人です。",
+          "roma": "Futari desu",
+          "zh": "两个人。",
+          "en": "Two, please.",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "「二人」= ふたり，不规则读法。一人=ひとり，二人=ふたり，三人起才有规律。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "二人（汉字同）"
+            },
+            {
+              "lang": "EN",
+              "word": "two people"
+            }
+          ],
+          "scene": "进门站在入口，等店员走来，说这句然后比两根手指。"
+        },
+        {
+          "id": 2,
+          "jp": "すみません、注文をお願いします。",
+          "roma": "Sumimasen, chūmon wo onegaishimasu",
+          "zh": "不好意思，要点餐。",
+          "en": "We're ready to order.",
+          "jlpt": "N4",
+          "hookType": "t",
+          "hook": "注文陷阱！不是注释文字，是点餐/订购。看到注文=可以点单了。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "注文≠注释，=点餐"
+            },
+            {
+              "lang": "ES",
+              "word": "pedir"
+            }
+          ],
+          "scene": "看完菜单举手。日本服务员不会主动来问你。"
+        },
+        {
+          "id": 3,
+          "jp": "これをください。",
+          "roma": "Kore wo kudasai",
+          "zh": "给我这个。",
+          "en": "I'll have this.",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "「これ」= this，「ください」= please give me。指着菜单图片点完全正常。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "this one please"
+            },
+            {
+              "lang": "ES",
+              "word": "esto por favor"
+            }
+          ],
+          "scene": "对着图文菜单直接指，日本很多餐厅有图片菜单。"
+        },
+        {
+          "id": 4,
+          "jp": "えびアレルギーがあります。",
+          "roma": "Ebi arerugī ga arimasu",
+          "zh": "我对虾过敏。",
+          "en": "I have a shrimp allergy.",
+          "jlpt": "N3",
+          "hookType": "e",
+          "hook": "「アレルギー」= allergy，英语直接音译。换词：ナッツ・卵・牛乳。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "allergy→アレルギー"
+            },
+            {
+              "lang": "ES",
+              "word": "alergia"
+            }
+          ],
+          "scene": "点餐前主动说，不要等菜上来。"
+        },
+        {
+          "id": 5,
+          "jp": "お会計をお願いします。",
+          "roma": "Okaikei wo onegaishimasu",
+          "zh": "麻烦结账。",
+          "en": "The bill, please.",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "「会計」= 会计，汉字联想：帮你算账的人。空中做写字手势也行。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "会計≈会计"
+            },
+            {
+              "lang": "EN",
+              "word": "the bill"
+            },
+            {
+              "lang": "ES",
+              "word": "la cuenta"
+            }
+          ],
+          "scene": "日本餐厅不会主动给账单，吃完举手说或走到收银台。"
+        },
+        {
+          "id": 6,
+          "jp": "おすすめは何ですか？",
+          "roma": "Osusume wa nan desu ka?",
+          "zh": "有什么推荐吗？",
+          "en": "What do you recommend?",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "「おすすめ」= 推荐。お开头是礼貌前缀。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "recommendation"
+            },
+            {
+              "lang": "ES",
+              "word": "¿qué recomienda?"
+            }
+          ],
+          "scene": "菜单全是日文看不懂，让服务员帮选往往有惊喜。"
+        },
+        {
+          "id": 7,
+          "jp": "すみません、もう一つください。",
+          "roma": "Sumimasen, mō hitotsu kudasai",
+          "zh": "再来一个。",
+          "en": "One more, please.",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "「もう」= 再/还。もう一杯（再一杯）・もう少し（再一点儿）。",
+          "links": [
+            {
+              "lang": "ES",
+              "word": "uno más"
+            },
+            {
+              "lang": "EN",
+              "word": "one more"
+            }
+          ],
+          "scene": "汤喝完想续杯，或好吃想加一份。"
+        },
+        {
+          "id": 8,
+          "jp": "おいしいです！",
+          "roma": "Oishii desu!",
+          "zh": "好吃！",
+          "en": "It's delicious!",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "「おいしい」= 好吃。日本厨师服务员听到这句会真的很开心。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "好吃"
+            },
+            {
+              "lang": "ES",
+              "word": "¡qué rico!"
+            },
+            {
+              "lang": "EN",
+              "word": "delicious!"
+            }
+          ],
+          "scene": "吃到好吃的，直接说。效果比任何礼貌用语都强。"
+        }
+      ]
+    },
+    {
+      "id": "convenience",
+      "label": "便利店 & 购物",
+      "desc": "积分 · 加热 · 结账",
+      "emoji": "🛒",
+      "color": "#2a7a6a",
+      "bgColor": "#e0f0ec",
+      "ready": true,
+      "notes": [
+        {
+          "t": "🔑 四个万能句型框架",
+          "b": "「〜てください」「〜はありますか」「〜はどこですか」「いりません」——掌握这四个，便利店里90%的对话都能应付。"
+        },
+        {
+          "t": "📱 支付方式全览",
+          "b": "现金・IC卡（Suica/ICOCA）・信用卡・PayPay・Apple Pay，大城市便利店全支持。小城市可能只收现金，进门前可以问「カードで払えますか？」"
+        },
+        {
+          "t": "🕐 24小时营业的秘密",
+          "b": "日本便利店可以缴水电费、取快递、打印文件、买演唱会票。碰到问题先用「〜はありますか？」"
+        }
+      ],
+      "phrases": [
+        {
+          "id": 1,
+          "jp": "ポイントカードはありますか？",
+          "roma": "Pointo kādo wa arimasu ka?",
+          "zh": "您有积分卡吗？",
+          "en": "Do you have a points card?",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "「ポイント」= point，「カード」= card，英语直接音译。便利店里80%的外来词都能靠英语猜出来。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "积分卡"
+            },
+            {
+              "lang": "JP",
+              "word": "ポイント"
+            },
+            {
+              "lang": "EN",
+              "word": "point card"
+            },
+            {
+              "lang": "ES",
+              "word": "tarjeta de puntos"
+            }
+          ],
+          "scene": "结账时收银员必问。听到就回「いりません」或「あります」。"
+        },
+        {
+          "id": 2,
+          "jp": "いりません",
+          "roma": "Irimasen",
+          "zh": "不需要",
+          "en": "No, thank you",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "「要る（いる）」= 需要，「ません」= 否定。万能拒绝句——袋いりません・スプーンいりません，换什么都行。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "不要"
+            },
+            {
+              "lang": "EN",
+              "word": "no need"
+            },
+            {
+              "lang": "ES",
+              "word": "no hace falta"
+            }
+          ],
+          "scene": "对方问你要不要袋子、筷子、叉子，统统用这一句解决。"
+        },
+        {
+          "id": 3,
+          "jp": "温めますか？",
+          "roma": "Atatamemasu ka?",
+          "zh": "需要加热吗？（店员说）",
+          "en": "Shall I heat it up?",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "「温」= 温暖，中日同字。「める」是使动后缀，温める = 让它变温 = 加热。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "温热"
+            },
+            {
+              "lang": "JP",
+              "word": "温(あたた)"
+            },
+            {
+              "lang": "EN",
+              "word": "warm up"
+            },
+            {
+              "lang": "ES",
+              "word": "calentar"
+            }
+          ],
+          "scene": "买了便当或包子，收银员会问这句。"
+        },
+        {
+          "id": 4,
+          "jp": "温めてください",
+          "roma": "Atatamete kudasai",
+          "zh": "请帮我加热",
+          "en": "Please heat it up",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "「〜てください」= please do〜，日语最实用的请求句型。前面换任何动词的て形都能用。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "请……"
+            },
+            {
+              "lang": "EN",
+              "word": "please + verb"
+            },
+            {
+              "lang": "ES",
+              "word": "por favor + infinitivo"
+            }
+          ],
+          "scene": "对方没有主动问但你想加热时主动说。"
+        },
+        {
+          "id": 5,
+          "jp": "袋はいりますか？",
+          "roma": "Fukuro wa irimasu ka?",
+          "zh": "需要袋子吗？（店员说）",
+          "en": "Do you need a bag?",
+          "jlpt": "N4",
+          "hookType": "t",
+          "hook": "袋不读「たい」，读「ふくろ」——训读，跟中文音完全不同。但字形认识，意思就懂了。2020年起袋子收费。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "袋子"
+            },
+            {
+              "lang": "JP",
+              "word": "袋(ふくろ)"
+            },
+            {
+              "lang": "EN",
+              "word": "bag"
+            },
+            {
+              "lang": "ES",
+              "word": "bolsa"
+            }
+          ],
+          "scene": "法规要求店员每次必问。直接回「いりません」或「ください」。"
+        },
+        {
+          "id": 6,
+          "jp": "カードで払えますか？",
+          "roma": "Kādo de haraemasu ka?",
+          "zh": "可以刷卡吗？",
+          "en": "Can I pay by card?",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "「カード」= card（音译）。「で」= 用……方式。句型：[手段]で払えますか？換現金で・Suicaで都能用。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "刷卡"
+            },
+            {
+              "lang": "EN",
+              "word": "pay by card"
+            },
+            {
+              "lang": "ES",
+              "word": "pagar con tarjeta"
+            },
+            {
+              "lang": "JP",
+              "word": "払う(はらう)=支付"
+            }
+          ],
+          "scene": "去小城市或老店，先确认能不能刷卡。"
+        },
+        {
+          "id": 7,
+          "jp": "領収書をください",
+          "roma": "Ryōshūsho wo kudasai",
+          "zh": "请给我收据（正式）",
+          "en": "Official receipt, please",
+          "jlpt": "N3",
+          "hookType": "d",
+          "hook": "「領収書」= 领收书 = 收据。三字全认识：领（领取）+ 収（收）+ 書（书面凭证）。和レシート（普通小票）不同。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "收据/发票"
+            },
+            {
+              "lang": "JP",
+              "word": "領収書 vs レシート"
+            },
+            {
+              "lang": "EN",
+              "word": "official receipt"
+            },
+            {
+              "lang": "ES",
+              "word": "recibo formal"
+            }
+          ],
+          "scene": "出差报销或需要正式凭证时用。"
+        },
+        {
+          "id": 8,
+          "jp": "お弁当はどこですか？",
+          "roma": "Obentō wa doko desu ka?",
+          "zh": "便当在哪里？",
+          "en": "Where are the bento boxes?",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "「弁当」= 便当——中文的便当就是从日语借来的！把お弁当换成ATM・トイレ・お茶，这句话能找便利店里任何东西。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "便当（源自日语）"
+            },
+            {
+              "lang": "JP",
+              "word": "弁当(べんとう)"
+            },
+            {
+              "lang": "EN",
+              "word": "bento"
+            },
+            {
+              "lang": "ES",
+              "word": "bento（国际通用）"
+            }
+          ],
+          "scene": "进店找不到热食区时问。"
+        },
+        {
+          "id": 9,
+          "jp": "〜はありますか？",
+          "roma": "〜wa arimasu ka?",
+          "zh": "有……吗？",
+          "en": "Do you have 〜?",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "「ある」= 存在/有（无生命物体）。和「いる」区分：物体用ある，人/动物用いる。前面换任何名词都能用。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "有……吗"
+            },
+            {
+              "lang": "EN",
+              "word": "do you have"
+            },
+            {
+              "lang": "ES",
+              "word": "¿tiene〜?"
+            },
+            {
+              "lang": "JP",
+              "word": "ある vs いる（物 vs 人）"
+            }
+          ],
+          "scene": "找任何东西都可以用。"
+        },
+        {
+          "id": 10,
+          "jp": "ありがとうございました",
+          "roma": "Arigatō gozaimashita",
+          "zh": "谢谢您（离开时）",
+          "en": "Thank you — farewell",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "「ございます」vs「ございました」——差一个字。「ます」= 现在，「ました」= 过去。道别用过去式，表示感谢这次交易已完成。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "谢谢（道别）"
+            },
+            {
+              "lang": "EN",
+              "word": "thank you farewell"
+            },
+            {
+              "lang": "ES",
+              "word": "gracias（despedida）"
+            },
+            {
+              "lang": "JP",
+              "word": "ました=过去式"
+            }
+          ],
+          "scene": "付完款拿东西离开时说。"
+        }
+      ]
+    },
+    {
+      "id": "hotel",
+      "label": "酒店入住",
+      "desc": "登记 · 设施 · 退房",
+      "emoji": "🏨",
+      "color": "#2d5fa0",
+      "bgColor": "#e6eef8",
+      "ready": true,
+      "notes": [
+        {
+          "t": "🛁 浴室热水开关",
+          "b": "很多日本酒店浴室要先开墙上的总开关才有热水，不是龙头的问题。进浴室先找找墙上的开关。"
+        },
+        {
+          "t": "🩴 拖鞋只能在室内穿",
+          "b": "酒店拖鞋不能穿去电梯或走廊，更不能穿去大堂。穿浴衣出电梯也不合适——温泉旅馆例外。"
+        },
+        {
+          "t": "🚭 吸烟规定很严",
+          "b": "日本酒店禁烟房是真禁烟，在房间吸烟会被收取高额清洁费，有时超过一晚房费。"
+        }
+      ],
+      "phrases": [
+        {
+          "id": 1,
+          "jp": "チェックインをお願いします",
+          "roma": "Chekku-in wo onegaishimasu",
+          "zh": "麻烦帮我办入住",
+          "en": "Check-in, please",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "「チェックイン」= check-in，英语直接音译。「をお願いします」比「ください」更礼貌，酒店场景用这个更得体。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "入住"
+            },
+            {
+              "lang": "EN",
+              "word": "check-in→チェックイン"
+            },
+            {
+              "lang": "ES",
+              "word": "check-in"
+            }
+          ],
+          "scene": "走到前台把护照递过去说这句。对方会问预约名字，准备好护照或预订确认邮件。"
+        },
+        {
+          "id": 2,
+          "jp": "予約しています、〇〇です",
+          "roma": "Yoyaku shite imasu, 〇〇 desu",
+          "zh": "我有预约，我叫〇〇",
+          "en": "I have a reservation, I'm 〇〇",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "「予約」= 预约，汉字直读。中文「预约」和日语「予約」完全同义——汉字圈的天然优势。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "预约（完全同）"
+            },
+            {
+              "lang": "JP",
+              "word": "予約(よやく)"
+            },
+            {
+              "lang": "EN",
+              "word": "reservation"
+            },
+            {
+              "lang": "ES",
+              "word": "reserva"
+            }
+          ],
+          "scene": "说完①紧接着说这句。名字说清楚，前台会在系统里查，不用担心发音。"
+        },
+        {
+          "id": 3,
+          "jp": "朝食はついていますか？",
+          "roma": "Chōshoku wa tsuite imasu ka?",
+          "zh": "含早餐吗？",
+          "en": "Is breakfast included?",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "「朝食」= 朝（早晨）+ 食（食物）= 早餐，汉字直读。换「夕食」=晚餐，「昼食」=午餐——三餐都用「食」，认识这个字搞定全部。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "朝食≈早食"
+            },
+            {
+              "lang": "JP",
+              "word": "朝(あさ)=早晨"
+            },
+            {
+              "lang": "EN",
+              "word": "breakfast included"
+            },
+            {
+              "lang": "ES",
+              "word": "¿incluye desayuno?"
+            }
+          ],
+          "scene": "check-in时确认。日本商务酒店经常有附带早餐选项，但要分清楚。"
+        },
+        {
+          "id": 4,
+          "jp": "Wi-Fiのパスワードを教えてもらえますか？",
+          "roma": "Wi-Fi no pasuwādo wo oshiete moraemasu ka?",
+          "zh": "可以告诉我Wi-Fi密码吗？",
+          "en": "Could you tell me the Wi-Fi password?",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "「パスワード」= password，英语音译。「教えてもらえますか」= 能告诉我吗，比「ください」更礼貌，适合问稍微麻烦一点的事情。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "密码"
+            },
+            {
+              "lang": "EN",
+              "word": "password→パスワード"
+            },
+            {
+              "lang": "ES",
+              "word": "contraseña"
+            }
+          ],
+          "scene": "先找找桌子上的小卡片，找不到再问。部分酒店每层楼密码不同。"
+        },
+        {
+          "id": 5,
+          "jp": "タオルをもう一枚もらえますか？",
+          "roma": "Taoru wo mō ichimai moraemasu ka?",
+          "zh": "可以再给我一条毛巾吗？",
+          "en": "Could I have one more towel?",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "「タオル」= towel，英语音译。「もう一枚」= one more（枚=布/纸类量词）。换「もう一つ」就是再给我一个，可以要任何东西。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "毛巾"
+            },
+            {
+              "lang": "EN",
+              "word": "towel→タオル"
+            },
+            {
+              "lang": "ES",
+              "word": "toalla"
+            },
+            {
+              "lang": "JP",
+              "word": "もう一枚=再一张"
+            }
+          ],
+          "scene": "日本酒店毛巾按人头给，不够用打内线或去前台说这句。"
+        },
+        {
+          "id": 6,
+          "jp": "お湯が出ないのですが…",
+          "roma": "Oyu ga denai no desu ga...",
+          "zh": "热水出不来……",
+          "en": "The hot water isn't working...",
+          "jlpt": "N4",
+          "hookType": "t",
+          "hook": "⚠️「湯」陷阱！日语「お湯」= 热水，不是汤！「〜のですが…」句尾省略表示请帮我处理，日本人立刻明白，不用说完。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "⚠️湯≠汤，=热水"
+            },
+            {
+              "lang": "JP",
+              "word": "お湯(おゆ)"
+            },
+            {
+              "lang": "EN",
+              "word": "hot water"
+            }
+          ],
+          "scene": "先找浴室墙上的总开关，很多酒店要先开它才有热水。真的没有再打电话。"
+        },
+        {
+          "id": 7,
+          "jp": "エアコンの使い方を教えてもらえますか？",
+          "roma": "Eakon no tsukaikata wo oshiete moraemasu ka?",
+          "zh": "可以教我怎么用空调吗？",
+          "en": "Could you show me how to use the AC?",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "「エアコン」= air conditioner，音译。「〜の使い方」= 〜的用法，万能句型——换「テレビ」=电视怎么用，「金庫」=保险箱怎么用。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "空调"
+            },
+            {
+              "lang": "EN",
+              "word": "air con→エアコン"
+            },
+            {
+              "lang": "ES",
+              "word": "aire acondicionado"
+            }
+          ],
+          "scene": "日本酒店空调遥控器经常全是日文，不懂就问，前台会上来演示。"
+        },
+        {
+          "id": 8,
+          "jp": "荷物を預かってもらえますか？",
+          "roma": "Nimotsu wo azukatte moraemasu ka?",
+          "zh": "可以帮我寄存行李吗？",
+          "en": "Could you store my luggage?",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "「荷物」= 荷（货）+ 物（物品）= 行李，汉字直读。几乎所有日本酒店都提供免费行李寄存。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "荷物≈行李（直读）"
+            },
+            {
+              "lang": "EN",
+              "word": "luggage"
+            },
+            {
+              "lang": "ES",
+              "word": "equipaje"
+            }
+          ],
+          "scene": "早上退房但下午的飞机，行李寄存前台去逛街，晚上回来拿。"
+        },
+        {
+          "id": 9,
+          "jp": "レイトチェックアウトはできますか？",
+          "roma": "Reito chekku-auto wa dekimasu ka?",
+          "zh": "可以延迟退房吗？",
+          "en": "Is late check-out possible?",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "「レイトチェックアウト」= late check-out，全部音译。「できますか」= 可以吗——万能可能性询问句型：「〜はできますか？」",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "延迟退房"
+            },
+            {
+              "lang": "EN",
+              "word": "late check-out→全音译"
+            },
+            {
+              "lang": "ES",
+              "word": "check-out tardío"
+            }
+          ],
+          "scene": "通常前一天或当天早上问。旺季基本没得商量，淡季比较好说话。"
+        },
+        {
+          "id": 10,
+          "jp": "ここに名前を書けばいいですか？",
+          "roma": "Koko ni namae wo kakeba ii desu ka?",
+          "zh": "在这里签名就可以吗？",
+          "en": "Should I sign here?",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "「名前」= 名（名字）+ 前（处）= 姓名，汉字直读。「〜ばいいですか」= 做〜就可以吗，确认操作的万能句型。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "名前=姓名（直读）"
+            },
+            {
+              "lang": "EN",
+              "word": "sign here"
+            },
+            {
+              "lang": "ES",
+              "word": "¿firmo aquí?"
+            }
+          ],
+          "scene": "办手续时对方把单据推过来，不确定要在哪里签时说这句，指着纸上位置。"
+        },
+        {
+          "id": 11,
+          "jp": "チェックアウトをお願いします",
+          "roma": "Chekku-auto wo onegaishimasu",
+          "zh": "麻烦帮我办退房",
+          "en": "Check-out, please",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "和①对称——「チェックイン」进，「チェックアウト」出。进出酒店只需这两句开口，其余交给对方操作。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "退房"
+            },
+            {
+              "lang": "EN",
+              "word": "check-out→チェックアウト"
+            },
+            {
+              "lang": "ES",
+              "word": "check-out"
+            }
+          ],
+          "scene": "退房时把钥匙卡递过去说这句。对方会打印账单让你确认，扫一眼有没有额外消费。"
+        },
+        {
+          "id": 12,
+          "jp": "お世話になりました",
+          "roma": "Osewa ni narimashita",
+          "zh": "承蒙关照",
+          "en": "Thank you for everything",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "不是「谢谢」的直译，是「承蒙您照顾了」。比ありがとう更有分量，适合离开一个地方时说。日本人听到这句会真的很感动。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "承蒙关照（同义）"
+            },
+            {
+              "lang": "JP",
+              "word": "世話(せわ)=照顾"
+            },
+            {
+              "lang": "EN",
+              "word": "thank you for your care"
+            }
+          ],
+          "scene": "退完房离开时转身说这句，前台会深深鞠躬。一句话，真实的人情味。"
+        }
+      ]
+    },
+    {
+      "id": "directions",
+      "label": "问路 & 厕所",
+      "desc": "方向 · 地图 · 洗手间",
+      "emoji": "🚻",
+      "color": "#5a3a9a",
+      "bgColor": "#eeebff",
+      "ready": false,
+      "phrases": []
+    },
+    {
+      "id": "emergency",
+      "label": "紧急 & 就医",
+      "desc": "求助 · 医院 · 药店",
+      "emoji": "🏥",
+      "color": "#aa3355",
+      "bgColor": "#fce8ee",
+      "ready": false,
+      "phrases": []
+    }
   ],
-  "katakana": [
-    { "kana": "ア", "roma": "a", "category": "片假名", "row": "ア行", "kanjiOrigin": "阿的偏旁", "shapeHook": "像「片」的左边", "chineseApprox": "啊", "pronunciationTip": "同あ", "confusableWith": ["ン"], "distinctionTip": "ア两笔，ン一笔", "highFreqWord": "アメリカ", "scene": "国家名", "inputRule": "打「a」", "miniExercise": "听「a」音，选择ア/ン" },
-    { "kana": "イ", "roma": "i", "category": "片假名", "row": "ア行", "kanjiOrigin": "伊的偏旁", "shapeHook": "像「イ」", "chineseApprox": "衣", "pronunciationTip": "同い", "confusableWith": [], "distinctionTip": "", "highFreqWord": "イタリア", "scene": "国家名", "inputRule": "打「i」", "miniExercise": "听「i」音，选择イ/ウ" },
-    { "kana": "ウ", "roma": "u", "category": "片假名", "row": "ア行", "kanjiOrigin": "宇的变形", "shapeHook": "像「ウ」", "chineseApprox": "乌", "pronunciationTip": "同う", "confusableWith": ["ワ"], "distinctionTip": "ウ上下出头，ワ不出头", "highFreqWord": "ウイスキー", "scene": "餐厅/酒吧", "inputRule": "打「u」", "miniExercise": "听「u」音，选择ウ/ワ" },
-    { "kana": "エ", "roma": "e", "category": "片假名", "row": "ア行", "kanjiOrigin": "江的变形", "shapeHook": "像「工」", "chineseApprox": "欸", "pronunciationTip": "同え", "confusableWith": ["オ"], "distinctionTip": "エ像「工」，オ有圆圈", "highFreqWord": "エレベーター", "scene": "地铁/酒店", "inputRule": "打「e」", "miniExercise": "听「e」音，选择エ/オ" },
-    { "kana": "オ", "roma": "o", "category": "片假名", "row": "ア行", "kanjiOrigin": "于的变形", "shapeHook": "像「才」加一撇", "chineseApprox": "哦", "pronunciationTip": "同お", "confusableWith": ["エ"], "distinctionTip": "オ有圆圈，エ没有", "highFreqWord": "オレンジ", "scene": "餐厅/购物", "inputRule": "打「o」", "miniExercise": "听「o」音，选择オ/エ" },
-    { "kana": "カ", "roma": "ka", "category": "片假名", "row": "カ行", "kanjiOrigin": "加的偏旁", "shapeHook": "像「力」加一横", "chineseApprox": "卡", "pronunciationTip": "同か", "confusableWith": ["力"], "distinctionTip": "カ比「力」多一横", "highFreqWord": "カメラ", "scene": "购物/旅游", "inputRule": "打「ka」", "miniExercise": "听「ka」音，选择カ/ガ" },
-    { "kana": "キ", "roma": "ki", "category": "片假名", "row": "カ行", "kanjiOrigin": "几的变形", "shapeHook": "像「几」", "chineseApprox": "key", "pronunciationTip": "同き", "confusableWith": [], "distinctionTip": "", "highFreqWord": "キップ", "scene": "地铁/购票", "inputRule": "打「ki」", "miniExercise": "听「ki」音，选择キ/ク" },
-    { "kana": "ク", "roma": "ku", "category": "片假名", "row": "カ行", "kanjiOrigin": "久的变形", "shapeHook": "像「ク」", "chineseApprox": "哭", "pronunciationTip": "同く", "confusableWith": ["ス"], "distinctionTip": "ク像「<」，ス中间一竖", "highFreqWord": "クリスマス", "scene": "节日", "inputRule": "打「ku」", "miniExercise": "听「ku」音，选择ク/ス" },
-    { "kana": "ケ", "roma": "ke", "category": "片假名", "row": "カ行", "kanjiOrigin": "介的变形", "shapeHook": "像「ケ」", "chineseApprox": "开", "pronunciationTip": "同け", "confusableWith": ["け"], "distinctionTip": "ケ是片假名，け是平假名", "highFreqWord": "ケータイ", "scene": "购物/通讯", "inputRule": "打「ke」", "miniExercise": "听「ke」音，选择ケ/け" },
-    { "kana": "コ", "roma": "ko", "category": "片假名", "row": "カ行", "kanjiOrigin": "己的变形", "shapeHook": "像「コ」", "chineseApprox": "科", "pronunciationTip": "同こ", "confusableWith": [], "distinctionTip": "", "highFreqWord": "コンビニ", "scene": "购物", "inputRule": "打「ko」", "miniExercise": "听「ko」音，选择コ/ゴ" },
-    { "kana": "サ", "roma": "sa", "category": "片假名", "row": "サ行", "kanjiOrigin": "散的偏旁", "shapeHook": "像「サ」", "chineseApprox": "撒", "pronunciationTip": "同さ", "confusableWith": ["ン"], "distinctionTip": "サ三笔，ン一笔", "highFreqWord": "サービス", "scene": "餐厅/购物", "inputRule": "打「sa」", "miniExercise": "听「sa」音，选择サ/ザ" },
-    { "kana": "シ", "roma": "shi", "category": "片假名", "row": "サ行", "kanjiOrigin": "之的变形", "shapeHook": "像「シ」", "chineseApprox": "西", "pronunciationTip": "同し", "confusableWith": ["ツ"], "distinctionTip": "シ像「彡」，ツ两折", "highFreqWord": "サイズ", "scene": "购物", "inputRule": "打「shi」", "miniExercise": "听「shi」音，选择シ/ツ" },
-    { "kana": "ス", "roma": "su", "category": "片假名", "row": "サ行", "kanjiOrigin": "寸的变形", "shapeHook": "像「ス」", "chineseApprox": "苏", "pronunciationTip": "同す", "confusableWith": ["ク"], "distinctionTip": "ス中间一竖，ク没有", "highFreqWord": "スーパー", "scene": "购物", "inputRule": "打「su」", "miniExercise": "听「su」音，选择ス/ク" },
-    { "kana": "セ", "roma": "se", "category": "片假名", "row": "サ行", "kanjiOrigin": "世的变形", "shapeHook": "像「セ」", "chineseApprox": "赛", "pronunciationTip": "同せ", "confusableWith": ["ソ"], "distinctionTip": "セ两横，ソ有圆圈", "highFreqWord": "セット", "scene": "餐厅/购物", "inputRule": "打「se」", "miniExercise": "听「se」音，选择セ/ソ" },
-    { "kana": "ソ", "roma": "so", "category": "片假名", "row": "サ行", "kanjiOrigin": "曾的变形", "shapeHook": "像「そ」加一横", "chineseApprox": "索", "pronunciationTip": "同そ", "confusableWith": ["ン"], "distinctionTip": "ソ两笔，ン一笔", "highFreqWord": "ソース", "scene": "餐厅", "inputRule": "打「so」", "miniExercise": "听「so」音，选择ソ/ン" },
-    { "kana": "タ", "roma": "ta", "category": "片假名", "row": "タ行", "kanjiOrigin": "太的偏旁", "shapeHook": "像「夕」加一横", "chineseApprox": "他", "pronunciationTip": "同た", "confusableWith": ["夕"], "distinctionTip": "タ比「夕」多一横", "highFreqWord": "タクシー", "scene": "交通", "inputRule": "打「ta」", "miniExercise": "听「ta」音，选择タ/ダ" },
-    { "kana": "チ", "roma": "chi", "category": "片假名", "row": "タ行", "kanjiOrigin": "千的变形", "shapeHook": "像「千」", "chineseApprox": "七", "pronunciationTip": "同ち", "confusableWith": ["テ"], "distinctionTip": "チ像「千」，テ像「于」", "highFreqWord": "チケット", "scene": "购票", "inputRule": "打「chi」", "miniExercise": "听「chi」音，选择チ/テ" },
-    { "kana": "ツ", "roma": "tsu", "category": "片假名", "row": "タ行", "kanjiOrigin": "川的变形", "shapeHook": "像「ツ」", "chineseApprox": "次", "pronunciationTip": "同つ", "confusableWith": ["シ"], "distinctionTip": "ツ两折，シ三撇", "highFreqWord": "ツアー", "scene": "旅游", "inputRule": "打「tsu」", "miniExercise": "听「tsu」音，选择ツ/シ" },
-    { "kana": "テ", "roma": "te", "category": "片假名", "row": "タ行", "kanjiOrigin": "天的变形", "shapeHook": "像「于」加一横", "chineseApprox": "特", "pronunciationTip": "同て", "confusableWith": ["チ"], "distinctionTip": "テ像「于」，チ像「千」", "highFreqWord": "テレビ", "scene": "酒店/购物", "inputRule": "打「te」", "miniExercise": "听「te」音，选择テ/チ" },
-    { "kana": "ト", "roma": "to", "category": "片假名", "row": "タ行", "kanjiOrigin": "止的变形", "shapeHook": "像「ト」", "chineseApprox": "脱", "pronunciationTip": "同と", "confusableWith": [], "distinctionTip": "", "highFreqWord": "トイレ", "scene": "问路", "inputRule": "打「to」", "miniExercise": "听「to」音，选择ト/ド" },
-    { "kana": "ナ", "roma": "na", "category": "片假名", "row": "ナ行", "kanjiOrigin": "奈的偏旁", "shapeHook": "像「ナ」", "chineseApprox": "那", "pronunciationTip": "同な", "confusableWith": ["ン"], "distinctionTip": "ナ两笔，ン一笔", "highFreqWord": "ナース", "scene": "医院", "inputRule": "打「na」", "miniExercise": "听「na」音，选择ナ/ン" },
-    { "kana": "ニ", "roma": "ni", "category": "片假名", "row": "ナ行", "kanjiOrigin": "仁的变形", "shapeHook": "像「ニ」", "chineseApprox": "你", "pronunciationTip": "同に", "confusableWith": [], "distinctionTip": "", "highFreqWord": "ニコニコ", "scene": "表情", "inputRule": "打「ni」", "miniExercise": "听「ni」音，选择ニ/ヌ" },
-    { "kana": "ヌ", "roma": "nu", "category": "片假名", "row": "ナ行", "kanjiOrigin": "奴的偏旁", "shapeHook": "像「ヌ」", "chineseApprox": "努", "pronunciationTip": "同ぬ", "confusableWith": ["メ"], "distinctionTip": "ヌ右边封闭，メ右边开口", "highFreqWord": "ぬりえ", "scene": "儿童/购物", "inputRule": "打「nu」", "miniExercise": "听「nu」音，选择ヌ/メ" },
-    { "kana": "ネ", "roma": "ne", "category": "片假名", "row": "ナ行", "kanjiOrigin": "祢的偏旁", "shapeHook": "像「ネ」", "chineseApprox": "内", "pronunciationTip": "同ね", "confusableWith": ["レ"], "distinctionTip": "ネ有两横，レ一折", "highFreqWord": "ネット", "scene": "酒店/网络", "inputRule": "打「ne」", "miniExercise": "听「ne」音，选择ネ/レ" },
-    { "kana": "ノ", "roma": "no", "category": "片假名", "row": "ナ行", "kanjiOrigin": "乃的变形", "shapeHook": "像「ノ」", "chineseApprox": "诺", "pronunciationTip": "同の", "confusableWith": ["メ"], "distinctionTip": "ノ一撇，メ两笔", "highFreqWord": "ノート", "scene": "学习/购物", "inputRule": "打「no」", "miniExercise": "听「no」音，选择ノ/メ" },
-    { "kana": "ハ", "roma": "ha", "category": "片假名", "row": "ハ行", "kanjiOrigin": "八的变形", "shapeHook": "像「八」", "chineseApprox": "哈", "pronunciationTip": "同は", "confusableWith": ["八"], "distinctionTip": "ハ比「八」笔画直", "highFreqWord": "バス", "scene": "交通", "inputRule": "打「ha」", "miniExercise": "听「ha」音，选择ハ/バ/パ" },
-    { "kana": "ヒ", "roma": "hi", "category": "片假名", "row": "ハ行", "kanjiOrigin": "比的变形", "shapeHook": "像「ヒ」", "chineseApprox": "西", "pronunciationTip": "同ひ", "confusableWith": [], "distinctionTip": "", "highFreqWord": "ビール", "scene": "餐厅", "inputRule": "打「hi」", "miniExercise": "听「hi」音，选择ヒ/ビ/ピ" },
-    { "kana": "フ", "roma": "fu", "category": "片假名", "row": "ハ行", "kanjiOrigin": "不的变形", "shapeHook": "像「フ」", "chineseApprox": "夫", "pronunciationTip": "同ふ", "confusableWith": [], "distinctionTip": "", "highFreqWord": "フード", "scene": "餐厅", "inputRule": "打「fu」", "miniExercise": "听「fu」音，选择フ/ブ/プ" },
-    { "kana": "ヘ", "roma": "he", "category": "片假名", "row": "ハ行", "kanjiOrigin": "部的偏旁", "shapeHook": "像「へ」", "chineseApprox": "黑", "pronunciationTip": "同へ", "confusableWith": ["メ"], "distinctionTip": "ヘ一折，メ两笔", "highFreqWord": "ヘルプ", "scene": "问路/求助", "inputRule": "打「he」", "miniExercise": "听「he」音，选择ヘ/ベ/ペ" },
-    { "kana": "ホ", "roma": "ho", "category": "片假名", "row": "ハ行", "kanjiOrigin": "保的偏旁", "shapeHook": "像「ホ」", "chineseApprox": "霍", "pronunciationTip": "同ほ", "confusableWith": [], "distinctionTip": "", "highFreqWord": "ホテル", "scene": "酒店", "inputRule": "打「ho」", "miniExercise": "听「ho」音，选择ホ/ボ/ポ" },
-    { "kana": "マ", "roma": "ma", "category": "片假名", "row": "マ行", "kanjiOrigin": "末的变形", "shapeHook": "像「マ」", "chineseApprox": "妈", "pronunciationTip": "同ま", "confusableWith": [], "distinctionTip": "", "highFreqWord": "マンション", "scene": "住宿", "inputRule": "打「ma」", "miniExercise": "听「ma」音，选择マ/メ" },
-    { "kana": "ミ", "roma": "mi", "category": "片假名", "row": "マ行", "kanjiOrigin": "美的变形", "shapeHook": "像「ミ」", "chineseApprox": "米", "pronunciationTip": "同み", "confusableWith": [], "distinctionTip": "", "highFreqWord": "ミルク", "scene": "餐厅", "inputRule": "打「mi」", "miniExercise": "听「mi」音，选择ミ/ム" },
-    { "kana": "ム", "roma": "mu", "category": "片假名", "row": "マ行", "kanjiOrigin": "武的变形", "shapeHook": "像「ム」", "chineseApprox": "母", "pronunciationTip": "同む", "confusableWith": ["ウ"], "distinctionTip": "ム不出头，ウ上下出头", "highFreqWord": "メニュー", "scene": "餐厅", "inputRule": "打「mu」", "miniExercise": "听「mu」音，选择ム/ウ" },
-    { "kana": "メ", "roma": "me", "category": "片假名", "row": "マ行", "kanjiOrigin": "女的变形", "shapeHook": "像「メ」", "chineseApprox": "灭", "pronunciationTip": "同め", "confusableWith": ["メ"], "distinctionTip": "", "highFreqWord": "メートル", "scene": "购物/尺寸", "inputRule": "打「me」", "miniExercise": "听「me」音，选择メ/メ" },
-    { "kana": "モ", "roma": "mo", "category": "片假名", "row": "マ行", "kanjiOrigin": "毛的变形", "shapeHook": "像「モ」", "chineseApprox": "莫", "pronunciationTip": "同も", "confusableWith": [], "distinctionTip": "", "highFreqWord": "メニュー", "scene": "餐厅", "inputRule": "打「mo」", "miniExercise": "听「mo」音，选择モ/ム" },
-    { "kana": "ヤ", "roma": "ya", "category": "片假名", "row": "ヤ行", "kanjiOrigin": "也的变形", "shapeHook": "像「ヤ」", "chineseApprox": "呀", "pronunciationTip": "同や", "confusableWith": [], "distinctionTip": "", "highFreqWord": "ヤクルト", "scene": "便利店", "inputRule": "打「ya」", "miniExercise": "听「ya」音，选择ヤ/ユ" },
-    { "kana": "ユ", "roma": "yu", "category": "片假名", "row": "ヤ行", "kanjiOrigin": "由的变形", "shapeHook": "像「ユ」", "chineseApprox": "优", "pronunciationTip": "同ゆ", "confusableWith": [], "distinctionTip": "", "highFreqWord": "ユースホステル", "scene": "住宿", "inputRule": "打「yu」", "miniExercise": "听「yu」音，选择ユ/ヤ" },
-    { "kana": "ヨ", "roma": "yo", "category": "片假名", "row": "ヤ行", "kanjiOrigin": "与的变形", "shapeHook": "像「ヨ」", "chineseApprox": "哟", "pronunciationTip": "同よ", "confusableWith": [], "distinctionTip": "", "highFreqWord": "ヨーグルト", "scene": "餐厅/便利店", "inputRule": "打「yo」", "miniExercise": "听「yo」音，选择ヨ/ユ" },
-    { "kana": "ラ", "roma": "ra", "category": "片假名", "row": "ラ行", "kanjiOrigin": "良的偏旁", "shapeHook": "像「ラ」", "chineseApprox": "拉", "pronunciationTip": "同ら", "confusableWith": [], "distinctionTip": "", "highFreqWord": "ラーメン", "scene": "餐厅", "inputRule": "打「ra」", "miniExercise": "听「ra」音，选择ラ/ワ" },
-    { "kana": "リ", "roma": "ri", "category": "片假名", "row": "ラ行", "kanjiOrigin": "利的偏旁", "shapeHook": "像「リ」", "chineseApprox": "里", "pronunciationTip": "同り", "confusableWith": [], "distinctionTip": "", "highFreqWord": "リハーサル", "scene": "演出/学习", "inputRule": "打「ri」", "miniExercise": "听「ri」音，选择リ/ル" },
-    { "kana": "ル", "roma": "ru", "category": "片假名", "row": "ラ行", "kanjiOrigin": "留的偏旁", "shapeHook": "像「ル」", "chineseApprox": "鲁", "pronunciationTip": "同る", "confusableWith": ["レ"], "distinctionTip": "ル两折，レ一折", "highFreqWord": "ルール", "scene": "通用", "inputRule": "打「ru」", "miniExercise": "听「ru」音，选择ル/レ" },
-    { "kana": "レ", "roma": "re", "category": "片假名", "row": "ラ行", "kanjiOrigin": "礼的偏旁", "shapeHook": "像「レ」", "chineseApprox": "类", "pronunciationTip": "同れ", "confusableWith": ["ル"], "distinctionTip": "レ一折，ル两折", "highFreqWord": "レストラン", "scene": "餐厅", "inputRule": "打「re」", "miniExercise": "听「re」音，选择レ/ル" },
-    { "kana": "ロ", "roma": "ro", "category": "片假名", "row": "ラ行", "kanjiOrigin": "吕的变形", "shapeHook": "像「口」", "chineseApprox": "洛", "pronunciationTip": "同ろ", "confusableWith": ["口"], "distinctionTip": "ロ比「口」笔画直", "highFreqWord": "ロシア", "scene": "国家名", "inputRule": "打「ro」", "miniExercise": "听「ro」音，选择ロ/ン" },
-    { "kana": "ワ", "roma": "wa", "category": "片假名", "row": "ワ行", "kanjiOrigin": "和的变形", "shapeHook": "像「ワ」", "chineseApprox": "哇", "pronunciationTip": "同わ", "confusableWith": ["ウ"], "distinctionTip": "ワ不出头，ウ上下出头", "highFreqWord": "ワープロ", "scene": "办公", "inputRule": "打「wa」", "miniExercise": "听「wa」音，选择ワ/ラ" },
-    { "kana": "ヲ", "roma": "wo", "category": "片假名", "row": "ワ行", "kanjiOrigin": "远的变形", "shapeHook": "像「を」", "chineseApprox": "哦", "pronunciationTip": "同を", "confusableWith": ["オ"], "distinctionTip": "ヲ是助词专用，オ是元音", "highFreqWord": "〜ヲください", "scene": "罕见", "inputRule": "打「wo」", "miniExercise": "听「o」音，选择ヲ/オ" },
-    { "kana": "ン", "roma": "n", "category": "特殊", "row": "特殊", "kanjiOrigin": "无", "shapeHook": "一笔", "chineseApprox": "嗯", "pronunciationTip": "同ん", "confusableWith": ["ソ", "ン"], "distinctionTip": "ン一笔，ソ两笔", "highFreqWord": "ラーメン", "scene": "餐厅", "inputRule": "打「n」", "miniExercise": "听「n」音，选择ン/ソ" }
+  "mapPlaces": [
+    {
+      "id": "mihara",
+      "type": "volcano",
+      "status": "been",
+      "name": "三原山",
+      "loc": "东京都大岛町",
+      "emoji": "🌋",
+      "jp": "噴火口まで歩けますか？",
+      "zh": "可以走到火山口吗？",
+      "lang": "ja-JP",
+      "note": "活火山，可以徒步到火山口边缘。从东京坐夜船就到。"
+    },
+    {
+      "id": "fuji",
+      "type": "volcano",
+      "status": "been",
+      "name": "富士山",
+      "loc": "静冈县",
+      "emoji": "🗻",
+      "jp": "富士山に登りたいです",
+      "zh": "我想爬富士山",
+      "lang": "ja-JP",
+      "note": "休眠火山，世界文化遗产。攀登季7-9月。"
+    },
+    {
+      "id": "owakudani",
+      "type": "volcano",
+      "status": "been",
+      "name": "大涌谷",
+      "loc": "箱根，神奈川",
+      "emoji": "♨️",
+      "jp": "黒たまごはどこですか？",
+      "zh": "黑鸡蛋在哪里？",
+      "lang": "ja-JP",
+      "note": "硫磺泉煮出的黑鸡蛋据说延寿7年。"
+    },
+    {
+      "id": "sakura",
+      "type": "volcano",
+      "status": "wish",
+      "name": "樱岛",
+      "loc": "鹿儿岛县",
+      "emoji": "🌋",
+      "jp": "桜島はよく噴火しますか？",
+      "zh": "樱岛经常喷发吗？",
+      "lang": "ja-JP",
+      "note": "年均喷发超1000次，居民早已习惯。"
+    },
+    {
+      "id": "etna",
+      "type": "volcano",
+      "status": "wish",
+      "name": "埃特纳火山",
+      "loc": "西西里岛",
+      "emoji": "🌋",
+      "jp": "Dov'è l'Etna?",
+      "zh": "埃特纳在哪里？",
+      "lang": "it-IT",
+      "note": "欧洲最活跃火山，UNESCO世界自然遗产2021。Susan Sontag的《火山情人》就写它。"
+    },
+    {
+      "id": "yulong",
+      "type": "snow",
+      "status": "wish",
+      "name": "玉龙雪山",
+      "loc": "云南丽江",
+      "emoji": "🏔",
+      "jp": "雪山はどこですか？",
+      "zh": "雪山在哪里？",
+      "lang": "zh-CN",
+      "note": "北半球最南端雪山，索道可达4506m。"
+    },
+    {
+      "id": "kilimanjaro",
+      "type": "snow",
+      "status": "wish",
+      "name": "乞力马扎罗",
+      "loc": "坦桑尼亚",
+      "emoji": "🏔",
+      "jp": "¿Dónde está el Kilimanjaro?",
+      "zh": "乞力马扎罗在哪里？",
+      "lang": "es-ES",
+      "note": "非洲最高峰，赤道上的雪山。无需专业技术，徒步7天可登顶。"
+    },
+    {
+      "id": "baikal",
+      "type": "water",
+      "status": "wish",
+      "name": "贝加尔湖",
+      "loc": "俄罗斯",
+      "emoji": "🌊",
+      "jp": "Где Байкал?",
+      "zh": "贝加尔湖在哪里？",
+      "lang": "ru-RU",
+      "note": "世界最深湖，全球20%淡水。冬天可以在湖面上行走。"
+    },
+    {
+      "id": "amazon",
+      "type": "water",
+      "status": "wish",
+      "name": "亚马逊河",
+      "loc": "巴西",
+      "emoji": "🌿",
+      "jp": "¿Dónde está el Amazonas?",
+      "zh": "亚马逊河在哪里？",
+      "lang": "es-ES",
+      "note": "世界最大热带雨林，占全球氧气生产的20%。"
+    },
+    {
+      "id": "cafe_kyoto",
+      "type": "cafe",
+      "status": "been",
+      "name": "京都町家咖啡",
+      "loc": "京都市",
+      "emoji": "☕",
+      "jp": "コーヒーをください",
+      "zh": "请给我一杯咖啡",
+      "lang": "ja-JP",
+      "note": "百年町家改建，木梁石地，手冲咖啡。这种安静只有京都有。"
+    },
+    {
+      "id": "cafe_medellin",
+      "type": "cafe",
+      "status": "wish",
+      "name": "麦德林咖啡庄园",
+      "loc": "哥伦比亚",
+      "emoji": "☕",
+      "jp": "¿Puedo visitar la finca?",
+      "zh": "我可以参观庄园吗？",
+      "lang": "es-ES",
+      "note": "可以在种植庄园喝到当天采摘的咖啡。"
+    }
   ],
-  "practicalContent": {
-    "numbers": [
-      { "digit": "0", "jp": "ゼロ", "roma": "zero", "scene": "数字/电话" },
-      { "digit": "1", "jp": "いち", "roma": "ichi", "scene": "通用" },
-      { "digit": "2", "jp": "に", "roma": "ni", "scene": "通用" },
-      { "digit": "3", "jp": "さん", "roma": "san", "scene": "通用" },
-      { "digit": "4", "jp": "よん/し", "roma": "yon/shi", "scene": "通用/忌讳" },
-      { "digit": "5", "jp": "ご", "roma": "go", "scene": "通用" },
-      { "digit": "6", "jp": "ろく", "roma": "roku", "scene": "通用" },
-      { "digit": "7", "jp": "なな/しち", "roma": "nana/shichi", "scene": "通用" },
-      { "digit": "8", "jp": "はち", "roma": "hachi", "scene": "通用" },
-      { "digit": "9", "jp": "きゅう/く", "roma": "kyuu/ku", "scene": "通用" },
-      { "digit": "10", "jp": "じゅう", "roma": "juu", "scene": "通用" }
-    ],
-    "time": [
-      { "concept": "今天", "jp": "きょう", "roma": "kyou", "scene": "时间" },
-      { "concept": "明天", "jp": "あした", "roma": "ashita", "scene": "时间" },
-      { "concept": "昨天", "jp": "きのう", "roma": "kinou", "scene": "时间" },
-      { "concept": "早上", "jp": "あさ", "roma": "asa", "scene": "时间" },
-      { "concept": "晚上", "jp": "よる", "roma": "yoru", "scene": "时间" },
-      { "concept": "星期", "jp": "ようび", "roma": "youbi", "scene": "时间" }
-    ],
-    "essentialPhrases": [
-      { "jp": "すみません", "roma": "sumimasen", "zh": "不好意思/对不起", "scene": "通用礼貌语" },
-      { "jp": "ありがとうございます", "roma": "arigatou gozaimasu", "zh": "谢谢", "scene": "通用礼貌语" },
-      { "jp": "お願いします", "roma": "onegai shimasu", "zh": "拜托了", "scene": "通用礼貌语" },
-      { "jp": "わかりました", "roma": "wakarimashita", "zh": "明白了", "scene": "通用" },
-      { "jp": "わかりません", "roma": "wakarimasen", "zh": "不明白", "scene": "通用" },
-      { "jp": "英語を話せますか", "roma": "eigo o hanasemasu ka", "zh": "会说英语吗", "scene": "问路/求助" },
-      { "jp": "トイレはどこですか", "roma": "toire wa doko desu ka", "zh": "厕所在哪里", "scene": "问路" },
-      { "jp": "これをお願いします", "roma": "kore o onegai shimasu", "zh": "请给我这个", "scene": "餐厅/购物" },
-      { "jp": "いくらですか", "roma": "ikura desu ka", "zh": "多少钱", "scene": "购物" },
-      { "jp": "助けてください", "roma": "tasukete kudasai", "zh": "请救救我", "scene": "紧急情况" }
-    ],
-    "directionWords": [
-      { "jp": "東", "roma": "higashi", "zh": "东", "scene": "问路" },
-      { "jp": "西", "roma": "nishi", "zh": "西", "scene": "问路" },
-      { "jp": "南", "roma": "minami", "zh": "南", "scene": "问路" },
-      { "jp": "北", "roma": "kita", "zh": "北", "scene": "问路" },
-      { "jp": "前", "roma": "mae", "zh": "前", "scene": "问路" },
-      { "jp": "後", "roma": "ushiro", "zh": "后", "scene": "问路" },
-      { "jp": "右", "roma": "migi", "zh": "右", "scene": "问路" },
-      { "jp": "左", "roma": "hidari", "zh": "左", "scene": "问路" }
-    ]
-  },
-  "usageGuide": {
-    "howToUse": "1. 按顺序学习：清音→浊音→片假名→实用内容；2. 每个假名包含汉字起源、形状记忆钩、发音提示、易混对比、高频词；3. 迷你练习用于自测；4. 地铁冒险场景用于实战演练",
-    "targetAudience": "零基础成人学习者，尤其是懂中文的学习者（可利用汉字优势）",
-    "learningPath": "五十音 → 基础词汇 → 地铁场景 → 实际应用",
-    "keyInsight": "汉字是中文母语者的天然优势——日语中大量汉字词可直接理解，学习重点应放在：①假名识别 ②发音 ③语法结构"
-  }
+  "kanaRows": [
+    {
+      "row": "あ行",
+      "chars": [
+        {
+          "kana": "あ",
+          "roma": "a",
+          "hook": "草书「安」变形；嘴巴自然张开，不要过度圆唇；易混：あ有「安」的草书特征，お有两个「o」形",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "安→あ"
+            },
+            {
+              "lang": "ES",
+              "word": "a"
+            },
+            {
+              "lang": "EN",
+              "word": "a"
+            }
+          ]
+        },
+        {
+          "kana": "い",
+          "roma": "i",
+          "hook": "草书「以」变形；舌面抬高，接近「衣」但短促",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "以→い"
+            },
+            {
+              "lang": "EN",
+              "word": "i"
+            }
+          ]
+        },
+        {
+          "kana": "う",
+          "roma": "u",
+          "hook": "草书「宇」变形；嘴唇不圆，是扁平的 u；注意区分：お",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "宇→う"
+            }
+          ]
+        },
+        {
+          "kana": "え",
+          "roma": "e",
+          "hook": "草书「衣」变形；单元音 e，像「欸」的开头",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "工≈え"
+            },
+            {
+              "lang": "ES",
+              "word": "e"
+            }
+          ]
+        },
+        {
+          "kana": "お",
+          "roma": "o",
+          "hook": "草书「于」变形；嘴唇圆，发音短促；注意区分：あ、う",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "于→お"
+            },
+            {
+              "lang": "ES",
+              "word": "o"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "か行",
+      "chars": [
+        {
+          "kana": "か",
+          "roma": "ka",
+          "hook": "草书「加」变形；清音不送气；注意区分：が",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "加→か"
+            },
+            {
+              "lang": "ES",
+              "word": "ca-"
+            }
+          ]
+        },
+        {
+          "kana": "き",
+          "roma": "ki",
+          "hook": "草书「几」变形；接近「key」的开头",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "几→き"
+            },
+            {
+              "lang": "EN",
+              "word": "key→き"
+            }
+          ]
+        },
+        {
+          "kana": "く",
+          "roma": "ku",
+          "hook": "草书「久」变形；嘴唇不突出，短促；易混：く像「<」，す中间一竖穿过",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "久→く"
+            }
+          ]
+        },
+        {
+          "kana": "け",
+          "roma": "ke",
+          "hook": "草书「介」变形；接近「开」的韵母",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "介→け"
+            }
+          ]
+        },
+        {
+          "kana": "こ",
+          "roma": "ko",
+          "hook": "草书「己」变形；短促，不要拖长；注意区分：ご",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "己→こ"
+            },
+            {
+              "lang": "ZH",
+              "word": "二≈こ"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "さ行",
+      "chars": [
+        {
+          "kana": "さ",
+          "roma": "sa",
+          "hook": "草书「左」变形；舌尖抵下齿，s音清晰",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "左→さ"
+            }
+          ]
+        },
+        {
+          "kana": "し",
+          "roma": "shi",
+          "hook": "草书「之」变形；舌面音，不是舌尖音「诗」；易混：し像鱼钩🎣，す中间一竖，つ像波浪",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "之→し"
+            },
+            {
+              "lang": "EN",
+              "word": "she→し"
+            }
+          ]
+        },
+        {
+          "kana": "す",
+          "roma": "su",
+          "hook": "草书「寸」变形；嘴唇扁平，接近「s」，不要圆唇；注意区分：く",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "寸→す"
+            }
+          ]
+        },
+        {
+          "kana": "せ",
+          "roma": "se",
+          "hook": "草书「世」变形；接近「赛」的韵母",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "世≈せ（形）"
+            }
+          ]
+        },
+        {
+          "kana": "そ",
+          "roma": "so",
+          "hook": "草书「曾」变形；接近「索」的韵母；易混：そ两笔，ん一笔",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "曾→そ"
+            },
+            {
+              "lang": "ES",
+              "word": "so-"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "た行",
+      "chars": [
+        {
+          "kana": "た",
+          "roma": "ta",
+          "hook": "草书「太」变形；清音不送气；注意区分：だ",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "太→た"
+            }
+          ]
+        },
+        {
+          "kana": "ち",
+          "roma": "chi",
+          "hook": "草书「千」变形；接近「七」，舌面音；易混：ち像扳手，つ像两个小波浪",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "千→ち"
+            },
+            {
+              "lang": "ZH",
+              "word": "知≈ち"
+            }
+          ]
+        },
+        {
+          "kana": "つ",
+          "roma": "tsu",
+          "hook": "草书「川」变形；「ts」音，像「次」的声母，不是「兔」；注意区分：し、ち",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "川→つ"
+            },
+            {
+              "lang": "EN",
+              "word": "tsunami→つ"
+            }
+          ]
+        },
+        {
+          "kana": "て",
+          "roma": "te",
+          "hook": "草书「天」变形；接近「特」的韵母；注意区分：で",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "天→て"
+            }
+          ]
+        },
+        {
+          "kana": "と",
+          "roma": "to",
+          "hook": "草书「止」变形；接近「脱」的韵母；注意区分：ど",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "止→と"
+            },
+            {
+              "lang": "ZH",
+              "word": "到≈と（音）"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "な行",
+      "chars": [
+        {
+          "kana": "な",
+          "roma": "na",
+          "hook": "草书「奈」变形；接近「那」",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "奈→な"
+            }
+          ]
+        },
+        {
+          "kana": "に",
+          "roma": "ni",
+          "hook": "草书「仁」变形；接近「你」",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "仁→に"
+            },
+            {
+              "lang": "ZH",
+              "word": "二≈に（音）"
+            }
+          ]
+        },
+        {
+          "kana": "ぬ",
+          "roma": "nu",
+          "hook": "草书「奴」变形；嘴唇圆，短促；易混：ぬ右边封闭，ね右边开口",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "奴→ぬ"
+            },
+            {
+              "lang": "EN",
+              "word": "noodle→ぬ"
+            }
+          ]
+        },
+        {
+          "kana": "ね",
+          "roma": "ne",
+          "hook": "草书「祢」变形；接近「内」的韵母；注意区分：ぬ",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "猫=ねこ（记忆锚）"
+            }
+          ]
+        },
+        {
+          "kana": "の",
+          "roma": "no",
+          "hook": "草书「乃」变形；接近「诺」的韵母",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "乃→の"
+            },
+            {
+              "lang": "ZH",
+              "word": "の=「的」"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "は行",
+      "chars": [
+        {
+          "kana": "は",
+          "roma": "ha",
+          "hook": "草书「八」变形；接近「哈」；作主语助词时读「wa」；注意区分：ば、ぱ",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "八→は"
+            }
+          ]
+        },
+        {
+          "kana": "ひ",
+          "roma": "hi",
+          "hook": "草书「比」变形；接近「嘻」但带h音",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "比→ひ"
+            },
+            {
+              "lang": "EN",
+              "word": "hi→ひ"
+            }
+          ]
+        },
+        {
+          "kana": "ふ",
+          "roma": "fu",
+          "hook": "草书「不」变形；嘴唇不闭合，轻轻吹气；注意区分：ぶ、ぷ",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "不→ふ"
+            },
+            {
+              "lang": "ZH",
+              "word": "富士=ふじ"
+            }
+          ]
+        },
+        {
+          "kana": "へ",
+          "roma": "he",
+          "hook": "草书「部」变形；接近「黑」的韵母；作助词时读「e」",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "部→へ（形）"
+            }
+          ]
+        },
+        {
+          "kana": "ほ",
+          "roma": "ho",
+          "hook": "草书「保」变形；接近「霍」的韵母；注意区分：ぼ、ぽ",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "保≈ほ（形）"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "ま行",
+      "chars": [
+        {
+          "kana": "ま",
+          "roma": "ma",
+          "hook": "草书「末」变形；接近「妈」；注意区分：め",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "末→ま"
+            }
+          ]
+        },
+        {
+          "kana": "み",
+          "roma": "mi",
+          "hook": "草书「美」变形；接近「米」；注意区分：む",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "美→み"
+            }
+          ]
+        },
+        {
+          "kana": "む",
+          "roma": "mu",
+          "hook": "草书「武」变形；嘴唇圆，短促；注意区分：み",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "武→む"
+            }
+          ]
+        },
+        {
+          "kana": "め",
+          "roma": "me",
+          "hook": "草书「女」变形；接近「灭」的韵母；注意区分：ま",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "女→め"
+            },
+            {
+              "lang": "ZH",
+              "word": "目（め）同音记忆"
+            }
+          ]
+        },
+        {
+          "kana": "も",
+          "roma": "mo",
+          "hook": "草书「毛」变形；接近「莫」的韵母",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "毛→も"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "や行",
+      "chars": [
+        {
+          "kana": "や",
+          "roma": "ya",
+          "hook": "草书「也」变形；接近「呀」；注意区分：ゆ",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "也→や"
+            }
+          ]
+        },
+        {
+          "kana": "ゆ",
+          "roma": "yu",
+          "hook": "草书「由」变形；接近「优」；注意区分：や",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "由→ゆ"
+            }
+          ]
+        },
+        {
+          "kana": "よ",
+          "roma": "yo",
+          "hook": "草书「与」变形；接近「哟」",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "与→よ"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "ら行",
+      "chars": [
+        {
+          "kana": "ら",
+          "roma": "ra",
+          "hook": "草书「良」变形；舌尖轻弹上颚，r和l之间，不是卷舌；注意区分：わ",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "良→ら"
+            }
+          ]
+        },
+        {
+          "kana": "り",
+          "roma": "ri",
+          "hook": "草书「利」变形；接近「里」；注意区分：る",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "利→り"
+            }
+          ]
+        },
+        {
+          "kana": "る",
+          "roma": "ru",
+          "hook": "草书「留」变形；嘴唇略圆，短促；注意区分：り",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "留→る"
+            }
+          ]
+        },
+        {
+          "kana": "れ",
+          "roma": "re",
+          "hook": "草书「礼」变形；接近「类」的韵母，弹舌r",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "礼→れ"
+            }
+          ]
+        },
+        {
+          "kana": "ろ",
+          "roma": "ro",
+          "hook": "草书「吕」变形；接近「洛」的韵母；易混：ろ是封闭的圈，ん是一笔",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "吕→ろ"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "わ行",
+      "chars": [
+        {
+          "kana": "わ",
+          "roma": "wa",
+          "hook": "草书「和」变形；接近「哇」；注意区分：ら",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "和→わ"
+            }
+          ]
+        },
+        {
+          "kana": "を",
+          "roma": "wo",
+          "hook": "草书「远」变形；读音同お（o），作宾语助词专用；易混：を是助词，只在句子里用；お是普通元音",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "远→を"
+            },
+            {
+              "lang": "ZH",
+              "word": "を=宾语助词"
+            }
+          ]
+        },
+        {
+          "kana": "ん",
+          "roma": "n",
+          "hook": "鼻音收尾，嘴巴闭上；易混：ん一笔，そ两笔，ろ是封闭的圈",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "ん=鼻音收尾"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
