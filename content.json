@@ -1911,7 +1911,7 @@
           "en": "Is there a convenience store nearby?",
           "jlpt": "N5",
           "hookType": "e",
-          "hook": "コンビニ = convenience store 的日式缩写。不是完整音译，而是日本人把英语压缩成了自己的节奏。",
+          "hook": "コンビニ来自英文「convenience store」——日语截取前两个音节。中文叫「便利店」，日文叫コンビニ，英文是原型，三语互相印证。",
           "links": [
             {
               "lang": "EN",
@@ -1926,7 +1926,7 @@
               "word": "便利店"
             }
           ],
-          "scene": "日本问路时最有用的地标往往不是银行、不是咖啡店，而是便利店。把这句学会，顺便也能换成薬局・トイレ・ATM。"
+          "scene": "在日本コンビニ是最好用的路标。把「コンビニ」换成「薬局」「トイレ」「ATM」，这句话能找便利店里任何东西。"
         },
         {
           "id": 4,
@@ -1953,31 +1953,56 @@
           ],
           "scene": "导航显示不远，但你想确认是不是能走过去时，用这句最自然。"
         },
-        {
-          "id": 5,
-          "jp": "もう一度お願いします",
-          "roma": "Mou ichido onegaishimasu",
-          "zh": "请再说一遍",
-          "en": "One more time, please",
-          "jlpt": "N5",
-          "hookType": "e",
-          "hook": "「もう一度」= one more time。比长长的尊敬语版本更适合旅游现场：短、稳、礼貌，脑子空白时也说得出来。",
-          "links": [
-            {
-              "lang": "EN",
-              "word": "one more time"
-            },
-            {
-              "lang": "ES",
-              "word": "otra vez, por favor"
-            },
-            {
-              "lang": "ZH",
-              "word": "再一次"
-            }
-          ],
-          "scene": "对方说太快、环境太吵、你一下没反应过来时，先丢这句。先活下来，再求完美。"
-        },
+       {
+  "id": 5,
+  "jp": "もう一度お願いします",
+  "roma": "Mou ichido onegaishimasu",
+  "zh": "请再说一遍",
+  "en": "One more time, please",
+  "jlpt": "N5",
+  "hookType": "e",
+  "hook": "「もう一度」= one more time。比长长的尊敬语版本更适合旅游现场：短、稳、礼貌，脑子空白时也说得出来。",
+  "links": [
+    {
+      "lang": "EN",
+      "word": "one more time"
+    },
+    {
+      "lang": "ES",
+      "word": "otra vez, por favor"
+    },
+    {
+      "lang": "ZH",
+      "word": "再一次"
+    }
+  ],
+  "scene": "对方说太快、环境太吵、你一下没反应过来时，先丢这句。先活下来，再求完美。"
+},
+{
+  "id": 5.5,
+  "jp": "もう一度おっしゃっていただけますか？",
+  "roma": "Mou ichido osshatte itadakemasu ka?",
+  "zh": "可以再说一遍吗？（更礼貌）",
+  "en": "Could you say that again?",
+  "jlpt": "N4",
+  "hookType": "t",
+  "hook": "陷阱：「おっしゃる」是「言う」的尊敬语。学习者容易直接用「言ってください」，但对陌生人这样说显得失礼。向对方请求时，把对方的动作升级为尊敬语。",
+  "links": [
+    {
+      "lang": "EN",
+      "word": "say it again"
+    },
+    {
+      "lang": "ES",
+      "word": "¿puede repetir?"
+    },
+    {
+      "lang": "ZH",
+      "word": "再说一遍（敬语）"
+    }
+  ],
+  "scene": "这是问路进阶版。当前面的「もう一度お願いします」不够细腻时，用这句更像你原来雕过的语言层次。"
+},
         {
           "id": 6,
           "jp": "ゆっくりお願いします",
@@ -2107,7 +2132,7 @@
           "en": "Where is the subway entrance?",
           "jlpt": "N5",
           "hookType": "d",
-          "hook": "地下鉄 = 地下 + 铁，和中文几乎完全直读。入口也和中文一样，汉字圈优势直接吃满。",
+          "hook": "地下鉄——汉字完全直读。中文「地铁」是缩写，日文保留全称「地下を走る鉄道」（在地下跑的铁路）。入口「いりぐち」也是汉字直读：入＋口。",
           "links": [
             {
               "lang": "ZH",
@@ -2122,7 +2147,7 @@
               "word": "entrada del metro"
             }
           ],
-          "scene": "这句保留给「人在街上，想找最近进站口」的场景。它属于问路，不属于站内换乘。"
+          "scene": "大站有多个出口，编号可达十几个。先用手机查好对应出口号，比问人更高效——出哪个口决定你从哪条街走出来。"
         },
         {
           "id": 12,
