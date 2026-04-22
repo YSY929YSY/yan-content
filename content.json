@@ -741,10 +741,10 @@
       "scene": "窗口买 Suica、纸票、地图时都能套。",
       "culture": "",
       "swappableWords": [
-        { "word": "Suica", "zh": "Suica 卡" },
-        { "word": "切符", "zh": "纸票" },
-        { "word": "地図", "zh": "地图" }
-      ]
+  { "word": "Suica", "reading": "スイカ", "zh": "Suica 卡" },
+  { "word": "切符", "reading": "きっぷ", "zh": "纸票" },
+  { "word": "地図", "reading": "ちず", "zh": "地图" }
+]
     },
     {
       "id": 4,
@@ -3407,6 +3407,446 @@
             }
           ]
         },
+        {
+  "row": "ア行",
+  "chars": [
+    {
+      "kana": "ア",
+      "roma": "a",
+      "hook": "片假名更像直线切出来的「阿」；和あ是同音，但字形更硬、更像外来语入口",
+      "links": [
+        { "lang": "ZH", "word": "阿→ア（记忆锚）" },
+        { "lang": "EN", "word": "a" }
+      ]
+    },
+    {
+      "kana": "イ",
+      "roma": "i",
+      "hook": "像两道斜线，利落、短促；和い同音，但更像“外来词频道”",
+      "links": [
+        { "lang": "ZH", "word": "伊→イ（记忆锚）" },
+        { "lang": "EN", "word": "i" }
+      ]
+    },
+    {
+      "kana": "ウ",
+      "roma": "u",
+      "hook": "像屋檐拐角；发音和う一样，嘴唇不要夸张圆起来",
+      "links": [
+        { "lang": "ZH", "word": "宇→ウ（记忆锚）" }
+      ]
+    },
+    {
+      "kana": "エ",
+      "roma": "e",
+      "hook": "像一个转折的工字；和え同音，片假名更利落",
+      "links": [
+        { "lang": "ZH", "word": "江→エ（记忆锚）" },
+        { "lang": "EN", "word": "e" }
+      ]
+    },
+    {
+      "kana": "オ",
+      "roma": "o",
+      "hook": "像竖线加一个小折；和お同音，注意和ホ视觉区分",
+      "links": [
+        { "lang": "ZH", "word": "於→オ（记忆锚）" },
+        { "lang": "EN", "word": "o" }
+      ]
+    }
+  ]
+},
+{
+  "row": "カ行",
+  "chars": [
+    {
+      "kana": "カ",
+      "roma": "ka",
+      "hook": "像一把小刀，最像「力」但更开；外来词里非常高频",
+      "links": [
+        { "lang": "ZH", "word": "力感→カ" },
+        { "lang": "EN", "word": "ka" }
+      ]
+    },
+    {
+      "kana": "キ",
+      "roma": "ki",
+      "hook": "三横一竖，像切开的“丰”；和き同音，片假名更规整",
+      "links": [
+        { "lang": "ZH", "word": "木感→キ" },
+        { "lang": "EN", "word": "key→キ" }
+      ]
+    },
+    {
+      "kana": "ク",
+      "roma": "ku",
+      "hook": "像张开的嘴角「<」；和く同音，视觉上最简",
+      "links": [
+        { "lang": "ZH", "word": "久→ク（记忆锚）" }
+      ]
+    },
+    {
+      "kana": "ケ",
+      "roma": "ke",
+      "hook": "像キ少一横；最容易和サ混，要靠整体方向感区分",
+      "links": [
+        { "lang": "ZH", "word": "介→ケ（记忆锚）" }
+      ]
+    },
+    {
+      "kana": "コ",
+      "roma": "ko",
+      "hook": "就是两横，像中文“二”；记忆最轻松的一组之一",
+      "links": [
+        { "lang": "ZH", "word": "二≈コ" },
+        { "lang": "EN", "word": "co-" }
+      ]
+    }
+  ]
+},
+{
+  "row": "サ行",
+  "chars": [
+    {
+      "kana": "サ",
+      "roma": "sa",
+      "hook": "像十字加斜刀；容易和セ混，但サ更像“交叉”",
+      "links": [
+        { "lang": "ZH", "word": "左感→サ" }
+      ]
+    },
+    {
+      "kana": "シ",
+      "roma": "shi",
+      "hook": "三点向右下；最经典陷阱之一——シ和ツ一定成对记",
+      "links": [
+        { "lang": "ZH", "word": "三点斜下=シ" },
+        { "lang": "EN", "word": "she→シ" }
+      ]
+    },
+    {
+      "kana": "ス",
+      "roma": "su",
+      "hook": "像一把刀往右下切；和す同音，但形状完全不同",
+      "links": [
+        { "lang": "ZH", "word": "須→ス（记忆锚）" }
+      ]
+    },
+    {
+      "kana": "セ",
+      "roma": "se",
+      "hook": "像サ少一斜，整体更平；和ケ也容易混",
+      "links": [
+        { "lang": "ZH", "word": "世感→セ" }
+      ]
+    },
+    {
+      "kana": "ソ",
+      "roma": "so",
+      "hook": "两笔，像气流往右下收；一定和ン对照记",
+      "links": [
+        { "lang": "ZH", "word": "曾感→ソ" },
+        { "lang": "EN", "word": "so" }
+      ]
+    }
+  ]
+},
+{
+  "row": "タ行",
+  "chars": [
+    {
+      "kana": "タ",
+      "roma": "ta",
+      "hook": "像夕字切开；和た同音，但片假名更锋利",
+      "links": [
+        { "lang": "ZH", "word": "夕感→タ" }
+      ]
+    },
+    {
+      "kana": "チ",
+      "roma": "chi",
+      "hook": "像一个弯钩加一横；和ち同音，视觉上比テ更弯",
+      "links": [
+        { "lang": "ZH", "word": "千感→チ" }
+      ]
+    },
+    {
+      "kana": "ツ",
+      "roma": "tsu",
+      "hook": "三点更偏竖、更往上；一定和シ一起背：シ斜，ツ竖",
+      "links": [
+        { "lang": "ZH", "word": "三点偏竖=ツ" },
+        { "lang": "EN", "word": "tsunami→ツ" }
+      ]
+    },
+    {
+      "kana": "テ",
+      "roma": "te",
+      "hook": "像工字上面伸一横；和チ比，テ更直更平",
+      "links": [
+        { "lang": "ZH", "word": "天感→テ" }
+      ]
+    },
+    {
+      "kana": "ト",
+      "roma": "to",
+      "hook": "像竖线旁点一下；非常像中文部件，记忆成本低",
+      "links": [
+        { "lang": "ZH", "word": "卜感→ト" },
+        { "lang": "EN", "word": "to" }
+      ]
+    }
+  ]
+},
+{
+  "row": "ナ行",
+  "chars": [
+    {
+      "kana": "ナ",
+      "roma": "na",
+      "hook": "像右上伸出来的“十”；和メ要注意区分",
+      "links": [
+        { "lang": "ZH", "word": "奈感→ナ" }
+      ]
+    },
+    {
+      "kana": "ニ",
+      "roma": "ni",
+      "hook": "就是两横，和に发音一样；最像中文“二”",
+      "links": [
+        { "lang": "ZH", "word": "二≈ニ" },
+        { "lang": "EN", "word": "knee→ニ（音锚）" }
+      ]
+    },
+    {
+      "kana": "ヌ",
+      "roma": "nu",
+      "hook": "像叉形里穿一笔；和ス、メ都容易看花，要整体记",
+      "links": [
+        { "lang": "ZH", "word": "奴感→ヌ" }
+      ]
+    },
+    {
+      "kana": "ネ",
+      "roma": "ne",
+      "hook": "像示字偏旁切开的样子；和れ不是一个系统，别串台",
+      "links": [
+        { "lang": "ZH", "word": "祢感→ネ" }
+      ]
+    },
+    {
+      "kana": "ノ",
+      "roma": "no",
+      "hook": "最简单，一撇；像中文丿，和の的圆圈形成强对比",
+      "links": [
+        { "lang": "ZH", "word": "丿≈ノ" },
+        { "lang": "EN", "word": "no" }
+      ]
+    }
+  ]
+},
+{
+  "row": "ハ行",
+  "chars": [
+    {
+      "kana": "ハ",
+      "roma": "ha",
+      "hook": "像八，和中文视觉最友好；片假名里最容易认的一批",
+      "links": [
+        { "lang": "ZH", "word": "八≈ハ" }
+      ]
+    },
+    {
+      "kana": "ヒ",
+      "roma": "hi",
+      "hook": "像匕首感；比ひ更硬、更有刀锋感",
+      "links": [
+        { "lang": "ZH", "word": "比感→ヒ" },
+        { "lang": "EN", "word": "he→ヒ（音锚）" }
+      ]
+    },
+    {
+      "kana": "フ",
+      "roma": "fu",
+      "hook": "像不完整的三角折线；外来词里极高频，比如フォーク",
+      "links": [
+        { "lang": "ZH", "word": "不感→フ" },
+        { "lang": "EN", "word": "fu" }
+      ]
+    },
+    {
+      "kana": "ヘ",
+      "roma": "he",
+      "hook": "像一个人字顶，最容易；助词时读e的规则仍然成立",
+      "links": [
+        { "lang": "ZH", "word": "人字顶≈ヘ" }
+      ]
+    },
+    {
+      "kana": "ホ",
+      "roma": "ho",
+      "hook": "像木字拆开的形状；和オ都带竖，但ホ更饱满",
+      "links": [
+        { "lang": "ZH", "word": "保感→ホ" }
+      ]
+    }
+  ]
+},
+{
+  "row": "マ行",
+  "chars": [
+    {
+      "kana": "マ",
+      "roma": "ma",
+      "hook": "像楼梯转折；和ム不要混，マ更开更有折角",
+      "links": [
+        { "lang": "ZH", "word": "末感→マ" }
+      ]
+    },
+    {
+      "kana": "ミ",
+      "roma": "mi",
+      "hook": "三道斜线；和シ/ツ都要分清——ミ是三横斜排",
+      "links": [
+        { "lang": "ZH", "word": "美感→ミ" },
+        { "lang": "EN", "word": "me→ミ" }
+      ]
+    },
+    {
+      "kana": "ム",
+      "roma": "mu",
+      "hook": "像厶再拉开；比マ更收、更像一个尖角",
+      "links": [
+        { "lang": "ZH", "word": "厶感→ム" }
+      ]
+    },
+    {
+      "kana": "メ",
+      "roma": "me",
+      "hook": "像一个大叉；和ヌ、ナ容易串，但メ最像“×”",
+      "links": [
+        { "lang": "ZH", "word": "女感→メ" },
+        { "lang": "EN", "word": "me" }
+      ]
+    },
+    {
+      "kana": "モ",
+      "roma": "mo",
+      "hook": "像毛字切成横线结构；和ユ别混，モ横更多",
+      "links": [
+        { "lang": "ZH", "word": "毛感→モ" }
+      ]
+    }
+  ]
+},
+{
+  "row": "ヤ行",
+  "chars": [
+    {
+      "kana": "ヤ",
+      "roma": "ya",
+      "hook": "像也字硬切版；常出现在人名、品牌、外来词转写",
+      "links": [
+        { "lang": "ZH", "word": "也感→ヤ" }
+      ]
+    },
+    {
+      "kana": "ユ",
+      "roma": "yu",
+      "hook": "像U形开口；比ゆ更机械、更利落",
+      "links": [
+        { "lang": "ZH", "word": "由感→ユ" },
+        { "lang": "EN", "word": "you→ユ（音锚）" }
+      ]
+    },
+    {
+      "kana": "ヨ",
+      "roma": "yo",
+      "hook": "像E反过来；和中文/英文视觉联想都很强",
+      "links": [
+        { "lang": "ZH", "word": "与感→ヨ" },
+        { "lang": "EN", "word": "yo" }
+      ]
+    }
+  ]
+},
+{
+  "row": "ラ行",
+  "chars": [
+    {
+      "kana": "ラ",
+      "roma": "ra",
+      "hook": "像一个缺角的方折；和ク容易混，但ラ更有转角感",
+      "links": [
+        { "lang": "ZH", "word": "良感→ラ" }
+      ]
+    },
+    {
+      "kana": "リ",
+      "roma": "ri",
+      "hook": "两笔竖下去，像两根小针；非常像“利”的片段",
+      "links": [
+        { "lang": "ZH", "word": "利感→リ" }
+      ]
+    },
+    {
+      "kana": "ル",
+      "roma": "ru",
+      "hook": "像一个弯钩加点；比リ更弯、更收",
+      "links": [
+        { "lang": "ZH", "word": "留感→ル" }
+      ]
+    },
+    {
+      "kana": "レ",
+      "roma": "re",
+      "hook": "一笔下折；极简，和し系统完全不同",
+      "links": [
+        { "lang": "ZH", "word": "礼感→レ" }
+      ]
+    },
+    {
+      "kana": "ロ",
+      "roma": "ro",
+      "hook": "一个口字框；这是片假名里最像中文方框的一个",
+      "links": [
+        { "lang": "ZH", "word": "口≈ロ" },
+        { "lang": "EN", "word": "ro" }
+      ]
+    }
+  ]
+},
+{
+  "row": "ワ行",
+  "chars": [
+    {
+      "kana": "ワ",
+      "roma": "wa",
+      "hook": "像フ多一笔展开；和ウ不要混，ワ更开更有尾巴",
+      "links": [
+        { "lang": "ZH", "word": "和感→ワ" }
+      ]
+    },
+    {
+      "kana": "ヲ",
+      "roma": "wo",
+      "hook": "现代发音基本同オ，但主要作助词，现实里更常在名字/特殊写法里见到",
+      "links": [
+        { "lang": "ZH", "word": "遠感→ヲ" },
+        { "lang": "JP", "word": "助词专用感" }
+      ]
+    },
+    {
+      "kana": "ン",
+      "roma": "n",
+      "hook": "片假名最大陷阱之一——一定和ソ成对记：ソ两笔向下散，ン一笔向右下收",
+      "links": [
+        { "lang": "ZH", "word": "鼻音收尾" },
+        { "lang": "EN", "word": "n" }
+      ]
+    }
+  ]
+}，
         {
           "kana": "を",
           "roma": "wo",
