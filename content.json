@@ -4402,5 +4402,116 @@
         ]
       }
     ]
-  }
+      },
+  "voicedRows": [
+        {
+      "row": "が行",
+      "chars": [
+        { "kana": "が", "kata": "ガ", "roma": "ga", "hook": "在か行上加浊点，声音更浑厚。", "links": [{ "lang": "ZH", "word": "ga" }] },
+        { "kana": "ぎ", "kata": "ギ", "roma": "gi", "hook": "き→ぎ，清音变浊音。", "links": [{ "lang": "ZH", "word": "gi" }] },
+        { "kana": "ぐ", "kata": "グ", "roma": "gu", "hook": "く→ぐ，喉部更有震动感。", "links": [{ "lang": "ZH", "word": "gu" }] },
+        { "kana": "げ", "kata": "ゲ", "roma": "ge", "hook": "け→げ，发音比清音更沉。", "links": [{ "lang": "ZH", "word": "ge" }] },
+        { "kana": "ご", "kata": "ゴ", "roma": "go", "hook": "こ→ご，注意和 ko 区分。", "links": [{ "lang": "ZH", "word": "go" }] }
+      ]
+    },
+    {
+      "row": "ざ行",
+      "chars": [
+        { "kana": "ざ", "kata": "ザ", "roma": "za", "hook": "さ→ざ，摩擦更重。", "links": [{ "lang": "ZH", "word": "za" }] },
+        { "kana": "じ", "kata": "ジ", "roma": "ji", "hook": "し→じ，旅行里极高频。", "links": [{ "lang": "ZH", "word": "ji" }] },
+        { "kana": "ず", "kata": "ズ", "roma": "zu", "hook": "す→ず，和づ现实里多同音。", "links": [{ "lang": "ZH", "word": "zu" }] },
+        { "kana": "ぜ", "kata": "ゼ", "roma": "ze", "hook": "せ→ぜ，浊化后更重。", "links": [{ "lang": "ZH", "word": "ze" }] },
+        { "kana": "ぞ", "kata": "ゾ", "roma": "zo", "hook": "そ→ぞ，注意和ソ一起看。", "links": [{ "lang": "ZH", "word": "zo" }] }
+      ]
+    },
+    {
+      "row": "だ行",
+      "chars": [
+        { "kana": "だ", "kata": "ダ", "roma": "da", "hook": "た→だ，舌尖更实。", "links": [{ "lang": "ZH", "word": "da" }] },
+        { "kana": "ぢ", "kata": "ヂ", "roma": "ji", "hook": "ち→ぢ，现代通常和じ同音。", "links": [{ "lang": "ZH", "word": "ji" }] },
+        { "kana": "づ", "kata": "ヅ", "roma": "zu", "hook": "つ→づ，现代通常和ず同音。", "links": [{ "lang": "ZH", "word": "zu" }] },
+        { "kana": "で", "kata": "デ", "roma": "de", "hook": "て→で，极高频。", "links": [{ "lang": "ZH", "word": "de" }] },
+        { "kana": "ど", "kata": "ド", "roma": "do", "hook": "と→ど，注意和ト区分。", "links": [{ "lang": "ZH", "word": "do" }] }
+      ]
+    },
+    {
+      "row": "ば行",
+      "chars": [
+        { "kana": "ば", "kata": "バ", "roma": "ba", "hook": "は→ば，双唇更明显。", "links": [{ "lang": "ZH", "word": "ba" }] },
+        { "kana": "び", "kata": "ビ", "roma": "bi", "hook": "ひ→び，声音更厚。", "links": [{ "lang": "ZH", "word": "bi" }] },
+        { "kana": "ぶ", "kata": "ブ", "roma": "bu", "hook": "ふ→ぶ，注意和ぷ对照。", "links": [{ "lang": "ZH", "word": "bu" }] },
+        { "kana": "べ", "kata": "ベ", "roma": "be", "hook": "へ→べ，助词里的へ读 e 但字形仍这样记。", "links": [{ "lang": "ZH", "word": "be" }] },
+        { "kana": "ぼ", "kata": "ボ", "roma": "bo", "hook": "ほ→ぼ，和ぽ一起成组记。", "links": [{ "lang": "ZH", "word": "bo" }] }
+      ]
+    },
+    {
+      "row": "ぱ行",
+      "chars": [
+        { "kana": "ぱ", "kata": "パ", "roma": "pa", "hook": "半浊音，加小圆圈。", "links": [{ "lang": "ZH", "word": "pa" }] },
+        { "kana": "ぴ", "kata": "ピ", "roma": "pi", "hook": "ひ→ぴ，轻快很多。", "links": [{ "lang": "ZH", "word": "pi" }] },
+        { "kana": "ぷ", "kata": "プ", "roma": "pu", "hook": "ふ→ぷ，和ぶ做对照记。", "links": [{ "lang": "ZH", "word": "pu" }] },
+        { "kana": "ぺ", "kata": "ペ", "roma": "pe", "hook": "へ→ぺ，注意圆圈不是浊点。", "links": [{ "lang": "ZH", "word": "pe" }] },
+        { "kana": "ぽ", "kata": "ポ", "roma": "po", "hook": "ほ→ぽ，发音更轻更弹。", "links": [{ "lang": "ZH", "word": "po" }] }
+      ]
+    }
+  ],
+  "yoonRows": [
+        {
+      "row": "きゃ行",
+      "chars": [
+        { "kana": "きゃ", "kata": "キャ", "roma": "kya", "hook": "き + 小ゃ，不要读成 ki-ya。", "links": [{ "lang": "ZH", "word": "kya" }] },
+        { "kana": "きゅ", "kata": "キュ", "roma": "kyu", "hook": "き + 小ゅ，收紧成一拍。", "links": [{ "lang": "ZH", "word": "kyu" }] },
+        { "kana": "きょ", "kata": "キョ", "roma": "kyo", "hook": "き + 小ょ，别拆开读。", "links": [{ "lang": "ZH", "word": "kyo" }] }
+      ]
+    },
+    {
+      "row": "しゃ行",
+      "chars": [
+        { "kana": "しゃ", "kata": "シャ", "roma": "sha", "hook": "し + 小ゃ，旅行里高频。", "links": [{ "lang": "ZH", "word": "sha" }] },
+        { "kana": "しゅ", "kata": "シュ", "roma": "shu", "hook": "し + 小ゅ，一拍完成。", "links": [{ "lang": "ZH", "word": "shu" }] },
+        { "kana": "しょ", "kata": "ショ", "roma": "sho", "hook": "し + 小ょ，不要读成 shi-yo。", "links": [{ "lang": "ZH", "word": "sho" }] }
+      ]
+    },
+    {
+      "row": "ちゃ行",
+      "chars": [
+        { "kana": "ちゃ", "kata": "チャ", "roma": "cha", "hook": "ち + 小ゃ，超高频。", "links": [{ "lang": "ZH", "word": "cha" }] },
+        { "kana": "ちゅ", "kata": "チュ", "roma": "chu", "hook": "ち + 小ゅ，注意收成一拍。", "links": [{ "lang": "ZH", "word": "chu" }] },
+        { "kana": "ちょ", "kata": "チョ", "roma": "cho", "hook": "ち + 小ょ，像ちょっと里的开头。", "links": [{ "lang": "ZH", "word": "cho" }] }
+      ]
+    },
+    {
+      "row": "にゃ行",
+      "chars": [
+        { "kana": "にゃ", "kata": "ニャ", "roma": "nya", "hook": "に + 小ゃ，像猫叫感。", "links": [{ "lang": "ZH", "word": "nya" }] },
+        { "kana": "にゅ", "kata": "ニュ", "roma": "nyu", "hook": "に + 小ゅ，外来词里也常见。", "links": [{ "lang": "ZH", "word": "nyu" }] },
+        { "kana": "にょ", "kata": "ニョ", "roma": "nyo", "hook": "に + 小ょ，不拆拍。", "links": [{ "lang": "ZH", "word": "nyo" }] }
+      ]
+    },
+    {
+      "row": "ひゃ行",
+      "chars": [
+        { "kana": "ひゃ", "kata": "ヒャ", "roma": "hya", "hook": "ひ + 小ゃ，气息明显。", "links": [{ "lang": "ZH", "word": "hya" }] },
+        { "kana": "ひゅ", "kata": "ヒュ", "roma": "hyu", "hook": "ひ + 小ゅ，一拍。", "links": [{ "lang": "ZH", "word": "hyu" }] },
+        { "kana": "ひょ", "kata": "ヒョ", "roma": "hyo", "hook": "ひ + 小ょ，别拆开。", "links": [{ "lang": "ZH", "word": "hyo" }] }
+      ]
+    },
+    {
+      "row": "みゃ行",
+      "chars": [
+        { "kana": "みゃ", "kata": "ミャ", "roma": "mya", "hook": "み + 小ゃ，连成一拍。", "links": [{ "lang": "ZH", "word": "mya" }] },
+        { "kana": "みゅ", "kata": "ミュ", "roma": "myu", "hook": "み + 小ゅ。", "links": [{ "lang": "ZH", "word": "myu" }] },
+        { "kana": "みょ", "kata": "ミョ", "roma": "myo", "hook": "み + 小ょ。", "links": [{ "lang": "ZH", "word": "myo" }] }
+      ]
+    },
+    {
+      "row": "りゃ行",
+      "chars": [
+        { "kana": "りゃ", "kata": "リャ", "roma": "rya", "hook": "り + 小ゃ，r音很日式。", "links": [{ "lang": "ZH", "word": "rya" }] },
+        { "kana": "りゅ", "kata": "リュ", "roma": "ryu", "hook": "り + 小ゅ，像龙（りゅう）的开头。", "links": [{ "lang": "ZH", "word": "ryu" }] },
+        { "kana": "りょ", "kata": "リョ", "roma": "ryo", "hook": "り + 小ょ。", "links": [{ "lang": "ZH", "word": "ryo" }] }
+      ]
+    }
+  ]
 }
+
