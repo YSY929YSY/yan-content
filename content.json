@@ -3318,77 +3318,112 @@
       ]
     },
     {
-      "row": "か行",
-      "chars": [
+  "row": "あ行",
+  "chars": [
+    {
+      "kana": "あ",
+      "pair": "ア",
+      "roma": "a",
+      "source": "安",
+      "anchor": "安 → あ",
+      "hint": "嘴巴自然张开，发短促的 a。",
+      "strokeKey": "a-hira",
+      "pairStrokeKey": "a-kata",
+      "confuse": {
+        "level": "L2",
+        "items": [
+          {
+            "with": "お",
+            "diff": "あ有回环，お有小尾巴。"
+          }
+        ]
+      },
+      "examples": [
         {
-          "kana": "か",
-          "roma": "ka",
-          "hook": "草书「加」变形；清音不送气；注意区分：が",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "加→か"
-            },
-            {
-              "lang": "ES",
-              "word": "ca-"
-            }
-          ]
+          "word": "あめ",
+          "kanji": "雨",
+          "zh": "雨"
         },
         {
-          "kana": "き",
-          "roma": "ki",
-          "hook": "草书「几」变形；接近「key」的开头",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "几→き"
-            },
-            {
-              "lang": "EN",
-              "word": "key→き"
-            }
-          ]
+          "word": "あか",
+          "kanji": "赤",
+          "zh": "红色"
+        }
+      ],
+      "hook": "安 → あ。嘴巴自然张开，发短促的 a。",
+      "links": [
+        {
+          "lang": "ZH",
+          "word": "安→あ"
         },
         {
-          "kana": "く",
-          "roma": "ku",
-          "hook": "草书「久」变形；嘴唇不突出，短促；易混：く像「<」，す中间一竖穿过",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "久→く"
-            }
-          ]
+          "lang": "ES",
+          "word": "a"
         },
         {
-          "kana": "け",
-          "roma": "ke",
-          "hook": "草书「介」变形；接近「开」的韵母",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "介→け"
-            }
-          ]
-        },
-        {
-          "kana": "こ",
-          "roma": "ko",
-          "hook": "草书「己」变形；短促，不要拖长；注意区分：ご",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "己→こ"
-            },
-            {
-              "lang": "ZH",
-              "word": "二≈こ"
-            }
-          ]
+          "lang": "EN",
+          "word": "a"
         }
       ]
     },
+    {
+      "kana": "い",
+      "roma": "i",
+      "hook": "草书「以」变形；舌面抬高，接近「衣」但短促",
+      "links": [
+        {
+          "lang": "ZH",
+          "word": "以→い"
+        },
+        {
+          "lang": "EN",
+          "word": "i"
+        }
+      ]
+    },
+    {
+      "kana": "う",
+      "roma": "u",
+      "hook": "草书「宇」变形；嘴唇不圆，是扁平的 u；注意区分：お",
+      "links": [
+        {
+          "lang": "ZH",
+          "word": "宇→う"
+        }
+      ]
+    },
+    {
+      "kana": "え",
+      "roma": "e",
+      "hook": "草书「衣」变形；单元音 e，像「欸」的开头",
+      "links": [
+        {
+          "lang": "ZH",
+          "word": "工≈え"
+        },
+        {
+          "lang": "ES",
+          "word": "e"
+        }
+      ]
+    },
+    {
+      "kana": "お",
+      "roma": "o",
+      "hook": "草书「于」变形；嘴唇圆，发音短促；注意区分：あ、う",
+      "links": [
+        {
+          "lang": "ZH",
+          "word": "于→お"
+        },
+        {
+          "lang": "ES",
+          "word": "o"
+        }
+      ]
+    }
+  ]
+},
     {
       "row": "さ行",
       "chars": [
