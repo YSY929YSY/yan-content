@@ -3213,24 +3213,52 @@
       "row": "あ行",
       "chars": [
         {
-          "kana": "あ",
-          "roma": "a",
-          "hook": "草书「安」变形；嘴巴自然张开，不要过度圆唇；易混：あ有「安」的草书特征，お有两个「o」形",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "安→あ"
-            },
-            {
-              "lang": "ES",
-              "word": "a"
-            },
-            {
-              "lang": "EN",
-              "word": "a"
-            }
-          ]
-        },
+         {
+  "kana": "あ",
+  "pair": "ア",
+  "roma": "a",
+  "source": "安",
+  "anchor": "安 → あ",
+  "hint": "嘴巴自然张开，发短促的 a。",
+  "strokeKey": "a-hira",
+  "pairStrokeKey": "a-kata",
+  "confuse": {
+    "level": "L2",
+    "items": [
+      {
+        "with": "お",
+        "diff": "あ有回环，お有小尾巴。"
+      }
+    ]
+  },
+  "examples": [
+    {
+      "word": "あめ",
+      "kanji": "雨",
+      "zh": "雨"
+    },
+    {
+      "word": "あか",
+      "kanji": "赤",
+      "zh": "红色"
+    }
+  ],
+  "hook": "安 → あ。嘴巴自然张开，发短促的 a。",
+  "links": [
+    {
+      "lang": "ZH",
+      "word": "安→あ"
+    },
+    {
+      "lang": "ES",
+      "word": "a"
+    },
+    {
+      "lang": "EN",
+      "word": "a"
+    }
+  ]
+},
         {
           "kana": "い",
           "roma": "i",
