@@ -95,102 +95,128 @@
     }
   ],
   "cultureNotes": [
-  {
-    "id": "sumimasen",
-    "title": "すみません —— 日语万能词",
-    "level": "high",
-    "tags": ["开口", "礼貌", "问路", "通用"],
-    "summary": "既能表示不好意思，也能用来引起注意、轻微道歉，甚至在接受帮助后带一点“麻烦你了”的感谢意味。",
-    "points": [
-      "问路前：すみません、駅はどこですか？",
-      "轻微碰到别人：すみません",
-      "接受帮助后，也可能顺口说すみません，语气里带感谢"
-    ],
-    "tip": "旅游里多用すみません，几乎不会出大错。"
-  },
-  {
-    "id": "thanks_levels",
-    "title": "感谢语层级",
-    "level": "high",
-    "tags": ["礼貌", "感谢", "餐厅", "酒店"],
-    "summary": "ありがとう偏随意，ありがとうございます最稳，适合游客在大多数公共场景使用。",
-    "points": [
-      "ありがとう：朋友、熟人之间",
-      "ありがとうございます：商店、餐厅、酒店最常用",
-      "どうもありがとうございます：更郑重，接受较大帮助时"
-    ],
-    "tip": "拿不准时，直接用ありがとうございます。"
-  },
-  {
-    "id": "soft_refusal",
-    "title": "委婉拒绝要听懂",
-    "level": "high",
-    "tags": ["会话", "礼貌", "弦外之音"],
-    "summary": "日本人常不直接说“不行”，而是用ちょっと…、難しいですね等更委婉的表达。",
-    "points": [
-      "ちょっと…：往往不是“有点”，而是“恐怕不行”",
-      "難しいですね：字面是“有点难”，实际常表示拒绝",
-      "はい有时只是“我在听”，不一定是同意"
-    ],
-    "tip": "听到ちょっと…时，别继续强推。"
-  },
-  {
-    "id": "quiet_public",
-    "title": "公共场合安静是美德",
-    "level": "high",
-    "tags": ["地铁", "礼仪", "公共场合"],
-    "summary": "在地铁、电车、酒店大堂等空间，日本人通常会压低音量，电话也尽量不在车厢里打。",
-    "points": [
-      "地铁里尽量小声说话，手机调静音",
-      "酒店大堂和电梯里也别大声聊天",
-      "游客正常说话在日本环境里往往已经显得偏大声"
-    ],
-    "tip": "不确定音量时，再小一点通常更安全。"
-  },
-  {
-    "id": "restaurant_rules",
-    "title": "餐厅礼仪的几个底线",
-    "level": "high",
-    "tags": ["餐厅", "礼仪", "用餐"],
-    "summary": "日本餐桌礼仪里，筷子插饭、筷子传食物这类动作要避免；饭前饭后的小表达会很加分。",
-    "points": [
-      "不要把筷子直插在饭上",
-      "不要用筷子互相传递食物",
-      "饭前可以说いただきます，饭后可以说ごちそうさまでした"
-    ],
-    "tip": "不会说很多也没关系，至少避开明显禁忌。"
-  },
-  {
-    "id": "no_tipping",
-    "title": "日本没有小费文化",
-    "level": "high",
-    "tags": ["餐厅", "酒店", "支付"],
-    "summary": "在日本餐厅、酒店、出租车等场景通常不需要给小费，服务已包含在价格中。",
-    "points": [
-      "餐厅不需要额外留钱",
-      "酒店通常也不需要塞小费",
-      "给小费有时反而会让对方困惑"
-    ],
-    "tip": "正常付款 + 礼貌道谢，就已经足够。"
-  }
-],
+    {
+      "id": "sumimasen",
+      "title": "すみません —— 日语万能词",
+      "level": "high",
+      "tags": [
+        "开口",
+        "礼貌",
+        "问路",
+        "通用"
+      ],
+      "summary": "既能表示不好意思，也能用来引起注意、轻微道歉，甚至在接受帮助后带一点“麻烦你了”的感谢意味。",
+      "points": [
+        "问路前：すみません、駅はどこですか？",
+        "轻微碰到别人：すみません",
+        "接受帮助后，也可能顺口说すみません，语气里带感谢"
+      ],
+      "tip": "旅游里多用すみません，几乎不会出大错。"
+    },
+    {
+      "id": "thanks_levels",
+      "title": "感谢语层级",
+      "level": "high",
+      "tags": [
+        "礼貌",
+        "感谢",
+        "餐厅",
+        "酒店"
+      ],
+      "summary": "ありがとう偏随意，ありがとうございます最稳，适合游客在大多数公共场景使用。",
+      "points": [
+        "ありがとう：朋友、熟人之间",
+        "ありがとうございます：商店、餐厅、酒店最常用",
+        "どうもありがとうございます：更郑重，接受较大帮助时"
+      ],
+      "tip": "拿不准时，直接用ありがとうございます。"
+    },
+    {
+      "id": "soft_refusal",
+      "title": "委婉拒绝要听懂",
+      "level": "high",
+      "tags": [
+        "会话",
+        "礼貌",
+        "弦外之音"
+      ],
+      "summary": "日本人常不直接说“不行”，而是用ちょっと…、難しいですね等更委婉的表达。",
+      "points": [
+        "ちょっと…：往往不是“有点”，而是“恐怕不行”",
+        "難しいですね：字面是“有点难”，实际常表示拒绝",
+        "はい有时只是“我在听”，不一定是同意"
+      ],
+      "tip": "听到ちょっと…时，别继续强推。"
+    },
+    {
+      "id": "quiet_public",
+      "title": "公共场合安静是美德",
+      "level": "high",
+      "tags": [
+        "地铁",
+        "礼仪",
+        "公共场合"
+      ],
+      "summary": "在地铁、电车、酒店大堂等空间，日本人通常会压低音量，电话也尽量不在车厢里打。",
+      "points": [
+        "地铁里尽量小声说话，手机调静音",
+        "酒店大堂和电梯里也别大声聊天",
+        "游客正常说话在日本环境里往往已经显得偏大声"
+      ],
+      "tip": "不确定音量时，再小一点通常更安全。"
+    },
+    {
+      "id": "restaurant_rules",
+      "title": "餐厅礼仪的几个底线",
+      "level": "high",
+      "tags": [
+        "餐厅",
+        "礼仪",
+        "用餐"
+      ],
+      "summary": "日本餐桌礼仪里，筷子插饭、筷子传食物这类动作要避免；饭前饭后的小表达会很加分。",
+      "points": [
+        "不要把筷子直插在饭上",
+        "不要用筷子互相传递食物",
+        "饭前可以说いただきます，饭后可以说ごちそうさまでした"
+      ],
+      "tip": "不会说很多也没关系，至少避开明显禁忌。"
+    },
+    {
+      "id": "no_tipping",
+      "title": "日本没有小费文化",
+      "level": "high",
+      "tags": [
+        "餐厅",
+        "酒店",
+        "支付"
+      ],
+      "summary": "在日本餐厅、酒店、出租车等场景通常不需要给小费，服务已包含在价格中。",
+      "points": [
+        "餐厅不需要额外留钱",
+        "酒店通常也不需要塞小费",
+        "给小费有时反而会让对方困惑"
+      ],
+      "tip": "正常付款 + 礼貌道谢，就已经足够。"
+    }
+  ],
   "subwayAdventure": {
     "title": "东京地铁大冒险",
     "subtitle": "每站一关卡，通关解锁下一站",
     "culturalNote": "东京地铁由十几家私营公司共同运营——东京Metro、都营地铁、JR、东急、京王……换乘可能就是换了一家公司，需要重新计费，IC卡帮你自动结算。\n明治时代房地产公司先建铁路开发沿线土地（东急、西武、小田急均源于此）；1987年国铁JNR因巨额债务被拆分私有化成JR各公司。\n上车前确认：① 月台颜色 ② 终点站名字（看站台电子屏）。同一个站台可能停靠去往不同方向的车！\n日本换乘≈大陆坐高铁，换乘可能要出站重新买票（相当于从高铁站出来再进动车站）。",
     "railNotes": [
-  {
-    "id": "atami-boundary",
-    "title": "热海站：为什么有时 IC 卡不够用？",
-    "body": "热海常被当作理解“IC 卡区域边界”的教学案例。日本铁路并不是所有区域、所有线路、所有附加服务都能靠一张 IC 卡无脑刷通。跨边界、特急、全车指定席、观光列车，常常需要额外票券处理。",
-    "bullets": [
-      "普通近距离移动：多数情况刷 IC 卡",
-      "特急 / 新干线：常常还要特急券或指定席券",
-      "观光列车：可能保留窗口取票或纸质指定席",
-      "跨区域边界：有时需要特殊处理，不能默认刷到底"
-    ]
-  }
-],
+      {
+        "id": "atami-boundary",
+        "title": "热海站：为什么有时 IC 卡不够用？",
+        "body": "热海常被当作理解“IC 卡区域边界”的教学案例。日本铁路并不是所有区域、所有线路、所有附加服务都能靠一张 IC 卡无脑刷通。跨边界、特急、全车指定席、观光列车，常常需要额外票券处理。",
+        "bullets": [
+          "普通近距离移动：多数情况刷 IC 卡",
+          "特急 / 新干线：常常还要特急券或指定席券",
+          "观光列车：可能保留窗口取票或纸质指定席",
+          "跨区域边界：有时需要特殊处理，不能默认刷到底"
+        ]
+      }
+    ],
     "stations": [
       {
         "id": "shibuya",
@@ -721,456 +747,655 @@
   },
   "scenes": [
     {
-  "id": "subway",
-  "label": "地铁 & 交通",
-  "desc": "买票 · 换乘 · 出口",
-  "emoji": "🚇",
-  "color": "#d4401a",
-  "bgColor": "#fce8e0",
-  "ready": true,
-  "cultureIds": ["sumimasen", "quiet_public"],
-  "goal": [
-    "能完成进站、找站台、换乘、出站这些基础动作",
-    "能问方向、站台、出口和换乘位置",
-    "能听懂最常见的广播和站内高频词",
-    "能在不确定方向时快速确认自己有没有坐错"
-  ],
+      "id": "subway",
+      "label": "地铁 & 交通",
+      "desc": "买票 · 换乘 · 出口",
+      "emoji": "🚇",
+      "color": "#d4401a",
+      "bgColor": "#fce8e0",
+      "ready": true,
+      "cultureIds": [
+        "sumimasen",
+        "quiet_public"
+      ],
+      "goal": [
+        "能完成进站、找站台、换乘、出站这些基础动作",
+        "能问方向、站台、出口和换乘位置",
+        "能听懂最常见的广播和站内高频词",
+        "能在不确定方向时快速确认自己有没有坐错"
+      ],
       "starter": {
-  "title": "零基础先看这个",
-  "items": [
-    "先看中文，不要求你先记住整句日文",
-    "先会一个万能开口：すみません",
-    "先认几个高频汉字：地下鉄、出口、改札口",
-    "不会说完整句也没关系，可以直接指给对方看"
-  ]
-},
-  "notes": [
-    {
-      "t": "🎨 先认颜色，再认终点站",
-      "b": "东京地铁最实用的不是死背线路图，而是先认线路颜色，再确认终点站名字。颜色对了，方向通常就不会大错。"
-    },
-    {
-      "t": "🚪 出口号比“出口”更重要",
-      "b": "东京大站里，知道“我要出站”还不够，关键是出哪个口。A1、B3、南口、西口，差的不是几步，是可能整条街。"
-    },
-    {
-      "t": "🔁 换乘不一定是同一家公司",
-      "b": "在东京，换线有时等于换公司。你以为只是换乘，实际上可能要出闸、再进站、再计费。"
-    }
-  ],
-      "miniDialogues": [
-  {
-    "id": "subway_transfer_1",
-    "title": "问换乘",
-    "lines": [
-      {
-        "role": "A",
-        "jp": "すみません、乗り換えはどこですか？",
-        "roma": "Sumimasen, norikae wa doko desu ka?",
-        "zh": "不好意思，换乘在哪里？"
+        "title": "零基础先看这个",
+        "items": [
+          "先看中文，不要求你先记住整句日文",
+          "先会一个万能开口：すみません",
+          "先认几个高频汉字：地下鉄、出口、改札口",
+          "不会说完整句也没关系，可以直接指给对方看"
+        ]
       },
-      {
-        "role": "B",
-        "jp": "あちらです。",
-        "roma": "Achira desu.",
-        "zh": "在那边。"
-      },
-      {
-        "role": "A",
-        "jp": "ありがとうございます。",
-        "roma": "Arigatou gozaimasu.",
-        "zh": "谢谢您。"
-      }
-    ],
-    "focus": ["すみません", "乗り換え", "あちら", "ありがとうございます"],
-    "tip": "这是最短、最稳的地铁问路对话。先会这一组，比背十句散句更有用。"
-  },
+      "notes": [
         {
-  "id": "subway_ticket_1",
-  "title": "买票 / 买卡",
-  "lines": [
-    {
-      "role": "A",
-      "jp": "すみません、Suicaをください。",
-      "roma": "Sumimasen, Suica o kudasai.",
-      "zh": "不好意思，请给我一张 Suica。"
-    },
-    {
-      "role": "B",
-      "jp": "はい。",
-      "roma": "Hai.",
-      "zh": "好的。"
-    },
-    {
-      "role": "A",
-      "jp": "ありがとうございます。",
-      "roma": "Arigatou gozaimasu.",
-      "zh": "谢谢您。"
-    }
-  ],
-  "focus": ["すみません", "Suica", "ください", "ありがとうございます"],
-  "tip": "第一次到日本，这组对话比“切符売り場在哪里”更常用。先把卡买到手，后面会省很多脑力。"
-}
-],
-  "phrases": [
-    {
-      "id": 1,
-      "type": "core",
-      "jp": "すみません",
-      "roma": "Sumimasen",
-      "zh": "不好意思",
-      "en": "Excuse me",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "万能开场白。道歉、叫人、引起注意三合一。地铁里比こんにちは实用得多。",
-      "links": [
-        { "lang": "EN", "word": "excuse me" },
-        { "lang": "ES", "word": "perdón" },
-        { "lang": "ZH", "word": "不好意思" }
+          "t": "🎨 先认颜色，再认终点站",
+          "b": "东京地铁最实用的不是死背线路图，而是先认线路颜色，再确认终点站名字。颜色对了，方向通常就不会大错。"
+        },
+        {
+          "t": "🚪 出口号比“出口”更重要",
+          "b": "东京大站里，知道“我要出站”还不够，关键是出哪个口。A1、B3、南口、西口，差的不是几步，是可能整条街。"
+        },
+        {
+          "t": "🔁 换乘不一定是同一家公司",
+          "b": "在东京，换线有时等于换公司。你以为只是换乘，实际上可能要出闸、再进站、再计费。"
+        }
       ],
-      "scene": "拦工作人员、问乘客、需要别人让一下时都能开口。",
-      "culture": ""
-    },
-    {
-      "id": 2,
-      "type": "core",
-      "jp": "切符売り場はどこですか？",
-      "roma": "Kippu uriba wa doko desu ka?",
-      "zh": "售票处在哪里？",
-      "en": "Where is the ticket booth?",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "切符 = 票；売り場 = 卖东西的地方。汉字拆开就容易懂。",
-      "links": [
-        { "lang": "ZH", "word": "切符≈车票" },
-        { "lang": "EN", "word": "ticket" }
+      "miniDialogues": [
+        {
+          "id": "subway_transfer_1",
+          "title": "问换乘",
+          "lines": [
+            {
+              "role": "A",
+              "jp": "すみません、乗り換えはどこですか？",
+              "roma": "Sumimasen, norikae wa doko desu ka?",
+              "zh": "不好意思，换乘在哪里？"
+            },
+            {
+              "role": "B",
+              "jp": "あちらです。",
+              "roma": "Achira desu.",
+              "zh": "在那边。"
+            },
+            {
+              "role": "A",
+              "jp": "ありがとうございます。",
+              "roma": "Arigatou gozaimasu.",
+              "zh": "谢谢您。"
+            }
+          ],
+          "focus": [
+            "すみません",
+            "乗り換え",
+            "あちら",
+            "ありがとうございます"
+          ],
+          "tip": "这是最短、最稳的地铁问路对话。先会这一组，比背十句散句更有用。"
+        },
+        {
+          "id": "subway_ticket_1",
+          "title": "买票 / 买卡",
+          "lines": [
+            {
+              "role": "A",
+              "jp": "すみません、Suicaをください。",
+              "roma": "Sumimasen, Suica o kudasai.",
+              "zh": "不好意思，请给我一张 Suica。"
+            },
+            {
+              "role": "B",
+              "jp": "はい。",
+              "roma": "Hai.",
+              "zh": "好的。"
+            },
+            {
+              "role": "A",
+              "jp": "ありがとうございます。",
+              "roma": "Arigatou gozaimasu.",
+              "zh": "谢谢您。"
+            }
+          ],
+          "focus": [
+            "すみません",
+            "Suica",
+            "ください",
+            "ありがとうございます"
+          ],
+          "tip": "第一次到日本，这组对话比“切符売り場在哪里”更常用。先把卡买到手，后面会省很多脑力。"
+        }
       ],
-      "scene": "需要买纸票时用。虽然多数时候 IC 卡更方便，存在一些使用纸质票的情况。",
-      "expandNote": {
-  "title": "为什么有时还是要纸质票？",
-  "items": [
-    "偏远地区或小站不一定完全支持 IC 卡",
-    "新干线、特急常常除了基础车费，还需要特急券/指定席券",
-    "全车指定席列车通常不能只靠刷 IC 卡直接上车",
-    "部分观光列车仍保留窗口或指定席票务",
-    "跨越 IC 卡区域边界时，可能需要改用纸质票处理"
-  ]
-},
-      "culture": ""
-    },
-    {
-      "id": 3,
-      "type": "template",
-      "jp": "〇〇をください",
-      "roma": "〇〇 wo kudasai",
-      "zh": "请给我 〇〇",
-      "en": "Please give me 〇〇",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "ください很万能。地铁场景里最常见的是买卡、买票、要地图。",
-      "links": [
-        { "lang": "EN", "word": "please give me" },
-        { "lang": "ES", "word": "por favor" },
-        { "lang": "ZH", "word": "请给我……" }
+      "phrases": [
+        {
+          "id": 1,
+          "type": "core",
+          "jp": "すみません",
+          "roma": "Sumimasen",
+          "zh": "不好意思",
+          "en": "Excuse me",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "万能开场白。道歉、叫人、引起注意三合一。地铁里比こんにちは实用得多。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "excuse me"
+            },
+            {
+              "lang": "ES",
+              "word": "perdón"
+            },
+            {
+              "lang": "ZH",
+              "word": "不好意思"
+            }
+          ],
+          "scene": "拦工作人员、问乘客、需要别人让一下时都能开口。",
+          "culture": ""
+        },
+        {
+          "id": 2,
+          "type": "core",
+          "jp": "切符売り場はどこですか？",
+          "roma": "Kippu uriba wa doko desu ka?",
+          "zh": "售票处在哪里？",
+          "en": "Where is the ticket booth?",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "切符 = 票；売り場 = 卖东西的地方。汉字拆开就容易懂。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "切符≈车票"
+            },
+            {
+              "lang": "EN",
+              "word": "ticket"
+            }
+          ],
+          "scene": "需要买纸票时用。虽然多数时候 IC 卡更方便，存在一些使用纸质票的情况。",
+          "expandNote": {
+            "title": "为什么有时还是要纸质票？",
+            "items": [
+              "偏远地区或小站不一定完全支持 IC 卡",
+              "新干线、特急常常除了基础车费，还需要特急券/指定席券",
+              "全车指定席列车通常不能只靠刷 IC 卡直接上车",
+              "部分观光列车仍保留窗口或指定席票务",
+              "跨越 IC 卡区域边界时，可能需要改用纸质票处理"
+            ]
+          },
+          "culture": ""
+        },
+        {
+          "id": 3,
+          "type": "template",
+          "jp": "〇〇をください",
+          "roma": "〇〇 wo kudasai",
+          "zh": "请给我 〇〇",
+          "en": "Please give me 〇〇",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "ください很万能。地铁场景里最常见的是买卡、买票、要地图。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "please give me"
+            },
+            {
+              "lang": "ES",
+              "word": "por favor"
+            },
+            {
+              "lang": "ZH",
+              "word": "请给我……"
+            }
+          ],
+          "scene": "窗口买 Suica、纸票、地图时都能套。",
+          "culture": "",
+          "swappableWords": [
+            {
+              "word": "Suica",
+              "reading": "スイカ",
+              "zh": "Suica 卡"
+            },
+            {
+              "word": "切符",
+              "reading": "きっぷ",
+              "zh": "纸票"
+            },
+            {
+              "word": "地図",
+              "reading": "ちず",
+              "zh": "地图"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "type": "template",
+          "jp": "これは〇〇に行きますか？",
+          "roma": "Kore wa 〇〇 ni ikimasu ka?",
+          "zh": "这班车去 〇〇 吗？",
+          "en": "Does this go to 〇〇?",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "这是地铁里非常值钱的模板句。比背线路图更直接。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "does this go to..."
+            },
+            {
+              "lang": "ES",
+              "word": "¿va a ...?"
+            },
+            {
+              "lang": "ZH",
+              "word": "去……吗"
+            }
+          ],
+          "scene": "站台上不确定方向时，问这句最省事。",
+          "culture": "",
+          "swappableWords": [
+            {
+              "word": "渋谷",
+              "zh": "涩谷"
+            },
+            {
+              "word": "新宿",
+              "zh": "新宿"
+            },
+            {
+              "word": "東京",
+              "zh": "东京站"
+            },
+            {
+              "word": "上野",
+              "zh": "上野"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "type": "template",
+          "jp": "何番〇〇ですか？",
+          "roma": "Nan-ban 〇〇 desu ka?",
+          "zh": "几号 〇〇？",
+          "en": "Which number 〇〇?",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "何番这个问法很稳，后面换“线 / ホーム / 出口”都能成立。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "which number"
+            },
+            {
+              "lang": "ES",
+              "word": "qué número"
+            },
+            {
+              "lang": "ZH",
+              "word": "几号"
+            }
+          ],
+          "scene": "你知道自己缺的是“编号”，不是地名时，用它最合适。",
+          "culture": "",
+          "swappableWords": [
+            {
+              "word": "線",
+              "zh": "线 / 站台线号"
+            },
+            {
+              "word": "ホーム",
+              "zh": "站台"
+            },
+            {
+              "word": "出口",
+              "zh": "出口"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "type": "core",
+          "jp": "乗り換えはどこですか？",
+          "roma": "Norikae wa doko desu ka?",
+          "zh": "换乘在哪里？",
+          "en": "Where do I transfer?",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "乗り換え = 上车 + 换，字面就很像“换乘”。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "transfer"
+            },
+            {
+              "lang": "ES",
+              "word": "transbordo"
+            }
+          ],
+          "scene": "大站里最值得会的一句之一。",
+          "culture": ""
+        },
+        {
+          "id": 7,
+          "type": "core",
+          "jp": "次は渋谷です",
+          "roma": "Tsugi wa Shibuya desu",
+          "zh": "下一站是涩谷",
+          "en": "Next stop: Shibuya",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "次 = 下一个。广播里最高频的词之一。",
+          "spotlight": {
+            "title": "为什么先学涩谷？",
+            "body": "涩谷不是普通大站。它是年轻文化、商业密度、换乘复杂度和东京印象的叠加点。很多人第一次在东京真正感到“节奏变了”，就是从涩谷开始。"
+          },
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "次"
+            },
+            {
+              "lang": "EN",
+              "word": "next stop"
+            }
+          ],
+          "scene": "听懂这句，就能减少坐过站的概率。",
+          "culture": ""
+        },
+        {
+          "id": 8,
+          "type": "template",
+          "jp": "〇〇で降ります",
+          "roma": "〇〇 de orimasu",
+          "zh": "我在 〇〇 下车",
+          "en": "I get off at 〇〇",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "降ります = 下车，和乗ります一起记最省事。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "get off"
+            },
+            {
+              "lang": "ES",
+              "word": "me bajo en ..."
+            },
+            {
+              "lang": "ZH",
+              "word": "下车"
+            }
+          ],
+          "scene": "拥挤车厢里提前示意时很有用。",
+          "culture": "",
+          "swappableWords": [
+            {
+              "word": "渋谷",
+              "zh": "涩谷"
+            },
+            {
+              "word": "新宿",
+              "zh": "新宿"
+            },
+            {
+              "word": "池袋",
+              "zh": "池袋"
+            },
+            {
+              "word": "東京",
+              "zh": "东京站"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "type": "template",
+          "jp": "〇〇はどこですか？",
+          "roma": "〇〇 wa doko desu ka?",
+          "zh": "〇〇在哪里？",
+          "en": "Where is 〇〇?",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "在地铁里，这句主要用来找出口、检票口、东口南口这类具体位置。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "where is..."
+            },
+            {
+              "lang": "ES",
+              "word": "¿dónde está...?"
+            },
+            {
+              "lang": "ZH",
+              "word": "在哪里"
+            }
+          ],
+          "scene": "你知道自己要找的是“某个具体口”时最好用。",
+          "culture": "",
+          "swappableWords": [
+            {
+              "word": "出口",
+              "zh": "出口"
+            },
+            {
+              "word": "改札口",
+              "zh": "检票口"
+            },
+            {
+              "word": "南口",
+              "zh": "南口"
+            },
+            {
+              "word": "東口",
+              "zh": "东口"
+            },
+            {
+              "word": "西口",
+              "zh": "西口"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "type": "core",
+          "jp": "改札口はどこですか？",
+          "roma": "Kaisatsuguchi wa doko desu ka?",
+          "zh": "检票口在哪里？",
+          "en": "Where is the ticket gate?",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "口这个字在站内非常重要：出口、改札口、乗り場，都是路感词。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "改札口"
+            },
+            {
+              "lang": "EN",
+              "word": "ticket gate"
+            }
+          ],
+          "scene": "站内绕晕了，想先回到闸机附近时。",
+          "culture": ""
+        },
+        {
+          "id": 11,
+          "type": "support",
+          "jp": "わかりません",
+          "roma": "Wakarimasen",
+          "zh": "我听不懂",
+          "en": "I don't understand",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "不会就直接说不会。旅行里硬撑最浪费时间。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "don't understand"
+            },
+            {
+              "lang": "ES",
+              "word": "no entiendo"
+            }
+          ],
+          "scene": "听不懂说明时，立刻切断复杂对话。",
+          "culture": ""
+        },
+        {
+          "id": 12,
+          "type": "support",
+          "jp": "もう一度言ってください",
+          "roma": "Mou ichido itte kudasai",
+          "zh": "请再说一遍",
+          "en": "Could you repeat that?",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "もう一度 = 再一次，听地铁说明时很常用。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "repeat"
+            },
+            {
+              "lang": "ES",
+              "word": "otra vez"
+            }
+          ],
+          "scene": "对方说得太快或太长时。",
+          "culture": ""
+        },
+        {
+          "id": 13,
+          "type": "core",
+          "jp": "ドアが閉まります",
+          "roma": "Doa ga shimarimasu",
+          "zh": "门要关了",
+          "en": "Doors are closing",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "ドア = door，典型片假名外来词。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "door"
+            },
+            {
+              "lang": "ES",
+              "word": "puertas se cierran"
+            }
+          ],
+          "scene": "听到这句就别再冲门了。",
+          "culture": ""
+        },
+        {
+          "id": 14,
+          "type": "flavor",
+          "jp": "ありがとうございます",
+          "roma": "Arigatou gozaimasu",
+          "zh": "非常感谢",
+          "en": "Thank you very much",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "在地铁里被人认真指路后，这句比点头更有用。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "thank you"
+            },
+            {
+              "lang": "ES",
+              "word": "muchas gracias"
+            },
+            {
+              "lang": "ZH",
+              "word": "谢谢"
+            }
+          ],
+          "scene": "问完路、被帮了忙之后说。",
+          "culture": ""
+        },
+        {
+          "id": 15,
+          "type": "template",
+          "jp": "すみません、〇〇はどこですか？",
+          "roma": "Sumimasen, 〇〇 wa doko desu ka?",
+          "zh": "不好意思，请问 〇〇 在哪里？",
+          "en": "Excuse me, where is 〇〇?",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "这是最省脑子的完整问路开口模板。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "where is..."
+            },
+            {
+              "lang": "ES",
+              "word": "¿dónde está...?"
+            },
+            {
+              "lang": "ZH",
+              "word": "请问……在哪里"
+            }
+          ],
+          "scene": "不想分成两句时，直接一口气说完也成立。",
+          "culture": "",
+          "swappableWords": [
+            {
+              "word": "出口",
+              "zh": "出口"
+            },
+            {
+              "word": "渋谷",
+              "zh": "涩谷"
+            },
+            {
+              "word": "切符売り場",
+              "zh": "售票处"
+            },
+            {
+              "word": "乗り換え",
+              "zh": "换乘处"
+            }
+          ]
+        }
       ],
-      "scene": "窗口买 Suica、纸票、地图时都能套。",
-      "culture": "",
-      "swappableWords": [
-  { "word": "Suica", "reading": "スイカ", "zh": "Suica 卡" },
-  { "word": "切符", "reading": "きっぷ", "zh": "纸票" },
-  { "word": "地図", "reading": "ちず", "zh": "地图" }
-]
-    },
-    {
-      "id": 4,
-      "type": "template",
-      "jp": "これは〇〇に行きますか？",
-      "roma": "Kore wa 〇〇 ni ikimasu ka?",
-      "zh": "这班车去 〇〇 吗？",
-      "en": "Does this go to 〇〇?",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "这是地铁里非常值钱的模板句。比背线路图更直接。",
-      "links": [
-        { "lang": "EN", "word": "does this go to..." },
-        { "lang": "ES", "word": "¿va a ...?" },
-        { "lang": "ZH", "word": "去……吗" }
+      "inputTasks": [
+        {
+          "id": "in1",
+          "type": "scene_match",
+          "prompt": "你想确认这班车去不去新宿，最合适的模板句是哪句？",
+          "answer": "これは〇〇に行きますか？"
+        },
+        {
+          "id": "in2",
+          "type": "listen_match",
+          "prompt": "听到『次は渋谷です』，你应该理解成什么？",
+          "answer": "下一站是涩谷"
+        },
+        {
+          "id": "in3",
+          "type": "scene_match",
+          "prompt": "你在大站里迷路了，想找出口，最直接的一句是什么？",
+          "answer": "出口はどこですか？"
+        }
       ],
-      "scene": "站台上不确定方向时，问这句最省事。",
-      "culture": "",
-      "swappableWords": [
-        { "word": "渋谷", "zh": "涩谷" },
-        { "word": "新宿", "zh": "新宿" },
-        { "word": "東京", "zh": "东京站" },
-        { "word": "上野", "zh": "上野" }
+      "outputTasks": [
+        {
+          "id": "out1",
+          "type": "speak",
+          "promptZh": "不好意思，请问换乘在哪里？",
+          "target": "すみません、乗り換えはどこですか？"
+        },
+        {
+          "id": "out2",
+          "type": "speak",
+          "promptZh": "这班车去东京站吗？",
+          "target": "これは東京に行きますか？"
+        },
+        {
+          "id": "out3",
+          "type": "roleplay",
+          "promptZh": "你要找出口，没听清，再请对方说一遍。",
+          "targets": [
+            "すみません、出口はどこですか？",
+            "わかりません",
+            "もう一度言ってください"
+          ]
+        }
       ]
     },
-    {
-      "id": 5,
-      "type": "template",
-      "jp": "何番〇〇ですか？",
-      "roma": "Nan-ban 〇〇 desu ka?",
-      "zh": "几号 〇〇？",
-      "en": "Which number 〇〇?",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "何番这个问法很稳，后面换“线 / ホーム / 出口”都能成立。",
-      "links": [
-        { "lang": "EN", "word": "which number" },
-        { "lang": "ES", "word": "qué número" },
-        { "lang": "ZH", "word": "几号" }
-      ],
-      "scene": "你知道自己缺的是“编号”，不是地名时，用它最合适。",
-      "culture": "",
-      "swappableWords": [
-        { "word": "線", "zh": "线 / 站台线号" },
-        { "word": "ホーム", "zh": "站台" },
-        { "word": "出口", "zh": "出口" }
-      ]
-    },
-    {
-      "id": 6,
-      "type": "core",
-      "jp": "乗り換えはどこですか？",
-      "roma": "Norikae wa doko desu ka?",
-      "zh": "换乘在哪里？",
-      "en": "Where do I transfer?",
-      "jlpt": "N4",
-      "hookType": "d",
-      "hook": "乗り換え = 上车 + 换，字面就很像“换乘”。",
-      "links": [
-        { "lang": "EN", "word": "transfer" },
-        { "lang": "ES", "word": "transbordo" }
-      ],
-      "scene": "大站里最值得会的一句之一。",
-      "culture": ""
-    },
-   {
-  "id": 7,
-  "type": "core",
-  "jp": "次は渋谷です",
-  "roma": "Tsugi wa Shibuya desu",
-  "zh": "下一站是涩谷",
-  "en": "Next stop: Shibuya",
-  "jlpt": "N5",
-  "hookType": "d",
-  "hook": "次 = 下一个。广播里最高频的词之一。",
-  "spotlight": {
-    "title": "为什么先学涩谷？",
-    "body": "涩谷不是普通大站。它是年轻文化、商业密度、换乘复杂度和东京印象的叠加点。很多人第一次在东京真正感到“节奏变了”，就是从涩谷开始。"
-  },
-  "links": [
-    { "lang": "ZH", "word": "次" },
-    { "lang": "EN", "word": "next stop" }
-  ],
-  "scene": "听懂这句，就能减少坐过站的概率。",
-  "culture": ""
-},
-    {
-      "id": 8,
-      "type": "template",
-      "jp": "〇〇で降ります",
-      "roma": "〇〇 de orimasu",
-      "zh": "我在 〇〇 下车",
-      "en": "I get off at 〇〇",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "降ります = 下车，和乗ります一起记最省事。",
-      "links": [
-        { "lang": "EN", "word": "get off" },
-        { "lang": "ES", "word": "me bajo en ..." },
-        { "lang": "ZH", "word": "下车" }
-      ],
-      "scene": "拥挤车厢里提前示意时很有用。",
-      "culture": "",
-      "swappableWords": [
-        { "word": "渋谷", "zh": "涩谷" },
-        { "word": "新宿", "zh": "新宿" },
-        { "word": "池袋", "zh": "池袋" },
-        { "word": "東京", "zh": "东京站" }
-      ]
-    },
-    {
-      "id": 9,
-      "type": "template",
-      "jp": "〇〇はどこですか？",
-      "roma": "〇〇 wa doko desu ka?",
-      "zh": "〇〇在哪里？",
-      "en": "Where is 〇〇?",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "在地铁里，这句主要用来找出口、检票口、东口南口这类具体位置。",
-      "links": [
-        { "lang": "EN", "word": "where is..." },
-        { "lang": "ES", "word": "¿dónde está...?" },
-        { "lang": "ZH", "word": "在哪里" }
-      ],
-      "scene": "你知道自己要找的是“某个具体口”时最好用。",
-      "culture": "",
-      "swappableWords": [
-        { "word": "出口", "zh": "出口" },
-        { "word": "改札口", "zh": "检票口" },
-        { "word": "南口", "zh": "南口" },
-        { "word": "東口", "zh": "东口" },
-        { "word": "西口", "zh": "西口" }
-      ]
-    },
-    {
-      "id": 10,
-      "type": "core",
-      "jp": "改札口はどこですか？",
-      "roma": "Kaisatsuguchi wa doko desu ka?",
-      "zh": "检票口在哪里？",
-      "en": "Where is the ticket gate?",
-      "jlpt": "N4",
-      "hookType": "d",
-      "hook": "口这个字在站内非常重要：出口、改札口、乗り場，都是路感词。",
-      "links": [
-        { "lang": "ZH", "word": "改札口" },
-        { "lang": "EN", "word": "ticket gate" }
-      ],
-      "scene": "站内绕晕了，想先回到闸机附近时。",
-      "culture": ""
-    },
-    {
-      "id": 11,
-      "type": "support",
-      "jp": "わかりません",
-      "roma": "Wakarimasen",
-      "zh": "我听不懂",
-      "en": "I don't understand",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "不会就直接说不会。旅行里硬撑最浪费时间。",
-      "links": [
-        { "lang": "EN", "word": "don't understand" },
-        { "lang": "ES", "word": "no entiendo" }
-      ],
-      "scene": "听不懂说明时，立刻切断复杂对话。",
-      "culture": ""
-    },
-    {
-      "id": 12,
-      "type": "support",
-      "jp": "もう一度言ってください",
-      "roma": "Mou ichido itte kudasai",
-      "zh": "请再说一遍",
-      "en": "Could you repeat that?",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "もう一度 = 再一次，听地铁说明时很常用。",
-      "links": [
-        { "lang": "EN", "word": "repeat" },
-        { "lang": "ES", "word": "otra vez" }
-      ],
-      "scene": "对方说得太快或太长时。",
-      "culture": ""
-    },
-    {
-      "id": 13,
-      "type": "core",
-      "jp": "ドアが閉まります",
-      "roma": "Doa ga shimarimasu",
-      "zh": "门要关了",
-      "en": "Doors are closing",
-      "jlpt": "N4",
-      "hookType": "e",
-      "hook": "ドア = door，典型片假名外来词。",
-      "links": [
-        { "lang": "EN", "word": "door" },
-        { "lang": "ES", "word": "puertas se cierran" }
-      ],
-      "scene": "听到这句就别再冲门了。",
-      "culture": ""
-    },
-    {
-      "id": 14,
-      "type": "flavor",
-      "jp": "ありがとうございます",
-      "roma": "Arigatou gozaimasu",
-      "zh": "非常感谢",
-      "en": "Thank you very much",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "在地铁里被人认真指路后，这句比点头更有用。",
-      "links": [
-        { "lang": "EN", "word": "thank you" },
-        { "lang": "ES", "word": "muchas gracias" },
-        { "lang": "ZH", "word": "谢谢" }
-      ],
-      "scene": "问完路、被帮了忙之后说。",
-      "culture": ""
-    },
-    {
-      "id": 15,
-      "type": "template",
-      "jp": "すみません、〇〇はどこですか？",
-      "roma": "Sumimasen, 〇〇 wa doko desu ka?",
-      "zh": "不好意思，请问 〇〇 在哪里？",
-      "en": "Excuse me, where is 〇〇?",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "这是最省脑子的完整问路开口模板。",
-      "links": [
-        { "lang": "EN", "word": "where is..." },
-        { "lang": "ES", "word": "¿dónde está...?" },
-        { "lang": "ZH", "word": "请问……在哪里" }
-      ],
-      "scene": "不想分成两句时，直接一口气说完也成立。",
-      "culture": "",
-      "swappableWords": [
-        { "word": "出口", "zh": "出口" },
-        { "word": "渋谷", "zh": "涩谷" },
-        { "word": "切符売り場", "zh": "售票处" },
-        { "word": "乗り換え", "zh": "换乘处" }
-      ]
-    }
-  ],
-  "inputTasks": [
-    {
-      "id": "in1",
-      "type": "scene_match",
-      "prompt": "你想确认这班车去不去新宿，最合适的模板句是哪句？",
-      "answer": "これは〇〇に行きますか？"
-    },
-    {
-      "id": "in2",
-      "type": "listen_match",
-      "prompt": "听到『次は渋谷です』，你应该理解成什么？",
-      "answer": "下一站是涩谷"
-    },
-    {
-      "id": "in3",
-      "type": "scene_match",
-      "prompt": "你在大站里迷路了，想找出口，最直接的一句是什么？",
-      "answer": "出口はどこですか？"
-    }
-  ],
-  "outputTasks": [
-    {
-      "id": "out1",
-      "type": "speak",
-      "promptZh": "不好意思，请问换乘在哪里？",
-      "target": "すみません、乗り換えはどこですか？"
-    },
-    {
-      "id": "out2",
-      "type": "speak",
-      "promptZh": "这班车去东京站吗？",
-      "target": "これは東京に行きますか？"
-    },
-    {
-      "id": "out3",
-      "type": "roleplay",
-      "promptZh": "你要找出口，没听清，再请对方说一遍。",
-      "targets": [
-        "すみません、出口はどこですか？",
-        "わかりません",
-        "もう一度言ってください"
-      ]
-    }
-  ]
-},
     {
       "id": "restaurant",
       "label": "餐厅点餐",
@@ -1179,7 +1404,11 @@
       "color": "#a07020",
       "bgColor": "#faf0d8",
       "ready": true,
-      "cultureIds": ["thanks_levels", "restaurant_rules", "no_tipping"],
+      "cultureIds": [
+        "thanks_levels",
+        "restaurant_rules",
+        "no_tipping"
+      ],
       "notes": [
         {
           "t": "お通し · 不是免费赠品",
@@ -1195,59 +1424,69 @@
         }
       ],
       "miniDialogues": [
-  {
-    "id": "restaurant_order_1",
-    "title": "点餐",
-    "lines": [
-      {
-        "role": "A",
-        "jp": "すみません、注文をお願いします。",
-        "roma": "Sumimasen, chuumon o onegaishimasu.",
-        "zh": "不好意思，我想点餐。"
-      },
-      {
-        "role": "B",
-        "jp": "はい。",
-        "roma": "Hai.",
-        "zh": "好的。"
-      },
-      {
-        "role": "A",
-        "jp": "これをください。",
-        "roma": "Kore o kudasai.",
-        "zh": "请给我这个。"
-      }
-    ],
-    "focus": ["すみません", "注文", "お願いします", "これをください"],
-    "tip": "餐厅里这组对话特别值钱：先叫人，再点单，再指着菜单落地。"
-  },
         {
-  "id": "restaurant_pay_1",
-  "title": "结账",
-  "lines": [
-    {
-      "role": "A",
-      "jp": "すみません、お会計をお願いします。",
-      "roma": "Sumimasen, okaikei o onegaishimasu.",
-      "zh": "不好意思，麻烦结账。"
-    },
-    {
-      "role": "B",
-      "jp": "はい。",
-      "roma": "Hai.",
-      "zh": "好的。"
-    },
-    {
-      "role": "A",
-      "jp": "ありがとうございます。",
-      "roma": "Arigatou gozaimasu.",
-      "zh": "谢谢您。"
-    }
-  ],
-  "focus": ["すみません", "お会計", "お願いします", "ありがとうございます"],
-  "tip": "日本餐厅很多时候不会主动拿账单，这组对话很常用。"
-}
-],
+          "id": "restaurant_order_1",
+          "title": "点餐",
+          "lines": [
+            {
+              "role": "A",
+              "jp": "すみません、注文をお願いします。",
+              "roma": "Sumimasen, chuumon o onegaishimasu.",
+              "zh": "不好意思，我想点餐。"
+            },
+            {
+              "role": "B",
+              "jp": "はい。",
+              "roma": "Hai.",
+              "zh": "好的。"
+            },
+            {
+              "role": "A",
+              "jp": "これをください。",
+              "roma": "Kore o kudasai.",
+              "zh": "请给我这个。"
+            }
+          ],
+          "focus": [
+            "すみません",
+            "注文",
+            "お願いします",
+            "これをください"
+          ],
+          "tip": "餐厅里这组对话特别值钱：先叫人，再点单，再指着菜单落地。"
+        },
+        {
+          "id": "restaurant_pay_1",
+          "title": "结账",
+          "lines": [
+            {
+              "role": "A",
+              "jp": "すみません、お会計をお願いします。",
+              "roma": "Sumimasen, okaikei o onegaishimasu.",
+              "zh": "不好意思，麻烦结账。"
+            },
+            {
+              "role": "B",
+              "jp": "はい。",
+              "roma": "Hai.",
+              "zh": "好的。"
+            },
+            {
+              "role": "A",
+              "jp": "ありがとうございます。",
+              "roma": "Arigatou gozaimasu.",
+              "zh": "谢谢您。"
+            }
+          ],
+          "focus": [
+            "すみません",
+            "お会計",
+            "お願いします",
+            "ありがとうございます"
+          ],
+          "tip": "日本餐厅很多时候不会主动拿账单，这组对话很常用。"
+        }
+      ],
       "phrases": [
         {
           "id": 1,
@@ -1428,331 +1667,470 @@
       ]
     },
     {
-  "id": "convenience",
-  "label": "便利店 & 购物",
-  "desc": "积分 · 加热 · 结账",
-  "emoji": "🛒",
-  "color": "#2a7a6a",
-  "bgColor": "#e0f0ec",
-  "ready": true,
-  "cultureIds": ["thanks_levels"],
-  "goal": [
-    "能完成便利店最常见的结账对话",
-    "能听懂袋子、加热、积分卡这些高频问题",
-    "能主动问有没有某样东西、是否能刷卡、是否能开发票",
-    "能用最少的句子完成一次顺畅购物"
-  ],
-  "notes": [
-    {
-      "t": "🔑 四个骨架先记住",
-      "b": "「〜てください」「〜はありますか」「〜はどこですか」「いりません」——先把这四个框架吃透，便利店大多数对话都够用了。"
-    },
-    {
-      "t": "📱 支付方式很多，但小店别太自信",
-      "b": "大城市便利店一般支持现金、IC卡、信用卡、PayPay、Apple Pay。但老店、小地方还是值得先问一句能不能刷卡。"
-    },
-    {
-      "t": "🕐 便利店不只是买零食",
-      "b": "日本便利店还能打印、寄快递、买票、交账单。你不会词没关系，先用“〜はありますか？”问。"
-    }
-  ],
-      "miniDialogues": [
-  {
-    "id": "convenience_heat_1",
-    "title": "买东西 + 加热",
-    "lines": [
-      {
-        "role": "A",
-        "jp": "これと、これをお願いします。",
-        "roma": "Kore to, kore o onegaishimasu.",
-        "zh": "这个和这个，麻烦了。"
-      },
-      {
-        "role": "B",
-        "jp": "温めますか？",
-        "roma": "Atatamemasu ka?",
-        "zh": "需要加热吗？"
-      },
-      {
-        "role": "A",
-        "jp": "はい、お願いします。",
-        "roma": "Hai, onegaishimasu.",
-        "zh": "好的，麻烦了。"
-      }
-    ],
-    "focus": ["これ", "お願いします", "温めますか", "はい"],
-    "tip": "便利店里最真实的一组，不追求复杂，只求顺畅完成结账。"
-  },
+      "id": "convenience",
+      "label": "便利店 & 购物",
+      "desc": "积分 · 加热 · 结账",
+      "emoji": "🛒",
+      "color": "#2a7a6a",
+      "bgColor": "#e0f0ec",
+      "ready": true,
+      "cultureIds": [
+        "thanks_levels"
+      ],
+      "goal": [
+        "能完成便利店最常见的结账对话",
+        "能听懂袋子、加热、积分卡这些高频问题",
+        "能主动问有没有某样东西、是否能刷卡、是否能开发票",
+        "能用最少的句子完成一次顺畅购物"
+      ],
+      "notes": [
         {
-  "id": "convenience_find_1",
-  "title": "找东西",
-  "lines": [
-    {
-      "role": "A",
-      "jp": "すみません、水はどこですか？",
-      "roma": "Sumimasen, mizu wa doko desu ka?",
-      "zh": "不好意思，水在哪里？"
-    },
-    {
-      "role": "B",
-      "jp": "あちらです。",
-      "roma": "Achira desu.",
-      "zh": "在那边。"
-    },
-    {
-      "role": "A",
-      "jp": "ありがとうございます。",
-      "roma": "Arigatou gozaimasu.",
-      "zh": "谢谢您。"
-    }
-  ],
-  "focus": ["すみません", "水", "どこですか", "あちら", "ありがとうございます"],
-  "tip": "便利店里不会说商品名也没关系，先会问“在哪里”就够用了。"
-}
-],
-  "phrases": [
-    {
-      "id": 1,
-      "type": "core",
-      "jp": "ポイントカードはありますか？",
-      "roma": "Pointo kādo wa arimasu ka?",
-      "zh": "您有积分卡吗？",
-      "en": "Do you have a points card?",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "ポイント = point，カード = card。便利店里很多词都能靠英语猜出来。",
-      "links": [
-        { "lang": "ZH", "word": "积分卡" },
-        { "lang": "JP", "word": "ポイント" },
-        { "lang": "EN", "word": "point card" },
-        { "lang": "ES", "word": "tarjeta de puntos" }
+          "t": "🔑 四个骨架先记住",
+          "b": "「〜てください」「〜はありますか」「〜はどこですか」「いりません」——先把这四个框架吃透，便利店大多数对话都够用了。"
+        },
+        {
+          "t": "📱 支付方式很多，但小店别太自信",
+          "b": "大城市便利店一般支持现金、IC卡、信用卡、PayPay、Apple Pay。但老店、小地方还是值得先问一句能不能刷卡。"
+        },
+        {
+          "t": "🕐 便利店不只是买零食",
+          "b": "日本便利店还能打印、寄快递、买票、交账单。你不会词没关系，先用“〜はありますか？”问。"
+        }
       ],
-      "scene": "结账时收银员特别常问。",
-      "culture": ""
-    },
-    {
-      "id": 2,
-      "type": "core",
-      "jp": "いりません",
-      "roma": "Irimasen",
-      "zh": "不需要",
-      "en": "No, thank you",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "要る = 需要；いりません = 不需要。便利店最高频拒绝句之一。",
-      "links": [
-        { "lang": "ZH", "word": "不要" },
-        { "lang": "EN", "word": "no need" },
-        { "lang": "ES", "word": "no hace falta" }
+      "miniDialogues": [
+        {
+          "id": "convenience_heat_1",
+          "title": "买东西 + 加热",
+          "lines": [
+            {
+              "role": "A",
+              "jp": "これと、これをお願いします。",
+              "roma": "Kore to, kore o onegaishimasu.",
+              "zh": "这个和这个，麻烦了。"
+            },
+            {
+              "role": "B",
+              "jp": "温めますか？",
+              "roma": "Atatamemasu ka?",
+              "zh": "需要加热吗？"
+            },
+            {
+              "role": "A",
+              "jp": "はい、お願いします。",
+              "roma": "Hai, onegaishimasu.",
+              "zh": "好的，麻烦了。"
+            }
+          ],
+          "focus": [
+            "これ",
+            "お願いします",
+            "温めますか",
+            "はい"
+          ],
+          "tip": "便利店里最真实的一组，不追求复杂，只求顺畅完成结账。"
+        },
+        {
+          "id": "convenience_find_1",
+          "title": "找东西",
+          "lines": [
+            {
+              "role": "A",
+              "jp": "すみません、水はどこですか？",
+              "roma": "Sumimasen, mizu wa doko desu ka?",
+              "zh": "不好意思，水在哪里？"
+            },
+            {
+              "role": "B",
+              "jp": "あちらです。",
+              "roma": "Achira desu.",
+              "zh": "在那边。"
+            },
+            {
+              "role": "A",
+              "jp": "ありがとうございます。",
+              "roma": "Arigatou gozaimasu.",
+              "zh": "谢谢您。"
+            }
+          ],
+          "focus": [
+            "すみません",
+            "水",
+            "どこですか",
+            "あちら",
+            "ありがとうございます"
+          ],
+          "tip": "便利店里不会说商品名也没关系，先会问“在哪里”就够用了。"
+        }
       ],
-      "scene": "别人问你要不要袋子、筷子、勺子，直接这句。",
-      "culture": ""
-    },
-    {
-      "id": 3,
-      "type": "core",
-      "jp": "温めますか？",
-      "roma": "Atatamemasu ka?",
-      "zh": "需要加热吗？（店员说）",
-      "en": "Shall I heat it up?",
-      "jlpt": "N4",
-      "hookType": "d",
-      "hook": "温める = 加热。买便当和包子时非常高频。",
-      "links": [
-        { "lang": "ZH", "word": "加热" },
-        { "lang": "EN", "word": "heat up" },
-        { "lang": "ES", "word": "calentar" }
+      "phrases": [
+        {
+          "id": 1,
+          "type": "core",
+          "jp": "ポイントカードはありますか？",
+          "roma": "Pointo kādo wa arimasu ka?",
+          "zh": "您有积分卡吗？",
+          "en": "Do you have a points card?",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "ポイント = point，カード = card。便利店里很多词都能靠英语猜出来。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "积分卡"
+            },
+            {
+              "lang": "JP",
+              "word": "ポイント"
+            },
+            {
+              "lang": "EN",
+              "word": "point card"
+            },
+            {
+              "lang": "ES",
+              "word": "tarjeta de puntos"
+            }
+          ],
+          "scene": "结账时收银员特别常问。",
+          "culture": ""
+        },
+        {
+          "id": 2,
+          "type": "core",
+          "jp": "いりません",
+          "roma": "Irimasen",
+          "zh": "不需要",
+          "en": "No, thank you",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "要る = 需要；いりません = 不需要。便利店最高频拒绝句之一。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "不要"
+            },
+            {
+              "lang": "EN",
+              "word": "no need"
+            },
+            {
+              "lang": "ES",
+              "word": "no hace falta"
+            }
+          ],
+          "scene": "别人问你要不要袋子、筷子、勺子，直接这句。",
+          "culture": ""
+        },
+        {
+          "id": 3,
+          "type": "core",
+          "jp": "温めますか？",
+          "roma": "Atatamemasu ka?",
+          "zh": "需要加热吗？（店员说）",
+          "en": "Shall I heat it up?",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "温める = 加热。买便当和包子时非常高频。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "加热"
+            },
+            {
+              "lang": "EN",
+              "word": "heat up"
+            },
+            {
+              "lang": "ES",
+              "word": "calentar"
+            }
+          ],
+          "scene": "收银员主动问你时，先听懂这句最重要。",
+          "culture": ""
+        },
+        {
+          "id": 4,
+          "type": "core",
+          "jp": "温めてください",
+          "roma": "Atatamete kudasai",
+          "zh": "请帮我加热",
+          "en": "Please heat it up",
+          "jlpt": "N4",
+          "hookType": "d",
+          "hook": "〜てください是非常实用的请求框架。会这一句，很多事都能开口。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "请帮我……"
+            },
+            {
+              "lang": "EN",
+              "word": "please..."
+            },
+            {
+              "lang": "ES",
+              "word": "por favor..."
+            }
+          ],
+          "scene": "店员没主动问，但你想加热时。",
+          "culture": ""
+        },
+        {
+          "id": 5,
+          "type": "core",
+          "jp": "袋はいりますか？",
+          "roma": "Fukuro wa irimasu ka?",
+          "zh": "需要袋子吗？（店员说）",
+          "en": "Do you need a bag?",
+          "jlpt": "N4",
+          "hookType": "t",
+          "hook": "袋读ふくろ，不按中文音走。这个词在购物场景里很值钱。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "袋子"
+            },
+            {
+              "lang": "JP",
+              "word": "袋(ふくろ)"
+            },
+            {
+              "lang": "EN",
+              "word": "bag"
+            },
+            {
+              "lang": "ES",
+              "word": "bolsa"
+            }
+          ],
+          "scene": "法规改了之后，这句几乎成了固定流程。",
+          "culture": ""
+        },
+        {
+          "id": 6,
+          "type": "support",
+          "jp": "カードで払えますか？",
+          "roma": "Kādo de haraemasu ka?",
+          "zh": "可以刷卡吗？",
+          "en": "Can I pay by card?",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "カード = card。〜で払えますか就是“能用……支付吗”。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "刷卡"
+            },
+            {
+              "lang": "EN",
+              "word": "pay by card"
+            },
+            {
+              "lang": "ES",
+              "word": "pagar con tarjeta"
+            },
+            {
+              "lang": "JP",
+              "word": "払う=支付"
+            }
+          ],
+          "scene": "小店、老店、机器坏掉时，先确认最省事。",
+          "culture": ""
+        },
+        {
+          "id": 7,
+          "type": "support",
+          "jp": "領収書をください",
+          "roma": "Ryōshūsho wo kudasai",
+          "zh": "请给我收据（正式）",
+          "en": "Official receipt, please",
+          "jlpt": "N3",
+          "hookType": "d",
+          "hook": "領収書是正式收据，和普通レシート不一样。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "正式收据"
+            },
+            {
+              "lang": "JP",
+              "word": "領収書"
+            },
+            {
+              "lang": "EN",
+              "word": "official receipt"
+            },
+            {
+              "lang": "ES",
+              "word": "recibo formal"
+            }
+          ],
+          "scene": "报销、记账、公司用途时会用到。",
+          "culture": ""
+        },
+        {
+          "id": 8,
+          "type": "template",
+          "jp": "〇〇はどこですか？",
+          "roma": "〇〇 wa doko desu ka?",
+          "zh": "〇〇在哪里？",
+          "en": "Where is 〇〇?",
+          "jlpt": "N5",
+          "hookType": "d",
+          "hook": "这是便利店里最稳的找东西模板句。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "在哪里"
+            },
+            {
+              "lang": "EN",
+              "word": "where is"
+            },
+            {
+              "lang": "ES",
+              "word": "¿dónde está?"
+            }
+          ],
+          "scene": "找便当、ATM、厕所、饮料区都能直接套。",
+          "culture": "",
+          "swappableWords": [
+            {
+              "word": "お弁当",
+              "zh": "便当"
+            },
+            {
+              "word": "ATM",
+              "zh": "ATM"
+            },
+            {
+              "word": "トイレ",
+              "zh": "厕所"
+            },
+            {
+              "word": "お茶",
+              "zh": "茶"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "type": "template",
+          "jp": "〇〇はありますか？",
+          "roma": "〇〇 wa arimasu ka?",
+          "zh": "有 〇〇 吗？",
+          "en": "Do you have 〇〇?",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "便利店万能找物句。不会说完整需求时尤其好用。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "有……吗"
+            },
+            {
+              "lang": "EN",
+              "word": "do you have..."
+            },
+            {
+              "lang": "ES",
+              "word": "¿tiene ...?"
+            }
+          ],
+          "scene": "找不到某样东西，或者想先确认店里有没有卖时。",
+          "culture": "",
+          "swappableWords": [
+            {
+              "word": "充電器",
+              "zh": "充电器"
+            },
+            {
+              "word": "薬",
+              "zh": "药"
+            },
+            {
+              "word": "傘",
+              "zh": "伞"
+            },
+            {
+              "word": "水",
+              "zh": "水"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "type": "flavor",
+          "jp": "ありがとうございました",
+          "roma": "Arigatou gozaimashita",
+          "zh": "谢谢您（离开时）",
+          "en": "Thank you — farewell",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "交易完成后说这句，比只点头更像在日本买过东西。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "谢谢（道别）"
+            },
+            {
+              "lang": "EN",
+              "word": "thank you"
+            },
+            {
+              "lang": "ES",
+              "word": "gracias"
+            }
+          ],
+          "scene": "付完钱拿着东西离开时说。",
+          "culture": ""
+        }
       ],
-      "scene": "收银员主动问你时，先听懂这句最重要。",
-      "culture": ""
-    },
-    {
-      "id": 4,
-      "type": "core",
-      "jp": "温めてください",
-      "roma": "Atatamete kudasai",
-      "zh": "请帮我加热",
-      "en": "Please heat it up",
-      "jlpt": "N4",
-      "hookType": "d",
-      "hook": "〜てください是非常实用的请求框架。会这一句，很多事都能开口。",
-      "links": [
-        { "lang": "ZH", "word": "请帮我……" },
-        { "lang": "EN", "word": "please..." },
-        { "lang": "ES", "word": "por favor..." }
+      "inputTasks": [
+        {
+          "id": "in1",
+          "type": "scene_match",
+          "prompt": "店员问你要不要袋子，你最可能先听到哪句？",
+          "answer": "袋はいりますか？"
+        },
+        {
+          "id": "in2",
+          "type": "scene_match",
+          "prompt": "你想找 ATM，最合适的模板句是哪句？",
+          "answer": "〇〇はどこですか？"
+        },
+        {
+          "id": "in3",
+          "type": "listen_match",
+          "prompt": "听到『温めますか？』，应该理解成什么？",
+          "answer": "需要加热吗？"
+        }
       ],
-      "scene": "店员没主动问，但你想加热时。",
-      "culture": ""
-    },
-    {
-      "id": 5,
-      "type": "core",
-      "jp": "袋はいりますか？",
-      "roma": "Fukuro wa irimasu ka?",
-      "zh": "需要袋子吗？（店员说）",
-      "en": "Do you need a bag?",
-      "jlpt": "N4",
-      "hookType": "t",
-      "hook": "袋读ふくろ，不按中文音走。这个词在购物场景里很值钱。",
-      "links": [
-        { "lang": "ZH", "word": "袋子" },
-        { "lang": "JP", "word": "袋(ふくろ)" },
-        { "lang": "EN", "word": "bag" },
-        { "lang": "ES", "word": "bolsa" }
-      ],
-      "scene": "法规改了之后，这句几乎成了固定流程。",
-      "culture": ""
-    },
-    {
-      "id": 6,
-      "type": "support",
-      "jp": "カードで払えますか？",
-      "roma": "Kādo de haraemasu ka?",
-      "zh": "可以刷卡吗？",
-      "en": "Can I pay by card?",
-      "jlpt": "N4",
-      "hookType": "e",
-      "hook": "カード = card。〜で払えますか就是“能用……支付吗”。",
-      "links": [
-        { "lang": "ZH", "word": "刷卡" },
-        { "lang": "EN", "word": "pay by card" },
-        { "lang": "ES", "word": "pagar con tarjeta" },
-        { "lang": "JP", "word": "払う=支付" }
-      ],
-      "scene": "小店、老店、机器坏掉时，先确认最省事。",
-      "culture": ""
-    },
-    {
-      "id": 7,
-      "type": "support",
-      "jp": "領収書をください",
-      "roma": "Ryōshūsho wo kudasai",
-      "zh": "请给我收据（正式）",
-      "en": "Official receipt, please",
-      "jlpt": "N3",
-      "hookType": "d",
-      "hook": "領収書是正式收据，和普通レシート不一样。",
-      "links": [
-        { "lang": "ZH", "word": "正式收据" },
-        { "lang": "JP", "word": "領収書" },
-        { "lang": "EN", "word": "official receipt" },
-        { "lang": "ES", "word": "recibo formal" }
-      ],
-      "scene": "报销、记账、公司用途时会用到。",
-      "culture": ""
-    },
-    {
-      "id": 8,
-      "type": "template",
-      "jp": "〇〇はどこですか？",
-      "roma": "〇〇 wa doko desu ka?",
-      "zh": "〇〇在哪里？",
-      "en": "Where is 〇〇?",
-      "jlpt": "N5",
-      "hookType": "d",
-      "hook": "这是便利店里最稳的找东西模板句。",
-      "links": [
-        { "lang": "ZH", "word": "在哪里" },
-        { "lang": "EN", "word": "where is" },
-        { "lang": "ES", "word": "¿dónde está?" }
-      ],
-      "scene": "找便当、ATM、厕所、饮料区都能直接套。",
-      "culture": "",
-      "swappableWords": [
-        { "word": "お弁当", "zh": "便当" },
-        { "word": "ATM", "zh": "ATM" },
-        { "word": "トイレ", "zh": "厕所" },
-        { "word": "お茶", "zh": "茶" }
+      "outputTasks": [
+        {
+          "id": "out1",
+          "type": "speak",
+          "promptZh": "请帮我加热，我不要袋子。",
+          "target": "温めてください。いりません。"
+        },
+        {
+          "id": "out2",
+          "type": "speak",
+          "promptZh": "请问可以刷卡吗？",
+          "target": "カードで払えますか？"
+        },
+        {
+          "id": "out3",
+          "type": "roleplay",
+          "promptZh": "你进便利店，想找便当、结账、最后离开。",
+          "targets": [
+            "お弁当はどこですか？",
+            "カードで払えますか？",
+            "ありがとうございました"
+          ]
+        }
       ]
     },
-    {
-      "id": 9,
-      "type": "template",
-      "jp": "〇〇はありますか？",
-      "roma": "〇〇 wa arimasu ka?",
-      "zh": "有 〇〇 吗？",
-      "en": "Do you have 〇〇?",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "便利店万能找物句。不会说完整需求时尤其好用。",
-      "links": [
-        { "lang": "ZH", "word": "有……吗" },
-        { "lang": "EN", "word": "do you have..." },
-        { "lang": "ES", "word": "¿tiene ...?" }
-      ],
-      "scene": "找不到某样东西，或者想先确认店里有没有卖时。",
-      "culture": "",
-      "swappableWords": [
-        { "word": "充電器", "zh": "充电器" },
-        { "word": "薬", "zh": "药" },
-        { "word": "傘", "zh": "伞" },
-        { "word": "水", "zh": "水" }
-      ]
-    },
-    {
-      "id": 10,
-      "type": "flavor",
-      "jp": "ありがとうございました",
-      "roma": "Arigatou gozaimashita",
-      "zh": "谢谢您（离开时）",
-      "en": "Thank you — farewell",
-      "jlpt": "N5",
-      "hookType": "e",
-      "hook": "交易完成后说这句，比只点头更像在日本买过东西。",
-      "links": [
-        { "lang": "ZH", "word": "谢谢（道别）" },
-        { "lang": "EN", "word": "thank you" },
-        { "lang": "ES", "word": "gracias" }
-      ],
-      "scene": "付完钱拿着东西离开时说。",
-      "culture": ""
-    }
-  ],
-  "inputTasks": [
-    {
-      "id": "in1",
-      "type": "scene_match",
-      "prompt": "店员问你要不要袋子，你最可能先听到哪句？",
-      "answer": "袋はいりますか？"
-    },
-    {
-      "id": "in2",
-      "type": "scene_match",
-      "prompt": "你想找 ATM，最合适的模板句是哪句？",
-      "answer": "〇〇はどこですか？"
-    },
-    {
-      "id": "in3",
-      "type": "listen_match",
-      "prompt": "听到『温めますか？』，应该理解成什么？",
-      "answer": "需要加热吗？"
-    }
-  ],
-  "outputTasks": [
-    {
-      "id": "out1",
-      "type": "speak",
-      "promptZh": "请帮我加热，我不要袋子。",
-      "target": "温めてください。いりません。"
-    },
-    {
-      "id": "out2",
-      "type": "speak",
-      "promptZh": "请问可以刷卡吗？",
-      "target": "カードで払えますか？"
-    },
-    {
-      "id": "out3",
-      "type": "roleplay",
-      "promptZh": "你进便利店，想找便当、结账、最后离开。",
-      "targets": [
-        "お弁当はどこですか？",
-        "カードで払えますか？",
-        "ありがとうございました"
-      ]
-    }
-  ]
-},
     {
       "id": "hotel",
       "label": "酒店入住",
@@ -1761,7 +2139,10 @@
       "color": "#2d5fa0",
       "bgColor": "#e6eef8",
       "ready": true,
-      "cultureIds": ["thanks_levels", "quiet_public"],
+      "cultureIds": [
+        "thanks_levels",
+        "quiet_public"
+      ],
       "notes": [
         {
           "t": "🛁 浴室热水开关",
@@ -1777,59 +2158,69 @@
         }
       ],
       "miniDialogues": [
-  {
-    "id": "hotel_checkin_1",
-    "title": "入住",
-    "lines": [
-      {
-        "role": "A",
-        "jp": "チェックインをお願いします。",
-        "roma": "Chekku-in o onegaishimasu.",
-        "zh": "麻烦帮我办理入住。"
-      },
-      {
-        "role": "B",
-       "jp": "お名前をお願いします。",
-        "roma": "Onamae wa?",
-        "zh": "请问您的名字是？"
-      },
-      {
-        "role": "A",
-        "jp": "予約しています。〇〇です。",
-        "roma": "Yoyaku shite imasu. 〇〇 desu.",
-        "zh": "我有预约，我叫〇〇。"
-      }
-    ],
-    "focus": ["チェックイン", "お願いします", "お名前", "予約しています"],
-    "tip": "酒店最实用的一组是“入住 + 报名字”。先把这一组练顺，前台流程就不容易慌。"
-  },
         {
-  "id": "hotel_checkout_1",
-  "title": "退房 + 寄存行李",
-  "lines": [
-    {
-      "role": "A",
-      "jp": "チェックアウトをお願いします。",
-      "roma": "Chekku-auto o onegaishimasu.",
-      "zh": "麻烦帮我办理退房。"
-    },
-    {
-      "role": "A",
-      "jp": "荷物を預かってもらえますか？",
-      "roma": "Nimotsu o azukatte moraemasu ka?",
-      "zh": "可以帮我寄存行李吗？"
-    },
-    {
-      "role": "B",
-      "jp": "はい、かしこまりました。",
-      "roma": "Hai, kashikomarimashita.",
-      "zh": "好的，没问题。"
-    }
-  ],
-  "focus": ["チェックアウト", "荷物", "預かってもらえますか", "かしこまりました"],
-  "tip": "这组非常实用，尤其适合退房后还想继续玩半天的场景。"
-}
-],
+          "id": "hotel_checkin_1",
+          "title": "入住",
+          "lines": [
+            {
+              "role": "A",
+              "jp": "チェックインをお願いします。",
+              "roma": "Chekku-in o onegaishimasu.",
+              "zh": "麻烦帮我办理入住。"
+            },
+            {
+              "role": "B",
+              "jp": "お名前をお願いします。",
+              "roma": "Onamae wa?",
+              "zh": "请问您的名字是？"
+            },
+            {
+              "role": "A",
+              "jp": "予約しています。〇〇です。",
+              "roma": "Yoyaku shite imasu. 〇〇 desu.",
+              "zh": "我有预约，我叫〇〇。"
+            }
+          ],
+          "focus": [
+            "チェックイン",
+            "お願いします",
+            "お名前",
+            "予約しています"
+          ],
+          "tip": "酒店最实用的一组是“入住 + 报名字”。先把这一组练顺，前台流程就不容易慌。"
+        },
+        {
+          "id": "hotel_checkout_1",
+          "title": "退房 + 寄存行李",
+          "lines": [
+            {
+              "role": "A",
+              "jp": "チェックアウトをお願いします。",
+              "roma": "Chekku-auto o onegaishimasu.",
+              "zh": "麻烦帮我办理退房。"
+            },
+            {
+              "role": "A",
+              "jp": "荷物を預かってもらえますか？",
+              "roma": "Nimotsu o azukatte moraemasu ka?",
+              "zh": "可以帮我寄存行李吗？"
+            },
+            {
+              "role": "B",
+              "jp": "はい、かしこまりました。",
+              "roma": "Hai, kashikomarimashita.",
+              "zh": "好的，没问题。"
+            }
+          ],
+          "focus": [
+            "チェックアウト",
+            "荷物",
+            "預かってもらえますか",
+            "かしこまりました"
+          ],
+          "tip": "这组非常实用，尤其适合退房后还想继续玩半天的场景。"
+        }
+      ],
       "phrases": [
         {
           "id": 1,
@@ -2153,7 +2544,10 @@
       "color": "#5a3a9a",
       "bgColor": "#eeebff",
       "ready": true,
-      "cultureIds": ["sumimasen", "soft_refusal"],
+      "cultureIds": [
+        "sumimasen",
+        "soft_refusal"
+      ],
       "notes": [
         {
           "t": "🇯🇵 日本人被问路会紧张",
@@ -2173,59 +2567,71 @@
         }
       ],
       "miniDialogues": [
-  {
-    "id": "directions_ask_1",
-    "title": "问方向",
-    "lines": [
-      {
-        "role": "A",
-        "jp": "すみません、東京タワーはどこですか？",
-        "roma": "Sumimasen, Toukyou Tawaa wa doko desu ka?",
-        "zh": "不好意思，东京塔在哪里？"
-      },
-      {
-        "role": "B",
-        "jp": "あちらです。まっすぐ行ってください。",
-        "roma": "Achira desu. Massugu itte kudasai.",
-        "zh": "在那边。请直走。"
-      },
-      {
-        "role": "A",
-        "jp": "ありがとうございます。",
-        "roma": "Arigatou gozaimasu.",
-        "zh": "谢谢您。"
-      }
-    ],
-    "focus": ["すみません", "どこですか", "あちら", "まっすぐ", "ありがとうございます"],
-    "tip": "真实问路里，能听懂“那边 + 直走”，已经能解决大半问题。"
-  },
         {
-  "id": "directions_distance_1",
-  "title": "问距离",
-  "lines": [
-    {
-      "role": "A",
-      "jp": "ここから駅まで歩いて何分ですか？",
-      "roma": "Koko kara eki made aruite nan-pun desu ka?",
-      "zh": "从这里走到车站要几分钟？"
-    },
-    {
-      "role": "B",
-      "jp": "五分ぐらいです。",
-      "roma": "Go-fun gurai desu.",
-      "zh": "大概五分钟。"
-    },
-    {
-      "role": "A",
-      "jp": "ありがとうございます。",
-      "roma": "Arigatou gozaimasu.",
-      "zh": "谢谢您。"
-    }
-  ],
-  "focus": ["ここから", "駅まで", "歩いて", "何分", "ぐらい"],
-  "tip": "日本人特别爱用“步行几分钟”描述距离，这组很地道。"
-}
-],
+          "id": "directions_ask_1",
+          "title": "问方向",
+          "lines": [
+            {
+              "role": "A",
+              "jp": "すみません、東京タワーはどこですか？",
+              "roma": "Sumimasen, Toukyou Tawaa wa doko desu ka?",
+              "zh": "不好意思，东京塔在哪里？"
+            },
+            {
+              "role": "B",
+              "jp": "あちらです。まっすぐ行ってください。",
+              "roma": "Achira desu. Massugu itte kudasai.",
+              "zh": "在那边。请直走。"
+            },
+            {
+              "role": "A",
+              "jp": "ありがとうございます。",
+              "roma": "Arigatou gozaimasu.",
+              "zh": "谢谢您。"
+            }
+          ],
+          "focus": [
+            "すみません",
+            "どこですか",
+            "あちら",
+            "まっすぐ",
+            "ありがとうございます"
+          ],
+          "tip": "真实问路里，能听懂“那边 + 直走”，已经能解决大半问题。"
+        },
+        {
+          "id": "directions_distance_1",
+          "title": "问距离",
+          "lines": [
+            {
+              "role": "A",
+              "jp": "ここから駅まで歩いて何分ですか？",
+              "roma": "Koko kara eki made aruite nan-pun desu ka?",
+              "zh": "从这里走到车站要几分钟？"
+            },
+            {
+              "role": "B",
+              "jp": "五分ぐらいです。",
+              "roma": "Go-fun gurai desu.",
+              "zh": "大概五分钟。"
+            },
+            {
+              "role": "A",
+              "jp": "ありがとうございます。",
+              "roma": "Arigatou gozaimasu.",
+              "zh": "谢谢您。"
+            }
+          ],
+          "focus": [
+            "ここから",
+            "駅まで",
+            "歩いて",
+            "何分",
+            "ぐらい"
+          ],
+          "tip": "日本人特别爱用“步行几分钟”描述距离，这组很地道。"
+        }
+      ],
       "phrases": [
         {
           "id": 1,
@@ -2345,56 +2751,56 @@
           ],
           "scene": "导航显示不远，但你想确认是不是能走过去时，用这句最自然。"
         },
-       {
-  "id": 5,
-  "jp": "もう一度お願いします",
-  "roma": "Mou ichido onegaishimasu",
-  "zh": "请再说一遍",
-  "en": "One more time, please",
-  "jlpt": "N5",
-  "hookType": "e",
-  "hook": "「もう一度」= one more time。比长长的尊敬语版本更适合旅游现场：短、稳、礼貌，脑子空白时也说得出来。",
-  "links": [
-    {
-      "lang": "EN",
-      "word": "one more time"
-    },
-    {
-      "lang": "ES",
-      "word": "otra vez, por favor"
-    },
-    {
-      "lang": "ZH",
-      "word": "再一次"
-    }
-  ],
-  "scene": "对方说太快、环境太吵、你一下没反应过来时，先丢这句。先活下来，再求完美。"
-},
-{
-  "id": 6,
-  "jp": "もう一度おっしゃっていただけますか？",
-  "roma": "Mou ichido osshatte itadakemasu ka?",
-  "zh": "可以再说一遍吗？（更礼貌）",
-  "en": "Could you say that again?",
-  "jlpt": "N4",
-  "hookType": "t",
-  "hook": "陷阱：「おっしゃる」是「言う」的尊敬语。学习者容易直接用「言ってください」，但对陌生人这样说显得失礼。向对方请求时，把对方的动作升级为尊敬语。",
-  "links": [
-    {
-      "lang": "EN",
-      "word": "say it again"
-    },
-    {
-      "lang": "ES",
-      "word": "¿puede repetir?"
-    },
-    {
-      "lang": "ZH",
-      "word": "再说一遍（敬语）"
-    }
-  ],
-  "scene": "这是问路进阶版。当前面的「もう一度お願いします」不够细腻时，用这句更像你原来雕过的语言层次。"
-},
+        {
+          "id": 5,
+          "jp": "もう一度お願いします",
+          "roma": "Mou ichido onegaishimasu",
+          "zh": "请再说一遍",
+          "en": "One more time, please",
+          "jlpt": "N5",
+          "hookType": "e",
+          "hook": "「もう一度」= one more time。比长长的尊敬语版本更适合旅游现场：短、稳、礼貌，脑子空白时也说得出来。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "one more time"
+            },
+            {
+              "lang": "ES",
+              "word": "otra vez, por favor"
+            },
+            {
+              "lang": "ZH",
+              "word": "再一次"
+            }
+          ],
+          "scene": "对方说太快、环境太吵、你一下没反应过来时，先丢这句。先活下来，再求完美。"
+        },
+        {
+          "id": 6,
+          "jp": "もう一度おっしゃっていただけますか？",
+          "roma": "Mou ichido osshatte itadakemasu ka?",
+          "zh": "可以再说一遍吗？（更礼貌）",
+          "en": "Could you say that again?",
+          "jlpt": "N4",
+          "hookType": "t",
+          "hook": "陷阱：「おっしゃる」是「言う」的尊敬语。学习者容易直接用「言ってください」，但对陌生人这样说显得失礼。向对方请求时，把对方的动作升级为尊敬语。",
+          "links": [
+            {
+              "lang": "EN",
+              "word": "say it again"
+            },
+            {
+              "lang": "ES",
+              "word": "¿puede repetir?"
+            },
+            {
+              "lang": "ZH",
+              "word": "再说一遍（敬语）"
+            }
+          ],
+          "scene": "这是问路进阶版。当前面的「もう一度お願いします」不够细腻时，用这句更像你原来雕过的语言层次。"
+        },
         {
           "id": 7,
           "jp": "ゆっくりお願いします",
@@ -2564,7 +2970,7 @@
         }
       ]
     },
-   {
+    {
       "id": "emergency",
       "label": "紧急 & 就医",
       "desc": "求助 · 医院 · 药店",
@@ -2572,7 +2978,9 @@
       "color": "#aa3355",
       "bgColor": "#fce8ee",
       "ready": true,
-      "cultureIds": ["sumimasen"],
+      "cultureIds": [
+        "sumimasen"
+      ],
       "goal": [
         "能表达自己不舒服或需要帮助",
         "能问医院、药店、厕所在哪里",
@@ -2594,60 +3002,70 @@
           "b": "真到紧张场景，能把护照页、酒店名称、酒店地址给对方看，往往比你硬说更快。"
         }
       ],
-     "miniDialogues": [
-  {
-    "id": "emergency_hospital_1",
-    "title": "不舒服 + 去医院",
-    "lines": [
-      {
-        "role": "A",
-        "jp": "気分が悪いです。",
-        "roma": "Kibun ga warui desu.",
-        "zh": "我不舒服。"
-      },
-      {
-        "role": "B",
-        "jp": "病院に行きますか？",
-        "roma": "Byouin ni ikimasu ka?",
-        "zh": "要去医院吗？"
-      },
-      {
-        "role": "A",
-        "jp": "はい、お願いします。",
-        "roma": "Hai, onegaishimasu.",
-        "zh": "好的，拜托了。"
-      }
-    ],
-    "focus": ["気分が悪い", "病院", "はい", "お願いします"],
-    "tip": "紧急场景不要追求复杂表达，短句 + 明确需求最有用。"
-  },
-       {
-  "id": "emergency_drugstore_1",
-  "title": "找药店 + 买药",
-  "lines": [
-    {
-      "role": "A",
-      "jp": "すみません、薬局はどこですか？",
-      "roma": "Sumimasen, yakkyoku wa doko desu ka?",
-      "zh": "不好意思，药店在哪里？"
-    },
-    {
-      "role": "B",
-      "jp": "あそこです。",
-      "roma": "Asoko desu.",
-      "zh": "在那边。"
-    },
-    {
-      "role": "A",
-      "jp": "薬をください。",
-      "roma": "Kusuri o kudasai.",
-      "zh": "请给我药。"
-    }
-  ],
-  "focus": ["すみません", "薬局", "あそこ", "薬をください"],
-  "tip": "先找到药店，再用最短句表达需求。紧急时不需要过度追求完整表达。"
-}
-],
+      "miniDialogues": [
+        {
+          "id": "emergency_hospital_1",
+          "title": "不舒服 + 去医院",
+          "lines": [
+            {
+              "role": "A",
+              "jp": "気分が悪いです。",
+              "roma": "Kibun ga warui desu.",
+              "zh": "我不舒服。"
+            },
+            {
+              "role": "B",
+              "jp": "病院に行きますか？",
+              "roma": "Byouin ni ikimasu ka?",
+              "zh": "要去医院吗？"
+            },
+            {
+              "role": "A",
+              "jp": "はい、お願いします。",
+              "roma": "Hai, onegaishimasu.",
+              "zh": "好的，拜托了。"
+            }
+          ],
+          "focus": [
+            "気分が悪い",
+            "病院",
+            "はい",
+            "お願いします"
+          ],
+          "tip": "紧急场景不要追求复杂表达，短句 + 明确需求最有用。"
+        },
+        {
+          "id": "emergency_drugstore_1",
+          "title": "找药店 + 买药",
+          "lines": [
+            {
+              "role": "A",
+              "jp": "すみません、薬局はどこですか？",
+              "roma": "Sumimasen, yakkyoku wa doko desu ka?",
+              "zh": "不好意思，药店在哪里？"
+            },
+            {
+              "role": "B",
+              "jp": "あそこです。",
+              "roma": "Asoko desu.",
+              "zh": "在那边。"
+            },
+            {
+              "role": "A",
+              "jp": "薬をください。",
+              "roma": "Kusuri o kudasai.",
+              "zh": "请给我药。"
+            }
+          ],
+          "focus": [
+            "すみません",
+            "薬局",
+            "あそこ",
+            "薬をください"
+          ],
+          "tip": "先找到药店，再用最短句表达需求。紧急时不需要过度追求完整表达。"
+        }
+      ],
       "phrases": [
         {
           "id": 1,
@@ -3210,187 +3628,299 @@
   ],
   "kanaRows": [
     {
-  "row": "あ行",
-  "chars": [
-    {
-      "kana": "あ",
-      "pair": "ア",
-      "roma": "a",
-      "source": "安",
-      "anchor": "安 → あ",
-      "hint": "嘴巴自然张开，发短促的 a。",
-      "strokeKey": "a-hira",
-      "pairStrokeKey": "a-kata",
-      "confuse": {
-        "level": "L2",
-        "items": [
-          {
-            "with": "お",
-            "diff": "あ有回环，お有小尾巴。"
-          }
-        ]
-      },
-      "examples": [
-  {
-    "word": "あめ",
-    "reading": "あめ",
-    "kanji": "雨",
-    "zh": "雨"
-  },
-  {
-    "word": "あか",
-    "reading": "あか",
-    "kanji": "赤",
-    "zh": "红色"
-  }
-],
-      "hook": "安 → あ。嘴巴自然张开，发短促的 a。",
-      "links": [
+      "row": "あ行",
+      "chars": [
         {
-          "lang": "ZH",
-          "word": "安→あ"
+          "kana": "あ",
+          "pair": "ア",
+          "roma": "a",
+          "source": "安",
+          "anchor": "安 → あ",
+          "hint": "嘴巴自然张开，发短促的 a。",
+          "strokeKey": "a-hira",
+          "pairStrokeKey": "a-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "お",
+                "diff": "あ有回环，お有小尾巴。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "あめ",
+              "reading": "あめ",
+              "kanji": "雨",
+              "zh": "雨"
+            },
+            {
+              "word": "あか",
+              "reading": "あか",
+              "kanji": "赤",
+              "zh": "红色"
+            }
+          ],
+          "hook": "安 → あ。嘴巴自然张开，发短促的 a。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "安→あ"
+            },
+            {
+              "lang": "ES",
+              "word": "a"
+            },
+            {
+              "lang": "EN",
+              "word": "a"
+            }
+          ],
+          "pairSource": "阿",
+          "pairAnchor": "阿 → ア"
         },
         {
-          "lang": "ES",
-          "word": "a"
+          "kana": "い",
+          "roma": "i",
+          "hook": "草书「以」变形；舌面抬高，接近「衣」但短促",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "以→い"
+            },
+            {
+              "lang": "EN",
+              "word": "i"
+            }
+          ],
+          "pair": "イ",
+          "source": "以",
+          "pairSource": "伊",
+          "anchor": "以 → い",
+          "pairAnchor": "伊 → イ",
+          "hint": "舌面抬高，发短促的 i，接近中文「衣」但更轻。",
+          "strokeKey": "i-hira",
+          "pairStrokeKey": "i-kata",
+          "examples": [
+            {
+              "word": "いえ",
+              "reading": "いえ",
+              "kanji": "家",
+              "zh": "家"
+            },
+            {
+              "word": "いぬ",
+              "reading": "いぬ",
+              "kanji": "犬",
+              "zh": "狗"
+            }
+          ]
         },
         {
-          "lang": "EN",
-          "word": "a"
+          "kana": "う",
+          "roma": "u",
+          "hook": "草书「宇」变形；嘴唇不圆，是扁平的 u；注意区分：お",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "宇→う"
+            }
+          ],
+          "pair": "ウ",
+          "source": "宇",
+          "pairSource": "宇",
+          "anchor": "宇 → う",
+          "pairAnchor": "宇 → ウ",
+          "hint": "嘴唇不要太圆，发短促、靠后的 u。",
+          "strokeKey": "u-hira",
+          "pairStrokeKey": "u-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "お",
+                "diff": "う更像上方一点加弯钩，お有竖线和小尾巴。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "うみ",
+              "reading": "うみ",
+              "kanji": "海",
+              "zh": "海"
+            },
+            {
+              "word": "うえ",
+              "reading": "うえ",
+              "kanji": "上",
+              "zh": "上面"
+            }
+          ]
+        },
+        {
+          "kana": "え",
+          "roma": "e",
+          "hook": "草书「衣」变形；单元音 e，像「欸」的开头",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "工≈え"
+            },
+            {
+              "lang": "ES",
+              "word": "e"
+            }
+          ],
+          "pair": "エ",
+          "source": "衣",
+          "pairSource": "江",
+          "anchor": "衣 → え",
+          "pairAnchor": "江 → エ",
+          "hint": "发短促的 e，像中文「欸」的开头，不要拖长。",
+          "strokeKey": "e-hira",
+          "pairStrokeKey": "e-kata",
+          "examples": [
+            {
+              "word": "えき",
+              "reading": "えき",
+              "kanji": "駅",
+              "zh": "车站"
+            },
+            {
+              "word": "えん",
+              "reading": "えん",
+              "kanji": "円",
+              "zh": "日元；圆"
+            }
+          ]
+        },
+        {
+          "kana": "お",
+          "roma": "o",
+          "hook": "草书「于」变形；嘴唇圆，发音短促；注意区分：あ、う",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "于→お"
+            },
+            {
+              "lang": "ES",
+              "word": "o"
+            }
+          ],
+          "pair": "オ",
+          "source": "於",
+          "pairSource": "於",
+          "anchor": "於 → お",
+          "pairAnchor": "於 → オ",
+          "hint": "嘴唇微圆，发短促的 o，注意和あ、う分开。",
+          "strokeKey": "o-hira",
+          "pairStrokeKey": "o-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "あ",
+                "diff": "お有明显小尾巴；あ的回环更开。"
+              },
+              {
+                "with": "う",
+                "diff": "お有竖线和尾巴；う结构更简单。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "おちゃ",
+              "reading": "おちゃ",
+              "kanji": "お茶",
+              "zh": "茶"
+            },
+            {
+              "word": "おと",
+              "reading": "おと",
+              "kanji": "音",
+              "zh": "声音"
+            }
+          ]
         }
       ]
     },
     {
-      "kana": "い",
-      "roma": "i",
-      "hook": "草书「以」变形；舌面抬高，接近「衣」但短促",
-      "links": [
+      "row": "か行",
+      "chars": [
         {
-          "lang": "ZH",
-          "word": "以→い"
+          "kana": "か",
+          "roma": "ka",
+          "hook": "草书「加」变形；清音不送气；注意区分：が",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "加→か"
+            },
+            {
+              "lang": "ES",
+              "word": "ca-"
+            }
+          ]
         },
         {
-          "lang": "EN",
-          "word": "i"
-        }
-      ]
-    },
-    {
-      "kana": "う",
-      "roma": "u",
-      "hook": "草书「宇」变形；嘴唇不圆，是扁平的 u；注意区分：お",
-      "links": [
-        {
-          "lang": "ZH",
-          "word": "宇→う"
-        }
-      ]
-    },
-    {
-      "kana": "え",
-      "roma": "e",
-      "hook": "草书「衣」变形；单元音 e，像「欸」的开头",
-      "links": [
-        {
-          "lang": "ZH",
-          "word": "工≈え"
+          "kana": "き",
+          "roma": "ki",
+          "hook": "草书「几」变形；接近「key」的开头",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "几→き"
+            },
+            {
+              "lang": "EN",
+              "word": "key→き"
+            }
+          ]
         },
         {
-          "lang": "ES",
-          "word": "e"
-        }
-      ]
-    },
-    {
-      "kana": "お",
-      "roma": "o",
-      "hook": "草书「于」变形；嘴唇圆，发音短促；注意区分：あ、う",
-      "links": [
-        {
-          "lang": "ZH",
-          "word": "于→お"
+          "kana": "く",
+          "roma": "ku",
+          "hook": "草书「久」变形；嘴唇不突出，短促；易混：く像「<」，す中间一竖穿过",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "久→く"
+            }
+          ]
         },
         {
-          "lang": "ES",
-          "word": "o"
-        }
-      ]
-    }
-    ]
-},
-{
-  "row": "か行",
-  "chars": [
-    {
-      "kana": "か",
-      "roma": "ka",
-      "hook": "草书「加」变形；清音不送气；注意区分：が",
-      "links": [
-        {
-          "lang": "ZH",
-          "word": "加→か"
+          "kana": "け",
+          "roma": "ke",
+          "hook": "草书「介」变形；接近「开」的韵母",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "介→け"
+            }
+          ]
         },
         {
-          "lang": "ES",
-          "word": "ca-"
+          "kana": "こ",
+          "roma": "ko",
+          "hook": "草书「己」变形；短促，不要拖长；注意区分：ご",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "己→こ"
+            },
+            {
+              "lang": "ZH",
+              "word": "二≈こ"
+            }
+          ]
         }
       ]
     },
     {
-      "kana": "き",
-      "roma": "ki",
-      "hook": "草书「几」变形；接近「key」的开头",
-      "links": [
-        {
-          "lang": "ZH",
-          "word": "几→き"
-        },
-        {
-          "lang": "EN",
-          "word": "key→き"
-        }
-      ]
-    },
-    {
-      "kana": "く",
-      "roma": "ku",
-      "hook": "草书「久」变形；嘴唇不突出，短促；易混：く像「<」，す中间一竖穿过",
-      "links": [
-        {
-          "lang": "ZH",
-          "word": "久→く"
-        }
-      ]
-    },
-    {
-      "kana": "け",
-      "roma": "ke",
-      "hook": "草书「介」变形；接近「开」的韵母",
-      "links": [
-        {
-          "lang": "ZH",
-          "word": "介→け"
-        }
-      ]
-    },
-    {
-      "kana": "こ",
-      "roma": "ko",
-      "hook": "草书「己」变形；短促，不要拖长；注意区分：ご",
-      "links": [
-        {
-          "lang": "ZH",
-          "word": "己→こ"
-        },
-        {
-          "lang": "ZH",
-          "word": "二≈こ"
-        }
-      ]
-    }
-  ]
-},
-{
       "row": "さ行",
       "chars": [
         {
@@ -3773,551 +4303,755 @@
       ]
     },
     {
-  "row": "ら行",
-  "chars": [
-    {
-      "kana": "ら",
-      "roma": "ra",
-      "hook": "草书「良」变形；舌尖轻弹上颚，r和l之间，不是卷舌；注意区分：わ",
-      "links": [
+      "row": "ら行",
+      "chars": [
         {
-          "lang": "ZH",
-          "word": "良→ら"
-        }
-      ]
-    },
-    {
-      "kana": "り",
-      "roma": "ri",
-      "hook": "草书「利」变形；接近「里」；注意区分：る",
-      "links": [
-        {
-          "lang": "ZH",
-          "word": "利→り"
-        }
-      ]
-    },
-    {
-      "kana": "る",
-      "roma": "ru",
-      "hook": "草书「留」变形；嘴唇略圆，短促；注意区分：り",
-      "links": [
-        {
-          "lang": "ZH",
-          "word": "留→る"
-        }
-      ]
-    },
-    {
-      "kana": "れ",
-      "roma": "re",
-      "hook": "草书「礼」变形；接近「类」的韵母，弹舌r",
-      "links": [
-        {
-          "lang": "ZH",
-          "word": "礼→れ"
-        }
-      ]
-    },
-    {
-      "kana": "ろ",
-      "roma": "ro",
-      "hook": "草书「吕」变形；接近「洛」的韵母；易混：ろ是封闭的圈，ん是一笔",
-      "links": [
-        {
-          "lang": "ZH",
-          "word": "吕→ろ"
-        }
-      ]
-    }
-  ]
-},
-{
-  "row": "わ行",
-  "chars": [
-    {
-      "kana": "わ",
-      "roma": "wa",
-      "hook": "草书「和」变形；接近「哇」；注意区分：ら",
-      "links": [
-        {
-          "lang": "ZH",
-          "word": "和→わ"
-        }
-      ]
-    },
-    {
-      "kana": "を",
-      "roma": "wo",
-      "hook": "草书「遠」变形；现代发音接近「お」，主要作助词；看到它先想到“宾语标记”",
-      "links": [
-        {
-          "lang": "ZH",
-          "word": "遠→を"
+          "kana": "ら",
+          "roma": "ra",
+          "hook": "草书「良」变形；舌尖轻弹上颚，r和l之间，不是卷舌；注意区分：わ",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "良→ら"
+            }
+          ]
         },
         {
-          "lang": "JP",
-          "word": "助词专用感"
-        }
-      ]
-    },
-    {
-      "kana": "ん",
-      "roma": "n",
-      "hook": "鼻音收尾；像一个甩尾；易混：そ两笔，ん一笔",
-      "links": [
-        {
-          "lang": "ZH",
-          "word": "鼻音收尾"
+          "kana": "り",
+          "roma": "ri",
+          "hook": "草书「利」变形；接近「里」；注意区分：る",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "利→り"
+            }
+          ]
         },
         {
-          "lang": "EN",
-          "word": "n"
+          "kana": "る",
+          "roma": "ru",
+          "hook": "草书「留」变形；嘴唇略圆，短促；注意区分：り",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "留→る"
+            }
+          ]
+        },
+        {
+          "kana": "れ",
+          "roma": "re",
+          "hook": "草书「礼」变形；接近「类」的韵母，弹舌r",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "礼→れ"
+            }
+          ]
+        },
+        {
+          "kana": "ろ",
+          "roma": "ro",
+          "hook": "草书「吕」变形；接近「洛」的韵母；易混：ろ是封闭的圈，ん是一笔",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "吕→ろ"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "わ行",
+      "chars": [
+        {
+          "kana": "わ",
+          "roma": "wa",
+          "hook": "草书「和」变形；接近「哇」；注意区分：ら",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "和→わ"
+            }
+          ]
+        },
+        {
+          "kana": "を",
+          "roma": "wo",
+          "hook": "草书「遠」变形；现代发音接近「お」，主要作助词；看到它先想到“宾语标记”",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "遠→を"
+            },
+            {
+              "lang": "JP",
+              "word": "助词专用感"
+            }
+          ]
+        },
+        {
+          "kana": "ん",
+          "roma": "n",
+          "hook": "鼻音收尾；像一个甩尾；易混：そ两笔，ん一笔",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "鼻音收尾"
+            },
+            {
+              "lang": "EN",
+              "word": "n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "ア行",
+      "chars": [
+        {
+          "kana": "ア",
+          "roma": "a",
+          "hook": "片假名更像直线切出来的「阿」；和あ是同音，但字形更硬、更像外来语入口",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "阿→ア（记忆锚）"
+            },
+            {
+              "lang": "EN",
+              "word": "a"
+            }
+          ]
+        },
+        {
+          "kana": "イ",
+          "roma": "i",
+          "hook": "像两道斜线，利落、短促；和い同音，但更像“外来词频道”",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "伊→イ（记忆锚）"
+            },
+            {
+              "lang": "EN",
+              "word": "i"
+            }
+          ]
+        },
+        {
+          "kana": "ウ",
+          "roma": "u",
+          "hook": "像屋檐拐角；发音和う一样，嘴唇不要夸张圆起来",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "宇→ウ（记忆锚）"
+            }
+          ]
+        },
+        {
+          "kana": "エ",
+          "roma": "e",
+          "hook": "像一个转折的工字；和え同音，片假名更利落",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "江→エ（记忆锚）"
+            },
+            {
+              "lang": "EN",
+              "word": "e"
+            }
+          ]
+        },
+        {
+          "kana": "オ",
+          "roma": "o",
+          "hook": "像竖线加一个小折；和お同音，注意和ホ视觉区分",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "於→オ（记忆锚）"
+            },
+            {
+              "lang": "EN",
+              "word": "o"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "カ行",
+      "chars": [
+        {
+          "kana": "カ",
+          "roma": "ka",
+          "hook": "像一把小刀，最像「力」但更开；外来词里非常高频",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "力感→カ"
+            },
+            {
+              "lang": "EN",
+              "word": "ka"
+            }
+          ]
+        },
+        {
+          "kana": "キ",
+          "roma": "ki",
+          "hook": "三横一竖，像切开的“丰”；和き同音，片假名更规整",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "木感→キ"
+            },
+            {
+              "lang": "EN",
+              "word": "key→キ"
+            }
+          ]
+        },
+        {
+          "kana": "ク",
+          "roma": "ku",
+          "hook": "像张开的嘴角「<」；和く同音，视觉上最简",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "久→ク（记忆锚）"
+            }
+          ]
+        },
+        {
+          "kana": "ケ",
+          "roma": "ke",
+          "hook": "像キ少一横；最容易和サ混，要靠整体方向感区分",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "介→ケ（记忆锚）"
+            }
+          ]
+        },
+        {
+          "kana": "コ",
+          "roma": "ko",
+          "hook": "就是两横，像中文“二”；记忆最轻松的一组之一",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "二≈コ"
+            },
+            {
+              "lang": "EN",
+              "word": "co-"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "サ行",
+      "chars": [
+        {
+          "kana": "サ",
+          "roma": "sa",
+          "hook": "像十字加斜刀；容易和セ混，但サ更像“交叉”",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "左感→サ"
+            }
+          ]
+        },
+        {
+          "kana": "シ",
+          "roma": "shi",
+          "hook": "三点向右下；最经典陷阱之一——シ和ツ一定成对记",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "三点斜下=シ"
+            },
+            {
+              "lang": "EN",
+              "word": "she→シ"
+            }
+          ]
+        },
+        {
+          "kana": "ス",
+          "roma": "su",
+          "hook": "像一把刀往右下切；和す同音，但形状完全不同",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "須→ス（记忆锚）"
+            }
+          ]
+        },
+        {
+          "kana": "セ",
+          "roma": "se",
+          "hook": "像サ少一斜，整体更平；和ケ也容易混",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "世感→セ"
+            }
+          ]
+        },
+        {
+          "kana": "ソ",
+          "roma": "so",
+          "hook": "两笔，像气流往右下收；一定和ン对照记",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "曾感→ソ"
+            },
+            {
+              "lang": "EN",
+              "word": "so"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "タ行",
+      "chars": [
+        {
+          "kana": "タ",
+          "roma": "ta",
+          "hook": "像夕字切开；和た同音，但片假名更锋利",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "夕感→タ"
+            }
+          ]
+        },
+        {
+          "kana": "チ",
+          "roma": "chi",
+          "hook": "像一个弯钩加一横；和ち同音，视觉上比テ更弯",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "千感→チ"
+            }
+          ]
+        },
+        {
+          "kana": "ツ",
+          "roma": "tsu",
+          "hook": "三点更偏竖、更往上；一定和シ一起背：シ斜，ツ竖",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "三点偏竖=ツ"
+            },
+            {
+              "lang": "EN",
+              "word": "tsunami→ツ"
+            }
+          ]
+        },
+        {
+          "kana": "テ",
+          "roma": "te",
+          "hook": "像工字上面伸一横；和チ比，テ更直更平",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "天感→テ"
+            }
+          ]
+        },
+        {
+          "kana": "ト",
+          "roma": "to",
+          "hook": "像竖线旁点一下；非常像中文部件，记忆成本低",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "卜感→ト"
+            },
+            {
+              "lang": "EN",
+              "word": "to"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "ナ行",
+      "chars": [
+        {
+          "kana": "ナ",
+          "roma": "na",
+          "hook": "像右上伸出来的“十”；和メ要注意区分",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "奈感→ナ"
+            }
+          ]
+        },
+        {
+          "kana": "ニ",
+          "roma": "ni",
+          "hook": "就是两横，和に发音一样；最像中文“二”",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "二≈ニ"
+            },
+            {
+              "lang": "EN",
+              "word": "knee→ニ（音锚）"
+            }
+          ]
+        },
+        {
+          "kana": "ヌ",
+          "roma": "nu",
+          "hook": "像叉形里穿一笔；和ス、メ都容易看花，要整体记",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "奴感→ヌ"
+            }
+          ]
+        },
+        {
+          "kana": "ネ",
+          "roma": "ne",
+          "hook": "像示字偏旁切开的样子；和れ不是一个系统，别串台",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "祢感→ネ"
+            }
+          ]
+        },
+        {
+          "kana": "ノ",
+          "roma": "no",
+          "hook": "最简单，一撇；像中文丿，和の的圆圈形成强对比",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "丿≈ノ"
+            },
+            {
+              "lang": "EN",
+              "word": "no"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "ハ行",
+      "chars": [
+        {
+          "kana": "ハ",
+          "roma": "ha",
+          "hook": "像八，和中文视觉最友好；片假名里最容易认的一批",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "八≈ハ"
+            }
+          ]
+        },
+        {
+          "kana": "ヒ",
+          "roma": "hi",
+          "hook": "像匕首感；比ひ更硬、更有刀锋感",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "比感→ヒ"
+            },
+            {
+              "lang": "EN",
+              "word": "he→ヒ（音锚）"
+            }
+          ]
+        },
+        {
+          "kana": "フ",
+          "roma": "fu",
+          "hook": "像不完整的三角折线；外来词里极高频，比如フォーク",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "不感→フ"
+            },
+            {
+              "lang": "EN",
+              "word": "fu"
+            }
+          ]
+        },
+        {
+          "kana": "ヘ",
+          "roma": "he",
+          "hook": "像一个人字顶，最容易；助词时读e的规则仍然成立",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "人字顶≈ヘ"
+            }
+          ]
+        },
+        {
+          "kana": "ホ",
+          "roma": "ho",
+          "hook": "像木字拆开的形状；和オ都带竖，但ホ更饱满",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "保感→ホ"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "マ行",
+      "chars": [
+        {
+          "kana": "マ",
+          "roma": "ma",
+          "hook": "像楼梯转折；和ム不要混，マ更开更有折角",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "末感→マ"
+            }
+          ]
+        },
+        {
+          "kana": "ミ",
+          "roma": "mi",
+          "hook": "三道斜线；和シ/ツ都要分清——ミ是三横斜排",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "美感→ミ"
+            },
+            {
+              "lang": "EN",
+              "word": "me→ミ"
+            }
+          ]
+        },
+        {
+          "kana": "ム",
+          "roma": "mu",
+          "hook": "像厶再拉开；比マ更收、更像一个尖角",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "厶感→ム"
+            }
+          ]
+        },
+        {
+          "kana": "メ",
+          "roma": "me",
+          "hook": "像一个大叉；和ヌ、ナ容易串，但メ最像“×”",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "女感→メ"
+            },
+            {
+              "lang": "EN",
+              "word": "me"
+            }
+          ]
+        },
+        {
+          "kana": "モ",
+          "roma": "mo",
+          "hook": "像毛字切成横线结构；和ユ别混，モ横更多",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "毛感→モ"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "ヤ行",
+      "chars": [
+        {
+          "kana": "ヤ",
+          "roma": "ya",
+          "hook": "像也字硬切版；常出现在人名、品牌、外来词转写",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "也感→ヤ"
+            }
+          ]
+        },
+        {
+          "kana": "ユ",
+          "roma": "yu",
+          "hook": "像U形开口；比ゆ更机械、更利落",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "由感→ユ"
+            },
+            {
+              "lang": "EN",
+              "word": "you→ユ（音锚）"
+            }
+          ]
+        },
+        {
+          "kana": "ヨ",
+          "roma": "yo",
+          "hook": "像E反过来；和中文/英文视觉联想都很强",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "与感→ヨ"
+            },
+            {
+              "lang": "EN",
+              "word": "yo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "ラ行",
+      "chars": [
+        {
+          "kana": "ラ",
+          "roma": "ra",
+          "hook": "像一个缺角的方折；和ク容易混，但ラ更有转角感",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "良感→ラ"
+            }
+          ]
+        },
+        {
+          "kana": "リ",
+          "roma": "ri",
+          "hook": "两笔竖下去，像两根小针；非常像“利”的片段",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "利感→リ"
+            }
+          ]
+        },
+        {
+          "kana": "ル",
+          "roma": "ru",
+          "hook": "像一个弯钩加点；比リ更弯、更收",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "留感→ル"
+            }
+          ]
+        },
+        {
+          "kana": "レ",
+          "roma": "re",
+          "hook": "一笔下折；极简，和し系统完全不同",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "礼感→レ"
+            }
+          ]
+        },
+        {
+          "kana": "ロ",
+          "roma": "ro",
+          "hook": "一个口字框；这是片假名里最像中文方框的一个",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "口≈ロ"
+            },
+            {
+              "lang": "EN",
+              "word": "ro"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "ワ行",
+      "chars": [
+        {
+          "kana": "ワ",
+          "roma": "wa",
+          "hook": "像フ多一笔展开；和ウ不要混，ワ更开更有尾巴",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "和感→ワ"
+            }
+          ]
+        },
+        {
+          "kana": "ヲ",
+          "roma": "wo",
+          "hook": "现代发音基本同オ，但主要作助词，现实里更常在名字/特殊写法里见到",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "遠感→ヲ"
+            },
+            {
+              "lang": "JP",
+              "word": "助词专用感"
+            }
+          ]
+        },
+        {
+          "kana": "ン",
+          "roma": "n",
+          "hook": "片假名最大陷阱之一——一定和ソ成对记：ソ两笔向下散，ン一笔向右下收",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "鼻音收尾"
+            },
+            {
+              "lang": "EN",
+              "word": "n"
+            }
+          ]
         }
       ]
     }
-  ]
-},
-{
-  "row": "ア行",
-  "chars": [
-    {
-      "kana": "ア",
-      "roma": "a",
-      "hook": "片假名更像直线切出来的「阿」；和あ是同音，但字形更硬、更像外来语入口",
-      "links": [
-        { "lang": "ZH", "word": "阿→ア（记忆锚）" },
-        { "lang": "EN", "word": "a" }
-      ]
-    },
-    {
-      "kana": "イ",
-      "roma": "i",
-      "hook": "像两道斜线，利落、短促；和い同音，但更像“外来词频道”",
-      "links": [
-        { "lang": "ZH", "word": "伊→イ（记忆锚）" },
-        { "lang": "EN", "word": "i" }
-      ]
-    },
-    {
-      "kana": "ウ",
-      "roma": "u",
-      "hook": "像屋檐拐角；发音和う一样，嘴唇不要夸张圆起来",
-      "links": [
-        { "lang": "ZH", "word": "宇→ウ（记忆锚）" }
-      ]
-    },
-    {
-      "kana": "エ",
-      "roma": "e",
-      "hook": "像一个转折的工字；和え同音，片假名更利落",
-      "links": [
-        { "lang": "ZH", "word": "江→エ（记忆锚）" },
-        { "lang": "EN", "word": "e" }
-      ]
-    },
-    {
-      "kana": "オ",
-      "roma": "o",
-      "hook": "像竖线加一个小折；和お同音，注意和ホ视觉区分",
-      "links": [
-        { "lang": "ZH", "word": "於→オ（记忆锚）" },
-        { "lang": "EN", "word": "o" }
-      ]
-    }
-  ]
-},
-{
-  "row": "カ行",
-  "chars": [
-    {
-      "kana": "カ",
-      "roma": "ka",
-      "hook": "像一把小刀，最像「力」但更开；外来词里非常高频",
-      "links": [
-        { "lang": "ZH", "word": "力感→カ" },
-        { "lang": "EN", "word": "ka" }
-      ]
-    },
-    {
-      "kana": "キ",
-      "roma": "ki",
-      "hook": "三横一竖，像切开的“丰”；和き同音，片假名更规整",
-      "links": [
-        { "lang": "ZH", "word": "木感→キ" },
-        { "lang": "EN", "word": "key→キ" }
-      ]
-    },
-    {
-      "kana": "ク",
-      "roma": "ku",
-      "hook": "像张开的嘴角「<」；和く同音，视觉上最简",
-      "links": [
-        { "lang": "ZH", "word": "久→ク（记忆锚）" }
-      ]
-    },
-    {
-      "kana": "ケ",
-      "roma": "ke",
-      "hook": "像キ少一横；最容易和サ混，要靠整体方向感区分",
-      "links": [
-        { "lang": "ZH", "word": "介→ケ（记忆锚）" }
-      ]
-    },
-    {
-      "kana": "コ",
-      "roma": "ko",
-      "hook": "就是两横，像中文“二”；记忆最轻松的一组之一",
-      "links": [
-        { "lang": "ZH", "word": "二≈コ" },
-        { "lang": "EN", "word": "co-" }
-      ]
-    }
-  ]
-},
-{
-  "row": "サ行",
-  "chars": [
-    {
-      "kana": "サ",
-      "roma": "sa",
-      "hook": "像十字加斜刀；容易和セ混，但サ更像“交叉”",
-      "links": [
-        { "lang": "ZH", "word": "左感→サ" }
-      ]
-    },
-    {
-      "kana": "シ",
-      "roma": "shi",
-      "hook": "三点向右下；最经典陷阱之一——シ和ツ一定成对记",
-      "links": [
-        { "lang": "ZH", "word": "三点斜下=シ" },
-        { "lang": "EN", "word": "she→シ" }
-      ]
-    },
-    {
-      "kana": "ス",
-      "roma": "su",
-      "hook": "像一把刀往右下切；和す同音，但形状完全不同",
-      "links": [
-        { "lang": "ZH", "word": "須→ス（记忆锚）" }
-      ]
-    },
-    {
-      "kana": "セ",
-      "roma": "se",
-      "hook": "像サ少一斜，整体更平；和ケ也容易混",
-      "links": [
-        { "lang": "ZH", "word": "世感→セ" }
-      ]
-    },
-    {
-      "kana": "ソ",
-      "roma": "so",
-      "hook": "两笔，像气流往右下收；一定和ン对照记",
-      "links": [
-        { "lang": "ZH", "word": "曾感→ソ" },
-        { "lang": "EN", "word": "so" }
-      ]
-    }
-  ]
-},
-{
-  "row": "タ行",
-  "chars": [
-    {
-      "kana": "タ",
-      "roma": "ta",
-      "hook": "像夕字切开；和た同音，但片假名更锋利",
-      "links": [
-        { "lang": "ZH", "word": "夕感→タ" }
-      ]
-    },
-    {
-      "kana": "チ",
-      "roma": "chi",
-      "hook": "像一个弯钩加一横；和ち同音，视觉上比テ更弯",
-      "links": [
-        { "lang": "ZH", "word": "千感→チ" }
-      ]
-    },
-    {
-      "kana": "ツ",
-      "roma": "tsu",
-      "hook": "三点更偏竖、更往上；一定和シ一起背：シ斜，ツ竖",
-      "links": [
-        { "lang": "ZH", "word": "三点偏竖=ツ" },
-        { "lang": "EN", "word": "tsunami→ツ" }
-      ]
-    },
-    {
-      "kana": "テ",
-      "roma": "te",
-      "hook": "像工字上面伸一横；和チ比，テ更直更平",
-      "links": [
-        { "lang": "ZH", "word": "天感→テ" }
-      ]
-    },
-    {
-      "kana": "ト",
-      "roma": "to",
-      "hook": "像竖线旁点一下；非常像中文部件，记忆成本低",
-      "links": [
-        { "lang": "ZH", "word": "卜感→ト" },
-        { "lang": "EN", "word": "to" }
-      ]
-    }
-  ]
-},
-{
-  "row": "ナ行",
-  "chars": [
-    {
-      "kana": "ナ",
-      "roma": "na",
-      "hook": "像右上伸出来的“十”；和メ要注意区分",
-      "links": [
-        { "lang": "ZH", "word": "奈感→ナ" }
-      ]
-    },
-    {
-      "kana": "ニ",
-      "roma": "ni",
-      "hook": "就是两横，和に发音一样；最像中文“二”",
-      "links": [
-        { "lang": "ZH", "word": "二≈ニ" },
-        { "lang": "EN", "word": "knee→ニ（音锚）" }
-      ]
-    },
-    {
-      "kana": "ヌ",
-      "roma": "nu",
-      "hook": "像叉形里穿一笔；和ス、メ都容易看花，要整体记",
-      "links": [
-        { "lang": "ZH", "word": "奴感→ヌ" }
-      ]
-    },
-    {
-      "kana": "ネ",
-      "roma": "ne",
-      "hook": "像示字偏旁切开的样子；和れ不是一个系统，别串台",
-      "links": [
-        { "lang": "ZH", "word": "祢感→ネ" }
-      ]
-    },
-    {
-      "kana": "ノ",
-      "roma": "no",
-      "hook": "最简单，一撇；像中文丿，和の的圆圈形成强对比",
-      "links": [
-        { "lang": "ZH", "word": "丿≈ノ" },
-        { "lang": "EN", "word": "no" }
-      ]
-    }
-  ]
-},
-{
-  "row": "ハ行",
-  "chars": [
-    {
-      "kana": "ハ",
-      "roma": "ha",
-      "hook": "像八，和中文视觉最友好；片假名里最容易认的一批",
-      "links": [
-        { "lang": "ZH", "word": "八≈ハ" }
-      ]
-    },
-    {
-      "kana": "ヒ",
-      "roma": "hi",
-      "hook": "像匕首感；比ひ更硬、更有刀锋感",
-      "links": [
-        { "lang": "ZH", "word": "比感→ヒ" },
-        { "lang": "EN", "word": "he→ヒ（音锚）" }
-      ]
-    },
-    {
-      "kana": "フ",
-      "roma": "fu",
-      "hook": "像不完整的三角折线；外来词里极高频，比如フォーク",
-      "links": [
-        { "lang": "ZH", "word": "不感→フ" },
-        { "lang": "EN", "word": "fu" }
-      ]
-    },
-    {
-      "kana": "ヘ",
-      "roma": "he",
-      "hook": "像一个人字顶，最容易；助词时读e的规则仍然成立",
-      "links": [
-        { "lang": "ZH", "word": "人字顶≈ヘ" }
-      ]
-    },
-    {
-      "kana": "ホ",
-      "roma": "ho",
-      "hook": "像木字拆开的形状；和オ都带竖，但ホ更饱满",
-      "links": [
-        { "lang": "ZH", "word": "保感→ホ" }
-      ]
-    }
-  ]
-},
-{
-  "row": "マ行",
-  "chars": [
-    {
-      "kana": "マ",
-      "roma": "ma",
-      "hook": "像楼梯转折；和ム不要混，マ更开更有折角",
-      "links": [
-        { "lang": "ZH", "word": "末感→マ" }
-      ]
-    },
-    {
-      "kana": "ミ",
-      "roma": "mi",
-      "hook": "三道斜线；和シ/ツ都要分清——ミ是三横斜排",
-      "links": [
-        { "lang": "ZH", "word": "美感→ミ" },
-        { "lang": "EN", "word": "me→ミ" }
-      ]
-    },
-    {
-      "kana": "ム",
-      "roma": "mu",
-      "hook": "像厶再拉开；比マ更收、更像一个尖角",
-      "links": [
-        { "lang": "ZH", "word": "厶感→ム" }
-      ]
-    },
-    {
-      "kana": "メ",
-      "roma": "me",
-      "hook": "像一个大叉；和ヌ、ナ容易串，但メ最像“×”",
-      "links": [
-        { "lang": "ZH", "word": "女感→メ" },
-        { "lang": "EN", "word": "me" }
-      ]
-    },
-    {
-      "kana": "モ",
-      "roma": "mo",
-      "hook": "像毛字切成横线结构；和ユ别混，モ横更多",
-      "links": [
-        { "lang": "ZH", "word": "毛感→モ" }
-      ]
-    }
-  ]
-},
-{
-  "row": "ヤ行",
-  "chars": [
-    {
-      "kana": "ヤ",
-      "roma": "ya",
-      "hook": "像也字硬切版；常出现在人名、品牌、外来词转写",
-      "links": [
-        { "lang": "ZH", "word": "也感→ヤ" }
-      ]
-    },
-    {
-      "kana": "ユ",
-      "roma": "yu",
-      "hook": "像U形开口；比ゆ更机械、更利落",
-      "links": [
-        { "lang": "ZH", "word": "由感→ユ" },
-        { "lang": "EN", "word": "you→ユ（音锚）" }
-      ]
-    },
-    {
-      "kana": "ヨ",
-      "roma": "yo",
-      "hook": "像E反过来；和中文/英文视觉联想都很强",
-      "links": [
-        { "lang": "ZH", "word": "与感→ヨ" },
-        { "lang": "EN", "word": "yo" }
-      ]
-    }
-  ]
-},
-{
-  "row": "ラ行",
-  "chars": [
-    {
-      "kana": "ラ",
-      "roma": "ra",
-      "hook": "像一个缺角的方折；和ク容易混，但ラ更有转角感",
-      "links": [
-        { "lang": "ZH", "word": "良感→ラ" }
-      ]
-    },
-    {
-      "kana": "リ",
-      "roma": "ri",
-      "hook": "两笔竖下去，像两根小针；非常像“利”的片段",
-      "links": [
-        { "lang": "ZH", "word": "利感→リ" }
-      ]
-    },
-    {
-      "kana": "ル",
-      "roma": "ru",
-      "hook": "像一个弯钩加点；比リ更弯、更收",
-      "links": [
-        { "lang": "ZH", "word": "留感→ル" }
-      ]
-    },
-    {
-      "kana": "レ",
-      "roma": "re",
-      "hook": "一笔下折；极简，和し系统完全不同",
-      "links": [
-        { "lang": "ZH", "word": "礼感→レ" }
-      ]
-    },
-    {
-      "kana": "ロ",
-      "roma": "ro",
-      "hook": "一个口字框；这是片假名里最像中文方框的一个",
-      "links": [
-        { "lang": "ZH", "word": "口≈ロ" },
-        { "lang": "EN", "word": "ro" }
-      ]
-    }
-  ]
-},
-{
-  "row": "ワ行",
-  "chars": [
-    {
-      "kana": "ワ",
-      "roma": "wa",
-      "hook": "像フ多一笔展开；和ウ不要混，ワ更开更有尾巴",
-      "links": [
-        { "lang": "ZH", "word": "和感→ワ" }
-      ]
-    },
-    {
-      "kana": "ヲ",
-      "roma": "wo",
-      "hook": "现代发音基本同オ，但主要作助词，现实里更常在名字/特殊写法里见到",
-      "links": [
-        { "lang": "ZH", "word": "遠感→ヲ" },
-        { "lang": "JP", "word": "助词专用感" }
-      ]
-    },
-    {
-      "kana": "ン",
-      "roma": "n",
-      "hook": "片假名最大陷阱之一——一定和ソ成对记：ソ两笔向下散，ン一笔向右下收",
-      "links": [
-        { "lang": "ZH", "word": "鼻音收尾" },
-        { "lang": "EN", "word": "n" }
-      ]
-    }
-  ]
-}
   ],
   "specialSounds": {
     "title": "特殊音",
@@ -4431,116 +5165,621 @@
         ]
       }
     ]
-      },
+  },
   "voicedRows": [
-        {
+    {
       "row": "が行",
       "chars": [
-        { "kana": "が", "kata": "ガ", "roma": "ga", "hook": "在か行上加浊点，声音更浑厚。", "links": [{ "lang": "ZH", "word": "ga" }] },
-        { "kana": "ぎ", "kata": "ギ", "roma": "gi", "hook": "き→ぎ，清音变浊音。", "links": [{ "lang": "ZH", "word": "gi" }] },
-        { "kana": "ぐ", "kata": "グ", "roma": "gu", "hook": "く→ぐ，喉部更有震动感。", "links": [{ "lang": "ZH", "word": "gu" }] },
-        { "kana": "げ", "kata": "ゲ", "roma": "ge", "hook": "け→げ，发音比清音更沉。", "links": [{ "lang": "ZH", "word": "ge" }] },
-        { "kana": "ご", "kata": "ゴ", "roma": "go", "hook": "こ→ご，注意和 ko 区分。", "links": [{ "lang": "ZH", "word": "go" }] }
+        {
+          "kana": "が",
+          "kata": "ガ",
+          "roma": "ga",
+          "hook": "在か行上加浊点，声音更浑厚。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "ga"
+            }
+          ]
+        },
+        {
+          "kana": "ぎ",
+          "kata": "ギ",
+          "roma": "gi",
+          "hook": "き→ぎ，清音变浊音。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "gi"
+            }
+          ]
+        },
+        {
+          "kana": "ぐ",
+          "kata": "グ",
+          "roma": "gu",
+          "hook": "く→ぐ，喉部更有震动感。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "gu"
+            }
+          ]
+        },
+        {
+          "kana": "げ",
+          "kata": "ゲ",
+          "roma": "ge",
+          "hook": "け→げ，发音比清音更沉。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "ge"
+            }
+          ]
+        },
+        {
+          "kana": "ご",
+          "kata": "ゴ",
+          "roma": "go",
+          "hook": "こ→ご，注意和 ko 区分。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "go"
+            }
+          ]
+        }
       ]
     },
     {
       "row": "ざ行",
       "chars": [
-        { "kana": "ざ", "kata": "ザ", "roma": "za", "hook": "さ→ざ，摩擦更重。", "links": [{ "lang": "ZH", "word": "za" }] },
-        { "kana": "じ", "kata": "ジ", "roma": "ji", "hook": "し→じ，旅行里极高频。", "links": [{ "lang": "ZH", "word": "ji" }] },
-        { "kana": "ず", "kata": "ズ", "roma": "zu", "hook": "す→ず，和づ现实里多同音。", "links": [{ "lang": "ZH", "word": "zu" }] },
-        { "kana": "ぜ", "kata": "ゼ", "roma": "ze", "hook": "せ→ぜ，浊化后更重。", "links": [{ "lang": "ZH", "word": "ze" }] },
-        { "kana": "ぞ", "kata": "ゾ", "roma": "zo", "hook": "そ→ぞ，注意和ソ一起看。", "links": [{ "lang": "ZH", "word": "zo" }] }
+        {
+          "kana": "ざ",
+          "kata": "ザ",
+          "roma": "za",
+          "hook": "さ→ざ，摩擦更重。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "za"
+            }
+          ]
+        },
+        {
+          "kana": "じ",
+          "kata": "ジ",
+          "roma": "ji",
+          "hook": "し→じ，旅行里极高频。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "ji"
+            }
+          ]
+        },
+        {
+          "kana": "ず",
+          "kata": "ズ",
+          "roma": "zu",
+          "hook": "す→ず，和づ现实里多同音。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "zu"
+            }
+          ]
+        },
+        {
+          "kana": "ぜ",
+          "kata": "ゼ",
+          "roma": "ze",
+          "hook": "せ→ぜ，浊化后更重。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "ze"
+            }
+          ]
+        },
+        {
+          "kana": "ぞ",
+          "kata": "ゾ",
+          "roma": "zo",
+          "hook": "そ→ぞ，注意和ソ一起看。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "zo"
+            }
+          ]
+        }
       ]
     },
     {
       "row": "だ行",
       "chars": [
-        { "kana": "だ", "kata": "ダ", "roma": "da", "hook": "た→だ，舌尖更实。", "links": [{ "lang": "ZH", "word": "da" }] },
-        { "kana": "ぢ", "kata": "ヂ", "roma": "ji", "hook": "ち→ぢ，现代通常和じ同音。", "links": [{ "lang": "ZH", "word": "ji" }] },
-        { "kana": "づ", "kata": "ヅ", "roma": "zu", "hook": "つ→づ，现代通常和ず同音。", "links": [{ "lang": "ZH", "word": "zu" }] },
-        { "kana": "で", "kata": "デ", "roma": "de", "hook": "て→で，极高频。", "links": [{ "lang": "ZH", "word": "de" }] },
-        { "kana": "ど", "kata": "ド", "roma": "do", "hook": "と→ど，注意和ト区分。", "links": [{ "lang": "ZH", "word": "do" }] }
+        {
+          "kana": "だ",
+          "kata": "ダ",
+          "roma": "da",
+          "hook": "た→だ，舌尖更实。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "da"
+            }
+          ]
+        },
+        {
+          "kana": "ぢ",
+          "kata": "ヂ",
+          "roma": "ji",
+          "hook": "ち→ぢ，现代通常和じ同音。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "ji"
+            }
+          ]
+        },
+        {
+          "kana": "づ",
+          "kata": "ヅ",
+          "roma": "zu",
+          "hook": "つ→づ，现代通常和ず同音。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "zu"
+            }
+          ]
+        },
+        {
+          "kana": "で",
+          "kata": "デ",
+          "roma": "de",
+          "hook": "て→で，极高频。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "de"
+            }
+          ]
+        },
+        {
+          "kana": "ど",
+          "kata": "ド",
+          "roma": "do",
+          "hook": "と→ど，注意和ト区分。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "do"
+            }
+          ]
+        }
       ]
     },
     {
       "row": "ば行",
       "chars": [
-        { "kana": "ば", "kata": "バ", "roma": "ba", "hook": "は→ば，双唇更明显。", "links": [{ "lang": "ZH", "word": "ba" }] },
-        { "kana": "び", "kata": "ビ", "roma": "bi", "hook": "ひ→び，声音更厚。", "links": [{ "lang": "ZH", "word": "bi" }] },
-        { "kana": "ぶ", "kata": "ブ", "roma": "bu", "hook": "ふ→ぶ，注意和ぷ对照。", "links": [{ "lang": "ZH", "word": "bu" }] },
-        { "kana": "べ", "kata": "ベ", "roma": "be", "hook": "へ→べ，助词里的へ读 e 但字形仍这样记。", "links": [{ "lang": "ZH", "word": "be" }] },
-        { "kana": "ぼ", "kata": "ボ", "roma": "bo", "hook": "ほ→ぼ，和ぽ一起成组记。", "links": [{ "lang": "ZH", "word": "bo" }] }
+        {
+          "kana": "ば",
+          "kata": "バ",
+          "roma": "ba",
+          "hook": "は→ば，双唇更明显。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "ba"
+            }
+          ]
+        },
+        {
+          "kana": "び",
+          "kata": "ビ",
+          "roma": "bi",
+          "hook": "ひ→び，声音更厚。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "bi"
+            }
+          ]
+        },
+        {
+          "kana": "ぶ",
+          "kata": "ブ",
+          "roma": "bu",
+          "hook": "ふ→ぶ，注意和ぷ对照。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "bu"
+            }
+          ]
+        },
+        {
+          "kana": "べ",
+          "kata": "ベ",
+          "roma": "be",
+          "hook": "へ→べ，助词里的へ读 e 但字形仍这样记。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "be"
+            }
+          ]
+        },
+        {
+          "kana": "ぼ",
+          "kata": "ボ",
+          "roma": "bo",
+          "hook": "ほ→ぼ，和ぽ一起成组记。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "bo"
+            }
+          ]
+        }
       ]
     },
     {
       "row": "ぱ行",
       "chars": [
-        { "kana": "ぱ", "kata": "パ", "roma": "pa", "hook": "半浊音，加小圆圈。", "links": [{ "lang": "ZH", "word": "pa" }] },
-        { "kana": "ぴ", "kata": "ピ", "roma": "pi", "hook": "ひ→ぴ，轻快很多。", "links": [{ "lang": "ZH", "word": "pi" }] },
-        { "kana": "ぷ", "kata": "プ", "roma": "pu", "hook": "ふ→ぷ，和ぶ做对照记。", "links": [{ "lang": "ZH", "word": "pu" }] },
-        { "kana": "ぺ", "kata": "ペ", "roma": "pe", "hook": "へ→ぺ，注意圆圈不是浊点。", "links": [{ "lang": "ZH", "word": "pe" }] },
-        { "kana": "ぽ", "kata": "ポ", "roma": "po", "hook": "ほ→ぽ，发音更轻更弹。", "links": [{ "lang": "ZH", "word": "po" }] }
+        {
+          "kana": "ぱ",
+          "kata": "パ",
+          "roma": "pa",
+          "hook": "半浊音，加小圆圈。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "pa"
+            }
+          ]
+        },
+        {
+          "kana": "ぴ",
+          "kata": "ピ",
+          "roma": "pi",
+          "hook": "ひ→ぴ，轻快很多。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "pi"
+            }
+          ]
+        },
+        {
+          "kana": "ぷ",
+          "kata": "プ",
+          "roma": "pu",
+          "hook": "ふ→ぷ，和ぶ做对照记。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "pu"
+            }
+          ]
+        },
+        {
+          "kana": "ぺ",
+          "kata": "ペ",
+          "roma": "pe",
+          "hook": "へ→ぺ，注意圆圈不是浊点。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "pe"
+            }
+          ]
+        },
+        {
+          "kana": "ぽ",
+          "kata": "ポ",
+          "roma": "po",
+          "hook": "ほ→ぽ，发音更轻更弹。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "po"
+            }
+          ]
+        }
       ]
     }
   ],
   "yoonRows": [
-        {
+    {
       "row": "きゃ行",
       "chars": [
-        { "kana": "きゃ", "kata": "キャ", "roma": "kya", "hook": "き + 小ゃ，不要读成 ki-ya。", "links": [{ "lang": "ZH", "word": "kya" }] },
-        { "kana": "きゅ", "kata": "キュ", "roma": "kyu", "hook": "き + 小ゅ，收紧成一拍。", "links": [{ "lang": "ZH", "word": "kyu" }] },
-        { "kana": "きょ", "kata": "キョ", "roma": "kyo", "hook": "き + 小ょ，别拆开读。", "links": [{ "lang": "ZH", "word": "kyo" }] }
+        {
+          "kana": "きゃ",
+          "kata": "キャ",
+          "roma": "kya",
+          "hook": "き + 小ゃ，不要读成 ki-ya。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "kya"
+            }
+          ]
+        },
+        {
+          "kana": "きゅ",
+          "kata": "キュ",
+          "roma": "kyu",
+          "hook": "き + 小ゅ，收紧成一拍。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "kyu"
+            }
+          ]
+        },
+        {
+          "kana": "きょ",
+          "kata": "キョ",
+          "roma": "kyo",
+          "hook": "き + 小ょ，别拆开读。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "kyo"
+            }
+          ]
+        }
       ]
     },
     {
       "row": "しゃ行",
       "chars": [
-        { "kana": "しゃ", "kata": "シャ", "roma": "sha", "hook": "し + 小ゃ，旅行里高频。", "links": [{ "lang": "ZH", "word": "sha" }] },
-        { "kana": "しゅ", "kata": "シュ", "roma": "shu", "hook": "し + 小ゅ，一拍完成。", "links": [{ "lang": "ZH", "word": "shu" }] },
-        { "kana": "しょ", "kata": "ショ", "roma": "sho", "hook": "し + 小ょ，不要读成 shi-yo。", "links": [{ "lang": "ZH", "word": "sho" }] }
+        {
+          "kana": "しゃ",
+          "kata": "シャ",
+          "roma": "sha",
+          "hook": "し + 小ゃ，旅行里高频。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "sha"
+            }
+          ]
+        },
+        {
+          "kana": "しゅ",
+          "kata": "シュ",
+          "roma": "shu",
+          "hook": "し + 小ゅ，一拍完成。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "shu"
+            }
+          ]
+        },
+        {
+          "kana": "しょ",
+          "kata": "ショ",
+          "roma": "sho",
+          "hook": "し + 小ょ，不要读成 shi-yo。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "sho"
+            }
+          ]
+        }
       ]
     },
     {
       "row": "ちゃ行",
       "chars": [
-        { "kana": "ちゃ", "kata": "チャ", "roma": "cha", "hook": "ち + 小ゃ，超高频。", "links": [{ "lang": "ZH", "word": "cha" }] },
-        { "kana": "ちゅ", "kata": "チュ", "roma": "chu", "hook": "ち + 小ゅ，注意收成一拍。", "links": [{ "lang": "ZH", "word": "chu" }] },
-        { "kana": "ちょ", "kata": "チョ", "roma": "cho", "hook": "ち + 小ょ，像ちょっと里的开头。", "links": [{ "lang": "ZH", "word": "cho" }] }
+        {
+          "kana": "ちゃ",
+          "kata": "チャ",
+          "roma": "cha",
+          "hook": "ち + 小ゃ，超高频。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "cha"
+            }
+          ]
+        },
+        {
+          "kana": "ちゅ",
+          "kata": "チュ",
+          "roma": "chu",
+          "hook": "ち + 小ゅ，注意收成一拍。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "chu"
+            }
+          ]
+        },
+        {
+          "kana": "ちょ",
+          "kata": "チョ",
+          "roma": "cho",
+          "hook": "ち + 小ょ，像ちょっと里的开头。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "cho"
+            }
+          ]
+        }
       ]
     },
     {
       "row": "にゃ行",
       "chars": [
-        { "kana": "にゃ", "kata": "ニャ", "roma": "nya", "hook": "に + 小ゃ，像猫叫感。", "links": [{ "lang": "ZH", "word": "nya" }] },
-        { "kana": "にゅ", "kata": "ニュ", "roma": "nyu", "hook": "に + 小ゅ，外来词里也常见。", "links": [{ "lang": "ZH", "word": "nyu" }] },
-        { "kana": "にょ", "kata": "ニョ", "roma": "nyo", "hook": "に + 小ょ，不拆拍。", "links": [{ "lang": "ZH", "word": "nyo" }] }
+        {
+          "kana": "にゃ",
+          "kata": "ニャ",
+          "roma": "nya",
+          "hook": "に + 小ゃ，像猫叫感。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "nya"
+            }
+          ]
+        },
+        {
+          "kana": "にゅ",
+          "kata": "ニュ",
+          "roma": "nyu",
+          "hook": "に + 小ゅ，外来词里也常见。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "nyu"
+            }
+          ]
+        },
+        {
+          "kana": "にょ",
+          "kata": "ニョ",
+          "roma": "nyo",
+          "hook": "に + 小ょ，不拆拍。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "nyo"
+            }
+          ]
+        }
       ]
     },
     {
       "row": "ひゃ行",
       "chars": [
-        { "kana": "ひゃ", "kata": "ヒャ", "roma": "hya", "hook": "ひ + 小ゃ，气息明显。", "links": [{ "lang": "ZH", "word": "hya" }] },
-        { "kana": "ひゅ", "kata": "ヒュ", "roma": "hyu", "hook": "ひ + 小ゅ，一拍。", "links": [{ "lang": "ZH", "word": "hyu" }] },
-        { "kana": "ひょ", "kata": "ヒョ", "roma": "hyo", "hook": "ひ + 小ょ，别拆开。", "links": [{ "lang": "ZH", "word": "hyo" }] }
+        {
+          "kana": "ひゃ",
+          "kata": "ヒャ",
+          "roma": "hya",
+          "hook": "ひ + 小ゃ，气息明显。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "hya"
+            }
+          ]
+        },
+        {
+          "kana": "ひゅ",
+          "kata": "ヒュ",
+          "roma": "hyu",
+          "hook": "ひ + 小ゅ，一拍。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "hyu"
+            }
+          ]
+        },
+        {
+          "kana": "ひょ",
+          "kata": "ヒョ",
+          "roma": "hyo",
+          "hook": "ひ + 小ょ，别拆开。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "hyo"
+            }
+          ]
+        }
       ]
     },
     {
       "row": "みゃ行",
       "chars": [
-        { "kana": "みゃ", "kata": "ミャ", "roma": "mya", "hook": "み + 小ゃ，连成一拍。", "links": [{ "lang": "ZH", "word": "mya" }] },
-        { "kana": "みゅ", "kata": "ミュ", "roma": "myu", "hook": "み + 小ゅ。", "links": [{ "lang": "ZH", "word": "myu" }] },
-        { "kana": "みょ", "kata": "ミョ", "roma": "myo", "hook": "み + 小ょ。", "links": [{ "lang": "ZH", "word": "myo" }] }
+        {
+          "kana": "みゃ",
+          "kata": "ミャ",
+          "roma": "mya",
+          "hook": "み + 小ゃ，连成一拍。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "mya"
+            }
+          ]
+        },
+        {
+          "kana": "みゅ",
+          "kata": "ミュ",
+          "roma": "myu",
+          "hook": "み + 小ゅ。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "myu"
+            }
+          ]
+        },
+        {
+          "kana": "みょ",
+          "kata": "ミョ",
+          "roma": "myo",
+          "hook": "み + 小ょ。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "myo"
+            }
+          ]
+        }
       ]
     },
     {
       "row": "りゃ行",
       "chars": [
-        { "kana": "りゃ", "kata": "リャ", "roma": "rya", "hook": "り + 小ゃ，r音很日式。", "links": [{ "lang": "ZH", "word": "rya" }] },
-        { "kana": "りゅ", "kata": "リュ", "roma": "ryu", "hook": "り + 小ゅ，像龙（りゅう）的开头。", "links": [{ "lang": "ZH", "word": "ryu" }] },
-        { "kana": "りょ", "kata": "リョ", "roma": "ryo", "hook": "り + 小ょ。", "links": [{ "lang": "ZH", "word": "ryo" }] }
+        {
+          "kana": "りゃ",
+          "kata": "リャ",
+          "roma": "rya",
+          "hook": "り + 小ゃ，r音很日式。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "rya"
+            }
+          ]
+        },
+        {
+          "kana": "りゅ",
+          "kata": "リュ",
+          "roma": "ryu",
+          "hook": "り + 小ゅ，像龙（りゅう）的开头。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "ryu"
+            }
+          ]
+        },
+        {
+          "kana": "りょ",
+          "kata": "リョ",
+          "roma": "ryo",
+          "hook": "り + 小ょ。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "ryo"
+            }
+          ]
+        }
       ]
     }
   ]
 }
-
