@@ -3924,6 +3924,49 @@
               "lang": "ES",
               "word": "ca-"
             }
+          ],
+          "pair": "カ",
+          "source": "加",
+          "pairSource": "加",
+          "anchor": "加 → か",
+          "pairAnchor": "加 → カ",
+          "hint": "舌后部轻轻贴近软腭，发短促的 ka；清音不要重送气。",
+          "strokeKey": "ka-hira",
+          "pairStrokeKey": "ka-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "が",
+                "diff": "か是清音，が是加浊点后的浊音，声音更厚。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "かさ",
+              "reading": "かさ",
+              "kanji": "傘",
+              "zh": "伞"
+            },
+            {
+              "word": "かお",
+              "reading": "かお",
+              "kanji": "顔",
+              "zh": "脸"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "カメラ",
+              "reading": "カメラ",
+              "zh": "相机"
+            },
+            {
+              "word": "カード",
+              "reading": "カード",
+              "zh": "卡片；信用卡"
+            }
           ]
         },
         {
@@ -3939,6 +3982,40 @@
               "lang": "EN",
               "word": "key→き"
             }
+          ],
+          "pair": "キ",
+          "source": "幾",
+          "pairSource": "幾",
+          "anchor": "幾 → き",
+          "pairAnchor": "幾 → キ",
+          "hint": "接近 key 的开头，发短促的 ki，不要拖长。",
+          "strokeKey": "ki-hira",
+          "pairStrokeKey": "ki-kata",
+          "examples": [
+            {
+              "word": "きた",
+              "reading": "きた",
+              "kanji": "北",
+              "zh": "北；北方"
+            },
+            {
+              "word": "きっぷ",
+              "reading": "きっぷ",
+              "kanji": "切符",
+              "zh": "车票"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "キロ",
+              "reading": "キロ",
+              "zh": "公斤；千米"
+            },
+            {
+              "word": "キッチン",
+              "reading": "キッチン",
+              "zh": "厨房"
+            }
           ]
         },
         {
@@ -3950,6 +4027,49 @@
               "lang": "ZH",
               "word": "久→く"
             }
+          ],
+          "pair": "ク",
+          "source": "久",
+          "pairSource": "久",
+          "anchor": "久 → く",
+          "pairAnchor": "久 → ク",
+          "hint": "嘴唇不要突出，发短促的 ku；字形像一个尖角。",
+          "strokeKey": "ku-hira",
+          "pairStrokeKey": "ku-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "し",
+                "diff": "く是尖角向左开，し像向上的鱼钩。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "くも",
+              "reading": "くも",
+              "kanji": "雲",
+              "zh": "云"
+            },
+            {
+              "word": "くすり",
+              "reading": "くすり",
+              "kanji": "薬",
+              "zh": "药"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "クラス",
+              "reading": "クラス",
+              "zh": "班级；等级"
+            },
+            {
+              "word": "クッキー",
+              "reading": "クッキー",
+              "zh": "曲奇饼"
+            }
           ]
         },
         {
@@ -3960,6 +4080,40 @@
             {
               "lang": "ZH",
               "word": "介→け"
+            }
+          ],
+          "pair": "ケ",
+          "source": "計",
+          "pairSource": "介",
+          "anchor": "計 → け",
+          "pairAnchor": "介 → ケ",
+          "hint": "发短促的 ke，接近中文「开」的前半，但更轻。",
+          "strokeKey": "ke-hira",
+          "pairStrokeKey": "ke-kata",
+          "examples": [
+            {
+              "word": "けさ",
+              "reading": "けさ",
+              "kanji": "今朝",
+              "zh": "今天早上"
+            },
+            {
+              "word": "けむり",
+              "reading": "けむり",
+              "kanji": "煙",
+              "zh": "烟"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ケーキ",
+              "reading": "ケーキ",
+              "zh": "蛋糕"
+            },
+            {
+              "word": "ケース",
+              "reading": "ケース",
+              "zh": "盒子；案例"
             }
           ]
         },
@@ -3975,6 +4129,40 @@
             {
               "lang": "ZH",
               "word": "二≈こ"
+            }
+          ],
+          "pair": "コ",
+          "source": "己",
+          "pairSource": "己",
+          "anchor": "己 → こ",
+          "pairAnchor": "己 → コ",
+          "hint": "发短促的 ko，不要拖长；片假名コ像两横。",
+          "strokeKey": "ko-hira",
+          "pairStrokeKey": "ko-kata",
+          "examples": [
+            {
+              "word": "こえ",
+              "reading": "こえ",
+              "kanji": "声",
+              "zh": "声音"
+            },
+            {
+              "word": "ここ",
+              "reading": "ここ",
+              "kanji": "",
+              "zh": "这里"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "コーヒー",
+              "reading": "コーヒー",
+              "zh": "咖啡"
+            },
+            {
+              "word": "コンビニ",
+              "reading": "コンビニ",
+              "zh": "便利店"
             }
           ]
         }
