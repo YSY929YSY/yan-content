@@ -3678,7 +3678,19 @@
             }
           ],
           "pairSource": "阿",
-          "pairAnchor": "阿 → ア"
+          "pairAnchor": "阿 → ア",
+          "pairExamples": [
+            {
+              "word": "アイス",
+              "reading": "アイス",
+              "zh": "冰淇淋；冰"
+            },
+            {
+              "word": "アニメ",
+              "reading": "アニメ",
+              "zh": "动画"
+            }
+          ]
         },
         {
           "kana": "い",
@@ -3714,6 +3726,18 @@
               "reading": "いぬ",
               "kanji": "犬",
               "zh": "狗"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "インク",
+              "reading": "インク",
+              "zh": "墨水"
+            },
+            {
+              "word": "イギリス",
+              "reading": "イギリス",
+              "zh": "英国"
             }
           ]
         },
@@ -3757,6 +3781,18 @@
               "kanji": "上",
               "zh": "上面"
             }
+          ],
+          "pairExamples": [
+            {
+              "word": "ウイルス",
+              "reading": "ウイルス",
+              "zh": "病毒"
+            },
+            {
+              "word": "ウール",
+              "reading": "ウール",
+              "zh": "羊毛"
+            }
           ]
         },
         {
@@ -3793,6 +3829,18 @@
               "reading": "えん",
               "kanji": "円",
               "zh": "日元；圆"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "エアコン",
+              "reading": "エアコン",
+              "zh": "空调"
+            },
+            {
+              "word": "エネルギー",
+              "reading": "エネルギー",
+              "zh": "能量；能源"
             }
           ]
         },
@@ -3843,6 +3891,18 @@
               "reading": "おと",
               "kanji": "音",
               "zh": "声音"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "オレンジ",
+              "reading": "オレンジ",
+              "zh": "橙子；橙色"
+            },
+            {
+              "word": "オフィス",
+              "reading": "オフィス",
+              "zh": "办公室"
             }
           ]
         }
