@@ -5714,6 +5714,40 @@
               "lang": "ZH",
               "word": "良→ら"
             }
+          ],
+          "pair": "ラ",
+          "source": "良",
+          "pairSource": "良",
+          "anchor": "良 → ら",
+          "pairAnchor": "良 → ラ",
+          "hint": "舌尖轻弹上齿龈，发介于 r 和 l 之间的短促 ra，不要卷舌。",
+          "strokeKey": "ra-hira",
+          "pairStrokeKey": "ra-kata",
+          "examples": [
+            {
+              "word": "らく",
+              "reading": "らく",
+              "kanji": "楽",
+              "zh": "轻松；舒服"
+            },
+            {
+              "word": "そら",
+              "reading": "そら",
+              "kanji": "空",
+              "zh": "天空"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ラーメン",
+              "reading": "ラーメン",
+              "zh": "拉面"
+            },
+            {
+              "word": "ラジオ",
+              "reading": "ラジオ",
+              "zh": "收音机；广播"
+            }
           ]
         },
         {
@@ -5724,6 +5758,49 @@
             {
               "lang": "ZH",
               "word": "利→り"
+            }
+          ],
+          "pair": "リ",
+          "source": "利",
+          "pairSource": "利",
+          "anchor": "利 → り",
+          "pairAnchor": "利 → リ",
+          "hint": "舌尖轻弹后接 i，发短促的 ri；字形像两笔下落，注意和い区分。",
+          "strokeKey": "ri-hira",
+          "pairStrokeKey": "ri-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "い",
+                "diff": "り两笔更直、更靠近；い更像两段柔和的竖弯。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "りんご",
+              "reading": "りんご",
+              "kanji": "",
+              "zh": "苹果"
+            },
+            {
+              "word": "とり",
+              "reading": "とり",
+              "kanji": "鳥",
+              "zh": "鸟"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "リモコン",
+              "reading": "リモコン",
+              "zh": "遥控器"
+            },
+            {
+              "word": "リスト",
+              "reading": "リスト",
+              "zh": "列表；清单"
             }
           ]
         },
@@ -5736,6 +5813,49 @@
               "lang": "ZH",
               "word": "留→る"
             }
+          ],
+          "pair": "ル",
+          "source": "留",
+          "pairSource": "流",
+          "anchor": "留 → る",
+          "pairAnchor": "流 → ル",
+          "hint": "舌尖轻弹后接 u，发短促的 ru；下方有小圈感，注意和ろ区分。",
+          "strokeKey": "ru-hira",
+          "pairStrokeKey": "ru-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "ろ",
+                "diff": "る下方有小收口和尾巴，ろ更像一个开放的弯圈。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "くるま",
+              "reading": "くるま",
+              "kanji": "車",
+              "zh": "车"
+            },
+            {
+              "word": "よる",
+              "reading": "よる",
+              "kanji": "夜",
+              "zh": "夜晚"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ルール",
+              "reading": "ルール",
+              "zh": "规则"
+            },
+            {
+              "word": "ホテル",
+              "reading": "ホテル",
+              "zh": "酒店"
+            }
           ]
         },
         {
@@ -5747,6 +5867,53 @@
               "lang": "ZH",
               "word": "礼→れ"
             }
+          ],
+          "pair": "レ",
+          "source": "礼",
+          "pairSource": "礼",
+          "anchor": "礼 → れ",
+          "pairAnchor": "礼 → レ",
+          "hint": "舌尖轻弹后接 e，发短促的 re；右边向外展开，不要和ね、わ混。",
+          "strokeKey": "re-hira",
+          "pairStrokeKey": "re-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "ね",
+                "diff": "れ右边展开不回旋，ね右边有明显回旋。"
+              },
+              {
+                "with": "わ",
+                "diff": "れ更细长向右下伸，わ右边更圆、更开。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "これ",
+              "reading": "これ",
+              "kanji": "",
+              "zh": "这个"
+            },
+            {
+              "word": "れい",
+              "reading": "れい",
+              "kanji": "例",
+              "zh": "例子"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "レストラン",
+              "reading": "レストラン",
+              "zh": "餐厅"
+            },
+            {
+              "word": "レシート",
+              "reading": "レシート",
+              "zh": "小票；收据"
+            }
           ]
         },
         {
@@ -5757,6 +5924,49 @@
             {
               "lang": "ZH",
               "word": "吕→ろ"
+            }
+          ],
+          "pair": "ロ",
+          "source": "呂",
+          "pairSource": "呂",
+          "anchor": "呂 → ろ",
+          "pairAnchor": "呂 → ロ",
+          "hint": "舌尖轻弹后接 o，发短促的 ro；形状像弯开的圈，注意和る区分。",
+          "strokeKey": "ro-hira",
+          "pairStrokeKey": "ro-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "る",
+                "diff": "ろ更像开放弯圈，る下方多一个小收口和尾巴。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ろく",
+              "reading": "ろく",
+              "kanji": "六",
+              "zh": "六"
+            },
+            {
+              "word": "ふろ",
+              "reading": "ふろ",
+              "kanji": "風呂",
+              "zh": "浴室；澡盆"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ロビー",
+              "reading": "ロビー",
+              "zh": "大堂"
+            },
+            {
+              "word": "ロッカー",
+              "reading": "ロッカー",
+              "zh": "储物柜"
             }
           ]
         }
