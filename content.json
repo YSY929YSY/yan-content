@@ -4180,6 +4180,40 @@
               "lang": "ZH",
               "word": "左→さ"
             }
+          ],
+          "pair": "サ",
+          "source": "左",
+          "pairSource": "散",
+          "anchor": "左 → さ",
+          "pairAnchor": "散 → サ",
+          "hint": "舌尖靠近上齿龈，气流从缝隙擦出，发短促的 sa。",
+          "strokeKey": "sa-hira",
+          "pairStrokeKey": "sa-kata",
+          "examples": [
+            {
+              "word": "さかな",
+              "reading": "さかな",
+              "kanji": "魚",
+              "zh": "鱼"
+            },
+            {
+              "word": "さくら",
+              "reading": "さくら",
+              "kanji": "桜",
+              "zh": "樱花"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "サイズ",
+              "reading": "サイズ",
+              "zh": "尺寸"
+            },
+            {
+              "word": "サラダ",
+              "reading": "サラダ",
+              "zh": "沙拉"
+            }
           ]
         },
         {
@@ -4195,6 +4229,53 @@
               "lang": "EN",
               "word": "she→し"
             }
+          ],
+          "pair": "シ",
+          "source": "之",
+          "pairSource": "之",
+          "anchor": "之 → し",
+          "pairAnchor": "之 → シ",
+          "hint": "接近 she 的开头，但更短；舌面抬起，不要读成中文卷舌。",
+          "strokeKey": "shi-hira",
+          "pairStrokeKey": "shi-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "つ",
+                "diff": "し像向上的钩，つ像横向的波浪。"
+              },
+              {
+                "with": "シ",
+                "diff": "シ的两短笔更偏横，ツ的两短笔更偏竖。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "しお",
+              "reading": "しお",
+              "kanji": "塩",
+              "zh": "盐"
+            },
+            {
+              "word": "しんぶん",
+              "reading": "しんぶん",
+              "kanji": "新聞",
+              "zh": "报纸"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "シャツ",
+              "reading": "シャツ",
+              "zh": "衬衫"
+            },
+            {
+              "word": "シート",
+              "reading": "シート",
+              "zh": "座位；座椅"
+            }
           ]
         },
         {
@@ -4206,6 +4287,49 @@
               "lang": "ZH",
               "word": "寸→す"
             }
+          ],
+          "pair": "ス",
+          "source": "寸",
+          "pairSource": "須",
+          "anchor": "寸 → す",
+          "pairAnchor": "須 → ス",
+          "hint": "发短促的 su，嘴唇保持扁平，不要圆成「苏」。",
+          "strokeKey": "su-hira",
+          "pairStrokeKey": "su-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "く",
+                "diff": "く是单个尖角，す有横线和中间下来的钩。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "すし",
+              "reading": "すし",
+              "kanji": "寿司",
+              "zh": "寿司"
+            },
+            {
+              "word": "すみません",
+              "reading": "すみません",
+              "kanji": "",
+              "zh": "不好意思；打扰了"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "スーパー",
+              "reading": "スーパー",
+              "zh": "超市"
+            },
+            {
+              "word": "スープ",
+              "reading": "スープ",
+              "zh": "汤"
+            }
           ]
         },
         {
@@ -4216,6 +4340,40 @@
             {
               "lang": "ZH",
               "word": "世≈せ（形）"
+            }
+          ],
+          "pair": "セ",
+          "source": "世",
+          "pairSource": "世",
+          "anchor": "世 → せ",
+          "pairAnchor": "世 → セ",
+          "hint": "发短促的 se，接近「赛」的前半，但收得更轻。",
+          "strokeKey": "se-hira",
+          "pairStrokeKey": "se-kata",
+          "examples": [
+            {
+              "word": "せんせい",
+              "reading": "せんせい",
+              "kanji": "先生",
+              "zh": "老师；先生"
+            },
+            {
+              "word": "せかい",
+              "reading": "せかい",
+              "kanji": "世界",
+              "zh": "世界"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "セール",
+              "reading": "セール",
+              "zh": "促销"
+            },
+            {
+              "word": "センター",
+              "reading": "センター",
+              "zh": "中心"
             }
           ]
         },
@@ -4231,6 +4389,53 @@
             {
               "lang": "ES",
               "word": "so-"
+            }
+          ],
+          "pair": "ソ",
+          "source": "曾",
+          "pairSource": "曾",
+          "anchor": "曾 → そ",
+          "pairAnchor": "曾 → ソ",
+          "hint": "发短促的 so，接近「索」的前半；注意そ的转折和ん不同。",
+          "strokeKey": "so-hira",
+          "pairStrokeKey": "so-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "ん",
+                "diff": "そ上方有转折感，ん是一笔顺下来的鼻音假名。"
+              },
+              {
+                "with": "ソ",
+                "diff": "ソ是一短一长两笔，ン的长笔更平、方向不同。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "そら",
+              "reading": "そら",
+              "kanji": "空",
+              "zh": "天空"
+            },
+            {
+              "word": "そこ",
+              "reading": "そこ",
+              "kanji": "",
+              "zh": "那里"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ソース",
+              "reading": "ソース",
+              "zh": "酱汁"
+            },
+            {
+              "word": "ソフト",
+              "reading": "ソフト",
+              "zh": "柔软；软件"
             }
           ]
         }
