@@ -5556,6 +5556,49 @@
               "lang": "ZH",
               "word": "也→や"
             }
+          ],
+          "pair": "ヤ",
+          "source": "也",
+          "pairSource": "也",
+          "anchor": "也 → や",
+          "pairAnchor": "也 → ヤ",
+          "hint": "接近中文「呀」的短音 ya；中间的交叉和下方斜线是识别重点。",
+          "strokeKey": "ya-hira",
+          "pairStrokeKey": "ya-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "ゆ",
+                "diff": "や更像交叉展开，ゆ中间有回环和竖向走势。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "やま",
+              "reading": "やま",
+              "kanji": "山",
+              "zh": "山"
+            },
+            {
+              "word": "やさい",
+              "reading": "やさい",
+              "kanji": "野菜",
+              "zh": "蔬菜"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ヤクルト",
+              "reading": "ヤクルト",
+              "zh": "养乐多"
+            },
+            {
+              "word": "イヤホン",
+              "reading": "イヤホン",
+              "zh": "耳机"
+            }
           ]
         },
         {
@@ -5567,6 +5610,49 @@
               "lang": "ZH",
               "word": "由→ゆ"
             }
+          ],
+          "pair": "ユ",
+          "source": "由",
+          "pairSource": "由",
+          "anchor": "由 → ゆ",
+          "pairAnchor": "由 → ユ",
+          "hint": "接近 you 的短音 yu；嘴唇略收，声音轻而短。",
+          "strokeKey": "yu-hira",
+          "pairStrokeKey": "yu-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "や",
+                "diff": "ゆ有明显回环，や更像开口的交叉形。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ゆき",
+              "reading": "ゆき",
+              "kanji": "雪",
+              "zh": "雪"
+            },
+            {
+              "word": "ゆび",
+              "reading": "ゆび",
+              "kanji": "指",
+              "zh": "手指"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ユニフォーム",
+              "reading": "ユニフォーム",
+              "zh": "制服；队服"
+            },
+            {
+              "word": "ユーモア",
+              "reading": "ユーモア",
+              "zh": "幽默"
+            }
           ]
         },
         {
@@ -5577,6 +5663,40 @@
             {
               "lang": "ZH",
               "word": "与→よ"
+            }
+          ],
+          "pair": "ヨ",
+          "source": "与",
+          "pairSource": "與",
+          "anchor": "与 → よ",
+          "pairAnchor": "與 → ヨ",
+          "hint": "接近中文「哟」的短音 yo；竖线加横向回钩，整体很紧凑。",
+          "strokeKey": "yo-hira",
+          "pairStrokeKey": "yo-kata",
+          "examples": [
+            {
+              "word": "よる",
+              "reading": "よる",
+              "kanji": "夜",
+              "zh": "夜晚"
+            },
+            {
+              "word": "よむ",
+              "reading": "よむ",
+              "kanji": "読む",
+              "zh": "读"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ヨガ",
+              "reading": "ヨガ",
+              "zh": "瑜伽"
+            },
+            {
+              "word": "ヨーグルト",
+              "reading": "ヨーグルト",
+              "zh": "酸奶"
             }
           ]
         }
