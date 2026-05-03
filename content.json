@@ -4453,6 +4453,49 @@
               "lang": "ZH",
               "word": "太→た"
             }
+          ],
+          "pair": "タ",
+          "source": "太",
+          "pairSource": "多",
+          "anchor": "太 → た",
+          "pairAnchor": "多 → タ",
+          "hint": "舌尖轻触上齿龈后立刻放开，发短促的 ta；清音不要重送气。",
+          "strokeKey": "ta-hira",
+          "pairStrokeKey": "ta-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "だ",
+                "diff": "た是清音，だ是加浊点后的浊音。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "たび",
+              "reading": "たび",
+              "kanji": "旅",
+              "zh": "旅行"
+            },
+            {
+              "word": "たべる",
+              "reading": "たべる",
+              "kanji": "食べる",
+              "zh": "吃"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "タクシー",
+              "reading": "タクシー",
+              "zh": "出租车"
+            },
+            {
+              "word": "タオル",
+              "reading": "タオル",
+              "zh": "毛巾"
+            }
           ]
         },
         {
@@ -4467,6 +4510,53 @@
             {
               "lang": "ZH",
               "word": "知≈ち"
+            }
+          ],
+          "pair": "チ",
+          "source": "知",
+          "pairSource": "千",
+          "anchor": "知 → ち",
+          "pairAnchor": "千 → チ",
+          "hint": "接近 chi，舌面抬起，声音短；不要读成中文卷舌的「吃」。",
+          "strokeKey": "chi-hira",
+          "pairStrokeKey": "chi-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "さ",
+                "diff": "ち下方像弯钩，さ下方更像断开的收笔。"
+              },
+              {
+                "with": "つ",
+                "diff": "ち有上方横画和向下钩，つ是横向圆弧。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ちかてつ",
+              "reading": "ちかてつ",
+              "kanji": "地下鉄",
+              "zh": "地铁"
+            },
+            {
+              "word": "ちず",
+              "reading": "ちず",
+              "kanji": "地図",
+              "zh": "地图"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "チケット",
+              "reading": "チケット",
+              "zh": "票；门票"
+            },
+            {
+              "word": "チーズ",
+              "reading": "チーズ",
+              "zh": "奶酪"
             }
           ]
         },
@@ -4483,6 +4573,53 @@
               "lang": "EN",
               "word": "tsunami→つ"
             }
+          ],
+          "pair": "ツ",
+          "source": "川",
+          "pairSource": "川",
+          "anchor": "川 → つ",
+          "pairAnchor": "川 → ツ",
+          "hint": "先有很轻的 t，再接 su，合成一拍 tsu；不要读成单独的「兔」。",
+          "strokeKey": "tsu-hira",
+          "pairStrokeKey": "tsu-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "し",
+                "diff": "つ像横向圆弧，し像向上的钩。"
+              },
+              {
+                "with": "ツ",
+                "diff": "ツ的两短笔更偏竖，シ的两短笔更偏横。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "つき",
+              "reading": "つき",
+              "kanji": "月",
+              "zh": "月亮；月份"
+            },
+            {
+              "word": "つぎ",
+              "reading": "つぎ",
+              "kanji": "次",
+              "zh": "下一个"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ツアー",
+              "reading": "ツアー",
+              "zh": "旅行团；游览"
+            },
+            {
+              "word": "ツナ",
+              "reading": "ツナ",
+              "zh": "金枪鱼"
+            }
           ]
         },
         {
@@ -4493,6 +4630,49 @@
             {
               "lang": "ZH",
               "word": "天→て"
+            }
+          ],
+          "pair": "テ",
+          "source": "天",
+          "pairSource": "天",
+          "anchor": "天 → て",
+          "pairAnchor": "天 → テ",
+          "hint": "发短促的 te，接近「特」的前半；清音轻而短。",
+          "strokeKey": "te-hira",
+          "pairStrokeKey": "te-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "で",
+                "diff": "て是清音，で是加浊点后的浊音。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "て",
+              "reading": "て",
+              "kanji": "手",
+              "zh": "手"
+            },
+            {
+              "word": "てがみ",
+              "reading": "てがみ",
+              "kanji": "手紙",
+              "zh": "信"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "テレビ",
+              "reading": "テレビ",
+              "zh": "电视"
+            },
+            {
+              "word": "テーブル",
+              "reading": "テーブル",
+              "zh": "桌子"
             }
           ]
         },
@@ -4508,6 +4688,49 @@
             {
               "lang": "ZH",
               "word": "到≈と（音）"
+            }
+          ],
+          "pair": "ト",
+          "source": "止",
+          "pairSource": "止",
+          "anchor": "止 → と",
+          "pairAnchor": "止 → ト",
+          "hint": "发短促的 to，舌尖轻触后放开；不要拖成中文的长音。",
+          "strokeKey": "to-hira",
+          "pairStrokeKey": "to-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "ど",
+                "diff": "と是清音，ど是加浊点后的浊音。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "とけい",
+              "reading": "とけい",
+              "kanji": "時計",
+              "zh": "钟表"
+            },
+            {
+              "word": "ともだち",
+              "reading": "ともだち",
+              "kanji": "友達",
+              "zh": "朋友"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "トイレ",
+              "reading": "トイレ",
+              "zh": "厕所"
+            },
+            {
+              "word": "トマト",
+              "reading": "トマト",
+              "zh": "番茄"
             }
           ]
         }
