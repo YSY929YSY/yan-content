@@ -4748,6 +4748,40 @@
               "lang": "ZH",
               "word": "奈→な"
             }
+          ],
+          "pair": "ナ",
+          "source": "奈",
+          "pairSource": "奈",
+          "anchor": "奈 → な",
+          "pairAnchor": "奈 → ナ",
+          "hint": "舌尖轻触上齿龈，发短促的 na；鼻音要轻轻带出来。",
+          "strokeKey": "na-hira",
+          "pairStrokeKey": "na-kata",
+          "examples": [
+            {
+              "word": "なまえ",
+              "reading": "なまえ",
+              "kanji": "名前",
+              "zh": "名字"
+            },
+            {
+              "word": "なつ",
+              "reading": "なつ",
+              "kanji": "夏",
+              "zh": "夏天"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ナイフ",
+              "reading": "ナイフ",
+              "zh": "刀"
+            },
+            {
+              "word": "ナンバー",
+              "reading": "ナンバー",
+              "zh": "号码"
+            }
           ]
         },
         {
@@ -4762,6 +4796,40 @@
             {
               "lang": "ZH",
               "word": "二≈に（音）"
+            }
+          ],
+          "pair": "ニ",
+          "source": "仁",
+          "pairSource": "二",
+          "anchor": "仁 → に",
+          "pairAnchor": "二 → ニ",
+          "hint": "接近中文「你」的前半，舌面抬起，发短促的 ni。",
+          "strokeKey": "ni-hira",
+          "pairStrokeKey": "ni-kata",
+          "examples": [
+            {
+              "word": "にほん",
+              "reading": "にほん",
+              "kanji": "日本",
+              "zh": "日本"
+            },
+            {
+              "word": "にく",
+              "reading": "にく",
+              "kanji": "肉",
+              "zh": "肉"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ニュース",
+              "reading": "ニュース",
+              "zh": "新闻"
+            },
+            {
+              "word": "ニット",
+              "reading": "ニット",
+              "zh": "针织衫；针织"
             }
           ]
         },
@@ -4778,6 +4846,53 @@
               "lang": "EN",
               "word": "noodle→ぬ"
             }
+          ],
+          "pair": "ヌ",
+          "source": "奴",
+          "pairSource": "奴",
+          "anchor": "奴 → ぬ",
+          "pairAnchor": "奴 → ヌ",
+          "hint": "嘴唇略圆，发短促的 nu；字形右边封闭，先和ね成组区分。",
+          "strokeKey": "nu-hira",
+          "pairStrokeKey": "nu-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "ね",
+                "diff": "ぬ右边像封闭的圈，ね右边是打开的钩。"
+              },
+              {
+                "with": "め",
+                "diff": "ぬ有明显尾巴和封闭感，め更像简化的圆弧交叉。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ぬの",
+              "reading": "ぬの",
+              "kanji": "布",
+              "zh": "布"
+            },
+            {
+              "word": "ぬるい",
+              "reading": "ぬるい",
+              "kanji": "",
+              "zh": "温的；不冷不热"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ヌードル",
+              "reading": "ヌードル",
+              "zh": "面条"
+            },
+            {
+              "word": "ヌガー",
+              "reading": "ヌガー",
+              "zh": "牛轧糖"
+            }
           ]
         },
         {
@@ -4788,6 +4903,53 @@
             {
               "lang": "ZH",
               "word": "猫=ねこ（记忆锚）"
+            }
+          ],
+          "pair": "ネ",
+          "source": "祢",
+          "pairSource": "祢",
+          "anchor": "祢 → ね",
+          "pairAnchor": "祢 → ネ",
+          "hint": "接近中文「内」的前半，发短促的 ne；右边开口，不要和ぬ混。",
+          "strokeKey": "ne-hira",
+          "pairStrokeKey": "ne-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "ぬ",
+                "diff": "ね右边开口上挑，ぬ右边更封闭。"
+              },
+              {
+                "with": "れ",
+                "diff": "ね右边有回旋，れ更像一笔向右展开。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ねこ",
+              "reading": "ねこ",
+              "kanji": "猫",
+              "zh": "猫"
+            },
+            {
+              "word": "ねつ",
+              "reading": "ねつ",
+              "kanji": "熱",
+              "zh": "发烧；热"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ネット",
+              "reading": "ネット",
+              "zh": "网络"
+            },
+            {
+              "word": "ネクタイ",
+              "reading": "ネクタイ",
+              "zh": "领带"
             }
           ]
         },
@@ -4803,6 +4965,40 @@
             {
               "lang": "ZH",
               "word": "の=「的」"
+            }
+          ],
+          "pair": "ノ",
+          "source": "乃",
+          "pairSource": "乃",
+          "anchor": "乃 → の",
+          "pairAnchor": "乃 → ノ",
+          "hint": "发短促的 no，嘴唇微圆；の常作连接名词的「的」。",
+          "strokeKey": "no-hira",
+          "pairStrokeKey": "no-kata",
+          "examples": [
+            {
+              "word": "のり",
+              "reading": "のり",
+              "kanji": "海苔",
+              "zh": "海苔"
+            },
+            {
+              "word": "のみもの",
+              "reading": "のみもの",
+              "kanji": "飲み物",
+              "zh": "饮料"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ノート",
+              "reading": "ノート",
+              "zh": "笔记本"
+            },
+            {
+              "word": "ノック",
+              "reading": "ノック",
+              "zh": "敲门；敲击"
             }
           ]
         }
