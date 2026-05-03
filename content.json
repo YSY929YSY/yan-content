@@ -5295,6 +5295,49 @@
               "lang": "ZH",
               "word": "末→ま"
             }
+          ],
+          "pair": "マ",
+          "source": "末",
+          "pairSource": "末",
+          "anchor": "末 → ま",
+          "pairAnchor": "末 → マ",
+          "hint": "双唇轻闭后打开，发短促的 ma；字形有两横和一竖，注意和ほ区分。",
+          "strokeKey": "ma-hira",
+          "pairStrokeKey": "ma-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "ほ",
+                "diff": "ま中间结构更收，ほ右边更像小圈和长尾。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "まち",
+              "reading": "まち",
+              "kanji": "町",
+              "zh": "城镇；街区"
+            },
+            {
+              "word": "まえ",
+              "reading": "まえ",
+              "kanji": "前",
+              "zh": "前面；以前"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "マンガ",
+              "reading": "マンガ",
+              "zh": "漫画"
+            },
+            {
+              "word": "マスク",
+              "reading": "マスク",
+              "zh": "口罩"
+            }
           ]
         },
         {
@@ -5306,6 +5349,40 @@
               "lang": "ZH",
               "word": "美→み"
             }
+          ],
+          "pair": "ミ",
+          "source": "美",
+          "pairSource": "三",
+          "anchor": "美 → み",
+          "pairAnchor": "三 → ミ",
+          "hint": "接近中文「米」的前半，发短促的 mi；片假名ミ像三道斜线。",
+          "strokeKey": "mi-hira",
+          "pairStrokeKey": "mi-kata",
+          "examples": [
+            {
+              "word": "みず",
+              "reading": "みず",
+              "kanji": "水",
+              "zh": "水"
+            },
+            {
+              "word": "みせ",
+              "reading": "みせ",
+              "kanji": "店",
+              "zh": "商店"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ミルク",
+              "reading": "ミルク",
+              "zh": "牛奶"
+            },
+            {
+              "word": "ミス",
+              "reading": "ミス",
+              "zh": "错误；失误"
+            }
           ]
         },
         {
@@ -5316,6 +5393,40 @@
             {
               "lang": "ZH",
               "word": "武→む"
+            }
+          ],
+          "pair": "ム",
+          "source": "武",
+          "pairSource": "牟",
+          "anchor": "武 → む",
+          "pairAnchor": "牟 → ム",
+          "hint": "双唇轻闭后带出短促的 mu；右下的小尾巴是辨认重点。",
+          "strokeKey": "mu-hira",
+          "pairStrokeKey": "mu-kata",
+          "examples": [
+            {
+              "word": "むし",
+              "reading": "むし",
+              "kanji": "虫",
+              "zh": "虫子"
+            },
+            {
+              "word": "むら",
+              "reading": "むら",
+              "kanji": "村",
+              "zh": "村庄"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ゲーム",
+              "reading": "ゲーム",
+              "zh": "游戏"
+            },
+            {
+              "word": "チーム",
+              "reading": "チーム",
+              "zh": "团队"
             }
           ]
         },
@@ -5332,6 +5443,49 @@
               "lang": "ZH",
               "word": "目（め）同音记忆"
             }
+          ],
+          "pair": "メ",
+          "source": "女",
+          "pairSource": "女",
+          "anchor": "女 → め",
+          "pairAnchor": "女 → メ",
+          "hint": "发短促的 me，接近「灭」的前半；め整体更开放，不要和ぬ混。",
+          "strokeKey": "me-hira",
+          "pairStrokeKey": "me-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "ぬ",
+                "diff": "め更开放，ぬ右下有明显小尾巴和封闭感。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "め",
+              "reading": "め",
+              "kanji": "目",
+              "zh": "眼睛"
+            },
+            {
+              "word": "あめ",
+              "reading": "あめ",
+              "kanji": "雨",
+              "zh": "雨"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "メニュー",
+              "reading": "メニュー",
+              "zh": "菜单"
+            },
+            {
+              "word": "メール",
+              "reading": "メール",
+              "zh": "邮件"
+            }
           ]
         },
         {
@@ -5342,6 +5496,49 @@
             {
               "lang": "ZH",
               "word": "毛→も"
+            }
+          ],
+          "pair": "モ",
+          "source": "毛",
+          "pairSource": "毛",
+          "anchor": "毛 → も",
+          "pairAnchor": "毛 → モ",
+          "hint": "发短促的 mo，嘴唇微圆；两横加弯钩，注意不要看成ん。",
+          "strokeKey": "mo-hira",
+          "pairStrokeKey": "mo-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "ん",
+                "diff": "も有两条横线，ん是一笔顺下来的鼻音假名。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "もの",
+              "reading": "もの",
+              "kanji": "物",
+              "zh": "东西；物品"
+            },
+            {
+              "word": "もり",
+              "reading": "もり",
+              "kanji": "森",
+              "zh": "森林"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "モデル",
+              "reading": "モデル",
+              "zh": "模特；模型"
+            },
+            {
+              "word": "モバイル",
+              "reading": "モバイル",
+              "zh": "移动；手机相关"
             }
           ]
         }
