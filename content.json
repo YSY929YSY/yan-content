@@ -5016,6 +5016,54 @@
               "lang": "ZH",
               "word": "八→は"
             }
+          ],
+          "pair": "ハ",
+          "source": "波",
+          "pairSource": "八",
+          "anchor": "波 → は",
+          "pairAnchor": "八 → ハ",
+          "hint": "轻轻送气，发短促的 ha；注意作主题助词时读 wa。",
+          "usageNote": "单独作为假名读 ha；作主题助词时读 wa，例如「これは」。",
+          "strokeKey": "ha-hira",
+          "pairStrokeKey": "ha-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "ば",
+                "diff": "は是清音，ば是在は上加浊点。"
+              },
+              {
+                "with": "ぱ",
+                "diff": "ぱ是在は上加半浊点小圆圈。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "はな",
+              "reading": "はな",
+              "kanji": "花",
+              "zh": "花"
+            },
+            {
+              "word": "はし",
+              "reading": "はし",
+              "kanji": "橋",
+              "zh": "桥"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ハンカチ",
+              "reading": "ハンカチ",
+              "zh": "手帕"
+            },
+            {
+              "word": "ハンバーガー",
+              "reading": "ハンバーガー",
+              "zh": "汉堡"
+            }
           ]
         },
         {
@@ -5030,6 +5078,40 @@
             {
               "lang": "EN",
               "word": "hi→ひ"
+            }
+          ],
+          "pair": "ヒ",
+          "source": "比",
+          "pairSource": "比",
+          "anchor": "比 → ひ",
+          "pairAnchor": "比 → ヒ",
+          "hint": "接近 hi，气息轻一点，声音短促。",
+          "strokeKey": "hi-hira",
+          "pairStrokeKey": "hi-kata",
+          "examples": [
+            {
+              "word": "ひと",
+              "reading": "ひと",
+              "kanji": "人",
+              "zh": "人"
+            },
+            {
+              "word": "ひる",
+              "reading": "ひる",
+              "kanji": "昼",
+              "zh": "中午；白天"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ホテル",
+              "reading": "ホテル",
+              "zh": "酒店"
+            },
+            {
+              "word": "ヒント",
+              "reading": "ヒント",
+              "zh": "提示；线索"
             }
           ]
         },
@@ -5046,6 +5128,53 @@
               "lang": "ZH",
               "word": "富士=ふじ"
             }
+          ],
+          "pair": "フ",
+          "source": "不",
+          "pairSource": "不",
+          "anchor": "不 → ふ",
+          "pairAnchor": "不 → フ",
+          "hint": "罗马音写 fu，但不是强烈咬唇的 f，也不是完全的 hu；双唇轻轻吹气。",
+          "strokeKey": "fu-hira",
+          "pairStrokeKey": "fu-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "ぶ",
+                "diff": "ふ是清音，ぶ是在ふ上加浊点。"
+              },
+              {
+                "with": "ぷ",
+                "diff": "ぷ是在ふ上加半浊点小圆圈。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ふね",
+              "reading": "ふね",
+              "kanji": "船",
+              "zh": "船"
+            },
+            {
+              "word": "ふゆ",
+              "reading": "ふゆ",
+              "kanji": "冬",
+              "zh": "冬天"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "フォーク",
+              "reading": "フォーク",
+              "zh": "叉子"
+            },
+            {
+              "word": "フルーツ",
+              "reading": "フルーツ",
+              "zh": "水果"
+            }
           ]
         },
         {
@@ -5057,6 +5186,41 @@
               "lang": "ZH",
               "word": "部→へ（形）"
             }
+          ],
+          "pair": "ヘ",
+          "source": "部",
+          "pairSource": "部",
+          "anchor": "部 → へ",
+          "pairAnchor": "部 → ヘ",
+          "hint": "发短促的 he，接近「黑」的前半；作方向助词时读 e。",
+          "usageNote": "单独作为假名读 he；作方向助词时读 e，例如「東京へ」。",
+          "strokeKey": "he-hira",
+          "pairStrokeKey": "he-kata",
+          "examples": [
+            {
+              "word": "へや",
+              "reading": "へや",
+              "kanji": "部屋",
+              "zh": "房间"
+            },
+            {
+              "word": "へび",
+              "reading": "へび",
+              "kanji": "蛇",
+              "zh": "蛇"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ヘア",
+              "reading": "ヘア",
+              "zh": "头发；发型"
+            },
+            {
+              "word": "ヘルプ",
+              "reading": "ヘルプ",
+              "zh": "帮助"
+            }
           ]
         },
         {
@@ -5067,6 +5231,53 @@
             {
               "lang": "ZH",
               "word": "保≈ほ（形）"
+            }
+          ],
+          "pair": "ホ",
+          "source": "保",
+          "pairSource": "保",
+          "anchor": "保 → ほ",
+          "pairAnchor": "保 → ホ",
+          "hint": "发短促的 ho，嘴唇微圆；注意和ぼ、ぽ只差点或圈。",
+          "strokeKey": "ho-hira",
+          "pairStrokeKey": "ho-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "ぼ",
+                "diff": "ほ是清音，ぼ是在ほ上加浊点。"
+              },
+              {
+                "with": "ぽ",
+                "diff": "ぽ是在ほ上加半浊点小圆圈。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ほし",
+              "reading": "ほし",
+              "kanji": "星",
+              "zh": "星星"
+            },
+            {
+              "word": "ほん",
+              "reading": "ほん",
+              "kanji": "本",
+              "zh": "书"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ホテル",
+              "reading": "ホテル",
+              "zh": "酒店"
+            },
+            {
+              "word": "ホット",
+              "reading": "ホット",
+              "zh": "热的"
             }
           ]
         }
