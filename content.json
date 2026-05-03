@@ -5984,6 +5984,53 @@
               "lang": "ZH",
               "word": "和→わ"
             }
+          ],
+          "pair": "ワ",
+          "source": "和",
+          "pairSource": "和",
+          "anchor": "和 → わ",
+          "pairAnchor": "和 → ワ",
+          "hint": "发 wa，像中文“哇”的开头；右边圆开，注意和れ、ね区分。",
+          "strokeKey": "wa-hira",
+          "pairStrokeKey": "wa-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "れ",
+                "diff": "わ右边更圆、更开；れ右边更细长，向右下伸。"
+              },
+              {
+                "with": "ね",
+                "diff": "わ没有ね右下的小回旋，整体更舒展。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "わたし",
+              "reading": "わたし",
+              "kanji": "私",
+              "zh": "我"
+            },
+            {
+              "word": "かわ",
+              "reading": "かわ",
+              "kanji": "川",
+              "zh": "河川"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ワイン",
+              "reading": "ワイン",
+              "zh": "葡萄酒"
+            },
+            {
+              "word": "シャワー",
+              "reading": "シャワー",
+              "zh": "淋浴"
+            }
           ]
         },
         {
@@ -5999,6 +6046,41 @@
               "lang": "JP",
               "word": "助词专用感"
             }
+          ],
+          "pair": "ヲ",
+          "source": "遠",
+          "pairSource": "乎",
+          "anchor": "遠 → を",
+          "pairAnchor": "乎 → ヲ",
+          "hint": "现代常作助词，发音多读 o；看到を，先想到它标记动作对象。",
+          "usageNote": "を通常作为助词使用，现代标准发音多读 o，不按 wo 明显发双音。",
+          "strokeKey": "wo-hira",
+          "pairStrokeKey": "wo-kata",
+          "examples": [
+            {
+              "word": "水をください",
+              "reading": "みずをください",
+              "kanji": "水をください",
+              "zh": "请给我水"
+            },
+            {
+              "word": "本を読む",
+              "reading": "ほんをよむ",
+              "kanji": "本を読む",
+              "zh": "读书"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ヲタク",
+              "reading": "ヲタク",
+              "zh": "御宅族；宅"
+            },
+            {
+              "word": "ヲ",
+              "reading": "ヲ",
+              "zh": "片假名 wo，现代少用"
+            }
           ]
         },
         {
@@ -6013,6 +6095,54 @@
             {
               "lang": "EN",
               "word": "n"
+            }
+          ],
+          "pair": "ン",
+          "source": "无",
+          "pairSource": "尓",
+          "anchor": "无 → ん",
+          "pairAnchor": "尓 → ン",
+          "hint": "ん是拨音，常在音节末尾收成鼻音，不是普通元音开头音。",
+          "usageNote": "ん会随后一音变化为 n、m 或 ng 一类鼻音感；单独练时先当鼻音收尾。",
+          "strokeKey": "n-hira",
+          "pairStrokeKey": "n-kata",
+          "confuse": {
+            "level": "L2",
+            "items": [
+              {
+                "with": "そ",
+                "diff": "ん是一笔顺滑甩尾；そ通常有更明显的折线和分段感。"
+              },
+              {
+                "with": "ソ",
+                "diff": "ン的短点更偏上，长笔从左下向右上扫；ソ的长笔更从上往下撇。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "こんにちは",
+              "reading": "こんにちは",
+              "kanji": "",
+              "zh": "你好"
+            },
+            {
+              "word": "ほん",
+              "reading": "ほん",
+              "kanji": "本",
+              "zh": "书"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "パン",
+              "reading": "パン",
+              "zh": "面包"
+            },
+            {
+              "word": "コンビニ",
+              "reading": "コンビニ",
+              "zh": "便利店"
             }
           ]
         }
