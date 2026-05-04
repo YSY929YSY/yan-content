@@ -6920,6 +6920,49 @@
               "lang": "ZH",
               "word": "ga"
             }
+          ],
+          "pair": "ガ",
+          "source": "か",
+          "pairSource": "カ",
+          "anchor": "か + ゛ → が",
+          "pairAnchor": "カ + ゛ → ガ",
+          "hint": "か加浊点变が，声音更厚，喉部有轻微振动感。",
+          "strokeKey": "ga-hira",
+          "pairStrokeKey": "ga-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "か",
+                "diff": "が比か多浊点，发音从清音变浊音。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "がっこう",
+              "reading": "がっこう",
+              "kanji": "学校",
+              "zh": "学校"
+            },
+            {
+              "word": "かぎ",
+              "reading": "かぎ",
+              "kanji": "鍵",
+              "zh": "钥匙"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ガイド",
+              "reading": "ガイド",
+              "zh": "导游；指南"
+            },
+            {
+              "word": "ガス",
+              "reading": "ガス",
+              "zh": "燃气；气体"
+            }
           ]
         },
         {
@@ -6931,6 +6974,49 @@
             {
               "lang": "ZH",
               "word": "gi"
+            }
+          ],
+          "pair": "ギ",
+          "source": "き",
+          "pairSource": "キ",
+          "anchor": "き + ゛ → ぎ",
+          "pairAnchor": "キ + ゛ → ギ",
+          "hint": "き加浊点变ぎ，发 gi，声音比き更沉一点。",
+          "strokeKey": "gi-hira",
+          "pairStrokeKey": "gi-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "き",
+                "diff": "ぎ比き多浊点，读音从 ki 变 gi。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ぎんこう",
+              "reading": "ぎんこう",
+              "kanji": "銀行",
+              "zh": "银行"
+            },
+            {
+              "word": "かぎ",
+              "reading": "かぎ",
+              "kanji": "鍵",
+              "zh": "钥匙"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ギター",
+              "reading": "ギター",
+              "zh": "吉他"
+            },
+            {
+              "word": "ギフト",
+              "reading": "ギフト",
+              "zh": "礼物"
             }
           ]
         },
@@ -6944,6 +7030,49 @@
               "lang": "ZH",
               "word": "gu"
             }
+          ],
+          "pair": "グ",
+          "source": "く",
+          "pairSource": "ク",
+          "anchor": "く + ゛ → ぐ",
+          "pairAnchor": "ク + ゛ → グ",
+          "hint": "く加浊点变ぐ，喉部更有振动，发短促的 gu。",
+          "strokeKey": "gu-hira",
+          "pairStrokeKey": "gu-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "く",
+                "diff": "ぐ比く多浊点，读音从 ku 变 gu。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ぐあい",
+              "reading": "ぐあい",
+              "kanji": "具合",
+              "zh": "状态；情况"
+            },
+            {
+              "word": "すぐ",
+              "reading": "すぐ",
+              "kanji": "",
+              "zh": "马上；立刻"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "グループ",
+              "reading": "グループ",
+              "zh": "小组；团体"
+            },
+            {
+              "word": "グラス",
+              "reading": "グラス",
+              "zh": "玻璃杯"
+            }
           ]
         },
         {
@@ -6956,6 +7085,49 @@
               "lang": "ZH",
               "word": "ge"
             }
+          ],
+          "pair": "ゲ",
+          "source": "け",
+          "pairSource": "ケ",
+          "anchor": "け + ゛ → げ",
+          "pairAnchor": "ケ + ゛ → ゲ",
+          "hint": "け加浊点变げ，发短促的 ge，声音比け更厚。",
+          "strokeKey": "ge-hira",
+          "pairStrokeKey": "ge-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "け",
+                "diff": "げ比け多浊点，读音从 ke 变 ge。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "げんき",
+              "reading": "げんき",
+              "kanji": "元気",
+              "zh": "精神；有活力"
+            },
+            {
+              "word": "かげ",
+              "reading": "かげ",
+              "kanji": "影",
+              "zh": "影子"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ゲーム",
+              "reading": "ゲーム",
+              "zh": "游戏"
+            },
+            {
+              "word": "ゲート",
+              "reading": "ゲート",
+              "zh": "门；登机口"
+            }
           ]
         },
         {
@@ -6967,6 +7139,49 @@
             {
               "lang": "ZH",
               "word": "go"
+            }
+          ],
+          "pair": "ゴ",
+          "source": "こ",
+          "pairSource": "コ",
+          "anchor": "こ + ゛ → ご",
+          "pairAnchor": "コ + ゛ → ゴ",
+          "hint": "こ加浊点变ご，发短促的 go，注意和こ区分。",
+          "strokeKey": "go-hira",
+          "pairStrokeKey": "go-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "こ",
+                "diff": "ご比こ多浊点，读音从 ko 变 go。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ごはん",
+              "reading": "ごはん",
+              "kanji": "ご飯",
+              "zh": "米饭；饭"
+            },
+            {
+              "word": "ごご",
+              "reading": "ごご",
+              "kanji": "午後",
+              "zh": "下午"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ゴール",
+              "reading": "ゴール",
+              "zh": "目标；终点"
+            },
+            {
+              "word": "ゴミ",
+              "reading": "ゴミ",
+              "zh": "垃圾"
             }
           ]
         }
@@ -7180,6 +7395,53 @@
               "lang": "ZH",
               "word": "pa"
             }
+          ],
+          "pair": "パ",
+          "source": "は",
+          "pairSource": "ハ",
+          "anchor": "は + ゜ → ぱ",
+          "pairAnchor": "ハ + ゜ → パ",
+          "hint": "は加半浊点变ぱ，双唇轻闭再打开，发轻快的 pa。",
+          "strokeKey": "pa-hira",
+          "pairStrokeKey": "pa-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "ば",
+                "diff": "ぱ是小圆圈半浊点，ば是两点浊点。"
+              },
+              {
+                "with": "は",
+                "diff": "ぱ比は多半浊点，读音从 ha 变 pa。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ぱん",
+              "reading": "ぱん",
+              "kanji": "",
+              "zh": "面包"
+            },
+            {
+              "word": "さんぽ",
+              "reading": "さんぽ",
+              "kanji": "散歩",
+              "zh": "散步"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "パン",
+              "reading": "パン",
+              "zh": "面包"
+            },
+            {
+              "word": "パスポート",
+              "reading": "パスポート",
+              "zh": "护照"
+            }
           ]
         },
         {
@@ -7191,6 +7453,53 @@
             {
               "lang": "ZH",
               "word": "pi"
+            }
+          ],
+          "pair": "ピ",
+          "source": "ひ",
+          "pairSource": "ヒ",
+          "anchor": "ひ + ゜ → ぴ",
+          "pairAnchor": "ヒ + ゜ → ピ",
+          "hint": "ひ加半浊点变ぴ，发短促的 pi，声音轻快。",
+          "strokeKey": "pi-hira",
+          "pairStrokeKey": "pi-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "び",
+                "diff": "ぴ是小圆圈半浊点，び是两点浊点。"
+              },
+              {
+                "with": "ひ",
+                "diff": "ぴ比ひ多半浊点，读音从 hi 变 pi。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ぴったり",
+              "reading": "ぴったり",
+              "kanji": "",
+              "zh": "正合适"
+            },
+            {
+              "word": "えんぴつ",
+              "reading": "えんぴつ",
+              "kanji": "鉛筆",
+              "zh": "铅笔"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ピアノ",
+              "reading": "ピアノ",
+              "zh": "钢琴"
+            },
+            {
+              "word": "ピザ",
+              "reading": "ピザ",
+              "zh": "披萨"
             }
           ]
         },
@@ -7204,6 +7513,53 @@
               "lang": "ZH",
               "word": "pu"
             }
+          ],
+          "pair": "プ",
+          "source": "ふ",
+          "pairSource": "フ",
+          "anchor": "ふ + ゜ → ぷ",
+          "pairAnchor": "フ + ゜ → プ",
+          "hint": "ふ加半浊点变ぷ，双唇轻闭后弹出 pu。",
+          "strokeKey": "pu-hira",
+          "pairStrokeKey": "pu-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "ぶ",
+                "diff": "ぷ是小圆圈半浊点，ぶ是两点浊点。"
+              },
+              {
+                "with": "ふ",
+                "diff": "ぷ比ふ多半浊点，读音从 fu 变 pu。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ぷりん",
+              "reading": "ぷりん",
+              "kanji": "",
+              "zh": "布丁"
+            },
+            {
+              "word": "きっぷ",
+              "reading": "きっぷ",
+              "kanji": "切符",
+              "zh": "车票"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "プール",
+              "reading": "プール",
+              "zh": "游泳池"
+            },
+            {
+              "word": "プリン",
+              "reading": "プリン",
+              "zh": "布丁"
+            }
           ]
         },
         {
@@ -7216,6 +7572,53 @@
               "lang": "ZH",
               "word": "pe"
             }
+          ],
+          "pair": "ペ",
+          "source": "へ",
+          "pairSource": "ヘ",
+          "anchor": "へ + ゜ → ぺ",
+          "pairAnchor": "ヘ + ゜ → ペ",
+          "hint": "へ加半浊点变ぺ，发短促的 pe，小圆圈不是浊点。",
+          "strokeKey": "pe-hira",
+          "pairStrokeKey": "pe-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "べ",
+                "diff": "ぺ是小圆圈半浊点，べ是两点浊点。"
+              },
+              {
+                "with": "へ",
+                "diff": "ぺ比へ多半浊点，读音从 he 变 pe。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ぺこぺこ",
+              "reading": "ぺこぺこ",
+              "kanji": "",
+              "zh": "饿扁了；空空的"
+            },
+            {
+              "word": "ぺらぺら",
+              "reading": "ぺらぺら",
+              "kanji": "",
+              "zh": "流利地；单薄"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ペン",
+              "reading": "ペン",
+              "zh": "笔"
+            },
+            {
+              "word": "ページ",
+              "reading": "ページ",
+              "zh": "页"
+            }
           ]
         },
         {
@@ -7227,6 +7630,53 @@
             {
               "lang": "ZH",
               "word": "po"
+            }
+          ],
+          "pair": "ポ",
+          "source": "ほ",
+          "pairSource": "ホ",
+          "anchor": "ほ + ゜ → ぽ",
+          "pairAnchor": "ホ + ゜ → ポ",
+          "hint": "ほ加半浊点变ぽ，发短促的 po，声音轻而弹。",
+          "strokeKey": "po-hira",
+          "pairStrokeKey": "po-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "ぼ",
+                "diff": "ぽ是小圆圈半浊点，ぼ是两点浊点。"
+              },
+              {
+                "with": "ほ",
+                "diff": "ぽ比ほ多半浊点，读音从 ho 变 po。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "さんぽ",
+              "reading": "さんぽ",
+              "kanji": "散歩",
+              "zh": "散步"
+            },
+            {
+              "word": "ぽかぽか",
+              "reading": "ぽかぽか",
+              "kanji": "",
+              "zh": "暖洋洋"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ポスト",
+              "reading": "ポスト",
+              "zh": "邮筒；职位"
+            },
+            {
+              "word": "ポイント",
+              "reading": "ポイント",
+              "zh": "积分；要点"
             }
           ]
         }
