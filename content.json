@@ -7200,6 +7200,49 @@
               "lang": "ZH",
               "word": "za"
             }
+          ],
+          "pair": "ザ",
+          "source": "さ",
+          "pairSource": "サ",
+          "anchor": "さ + ゛ → ざ",
+          "pairAnchor": "サ + ゛ → ザ",
+          "hint": "さ加浊点变ざ，摩擦音更重，发短促的 za。",
+          "strokeKey": "za-hira",
+          "pairStrokeKey": "za-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "さ",
+                "diff": "ざ比さ多浊点，读音从 sa 变 za。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ざっし",
+              "reading": "ざっし",
+              "kanji": "雑誌",
+              "zh": "杂志"
+            },
+            {
+              "word": "ざせき",
+              "reading": "ざせき",
+              "kanji": "座席",
+              "zh": "座位"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "サイズ",
+              "reading": "サイズ",
+              "zh": "尺寸"
+            },
+            {
+              "word": "ザック",
+              "reading": "ザック",
+              "zh": "背包"
+            }
           ]
         },
         {
@@ -7211,6 +7254,53 @@
             {
               "lang": "ZH",
               "word": "ji"
+            }
+          ],
+          "pair": "ジ",
+          "source": "し",
+          "pairSource": "シ",
+          "anchor": "し + ゛ → じ",
+          "pairAnchor": "シ + ゛ → ジ",
+          "hint": "し加浊点变じ，罗马音写 ji，不写 zi。",
+          "strokeKey": "ji-hira",
+          "pairStrokeKey": "ji-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "し",
+                "diff": "じ比し多浊点，读音从 shi 变 ji。"
+              },
+              {
+                "with": "ジ",
+                "diff": "ジ是在シ上加浊点，短笔方向仍按シ来认。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "じかん",
+              "reading": "じかん",
+              "kanji": "時間",
+              "zh": "时间"
+            },
+            {
+              "word": "じしょ",
+              "reading": "じしょ",
+              "kanji": "辞書",
+              "zh": "词典"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ジーンズ",
+              "reading": "ジーンズ",
+              "zh": "牛仔裤"
+            },
+            {
+              "word": "ジム",
+              "reading": "ジム",
+              "zh": "健身房"
             }
           ]
         },
@@ -7224,6 +7314,53 @@
               "lang": "ZH",
               "word": "zu"
             }
+          ],
+          "pair": "ズ",
+          "source": "す",
+          "pairSource": "ス",
+          "anchor": "す + ゛ → ず",
+          "pairAnchor": "ス + ゛ → ズ",
+          "hint": "す加浊点变ず，发 zu；现代日语里ず和づ多同音。",
+          "strokeKey": "zu-hira",
+          "pairStrokeKey": "zu-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "す",
+                "diff": "ず比す多浊点，读音从 su 变 zu。"
+              },
+              {
+                "with": "づ",
+                "diff": "ず来自す，づ来自つ，现代标准发音多相同。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "みず",
+              "reading": "みず",
+              "kanji": "水",
+              "zh": "水"
+            },
+            {
+              "word": "ずっと",
+              "reading": "ずっと",
+              "kanji": "",
+              "zh": "一直；更"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ズボン",
+              "reading": "ズボン",
+              "zh": "裤子"
+            },
+            {
+              "word": "サイズ",
+              "reading": "サイズ",
+              "zh": "尺寸"
+            }
           ]
         },
         {
@@ -7236,6 +7373,49 @@
               "lang": "ZH",
               "word": "ze"
             }
+          ],
+          "pair": "ゼ",
+          "source": "せ",
+          "pairSource": "セ",
+          "anchor": "せ + ゛ → ぜ",
+          "pairAnchor": "セ + ゛ → ゼ",
+          "hint": "せ加浊点变ぜ，发短促的 ze，声音比せ更重。",
+          "strokeKey": "ze-hira",
+          "pairStrokeKey": "ze-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "せ",
+                "diff": "ぜ比せ多浊点，读音从 se 变 ze。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ぜんぶ",
+              "reading": "ぜんぶ",
+              "kanji": "全部",
+              "zh": "全部"
+            },
+            {
+              "word": "ぜろ",
+              "reading": "ぜろ",
+              "kanji": "",
+              "zh": "零"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ゼロ",
+              "reading": "ゼロ",
+              "zh": "零"
+            },
+            {
+              "word": "ゼリー",
+              "reading": "ゼリー",
+              "zh": "果冻"
+            }
           ]
         },
         {
@@ -7247,6 +7427,53 @@
             {
               "lang": "ZH",
               "word": "zo"
+            }
+          ],
+          "pair": "ゾ",
+          "source": "そ",
+          "pairSource": "ソ",
+          "anchor": "そ + ゛ → ぞ",
+          "pairAnchor": "ソ + ゛ → ゾ",
+          "hint": "そ加浊点变ぞ，发短促的 zo，先认清そ/ソ再加浊点。",
+          "strokeKey": "zo-hira",
+          "pairStrokeKey": "zo-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "そ",
+                "diff": "ぞ比そ多浊点，读音从 so 变 zo。"
+              },
+              {
+                "with": "ゾ",
+                "diff": "ゾ是在ソ上加浊点，注意ソ和ン的笔向区别。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "かぞく",
+              "reading": "かぞく",
+              "kanji": "家族",
+              "zh": "家人；家庭"
+            },
+            {
+              "word": "どうぞ",
+              "reading": "どうぞ",
+              "kanji": "",
+              "zh": "请；请用"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ゾーン",
+              "reading": "ゾーン",
+              "zh": "区域"
+            },
+            {
+              "word": "アマゾン",
+              "reading": "アマゾン",
+              "zh": "亚马逊"
             }
           ]
         }
