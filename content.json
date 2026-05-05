@@ -7492,6 +7492,49 @@
               "lang": "ZH",
               "word": "da"
             }
+          ],
+          "pair": "ダ",
+          "source": "た",
+          "pairSource": "タ",
+          "anchor": "た + ゛ → だ",
+          "pairAnchor": "タ + ゛ → ダ",
+          "hint": "た加浊点变だ，舌尖发力更实，声音从 ta 变 da。",
+          "strokeKey": "da-hira",
+          "pairStrokeKey": "da-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "た",
+                "diff": "だ比た多浊点，读音从 ta 变 da。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "だいがく",
+              "reading": "だいがく",
+              "kanji": "大学",
+              "zh": "大学"
+            },
+            {
+              "word": "だれ",
+              "reading": "だれ",
+              "kanji": "誰",
+              "zh": "谁"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ダンス",
+              "reading": "ダンス",
+              "zh": "舞蹈"
+            },
+            {
+              "word": "ダイヤ",
+              "reading": "ダイヤ",
+              "zh": "钻石；时刻表"
+            }
           ]
         },
         {
@@ -7503,6 +7546,54 @@
             {
               "lang": "ZH",
               "word": "ji"
+            }
+          ],
+          "pair": "ヂ",
+          "source": "ち",
+          "pairSource": "チ",
+          "anchor": "ち + ゛ → ぢ",
+          "pairAnchor": "チ + ゛ → ヂ",
+          "hint": "ち加浊点变ぢ，现代标准发音多接近じ，但来源不同。",
+          "usageNote": "ぢ现代较少单独出现，常见于連濁或固定词中；key 用 ji2，避免和じ混同。",
+          "strokeKey": "ji2-hira",
+          "pairStrokeKey": "ji2-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "じ",
+                "diff": "ぢ来自ち加浊点，じ来自し加浊点，现代发音多相同但写法不同。"
+              },
+              {
+                "with": "ち",
+                "diff": "ぢ比ち多浊点。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ちぢむ",
+              "reading": "ちぢむ",
+              "kanji": "縮む",
+              "zh": "缩小；收缩"
+            },
+            {
+              "word": "はなぢ",
+              "reading": "はなぢ",
+              "kanji": "鼻血",
+              "zh": "鼻血"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ヂーゼル",
+              "reading": "ヂーゼル",
+              "zh": "柴油机（旧式写法）"
+            },
+            {
+              "word": "ヂャズ",
+              "reading": "ヂャズ",
+              "zh": "爵士乐（旧式写法）"
             }
           ]
         },
@@ -7516,6 +7607,54 @@
               "lang": "ZH",
               "word": "zu"
             }
+          ],
+          "pair": "ヅ",
+          "source": "つ",
+          "pairSource": "ツ",
+          "anchor": "つ + ゛ → づ",
+          "pairAnchor": "ツ + ゛ → ヅ",
+          "hint": "つ加浊点变づ，现代标准发音多接近ず，但来源不同。",
+          "usageNote": "づ现代较少作为普通独立音出现，常见于続く、気づく一类固定写法；key 用 zu2，避免和ず混同。",
+          "strokeKey": "zu2-hira",
+          "pairStrokeKey": "zu2-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "ず",
+                "diff": "づ来自つ加浊点，ず来自す加浊点，现代发音多相同但写法不同。"
+              },
+              {
+                "with": "つ",
+                "diff": "づ比つ多浊点。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "つづく",
+              "reading": "つづく",
+              "kanji": "続く",
+              "zh": "继续；持续"
+            },
+            {
+              "word": "きづく",
+              "reading": "きづく",
+              "kanji": "気づく",
+              "zh": "注意到"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ヅラ",
+              "reading": "ヅラ",
+              "zh": "假发（俗语）"
+            },
+            {
+              "word": "ヅケ",
+              "reading": "ヅケ",
+              "zh": "腌渍鱼片"
+            }
           ]
         },
         {
@@ -7528,6 +7667,49 @@
               "lang": "ZH",
               "word": "de"
             }
+          ],
+          "pair": "デ",
+          "source": "て",
+          "pairSource": "テ",
+          "anchor": "て + ゛ → で",
+          "pairAnchor": "テ + ゛ → デ",
+          "hint": "て加浊点变で，发短促的 de，是日语里非常高频的音。",
+          "strokeKey": "de-hira",
+          "pairStrokeKey": "de-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "て",
+                "diff": "で比て多浊点，读音从 te 变 de。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "でんわ",
+              "reading": "でんわ",
+              "kanji": "電話",
+              "zh": "电话"
+            },
+            {
+              "word": "でぐち",
+              "reading": "でぐち",
+              "kanji": "出口",
+              "zh": "出口"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "デパート",
+              "reading": "デパート",
+              "zh": "百货商店"
+            },
+            {
+              "word": "デザート",
+              "reading": "デザート",
+              "zh": "甜点"
+            }
           ]
         },
         {
@@ -7539,6 +7721,49 @@
             {
               "lang": "ZH",
               "word": "do"
+            }
+          ],
+          "pair": "ド",
+          "source": "と",
+          "pairSource": "ト",
+          "anchor": "と + ゛ → ど",
+          "pairAnchor": "ト + ゛ → ド",
+          "hint": "と加浊点变ど，发短促的 do，注意和と区分。",
+          "strokeKey": "do-hira",
+          "pairStrokeKey": "do-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "と",
+                "diff": "ど比と多浊点，读音从 to 变 do。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "どこ",
+              "reading": "どこ",
+              "kanji": "",
+              "zh": "哪里"
+            },
+            {
+              "word": "どうぞ",
+              "reading": "どうぞ",
+              "kanji": "",
+              "zh": "请；请用"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ドア",
+              "reading": "ドア",
+              "zh": "门"
+            },
+            {
+              "word": "ドラマ",
+              "reading": "ドラマ",
+              "zh": "电视剧；戏剧"
             }
           ]
         }
