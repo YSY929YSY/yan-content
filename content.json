@@ -7782,6 +7782,53 @@
               "lang": "ZH",
               "word": "ba"
             }
+          ],
+          "pair": "バ",
+          "source": "は",
+          "pairSource": "ハ",
+          "anchor": "は + ゛ → ば",
+          "pairAnchor": "ハ + ゛ → バ",
+          "hint": "は加浊点变ば，双唇轻闭后打开，声音比は更厚。",
+          "strokeKey": "ba-hira",
+          "pairStrokeKey": "ba-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "は",
+                "diff": "ば比は多浊点，读音从 ha 变 ba。"
+              },
+              {
+                "with": "ぱ",
+                "diff": "ば是两点浊点，ぱ是小圆圈半浊点。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ばす",
+              "reading": "ばす",
+              "kanji": "",
+              "zh": "公共汽车"
+            },
+            {
+              "word": "ばんごう",
+              "reading": "ばんごう",
+              "kanji": "番号",
+              "zh": "号码"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "バス",
+              "reading": "バス",
+              "zh": "公共汽车；浴室"
+            },
+            {
+              "word": "バッグ",
+              "reading": "バッグ",
+              "zh": "包"
+            }
           ]
         },
         {
@@ -7793,6 +7840,53 @@
             {
               "lang": "ZH",
               "word": "bi"
+            }
+          ],
+          "pair": "ビ",
+          "source": "ひ",
+          "pairSource": "ヒ",
+          "anchor": "ひ + ゛ → び",
+          "pairAnchor": "ヒ + ゛ → ビ",
+          "hint": "ひ加浊点变び，气息变少，声音更实更厚。",
+          "strokeKey": "bi-hira",
+          "pairStrokeKey": "bi-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "ひ",
+                "diff": "び比ひ多浊点，读音从 hi 变 bi。"
+              },
+              {
+                "with": "ぴ",
+                "diff": "び是两点浊点，ぴ是小圆圈半浊点。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "びょういん",
+              "reading": "びょういん",
+              "kanji": "病院",
+              "zh": "医院"
+            },
+            {
+              "word": "びじゅつかん",
+              "reading": "びじゅつかん",
+              "kanji": "美術館",
+              "zh": "美术馆"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ビール",
+              "reading": "ビール",
+              "zh": "啤酒"
+            },
+            {
+              "word": "ビザ",
+              "reading": "ビザ",
+              "zh": "签证"
             }
           ]
         },
@@ -7806,6 +7900,53 @@
               "lang": "ZH",
               "word": "bu"
             }
+          ],
+          "pair": "ブ",
+          "source": "ふ",
+          "pairSource": "フ",
+          "anchor": "ふ + ゛ → ぶ",
+          "pairAnchor": "フ + ゛ → ブ",
+          "hint": "ふ加浊点变ぶ，双唇轻闭后带出浊音，注意和ぷ区分。",
+          "strokeKey": "bu-hira",
+          "pairStrokeKey": "bu-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "ふ",
+                "diff": "ぶ比ふ多浊点，读音从 fu 变 bu。"
+              },
+              {
+                "with": "ぷ",
+                "diff": "ぶ是两点浊点，ぷ是小圆圈半浊点。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ぶた",
+              "reading": "ぶた",
+              "kanji": "豚",
+              "zh": "猪"
+            },
+            {
+              "word": "ぶんか",
+              "reading": "ぶんか",
+              "kanji": "文化",
+              "zh": "文化"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ブログ",
+              "reading": "ブログ",
+              "zh": "博客"
+            },
+            {
+              "word": "ブーツ",
+              "reading": "ブーツ",
+              "zh": "靴子；长靴"
+            }
           ]
         },
         {
@@ -7818,6 +7959,54 @@
               "lang": "ZH",
               "word": "be"
             }
+          ],
+          "pair": "ベ",
+          "source": "へ",
+          "pairSource": "ヘ",
+          "anchor": "へ + ゛ → べ",
+          "pairAnchor": "ヘ + ゛ → ベ",
+          "hint": "へ加浊点变べ，发短促的 be；这里是浊音，不是助词读法。",
+          "strokeKey": "be-hira",
+          "pairStrokeKey": "be-kata",
+          "usageNote": "へ作方向助词时读 e；べ是へ加浊点后的音，读 be。",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "へ",
+                "diff": "べ比へ多浊点，读音从 he 变 be。"
+              },
+              {
+                "with": "ぺ",
+                "diff": "べ是两点浊点，ぺ是小圆圈半浊点。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "べんり",
+              "reading": "べんり",
+              "kanji": "便利",
+              "zh": "方便"
+            },
+            {
+              "word": "たべる",
+              "reading": "たべる",
+              "kanji": "食べる",
+              "zh": "吃"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ベッド",
+              "reading": "ベッド",
+              "zh": "床"
+            },
+            {
+              "word": "ベルト",
+              "reading": "ベルト",
+              "zh": "腰带"
+            }
           ]
         },
         {
@@ -7829,6 +8018,53 @@
             {
               "lang": "ZH",
               "word": "bo"
+            }
+          ],
+          "pair": "ボ",
+          "source": "ほ",
+          "pairSource": "ホ",
+          "anchor": "ほ + ゛ → ぼ",
+          "pairAnchor": "ホ + ゛ → ボ",
+          "hint": "ほ加浊点变ぼ，嘴唇微圆，声音比ほ更厚。",
+          "strokeKey": "bo-hira",
+          "pairStrokeKey": "bo-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "ほ",
+                "diff": "ぼ比ほ多浊点，读音从 ho 变 bo。"
+              },
+              {
+                "with": "ぽ",
+                "diff": "ぼ是两点浊点，ぽ是小圆圈半浊点。"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "word": "ぼうし",
+              "reading": "ぼうし",
+              "kanji": "帽子",
+              "zh": "帽子"
+            },
+            {
+              "word": "ぼく",
+              "reading": "ぼく",
+              "kanji": "僕",
+              "zh": "我（男性常用）"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ボタン",
+              "reading": "ボタン",
+              "zh": "按钮；纽扣"
+            },
+            {
+              "word": "ボール",
+              "reading": "ボール",
+              "zh": "球"
             }
           ]
         }
