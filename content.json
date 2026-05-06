@@ -8671,6 +8671,40 @@
               "lang": "ZH",
               "word": "cha"
             }
+          ],
+          "pair": "チャ",
+          "source": "ち + ゃ",
+          "pairSource": "チ + ャ",
+          "anchor": "ち + ゃ → ちゃ",
+          "pairAnchor": "チ + ャ → チャ",
+          "hint": "ちゃ 要压成一拍读 cha，不要拆成 chi-ya；罗马音写 cha。",
+          "strokeKey": "cha-hira",
+          "pairStrokeKey": "cha-kata",
+          "examples": [
+            {
+              "word": "ちゃ",
+              "reading": "ちゃ",
+              "kanji": "茶",
+              "zh": "茶"
+            },
+            {
+              "word": "おちゃ",
+              "reading": "おちゃ",
+              "kanji": "お茶",
+              "zh": "茶；茶水"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "チャンス",
+              "reading": "チャンス",
+              "zh": "机会"
+            },
+            {
+              "word": "チャーハン",
+              "reading": "チャーハン",
+              "zh": "炒饭"
+            }
           ]
         },
         {
@@ -8683,6 +8717,40 @@
               "lang": "ZH",
               "word": "chu"
             }
+          ],
+          "pair": "チュ",
+          "source": "ち + ゅ",
+          "pairSource": "チ + ュ",
+          "anchor": "ち + ゅ → ちゅ",
+          "pairAnchor": "チ + ュ → チュ",
+          "hint": "ちゅ 要压成一拍读 chu，不要拆成 chi-yu；罗马音写 chu。",
+          "strokeKey": "chu-hira",
+          "pairStrokeKey": "chu-kata",
+          "examples": [
+            {
+              "word": "ちゅうごく",
+              "reading": "ちゅうごく",
+              "kanji": "中国",
+              "zh": "中国"
+            },
+            {
+              "word": "ちゅうもん",
+              "reading": "ちゅうもん",
+              "kanji": "注文",
+              "zh": "点餐；订购"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "チューリップ",
+              "reading": "チューリップ",
+              "zh": "郁金香"
+            },
+            {
+              "word": "チューブ",
+              "reading": "チューブ",
+              "zh": "管；软管"
+            }
           ]
         },
         {
@@ -8694,6 +8762,40 @@
             {
               "lang": "ZH",
               "word": "cho"
+            }
+          ],
+          "pair": "チョ",
+          "source": "ち + ょ",
+          "pairSource": "チ + ョ",
+          "anchor": "ち + ょ → ちょ",
+          "pairAnchor": "チ + ョ → チョ",
+          "hint": "ちょ 要压成一拍读 cho，不要拆成 chi-yo；罗马音写 cho。",
+          "strokeKey": "cho-hira",
+          "pairStrokeKey": "cho-kata",
+          "examples": [
+            {
+              "word": "ちょっと",
+              "reading": "ちょっと",
+              "kanji": "",
+              "zh": "稍微；一下"
+            },
+            {
+              "word": "ちょきん",
+              "reading": "ちょきん",
+              "kanji": "貯金",
+              "zh": "存钱；储蓄"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "チョコ",
+              "reading": "チョコ",
+              "zh": "巧克力"
+            },
+            {
+              "word": "チョイス",
+              "reading": "チョイス",
+              "zh": "选择"
             }
           ]
         }
