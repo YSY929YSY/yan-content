@@ -8394,6 +8394,15 @@
           "hint": "压成一拍读 kya；小ゃ缩小靠右。",
           "strokeKey": "kya-hira",
           "pairStrokeKey": "kya-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "きや",
+                "diff": "きゃ 是拗音，小ゃ要和き压成一拍；きや 是两个普通假名，读成 ki-ya。"
+              }
+            ]
+          },
           "examples": [
             {
               "word": "きゃく",
@@ -8440,6 +8449,15 @@
           "hint": "きゅ 是单一音节，读 ky u；小ゅ缩小靠右。",
           "strokeKey": "kyu-hira",
           "pairStrokeKey": "kyu-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "きゆ",
+                "diff": "きゅ 是拗音，小ゅ要和き压成一拍；きゆ 是两个普通假名，读成 ki-yu。"
+              }
+            ]
+          },
           "examples": [
             {
               "word": "きゅう",
@@ -8486,6 +8504,15 @@
           "hint": "きょ 是一个整体音，读 kyo；小ょ缩小靠右。",
           "strokeKey": "kyo-hira",
           "pairStrokeKey": "kyo-kata",
+          "confuse": {
+            "level": "L1",
+            "items": [
+              {
+                "with": "きよ",
+                "diff": "きょ 是拗音，小ょ要和き压成一拍；きよ 是两个普通假名，读成 ki-yo。"
+              }
+            ]
+          },
           "examples": [
             {
               "word": "きょく",
