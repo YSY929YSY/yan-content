@@ -8385,6 +8385,40 @@
               "lang": "ZH",
               "word": "kya"
             }
+          ],
+          "pair": "キャ",
+          "source": "幾",
+          "pairSource": "幾",
+          "anchor": "幾 → きゃ",
+          "pairAnchor": "幾 → キャ",
+          "hint": "压成一拍读 kya；小ゃ缩小靠右。",
+          "strokeKey": "kya-hira",
+          "pairStrokeKey": "kya-kata",
+          "examples": [
+            {
+              "word": "きゃく",
+              "reading": "きゃく",
+              "kanji": "客",
+              "zh": "客人；顾客"
+            },
+            {
+              "word": "きゃんぷ",
+              "reading": "きゃんぷ",
+              "kanji": "キャンプ",
+              "zh": "露营"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "キャベツ",
+              "reading": "キャベツ",
+              "zh": "卷心菜"
+            },
+            {
+              "word": "キャッシュ",
+              "reading": "キャッシュ",
+              "zh": "现金"
+            }
           ]
         },
         {
@@ -8397,6 +8431,40 @@
               "lang": "ZH",
               "word": "kyu"
             }
+          ],
+          "pair": "キュ",
+          "source": "幾",
+          "pairSource": "幾",
+          "anchor": "幾 → きゅ",
+          "pairAnchor": "幾 → キュ",
+          "hint": "きゅ 是单一音节，读 ky u；小ゅ缩小靠右。",
+          "strokeKey": "kyu-hira",
+          "pairStrokeKey": "kyu-kata",
+          "examples": [
+            {
+              "word": "きゅう",
+              "reading": "きゅう",
+              "kanji": "九",
+              "zh": "九"
+            },
+            {
+              "word": "きゅうこう",
+              "reading": "きゅうこう",
+              "kanji": "急行",
+              "zh": "快车"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "キュート",
+              "reading": "キュート",
+              "zh": "可爱"
+            },
+            {
+              "word": "キュウ",
+              "reading": "キュウ",
+              "zh": "九"
+            }
           ]
         },
         {
@@ -8408,6 +8476,40 @@
             {
               "lang": "ZH",
               "word": "kyo"
+            }
+          ],
+          "pair": "キョ",
+          "source": "幾",
+          "pairSource": "幾",
+          "anchor": "幾 → きょ",
+          "pairAnchor": "幾 → キョ",
+          "hint": "きょ 是一个整体音，读 kyo；小ょ缩小靠右。",
+          "strokeKey": "kyo-hira",
+          "pairStrokeKey": "kyo-kata",
+          "examples": [
+            {
+              "word": "きょく",
+              "reading": "きょく",
+              "kanji": "曲",
+              "zh": "曲子；歌曲"
+            },
+            {
+              "word": "きょう",
+              "reading": "きょう",
+              "kanji": "今日",
+              "zh": "今天"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "キョク",
+              "reading": "キョク",
+              "zh": "曲子"
+            },
+            {
+              "word": "キョウ",
+              "reading": "キョウ",
+              "zh": "今天"
             }
           ]
         }
