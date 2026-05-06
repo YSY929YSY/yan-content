@@ -8394,15 +8394,6 @@
           "hint": "压成一拍读 kya；小ゃ缩小靠右。",
           "strokeKey": "kya-hira",
           "pairStrokeKey": "kya-kata",
-          "confuse": {
-            "level": "L1",
-            "items": [
-              {
-                "with": "しゃ",
-                "diff": "きゃ 的起音是 k，しゃ 的起音是 sh；两者都是一拍拗音，但开头辅音不同。"
-              }
-            ]
-          },
           "examples": [
             {
               "word": "きゃく",
@@ -8449,15 +8440,6 @@
           "hint": "きゅ 是单一音节，读 ky u；小ゅ缩小靠右。",
           "strokeKey": "kyu-hira",
           "pairStrokeKey": "kyu-kata",
-          "confuse": {
-            "level": "L1",
-            "items": [
-              {
-                "with": "しゅ",
-                "diff": "きゅ 的起音是 k，しゅ 的起音是 sh；两者都要压成一拍，但开头辅音不同。"
-              }
-            ]
-          },
           "examples": [
             {
               "word": "きゅう",
@@ -8504,15 +8486,6 @@
           "hint": "きょ 是一个整体音，读 kyo；小ょ缩小靠右。",
           "strokeKey": "kyo-hira",
           "pairStrokeKey": "kyo-kata",
-          "confuse": {
-            "level": "L1",
-            "items": [
-              {
-                "with": "しょ",
-                "diff": "きょ 的起音是 k，しょ 的起音是 sh；两者都不是拆开读，区别在开头辅音。"
-              }
-            ]
-          },
           "examples": [
             {
               "word": "きょく",
