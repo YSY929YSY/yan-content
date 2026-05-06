@@ -8528,6 +8528,40 @@
               "lang": "ZH",
               "word": "sha"
             }
+          ],
+          "pair": "シャ",
+          "source": "し + ゃ",
+          "pairSource": "シ + ャ",
+          "anchor": "し + ゃ → しゃ",
+          "pairAnchor": "シ + ャ → シャ",
+          "hint": "しゃ 要压成一拍读 sha，不要拆成 shi-ya。",
+          "strokeKey": "sha-hira",
+          "pairStrokeKey": "sha-kata",
+          "examples": [
+            {
+              "word": "しゃしん",
+              "reading": "しゃしん",
+              "kanji": "写真",
+              "zh": "照片"
+            },
+            {
+              "word": "でんしゃ",
+              "reading": "でんしゃ",
+              "kanji": "電車",
+              "zh": "电车"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "シャツ",
+              "reading": "シャツ",
+              "zh": "衬衫"
+            },
+            {
+              "word": "シャワー",
+              "reading": "シャワー",
+              "zh": "淋浴"
+            }
           ]
         },
         {
@@ -8540,6 +8574,40 @@
               "lang": "ZH",
               "word": "shu"
             }
+          ],
+          "pair": "シュ",
+          "source": "し + ゅ",
+          "pairSource": "シ + ュ",
+          "anchor": "し + ゅ → しゅ",
+          "pairAnchor": "シ + ュ → シュ",
+          "hint": "しゅ 要压成一拍读 shu，不要拆成 shi-yu。",
+          "strokeKey": "shu-hira",
+          "pairStrokeKey": "shu-kata",
+          "examples": [
+            {
+              "word": "しゅくだい",
+              "reading": "しゅくだい",
+              "kanji": "宿題",
+              "zh": "作业"
+            },
+            {
+              "word": "しゅみ",
+              "reading": "しゅみ",
+              "kanji": "趣味",
+              "zh": "兴趣；爱好"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "シュート",
+              "reading": "シュート",
+              "zh": "射门；投篮"
+            },
+            {
+              "word": "シューズ",
+              "reading": "シューズ",
+              "zh": "鞋"
+            }
           ]
         },
         {
@@ -8551,6 +8619,40 @@
             {
               "lang": "ZH",
               "word": "sho"
+            }
+          ],
+          "pair": "ショ",
+          "source": "し + ょ",
+          "pairSource": "シ + ョ",
+          "anchor": "し + ょ → しょ",
+          "pairAnchor": "シ + ョ → ショ",
+          "hint": "しょ 要压成一拍读 sho，不要拆成 shi-yo。",
+          "strokeKey": "sho-hira",
+          "pairStrokeKey": "sho-kata",
+          "examples": [
+            {
+              "word": "しょくどう",
+              "reading": "しょくどう",
+              "kanji": "食堂",
+              "zh": "食堂"
+            },
+            {
+              "word": "じしょ",
+              "reading": "じしょ",
+              "kanji": "辞書",
+              "zh": "词典"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ショー",
+              "reading": "ショー",
+              "zh": "表演；秀"
+            },
+            {
+              "word": "ショップ",
+              "reading": "ショップ",
+              "zh": "商店"
             }
           ]
         }
