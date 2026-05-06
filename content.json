@@ -8387,10 +8387,10 @@
             }
           ],
           "pair": "キャ",
-          "source": "幾",
-          "pairSource": "幾",
-          "anchor": "幾 → きゃ",
-          "pairAnchor": "幾 → キャ",
+          "source": "き + ゃ",
+          "pairSource": "キ + ャ",
+          "anchor": "き + ゃ → きゃ",
+          "pairAnchor": "キ + ャ → キャ",
           "hint": "压成一拍读 kya；小ゃ缩小靠右。",
           "strokeKey": "kya-hira",
           "pairStrokeKey": "kya-kata",
@@ -8398,8 +8398,8 @@
             "level": "L1",
             "items": [
               {
-                "with": "きや",
-                "diff": "きゃ 是拗音，小ゃ要和き压成一拍；きや 是两个普通假名，读成 ki-ya。"
+                "with": "しゃ",
+                "diff": "きゃ 的起音是 k，しゃ 的起音是 sh；两者都是一拍拗音，但开头辅音不同。"
               }
             ]
           },
@@ -8442,10 +8442,10 @@
             }
           ],
           "pair": "キュ",
-          "source": "幾",
-          "pairSource": "幾",
-          "anchor": "幾 → きゅ",
-          "pairAnchor": "幾 → キュ",
+          "source": "き + ゅ",
+          "pairSource": "キ + ュ",
+          "anchor": "き + ゅ → きゅ",
+          "pairAnchor": "キ + ュ → キュ",
           "hint": "きゅ 是单一音节，读 ky u；小ゅ缩小靠右。",
           "strokeKey": "kyu-hira",
           "pairStrokeKey": "kyu-kata",
@@ -8453,8 +8453,8 @@
             "level": "L1",
             "items": [
               {
-                "with": "きゆ",
-                "diff": "きゅ 是拗音，小ゅ要和き压成一拍；きゆ 是两个普通假名，读成 ki-yu。"
+                "with": "しゅ",
+                "diff": "きゅ 的起音是 k，しゅ 的起音是 sh；两者都要压成一拍，但开头辅音不同。"
               }
             ]
           },
@@ -8497,10 +8497,10 @@
             }
           ],
           "pair": "キョ",
-          "source": "幾",
-          "pairSource": "幾",
-          "anchor": "幾 → きょ",
-          "pairAnchor": "幾 → キョ",
+          "source": "き + ょ",
+          "pairSource": "キ + ョ",
+          "anchor": "き + ょ → きょ",
+          "pairAnchor": "キ + ョ → キョ",
           "hint": "きょ 是一个整体音，读 kyo；小ょ缩小靠右。",
           "strokeKey": "kyo-hira",
           "pairStrokeKey": "kyo-kata",
@@ -8508,8 +8508,8 @@
             "level": "L1",
             "items": [
               {
-                "with": "きよ",
-                "diff": "きょ 是拗音，小ょ要和き压成一拍；きよ 是两个普通假名，读成 ki-yo。"
+                "with": "しょ",
+                "diff": "きょ 的起音是 k，しょ 的起音是 sh；两者都不是拆开读，区别在开头辅音。"
               }
             ]
           },
