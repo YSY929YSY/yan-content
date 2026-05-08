@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "YanApp",
+    "slug": "YanApp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.lexie.yan",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "言需要访问照片图库，用于上传和保存世界打卡照片。"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-dev-client",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "言需要访问照片图库，用于上传世界打卡照片。"
+        }
+      ]
+    ]
+  }
+}
