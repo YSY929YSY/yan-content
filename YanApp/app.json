@@ -16,7 +16,8 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.lexie.yan",
       "infoPlist": {
-        "NSPhotoLibraryUsageDescription": "言需要访问照片图库，用于上传和保存世界打卡照片。"
+        "NSPhotoLibraryUsageDescription": "言需要访问照片图库，用于上传和保存世界打卡照片。",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
@@ -37,6 +38,11 @@
           "photosPermission": "言需要访问照片图库，用于上传世界打卡照片。"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "390f09a4-3211-4fec-8702-45ee711a9245"
+      }
+    }
   }
 }
