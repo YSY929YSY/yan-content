@@ -9243,6 +9243,40 @@
               "lang": "ZH",
               "word": "rya"
             }
+          ],
+          "pair": "リャ",
+          "source": "り + ゃ",
+          "pairSource": "リ + ャ",
+          "anchor": "り + ゃ → りゃ",
+          "pairAnchor": "リ + ャ → リャ",
+          "hint": "りゃ 要压成一拍读 rya，不要拆成 ri-ya。",
+          "strokeKey": "rya-hira",
+          "pairStrokeKey": "rya-kata",
+          "examples": [
+            {
+              "word": "りゃく",
+              "reading": "りゃく",
+              "kanji": "略",
+              "zh": "省略；简略"
+            },
+            {
+              "word": "しょうりゃく",
+              "reading": "しょうりゃく",
+              "kanji": "省略",
+              "zh": "省略"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "リャマ",
+              "reading": "リャマ",
+              "zh": "羊驼"
+            },
+            {
+              "word": "リャン",
+              "reading": "リャン",
+              "zh": "两；人名音译"
+            }
           ]
         },
         {
@@ -9255,6 +9289,40 @@
               "lang": "ZH",
               "word": "ryu"
             }
+          ],
+          "pair": "リュ",
+          "source": "り + ゅ",
+          "pairSource": "リ + ュ",
+          "anchor": "り + ゅ → りゅ",
+          "pairAnchor": "リ + ュ → リュ",
+          "hint": "りゅ 要压成一拍读 ryu，不要拆成 ri-yu。",
+          "strokeKey": "ryu-hira",
+          "pairStrokeKey": "ryu-kata",
+          "examples": [
+            {
+              "word": "りゅう",
+              "reading": "りゅう",
+              "kanji": "竜",
+              "zh": "龙"
+            },
+            {
+              "word": "りゅうがく",
+              "reading": "りゅうがく",
+              "kanji": "留学",
+              "zh": "留学"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "リュック",
+              "reading": "リュック",
+              "zh": "背包"
+            },
+            {
+              "word": "リュージュ",
+              "reading": "リュージュ",
+              "zh": "雪橇运动"
+            }
           ]
         },
         {
@@ -9266,6 +9334,40 @@
             {
               "lang": "ZH",
               "word": "ryo"
+            }
+          ],
+          "pair": "リョ",
+          "source": "り + ょ",
+          "pairSource": "リ + ョ",
+          "anchor": "り + ょ → りょ",
+          "pairAnchor": "リ + ョ → リョ",
+          "hint": "りょ 要压成一拍读 ryo，不要拆成 ri-yo。",
+          "strokeKey": "ryo-hira",
+          "pairStrokeKey": "ryo-kata",
+          "examples": [
+            {
+              "word": "りょうり",
+              "reading": "りょうり",
+              "kanji": "料理",
+              "zh": "料理；做菜"
+            },
+            {
+              "word": "りょこう",
+              "reading": "りょこう",
+              "kanji": "旅行",
+              "zh": "旅行"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "リョウ",
+              "reading": "リョウ",
+              "zh": "亮；良；人名音译"
+            },
+            {
+              "word": "リョーカイ",
+              "reading": "リョーカイ",
+              "zh": "了解"
             }
           ]
         }
