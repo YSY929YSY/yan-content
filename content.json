@@ -9372,6 +9372,149 @@
           ]
         }
       ]
+    },
+    {
+      "row": "ぎゃ行",
+      "chars": [
+        {
+          "kana": "ぎゃ",
+          "kata": "ギャ",
+          "roma": "gya",
+          "hook": "ぎ + 小ゃ，浊音也压成一拍。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "gya"
+            }
+          ],
+          "pair": "ギャ",
+          "source": "ぎ + ゃ",
+          "pairSource": "ギ + ャ",
+          "anchor": "ぎ + ゃ → ぎゃ",
+          "pairAnchor": "ギ + ャ → ギャ",
+          "hint": "ぎゃ 要压成一拍读 gya，不要拆成 gi-ya。",
+          "strokeKey": "gya-hira",
+          "pairStrokeKey": "gya-kata",
+          "examples": [
+            {
+              "word": "ぎゃく",
+              "reading": "ぎゃく",
+              "kanji": "逆",
+              "zh": "相反；反向"
+            },
+            {
+              "word": "ぎゃくてん",
+              "reading": "ぎゃくてん",
+              "kanji": "逆転",
+              "zh": "逆转"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ギャグ",
+              "reading": "ギャグ",
+              "zh": "笑话；噱头"
+            },
+            {
+              "word": "ギャラリー",
+              "reading": "ギャラリー",
+              "zh": "画廊；观众席"
+            }
+          ]
+        },
+        {
+          "kana": "ぎゅ",
+          "kata": "ギュ",
+          "roma": "gyu",
+          "hook": "ぎ + 小ゅ，收成一拍。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "gyu"
+            }
+          ],
+          "pair": "ギュ",
+          "source": "ぎ + ゅ",
+          "pairSource": "ギ + ュ",
+          "anchor": "ぎ + ゅ → ぎゅ",
+          "pairAnchor": "ギ + ュ → ギュ",
+          "hint": "ぎゅ 要压成一拍读 gyu，不要拆成 gi-yu。",
+          "strokeKey": "gyu-hira",
+          "pairStrokeKey": "gyu-kata",
+          "examples": [
+            {
+              "word": "ぎゅうにゅう",
+              "reading": "ぎゅうにゅう",
+              "kanji": "牛乳",
+              "zh": "牛奶"
+            },
+            {
+              "word": "ぎゅうにく",
+              "reading": "ぎゅうにく",
+              "kanji": "牛肉",
+              "zh": "牛肉"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ギュウドン",
+              "reading": "ギュウドン",
+              "zh": "牛丼"
+            },
+            {
+              "word": "ギュッ",
+              "reading": "ギュッ",
+              "zh": "紧紧地；用力抱住"
+            }
+          ]
+        },
+        {
+          "kana": "ぎょ",
+          "kata": "ギョ",
+          "roma": "gyo",
+          "hook": "ぎ + 小ょ，不要拆开读。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "gyo"
+            }
+          ],
+          "pair": "ギョ",
+          "source": "ぎ + ょ",
+          "pairSource": "ギ + ョ",
+          "anchor": "ぎ + ょ → ぎょ",
+          "pairAnchor": "ギ + ョ → ギョ",
+          "hint": "ぎょ 要压成一拍读 gyo，不要拆成 gi-yo。",
+          "strokeKey": "gyo-hira",
+          "pairStrokeKey": "gyo-kata",
+          "examples": [
+            {
+              "word": "ぎょく",
+              "reading": "ぎょく",
+              "kanji": "玉",
+              "zh": "玉；球"
+            },
+            {
+              "word": "きんぎょ",
+              "reading": "きんぎょ",
+              "kanji": "金魚",
+              "zh": "金鱼"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ギョーザ",
+              "reading": "ギョーザ",
+              "zh": "饺子"
+            },
+            {
+              "word": "ギョッ",
+              "reading": "ギョッ",
+              "zh": "吃惊的样子"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
