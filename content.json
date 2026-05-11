@@ -9515,6 +9515,149 @@
           ]
         }
       ]
+    },
+    {
+      "row": "じゃ行",
+      "chars": [
+        {
+          "kana": "じゃ",
+          "kata": "ジャ",
+          "roma": "ja",
+          "hook": "じ + 小ゃ，压成一拍。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "ja"
+            }
+          ],
+          "pair": "ジャ",
+          "source": "じ + ゃ",
+          "pairSource": "ジ + ャ",
+          "anchor": "じ + ゃ → じゃ",
+          "pairAnchor": "ジ + ャ → ジャ",
+          "hint": "じゃ 要压成一拍读 ja，不要拆成 ji-ya。",
+          "strokeKey": "ja-hira",
+          "pairStrokeKey": "ja-kata",
+          "examples": [
+            {
+              "word": "じゃま",
+              "reading": "じゃま",
+              "kanji": "邪魔",
+              "zh": "妨碍；打扰"
+            },
+            {
+              "word": "じゃぐち",
+              "reading": "じゃぐち",
+              "kanji": "蛇口",
+              "zh": "水龙头"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ジャム",
+              "reading": "ジャム",
+              "zh": "果酱"
+            },
+            {
+              "word": "ジャズ",
+              "reading": "ジャズ",
+              "zh": "爵士乐"
+            }
+          ]
+        },
+        {
+          "kana": "じゅ",
+          "kata": "ジュ",
+          "roma": "ju",
+          "hook": "じ + 小ゅ，压成一拍。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "ju"
+            }
+          ],
+          "pair": "ジュ",
+          "source": "じ + ゅ",
+          "pairSource": "ジ + ュ",
+          "anchor": "じ + ゅ → じゅ",
+          "pairAnchor": "ジ + ュ → ジュ",
+          "hint": "じゅ 要压成一拍读 ju，不要拆成 ji-yu。",
+          "strokeKey": "ju-hira",
+          "pairStrokeKey": "ju-kata",
+          "examples": [
+            {
+              "word": "じゅぎょう",
+              "reading": "じゅぎょう",
+              "kanji": "授業",
+              "zh": "上课；课程"
+            },
+            {
+              "word": "じゅうしょ",
+              "reading": "じゅうしょ",
+              "kanji": "住所",
+              "zh": "住址"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ジュース",
+              "reading": "ジュース",
+              "zh": "果汁；饮料"
+            },
+            {
+              "word": "ジュエリー",
+              "reading": "ジュエリー",
+              "zh": "珠宝"
+            }
+          ]
+        },
+        {
+          "kana": "じょ",
+          "kata": "ジョ",
+          "roma": "jo",
+          "hook": "じ + 小ょ，压成一拍。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "jo"
+            }
+          ],
+          "pair": "ジョ",
+          "source": "じ + ょ",
+          "pairSource": "ジ + ョ",
+          "anchor": "じ + ょ → じょ",
+          "pairAnchor": "ジ + ョ → ジョ",
+          "hint": "じょ 要压成一拍读 jo，不要拆成 ji-yo。",
+          "strokeKey": "jo-hira",
+          "pairStrokeKey": "jo-kata",
+          "examples": [
+            {
+              "word": "じょうず",
+              "reading": "じょうず",
+              "kanji": "上手",
+              "zh": "擅长"
+            },
+            {
+              "word": "じょせい",
+              "reading": "じょせい",
+              "kanji": "女性",
+              "zh": "女性"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ジョギング",
+              "reading": "ジョギング",
+              "zh": "慢跑"
+            },
+            {
+              "word": "ジョーク",
+              "reading": "ジョーク",
+              "zh": "玩笑"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
