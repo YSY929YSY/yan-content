@@ -9658,6 +9658,149 @@
           ]
         }
       ]
+    },
+    {
+      "row": "びゃ行",
+      "chars": [
+        {
+          "kana": "びゃ",
+          "kata": "ビャ",
+          "roma": "bya",
+          "hook": "び + 小ゃ，压成一拍。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "bya"
+            }
+          ],
+          "pair": "ビャ",
+          "source": "び + ゃ",
+          "pairSource": "ビ + ャ",
+          "anchor": "び + ゃ → びゃ",
+          "pairAnchor": "ビ + ャ → ビャ",
+          "hint": "びゃ 要压成一拍读 bya，不要拆成 bi-ya。",
+          "strokeKey": "bya-hira",
+          "pairStrokeKey": "bya-kata",
+          "examples": [
+            {
+              "word": "びゃくだん",
+              "reading": "びゃくだん",
+              "kanji": "白檀",
+              "zh": "檀香；白檀"
+            },
+            {
+              "word": "びゃくや",
+              "reading": "びゃくや",
+              "kanji": "白夜",
+              "zh": "白夜"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ビャクダン",
+              "reading": "ビャクダン",
+              "zh": "檀香；白檀"
+            },
+            {
+              "word": "ビャンビャンめん",
+              "reading": "ビャンビャンめん",
+              "zh": "biangbiang 面"
+            }
+          ]
+        },
+        {
+          "kana": "びゅ",
+          "kata": "ビュ",
+          "roma": "byu",
+          "hook": "び + 小ゅ，压成一拍。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "byu"
+            }
+          ],
+          "pair": "ビュ",
+          "source": "び + ゅ",
+          "pairSource": "ビ + ュ",
+          "anchor": "び + ゅ → びゅ",
+          "pairAnchor": "ビ + ュ → ビュ",
+          "hint": "びゅ 要压成一拍读 byu，不要拆成 bi-yu。",
+          "strokeKey": "byu-hira",
+          "pairStrokeKey": "byu-kata",
+          "examples": [
+            {
+              "word": "びゅうびゅう",
+              "reading": "びゅうびゅう",
+              "kanji": "",
+              "zh": "呼呼地；风声"
+            },
+            {
+              "word": "ごびゅう",
+              "reading": "ごびゅう",
+              "kanji": "誤謬",
+              "zh": "谬误"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ビュー",
+              "reading": "ビュー",
+              "zh": "视野；景观"
+            },
+            {
+              "word": "デビュー",
+              "reading": "デビュー",
+              "zh": "出道；首次登场"
+            }
+          ]
+        },
+        {
+          "kana": "びょ",
+          "kata": "ビョ",
+          "roma": "byo",
+          "hook": "び + 小ょ，压成一拍。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "byo"
+            }
+          ],
+          "pair": "ビョ",
+          "source": "び + ょ",
+          "pairSource": "ビ + ョ",
+          "anchor": "び + ょ → びょ",
+          "pairAnchor": "ビ + ョ → ビョ",
+          "hint": "びょ 要压成一拍读 byo，不要拆成 bi-yo。",
+          "strokeKey": "byo-hira",
+          "pairStrokeKey": "byo-kata",
+          "examples": [
+            {
+              "word": "びょういん",
+              "reading": "びょういん",
+              "kanji": "病院",
+              "zh": "医院"
+            },
+            {
+              "word": "びょうき",
+              "reading": "びょうき",
+              "kanji": "病気",
+              "zh": "生病；疾病"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ビョーク",
+              "reading": "ビョーク",
+              "zh": "Bjork；人名音译"
+            },
+            {
+              "word": "ビョン",
+              "reading": "ビョン",
+              "zh": "Byun / Byeon；韩姓音译"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
