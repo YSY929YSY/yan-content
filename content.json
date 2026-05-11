@@ -8957,6 +8957,40 @@
               "lang": "ZH",
               "word": "hya"
             }
+          ],
+          "pair": "ヒャ",
+          "source": "ひ + ゃ",
+          "pairSource": "ヒ + ャ",
+          "anchor": "ひ + ゃ → ひゃ",
+          "pairAnchor": "ヒ + ャ → ヒャ",
+          "hint": "ひゃ 要压成一拍读 hya，不要拆成 hi-ya。",
+          "strokeKey": "hya-hira",
+          "pairStrokeKey": "hya-kata",
+          "examples": [
+            {
+              "word": "ひゃく",
+              "reading": "ひゃく",
+              "kanji": "百",
+              "zh": "一百"
+            },
+            {
+              "word": "ひゃっかてん",
+              "reading": "ひゃっかてん",
+              "kanji": "百貨店",
+              "zh": "百货商店"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ヒャク",
+              "reading": "ヒャク",
+              "zh": "百"
+            },
+            {
+              "word": "ヒャッホー",
+              "reading": "ヒャッホー",
+              "zh": "呀呼；欢呼声"
+            }
           ]
         },
         {
@@ -8969,6 +9003,40 @@
               "lang": "ZH",
               "word": "hyu"
             }
+          ],
+          "pair": "ヒュ",
+          "source": "ひ + ゅ",
+          "pairSource": "ヒ + ュ",
+          "anchor": "ひ + ゅ → ひゅ",
+          "pairAnchor": "ヒ + ュ → ヒュ",
+          "hint": "ひゅ 要压成一拍读 hyu，不要拆成 hi-yu。",
+          "strokeKey": "hyu-hira",
+          "pairStrokeKey": "hyu-kata",
+          "examples": [
+            {
+              "word": "ひゅうが",
+              "reading": "ひゅうが",
+              "kanji": "日向",
+              "zh": "日向；地名"
+            },
+            {
+              "word": "ひゅうひゅう",
+              "reading": "ひゅうひゅう",
+              "kanji": "",
+              "zh": "呼呼声"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ヒューマン",
+              "reading": "ヒューマン",
+              "zh": "人类；人的"
+            },
+            {
+              "word": "ヒューズ",
+              "reading": "ヒューズ",
+              "zh": "保险丝"
+            }
           ]
         },
         {
@@ -8980,6 +9048,40 @@
             {
               "lang": "ZH",
               "word": "hyo"
+            }
+          ],
+          "pair": "ヒョ",
+          "source": "ひ + ょ",
+          "pairSource": "ヒ + ョ",
+          "anchor": "ひ + ょ → ひょ",
+          "pairAnchor": "ヒ + ョ → ヒョ",
+          "hint": "ひょ 要压成一拍读 hyo，不要拆成 hi-yo。",
+          "strokeKey": "hyo-hira",
+          "pairStrokeKey": "hyo-kata",
+          "examples": [
+            {
+              "word": "ひょう",
+              "reading": "ひょう",
+              "kanji": "表",
+              "zh": "表格；表面"
+            },
+            {
+              "word": "ひょうし",
+              "reading": "ひょうし",
+              "kanji": "表紙",
+              "zh": "封面"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ヒョウ",
+              "reading": "ヒョウ",
+              "zh": "豹；冰雹"
+            },
+            {
+              "word": "ヒョロヒョロ",
+              "reading": "ヒョロヒョロ",
+              "zh": "瘦长摇晃的样子"
             }
           ]
         }
