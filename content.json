@@ -9100,6 +9100,40 @@
               "lang": "ZH",
               "word": "mya"
             }
+          ],
+          "pair": "ミャ",
+          "source": "み + ゃ",
+          "pairSource": "ミ + ャ",
+          "anchor": "み + ゃ → みゃ",
+          "pairAnchor": "ミ + ャ → ミャ",
+          "hint": "みゃ 要压成一拍读 mya，不要拆成 mi-ya。",
+          "strokeKey": "mya-hira",
+          "pairStrokeKey": "mya-kata",
+          "examples": [
+            {
+              "word": "みゃく",
+              "reading": "みゃく",
+              "kanji": "脈",
+              "zh": "脉；脉络"
+            },
+            {
+              "word": "みゃくはく",
+              "reading": "みゃくはく",
+              "kanji": "脈拍",
+              "zh": "脉搏"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ミャンマー",
+              "reading": "ミャンマー",
+              "zh": "缅甸"
+            },
+            {
+              "word": "ミャオ",
+              "reading": "ミャオ",
+              "zh": "喵；拟声"
+            }
           ]
         },
         {
@@ -9112,6 +9146,40 @@
               "lang": "ZH",
               "word": "myu"
             }
+          ],
+          "pair": "ミュ",
+          "source": "み + ゅ",
+          "pairSource": "ミ + ュ",
+          "anchor": "み + ゅ → みゅ",
+          "pairAnchor": "ミ + ュ → ミュ",
+          "hint": "みゅ 要压成一拍读 myu，不要拆成 mi-yu。",
+          "strokeKey": "myu-hira",
+          "pairStrokeKey": "myu-kata",
+          "examples": [
+            {
+              "word": "みゅう",
+              "reading": "みゅう",
+              "kanji": "",
+              "zh": "谬；拟声"
+            },
+            {
+              "word": "みゅうみゅう",
+              "reading": "みゅうみゅう",
+              "kanji": "",
+              "zh": "细小叫声"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ミュージック",
+              "reading": "ミュージック",
+              "zh": "音乐"
+            },
+            {
+              "word": "ミュージアム",
+              "reading": "ミュージアム",
+              "zh": "博物馆；美术馆"
+            }
           ]
         },
         {
@@ -9123,6 +9191,40 @@
             {
               "lang": "ZH",
               "word": "myo"
+            }
+          ],
+          "pair": "ミョ",
+          "source": "み + ょ",
+          "pairSource": "ミ + ョ",
+          "anchor": "み + ょ → みょ",
+          "pairAnchor": "ミ + ョ → ミョ",
+          "hint": "みょ 要压成一拍读 myo，不要拆成 mi-yo。",
+          "strokeKey": "myo-hira",
+          "pairStrokeKey": "myo-kata",
+          "examples": [
+            {
+              "word": "みょうじ",
+              "reading": "みょうじ",
+              "kanji": "名字",
+              "zh": "姓氏"
+            },
+            {
+              "word": "みょうにち",
+              "reading": "みょうにち",
+              "kanji": "明日",
+              "zh": "明天"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ミョウガ",
+              "reading": "ミョウガ",
+              "zh": "茗荷；蘘荷"
+            },
+            {
+              "word": "ミョンドン",
+              "reading": "ミョンドン",
+              "zh": "明洞"
             }
           ]
         }
