@@ -8814,6 +8814,40 @@
               "lang": "ZH",
               "word": "nya"
             }
+          ],
+          "pair": "ニャ",
+          "source": "に + ゃ",
+          "pairSource": "ニ + ャ",
+          "anchor": "に + ゃ → にゃ",
+          "pairAnchor": "ニ + ャ → ニャ",
+          "hint": "にゃ 要压成一拍读 nya，不要拆成 ni-ya。",
+          "strokeKey": "nya-hira",
+          "pairStrokeKey": "nya-kata",
+          "examples": [
+            {
+              "word": "こんにゃく",
+              "reading": "こんにゃく",
+              "kanji": "蒟蒻",
+              "zh": "魔芋"
+            },
+            {
+              "word": "にゃんこ",
+              "reading": "にゃんこ",
+              "kanji": "",
+              "zh": "小猫"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ニャンコ",
+              "reading": "ニャンコ",
+              "zh": "小猫"
+            },
+            {
+              "word": "ニャー",
+              "reading": "ニャー",
+              "zh": "喵"
+            }
           ]
         },
         {
@@ -8826,6 +8860,40 @@
               "lang": "ZH",
               "word": "nyu"
             }
+          ],
+          "pair": "ニュ",
+          "source": "に + ゅ",
+          "pairSource": "ニ + ュ",
+          "anchor": "に + ゅ → にゅ",
+          "pairAnchor": "ニ + ュ → ニュ",
+          "hint": "にゅ 要压成一拍读 nyu，不要拆成 ni-yu。",
+          "strokeKey": "nyu-hira",
+          "pairStrokeKey": "nyu-kata",
+          "examples": [
+            {
+              "word": "にゅうがく",
+              "reading": "にゅうがく",
+              "kanji": "入学",
+              "zh": "入学"
+            },
+            {
+              "word": "ぎゅうにゅう",
+              "reading": "ぎゅうにゅう",
+              "kanji": "牛乳",
+              "zh": "牛奶"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ニュース",
+              "reading": "ニュース",
+              "zh": "新闻"
+            },
+            {
+              "word": "メニュー",
+              "reading": "メニュー",
+              "zh": "菜单"
+            }
           ]
         },
         {
@@ -8837,6 +8905,40 @@
             {
               "lang": "ZH",
               "word": "nyo"
+            }
+          ],
+          "pair": "ニョ",
+          "source": "に + ょ",
+          "pairSource": "ニ + ョ",
+          "anchor": "に + ょ → にょ",
+          "pairAnchor": "ニ + ョ → ニョ",
+          "hint": "にょ 要压成一拍读 nyo，不要拆成 ni-yo。",
+          "strokeKey": "nyo-hira",
+          "pairStrokeKey": "nyo-kata",
+          "examples": [
+            {
+              "word": "にょうぼう",
+              "reading": "にょうぼう",
+              "kanji": "女房",
+              "zh": "妻子"
+            },
+            {
+              "word": "にょきにょき",
+              "reading": "にょきにょき",
+              "kanji": "",
+              "zh": "一个接一个地冒出"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ニョッキ",
+              "reading": "ニョッキ",
+              "zh": "意式面疙瘩"
+            },
+            {
+              "word": "ニョロニョロ",
+              "reading": "ニョロニョロ",
+              "zh": "扭动爬行的样子"
             }
           ]
         }
