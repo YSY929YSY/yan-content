@@ -6896,9 +6896,9 @@
           "roma": "sokuon",
           "source": "小さい つ",
           "pairSource": "小さい ツ",
-          "anchor": "つ を小さく → っ",
+          "anchor": "つを小さく → っ",
           "pairAnchor": "ツ を小さく → ッ",
-          "hint": "小っ本身不单独发完整的 tsu，而是让后面的辅音停顿、加倍，形成促音。",
+          "hint": "小っ本身不读完整 tsu，而是让后面的辅音停顿、加倍。听起来像中间卡了一下。",
           "strokeKey": "small-tsu-hira",
           "pairStrokeKey": "small-tsu-kata",
           "compareExamples": [
@@ -6930,7 +6930,7 @@
               "left": {
                 "word": "いた",
                 "roma": "i-ta",
-                "zh": "在；有；曾经在"
+                "zh": "在；曾经在"
               },
               "right": {
                 "word": "いった",
@@ -6951,6 +6951,12 @@
               "reading": "がっこう",
               "kanji": "学校",
               "zh": "学校"
+            },
+            {
+              "word": "ざっし",
+              "reading": "ざっし",
+              "kanji": "雑誌",
+              "zh": "杂志"
             }
           ],
           "pairExamples": [
