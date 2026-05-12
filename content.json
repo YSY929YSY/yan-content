@@ -6941,32 +6941,7 @@
               }
             }
           ],
-          "pairCompareExamples": [
-            {
-              "left": {
-                "word": "ベド",
-                "roma": "be-do",
-                "zh": "少了ッ，听起来不完整"
-              },
-              "right": {
-                "word": "ベッド",
-                "roma": "bed-do",
-                "zh": "bed・床"
-              }
-            },
-            {
-              "left": {
-                "word": "カプ",
-                "roma": "ka-pu",
-                "zh": "少了ッ，听起来不完整"
-              },
-              "right": {
-                "word": "カップ",
-                "roma": "kap-pu",
-                "zh": "cup・杯子"
-              }
-            }
-          ],
+          "pairCompareExamples": [],
           "examples": [
             {
               "word": "がっこう",
@@ -7003,6 +6978,18 @@
             }
           ],
           "pairExamples": [
+            {
+              "word": "ベッド",
+              "reading": "ベッド",
+              "kanji": "bed",
+              "zh": "床"
+            },
+            {
+              "word": "カップ",
+              "reading": "カップ",
+              "kanji": "cup",
+              "zh": "杯子"
+            },
             {
               "word": "バッグ",
               "reading": "バッグ",
