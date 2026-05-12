@@ -6896,9 +6896,9 @@
           "roma": "sokuon",
           "source": "小さい つ",
           "pairSource": "小さい ツ",
-          "anchor": "つを小さく → っ",
-          "pairAnchor": "ツ を小さく → ッ",
-          "hint": "小っ本身不读完整 tsu，而是让后面的辅音停顿、加倍。听起来像中间卡了一下。",
+          "anchor": "把 つ 缩小，就变成促音 っ",
+          "pairAnchor": "把 ツ 缩小，就变成促音 ッ",
+          "hint": "小っ本身不读完整 tsu，而是让后面的辅音停顿、加倍。听起来像中间“卡”了一下。",
           "strokeKey": "small-tsu-hira",
           "pairStrokeKey": "small-tsu-kata",
           "compareExamples": [
@@ -6957,6 +6957,22 @@
               "reading": "ざっし",
               "kanji": "雑誌",
               "zh": "杂志"
+            },
+            {
+              "word": "きっぷ",
+              "reading": "きっぷ",
+              "kanji": "切符",
+              "zh": "车票"
+            },
+            {
+              "word": "もっと",
+              "reading": "もっと",
+              "zh": "更多；再一点"
+            },
+            {
+              "word": "ちょっと",
+              "reading": "ちょっと",
+              "zh": "稍微；一下子"
             }
           ],
           "pairExamples": [
@@ -6971,6 +6987,18 @@
               "reading": "カップ",
               "kanji": "cup",
               "zh": "杯子"
+            },
+            {
+              "word": "バッグ",
+              "reading": "バッグ",
+              "kanji": "bag",
+              "zh": "包"
+            },
+            {
+              "word": "チケット",
+              "reading": "チケット",
+              "kanji": "ticket",
+              "zh": "票；券"
             }
           ]
         },
