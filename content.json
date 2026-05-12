@@ -7245,6 +7245,119 @@
               "zh": "酒店"
             }
           ]
+        },
+        {
+          "kana": "ん",
+          "pair": "ン",
+          "roma": "n",
+          "source": "撥音",
+          "pairSource": "撥音",
+          "anchor": "ん 也要占一拍",
+          "pairAnchor": "ン 也要占一拍",
+          "hint": "ん 不是轻轻带过的尾音，而是单独占一拍。漏掉它，词会变得不自然，甚至意思不清。",
+          "compareTitle": "听见不能漏掉的一拍",
+          "compareExamples": [
+            {
+              "left": {
+                "word": "みな",
+                "roma": "mi-na",
+                "zh": "大家；各位"
+              },
+              "right": {
+                "word": "みんな",
+                "roma": "min-na",
+                "zh": "大家；所有人"
+              },
+              "note": "ん 单独占一拍，不能被吞掉。"
+            },
+            {
+              "left": {
+                "word": "さぽ",
+                "roma": "sa-po",
+                "zh": "少了ん，听起来不自然"
+              },
+              "right": {
+                "word": "さんぽ",
+                "roma": "san-po",
+                "zh": "散步"
+              },
+              "note": "さんぽ 里的 ん 要保留一拍。"
+            }
+          ],
+          "examples": [
+            {
+              "word": "ほん",
+              "reading": "ほん",
+              "kanji": "本",
+              "zh": "书"
+            },
+            {
+              "word": "でんしゃ",
+              "reading": "でんしゃ",
+              "kanji": "電車",
+              "zh": "电车"
+            },
+            {
+              "word": "さんぽ",
+              "reading": "さんぽ",
+              "kanji": "散歩",
+              "zh": "散步"
+            },
+            {
+              "word": "すみません",
+              "reading": "すみません",
+              "zh": "不好意思；对不起"
+            },
+            {
+              "word": "みんな",
+              "reading": "みんな",
+              "zh": "大家；所有人"
+            },
+            {
+              "word": "べんり",
+              "reading": "べんり",
+              "kanji": "便利",
+              "zh": "方便"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "パン",
+              "reading": "パン",
+              "kanji": "pão",
+              "zh": "面包"
+            },
+            {
+              "word": "コンビニ",
+              "reading": "コンビニ",
+              "kanji": "convenience store",
+              "zh": "便利店"
+            },
+            {
+              "word": "レストラン",
+              "reading": "レストラン",
+              "kanji": "restaurant",
+              "zh": "餐厅"
+            },
+            {
+              "word": "エンジン",
+              "reading": "エンジン",
+              "kanji": "engine",
+              "zh": "发动机"
+            },
+            {
+              "word": "マンション",
+              "reading": "マンション",
+              "kanji": "mansion",
+              "zh": "公寓"
+            },
+            {
+              "word": "コンセント",
+              "reading": "コンセント",
+              "kanji": "consent",
+              "zh": "插座"
+            }
+          ]
         }
       ]
     }
