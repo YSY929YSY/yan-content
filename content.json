@@ -9987,6 +9987,145 @@
           ]
         }
       ]
+    },
+    {
+      "row": "ぴゃ行",
+      "chars": [
+        {
+          "kana": "ぴゃ",
+          "kata": "ピャ",
+          "roma": "pya",
+          "hook": "ぴ + 小ゃ，压成一拍。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "pya"
+            }
+          ],
+          "pair": "ピャ",
+          "source": "ぴ + ゃ",
+          "pairSource": "ピ + ャ",
+          "anchor": "ぴ + ゃ → ぴゃ",
+          "pairAnchor": "ピ + ャ → ピャ",
+          "hint": "ぴゃ 要压成一拍读 pya，不要拆成 pi-ya。",
+          "strokeKey": "pya-hira",
+          "pairStrokeKey": "pya-kata",
+          "examples": [
+            {
+              "word": "ぴゃっと",
+              "reading": "ぴゃっと",
+              "zh": "突然一下；猛地"
+            },
+            {
+              "word": "ぴゃー",
+              "reading": "ぴゃー",
+              "zh": "尖细的叫声"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ピャッ",
+              "reading": "ピャッ",
+              "zh": "突然响起的声音"
+            },
+            {
+              "word": "ピャー",
+              "reading": "ピャー",
+              "zh": "尖细拉长的声音"
+            }
+          ]
+        },
+        {
+          "kana": "ぴゅ",
+          "kata": "ピュ",
+          "roma": "pyu",
+          "hook": "ぴ + 小ゅ，压成一拍。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "pyu"
+            }
+          ],
+          "pair": "ピュ",
+          "source": "ぴ + ゅ",
+          "pairSource": "ピ + ュ",
+          "anchor": "ぴ + ゅ → ぴゅ",
+          "pairAnchor": "ピ + ュ → ピュ",
+          "hint": "ぴゅ 要压成一拍读 pyu，不要拆成 pi-yu。",
+          "strokeKey": "pyu-hira",
+          "pairStrokeKey": "pyu-kata",
+          "examples": [
+            {
+              "word": "ぴゅうぴゅう",
+              "reading": "ぴゅうぴゅう",
+              "zh": "呼呼地吹"
+            },
+            {
+              "word": "ぴゅっと",
+              "reading": "ぴゅっと",
+              "zh": "嗖地一下"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ピュア",
+              "reading": "ピュア",
+              "kanji": "pure",
+              "zh": "纯粹；纯真的"
+            },
+            {
+              "word": "コンピューター",
+              "reading": "コンピューター",
+              "kanji": "computer",
+              "zh": "电脑；计算机"
+            }
+          ]
+        },
+        {
+          "kana": "ぴょ",
+          "kata": "ピョ",
+          "roma": "pyo",
+          "hook": "ぴ + 小ょ，压成一拍。",
+          "links": [
+            {
+              "lang": "ZH",
+              "word": "pyo"
+            }
+          ],
+          "pair": "ピョ",
+          "source": "ぴ + ょ",
+          "pairSource": "ピ + ョ",
+          "anchor": "ぴ + ょ → ぴょ",
+          "pairAnchor": "ピ + ョ → ピョ",
+          "hint": "ぴょ 要压成一拍读 pyo，不要拆成 pi-yo。",
+          "strokeKey": "pyo-hira",
+          "pairStrokeKey": "pyo-kata",
+          "examples": [
+            {
+              "word": "ぴょん",
+              "reading": "ぴょん",
+              "zh": "轻快地跳一下"
+            },
+            {
+              "word": "ぴょこぴょこ",
+              "reading": "ぴょこぴょこ",
+              "zh": "一跳一跳地"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ピョン",
+              "reading": "ピョン",
+              "zh": "轻快跳起的样子"
+            },
+            {
+              "word": "ピョコピョコ",
+              "reading": "ピョコピョコ",
+              "zh": "一跳一跳的样子"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
