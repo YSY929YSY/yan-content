@@ -6900,6 +6900,7 @@
           "pairAnchor": "把 ツ 缩小，就变成促音 ッ",
           "hint": "小っ本身不读完整 tsu，而是让后面的辅音停顿、加倍。听起来像中间“卡”了一下。",
           "compareTitle": "听见「卡住」的一拍",
+          "pairCompareTitle": "听见片假名里的「卡住」一拍",
           "strokeKey": "small-tsu-hira",
           "pairStrokeKey": "small-tsu-kata",
           "compareExamples": [
@@ -6937,6 +6938,44 @@
                 "word": "いった",
                 "roma": "it-ta",
                 "zh": "去了；说了"
+              }
+            }
+          ],
+          "pairCompareExamples": [
+            {
+              "left": {
+                "word": "ベド",
+                "roma": "be-do",
+                "zh": "少了ッ，不自然"
+              },
+              "right": {
+                "word": "ベッド",
+                "roma": "bed-do",
+                "zh": "bed・床"
+              }
+            },
+            {
+              "left": {
+                "word": "カプ",
+                "roma": "ka-pu",
+                "zh": "少了ッ，不自然"
+              },
+              "right": {
+                "word": "カップ",
+                "roma": "kap-pu",
+                "zh": "cup・杯子"
+              }
+            },
+            {
+              "left": {
+                "word": "チケト",
+                "roma": "chi-ke-to",
+                "zh": "少了ッ，不自然"
+              },
+              "right": {
+                "word": "チケット",
+                "roma": "chiket-to",
+                "zh": "ticket・票；券"
               }
             }
           ],
@@ -7024,6 +7063,7 @@
           "pairAnchor": "把前一个元音拉长一拍",
           "hint": "长音的本质是把前面的元音多读一拍。\n平假名里常用 あ / い / う 等表示长音；片假名外来词里常用 ー。",
           "compareTitle": "听见被拉长的一拍",
+          "pairCompareTitle": "听见片假名里被拉长的一拍",
           "strokeKey": "long-vowel",
           "pairStrokeKey": "long-vowel",
           "compareExamples": [
@@ -7061,6 +7101,44 @@
                 "word": "こうこう",
                 "roma": "koo-koo",
                 "zh": "高中"
+              }
+            }
+          ],
+          "pairCompareExamples": [
+            {
+              "left": {
+                "word": "ビル",
+                "roma": "bi-ru",
+                "zh": "大楼"
+              },
+              "right": {
+                "word": "ビール",
+                "roma": "bii-ru",
+                "zh": "beer・啤酒"
+              }
+            },
+            {
+              "left": {
+                "word": "コヒ",
+                "roma": "ko-hi",
+                "zh": "少了ー，不自然"
+              },
+              "right": {
+                "word": "コーヒー",
+                "roma": "koo-hii",
+                "zh": "coffee・咖啡"
+              }
+            },
+            {
+              "left": {
+                "word": "ケキ",
+                "roma": "ke-ki",
+                "zh": "少了ー，不自然"
+              },
+              "right": {
+                "word": "ケーキ",
+                "roma": "kee-ki",
+                "zh": "cake・蛋糕"
               }
             }
           ],
