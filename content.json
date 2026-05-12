@@ -6946,7 +6946,7 @@
               "left": {
                 "word": "ベド",
                 "roma": "be-do",
-                "zh": "少了ッ，不自然"
+                "zh": "少了ッ，听起来不完整"
               },
               "right": {
                 "word": "ベッド",
@@ -6958,24 +6958,12 @@
               "left": {
                 "word": "カプ",
                 "roma": "ka-pu",
-                "zh": "少了ッ，不自然"
+                "zh": "少了ッ，听起来不完整"
               },
               "right": {
                 "word": "カップ",
                 "roma": "kap-pu",
                 "zh": "cup・杯子"
-              }
-            },
-            {
-              "left": {
-                "word": "チケト",
-                "roma": "chi-ke-to",
-                "zh": "少了ッ，不自然"
-              },
-              "right": {
-                "word": "チケット",
-                "roma": "chiket-to",
-                "zh": "ticket・票；券"
               }
             }
           ],
@@ -7015,18 +7003,6 @@
             }
           ],
           "pairExamples": [
-            {
-              "word": "ベッド",
-              "reading": "ベッド",
-              "kanji": "bed",
-              "zh": "床"
-            },
-            {
-              "word": "カップ",
-              "reading": "カップ",
-              "kanji": "cup",
-              "zh": "杯子"
-            },
             {
               "word": "バッグ",
               "reading": "バッグ",
@@ -7081,18 +7057,6 @@
             },
             {
               "left": {
-                "word": "ビル",
-                "roma": "bi-ru",
-                "zh": "大楼"
-              },
-              "right": {
-                "word": "ビール",
-                "roma": "bii-ru",
-                "zh": "啤酒"
-              }
-            },
-            {
-              "left": {
                 "word": "ここ",
                 "roma": "ko-ko",
                 "zh": "这里"
@@ -7100,7 +7064,7 @@
               "right": {
                 "word": "こうこう",
                 "roma": "koo-koo",
-                "zh": "高中"
+                "zh": "高校；高中"
               }
             }
           ],
@@ -7116,44 +7080,32 @@
                 "roma": "bii-ru",
                 "zh": "beer・啤酒"
               }
-            },
-            {
-              "left": {
-                "word": "コヒ",
-                "roma": "ko-hi",
-                "zh": "少了ー，不自然"
-              },
-              "right": {
-                "word": "コーヒー",
-                "roma": "koo-hii",
-                "zh": "coffee・咖啡"
-              }
-            },
-            {
-              "left": {
-                "word": "ケキ",
-                "roma": "ke-ki",
-                "zh": "少了ー，不自然"
-              },
-              "right": {
-                "word": "ケーキ",
-                "roma": "kee-ki",
-                "zh": "cake・蛋糕"
-              }
             }
           ],
           "examples": [
             {
-              "word": "おばさん",
-              "reading": "おばさん",
-              "kanji": "伯母さん",
-              "zh": "阿姨；伯母"
+              "word": "おかあさん",
+              "reading": "おかあさん",
+              "kanji": "お母さん",
+              "zh": "妈妈"
             },
             {
-              "word": "おばあさん",
-              "reading": "おばあさん",
-              "kanji": "お婆さん",
-              "zh": "奶奶；老奶奶"
+              "word": "おとうさん",
+              "reading": "おとうさん",
+              "kanji": "お父さん",
+              "zh": "爸爸"
+            },
+            {
+              "word": "きょう",
+              "reading": "きょう",
+              "kanji": "今日",
+              "zh": "今天"
+            },
+            {
+              "word": "せんせい",
+              "reading": "せんせい",
+              "kanji": "先生",
+              "zh": "老师"
             }
           ],
           "pairExamples": [
