@@ -7023,14 +7023,29 @@
           "source": "長音",
           "pairSource": "長音符号 ー",
           "anchor": "把前一个元音拉长一拍",
-          "pairAnchor": "把前一个元音拉长一拍",
-          "hint": "长音的本质是把前面的元音多读一拍。\n平假名里常用 あ / い / う 等表示长音；片假名外来词里常用 ー。",
+          "pairAnchor": "用 ー 把前一个音拉长一拍",
+          "hint": "长音不是一个新的音，而是把前面的元音多读一拍。",
+          "pairHint": "ー 本身不单独发音，只提示前面的音拖长一拍。",
+          "ruleTips": [
+            "日语的基本元音是 a / i / u / e / o",
+            "あ / い / う 本身仍是普通假名",
+            "它们有时承担“拉长前音”的作用",
+            "要结合词的读音判断是不是长音",
+            "片假名外来词里常用 ー"
+          ],
+          "pairRuleTips": [
+            "片假名外来词里最常见",
+            "ビ + ー → bii",
+            "コ + ー → koo",
+            "ケ + ー → kee"
+          ],
           "compareTitle": "听见被拉长的一拍",
           "pairCompareTitle": "听见片假名里被拉长的一拍",
           "strokeKey": "long-vowel",
           "pairStrokeKey": "long-vowel",
           "compareExamples": [
             {
+              "type": "あ 段 + あ",
               "left": {
                 "word": "おばさん",
                 "roma": "o-ba-san",
@@ -7040,9 +7055,11 @@
                 "word": "おばあさん",
                 "roma": "o-baa-san",
                 "zh": "奶奶；老奶奶"
-              }
+              },
+              "note": "ば + あ → baa"
             },
             {
+              "type": "お 段 + う",
               "left": {
                 "word": "ここ",
                 "roma": "ko-ko",
@@ -7052,11 +7069,13 @@
                 "word": "こうこう",
                 "roma": "koo-koo",
                 "zh": "高校；高中"
-              }
+              },
+              "note": "こ + う → koo"
             }
           ],
           "pairCompareExamples": [
             {
+              "type": "片假名 ー",
               "left": {
                 "word": "ビル",
                 "roma": "bi-ru",
@@ -7066,7 +7085,8 @@
                 "word": "ビール",
                 "roma": "bii-ru",
                 "zh": "beer・啤酒"
-              }
+              },
+              "note": "ビ + ー → bii"
             }
           ],
           "examples": [
