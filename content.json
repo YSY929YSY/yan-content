@@ -7255,28 +7255,65 @@
           "anchor": "ん 也要占一拍",
           "pairAnchor": "ン 也要占一拍",
           "hint": "ん 不是轻轻带过的尾音，而是单独占一拍。",
-          "pairHint": "ン 也不是轻轻带过的尾音，而是单独占一拍。",
+          "pairHint": "ン 不是轻轻带过的尾音，而是单独占一拍。",
           "compareTitle": "听见不能漏掉的一拍",
-          "compareExamples": [
-            {
-              "type": "自然对比",
-              "left": {
-                "word": "みな",
-                "roma": "mi-na",
-                "zh": "大家；各位",
-                "beats": "♩ ♩"
-              },
-              "right": {
-                "word": "みんな",
-                "roma": "min-na",
-                "zh": "大家；所有人",
-                "beats": "♩♩ ♩"
-              },
-              "note": "ん 单独占一拍，听感会更饱满。"
-            }
-          ],
+          "compareExamples": [],
           "pairCompareTitle": "听见片假名里的拨音",
           "pairCompareExamples": [],
+          "rhythmTitle": "把 ん 听成一拍",
+          "rhythmExamples": [
+            {
+              "word": "ほん",
+              "split": "ほ・ん",
+              "beats": "♩ ♩",
+              "zh": "本・书"
+            },
+            {
+              "word": "さんぽ",
+              "split": "さ・ん・ぽ",
+              "beats": "♩ ♩ ♩",
+              "zh": "散歩・散步"
+            },
+            {
+              "word": "でんしゃ",
+              "split": "で・ん・しゃ",
+              "beats": "♩ ♩ ♩",
+              "zh": "電車・电车"
+            },
+            {
+              "word": "しんかんせん",
+              "split": "し・ん・か・ん・せ・ん",
+              "beats": "♩ ♩ ♩ ♩ ♩ ♩",
+              "zh": "新幹線・新干线"
+            }
+          ],
+          "pairRhythmTitle": "把 ン 听成一拍",
+          "pairRhythmExamples": [
+            {
+              "word": "パン",
+              "split": "パ・ン",
+              "beats": "♩ ♩",
+              "zh": "pão・面包"
+            },
+            {
+              "word": "コンビニ",
+              "split": "コ・ン・ビ・ニ",
+              "beats": "♩ ♩ ♩ ♩",
+              "zh": "convenience store・便利店"
+            },
+            {
+              "word": "レストラン",
+              "split": "レ・ス・ト・ラ・ン",
+              "beats": "♩ ♩ ♩ ♩ ♩",
+              "zh": "restaurant・餐厅"
+            },
+            {
+              "word": "コンセント",
+              "split": "コ・ン・セ・ン・ト",
+              "beats": "♩ ♩ ♩ ♩ ♩",
+              "zh": "consent・插座"
+            }
+          ],
           "examples": [
             {
               "word": "ほん",
