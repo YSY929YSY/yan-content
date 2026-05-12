@@ -6929,6 +6929,52 @@
               "zh": "杯子"
             }
           ]
+        },
+        {
+          "kana": "ー",
+          "pair": "ー",
+          "roma": "long",
+          "source": "長音符号",
+          "pairSource": "長音符号",
+          "anchor": "前の母音をのばす → ー",
+          "pairAnchor": "前の母音をのばす → ー",
+          "hint": "ー 不单独发音，而是把前一个元音拉长一拍，常见于片假名外来词。",
+          "strokeKey": "long-vowel",
+          "pairStrokeKey": "long-vowel",
+          "examples": [
+            {
+              "word": "おばさん",
+              "reading": "おばさん",
+              "kanji": "伯母さん",
+              "zh": "阿姨；伯母"
+            },
+            {
+              "word": "おばあさん",
+              "reading": "おばあさん",
+              "kanji": "お婆さん",
+              "zh": "奶奶；老奶奶"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "コーヒー",
+              "reading": "コーヒー",
+              "kanji": "coffee",
+              "zh": "咖啡"
+            },
+            {
+              "word": "ケーキ",
+              "reading": "ケーキ",
+              "kanji": "cake",
+              "zh": "蛋糕"
+            },
+            {
+              "word": "タクシー",
+              "reading": "タクシー",
+              "kanji": "taxi",
+              "zh": "出租车"
+            }
+          ]
         }
       ]
     }
