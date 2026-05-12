@@ -6885,6 +6885,54 @@
       ]
     }
   ],
+  "specialRows": [
+    {
+      "row": "特殊音",
+      "rowKata": "特殊音",
+      "chars": [
+        {
+          "kana": "っ",
+          "pair": "ッ",
+          "roma": "sokuon",
+          "source": "小さい つ",
+          "pairSource": "小さい ツ",
+          "anchor": "つ を小さく → っ",
+          "pairAnchor": "ツ を小さく → ッ",
+          "hint": "小っ本身不单独发完整的 tsu，而是让后面的辅音停顿、加倍，形成促音。",
+          "strokeKey": "small-tsu-hira",
+          "pairStrokeKey": "small-tsu-kata",
+          "examples": [
+            {
+              "word": "きって",
+              "reading": "きって",
+              "kanji": "切手",
+              "zh": "邮票"
+            },
+            {
+              "word": "がっこう",
+              "reading": "がっこう",
+              "kanji": "学校",
+              "zh": "学校"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ベッド",
+              "reading": "ベッド",
+              "kanji": "bed",
+              "zh": "床"
+            },
+            {
+              "word": "カップ",
+              "reading": "カップ",
+              "kanji": "cup",
+              "zh": "杯子"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "specialSounds": {
     "title": "特殊音",
     "sections": [
