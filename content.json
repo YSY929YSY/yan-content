@@ -7024,52 +7024,111 @@
           "pairSource": "長音符号 ー",
           "anchor": "把前一个元音拉长一拍",
           "pairAnchor": "用 ー 把前一个音拉长一拍",
-          "hint": "平假名里的长音没有统一符号。\n常靠后面的 あ / い / う 拉长前一个元音。\nあ / い / う 本身仍是普通假名。\n是不是长音，要结合词的读音判断。",
+          "hint": "平假名里的长音没有统一符号。\n常靠后面的 あ / い / う 拉长前一个元音。\n有些规则很直觉，有些规则反而容易误读。",
           "pairHint": "ー 本身不单独发音。\n片假名里常用 ー 表示长音。\n看到 ー，就把前面的音拖长一拍。",
-          "ruleTips": [
-            "あ 段 + あ：おばあさん",
-            "い 段 + い：おにいさん",
-            "え 段 + い：せんせい",
-            "お 段 + う：こうこう",
-            "う 段 + う：くうこう"
+          "ruleSections": [
+            {
+              "title": "直觉规则",
+              "desc": "看到相同元音靠在一起，通常就是多读一拍。",
+              "items": [
+                {
+                  "pattern": "あ + あ → ā",
+                  "example": "おばあさん",
+                  "note": "ba + a → baa"
+                },
+                {
+                  "pattern": "い + い → ī",
+                  "example": "おにいさん",
+                  "note": "ni + i → nii"
+                },
+                {
+                  "pattern": "う + う → ū",
+                  "example": "くうこう",
+                  "note": "ku + u → kuu"
+                }
+              ]
+            },
+            {
+              "title": "注意规则",
+              "desc": "写法看起来像两个音，听起来却常接近一个长音。",
+              "items": [
+                {
+                  "pattern": "え + い → ē",
+                  "example": "せんせい",
+                  "note": "se + i → sē"
+                },
+                {
+                  "pattern": "お + う → ō",
+                  "example": "こうこう / とうきょう",
+                  "note": "ko + u → kō"
+                }
+              ]
+            }
           ],
-          "pairRuleTips": [
-            "ビ + ー → ビー",
-            "コ + ー → コー",
-            "ケ + ー → ケー"
+          "pairRuleSections": [
+            {
+              "title": "片假名 ー",
+              "desc": "规则很直接：ー 前面的音，多读一拍。",
+              "items": [
+                {
+                  "pattern": "ビ + ー → ビー",
+                  "example": "ビール",
+                  "note": "bi + ー → bii"
+                },
+                {
+                  "pattern": "コ + ー → コー",
+                  "example": "コーヒー",
+                  "note": "ko + ー → koo"
+                },
+                {
+                  "pattern": "ケ + ー → ケー",
+                  "example": "ケーキ",
+                  "note": "ke + ー → kee"
+                },
+                {
+                  "pattern": "タ + ー → ター",
+                  "example": "タクシー",
+                  "note": "ta + ー → taa"
+                }
+              ]
+            }
           ],
-          "compareTitle": "听见被拉长的一拍",
-          "pairCompareTitle": "听见片假名里被拉长的一拍",
+          "compareTitle": "多出来的一拍，意思会变",
+          "pairCompareTitle": "ー 多一拍，意思就变",
           "strokeKey": "long-vowel",
           "pairStrokeKey": "long-vowel",
           "compareExamples": [
             {
-              "type": "あ 段 + あ",
+              "type": "直觉规则",
               "left": {
                 "word": "おばさん",
                 "roma": "o-ba-san",
-                "zh": "阿姨；伯母"
+                "zh": "阿姨；伯母",
+                "beats": "♩ ♩ ♩ ♩"
               },
               "right": {
                 "word": "おばあさん",
                 "roma": "o-baa-san",
-                "zh": "奶奶；老奶奶"
+                "zh": "奶奶；老奶奶",
+                "beats": "♩ ♩ ♩ ♩ ♩"
               },
-              "note": "ば + あ → baa"
+              "note": "ば + あ → baa，多出来的这一拍就是长音。"
             },
             {
-              "type": "お 段 + う",
+              "type": "注意规则",
               "left": {
                 "word": "ここ",
                 "roma": "ko-ko",
-                "zh": "这里"
+                "zh": "这里",
+                "beats": "♩ ♩"
               },
               "right": {
                 "word": "こうこう",
                 "roma": "koo-koo",
-                "zh": "高校；高中"
+                "zh": "高校；高中",
+                "beats": "♩♩  ♩♩"
               },
-              "note": "こ + う → koo"
+              "note": "こ + う → kō，不是简单拆成 ko-u。"
             }
           ],
           "pairCompareExamples": [
@@ -7078,14 +7137,36 @@
               "left": {
                 "word": "ビル",
                 "roma": "bi-ru",
-                "zh": "大楼"
+                "zh": "大楼",
+                "beats": "♩ ♩"
               },
               "right": {
                 "word": "ビール",
                 "roma": "bii-ru",
-                "zh": "beer・啤酒"
+                "zh": "beer・啤酒",
+                "beats": "♩♩ ♩"
               },
               "note": "ビ + ー → bii"
+            }
+          ],
+          "travelTips": [
+            {
+              "word": "とうきょう",
+              "kanji": "東京",
+              "zh": "东京",
+              "note": "とう ≈ tō；きょう ≈ kyō"
+            },
+            {
+              "word": "おとうさん",
+              "kanji": "お父さん",
+              "zh": "爸爸",
+              "note": "とう ≈ tō"
+            },
+            {
+              "word": "こうえん",
+              "kanji": "公園",
+              "zh": "公园",
+              "note": "こう ≈ kō"
             }
           ],
           "examples": [
@@ -7102,16 +7183,28 @@
               "zh": "爸爸"
             },
             {
-              "word": "きょう",
-              "reading": "きょう",
-              "kanji": "今日",
-              "zh": "今天"
+              "word": "おにいさん",
+              "reading": "おにいさん",
+              "kanji": "お兄さん",
+              "zh": "哥哥"
             },
             {
               "word": "せんせい",
               "reading": "せんせい",
               "kanji": "先生",
               "zh": "老师"
+            },
+            {
+              "word": "くうこう",
+              "reading": "くうこう",
+              "kanji": "空港",
+              "zh": "机场"
+            },
+            {
+              "word": "とうきょう",
+              "reading": "とうきょう",
+              "kanji": "東京",
+              "zh": "东京"
             }
           ],
           "pairExamples": [
