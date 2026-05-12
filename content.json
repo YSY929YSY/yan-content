@@ -7096,6 +7096,24 @@
               "reading": "タクシー",
               "kanji": "taxi",
               "zh": "出租车"
+            },
+            {
+              "word": "スーパー",
+              "reading": "スーパー",
+              "kanji": "supermarket",
+              "zh": "超市"
+            },
+            {
+              "word": "メール",
+              "reading": "メール",
+              "kanji": "mail",
+              "zh": "邮件"
+            },
+            {
+              "word": "ホテル",
+              "reading": "ホテル",
+              "kanji": "hotel",
+              "zh": "酒店"
             }
           ]
         }
