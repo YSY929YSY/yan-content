@@ -3734,6 +3734,7 @@
             {
               "word": "インク",
               "reading": "インク",
+              "kanji": "ink",
               "zh": "墨水"
             },
             {
@@ -3789,11 +3790,13 @@
             {
               "word": "ウイルス",
               "reading": "ウイルス",
+              "kanji": "virus",
               "zh": "病毒"
             },
             {
               "word": "ウール",
               "reading": "ウール",
+              "kanji": "wool",
               "zh": "羊毛"
             }
           ]
@@ -3838,11 +3841,13 @@
             {
               "word": "エアコン",
               "reading": "エアコン",
+              "kanji": "air conditioner",
               "zh": "空调"
             },
             {
               "word": "エネルギー",
               "reading": "エネルギー",
+              "kanji": "energy",
               "zh": "能量；能源"
             }
           ]
@@ -3900,11 +3905,13 @@
             {
               "word": "オレンジ",
               "reading": "オレンジ",
+              "kanji": "orange",
               "zh": "橙子；橙色"
             },
             {
               "word": "オフィス",
               "reading": "オフィス",
+              "kanji": "office",
               "zh": "办公室"
             }
           ]
@@ -3969,6 +3976,7 @@
             {
               "word": "カード",
               "reading": "カード",
+              "kanji": "card",
               "zh": "卡片；信用卡"
             }
           ]
@@ -4013,11 +4021,13 @@
             {
               "word": "キロ",
               "reading": "キロ",
+              "kanji": "kilo",
               "zh": "公斤；千米"
             },
             {
               "word": "キッチン",
               "reading": "キッチン",
+              "kanji": "kitchen",
               "zh": "厨房"
             }
           ]
@@ -4067,11 +4077,13 @@
             {
               "word": "クラス",
               "reading": "クラス",
+              "kanji": "class",
               "zh": "班级；等级"
             },
             {
               "word": "クッキー",
               "reading": "クッキー",
+              "kanji": "cookie",
               "zh": "曲奇饼"
             }
           ]
@@ -4112,11 +4124,13 @@
             {
               "word": "ケーキ",
               "reading": "ケーキ",
+              "kanji": "cake",
               "zh": "蛋糕"
             },
             {
               "word": "ケース",
               "reading": "ケース",
+              "kanji": "case",
               "zh": "盒子；案例"
             }
           ]
@@ -4167,6 +4181,7 @@
             {
               "word": "コンビニ",
               "reading": "コンビニ",
+              "kanji": "convenience store",
               "zh": "便利店"
             }
           ]
@@ -4212,11 +4227,13 @@
             {
               "word": "サイズ",
               "reading": "サイズ",
+              "kanji": "size",
               "zh": "尺寸"
             },
             {
               "word": "サラダ",
               "reading": "サラダ",
+              "kanji": "salad",
               "zh": "沙拉"
             }
           ]
@@ -4274,11 +4291,13 @@
             {
               "word": "シャツ",
               "reading": "シャツ",
+              "kanji": "shirt",
               "zh": "衬衫"
             },
             {
               "word": "シート",
               "reading": "シート",
+              "kanji": "seat",
               "zh": "座位；座椅"
             }
           ]
@@ -4328,11 +4347,13 @@
             {
               "word": "スーパー",
               "reading": "スーパー",
+              "kanji": "supermarket",
               "zh": "超市"
             },
             {
               "word": "スープ",
               "reading": "スープ",
+              "kanji": "soup",
               "zh": "汤"
             }
           ]
@@ -4373,11 +4394,13 @@
             {
               "word": "セール",
               "reading": "セール",
+              "kanji": "sale",
               "zh": "促销"
             },
             {
               "word": "センター",
               "reading": "センター",
+              "kanji": "center",
               "zh": "中心"
             }
           ]
@@ -4435,11 +4458,13 @@
             {
               "word": "ソース",
               "reading": "ソース",
+              "kanji": "sauce",
               "zh": "酱汁"
             },
             {
               "word": "ソフト",
               "reading": "ソフト",
+              "kanji": "soft",
               "zh": "柔软；软件"
             }
           ]
@@ -4494,11 +4519,13 @@
             {
               "word": "タクシー",
               "reading": "タクシー",
+              "kanji": "taxi",
               "zh": "出租车"
             },
             {
               "word": "タオル",
               "reading": "タオル",
+              "kanji": "towel",
               "zh": "毛巾"
             }
           ]
@@ -4556,11 +4583,13 @@
             {
               "word": "チケット",
               "reading": "チケット",
+              "kanji": "ticket",
               "zh": "票；门票"
             },
             {
               "word": "チーズ",
               "reading": "チーズ",
+              "kanji": "cheese",
               "zh": "奶酪"
             }
           ]
@@ -4618,11 +4647,13 @@
             {
               "word": "ツアー",
               "reading": "ツアー",
+              "kanji": "tour",
               "zh": "旅行团；游览"
             },
             {
               "word": "ツナ",
               "reading": "ツナ",
+              "kanji": "tuna",
               "zh": "金枪鱼"
             }
           ]
@@ -4672,11 +4703,13 @@
             {
               "word": "テレビ",
               "reading": "テレビ",
+              "kanji": "television",
               "zh": "电视"
             },
             {
               "word": "テーブル",
               "reading": "テーブル",
+              "kanji": "table",
               "zh": "桌子"
             }
           ]
@@ -4730,11 +4763,13 @@
             {
               "word": "トイレ",
               "reading": "トイレ",
+              "kanji": "toilet",
               "zh": "厕所"
             },
             {
               "word": "トマト",
               "reading": "トマト",
+              "kanji": "tomato",
               "zh": "番茄"
             }
           ]
@@ -4780,11 +4815,13 @@
             {
               "word": "ナイフ",
               "reading": "ナイフ",
+              "kanji": "knife",
               "zh": "刀"
             },
             {
               "word": "ナンバー",
               "reading": "ナンバー",
+              "kanji": "number",
               "zh": "号码"
             }
           ]
@@ -4829,11 +4866,13 @@
             {
               "word": "ニュース",
               "reading": "ニュース",
+              "kanji": "news",
               "zh": "新闻"
             },
             {
               "word": "ニット",
               "reading": "ニット",
+              "kanji": "knit",
               "zh": "针织衫；针织"
             }
           ]
@@ -4891,11 +4930,13 @@
             {
               "word": "ヌードル",
               "reading": "ヌードル",
+              "kanji": "noodle",
               "zh": "面条"
             },
             {
               "word": "ヌガー",
               "reading": "ヌガー",
+              "kanji": "nougat",
               "zh": "牛轧糖"
             }
           ]
@@ -4949,11 +4990,13 @@
             {
               "word": "ネット",
               "reading": "ネット",
+              "kanji": "net",
               "zh": "网络"
             },
             {
               "word": "ネクタイ",
               "reading": "ネクタイ",
+              "kanji": "necktie",
               "zh": "领带"
             }
           ]
@@ -4998,11 +5041,13 @@
             {
               "word": "ノート",
               "reading": "ノート",
+              "kanji": "note",
               "zh": "笔记本"
             },
             {
               "word": "ノック",
               "reading": "ノック",
+              "kanji": "knock",
               "zh": "敲门；敲击"
             }
           ]
@@ -5062,11 +5107,13 @@
             {
               "word": "ハンカチ",
               "reading": "ハンカチ",
+              "kanji": "handkerchief",
               "zh": "手帕"
             },
             {
               "word": "ハンバーガー",
               "reading": "ハンバーガー",
+              "kanji": "hamburger",
               "zh": "汉堡"
             }
           ]
@@ -5111,11 +5158,13 @@
             {
               "word": "ホテル",
               "reading": "ホテル",
+              "kanji": "hotel",
               "zh": "酒店"
             },
             {
               "word": "ヒント",
               "reading": "ヒント",
+              "kanji": "hint",
               "zh": "提示；线索"
             }
           ]
@@ -5173,11 +5222,13 @@
             {
               "word": "フォーク",
               "reading": "フォーク",
+              "kanji": "fork",
               "zh": "叉子"
             },
             {
               "word": "フルーツ",
               "reading": "フルーツ",
+              "kanji": "fruit",
               "zh": "水果"
             }
           ]
@@ -5219,11 +5270,13 @@
             {
               "word": "ヘア",
               "reading": "ヘア",
+              "kanji": "hair",
               "zh": "头发；发型"
             },
             {
               "word": "ヘルプ",
               "reading": "ヘルプ",
+              "kanji": "help",
               "zh": "帮助"
             }
           ]
@@ -5277,11 +5330,13 @@
             {
               "word": "ホテル",
               "reading": "ホテル",
+              "kanji": "hotel",
               "zh": "酒店"
             },
             {
               "word": "ホット",
               "reading": "ホット",
+              "kanji": "hot",
               "zh": "热的"
             }
           ]
@@ -5336,11 +5391,13 @@
             {
               "word": "マンガ",
               "reading": "マンガ",
+              "kanji": "manga",
               "zh": "漫画"
             },
             {
               "word": "マスク",
               "reading": "マスク",
+              "kanji": "mask",
               "zh": "口罩"
             }
           ]
@@ -5381,11 +5438,13 @@
             {
               "word": "ミルク",
               "reading": "ミルク",
+              "kanji": "milk",
               "zh": "牛奶"
             },
             {
               "word": "ミス",
               "reading": "ミス",
+              "kanji": "miss",
               "zh": "错误；失误"
             }
           ]
@@ -5426,11 +5485,13 @@
             {
               "word": "ゲーム",
               "reading": "ゲーム",
+              "kanji": "game",
               "zh": "游戏"
             },
             {
               "word": "チーム",
               "reading": "チーム",
+              "kanji": "team",
               "zh": "团队"
             }
           ]
@@ -5484,11 +5545,13 @@
             {
               "word": "メニュー",
               "reading": "メニュー",
+              "kanji": "menu",
               "zh": "菜单"
             },
             {
               "word": "メール",
               "reading": "メール",
+              "kanji": "mail",
               "zh": "邮件"
             }
           ]
@@ -5538,11 +5601,13 @@
             {
               "word": "モデル",
               "reading": "モデル",
+              "kanji": "model",
               "zh": "模特；模型"
             },
             {
               "word": "モバイル",
               "reading": "モバイル",
+              "kanji": "mobile",
               "zh": "移动；手机相关"
             }
           ]
@@ -5603,6 +5668,7 @@
             {
               "word": "イヤホン",
               "reading": "イヤホン",
+              "kanji": "earphone",
               "zh": "耳机"
             }
           ]
@@ -5652,11 +5718,13 @@
             {
               "word": "ユニフォーム",
               "reading": "ユニフォーム",
+              "kanji": "uniform",
               "zh": "制服；队服"
             },
             {
               "word": "ユーモア",
               "reading": "ユーモア",
+              "kanji": "humor",
               "zh": "幽默"
             }
           ]
@@ -5697,11 +5765,13 @@
             {
               "word": "ヨガ",
               "reading": "ヨガ",
+              "kanji": "yoga",
               "zh": "瑜伽"
             },
             {
               "word": "ヨーグルト",
               "reading": "ヨーグルト",
+              "kanji": "yogurt",
               "zh": "酸奶"
             }
           ]
@@ -5747,11 +5817,13 @@
             {
               "word": "ラーメン",
               "reading": "ラーメン",
+              "kanji": "拉麺",
               "zh": "拉面"
             },
             {
               "word": "ラジオ",
               "reading": "ラジオ",
+              "kanji": "radio",
               "zh": "收音机；广播"
             }
           ]
@@ -5801,11 +5873,13 @@
             {
               "word": "リモコン",
               "reading": "リモコン",
+              "kanji": "remote control",
               "zh": "遥控器"
             },
             {
               "word": "リスト",
               "reading": "リスト",
+              "kanji": "list",
               "zh": "列表；清单"
             }
           ]
@@ -5855,11 +5929,13 @@
             {
               "word": "ルール",
               "reading": "ルール",
+              "kanji": "rule",
               "zh": "规则"
             },
             {
               "word": "ホテル",
               "reading": "ホテル",
+              "kanji": "hotel",
               "zh": "酒店"
             }
           ]
@@ -5913,11 +5989,13 @@
             {
               "word": "レストラン",
               "reading": "レストラン",
+              "kanji": "restaurant",
               "zh": "餐厅"
             },
             {
               "word": "レシート",
               "reading": "レシート",
+              "kanji": "receipt",
               "zh": "小票；收据"
             }
           ]
@@ -5967,11 +6045,13 @@
             {
               "word": "ロビー",
               "reading": "ロビー",
+              "kanji": "lobby",
               "zh": "大堂"
             },
             {
               "word": "ロッカー",
               "reading": "ロッカー",
+              "kanji": "locker",
               "zh": "储物柜"
             }
           ]
@@ -6030,11 +6110,13 @@
             {
               "word": "ワイン",
               "reading": "ワイン",
+              "kanji": "wine",
               "zh": "葡萄酒"
             },
             {
               "word": "シャワー",
               "reading": "シャワー",
+              "kanji": "shower",
               "zh": "淋浴"
             }
           ]
@@ -6145,11 +6227,13 @@
             {
               "word": "パン",
               "reading": "パン",
+              "kanji": "pao",
               "zh": "面包"
             },
             {
               "word": "コンビニ",
               "reading": "コンビニ",
+              "kanji": "convenience store",
               "zh": "便利店"
             }
           ]
@@ -6964,11 +7048,13 @@
             {
               "word": "ガイド",
               "reading": "ガイド",
+              "kanji": "guide",
               "zh": "导游；指南"
             },
             {
               "word": "ガス",
               "reading": "ガス",
+              "kanji": "gas",
               "zh": "燃气；气体"
             }
           ]
@@ -7019,11 +7105,13 @@
             {
               "word": "ギター",
               "reading": "ギター",
+              "kanji": "guitar",
               "zh": "吉他"
             },
             {
               "word": "ギフト",
               "reading": "ギフト",
+              "kanji": "gift",
               "zh": "礼物"
             }
           ]
@@ -7074,11 +7162,13 @@
             {
               "word": "グループ",
               "reading": "グループ",
+              "kanji": "group",
               "zh": "小组；团体"
             },
             {
               "word": "グラス",
               "reading": "グラス",
+              "kanji": "glass",
               "zh": "玻璃杯"
             }
           ]
@@ -7129,11 +7219,13 @@
             {
               "word": "ゲーム",
               "reading": "ゲーム",
+              "kanji": "game",
               "zh": "游戏"
             },
             {
               "word": "ゲート",
               "reading": "ゲート",
+              "kanji": "gate",
               "zh": "门；登机口"
             }
           ]
@@ -7184,6 +7276,7 @@
             {
               "word": "ゴール",
               "reading": "ゴール",
+              "kanji": "goal",
               "zh": "目标；终点"
             },
             {
@@ -7249,6 +7342,7 @@
             {
               "word": "ザック",
               "reading": "ザック",
+              "kanji": "sack",
               "zh": "背包"
             }
           ]
@@ -7303,11 +7397,13 @@
             {
               "word": "ジーンズ",
               "reading": "ジーンズ",
+              "kanji": "jeans",
               "zh": "牛仔裤"
             },
             {
               "word": "ジム",
               "reading": "ジム",
+              "kanji": "gym",
               "zh": "健身房"
             }
           ]
@@ -7367,6 +7463,7 @@
             {
               "word": "サイズ",
               "reading": "サイズ",
+              "kanji": "size",
               "zh": "尺寸"
             }
           ]
@@ -7417,11 +7514,13 @@
             {
               "word": "ゼロ",
               "reading": "ゼロ",
+              "kanji": "zero",
               "zh": "零"
             },
             {
               "word": "ゼリー",
               "reading": "ゼリー",
+              "kanji": "jelly",
               "zh": "果冻"
             }
           ]
@@ -7476,6 +7575,7 @@
             {
               "word": "ゾーン",
               "reading": "ゾーン",
+              "kanji": "zone",
               "zh": "区域"
             },
             {
@@ -7537,11 +7637,13 @@
             {
               "word": "ダンス",
               "reading": "ダンス",
+              "kanji": "dance",
               "zh": "舞蹈"
             },
             {
               "word": "ダイヤ",
               "reading": "ダイヤ",
+              "kanji": "diamond",
               "zh": "钻石；时刻表"
             }
           ]
@@ -7714,11 +7816,13 @@
             {
               "word": "デパート",
               "reading": "デパート",
+              "kanji": "department store",
               "zh": "百货商店"
             },
             {
               "word": "デザート",
               "reading": "デザート",
+              "kanji": "dessert",
               "zh": "甜点"
             }
           ]
@@ -7769,11 +7873,13 @@
             {
               "word": "ドア",
               "reading": "ドア",
+              "kanji": "door",
               "zh": "门"
             },
             {
               "word": "ドラマ",
               "reading": "ドラマ",
+              "kanji": "drama",
               "zh": "电视剧；戏剧"
             }
           ]
@@ -7833,11 +7939,13 @@
             {
               "word": "バス",
               "reading": "バス",
+              "kanji": "bus",
               "zh": "公共汽车；浴室"
             },
             {
               "word": "バッグ",
               "reading": "バッグ",
+              "kanji": "bag",
               "zh": "包"
             }
           ]
@@ -7892,11 +8000,13 @@
             {
               "word": "ビール",
               "reading": "ビール",
+              "kanji": "beer",
               "zh": "啤酒"
             },
             {
               "word": "ビザ",
               "reading": "ビザ",
+              "kanji": "visa",
               "zh": "签证"
             }
           ]
@@ -7951,11 +8061,13 @@
             {
               "word": "ブログ",
               "reading": "ブログ",
+              "kanji": "blog",
               "zh": "博客"
             },
             {
               "word": "ブーツ",
               "reading": "ブーツ",
+              "kanji": "boots",
               "zh": "靴子；长靴"
             }
           ]
@@ -8011,11 +8123,13 @@
             {
               "word": "ベッド",
               "reading": "ベッド",
+              "kanji": "bed",
               "zh": "床"
             },
             {
               "word": "ベルト",
               "reading": "ベルト",
+              "kanji": "belt",
               "zh": "腰带"
             }
           ]
@@ -8070,11 +8184,13 @@
             {
               "word": "ボタン",
               "reading": "ボタン",
+              "kanji": "button",
               "zh": "按钮；纽扣"
             },
             {
               "word": "ボール",
               "reading": "ボール",
+              "kanji": "ball",
               "zh": "球"
             }
           ]
@@ -8134,11 +8250,13 @@
             {
               "word": "パン",
               "reading": "パン",
+              "kanji": "pao",
               "zh": "面包"
             },
             {
               "word": "パスポート",
               "reading": "パスポート",
+              "kanji": "passport",
               "zh": "护照"
             }
           ]
@@ -8193,11 +8311,13 @@
             {
               "word": "ピアノ",
               "reading": "ピアノ",
+              "kanji": "piano",
               "zh": "钢琴"
             },
             {
               "word": "ピザ",
               "reading": "ピザ",
+              "kanji": "pizza",
               "zh": "披萨"
             }
           ]
@@ -8252,11 +8372,13 @@
             {
               "word": "プール",
               "reading": "プール",
+              "kanji": "pool",
               "zh": "游泳池"
             },
             {
               "word": "プリン",
               "reading": "プリン",
+              "kanji": "pudding",
               "zh": "布丁"
             }
           ]
@@ -8311,11 +8433,13 @@
             {
               "word": "ペン",
               "reading": "ペン",
+              "kanji": "pen",
               "zh": "笔"
             },
             {
               "word": "ページ",
               "reading": "ページ",
+              "kanji": "page",
               "zh": "页"
             }
           ]
@@ -8370,11 +8494,13 @@
             {
               "word": "ポスト",
               "reading": "ポスト",
+              "kanji": "post",
               "zh": "邮筒；职位"
             },
             {
               "word": "ポイント",
               "reading": "ポイント",
+              "kanji": "point",
               "zh": "积分；要点"
             }
           ]
