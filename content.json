@@ -7254,36 +7254,29 @@
           "pairSource": "撥音",
           "anchor": "ん 也要占一拍",
           "pairAnchor": "ン 也要占一拍",
-          "hint": "ん 不是轻轻带过的尾音，而是单独占一拍。漏掉它，词会变得不自然，甚至意思不清。",
+          "hint": "ん 不是轻轻带过的尾音，而是单独占一拍。",
+          "pairHint": "ン 也不是轻轻带过的尾音，而是单独占一拍。",
           "compareTitle": "听见不能漏掉的一拍",
           "compareExamples": [
             {
+              "type": "自然对比",
               "left": {
                 "word": "みな",
                 "roma": "mi-na",
-                "zh": "大家；各位"
+                "zh": "大家；各位",
+                "beats": "♩ ♩"
               },
               "right": {
                 "word": "みんな",
                 "roma": "min-na",
-                "zh": "大家；所有人"
+                "zh": "大家；所有人",
+                "beats": "♩♩ ♩"
               },
-              "note": "ん 单独占一拍，不能被吞掉。"
-            },
-            {
-              "left": {
-                "word": "さぽ",
-                "roma": "sa-po",
-                "zh": "少了ん，听起来不自然"
-              },
-              "right": {
-                "word": "さんぽ",
-                "roma": "san-po",
-                "zh": "散步"
-              },
-              "note": "さんぽ 里的 ん 要保留一拍。"
+              "note": "ん 单独占一拍，听感会更饱满。"
             }
           ],
+          "pairCompareTitle": "听见片假名里的拨音",
+          "pairCompareExamples": [],
           "examples": [
             {
               "word": "ほん",
@@ -7309,15 +7302,16 @@
               "zh": "不好意思；对不起"
             },
             {
-              "word": "みんな",
-              "reading": "みんな",
-              "zh": "大家；所有人"
-            },
-            {
               "word": "べんり",
               "reading": "べんり",
               "kanji": "便利",
               "zh": "方便"
+            },
+            {
+              "word": "しんかんせん",
+              "reading": "しんかんせん",
+              "kanji": "新幹線",
+              "zh": "新干线"
             }
           ],
           "pairExamples": [
