@@ -6899,6 +6899,7 @@
           "anchor": "把 つ 缩小，就变成促音 っ",
           "pairAnchor": "把 ツ 缩小，就变成促音 ッ",
           "hint": "小っ本身不读完整 tsu，而是让后面的辅音停顿、加倍。听起来像中间“卡”了一下。",
+          "compareTitle": "听见「卡住」的一拍",
           "strokeKey": "small-tsu-hira",
           "pairStrokeKey": "small-tsu-kata",
           "compareExamples": [
@@ -6941,12 +6942,6 @@
           ],
           "examples": [
             {
-              "word": "きって",
-              "reading": "きって",
-              "kanji": "切手",
-              "zh": "邮票"
-            },
-            {
               "word": "がっこう",
               "reading": "がっこう",
               "kanji": "学校",
@@ -6973,6 +6968,11 @@
               "word": "ちょっと",
               "reading": "ちょっと",
               "zh": "稍微；一下子"
+            },
+            {
+              "word": "ゆっくり",
+              "reading": "ゆっくり",
+              "zh": "慢慢地"
             }
           ],
           "pairExamples": [
@@ -6999,6 +6999,18 @@
               "reading": "チケット",
               "kanji": "ticket",
               "zh": "票；券"
+            },
+            {
+              "word": "セット",
+              "reading": "セット",
+              "kanji": "set",
+              "zh": "套装；套餐"
+            },
+            {
+              "word": "スタッフ",
+              "reading": "スタッフ",
+              "kanji": "staff",
+              "zh": "工作人员"
             }
           ]
         },
@@ -7009,8 +7021,9 @@
           "source": "長音",
           "pairSource": "長音符号 ー",
           "anchor": "把前一个元音拉长一拍",
-          "pairAnchor": "前の母音をのばす → ー",
-          "hint": "长音的本质是把前面的元音多读一拍。平假名里常用 あ / い / う 等表示长音；片假名外来词里常用 ー。",
+          "pairAnchor": "把前一个元音拉长一拍",
+          "hint": "长音的本质是把前面的元音多读一拍。\n平假名里常用 あ / い / う 等表示长音；片假名外来词里常用 ー。",
+          "compareTitle": "听见被拉长的一拍",
           "strokeKey": "long-vowel",
           "pairStrokeKey": "long-vowel",
           "compareExamples": [
