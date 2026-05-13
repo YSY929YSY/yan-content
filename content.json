@@ -6885,6 +6885,103 @@
       ]
     }
   ],
+  "loanwordRows": [
+    {
+      "row": "ファ行",
+      "label": "ファ / フィ / フェ / フォ",
+      "desc": "フ + 小ァィェォ",
+      "chars": [
+        {
+          "kana": "ファ",
+          "roma": "fa",
+          "source": "フ + ァ",
+          "anchor": "フ + ァ → ファ",
+          "hint": "フ 遇到小ァ，就更接近 fa 的外来语音。",
+          "rule": "小ァ不单独抢音，它帮助前面的フ改变读法。",
+          "examples": [
+            {
+              "word": "ファイル",
+              "reading": "ファイル",
+              "kanji": "file",
+              "zh": "文件"
+            },
+            {
+              "word": "ファミリー",
+              "reading": "ファミリー",
+              "kanji": "family",
+              "zh": "家庭"
+            }
+          ]
+        },
+        {
+          "kana": "フィ",
+          "roma": "fi",
+          "source": "フ + ィ",
+          "anchor": "フ + ィ → フィ",
+          "hint": "フ 遇到小ィ，就更接近 fi 的外来语音。",
+          "rule": "小ィ不单独读成一个完整的イ，而是参与组合。",
+          "examples": [
+            {
+              "word": "フィルム",
+              "reading": "フィルム",
+              "kanji": "film",
+              "zh": "胶片；薄膜"
+            },
+            {
+              "word": "フィット",
+              "reading": "フィット",
+              "kanji": "fit",
+              "zh": "合身；适合"
+            }
+          ]
+        },
+        {
+          "kana": "フェ",
+          "roma": "fe",
+          "source": "フ + ェ",
+          "anchor": "フ + ェ → フェ",
+          "hint": "フ 遇到小ェ，就更接近 fe 的外来语音。",
+          "rule": "小ェ让フ的读法更接近外来语里的 fe。",
+          "examples": [
+            {
+              "word": "カフェ",
+              "reading": "カフェ",
+              "kanji": "café",
+              "zh": "咖啡馆"
+            },
+            {
+              "word": "フェリー",
+              "reading": "フェリー",
+              "kanji": "ferry",
+              "zh": "渡轮"
+            }
+          ]
+        },
+        {
+          "kana": "フォ",
+          "roma": "fo",
+          "source": "フ + ォ",
+          "anchor": "フ + ォ → フォ",
+          "hint": "フ 遇到小ォ，就更接近 fo 的外来语音。",
+          "rule": "小ォ让フ的读法更接近外来语里的 fo。",
+          "examples": [
+            {
+              "word": "フォーク",
+              "reading": "フォーク",
+              "kanji": "fork",
+              "zh": "叉子"
+            },
+            {
+              "word": "フォーム",
+              "reading": "フォーム",
+              "kanji": "form",
+              "zh": "表格；形式"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "specialRows": [
     {
       "row": "特殊音",
