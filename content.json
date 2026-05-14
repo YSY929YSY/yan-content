@@ -7249,24 +7249,42 @@
               "note": "ビ + ー → bii"
             }
           ],
-          "travelTips": [
-            {
-              "word": "とうきょう",
-              "kanji": "東京",
-              "zh": "东京",
-              "note": "とう ≈ tō；きょう ≈ kyō"
-            },
+          "lifeExamples": [
             {
               "word": "おとうさん",
+              "reading": "おとうさん",
               "kanji": "お父さん",
-              "zh": "爸爸",
-              "note": "とう ≈ tō"
+              "zh": "爸爸"
+            },
+            {
+              "word": "おにいさん",
+              "reading": "おにいさん",
+              "kanji": "お兄さん",
+              "zh": "哥哥"
+            },
+            {
+              "word": "せんせい",
+              "reading": "せんせい",
+              "kanji": "先生",
+              "zh": "老师"
+            },
+            {
+              "word": "くうこう",
+              "reading": "くうこう",
+              "kanji": "空港",
+              "zh": "机场"
+            },
+            {
+              "word": "とうきょう",
+              "reading": "とうきょう",
+              "kanji": "東京",
+              "zh": "东京"
             },
             {
               "word": "こうえん",
+              "reading": "こうえん",
               "kanji": "公園",
-              "zh": "公园",
-              "note": "こう ≈ kō"
+              "zh": "公园"
             }
           ],
           "examples": [
@@ -7305,6 +7323,44 @@
               "reading": "とうきょう",
               "kanji": "東京",
               "zh": "东京"
+            }
+          ],
+          "pairLifeExamples": [
+            {
+              "word": "コーヒー",
+              "reading": "コーヒー",
+              "kanji": "coffee",
+              "zh": "咖啡"
+            },
+            {
+              "word": "ケーキ",
+              "reading": "ケーキ",
+              "kanji": "cake",
+              "zh": "蛋糕"
+            },
+            {
+              "word": "タクシー",
+              "reading": "タクシー",
+              "kanji": "taxi",
+              "zh": "出租车"
+            },
+            {
+              "word": "スーパー",
+              "reading": "スーパー",
+              "kanji": "supermarket",
+              "zh": "超市"
+            },
+            {
+              "word": "メール",
+              "reading": "メール",
+              "kanji": "mail",
+              "zh": "邮件"
+            },
+            {
+              "word": "ホテル",
+              "reading": "ホテル",
+              "kanji": "hotel",
+              "zh": "酒店"
             }
           ],
           "pairExamples": [
