@@ -6980,6 +6980,69 @@
           ]
         }
       ]
+    },
+    {
+      "row": "ティ・ディ",
+      "label": "ティ / ディ",
+      "desc": "テ・デ + 小ィ",
+      "chars": [
+        {
+          "kana": "ティ",
+          "roma": "ti",
+          "source": "テ + ィ",
+          "anchor": "テ + ィ → ティ",
+          "hint": "テ 遇到小ィ，就更接近 ti 的外来语音。",
+          "rule": "小ィ不单独读成完整的イ，而是帮助前面的テ改变读法。",
+          "examples": [
+            {
+              "word": "ティー",
+              "reading": "ティー",
+              "kanji": "tea",
+              "zh": "茶"
+            },
+            {
+              "word": "パーティー",
+              "reading": "パーティー",
+              "kanji": "party",
+              "zh": "派对；聚会"
+            },
+            {
+              "word": "ミーティング",
+              "reading": "ミーティング",
+              "kanji": "meeting",
+              "zh": "会议"
+            }
+          ]
+        },
+        {
+          "kana": "ディ",
+          "roma": "di",
+          "source": "デ + ィ",
+          "anchor": "デ + ィ → ディ",
+          "hint": "デ 遇到小ィ，就更接近 di 的外来语音。",
+          "rule": "小ィ让デ的读法更接近外来语里的 di。",
+          "examples": [
+            {
+              "word": "ディナー",
+              "reading": "ディナー",
+              "kanji": "dinner",
+              "zh": "晚餐"
+            },
+            {
+              "word": "ディスカウント",
+              "reading": "ディスカウント",
+              "kanji": "discount",
+              "zh": "折扣"
+            },
+            {
+              "word": "ディスプレイ",
+              "reading": "ディスプレイ",
+              "kanji": "display",
+              "zh": "显示屏；展示"
+            }
+          ]
+        }
+      ]
     }
   ],
   "specialRows": [
@@ -7257,16 +7320,10 @@
               "zh": "爸爸"
             },
             {
-              "word": "おにいさん",
-              "reading": "おにいさん",
-              "kanji": "お兄さん",
-              "zh": "哥哥"
-            },
-            {
-              "word": "せんせい",
-              "reading": "せんせい",
-              "kanji": "先生",
-              "zh": "老师"
+              "word": "おかあさん",
+              "reading": "おかあさん",
+              "kanji": "お母さん",
+              "zh": "妈妈"
             },
             {
               "word": "くうこう",
@@ -7289,28 +7346,16 @@
           ],
           "examples": [
             {
-              "word": "おかあさん",
-              "reading": "おかあさん",
-              "kanji": "お母さん",
-              "zh": "妈妈"
-            },
-            {
               "word": "おとうさん",
               "reading": "おとうさん",
               "kanji": "お父さん",
               "zh": "爸爸"
             },
             {
-              "word": "おにいさん",
-              "reading": "おにいさん",
-              "kanji": "お兄さん",
-              "zh": "哥哥"
-            },
-            {
-              "word": "せんせい",
-              "reading": "せんせい",
-              "kanji": "先生",
-              "zh": "老师"
+              "word": "おかあさん",
+              "reading": "おかあさん",
+              "kanji": "お母さん",
+              "zh": "妈妈"
             },
             {
               "word": "くうこう",
@@ -7323,6 +7368,12 @@
               "reading": "とうきょう",
               "kanji": "東京",
               "zh": "东京"
+            },
+            {
+              "word": "こうえん",
+              "reading": "こうえん",
+              "kanji": "公園",
+              "zh": "公园"
             }
           ],
           "pairLifeExamples": [
