@@ -7540,60 +7540,31 @@
           ],
           "examples": [
             {
-              "word": "ほん",
-              "reading": "ほん",
-              "kanji": "本",
-              "zh": "书"
-            },
-            {
-              "word": "でんしゃ",
-              "reading": "でんしゃ",
-              "kanji": "電車",
-              "zh": "电车"
-            },
-            {
-              "word": "さんぽ",
-              "reading": "さんぽ",
-              "kanji": "散歩",
-              "zh": "散步"
-            },
-            {
-              "word": "すみません",
-              "reading": "すみません",
-              "zh": "不好意思；对不起"
-            },
-            {
               "word": "べんり",
               "reading": "べんり",
               "kanji": "便利",
               "zh": "方便"
             },
             {
-              "word": "しんかんせん",
-              "reading": "しんかんせん",
-              "kanji": "新幹線",
-              "zh": "新干线"
+              "word": "じかん",
+              "reading": "じかん",
+              "kanji": "時間",
+              "zh": "时间"
+            },
+            {
+              "word": "にほん",
+              "reading": "にほん",
+              "kanji": "日本",
+              "zh": "日本"
+            },
+            {
+              "word": "えきいん",
+              "reading": "えきいん",
+              "kanji": "駅員",
+              "zh": "车站工作人员"
             }
           ],
           "pairExamples": [
-            {
-              "word": "パン",
-              "reading": "パン",
-              "kanji": "pão",
-              "zh": "面包"
-            },
-            {
-              "word": "コンビニ",
-              "reading": "コンビニ",
-              "kanji": "convenience store",
-              "zh": "便利店"
-            },
-            {
-              "word": "レストラン",
-              "reading": "レストラン",
-              "kanji": "restaurant",
-              "zh": "餐厅"
-            },
             {
               "word": "エンジン",
               "reading": "エンジン",
@@ -7607,10 +7578,16 @@
               "zh": "公寓"
             },
             {
-              "word": "コンセント",
-              "reading": "コンセント",
-              "kanji": "consent",
-              "zh": "插座"
+              "word": "インフォメーション",
+              "reading": "インフォメーション",
+              "kanji": "information",
+              "zh": "信息；服务台"
+            },
+            {
+              "word": "センター",
+              "reading": "センター",
+              "kanji": "center",
+              "zh": "中心"
             }
           ]
         }
