@@ -7207,7 +7207,8 @@
                 "word": "おばあさん",
                 "roma": "o-baa-san",
                 "zh": "奶奶；老奶奶",
-                "beats": "♩ ♩ ♩ ♩ ♩"
+                "beats": "♩ ♩ ♩ ♩ ♩",
+                "highlightBeats": [3]
               },
               "note": "ば + あ → baa，多出来的这一拍就是长音。"
             },
@@ -7223,7 +7224,8 @@
                 "word": "こうこう",
                 "roma": "koo-koo",
                 "zh": "高校；高中",
-                "beats": "♩♩  ♩♩"
+                "beats": "♩ ♩ ♩ ♩",
+                "highlightBeats": [2, 4]
               },
               "note": "こ + う → kō，不是简单拆成 ko-u。"
             }
@@ -7241,7 +7243,8 @@
                 "word": "ビール",
                 "roma": "bii-ru",
                 "zh": "beer・啤酒",
-                "beats": "♩♩ ♩"
+                "beats": "♩ ♩ ♩",
+                "highlightBeats": [2]
               },
               "note": "ビ + ー → bii"
             }
@@ -7363,24 +7366,28 @@
               "word": "ほん",
               "split": "ほ・ん",
               "beats": "♩ ♩",
+              "highlightBeats": [2],
               "zh": "本・书"
             },
             {
               "word": "さんぽ",
               "split": "さ・ん・ぽ",
               "beats": "♩ ♩ ♩",
+              "highlightBeats": [2],
               "zh": "散歩・散步"
             },
             {
               "word": "でんしゃ",
               "split": "で・ん・しゃ",
               "beats": "♩ ♩ ♩",
+              "highlightBeats": [2],
               "zh": "電車・电车"
             },
             {
               "word": "しんかんせん",
               "split": "し・ん・か・ん・せ・ん",
               "beats": "♩ ♩ ♩ ♩ ♩ ♩",
+              "highlightBeats": [2, 4, 6],
               "zh": "新幹線・新干线"
             }
           ],
@@ -7390,24 +7397,28 @@
               "word": "パン",
               "split": "パ・ン",
               "beats": "♩ ♩",
+              "highlightBeats": [2],
               "zh": "pão・面包"
             },
             {
               "word": "コンビニ",
               "split": "コ・ン・ビ・ニ",
               "beats": "♩ ♩ ♩ ♩",
+              "highlightBeats": [2],
               "zh": "convenience store・便利店"
             },
             {
               "word": "レストラン",
               "split": "レ・ス・ト・ラ・ン",
               "beats": "♩ ♩ ♩ ♩ ♩",
+              "highlightBeats": [5],
               "zh": "restaurant・餐厅"
             },
             {
               "word": "コンセント",
               "split": "コ・ン・セ・ン・ト",
               "beats": "♩ ♩ ♩ ♩ ♩",
+              "highlightBeats": [2, 4],
               "zh": "consent・插座"
             }
           ],
