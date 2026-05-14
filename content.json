@@ -7043,6 +7043,75 @@
           ]
         }
       ]
+    },
+    {
+      "row": "チェ・ジェ",
+      "label": "チェ / ジェ",
+      "desc": "チ・ジ + 小ェ",
+      "chars": [
+        {
+          "kana": "チェ",
+          "roma": "che",
+          "source": "チ + ェ",
+          "anchor": "チ + ェ → チェ",
+          "hint": "チ 遇到小ェ，就更接近 che 的外来语音。",
+          "rule": "小ェ不单独读成完整的エ，而是帮助前面的チ改变读法。",
+          "examples": [
+            {
+              "word": "チェック",
+              "reading": "チェック",
+              "kanji": "check",
+              "zh": "确认；检查"
+            },
+            {
+              "word": "チェックイン",
+              "reading": "チェックイン",
+              "kanji": "check-in",
+              "zh": "办理入住；登机值机"
+            },
+            {
+              "word": "チェックアウト",
+              "reading": "チェックアウト",
+              "kanji": "check-out",
+              "zh": "退房；结账离店"
+            },
+            {
+              "word": "チェーン",
+              "reading": "チェーン",
+              "kanji": "chain",
+              "zh": "连锁；链条"
+            }
+          ]
+        },
+        {
+          "kana": "ジェ",
+          "roma": "je",
+          "source": "ジ + ェ",
+          "anchor": "ジ + ェ → ジェ",
+          "hint": "ジ 遇到小ェ，就更接近 je 的外来语音。",
+          "rule": "小ェ让ジ的读法更接近外来语里的 je。",
+          "examples": [
+            {
+              "word": "ジェラート",
+              "reading": "ジェラート",
+              "kanji": "gelato",
+              "zh": "意式冰淇淋"
+            },
+            {
+              "word": "ジェット",
+              "reading": "ジェット",
+              "kanji": "jet",
+              "zh": "喷气式飞机；喷射"
+            },
+            {
+              "word": "ジェル",
+              "reading": "ジェル",
+              "kanji": "gel",
+              "zh": "凝胶；啫喱"
+            }
+          ]
+        }
+      ]
     }
   ],
   "specialRows": [
@@ -7326,18 +7395,6 @@
               "zh": "妈妈"
             },
             {
-              "word": "くうこう",
-              "reading": "くうこう",
-              "kanji": "空港",
-              "zh": "机场"
-            },
-            {
-              "word": "とうきょう",
-              "reading": "とうきょう",
-              "kanji": "東京",
-              "zh": "东京"
-            },
-            {
               "word": "こうえん",
               "reading": "こうえん",
               "kanji": "公園",
@@ -7358,18 +7415,6 @@
               "zh": "妈妈"
             },
             {
-              "word": "くうこう",
-              "reading": "くうこう",
-              "kanji": "空港",
-              "zh": "机场"
-            },
-            {
-              "word": "とうきょう",
-              "reading": "とうきょう",
-              "kanji": "東京",
-              "zh": "东京"
-            },
-            {
               "word": "こうえん",
               "reading": "こうえん",
               "kanji": "公園",
@@ -7377,24 +7422,6 @@
             }
           ],
           "pairLifeExamples": [
-            {
-              "word": "コーヒー",
-              "reading": "コーヒー",
-              "kanji": "coffee",
-              "zh": "咖啡"
-            },
-            {
-              "word": "ケーキ",
-              "reading": "ケーキ",
-              "kanji": "cake",
-              "zh": "蛋糕"
-            },
-            {
-              "word": "タクシー",
-              "reading": "タクシー",
-              "kanji": "taxi",
-              "zh": "出租车"
-            },
             {
               "word": "スーパー",
               "reading": "スーパー",
@@ -7415,24 +7442,6 @@
             }
           ],
           "pairExamples": [
-            {
-              "word": "コーヒー",
-              "reading": "コーヒー",
-              "kanji": "coffee",
-              "zh": "咖啡"
-            },
-            {
-              "word": "ケーキ",
-              "reading": "ケーキ",
-              "kanji": "cake",
-              "zh": "蛋糕"
-            },
-            {
-              "word": "タクシー",
-              "reading": "タクシー",
-              "kanji": "taxi",
-              "zh": "出租车"
-            },
             {
               "word": "スーパー",
               "reading": "スーパー",
