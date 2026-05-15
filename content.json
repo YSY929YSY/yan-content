@@ -7112,6 +7112,103 @@
           ]
         }
       ]
+    },
+    {
+      "row": "ウィ・ウェ・ウォ",
+      "label": "ウィ / ウェ / ウォ",
+      "desc": "ウ + 小ィェォ",
+      "chars": [
+        {
+          "kana": "ウィ",
+          "roma": "wi",
+          "source": "ウ + ィ",
+          "anchor": "ウ + ィ → ウィ",
+          "hint": "ウ 遇到小ィ，就更接近 wi 的外来语音。",
+          "rule": "小ィ不单独读成完整的イ，而是帮助前面的ウ改变读法。",
+          "examples": [
+            {
+              "word": "ウィンドウ",
+              "reading": "ウィンドウ",
+              "kanji": "window",
+              "zh": "窗口"
+            },
+            {
+              "word": "ウィーク",
+              "reading": "ウィーク",
+              "kanji": "week",
+              "zh": "周；星期"
+            },
+            {
+              "word": "ウィスキー",
+              "reading": "ウィスキー",
+              "kanji": "whisky",
+              "zh": "威士忌"
+            }
+          ]
+        },
+        {
+          "kana": "ウェ",
+          "roma": "we",
+          "source": "ウ + ェ",
+          "anchor": "ウ + ェ → ウェ",
+          "hint": "ウ 遇到小ェ，就更接近 we 的外来语音。",
+          "rule": "小ェ不单独读成完整的エ，而是帮助前面的ウ改变读法。",
+          "examples": [
+            {
+              "word": "ウェブ",
+              "reading": "ウェブ",
+              "kanji": "web",
+              "zh": "网络；网页"
+            },
+            {
+              "word": "ウェイター",
+              "reading": "ウェイター",
+              "kanji": "waiter",
+              "zh": "服务员"
+            },
+            {
+              "word": "ウェルカム",
+              "reading": "ウェルカム",
+              "kanji": "welcome",
+              "zh": "欢迎"
+            }
+          ]
+        },
+        {
+          "kana": "ウォ",
+          "roma": "wo",
+          "source": "ウ + ォ",
+          "anchor": "ウ + ォ → ウォ",
+          "hint": "ウ 遇到小ォ，就更接近 wo 的外来语音。",
+          "rule": "小ォ不单独读成完整的オ，而是帮助前面的ウ改变读法。",
+          "examples": [
+            {
+              "word": "ウォーター",
+              "reading": "ウォーター",
+              "kanji": "water",
+              "zh": "水"
+            },
+            {
+              "word": "ウォーク",
+              "reading": "ウォーク",
+              "kanji": "walk",
+              "zh": "步行；行走"
+            },
+            {
+              "word": "ウォレット",
+              "reading": "ウォレット",
+              "kanji": "wallet",
+              "zh": "钱包"
+            },
+            {
+              "word": "ウォッチ",
+              "reading": "ウォッチ",
+              "kanji": "watch",
+              "zh": "手表；观看"
+            }
+          ]
+        }
+      ]
     }
   ],
   "specialRows": [
