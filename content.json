@@ -7058,12 +7058,6 @@
           "rule": "小ェ不单独读成完整的エ，而是帮助前面的チ改变读法。",
           "examples": [
             {
-              "word": "チェック",
-              "reading": "チェック",
-              "kanji": "check",
-              "zh": "确认；检查"
-            },
-            {
               "word": "チェックイン",
               "reading": "チェックイン",
               "kanji": "check-in",
@@ -7074,6 +7068,12 @@
               "reading": "チェックアウト",
               "kanji": "check-out",
               "zh": "退房；结账离店"
+            },
+            {
+              "word": "チェック",
+              "reading": "チェック",
+              "kanji": "check",
+              "zh": "确认；检查"
             },
             {
               "word": "チェーン",
