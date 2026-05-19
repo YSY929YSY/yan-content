@@ -39,3 +39,26 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# Local backups
+App.backup-before-codex.js
+App.codex-backup.js
+App26.4.30.js
+../YanApp_backup_0501/
+
+# Local source/export copies
+assets/yan_app_icon_v1.png
+
+# Local generated data
+data/
+
+# Local reference materials outside the app package
+../docs/
+../resources/
+
+# Local content repo clone
+../yan-content/
+
+# Local scripts output
+scripts/output/
+scripts/tmp/
