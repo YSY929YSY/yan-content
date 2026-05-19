@@ -13,10 +13,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.lexie.yan",
+      "supportsTablet": false,
+      "bundleIdentifier": "com.ysy929ysy.yan",
+      "buildNumber": "1",
       "infoPlist": {
-        "NSPhotoLibraryUsageDescription": "言需要访问照片图库，用于上传和保存世界打卡照片。",
+        "NSPhotoLibraryUsageDescription": "言需要访问照片图库，用于上传世界足迹打卡照片。",
         "ITSAppUsesNonExemptEncryption": false
       }
     },
@@ -35,7 +36,7 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "言需要访问照片图库，用于上传世界打卡照片。"
+          "photosPermission": "言需要访问照片图库，用于上传世界足迹打卡照片。"
         }
       ]
     ],

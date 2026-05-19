@@ -11,18 +11,43 @@ const CONTENT_URL = 'https://raw.githubusercontent.com/YSY929YSY/yan-content/mai
 
 
 import fallbackContent from './assets/content.fallback.json';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import * as Speech from 'expo-speech';
 import { Audio } from 'expo-av';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  ActivityIndicator, Animated, Dimensions, Image,
+  ActivityIndicator, Alert, Animated, Dimensions, Image,
   Platform, Pressable, SafeAreaView, ScrollView,
   StatusBar, StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
 const { width: SW } = Dimensions.get('window');
+const WORLD_FOOTPRINT_PHOTOS_KEY = 'yan_world_footprint_photos';
+const WORLD_VISITED_IDS_KEY = 'yan_world_footprint_visited_ids';
+const WORLD_META_KEY = 'yan_world_footprint_meta';
+const showComingSoonAlert = () => {
+  Alert.alert(
+    '即将开放',
+    '这个模块会在后续版本上线。V1 可以先从旅行速成、五十音和地铁冒险开始。',
+    [{ text: '知道了' }]
+  );
+};
+const showRouteComingSoonAlert = () => {
+  Alert.alert(
+    '即将开放',
+    '这个路线会在后续版本上线。V1 可以先从旅行速成开始。',
+    [{ text: '知道了' }]
+  );
+};
+const showWanderComingSoonAlert = () => {
+  Alert.alert(
+    '即将开放',
+    '漫游模式会从地点、词句和记忆卡自由进入学习。V1 可以先使用轨道模式。',
+    [{ text: '知道了' }]
+  );
+};
 
 const C = {
   ink:'#0e0e12', paper:'#f5f2ec', lava:'#d4401a', lavaLight:'#fce8e0',
@@ -210,6 +235,10 @@ const MINI_STROKES = {
 
 'tsu-hira': [
   { d: 'M14,44.75c1.88,1.62,4.68,2.09,8.12,0.62c17.88-7.62,30-11.12,44.88-10.88c12.56,0.21,22.98,7.17,22.87,19.17c-0.18,18.77-24.75,28.71-45.01,32.08', len: 500 },
+],
+
+'long-vowel': [
+  { d: 'M24,52c13.5,0,27,0,40.5,0c4.25,0,8.5,0,12.75,0', len: 500 },
 ],
 
 'te-hira': [
@@ -551,6 +580,20 @@ const MINI_STROKES = {
 ],
 };
 
+const YOON_MAIN_STROKE = { scale: 0.92, tx: -2, ty: 4 };
+const YOON_SMALL_STROKES = {
+  ya: { tx: 76, ty: 58, scale: 0.4 },
+  yu: { tx: 78, ty: 58, scale: 0.4 },
+  yo: { tx: 78, ty: 56, scale: 0.4 },
+};
+
+function yoonStrokeCombo(mainKey, smallKey, smallType) {
+  return [
+    { key: mainKey, ...YOON_MAIN_STROKE },
+    { key: smallKey, ...YOON_SMALL_STROKES[smallType] },
+  ];
+}
+
 const STROKE_COMBOS = {
   'ga-hira': ['ka-hira', 'dakuten-hira'],
   'gi-hira': ['ki-hira', 'dakuten-hira'],
@@ -602,24 +645,74 @@ const STROKE_COMBOS = {
   'pu-kata': ['fu-kata', 'handakuten-kata'],
   'pe-kata': ['he-kata', 'handakuten-kata'],
   'po-kata': ['ho-kata', 'handakuten-kata'],
-  'kya-hira': ['ki-hira', { key: 'ya-hira', tx: 72, ty: 54, scale: 0.45 }],
-  'kyu-hira': ['ki-hira', { key: 'yu-hira', tx: 72, ty: 54, scale: 0.45 }],
-  'kyo-hira': ['ki-hira', { key: 'yo-hira', tx: 72, ty: 54, scale: 0.45 }],
-  'kya-kata': ['ki-kata', { key: 'ya-kata', tx: 72, ty: 54, scale: 0.45 }],
-  'kyu-kata': ['ki-kata', { key: 'yu-kata', tx: 72, ty: 54, scale: 0.45 }],
-  'kyo-kata': ['ki-kata', { key: 'yo-kata', tx: 72, ty: 54, scale: 0.45 }],
-  'sha-hira': ['shi-hira', { key: 'ya-hira', tx: 72, ty: 54, scale: 0.45 }],
-  'shu-hira': ['shi-hira', { key: 'yu-hira', tx: 72, ty: 54, scale: 0.45 }],
-  'sho-hira': ['shi-hira', { key: 'yo-hira', tx: 72, ty: 54, scale: 0.45 }],
-  'sha-kata': ['shi-kata', { key: 'ya-kata', tx: 72, ty: 54, scale: 0.45 }],
-  'shu-kata': ['shi-kata', { key: 'yu-kata', tx: 72, ty: 54, scale: 0.45 }],
-  'sho-kata': ['shi-kata', { key: 'yo-kata', tx: 72, ty: 54, scale: 0.45 }],
-  'cha-hira': ['chi-hira', { key: 'ya-hira', tx: 80, ty: 58, scale: 0.45 }],
-  'chu-hira': ['chi-hira', { key: 'yu-hira', tx: 80, ty: 58, scale: 0.45 }],
-  'cho-hira': ['chi-hira', { key: 'yo-hira', tx: 72, ty: 54, scale: 0.45 }],
-  'cha-kata': ['chi-kata', { key: 'ya-kata', tx: 72, ty: 54, scale: 0.45 }],
-  'chu-kata': ['chi-kata', { key: 'yu-kata', tx: 72, ty: 54, scale: 0.45 }],
-  'cho-kata': ['chi-kata', { key: 'yo-kata', tx: 72, ty: 54, scale: 0.45 }],
+  'kya-hira': yoonStrokeCombo('ki-hira', 'ya-hira', 'ya'),
+  'kyu-hira': yoonStrokeCombo('ki-hira', 'yu-hira', 'yu'),
+  'kyo-hira': yoonStrokeCombo('ki-hira', 'yo-hira', 'yo'),
+  'kya-kata': yoonStrokeCombo('ki-kata', 'ya-kata', 'ya'),
+  'kyu-kata': yoonStrokeCombo('ki-kata', 'yu-kata', 'yu'),
+  'kyo-kata': yoonStrokeCombo('ki-kata', 'yo-kata', 'yo'),
+  'sha-hira': yoonStrokeCombo('shi-hira', 'ya-hira', 'ya'),
+  'shu-hira': yoonStrokeCombo('shi-hira', 'yu-hira', 'yu'),
+  'sho-hira': yoonStrokeCombo('shi-hira', 'yo-hira', 'yo'),
+  'sha-kata': yoonStrokeCombo('shi-kata', 'ya-kata', 'ya'),
+  'shu-kata': yoonStrokeCombo('shi-kata', 'yu-kata', 'yu'),
+  'sho-kata': yoonStrokeCombo('shi-kata', 'yo-kata', 'yo'),
+  'cha-hira': yoonStrokeCombo('chi-hira', 'ya-hira', 'ya'),
+  'chu-hira': yoonStrokeCombo('chi-hira', 'yu-hira', 'yu'),
+  'cho-hira': yoonStrokeCombo('chi-hira', 'yo-hira', 'yo'),
+  'cha-kata': yoonStrokeCombo('chi-kata', 'ya-kata', 'ya'),
+  'chu-kata': yoonStrokeCombo('chi-kata', 'yu-kata', 'yu'),
+  'cho-kata': yoonStrokeCombo('chi-kata', 'yo-kata', 'yo'),
+  'nya-hira': yoonStrokeCombo('ni-hira', 'ya-hira', 'ya'),
+  'nyu-hira': yoonStrokeCombo('ni-hira', 'yu-hira', 'yu'),
+  'nyo-hira': yoonStrokeCombo('ni-hira', 'yo-hira', 'yo'),
+  'nya-kata': yoonStrokeCombo('ni-kata', 'ya-kata', 'ya'),
+  'nyu-kata': yoonStrokeCombo('ni-kata', 'yu-kata', 'yu'),
+  'nyo-kata': yoonStrokeCombo('ni-kata', 'yo-kata', 'yo'),
+  'hya-hira': yoonStrokeCombo('hi-hira', 'ya-hira', 'ya'),
+  'hyu-hira': yoonStrokeCombo('hi-hira', 'yu-hira', 'yu'),
+  'hyo-hira': yoonStrokeCombo('hi-hira', 'yo-hira', 'yo'),
+  'hya-kata': yoonStrokeCombo('hi-kata', 'ya-kata', 'ya'),
+  'hyu-kata': yoonStrokeCombo('hi-kata', 'yu-kata', 'yu'),
+  'hyo-kata': yoonStrokeCombo('hi-kata', 'yo-kata', 'yo'),
+  'mya-hira': yoonStrokeCombo('mi-hira', 'ya-hira', 'ya'),
+  'myu-hira': yoonStrokeCombo('mi-hira', 'yu-hira', 'yu'),
+  'myo-hira': yoonStrokeCombo('mi-hira', 'yo-hira', 'yo'),
+  'mya-kata': yoonStrokeCombo('mi-kata', 'ya-kata', 'ya'),
+  'myu-kata': yoonStrokeCombo('mi-kata', 'yu-kata', 'yu'),
+  'myo-kata': yoonStrokeCombo('mi-kata', 'yo-kata', 'yo'),
+  'rya-hira': yoonStrokeCombo('ri-hira', 'ya-hira', 'ya'),
+  'ryu-hira': yoonStrokeCombo('ri-hira', 'yu-hira', 'yu'),
+  'ryo-hira': yoonStrokeCombo('ri-hira', 'yo-hira', 'yo'),
+  'rya-kata': yoonStrokeCombo('ri-kata', 'ya-kata', 'ya'),
+  'ryu-kata': yoonStrokeCombo('ri-kata', 'yu-kata', 'yu'),
+  'ryo-kata': yoonStrokeCombo('ri-kata', 'yo-kata', 'yo'),
+  'gya-hira': yoonStrokeCombo('gi-hira', 'ya-hira', 'ya'),
+  'gyu-hira': yoonStrokeCombo('gi-hira', 'yu-hira', 'yu'),
+  'gyo-hira': yoonStrokeCombo('gi-hira', 'yo-hira', 'yo'),
+  'gya-kata': yoonStrokeCombo('gi-kata', 'ya-kata', 'ya'),
+  'gyu-kata': yoonStrokeCombo('gi-kata', 'yu-kata', 'yu'),
+  'gyo-kata': yoonStrokeCombo('gi-kata', 'yo-kata', 'yo'),
+  'ja-hira': yoonStrokeCombo('ji-hira', 'ya-hira', 'ya'),
+  'ju-hira': yoonStrokeCombo('ji-hira', 'yu-hira', 'yu'),
+  'jo-hira': yoonStrokeCombo('ji-hira', 'yo-hira', 'yo'),
+  'ja-kata': yoonStrokeCombo('ji-kata', 'ya-kata', 'ya'),
+  'ju-kata': yoonStrokeCombo('ji-kata', 'yu-kata', 'yu'),
+  'jo-kata': yoonStrokeCombo('ji-kata', 'yo-kata', 'yo'),
+  'bya-hira': yoonStrokeCombo('bi-hira', 'ya-hira', 'ya'),
+  'byu-hira': yoonStrokeCombo('bi-hira', 'yu-hira', 'yu'),
+  'byo-hira': yoonStrokeCombo('bi-hira', 'yo-hira', 'yo'),
+  'bya-kata': yoonStrokeCombo('bi-kata', 'ya-kata', 'ya'),
+  'byu-kata': yoonStrokeCombo('bi-kata', 'yu-kata', 'yu'),
+  'byo-kata': yoonStrokeCombo('bi-kata', 'yo-kata', 'yo'),
+  'pya-hira': yoonStrokeCombo('pi-hira', 'ya-hira', 'ya'),
+  'pyu-hira': yoonStrokeCombo('pi-hira', 'yu-hira', 'yu'),
+  'pyo-hira': yoonStrokeCombo('pi-hira', 'yo-hira', 'yo'),
+  'pya-kata': yoonStrokeCombo('pi-kata', 'ya-kata', 'ya'),
+  'pyu-kata': yoonStrokeCombo('pi-kata', 'yu-kata', 'yu'),
+  'pyo-kata': yoonStrokeCombo('pi-kata', 'yo-kata', 'yo'),
+  'small-tsu-hira': [{ key: 'tsu-hira', scale: 0.62, tx: 27, ty: 24 }],
+  'small-tsu-kata': [{ key: 'tsu-kata', scale: 0.62, tx: 24, ty: 22 }],
 };
 
 const COMBO_MARK_OFFSETS = {
@@ -632,13 +725,16 @@ const COMBO_MARK_OFFSETS = {
   'pu-kata': { x: 5, y: -4 },
 };
 
-function resolveMiniStrokes(strokeKey) {
+function resolveMiniStrokes(strokeKey, seen = new Set()) {
+  if (seen.has(strokeKey)) return [];
   const combo = STROKE_COMBOS[strokeKey];
   if (!combo) return MINI_STROKES[strokeKey] || [];
+  const nextSeen = new Set(seen);
+  nextSeen.add(strokeKey);
   const markOffset = COMBO_MARK_OFFSETS[strokeKey];
   return combo.flatMap(component => {
     const comboItem = typeof component === 'string' ? { key: component } : component;
-    const strokes = MINI_STROKES[comboItem.key] || [];
+    const strokes = resolveMiniStrokes(comboItem.key, nextSeen);
     return strokes.map(stroke => {
       const result = { ...stroke };
       if (comboItem.scale && comboItem.scale !== 1) {
@@ -798,7 +894,14 @@ function StrokeMini({ strokeKey, fallbackKana }) {
   const strokes = resolveMiniStrokes(strokeKey);
 
   if (!strokes.length) {
-    return <YoonKanaText text={fallbackKana} mainStyle={kn.writeKana} smallStyle={kn.writeKanaSmall} />;
+    const isYoonFallback = isYoonKanaText(fallbackKana);
+    return (
+      <YoonKanaText
+        text={fallbackKana}
+        mainStyle={isYoonFallback ? kn.writeYoonKana : kn.writeKana}
+        smallStyle={isYoonFallback ? kn.writeYoonKanaSmall : kn.writeKanaSmall}
+      />
+    );
   }
 
   return (
@@ -1505,7 +1608,7 @@ const recoItem3 =
   <View style={hs.goalRow}>
     <TouchableOpacity
       style={[hs.goalChip, goalMode === 'travel' && hs.goalChipAct]}
-      onPress={() => setGoalMode('travel')}
+      onPress={() => { setGoalMode('travel'); setTab('pie'); setSubTab('learn'); }}
     >
    <View style={hs.goalInner}>
   <View style={hs.goalDotsRow}>
@@ -1518,8 +1621,8 @@ const recoItem3 =
     </TouchableOpacity>
 
     <TouchableOpacity
-      style={[hs.goalChip, goalMode === 'interest' && hs.goalChipAct]}
-      onPress={() => setGoalMode('interest')}
+      style={[hs.goalChip, hs.goalChipLocked]}
+      onPress={showRouteComingSoonAlert}
     >
     <View style={hs.goalInner}>
   <View style={hs.goalDotsRow}>
@@ -1527,13 +1630,14 @@ const recoItem3 =
     <View style={[hs.goalDot, hs.goalDotOn]} />
     <View style={hs.goalDot} />
   </View>
-  <Text style={[hs.goalTxt, goalMode === 'interest' && hs.goalTxtAct]}>兴趣入门</Text>
+  <Text style={[hs.goalTxt, hs.goalTxtLocked]}>兴趣入门</Text>
+  <Text style={hs.lockTag}>即将开放</Text>
 </View>
     </TouchableOpacity>
 
     <TouchableOpacity
-      style={[hs.goalChip, goalMode === 'exam' && hs.goalChipAct]}
-      onPress={() => setGoalMode('exam')}
+      style={[hs.goalChip, hs.goalChipLocked]}
+      onPress={showRouteComingSoonAlert}
     >
     <View style={hs.goalInner}>
   <View style={hs.goalDotsRow}>
@@ -1541,7 +1645,8 @@ const recoItem3 =
     <View style={[hs.goalDot, hs.goalDotOn]} />
     <View style={[hs.goalDot, hs.goalDotOn]} />
   </View>
-  <Text style={[hs.goalTxt, goalMode === 'exam' && hs.goalTxtAct]}>考试基础</Text>
+  <Text style={[hs.goalTxt, hs.goalTxtLocked]}>考试基础</Text>
+  <Text style={hs.lockTag}>即将开放</Text>
 </View>
     </TouchableOpacity>
   </View>
@@ -1561,12 +1666,13 @@ const recoItem3 =
     </TouchableOpacity>
 
     <TouchableOpacity
-      style={[hs.entryCard, entryMode === 'wander' && hs.entryCardAct]}
-      onPress={() => setEntryMode('wander')}
+      style={[hs.entryCard, hs.entryCardLocked]}
+      onPress={showWanderComingSoonAlert}
     >
-   <Text style={[hs.entryIcon, entryMode === 'wander' && hs.entryIconAct]}>◎</Text>
-<Text style={[hs.entryTitle, entryMode === 'wander' && hs.entryTitleAct]}>漫游模式</Text>
-<Text style={[hs.entryLead, entryMode === 'wander' && hs.entryLeadAct]}>随心成体系</Text>
+   <Text style={[hs.entryIcon, hs.entryIconLocked]}>◎</Text>
+<Text style={[hs.entryTitle, hs.entryTxtLocked]}>漫游模式</Text>
+<Text style={[hs.entryLead, hs.entryTxtLocked]}>随心成体系</Text>
+<Text style={hs.entryLockTag}>即将开放</Text>
     </TouchableOpacity>
   </View>
 </View>
@@ -1605,7 +1711,7 @@ const recoItem3 =
 
   <TouchableOpacity
     style={hs.startCard}
-    onPress={() => { setTab('pie'); setSubTab('learn'); }}
+    onPress={() => { setTab('pie'); setSubTab('subway'); }}
   >
     <Text style={hs.startTop}>丿</Text>
     <View>
@@ -1615,13 +1721,14 @@ const recoItem3 =
   </TouchableOpacity>
 
   <TouchableOpacity
-    style={hs.startCard}
-    onPress={() => { setTab('pie'); setSubTab('kana'); }}
+    style={[hs.startCard, hs.startCardLocked]}
+    onPress={showComingSoonAlert}
   >
     <Text style={hs.startTop}>丶</Text>
     <View>
       <Text style={hs.startName}>记忆专题</Text>
       <Text style={hs.startSub}>星期 · 日期 · 方位</Text>
+      <Text style={hs.startLockTag}>即将开放</Text>
     </View>
   </TouchableOpacity>
 </ScrollView>
@@ -1705,6 +1812,10 @@ startCard: {
 startCardDark: {
   backgroundColor: C.ink,
 },
+startCardLocked: {
+  opacity: 0.55,
+  backgroundColor: '#f1efe8',
+},
 
 startTop: {
   fontSize: 32,
@@ -1743,6 +1854,18 @@ startSubDark: {
   color: '#6f6f92',
   lineHeight: 16,
 },
+startLockTag: {
+  alignSelf: 'flex-start',
+  marginTop: 8,
+  paddingHorizontal: 7,
+  paddingVertical: 3,
+  borderRadius: 999,
+  backgroundColor: C.tag,
+  color: C.muted,
+  fontSize: 9,
+  fontWeight: '700',
+  overflow: 'hidden',
+},
 entryTitleAct: {
   color: C.white,
 },
@@ -1762,6 +1885,24 @@ entryIcon: {
 
 entryIconAct: {
   color: C.lava,
+},
+entryIconLocked: {
+  color: C.mutedLight,
+},
+entryTxtLocked: {
+  color: C.muted,
+},
+entryLockTag: {
+  alignSelf: 'flex-start',
+  marginTop: 6,
+  paddingHorizontal: 7,
+  paddingVertical: 3,
+  borderRadius: 999,
+  backgroundColor: C.tag,
+  color: C.muted,
+  fontSize: 9,
+  fontWeight: '700',
+  overflow: 'hidden',
 },
 
 entryRow: {
@@ -1785,6 +1926,10 @@ entryCard: {
 
 entryCardAct: {
   backgroundColor: C.ink,
+},
+entryCardLocked: {
+  opacity: 0.58,
+  backgroundColor: '#f1efe8',
 },
 
 entryTitle: {
@@ -1839,6 +1984,11 @@ goalChipAct: {
   borderColor: C.lava,
   backgroundColor: 'rgba(192,64,16,0.16)',
 },
+goalChipLocked: {
+  opacity: 0.62,
+  borderColor: 'rgba(255,255,255,0.08)',
+  backgroundColor: 'rgba(255,255,255,0.02)',
+},
 
 goalTxt: {
   fontSize: 13,
@@ -1848,6 +1998,15 @@ goalTxt: {
 
 goalTxtAct: {
   color: C.white,
+},
+goalTxtLocked: {
+  color: 'rgba(255,255,255,0.38)',
+},
+lockTag: {
+  marginTop: 2,
+  fontSize: 9,
+  color: '#8d8da8',
+  fontWeight: '700',
 },
 goalInner: {
   alignItems: 'center',
@@ -2040,8 +2199,10 @@ function PieTab({ content, subTab, setSubTab, sceneState, setSceneState, practic
         <KanaScreen
   kanaRows={content.kanaRows}
   specialSounds={content.specialSounds}
+  specialRows={content.specialRows}
   voicedRows={content.voicedRows}
   yoonRows={content.yoonRows}
+  loanwordRows={content.loanwordRows}
 />
         )}
       </View>
@@ -2060,14 +2221,26 @@ const pt = StyleSheet.create({
 // Learn Screen（场景列表）
 // ─────────────────────────────────────────────
 function LearnScreen({ content, setSceneState, setSubTab }) {
+  const [learnView, setLearnView] = useState('home');
+  const isSentenceView = learnView === 'sentences';
+  const openScene = (sc) => {
+    if (!sc.ready) {
+      showComingSoonAlert();
+      return;
+    }
+    setSceneState({ scene: sc, index: 0 });
+    setSubTab('intro');
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <View style={ls.hd}>
-        <Text style={ls.title}>出发前七天</Text>
-        <Text style={ls.sub}>选一个场景，开始学习</Text>
+        <Text style={ls.title}>{isSentenceView ? '出发句' : '出发前七天'}</Text>
+        <Text style={ls.sub}>{isSentenceView ? '按场景学会最常用的表达骨架' : '先学最能用上的内容'}</Text>
       </View>
       <ScrollView contentContainerStyle={{ padding: 16, gap: 10 }} showsVerticalScrollIndicator={false}>
-        <View style={ls.section}>
+        {!isSentenceView ? (
+          <View style={ls.section}>
   <Text style={ls.sectionTitle}>学习目录</Text>
 
   <View style={ls.grid}>
@@ -2080,16 +2253,17 @@ function LearnScreen({ content, setSceneState, setSubTab }) {
       <Text style={ls.cardDesc}>发音、平片、易混字、记忆提示</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity style={ls.card}>
+    <TouchableOpacity style={[ls.card, ls.cardLocked]} onPress={showComingSoonAlert}>
       <Text style={ls.cardGlyph}>詞</Text>
       <Text style={ls.cardTitle}>高频词块</Text>
       <Text style={ls.cardDesc}>先学最常见、最能立刻用上的语块</Text>
+      <Text style={ls.lockTag}>即将开放</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity style={ls.card}>
+    <TouchableOpacity style={ls.card} onPress={() => setLearnView('sentences')}>
       <Text style={ls.cardGlyph}>句</Text>
       <Text style={ls.cardTitle}>核心句型</Text>
-      <Text style={ls.cardDesc}>先掌握能替换、能开口的表达骨架</Text>
+      <Text style={ls.cardDesc}>按场景学会最常用的表达骨架</Text>
     </TouchableOpacity>
 
     <TouchableOpacity
@@ -2098,26 +2272,28 @@ function LearnScreen({ content, setSceneState, setSubTab }) {
     >
       <Text style={ls.cardGlyph}>境</Text>
       <Text style={ls.cardTitle}>场景实战</Text>
-      <Text style={ls.cardDesc}>地铁、餐厅、酒店与真实处境</Text>
+      <Text style={ls.cardDesc}>用语言完成一整条真实行动链</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity style={ls.card}>
+    <TouchableOpacity style={[ls.card, ls.cardLocked]} onPress={showComingSoonAlert}>
       <Text style={ls.cardGlyph}>識</Text>
       <Text style={ls.cardTitle}>记忆专题</Text>
       <Text style={ls.cardDesc}>星期、日期、方位与速查专题</Text>
+      <Text style={ls.lockTag}>即将开放</Text>
     </TouchableOpacity>
   </View>
 </View>
-<Text style={ls.sectionTitle}>场景列表</Text>
+        ) : (
+          <>
+            <TouchableOpacity onPress={() => setLearnView('home')}>
+              <Text style={ls.backLink}>‹ 返回学习目录</Text>
+            </TouchableOpacity>
+            <Text style={ls.sectionTitle}>场景列表</Text>
         {content.scenes.map(sc => (
 <TouchableOpacity
   key={sc.id}
   style={[ls.row, !sc.ready && { opacity: 0.42 }]}
-  onPress={() => {
-    if (!sc.ready) return;
-    setSceneState({ scene: sc, index: 0 });
-    setSubTab('intro');
-  }}
+  onPress={() => openScene(sc)}
 >
   <View style={[ls.icon, { backgroundColor: sc.bgColor }]}>
     <Text style={{ fontSize: 22 }}>{sc.emoji}</Text>
@@ -2132,6 +2308,8 @@ function LearnScreen({ content, setSceneState, setSubTab }) {
             </View>
           </TouchableOpacity>
         ))}
+          </>
+        )}
         <View style={{ height: 16 }} />
       </ScrollView>
     </View>
@@ -2151,6 +2329,12 @@ sectionTitle: {
   color: C.ink,
   marginBottom: 10,
 },
+backLink: {
+  fontSize: 13,
+  color: C.lava,
+  fontWeight: '600',
+  marginBottom: 6,
+},
 
 grid: {
   gap: 10,
@@ -2162,6 +2346,10 @@ card: {
   padding: 14,
   borderWidth: 1.5,
   borderColor: C.border,
+},
+cardLocked: {
+  opacity: 0.58,
+  backgroundColor: '#f1efe8',
 },
 
 cardGlyph: {
@@ -2181,6 +2369,18 @@ cardDesc: {
   fontSize: 12,
   color: C.muted,
   lineHeight: 18,
+},
+lockTag: {
+  alignSelf: 'flex-start',
+  marginTop: 8,
+  paddingHorizontal: 7,
+  paddingVertical: 3,
+  borderRadius: 999,
+  backgroundColor: C.tag,
+  color: C.muted,
+  fontSize: 9,
+  fontWeight: '700',
+  overflow: 'hidden',
 },
   row: { flexDirection: 'row', alignItems: 'center', backgroundColor: C.white, borderRadius: 15, padding: 15, borderWidth: 1.5, borderColor: C.border, gap: 12 },
   icon: { width: 46, height: 46, borderRadius: 13, alignItems: 'center', justifyContent: 'center' },
@@ -2380,7 +2580,26 @@ function CardScreen({ sceneState, onBack, onFinish }) {
   const p = phrases[cur];
   const hookStyle = HOOK_STYLES[p?.hookType] || HOOK_STYLES.e;
   const go = (d) => { setCur(i => i + d); setShowScene(false); };
-  if (!p) return null;
+  if (!p) {
+    return (
+      <View style={{ flex: 1 }}>
+        <View style={cs.nav}>
+          <TouchableOpacity onPress={onBack}><Text style={[cs.navBack, { color: scene.color }]}>‹ 返回</Text></TouchableOpacity>
+          <Text style={cs.navN}>{scene.label}</Text>
+          <View style={{ width: 80 }} />
+        </View>
+        <View style={cs.emptyWrap}>
+          <View style={cs.emptyCard}>
+            <Text style={cs.emptyTitle}>内容暂未准备好</Text>
+            <Text style={cs.emptySub}>请返回上一页，或先学习其他场景。</Text>
+            <TouchableOpacity style={[cs.emptyBtn, { backgroundColor: scene.color }]} onPress={onBack}>
+              <Text style={cs.emptyBtnTxt}>返回上一页</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    );
+  }
   return (
     <View style={{ flex: 1 }}>
       <View style={cs.nav}>
@@ -2421,9 +2640,9 @@ function CardScreen({ sceneState, onBack, onFinish }) {
       {p.swappableWords.map((w, i) => (
         <View key={i} style={cs.swapChip}>
           <View style={cs.swapTop}>
-            <View style={{ flex: 1 }}>
-              <Text style={cs.swapJp}>{w.word}</Text>
-              {w.reading ? <Text style={cs.swapReading}>{w.reading}</Text> : null}
+            <View style={cs.swapTextWrap}>
+              <Text style={cs.swapJp} numberOfLines={1} ellipsizeMode="tail">{w.word}</Text>
+              {w.reading ? <Text style={cs.swapReading} numberOfLines={1} ellipsizeMode="tail">{w.reading}</Text> : null}
             </View>
             <SpeakBtn
               onPress={() => speak(w.word, 'ja-JP', `swap-${p.id}-${i}`)}
@@ -2431,7 +2650,7 @@ function CardScreen({ sceneState, onBack, onFinish }) {
               size="sm"
             />
           </View>
-          <Text style={cs.swapZh}>{w.zh}</Text>
+          <Text style={cs.swapZh} numberOfLines={1} ellipsizeMode="tail">{w.zh}</Text>
         </View>
       ))}
     </View>
@@ -2505,6 +2724,12 @@ const cs = StyleSheet.create({
   prog: { height: 3, backgroundColor: C.border },
   progFill: { height: 3 },
   scroll: { padding: 18, paddingBottom: 48 },
+  emptyWrap: { flex: 1, padding: 18, justifyContent: 'center' },
+  emptyCard: { backgroundColor: C.white, borderRadius: 18, padding: 22, borderWidth: 1.5, borderColor: C.border, alignItems: 'center' },
+  emptyTitle: { fontSize: 17, fontWeight: '700', color: C.ink, textAlign: 'center' },
+  emptySub: { fontSize: 13, color: C.muted, lineHeight: 20, marginTop: 8, textAlign: 'center' },
+  emptyBtn: { marginTop: 18, borderRadius: 13, paddingHorizontal: 22, paddingVertical: 12 },
+  emptyBtnTxt: { fontSize: 14, fontWeight: '700', color: C.white },
   main: { backgroundColor: C.white, borderRadius: 20, padding: 22, marginBottom: 12, borderWidth: 1.5, borderColor: C.border, alignItems: 'center' },
   scTag: { borderRadius: 18, paddingHorizontal: 11, paddingVertical: 4 },
   scTagTxt: { fontSize: 11, fontWeight: '700' },
@@ -2572,6 +2797,8 @@ const cs = StyleSheet.create({
     gap: 8,
   },
   swapChip: {
+    minWidth: 104,
+    maxWidth: '100%',
     backgroundColor: '#f3eeff',
     borderColor: '#d8ccff',
     borderWidth: 1,
@@ -2585,20 +2812,27 @@ const cs = StyleSheet.create({
   justifyContent: 'space-between',
   gap: 8,
 },
+  swapTextWrap: {
+    minWidth: 0,
+    flexShrink: 1,
+  },
   swapJp: {
     fontSize: 12,
     fontWeight: '700',
     color: '#5a3a9a',
+    textAlign: 'center',
   },
   swapReading: {
   fontSize: 10,
   color: '#8c7bb8',
   marginTop: 2,
+  textAlign: 'center',
   },
   swapZh: {
     fontSize: 10,
     color: '#7a7199',
     marginTop: 2,
+    textAlign: 'center',
   },
   taskWrap: {
     marginTop: 14,
@@ -3392,20 +3626,77 @@ stationSpotlightTxt: {
 // ─────────────────────────────────────────────
 // あ Kana Screen
 // ─────────────────────────────────────────────
-function KanaScreen({ kanaRows, specialSounds, voicedRows, yoonRows }) {
+function KanaScreen({ kanaRows, specialSounds, specialRows, voicedRows, yoonRows, loanwordRows }) {
   const [sel, setSel] = useState(null);
   const [showConfuse, setShowConfuse] = useState(false);
   const [showWords, setShowWords] = useState(false);
   const [strokeReplay, setStrokeReplay] = useState(0);
   const [kanaMode, setKanaMode] = useState('hira');
+  const [detailScriptMode, setDetailScriptMode] = useState('hira');
   const [kanaSection, setKanaSection] = useState('clear');
   const [showPair, setShowPair] = useState(false);
+  const [openSpecialFolds, setOpenSpecialFolds] = useState({});
+  const [activeBeat, setActiveBeat] = useState(null);
+  const beatFlashRef = useRef(null);
   useEffect(() => {
-  setSel(null);
+  if (kanaSection !== 'special') {
+    setSel(null);
+  }
 }, [kanaMode, kanaSection, showPair]);
+  useEffect(() => () => {
+    if (beatFlashRef.current) clearTimeout(beatFlashRef.current);
+  }, []);
   const tapTimeoutRef = useRef(null);
   const lastTapRef = useRef(0);
   const { speak, speakingKey } = useSpeech();
+  const splitBeats = beats =>
+    typeof beats === 'string'
+      ? beats.trim().split(/\s+/).filter(Boolean)
+      : Array.isArray(beats)
+      ? beats
+      : [];
+  const handleBeatPress = (word, beatKey, beatIndex) => {
+    setActiveBeat({ key: beatKey, index: beatIndex });
+    if (beatFlashRef.current) clearTimeout(beatFlashRef.current);
+    beatFlashRef.current = setTimeout(() => setActiveBeat(null), 520);
+    if (word) speak(word, 'ja-JP', `beat-${beatKey}-${beatIndex}`);
+  };
+  const renderBeats = (beats, highlightBeats, word, beatKey, extraStyle) => {
+    const parts = splitBeats(beats);
+    if (!parts.length) return null;
+    const highlights = Array.isArray(highlightBeats) ? highlightBeats : [];
+    return (
+      <View style={[kn.beatRow, extraStyle]}>
+        {parts.map((beat, index) => {
+          const beatIndex = index + 1;
+          const isDefaultHot = highlights.includes(beatIndex);
+          const isTapped = activeBeat?.key === beatKey && activeBeat.index === beatIndex;
+          return (
+            <TouchableOpacity
+              key={`${beatKey}-${beatIndex}`}
+              style={[
+                kn.beatPill,
+                isDefaultHot && kn.beatPillHot,
+                isTapped && kn.beatPillTap,
+              ]}
+              activeOpacity={0.72}
+              onPress={() => handleBeatPress(word, beatKey, beatIndex)}
+            >
+              <Text
+                style={[
+                  kn.beatText,
+                  isDefaultHot && kn.beatTextHot,
+                  isTapped && kn.beatTextTap,
+                ]}
+              >
+                {beat}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    );
+  };
 
   const shownRows = (() => {
   const hiraRows = kanaRows.filter(row => /^[ぁ-ん]$/.test(row.row?.[0]));
@@ -3473,6 +3764,7 @@ function KanaScreen({ kanaRows, specialSounds, voicedRows, yoonRows }) {
   const isSpecialMode = kanaSection === 'special';
   const isVoicedMode = kanaSection === 'voiced';
   const isYoonMode = kanaSection === 'yoon';
+  const isLoanwordMode = kanaSection === 'loanword';
   const shownVoicedRows = (voicedRows || []).map(row => ({
   ...row,
   rowHira: row.row,
@@ -3503,7 +3795,11 @@ const shownYoonRows = (yoonRows || []).map(row => ({
     .replace('にゃ', 'ニャ')
     .replace('ひゃ', 'ヒャ')
     .replace('みゃ', 'ミャ')
-    .replace('りゃ', 'リャ'),
+    .replace('りゃ', 'リャ')
+    .replace('ぎゃ', 'ギャ')
+    .replace('じゃ', 'ジャ')
+    .replace('びゃ', 'ビャ')
+    .replace('ぴゃ', 'ピャ'),
   chars: row.chars.map(ch => ({
     ...ch,
     kana: kanaMode === 'kata' ? ch.kata : ch.kana,
@@ -3515,14 +3811,272 @@ const shownYoonRows = (yoonRows || []).map(row => ({
     kata: ch.kata,
   })),
 }));
+const shownSpecialRows = (specialRows || []).map(row => ({
+  ...row,
+  rowHira: row.row,
+  rowKata: row.rowKata || row.row,
+  chars: row.chars.map(ch => ({
+    ...ch,
+    kana: kanaMode === 'kata' ? (ch.pair || ch.kata || ch.kana) : ch.kana,
+    pair: kanaMode === 'kata' ? ch.kana : (ch.pair || ch.kata || ''),
+    roma: ch.roma,
+    hook: ch.hook,
+    links: ch.links || [],
+    hira: ch.kana,
+    kata: ch.pair || ch.kata || '',
+  })),
+}));
+const shownLoanwordRows = (loanwordRows || []).map(row => ({
+  ...row,
+  rowHira: row.label || row.row,
+  rowKata: row.label || row.row,
+  chars: (row.chars || []).map(ch => ({
+    ...ch,
+    roma: ch.roma,
+    links: ch.links || [],
+  })),
+}));
+const getSpecialDefaultChar = (mode = kanaMode) => {
+  const ch = specialRows?.[0]?.chars?.[0];
+  if (!ch) return null;
+  return {
+    ...ch,
+    kana: mode === 'kata' ? (ch.pair || ch.kata || ch.kana) : ch.kana,
+    pair: mode === 'kata' ? ch.kana : (ch.pair || ch.kata || ''),
+    roma: ch.roma,
+    hook: ch.hook,
+    links: ch.links || [],
+    hira: ch.kana,
+    kata: ch.pair || ch.kata || '',
+  };
+};
+const getSpecialCharForMode = (current, mode = kanaMode) => {
+  const baseKana = current?.hira || current?.kana || current?.pair;
+  const ch = specialRows
+    ?.flatMap(row => row.chars || [])
+    ?.find(item => item.kana === baseKana || item.pair === baseKana || item.kata === baseKana);
+  if (!ch) return getSpecialDefaultChar(mode);
+  return {
+    ...ch,
+    kana: mode === 'kata' ? (ch.pair || ch.kata || ch.kana) : ch.kana,
+    pair: mode === 'kata' ? ch.kana : (ch.pair || ch.kata || ''),
+    roma: ch.roma,
+    hook: ch.hook,
+    links: ch.links || [],
+    hira: ch.kana,
+    kata: ch.pair || ch.kata || '',
+  };
+};
+const getDetailCharForMode = (current, mode = kanaMode) => {
+  if (!current) return null;
+  const hira = current.hira || (kanaMode === 'hira' ? current.kana : current.pair) || current.kana;
+  const kata = current.kata || (kanaMode === 'kata' ? current.kana : current.pair) || current.kata || '';
+  const nextKana = mode === 'kata' ? (kata || current.kana) : (hira || current.kana);
+  const nextPair = mode === 'kata' ? (hira || current.pair || '') : (kata || current.pair || '');
+  return {
+    ...current,
+    kana: nextKana,
+    pair: nextPair,
+    hira,
+    kata,
+  };
+};
+const isVoicedYoonRow = row =>
+  /^[ぎじぢびぴギジヂビピ]/.test(row?.rowHira || row?.row || '');
+const yoonDisplayGroups = [
+  { title: '清拗音', rows: shownYoonRows.filter(row => !isVoicedYoonRow(row)) },
+  { title: '浊拗音 / 半浊拗音', rows: shownYoonRows.filter(isVoicedYoonRow) },
+].filter(group => group.rows.length);
 const activeRows =
   isVoicedMode ? shownVoicedRows :
   isYoonMode ? shownYoonRows :
+  isLoanwordMode ? shownLoanwordRows :
+  isSpecialMode ? shownSpecialRows :
   shownRows;
-const activeSource = kanaMode === 'kata' ? (sel?.pairSource || sel?.source || '') : (sel?.source || '');
-const activeAnchor = kanaMode === 'kata' ? (sel?.pairAnchor || sel?.anchor || '') : (sel?.anchor || '');
-const activeHint = sel?.hint || sel?.hook || '';
-const activeExamples = kanaMode === 'kata' ? (sel?.pairExamples || sel?.examples || []) : (sel?.examples || []);
+const detailMode = sel ? detailScriptMode : kanaMode;
+const detailSel = sel
+  ? (isSpecialMode ? getSpecialCharForMode(sel, detailMode) : getDetailCharForMode(sel, detailMode))
+  : null;
+const activeSource = detailMode === 'kata' ? (detailSel?.pairSource || detailSel?.source || '') : (detailSel?.source || '');
+const activeAnchor = detailMode === 'kata' ? (detailSel?.pairAnchor || detailSel?.anchor || '') : (detailSel?.anchor || '');
+const activeHint = detailMode === 'kata'
+  ? (detailSel?.pairHint || detailSel?.hint || detailSel?.hook || '')
+  : (detailSel?.hint || detailSel?.hook || '');
+const activeExamples = detailMode === 'kata' ? (detailSel?.pairExamples || detailSel?.examples || []) : (detailSel?.examples || []);
+const activeSpecialAnchor =
+  detailMode === 'kata'
+    ? (detailSel?.pairAnchor || '')
+    : (detailSel?.anchor || '');
+const activeSpecialExamples =
+  detailMode === 'kata'
+    ? (detailSel?.pairLifeExamples || detailSel?.pairExamples || [])
+    : (detailSel?.lifeExamples || detailSel?.examples || []);
+const activeSpecialCompareExamples =
+  detailMode === 'kata'
+    ? (detailSel?.pairCompareExamples || [])
+    : (detailSel?.compareExamples || detailSel?.contrasts || []);
+const activeSpecialCompareTitle =
+  detailMode === 'kata' && detailSel?.pairCompareTitle
+    ? detailSel.pairCompareTitle
+    : (detailSel?.compareTitle || '听一听，有什么不同');
+const activeSpecialHint =
+  detailMode === 'kata'
+    ? (detailSel?.pairHint || '')
+    : (detailSel?.hint || detailSel?.hook || '');
+const activeSpecialRuleTips =
+  detailMode === 'kata'
+    ? (detailSel?.pairRuleTips || [])
+    : (detailSel?.ruleTips || []);
+const activeSpecialRuleSections =
+  detailMode === 'kata'
+    ? (detailSel?.pairRuleSections || [])
+    : (detailSel?.ruleSections || []);
+const activeSpecialRhythmTitle =
+  detailMode === 'kata'
+    ? (detailSel?.pairRhythmTitle || '')
+    : (detailSel?.rhythmTitle || '');
+const activeSpecialRhythmExamples =
+  detailMode === 'kata'
+    ? (detailSel?.pairRhythmExamples || [])
+    : (detailSel?.rhythmExamples || []);
+const activeSpecialTravelTips = detailMode === 'hira' ? (detailSel?.travelTips || []) : [];
+const isLongVowelDetail = isSpecialMode && (sel?.hira === 'ー' || sel?.kana === 'ー');
+const priorityRuleSections = isLongVowelDetail
+  ? activeSpecialRuleSections.filter(section => /注意|片假名/.test(section.title || ''))
+  : activeSpecialRuleSections;
+const compactRuleSections = isLongVowelDetail
+  ? activeSpecialRuleSections.filter(section => !/注意|片假名/.test(section.title || ''))
+  : [];
+const hasSpecialFoldOpen = key => !!openSpecialFolds[`${sel?.kana || 'special'}-${detailMode}-${key}`];
+const toggleSpecialFold = key => {
+  const foldKey = `${sel?.kana || 'special'}-${detailMode}-${key}`;
+  setOpenSpecialFolds(prev => ({ ...prev, [foldKey]: !prev[foldKey] }));
+};
+const foldSummary = items =>
+  (items || []).slice(0, 3).map(item => item.example || item.word).filter(Boolean).join(' / ');
+const loanwordBaseRoma = {
+  'フ': 'fu',
+  'テ': 'te',
+  'デ': 'de',
+  'チ': 'chi',
+  'ジ': 'ji',
+  'ウ': 'u',
+};
+const getLoanwordRuleLines = ch => {
+  const [baseKana, smallKana] = String(ch?.source || '').split('+').map(part => part.trim());
+  if (!baseKana || !smallKana) return [];
+  return [
+    `${baseKana} 单独接近 ${loanwordBaseRoma[baseKana] || ch?.roma || ''}`,
+    `${baseKana} + ${smallKana} → ${ch.kana}`,
+    `${smallKana}帮${baseKana}变成 ${ch.roma}`,
+  ];
+};
+const shouldMarkLongVowelKana = (chars, index) => {
+  const char = chars[index];
+  const prev = chars[index - 1];
+  if (char === 'ー') return true;
+  if (detailMode === 'kata') return false;
+  if (!index) return false;
+  const vowelRows = {
+    a: 'あかさたなはまやらわがざだばぱゃ',
+    i: 'いきしちにひみりぎじぢびぴ',
+    u: 'うくすつぬふむゆるぐずづぶぷゅ',
+    e: 'えけせてねへめれげぜでべぺ',
+    o: 'おこそとのほもよろごぞどぼぽょ',
+  };
+  if (char === 'あ') return vowelRows.a.includes(prev);
+  if (char === 'い') return vowelRows.i.includes(prev) || vowelRows.e.includes(prev);
+  if (char === 'う') return vowelRows.u.includes(prev) || vowelRows.o.includes(prev);
+  return false;
+};
+const renderSpecialMarkedText = (text, { markType, context, side } = {}) => {
+  const canMarkCompareWord =
+    context === 'compareWord' &&
+    side === 'right' &&
+    (markType === 'long' || markType === 'sokuon');
+  const canMarkRhythmWord = context === 'rhythmWord' && markType === 'hatsuon';
+  if (!canMarkCompareWord && !canMarkRhythmWord) return text;
+  const chars = Array.from(String(text || ''));
+  if (!chars.length) return text;
+  const shouldMark = (char, index) => {
+    if (markType === 'sokuon') return char === 'っ' || char === 'ッ';
+    if (markType === 'hatsuon') return char === 'ん' || char === 'ン';
+    if (markType === 'long') return shouldMarkLongVowelKana(chars, index);
+    return false;
+  };
+  return chars.map((char, index) =>
+    shouldMark(char, index) ? (
+      <Text key={`${char}-${index}`} style={kn.specialKeyMarkText}>{char}</Text>
+    ) : (
+      char
+    )
+  );
+};
+const activeSpecialMarkType = isLongVowelDetail
+  ? 'long'
+  : sel?.hira === 'っ' || sel?.kana === 'っ'
+  ? 'sokuon'
+  : sel?.hira === 'ん' || sel?.kana === 'ん'
+  ? 'hatsuon'
+  : null;
+const renderSpecialCompareBlock = () => (
+  activeSpecialCompareExamples?.length > 0 ? (
+    <View style={kn.specialCompareBox}>
+      <Text style={kn.specialRuleTitle}>{activeSpecialCompareTitle}</Text>
+      {activeSpecialCompareExamples.map((item, i) => (
+        <View key={i} style={kn.compareItem}>
+          {item.type ? <Text style={kn.compareType}>{item.type}</Text> : null}
+          <View style={[kn.compareRow, isLongVowelDetail && kn.compareRowLong]}>
+            <TouchableOpacity
+              style={[kn.compareSide, isLongVowelDetail && kn.compareSideLongLeft]}
+              activeOpacity={0.75}
+              onPress={() => speak(item.left.word, 'ja-JP', `compare-left-${sel.kana}-${i}`)}
+            >
+              <Text style={kn.compareWord}>{item.left.word}</Text>
+              <Text style={kn.compareRoma}>{item.left.roma}</Text>
+              <Text style={kn.compareZh}>{item.left.zh}</Text>
+              {renderBeats(
+                item.left.beats,
+                item.left.highlightBeats,
+                item.left.word,
+                `compare-left-${sel.kana}-${i}`,
+                kn.compareBeatRow
+              )}
+            </TouchableOpacity>
+
+            <Text style={[kn.compareArrow, isLongVowelDetail && kn.compareArrowLong]}>↔</Text>
+
+            <TouchableOpacity
+              style={[kn.compareSide, isLongVowelDetail && kn.compareSideLongRight]}
+              activeOpacity={0.75}
+              onPress={() => speak(item.right.word, 'ja-JP', `compare-right-${sel.kana}-${i}`)}
+            >
+              <Text style={kn.compareWord}>
+                {renderSpecialMarkedText(item.right.word, {
+                  markType: activeSpecialMarkType,
+                  context: 'compareWord',
+                  side: 'right',
+                })}
+              </Text>
+              <Text style={kn.compareRoma}>{item.right.roma}</Text>
+              <Text style={kn.compareZh}>{item.right.zh}</Text>
+              {renderBeats(
+                item.right.beats,
+                item.right.highlightBeats,
+                item.right.word,
+                `compare-right-${sel.kana}-${i}`,
+                kn.compareBeatRow
+              )}
+              {item.note ? <Text style={kn.compareNote}>{item.note}</Text> : null}
+            </TouchableOpacity>
+          </View>
+        </View>
+      ))}
+    </View>
+  ) : null
+);
+const activeCompareExamples = sel?.compareExamples || sel?.contrasts || [];
+const activeCompareTitle = sel?.compareTitle || '听一听，有什么不同';
 const isYoonDetail =
   kanaSection === 'yoon' ||
   /[ゃゅょャュョ]/.test(
@@ -3532,9 +4086,49 @@ const isYoonDetail =
 const sectionTitle =
   kanaSection === 'voiced' ? '浊音 / 半浊音' :
   kanaSection === 'yoon' ? '拗音' :
+  kanaSection === 'loanword' ? '外来语里的小假名' :
   kanaSection === 'special' ? '特殊音' :
   '清音';
 const handleKanaPress = (ch) => {
+  if (isLoanwordMode) {
+    const now = Date.now();
+
+    if (lastTapRef.current && now - lastTapRef.current < 250) {
+      if (tapTimeoutRef.current) {
+        clearTimeout(tapTimeoutRef.current);
+      }
+      lastTapRef.current = 0;
+      setSel(sel?.kana === ch.kana ? null : ch);
+      setShowConfuse(false);
+      setShowWords(false);
+      return;
+    }
+
+    lastTapRef.current = now;
+
+    tapTimeoutRef.current = setTimeout(() => {
+      speak(ch.kana, 'ja-JP', `loanword-card-${ch.kana}`);
+      lastTapRef.current = 0;
+    }, 220);
+    return;
+  }
+
+  if (isSpecialMode) {
+    if (tapTimeoutRef.current) {
+      clearTimeout(tapTimeoutRef.current);
+    }
+    lastTapRef.current = 0;
+    const isSameSpecial =
+      sel &&
+      ((sel.hira || sel.kana) === (ch.hira || ch.kana) ||
+        (sel.kata || sel.pair) === (ch.kata || ch.pair));
+    setSel(isSameSpecial ? null : ch);
+    setDetailScriptMode(kanaMode);
+    setShowConfuse(false);
+    setShowWords(false);
+    return;
+  }
+
   const now = Date.now();
 
   if (lastTapRef.current && now - lastTapRef.current < 250) {
@@ -3547,6 +4141,7 @@ const handleKanaPress = (ch) => {
     setShowConfuse(false);
     setShowWords(false);
     if (shouldOpen) {
+      setDetailScriptMode(kanaMode);
       setStrokeReplay(v => v + 1);
       speak(ch.kana, 'ja-JP', `kana-${ch.kana}`);
     }
@@ -3565,6 +4160,8 @@ const sectionSubtitle =
     ? '在清音上加浊点或半浊点，声音会更厚、更实'
     : kanaSection === 'yoon'
     ? '小ゃ・ゅ・ょ组合成一拍，不拆开读'
+    : kanaSection === 'loanword'
+    ? '片假名拓展 · 片假名外来语组合'
     : kanaSection === 'special'
     ? '促音、长音、拨音，是旅行听力里最容易卡住的地方'
     : '先把最基础的 46 音读顺，再往上加层';
@@ -3574,6 +4171,8 @@ const theoryTitle =
     ? '🔔 浊点和半浊点不是装饰'
     : kanaSection === 'yoon'
     ? '🪄 小ゃ・ゅ・ょ要收成一拍'
+    : kanaSection === 'loanword'
+    ? '外来语里的小假名'
     : kanaSection === 'special'
     ? '🧩 特殊音决定你能不能真正听懂'
     : '🧬 汉字母语者学假名更快';
@@ -3583,12 +4182,16 @@ const theoryText =
     ? 'が行、ざ行、だ行、ば行是在清音上加浊点后得到的声音，ぱ行则是半浊音。先和原来的か・さ・た・は行成组记，最稳。'
     : kanaSection === 'yoon'
     ? '拗音不是把两个音拆开念，而是压成一拍：きゃ不是ki-ya，しゃ不是shi-ya。把它们当成整体看，记忆会轻松很多。'
+    : kanaSection === 'loanword'
+    ? '小ァィゥェォ常用于片假名外来语。它们不单独抢音，而是和前面的假名组合，让读法更接近 fa / fi / fe / fo 等外来语音。'
     : kanaSection === 'special'
     ? '旅行里最容易听漏的，往往不是单个假名，而是促音、长音和ん。把这些卡点拆开练，听力会一下顺很多。'
     : 'あ来自「安」，か来自「加」，さ来自「左」。用汉字字形做记忆锚，比死背快得多。点击任意假名查看钩子。';
     const tapHintText =
   isSpecialMode
-    ? '轻触先听例词 · 双击展开细节'
+    ? '轻触展开规则'
+    : isLoanwordMode
+    ? '轻触发音 · 双击查看组合规则'
     : '轻触发音 · 双击查看记忆钩子';
     const padKanaRow = (row) => {
   const chars = row.chars || [];
@@ -3616,17 +4219,19 @@ const theoryText =
   return chars;
 };
     return (
-    <View style={{ flex: 1 }}>
+<View style={{ flex: 1 }}>
       <View style={kn.hd}>
 <Text style={kn.title}>{sectionTitle}</Text>
 <Text style={kn.sub}>{sectionSubtitle}</Text>
+{!isLoanwordMode ? (
 <View style={kn.modeTopRow}>
-  <View style={kn.modeRow}>
+    <View style={kn.modeRow}>
     <TouchableOpacity
       style={[kn.modeBtn, kanaMode === 'hira' && kn.modeBtnAct]}
       onPress={() => {
         setKanaMode('hira');
-        setSel(null);
+        setDetailScriptMode('hira');
+        setSel(kanaSection === 'special' && sel ? getSpecialCharForMode(sel, 'hira') : null);
         setShowConfuse(false);
         setShowWords(false);
       }}
@@ -3638,7 +4243,8 @@ const theoryText =
       style={[kn.modeBtn, kanaMode === 'kata' && kn.modeBtnAct]}
       onPress={() => {
         setKanaMode('kata');
-        setSel(null);
+        setDetailScriptMode('kata');
+        setSel(kanaSection === 'special' && sel ? getSpecialCharForMode(sel, 'kata') : null);
         setShowConfuse(false);
         setShowWords(false);
       }}
@@ -3661,6 +4267,7 @@ const theoryText =
     </Text>
   </TouchableOpacity>
 </View>
+) : null}
 <View style={kn.sectionRow}>
   <TouchableOpacity
     style={[kn.sectionBtn, kanaSection === 'clear' && kn.sectionBtnAct]}
@@ -3703,11 +4310,24 @@ const theoryText =
     onPress={() => {
       setKanaSection('special');
       setSel(null);
+      setDetailScriptMode(kanaMode);
       setShowConfuse(false);
       setShowWords(false);
     }}
   >
     <Text style={[kn.sectionTxt, kanaSection === 'special' && kn.sectionTxtAct]}>特殊音</Text>
+  </TouchableOpacity>
+
+  <TouchableOpacity
+    style={[kn.sectionBtn, kanaSection === 'loanword' && kn.sectionBtnAct]}
+    onPress={() => {
+      setKanaSection('loanword');
+      setSel(null);
+      setShowConfuse(false);
+      setShowWords(false);
+    }}
+  >
+    <Text style={[kn.sectionTxt, kanaSection === 'loanword' && kn.sectionTxtAct]}>外来语</Text>
   </TouchableOpacity>
 </View>
 </View>
@@ -3716,10 +4336,10 @@ const theoryText =
   <View style={kn.theoryCard}>
     <Text style={kn.theoryTitle}>{theoryTitle}</Text>
     <Text style={kn.theoryTxt}>{theoryText}</Text>
-    <Text style={kn.tapHint}>{tapHintText}</Text>
+    {tapHintText ? <Text style={kn.tapHint}>{tapHintText}</Text> : null}
   </View>
 
-  {isSpecialMode ? (
+  {isSpecialMode && !activeRows.length ? (
     <View style={kn.specialWrap}>
       {specialSounds?.sections?.map(section => (
         <View key={section.id} style={kn.specialCard}>
@@ -3741,18 +4361,26 @@ const theoryText =
       ))}
     </View>
   ) : (
-    activeRows.map(row => (
+    (isYoonMode ? yoonDisplayGroups : [{ title: '', rows: activeRows }]).map(group => (
+      <View key={group.title || 'kana-rows'} style={group.title ? kn.yoonGroupBlock : null}>
+        {group.title ? <Text style={kn.yoonGroupLbl}>{group.title}</Text> : null}
+        {group.rows.map(row => (
       <View key={row.row} style={kn.rowBlock}>
         <Text style={kn.rowLbl}>
-          {kanaMode === 'kata' ? (row.rowKata || row.row) : (row.rowHira || row.row)}
+          {isLoanwordMode ? (row.label || row.row) : kanaMode === 'kata' ? (row.rowKata || row.row) : (row.rowHira || row.row)}
         </Text>
+        {isLoanwordMode && row.desc ? <Text style={kn.loanwordDesc}>{row.desc}</Text> : null}
 
-        <View style={kn.grid}>
+        <View style={[kn.grid, isYoonMode && kn.yoonGrid]}>
           {padKanaRow(row).map((ch, idx) =>
             ch ? (
               <TouchableOpacity
                 key={`${row.row}-${ch.kana}-${idx}`}
-                style={[kn.charCard, sel?.kana === ch.kana && kn.charCardSel]}
+                style={[
+                  kn.charCard,
+                  isYoonMode && kn.yoonCharCard,
+                  sel?.kana === ch.kana && kn.charCardSel,
+                ]}
                 onPress={() => handleKanaPress(ch)}
               >
                 <Text style={[kn.kana, sel?.kana === ch.kana && { color: C.lava }]}>
@@ -3770,49 +4398,347 @@ const theoryText =
                 <Text style={kn.roma}>{ch.roma}</Text>
               </TouchableOpacity>
             ) : (
-              <View key={`${row.row}-empty-${idx}`} style={kn.charCardGhost} />
+              <View
+                key={`${row.row}-empty-${idx}`}
+                style={[kn.charCardGhost, isYoonMode && kn.yoonCharCardGhost]}
+              />
             )
           )}
         </View>
   {row.chars?.some(ch => ch?.kana === sel?.kana) && sel && (
   <View style={kn.memoryBox}>
+    {isLoanwordMode ? (
+      <>
+        <View style={kn.detailHead}>
+          <TouchableOpacity
+            style={{ flex: 1 }}
+            activeOpacity={0.75}
+            onPress={() => {
+              speak(sel.kana, 'ja-JP', `loanword-${sel.kana}`);
+            }}
+          >
+            <Text style={kn.detailKana}>{sel.kana}</Text>
+            <Text style={kn.detailRoma}>{sel.roma}</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={kn.specialRuleBox}>
+          <Text style={kn.specialRuleTitle}>规则说明</Text>
+          {sel.anchor ? <Text style={kn.specialRuleAnchor}>{sel.anchor}</Text> : null}
+          {sel.hint ? <Text style={kn.specialRuleHint}>{sel.hint}</Text> : null}
+          {sel.rule ? <Text style={kn.loanwordRule}>{sel.rule}</Text> : null}
+        </View>
+
+        <View style={kn.loanwordComboCard}>
+          <Text style={kn.specialRuleTitle}>组合规则</Text>
+          <Text style={kn.loanwordSource}>{sel.source}</Text>
+          <Text style={kn.loanwordAnchor}>{sel.anchor}</Text>
+          <View style={kn.loanwordRuleLines}>
+            {getLoanwordRuleLines(sel).map((line, i) => (
+              <Text key={`${sel.kana}-rule-${i}`} style={kn.loanwordRuleLine}>{line}</Text>
+            ))}
+          </View>
+        </View>
+
+        {sel.examples?.length > 0 ? (
+          <View style={kn.specialWordsBox}>
+            <Text style={kn.specialRuleTitle}>生活词汇</Text>
+            <View style={kn.wordRow}>
+              {sel.examples.map((ex, i) => (
+                <TouchableOpacity
+                  key={i}
+                  style={kn.wordChip}
+                  activeOpacity={0.72}
+                  onPress={() => {
+                    speak(ex.reading || ex.word, 'ja-JP', `loanword-example-${sel.kana}-${i}`);
+                  }}
+                >
+                  <Text style={kn.wordKana}>{ex.word}</Text>
+                  <Text style={kn.wordZh}>
+                    {ex.kanji ? `${ex.kanji}・${ex.zh}` : ex.zh}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        ) : null}
+      </>
+    ) : isSpecialMode ? (
+      <>
+        <View style={kn.detailHead}>
+          <View style={{ flex: 1 }}>
+            <Text style={kn.detailKana}>{detailSel.kana}</Text>
+
+            {showPair &&
+            ((detailMode === 'kata' ? detailSel.hira : detailSel.kata) &&
+              (detailMode === 'kata' ? detailSel.hira : detailSel.kata) !== detailSel.kana) ? (
+              <Text style={kn.detailKanaSub}>
+                {detailMode === 'kata' ? detailSel.hira : detailSel.kata}
+              </Text>
+            ) : null}
+
+            <Text style={kn.detailRoma}>{detailSel.roma}</Text>
+          </View>
+
+          <TouchableOpacity
+            style={kn.specialScriptToggle}
+            activeOpacity={0.82}
+            onPress={() => {
+              const nextMode = detailMode === 'kata' ? 'hira' : 'kata';
+              setDetailScriptMode(nextMode);
+              setShowConfuse(false);
+              setShowWords(false);
+            }}
+          >
+            <Text style={kn.specialScriptToggleText}>
+              {detailMode === 'kata' ? '平' : '片'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {isLongVowelDetail ? renderSpecialCompareBlock() : null}
+
+        <View style={kn.specialRuleBox}>
+          <Text style={kn.specialRuleTitle}>规则说明</Text>
+          <Text style={kn.specialRuleAnchor}>{activeSpecialAnchor}</Text>
+          <Text style={kn.specialRuleHint}>{activeSpecialHint}</Text>
+          {priorityRuleSections?.length > 0 ? (
+            <View style={kn.ruleSectionWrap}>
+              {priorityRuleSections.map((section, sectionIndex) => (
+                <View
+                  key={`${section.title}-${sectionIndex}`}
+                  style={[
+                    kn.ruleSectionBlock,
+                    /注意/.test(section.title || '') && kn.ruleSectionBlockWarn,
+                  ]}
+                >
+                  <View style={kn.ruleSectionHead}>
+                    <Text style={kn.ruleSectionTitle}>{section.title}</Text>
+                    {section.desc ? <Text style={kn.ruleSectionDesc}>{section.desc}</Text> : null}
+                  </View>
+                  <View style={kn.ruleItemGrid}>
+                    {section.items?.map((item, itemIndex) => (
+                      <View key={`${item.pattern}-${itemIndex}`} style={kn.ruleItemCard}>
+                        <Text style={kn.ruleItemPattern}>{item.pattern}</Text>
+                        <Text style={[kn.ruleItemExample, isLongVowelDetail && kn.ruleItemExamplePlain]}>
+                          {item.example}
+                        </Text>
+                        {item.note ? <Text style={kn.ruleItemNote}>{item.note}</Text> : null}
+                      </View>
+                    ))}
+                  </View>
+                </View>
+              ))}
+            </View>
+          ) : null}
+          {activeSpecialRuleTips?.length > 0 ? (
+            <View style={kn.specialTipWrap}>
+              {activeSpecialRuleTips.map((tip, i) => (
+                <View key={i} style={kn.specialTipChip}>
+                  <Text style={kn.specialTipText}>{tip}</Text>
+                </View>
+              ))}
+            </View>
+          ) : null}
+        </View>
+
+        {compactRuleSections?.map((section, sectionIndex) => {
+          const foldKey = `rule-${sectionIndex}`;
+          const isOpen = hasSpecialFoldOpen(foldKey);
+          return (
+            <View key={`${section.title}-${sectionIndex}`} style={kn.specialFoldBlock}>
+              <TouchableOpacity
+                style={kn.specialFoldHead}
+                activeOpacity={0.78}
+                onPress={() => toggleSpecialFold(foldKey)}
+              >
+                <Text style={kn.specialFoldTitle}>
+                  {`${section.title}：${foldSummary(section.items)}`}
+                </Text>
+                <Text style={kn.specialFoldMeta}>{isOpen ? '收起 ▲' : '展开 ▼'}</Text>
+              </TouchableOpacity>
+              {isOpen ? (
+                <View style={kn.ruleItemGrid}>
+                  {section.items?.map((item, itemIndex) => (
+                    <View key={`${item.pattern}-${itemIndex}`} style={kn.ruleItemCardCompact}>
+                      <Text style={kn.ruleItemPattern}>{item.pattern}</Text>
+                      <Text style={[kn.ruleItemExample, isLongVowelDetail && kn.ruleItemExamplePlain]}>
+                        {item.example}
+                      </Text>
+                      {item.note ? <Text style={kn.ruleItemNote}>{item.note}</Text> : null}
+                    </View>
+                  ))}
+                </View>
+              ) : null}
+            </View>
+          );
+        })}
+
+        {activeSpecialRhythmExamples?.length > 0 ? (
+          <View style={kn.rhythmBox}>
+            <Text style={kn.specialRuleTitle}>{activeSpecialRhythmTitle || '拍子示意'}</Text>
+            <View style={kn.rhythmGrid}>
+              {activeSpecialRhythmExamples.map((item, i) => (
+                <TouchableOpacity
+                  key={`${item.word}-${i}`}
+                  style={kn.rhythmCard}
+                  activeOpacity={0.75}
+                  onPress={() => speak(item.word, 'ja-JP', `rhythm-${sel.kana}-${i}`)}
+                >
+                  <Text style={kn.rhythmWord}>
+                    {renderSpecialMarkedText(item.word, {
+                      markType: activeSpecialMarkType,
+                      context: 'rhythmWord',
+                    })}
+                  </Text>
+                  <Text style={kn.rhythmSplit}>{item.split}</Text>
+                  {renderBeats(
+                    item.beats,
+                    item.highlightBeats,
+                    item.word,
+                    `rhythm-${sel.kana}-${i}`,
+                    kn.rhythmBeatRow
+                  )}
+                  <Text style={kn.rhythmZh}>{item.zh}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        ) : null}
+
+        {!isLongVowelDetail ? renderSpecialCompareBlock() : null}
+
+        {!isLongVowelDetail && activeSpecialTravelTips?.length > 0 ? (
+          <View style={kn.travelTipsBox}>
+            <Text style={kn.specialRuleTitle}>旅行高频</Text>
+            <View style={kn.travelTipsGrid}>
+              {activeSpecialTravelTips.map((tip, i) => (
+                <TouchableOpacity
+                  key={`${tip.word}-${i}`}
+                  style={kn.travelTipCard}
+                  activeOpacity={0.75}
+                  onPress={() => speak(tip.word, 'ja-JP', `travel-tip-${sel.kana}-${i}`)}
+                >
+                  <Text style={kn.travelTipWord}>{tip.word}</Text>
+                  <Text style={kn.travelTipZh}>
+                    {[tip.kanji, tip.zh].filter(Boolean).join('・')}
+                  </Text>
+                  {tip.note ? <Text style={kn.travelTipNote}>{tip.note}</Text> : null}
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        ) : null}
+
+        {activeSpecialExamples?.length > 0 ? (
+          <View style={kn.specialWordsBox}>
+            {isLongVowelDetail ? (
+              <TouchableOpacity
+                style={kn.specialFoldHead}
+                activeOpacity={0.78}
+                onPress={() => toggleSpecialFold('words')}
+              >
+                <Text style={kn.specialFoldTitle}>
+                  {`生活高频：${foldSummary(activeSpecialExamples)}`}
+                </Text>
+                <Text style={kn.specialFoldMeta}>
+                  {hasSpecialFoldOpen('words') ? '收起 ▲' : '展开 ▼'}
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <Text style={kn.specialRuleTitle}>常见词汇</Text>
+            )}
+            {!isLongVowelDetail || hasSpecialFoldOpen('words') ? (
+              <>
+              {isLongVowelDetail ? (
+                <Text style={kn.lifeExamplesSub}>旅行、交通、日常里会反复遇到</Text>
+              ) : null}
+              <View style={kn.wordRow}>
+                {activeSpecialExamples.map((ex, i) => (
+                  <TouchableOpacity
+                    key={i}
+                    style={kn.wordChip}
+                    activeOpacity={0.72}
+                    onPress={() =>
+                      speak(ex.reading || ex.word, 'ja-JP', `word-${sel.kana}-${i}`)
+                    }
+                  >
+                    <Text style={kn.wordKana}>{ex.word}</Text>
+
+                    {ex.reading && ex.reading !== ex.word ? (
+                      <Text style={kn.wordReading}>{ex.reading}</Text>
+                    ) : null}
+
+                    <Text style={kn.wordZh}>
+                      {ex.kanji ? `${ex.kanji}・${ex.zh}` : ex.zh}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+              </>
+            ) : null}
+          </View>
+        ) : null}
+      </>
+    ) : (
+      <>
     <View style={kn.detailHead}>
       <View style={{ flex: 1 }}>
-        <YoonKanaText text={sel.kana} mainStyle={kn.detailKana} smallStyle={kn.detailKanaSmall} />
+        <YoonKanaText
+          text={detailSel.kana}
+          mainStyle={isYoonKanaText(detailSel.kana) ? kn.detailYoonKana : kn.detailKana}
+          smallStyle={isYoonKanaText(detailSel.kana) ? kn.detailYoonKanaSmall : kn.detailKanaSmall}
+        />
 
         {showPair &&
-        ((kanaMode === 'kata' ? sel.hira : sel.kata) &&
-          (kanaMode === 'kata' ? sel.hira : sel.kata) !== sel.kana) ? (
+        ((detailMode === 'kata' ? detailSel.hira : detailSel.kata) &&
+          (detailMode === 'kata' ? detailSel.hira : detailSel.kata) !== detailSel.kana) ? (
           <Text style={kn.detailKanaSub}>
-            {kanaMode === 'kata' ? sel.hira : sel.kata}
+            {detailMode === 'kata' ? detailSel.hira : detailSel.kata}
           </Text>
         ) : null}
 
-        <Text style={kn.detailRoma}>{sel.roma}</Text>
+        <Text style={kn.detailRoma}>{detailSel.roma}</Text>
       </View>
 
       <SpeakBtn
-        onPress={() => speak(sel.kana, 'ja-JP', `kana-${sel.kana}`)}
-        speaking={speakingKey === `kana-${sel.kana}`}
+        onPress={() => speak(detailSel.kana, 'ja-JP', `kana-${detailSel.kana}`)}
+        speaking={speakingKey === `kana-${detailSel.kana}`}
         size="sm"
       />
+
+      <TouchableOpacity
+        style={kn.specialScriptToggle}
+        activeOpacity={0.82}
+        onPress={() => {
+          const nextMode = detailMode === 'kata' ? 'hira' : 'kata';
+          setDetailScriptMode(nextMode);
+          setShowConfuse(false);
+          setShowWords(false);
+          setStrokeReplay(v => v + 1);
+        }}
+      >
+        <Text style={kn.specialScriptToggleText}>
+          {detailMode === 'kata' ? '平' : '片'}
+        </Text>
+      </TouchableOpacity>
     </View>
 
     
     <View style={kn.writePanel}>
   <View style={kn.writeStage}>
     <View style={kn.writeGrid}>
-      {!isYoonDetail ? (
+      {!isYoonDetail && !isSpecialMode ? (
 	      <SourceGhost
 	        text={activeSource}
-	        replayKey={`${sel.kana}-${strokeReplay}`}
+	        replayKey={`${detailSel.kana}-${strokeReplay}`}
 	      />
       ) : null}
 
 	      <StrokeMini
-	        key={`${(kanaMode === 'kata' ? (sel.pairStrokeKey || sel.strokeKey) : sel.strokeKey) || sel.kana}-${strokeReplay}`}
-	        strokeKey={kanaMode === 'kata' ? (sel.pairStrokeKey || sel.strokeKey) : sel.strokeKey}
-	        fallbackKana={kanaMode === 'kata' ? (sel.kata || sel.kana || sel.pair) : sel.kana}
+	        key={`${(detailMode === 'kata' ? (detailSel.pairStrokeKey || detailSel.strokeKey) : detailSel.strokeKey) || detailSel.kana}-${strokeReplay}`}
+	        strokeKey={detailMode === 'kata' ? (detailSel.pairStrokeKey || detailSel.strokeKey) : detailSel.strokeKey}
+	        fallbackKana={detailMode === 'kata' ? (detailSel.kata || detailSel.kana || detailSel.pair) : detailSel.kana}
 	      />
 
       <View style={kn.gridV} />
@@ -3898,7 +4824,7 @@ const theoryText =
                 ) : null}
 
                 <Text style={kn.wordZh}>
-                  {ex.kanji ? `${ex.kanji} · ${ex.zh}` : ex.zh}
+                  {ex.kanji ? `${ex.kanji}・${ex.zh}` : ex.zh}
                 </Text>
               </TouchableOpacity>
             ))}
@@ -3906,8 +4832,12 @@ const theoryText =
         ) : null}
       </View>
     ) : null}
+      </>
+    )}
   </View>
 )}
+      </View>
+        ))}
       </View>
     ))
   )}
@@ -4069,6 +4999,14 @@ detailKana: {
   fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
 },
 
+detailYoonKana: {
+  fontSize: 46,
+  lineHeight: 54,
+  color: C.ink,
+  fontWeight: '400',
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+},
+
 detailKanaRow: {
   flexDirection: 'row',
   alignItems: 'flex-end',
@@ -4088,6 +5026,17 @@ detailKanaSmall: {
   marginLeft: 4,
   marginBottom: 12,
   transform: [{ translateY: 14 }],
+},
+
+detailYoonKanaSmall: {
+  fontSize: 20,
+  lineHeight: 24,
+  color: C.ink,
+  fontWeight: '400',
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  marginLeft: 8,
+  marginBottom: 10,
+  transform: [{ translateY: 16 }],
 },
 
 detailRoma: {
@@ -4158,6 +5107,21 @@ writeKanaSmall: {
   fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
   marginLeft: 2,
   transform: [{ translateY: 16 }],
+},
+writeYoonKana: {
+  fontSize: 66,
+  color: C.ink,
+  fontWeight: '400',
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+},
+writeYoonKanaSmall: {
+  fontSize: 26,
+  lineHeight: 30,
+  color: C.ink,
+  fontWeight: '400',
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  marginLeft: 6,
+  transform: [{ translateY: 20 }],
 },
 strokeSvg: {  position: 'absolute',  width: '100%',  height: '100%',  zIndex: 10,},
 replayMini: {
@@ -4285,6 +5249,471 @@ specialPoint: {
   color: C.ink,
   lineHeight: 20,
   marginBottom: 4,
+},
+specialScriptToggle: {
+  alignSelf: 'flex-start',
+  paddingVertical: 6,
+  paddingHorizontal: 10,
+  borderRadius: 999,
+  backgroundColor: '#fff2ea',
+  borderWidth: 1,
+  borderColor: '#efd8c9',
+},
+specialScriptToggleText: {
+  fontSize: 12,
+  color: '#b66b3d',
+  fontWeight: '800',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+specialRuleBox: {
+  backgroundColor: '#fffaf7',
+  borderRadius: 16,
+  padding: 14,
+  borderWidth: 1,
+  borderColor: '#f3e7df',
+  marginTop: 8,
+},
+specialRuleTitle: {
+  fontSize: 12,
+  color: '#8b837a',
+  fontWeight: '800',
+  marginBottom: 8,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+specialRuleAnchor: {
+  fontSize: 19,
+  lineHeight: 25,
+  color: '#c97845',
+  fontWeight: '800',
+  marginBottom: 6,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+specialRuleHint: {
+  fontSize: 13,
+  lineHeight: 20,
+  color: '#6f655d',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+loanwordDesc: {
+  alignSelf: 'flex-start',
+  fontSize: 12,
+  lineHeight: 18,
+  color: C.muted,
+  marginBottom: 8,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+loanwordRule: {
+  marginTop: 8,
+  fontSize: 13,
+  lineHeight: 20,
+  color: '#6f655d',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+loanwordComboCard: {
+  backgroundColor: '#fffaf5',
+  borderRadius: 16,
+  padding: 14,
+  borderWidth: 1,
+  borderColor: '#eaded4',
+  marginTop: 10,
+},
+loanwordSource: {
+  fontSize: 20,
+  lineHeight: 26,
+  color: C.ink,
+  fontWeight: '800',
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+},
+loanwordAnchor: {
+  marginTop: 4,
+  fontSize: 14,
+  lineHeight: 20,
+  color: '#b66b3d',
+  fontWeight: '700',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+loanwordRuleLines: {
+  marginTop: 8,
+  gap: 3,
+},
+loanwordRuleLine: {
+  fontSize: 11,
+  lineHeight: 15,
+  color: '#8f8379',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+specialTipWrap: {
+  marginTop: 10,
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  gap: 6,
+},
+specialTipChip: {
+  width: '48%',
+  paddingVertical: 5,
+  paddingHorizontal: 9,
+  borderRadius: 10,
+  backgroundColor: '#fff2ea',
+  borderWidth: 1,
+  borderColor: '#f0dfd4',
+},
+specialTipText: {
+  fontSize: 11,
+  lineHeight: 16,
+  color: '#8f7d70',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+ruleSectionWrap: {
+  marginTop: 12,
+  gap: 10,
+},
+ruleSectionBlock: {
+  paddingTop: 8,
+  borderTopWidth: 1,
+  borderTopColor: '#f0e3d9',
+},
+ruleSectionBlockWarn: {
+  borderTopColor: '#ead7c0',
+},
+ruleSectionHead: {
+  marginBottom: 7,
+},
+ruleSectionTitle: {
+  alignSelf: 'flex-start',
+  fontSize: 11,
+  lineHeight: 15,
+  color: '#9b6b44',
+  fontWeight: '800',
+  paddingVertical: 3,
+  paddingHorizontal: 7,
+  borderRadius: 999,
+  backgroundColor: '#fff0e5',
+  overflow: 'hidden',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+ruleSectionDesc: {
+  marginTop: 5,
+  fontSize: 11,
+  lineHeight: 16,
+  color: '#8b7d72',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+ruleItemGrid: {
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  gap: 7,
+},
+ruleItemCard: {
+  width: '48%',
+  minHeight: 74,
+  paddingVertical: 7,
+  paddingHorizontal: 8,
+  borderRadius: 12,
+  borderWidth: 1,
+  borderColor: '#eaded4',
+  backgroundColor: '#fff8f2',
+},
+ruleItemCardCompact: {
+  width: '48%',
+  minHeight: 68,
+  paddingVertical: 7,
+  paddingHorizontal: 8,
+  borderRadius: 12,
+  borderWidth: 1,
+  borderColor: '#eaded4',
+  backgroundColor: '#fffaf5',
+},
+ruleItemPattern: {
+  fontSize: 12,
+  lineHeight: 16,
+  color: C.ink,
+  fontWeight: '800',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+ruleItemExample: {
+  marginTop: 3,
+  fontSize: 14,
+  lineHeight: 18,
+  color: '#c97845',
+  fontWeight: '800',
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+},
+ruleItemExamplePlain: {
+  color: C.ink,
+},
+ruleItemNote: {
+  marginTop: 2,
+  fontSize: 10,
+  lineHeight: 14,
+  color: '#8f8379',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+rhythmBox: {
+  backgroundColor: '#fffdf9',
+  borderRadius: 16,
+  padding: 10,
+  borderWidth: 1,
+  borderColor: '#eee7df',
+  marginTop: 8,
+},
+rhythmGrid: {
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  gap: 7,
+},
+rhythmCard: {
+  width: '48%',
+  minHeight: 86,
+  paddingVertical: 8,
+  paddingHorizontal: 9,
+  borderRadius: 12,
+  borderWidth: 1,
+  borderColor: '#eaded4',
+  backgroundColor: '#fffaf5',
+},
+rhythmWord: {
+  fontSize: 15,
+  lineHeight: 19,
+  color: C.ink,
+  fontWeight: '800',
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+},
+rhythmSplit: {
+  marginTop: 3,
+  fontSize: 12,
+  lineHeight: 16,
+  color: '#6b5f55',
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+},
+rhythmBeatRow: {
+  marginTop: 5,
+},
+rhythmZh: {
+  marginTop: 3,
+  fontSize: 11,
+  lineHeight: 15,
+  color: '#8f8379',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+specialCompareBox: {
+  backgroundColor: '#fbfaf7',
+  borderRadius: 16,
+  padding: 9,
+  borderWidth: 1,
+  borderColor: '#eee7df',
+  marginTop: 8,
+},
+compareItem: {
+  marginTop: 6,
+},
+compareType: {
+  alignSelf: 'flex-start',
+  fontSize: 10,
+  lineHeight: 14,
+  color: '#9b8b7d',
+  fontWeight: '800',
+  paddingVertical: 3,
+  paddingHorizontal: 7,
+  borderRadius: 999,
+  backgroundColor: '#f1ece6',
+  overflow: 'hidden',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+compareRow: {
+  flexDirection: 'row',
+  alignItems: 'stretch',
+  gap: 6,
+  marginTop: 5,
+},
+compareRowLong: {
+  gap: 0,
+},
+compareSide: {
+  flex: 1,
+  minHeight: 78,
+  padding: 7,
+  borderRadius: 14,
+  borderWidth: 1,
+  borderColor: '#E2D7CC',
+  backgroundColor: '#FDF9F4',
+},
+compareSideLongLeft: {
+  flex: 0,
+  width: '42%',
+  flexShrink: 1,
+},
+compareSideLongRight: {
+  flex: 0,
+  width: '50%',
+  flexShrink: 1,
+},
+compareArrow: {
+  alignSelf: 'center',
+  fontSize: 14,
+  color: '#A79A90',
+  fontWeight: '800',
+},
+compareArrowLong: {
+  width: '8%',
+  textAlign: 'center',
+},
+compareWord: {
+  fontSize: 16,
+  color: C.ink,
+  fontWeight: '800',
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+},
+specialKeyMarkText: {
+  color: '#c97845',
+  fontWeight: '600',
+},
+compareRoma: {
+  marginTop: 2,
+  fontSize: 11,
+  color: '#9A8C82',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+compareZh: {
+  marginTop: 4,
+  fontSize: 12,
+  lineHeight: 16,
+  color: '#5a5048',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+compareBeatRow: {
+  marginTop: 5,
+},
+compareNote: {
+  marginTop: 4,
+  fontSize: 11,
+  lineHeight: 15,
+  color: '#8f8379',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+travelTipsBox: {
+  backgroundColor: '#fffdf9',
+  borderRadius: 16,
+  padding: 10,
+  borderWidth: 1,
+  borderColor: '#eee7df',
+  marginTop: 8,
+},
+travelTipsGrid: {
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  gap: 7,
+},
+travelTipCard: {
+  width: '48%',
+  paddingVertical: 7,
+  paddingHorizontal: 8,
+  borderRadius: 12,
+  borderWidth: 1,
+  borderColor: '#eaded4',
+  backgroundColor: '#fffaf5',
+},
+travelTipWord: {
+  fontSize: 14,
+  lineHeight: 18,
+  color: C.ink,
+  fontWeight: '800',
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+},
+travelTipZh: {
+  marginTop: 2,
+  fontSize: 11,
+  lineHeight: 15,
+  color: '#6b5f55',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+travelTipNote: {
+  marginTop: 3,
+  fontSize: 10,
+  lineHeight: 14,
+  color: '#9a8d82',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+specialWordsBox: {
+  backgroundColor: '#fbfaf7',
+  borderRadius: 16,
+  padding: 12,
+  borderWidth: 1,
+  borderColor: '#eee7df',
+  marginTop: 10,
+},
+lifeExamplesSub: {
+  marginTop: 8,
+  fontSize: 11,
+  lineHeight: 15,
+  color: '#9a8d82',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+specialFoldBlock: {
+  backgroundColor: '#fffdf9',
+  borderRadius: 15,
+  padding: 10,
+  borderWidth: 1,
+  borderColor: '#eee7df',
+  marginTop: 8,
+},
+specialFoldHead: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  gap: 8,
+},
+specialFoldTitle: {
+  flex: 1,
+  fontSize: 12,
+  lineHeight: 17,
+  color: '#6b5f55',
+  fontWeight: '800',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+specialFoldMeta: {
+  fontSize: 10,
+  lineHeight: 14,
+  color: '#b66b3d',
+  fontWeight: '800',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+beatRow: {
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  gap: 4,
+},
+beatPill: {
+  minWidth: 20,
+  height: 20,
+  paddingHorizontal: 5,
+  borderRadius: 999,
+  borderWidth: 1,
+  borderColor: '#eaded4',
+  backgroundColor: '#fffaf5',
+  alignItems: 'center',
+  justifyContent: 'center',
+},
+beatPillHot: {
+  borderColor: '#e4ad84',
+  backgroundColor: '#fff0e5',
+},
+beatPillTap: {
+  borderColor: C.lava,
+  backgroundColor: '#ffe1d4',
+},
+beatText: {
+  fontSize: 11,
+  lineHeight: 14,
+  color: '#b07a52',
+  fontWeight: '700',
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+},
+beatTextHot: {
+  color: '#c56f3b',
+  fontWeight: '900',
+},
+beatTextTap: {
+  color: C.lava,
 },
 sourceBlockSoft: {
   backgroundColor: '#fffaf7',
@@ -4421,9 +5850,32 @@ exampleZh: {
   marginTop: 2,
 },
   scroll: { padding: 16 },
-  theoryCard: { backgroundColor: C.dark2, borderRadius: 14, padding: 16, marginBottom: 20 },
-  theoryTitle: { fontSize: 12, fontWeight: '700', color: '#9090c0', marginBottom: 8 },
-  theoryTxt: { fontSize: 12, color: '#5a5a7a', lineHeight: 19 },
+  theoryCard: {
+    backgroundColor: '#FDFAF6',
+    borderRadius: 14,
+    padding: 16,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#eee7df',
+  },
+  theoryTitle: { fontSize: 12, fontWeight: '700', color: '#a86b44', marginBottom: 8 },
+  theoryTxt: { fontSize: 12, color: '#5a5048', lineHeight: 19 },
+  yoonGroupBlock: {
+  marginTop: 4,
+  marginBottom: 8,
+},
+  yoonGroupLbl: {
+  alignSelf: 'flex-start',
+  fontSize: 13,
+  fontWeight: '800',
+  color: C.ink,
+  marginBottom: 12,
+  paddingHorizontal: 9,
+  paddingVertical: 4,
+  borderRadius: 999,
+  backgroundColor: '#f6f3ec',
+  overflow: 'hidden',
+},
   rowBlock: { marginBottom: 18 },
   rowLbl: {
   alignSelf: 'flex-start',
@@ -4438,6 +5890,11 @@ exampleZh: {
   backgroundColor: '#f6f3ec',
 },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  yoonGrid: {
+  width: '100%',
+  justifyContent: 'space-between',
+  gap: 0,
+},
   charCard: {
   width: (SW - 64) / 5,
   minHeight: 78,
@@ -4448,6 +5905,9 @@ exampleZh: {
   justifyContent: 'center',
   borderWidth: 1.5,
   borderColor: C.border,
+},
+  yoonCharCard: {
+  width: (SW - 64) / 3,
 },
   charCardSel: {
   borderColor: C.lava,
@@ -4472,6 +5932,9 @@ charCardGhost: {
   borderWidth: 1,
   borderColor: '#eee7dc',
   opacity: 0.55,
+},
+yoonCharCardGhost: {
+  width: (SW - 64) / 3,
 },
   roma: {
   fontSize: 10,
@@ -4508,9 +5971,13 @@ memoryBox: {
   marginTop: 10,
   padding: 10,
   borderRadius: 18,
-  backgroundColor: '#f8f7fc',
+  backgroundColor: '#FDFAF6',
   borderWidth: 1,
-  borderColor: '#ece8f6',
+  borderColor: '#eee7df',
+  shadowColor: '#6b4a2f',
+  shadowOpacity: 0.06,
+  shadowRadius: 10,
+  shadowOffset: { width: 0, height: 3 },
 },
 
 memoryTxt: {
@@ -4551,42 +6018,131 @@ function NaTab({ mapPlaces: initialPlaces }) {
   const [typeF, setTypeF] = useState('all');
   const [statusF, setStatusF] = useState('all');
   const [sel, setSel] = useState(null);
-  const [places, setPlaces] = useState(initialPlaces.map(p => ({ ...p, photo: null })));
+  const [places, setPlaces] = useState(initialPlaces.map(p => ({ ...p, status: 'wish' })));
+  const [visitedIds, setVisitedIds] = useState([]);
+  const [photoUris, setPhotoUris] = useState({});
   const { speak, speakingKey } = useSpeech();
 
   const shown = places.filter(
     p => (typeF === 'all' || p.type === typeF) && (statusF === 'all' || p.status === statusF)
   );
-  const been = places.filter(p => p.status === 'been').length;
-  const wish = places.filter(p => p.status === 'wish').length;
+  const been = visitedIds.length;
+  const wish = places.length - been;
+  const typeFilters = [
+    { id: 'all', label: '全部', widthStyle: ms.fBtnShort },
+    { id: 'snow', label: '雪山', widthStyle: ms.fBtnShort },
+    { id: 'volcano', label: '火山', widthStyle: ms.fBtnShort },
+    { id: 'water', label: '山河湖海', widthStyle: ms.fBtnLong },
+    { id: 'cafe', label: '咖啡馆', widthStyle: ms.fBtnMedium },
+  ];
+  const statusFilters = [
+    { id: 'all', label: '全部状态', widthStyle: ms.fBtnState },
+    { id: 'been', label: '去过', widthStyle: ms.fBtnShort },
+    { id: 'wish', label: '想去', widthStyle: ms.fBtnShort },
+  ];
+  useEffect(() => {
+    const visitedSet = new Set(visitedIds);
+    setPlaces(initialPlaces.map(place => ({
+      ...place,
+      status: visitedSet.has(place.id) ? 'been' : 'wish',
+    })));
+  }, [initialPlaces, visitedIds]);
+
+  useEffect(() => {
+    let alive = true;
+    const loadVisitedIds = async () => {
+      try {
+        await AsyncStorage.setItem(WORLD_META_KEY, JSON.stringify({ storageVersion: 1 }));
+        const raw = await AsyncStorage.getItem(WORLD_VISITED_IDS_KEY);
+        if (!alive || !raw) return;
+        const saved = JSON.parse(raw);
+        if (Array.isArray(saved)) {
+          const validPlaceIds = new Set(initialPlaces.map(place => place.id));
+          const nextVisitedIds = saved.filter(id => typeof id === 'string' && validPlaceIds.has(id));
+          setVisitedIds(nextVisitedIds);
+        }
+      } catch (e) {
+        console.warn('[WorldFootprints] Failed to load visited places', e);
+      }
+    };
+    loadVisitedIds();
+    return () => {
+      alive = false;
+    };
+  }, [initialPlaces]);
+
+  useEffect(() => {
+    let alive = true;
+    const loadPhotoUris = async () => {
+      try {
+        const raw = await AsyncStorage.getItem(WORLD_FOOTPRINT_PHOTOS_KEY);
+        if (!alive || !raw) return;
+        const saved = JSON.parse(raw);
+        if (saved && typeof saved === 'object' && !Array.isArray(saved)) {
+          setPhotoUris(saved);
+        }
+      } catch (e) {
+        console.warn('[WorldFootprints] Failed to load photos', e);
+      }
+    };
+    loadPhotoUris();
+    return () => {
+      alive = false;
+    };
+  }, []);
+
 useEffect(() => {
-  if (shown.length === 0) {
+  if (sel && !shown.some(p => p.id === sel.id)) {
     setSel(null);
-    return;
   }
+}, [typeF, statusF, places, sel]);
+  const togglePlaceStatus = (placeId) => {
+    setVisitedIds(prev => {
+      const next = prev.includes(placeId)
+        ? prev.filter(id => id !== placeId)
+        : [...prev, placeId];
+      AsyncStorage.setItem(WORLD_VISITED_IDS_KEY, JSON.stringify(next)).catch(e => {
+        console.warn('[WorldFootprints] Failed to save visited places', e);
+      });
+      AsyncStorage.setItem(WORLD_META_KEY, JSON.stringify({ storageVersion: 1 })).catch(e => {
+        console.warn('[WorldFootprints] Failed to save storage meta', e);
+      });
+      return next;
+    });
+  };
 
-  const stillVisible = sel && shown.some(p => p.id === sel.id);
-
-  if (!stillVisible) {
-    setSel(shown[0]);
-  }
-}, [typeF, statusF, places]);
   const pickPhoto = async (placeId) => {
     const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!perm.granted) return;
+    if (!perm.granted) {
+      Alert.alert(
+        '无法访问照片',
+        '你可以在系统设置中允许“言”访问照片后，再上传打卡照片。',
+        [{ text: '知道了' }]
+      );
+      return;
+    }
 
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 0.7,
-      allowsEditing: true,
-      aspect: [4, 3],
     });
 
-    if (!result.canceled && result.assets[0]) {
-      setPlaces(prev =>
-        prev.map(p => (p.id === placeId ? { ...p, photo: result.assets[0].uri } : p))
-      );
+    if (!result.canceled && result.assets?.[0]?.uri) {
+      const photoUri = result.assets[0].uri;
+      setPhotoUris(prev => {
+        const next = { ...prev, [placeId]: photoUri };
+        AsyncStorage.setItem(WORLD_FOOTPRINT_PHOTOS_KEY, JSON.stringify(next)).catch(e => {
+          console.warn('[WorldFootprints] Failed to save photo', e);
+        });
+        return next;
+      });
     }
+  };
+  const showCustomPlaceNotice = () => {
+    Alert.alert(
+      '自定义地点即将开放',
+      '这一版可以先从推荐地点里标记想去或去过。',
+      [{ text: '知道了' }]
+    );
   };
 
   return (
@@ -4611,71 +6167,51 @@ useEffect(() => {
           </View>
         </View>
       </View>
-      <ScrollView
+      <View style={ms.filterSection}>
+        <ScrollView
   horizontal
   showsHorizontalScrollIndicator={false}
+  style={ms.filterScroll}
   contentContainerStyle={ms.filterRow}
 >
-  <TouchableOpacity
-    style={[ms.fBtn, typeF === 'all' && ms.fBtnAct]}
-    onPress={() => setTypeF('all')}
-  >
-    <Text style={[ms.fTxt, typeF === 'all' && ms.fTxtAct]}>全部</Text>
-  </TouchableOpacity>
-
-  <TouchableOpacity
-    style={[ms.fBtn, typeF === 'mountain' && ms.fBtnAct]}
-    onPress={() => setTypeF('mountain')}
-  >
-    <Text style={[ms.fTxt, typeF === 'mountain' && ms.fTxtAct]}>雪山</Text>
-  </TouchableOpacity>
-
-  <TouchableOpacity
-    style={[ms.fBtn, typeF === 'volcano' && ms.fBtnAct]}
-    onPress={() => setTypeF('volcano')}
-  >
-    <Text style={[ms.fTxt, typeF === 'volcano' && ms.fTxtAct]}>火山</Text>
-  </TouchableOpacity>
-
-  <TouchableOpacity
-    style={[ms.fBtn, typeF === 'water' && ms.fBtnAct]}
-    onPress={() => setTypeF('water')}
-  >
-    <Text style={[ms.fTxt, typeF === 'water' && ms.fTxtAct]}>山河湖海</Text>
-  </TouchableOpacity>
-
-  <TouchableOpacity
-    style={[ms.fBtn, typeF === 'cafe' && ms.fBtnAct]}
-    onPress={() => setTypeF('cafe')}
-  >
-    <Text style={[ms.fTxt, typeF === 'cafe' && ms.fTxtAct]}>咖啡馆</Text>
-  </TouchableOpacity>
+  {typeFilters.map(filter => (
+    <TouchableOpacity
+      key={`type-${filter.id}`}
+      style={[ms.fBtn, filter.widthStyle, typeF === filter.id && ms.fBtnAct]}
+      onPress={() => setTypeF(prev => (prev === filter.id ? prev : filter.id))}
+      activeOpacity={1}
+    >
+      <Text style={[ms.fTxt, typeF === filter.id && ms.fTxtAct]} numberOfLines={1}>
+        {filter.label}
+      </Text>
+    </TouchableOpacity>
+  ))}
 
   <View style={ms.fDiv} />
 
-  <TouchableOpacity
-    style={[ms.fBtn, statusF === 'all' && ms.fBtnAct]}
-    onPress={() => setStatusF('all')}
-  >
-    <Text style={[ms.fTxt, statusF === 'all' && ms.fTxtAct]}>全部状态</Text>
-  </TouchableOpacity>
-
-  <TouchableOpacity
-    style={[ms.fBtn, statusF === 'been' && ms.fBtnAct]}
-    onPress={() => setStatusF('been')}
-  >
-    <Text style={[ms.fTxt, statusF === 'been' && ms.fTxtAct]}>去过</Text>
-  </TouchableOpacity>
-
-  <TouchableOpacity
-    style={[ms.fBtn, statusF === 'wish' && ms.fBtnAct]}
-    onPress={() => setStatusF('wish')}
-  >
-    <Text style={[ms.fTxt, statusF === 'wish' && ms.fTxtAct]}>想去</Text>
-  </TouchableOpacity>
+  {statusFilters.map(filter => (
+    <TouchableOpacity
+      key={`status-${filter.id}`}
+      style={[ms.fBtn, filter.widthStyle, statusF === filter.id && ms.fBtnAct]}
+      onPress={() => setStatusF(prev => (prev === filter.id ? prev : filter.id))}
+      activeOpacity={1}
+    >
+      <Text style={[ms.fTxt, statusF === filter.id && ms.fTxtAct]} numberOfLines={1}>
+        {filter.label}
+      </Text>
+    </TouchableOpacity>
+  ))}
 </ScrollView>
+      </View>
 
       <ScrollView contentContainerStyle={ms.list} showsVerticalScrollIndicator={false}>
+        {shown.length === 0 && (
+          <View style={ms.emptyState}>
+            <Text style={ms.emptyTitle}>还没有去过的地方</Text>
+            <Text style={ms.emptySub}>添加你的第一段足迹，慢慢把世界点亮。</Text>
+          </View>
+        )}
+
         {shown.map(place => (
   <TouchableOpacity
     key={place.id}
@@ -4692,18 +6228,25 @@ useEffect(() => {
         <Text style={ms.cardLoc}>{place.loc}</Text>
       </View>
 
-      <View style={[ms.sTag, place.status === 'been' ? ms.tagBeen : ms.tagWish]}>
+      <TouchableOpacity
+        style={[ms.sTag, place.status === 'been' ? ms.tagBeen : ms.tagWish]}
+        onPress={(event) => {
+          event.stopPropagation();
+          togglePlaceStatus(place.id);
+        }}
+        activeOpacity={0.8}
+      >
         <Text style={[ms.sTxt, place.status === 'been' ? ms.tagBeenTxt : ms.tagWishTxt]}>
           {place.status === 'been' ? '✓ 去过' : '🔖 想去'}
         </Text>
-      </View>
+      </TouchableOpacity>
     </View>
 
    {sel?.id === place.id && (
       <View style={ms.detail}>
-        {place.photo ? (
+        {photoUris[place.id] ? (
           <View style={ms.photoWrap}>
-            <Image source={{ uri: place.photo }} style={ms.photo} resizeMode="cover" />
+            <Image source={{ uri: photoUris[place.id] }} style={ms.photo} resizeMode="cover" />
             <TouchableOpacity style={ms.photoEdit} onPress={() => pickPhoto(place.id)}>
               <Text style={ms.photoEditTxt}>换图 ✎</Text>
             </TouchableOpacity>
@@ -4734,7 +6277,7 @@ useEffect(() => {
   </TouchableOpacity>
 ))}
 
-        <TouchableOpacity style={ms.addCard}>
+        <TouchableOpacity style={ms.addCard} onPress={showCustomPlaceNotice} activeOpacity={0.82}>
           <Text style={{ fontSize: 20, color: C.mutedLight }}>＋</Text>
           <Text style={ms.addTxt}>添加去过的地方</Text>
         </TouchableOpacity>
@@ -4758,13 +6301,22 @@ const ms = StyleSheet.create({
   statN: { fontSize: 18, fontWeight: '700', color: C.ink },
   statL: { fontSize: 9, color: C.muted, marginTop: 1 },
   statDiv: { width: 1, height: 20, backgroundColor: C.border },
-  filterRow: { paddingHorizontal: 14, paddingVertical: 10, gap: 7, borderBottomWidth: 1, borderBottomColor: C.border },
-  fBtn: { paddingHorizontal: 12, paddingVertical: 6, borderRadius: 16, borderWidth: 1.5, borderColor: C.border, backgroundColor: C.white },
+  filterSection: { height: 59, borderBottomWidth: 1, borderBottomColor: C.border, justifyContent: 'center' },
+  filterScroll: { height: 58 },
+  filterRow: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 14, paddingVertical: 10 },
+  fBtn: { height: 38, paddingHorizontal: 18, borderRadius: 19, borderWidth: 1, borderColor: C.border, backgroundColor: C.white, alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginRight: 10 },
+  fBtnShort: { width: 72 },
+  fBtnMedium: { width: 84 },
+  fBtnLong: { width: 104 },
+  fBtnState: { width: 106 },
   fBtnAct: { backgroundColor: C.lava, borderColor: C.lava },
-  fTxt: { fontSize: 11, color: C.muted, fontWeight: '600' },
+  fTxt: { fontSize: 11, color: C.muted, fontWeight: '600', textAlign: 'center' },
   fTxtAct: { color: C.white },
-  fDiv: { width: 1, backgroundColor: C.border, marginHorizontal: 2 },
+  fDiv: { width: 1, height: 24, backgroundColor: C.border, marginRight: 10 },
   list: { padding: 14, gap: 12 },
+  emptyState: { paddingTop: 36, paddingBottom: 22, paddingHorizontal: 18, alignItems: 'center' },
+  emptyTitle: { fontSize: 15, fontWeight: '700', color: C.ink, textAlign: 'center' },
+  emptySub: { fontSize: 12, color: C.muted, lineHeight: 18, marginTop: 6, textAlign: 'center' },
   card: { backgroundColor: C.white, borderRadius: 16, borderWidth: 1.5, borderColor: C.border, overflow: 'hidden' },
   cardSel: { borderColor: C.lava },
   cardHd: { flexDirection: 'row', alignItems: 'center', gap: 10, padding: 15 },

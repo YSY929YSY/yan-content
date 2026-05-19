@@ -3496,7 +3496,7 @@
     {
       "id": "mihara",
       "type": "volcano",
-      "status": "been",
+      "status": "wish",
       "name": "三原山",
       "loc": "东京都大岛町",
       "emoji": "🌋",
@@ -3508,7 +3508,7 @@
     {
       "id": "fuji",
       "type": "volcano",
-      "status": "been",
+      "status": "wish",
       "name": "富士山",
       "loc": "静冈县",
       "emoji": "🗻",
@@ -3520,7 +3520,7 @@
     {
       "id": "owakudani",
       "type": "volcano",
-      "status": "been",
+      "status": "wish",
       "name": "大涌谷",
       "loc": "箱根，神奈川",
       "emoji": "♨️",
@@ -3578,6 +3578,42 @@
       "note": "非洲最高峰，赤道上的雪山。无需专业技术，徒步7天可登顶。"
     },
     {
+      "id": "matterhorn",
+      "type": "snow",
+      "status": "wish",
+      "name": "马特洪峰",
+      "loc": "瑞士采尔马特",
+      "emoji": "🏔",
+      "jp": "写真を撮ってもいいですか？",
+      "zh": "可以拍照吗？",
+      "lang": "ja-JP",
+      "note": "瑞士明信片一样的山峰，适合坐缆车远眺。"
+    },
+    {
+      "id": "alps",
+      "type": "snow",
+      "status": "wish",
+      "name": "阿尔卑斯山",
+      "loc": "欧洲",
+      "emoji": "🏔",
+      "jp": "ここに行きたいです。",
+      "zh": "我想去这里。",
+      "lang": "ja-JP",
+      "note": "横跨多国的雪山地带，火车和徒步路线都很经典。"
+    },
+    {
+      "id": "tateyama",
+      "type": "snow",
+      "status": "wish",
+      "name": "立山黑部",
+      "loc": "日本富山县",
+      "emoji": "🏔",
+      "jp": "駅まで行きたいです。",
+      "zh": "我想去车站。",
+      "lang": "ja-JP",
+      "note": "春天有雪之大谷，夏秋适合穿越高山路线。"
+    },
+    {
       "id": "baikal",
       "type": "water",
       "status": "wish",
@@ -3602,9 +3638,45 @@
       "note": "世界最大热带雨林，占全球氧气生产的20%。"
     },
     {
+      "id": "black_sand_beach",
+      "type": "water",
+      "status": "wish",
+      "name": "黑沙滩",
+      "loc": "冰岛维克",
+      "emoji": "🌊",
+      "jp": "ここはどこですか？",
+      "zh": "这里是哪里？",
+      "lang": "ja-JP",
+      "note": "黑色火山沙和海浪形成强烈对比，拍照很有记忆点。"
+    },
+    {
+      "id": "blue_lagoon",
+      "type": "water",
+      "status": "wish",
+      "name": "蓝湖",
+      "loc": "冰岛",
+      "emoji": "💧",
+      "jp": "チケットはありますか？",
+      "zh": "有门票吗？",
+      "lang": "ja-JP",
+      "note": "乳蓝色温泉是冰岛最容易识别的旅行地之一。"
+    },
+    {
+      "id": "kamakura_coast",
+      "type": "water",
+      "status": "wish",
+      "name": "镰仓海岸",
+      "loc": "神奈川县",
+      "emoji": "🌊",
+      "jp": "海まで行きたいです。",
+      "zh": "我想去海边。",
+      "lang": "ja-JP",
+      "note": "江之电、海岸线和富士山远景，是东京近郊经典一日游。"
+    },
+    {
       "id": "cafe_kyoto",
       "type": "cafe",
-      "status": "been",
+      "status": "wish",
       "name": "京都町家咖啡",
       "loc": "京都市",
       "emoji": "☕",
@@ -3624,6 +3696,42 @@
       "zh": "我可以参观庄园吗？",
       "lang": "es-ES",
       "note": "可以在种植庄园喝到当天采摘的咖啡。"
+    },
+    {
+      "id": "cafe_chiangmai",
+      "type": "cafe",
+      "status": "wish",
+      "name": "清迈咖啡馆",
+      "loc": "泰国清迈",
+      "emoji": "☕",
+      "jp": "アイスコーヒーをください。",
+      "zh": "请给我一杯冰咖啡。",
+      "lang": "ja-JP",
+      "note": "清迈老城和山边有很多适合慢坐的咖啡馆。"
+    },
+    {
+      "id": "cafe_yeonnam",
+      "type": "cafe",
+      "status": "wish",
+      "name": "首尔延南洞咖啡",
+      "loc": "韩国首尔",
+      "emoji": "☕",
+      "jp": "席はありますか？",
+      "zh": "有座位吗？",
+      "lang": "ja-JP",
+      "note": "延南洞小巷里有很多独立咖啡馆，适合边走边找。"
+    },
+    {
+      "id": "cafe_paris_left_bank",
+      "type": "cafe",
+      "status": "wish",
+      "name": "巴黎左岸咖啡馆",
+      "loc": "法国巴黎",
+      "emoji": "☕",
+      "jp": "コーヒーをください。",
+      "zh": "请给我一杯咖啡。",
+      "lang": "ja-JP",
+      "note": "塞纳河左岸的咖啡馆适合把巴黎慢慢坐下来。"
     }
   ],
   "kanaRows": [
@@ -8960,6 +9068,838 @@
             {
               "lang": "ZH",
               "word": "ryo"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "specialRows": [
+    {
+      "row": "特殊音",
+      "rowKata": "特殊音",
+      "chars": [
+        {
+          "kana": "っ",
+          "pair": "ッ",
+          "roma": "sokuon",
+          "source": "小さい つ",
+          "pairSource": "小さい ツ",
+          "anchor": "把 つ 缩小，就变成促音 っ",
+          "pairAnchor": "把 ツ 缩小，就变成促音 ッ",
+          "hint": "小っ本身不读完整 tsu，而是让后面的辅音停顿、加倍。听起来像中间“卡”了一下。",
+          "compareTitle": "听见「卡住」的一拍",
+          "pairCompareTitle": "听见片假名里的「卡住」一拍",
+          "strokeKey": "small-tsu-hira",
+          "pairStrokeKey": "small-tsu-kata",
+          "compareExamples": [
+            {
+              "left": {
+                "word": "きて",
+                "roma": "ki-te",
+                "zh": "来；请来"
+              },
+              "right": {
+                "word": "きって",
+                "roma": "kit-te",
+                "zh": "邮票"
+              }
+            },
+            {
+              "left": {
+                "word": "かた",
+                "roma": "ka-ta",
+                "zh": "肩；型"
+              },
+              "right": {
+                "word": "かった",
+                "roma": "kat-ta",
+                "zh": "赢了；买了"
+              }
+            },
+            {
+              "left": {
+                "word": "いた",
+                "roma": "i-ta",
+                "zh": "在；曾经在"
+              },
+              "right": {
+                "word": "いった",
+                "roma": "it-ta",
+                "zh": "去了；说了"
+              }
+            }
+          ],
+          "pairCompareExamples": [],
+          "examples": [
+            {
+              "word": "がっこう",
+              "reading": "がっこう",
+              "kanji": "学校",
+              "zh": "学校"
+            },
+            {
+              "word": "ざっし",
+              "reading": "ざっし",
+              "kanji": "雑誌",
+              "zh": "杂志"
+            },
+            {
+              "word": "きっぷ",
+              "reading": "きっぷ",
+              "kanji": "切符",
+              "zh": "车票"
+            },
+            {
+              "word": "もっと",
+              "reading": "もっと",
+              "zh": "更多；再一点"
+            },
+            {
+              "word": "ちょっと",
+              "reading": "ちょっと",
+              "zh": "稍微；一下子"
+            },
+            {
+              "word": "ゆっくり",
+              "reading": "ゆっくり",
+              "zh": "慢慢地"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "ベッド",
+              "reading": "ベッド",
+              "kanji": "bed",
+              "zh": "床"
+            },
+            {
+              "word": "カップ",
+              "reading": "カップ",
+              "kanji": "cup",
+              "zh": "杯子"
+            },
+            {
+              "word": "バッグ",
+              "reading": "バッグ",
+              "kanji": "bag",
+              "zh": "包"
+            },
+            {
+              "word": "チケット",
+              "reading": "チケット",
+              "kanji": "ticket",
+              "zh": "票；券"
+            },
+            {
+              "word": "セット",
+              "reading": "セット",
+              "kanji": "set",
+              "zh": "套装；套餐"
+            },
+            {
+              "word": "スタッフ",
+              "reading": "スタッフ",
+              "kanji": "staff",
+              "zh": "工作人员"
+            }
+          ]
+        },
+        {
+          "kana": "ー",
+          "pair": "ー",
+          "roma": "long",
+          "source": "長音",
+          "pairSource": "長音符号 ー",
+          "anchor": "把前一个元音拉长一拍",
+          "pairAnchor": "用 ー 把前一个音拉长一拍",
+          "hint": "平假名里的长音没有统一符号。\n常靠后面的 あ / い / う 拉长前一个元音。\n有些规则很直觉，有些规则反而容易误读。",
+          "pairHint": "ー 本身不单独发音。\n片假名里常用 ー 表示长音。\n看到 ー，就把前面的音拖长一拍。",
+          "ruleSections": [
+            {
+              "title": "直觉规则",
+              "desc": "看到相同元音靠在一起，通常就是多读一拍。",
+              "items": [
+                {
+                  "pattern": "あ + あ → ā",
+                  "example": "おばあさん",
+                  "note": "ba + a → baa"
+                },
+                {
+                  "pattern": "い + い → ī",
+                  "example": "おにいさん",
+                  "note": "ni + i → nii"
+                },
+                {
+                  "pattern": "う + う → ū",
+                  "example": "くうこう",
+                  "note": "ku + u → kuu"
+                }
+              ]
+            },
+            {
+              "title": "注意规则",
+              "desc": "写法看起来像两个音，听起来却常接近一个长音。",
+              "items": [
+                {
+                  "pattern": "え + い → ē",
+                  "example": "せんせい",
+                  "note": "se + i → sē"
+                },
+                {
+                  "pattern": "お + う → ō",
+                  "example": "こうこう / とうきょう",
+                  "note": "ko + u → kō"
+                }
+              ]
+            }
+          ],
+          "pairRuleSections": [
+            {
+              "title": "片假名 ー",
+              "desc": "规则很直接：ー 前面的音，多读一拍。",
+              "items": [
+                {
+                  "pattern": "ビ + ー → ビー",
+                  "example": "ビール",
+                  "note": "bi + ー → bii"
+                },
+                {
+                  "pattern": "コ + ー → コー",
+                  "example": "コーヒー",
+                  "note": "ko + ー → koo"
+                },
+                {
+                  "pattern": "ケ + ー → ケー",
+                  "example": "ケーキ",
+                  "note": "ke + ー → kee"
+                },
+                {
+                  "pattern": "タ + ー → ター",
+                  "example": "タクシー",
+                  "note": "ta + ー → taa"
+                }
+              ]
+            }
+          ],
+          "compareTitle": "多出来的一拍，意思会变",
+          "pairCompareTitle": "ー 多一拍，意思就变",
+          "strokeKey": "long-vowel",
+          "pairStrokeKey": "long-vowel",
+          "compareExamples": [
+            {
+              "type": "直觉规则",
+              "left": {
+                "word": "おばさん",
+                "roma": "o-ba-san",
+                "zh": "阿姨；伯母",
+                "beats": "♩ ♩ ♩ ♩"
+              },
+              "right": {
+                "word": "おばあさん",
+                "roma": "o-baa-san",
+                "zh": "奶奶；老奶奶",
+                "beats": "♩ ♩ ♩ ♩ ♩",
+                "highlightBeats": [
+                  3
+                ]
+              },
+              "note": "ば + あ → baa，多出来的这一拍就是长音。"
+            },
+            {
+              "type": "注意规则",
+              "left": {
+                "word": "ここ",
+                "roma": "ko-ko",
+                "zh": "这里",
+                "beats": "♩ ♩"
+              },
+              "right": {
+                "word": "こうこう",
+                "roma": "koo-koo",
+                "zh": "高校；高中",
+                "beats": "♩ ♩ ♩ ♩",
+                "highlightBeats": [
+                  2,
+                  4
+                ]
+              },
+              "note": "こ + う → kō，不是简单拆成 ko-u。"
+            }
+          ],
+          "pairCompareExamples": [
+            {
+              "type": "片假名 ー",
+              "left": {
+                "word": "ビル",
+                "roma": "bi-ru",
+                "zh": "大楼",
+                "beats": "♩ ♩"
+              },
+              "right": {
+                "word": "ビール",
+                "roma": "bii-ru",
+                "zh": "beer・啤酒",
+                "beats": "♩ ♩ ♩",
+                "highlightBeats": [
+                  2
+                ]
+              },
+              "note": "ビ + ー → bii"
+            }
+          ],
+          "lifeExamples": [
+            {
+              "word": "おとうさん",
+              "reading": "おとうさん",
+              "kanji": "お父さん",
+              "zh": "爸爸"
+            },
+            {
+              "word": "おかあさん",
+              "reading": "おかあさん",
+              "kanji": "お母さん",
+              "zh": "妈妈"
+            },
+            {
+              "word": "こうえん",
+              "reading": "こうえん",
+              "kanji": "公園",
+              "zh": "公园"
+            }
+          ],
+          "examples": [
+            {
+              "word": "おとうさん",
+              "reading": "おとうさん",
+              "kanji": "お父さん",
+              "zh": "爸爸"
+            },
+            {
+              "word": "おかあさん",
+              "reading": "おかあさん",
+              "kanji": "お母さん",
+              "zh": "妈妈"
+            },
+            {
+              "word": "こうえん",
+              "reading": "こうえん",
+              "kanji": "公園",
+              "zh": "公园"
+            }
+          ],
+          "pairLifeExamples": [
+            {
+              "word": "スーパー",
+              "reading": "スーパー",
+              "kanji": "supermarket",
+              "zh": "超市"
+            },
+            {
+              "word": "メール",
+              "reading": "メール",
+              "kanji": "mail",
+              "zh": "邮件"
+            },
+            {
+              "word": "ホテル",
+              "reading": "ホテル",
+              "kanji": "hotel",
+              "zh": "酒店"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "スーパー",
+              "reading": "スーパー",
+              "kanji": "supermarket",
+              "zh": "超市"
+            },
+            {
+              "word": "メール",
+              "reading": "メール",
+              "kanji": "mail",
+              "zh": "邮件"
+            },
+            {
+              "word": "ホテル",
+              "reading": "ホテル",
+              "kanji": "hotel",
+              "zh": "酒店"
+            }
+          ]
+        },
+        {
+          "kana": "ん",
+          "pair": "ン",
+          "roma": "n",
+          "source": "撥音",
+          "pairSource": "撥音",
+          "anchor": "ん 也要占一拍",
+          "pairAnchor": "ン 也要占一拍",
+          "hint": "ん 不是轻轻带过的尾音，而是单独占一拍。",
+          "pairHint": "ン 不是轻轻带过的尾音，而是单独占一拍。",
+          "compareTitle": "听见不能漏掉的一拍",
+          "compareExamples": [],
+          "pairCompareTitle": "听见片假名里的拨音",
+          "pairCompareExamples": [],
+          "rhythmTitle": "把 ん 听成一拍",
+          "rhythmExamples": [
+            {
+              "word": "ほん",
+              "split": "ほ・ん",
+              "beats": "♩ ♩",
+              "highlightBeats": [
+                2
+              ],
+              "zh": "本・书"
+            },
+            {
+              "word": "さんぽ",
+              "split": "さ・ん・ぽ",
+              "beats": "♩ ♩ ♩",
+              "highlightBeats": [
+                2
+              ],
+              "zh": "散歩・散步"
+            },
+            {
+              "word": "でんしゃ",
+              "split": "で・ん・しゃ",
+              "beats": "♩ ♩ ♩",
+              "highlightBeats": [
+                2
+              ],
+              "zh": "電車・电车"
+            },
+            {
+              "word": "しんかんせん",
+              "split": "し・ん・か・ん・せ・ん",
+              "beats": "♩ ♩ ♩ ♩ ♩ ♩",
+              "highlightBeats": [
+                2,
+                4,
+                6
+              ],
+              "zh": "新幹線・新干线"
+            }
+          ],
+          "pairRhythmTitle": "把 ン 听成一拍",
+          "pairRhythmExamples": [
+            {
+              "word": "パン",
+              "split": "パ・ン",
+              "beats": "♩ ♩",
+              "highlightBeats": [
+                2
+              ],
+              "zh": "pão・面包"
+            },
+            {
+              "word": "コンビニ",
+              "split": "コ・ン・ビ・ニ",
+              "beats": "♩ ♩ ♩ ♩",
+              "highlightBeats": [
+                2
+              ],
+              "zh": "convenience store・便利店"
+            },
+            {
+              "word": "レストラン",
+              "split": "レ・ス・ト・ラ・ン",
+              "beats": "♩ ♩ ♩ ♩ ♩",
+              "highlightBeats": [
+                5
+              ],
+              "zh": "restaurant・餐厅"
+            },
+            {
+              "word": "コンセント",
+              "split": "コ・ン・セ・ン・ト",
+              "beats": "♩ ♩ ♩ ♩ ♩",
+              "highlightBeats": [
+                2,
+                4
+              ],
+              "zh": "consent・插座"
+            }
+          ],
+          "examples": [
+            {
+              "word": "べんり",
+              "reading": "べんり",
+              "kanji": "便利",
+              "zh": "方便"
+            },
+            {
+              "word": "じかん",
+              "reading": "じかん",
+              "kanji": "時間",
+              "zh": "时间"
+            },
+            {
+              "word": "にほん",
+              "reading": "にほん",
+              "kanji": "日本",
+              "zh": "日本"
+            },
+            {
+              "word": "えきいん",
+              "reading": "えきいん",
+              "kanji": "駅員",
+              "zh": "车站工作人员"
+            }
+          ],
+          "pairExamples": [
+            {
+              "word": "エンジン",
+              "reading": "エンジン",
+              "kanji": "engine",
+              "zh": "发动机"
+            },
+            {
+              "word": "マンション",
+              "reading": "マンション",
+              "kanji": "mansion",
+              "zh": "公寓"
+            },
+            {
+              "word": "インフォメーション",
+              "reading": "インフォメーション",
+              "kanji": "information",
+              "zh": "信息；服务台"
+            },
+            {
+              "word": "センター",
+              "reading": "センター",
+              "kanji": "center",
+              "zh": "中心"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "loanwordRows": [
+    {
+      "row": "ファ行",
+      "label": "ファ / フィ / フェ / フォ",
+      "desc": "フ + 小ァィェォ",
+      "chars": [
+        {
+          "kana": "ファ",
+          "roma": "fa",
+          "source": "フ + ァ",
+          "anchor": "フ + ァ → ファ",
+          "hint": "フ 遇到小ァ，就更接近 fa 的外来语音。",
+          "rule": "小ァ不单独抢音，它帮助前面的フ改变读法。",
+          "examples": [
+            {
+              "word": "ファイル",
+              "reading": "ファイル",
+              "kanji": "file",
+              "zh": "文件"
+            },
+            {
+              "word": "ファミリー",
+              "reading": "ファミリー",
+              "kanji": "family",
+              "zh": "家庭"
+            }
+          ]
+        },
+        {
+          "kana": "フィ",
+          "roma": "fi",
+          "source": "フ + ィ",
+          "anchor": "フ + ィ → フィ",
+          "hint": "フ 遇到小ィ，就更接近 fi 的外来语音。",
+          "rule": "小ィ不单独读成一个完整的イ，而是参与组合。",
+          "examples": [
+            {
+              "word": "フィルム",
+              "reading": "フィルム",
+              "kanji": "film",
+              "zh": "胶片；薄膜"
+            },
+            {
+              "word": "フィット",
+              "reading": "フィット",
+              "kanji": "fit",
+              "zh": "合身；适合"
+            }
+          ]
+        },
+        {
+          "kana": "フェ",
+          "roma": "fe",
+          "source": "フ + ェ",
+          "anchor": "フ + ェ → フェ",
+          "hint": "フ 遇到小ェ，就更接近 fe 的外来语音。",
+          "rule": "小ェ让フ的读法更接近外来语里的 fe。",
+          "examples": [
+            {
+              "word": "カフェ",
+              "reading": "カフェ",
+              "kanji": "café",
+              "zh": "咖啡馆"
+            },
+            {
+              "word": "フェリー",
+              "reading": "フェリー",
+              "kanji": "ferry",
+              "zh": "渡轮"
+            }
+          ]
+        },
+        {
+          "kana": "フォ",
+          "roma": "fo",
+          "source": "フ + ォ",
+          "anchor": "フ + ォ → フォ",
+          "hint": "フ 遇到小ォ，就更接近 fo 的外来语音。",
+          "rule": "小ォ让フ的读法更接近外来语里的 fo。",
+          "examples": [
+            {
+              "word": "フォーク",
+              "reading": "フォーク",
+              "kanji": "fork",
+              "zh": "叉子"
+            },
+            {
+              "word": "フォーム",
+              "reading": "フォーム",
+              "kanji": "form",
+              "zh": "表格；形式"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "ティ・ディ",
+      "label": "ティ / ディ",
+      "desc": "テ・デ + 小ィ",
+      "chars": [
+        {
+          "kana": "ティ",
+          "roma": "ti",
+          "source": "テ + ィ",
+          "anchor": "テ + ィ → ティ",
+          "hint": "テ 遇到小ィ，就更接近 ti 的外来语音。",
+          "rule": "小ィ不单独读成完整的イ，而是帮助前面的テ改变读法。",
+          "examples": [
+            {
+              "word": "ティー",
+              "reading": "ティー",
+              "kanji": "tea",
+              "zh": "茶"
+            },
+            {
+              "word": "パーティー",
+              "reading": "パーティー",
+              "kanji": "party",
+              "zh": "派对；聚会"
+            },
+            {
+              "word": "ミーティング",
+              "reading": "ミーティング",
+              "kanji": "meeting",
+              "zh": "会议"
+            }
+          ]
+        },
+        {
+          "kana": "ディ",
+          "roma": "di",
+          "source": "デ + ィ",
+          "anchor": "デ + ィ → ディ",
+          "hint": "デ 遇到小ィ，就更接近 di 的外来语音。",
+          "rule": "小ィ让デ的读法更接近外来语里的 di。",
+          "examples": [
+            {
+              "word": "ディナー",
+              "reading": "ディナー",
+              "kanji": "dinner",
+              "zh": "晚餐"
+            },
+            {
+              "word": "ディスカウント",
+              "reading": "ディスカウント",
+              "kanji": "discount",
+              "zh": "折扣"
+            },
+            {
+              "word": "ディスプレイ",
+              "reading": "ディスプレイ",
+              "kanji": "display",
+              "zh": "显示屏；展示"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "チェ・ジェ",
+      "label": "チェ / ジェ",
+      "desc": "チ・ジ + 小ェ",
+      "chars": [
+        {
+          "kana": "チェ",
+          "roma": "che",
+          "source": "チ + ェ",
+          "anchor": "チ + ェ → チェ",
+          "hint": "チ 遇到小ェ，就更接近 che 的外来语音。",
+          "rule": "小ェ不单独读成完整的エ，而是帮助前面的チ改变读法。",
+          "examples": [
+            {
+              "word": "チェックイン",
+              "reading": "チェックイン",
+              "kanji": "check-in",
+              "zh": "办理入住；登机值机"
+            },
+            {
+              "word": "チェックアウト",
+              "reading": "チェックアウト",
+              "kanji": "check-out",
+              "zh": "退房；结账离店"
+            },
+            {
+              "word": "チェック",
+              "reading": "チェック",
+              "kanji": "check",
+              "zh": "确认；检查"
+            },
+            {
+              "word": "チェーン",
+              "reading": "チェーン",
+              "kanji": "chain",
+              "zh": "连锁；链条"
+            }
+          ]
+        },
+        {
+          "kana": "ジェ",
+          "roma": "je",
+          "source": "ジ + ェ",
+          "anchor": "ジ + ェ → ジェ",
+          "hint": "ジ 遇到小ェ，就更接近 je 的外来语音。",
+          "rule": "小ェ让ジ的读法更接近外来语里的 je。",
+          "examples": [
+            {
+              "word": "ジェラート",
+              "reading": "ジェラート",
+              "kanji": "gelato",
+              "zh": "意式冰淇淋"
+            },
+            {
+              "word": "ジェット",
+              "reading": "ジェット",
+              "kanji": "jet",
+              "zh": "喷气式飞机；喷射"
+            },
+            {
+              "word": "ジェル",
+              "reading": "ジェル",
+              "kanji": "gel",
+              "zh": "凝胶；啫喱"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row": "ウィ・ウェ・ウォ",
+      "label": "ウィ / ウェ / ウォ",
+      "desc": "ウ + 小ィェォ",
+      "chars": [
+        {
+          "kana": "ウィ",
+          "roma": "wi",
+          "source": "ウ + ィ",
+          "anchor": "ウ + ィ → ウィ",
+          "hint": "ウ 遇到小ィ，就更接近 wi 的外来语音。",
+          "rule": "小ィ不单独读成完整的イ，而是帮助前面的ウ改变读法。",
+          "examples": [
+            {
+              "word": "ウィンドウ",
+              "reading": "ウィンドウ",
+              "kanji": "window",
+              "zh": "窗口"
+            },
+            {
+              "word": "ウィーク",
+              "reading": "ウィーク",
+              "kanji": "week",
+              "zh": "周；星期"
+            },
+            {
+              "word": "ウィスキー",
+              "reading": "ウィスキー",
+              "kanji": "whisky",
+              "zh": "威士忌"
+            }
+          ]
+        },
+        {
+          "kana": "ウェ",
+          "roma": "we",
+          "source": "ウ + ェ",
+          "anchor": "ウ + ェ → ウェ",
+          "hint": "ウ 遇到小ェ，就更接近 we 的外来语音。",
+          "rule": "小ェ不单独读成完整的エ，而是帮助前面的ウ改变读法。",
+          "examples": [
+            {
+              "word": "ウェブ",
+              "reading": "ウェブ",
+              "kanji": "web",
+              "zh": "网络；网页"
+            },
+            {
+              "word": "ウェイター",
+              "reading": "ウェイター",
+              "kanji": "waiter",
+              "zh": "服务员"
+            },
+            {
+              "word": "ウェルカム",
+              "reading": "ウェルカム",
+              "kanji": "welcome",
+              "zh": "欢迎"
+            }
+          ]
+        },
+        {
+          "kana": "ウォ",
+          "roma": "wo",
+          "source": "ウ + ォ",
+          "anchor": "ウ + ォ → ウォ",
+          "hint": "ウ 遇到小ォ，就更接近 wo 的外来语音。",
+          "rule": "小ォ不单独读成完整的オ，而是帮助前面的ウ改变读法。",
+          "examples": [
+            {
+              "word": "ウォーター",
+              "reading": "ウォーター",
+              "kanji": "water",
+              "zh": "水"
+            },
+            {
+              "word": "ウォーク",
+              "reading": "ウォーク",
+              "kanji": "walk",
+              "zh": "步行；行走"
+            },
+            {
+              "word": "ウォレット",
+              "reading": "ウォレット",
+              "kanji": "wallet",
+              "zh": "钱包"
+            },
+            {
+              "word": "ウォッチ",
+              "reading": "ウォッチ",
+              "kanji": "watch",
+              "zh": "手表；观看"
             }
           ]
         }
