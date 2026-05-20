@@ -3624,6 +3624,195 @@
       "zh": "我可以参观庄园吗？",
       "lang": "es-ES",
       "note": "可以在种植庄园喝到当天采摘的咖啡。"
+    },
+    {
+      "id": "jungfrau",
+      "type": "snow",
+      "status": "wish",
+      "name": "少女峰",
+      "loc": "瑞士伯尔尼高地",
+      "emoji": "🏔",
+      "jp": "Wo ist der Zug zur Jungfrau?",
+      "zh": "去少女峰的火车在哪里？",
+      "lang": "de-DE",
+      "note": "搭齿轨火车上山，先学会问站台和方向。",
+      "memory": {
+        "version": 1,
+        "title": "在瑞士问去少女峰的火车",
+        "cardType": "place_phrase",
+        "language": {
+          "code": "de-DE",
+          "name": "德语",
+          "romanization": "Vo ist der tsuuk tsur Jungfrau?"
+        },
+        "phrase": {
+          "text": "Wo ist der Zug zur Jungfrau?",
+          "translation": "去少女峰的火车在哪里？",
+          "audioText": "Wo ist der Zug zur Jungfrau?",
+          "pattern": "Wo ist der Zug nach ○○?"
+        },
+        "context": {
+          "situation": "在火车站向工作人员确认列车方向",
+          "task": "问出去目的地的火车在哪里",
+          "note": "Wo ist ...? 是“……在哪里？”，适合问站台、出口和交通工具。"
+        },
+        "swap": {
+          "slot": "○○",
+          "items": [
+            {
+              "text": "Jungfrau",
+              "translation": "少女峰",
+              "audioText": "Jungfrau"
+            },
+            {
+              "text": "Interlaken",
+              "translation": "因特拉肯",
+              "audioText": "Interlaken"
+            },
+            {
+              "text": "Lauterbrunnen",
+              "translation": "劳特布伦嫩",
+              "audioText": "Lauterbrunnen"
+            }
+          ]
+        },
+        "review": {
+          "prompt": "在瑞士车站想问去少女峰的火车在哪里，怎么说？",
+          "answer": "Wo ist der Zug zur Jungfrau?",
+          "hint": "Wo ist ...? = ……在哪里？"
+        },
+        "footprint": {
+          "traceText": "我在瑞士用德语问到了去雪山的交通方向。",
+          "stampLabel": "已问路",
+          "memoryHook": "少女峰 + Wo ist der Zug?"
+        }
+      }
+    },
+    {
+      "id": "kamakura_coast",
+      "type": "water",
+      "status": "wish",
+      "name": "镰仓海岸",
+      "loc": "神奈川县镰仓市",
+      "emoji": "🌊",
+      "jp": "海まで歩けますか？",
+      "zh": "可以走到海边吗？",
+      "lang": "ja-JP",
+      "note": "电车、海风和步行路线，是问路句型的真实场景。",
+      "memory": {
+        "version": 1,
+        "title": "在镰仓海岸描述眼前的海",
+        "cardType": "place_phrase",
+        "language": {
+          "code": "ja-JP",
+          "name": "日语",
+          "romanization": "Umi ga kirei desu."
+        },
+        "phrase": {
+          "text": "海がきれいです。",
+          "translation": "海很漂亮。",
+          "audioText": "海がきれいです。",
+          "pattern": "○○がきれいです。"
+        },
+        "context": {
+          "situation": "站在海边描述眼前看到的风景",
+          "task": "用一句简单日语说出你看到的景色",
+          "note": "○○がきれいです 可以描述海、天空、夕阳和街景。"
+        },
+        "swap": {
+          "slot": "○○",
+          "items": [
+            {
+              "text": "海",
+              "translation": "海",
+              "audioText": "海"
+            },
+            {
+              "text": "空",
+              "translation": "天空",
+              "audioText": "空"
+            },
+            {
+              "text": "夕日",
+              "translation": "夕阳",
+              "audioText": "夕日"
+            }
+          ]
+        },
+        "review": {
+          "prompt": "在镰仓海岸想说“海很漂亮”，怎么说？",
+          "answer": "海がきれいです。",
+          "hint": "○○がきれいです = ○○很漂亮。"
+        },
+        "footprint": {
+          "traceText": "我在镰仓用日语描述了眼前的海。",
+          "stampLabel": "已描述",
+          "memoryHook": "镰仓海岸 + 海がきれいです。"
+        }
+      }
+    },
+    {
+      "id": "cafe_seoul_hanok",
+      "type": "cafe",
+      "status": "wish",
+      "name": "首尔韩屋咖啡",
+      "loc": "韩国首尔",
+      "emoji": "☕",
+      "jp": "커피 한 잔 주세요.",
+      "zh": "请给我一杯咖啡。",
+      "lang": "ko-KR",
+      "note": "在韩屋改造咖啡馆里，用一句点单完成打卡。",
+      "memory": {
+        "version": 1,
+        "title": "在首尔韩屋咖啡点一杯咖啡",
+        "cardType": "place_phrase",
+        "language": {
+          "code": "ko-KR",
+          "name": "韩语",
+          "romanization": "Keopi han jan juseyo."
+        },
+        "phrase": {
+          "text": "커피 한 잔 주세요.",
+          "translation": "请给我一杯咖啡。",
+          "audioText": "커피 한 잔 주세요.",
+          "pattern": "○○ 한 잔 주세요."
+        },
+        "context": {
+          "situation": "在咖啡馆向店员点饮品",
+          "task": "说出想喝的东西，并完成一次点单",
+          "note": "한 잔 是“一杯”，适合咖啡、茶、水等饮品。"
+        },
+        "swap": {
+          "slot": "○○",
+          "items": [
+            {
+              "text": "커피",
+              "translation": "咖啡",
+              "audioText": "커피"
+            },
+            {
+              "text": "물",
+              "translation": "水",
+              "audioText": "물"
+            },
+            {
+              "text": "차",
+              "translation": "茶",
+              "audioText": "차"
+            }
+          ]
+        },
+        "review": {
+          "prompt": "在首尔咖啡馆想点一杯咖啡，怎么说？",
+          "answer": "커피 한 잔 주세요.",
+          "hint": "○○ 한 잔 주세요 = 请给我一杯○○。"
+        },
+        "footprint": {
+          "traceText": "我在首尔用韩语完成了一次点单。",
+          "stampLabel": "已点单",
+          "memoryHook": "韩屋咖啡 + 커피 한 잔 주세요."
+        }
+      }
     }
   ],
   "kanaRows": [
@@ -7437,7 +7626,9 @@
                 "roma": "o-baa-san",
                 "zh": "奶奶；老奶奶",
                 "beats": "♩ ♩ ♩ ♩ ♩",
-                "highlightBeats": [3]
+                "highlightBeats": [
+                  3
+                ]
               },
               "note": "ば + あ → baa，多出来的这一拍就是长音。"
             },
@@ -7454,7 +7645,10 @@
                 "roma": "koo-koo",
                 "zh": "高校；高中",
                 "beats": "♩ ♩ ♩ ♩",
-                "highlightBeats": [2, 4]
+                "highlightBeats": [
+                  2,
+                  4
+                ]
               },
               "note": "こ + う → kō，不是简单拆成 ko-u。"
             }
@@ -7473,7 +7667,9 @@
                 "roma": "bii-ru",
                 "zh": "beer・啤酒",
                 "beats": "♩ ♩ ♩",
-                "highlightBeats": [2]
+                "highlightBeats": [
+                  2
+                ]
               },
               "note": "ビ + ー → bii"
             }
@@ -7579,28 +7775,38 @@
               "word": "ほん",
               "split": "ほ・ん",
               "beats": "♩ ♩",
-              "highlightBeats": [2],
+              "highlightBeats": [
+                2
+              ],
               "zh": "本・书"
             },
             {
               "word": "さんぽ",
               "split": "さ・ん・ぽ",
               "beats": "♩ ♩ ♩",
-              "highlightBeats": [2],
+              "highlightBeats": [
+                2
+              ],
               "zh": "散歩・散步"
             },
             {
               "word": "でんしゃ",
               "split": "で・ん・しゃ",
               "beats": "♩ ♩ ♩",
-              "highlightBeats": [2],
+              "highlightBeats": [
+                2
+              ],
               "zh": "電車・电车"
             },
             {
               "word": "しんかんせん",
               "split": "し・ん・か・ん・せ・ん",
               "beats": "♩ ♩ ♩ ♩ ♩ ♩",
-              "highlightBeats": [2, 4, 6],
+              "highlightBeats": [
+                2,
+                4,
+                6
+              ],
               "zh": "新幹線・新干线"
             }
           ],
@@ -7610,28 +7816,37 @@
               "word": "パン",
               "split": "パ・ン",
               "beats": "♩ ♩",
-              "highlightBeats": [2],
+              "highlightBeats": [
+                2
+              ],
               "zh": "pão・面包"
             },
             {
               "word": "コンビニ",
               "split": "コ・ン・ビ・ニ",
               "beats": "♩ ♩ ♩ ♩",
-              "highlightBeats": [2],
+              "highlightBeats": [
+                2
+              ],
               "zh": "convenience store・便利店"
             },
             {
               "word": "レストラン",
               "split": "レ・ス・ト・ラ・ン",
               "beats": "♩ ♩ ♩ ♩ ♩",
-              "highlightBeats": [5],
+              "highlightBeats": [
+                5
+              ],
               "zh": "restaurant・餐厅"
             },
             {
               "word": "コンセント",
               "split": "コ・ン・セ・ン・ト",
               "beats": "♩ ♩ ♩ ♩ ♩",
-              "highlightBeats": [2, 4],
+              "highlightBeats": [
+                2,
+                4
+              ],
               "zh": "consent・插座"
             }
           ],
@@ -10935,4 +11150,3 @@
     }
   ]
 }
-
