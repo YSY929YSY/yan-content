@@ -7,7 +7,7 @@
  * - 丿捺=人，产品哲学嵌入导航结构
  * ─────────────────────────────────────────────
  */
-const CONTENT_URL = 'https://raw.githubusercontent.com/YSY929YSY/yan-content/main/content.json';
+const CONTENT_URL = 'https://raw.githubusercontent.com/YSY929YSY/yan-content/main/content.v2.json';
 
 
 import fallbackContent from './assets/content.fallback.json';
