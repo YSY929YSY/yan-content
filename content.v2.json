@@ -26,6 +26,40 @@
           "lang": "EN",
           "word": "volcano"
         }
+      ],
+      "inputTasks": [
+        {
+          "type": "meaning",
+          "prompt": "看到「お会計をお願いします。」时，你应该理解成什么行动？",
+          "answer": "结账 / 麻烦结账"
+        },
+        {
+          "type": "scene_match",
+          "prompt": "你指着菜单上的图片点餐时，可以说哪一句？",
+          "answer": "これをください。"
+        },
+        {
+          "type": "keyword",
+          "prompt": "看到「アレルギー」时，要立刻想到什么信息？",
+          "answer": "过敏，需要提前说明不能吃的东西"
+        }
+      ],
+      "outputTasks": [
+        {
+          "type": "speak",
+          "promptZh": "你要点菜单上的这个。",
+          "target": "これをください。"
+        },
+        {
+          "type": "speak",
+          "promptZh": "你吃完后想结账。",
+          "target": "お会計をお願いします。"
+        },
+        {
+          "type": "speak",
+          "promptZh": "你对虾过敏，需要提前说明。",
+          "target": "えびアレルギーがあります。"
+        }
       ]
     },
     {
@@ -1664,6 +1698,40 @@
           ],
           "scene": "吃到好吃的，直接说。效果比任何礼貌用语都强。"
         }
+      ],
+      "inputTasks": [
+        {
+          "type": "meaning",
+          "prompt": "看到「お会計をお願いします。」时，你应该理解成什么行动？",
+          "answer": "结账 / 麻烦结账"
+        },
+        {
+          "type": "scene_match",
+          "prompt": "你指着菜单上的图片点餐时，可以说哪一句？",
+          "answer": "これをください。"
+        },
+        {
+          "type": "keyword",
+          "prompt": "看到「アレルギー」时，要立刻想到什么信息？",
+          "answer": "过敏，需要提前说明不能吃的东西"
+        }
+      ],
+      "outputTasks": [
+        {
+          "type": "speak",
+          "promptZh": "你要点菜单上的这个。",
+          "target": "これをください。"
+        },
+        {
+          "type": "speak",
+          "promptZh": "你吃完后想结账。",
+          "target": "お会計をお願いします。"
+        },
+        {
+          "type": "speak",
+          "promptZh": "你对虾过敏，需要提前说明。",
+          "target": "えびアレルギーがあります。"
+        }
       ]
     },
     {
@@ -2534,6 +2602,40 @@
           ],
           "scene": "退完房离开时转身说这句，前台会深深鞠躬。一句话，真实的人情味。"
         }
+      ],
+      "inputTasks": [
+        {
+          "type": "meaning",
+          "prompt": "看到「チェックイン」和「チェックアウト」时，分别是什么意思？",
+          "answer": "チェックイン是入住，チェックアウト是退房"
+        },
+        {
+          "type": "meaning",
+          "prompt": "「朝食はついていますか？」是在确认什么？",
+          "answer": "是否包含早餐"
+        },
+        {
+          "type": "scene_match",
+          "prompt": "「お湯が出ないのですが…」是在向酒店说明什么问题？",
+          "answer": "热水出不来 / 没有热水"
+        }
+      ],
+      "outputTasks": [
+        {
+          "type": "speak",
+          "promptZh": "你到前台，想办理入住。",
+          "target": "チェックインをお願いします。"
+        },
+        {
+          "type": "speak",
+          "promptZh": "你要告诉前台：我有预约，我叫〇〇。",
+          "target": "予約しています、〇〇です。"
+        },
+        {
+          "type": "speak",
+          "promptZh": "你想请酒店帮你寄存行李。",
+          "target": "荷物を預かってもらえますか？"
+        }
       ]
     },
     {
@@ -2967,6 +3069,43 @@
             }
           ],
           "scene": "日本人被外国人真心道谢会记住这次互动很久。说完「助かりました」，对方会感到被真正需要——这比单纯的ありがとう更有分量。"
+        }
+      ],
+      "inputTasks": [
+        {
+          "type": "direction",
+          "prompt": "听到「右に曲がってください」时，你应该往哪边走？",
+          "answer": "向右转"
+        },
+        {
+          "type": "direction",
+          "prompt": "听到「左に曲がってください」时，你应该往哪边走？",
+          "answer": "向左转"
+        },
+        {
+          "type": "meaning",
+          "prompt": "「もう一度お願いします」是在请求对方做什么？",
+          "answer": "请再说一遍"
+        }
+      ],
+      "outputTasks": [
+        {
+          "type": "speak",
+          "promptZh": "你想问洗手间在哪里。",
+          "target": "トイレはどこですか？"
+        },
+        {
+          "type": "speak",
+          "promptZh": "你想问地铁入口在哪里。",
+          "target": "地下鉄の入口はどこですか？"
+        },
+        {
+          "type": "roleplay",
+          "promptZh": "你没听清对方说的话，想请对方慢一点或再说一遍。",
+          "targets": [
+            "ゆっくりお願いします。",
+            "もう一度お願いします。"
+          ]
         }
       ]
     },
@@ -3505,9 +3644,12 @@
       "lang": "ja-JP",
       "note": "活火山，可以徒步到火山口边缘。从东京坐夜船就到。",
       "memory": {
+        "version": 1,
         "title": "三原山：确认能不能走到火山口",
+        "cardType": "place_phrase",
         "language": {
-          "code": "ja-JP"
+          "code": "ja-JP",
+          "name": "日本語"
         },
         "phrase": {
           "text": "噴火口まで歩けますか？",
@@ -3537,6 +3679,7 @@
         },
         "review": {
           "prompt": "如果你想问能不能走到酒店，该怎么说？",
+          "answer": "ホテルまで歩けますか？",
           "hint": "把「噴火口」换成「ホテル」。"
         },
         "footprint": {
@@ -3568,9 +3711,12 @@
       "lang": "ja-JP",
       "note": "硫磺泉煮出的黑鸡蛋据说延寿7年。",
       "memory": {
+        "version": 1,
         "title": "大涌谷：问黑鸡蛋在哪里",
+        "cardType": "place_phrase",
         "language": {
-          "code": "ja-JP"
+          "code": "ja-JP",
+          "name": "日本語"
         },
         "phrase": {
           "text": "黒たまごはどこですか？",
@@ -3600,6 +3746,7 @@
         },
         "review": {
           "prompt": "如果你想问洗手间在哪里，该怎么说？",
+          "answer": "トイレはどこですか？",
           "hint": "把「黒たまご」换成「トイレ」。"
         },
         "footprint": {
@@ -3691,9 +3838,12 @@
       "lang": "ja-JP",
       "note": "百年町家改建，木梁石地，手冲咖啡。这种安静只有京都有。",
       "memory": {
+        "version": 1,
         "title": "京都町家咖啡：开口点一杯咖啡",
+        "cardType": "place_phrase",
         "language": {
-          "code": "ja-JP"
+          "code": "ja-JP",
+          "name": "日本語"
         },
         "phrase": {
           "text": "コーヒーをください",
@@ -3723,6 +3873,7 @@
         },
         "review": {
           "prompt": "如果你想要菜单，该怎么说？",
+          "answer": "メニューをください",
           "hint": "把「コーヒー」换成「メニュー」。"
         },
         "footprint": {
