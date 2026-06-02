@@ -2638,20 +2638,20 @@ function CardScreen({ sceneState, onBack, onFinish }) {
     <Text style={cs.swapLbl}>🔁 可替换词</Text>
     <View style={cs.swapRow}>
       {p.swappableWords.map((w, i) => (
-        <View key={i} style={cs.swapChip}>
+        <TouchableOpacity
+          key={i}
+          style={cs.swapChip}
+          activeOpacity={0.78}
+          onPress={() => speak(w.word, 'ja-JP', `swap-${p.id || cur}-${i}`)}
+        >
           <View style={cs.swapTop}>
             <View style={cs.swapTextWrap}>
               <Text style={cs.swapJp} numberOfLines={1} ellipsizeMode="tail">{w.word}</Text>
               {w.reading ? <Text style={cs.swapReading} numberOfLines={1} ellipsizeMode="tail">{w.reading}</Text> : null}
             </View>
-            <SpeakBtn
-              onPress={() => speak(w.word, 'ja-JP', `swap-${p.id}-${i}`)}
-              speaking={speakingKey === `swap-${p.id}-${i}`}
-              size="sm"
-            />
           </View>
           <Text style={cs.swapZh} numberOfLines={1} ellipsizeMode="tail">{w.zh}</Text>
-        </View>
+        </TouchableOpacity>
       ))}
     </View>
   </View>
@@ -2919,6 +2919,48 @@ spotlightTxt: {
 // Practice Screen
 // ─────────────────────────────────────────────
 function PracticeScreen({ scene, onBack, onDone }) {
+  const [curIndex, setCurIndex] = useState(0);
+  const [revealed, setRevealed] = useState(false);
+  const [results, setResults] = useState([]);
+  const inputTasks = (scene.inputTasks || []).map(t => ({
+    kind: 'input',
+    title: '听懂 / 看懂',
+    prompt: t.prompt,
+    answer: t.answer || '',
+  }));
+  const outputTasks = (scene.outputTasks || []).map(t => ({
+    kind: 'output',
+    title: t.type === 'roleplay' ? '情境输出' : '开口练习',
+    prompt: t.promptZh || t.prompt,
+    answer: t.target || (Array.isArray(t.targets) ? t.targets : ''),
+  }));
+  const tasks = [...inputTasks, ...outputTasks];
+  const task = tasks[curIndex];
+  const finished = tasks.length > 0 && results.length >= tasks.length;
+  const knownCount = results.filter(r => r === 'known').length;
+  const shakyCount = results.filter(r => r === 'shaky').length;
+  const restart = () => {
+    setCurIndex(0);
+    setRevealed(false);
+    setResults([]);
+  };
+  const selfRate = (result) => {
+    setResults(prev => [...prev, result]);
+    if (curIndex < tasks.length - 1) {
+      setCurIndex(i => i + 1);
+      setRevealed(false);
+    }
+  };
+  const renderAnswer = (answer) => {
+    if (Array.isArray(answer)) {
+      return answer.map((line, i) => (
+        <Text key={`${line}-${i}`} style={pr.answer}>• {line}</Text>
+      ));
+    }
+    if (answer) return <Text style={pr.answer}>{answer}</Text>;
+    return <Text style={pr.answer}>暂无标准答案，试着用自己的话说出来。</Text>;
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <View style={pr.nav}>
@@ -2931,43 +2973,74 @@ function PracticeScreen({ scene, onBack, onDone }) {
         <View style={[pr.hero, { backgroundColor: scene.bgColor, borderColor: scene.color + '30' }]}>
           <Text style={pr.heroEmoji}>{scene.emoji}</Text>
           <Text style={[pr.heroTitle, { color: scene.color }]}>{scene.label} · 练习</Text>
-          <Text style={pr.heroSub}>先把练习独立出来。下一步再升级成交互版。</Text>
+          <Text style={pr.heroSub}>先想一想，再看答案。</Text>
         </View>
 
-        {scene.inputTasks && scene.inputTasks.length > 0 && (
-          <View style={pr.block}>
-            <Text style={pr.blockTitle}>输入练习</Text>
-            {scene.inputTasks.map((t, i) => (
-              <View key={i} style={pr.card}>
-                <Text style={pr.prompt}>{t.prompt}</Text>
-                <Text style={pr.answer}>答案：{t.answer}</Text>
+        {tasks.length === 0 ? (
+          <View style={pr.emptyCard}>
+            <Text style={pr.emptyTitle}>这组暂时没有练习</Text>
+            <Text style={pr.emptySub}>先回到句卡，把场景句读一遍。</Text>
+            <View style={pr.actionRow}>
+              <TouchableOpacity style={pr.ghostBtn} onPress={onBack}>
+                <Text style={pr.ghostBtnTxt}>返回句卡</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[pr.solidBtn, { backgroundColor: scene.color }]} onPress={onDone}>
+                <Text style={pr.solidBtnTxt}>完成</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        ) : finished ? (
+          <View style={pr.summaryCard}>
+            <Text style={pr.summaryTitle}>这组练习完成了</Text>
+            <Text style={pr.summaryLine}>共 {tasks.length} 题</Text>
+            <View style={pr.scoreRow}>
+              <View style={pr.scoreChip}>
+                <Text style={pr.scoreN}>{knownCount}</Text>
+                <Text style={pr.scoreLbl}>会了</Text>
               </View>
-            ))}
+              <View style={pr.scoreChip}>
+                <Text style={pr.scoreN}>{shakyCount}</Text>
+                <Text style={pr.scoreLbl}>还不熟</Text>
+              </View>
+            </View>
+            <Text style={pr.summarySub}>先能判断自己会不会，就是输出能力的开始。</Text>
+            <View style={pr.actionRow}>
+              <TouchableOpacity style={pr.ghostBtn} onPress={restart}>
+                <Text style={pr.ghostBtnTxt}>再练一遍</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[pr.solidBtn, { backgroundColor: scene.color }]} onPress={onDone}>
+                <Text style={pr.solidBtnTxt}>完成</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        ) : (
+          <View style={pr.card}>
+            <Text style={pr.progress}>第 {curIndex + 1} / {tasks.length} 题</Text>
+            <Text style={[pr.kind, { color: scene.color }]}>{task.title}</Text>
+            <Text style={pr.prompt}>{task.prompt}</Text>
+
+            {!revealed ? (
+              <TouchableOpacity style={[pr.revealBtn, { backgroundColor: scene.color }]} onPress={() => setRevealed(true)}>
+                <Text style={pr.revealBtnTxt}>查看答案</Text>
+              </TouchableOpacity>
+            ) : (
+              <>
+                <View style={pr.answerBox}>
+                  <Text style={pr.answerLabel}>参考答案</Text>
+                  {renderAnswer(task.answer)}
+                </View>
+                <View style={pr.actionRow}>
+                  <TouchableOpacity style={pr.ghostBtn} onPress={() => selfRate('shaky')}>
+                    <Text style={pr.ghostBtnTxt}>还不熟</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={[pr.solidBtn, { backgroundColor: scene.color }]} onPress={() => selfRate('known')}>
+                    <Text style={pr.solidBtnTxt}>会了</Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            )}
           </View>
         )}
-
-        {scene.outputTasks && scene.outputTasks.length > 0 && (
-          <View style={pr.block}>
-            <Text style={pr.blockTitle}>输出练习</Text>
-            {scene.outputTasks.map((t, i) => (
-              <View key={i} style={pr.card}>
-                <Text style={pr.prompt}>{t.promptZh}</Text>
-                {t.target ? <Text style={pr.answer}>目标句：{t.target}</Text> : null}
-                {t.targets ? (
-                  <View style={{ marginTop: 6 }}>
-                    {t.targets.map((x, j) => (
-                      <Text key={j} style={pr.answer}>• {x}</Text>
-                    ))}
-                  </View>
-                ) : null}
-              </View>
-            ))}
-          </View>
-        )}
-
-        <TouchableOpacity style={[pr.doneBtn, { backgroundColor: scene.color }]} onPress={onDone}>
-          <Text style={pr.doneBtnTxt}>完成这组练习</Text>
-        </TouchableOpacity>
       </ScrollView>
     </View>
   );
@@ -3033,11 +3106,141 @@ const pr = StyleSheet.create({
     lineHeight: 20,
     fontWeight: '600',
   },
+  progress: {
+    fontSize: 11,
+    color: C.muted,
+    fontWeight: '700',
+    marginBottom: 8,
+  },
+  kind: {
+    fontSize: 13,
+    fontWeight: '800',
+    marginBottom: 10,
+  },
   answer: {
     fontSize: 12,
     color: C.muted,
     lineHeight: 19,
     marginTop: 6,
+  },
+  answerBox: {
+    backgroundColor: C.tag,
+    borderRadius: 12,
+    padding: 12,
+    marginTop: 14,
+  },
+  answerLabel: {
+    fontSize: 10,
+    color: C.muted,
+    fontWeight: '800',
+    marginBottom: 4,
+  },
+  revealBtn: {
+    marginTop: 18,
+    borderRadius: 13,
+    paddingVertical: 13,
+    alignItems: 'center',
+  },
+  revealBtnTxt: {
+    fontSize: 14,
+    color: C.white,
+    fontWeight: '700',
+  },
+  actionRow: {
+    flexDirection: 'row',
+    gap: 10,
+    marginTop: 16,
+  },
+  ghostBtn: {
+    flex: 1,
+    borderRadius: 13,
+    paddingVertical: 13,
+    alignItems: 'center',
+    borderWidth: 1.5,
+    borderColor: C.border,
+    backgroundColor: C.white,
+  },
+  ghostBtnTxt: {
+    fontSize: 14,
+    color: C.ink,
+    fontWeight: '700',
+  },
+  solidBtn: {
+    flex: 1,
+    borderRadius: 13,
+    paddingVertical: 13,
+    alignItems: 'center',
+  },
+  solidBtnTxt: {
+    fontSize: 14,
+    color: C.white,
+    fontWeight: '700',
+  },
+  emptyCard: {
+    backgroundColor: C.white,
+    borderColor: C.border,
+    borderWidth: 1.5,
+    borderRadius: 14,
+    padding: 18,
+  },
+  emptyTitle: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: C.ink,
+    marginBottom: 6,
+  },
+  emptySub: {
+    fontSize: 13,
+    color: C.muted,
+    lineHeight: 20,
+  },
+  summaryCard: {
+    backgroundColor: C.white,
+    borderColor: C.border,
+    borderWidth: 1.5,
+    borderRadius: 14,
+    padding: 18,
+  },
+  summaryTitle: {
+    fontSize: 18,
+    fontWeight: '800',
+    color: C.ink,
+    marginBottom: 10,
+  },
+  summaryLine: {
+    fontSize: 13,
+    color: C.muted,
+    fontWeight: '700',
+  },
+  scoreRow: {
+    flexDirection: 'row',
+    gap: 10,
+    marginTop: 12,
+    marginBottom: 12,
+  },
+  scoreChip: {
+    flex: 1,
+    backgroundColor: C.tag,
+    borderRadius: 12,
+    padding: 12,
+    alignItems: 'center',
+  },
+  scoreN: {
+    fontSize: 22,
+    color: C.ink,
+    fontWeight: '800',
+  },
+  scoreLbl: {
+    fontSize: 11,
+    color: C.muted,
+    fontWeight: '700',
+    marginTop: 2,
+  },
+  summarySub: {
+    fontSize: 13,
+    color: C.ink,
+    lineHeight: 20,
+    opacity: 0.76,
   },
   doneBtn: {
     marginTop: 8,
@@ -6018,6 +6221,7 @@ function NaTab({ mapPlaces: initialPlaces }) {
   const [typeF, setTypeF] = useState('all');
   const [statusF, setStatusF] = useState('all');
   const [sel, setSel] = useState(null);
+  const [openMemoryId, setOpenMemoryId] = useState(null);
   const [places, setPlaces] = useState(initialPlaces.map(p => ({ ...p, status: 'wish' })));
   const [visitedIds, setVisitedIds] = useState([]);
   const [photoUris, setPhotoUris] = useState({});
@@ -6095,7 +6299,10 @@ useEffect(() => {
   if (sel && !shown.some(p => p.id === sel.id)) {
     setSel(null);
   }
-}, [typeF, statusF, places, sel]);
+  if (openMemoryId && !shown.some(p => p.id === openMemoryId)) {
+    setOpenMemoryId(null);
+  }
+}, [typeF, statusF, places, sel, openMemoryId]);
   const togglePlaceStatus = (placeId) => {
     setVisitedIds(prev => {
       const next = prev.includes(placeId)
@@ -6142,6 +6349,122 @@ useEffect(() => {
       '自定义地点即将开放',
       '这一版可以先从推荐地点里标记想去或去过。',
       [{ text: '知道了' }]
+    );
+  };
+  const renderMemoryCard = (place) => {
+    const memory = place.memory;
+    if (!memory) return null;
+
+    const phraseText = memory?.phrase?.text || place.jp;
+    const phraseZh = memory?.phrase?.translation || place.zh;
+    const audioText = memory?.phrase?.audioText || phraseText;
+    const langCode = memory?.language?.code || place.lang;
+    const title = memory?.title || place.name;
+    const isOpen = openMemoryId === place.id;
+    const swapItems = Array.isArray(memory?.swap?.items)
+      ? memory.swap.items.slice(0, 3).filter(item => item?.text || item?.translation)
+      : [];
+    const hasContext = !!(memory?.context?.situation || memory?.context?.note);
+    const hasReview = !!(memory?.review?.prompt || memory?.review?.hint);
+
+    return (
+      <>
+        <TouchableOpacity
+          style={ms.memoryToggle}
+          onPress={(event) => {
+            event.stopPropagation();
+            setOpenMemoryId(prev => (prev === place.id ? null : place.id));
+          }}
+          activeOpacity={0.82}
+        >
+          <Text style={ms.memoryToggleTxt}>{isOpen ? '记忆卡已展开 · 收起' : '打开记忆卡'}</Text>
+        </TouchableOpacity>
+
+        {isOpen && (
+          <View style={ms.memoryCard}>
+            <View>
+              <Text style={ms.memoryEyebrow}>记忆卡</Text>
+              {!!title && <Text style={ms.memoryTitle}>{title}</Text>}
+            </View>
+
+            <View style={ms.memoryPhrase}>
+              <View style={{ flex: 1 }}>
+                {!!phraseText && <Text style={ms.memoryJp}>{phraseText}</Text>}
+                {!!phraseZh && <Text style={ms.memoryZh}>{phraseZh}</Text>}
+              </View>
+              {!!audioText && (
+                <SpeakBtn
+                  onPress={() => speak(audioText, langCode, `memory-${place.id}`)}
+                  speaking={speakingKey === `memory-${place.id}`}
+                  size="sm"
+                />
+              )}
+            </View>
+
+            {hasContext && (
+              <View style={ms.memorySection}>
+                <Text style={ms.memorySectionTitle}>场景</Text>
+                {!!memory?.context?.situation && (
+                  <Text style={ms.memoryBody}>{memory.context.situation}</Text>
+                )}
+                {!!memory?.context?.note && (
+                  <Text style={ms.memorySubtle}>{memory.context.note}</Text>
+                )}
+              </View>
+            )}
+
+            {!!memory?.phrase?.pattern && (
+              <View style={ms.memorySection}>
+                <Text style={ms.memorySectionTitle}>句型</Text>
+                <Text style={ms.memoryPattern}>{memory.phrase.pattern}</Text>
+              </View>
+            )}
+
+            {swapItems.length > 0 && (
+              <View style={ms.memorySection}>
+                <Text style={ms.memorySectionTitle}>替换一下</Text>
+                <View style={ms.memorySwapRow}>
+                  {swapItems.map((item, index) => (
+                    <TouchableOpacity
+                      key={`${place.id}-swap-${index}`}
+                      style={ms.memorySwapChip}
+                      activeOpacity={0.78}
+                      onPress={(event) => {
+                        event.stopPropagation?.();
+                        if (item.text) speak(item.text, langCode || 'ja-JP', `memory-swap-${place.id}-${index}`);
+                      }}
+                    >
+                      {!!item.text && <Text style={ms.memorySwapText} numberOfLines={1}>{item.text}</Text>}
+                      {!!item.translation && (
+                        <Text style={ms.memorySwapZh} numberOfLines={1}>{item.translation}</Text>
+                      )}
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </View>
+            )}
+
+            {hasReview && (
+              <View style={ms.memorySection}>
+                <Text style={ms.memorySectionTitle}>小练习</Text>
+                {!!memory?.review?.prompt && (
+                  <Text style={ms.memoryReview}>{memory.review.prompt}</Text>
+                )}
+                {!!memory?.review?.hint && (
+                  <Text style={ms.memorySubtle}>{memory.review.hint}</Text>
+                )}
+              </View>
+            )}
+
+            {!!memory?.footprint?.traceText && (
+              <View style={ms.memoryTraceBox}>
+                <Text style={ms.memorySectionTitle}>留痕</Text>
+                <Text style={ms.memoryTrace}>{memory.footprint.traceText}</Text>
+              </View>
+            )}
+          </View>
+        )}
+      </>
     );
   };
 
@@ -6272,6 +6595,8 @@ useEffect(() => {
         </View>
 
         <Text style={ms.note}>{place.note}</Text>
+
+        {renderMemoryCard(place)}
       </View>
     )}
   </TouchableOpacity>
@@ -6348,6 +6673,26 @@ const ms = StyleSheet.create({
   phraseJp: { fontSize: 15, fontWeight: '500', color: C.ink },
   phraseZh: { fontSize: 11, color: C.muted, marginTop: 3 },
   note: { fontSize: 13, color: C.ink, lineHeight: 20, opacity: 0.7 },
+  memoryToggle: { minHeight: 42, borderRadius: 11, borderWidth: 1, borderColor: C.border, backgroundColor: C.white, paddingHorizontal: 12, paddingVertical: 9, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
+  memoryToggleTxt: { fontSize: 13, fontWeight: '700', color: C.ink },
+  memoryCard: { borderRadius: 14, backgroundColor: C.white, padding: 13, gap: 12 },
+  memoryEyebrow: { fontSize: 10, color: C.lava, fontWeight: '700', marginBottom: 3 },
+  memoryTitle: { fontSize: 15, fontWeight: '700', color: C.ink },
+  memoryPhrase: { flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: C.tag, borderRadius: 12, padding: 11 },
+  memoryJp: { fontSize: 15, fontWeight: '700', color: C.ink, lineHeight: 21 },
+  memoryZh: { fontSize: 12, color: C.muted, marginTop: 4, lineHeight: 17 },
+  memorySection: { gap: 5 },
+  memorySectionTitle: { fontSize: 10, color: C.muted, fontWeight: '700' },
+  memoryBody: { fontSize: 12, color: C.ink, lineHeight: 18, opacity: 0.78 },
+  memorySubtle: { fontSize: 11, color: C.muted, lineHeight: 17 },
+  memoryPattern: { fontSize: 12, color: C.lava, lineHeight: 18, fontWeight: '700' },
+  memorySwapRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  memorySwapChip: { minWidth: 76, maxWidth: '100%', borderRadius: 9, backgroundColor: '#fcfbf8', paddingHorizontal: 9, paddingVertical: 7 },
+  memorySwapText: { fontSize: 11, fontWeight: '700', color: C.ink },
+  memorySwapZh: { fontSize: 10, color: C.muted, marginTop: 2 },
+  memoryReview: { fontSize: 12, color: C.ink, lineHeight: 18, fontWeight: '600' },
+  memoryTraceBox: { borderRadius: 12, backgroundColor: '#f8efe7', padding: 10, gap: 5 },
+  memoryTrace: { fontSize: 12, color: C.ink, lineHeight: 18, fontWeight: '600' },
   addCard: { backgroundColor: C.white, borderRadius: 15, padding: 18, borderWidth: 1.5, borderColor: C.border, borderStyle: 'dashed', alignItems: 'center', flexDirection: 'row', justifyContent: 'center', gap: 8 },
   addTxt: { fontSize: 13, color: C.mutedLight },
   globeHint: {

@@ -19,6 +19,11 @@ const REQUIRED_TOP_LEVEL_KEYS = [
 const REQUIRED_SCENE_KEYS = ['id', 'label', 'desc', 'emoji', 'color', 'bgColor', 'ready', 'phrases'];
 const REQUIRED_PHRASE_KEYS = ['id', 'jp', 'zh', 'en', 'roma', 'scene', 'hook', 'hookType'];
 const REQUIRED_PLACE_KEYS = ['id', 'name', 'loc', 'type', 'emoji', 'jp', 'zh', 'note', 'lang'];
+const REQUIRED_MEMORY_ROOT_KEYS = ['version', 'title', 'cardType'];
+const REQUIRED_MEMORY_LANGUAGE_KEYS = ['code', 'name'];
+const REQUIRED_MEMORY_PHRASE_KEYS = ['text', 'translation'];
+const REQUIRED_MEMORY_CONTEXT_KEYS = ['situation'];
+const REQUIRED_MEMORY_REVIEW_KEYS = ['prompt', 'answer'];
 const REQUIRED_KANA_CHAR_KEYS = ['kana', 'roma'];
 const KANA_ROW_KEYS = ['kanaRows', 'voicedRows', 'yoonRows', 'specialRows', 'loanwordRows'];
 const VALID_PLACE_TYPES = new Set(['snow', 'volcano', 'water', 'cafe']);
@@ -73,6 +78,11 @@ function warnOptionalArray(value, fieldPath) {
   if (value !== undefined && !Array.isArray(value)) {
     addWarning(`${fieldPath} exists but is not an array`);
   }
+}
+
+function countKey(counter, key) {
+  const counterKey = isEmpty(key) ? '(missing)' : String(key);
+  counter[counterKey] = (counter[counterKey] || 0) + 1;
 }
 
 function walkStrings(value, currentPath = '$') {
@@ -157,13 +167,16 @@ function validateScenes(content) {
 function validateMapPlaces(content) {
   if (!Array.isArray(content.mapPlaces)) {
     addError('top-level mapPlaces must be an array');
-    return { placeCount: 0, placeTypeCounts: {} };
+    return { placeCount: 0, placeTypeCounts: {}, placesWithMemory: 0, memoryCardTypeCounts: {}, memoryLanguageCounts: {} };
   }
   if (content.mapPlaces.length === 0) {
     addError('top-level mapPlaces must not be empty');
   }
 
   const placeTypeCounts = {};
+  const memoryCardTypeCounts = {};
+  const memoryLanguageCounts = {};
+  let placesWithMemory = 0;
   checkDuplicateId(content.mapPlaces, 'place');
 
   content.mapPlaces.forEach((place, index) => {
@@ -181,6 +194,11 @@ function validateMapPlaces(content) {
       }
     }
     warnOptionalArray(place.links, `${placeLabel}.links`);
+
+    if (place.memory !== undefined) {
+      validatePlaceMemory(place.memory, `${placeLabel}.memory`, memoryCardTypeCounts, memoryLanguageCounts);
+      placesWithMemory += 1;
+    }
   });
 
   for (const type of VALID_PLACE_TYPES) {
@@ -190,7 +208,72 @@ function validateMapPlaces(content) {
     }
   }
 
-  return { placeCount: content.mapPlaces.length, placeTypeCounts };
+  return { placeCount: content.mapPlaces.length, placeTypeCounts, placesWithMemory, memoryCardTypeCounts, memoryLanguageCounts };
+}
+
+function validatePlaceMemory(memory, memoryLabel, memoryCardTypeCounts, memoryLanguageCounts) {
+  if (!isObject(memory)) {
+    addError(`${memoryLabel} must be an object`);
+    return;
+  }
+
+  requireKeys(memory, REQUIRED_MEMORY_ROOT_KEYS, memoryLabel);
+  countKey(memoryCardTypeCounts, memory.cardType);
+
+  if (!isObject(memory.language)) {
+    addError(`${memoryLabel}.language must be an object`);
+  } else {
+    requireKeys(memory.language, REQUIRED_MEMORY_LANGUAGE_KEYS, `${memoryLabel}.language`);
+    countKey(memoryLanguageCounts, memory.language.code);
+  }
+
+  if (!isObject(memory.phrase)) {
+    addError(`${memoryLabel}.phrase must be an object`);
+  } else {
+    requireKeys(memory.phrase, REQUIRED_MEMORY_PHRASE_KEYS, `${memoryLabel}.phrase`);
+    if (isEmpty(memory.phrase.audioText)) {
+      addWarning(`${memoryLabel}.phrase.audioText is missing`);
+    }
+    if (isEmpty(memory.phrase.pattern)) {
+      addWarning(`${memoryLabel}.phrase.pattern is missing`);
+    }
+  }
+
+  if (!isObject(memory.context)) {
+    addError(`${memoryLabel}.context must be an object`);
+  } else {
+    requireKeys(memory.context, REQUIRED_MEMORY_CONTEXT_KEYS, `${memoryLabel}.context`);
+  }
+
+  if (memory.swap !== undefined) {
+    if (!isObject(memory.swap)) {
+      addWarning(`${memoryLabel}.swap exists but is not an object`);
+    } else if (!Array.isArray(memory.swap.items)) {
+      addWarning(`${memoryLabel}.swap exists but swap.items is not an array`);
+    } else if (memory.swap.items.length < 3) {
+      addWarning(`${memoryLabel}.swap.items has fewer than 3 items (${memory.swap.items.length})`);
+    }
+  }
+
+  if (!isObject(memory.review)) {
+    addError(`${memoryLabel}.review must be an object`);
+  } else {
+    requireKeys(memory.review, REQUIRED_MEMORY_REVIEW_KEYS, `${memoryLabel}.review`);
+  }
+
+  if (!isObject(memory.footprint)) {
+    addWarning(`${memoryLabel}.footprint is missing`);
+  } else {
+    if (isEmpty(memory.footprint.traceText)) {
+      addWarning(`${memoryLabel}.footprint.traceText is missing`);
+    }
+    if (isEmpty(memory.footprint.stampLabel)) {
+      addWarning(`${memoryLabel}.footprint.stampLabel is missing`);
+    }
+    if (isEmpty(memory.footprint.memoryHook)) {
+      addWarning(`${memoryLabel}.footprint.memoryHook is missing`);
+    }
+  }
 }
 
 function validateKanaRows(content) {
@@ -310,7 +393,7 @@ for (const key of Object.keys(content)) {
 }
 
 const { readySceneCount, phraseCount } = validateScenes(content);
-const { placeCount, placeTypeCounts } = validateMapPlaces(content);
+const { placeCount, placeTypeCounts, placesWithMemory, memoryCardTypeCounts, memoryLanguageCounts } = validateMapPlaces(content);
 const kanaCounts = validateKanaRows(content);
 validateSubway(content);
 validateCulturalFusion(content);
@@ -327,6 +410,9 @@ console.log(`Ready scenes: ${readySceneCount}`);
 console.log(`Phrases: ${phraseCount}`);
 console.log(`Map places: ${placeCount}`);
 console.log(`Map place types: ${JSON.stringify(placeTypeCounts)}`);
+console.log(`Places with memory: ${placesWithMemory}`);
+console.log(`Memory card types: ${JSON.stringify(memoryCardTypeCounts)}`);
+console.log(`Memory languages: ${JSON.stringify(memoryLanguageCounts)}`);
 console.log(`Kana rows: kanaRows=${kanaCounts.kanaRows}, voicedRows=${kanaCounts.voicedRows}, yoonRows=${kanaCounts.yoonRows}, specialRows=${kanaCounts.specialRows}, loanwordRows=${kanaCounts.loanwordRows}`);
 printList('Errors', errors);
 printList('Warnings', warnings);
