@@ -1512,6 +1512,7 @@
         {
           "id": 2,
           "jp": "すみません、注文をお願いします。",
+          "wordCard": "order",
           "roma": "Sumimasen, chūmon wo onegaishimasu",
           "zh": "不好意思，要点餐。",
           "en": "We're ready to order.",
