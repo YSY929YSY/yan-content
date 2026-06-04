@@ -2571,15 +2571,243 @@ starterTitle: {
 // ─────────────────────────────────────────────
 // Card Screen
 // ─────────────────────────────────────────────
+const WORD_CARDS = {
+  order: {
+    word: '注文',
+    reading: 'ちゅうもん',
+    meaning: '点餐 · 下单',
+    tags: ['旅行高频', '餐厅', 'N4'],
+    frequency: 4,
+    coreSentence: 'すみません、注文をお願いします。',
+    coreTranslation: '不好意思，我要点餐了。',
+    source: '从 餐厅点餐 · 第2句 进入',
+    notes: {
+      order: {
+        title: '注文',
+        body: '注文：点餐 / 下单。这里是动作名词，告诉店员“我准备开始点餐了”。',
+      },
+      wo: {
+        title: 'を',
+        body: 'を：把前面的「注文」变成请求处理的对象。注文を = 把点餐这件事交给对方处理。',
+      },
+      onegai: {
+        title: 'お願いします',
+        body: 'お願いします：礼貌请求的万能结尾。比直接说ください更软，对店员很自然。',
+      },
+    },
+    related: [
+      { jp: '会計', zh: '结账' },
+      { jp: 'ください', zh: '请给我' },
+      { jp: 'メニュー', zh: '菜单' },
+      { jp: '予約', zh: '预约' },
+    ],
+    skeletons: [
+      { jp: '注文をお願いします', zh: '麻烦点餐' },
+      { jp: '会計をお願いします', zh: '麻烦结账' },
+      { jp: '予約をお願いします', zh: '麻烦预约' },
+      { jp: '確認をお願いします', zh: '麻烦确认' },
+    ],
+  },
+};
+
+function WordCardScreen({ card, onBack }) {
+  const [side, setSide] = useState('front');
+  const [trapFlipped, setTrapFlipped] = useState(false);
+  const [activeWordNote, setActiveWordNote] = useState(null);
+  const [slotIdx, setSlotIdx] = useState(0);
+  const { speak, speakingKey } = useSpeech();
+  const say = (text, key) => speak(text, 'ja-JP', key);
+  const showNote = (key, text) => {
+    setActiveWordNote(key);
+    say(text, `word-card-token-${key}`);
+  };
+  const activeNote = activeWordNote ? card.notes[activeWordNote] : null;
+  return (
+    <View style={cs.wordCardPage}>
+      <View style={cs.nav}>
+        <TouchableOpacity onPress={onBack}><Text style={[cs.navBack, { color: C.lava }]}>‹ 餐厅点餐</Text></TouchableOpacity>
+        <Text style={cs.navN}>词卡</Text>
+        <View style={{ width: 80 }} />
+      </View>
+      <ScrollView contentContainerStyle={cs.wordCardScroll} showsVerticalScrollIndicator={false}>
+        <Pressable style={cs.wordCardSheet} onPress={() => setSide(s => s === 'front' ? 'back' : 'front')}>
+          <View style={cs.wordCardTabs}>
+            {[
+              { id: 'front', label: '真实世界' },
+              { id: 'back', label: '语法深度' },
+            ].map(tab => (
+              <TouchableOpacity key={tab.id} style={[cs.wordCardTab, side === tab.id && cs.wordCardTabAct]} onPress={() => setSide(tab.id)}>
+                <Text style={[cs.wordCardTabTxt, side === tab.id && cs.wordCardTabTxtAct]}>{tab.label}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+          {side === 'front' ? (
+            <>
+              <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginBottom: 4 }}>
+                <Text style={cs.wordN4Tag}>N4</Text>
+              </View>
+              <View style={cs.wordHero}>
+                <TouchableOpacity activeOpacity={0.78} onPress={() => say(card.word, 'word-card-headword')}>
+                  <Text style={[cs.wordHead, speakingKey === 'word-card-headword' && cs.wordSpeaking]}>{card.word}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.78} onPress={() => say(card.reading, 'word-card-reading')}>
+                  <Text style={[cs.wordReading, speakingKey === 'word-card-reading' && cs.wordSpeaking]}>{card.reading}</Text>
+                </TouchableOpacity>
+                <Text style={cs.wordMeaning}>{card.meaning}</Text>
+                <View style={cs.wordTagRow}>
+                  {card.tags.filter(tag => tag !== 'N4').map(tag => <Text key={tag} style={cs.wordMiniTag}>{tag}</Text>)}
+                </View>
+              </View>
+
+              <TouchableOpacity
+                style={[cs.wordTrapFlip, trapFlipped && cs.wordTrapFlipBack]}
+                activeOpacity={0.9}
+                onPress={() => setTrapFlipped(v => !v)}
+              >
+                {!trapFlipped ? (
+                  <View style={cs.wordTrapFront}>
+                    <Text style={cs.wordTrapWarning}>⚠️ 汉字陷阱</Text>
+                    <Text style={cs.wordTrapFrontText}>注文 ≠ 注解文字</Text>
+                    <Text style={cs.wordTrapHintSmall}>点击翻看 →</Text>
+                  </View>
+                ) : (
+                  <View style={cs.wordTrapBackInner}>
+                    <Text style={cs.wordTrapBackText}>真实含义：点餐 / 下单</Text>
+                    <Text style={cs.wordTrapBackSub}>是动作，不是文字。</Text>
+                  </View>
+                )}
+              </TouchableOpacity>
+
+              <View style={cs.wordCoreBlock}>
+                <Text style={[cs.wordCoreSentence, speakingKey === 'word-card-core' && cs.wordSpeaking]} onPress={() => say(card.coreSentence, 'word-card-core')}>
+                  すみません、
+                  <Text style={[cs.wordToken, { color: C.lava, backgroundColor: 'transparent' }, activeWordNote === 'order' && cs.wordTokenAct]} onPress={() => showNote('order', card.word)}>注文</Text>
+                  <Text style={[cs.wordTokenBlue, activeWordNote === 'wo' && cs.wordTokenBlueAct]} onPress={() => showNote('wo', 'を')}>を</Text>
+                  <Text style={[cs.wordTokenPlain, activeWordNote === 'onegai' && cs.wordTokenAct]} onPress={() => showNote('onegai', 'お願いします')}>お願いします</Text>
+                  。
+                </Text>
+                <Text style={cs.wordCoreZh}>{card.coreTranslation}</Text>
+                {activeNote && (
+                  <View style={cs.wordNotePanel}>
+                    <Text style={cs.wordNoteTitle}>{activeNote.title}</Text>
+                    <Text style={cs.wordNoteBody}>{activeNote.body}</Text>
+                  </View>
+                )}
+              </View>
+
+              <Text style={cs.wordContextText}>
+                在餐厅是行动信号——你在说「我准备好了」。{'\n'}
+                网购确认订单时同样用，日本人会说{' '}
+                <Text
+                  style={cs.wordContextJa}
+                  onPress={() => say('注文しました', 'word-card-ctx-shimashita')}
+                >
+                  注文しました
+                </Text>
+                {' '}表示下单完成。
+              </Text>
+
+              <View style={cs.wordRelatedBlock}>
+                <Text style={cs.wordSectionLabel}>在餐厅还会遇到</Text>
+                <View style={cs.wordChipRow}>
+                  {card.related.map(item => (
+                    <TouchableOpacity key={item.jp} style={cs.wordChip} activeOpacity={0.78} onPress={() => say(item.jp, `word-card-related-${item.jp}`)}>
+                      <Text style={cs.wordChipTxt}>{item.jp}</Text>
+                      <Text style={cs.wordChipZh}>{item.zh}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </View>
+            </>
+          ) : (
+            <>
+              <View style={cs.wordBackBlock}>
+                <Text style={cs.gramParticle}>を</Text>
+                <Text style={cs.gramLabel}>传送带助词</Text>
+                <Text style={cs.gramQuote}>「把注文传送给对方处理」</Text>
+                <Text style={cs.wordBackText}>
+                  を = 把前面的词变成动作施加的对象。{'\n'}
+                  注文をお願いします = 把「点餐这件事」交给服务员执行。{'\n'}
+                  去掉を，句子不完整。
+                </Text>
+              </View>
+
+              <View style={cs.wordBackBlock}>
+                <Text style={[cs.gramParticle, {fontSize: 22}]}>お願いします</Text>
+                <Text style={cs.gramLabel}>礼貌请求结尾</Text>
+                <Text style={cs.gramQuote}>「比ください更软，比どうぞ更主动」</Text>
+                <Text style={cs.wordBackText}>
+                  万能礼貌结尾。对服务员、收银员都最自然。{'\n'}
+                  对朋友可以说「お願い」（去掉します）。
+                </Text>
+              </View>
+
+              <View style={cs.wordBackBlock}>
+                <Text style={cs.wordBackHd}>这个骨架可以替换</Text>
+                <View style={cs.patRow}>
+                  <TouchableOpacity
+                    style={cs.patSlotVar}
+                    activeOpacity={0.78}
+                    onPress={() => {
+                      const next = (slotIdx + 1) % card.skeletons.length;
+                      setSlotIdx(next);
+                      say(card.skeletons[next].jp, `word-card-slot-${next}`);
+                    }}
+                  >
+                    <Text style={cs.patSlotVarTxt}>{card.skeletons[slotIdx].jp.replace('をお願いします', '')}</Text>
+                  </TouchableOpacity>
+                  <View style={cs.patSlotFix}><Text style={cs.patSlotFixTxt}>を</Text></View>
+                  <View style={cs.patSlotFix}><Text style={cs.patSlotFixTxt}>お願いします</Text></View>
+                </View>
+                <Text style={cs.patMeaning}>{card.skeletons[slotIdx].zh}</Text>
+                <Text style={cs.patHint}>点击橙色词替换 →</Text>
+              </View>
+
+              <View style={cs.wordBackBlock}>
+                <Text style={cs.wordBackHd}>高频出现场景</Text>
+                <Text style={cs.wordBackText}>餐厅 · 居酒屋 · 咖啡馆 · 网购</Text>
+              </View>
+
+              <View style={cs.wordAccentBox}>
+                <Text style={cs.pitchLabel}>声调 · Pitch Accent</Text>
+                <View style={cs.pitchRow}>
+                  {[
+                    { char: 'ちゅ', high: false },
+                    { char: 'う',   high: true  },
+                    { char: 'も',   high: true  },
+                    { char: 'ん',   high: false },
+                  ].map((s, i) => (
+                    <View key={i} style={cs.pitchSyl}>
+                      <Text style={cs.pitchChar}>{s.char}</Text>
+                      <View style={[cs.pitchBar, s.high ? cs.pitchBarHigh : cs.pitchBarLow]} />
+                    </View>
+                  ))}
+                </View>
+                <Text style={cs.pitchBody}>低→高→高→低。第一拍低，第二拍起跳，第四拍落下。标准东京音。</Text>
+              </View>
+            </>
+          )}
+        </Pressable>
+        <Text style={cs.wordCardSource}>{card.source}</Text>
+      </ScrollView>
+    </View>
+  );
+}
+
 function CardScreen({ sceneState, onBack, onFinish }) {
   const { scene, index } = sceneState;
   const [cur, setCur] = useState(index);
   const [showScene, setShowScene] = useState(false);
+  const [wordCardKey, setWordCardKey] = useState(null);
   const { speak, speakingKey } = useSpeech();
   const phrases = scene.phrases || [];
   const p = phrases[cur];
   const hookStyle = HOOK_STYLES[p?.hookType] || HOOK_STYLES.e;
-  const go = (d) => { setCur(i => i + d); setShowScene(false); };
+  const go = (d) => { setCur(i => i + d); setShowScene(false); setWordCardKey(null); };
+  const canOpenOrderWordCard = p?.wordCard === 'order';
+  if (wordCardKey && WORD_CARDS[wordCardKey]) {
+    return <WordCardScreen card={WORD_CARDS[wordCardKey]} onBack={() => setWordCardKey(null)} />;
+  }
   if (!p) {
     return (
       <View style={{ flex: 1 }}>
@@ -2615,13 +2843,22 @@ function CardScreen({ sceneState, onBack, onFinish }) {
             <View style={[cs.scTag, { backgroundColor: scene.bgColor }]}><Text style={[cs.scTagTxt, { color: scene.color }]}>{scene.emoji} {scene.label}</Text></View>
             <JlptBadge level={p.jlpt} />
           </View>
-          <Text style={cs.jpTxt}>{p.jp}</Text>
+          {canOpenOrderWordCard ? (
+            <Text style={cs.jpTxt}>
+              すみません、
+              <Text style={[cs.jpTxt, cs.wordCardInline]} onPress={() => setWordCardKey('order')}>注文</Text>
+              をお願いします。
+            </Text>
+          ) : (
+            <Text style={cs.jpTxt}>{p.jp}</Text>
+          )}
           <Text style={cs.romaTxt}>{p.roma}</Text>
-          <View style={{ marginTop: 20 }}><SpeakBtn
-  onPress={() => speak(p.jp, 'ja-JP', `phrase-${p.id}`)}
-  speaking={speakingKey === `phrase-${p.id}`}
-  color={scene.color}
-/>
+          <View style={{ marginTop: 20 }}>
+            <SpeakBtn
+              onPress={() => speak(p.jp, 'ja-JP', `phrase-${p.id}`)}
+              speaking={speakingKey === `phrase-${p.id}`}
+              color={scene.color}
+            />
           </View>
           <View style={cs.trans}>
             <Text style={cs.zhTxt}>{p.zh}</Text>
@@ -2634,83 +2871,82 @@ function CardScreen({ sceneState, onBack, onFinish }) {
             </View>
           )}
           {p.swappableWords && p.swappableWords.length > 0 && (
-  <View style={cs.swapBox}>
-    <Text style={cs.swapLbl}>🔁 可替换词</Text>
-    <View style={cs.swapRow}>
-      {p.swappableWords.map((w, i) => (
-        <TouchableOpacity
-          key={i}
-          style={cs.swapChip}
-          activeOpacity={0.78}
-          onPress={() => speak(w.word, 'ja-JP', `swap-${p.id || cur}-${i}`)}
-        >
-          <View style={cs.swapTop}>
-            <View style={cs.swapTextWrap}>
-              <Text style={cs.swapJp} numberOfLines={1} ellipsizeMode="tail">{w.word}</Text>
-              {w.reading ? <Text style={cs.swapReading} numberOfLines={1} ellipsizeMode="tail">{w.reading}</Text> : null}
+            <View style={cs.swapBox}>
+              <Text style={cs.swapLbl}>🔁 可替换词</Text>
+              <View style={cs.swapRow}>
+                {p.swappableWords.map((w, i) => (
+                  <TouchableOpacity
+                    key={i}
+                    style={cs.swapChip}
+                    activeOpacity={0.78}
+                    onPress={() => speak(w.word, 'ja-JP', `swap-${p.id || cur}-${i}`)}
+                  >
+                    <View style={cs.swapTop}>
+                      <View style={cs.swapTextWrap}>
+                        <Text style={cs.swapJp} numberOfLines={1} ellipsizeMode="tail">{w.word}</Text>
+                        {w.reading ? <Text style={cs.swapReading} numberOfLines={1} ellipsizeMode="tail">{w.reading}</Text> : null}
+                      </View>
+                    </View>
+                    <Text style={cs.swapZh} numberOfLines={1} ellipsizeMode="tail">{w.zh}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
             </View>
-          </View>
-          <Text style={cs.swapZh} numberOfLines={1} ellipsizeMode="tail">{w.zh}</Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-  </View>
-)}
-</View>
+          )}
+        </View>
         <AnimatedHook hookStyle={hookStyle} hookTxt={p.hook} />
         <TouchableOpacity style={cs.expBtn} onPress={() => setShowScene(v => !v)}>
           <Text style={cs.expTxt}>{showScene ? '收起 ↑' : '🎬 实战场景 ↓'}</Text>
         </TouchableOpacity>
-      {showScene && (
-  <>
-    <View style={cs.detail}>
-      <Text style={cs.detailTxt}>{p.scene}</Text>
-    </View>
+        {showScene && (
+          <>
+            <View style={cs.detail}>
+              <Text style={cs.detailTxt}>{p.scene}</Text>
+            </View>
 
-    {p.expandNote && p.expandNote.items && p.expandNote.items.length > 0 && (
-      <View style={cs.extraBox}>
-        <Text style={cs.extraTitle}>{p.expandNote.title}</Text>
-        {p.expandNote.items.map((item, i) => (
-          <View key={i} style={cs.extraItem}>
-            <Text style={cs.extraBullet}>•</Text>
-            <Text style={cs.extraTxt}>{item}</Text>
-          </View>
-        ))}
-      </View>
-    )}
-    {p.spotlight && (
-  <View style={cs.spotlightBox}>
-    <Text style={cs.spotlightTitle}>
-      {typeof p.spotlight === 'string' ? '站点小知识' : p.spotlight.title}
-    </Text>
-    <Text style={cs.spotlightTxt}>
-      {typeof p.spotlight === 'string' ? p.spotlight : p.spotlight.body}
-    </Text>
-  </View>
-)}
-  </>
-)}   
+            {p.expandNote && p.expandNote.items && p.expandNote.items.length > 0 && (
+              <View style={cs.extraBox}>
+                <Text style={cs.extraTitle}>{p.expandNote.title}</Text>
+                {p.expandNote.items.map((item, i) => (
+                  <View key={i} style={cs.extraItem}>
+                    <Text style={cs.extraBullet}>•</Text>
+                    <Text style={cs.extraTxt}>{item}</Text>
+                  </View>
+                ))}
+              </View>
+            )}
+            {p.spotlight && (
+              <View style={cs.spotlightBox}>
+                <Text style={cs.spotlightTitle}>
+                  {typeof p.spotlight === 'string' ? '站点小知识' : p.spotlight.title}
+                </Text>
+                <Text style={cs.spotlightTxt}>
+                  {typeof p.spotlight === 'string' ? p.spotlight : p.spotlight.body}
+                </Text>
+              </View>
+            )}
+          </>
+        )}
 
         <View style={cs.navBtns}>
-  <TouchableOpacity style={[cs.btn, cur === 0 && cs.btnOff]} onPress={() => go(-1)} disabled={cur === 0}>
-    <Text style={cs.btnTxt}>← 上一句</Text>
-  </TouchableOpacity>
+          <TouchableOpacity style={[cs.btn, cur === 0 && cs.btnOff]} onPress={() => go(-1)} disabled={cur === 0}>
+            <Text style={cs.btnTxt}>← 上一句</Text>
+          </TouchableOpacity>
 
-  <TouchableOpacity
-    style={[cs.btn, { backgroundColor: scene.color, borderColor: scene.color }]}
-    onPress={() => {
-      if (cur === phrases.length - 1) {
-        onFinish && onFinish();
-      } else {
-        go(1);
-      }
-    }}
- 
->
-  <Text style={[cs.btnTxt, { color: C.white }]}>
-    {cur === phrases.length - 1 ? '进入练习 →' : '下一句 →'}
-  </Text>
-</TouchableOpacity>
+          <TouchableOpacity
+            style={[cs.btn, { backgroundColor: scene.color, borderColor: scene.color }]}
+            onPress={() => {
+              if (cur === phrases.length - 1) {
+                onFinish && onFinish();
+              } else {
+                go(1);
+              }
+            }}
+          >
+            <Text style={[cs.btnTxt, { color: C.white }]}>
+              {cur === phrases.length - 1 ? '进入练习 →' : '下一句 →'}
+            </Text>
+          </TouchableOpacity>
         </View>
         <View style={{ height: 32 }} />
       </ScrollView>
@@ -2734,6 +2970,7 @@ const cs = StyleSheet.create({
   scTag: { borderRadius: 18, paddingHorizontal: 11, paddingVertical: 4 },
   scTagTxt: { fontSize: 11, fontWeight: '700' },
   jpTxt: { fontSize: 30, color: C.ink, fontWeight: '300', textAlign: 'center', lineHeight: 42 },
+  wordCardInline: { color: C.lava, textDecorationLine: 'underline', fontWeight: '500' },
   romaTxt: { fontSize: 12, color: C.muted, marginTop: 7 },
   trans: { marginTop: 18, alignItems: 'center' },
   zhTxt: { fontSize: 19, color: C.ink, fontWeight: '500', textAlign: 'center' },
@@ -2834,6 +3071,173 @@ const cs = StyleSheet.create({
     marginTop: 2,
     textAlign: 'center',
   },
+  wordCardPage: { flex: 1, backgroundColor: C.paper },
+  wordCardScroll: { paddingHorizontal: 18, paddingTop: 14, paddingBottom: 56 },
+  wordCardSource: { fontSize: 12, color: C.muted, textAlign: 'center', marginBottom: 12 },
+  wordCardTabs: {
+    alignSelf: 'center',
+    flexDirection: 'row',
+    backgroundColor: '#ece7de',
+    borderRadius: 999,
+    padding: 3,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#e0d7cc',
+  },
+  wordCardTab: { borderRadius: 999, paddingHorizontal: 18, paddingVertical: 8 },
+  wordCardTabAct: { backgroundColor: C.ink },
+  wordCardTabTxt: { fontSize: 12, fontWeight: '700', color: '#7a7168' },
+  wordCardTabTxtAct: { color: C.paper },
+  wordCardSheet: {
+    backgroundColor: '#fffdf8',
+    borderRadius: 18,
+    paddingHorizontal: 22,
+    paddingTop: 26,
+    paddingBottom: 28,
+    shadowColor: C.ink,
+    shadowOpacity: 0.07,
+    shadowRadius: 18,
+    shadowOffset: { width: 0, height: 6 },
+  },
+  wordHero: { alignItems: 'center', paddingTop: 10, paddingBottom: 36, borderBottomWidth: 1, borderBottomColor: '#eee7df', marginBottom: 20 },
+  wordHead: { fontSize: 72, lineHeight: 82, fontWeight: '400', color: C.ink, textAlign: 'center' },
+  wordReading: { fontSize: 18, color: C.lava, fontWeight: '700', textAlign: 'center', marginTop: 2 },
+  wordMeaning: { fontSize: 20, color: C.ink, fontWeight: '700', textAlign: 'center', marginTop: 12 },
+  wordTagRow: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 7, marginTop: 14 },
+  wordN4Tag: { fontSize: 11, color: C.muted, borderWidth: 0.5, borderColor: C.border, borderRadius: 6, paddingHorizontal: 6, paddingVertical: 2 },
+  wordMiniTag: {
+    fontSize: 11,
+    color: '#7c6f62',
+    backgroundColor: C.tag,
+    borderRadius: 999,
+    paddingHorizontal: 9,
+    paddingVertical: 4,
+    overflow: 'hidden',
+  },
+  wordFreqRow: { flexDirection: 'row', gap: 5, marginTop: 12 },
+  wordFreqDot: { fontSize: 12, color: '#d2c8bb', lineHeight: 16 },
+  wordFreqDotOn: { color: C.lava },
+  wordTrapHint: { fontSize: 11, color: C.muted, textAlign: 'center', marginTop: 2, letterSpacing: 0.5 },
+  wordTrapFlip: { backgroundColor: C.ink, borderRadius: 14, paddingHorizontal: 16, paddingVertical: 14, marginBottom: 20, minHeight: 72, justifyContent: 'center' },
+  wordTrapFlipBack: {},
+  wordTrapFront: { alignItems: 'center' },
+  wordTrapWarning: { fontSize: 11, color: '#a09080', marginBottom: 4 },
+  wordTrapFrontText: { fontSize: 17, color: C.paper, fontWeight: '600' },
+  wordTrapHintSmall: { fontSize: 11, color: '#6a6050', marginTop: 6 },
+  wordTrapBackInner: { alignItems: 'center' },
+  wordTrapBackText: { fontSize: 17, color: C.lava, fontWeight: '700' },
+  wordTrapBackSub: { fontSize: 13, color: '#a09080', marginTop: 4 },
+  wordTrapBox: {
+    backgroundColor: '#fff6ee',
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: '#efd8c8',
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    marginBottom: 24,
+  },
+  wordTrapTitle: { fontSize: 12, fontWeight: '800', color: C.lava, marginBottom: 7 },
+  wordTrapBody: { fontSize: 15, color: C.ink, lineHeight: 23, fontWeight: '600' },
+  wordCoreBlock: { alignItems: 'center', marginBottom: 22 },
+  wordSectionLabel: { fontSize: 11, fontWeight: '800', color: C.muted, letterSpacing: 1.5, marginBottom: 12 },
+  wordCoreSentence: { fontSize: 20, lineHeight: 32, color: C.ink, fontWeight: '500', textAlign: 'center', marginBottom: 8 },
+  wordCoreZh: { fontSize: 15, lineHeight: 22, color: C.muted, textAlign: 'center', marginBottom: 14 },
+  wordToken: {
+    color: '#3D5FA0',
+    backgroundColor: '#EBEEf8',
+    textDecorationLine: 'underline',
+    textDecorationStyle: 'dashed',
+    textDecorationColor: '#3D5FA0',
+  },
+  wordTokenAct: { color: C.lava, backgroundColor: C.lavaLight, fontWeight: '800' },
+  wordTokenBlue: {
+    color: '#3D5FA0',
+    textDecorationLine: 'underline',
+    textDecorationStyle: 'dashed',
+    textDecorationColor: '#3D5FA0',
+  },
+  wordTokenBlueAct: { color: '#3D5FA0', backgroundColor: '#d8dff5', fontWeight: '800' },
+  wordTokenPlain: { color: C.ink, textDecorationLine: 'underline', textDecorationStyle: 'dashed', textDecorationColor: '#c8bdb2' },
+  wordNoteHint: { fontSize: 12, color: C.muted, lineHeight: 18, textAlign: 'center' },
+  wordNotePanel: {
+    alignSelf: 'stretch',
+    backgroundColor: '#f4eee6',
+    borderRadius: 14,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: '#eaded4',
+  },
+  wordNoteTitle: { fontSize: 13, fontWeight: '800', color: C.lava, marginBottom: 5 },
+  wordNoteBody: { fontSize: 13, color: C.ink, lineHeight: 20 },
+  wordContextText: { fontSize: 14, color: C.ink, lineHeight: 24, marginBottom: 24 },
+  wordContextJa: { color: C.muted, fontSize: 14, textDecorationLine: 'underline', textDecorationStyle: 'dotted', textDecorationColor: C.muted },
+  wordRelatedBlock: { borderTopWidth: 1, borderTopColor: '#eee7df', paddingTop: 18 },
+  wordChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 9 },
+  wordChip: {
+    backgroundColor: C.tag,
+    borderWidth: 1,
+    borderColor: '#e6ded4',
+    borderRadius: 999,
+    paddingHorizontal: 13,
+    paddingVertical: 8,
+  },
+  wordChipTxt: { fontSize: 14, color: C.ink, fontWeight: '700' },
+  wordChipZh: { fontSize: 10, color: C.muted, textAlign: 'center', marginTop: 1 },
+  wordSpeaking: { color: C.lava },
+  wordBackTitle: { fontSize: 13, fontWeight: '500', color: C.muted, marginBottom: 20, letterSpacing: 1 },
+  wordBackBlock: { marginBottom: 24 },
+  wordBackHd: { fontSize: 13, fontWeight: '500', color: C.muted, marginBottom: 9 },
+  wordBackText: { fontSize: 13, lineHeight: 26, color: C.ink },
+  wordSkeletonFormula: {
+    fontSize: 15,
+    lineHeight: 23,
+    color: C.lava,
+    fontWeight: '800',
+    backgroundColor: C.lavaLight,
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    marginBottom: 10,
+    overflow: 'hidden',
+  },
+  wordSkeletonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 12,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee7df',
+  },
+  wordSkeletonJp: { flex: 1.3, fontSize: 15, color: C.ink, fontWeight: '700', lineHeight: 22 },
+  wordSkeletonZh: { flex: 1, fontSize: 13, color: C.muted, lineHeight: 22, textAlign: 'right' },
+  wordSceneLine: { fontSize: 14, color: C.ink, lineHeight: 24, marginBottom: 3 },
+  wordAccentBox: {
+    backgroundColor: '#EBEEf8',
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: '#c5cce8',
+    padding: 14,
+  },
+  wordAccentText: { fontSize: 15, color: '#3D5FA0', lineHeight: 23, fontWeight: '600' },
+  wordAccentHint: { fontSize: 11, color: '#7a8ab0', marginTop: 4, textAlign: 'center' },
+  gramParticle: { fontSize: 32, fontWeight: '700', color: '#3D5FA0', marginBottom: 2 },
+  gramLabel: { fontSize: 12, color: '#3D5FA0', letterSpacing: 1, marginBottom: 8 },
+  gramQuote: { fontSize: 13, color: '#5a6a8a', fontStyle: 'italic', marginBottom: 8, paddingLeft: 2 },
+  patRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 10, marginBottom: 8, flexWrap: 'wrap' },
+  patSlotVar: { backgroundColor: C.lavaLight, borderRadius: 10, paddingHorizontal: 12, paddingVertical: 5 },
+  patSlotVarTxt: { fontSize: 15, fontWeight: '700', color: C.lava },
+  patSlotFix: { backgroundColor: '#ede8e0', borderRadius: 10, paddingHorizontal: 12, paddingVertical: 5 },
+  patSlotFixTxt: { fontSize: 15, fontWeight: '700', color: C.ink },
+  patMeaning: { fontSize: 12, color: C.muted, marginBottom: 2 },
+  patHint: { fontSize: 10, color: C.mutedLight, marginTop: 4 },
+  pitchLabel: { fontSize: 10, fontWeight: '700', color: '#3D5FA0', letterSpacing: 1, marginBottom: 8 },
+  pitchRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 4, marginBottom: 6 },
+  pitchSyl: { alignItems: 'center', gap: 4, marginRight: 2 },
+  pitchChar: { fontSize: 18, fontWeight: '700', color: C.ink, lineHeight: 22 },
+  pitchBar: { height: 3, borderRadius: 2, width: 28 },
+  pitchBarHigh: { backgroundColor: '#3D5FA0' },
+  pitchBarLow: { backgroundColor: '#DDD5C8' },
+  pitchBody: { fontSize: 11.5, color: '#3D5FA0', lineHeight: 18 },
   taskWrap: {
     marginTop: 14,
     marginBottom: 6,
@@ -3241,17 +3645,6 @@ const pr = StyleSheet.create({
     color: C.ink,
     lineHeight: 20,
     opacity: 0.76,
-  },
-  doneBtn: {
-    marginTop: 8,
-    borderRadius: 14,
-    paddingVertical: 15,
-    alignItems: 'center',
-  },
-  doneBtnTxt: {
-    fontSize: 15,
-    color: C.white,
-    fontWeight: '700',
   },
 });
 // ─────────────────────────────────────────────
