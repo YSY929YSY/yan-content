@@ -2661,9 +2661,15 @@ function WordCardScreen({ card, onBack }) {
                 <TouchableOpacity activeOpacity={0.78} onPress={() => say(card.word, 'word-card-headword')}>
                   <Text style={[cs.wordHead, speakingKey === 'word-card-headword' && cs.wordSpeaking]}>{card.word}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity activeOpacity={0.78} onPress={() => say(card.reading, 'word-card-reading')}>
-                  <Text style={[cs.wordReading, speakingKey === 'word-card-reading' && cs.wordSpeaking]}>{card.reading}</Text>
-                </TouchableOpacity>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                  <Text style={[cs.wordReading, speakingKey === 'word-card-headword' && cs.wordSpeaking]}>{card.reading}</Text>
+                  <SpeakBtn
+                    onPress={() => say(card.word, 'word-card-headword')}
+                    speaking={speakingKey === 'word-card-headword'}
+                    size="sm"
+                    color={C.muted}
+                  />
+                </View>
                 <Text style={cs.wordMeaning}>{card.meaning}</Text>
                 <View style={cs.wordTagRow}>
                   {card.tags.filter(tag => tag !== 'N4').map(tag => <Text key={tag} style={cs.wordMiniTag}>{tag}</Text>)}
@@ -2690,13 +2696,21 @@ function WordCardScreen({ card, onBack }) {
               </TouchableOpacity>
 
               <View style={cs.wordCoreBlock}>
-                <Text style={[cs.wordCoreSentence, speakingKey === 'word-card-core' && cs.wordSpeaking]} onPress={() => say(card.coreSentence, 'word-card-core')}>
-                  すみません、
-                  <Text style={[cs.wordToken, { color: C.lava, backgroundColor: 'transparent' }, activeWordNote === 'order' && cs.wordTokenAct]} onPress={() => showNote('order', card.word)}>注文</Text>
-                  <Text style={[cs.wordTokenBlue, activeWordNote === 'wo' && cs.wordTokenBlueAct]} onPress={() => showNote('wo', 'を')}>を</Text>
-                  <Text style={[cs.wordTokenPlain, activeWordNote === 'onegai' && cs.wordTokenAct]} onPress={() => showNote('onegai', 'お願いします')}>お願いします</Text>
-                  。
-                </Text>
+                <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 10 }}>
+                  <Text style={[cs.wordCoreSentence, { flex: 1 }, speakingKey === 'word-card-core' && cs.wordSpeaking]} onPress={() => say(card.coreSentence, 'word-card-core')}>
+                    すみません、
+                    <Text style={[cs.wordToken, { color: C.lava, backgroundColor: 'transparent' }, activeWordNote === 'order' && cs.wordTokenAct]} onPress={() => showNote('order', card.word)}>注文</Text>
+                    <Text style={[cs.wordTokenBlue, activeWordNote === 'wo' && cs.wordTokenBlueAct]} onPress={() => showNote('wo', 'を')}>を</Text>
+                    <Text style={[cs.wordTokenPlain, activeWordNote === 'onegai' && cs.wordTokenAct]} onPress={() => showNote('onegai', 'お願いします')}>お願いします</Text>
+                    。
+                  </Text>
+                  <SpeakBtn
+                    onPress={() => say(card.coreSentence, 'word-card-core')}
+                    speaking={speakingKey === 'word-card-core'}
+                    size="sm"
+                    color={C.lava}
+                  />
+                </View>
                 <Text style={cs.wordCoreZh}>{card.coreTranslation}</Text>
                 {activeNote && (
                   <View style={cs.wordNotePanel}>
@@ -2781,7 +2795,15 @@ function WordCardScreen({ card, onBack }) {
               </View>
 
               <View style={cs.wordAccentBox}>
-                <Text style={cs.pitchLabel}>声调 · Pitch Accent</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+                  <Text style={cs.pitchLabel}>声调 · Pitch Accent</Text>
+                  <SpeakBtn
+                    onPress={() => say(card.word, 'word-card-pitch')}
+                    speaking={speakingKey === 'word-card-pitch'}
+                    size="sm"
+                    color={C.blue}
+                  />
+                </View>
                 <View style={cs.pitchRow}>
                   {[
                     { char: 'ちゅ', high: false },
@@ -3250,7 +3272,7 @@ const cs = StyleSheet.create({
   patMeaning: { fontSize: 12, color: C.muted, marginBottom: 2 },
   patHint: { fontSize: 10, color: C.mutedLight, marginTop: 4 },
   patInlineHint: { fontSize: 10, color: C.mutedLight },
-  pitchLabel: { fontSize: 10, fontWeight: '700', color: '#3D5FA0', letterSpacing: 1, marginBottom: 8 },
+  pitchLabel: { fontSize: 10, fontWeight: '700', color: '#3D5FA0', letterSpacing: 1 },
   pitchRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 4, marginBottom: 6 },
   pitchSyl: { alignItems: 'center', gap: 4, marginRight: 2 },
   pitchChar: { fontSize: 18, fontWeight: '700', color: C.ink, lineHeight: 22 },
