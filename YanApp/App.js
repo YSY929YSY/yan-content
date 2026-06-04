@@ -2814,23 +2814,32 @@ function WordCardScreen({ card, onBack }) {
               <View style={cs.wordBackBlock}>
                 <Text style={cs.wordBackHd}>这个骨架可以通用</Text>
                 <View style={cs.patRow}>
-                  <TouchableOpacity
-                    style={cs.patSlotVar}
-                    activeOpacity={0.78}
-                    onPress={() => {
-                      const next = (slotIdx + 1) % card.skeletons.length;
-                      setSlotIdx(next);
-                      say(card.skeletons[next].jp, `word-card-slot-${next}`);
-                    }}
-                  >
+                  <View style={cs.patSlotVar}>
                     <Text style={cs.patSlotVarTxt}>{card.skeletons[slotIdx].jp.replace('をお願いします', '')}</Text>
-                  </TouchableOpacity>
+                  </View>
                   <View style={cs.patSlotFix}><Text style={cs.patSlotFixTxt}>を</Text></View>
                   <View style={cs.patSlotFix}><Text style={cs.patSlotFixTxt}>お願いします</Text></View>
                 </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 2 }}>
-                  <Text style={cs.patMeaning}>{card.skeletons[slotIdx].zh}</Text>
-                  <Text style={cs.patInlineHint}>（点击橙色替换词）</Text>
+                <Text style={cs.patMeaning}>{card.skeletons[slotIdx].zh}</Text>
+                <View style={cs.patChipRow}>
+                  {card.skeletons.map((sk, i) => {
+                    const varWord = sk.jp.replace('をお願いします', '');
+                    const active = slotIdx === i;
+                    return (
+                      <TouchableOpacity
+                        key={i}
+                        style={[cs.patChip, active && cs.patChipActive]}
+                        activeOpacity={0.75}
+                        onPress={() => {
+                          setSlotIdx(i);
+                          say(sk.jp, `word-card-slot-${i}`);
+                        }}
+                      >
+                        <Text style={[cs.patChipWord, active && cs.patChipWordActive]}>{varWord}</Text>
+                        <Text style={[cs.patChipZh, active && cs.patChipZhActive]}>{sk.zh.replace('麻烦', '')}</Text>
+                      </TouchableOpacity>
+                    );
+                  })}
                 </View>
               </View>
 
@@ -3328,6 +3337,13 @@ const cs = StyleSheet.create({
   patMeaning: { fontSize: 12, color: C.muted, marginBottom: 2 },
   patHint: { fontSize: 10, color: C.mutedLight, marginTop: 4 },
   patInlineHint: { fontSize: 10, color: C.mutedLight },
+  patChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 12 },
+  patChip: { borderWidth: 1.5, borderColor: C.border, borderRadius: 10, paddingHorizontal: 12, paddingVertical: 7, alignItems: 'center', backgroundColor: C.white },
+  patChipActive: { borderColor: C.lava, backgroundColor: C.lavaLight },
+  patChipWord: { fontSize: 14, fontWeight: '700', color: C.ink },
+  patChipWordActive: { color: C.lava },
+  patChipZh: { fontSize: 10, color: C.muted, marginTop: 2 },
+  patChipZhActive: { color: C.lava },
   pitchLabel: { fontSize: 10, fontWeight: '700', color: '#3D5FA0', letterSpacing: 1 },
   pitchRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 4, marginBottom: 6 },
   pitchSyl: { alignItems: 'center', gap: 4, marginRight: 2 },
