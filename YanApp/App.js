@@ -2690,6 +2690,7 @@ function WordCardScreen({ card, onBack }) {
                   </View>
                 ) : (
                   <View style={cs.wordTrapBackInner}>
+                    <Text style={cs.wordTrapBackSub}>注文 ≠ 注解文字</Text>
                     <Text style={cs.wordTrapBackText}>真实含义：点餐 / 下单</Text>
                     <Text style={cs.wordTrapBackSub}>是动作，不是文字。</Text>
                   </View>
