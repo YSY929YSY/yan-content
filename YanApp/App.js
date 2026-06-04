@@ -2626,6 +2626,8 @@ function WordCardScreen({ card, onBack }) {
   const [trapFlipped, setTrapFlipped] = useState(false);
   const [activeWordNote, setActiveWordNote] = useState(null);
   const [slotIdx, setSlotIdx] = useState(0);
+  const [examplesOpen, setExamplesOpen] = useState(false);
+  const [examplesExpanded, setExamplesExpanded] = useState(false);
   const { speak, speakingKey } = useSpeech();
   const say = (text, key) => speak(text, 'ja-JP', key);
   const showNote = (key, text) => {
@@ -2730,6 +2732,49 @@ function WordCardScreen({ card, onBack }) {
                 </Text>
                 {' '}表示下单完成。
               </Text>
+
+              {card.examples && card.examples.length > 0 && (
+                <View style={cs.examplesDrawer}>
+                  <TouchableOpacity
+                    style={cs.examplesToggle}
+                    onPress={() => setExamplesOpen(v => !v)}
+                    activeOpacity={0.82}
+                  >
+                    <Text style={cs.examplesToggleTxt}>在真实句子里再遇见它 {examplesOpen ? '↑' : '→'}</Text>
+                  </TouchableOpacity>
+                  {examplesOpen && (
+                    <>
+                      {(examplesExpanded ? card.examples : card.examples.slice(0, 2)).map((ex, i) => (
+                        <View key={i} style={cs.exampleRow}>
+                          <View style={{ flex: 1 }}>
+                            <Text style={cs.exampleJp}>{ex.jp}</Text>
+                            <Text style={cs.exampleZh}>{ex.zh}</Text>
+                            <View style={cs.exampleMeta}>
+                              <Text style={cs.exampleScene}>{ex.scene}</Text>
+                              <Text style={cs.exampleWho}>{ex.who === 'listen' ? '👂' : '🗣'}</Text>
+                            </View>
+                          </View>
+                          <SpeakBtn
+                            onPress={() => say(ex.jp, `word-card-ex-${i}`)}
+                            speaking={speakingKey === `word-card-ex-${i}`}
+                            size="sm"
+                            color={C.muted}
+                          />
+                        </View>
+                      ))}
+                      {!examplesExpanded && card.examples.length > 2 && (
+                        <TouchableOpacity
+                          style={cs.examplesExpandBtn}
+                          onPress={() => setExamplesExpanded(true)}
+                          activeOpacity={0.75}
+                        >
+                          <Text style={cs.examplesExpandTxt}>展开全部 ↓</Text>
+                        </TouchableOpacity>
+                      )}
+                    </>
+                  )}
+                </View>
+              )}
 
               <View style={cs.wordRelatedBlock}>
                 <Text style={cs.wordSectionLabel}>在餐厅还会遇到</Text>
@@ -3213,6 +3258,17 @@ const cs = StyleSheet.create({
   wordContextText: { fontSize: 14, color: C.ink, lineHeight: 24, marginBottom: 24 },
   wordContextJa: { color: C.muted, fontSize: 14, textDecorationLine: 'underline', textDecorationStyle: 'dotted', textDecorationColor: C.muted },
   wordRelatedBlock: { borderTopWidth: 1, borderTopColor: '#eee7df', paddingTop: 18 },
+  examplesDrawer: { borderTopWidth: 1, borderTopColor: '#eee7df', paddingTop: 14, marginBottom: 4 },
+  examplesToggle: { paddingVertical: 4 },
+  examplesToggleTxt: { fontSize: 13, fontWeight: '700', color: C.ink },
+  exampleRow: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: C.border },
+  exampleJp: { fontSize: 14, color: C.ink, fontWeight: '600', lineHeight: 21 },
+  exampleZh: { fontSize: 12, color: C.muted, lineHeight: 18, marginTop: 2 },
+  exampleMeta: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 4 },
+  exampleScene: { fontSize: 11, color: C.muted, backgroundColor: C.tag, borderRadius: 6, paddingHorizontal: 6, paddingVertical: 2 },
+  exampleWho: { fontSize: 13 },
+  examplesExpandBtn: { paddingVertical: 10, alignItems: 'center' },
+  examplesExpandTxt: { fontSize: 12, color: C.muted, fontWeight: '600' },
   wordChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 9 },
   wordChip: {
     backgroundColor: C.tag,
