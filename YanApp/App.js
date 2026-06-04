@@ -2713,6 +2713,20 @@ function WordCardScreen({ card, onBack }) {
                   />
                 </View>
                 <Text style={cs.wordCoreZh}>{card.coreTranslation}</Text>
+                <View style={cs.wordNoteChipRow}>
+                  {Object.entries(card.notes).map(([key, note]) => (
+                    <TouchableOpacity
+                      key={key}
+                      style={[cs.wordNoteChip, activeWordNote === key && cs.wordNoteChipActive]}
+                      onPress={() => setActiveWordNote(prev => prev === key ? null : key)}
+                      activeOpacity={0.75}
+                    >
+                      <Text style={[cs.wordNoteChipTxt, activeWordNote === key && cs.wordNoteChipTxtActive]}>
+                        {note.title}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
                 {activeNote && (
                   <View style={cs.wordNotePanel}>
                     <Text style={cs.wordNoteTitle}>{activeNote.title}</Text>
@@ -3247,6 +3261,11 @@ const cs = StyleSheet.create({
   wordTokenBlueAct: { color: '#3D5FA0', backgroundColor: '#d8dff5', fontWeight: '800' },
   wordTokenPlain: { color: C.ink, textDecorationLine: 'underline', textDecorationStyle: 'dashed', textDecorationColor: '#c8bdb2' },
   wordNoteHint: { fontSize: 12, color: C.muted, lineHeight: 18, textAlign: 'center' },
+  wordNoteChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 10 },
+  wordNoteChip: { borderRadius: 999, borderWidth: 1, borderColor: C.border, paddingHorizontal: 10, paddingVertical: 4, backgroundColor: C.white },
+  wordNoteChipActive: { borderColor: C.lava, backgroundColor: C.lavaLight },
+  wordNoteChipTxt: { fontSize: 11, fontWeight: '700', color: C.muted },
+  wordNoteChipTxtActive: { color: C.lava },
   wordNotePanel: {
     alignSelf: 'stretch',
     backgroundColor: '#f4eee6',
