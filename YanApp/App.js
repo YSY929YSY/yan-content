@@ -2575,7 +2575,8 @@ const WORD_CARDS = {
   order: {
     word: '注文',
     reading: 'ちゅうもん',
-    meaning: '点餐 · 下单',
+    meaning: '在餐厅是行动信号——你在说「我准备好了」',
+    literalMeaning: '点餐 · 下单',
     tags: ['旅行高频', '餐厅', 'N4'],
     frequency: 4,
     coreSentence: 'すみません、注文をお願いします。',
@@ -2584,7 +2585,7 @@ const WORD_CARDS = {
     notes: {
       order: {
         title: '注文',
-        body: '注文：点餐 / 下单。这里是动作名词，告诉店员“我准备开始点餐了”。',
+        body: '注文是行动信号，不只是”点餐”这个动作名词。你说出这个词，等于告诉店员：我选好了，可以来了。',
       },
       wo: {
         title: 'を',
@@ -2595,6 +2596,12 @@ const WORD_CARDS = {
         body: 'お願いします：礼貌请求的万能结尾。比直接说ください更软，对店员很自然。',
       },
     },
+    examples: [
+      { jp: 'すみません、注文をお願いします。', zh: '不好意思，我要点餐。', scene: '餐厅', who: 'say', level: 'N4' },
+      { jp: '注文してもいいですか？', zh: '现在可以点单吗？', scene: '咖啡馆', who: 'say', level: 'N4' },
+      { jp: 'ご注文はお決まりですか？', zh: '您想好点什么了吗？', scene: '餐厅', who: 'listen', level: 'N4' },
+      { jp: '昨日、本を注文しました。', zh: '昨天我下单买了一本书。', scene: '网购', who: 'say', level: 'N4' },
+    ],
     related: [
       { jp: '会計', zh: '结账' },
       { jp: 'ください', zh: '请给我' },

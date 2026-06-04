@@ -1518,11 +1518,11 @@
           "en": "We're ready to order.",
           "jlpt": "N4",
           "hookType": "t",
-          "hook": "注文陷阱！不是注释文字，是点餐/订购。看到注文=可以点单了。",
+          "hook": "注文＝点餐/下单，不是注解文字",
           "links": [
             {
               "lang": "ZH",
-              "word": "注文≠注释，=点餐"
+              "word": "注文≠注解，=点餐"
             },
             {
               "lang": "ES",
