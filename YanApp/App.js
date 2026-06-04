@@ -2595,6 +2595,10 @@ const WORD_CARDS = {
         title: 'お願いします',
         body: 'お願いします：礼貌请求的万能结尾。比直接说ください更软，对店员很自然。',
       },
+      es: {
+        title: 'ES｜pedir',
+        body: '源自拉丁 petere「寻求、去要」。英文 appetite、petition 同根。点餐这件事，西语和日语都落在「我要去要」这个动作上。',
+      },
     },
     examples: [
       { jp: 'すみません、注文をお願いします。', zh: '不好意思，我要点餐。', scene: '餐厅', who: 'say', level: 'N4' },
