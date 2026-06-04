@@ -2804,7 +2804,7 @@ function CardScreen({ sceneState, onBack, onFinish }) {
   const p = phrases[cur];
   const hookStyle = HOOK_STYLES[p?.hookType] || HOOK_STYLES.e;
   const go = (d) => { setCur(i => i + d); setShowScene(false); setWordCardKey(null); };
-  const canOpenOrderWordCard = p?.wordCard === 'order';
+  const canOpenOrderWordCard = scene.id === 'restaurant' && p?.jp === 'すみません、注文をお願いします。';
   if (wordCardKey && WORD_CARDS[wordCardKey]) {
     return <WordCardScreen card={WORD_CARDS[wordCardKey]} onBack={() => setWordCardKey(null)} />;
   }
