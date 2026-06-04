@@ -2621,7 +2621,7 @@ const WORD_CARDS = {
   },
 };
 
-function WordCardScreen({ card, onBack }) {
+function WordCardScreen({ card, onBack, onDone }) {
   const [side, setSide] = useState('front');
   const [trapFlipped, setTrapFlipped] = useState(false);
   const [activeWordNote, setActiveWordNote] = useState(null);
@@ -2885,6 +2885,11 @@ function WordCardScreen({ card, onBack }) {
           )}
         </Pressable>
         <Text style={cs.wordCardSource}>{card.source}</Text>
+        {onDone && (
+          <TouchableOpacity style={cs.wordDoneBtn} onPress={onDone} activeOpacity={0.85}>
+            <Text style={cs.wordDoneBtnTxt}>学完这个词，继续 →</Text>
+          </TouchableOpacity>
+        )}
       </ScrollView>
     </View>
   );
@@ -2902,7 +2907,7 @@ function CardScreen({ sceneState, onBack, onFinish }) {
   const go = (d) => { setCur(i => i + d); setShowScene(false); setWordCardKey(null); };
   const canOpenOrderWordCard = scene.id === 'restaurant' && p?.jp === 'すみません、注文をお願いします。';
   if (wordCardKey && WORD_CARDS[wordCardKey]) {
-    return <WordCardScreen card={WORD_CARDS[wordCardKey]} onBack={() => setWordCardKey(null)} />;
+    return <WordCardScreen card={WORD_CARDS[wordCardKey]} onBack={() => setWordCardKey(null)} onDone={() => { setWordCardKey(null); go(1); }} />;
   }
   if (!p) {
     return (
@@ -3177,6 +3182,8 @@ const cs = StyleSheet.create({
   wordCardPage: { flex: 1, backgroundColor: C.paper },
   wordCardScroll: { paddingHorizontal: 18, paddingTop: 14, paddingBottom: 56 },
   wordCardSource: { fontSize: 12, color: C.muted, textAlign: 'center', marginBottom: 12 },
+  wordDoneBtn: { marginHorizontal: 18, marginBottom: 32, marginTop: 4, backgroundColor: C.ink, borderRadius: 14, paddingVertical: 14, alignItems: 'center' },
+  wordDoneBtnTxt: { fontSize: 15, color: C.white, fontWeight: '700' },
   wordCardTabs: {
     alignSelf: 'center',
     flexDirection: 'row',
