@@ -2672,7 +2672,6 @@ function WordCardScreen({ card, onBack }) {
                     color={C.muted}
                   />
                 </View>
-                <Text style={cs.wordMeaning}>{card.meaning}</Text>
                 <View style={cs.wordTagRow}>
                   {card.tags.filter(tag => tag !== 'N4').map(tag => <Text key={tag} style={cs.wordMiniTag}>{tag}</Text>)}
                 </View>
@@ -2796,8 +2795,7 @@ function WordCardScreen({ card, onBack }) {
                 <Text style={cs.gramQuote}>「把注文传送给对方处理」</Text>
                 <Text style={cs.wordBackText}>
                   を = 把前面的词变成动作施加的对象。{'\n'}
-                  注文をお願いします = 把「点餐这件事」交给服务员执行。{'\n'}
-                  去掉を，句子不完整。
+                  注文をお願いします = 把「点餐这件事」交给服务员执行。
                 </Text>
               </View>
 
@@ -2811,7 +2809,7 @@ function WordCardScreen({ card, onBack }) {
                 </Text>
               </View>
 
-              <View style={cs.wordBackBlock}>
+              <View style={[cs.wordBackBlock, cs.patContainer]}>
                 <Text style={cs.wordBackHd}>这个骨架可以通用</Text>
                 <View style={cs.patRow}>
                   <View style={cs.patSlotVar}>
@@ -2848,16 +2846,12 @@ function WordCardScreen({ card, onBack }) {
                 <Text style={cs.wordBackText}>餐厅 · 居酒屋 · 咖啡馆 · 网购</Text>
               </View>
 
-              <View style={cs.wordAccentBox}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-                  <Text style={cs.pitchLabel}>声调 · Pitch Accent</Text>
-                  <SpeakBtn
-                    onPress={() => say(card.word, 'word-card-pitch')}
-                    speaking={speakingKey === 'word-card-pitch'}
-                    size="sm"
-                    color={C.blue}
-                  />
-                </View>
+              <TouchableOpacity
+                style={cs.wordAccentBox}
+                activeOpacity={0.75}
+                onPress={() => say(card.word, 'word-card-pitch')}
+              >
+                <Text style={[cs.pitchLabel, { marginBottom: 8 }]}>声调 · Pitch Accent · 点击朗读</Text>
                 <View style={cs.pitchRow}>
                   {[
                     { char: 'ちゅ', high: false },
@@ -2871,8 +2865,7 @@ function WordCardScreen({ card, onBack }) {
                     </View>
                   ))}
                 </View>
-                <Text style={cs.pitchBody}>低→高→高→低。第一拍低，第二拍起跳，第四拍落下。标准东京音。</Text>
-              </View>
+              </TouchableOpacity>
             </>
           )}
         </Pressable>
@@ -3344,6 +3337,7 @@ const cs = StyleSheet.create({
   patChipWordActive: { color: C.lava },
   patChipZh: { fontSize: 10, color: C.muted, marginTop: 2 },
   patChipZhActive: { color: C.lava },
+  patContainer: { backgroundColor: '#fdf0ec', borderRadius: 14, borderWidth: 1, borderColor: '#f4cfc4', padding: 14 },
   pitchLabel: { fontSize: 10, fontWeight: '700', color: '#3D5FA0', letterSpacing: 1 },
   pitchRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 4, marginBottom: 6 },
   pitchSyl: { alignItems: 'center', gap: 4, marginRight: 2 },
