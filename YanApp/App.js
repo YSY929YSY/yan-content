@@ -2707,7 +2707,6 @@ function WordCardScreen({ card, onBack }) {
               </View>
 
               <Text style={cs.wordContextText}>
-                在餐厅是行动信号——你在说「我准备好了」。{'\n'}
                 网购确认订单时同样用，日本人会说{' '}
                 <Text
                   style={cs.wordContextJa}
@@ -2754,7 +2753,7 @@ function WordCardScreen({ card, onBack }) {
               </View>
 
               <View style={cs.wordBackBlock}>
-                <Text style={cs.wordBackHd}>这个骨架可以替换</Text>
+                <Text style={cs.wordBackHd}>这个骨架可以通用</Text>
                 <View style={cs.patRow}>
                   <TouchableOpacity
                     style={cs.patSlotVar}
@@ -2770,8 +2769,10 @@ function WordCardScreen({ card, onBack }) {
                   <View style={cs.patSlotFix}><Text style={cs.patSlotFixTxt}>を</Text></View>
                   <View style={cs.patSlotFix}><Text style={cs.patSlotFixTxt}>お願いします</Text></View>
                 </View>
-                <Text style={cs.patMeaning}>{card.skeletons[slotIdx].zh}</Text>
-                <Text style={cs.patHint}>点击橙色词替换 →</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 2 }}>
+                  <Text style={cs.patMeaning}>{card.skeletons[slotIdx].zh}</Text>
+                  <Text style={cs.patInlineHint}>（点击橙色替换词）</Text>
+                </View>
               </View>
 
               <View style={cs.wordBackBlock}>
@@ -3248,6 +3249,7 @@ const cs = StyleSheet.create({
   patSlotFixTxt: { fontSize: 15, fontWeight: '700', color: C.ink },
   patMeaning: { fontSize: 12, color: C.muted, marginBottom: 2 },
   patHint: { fontSize: 10, color: C.mutedLight, marginTop: 4 },
+  patInlineHint: { fontSize: 10, color: C.mutedLight },
   pitchLabel: { fontSize: 10, fontWeight: '700', color: '#3D5FA0', letterSpacing: 1, marginBottom: 8 },
   pitchRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 4, marginBottom: 6 },
   pitchSyl: { alignItems: 'center', gap: 4, marginRight: 2 },
