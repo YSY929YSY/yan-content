@@ -2906,38 +2906,40 @@ function CardScreen({ sceneState, onBack, onFinish }) {
           )}
         </View>
         <AnimatedHook hookStyle={hookStyle} hookTxt={p.hook} />
-        <TouchableOpacity style={cs.expBtn} onPress={() => setShowScene(v => !v)}>
-          <Text style={cs.expTxt}>{showScene ? '收起 ↑' : '🎬 实战场景 ↓'}</Text>
+        <TouchableOpacity style={cs.sceneCard} onPress={() => setShowScene(v => !v)} activeOpacity={0.85}>
+          <View style={cs.sceneCardHeader}>
+            <Text style={cs.sceneCardTitle}>🎬 实战场景</Text>
+            <Text style={cs.sceneCardArrow}>{showScene ? '↑' : '↓'}</Text>
+          </View>
+          {showScene && (
+            <>
+              <View style={cs.sceneCardBody}>
+                <Text style={cs.detailTxt}>{p.scene}</Text>
+              </View>
+              {p.expandNote && p.expandNote.items && p.expandNote.items.length > 0 && (
+                <View style={cs.sceneCardExtra}>
+                  <Text style={cs.extraTitle}>{p.expandNote.title}</Text>
+                  {p.expandNote.items.map((item, i) => (
+                    <View key={i} style={cs.extraItem}>
+                      <Text style={cs.extraBullet}>•</Text>
+                      <Text style={cs.extraTxt}>{item}</Text>
+                    </View>
+                  ))}
+                </View>
+              )}
+              {p.spotlight && (
+                <View style={cs.sceneCardSpotlight}>
+                  <Text style={cs.spotlightTitle}>
+                    {typeof p.spotlight === 'string' ? '站点小知识' : p.spotlight.title}
+                  </Text>
+                  <Text style={cs.spotlightTxt}>
+                    {typeof p.spotlight === 'string' ? p.spotlight : p.spotlight.body}
+                  </Text>
+                </View>
+              )}
+            </>
+          )}
         </TouchableOpacity>
-        {showScene && (
-          <>
-            <View style={cs.detail}>
-              <Text style={cs.detailTxt}>{p.scene}</Text>
-            </View>
-
-            {p.expandNote && p.expandNote.items && p.expandNote.items.length > 0 && (
-              <View style={cs.extraBox}>
-                <Text style={cs.extraTitle}>{p.expandNote.title}</Text>
-                {p.expandNote.items.map((item, i) => (
-                  <View key={i} style={cs.extraItem}>
-                    <Text style={cs.extraBullet}>•</Text>
-                    <Text style={cs.extraTxt}>{item}</Text>
-                  </View>
-                ))}
-              </View>
-            )}
-            {p.spotlight && (
-              <View style={cs.spotlightBox}>
-                <Text style={cs.spotlightTitle}>
-                  {typeof p.spotlight === 'string' ? '站点小知识' : p.spotlight.title}
-                </Text>
-                <Text style={cs.spotlightTxt}>
-                  {typeof p.spotlight === 'string' ? p.spotlight : p.spotlight.body}
-                </Text>
-              </View>
-            )}
-          </>
-        )}
 
         <View style={cs.navBtns}>
           <TouchableOpacity style={[cs.btn, cur === 0 && cs.btnOff]} onPress={() => go(-1)} disabled={cur === 0}>
@@ -2987,8 +2989,13 @@ const cs = StyleSheet.create({
   zhTxt: { fontSize: 19, color: C.ink, fontWeight: '500', textAlign: 'center' },
   enTxt: { fontSize: 12, color: C.muted, marginTop: 4, fontStyle: 'italic', textAlign: 'center' },
   linkLbl: { fontSize: 10, fontWeight: '700', color: C.muted, letterSpacing: 1, marginBottom: 2 },
-  expBtn: { alignItems: 'center', paddingVertical: 12, borderWidth: 1.5, borderColor: C.border, borderRadius: 12, marginBottom: 10, backgroundColor: C.white },
-  expTxt: { fontSize: 13, color: C.muted },
+  sceneCard: { borderWidth: 1.5, borderColor: C.border, borderRadius: 12, marginBottom: 10, backgroundColor: C.white, overflow: 'hidden' },
+  sceneCardHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 14, paddingVertical: 12 },
+  sceneCardTitle: { fontSize: 13, color: C.muted, fontWeight: '600' },
+  sceneCardArrow: { fontSize: 13, color: C.muted },
+  sceneCardBody: { borderTopWidth: 1, borderTopColor: C.border, padding: 14 },
+  sceneCardExtra: { borderTopWidth: 1, borderTopColor: C.border, padding: 14 },
+  sceneCardSpotlight: { borderTopWidth: 1, borderTopColor: C.border, padding: 14 },
   detail: { backgroundColor: C.white, borderRadius: 14, padding: 16, marginBottom: 10, borderWidth: 1.5, borderColor: C.border },
   detailLbl: { fontSize: 10, fontWeight: '700', color: C.muted, marginBottom: 7, letterSpacing: 1 },
   detailTxt: { fontSize: 14, color: C.ink, lineHeight: 22 },
