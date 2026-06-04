@@ -2758,24 +2758,29 @@ function WordCardScreen({ card, onBack, onDone }) {
                   </TouchableOpacity>
                   {examplesOpen && (
                     <>
-                      {(examplesExpanded ? card.examples : card.examples.slice(0, 2)).map((ex, i) => (
-                        <View key={i} style={cs.exampleRow}>
-                          <View style={{ flex: 1 }}>
-                            <Text style={cs.exampleJp}>{ex.jp}</Text>
-                            <Text style={cs.exampleZh}>{ex.zh}</Text>
-                            <View style={cs.exampleMeta}>
-                              <Text style={cs.exampleScene}>{ex.scene}</Text>
-                              <Text style={cs.exampleWho}>{ex.who === 'listen' ? '👂' : '🗣'}</Text>
+                      {(examplesExpanded ? card.examples : card.examples.slice(0, 2)).map((ex, i) => {
+                        const isListen = ex.who === 'listen';
+                        return (
+                          <View key={i} style={[cs.exampleRow, isListen && cs.exampleRowListen]}>
+                            <View style={{ flex: 1 }}>
+                              <Text style={[cs.exampleJp, isListen && cs.exampleJpListen]}>{ex.jp}</Text>
+                              <Text style={cs.exampleZh}>{ex.zh}</Text>
+                              <View style={cs.exampleMeta}>
+                                <Text style={[cs.exampleScene, isListen && cs.exampleSceneListen]}>{ex.scene}</Text>
+                                <Text style={[cs.exampleWhoLabel, isListen ? cs.exampleWhoListen : cs.exampleWhoSay]}>
+                                  {isListen ? '👂 听懂就好' : '🗣 开口练'}
+                                </Text>
+                              </View>
                             </View>
+                            <SpeakBtn
+                              onPress={() => say(ex.jp, `word-card-ex-${i}`)}
+                              speaking={speakingKey === `word-card-ex-${i}`}
+                              size="sm"
+                              color={isListen ? C.blue : C.muted}
+                            />
                           </View>
-                          <SpeakBtn
-                            onPress={() => say(ex.jp, `word-card-ex-${i}`)}
-                            speaking={speakingKey === `word-card-ex-${i}`}
-                            size="sm"
-                            color={C.muted}
-                          />
-                        </View>
-                      ))}
+                        );
+                      })}
                       {!examplesExpanded && card.examples.length > 2 && (
                         <TouchableOpacity
                           style={cs.examplesExpandBtn}
@@ -3290,12 +3295,17 @@ const cs = StyleSheet.create({
   examplesDrawer: { borderTopWidth: 1, borderTopColor: '#eee7df', paddingTop: 14, marginBottom: 4 },
   examplesToggle: { paddingVertical: 4 },
   examplesToggleTxt: { fontSize: 13, fontWeight: '700', color: C.ink },
-  exampleRow: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: C.border },
+  exampleRow: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 10, paddingHorizontal: 8, borderRadius: 10, borderBottomWidth: 1, borderBottomColor: C.border, backgroundColor: C.white },
+  exampleRowListen: { backgroundColor: C.blueLight },
   exampleJp: { fontSize: 14, color: C.ink, fontWeight: '600', lineHeight: 21 },
+  exampleJpListen: { color: C.blue },
   exampleZh: { fontSize: 12, color: C.muted, lineHeight: 18, marginTop: 2 },
   exampleMeta: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 4 },
   exampleScene: { fontSize: 11, color: C.muted, backgroundColor: C.tag, borderRadius: 6, paddingHorizontal: 6, paddingVertical: 2 },
-  exampleWho: { fontSize: 13 },
+  exampleSceneListen: { backgroundColor: '#d8e8f8', color: C.blue },
+  exampleWhoLabel: { fontSize: 11, fontWeight: '600', borderRadius: 6, paddingHorizontal: 6, paddingVertical: 2 },
+  exampleWhoSay: { color: C.muted, backgroundColor: C.tag },
+  exampleWhoListen: { color: C.blue, backgroundColor: '#d8e8f8' },
   examplesExpandBtn: { paddingVertical: 10, alignItems: 'center' },
   examplesExpandTxt: { fontSize: 12, color: C.muted, fontWeight: '600' },
   wordChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 9 },
