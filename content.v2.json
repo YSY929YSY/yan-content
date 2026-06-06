@@ -1124,7 +1124,8 @@
             }
           ],
           "scene": "听懂这句，就能减少坐过站的概率。",
-          "culture": ""
+          "culture": "",
+          "speaker": "staff"
         },
         {
           "id": 8,
@@ -1310,7 +1311,8 @@
             }
           ],
           "scene": "听到这句就别再冲门了。",
-          "culture": ""
+          "culture": "",
+          "speaker": "staff"
         },
         {
           "id": 14,
@@ -1861,7 +1863,8 @@
             }
           ],
           "scene": "结账时收银员特别常问。",
-          "culture": ""
+          "culture": "",
+          "speaker": "staff"
         },
         {
           "id": 2,
@@ -1915,7 +1918,8 @@
             }
           ],
           "scene": "收银员主动问你时，先听懂这句最重要。",
-          "culture": ""
+          "culture": "",
+          "speaker": "staff"
         },
         {
           "id": 4,
@@ -1973,7 +1977,8 @@
             }
           ],
           "scene": "法规改了之后，这句几乎成了固定流程。",
-          "culture": ""
+          "culture": "",
+          "speaker": "staff"
         },
         {
           "id": 6,
