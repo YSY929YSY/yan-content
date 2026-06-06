@@ -2638,7 +2638,7 @@ const WORD_CARDS = {
           { text: '済みません', sub: '还没了结', active: true },
         ],
         transform: '→ ません',
-        body: '打扰你 / 寻求帮助 = 占用了对方的注意力与时间\n　　(未了结态)',
+        body: '打扰你 / 寻求帮助 = 占用了对方的注意力与时间 (未了结态)',
       },
       {
         type: 'compare',
@@ -3128,7 +3128,6 @@ function WordCardScreen({ card, onBack, onDone }) {
                           <TouchableOpacity key={i} style={[cs.patChip, active && cs.patChipActive]} activeOpacity={0.75}
                             onPress={() => { setSlotIdx(i); say(sk.jp, `word-card-slot-${i}`); }}>
                             <Text style={[cs.patChipWord, active && cs.patChipWordActive]}>{getVar(sk)}</Text>
-                            <Text style={[cs.patChipZh, active && cs.patChipZhActive]}>{sk.zh}</Text>
                           </TouchableOpacity>
                         );
                       })}
