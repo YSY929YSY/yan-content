@@ -17,7 +17,7 @@ import * as Speech from 'expo-speech';
 import { Audio } from 'expo-av';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  ActivityIndicator, Alert, Animated, Dimensions, Image,
+  ActivityIndicator, Alert, Animated, Dimensions, Image, Modal,
   Platform, Pressable, SafeAreaView, ScrollView,
   StatusBar, StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
@@ -2616,7 +2616,7 @@ const WORD_CARDS = {
       { jp: '注文をお願いします', zh: '麻烦点餐' },
       { jp: '会計をお願いします', zh: '麻烦结账' },
       { jp: '予約をお願いします', zh: '麻烦预约' },
-      { jp: '確認をお願いします', zh: '麻烦确认' },
+      { jp: '写真をお願いします', zh: '麻烦帮我拍照' },
     ],
   },
 };
@@ -2626,8 +2626,8 @@ function WordCardScreen({ card, onBack, onDone }) {
   const [trapFlipped, setTrapFlipped] = useState(false);
   const [activeWordNote, setActiveWordNote] = useState(null);
   const [slotIdx, setSlotIdx] = useState(0);
-  const [examplesOpen, setExamplesOpen] = useState(false);
-  const [examplesExpanded, setExamplesExpanded] = useState(false);
+  const [examplesModal, setExamplesModal] = useState(false);
+  const [exModalExpanded, setExModalExpanded] = useState(false);
   const { speak, speakingKey } = useSpeech();
   const say = (text, key) => speak(text, 'ja-JP', key);
   const showNote = (key, text) => {
@@ -2644,21 +2644,23 @@ function WordCardScreen({ card, onBack, onDone }) {
       </View>
       <ScrollView contentContainerStyle={cs.wordCardScroll} showsVerticalScrollIndicator={false}>
         <Pressable style={cs.wordCardSheet} onPress={() => setSide(s => s === 'front' ? 'back' : 'front')}>
-          <View style={cs.wordCardTabs}>
-            {[
-              { id: 'front', label: '真实世界' },
-              { id: 'back', label: '语法深度' },
-            ].map(tab => (
-              <TouchableOpacity key={tab.id} style={[cs.wordCardTab, side === tab.id && cs.wordCardTabAct]} onPress={() => setSide(tab.id)}>
-                <Text style={[cs.wordCardTabTxt, side === tab.id && cs.wordCardTabTxtAct]}>{tab.label}</Text>
-              </TouchableOpacity>
-            ))}
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 16 }}>
+            <View style={{ flex: 1, alignItems: 'center' }}>
+              <View style={cs.wordCardTabs}>
+                {[
+                  { id: 'front', label: '真实世界' },
+                  { id: 'back', label: '语法深度' },
+                ].map(tab => (
+                  <TouchableOpacity key={tab.id} style={[cs.wordCardTab, side === tab.id && cs.wordCardTabAct]} onPress={() => setSide(tab.id)}>
+                    <Text style={[cs.wordCardTabTxt, side === tab.id && cs.wordCardTabTxtAct]}>{tab.label}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </View>
+            <Text style={cs.wordN4Tag}>N4</Text>
           </View>
           {side === 'front' ? (
             <>
-              <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginBottom: 4 }}>
-                <Text style={cs.wordN4Tag}>N4</Text>
-              </View>
               <View style={cs.wordHero}>
                 <TouchableOpacity activeOpacity={0.78} onPress={() => say(card.word, 'word-card-headword')}>
                   <Text style={[cs.wordHead, speakingKey === 'word-card-headword' && cs.wordSpeaking]}>{card.word}</Text>
@@ -2698,7 +2700,7 @@ function WordCardScreen({ card, onBack, onDone }) {
               </TouchableOpacity>
 
               <View style={cs.wordCoreBlock}>
-                <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 10 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
                   <Text style={[cs.wordCoreSentence, { flex: 1 }, speakingKey === 'word-card-core' && cs.wordSpeaking]} onPress={() => say(card.coreSentence, 'word-card-core')}>
                     すみません、
                     <Text style={[cs.wordToken, { color: C.lava, backgroundColor: 'transparent' }, activeWordNote === 'order' && cs.wordTokenAct]} onPress={() => showNote('order', card.word)}>注文</Text>
@@ -2730,148 +2732,36 @@ function WordCardScreen({ card, onBack, onDone }) {
                 </View>
                 {activeNote && (
                   <View style={cs.wordNotePanel}>
-                    <Text style={cs.wordNoteTitle}>{activeNote.title}</Text>
                     <Text style={cs.wordNoteBody}>{activeNote.body}</Text>
                   </View>
                 )}
               </View>
 
               <Text style={cs.wordContextText}>
-                网购确认订单时同样用，日本人会说{' '}
                 <Text
                   style={cs.wordContextJa}
                   onPress={() => say('注文しました', 'word-card-ctx-shimashita')}
                 >
                   注文しました
                 </Text>
-                {' '}表示下单完成。
+                ，网购里也常见。
               </Text>
 
               {card.examples && card.examples.length > 0 && (
-                <View style={cs.examplesDrawer}>
-                  <TouchableOpacity
-                    style={cs.examplesToggle}
-                    onPress={() => setExamplesOpen(v => !v)}
-                    activeOpacity={0.82}
-                  >
-                    <Text style={cs.examplesToggleTxt}>在真实句子里再遇见它 {examplesOpen ? '↑' : '→'}</Text>
-                  </TouchableOpacity>
-                  {examplesOpen && (
-                    <>
-                      {(examplesExpanded ? card.examples : card.examples.slice(0, 2)).map((ex, i) => {
-                        const isListen = ex.who === 'listen';
-                        return (
-                          <View key={i} style={[cs.exampleRow, isListen && cs.exampleRowListen]}>
-                            <View style={{ flex: 1 }}>
-                              <Text style={[cs.exampleJp, isListen && cs.exampleJpListen]}>{ex.jp}</Text>
-                              <Text style={cs.exampleZh}>{ex.zh}</Text>
-                              <View style={cs.exampleMeta}>
-                                <Text style={[cs.exampleScene, isListen && cs.exampleSceneListen]}>{ex.scene}</Text>
-                                <Text style={[cs.exampleWhoLabel, isListen ? cs.exampleWhoListen : cs.exampleWhoSay]}>
-                                  {isListen ? '👂 听懂就好' : '🗣 开口练'}
-                                </Text>
-                              </View>
-                            </View>
-                            <SpeakBtn
-                              onPress={() => say(ex.jp, `word-card-ex-${i}`)}
-                              speaking={speakingKey === `word-card-ex-${i}`}
-                              size="sm"
-                              color={isListen ? C.blue : C.muted}
-                            />
-                          </View>
-                        );
-                      })}
-                      {!examplesExpanded && card.examples.length > 2 && (
-                        <TouchableOpacity
-                          style={cs.examplesExpandBtn}
-                          onPress={() => setExamplesExpanded(true)}
-                          activeOpacity={0.75}
-                        >
-                          <Text style={cs.examplesExpandTxt}>展开全部 ↓</Text>
-                        </TouchableOpacity>
-                      )}
-                    </>
-                  )}
-                </View>
+                <TouchableOpacity style={cs.examplesDrawer} onPress={() => setExamplesModal(true)} activeOpacity={0.82}>
+                  <Text style={cs.examplesToggleTxt}>在真实句子里再遇见它</Text>
+                  <Text style={cs.examplesArrow}>↗</Text>
+                </TouchableOpacity>
               )}
 
-              <View style={cs.wordRelatedBlock}>
-                <Text style={cs.wordSectionLabel}>在餐厅还会遇到</Text>
-                <View style={cs.wordChipRow}>
-                  {card.related.map(item => (
-                    <TouchableOpacity key={item.jp} style={cs.wordChip} activeOpacity={0.78} onPress={() => say(item.jp, `word-card-related-${item.jp}`)}>
-                      <Text style={cs.wordChipTxt}>{item.jp}</Text>
-                      <Text style={cs.wordChipZh}>{item.zh}</Text>
-                    </TouchableOpacity>
-                  ))}
-                </View>
-              </View>
-            </>
-          ) : (
-            <>
-              <View style={cs.wordBackBlock}>
-                <Text style={cs.gramParticle}>を</Text>
-                <Text style={cs.gramLabel}>传送带助词</Text>
-                <Text style={cs.gramQuote}>「把注文传送给对方处理」</Text>
-                <Text style={cs.wordBackText}>
-                  を = 把前面的词变成动作施加的对象。{'\n'}
-                  注文をお願いします = 把「点餐这件事」交给服务员执行。
-                </Text>
-              </View>
-
-              <View style={cs.wordBackBlock}>
-                <Text style={[cs.gramParticle, {fontSize: 22}]}>お願いします</Text>
-                <Text style={cs.gramLabel}>礼貌请求结尾</Text>
-                <Text style={cs.gramQuote}>「比ください更软，比どうぞ更主动」</Text>
-                <Text style={cs.wordBackText}>
-                  万能礼貌结尾。对服务员、收银员都最自然。{'\n'}
-                  对朋友可以说「お願い」（去掉します）。
-                </Text>
-              </View>
-
-              <View style={[cs.wordBackBlock, cs.patContainer]}>
-                <Text style={cs.wordBackHd}>这个骨架可以通用</Text>
-                <View style={cs.patRow}>
-                  <View style={cs.patSlotVar}>
-                    <Text style={cs.patSlotVarTxt}>{card.skeletons[slotIdx].jp.replace('をお願いします', '')}</Text>
-                  </View>
-                  <View style={cs.patSlotFix}><Text style={cs.patSlotFixTxt}>を</Text></View>
-                  <View style={cs.patSlotFix}><Text style={cs.patSlotFixTxt}>お願いします</Text></View>
-                </View>
-                <Text style={cs.patMeaning}>{card.skeletons[slotIdx].zh}</Text>
-                <View style={cs.patChipRow}>
-                  {card.skeletons.map((sk, i) => {
-                    const varWord = sk.jp.replace('をお願いします', '');
-                    const active = slotIdx === i;
-                    return (
-                      <TouchableOpacity
-                        key={i}
-                        style={[cs.patChip, active && cs.patChipActive]}
-                        activeOpacity={0.75}
-                        onPress={() => {
-                          setSlotIdx(i);
-                          say(sk.jp, `word-card-slot-${i}`);
-                        }}
-                      >
-                        <Text style={[cs.patChipWord, active && cs.patChipWordActive]}>{varWord}</Text>
-                        <Text style={[cs.patChipZh, active && cs.patChipZhActive]}>{sk.zh.replace('麻烦', '')}</Text>
-                      </TouchableOpacity>
-                    );
-                  })}
-                </View>
-              </View>
-
-              <View style={cs.wordBackBlock}>
-                <Text style={cs.wordBackHd}>高频出现场景</Text>
-                <Text style={cs.wordBackText}>餐厅 · 居酒屋 · 咖啡馆 · 网购</Text>
-              </View>
-
-              <TouchableOpacity
-                style={cs.wordAccentBox}
-                activeOpacity={0.75}
-                onPress={() => say(card.word, 'word-card-pitch')}
-              >
-                <Text style={[cs.pitchLabel, { marginBottom: 8 }]}>声调 · Pitch Accent · 点击朗读</Text>
+              <TouchableOpacity style={cs.pitchInlineRow} onPress={() => say(card.word, 'word-card-pitch')} activeOpacity={0.75}>
+                <SpeakBtn
+                  onPress={() => say(card.word, 'word-card-pitch')}
+                  speaking={speakingKey === 'word-card-pitch'}
+                  size="sm"
+                  color={C.muted}
+                />
+                <Text style={cs.pitchLabel}>声调</Text>
                 <View style={cs.pitchRow}>
                   {[
                     { char: 'ちゅ', high: false },
@@ -2887,15 +2777,124 @@ function WordCardScreen({ card, onBack, onDone }) {
                 </View>
               </TouchableOpacity>
             </>
+          ) : (
+            <>
+              <View style={cs.wordBackBlock}>
+                <Text style={cs.gramParticle}>を</Text>
+                <Text style={cs.gramLabel}>助词</Text>
+                <Text style={cs.wordBackText}>
+                  を 像传送带，{'\n'}
+                  把「注文」送到 お願いします 那里。
+                </Text>
+              </View>
+
+              <View style={cs.wordBackBlock}>
+                <Text style={[cs.gramParticle, {fontSize: 22}]}>お願いします</Text>
+                <Text style={cs.gramLabel}>礼貌请求结尾</Text>
+                <Text style={cs.wordBackText}>
+                  ください 是「给我」，お願いします 是「我托付你」。{'\n'}
+                  一字之差，是日语礼貌感的核心。{'\n'}
+                  对朋友可以直接说「お願い」。
+                </Text>
+              </View>
+
+              <View style={[cs.wordBackBlock, cs.patContainer]}>
+                <Text style={cs.wordBackHd}>这个骨架可以通用</Text>
+                <View style={cs.patRow}>
+                  <View style={cs.patSlotVar}>
+                    <Text style={cs.patSlotVarTxt}>{card.skeletons[slotIdx].jp.replace('をお願いします', '')}</Text>
+                  </View>
+                  <View style={cs.patSlotFix}><Text style={cs.patSlotFixTxt}>を</Text></View>
+                  <View style={cs.patSlotFix}><Text style={cs.patSlotFixTxt}>お願いします</Text></View>
+                </View>
+                <View style={cs.patChipRow}>
+                  {card.skeletons.map((sk, i) => {
+                    const varWord = sk.jp.replace('をお願いします', '');
+                    const active = slotIdx === i;
+                    return (
+                      <TouchableOpacity
+                        key={i}
+                        style={[cs.patChip, active && cs.patChipActive]}
+                        activeOpacity={0.75}
+                        onPress={() => {
+                          setSlotIdx(i);
+                          say(sk.jp, `word-card-slot-${i}`);
+                        }}
+                      >
+                        <Text style={[cs.patChipWord, active && cs.patChipWordActive]}>{varWord}</Text>
+                        <Text style={[cs.patChipZh, active && cs.patChipZhActive]}>{sk.zh}</Text>
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
+              </View>
+
+            </>
           )}
         </Pressable>
-        <Text style={cs.wordCardSource}>{card.source}</Text>
         {onDone && (
           <TouchableOpacity style={cs.wordDoneBtn} onPress={onDone} activeOpacity={0.85}>
             <Text style={cs.wordDoneBtnTxt}>学完这个词，继续 →</Text>
           </TouchableOpacity>
         )}
       </ScrollView>
+      <Modal visible={examplesModal} transparent animationType="slide" onRequestClose={() => setExamplesModal(false)}>
+        <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.35)', justifyContent: 'flex-end' }}>
+          <Pressable style={{ flex: 1 }} onPress={() => setExamplesModal(false)} />
+          <View style={cs.exModal}>
+            <View style={cs.exModalHead}>
+              <Text style={cs.exModalTitle}>在真实句子里再遇见它</Text>
+              <TouchableOpacity onPress={() => setExamplesModal(false)}>
+                <Text style={cs.exModalClose}>✕</Text>
+              </TouchableOpacity>
+            </View>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              {(exModalExpanded ? card.examples : (card.examples || []).slice(0, 3)).map((ex, i) => {
+                const isListen = ex.who === 'listen';
+                return (
+                  <View key={i} style={[cs.exampleRow, isListen && cs.exampleRowListen]}>
+                    <View style={{ flex: 1 }}>
+                      <Text style={[cs.exampleJp, isListen && cs.exampleJpListen]}>{ex.jp}</Text>
+                      <Text style={cs.exampleZh}>{ex.zh}</Text>
+                      <View style={cs.exampleMeta}>
+                        <Text style={[cs.exampleScene, isListen && cs.exampleSceneListen]}>{ex.scene}</Text>
+                        <Text style={[cs.exampleWhoLabel, isListen ? cs.exampleWhoListen : cs.exampleWhoSay]}>
+                          {isListen ? '👂 听懂就好' : '🗣 开口练'}
+                        </Text>
+                      </View>
+                    </View>
+                    <SpeakBtn
+                      onPress={() => say(ex.jp, `word-card-ex-${i}`)}
+                      speaking={speakingKey === `word-card-ex-${i}`}
+                      size="sm"
+                      color={isListen ? C.blue : C.muted}
+                    />
+                  </View>
+                );
+              })}
+              {!exModalExpanded && (card.examples || []).length > 3 && (
+                <TouchableOpacity style={cs.examplesExpandBtn} onPress={() => setExModalExpanded(true)} activeOpacity={0.75}>
+                  <Text style={cs.examplesExpandTxt}>展开全部 ↓</Text>
+                </TouchableOpacity>
+              )}
+              {card.related && card.related.length > 0 && (
+                <View style={{ marginTop: 16 }}>
+                  <Text style={[cs.wordSectionLabel, { marginBottom: 10 }]}>在餐厅还会遇到</Text>
+                  <View style={cs.wordChipRow}>
+                    {card.related.map(item => (
+                      <TouchableOpacity key={item.jp} style={cs.wordChip} activeOpacity={0.78} onPress={() => say(item.jp, `word-card-related-${item.jp}`)}>
+                        <Text style={cs.wordChipTxt}>{item.jp}</Text>
+                        <Text style={cs.wordChipZh}>{item.zh}</Text>
+                      </TouchableOpacity>
+                    ))}
+                  </View>
+                </View>
+              )}
+              <View style={{ height: 24 }} />
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -2947,7 +2946,12 @@ function CardScreen({ sceneState, onBack, onFinish }) {
         
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18, width: '100%' }}>
             <View style={[cs.scTag, { backgroundColor: scene.bgColor }]}><Text style={[cs.scTagTxt, { color: scene.color }]}>{scene.emoji} {scene.label}</Text></View>
-            <JlptBadge level={p.jlpt} />
+            <View style={{ flexDirection: 'row', gap: 6, alignItems: 'center' }}>
+              {p.speaker === 'staff' && (
+                <View style={cs.listenChip}><Text style={cs.listenChipTxt}>👂</Text></View>
+              )}
+              <JlptBadge level={p.jlpt} />
+            </View>
           </View>
           {canOpenOrderWordCard ? (
             <Text style={cs.jpTxt}>
@@ -3075,6 +3079,8 @@ const cs = StyleSheet.create({
   emptyBtn: { marginTop: 18, borderRadius: 13, paddingHorizontal: 22, paddingVertical: 12 },
   emptyBtnTxt: { fontSize: 14, fontWeight: '700', color: C.white },
   main: { backgroundColor: C.white, borderRadius: 20, padding: 22, marginBottom: 12, borderWidth: 1.5, borderColor: C.border, alignItems: 'center' },
+  listenChip: { backgroundColor: C.blueLight, borderRadius: 7, paddingHorizontal: 6, paddingVertical: 2 },
+  listenChipTxt: { fontSize: 13 },
   scTag: { borderRadius: 18, paddingHorizontal: 11, paddingVertical: 4 },
   scTagTxt: { fontSize: 11, fontWeight: '700' },
   jpTxt: { fontSize: 30, color: C.ink, fontWeight: '300', textAlign: 'center', lineHeight: 42 },
@@ -3185,9 +3191,9 @@ const cs = StyleSheet.create({
     textAlign: 'center',
   },
   wordCardPage: { flex: 1, backgroundColor: C.paper },
-  wordCardScroll: { paddingHorizontal: 18, paddingTop: 14, paddingBottom: 56 },
+  wordCardScroll: { paddingHorizontal: 18, paddingTop: 12, paddingBottom: 24 },
   wordCardSource: { fontSize: 12, color: C.muted, textAlign: 'center', marginBottom: 12 },
-  wordDoneBtn: { marginHorizontal: 18, marginBottom: 32, marginTop: 4, backgroundColor: C.ink, borderRadius: 14, paddingVertical: 14, alignItems: 'center' },
+  wordDoneBtn: { marginHorizontal: 18, marginBottom: 16, marginTop: 10, backgroundColor: C.ink, borderRadius: 14, paddingVertical: 12, alignItems: 'center' },
   wordDoneBtnTxt: { fontSize: 15, color: C.white, fontWeight: '700' },
   wordCardTabs: {
     alignSelf: 'center',
@@ -3195,7 +3201,6 @@ const cs = StyleSheet.create({
     backgroundColor: '#ece7de',
     borderRadius: 999,
     padding: 3,
-    marginBottom: 20,
     borderWidth: 1,
     borderColor: '#e0d7cc',
   },
@@ -3206,19 +3211,19 @@ const cs = StyleSheet.create({
   wordCardSheet: {
     backgroundColor: '#fffdf8',
     borderRadius: 18,
-    paddingHorizontal: 22,
-    paddingTop: 26,
-    paddingBottom: 28,
+    paddingHorizontal: 20,
+    paddingTop: 14,
+    paddingBottom: 16,
     shadowColor: C.ink,
     shadowOpacity: 0.07,
     shadowRadius: 18,
     shadowOffset: { width: 0, height: 6 },
   },
-  wordHero: { alignItems: 'center', paddingTop: 10, paddingBottom: 36, borderBottomWidth: 1, borderBottomColor: '#eee7df', marginBottom: 20 },
-  wordHead: { fontSize: 72, lineHeight: 82, fontWeight: '400', color: C.ink, textAlign: 'center' },
+  wordHero: { alignItems: 'center', paddingTop: 6, paddingBottom: 12, borderBottomWidth: 1, borderBottomColor: '#eee7df', marginBottom: 12 },
+  wordHead: { fontSize: 54, lineHeight: 62, fontWeight: '400', color: C.ink, textAlign: 'center' },
   wordReading: { fontSize: 18, color: C.lava, fontWeight: '700', textAlign: 'center', marginTop: 2 },
   wordMeaning: { fontSize: 20, color: C.ink, fontWeight: '700', textAlign: 'center', marginTop: 12 },
-  wordTagRow: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 7, marginTop: 14 },
+  wordTagRow: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 7, marginTop: 8 },
   wordN4Tag: { fontSize: 11, color: C.muted, borderWidth: 0.5, borderColor: C.border, borderRadius: 6, paddingHorizontal: 6, paddingVertical: 2 },
   wordMiniTag: {
     fontSize: 11,
@@ -3233,7 +3238,7 @@ const cs = StyleSheet.create({
   wordFreqDot: { fontSize: 12, color: '#d2c8bb', lineHeight: 16 },
   wordFreqDotOn: { color: C.lava },
   wordTrapHint: { fontSize: 11, color: C.muted, textAlign: 'center', marginTop: 2, letterSpacing: 0.5 },
-  wordTrapFlip: { backgroundColor: C.ink, borderRadius: 14, paddingHorizontal: 16, paddingVertical: 14, marginBottom: 20, minHeight: 72, justifyContent: 'center' },
+  wordTrapFlip: { backgroundColor: C.ink, borderRadius: 14, paddingHorizontal: 16, paddingVertical: 14, marginBottom: 14, minHeight: 72, justifyContent: 'center' },
   wordTrapFlipBack: {},
   wordTrapFront: { alignItems: 'center' },
   wordTrapWarning: { fontSize: 11, color: '#a09080', marginBottom: 4 },
@@ -3253,28 +3258,23 @@ const cs = StyleSheet.create({
   },
   wordTrapTitle: { fontSize: 12, fontWeight: '800', color: C.lava, marginBottom: 7 },
   wordTrapBody: { fontSize: 15, color: C.ink, lineHeight: 23, fontWeight: '600' },
-  wordCoreBlock: { alignItems: 'center', marginBottom: 22 },
-  wordSectionLabel: { fontSize: 11, fontWeight: '800', color: C.muted, letterSpacing: 1.5, marginBottom: 12 },
-  wordCoreSentence: { fontSize: 20, lineHeight: 32, color: C.ink, fontWeight: '500', textAlign: 'center', marginBottom: 8 },
-  wordCoreZh: { fontSize: 15, lineHeight: 22, color: C.muted, textAlign: 'center', marginBottom: 14 },
+  wordCoreBlock: { alignItems: 'center', marginBottom: 8 },
+  wordSectionLabel: { fontSize: 11, fontWeight: '800', color: C.muted, letterSpacing: 1.5, marginBottom: 8 },
+  wordCoreSentence: { fontSize: 20, lineHeight: 30, color: C.ink, fontWeight: '500', textAlign: 'center', marginBottom: 6 },
+  wordCoreZh: { fontSize: 15, lineHeight: 22, color: C.muted, textAlign: 'center', marginBottom: 8 },
   wordToken: {
     color: '#3D5FA0',
     backgroundColor: '#EBEEf8',
-    textDecorationLine: 'underline',
-    textDecorationStyle: 'dashed',
-    textDecorationColor: '#3D5FA0',
   },
   wordTokenAct: { color: C.lava, backgroundColor: C.lavaLight, fontWeight: '800' },
   wordTokenBlue: {
     color: '#3D5FA0',
-    textDecorationLine: 'underline',
-    textDecorationStyle: 'dashed',
-    textDecorationColor: '#3D5FA0',
+    backgroundColor: '#EBEEf8',
   },
   wordTokenBlueAct: { color: '#3D5FA0', backgroundColor: '#d8dff5', fontWeight: '800' },
-  wordTokenPlain: { color: C.ink, textDecorationLine: 'underline', textDecorationStyle: 'dashed', textDecorationColor: '#c8bdb2' },
+  wordTokenPlain: { color: C.ink, backgroundColor: '#EBEEf8' },
   wordNoteHint: { fontSize: 12, color: C.muted, lineHeight: 18, textAlign: 'center' },
-  wordNoteChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 10 },
+  wordNoteChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 6 },
   wordNoteChip: { borderRadius: 999, borderWidth: 1, borderColor: C.border, paddingHorizontal: 10, paddingVertical: 4, backgroundColor: C.white },
   wordNoteChipActive: { borderColor: C.lava, backgroundColor: C.lavaLight },
   wordNoteChipTxt: { fontSize: 11, fontWeight: '700', color: C.muted },
@@ -3284,17 +3284,23 @@ const cs = StyleSheet.create({
     backgroundColor: '#f4eee6',
     borderRadius: 14,
     padding: 14,
+    marginTop: 10,
     borderWidth: 1,
     borderColor: '#eaded4',
   },
   wordNoteTitle: { fontSize: 13, fontWeight: '800', color: C.lava, marginBottom: 5 },
   wordNoteBody: { fontSize: 13, color: C.ink, lineHeight: 20 },
-  wordContextText: { fontSize: 14, color: C.ink, lineHeight: 24, marginBottom: 24 },
+  wordContextText: { fontSize: 14, color: C.ink, lineHeight: 24, marginBottom: 8 },
   wordContextJa: { color: C.muted, fontSize: 14, textDecorationLine: 'underline', textDecorationStyle: 'dotted', textDecorationColor: C.muted },
-  wordRelatedBlock: { borderTopWidth: 1, borderTopColor: '#eee7df', paddingTop: 18 },
-  examplesDrawer: { borderTopWidth: 1, borderTopColor: '#eee7df', paddingTop: 14, marginBottom: 4 },
-  examplesToggle: { paddingVertical: 4 },
+  wordRelatedBlock: { borderTopWidth: 1, borderTopColor: '#eee7df', paddingTop: 10 },
+  examplesDrawer: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#f4ede6', borderRadius: 12, paddingHorizontal: 14, paddingVertical: 8, marginTop: 4, marginBottom: 6 },
   examplesToggleTxt: { fontSize: 13, fontWeight: '700', color: C.ink },
+  examplesArrow: { fontSize: 14, color: C.lava, fontWeight: '700' },
+  pitchInlineRow: { flexDirection: 'row', alignItems: 'center', gap: 8, borderTopWidth: 1, borderTopColor: '#eee7df', paddingTop: 8, marginTop: 2 },
+  exModal: { backgroundColor: C.white, borderTopLeftRadius: 20, borderTopRightRadius: 20, paddingHorizontal: 18, paddingTop: 16, paddingBottom: 32, maxHeight: '80%' },
+  exModalHead: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 },
+  exModalTitle: { fontSize: 15, fontWeight: '700', color: C.ink },
+  exModalClose: { fontSize: 18, color: C.muted, paddingHorizontal: 6 },
   exampleRow: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 10, paddingHorizontal: 8, borderRadius: 10, borderBottomWidth: 1, borderBottomColor: C.border, backgroundColor: C.white },
   exampleRowListen: { backgroundColor: C.blueLight },
   exampleJp: { fontSize: 14, color: C.ink, fontWeight: '600', lineHeight: 21 },
@@ -3321,9 +3327,9 @@ const cs = StyleSheet.create({
   wordChipZh: { fontSize: 10, color: C.muted, textAlign: 'center', marginTop: 1 },
   wordSpeaking: { color: C.lava },
   wordBackTitle: { fontSize: 13, fontWeight: '500', color: C.muted, marginBottom: 20, letterSpacing: 1 },
-  wordBackBlock: { marginBottom: 24 },
-  wordBackHd: { fontSize: 13, fontWeight: '500', color: C.muted, marginBottom: 9 },
-  wordBackText: { fontSize: 13, lineHeight: 26, color: C.ink },
+  wordBackBlock: { marginBottom: 10 },
+  wordBackHd: { fontSize: 13, fontWeight: '500', color: C.muted, marginBottom: 6 },
+  wordBackText: { fontSize: 13, lineHeight: 22, color: C.ink },
   wordSkeletonFormula: {
     fontSize: 15,
     lineHeight: 23,
@@ -3352,14 +3358,14 @@ const cs = StyleSheet.create({
     borderRadius: 14,
     borderWidth: 1,
     borderColor: '#c5cce8',
-    padding: 14,
+    padding: 10,
   },
   wordAccentText: { fontSize: 15, color: '#3D5FA0', lineHeight: 23, fontWeight: '600' },
   wordAccentHint: { fontSize: 11, color: '#7a8ab0', marginTop: 4, textAlign: 'center' },
-  gramParticle: { fontSize: 32, fontWeight: '700', color: '#3D5FA0', marginBottom: 2 },
-  gramLabel: { fontSize: 12, color: '#3D5FA0', letterSpacing: 1, marginBottom: 8 },
-  gramQuote: { fontSize: 13, color: '#5a6a8a', fontStyle: 'italic', marginBottom: 8, paddingLeft: 2 },
-  patRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 10, marginBottom: 8, flexWrap: 'wrap' },
+  gramParticle: { fontSize: 24, fontWeight: '700', color: '#3D5FA0', marginBottom: 2 },
+  gramLabel: { fontSize: 12, color: '#3D5FA0', letterSpacing: 1, marginBottom: 5 },
+  gramQuote: { fontSize: 13, color: '#5a6a8a', fontStyle: 'italic', marginBottom: 5, paddingLeft: 2 },
+  patRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 6, marginBottom: 4, flexWrap: 'wrap' },
   patSlotVar: { backgroundColor: C.lavaLight, borderRadius: 10, paddingHorizontal: 12, paddingVertical: 5 },
   patSlotVarTxt: { fontSize: 15, fontWeight: '700', color: C.lava },
   patSlotFix: { backgroundColor: '#ede8e0', borderRadius: 10, paddingHorizontal: 12, paddingVertical: 5 },
@@ -3367,14 +3373,14 @@ const cs = StyleSheet.create({
   patMeaning: { fontSize: 12, color: C.muted, marginBottom: 2 },
   patHint: { fontSize: 10, color: C.mutedLight, marginTop: 4 },
   patInlineHint: { fontSize: 10, color: C.mutedLight },
-  patChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 12 },
-  patChip: { borderWidth: 1.5, borderColor: C.border, borderRadius: 10, paddingHorizontal: 12, paddingVertical: 7, alignItems: 'center', backgroundColor: C.white },
+  patChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 8 },
+  patChip: { borderWidth: 1.5, borderColor: C.border, borderRadius: 10, paddingHorizontal: 10, paddingVertical: 5, alignItems: 'center', backgroundColor: C.white },
   patChipActive: { borderColor: C.lava, backgroundColor: C.lavaLight },
   patChipWord: { fontSize: 14, fontWeight: '700', color: C.ink },
   patChipWordActive: { color: C.lava },
   patChipZh: { fontSize: 10, color: C.muted, marginTop: 2 },
   patChipZhActive: { color: C.lava },
-  patContainer: { backgroundColor: '#fdf0ec', borderRadius: 14, borderWidth: 1, borderColor: '#f4cfc4', padding: 14 },
+  patContainer: { backgroundColor: '#fdf0ec', borderRadius: 14, borderWidth: 1, borderColor: '#f4cfc4', padding: 10 },
   pitchLabel: { fontSize: 10, fontWeight: '700', color: '#3D5FA0', letterSpacing: 1 },
   pitchRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 4, marginBottom: 6 },
   pitchSyl: { alignItems: 'center', gap: 4, marginRight: 2 },
