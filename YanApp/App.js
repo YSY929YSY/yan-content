@@ -2637,15 +2637,15 @@ const WORD_CARDS = {
           { text: '済む', sub: '了结' },
           { text: '済みません', sub: '还没了结', active: true },
         ],
-        transform: '→ 否定',
-        body: '打扰你 / 寻求帮助 = 占用了对方的注意力与时间，未了结状态。\n道歉义和叫人义，都是这个逻辑。',
+        transform: '→ ません',
+        body: '打扰你 / 寻求帮助 = 占用了对方的注意力与时间\n　　(未了结态)',
       },
       {
         type: 'compare',
         heading: '为什么也能表达谢谢？',
         scenario: '帮我拿外套',
-        left: { word: 'すみません', state: '对方还在付出' },
-        right: { word: 'ありがとう', state: '对方已帮完' },
+        left: { word: 'すみません', scenario: '帮我拿一下外套', state: '对方还在付出' },
+        right: { word: 'ありがとう', scenario: '帮我拿了外套', state: '对方已帮完' },
         compound: 'すみません、ありがとうございます。',
         compoundLabel: '两句连说也自然',
       },
@@ -3054,17 +3054,17 @@ function WordCardScreen({ card, onBack, onDone }) {
                   <View key={i} style={cs.wordBackBlock}>
                     <Text style={cs.gramLabel}>{block.label}</Text>
                     <View style={cs.morphRow}>
-                      <View style={cs.morphPill}>
+                      <TouchableOpacity style={cs.morphPill} activeOpacity={0.7} onPress={() => say(block.chain[0].text, `morph-0-${i}`)}>
                         <Text style={cs.morphPillJp}>{block.chain[0].text}</Text>
                         <Text style={cs.morphPillSub}>{block.chain[0].sub}</Text>
-                      </View>
+                      </TouchableOpacity>
                       <View style={cs.morphArrowCol}>
                         <Text style={cs.morphArrowTxt}>{block.transform}</Text>
                       </View>
-                      <View style={[cs.morphPill, cs.morphPillActive]}>
+                      <TouchableOpacity style={[cs.morphPill, cs.morphPillActive]} activeOpacity={0.7} onPress={() => say(block.chain[1].text, `morph-1-${i}`)}>
                         <Text style={[cs.morphPillJp, cs.morphPillJpActive]}>{block.chain[1].text}</Text>
                         <Text style={[cs.morphPillSub, cs.morphPillSubActive]}>{block.chain[1].sub}</Text>
-                      </View>
+                      </TouchableOpacity>
                     </View>
                     {block.body ? <Text style={cs.wordBackText}>{block.body}</Text> : null}
                   </View>
@@ -3074,14 +3074,20 @@ function WordCardScreen({ card, onBack, onDone }) {
                     {block.heading ? <Text style={cs.compareHeading}>{block.heading}</Text> : null}
                     <View style={cs.compareRow}>
                       <View style={[cs.compareCard, cs.compareCardLeft]}>
-                        <Text style={cs.compareCardWord}>{block.left.word}</Text>
-                        <Text style={cs.compareCardScenario}>{block.scenario}</Text>
+                        <View style={cs.compareCardTopRow}>
+                          <Text style={cs.compareCardWord}>{block.left.word}</Text>
+                          <SpeakBtn onPress={() => say(block.left.word, `cmp-l-${i}`)} speaking={speakingKey === `cmp-l-${i}`} size="sm" color={C.muted} />
+                        </View>
+                        <Text style={cs.compareCardScenario}>{block.left.scenario || block.scenario}</Text>
                         <View style={cs.compareCardDivider} />
                         <Text style={cs.compareCardState}>{block.left.state}</Text>
                       </View>
                       <View style={cs.compareCard}>
-                        <Text style={cs.compareCardWord}>{block.right.word}</Text>
-                        <Text style={cs.compareCardScenario}>{block.scenario}</Text>
+                        <View style={cs.compareCardTopRow}>
+                          <Text style={cs.compareCardWord}>{block.right.word}</Text>
+                          <SpeakBtn onPress={() => say(block.right.word, `cmp-r-${i}`)} speaking={speakingKey === `cmp-r-${i}`} size="sm" color={C.muted} />
+                        </View>
+                        <Text style={cs.compareCardScenario}>{block.right.scenario || block.scenario}</Text>
                         <View style={cs.compareCardDivider} />
                         <Text style={cs.compareCardState}>{block.right.state}</Text>
                       </View>
@@ -3111,9 +3117,9 @@ function WordCardScreen({ card, onBack, onDone }) {
                   <View style={[cs.wordBackBlock, cs.patContainer]}>
                     <Text style={cs.wordBackHd}>{card.skeletonTitle || '只换前面，后面不用动'}</Text>
                     <View style={cs.patRow}>
-                      {pre ? <View style={cs.patSlotFix}><Text style={cs.patSlotFixTxt} numberOfLines={1}>{pre}</Text></View> : null}
+                      {pre ? <Text style={cs.patSlotFixTxt} numberOfLines={1}>{pre}</Text> : null}
                       <View style={cs.patSlotVar}><Text style={cs.patSlotVarTxt} numberOfLines={1}>{getVar(card.skeletons[slotIdx] || card.skeletons[0])}</Text></View>
-                      {suf ? <View style={cs.patSlotFix}><Text style={cs.patSlotFixTxt} numberOfLines={1}>{suf}</Text></View> : null}
+                      {suf ? <Text style={cs.patSlotFixTxt} numberOfLines={1}>{suf}</Text> : null}
                     </View>
                     <View style={cs.patChipRow}>
                       {card.skeletons.map((sk, i) => {
@@ -3126,6 +3132,10 @@ function WordCardScreen({ card, onBack, onDone }) {
                           </TouchableOpacity>
                         );
                       })}
+                    </View>
+                    <View style={cs.patSentenceRow}>
+                      <Text style={cs.patSentenceJp}>{(card.skeletons[slotIdx] || card.skeletons[0]).jp}</Text>
+                      <Text style={cs.patSentenceZh}> — {(card.skeletons[slotIdx] || card.skeletons[0]).zh}</Text>
                     </View>
                   </View>
                 );
@@ -3644,8 +3654,9 @@ const cs = StyleSheet.create({
   compareRow: { flexDirection: 'row', gap: 8, marginBottom: 10 },
   compareCard: { flex: 1, backgroundColor: '#f7f7f7', borderRadius: 10, padding: 10 },
   compareCardLeft: { backgroundColor: '#fdf8f5' },
-  compareCardWord: { fontSize: 11, color: C.muted, marginBottom: 4 },
-  compareCardScenario: { fontSize: 14, fontWeight: '700', color: C.ink, marginBottom: 6 },
+  compareCardTopRow: { flexDirection: 'row', alignItems: 'center', gap: 4, marginBottom: 4 },
+  compareCardWord: { fontSize: 16, fontWeight: '700', color: C.ink, flex: 1 },
+  compareCardScenario: { fontSize: 11, color: C.muted, marginBottom: 6 },
   compareCardDivider: { height: 0.5, backgroundColor: '#d8d8d8', marginBottom: 6 },
   compareCardState: { fontSize: 11, color: C.muted },
   compareCompound: { paddingVertical: 8, paddingHorizontal: 10, backgroundColor: '#f4f4f4', borderRadius: 8 },
@@ -3653,9 +3664,9 @@ const cs = StyleSheet.create({
   gramQuote: { fontSize: 13, color: '#5a6a8a', fontStyle: 'italic', marginBottom: 5, paddingLeft: 2 },
   patRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 6, marginBottom: 4, flexWrap: 'wrap' },
   patSlotVar: { backgroundColor: C.lavaLight, borderRadius: 10, paddingHorizontal: 12, paddingVertical: 5 },
-  patSlotVarTxt: { fontSize: 15, fontWeight: '700', color: C.lava },
-  patSlotFix: { backgroundColor: '#ede8e0', borderRadius: 10, paddingHorizontal: 12, paddingVertical: 5 },
-  patSlotFixTxt: { fontSize: 15, fontWeight: '700', color: C.ink },
+  patSlotVarTxt: { fontSize: 18, fontWeight: '700', color: C.lava },
+  patSlotFix: {},
+  patSlotFixTxt: { fontSize: 18, fontWeight: '300', color: C.ink },
   patMeaning: { fontSize: 12, color: C.muted, marginBottom: 2 },
   patHint: { fontSize: 10, color: C.mutedLight, marginTop: 4 },
   patInlineHint: { fontSize: 10, color: C.mutedLight },
@@ -3666,7 +3677,10 @@ const cs = StyleSheet.create({
   patChipWordActive: { color: C.lava },
   patChipZh: { fontSize: 10, color: C.muted, marginTop: 2 },
   patChipZhActive: { color: C.lava },
-  patContainer: { backgroundColor: '#fdf0ec', borderRadius: 14, borderWidth: 1, borderColor: '#f4cfc4', padding: 10 },
+  patContainer: { borderRadius: 14, borderWidth: 1, borderStyle: 'dashed', borderColor: '#c0a090', padding: 10 },
+  patSentenceRow: { marginTop: 10, paddingTop: 8, borderTopWidth: 0.5, borderTopColor: '#ddd', flexDirection: 'row', flexWrap: 'wrap' },
+  patSentenceJp: { fontSize: 12, color: C.ink },
+  patSentenceZh: { fontSize: 12, color: C.muted },
   pitchLabel: { fontSize: 10, fontWeight: '700', color: '#3D5FA0', letterSpacing: 1 },
   pitchRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 4, marginBottom: 6 },
   pitchSyl: { alignItems: 'center', gap: 4, marginRight: 2 },
