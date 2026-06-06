@@ -2574,7 +2574,8 @@ starterTitle: {
 const WORD_CARDS = {
   order: {
     word: '注文', reading: 'ちゅうもん', jlpt: 'N4', sourceLabel: '餐厅点餐',
-    tags: ['旅行高频', '餐厅', 'N4'],
+    coreMeaning: '点餐 · 下单',
+    tags: ['旅行高频', '餐厅'],
     coreSentence: 'すみません、注文をお願いします。',
     coreTranslation: '不好意思，我要点餐了。',
     coreTokens: [
@@ -2595,12 +2596,7 @@ const WORD_CARDS = {
     },
     grammarBlocks: [
       { particle: 'を', particleSize: 24, label: '助词', body: 'を 像传送带，\n把「注文」送到 お願いします 那里。' },
-      {
-        type: 'compare',
-        heading: 'ください vs お願いします',
-        left: { word: 'ください', scenario: 'お水ください', state: '直接索取' },
-        right: { word: 'お願いします', scenario: 'お水をお願いします', state: '礼貌托付' },
-      },
+      { particle: 'お願いします', particleSize: 20, label: '万能礼貌结尾', body: 'ください 是「给我」，お願いします 是「我托付你」。\n一字之差，是日语礼貌感的核心。\n对朋友可以直接说「お願い」。' },
     ],
     skeletonTitle: '换个请求',
     skeletonPrefix: '', skeletonSuffix: 'をお願いします',
@@ -2622,7 +2618,8 @@ const WORD_CARDS = {
 
   sumimasen: {
     word: 'すみません', reading: 'sumimasen', jlpt: 'N5', sourceLabel: '地铁 & 交通',
-    tags: ['旅行高频', '通用', 'N5'],
+    coreMeaning: '打扰一下 · 对不起',
+    tags: ['旅行高频', '通用'],
     coreSentence: 'すみません、写真をお願いします。',
     coreTranslation: '不好意思，麻烦帮我拍个照。',
     coreTokens: [
@@ -2675,7 +2672,8 @@ const WORD_CARDS = {
 
   oyu: {
     word: 'お湯', reading: 'おゆ', jlpt: 'N4', sourceLabel: '酒店入住',
-    tags: ['酒店', '陷阱词', 'N4'],
+    coreMeaning: '热水',
+    tags: ['酒店', '陷阱词'],
     coreSentence: 'お湯が出ないのですが…',
     coreTranslation: '热水出不来……',
     coreTokens: [
@@ -2714,7 +2712,8 @@ const WORD_CARDS = {
 
   okaikei: {
     word: 'お会計', reading: 'おかいけい', jlpt: 'N4', sourceLabel: '餐厅点餐',
-    tags: ['餐厅', '高频', 'N4'],
+    coreMeaning: '结账',
+    tags: ['餐厅', '高频'],
     coreSentence: 'お会計をお願いします。',
     coreTranslation: '麻烦结账。',
     coreTokens: [
@@ -2725,15 +2724,15 @@ const WORD_CARDS = {
       { text: '。' },
     ],
     trap: null,
-    contextJa: null, contextZh: '结账时加一个空中画写字的手势，店员立刻明白。',
+    contextJa: null, contextZh: null,
     pitch: [{ char: 'お', high: false }, { char: 'か', high: true }, { char: 'い', high: true }, { char: 'け', high: true }, { char: 'い', high: false }],
     notes: {
-      kaikei: { title: '会計', body: '会（会计）+ 計（计算）= 算账。汉字直读，和中文「会计」几乎同义。\n这个词告诉服务员：我要算这顿的账了。' },
+      kaikei: { title: '会計', body: '结账的账单。\n注意：日语「会計」≠ 中文「会计（职业）」。\nお勘定（おかんじょう）= 同义，两个说法都通。' },
       wo: { title: 'を', body: 'を把「会計」传送给お願いします处理。\n同一框架：〇〇をお願いします，换个名词就是新的礼貌请求。' },
       onegai: { title: 'お願いします', body: '万能礼貌结尾。比ください更软，正式场合用这个。\n任何名词后面接上，都变成得体的请求。' },
     },
     grammarBlocks: [
-      { particle: '会計', particleSize: 24, label: '汉字解析', body: '会（会计）+ 計（计算）。\n和中文「会计」高度同源。日本餐厅有时也写「お勘定」，两种都是结账的意思。' },
+      { particle: '会計', particleSize: 24, label: '汉字解析', body: '会 + 計 = 计算账目、结账。\n注意：日语「会計」= 结账/账单，≠ 中文「会计（职业）」。\nお勘定（おかんじょう）= 同义，两种说法都通。' },
       { particle: 'お〇〇をお願いします', particleSize: 13, label: '万能服务请求框架', body: '任何服务或物品前套上这个框架都成立：\nおすすめをお願いします（推荐菜）\nお箸をお願いします（筷子）\nキャンセルをお願いします（取消）' },
     ],
     skeletonTitle: '换个服务',
@@ -2756,7 +2755,8 @@ const WORD_CARDS = {
 
   norikae: {
     word: '乗り換え', reading: 'のりかえ', jlpt: 'N3', sourceLabel: '地铁 & 交通',
-    tags: ['地铁', '高频', 'N3'],
+    coreMeaning: '换乘',
+    tags: ['地铁', '高频'],
     coreSentence: '乗り換えはどこですか？',
     coreTranslation: '换乘在哪里？',
     coreTokens: [
@@ -2764,12 +2764,11 @@ const WORD_CARDS = {
       { text: 'はどこですか？' },
     ],
     trap: null,
-    contextJa: '〇〇線に乗り換えてください。', contextZh: '——广播里最常听到的换乘提示。',
+    contextJa: '〇〇線に乗り換えてください。', contextZh: ' 请换乘〇〇线。\n——地铁广播里最常听到的换乘提示。',
     pitch: [{ char: 'の', high: true }, { char: 'り', high: false }, { char: 'か', high: false }, { char: 'え', high: false }],
     notes: {
-      kanji: { title: '乗り換え', body: '乗る（のる）= 乘坐；換える（かえる）= 换。\n乗り換え = 乘坐 + 换 = 换乘。汉字分开看完全能猜——这是汉字圈的优势。' },
-      noru: { title: '乗る', body: '乗る = 上车/坐车。地铁三个动作：\n乗る（上车）→ 乗り換える（换乘）→ 降りる（下车）。' },
-      doko: { title: 'はどこですか', body: '〇〇はどこですか = 〇〇在哪里。全场景最万能的定位框架。\n换掉前面，任何你找不到的地方都能问。' },
+      kanji: { title: '乗り換え', body: '乗る（乘坐）+ 換える（换）= 乗り換え。\n地铁三个动作：乗る（上车）→ 乗り換える（换乘）→ 降りる（下车）。' },
+      doko: { title: 'はどこですか', body: '〇〇はどこですか = 〇〇在哪里。\n换掉前面，任何你找不到的地方都能问。' },
     },
     grammarBlocks: [
       {
@@ -2782,7 +2781,7 @@ const WORD_CARDS = {
         transform: '+ 換える',
         body: '日语复合动词：动词词干 + 动词 = 新动词\n乗り降り（上下车）· 乗り過ごし（坐过站）',
       },
-      { particle: 'はどこですか', particleSize: 15, label: '万能定位框架', body: '〇〇はどこですか = 〇〇在哪里？\nは = 话题标记；どこ = 何处（同源）。\n换掉前面什么都能问：改札口は · 出口は · トイレは。' },
+      { particle: 'はどこですか', particleSize: 15, label: '万能定位框架', body: '〇〇はどこですか = 〇〇在哪里？\nは = 话题标记；どこ = 何处（同源）。\n\n任何找不到的地方都可以试试。' },
     ],
     skeletonTitle: '换个地点',
     skeletonPrefix: '', skeletonSuffix: 'はどこですか？',
@@ -2794,7 +2793,6 @@ const WORD_CARDS = {
     ],
     examples: [
       { jp: '渋谷で山手線に乗り換えてください。', zh: '请在涩谷换乘山手线。', scene: '地铁广播', who: 'listen', level: 'N3' },
-      { jp: '乗り換えはどこですか？', zh: '换乘在哪里？', scene: '地铁站', who: 'say', level: 'N3' },
       { jp: '乗り換えに5分かかります。', zh: '换乘需要5分钟。', scene: '询问路线', who: 'listen', level: 'N3' },
       { jp: '乗り過ごしてしまいました。', zh: '我坐过站了。', scene: '地铁', who: 'say', level: 'N3' },
     ],
@@ -2804,7 +2802,8 @@ const WORD_CARDS = {
 
   doko: {
     word: 'どこ', reading: 'どこ（何処）', jlpt: 'N5', sourceLabel: '问题 & 导航',
-    tags: ['通用', '高频', 'N5'],
+    coreMeaning: '哪里 · 在哪',
+    tags: ['通用', '高频'],
     coreSentence: 'すみません、〇〇はどこですか？',
     coreTranslation: '不好意思，请问〇〇在哪里？',
     coreTokens: [
@@ -2844,7 +2843,8 @@ const WORD_CARDS = {
 
   itai: {
     word: '痛い', reading: 'いたい', jlpt: 'N4', sourceLabel: '紧急 & 就医',
-    tags: ['紧急', '医疗', 'N4'],
+    coreMeaning: '疼 · 痛',
+    tags: ['紧急', '医疗'],
     coreSentence: '〇〇が痛いです。',
     coreTranslation: '〇〇疼。',
     coreTokens: [
@@ -2884,7 +2884,8 @@ const WORD_CARDS = {
 
   osewa: {
     word: 'お世話になりました', reading: 'おせわになりました', jlpt: 'N3', sourceLabel: '酒店入住',
-    tags: ['酒店', '情感深度', 'N3'],
+    coreMeaning: '承蒙关照',
+    tags: ['酒店', '情感深度'],
     coreSentence: 'お世話になりました。ありがとうございました。',
     coreTranslation: '承蒙关照，非常感谢。',
     coreTokens: [
@@ -2972,8 +2973,9 @@ function WordCardScreen({ card, onBack, onDone }) {
                   <Text style={[cs.wordHead, speakingKey === 'word-card-headword' && cs.wordSpeaking]}>{card.word}</Text>
                 </TouchableOpacity>
                 <Text style={[cs.wordReading, speakingKey === 'word-card-headword' && cs.wordSpeaking]}>{card.reading}</Text>
+                {card.coreMeaning && <Text style={cs.wordMeaning}>{card.coreMeaning}</Text>}
                 <View style={cs.wordTagRow}>
-                  {card.tags.filter(tag => tag !== 'N4').map(tag => <Text key={tag} style={cs.wordMiniTag}>{tag}</Text>)}
+                  {card.tags.map(tag => <Text key={tag} style={cs.wordMiniTag}>{tag}</Text>)}
                 </View>
               </View>
 
@@ -3518,6 +3520,7 @@ const cs = StyleSheet.create({
   wordHero: { alignItems: 'center', paddingTop: 6, paddingBottom: 12, borderBottomWidth: 1, borderBottomColor: '#eee7df', marginBottom: 12 },
   wordHead: { fontSize: 54, lineHeight: 62, fontWeight: '400', color: C.ink, textAlign: 'center' },
   wordReading: { fontSize: 18, color: C.lava, fontWeight: '700', textAlign: 'center', marginTop: 2 },
+  wordMeaning: { fontSize: 14, color: C.muted, textAlign: 'center', marginTop: 2, fontWeight: '300' },
   wordMeaning: { fontSize: 20, color: C.ink, fontWeight: '700', textAlign: 'center', marginTop: 12 },
   wordTagRow: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 7, marginTop: 8 },
   wordN4Tag: { fontSize: 11, color: C.muted, borderWidth: 0.5, borderColor: C.border, borderRadius: 6, paddingHorizontal: 6, paddingVertical: 2 },
