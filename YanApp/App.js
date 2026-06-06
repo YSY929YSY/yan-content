@@ -2595,15 +2595,20 @@ const WORD_CARDS = {
     },
     grammarBlocks: [
       { particle: 'を', particleSize: 24, label: '助词', body: 'を 像传送带，\n把「注文」送到 お願いします 那里。' },
-      { particle: 'お願いします', particleSize: 20, label: '万能礼貌结尾', body: 'ください 是「给我」，お願いします 是「我托付你」。\n一字之差，是日语礼貌感的核心。\n对朋友可以直接说「お願い」。' },
+      {
+        type: 'compare',
+        heading: 'ください vs お願いします',
+        left: { word: 'ください', scenario: 'お水ください', state: '直接索取' },
+        right: { word: 'お願いします', scenario: 'お水をお願いします', state: '礼貌托付' },
+      },
     ],
-    skeletonTitle: '只换前面，后面不用动',
+    skeletonTitle: '换个请求',
     skeletonPrefix: '', skeletonSuffix: 'をお願いします',
     skeletons: [
-      { jp: '注文をお願いします', zh: '麻烦点餐' },
-      { jp: '会計をお願いします', zh: '麻烦结账' },
-      { jp: '予約をお願いします', zh: '麻烦预约' },
-      { jp: '写真をお願いします', zh: '麻烦帮我拍照' },
+      { jp: '注文をお願いします', zh: '麻烦点餐', chipLabel: '点餐' },
+      { jp: '会計をお願いします', zh: '麻烦结账', chipLabel: '结账' },
+      { jp: '予約をお願いします', zh: '麻烦预约', chipLabel: '预约' },
+      { jp: '写真をお願いします', zh: '麻烦帮我拍照', chipLabel: '拍照' },
     ],
     examples: [
       { jp: 'すみません、注文をお願いします。', zh: '不好意思，我要点餐。', scene: '餐厅', who: 'say', level: 'N4' },
@@ -2690,13 +2695,13 @@ const WORD_CARDS = {
       { particle: '湯', particleSize: 28, label: '汉字陷阱', body: '中文「汤」≠ 日文「湯」\n日语「湯」= 热水。在餐厅说「お湯ください」要的是热水，不是汤。\n汤要说スープ（soup）或汁（しる）。' },
       { particle: '〜のですが…', particleSize: 16, label: '省略请求句', body: '句子不说完反而更自然。「〜のですが…」= 因为……（所以希望你帮我处理）。\n任何问题都能套：\nシャワーが壊れているのですが…\nエアコンが動かないのですが…' },
     ],
-    skeletonTitle: '换前面，后面语气不动',
+    skeletonTitle: '换个问题',
     skeletonPrefix: '', skeletonSuffix: 'のですが…',
     skeletons: [
-      { jp: 'お湯が出ないのですが…', zh: '热水出不来' },
-      { jp: 'シャワーが壊れているのですが…', zh: '淋浴坏了' },
-      { jp: 'エアコンが動かないのですが…', zh: '空调不动了' },
-      { jp: 'カギが開かないのですが…', zh: '钥匙打不开' },
+      { jp: 'お湯が出ないのですが…', zh: '热水出不来', chipLabel: '热水' },
+      { jp: 'シャワーが壊れているのですが…', zh: '淋浴坏了', chipLabel: '淋浴' },
+      { jp: 'エアコンが動かないのですが…', zh: '空调不动了', chipLabel: '空调' },
+      { jp: 'カギが開かないのですが…', zh: '钥匙打不开', chipLabel: '钥匙' },
     ],
     examples: [
       { jp: 'お湯が出ないのですが、確認していただけますか？', zh: '热水出不来，可以帮我确认一下吗？', scene: '酒店', who: 'say', level: 'N4' },
@@ -2720,7 +2725,7 @@ const WORD_CARDS = {
       { text: '。' },
     ],
     trap: null,
-    contextJa: '（空中画写字手势）', contextZh: '——这个手势加这句话，是日本餐厅结账的标准组合。',
+    contextJa: null, contextZh: '结账时加一个空中画写字的手势，店员立刻明白。',
     pitch: [{ char: 'お', high: false }, { char: 'か', high: true }, { char: 'い', high: true }, { char: 'け', high: true }, { char: 'い', high: false }],
     notes: {
       kaikei: { title: '会計', body: '会（会计）+ 計（计算）= 算账。汉字直读，和中文「会计」几乎同义。\n这个词告诉服务员：我要算这顿的账了。' },
@@ -2731,13 +2736,13 @@ const WORD_CARDS = {
       { particle: '会計', particleSize: 24, label: '汉字解析', body: '会（会计）+ 計（计算）。\n和中文「会计」高度同源。日本餐厅有时也写「お勘定」，两种都是结账的意思。' },
       { particle: 'お〇〇をお願いします', particleSize: 13, label: '万能服务请求框架', body: '任何服务或物品前套上这个框架都成立：\nおすすめをお願いします（推荐菜）\nお箸をお願いします（筷子）\nキャンセルをお願いします（取消）' },
     ],
-    skeletonTitle: '只换前面，后面不用动',
+    skeletonTitle: '换个服务',
     skeletonPrefix: '', skeletonSuffix: 'をお願いします',
     skeletons: [
-      { jp: 'お会計をお願いします', zh: '麻烦结账' },
-      { jp: 'お箸をお願いします', zh: '麻烦给我筷子' },
-      { jp: 'キャンセルをお願いします', zh: '麻烦取消' },
-      { jp: '領収書をお願いします', zh: '麻烦给我收据' },
+      { jp: 'お会計をお願いします', zh: '麻烦结账', chipLabel: '结账' },
+      { jp: 'お箸をお願いします', zh: '麻烦给我筷子', chipLabel: '筷子' },
+      { jp: 'キャンセルをお願いします', zh: '麻烦取消', chipLabel: '取消' },
+      { jp: '領収書をお願いします', zh: '麻烦给我收据', chipLabel: '收据' },
     ],
     examples: [
       { jp: 'すみません、お会計をお願いします。', zh: '不好意思，麻烦结账。', scene: '餐厅', who: 'say', level: 'N4' },
@@ -2767,16 +2772,25 @@ const WORD_CARDS = {
       doko: { title: 'はどこですか', body: '〇〇はどこですか = 〇〇在哪里。全场景最万能的定位框架。\n换掉前面，任何你找不到的地方都能问。' },
     },
     grammarBlocks: [
-      { particle: '乗→換', particleSize: 26, label: '动词组合', body: '乗る（乘）+ 換える（换）= 乗り換える。\n日语复合动词逻辑：\n乗り換え（换乘）、乗り降り（上下车）、乗り過ごし（坐过站）。' },
-      { particle: 'はどこですか', particleSize: 15, label: '万能定位框架', body: '〇〇はどこですか = 〇〇在哪里？\nは = 话题标记；どこ = 何处（何处同源）。\n换掉前面什么都能问：改札口は、出口は、トイレは。' },
+      {
+        type: 'morph',
+        label: '复合动词',
+        chain: [
+          { text: '乗る', sub: '乘坐' },
+          { text: '乗り換え', sub: '换乘', active: true },
+        ],
+        transform: '+ 換える',
+        body: '日语复合动词：动词词干 + 动词 = 新动词\n乗り降り（上下车）· 乗り過ごし（坐过站）',
+      },
+      { particle: 'はどこですか', particleSize: 15, label: '万能定位框架', body: '〇〇はどこですか = 〇〇在哪里？\nは = 话题标记；どこ = 何处（同源）。\n换掉前面什么都能问：改札口は · 出口は · トイレは。' },
     ],
-    skeletonTitle: '换前面，哪里都能找',
+    skeletonTitle: '换个地点',
     skeletonPrefix: '', skeletonSuffix: 'はどこですか？',
     skeletons: [
-      { jp: '乗り換えはどこですか？', zh: '换乘在哪里' },
-      { jp: '改札口はどこですか？', zh: '检票口在哪里' },
-      { jp: '出口はどこですか？', zh: '出口在哪里' },
-      { jp: 'トイレはどこですか？', zh: '厕所在哪里' },
+      { jp: '乗り換えはどこですか？', zh: '换乘在哪里', chipLabel: '换乘' },
+      { jp: '改札口はどこですか？', zh: '检票口在哪里', chipLabel: '检票口' },
+      { jp: '出口はどこですか？', zh: '出口在哪里', chipLabel: '出口' },
+      { jp: 'トイレはどこですか？', zh: '厕所在哪里', chipLabel: '厕所' },
     ],
     examples: [
       { jp: '渋谷で山手線に乗り換えてください。', zh: '请在涩谷换乘山手线。', scene: '地铁广播', who: 'listen', level: 'N3' },
@@ -2810,13 +2824,13 @@ const WORD_CARDS = {
       { particle: '何処', particleSize: 28, label: '汉字同源', body: '何（なん/どの）= 哪；処（ところ）= 地方。\n合起来 = 何处。中文「何处」和日文「何処」，字形完全相同，意思完全一致。' },
       { particle: '〇〇はどこですか', particleSize: 13, label: '旅行最高频框架', body: '覆盖率最高的单一框架——换掉〇〇就能问任何地点：\nトイレはどこですか（厕所）\n駅はどこですか（车站）\n出口はどこですか（出口）' },
     ],
-    skeletonTitle: '换前面，哪里都能找',
+    skeletonTitle: '换个地点',
     skeletonPrefix: '', skeletonSuffix: 'はどこですか？',
     skeletons: [
-      { jp: 'トイレはどこですか？', zh: '厕所在哪' },
-      { jp: '駅はどこですか？', zh: '车站在哪' },
-      { jp: '出口はどこですか？', zh: '出口在哪' },
-      { jp: 'コンビニはどこですか？', zh: '便利店在哪' },
+      { jp: 'トイレはどこですか？', zh: '厕所在哪', chipLabel: '厕所' },
+      { jp: '駅はどこですか？', zh: '车站在哪', chipLabel: '车站' },
+      { jp: '出口はどこですか？', zh: '出口在哪', chipLabel: '出口' },
+      { jp: 'コンビニはどこですか？', zh: '便利店在哪', chipLabel: '便利店' },
     ],
     examples: [
       { jp: 'すみません、トイレはどこですか？', zh: '不好意思，厕所在哪里？', scene: '便利店', who: 'say', level: 'N5' },
@@ -2888,9 +2902,14 @@ const WORD_CARDS = {
     },
     grammarBlocks: [
       { particle: '世話', particleSize: 26, label: '汉字解析', body: '世（世界）+ 話（话/照管）。\n「世話をする」= 照顾、操持。承蒙关照 = 有人在你的世界里为你出力。\n汉字本身藏着这个词的情感重量。' },
-      { particle: 'ありがとう vs お世話', particleSize: 12, label: '感谢的层次', body: 'ありがとう → 感谢一件事\nありがとうございました → 感谢已完成的事\nお世話になりました → 感谢一段关系\n\n每次从酒店、旅馆、民宿离开说这句，会让对方真的高兴。' },
+      {
+        type: 'compare',
+        heading: '感谢的层次',
+        left: { word: 'ありがとう', scenario: '服务员帮你拿了行李', state: '感谢一件事' },
+        right: { word: 'お世話になりました', scenario: '住了三天退房时', state: '感谢一段关系' },
+      },
     ],
-    skeletonTitle: '这句说完，再加一句心意',
+    skeletonTitle: '接上心意',
     skeletonPrefix: 'お世話になりました。', skeletonSuffix: '',
     skeletons: [
       { jp: 'お世話になりました。ありがとうございました。', zh: '承蒙关照，非常感谢', chipLabel: '感谢' },
@@ -3018,9 +3037,9 @@ function WordCardScreen({ card, onBack, onDone }) {
                 )}
               </View>
 
-              {card.contextJa && (
+              {(card.contextJa || card.contextZh) && (
                 <Text style={cs.wordContextText}>
-                  <Text style={cs.wordContextJa} onPress={() => say(card.contextJa, 'word-card-ctx')}>{card.contextJa}</Text>
+                  {card.contextJa ? <Text style={cs.wordContextJa} onPress={() => say(card.contextJa, 'word-card-ctx')}>{card.contextJa}</Text> : null}
                   {card.contextZh}
                 </Text>
               )}
