@@ -947,48 +947,16 @@
           "culture": ""
         },
         {
-          "id": 3,
-          "type": "template",
-          "jp": "〇〇をください",
-          "roma": "〇〇 wo kudasai",
-          "zh": "请给我 〇〇",
-          "en": "Please give me 〇〇",
-          "jlpt": "N5",
+          "id": 203,
+          "type": "core",
+          "jp": "ICカードをチャージしたいのですが",
+          "roma": "IC kaado wo chaaji shitai no desu ga",
+          "zh": "我想给 IC 卡充值",
+          "en": "I would like to top up my IC card",
+          "jlpt": "N4",
           "hookType": "e",
-          "hook": "ください很万能。地铁场景里最常见的是买卡、买票、要地图。",
-          "links": [
-            {
-              "lang": "EN",
-              "word": "please give me"
-            },
-            {
-              "lang": "ES",
-              "word": "por favor"
-            },
-            {
-              "lang": "ZH",
-              "word": "请给我……"
-            }
-          ],
-          "scene": "窗口买 Suica、纸票、地图时都能套。",
-          "culture": "",
-          "swappableWords": [
-            {
-              "word": "Suica",
-              "reading": "スイカ",
-              "zh": "Suica 卡"
-            },
-            {
-              "word": "切符",
-              "reading": "きっぷ",
-              "zh": "纸票"
-            },
-            {
-              "word": "地図",
-              "reading": "ちず",
-              "zh": "地图"
-            }
-          ]
+          "hook": "チャージ = charge，英语直接用。自动售票机有中文界面，但找不到时说这句，工作人员会带你到窗口操作。西瓜卡 Suica、PASMO 都适用。",
+          "scene": "找不到充值机器、或余额不足被闸门挡住时，走到窗口说这句。"
         },
         {
           "id": 4,
@@ -1173,55 +1141,6 @@
           ]
         },
         {
-          "id": 9,
-          "type": "template",
-          "jp": "〇〇はどこですか？",
-          "roma": "〇〇 wa doko desu ka?",
-          "zh": "〇〇在哪里？",
-          "en": "Where is 〇〇?",
-          "jlpt": "N5",
-          "hookType": "d",
-          "hook": "在地铁里，这句主要用来找出口、检票口、东口南口这类具体位置。",
-          "links": [
-            {
-              "lang": "EN",
-              "word": "where is..."
-            },
-            {
-              "lang": "ES",
-              "word": "¿dónde está...?"
-            },
-            {
-              "lang": "ZH",
-              "word": "在哪里"
-            }
-          ],
-          "scene": "你知道自己要找的是“某个具体口”时最好用。",
-          "culture": "",
-          "swappableWords": [
-            {
-              "word": "出口",
-              "zh": "出口"
-            },
-            {
-              "word": "改札口",
-              "zh": "检票口"
-            },
-            {
-              "word": "南口",
-              "zh": "南口"
-            },
-            {
-              "word": "東口",
-              "zh": "东口"
-            },
-            {
-              "word": "西口",
-              "zh": "西口"
-            }
-          ]
-        },
-        {
           "id": 10,
           "type": "core",
           "jp": "改札口はどこですか？",
@@ -1270,13 +1189,13 @@
         {
           "id": 12,
           "type": "support",
-          "jp": "もう一度言ってください",
-          "roma": "Mou ichido itte kudasai",
+          "jp": "もう一度お願いします",
+          "roma": "Moo ichido onegaishimasu",
           "zh": "请再说一遍",
           "en": "Could you repeat that?",
           "jlpt": "N5",
           "hookType": "e",
-          "hook": "もう一度 = 再一次，听地铁说明时很常用。",
+          "hook": "もう一度 = 再一次，お願いします = 拜托了。比「言ってください」更软，对陌生人不会显得生硬。脑子空白时也能说出来。",
           "links": [
             {
               "lang": "EN",
@@ -1642,7 +1561,7 @@
           "en": "What do you recommend?",
           "jlpt": "N4",
           "hookType": "e",
-          "hook": "「おすすめ」= 推荐。お开头是礼貌前缀。",
+          "hook": "点这句相当于给服务员开话匣子。能用日语主动问推荐，对方往往会来劲地介绍——这是餐厅里最容易发生真实对话的一句。",
           "links": [
             {
               "lang": "EN",
@@ -1898,7 +1817,7 @@
           "type": "core",
           "jp": "温めますか？",
           "roma": "Atatamemasu ka?",
-          "zh": "需要加热吗？（店员说）",
+          "zh": "需要加热吗？",
           "en": "Shall I heat it up?",
           "jlpt": "N4",
           "hookType": "d",
@@ -1953,7 +1872,7 @@
           "type": "core",
           "jp": "袋はいりますか？",
           "roma": "Fukuro wa irimasu ka?",
-          "zh": "需要袋子吗？（店员说）",
+          "zh": "需要袋子吗？",
           "en": "Do you need a bag?",
           "jlpt": "N4",
           "hookType": "t",
@@ -2012,35 +1931,16 @@
           "culture": ""
         },
         {
-          "id": 7,
-          "type": "support",
-          "jp": "領収書をください",
-          "roma": "Ryōshūsho wo kudasai",
-          "zh": "请给我收据（正式）",
-          "en": "Official receipt, please",
-          "jlpt": "N3",
-          "hookType": "d",
-          "hook": "領収書是正式收据，和普通レシート不一样。",
-          "links": [
-            {
-              "lang": "ZH",
-              "word": "正式收据"
-            },
-            {
-              "lang": "JP",
-              "word": "領収書"
-            },
-            {
-              "lang": "EN",
-              "word": "official receipt"
-            },
-            {
-              "lang": "ES",
-              "word": "recibo formal"
-            }
-          ],
-          "scene": "报销、记账、公司用途时会用到。",
-          "culture": ""
+          "id": 306,
+          "type": "core",
+          "jp": "店内で食べられますか？",
+          "roma": "Ten'nai de taberaremasu ka?",
+          "zh": "可以在里面吃吗？",
+          "en": "Can I eat inside?",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "店内 = 店内，食べられる = 能吃。便利店越来越多有イートイン区，买了热食先问一句，直接站那边吃，不用找位子。",
+          "scene": "买了关东煮、肉包或热便当，想坐在便利店里吃时问这句。"
         },
         {
           "id": 8,
@@ -2051,7 +1951,7 @@
           "en": "Where is 〇〇?",
           "jlpt": "N5",
           "hookType": "d",
-          "hook": "这是便利店里最稳的找东西模板句。",
+          "hook": "全场景最值钱的定位句。换 ATM・お手洗い・〇〇売り場，便利店、地铁、街上都能用。记住这个句子框架，比背十句专用句更省事。",
           "links": [
             {
               "lang": "ZH",
@@ -2096,7 +1996,7 @@
           "en": "Do you have 〇〇?",
           "jlpt": "N5",
           "hookType": "e",
-          "hook": "便利店万能找物句。不会说完整需求时尤其好用。",
+          "hook": "有没有 〇〇？万能问货框架。不会描述需求时，找到包装或照片指给对方看，再说「これはありますか？」也完全可以。",
           "links": [
             {
               "lang": "ZH",
@@ -2885,31 +2785,6 @@
           "scene": "对方说太快、环境太吵、你一下没反应过来时，先丢这句。先活下来，再求完美。"
         },
         {
-          "id": 6,
-          "jp": "もう一度おっしゃっていただけますか？",
-          "roma": "Mou ichido osshatte itadakemasu ka?",
-          "zh": "可以再说一遍吗？（更礼貌）",
-          "en": "Could you say that again?",
-          "jlpt": "N4",
-          "hookType": "t",
-          "hook": "陷阱：「おっしゃる」是「言う」的尊敬语。学习者容易直接用「言ってください」，但对陌生人这样说显得失礼。向对方请求时，把对方的动作升级为尊敬语。",
-          "links": [
-            {
-              "lang": "EN",
-              "word": "say it again"
-            },
-            {
-              "lang": "ES",
-              "word": "¿puede repetir?"
-            },
-            {
-              "lang": "ZH",
-              "word": "再说一遍（敬语）"
-            }
-          ],
-          "scene": "这是问路进阶版。当前面的「もう一度お願いします」不够细腻时，用这句更像你原来雕过的语言层次。"
-        },
-        {
           "id": 7,
           "jp": "ゆっくりお願いします",
           "roma": "Yukkuri onegaishimasu",
@@ -2942,7 +2817,7 @@
           "en": "Please turn right",
           "jlpt": "N5",
           "hookType": "d",
-          "hook": "右 = みぎ，汉字和中文完全一样。曲がる = 转弯，这个动词以后看地图、听导航都常见。",
+          "hook": "坐出租车指路时最直接的一句。右=みぎ，左=ひだり，这两个方向词在任何导航场景里都要先认识。",
           "links": [
             {
               "lang": "ZH",
@@ -2967,7 +2842,7 @@
           "en": "Please turn left",
           "jlpt": "N5",
           "hookType": "d",
-          "hook": "左 = ひだり。東西南北左右这些方向词，汉字母语者天然占便宜。",
+          "hook": "和「右に」配一起记，方向词成对出现最容易进脑子。步行问路时也能用，加上「あの角を」（在那个转角）更清楚。",
           "links": [
             {
               "lang": "ZH",
@@ -3508,6 +3383,18 @@
               "zh": "药物"
             }
           ]
+        },
+        {
+          "id": 610,
+          "type": "core",
+          "jp": "海外旅行保険があります",
+          "roma": "Kaigai ryokoo hoken ga arimasu",
+          "zh": "我有海外旅行险",
+          "en": "I have travel insurance",
+          "jlpt": "N4",
+          "hookType": "e",
+          "hook": "保険 = 保险，汉字直读。到日本医院第一句话往往是「保険はありますか？」，有备无患。出发前在手机里存好保单号，说这句同时递出手机。",
+          "scene": "挂号或急诊窗口，工作人员问保险时主动说出来，能大幅简化后续流程。"
         },
         {
           "id": 10,
