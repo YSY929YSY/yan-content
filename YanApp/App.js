@@ -2944,7 +2944,7 @@ function CardScreen({ sceneState, onBack, onFinish }) {
       <ScrollView contentContainerStyle={cs.scroll} showsVerticalScrollIndicator={false}>
         <View style={cs.main}>
         
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18, width: '100%' }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, width: '100%' }}>
             <View style={[cs.scTag, { backgroundColor: scene.bgColor }]}><Text style={[cs.scTagTxt, { color: scene.color }]}>{scene.emoji} {scene.label}</Text></View>
             <View style={{ flexDirection: 'row', gap: 6, alignItems: 'center' }}>
               {p.speaker === 'staff' && (
@@ -2963,7 +2963,7 @@ function CardScreen({ sceneState, onBack, onFinish }) {
             <Text style={cs.jpTxt}>{p.jp}</Text>
           )}
           <Text style={cs.romaTxt}>{p.roma}</Text>
-          <View style={{ marginTop: 20 }}>
+          <View style={{ marginTop: 12 }}>
             <SpeakBtn
               onPress={() => speak(p.jp, 'ja-JP', `phrase-${p.id}`)}
               speaking={speakingKey === `phrase-${p.id}`}
@@ -2975,7 +2975,7 @@ function CardScreen({ sceneState, onBack, onFinish }) {
             <Text style={cs.enTxt}>{p.en}</Text>
           </View>
           {p.links && p.links.length > 0 && (
-            <View style={{ marginTop: 14, width: '100%' }}>
+            <View style={{ marginTop: 10, width: '100%' }}>
               <Text style={cs.linkLbl}>🔗 多语言关联</Text>
               <LangLink links={p.links} />
             </View>
@@ -2991,13 +2991,9 @@ function CardScreen({ sceneState, onBack, onFinish }) {
                     activeOpacity={0.78}
                     onPress={() => speak(w.word, 'ja-JP', `swap-${p.id || cur}-${i}`)}
                   >
-                    <View style={cs.swapTop}>
-                      <View style={cs.swapTextWrap}>
-                        <Text style={cs.swapJp} numberOfLines={1} ellipsizeMode="tail">{w.word}</Text>
-                        {w.reading ? <Text style={cs.swapReading} numberOfLines={1} ellipsizeMode="tail">{w.reading}</Text> : null}
-                      </View>
-                    </View>
-                    <Text style={cs.swapZh} numberOfLines={1} ellipsizeMode="tail">{w.zh}</Text>
+                    <Text style={cs.swapJp} numberOfLines={1}>{w.word}</Text>
+                    {w.reading ? <Text style={cs.swapReading} numberOfLines={1}>{w.reading}</Text> : null}
+                    <Text style={cs.swapZh} numberOfLines={1}>{w.zh}</Text>
                   </TouchableOpacity>
                 ))}
               </View>
@@ -3071,14 +3067,14 @@ const cs = StyleSheet.create({
   navN: { fontSize: 14, fontWeight: '600', color: C.ink },
   prog: { height: 3, backgroundColor: C.border },
   progFill: { height: 3 },
-  scroll: { padding: 18, paddingBottom: 48 },
+  scroll: { padding: 14, paddingBottom: 40 },
   emptyWrap: { flex: 1, padding: 18, justifyContent: 'center' },
   emptyCard: { backgroundColor: C.white, borderRadius: 18, padding: 22, borderWidth: 1.5, borderColor: C.border, alignItems: 'center' },
   emptyTitle: { fontSize: 17, fontWeight: '700', color: C.ink, textAlign: 'center' },
   emptySub: { fontSize: 13, color: C.muted, lineHeight: 20, marginTop: 8, textAlign: 'center' },
   emptyBtn: { marginTop: 18, borderRadius: 13, paddingHorizontal: 22, paddingVertical: 12 },
   emptyBtnTxt: { fontSize: 14, fontWeight: '700', color: C.white },
-  main: { backgroundColor: C.white, borderRadius: 20, padding: 22, marginBottom: 12, borderWidth: 1.5, borderColor: C.border, alignItems: 'center' },
+  main: { backgroundColor: C.white, borderRadius: 20, padding: 18, marginBottom: 10, borderWidth: 1.5, borderColor: C.border, alignItems: 'center' },
   listenChip: { backgroundColor: C.blueLight, borderRadius: 7, paddingHorizontal: 6, paddingVertical: 2 },
   listenChipTxt: { fontSize: 13 },
   scTag: { borderRadius: 18, paddingHorizontal: 11, paddingVertical: 4 },
@@ -3086,7 +3082,7 @@ const cs = StyleSheet.create({
   jpTxt: { fontSize: 30, color: C.ink, fontWeight: '300', textAlign: 'center', lineHeight: 42 },
   wordCardInline: { color: C.lava, textDecorationLine: 'underline', fontWeight: '500' },
   romaTxt: { fontSize: 12, color: C.muted, marginTop: 7 },
-  trans: { marginTop: 18, alignItems: 'center' },
+  trans: { marginTop: 12, alignItems: 'center' },
   zhTxt: { fontSize: 19, color: C.ink, fontWeight: '500', textAlign: 'center' },
   enTxt: { fontSize: 12, color: C.muted, marginTop: 4, fontStyle: 'italic', textAlign: 'center' },
   linkLbl: { fontSize: 10, fontWeight: '700', color: C.muted, letterSpacing: 1, marginBottom: 2 },
@@ -3136,60 +3132,23 @@ const cs = StyleSheet.create({
     color: '#4a3a16',
     lineHeight: 20,
   },
-  swapBox: {
-    marginTop: 12,
-    width: '100%',
-  },
-  swapLbl: {
-    fontSize: 10,
-    fontWeight: '700',
-    color: C.muted,
-    letterSpacing: 1,
-    marginBottom: 6,
-  },
-  swapRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
+  swapBox: { marginTop: 10, width: '100%' },
+  swapLbl: { fontSize: 10, fontWeight: '700', color: C.muted, letterSpacing: 1, marginBottom: 5 },
+  swapRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
   swapChip: {
-    minWidth: 104,
-    maxWidth: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
     backgroundColor: '#f3eeff',
     borderColor: '#d8ccff',
     borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 7,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
   },
-  swapTop: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  gap: 8,
-},
-  swapTextWrap: {
-    minWidth: 0,
-    flexShrink: 1,
-  },
-  swapJp: {
-    fontSize: 12,
-    fontWeight: '700',
-    color: '#5a3a9a',
-    textAlign: 'center',
-  },
-  swapReading: {
-  fontSize: 10,
-  color: '#8c7bb8',
-  marginTop: 2,
-  textAlign: 'center',
-  },
-  swapZh: {
-    fontSize: 10,
-    color: '#7a7199',
-    marginTop: 2,
-    textAlign: 'center',
-  },
+  swapJp: { fontSize: 13, fontWeight: '700', color: '#5a3a9a' },
+  swapReading: { fontSize: 10, color: '#8c7bb8' },
+  swapZh: { fontSize: 10, color: '#7a7199' },
   wordCardPage: { flex: 1, backgroundColor: C.paper },
   wordCardScroll: { paddingHorizontal: 18, paddingTop: 12, paddingBottom: 24 },
   wordCardSource: { fontSize: 12, color: C.muted, textAlign: 'center', marginBottom: 12 },
