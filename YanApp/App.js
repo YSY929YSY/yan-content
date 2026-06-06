@@ -2631,9 +2631,9 @@ const WORD_CARDS = {
     notes: {},
     grammarBlocks: [
       { particle: '済む（すむ）', particleSize: 20, label: '词根', body: '済む（すむ）= 事情了结。\n\n仕事が済む → 工作结束了。\nこの事が済みません → 这件事还没了结。\n\n打扰了你、让你帮忙——对方的注意力被我用掉了。「还没了结」，就是在承认这件事。\n\nすみません 的道歉义和叫人义，都是这个逻辑。' },
-      { particle: 'vs ありがとう', particleSize: 15, label: '反直觉用法', body: '服务员帮了你，日语用すみません有时比ありがとう更自然。\n「让你费心了」比「我很感谢」多一层体谅对方的立场。\n\nすみません、ありがとうございます。\n——两句连说也很自然：先承认占用了对方，再表示感谢。' },
+      { particle: 'vs ありがとう', particleSize: 15, label: '反直觉用法', body: '服务员帮了你，日语用すみません有时比ありがとう更自然。\n「让你费心了」比「我很感谢」多一层体谅对方的立场。\n\nすみません、ありがとうございます。' },
     ],
-    skeletonTitle: '前面不动，换后面的需求',
+    skeletonTitle: '换个需求',
     skeletonPrefix: 'すみません、', skeletonSuffix: '',
     skeletons: [
       { jp: 'すみません、写真をお願いします。', zh: '麻烦帮我拍照', chipLabel: '拍照' },
