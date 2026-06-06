@@ -2573,51 +2573,326 @@ starterTitle: {
 // ─────────────────────────────────────────────
 const WORD_CARDS = {
   order: {
-    word: '注文',
-    reading: 'ちゅうもん',
-    meaning: '在餐厅是行动信号——你在说「我准备好了」',
-    literalMeaning: '点餐 · 下单',
+    word: '注文', reading: 'ちゅうもん', jlpt: 'N4', sourceLabel: '餐厅点餐',
     tags: ['旅行高频', '餐厅', 'N4'],
-    frequency: 4,
     coreSentence: 'すみません、注文をお願いします。',
     coreTranslation: '不好意思，我要点餐了。',
-    source: '从 餐厅点餐 · 第2句 进入',
+    coreTokens: [
+      { text: 'すみません、' },
+      { text: '注文', noteKey: 'order', style: 'lava' },
+      { text: 'を', noteKey: 'wo', style: 'blue' },
+      { text: 'お願いします', noteKey: 'onegai', style: 'plain' },
+      { text: '。' },
+    ],
+    trap: { front: '注文 ≠ 注解文字', back: '真实含义：点餐 / 下单\n是动作，不是文字。' },
+    contextJa: '注文しました', contextZh: '，网购里也常见。',
+    pitch: [{ char: 'ちゅ', high: false }, { char: 'う', high: true }, { char: 'も', high: true }, { char: 'ん', high: false }],
     notes: {
-      order: {
-        title: '注文',
-        body: '注文是行动信号，不只是”点餐”这个动作名词。你说出这个词，等于告诉店员：我选好了，可以来了。',
-      },
-      wo: {
-        title: 'を',
-        body: 'を：把前面的「注文」变成请求处理的对象。注文を = 把点餐这件事交给对方处理。',
-      },
-      onegai: {
-        title: 'お願いします',
-        body: 'お願いします：礼貌请求的万能结尾。比直接说ください更软，对店员很自然。',
-      },
-      es: {
-        title: 'ES｜pedir',
-        body: '源自拉丁 petere「寻求、去要」。英文 appetite、petition 同根。点餐这件事，西语和日语都落在「我要去要」这个动作上。',
-      },
+      order: { title: '注文', body: '注文是行动信号，不只是”点餐”这个动作名词。你说出这个词，等于告诉店员：我选好了，可以来了。' },
+      wo: { title: 'を', body: 'を：把前面的「注文」变成请求处理的对象。注文を = 把点餐这件事交给对方处理。' },
+      onegai: { title: 'お願いします', body: 'お願いします：礼貌请求的万能结尾。比直接说ください更软，对店员很自然。' },
+      es: { title: 'ES｜pedir', body: '源自拉丁 petere「寻求、去要」。英文 appetite、petition 同根。点餐这件事，西语和日语都落在「我要去要」这个动作上。' },
     },
-    examples: [
-      { jp: 'すみません、注文をお願いします。', zh: '不好意思，我要点餐。', scene: '餐厅', who: 'say', level: 'N4' },
-      { jp: '注文してもいいですか？', zh: '现在可以点单吗？', scene: '咖啡馆', who: 'say', level: 'N4' },
-      { jp: 'ご注文はお決まりですか？', zh: '您想好点什么了吗？', scene: '餐厅', who: 'listen', level: 'N4' },
-      { jp: '昨日、本を注文しました。', zh: '昨天我下单买了一本书。', scene: '网购', who: 'say', level: 'N4' },
+    grammarBlocks: [
+      { particle: 'を', particleSize: 24, label: '助词', body: 'を 像传送带，\n把「注文」送到 お願いします 那里。' },
+      { particle: 'お願いします', particleSize: 20, label: '万能礼貌结尾', body: 'ください 是「给我」，お願いします 是「我托付你」。\n一字之差，是日语礼貌感的核心。\n对朋友可以直接说「お願い」。' },
     ],
-    related: [
-      { jp: '会計', zh: '结账' },
-      { jp: 'ください', zh: '请给我' },
-      { jp: 'メニュー', zh: '菜单' },
-      { jp: '予約', zh: '预约' },
-    ],
+    skeletonTitle: '只换前面，后面不用动',
+    skeletonPrefix: '', skeletonSuffix: 'をお願いします',
     skeletons: [
       { jp: '注文をお願いします', zh: '麻烦点餐' },
       { jp: '会計をお願いします', zh: '麻烦结账' },
       { jp: '予約をお願いします', zh: '麻烦预约' },
       { jp: '写真をお願いします', zh: '麻烦帮我拍照' },
     ],
+    examples: [
+      { jp: 'すみません、注文をお願いします。', zh: '不好意思，我要点餐。', scene: '餐厅', who: 'say', level: 'N4' },
+      { jp: '注文してもいいですか？', zh: '现在可以点单吗？', scene: '咖啡馆', who: 'say', level: 'N4' },
+      { jp: 'ご注文はお決まりですか？', zh: '您想好点什么了吗？', scene: '餐厅', who: 'listen', level: 'N4' },
+      { jp: '昨日、本を注文しました。', zh: '昨天我下单买了一本书。', scene: '网购', who: 'say', level: 'N4' },
+    ],
+    related: [{ jp: '会計', zh: '结账' }, { jp: 'ください', zh: '请给我' }, { jp: 'メニュー', zh: '菜单' }, { jp: '予約', zh: '预约' }],
+    relatedLabel: '在餐厅还会遇到',
+  },
+
+  sumimasen: {
+    word: 'すみません', reading: 'sumimasen', jlpt: 'N5', sourceLabel: '地铁 & 交通',
+    tags: ['旅行高频', '通用', 'N5'],
+    coreSentence: 'すみません、写真をお願いします。',
+    coreTranslation: '不好意思，麻烦帮我拍个照。',
+    coreTokens: [
+      { text: 'すみません', noteKey: 'main', style: 'lava' },
+      { text: '、写真をお願いします。' },
+    ],
+    trap: null,
+    contextJa: 'すみません！落としましたよ。',
+    contextZh: '——叫住陌生人最自然的一句。',
+    pitch: [{ char: 'す', high: false }, { char: 'み', high: true }, { char: 'ま', high: true }, { char: 'せ', high: true }, { char: 'ん', high: true }],
+    notes: {
+      main: { title: '済む', body: '済む（すむ）= 事情了结。すみません = 这件事还没了结。\n道歉和叫人用同一个词，因为两种情况下你都在说：我占用了你的注意力。' },
+      apology: { title: '道歉', body: '踩到别人脚、挤过去、给人添麻烦——轻度道歉首选。比申し訳ありません更日常，不那么沉重。' },
+      calling: { title: '叫人', body: '餐厅叫服务员、问路拦住陌生人——一切需要对方注意力的场合，都用这句开头。' },
+      passing: { title: '让路', body: '电车里要过去、前面有人挡路——不需要道歉，只需要对方知道你在这里。' },
+    },
+    grammarBlocks: [
+      { particle: '済む', particleSize: 24, label: '词根', body: '済む = 事情了结、完成。\nすみません = 「この事が済みません」省略——因为打扰了你，这件事还没了结。\n道歉和叫人同一个词：两种情况下你都在承认占用了对方。' },
+      { particle: 'vs ありがとう', particleSize: 15, label: '反直觉用法', body: '服务员帮了你，日语说すみません有时比ありがとう更自然。\n「让你费心了」比「我很感谢」多一层体谅对方的立场。' },
+    ],
+    skeletonTitle: '前面不动，换后面的需求',
+    skeletonPrefix: 'すみません、', skeletonSuffix: '',
+    skeletons: [
+      { jp: 'すみません、写真をお願いします。', zh: '麻烦帮我拍照', chipLabel: '拍照' },
+      { jp: 'すみません、〇〇はどこですか？', zh: '请问〇〇在哪里', chipLabel: '问路' },
+      { jp: 'すみません、通してください。', zh: '让我过一下', chipLabel: '让路' },
+      { jp: 'すみません、もう一度お願いします。', zh: '请再说一遍', chipLabel: '再说' },
+    ],
+    examples: [
+      { jp: 'すみません、ちょっと通してください。', zh: '不好意思，我要过去一下。', scene: '地铁', who: 'say', level: 'N5' },
+      { jp: 'すみません、落としましたよ。', zh: '不好意思，你掉东西了。', scene: '街上', who: 'say', level: 'N5' },
+      { jp: 'すみません！お水をください。', zh: '不好意思，请给我水。', scene: '餐厅', who: 'say', level: 'N5' },
+      { jp: 'あ、すみません。', zh: '啊，对不起。', scene: '不小心碰到人', who: 'say', level: 'N5' },
+    ],
+    related: [{ jp: 'ありがとうございます', zh: '谢谢' }, { jp: '申し訳ありません', zh: '非常抱歉（重度）' }],
+    relatedLabel: '同场合常用词',
+  },
+
+  oyu: {
+    word: 'お湯', reading: 'おゆ', jlpt: 'N4', sourceLabel: '酒店入住',
+    tags: ['酒店', '陷阱词', 'N4'],
+    coreSentence: 'お湯が出ないのですが…',
+    coreTranslation: '热水出不来……',
+    coreTokens: [
+      { text: 'お' },
+      { text: '湯', noteKey: 'yu', style: 'lava' },
+      { text: 'が出ないのですが…' },
+    ],
+    trap: { front: '湯 ≠ 汤', back: '日语「湯」= 热水，不是汤！\nスープ / 汁 才是汤。' },
+    contextJa: 'お湯をください。', contextZh: '——在餐厅要热水，同一个词。',
+    pitch: [{ char: 'お', high: false }, { char: 'ゆ', high: true }],
+    notes: {
+      yu: { title: '湯', body: '湯 = 热水，不是汤。这是汉字圈最容易踩的陷阱之一。\n日本餐厅里「お湯」= 热水，汤要说スープ或汁（しる）。' },
+      o: { title: 'お', body: '礼貌前缀。お + 湯 = 热水（礼貌说法）。日语里很多日常名词前加お表示礼貌，去掉也能说，但显得随意。' },
+      noda: { title: '〜のですが…', body: '「〜のですが」句尾不说完，表示「（所以请帮我处理）」。日本人听到这个语气词，立刻知道你在委婉请求帮助。' },
+    },
+    grammarBlocks: [
+      { particle: '湯', particleSize: 28, label: '汉字陷阱', body: '中文「汤」≠ 日文「湯」\n日语「湯」= 热水。在餐厅说「お湯ください」要的是热水，不是汤。\n汤要说スープ（soup）或汁（しる）。' },
+      { particle: '〜のですが…', particleSize: 16, label: '省略请求句', body: '句子不说完反而更自然。「〜のですが…」= 因为……（所以希望你帮我处理）。\n任何问题都能套：\nシャワーが壊れているのですが…\nエアコンが動かないのですが…' },
+    ],
+    skeletonTitle: '换前面，后面语气不动',
+    skeletonPrefix: '', skeletonSuffix: 'のですが…',
+    skeletons: [
+      { jp: 'お湯が出ないのですが…', zh: '热水出不来' },
+      { jp: 'シャワーが壊れているのですが…', zh: '淋浴坏了' },
+      { jp: 'エアコンが動かないのですが…', zh: '空调不动了' },
+      { jp: 'カギが開かないのですが…', zh: '钥匙打不开' },
+    ],
+    examples: [
+      { jp: 'お湯が出ないのですが、確認していただけますか？', zh: '热水出不来，可以帮我确认一下吗？', scene: '酒店', who: 'say', level: 'N4' },
+      { jp: 'お湯をください。', zh: '请给我热水。', scene: '餐厅', who: 'say', level: 'N4' },
+      { jp: 'お湯で溶かしてください。', zh: '请用热水溶化。', scene: '便利店食品', who: 'listen', level: 'N4' },
+    ],
+    related: [{ jp: '水（みず）', zh: '冷水' }, { jp: 'スープ', zh: '汤（soup）' }, { jp: 'お風呂', zh: '浴缸热水' }],
+    relatedLabel: '相关词汇',
+  },
+
+  okaikei: {
+    word: 'お会計', reading: 'おかいけい', jlpt: 'N4', sourceLabel: '餐厅点餐',
+    tags: ['餐厅', '高频', 'N4'],
+    coreSentence: 'お会計をお願いします。',
+    coreTranslation: '麻烦结账。',
+    coreTokens: [
+      { text: 'お' },
+      { text: '会計', noteKey: 'kaikei', style: 'lava' },
+      { text: 'を', noteKey: 'wo', style: 'blue' },
+      { text: 'お願いします', noteKey: 'onegai', style: 'plain' },
+      { text: '。' },
+    ],
+    trap: null,
+    contextJa: '（空中画写字手势）', contextZh: '——这个手势加这句话，是日本餐厅结账的标准组合。',
+    pitch: [{ char: 'お', high: false }, { char: 'か', high: true }, { char: 'い', high: true }, { char: 'け', high: true }, { char: 'い', high: false }],
+    notes: {
+      kaikei: { title: '会計', body: '会（会计）+ 計（计算）= 算账。汉字直读，和中文「会计」几乎同义。\n这个词告诉服务员：我要算这顿的账了。' },
+      wo: { title: 'を', body: 'を把「会計」传送给お願いします处理。\n同一框架：〇〇をお願いします，换个名词就是新的礼貌请求。' },
+      onegai: { title: 'お願いします', body: '万能礼貌结尾。比ください更软，正式场合用这个。\n任何名词后面接上，都变成得体的请求。' },
+    },
+    grammarBlocks: [
+      { particle: '会計', particleSize: 24, label: '汉字解析', body: '会（会计）+ 計（计算）。\n和中文「会计」高度同源。日本餐厅有时也写「お勘定」，两种都是结账的意思。' },
+      { particle: 'お〇〇をお願いします', particleSize: 13, label: '万能服务请求框架', body: '任何服务或物品前套上这个框架都成立：\nおすすめをお願いします（推荐菜）\nお箸をお願いします（筷子）\nキャンセルをお願いします（取消）' },
+    ],
+    skeletonTitle: '只换前面，后面不用动',
+    skeletonPrefix: '', skeletonSuffix: 'をお願いします',
+    skeletons: [
+      { jp: 'お会計をお願いします', zh: '麻烦结账' },
+      { jp: 'お箸をお願いします', zh: '麻烦给我筷子' },
+      { jp: 'キャンセルをお願いします', zh: '麻烦取消' },
+      { jp: '領収書をお願いします', zh: '麻烦给我收据' },
+    ],
+    examples: [
+      { jp: 'すみません、お会計をお願いします。', zh: '不好意思，麻烦结账。', scene: '餐厅', who: 'say', level: 'N4' },
+      { jp: 'お会計はご一緒ですか？', zh: '你们一起结账吗？', scene: '餐厅', who: 'listen', level: 'N4' },
+      { jp: '別々でお願いします。', zh: '分开结账。', scene: '餐厅', who: 'say', level: 'N4' },
+      { jp: 'カードでお支払いできますか？', zh: '可以刷卡吗？', scene: '收银台', who: 'say', level: 'N4' },
+    ],
+    related: [{ jp: '注文', zh: '点餐' }, { jp: '割り勘', zh: 'AA制' }, { jp: 'レシート', zh: '小票' }],
+    relatedLabel: '餐厅结账相关',
+  },
+
+  norikae: {
+    word: '乗り換え', reading: 'のりかえ', jlpt: 'N3', sourceLabel: '地铁 & 交通',
+    tags: ['地铁', '高频', 'N3'],
+    coreSentence: '乗り換えはどこですか？',
+    coreTranslation: '换乘在哪里？',
+    coreTokens: [
+      { text: '乗り換え', noteKey: 'kanji', style: 'lava' },
+      { text: 'はどこですか？' },
+    ],
+    trap: null,
+    contextJa: '〇〇線に乗り換えてください。', contextZh: '——广播里最常听到的换乘提示。',
+    pitch: [{ char: 'の', high: true }, { char: 'り', high: false }, { char: 'か', high: false }, { char: 'え', high: false }],
+    notes: {
+      kanji: { title: '乗り換え', body: '乗る（のる）= 乘坐；換える（かえる）= 换。\n乗り換え = 乘坐 + 换 = 换乘。汉字分开看完全能猜——这是汉字圈的优势。' },
+      noru: { title: '乗る', body: '乗る = 上车/坐车。地铁三个动作：\n乗る（上车）→ 乗り換える（换乘）→ 降りる（下车）。' },
+      doko: { title: 'はどこですか', body: '〇〇はどこですか = 〇〇在哪里。全场景最万能的定位框架。\n换掉前面，任何你找不到的地方都能问。' },
+    },
+    grammarBlocks: [
+      { particle: '乗→換', particleSize: 26, label: '动词组合', body: '乗る（乘）+ 換える（换）= 乗り換える。\n日语复合动词逻辑：\n乗り換え（换乘）、乗り降り（上下车）、乗り過ごし（坐过站）。' },
+      { particle: 'はどこですか', particleSize: 15, label: '万能定位框架', body: '〇〇はどこですか = 〇〇在哪里？\nは = 话题标记；どこ = 何处（何处同源）。\n换掉前面什么都能问：改札口は、出口は、トイレは。' },
+    ],
+    skeletonTitle: '换前面，哪里都能找',
+    skeletonPrefix: '', skeletonSuffix: 'はどこですか？',
+    skeletons: [
+      { jp: '乗り換えはどこですか？', zh: '换乘在哪里' },
+      { jp: '改札口はどこですか？', zh: '检票口在哪里' },
+      { jp: '出口はどこですか？', zh: '出口在哪里' },
+      { jp: 'トイレはどこですか？', zh: '厕所在哪里' },
+    ],
+    examples: [
+      { jp: '渋谷で山手線に乗り換えてください。', zh: '请在涩谷换乘山手线。', scene: '地铁广播', who: 'listen', level: 'N3' },
+      { jp: '乗り換えはどこですか？', zh: '换乘在哪里？', scene: '地铁站', who: 'say', level: 'N3' },
+      { jp: '乗り換えに5分かかります。', zh: '换乘需要5分钟。', scene: '询问路线', who: 'listen', level: 'N3' },
+      { jp: '乗り過ごしてしまいました。', zh: '我坐过站了。', scene: '地铁', who: 'say', level: 'N3' },
+    ],
+    related: [{ jp: '降ります', zh: '下车' }, { jp: '乗ります', zh: '上车' }, { jp: '終点', zh: '终点站' }],
+    relatedLabel: '地铁行动词',
+  },
+
+  doko: {
+    word: 'どこ', reading: 'どこ（何処）', jlpt: 'N5', sourceLabel: '问题 & 导航',
+    tags: ['通用', '高频', 'N5'],
+    coreSentence: 'すみません、〇〇はどこですか？',
+    coreTranslation: '不好意思，请问〇〇在哪里？',
+    coreTokens: [
+      { text: 'すみません、〇〇は' },
+      { text: 'どこ', noteKey: 'doko', style: 'lava' },
+      { text: 'ですか？' },
+    ],
+    trap: null,
+    contextJa: 'どこから来ましたか？', contextZh: '——どこ不只是导航，还能引出真实对话。',
+    pitch: [{ char: 'ど', high: true }, { char: 'こ', high: false }],
+    notes: {
+      doko: { title: '何処', body: 'どこ的汉字写法是「何処」——何（哪）+ 処（处所），和中文「何处」完全同源。\n现代日语简化为假名，但词根还在。' },
+      ha: { title: 'は', body: 'は是话题标记，把前面的名词变成被问对象。\nは发音 wa（不是 ha），这是日语拼写里最常见的特例。' },
+      desuka: { title: 'ですか', body: 'です = 是；か = 问句标记。合在一起把陈述句变成问句。\n语调上扬就是问句，语调平或下沉是陈述。' },
+    },
+    grammarBlocks: [
+      { particle: '何処', particleSize: 28, label: '汉字同源', body: '何（なん/どの）= 哪；処（ところ）= 地方。\n合起来 = 何处。中文「何处」和日文「何処」，字形完全相同，意思完全一致。' },
+      { particle: '〇〇はどこですか', particleSize: 13, label: '旅行最高频框架', body: '覆盖率最高的单一框架——换掉〇〇就能问任何地点：\nトイレはどこですか（厕所）\n駅はどこですか（车站）\n出口はどこですか（出口）' },
+    ],
+    skeletonTitle: '换前面，哪里都能找',
+    skeletonPrefix: '', skeletonSuffix: 'はどこですか？',
+    skeletons: [
+      { jp: 'トイレはどこですか？', zh: '厕所在哪' },
+      { jp: '駅はどこですか？', zh: '车站在哪' },
+      { jp: '出口はどこですか？', zh: '出口在哪' },
+      { jp: 'コンビニはどこですか？', zh: '便利店在哪' },
+    ],
+    examples: [
+      { jp: 'すみません、トイレはどこですか？', zh: '不好意思，厕所在哪里？', scene: '便利店', who: 'say', level: 'N5' },
+      { jp: 'どこから来ましたか？', zh: '你从哪里来？', scene: '旅途中', who: 'listen', level: 'N5' },
+      { jp: '今どこにいますか？', zh: '你现在在哪里？', scene: '打电话', who: 'listen', level: 'N5' },
+      { jp: 'どこか痛いですか？', zh: '哪里疼吗？', scene: '医院', who: 'listen', level: 'N4' },
+    ],
+    related: [{ jp: 'いつ', zh: '什么时候' }, { jp: 'だれ', zh: '谁' }, { jp: 'なに', zh: '什么' }],
+    relatedLabel: '五个疑问词',
+  },
+
+  itai: {
+    word: '痛い', reading: 'いたい', jlpt: 'N4', sourceLabel: '紧急 & 就医',
+    tags: ['紧急', '医疗', 'N4'],
+    coreSentence: '〇〇が痛いです。',
+    coreTranslation: '〇〇疼。',
+    coreTokens: [
+      { text: '〇〇が' },
+      { text: '痛い', noteKey: 'itai', style: 'lava' },
+      { text: 'です。' },
+    ],
+    trap: null,
+    contextJa: 'とても痛いです。', contextZh: '——加「とても」（非常），医生立刻明白程度。',
+    pitch: [{ char: 'い', high: false }, { char: 'た', high: true }, { char: 'い', high: false }],
+    notes: {
+      itai: { title: '痛', body: '痛（いた）汉字直读。中文「痛」和日语「痛い」完全同源，连字形都一样。\n紧张时最先想到的词，汉字圈优势在这里最明显。' },
+      ga: { title: 'が', body: 'が标记身体的哪个部位在疼。〇〇が痛い = 〇〇疼。\n不会说部位？指着说「ここが痛いです」（这里疼）完全有效。' },
+      totemo: { title: 'とても', body: 'とても = 非常。加在痛い前面表示程度严重。\n医院或急救场景里加这个词，帮助对方快速判断情况。' },
+    },
+    grammarBlocks: [
+      { particle: '痛い', particleSize: 28, label: '汉字同源', body: '中文「痛」与日文「痛い」完全同源。\n常见部位：\n頭（あたま）= 头 · お腹（おなか）= 肚子\n喉（のど）= 喉咙 · 背中（せなか）= 背' },
+      { particle: '〇〇が痛いです', particleSize: 13, label: '症状表达框架', body: '换掉〇〇说任何部位。\n不会说部位时，直接指着那个地方说「ここが痛いです」也完全有效。\n医院挂号时说这句就能开始诊断。' },
+    ],
+    skeletonTitle: '换身体部位',
+    skeletonPrefix: '', skeletonSuffix: 'が痛いです。',
+    skeletons: [
+      { jp: '頭が痛いです。', zh: '头疼' },
+      { jp: 'お腹が痛いです。', zh: '肚子疼' },
+      { jp: '喉が痛いです。', zh: '喉咙疼' },
+      { jp: '背中が痛いです。', zh: '背疼' },
+    ],
+    examples: [
+      { jp: 'ここが痛いです。', zh: '（指着）这里疼。', scene: '医院', who: 'say', level: 'N4' },
+      { jp: 'いつから痛いですか？', zh: '从什么时候开始疼？', scene: '医院', who: 'listen', level: 'N4' },
+      { jp: 'どこが痛いですか？', zh: '哪里疼？', scene: '医院', who: 'listen', level: 'N4' },
+      { jp: 'とても痛いです。', zh: '非常疼。', scene: '医院', who: 'say', level: 'N4' },
+    ],
+    related: [{ jp: '気分が悪い', zh: '不舒服' }, { jp: '熱があります', zh: '发烧了' }, { jp: '病院', zh: '医院' }],
+    relatedLabel: '医院常用词',
+  },
+
+  osewa: {
+    word: 'お世話になりました', reading: 'おせわになりました', jlpt: 'N3', sourceLabel: '酒店入住',
+    tags: ['酒店', '情感深度', 'N3'],
+    coreSentence: 'お世話になりました。ありがとうございました。',
+    coreTranslation: '承蒙关照，非常感谢。',
+    coreTokens: [
+      { text: 'お' },
+      { text: '世話', noteKey: 'sewa', style: 'lava' },
+      { text: 'になりました。ありがとうございました。' },
+    ],
+    trap: null,
+    contextJa: '大変お世話になりました。', contextZh: '——离开时说，比ありがとう分量重三倍。',
+    pitch: [{ char: 'お', high: false }, { char: 'せ', high: true }, { char: 'わ', high: true }, { char: 'に', high: true }, { char: 'な', high: false }],
+    notes: {
+      sewa: { title: '世話', body: '世話（せわ）= 照顾、关照。\nお世話になる = 受到照顾、承蒙关照。\n说这句，等于承认：这几天你们让我很舒适，我记得这份情。' },
+      ninarimashita: { title: 'になりました', body: 'になる = 成为；ました = 过去式。\nお世話になりました = 已经受到了关照（确认这段关系）。\n过去式很重要：表示这段关系正式告别，不只是一句谢谢。' },
+      vsarigato: { title: 'vs ありがとう', body: 'ありがとう是感谢一件事；お世話になりました是感谢一段关系。\n酒店离开、离职、离校——任何一段时间关系结束都用这句。\n日本人听到这句会真的很感动。' },
+    },
+    grammarBlocks: [
+      { particle: '世話', particleSize: 26, label: '汉字解析', body: '世（世界）+ 話（话/照管）。\n「世話をする」= 照顾、操持。承蒙关照 = 有人在你的世界里为你出力。\n汉字本身藏着这个词的情感重量。' },
+      { particle: 'ありがとう vs お世話', particleSize: 12, label: '感谢的层次', body: 'ありがとう → 感谢一件事\nありがとうございました → 感谢已完成的事\nお世話になりました → 感谢一段关系\n\n每次从酒店、旅馆、民宿离开说这句，会让对方真的高兴。' },
+    ],
+    skeletonTitle: '这句说完，再加一句心意',
+    skeletonPrefix: 'お世話になりました。', skeletonSuffix: '',
+    skeletons: [
+      { jp: 'お世話になりました。ありがとうございました。', zh: '承蒙关照，非常感谢', chipLabel: '感谢' },
+      { jp: 'お世話になりました。またよろしくお願いします。', zh: '承蒙关照，下次再来', chipLabel: '再来' },
+      { jp: 'お世話になりました。楽しかったです。', zh: '承蒙关照，很开心', chipLabel: '说开心' },
+      { jp: 'お世話になりました。お体に気をつけて。', zh: '承蒙关照，保重身体', chipLabel: '祝保重' },
+    ],
+    examples: [
+      { jp: 'お世話になりました。', zh: '承蒙关照了。（离开酒店时）', scene: '酒店退房', who: 'say', level: 'N3' },
+      { jp: '今まで大変お世話になりました。', zh: '一直以来承蒙您的关照。', scene: '离职 / 毕业', who: 'say', level: 'N3' },
+      { jp: 'こちらこそ、お世話になりました。', zh: '哪里哪里，是我受到您的关照了。', scene: '互相道谢', who: 'listen', level: 'N3' },
+    ],
+    related: [{ jp: 'ありがとうございました', zh: '非常感谢' }, { jp: 'またよろしく', zh: '下次也请多关照' }],
+    relatedLabel: '告别用语',
   },
 };
 
@@ -2638,7 +2913,7 @@ function WordCardScreen({ card, onBack, onDone }) {
   return (
     <View style={cs.wordCardPage}>
       <View style={cs.nav}>
-        <TouchableOpacity onPress={onBack}><Text style={[cs.navBack, { color: C.lava }]}>‹ 餐厅点餐</Text></TouchableOpacity>
+        <TouchableOpacity onPress={onBack}><Text style={[cs.navBack, { color: C.lava }]}>‹ {card.sourceLabel || '返回'}</Text></TouchableOpacity>
         <Text style={cs.navN}>词卡</Text>
         <View style={{ width: 80 }} />
       </View>
@@ -2657,7 +2932,7 @@ function WordCardScreen({ card, onBack, onDone }) {
                 ))}
               </View>
             </View>
-            <Text style={cs.wordN4Tag}>N4</Text>
+            <Text style={cs.wordN4Tag}>{card.jlpt || 'N5'}</Text>
           </View>
           {side === 'front' ? (
             <>
@@ -2679,34 +2954,33 @@ function WordCardScreen({ card, onBack, onDone }) {
                 </View>
               </View>
 
-              <TouchableOpacity
-                style={[cs.wordTrapFlip, trapFlipped && cs.wordTrapFlipBack]}
-                activeOpacity={0.9}
-                onPress={() => setTrapFlipped(v => !v)}
-              >
-                {!trapFlipped ? (
-                  <View style={cs.wordTrapFront}>
-                    <Text style={cs.wordTrapWarning}>⚠️ 汉字陷阱</Text>
-                    <Text style={cs.wordTrapFrontText}>注文 ≠ 注解文字</Text>
-                    <Text style={cs.wordTrapHintSmall}>点击翻看 →</Text>
-                  </View>
-                ) : (
-                  <View style={cs.wordTrapBackInner}>
-                    <Text style={cs.wordTrapBackSub}>注文 ≠ 注解文字</Text>
-                    <Text style={cs.wordTrapBackText}>真实含义：点餐 / 下单</Text>
-                    <Text style={cs.wordTrapBackSub}>是动作，不是文字。</Text>
-                  </View>
-                )}
-              </TouchableOpacity>
+              {card.trap && (
+                <TouchableOpacity style={[cs.wordTrapFlip, trapFlipped && cs.wordTrapFlipBack]} activeOpacity={0.9} onPress={() => setTrapFlipped(v => !v)}>
+                  {!trapFlipped ? (
+                    <View style={cs.wordTrapFront}>
+                      <Text style={cs.wordTrapWarning}>⚠️ 汉字陷阱</Text>
+                      <Text style={cs.wordTrapFrontText}>{card.trap.front}</Text>
+                      <Text style={cs.wordTrapHintSmall}>点击翻看 →</Text>
+                    </View>
+                  ) : (
+                    <View style={cs.wordTrapBackInner}>
+                      <Text style={cs.wordTrapBackSub}>{card.trap.front}</Text>
+                      <Text style={cs.wordTrapBackText}>{card.trap.back}</Text>
+                    </View>
+                  )}
+                </TouchableOpacity>
+              )}
 
               <View style={cs.wordCoreBlock}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
                   <Text style={[cs.wordCoreSentence, { flex: 1 }, speakingKey === 'word-card-core' && cs.wordSpeaking]} onPress={() => say(card.coreSentence, 'word-card-core')}>
-                    すみません、
-                    <Text style={[cs.wordToken, { color: C.lava, backgroundColor: 'transparent' }, activeWordNote === 'order' && cs.wordTokenAct]} onPress={() => showNote('order', card.word)}>注文</Text>
-                    <Text style={[cs.wordTokenBlue, activeWordNote === 'wo' && cs.wordTokenBlueAct]} onPress={() => showNote('wo', 'を')}>を</Text>
-                    <Text style={[cs.wordTokenPlain, activeWordNote === 'onegai' && cs.wordTokenAct]} onPress={() => showNote('onegai', 'お願いします')}>お願いします</Text>
-                    。
+                    {(card.coreTokens || []).map((t, i) => {
+                      if (!t.noteKey) return <Text key={i}>{t.text}</Text>;
+                      const isAct = activeWordNote === t.noteKey;
+                      if (t.style === 'lava') return <Text key={i} style={[cs.wordToken, { color: C.lava, backgroundColor: 'transparent' }, isAct && cs.wordTokenAct]} onPress={() => showNote(t.noteKey, t.text)}>{t.text}</Text>;
+                      if (t.style === 'blue') return <Text key={i} style={[cs.wordTokenBlue, isAct && cs.wordTokenBlueAct]} onPress={() => showNote(t.noteKey, t.text)}>{t.text}</Text>;
+                      return <Text key={i} style={[cs.wordTokenPlain, isAct && cs.wordTokenAct]} onPress={() => showNote(t.noteKey, t.text)}>{t.text}</Text>;
+                    })}
                   </Text>
                   <SpeakBtn
                     onPress={() => say(card.coreSentence, 'word-card-core')}
@@ -2737,15 +3011,12 @@ function WordCardScreen({ card, onBack, onDone }) {
                 )}
               </View>
 
-              <Text style={cs.wordContextText}>
-                <Text
-                  style={cs.wordContextJa}
-                  onPress={() => say('注文しました', 'word-card-ctx-shimashita')}
-                >
-                  注文しました
+              {card.contextJa && (
+                <Text style={cs.wordContextText}>
+                  <Text style={cs.wordContextJa} onPress={() => say(card.contextJa, 'word-card-ctx')}>{card.contextJa}</Text>
+                  {card.contextZh}
                 </Text>
-                ，网购里也常见。
-              </Text>
+              )}
 
               {card.examples && card.examples.length > 0 && (
                 <TouchableOpacity style={cs.examplesDrawer} onPress={() => setExamplesModal(true)} activeOpacity={0.82}>
@@ -2754,81 +3025,57 @@ function WordCardScreen({ card, onBack, onDone }) {
                 </TouchableOpacity>
               )}
 
-              <TouchableOpacity style={cs.pitchInlineRow} onPress={() => say(card.word, 'word-card-pitch')} activeOpacity={0.75}>
-                <SpeakBtn
-                  onPress={() => say(card.word, 'word-card-pitch')}
-                  speaking={speakingKey === 'word-card-pitch'}
-                  size="sm"
-                  color={C.muted}
-                />
-                <Text style={cs.pitchLabel}>声调</Text>
-                <View style={cs.pitchRow}>
-                  {[
-                    { char: 'ちゅ', high: false },
-                    { char: 'う',   high: true  },
-                    { char: 'も',   high: true  },
-                    { char: 'ん',   high: false },
-                  ].map((s, i) => (
-                    <View key={i} style={cs.pitchSyl}>
-                      <Text style={cs.pitchChar}>{s.char}</Text>
-                      <View style={[cs.pitchBar, s.high ? cs.pitchBarHigh : cs.pitchBarLow]} />
-                    </View>
-                  ))}
-                </View>
-              </TouchableOpacity>
+              {card.pitch && card.pitch.length > 0 && (
+                <TouchableOpacity style={cs.pitchInlineRow} onPress={() => say(card.word, 'word-card-pitch')} activeOpacity={0.75}>
+                  <SpeakBtn onPress={() => say(card.word, 'word-card-pitch')} speaking={speakingKey === 'word-card-pitch'} size="sm" color={C.muted} />
+                  <Text style={cs.pitchLabel}>声调</Text>
+                  <View style={cs.pitchRow}>
+                    {card.pitch.map((s, i) => (
+                      <View key={i} style={cs.pitchSyl}>
+                        <Text style={cs.pitchChar}>{s.char}</Text>
+                        <View style={[cs.pitchBar, s.high ? cs.pitchBarHigh : cs.pitchBarLow]} />
+                      </View>
+                    ))}
+                  </View>
+                </TouchableOpacity>
+              )}
             </>
           ) : (
             <>
-              <View style={cs.wordBackBlock}>
-                <Text style={cs.gramParticle}>を</Text>
-                <Text style={cs.gramLabel}>助词</Text>
-                <Text style={cs.wordBackText}>
-                  を 像传送带，{'\n'}
-                  把「注文」送到 お願いします 那里。
-                </Text>
-              </View>
-
-              <View style={cs.wordBackBlock}>
-                <Text style={[cs.gramParticle, {fontSize: 22}]}>お願いします</Text>
-                <Text style={cs.gramLabel}>礼貌请求结尾</Text>
-                <Text style={cs.wordBackText}>
-                  ください 是「给我」，お願いします 是「我托付你」。{'\n'}
-                  一字之差，是日语礼貌感的核心。{'\n'}
-                  对朋友可以直接说「お願い」。
-                </Text>
-              </View>
-
-              <View style={[cs.wordBackBlock, cs.patContainer]}>
-                <Text style={cs.wordBackHd}>这个骨架可以通用</Text>
-                <View style={cs.patRow}>
-                  <View style={cs.patSlotVar}>
-                    <Text style={cs.patSlotVarTxt}>{card.skeletons[slotIdx].jp.replace('をお願いします', '')}</Text>
+              {(card.grammarBlocks || []).map((block, i) => (
+                <View key={i} style={cs.wordBackBlock}>
+                  <Text style={[cs.gramParticle, block.particleSize && { fontSize: block.particleSize }]}>{block.particle}</Text>
+                  <Text style={cs.gramLabel}>{block.label}</Text>
+                  <Text style={cs.wordBackText}>{block.body}</Text>
+                </View>
+              ))}
+              {card.skeletons && card.skeletons.length > 0 && (() => {
+                const pre = card.skeletonPrefix || '';
+                const suf = card.skeletonSuffix || '';
+                const getVar = (sk) => sk.chipLabel || sk.jp.replace(pre, '').replace(suf, '').replace(/[。？]$/, '').trim();
+                return (
+                  <View style={[cs.wordBackBlock, cs.patContainer]}>
+                    <Text style={cs.wordBackHd}>{card.skeletonTitle || '只换前面，后面不用动'}</Text>
+                    <View style={cs.patRow}>
+                      {pre ? <View style={cs.patSlotFix}><Text style={cs.patSlotFixTxt} numberOfLines={1}>{pre}</Text></View> : null}
+                      <View style={cs.patSlotVar}><Text style={cs.patSlotVarTxt} numberOfLines={1}>{getVar(card.skeletons[slotIdx] || card.skeletons[0])}</Text></View>
+                      {suf ? <View style={cs.patSlotFix}><Text style={cs.patSlotFixTxt} numberOfLines={1}>{suf}</Text></View> : null}
+                    </View>
+                    <View style={cs.patChipRow}>
+                      {card.skeletons.map((sk, i) => {
+                        const active = slotIdx === i;
+                        return (
+                          <TouchableOpacity key={i} style={[cs.patChip, active && cs.patChipActive]} activeOpacity={0.75}
+                            onPress={() => { setSlotIdx(i); say(sk.jp, `word-card-slot-${i}`); }}>
+                            <Text style={[cs.patChipWord, active && cs.patChipWordActive]}>{getVar(sk)}</Text>
+                            <Text style={[cs.patChipZh, active && cs.patChipZhActive]}>{sk.zh}</Text>
+                          </TouchableOpacity>
+                        );
+                      })}
+                    </View>
                   </View>
-                  <View style={cs.patSlotFix}><Text style={cs.patSlotFixTxt}>を</Text></View>
-                  <View style={cs.patSlotFix}><Text style={cs.patSlotFixTxt}>お願いします</Text></View>
-                </View>
-                <View style={cs.patChipRow}>
-                  {card.skeletons.map((sk, i) => {
-                    const varWord = sk.jp.replace('をお願いします', '');
-                    const active = slotIdx === i;
-                    return (
-                      <TouchableOpacity
-                        key={i}
-                        style={[cs.patChip, active && cs.patChipActive]}
-                        activeOpacity={0.75}
-                        onPress={() => {
-                          setSlotIdx(i);
-                          say(sk.jp, `word-card-slot-${i}`);
-                        }}
-                      >
-                        <Text style={[cs.patChipWord, active && cs.patChipWordActive]}>{varWord}</Text>
-                        <Text style={[cs.patChipZh, active && cs.patChipZhActive]}>{sk.zh}</Text>
-                      </TouchableOpacity>
-                    );
-                  })}
-                </View>
-              </View>
-
+                );
+              })()}
             </>
           )}
         </Pressable>
@@ -2879,7 +3126,7 @@ function WordCardScreen({ card, onBack, onDone }) {
               )}
               {card.related && card.related.length > 0 && (
                 <View style={{ marginTop: 16 }}>
-                  <Text style={[cs.wordSectionLabel, { marginBottom: 10 }]}>在餐厅还会遇到</Text>
+                  <Text style={[cs.wordSectionLabel, { marginBottom: 10 }]}>{card.relatedLabel || '相关词汇'}</Text>
                   <View style={cs.wordChipRow}>
                     {card.related.map(item => (
                       <TouchableOpacity key={item.jp} style={cs.wordChip} activeOpacity={0.78} onPress={() => say(item.jp, `word-card-related-${item.jp}`)}>
@@ -2910,6 +3157,7 @@ function CardScreen({ sceneState, onBack, onFinish }) {
   const hookStyle = HOOK_STYLES[p?.hookType] || HOOK_STYLES.e;
   const go = (d) => { setCur(i => i + d); setShowScene(false); setWordCardKey(null); };
   const canOpenOrderWordCard = scene.id === 'restaurant' && p?.jp === 'すみません、注文をお願いします。';
+  const phraseWordCardKey = p?.wordCardKey;
   if (wordCardKey && WORD_CARDS[wordCardKey]) {
     return <WordCardScreen card={WORD_CARDS[wordCardKey]} onBack={() => setWordCardKey(null)} onDone={() => { setWordCardKey(null); go(1); }} />;
   }
@@ -2963,6 +3211,11 @@ function CardScreen({ sceneState, onBack, onFinish }) {
             <Text style={cs.jpTxt}>{p.jp}</Text>
           )}
           <Text style={cs.romaTxt}>{p.roma}</Text>
+          {phraseWordCardKey && WORD_CARDS[phraseWordCardKey] && (
+            <TouchableOpacity style={cs.wordCardChip} onPress={() => setWordCardKey(phraseWordCardKey)} activeOpacity={0.82}>
+              <Text style={cs.wordCardChipTxt}>词卡 ↗</Text>
+            </TouchableOpacity>
+          )}
           <View style={{ marginTop: 12 }}>
             <SpeakBtn
               onPress={() => speak(p.jp, 'ja-JP', `phrase-${p.id}`)}
@@ -3077,6 +3330,8 @@ const cs = StyleSheet.create({
   main: { backgroundColor: C.white, borderRadius: 20, padding: 18, marginBottom: 10, borderWidth: 1.5, borderColor: C.border, alignItems: 'center' },
   listenChip: { backgroundColor: C.blueLight, borderRadius: 7, paddingHorizontal: 6, paddingVertical: 2 },
   listenChipTxt: { fontSize: 13 },
+  wordCardChip: { marginTop: 6, paddingHorizontal: 12, paddingVertical: 4, backgroundColor: '#fff0e8', borderRadius: 20, borderWidth: 1, borderColor: '#f0c8b0' },
+  wordCardChipTxt: { fontSize: 12, color: C.lava, fontWeight: '600' },
   scTag: { borderRadius: 18, paddingHorizontal: 11, paddingVertical: 4 },
   scTagTxt: { fontSize: 11, fontWeight: '700' },
   jpTxt: { fontSize: 30, color: C.ink, fontWeight: '300', textAlign: 'center', lineHeight: 42 },
