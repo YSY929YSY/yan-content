@@ -2630,8 +2630,25 @@ const WORD_CARDS = {
     pitch: [{ char: 'す', high: false }, { char: 'み', high: true }, { char: 'ま', high: true }, { char: 'せ', high: true }, { char: 'ん', high: true }],
     notes: {},
     grammarBlocks: [
-      { particle: '済む（すむ）', particleSize: 20, label: '词根', body: '済む（すむ）= 事情了结。\n\n仕事が済む → 工作结束了。\nこの事が済みません → 这件事还没了结。\n\n打扰了你、让你帮忙——对方的注意力被我用掉了。「还没了结」，就是在承认这件事。\n\nすみません 的道歉义和叫人义，都是这个逻辑。' },
-      { particle: 'vs ありがとう', particleSize: 15, label: '反直觉用法', body: '服务员帮了你，日语用すみません有时比ありがとう更自然。\n「让你费心了」比「我很感谢」多一层体谅对方的立场。\n\nすみません、ありがとうございます。' },
+      {
+        type: 'morph',
+        label: '词根',
+        chain: [
+          { text: '済む', sub: '了结' },
+          { text: '済みません', sub: '还没了结', active: true },
+        ],
+        transform: '→ 否定',
+        body: '打扰你 / 寻求帮助 = 占用了对方的注意力与时间，未了结状态。\n道歉义和叫人义，都是这个逻辑。',
+      },
+      {
+        type: 'compare',
+        heading: '为什么也能表达谢谢？',
+        scenario: '帮我拿外套',
+        left: { word: 'すみません', state: '对方还在付出' },
+        right: { word: 'ありがとう', state: '对方已帮完' },
+        compound: 'すみません、ありがとうございます。',
+        compoundLabel: '两句连说也自然',
+      },
     ],
     skeletonTitle: '换个需求',
     skeletonPrefix: 'すみません、', skeletonSuffix: '',
@@ -3032,13 +3049,60 @@ function WordCardScreen({ card, onBack, onDone }) {
             </>
           ) : (
             <>
-              {(card.grammarBlocks || []).map((block, i) => (
-                <View key={i} style={cs.wordBackBlock}>
-                  <Text style={[cs.gramParticle, block.particleSize && { fontSize: block.particleSize }]}>{block.particle}</Text>
-                  <Text style={cs.gramLabel}>{block.label}</Text>
-                  <Text style={cs.wordBackText}>{block.body}</Text>
-                </View>
-              ))}
+              {(card.grammarBlocks || []).map((block, i) => {
+                if (block.type === 'morph') return (
+                  <View key={i} style={cs.wordBackBlock}>
+                    <Text style={cs.gramLabel}>{block.label}</Text>
+                    <View style={cs.morphRow}>
+                      <View style={cs.morphPill}>
+                        <Text style={cs.morphPillJp}>{block.chain[0].text}</Text>
+                        <Text style={cs.morphPillSub}>{block.chain[0].sub}</Text>
+                      </View>
+                      <View style={cs.morphArrowCol}>
+                        <Text style={cs.morphArrowTxt}>{block.transform}</Text>
+                      </View>
+                      <View style={[cs.morphPill, cs.morphPillActive]}>
+                        <Text style={[cs.morphPillJp, cs.morphPillJpActive]}>{block.chain[1].text}</Text>
+                        <Text style={[cs.morphPillSub, cs.morphPillSubActive]}>{block.chain[1].sub}</Text>
+                      </View>
+                    </View>
+                    {block.body ? <Text style={cs.wordBackText}>{block.body}</Text> : null}
+                  </View>
+                );
+                if (block.type === 'compare') return (
+                  <View key={i} style={cs.wordBackBlock}>
+                    {block.heading ? <Text style={cs.compareHeading}>{block.heading}</Text> : null}
+                    <View style={cs.compareRow}>
+                      <View style={[cs.compareCard, cs.compareCardLeft]}>
+                        <Text style={cs.compareCardWord}>{block.left.word}</Text>
+                        <Text style={cs.compareCardScenario}>{block.scenario}</Text>
+                        <View style={cs.compareCardDivider} />
+                        <Text style={cs.compareCardState}>{block.left.state}</Text>
+                      </View>
+                      <View style={cs.compareCard}>
+                        <Text style={cs.compareCardWord}>{block.right.word}</Text>
+                        <Text style={cs.compareCardScenario}>{block.scenario}</Text>
+                        <View style={cs.compareCardDivider} />
+                        <Text style={cs.compareCardState}>{block.right.state}</Text>
+                      </View>
+                    </View>
+                    {block.compound ? (
+                      <View style={cs.compareCompound}>
+                        <Text style={cs.compareCompoundTxt}>
+                          {block.compoundLabel ? `${block.compoundLabel}：` : ''}<Text style={{ fontWeight: '500' }}>{block.compound}</Text>
+                        </Text>
+                      </View>
+                    ) : null}
+                  </View>
+                );
+                return (
+                  <View key={i} style={cs.wordBackBlock}>
+                    <Text style={[cs.gramParticle, block.particleSize && { fontSize: block.particleSize }]}>{block.particle}</Text>
+                    <Text style={cs.gramLabel}>{block.label}</Text>
+                    <Text style={cs.wordBackText}>{block.body}</Text>
+                  </View>
+                );
+              })}
               {card.skeletons && card.skeletons.length > 0 && (() => {
                 const pre = card.skeletonPrefix || '';
                 const suf = card.skeletonSuffix || '';
@@ -3567,6 +3631,25 @@ const cs = StyleSheet.create({
   wordAccentHint: { fontSize: 11, color: '#7a8ab0', marginTop: 4, textAlign: 'center' },
   gramParticle: { fontSize: 24, fontWeight: '700', color: '#3D5FA0', marginBottom: 2 },
   gramLabel: { fontSize: 12, color: '#3D5FA0', letterSpacing: 1, marginBottom: 5 },
+  morphRow: { flexDirection: 'row', alignItems: 'center', marginTop: 8, marginBottom: 12, gap: 6 },
+  morphPill: { flex: 1, alignItems: 'center', paddingVertical: 10, paddingHorizontal: 8, backgroundColor: '#f4f4f4', borderRadius: 16 },
+  morphPillActive: { backgroundColor: '#fff0e8', borderWidth: 1.5, borderColor: C.lava },
+  morphPillJp: { fontSize: 15, fontWeight: '700', color: C.ink },
+  morphPillJpActive: { color: C.lava },
+  morphPillSub: { fontSize: 11, color: C.muted, marginTop: 2 },
+  morphPillSubActive: { color: C.lava, opacity: 0.8 },
+  morphArrowCol: { alignItems: 'center', paddingHorizontal: 2 },
+  morphArrowTxt: { fontSize: 11, color: '#bbb' },
+  compareHeading: { fontSize: 13, fontWeight: '600', color: C.lava, marginBottom: 10 },
+  compareRow: { flexDirection: 'row', gap: 8, marginBottom: 10 },
+  compareCard: { flex: 1, backgroundColor: '#f7f7f7', borderRadius: 10, padding: 10 },
+  compareCardLeft: { backgroundColor: '#fdf8f5' },
+  compareCardWord: { fontSize: 11, color: C.muted, marginBottom: 4 },
+  compareCardScenario: { fontSize: 14, fontWeight: '700', color: C.ink, marginBottom: 6 },
+  compareCardDivider: { height: 0.5, backgroundColor: '#d8d8d8', marginBottom: 6 },
+  compareCardState: { fontSize: 11, color: C.muted },
+  compareCompound: { paddingVertical: 8, paddingHorizontal: 10, backgroundColor: '#f4f4f4', borderRadius: 8 },
+  compareCompoundTxt: { fontSize: 13, color: C.ink },
   gramQuote: { fontSize: 13, color: '#5a6a8a', fontStyle: 'italic', marginBottom: 5, paddingLeft: 2 },
   patRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 6, marginBottom: 4, flexWrap: 'wrap' },
   patSlotVar: { backgroundColor: C.lavaLight, borderRadius: 10, paddingHorizontal: 12, paddingVertical: 5 },
