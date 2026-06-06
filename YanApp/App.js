@@ -2621,22 +2621,17 @@ const WORD_CARDS = {
     coreSentence: 'すみません、写真をお願いします。',
     coreTranslation: '不好意思，麻烦帮我拍个照。',
     coreTokens: [
-      { text: 'すみません', noteKey: 'main', style: 'lava' },
+      { text: 'すみません', style: 'lava' },
       { text: '、写真をお願いします。' },
     ],
     trap: null,
-    contextJa: 'すみません！落としましたよ。',
-    contextZh: '——叫住陌生人最自然的一句。',
+    contextJa: null,
+    contextZh: null,
     pitch: [{ char: 'す', high: false }, { char: 'み', high: true }, { char: 'ま', high: true }, { char: 'せ', high: true }, { char: 'ん', high: true }],
-    notes: {
-      main: { title: '済む', body: '済む（すむ）= 事情了结。すみません = 这件事还没了结。\n道歉和叫人用同一个词，因为两种情况下你都在说：我占用了你的注意力。' },
-      apology: { title: '道歉', body: '踩到别人脚、挤过去、给人添麻烦——轻度道歉首选。比申し訳ありません更日常，不那么沉重。' },
-      calling: { title: '叫人', body: '餐厅叫服务员、问路拦住陌生人——一切需要对方注意力的场合，都用这句开头。' },
-      passing: { title: '让路', body: '电车里要过去、前面有人挡路——不需要道歉，只需要对方知道你在这里。' },
-    },
+    notes: {},
     grammarBlocks: [
-      { particle: '済む', particleSize: 24, label: '词根', body: '済む = 事情了结、完成。\nすみません = 「この事が済みません」省略——因为打扰了你，这件事还没了结。\n道歉和叫人同一个词：两种情况下你都在承认占用了对方。' },
-      { particle: 'vs ありがとう', particleSize: 15, label: '反直觉用法', body: '服务员帮了你，日语说すみません有时比ありがとう更自然。\n「让你费心了」比「我很感谢」多一层体谅对方的立场。' },
+      { particle: '済む（すむ）', particleSize: 20, label: '词根', body: '済む（すむ）= 事情了结。\n\n仕事が済む → 工作结束了。\nこの事が済みません → 这件事还没了结。\n\n打扰了你、让你帮忙——对方的注意力被我用掉了。「还没了结」，就是在承认这件事。\n\nすみません 的道歉义和叫人义，都是这个逻辑。' },
+      { particle: 'vs ありがとう', particleSize: 15, label: '反直觉用法', body: '服务员帮了你，日语用すみません有时比ありがとう更自然。\n「让你费心了」比「我很感谢」多一层体谅对方的立场。\n\nすみません、ありがとうございます。\n——两句连说也很自然：先承认占用了对方，再表示感谢。' },
     ],
     skeletonTitle: '前面不动，换后面的需求',
     skeletonPrefix: 'すみません、', skeletonSuffix: '',
@@ -2940,15 +2935,7 @@ function WordCardScreen({ card, onBack, onDone }) {
                 <TouchableOpacity activeOpacity={0.78} onPress={() => say(card.word, 'word-card-headword')}>
                   <Text style={[cs.wordHead, speakingKey === 'word-card-headword' && cs.wordSpeaking]}>{card.word}</Text>
                 </TouchableOpacity>
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-                  <Text style={[cs.wordReading, speakingKey === 'word-card-headword' && cs.wordSpeaking]}>{card.reading}</Text>
-                  <SpeakBtn
-                    onPress={() => say(card.word, 'word-card-headword')}
-                    speaking={speakingKey === 'word-card-headword'}
-                    size="sm"
-                    color={C.muted}
-                  />
-                </View>
+                <Text style={[cs.wordReading, speakingKey === 'word-card-headword' && cs.wordSpeaking]}>{card.reading}</Text>
                 <View style={cs.wordTagRow}>
                   {card.tags.filter(tag => tag !== 'N4').map(tag => <Text key={tag} style={cs.wordMiniTag}>{tag}</Text>)}
                 </View>
@@ -2975,11 +2962,12 @@ function WordCardScreen({ card, onBack, onDone }) {
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
                   <Text style={[cs.wordCoreSentence, { flex: 1 }, speakingKey === 'word-card-core' && cs.wordSpeaking]} onPress={() => say(card.coreSentence, 'word-card-core')}>
                     {(card.coreTokens || []).map((t, i) => {
-                      if (!t.noteKey) return <Text key={i}>{t.text}</Text>;
-                      const isAct = activeWordNote === t.noteKey;
-                      if (t.style === 'lava') return <Text key={i} style={[cs.wordToken, { color: C.lava, backgroundColor: 'transparent' }, isAct && cs.wordTokenAct]} onPress={() => showNote(t.noteKey, t.text)}>{t.text}</Text>;
-                      if (t.style === 'blue') return <Text key={i} style={[cs.wordTokenBlue, isAct && cs.wordTokenBlueAct]} onPress={() => showNote(t.noteKey, t.text)}>{t.text}</Text>;
-                      return <Text key={i} style={[cs.wordTokenPlain, isAct && cs.wordTokenAct]} onPress={() => showNote(t.noteKey, t.text)}>{t.text}</Text>;
+                      const isAct = t.noteKey && activeWordNote === t.noteKey;
+                      const onPress = t.noteKey ? () => showNote(t.noteKey, t.text) : undefined;
+                      if (t.style === 'lava') return <Text key={i} style={[cs.wordToken, { color: C.lava, backgroundColor: 'transparent' }, isAct && cs.wordTokenAct]} onPress={onPress}>{t.text}</Text>;
+                      if (t.style === 'blue') return <Text key={i} style={[cs.wordTokenBlue, isAct && cs.wordTokenBlueAct]} onPress={onPress}>{t.text}</Text>;
+                      if (t.style === 'plain') return <Text key={i} style={[cs.wordTokenPlain, isAct && cs.wordTokenAct]} onPress={onPress}>{t.text}</Text>;
+                      return <Text key={i}>{t.text}</Text>;
                     })}
                   </Text>
                   <SpeakBtn
@@ -2990,20 +2978,22 @@ function WordCardScreen({ card, onBack, onDone }) {
                   />
                 </View>
                 <Text style={cs.wordCoreZh}>{card.coreTranslation}</Text>
-                <View style={cs.wordNoteChipRow}>
-                  {Object.entries(card.notes).map(([key, note]) => (
-                    <TouchableOpacity
-                      key={key}
-                      style={[cs.wordNoteChip, activeWordNote === key && cs.wordNoteChipActive]}
-                      onPress={() => setActiveWordNote(prev => prev === key ? null : key)}
-                      activeOpacity={0.75}
-                    >
-                      <Text style={[cs.wordNoteChipTxt, activeWordNote === key && cs.wordNoteChipTxtActive]}>
-                        {note.title}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
-                </View>
+                {card.notes && Object.keys(card.notes).length > 0 && (
+                  <View style={cs.wordNoteChipRow}>
+                    {Object.entries(card.notes).map(([key, note]) => (
+                      <TouchableOpacity
+                        key={key}
+                        style={[cs.wordNoteChip, activeWordNote === key && cs.wordNoteChipActive]}
+                        onPress={() => setActiveWordNote(prev => prev === key ? null : key)}
+                        activeOpacity={0.75}
+                      >
+                        <Text style={[cs.wordNoteChipTxt, activeWordNote === key && cs.wordNoteChipTxtActive]}>
+                          {note.title}
+                        </Text>
+                      </TouchableOpacity>
+                    ))}
+                  </View>
+                )}
                 {activeNote && (
                   <View style={cs.wordNotePanel}>
                     <Text style={cs.wordNoteBody}>{activeNote.body}</Text>
@@ -3156,7 +3146,6 @@ function CardScreen({ sceneState, onBack, onFinish }) {
   const p = phrases[cur];
   const hookStyle = HOOK_STYLES[p?.hookType] || HOOK_STYLES.e;
   const go = (d) => { setCur(i => i + d); setShowScene(false); setWordCardKey(null); };
-  const canOpenOrderWordCard = scene.id === 'restaurant' && p?.jp === 'すみません、注文をお願いします。';
   const phraseWordCardKey = p?.wordCardKey;
   if (wordCardKey && WORD_CARDS[wordCardKey]) {
     return <WordCardScreen card={WORD_CARDS[wordCardKey]} onBack={() => setWordCardKey(null)} onDone={() => { setWordCardKey(null); go(1); }} />;
@@ -3201,21 +3190,21 @@ function CardScreen({ sceneState, onBack, onFinish }) {
               <JlptBadge level={p.jlpt} />
             </View>
           </View>
-          {canOpenOrderWordCard ? (
-            <Text style={cs.jpTxt}>
-              すみません、
-              <Text style={[cs.jpTxt, cs.wordCardInline]} onPress={() => setWordCardKey('order')}>注文</Text>
-              をお願いします。
-            </Text>
-          ) : (
-            <Text style={cs.jpTxt}>{p.jp}</Text>
-          )}
+          {(() => {
+            if (phraseWordCardKey && WORD_CARDS[phraseWordCardKey]) {
+              const word = WORD_CARDS[phraseWordCardKey].word;
+              const idx = p.jp.indexOf(word);
+              if (idx >= 0) return (
+                <Text style={cs.jpTxt}>
+                  {idx > 0 ? p.jp.slice(0, idx) : null}
+                  <Text style={[cs.jpTxt, cs.wordCardInline]} onPress={() => setWordCardKey(phraseWordCardKey)}>{word}</Text>
+                  {p.jp.slice(idx + word.length) || null}
+                </Text>
+              );
+            }
+            return <Text style={cs.jpTxt}>{p.jp}</Text>;
+          })()}
           <Text style={cs.romaTxt}>{p.roma}</Text>
-          {phraseWordCardKey && WORD_CARDS[phraseWordCardKey] && (
-            <TouchableOpacity style={cs.wordCardChip} onPress={() => setWordCardKey(phraseWordCardKey)} activeOpacity={0.82}>
-              <Text style={cs.wordCardChipTxt}>词卡 ↗</Text>
-            </TouchableOpacity>
-          )}
           <View style={{ marginTop: 12 }}>
             <SpeakBtn
               onPress={() => speak(p.jp, 'ja-JP', `phrase-${p.id}`)}
