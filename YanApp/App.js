@@ -2656,7 +2656,7 @@ const WORD_CARDS = {
       { jp: 'すみません、写真をお願いします。', zh: '麻烦帮我拍照', chipLabel: '拍照' },
       { jp: 'すみません、〇〇はどこですか？', zh: '请问〇〇在哪里', chipLabel: '问路' },
       { jp: 'すみません、通してください。', zh: '让我过一下', chipLabel: '让路' },
-      { jp: 'すみません、もう一度お願いします。', zh: '请再说一遍', chipLabel: '再说' },
+      { jp: 'すみません、もう一度お願いします。', zh: '请再说一遍', chipLabel: '再说一遍' },
     ],
     examples: [
       { jp: 'すみません、ちょっと通してください。', zh: '不好意思，我要过去一下。', scene: '地铁', who: 'say', level: 'N5' },
@@ -3112,13 +3112,14 @@ function WordCardScreen({ card, onBack, onDone }) {
               {card.skeletons && card.skeletons.length > 0 && (() => {
                 const pre = card.skeletonPrefix || '';
                 const suf = card.skeletonSuffix || '';
-                const getVar = (sk) => sk.chipLabel || sk.jp.replace(pre, '').replace(suf, '').replace(/[。？]$/, '').trim();
+                const getJpVar = (sk) => sk.jp.replace(pre, '').replace(suf, '').replace(/[。？]$/, '').trim();
+                const getLabel = (sk) => sk.chipLabel || getJpVar(sk);
                 return (
                   <View style={[cs.wordBackBlock, cs.patContainer]}>
                     <Text style={cs.wordBackHd}>{card.skeletonTitle || '只换前面，后面不用动'}</Text>
                     <View style={cs.patRow}>
                       {pre ? <Text style={cs.patSlotFixTxt} numberOfLines={1}>{pre}</Text> : null}
-                      <View style={cs.patSlotVar}><Text style={cs.patSlotVarTxt} numberOfLines={1}>{getVar(card.skeletons[slotIdx] || card.skeletons[0])}</Text></View>
+                      <View style={cs.patSlotVar}><Text style={cs.patSlotVarTxt} numberOfLines={1}>{getJpVar(card.skeletons[slotIdx] || card.skeletons[0])}</Text></View>
                       {suf ? <Text style={cs.patSlotFixTxt} numberOfLines={1}>{suf}</Text> : null}
                     </View>
                     <View style={cs.patChipRow}>
@@ -3127,7 +3128,7 @@ function WordCardScreen({ card, onBack, onDone }) {
                         return (
                           <TouchableOpacity key={i} style={[cs.patChip, active && cs.patChipActive]} activeOpacity={0.75}
                             onPress={() => { setSlotIdx(i); say(sk.jp, `word-card-slot-${i}`); }}>
-                            <Text style={[cs.patChipWord, active && cs.patChipWordActive]}>{getVar(sk)}</Text>
+                            <Text style={[cs.patChipWord, active && cs.patChipWordActive]}>{getLabel(sk)}</Text>
                           </TouchableOpacity>
                         );
                       })}
@@ -3678,8 +3679,8 @@ const cs = StyleSheet.create({
   patChipZhActive: { color: C.lava },
   patContainer: { borderRadius: 14, borderWidth: 1, borderStyle: 'dashed', borderColor: '#c0a090', padding: 10 },
   patSentenceRow: { marginTop: 10, paddingTop: 8, borderTopWidth: 0.5, borderTopColor: '#ddd', flexDirection: 'row', flexWrap: 'wrap' },
-  patSentenceJp: { fontSize: 12, color: C.ink },
-  patSentenceZh: { fontSize: 12, color: C.muted },
+  patSentenceJp: { fontSize: 12, color: C.ink, fontWeight: '300' },
+  patSentenceZh: { fontSize: 12, color: C.muted, fontWeight: '300' },
   pitchLabel: { fontSize: 10, fontWeight: '700', color: '#3D5FA0', letterSpacing: 1 },
   pitchRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 4, marginBottom: 6 },
   pitchSyl: { alignItems: 'center', gap: 4, marginRight: 2 },
