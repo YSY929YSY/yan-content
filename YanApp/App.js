@@ -2386,12 +2386,12 @@ lockTag: {
   fontWeight: '700',
   overflow: 'hidden',
 },
-  bookCard: { backgroundColor: C.ink, borderRadius: 16, padding: 20, flexDirection: 'row', alignItems: 'center', overflow: 'hidden', minHeight: 96 },
-  bookTag: { alignSelf: 'flex-start', backgroundColor: C.lava, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 3 },
-  bookTagTxt: { fontSize: 10, fontWeight: '800', color: C.white, letterSpacing: 0.8 },
-  bookTitle: { fontSize: 22, fontWeight: '700', color: C.white },
-  bookMeta: { fontSize: 12, color: 'rgba(255,255,255,0.4)' },
-  bookGlyph: { fontSize: 72, fontWeight: '700', color: 'rgba(255,255,255,0.07)', marginLeft: 8 },
+  bookCard: { backgroundColor: C.ink, borderRadius: 14, paddingHorizontal: 16, paddingVertical: 14, flexDirection: 'row', alignItems: 'center', overflow: 'hidden' },
+  bookTag: { alignSelf: 'flex-start', backgroundColor: C.lava, borderRadius: 999, paddingHorizontal: 7, paddingVertical: 2, marginBottom: 4 },
+  bookTagTxt: { fontSize: 9, fontWeight: '800', color: C.white, letterSpacing: 0.8 },
+  bookTitle: { fontSize: 17, fontWeight: '700', color: C.white },
+  bookMeta: { fontSize: 11, color: 'rgba(255,255,255,0.4)', marginTop: 2 },
+  bookGlyph: { fontSize: 52, fontWeight: '700', color: 'rgba(255,255,255,0.07)', marginLeft: 8 },
   row: { flexDirection: 'row', alignItems: 'center', backgroundColor: C.white, borderRadius: 15, padding: 15, borderWidth: 1.5, borderColor: C.border, gap: 12 },
   icon: { width: 46, height: 46, borderRadius: 13, alignItems: 'center', justifyContent: 'center' },
   name: { fontSize: 15, fontWeight: '600', color: C.ink },
@@ -2521,6 +2521,7 @@ function WordBankScreen({ wordBank, onBack }) {
         </View>
       </View>
       <FlatList
+        style={{ flex: 1 }}
         data={filtered}
         keyExtractor={(item, idx) => `${item.word}-${item.reading}-${idx}`}
         contentContainerStyle={{ padding: 16, gap: 8 }}
