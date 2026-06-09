@@ -865,7 +865,7 @@ function SpeakBtn({ onPress, speaking, size='md', color=C.lava }) {
       >
         {sm ? (
           <Text style={[sb.smIconTxt, { color: speaking ? C.white : color }]}>
-            {speaking ? '♪' : 'あ'}
+            {speaking ? '♪' : '言'}
           </Text>
         ) : (
           <>
