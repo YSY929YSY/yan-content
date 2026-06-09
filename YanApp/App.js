@@ -2408,6 +2408,7 @@ const WB_NEXT_STATUS = { new: 'learning', learning: 'mastered', mastered: 'new' 
 const wordKey = (item) => `${item.word}-${item.reading}`;
 
 function WordBankScreen({ wordBank, onBack }) {
+  const [view, setView] = useState('cover');
   const [query, setQuery] = useState('');
   const [progress, setProgress] = useState({});
   const [statusFilter, setStatusFilter] = useState('all');
@@ -2471,6 +2472,31 @@ function WordBankScreen({ wordBank, onBack }) {
     });
   };
 
+  if (view === 'cover') {
+    return (
+      <View style={{ flex: 1, backgroundColor: C.bg }}>
+        <View style={wb.coverNav}>
+          <TouchableOpacity onPress={onBack}>
+            <Text style={wb.back}>‹ 返回学习目录</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={wb.coverBody}>
+          <View style={wb.coverHero}>
+            <Text style={wb.coverGlyph}>語</Text>
+            <View style={wb.coverTagRow}>
+              <View style={wb.coverTag}><Text style={wb.coverTagTxt}>JLPT · N5</Text></View>
+            </View>
+            <Text style={wb.coverTitle}>基础词书</Text>
+            <Text style={wb.coverSub}>718 词 · 高频词块 · 例句</Text>
+          </View>
+        </View>
+        <TouchableOpacity style={wb.coverBtn} onPress={() => setView('list')} activeOpacity={0.85}>
+          <Text style={wb.coverBtnTxt}>开始学习</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   if (selectedWord) {
     return (
       <WBDetailPage
@@ -2491,8 +2517,8 @@ function WordBankScreen({ wordBank, onBack }) {
   return (
     <View style={{ flex: 1 }}>
       <View style={wb.hd}>
-        <TouchableOpacity onPress={onBack}>
-          <Text style={wb.back}>‹ 返回学习目录</Text>
+        <TouchableOpacity onPress={() => setView('cover')}>
+          <Text style={wb.back}>‹ 基础词书</Text>
         </TouchableOpacity>
         <Text style={wb.title}>N5 基础词库</Text>
         <Text style={wb.sub}>JLPT N5 · {wordBank.length} 词 · 从高频词块开始</Text>
@@ -2548,6 +2574,17 @@ function WordBankScreen({ wordBank, onBack }) {
   );
 }
 const wb = StyleSheet.create({
+  coverNav: { paddingHorizontal: 20, paddingTop: 16, paddingBottom: 8 },
+  coverBody: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 32 },
+  coverHero: { alignItems: 'center', gap: 10 },
+  coverGlyph: { fontSize: 80, fontWeight: '700', color: C.ink, opacity: 0.08, marginBottom: -16 },
+  coverTagRow: { flexDirection: 'row', gap: 6 },
+  coverTag: { backgroundColor: C.lava, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 4 },
+  coverTagTxt: { fontSize: 11, fontWeight: '800', color: C.white, letterSpacing: 0.8 },
+  coverTitle: { fontSize: 32, fontWeight: '700', color: C.ink },
+  coverSub: { fontSize: 13, color: C.muted },
+  coverBtn: { margin: 20, backgroundColor: C.ink, borderRadius: 16, paddingVertical: 16, alignItems: 'center' },
+  coverBtnTxt: { fontSize: 15, fontWeight: '700', color: C.white },
   hd: { padding: 20, paddingBottom: 14, borderBottomWidth: 1, borderBottomColor: C.border, gap: 6 },
   back: { fontSize: 13, color: C.lava, fontWeight: '600', marginBottom: 2 },
   title: { fontSize: 22, fontWeight: '700', color: C.ink },
