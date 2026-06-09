@@ -22,6 +22,7 @@
       }
     },
     "android": {
+      "package": "com.ysy929ysy.yan",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"

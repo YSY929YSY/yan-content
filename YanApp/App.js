@@ -14,7 +14,6 @@ import fallbackContent from './assets/content.fallback.json';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import * as Speech from 'expo-speech';
-import { Audio } from 'expo-av';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator, Alert, Animated, Dimensions, FlatList, Image, Modal,
@@ -6356,7 +6355,7 @@ detailKana: {
   lineHeight: 58,
   color: C.ink,
   fontWeight: '400',
-  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
 },
 
 detailYoonKana: {
@@ -6364,7 +6363,7 @@ detailYoonKana: {
   lineHeight: 54,
   color: C.ink,
   fontWeight: '400',
-  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
 },
 
 detailKanaRow: {
@@ -6382,7 +6381,7 @@ detailKanaSmall: {
   lineHeight: 28,
   color: C.ink,
   fontWeight: '400',
-  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
   marginLeft: 4,
   marginBottom: 12,
   transform: [{ translateY: 14 }],
@@ -6393,7 +6392,7 @@ detailYoonKanaSmall: {
   lineHeight: 24,
   color: C.ink,
   fontWeight: '400',
-  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
   marginLeft: 8,
   marginBottom: 10,
   transform: [{ translateY: 16 }],
@@ -6404,7 +6403,7 @@ detailRoma: {
   fontSize: 15,
   color: C.muted,
   fontWeight: '500',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 writePanel: {
   flexDirection: 'row',
@@ -6449,7 +6448,7 @@ ghostSource: {
   fontSize: 82,
   color: '#8D6D5B',
   fontWeight: '700',
-  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
   zIndex: 1,
 },
 
@@ -6457,14 +6456,14 @@ writeKana: {
   fontSize: 72,
   color: C.ink,
   fontWeight: '400',
-  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
 },
 writeKanaSmall: {
   fontSize: 32,
   lineHeight: 36,
   color: C.ink,
   fontWeight: '400',
-  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
   marginLeft: 2,
   transform: [{ translateY: 16 }],
 },
@@ -6472,14 +6471,14 @@ writeYoonKana: {
   fontSize: 66,
   color: C.ink,
   fontWeight: '400',
-  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
 },
 writeYoonKanaSmall: {
   fontSize: 26,
   lineHeight: 30,
   color: C.ink,
   fontWeight: '400',
-  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
   marginLeft: 6,
   transform: [{ translateY: 20 }],
 },
@@ -6548,14 +6547,14 @@ writeAnchor: {
   color: '#c97845',
   fontWeight: '700',
   marginBottom: 6,
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 
 writeHint: {
   fontSize: 14,
   lineHeight: 21,
   color: '#5a5048',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 sectionRow: {
   flexDirection: 'row',
@@ -6623,7 +6622,7 @@ specialScriptToggleText: {
   fontSize: 12,
   color: '#b66b3d',
   fontWeight: '800',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 specialRuleBox: {
   backgroundColor: '#fffaf7',
@@ -6638,7 +6637,7 @@ specialRuleTitle: {
   color: '#8b837a',
   fontWeight: '800',
   marginBottom: 8,
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 specialRuleAnchor: {
   fontSize: 19,
@@ -6646,13 +6645,13 @@ specialRuleAnchor: {
   color: '#c97845',
   fontWeight: '800',
   marginBottom: 6,
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 specialRuleHint: {
   fontSize: 13,
   lineHeight: 20,
   color: '#6f655d',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 loanwordDesc: {
   alignSelf: 'flex-start',
@@ -6660,14 +6659,14 @@ loanwordDesc: {
   lineHeight: 18,
   color: C.muted,
   marginBottom: 8,
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 loanwordRule: {
   marginTop: 8,
   fontSize: 13,
   lineHeight: 20,
   color: '#6f655d',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 loanwordComboCard: {
   backgroundColor: '#fffaf5',
@@ -6682,7 +6681,7 @@ loanwordSource: {
   lineHeight: 26,
   color: C.ink,
   fontWeight: '800',
-  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
 },
 loanwordAnchor: {
   marginTop: 4,
@@ -6690,7 +6689,7 @@ loanwordAnchor: {
   lineHeight: 20,
   color: '#b66b3d',
   fontWeight: '700',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 loanwordRuleLines: {
   marginTop: 8,
@@ -6700,7 +6699,7 @@ loanwordRuleLine: {
   fontSize: 11,
   lineHeight: 15,
   color: '#8f8379',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 specialTipWrap: {
   marginTop: 10,
@@ -6721,7 +6720,7 @@ specialTipText: {
   fontSize: 11,
   lineHeight: 16,
   color: '#8f7d70',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 ruleSectionWrap: {
   marginTop: 12,
@@ -6749,14 +6748,14 @@ ruleSectionTitle: {
   borderRadius: 999,
   backgroundColor: '#fff0e5',
   overflow: 'hidden',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 ruleSectionDesc: {
   marginTop: 5,
   fontSize: 11,
   lineHeight: 16,
   color: '#8b7d72',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 ruleItemGrid: {
   flexDirection: 'row',
@@ -6788,7 +6787,7 @@ ruleItemPattern: {
   lineHeight: 16,
   color: C.ink,
   fontWeight: '800',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 ruleItemExample: {
   marginTop: 3,
@@ -6796,7 +6795,7 @@ ruleItemExample: {
   lineHeight: 18,
   color: '#c97845',
   fontWeight: '800',
-  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
 },
 ruleItemExamplePlain: {
   color: C.ink,
@@ -6806,7 +6805,7 @@ ruleItemNote: {
   fontSize: 10,
   lineHeight: 14,
   color: '#8f8379',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 rhythmBox: {
   backgroundColor: '#fffdf9',
@@ -6836,14 +6835,14 @@ rhythmWord: {
   lineHeight: 19,
   color: C.ink,
   fontWeight: '800',
-  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
 },
 rhythmSplit: {
   marginTop: 3,
   fontSize: 12,
   lineHeight: 16,
   color: '#6b5f55',
-  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
 },
 rhythmBeatRow: {
   marginTop: 5,
@@ -6853,7 +6852,7 @@ rhythmZh: {
   fontSize: 11,
   lineHeight: 15,
   color: '#8f8379',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 specialCompareBox: {
   backgroundColor: '#fbfaf7',
@@ -6877,7 +6876,7 @@ compareType: {
   borderRadius: 999,
   backgroundColor: '#f1ece6',
   overflow: 'hidden',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 compareRow: {
   flexDirection: 'row',
@@ -6921,7 +6920,7 @@ compareWord: {
   fontSize: 16,
   color: C.ink,
   fontWeight: '800',
-  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
 },
 specialKeyMarkText: {
   color: '#c97845',
@@ -6931,14 +6930,14 @@ compareRoma: {
   marginTop: 2,
   fontSize: 11,
   color: '#9A8C82',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 compareZh: {
   marginTop: 4,
   fontSize: 12,
   lineHeight: 16,
   color: '#5a5048',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 compareBeatRow: {
   marginTop: 5,
@@ -6948,7 +6947,7 @@ compareNote: {
   fontSize: 11,
   lineHeight: 15,
   color: '#8f8379',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 travelTipsBox: {
   backgroundColor: '#fffdf9',
@@ -6977,21 +6976,21 @@ travelTipWord: {
   lineHeight: 18,
   color: C.ink,
   fontWeight: '800',
-  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
 },
 travelTipZh: {
   marginTop: 2,
   fontSize: 11,
   lineHeight: 15,
   color: '#6b5f55',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 travelTipNote: {
   marginTop: 3,
   fontSize: 10,
   lineHeight: 14,
   color: '#9a8d82',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 specialWordsBox: {
   backgroundColor: '#fbfaf7',
@@ -7006,7 +7005,7 @@ lifeExamplesSub: {
   fontSize: 11,
   lineHeight: 15,
   color: '#9a8d82',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 specialFoldBlock: {
   backgroundColor: '#fffdf9',
@@ -7028,14 +7027,14 @@ specialFoldTitle: {
   lineHeight: 17,
   color: '#6b5f55',
   fontWeight: '800',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 specialFoldMeta: {
   fontSize: 10,
   lineHeight: 14,
   color: '#b66b3d',
   fontWeight: '800',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 beatRow: {
   flexDirection: 'row',
@@ -7066,7 +7065,7 @@ beatText: {
   lineHeight: 14,
   color: '#b07a52',
   fontWeight: '700',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 beatTextHot: {
   color: '#c56f3b',
@@ -7158,20 +7157,20 @@ wordKana: {
   fontSize: 16,
   color: C.ink,
   fontWeight: '700',
-  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
 },
 wordReading: {
   marginTop: 2,
   fontSize: 11,
   color: '#9A8C82',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 wordZh: {
   marginTop: 4,
   fontSize: 12,
   lineHeight: 16,
   color: '#8F837A',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 foldBlock: {  backgroundColor: '#fbfaf7',  borderRadius: 16,  borderWidth: 1,  borderColor: '#eee7df',  marginTop: 8,  overflow: 'hidden',},
 foldHead: {
@@ -7181,11 +7180,11 @@ foldHead: {
   paddingHorizontal: 18,
   paddingVertical: 14,
 },
-foldTitle: {  fontSize: 13,  color: '#7f746b',  fontWeight: '700',  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,},
+foldTitle: {  fontSize: 13,  color: '#7f746b',  fontWeight: '700',  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',},
 foldMeta: {
   fontSize: 12,
   color: '#A79A90',
-  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : undefined,
+  fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 foldBody: {  paddingHorizontal: 12,  paddingBottom: 12,},
 exampleCard: {
