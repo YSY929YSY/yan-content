@@ -7,7 +7,7 @@
  * - 丿捺=人，产品哲学嵌入导航结构
  * ─────────────────────────────────────────────
  */
-const CONTENT_URL = 'https://raw.githubusercontent.com/YSY929YSY/yan-content/main/content.v2.json';
+const CONTENT_URL = 'https://raw.githubusercontent.com/YSY929YSY/yan-content/main/yan-content/content.v2.json';
 
 
 import fallbackContent from './assets/content.fallback.json';
@@ -2568,6 +2568,15 @@ const wb = StyleSheet.create({
 });
 
 function WBDetailPage({ entry, status, onBack, onSetStatus, speak, speakingKey, hasPrev, hasNext, onPrev, onNext }) {
+  useEffect(() => {
+    speak(entry.word, 'ja-JP', `wd-auto-${entry.word}`);
+  }, [entry.word]);
+
+  const handleStatus = (id) => {
+    onSetStatus(id);
+    if (hasNext) setTimeout(onNext, 120);
+  };
+
   return (
     <View style={{ flex: 1, backgroundColor: C.bg }}>
       <View style={wd.nav}>
@@ -2615,13 +2624,13 @@ function WBDetailPage({ entry, status, onBack, onSetStatus, speak, speakingKey, 
           <View style={wd.statusRow}>
             <TouchableOpacity
               style={[wd.statusChip, status === 'learning' && wd.statusChipX]}
-              onPress={() => onSetStatus(status === 'learning' ? 'new' : 'learning')}
+              onPress={() => handleStatus(status === 'learning' ? 'new' : 'learning')}
             >
               <Text style={[wd.statusTxt, status === 'learning' && wd.statusTxtX]}>✕  不认识</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[wd.statusChip, status === 'mastered' && wd.statusChipCheck]}
-              onPress={() => onSetStatus(status === 'mastered' ? 'new' : 'mastered')}
+              onPress={() => handleStatus(status === 'mastered' ? 'new' : 'mastered')}
             >
               <Text style={[wd.statusTxt, status === 'mastered' && wd.statusTxtCheck]}>✓  认识</Text>
             </TouchableOpacity>
