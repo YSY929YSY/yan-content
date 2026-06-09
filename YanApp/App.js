@@ -2195,6 +2195,9 @@ function PieTab({ content, subTab, setSubTab, sceneState, setSceneState, practic
         {subTab === 'subway' && (
           <SubwayScreen adventure={content.subwayAdventure} />
         )}
+        {subTab === 'wordbank' && (
+          <WordBankScreen wordBank={content.wordBank || []} onBack={() => setSubTab('learn')} />
+        )}
         {subTab === 'kana' && (
         <KanaScreen
   kanaRows={content.kanaRows}
@@ -2253,11 +2256,10 @@ function LearnScreen({ content, setSceneState, setSubTab }) {
       <Text style={ls.cardDesc}>发音、平片、易混字、记忆提示</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity style={[ls.card, ls.cardLocked]} onPress={showComingSoonAlert}>
+    <TouchableOpacity style={ls.card} onPress={() => setSubTab('wordbank')}>
       <Text style={ls.cardGlyph}>詞</Text>
       <Text style={ls.cardTitle}>高频词块</Text>
       <Text style={ls.cardDesc}>先学最常见、最能立刻用上的语块</Text>
-      <Text style={ls.lockTag}>即将开放</Text>
     </TouchableOpacity>
 
     <TouchableOpacity style={ls.card} onPress={() => setLearnView('sentences')}>
@@ -2389,6 +2391,286 @@ lockTag: {
   cnt: { fontSize: 11, fontWeight: '600' },
   arr: { fontSize: 19, fontWeight: '300' },
 });
+// ─────────────────────────────────────────────
+// Word Bank Screen
+// ─────────────────────────────────────────────
+const WORDBANK_PROGRESS_KEY = 'yan_wordbank_progress';
+const WB_DAILY_GOAL = 10;
+const WB_NEXT_STATUS = { new: 'learning', learning: 'mastered', mastered: 'new' };
+const wordKey = (item) => `${item.word}-${item.reading}`;
+
+function WordBankScreen({ wordBank, onBack }) {
+  const [query, setQuery] = useState('');
+  const [progress, setProgress] = useState({});
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [todayKeys, setTodayKeys] = useState(null);
+  const [selectedWord, setSelectedWord] = useState(null);
+  const [selectedIdx, setSelectedIdx] = useState(0);
+  const [navList, setNavList] = useState([]);
+  const { speak, speakingKey } = useSpeech();
+
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        const raw = await AsyncStorage.getItem(WORDBANK_PROGRESS_KEY);
+        if (!alive || !raw) return;
+        const saved = JSON.parse(raw);
+        if (saved && typeof saved === 'object' && !Array.isArray(saved)) setProgress(saved);
+      } catch (e) { console.warn('[WordBank] load progress failed', e); }
+    })();
+    return () => { alive = false; };
+  }, []);
+
+  const q = query.trim().toLowerCase();
+  const searched = !q ? wordBank : wordBank.filter(w =>
+    w.word.includes(query.trim()) || w.reading.includes(query.trim())
+    || (w.meaning_zh || '').includes(query.trim())
+    || (w.meaning_en || '').toLowerCase().includes(q)
+  );
+  const STATUS_FILTERS = [
+    { id: 'all', label: '全部' },
+    { id: 'new', label: '未学' },
+    { id: 'learning', label: '学习中' },
+    { id: 'mastered', label: '已掌握' },
+  ];
+  const filtered = statusFilter === 'today'
+    ? searched.filter(w => todayKeys && todayKeys.has(wordKey(w)))
+    : statusFilter === 'all' ? searched
+    : searched.filter(w => (progress[wordKey(w)] || 'new') === statusFilter);
+
+  const reviewCount = wordBank.filter(w => (progress[wordKey(w)] || 'new') === 'learning').length;
+
+  const startToday = () => {
+    if (!todayKeys) {
+      const keys = new Set();
+      for (const w of wordBank) {
+        if (keys.size >= WB_DAILY_GOAL) break;
+        if ((progress[wordKey(w)] || 'new') === 'new') keys.add(wordKey(w));
+      }
+      setTodayKeys(keys);
+    }
+    setQuery(''); setStatusFilter('today');
+  };
+
+  const setWordStatus = (id) => {
+    const key = wordKey(selectedWord);
+    setProgress(prev => {
+      const merged = { ...prev };
+      if (id === 'new') { delete merged[key]; } else { merged[key] = id; }
+      AsyncStorage.setItem(WORDBANK_PROGRESS_KEY, JSON.stringify(merged)).catch(() => {});
+      return merged;
+    });
+  };
+
+  if (selectedWord) {
+    return (
+      <WBDetailPage
+        entry={selectedWord}
+        status={progress[wordKey(selectedWord)] || 'new'}
+        onBack={() => setSelectedWord(null)}
+        onSetStatus={setWordStatus}
+        speak={speak}
+        speakingKey={speakingKey}
+        hasPrev={selectedIdx > 0}
+        hasNext={selectedIdx < navList.length - 1}
+        onPrev={() => { const ni = selectedIdx - 1; setSelectedWord(navList[ni]); setSelectedIdx(ni); }}
+        onNext={() => { const ni = selectedIdx + 1; setSelectedWord(navList[ni]); setSelectedIdx(ni); }}
+      />
+    );
+  }
+
+  return (
+    <View style={{ flex: 1 }}>
+      <View style={wb.hd}>
+        <TouchableOpacity onPress={onBack}>
+          <Text style={wb.back}>‹ 返回学习目录</Text>
+        </TouchableOpacity>
+        <Text style={wb.title}>N5 基础词库</Text>
+        <Text style={wb.sub}>JLPT N5 · {wordBank.length} 词 · 从高频词块开始</Text>
+        <View style={wb.ctaRow}>
+          <TouchableOpacity style={[wb.ctaBtn, statusFilter === 'today' && wb.ctaBtnActive]} onPress={startToday}>
+            <Text style={[wb.ctaBtnTxt, statusFilter === 'today' && wb.ctaBtnTxtActive]}>今日 {WB_DAILY_GOAL} 词</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[wb.ctaBtn, statusFilter === 'learning' && wb.ctaBtnActive]} onPress={() => { setQuery(''); setStatusFilter('learning'); }}>
+            <Text style={[wb.ctaBtnTxt, statusFilter === 'learning' && wb.ctaBtnTxtActive]}>继续复习{reviewCount > 0 ? ` (${reviewCount})` : ''}</Text>
+          </TouchableOpacity>
+        </View>
+        <TextInput
+          style={wb.search}
+          placeholder="搜索词、读音或意思"
+          placeholderTextColor={C.mutedLight}
+          value={query}
+          onChangeText={setQuery}
+          autoCorrect={false}
+        />
+        <View style={wb.filterRow}>
+          {STATUS_FILTERS.map(f => (
+            <TouchableOpacity key={f.id} style={[wb.filterChip, statusFilter === f.id && wb.filterChipActive]} onPress={() => setStatusFilter(f.id)}>
+              <Text style={[wb.filterChipTxt, statusFilter === f.id && wb.filterChipTxtActive]}>{f.label}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
+      <FlatList
+        data={filtered}
+        keyExtractor={(item, idx) => `${item.word}-${item.reading}-${idx}`}
+        contentContainerStyle={{ padding: 16, gap: 8 }}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item, index }) => {
+          const st = progress[wordKey(item)] || 'new';
+          return (
+            <TouchableOpacity style={wb.row} onPress={() => { setSelectedWord(item); setSelectedIdx(index); setNavList(filtered); }} activeOpacity={0.7}>
+              <View style={wb.rowHead}>
+                <Text style={wb.word}>{item.word}</Text>
+                <Text style={wb.reading}>{item.reading}</Text>
+                <View style={wb.posTag}><Text style={wb.posTagTxt}>{item.pos}</Text></View>
+                {st === 'learning' && <View style={wb.dotLearning} />}
+                {st === 'mastered' && <Text style={wb.checkMastered}>✓</Text>}
+              </View>
+              <Text style={wb.zh}>{item.meaning_zh}</Text>
+              {!!item.coreChunk && <Text style={wb.chunk}>{item.coreChunk}</Text>}
+            </TouchableOpacity>
+          );
+        }}
+        ListEmptyComponent={<Text style={wb.empty}>没有找到匹配的词</Text>}
+      />
+    </View>
+  );
+}
+const wb = StyleSheet.create({
+  hd: { padding: 20, paddingBottom: 14, borderBottomWidth: 1, borderBottomColor: C.border, gap: 6 },
+  back: { fontSize: 13, color: C.lava, fontWeight: '600', marginBottom: 2 },
+  title: { fontSize: 22, fontWeight: '700', color: C.ink },
+  sub: { fontSize: 12, color: C.muted },
+  ctaRow: { flexDirection: 'row', gap: 8 },
+  ctaBtn: { flex: 1, borderRadius: 12, paddingVertical: 10, alignItems: 'center', borderWidth: 1.5, borderColor: C.border, backgroundColor: C.white },
+  ctaBtnActive: { backgroundColor: C.lava, borderColor: C.lava },
+  ctaBtnTxt: { fontSize: 13, fontWeight: '700', color: C.muted },
+  ctaBtnTxtActive: { color: C.white },
+  search: { marginTop: 2, backgroundColor: C.white, borderRadius: 12, borderWidth: 1.5, borderColor: C.border, paddingHorizontal: 14, paddingVertical: 10, fontSize: 14, color: C.ink },
+  filterRow: { flexDirection: 'row', gap: 6 },
+  filterChip: { borderRadius: 999, paddingHorizontal: 12, paddingVertical: 5, borderWidth: 1.5, borderColor: C.border, backgroundColor: C.white },
+  filterChipActive: { backgroundColor: C.ink, borderColor: C.ink },
+  filterChipTxt: { fontSize: 12, fontWeight: '600', color: C.muted },
+  filterChipTxtActive: { color: C.white },
+  row: { backgroundColor: C.white, borderRadius: 14, padding: 14, borderWidth: 1.5, borderColor: C.border, gap: 5 },
+  rowHead: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  word: { fontSize: 18, fontWeight: '700', color: C.ink },
+  reading: { fontSize: 12, color: C.muted },
+  posTag: { backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 2 },
+  posTagTxt: { fontSize: 10, color: C.muted, fontWeight: '600' },
+  dotLearning: { width: 7, height: 7, borderRadius: 4, backgroundColor: C.gold, marginLeft: 'auto' },
+  checkMastered: { fontSize: 13, color: C.lava, fontWeight: '700', marginLeft: 'auto' },
+  zh: { fontSize: 13, color: C.ink },
+  chunk: { fontSize: 12, color: C.muted, fontStyle: 'italic' },
+  empty: { textAlign: 'center', color: C.muted, marginTop: 40, fontSize: 14 },
+});
+
+function WBDetailPage({ entry, status, onBack, onSetStatus, speak, speakingKey, hasPrev, hasNext, onPrev, onNext }) {
+  return (
+    <View style={{ flex: 1, backgroundColor: C.bg }}>
+      <View style={wd.nav}>
+        <TouchableOpacity onPress={onBack}>
+          <Text style={wd.navBack}>‹ 返回词库</Text>
+        </TouchableOpacity>
+      </View>
+      <ScrollView contentContainerStyle={wd.scroll} showsVerticalScrollIndicator={false}>
+        <View style={wd.hero}>
+          <View style={{ flex: 1 }}>
+            <Text style={wd.word}>{entry.word}</Text>
+            <Text style={wd.reading}>{entry.reading}</Text>
+          </View>
+          <SpeakBtn onPress={() => speak(entry.word, 'ja-JP', 'wd-word')} speaking={speakingKey === 'wd-word'} size="sm" color={C.lava} />
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 20, marginTop: 4 }}>
+          <View style={wd.posTag}><Text style={wd.posTagTxt}>{entry.pos}</Text></View>
+        </View>
+        <View style={wd.card}>
+          <Text style={wd.zh}>{entry.meaning_zh}</Text>
+          {!!entry.meaning_en && <Text style={wd.en}>{entry.meaning_en}</Text>}
+        </View>
+        {!!entry.coreChunk && (
+          <View style={wd.section}>
+            <Text style={wd.sectionLabel}>词块</Text>
+            <View style={wd.exRow}>
+              <Text style={wd.exJp}>{entry.coreChunk}</Text>
+              <SpeakBtn onPress={() => speak(entry.coreChunk, 'ja-JP', 'wd-chunk')} speaking={speakingKey === 'wd-chunk'} size="sm" color={C.muted} />
+            </View>
+          </View>
+        )}
+        {!!entry.exampleJp && (
+          <View style={wd.section}>
+            <Text style={wd.sectionLabel}>例句</Text>
+            <View style={wd.exRow}>
+              <View style={{ flex: 1, gap: 4 }}>
+                <Text style={wd.exJp}>{entry.exampleJp}</Text>
+                <Text style={wd.exZh}>{entry.exampleZh}</Text>
+              </View>
+              <SpeakBtn onPress={() => speak(entry.exampleJp, 'ja-JP', 'wd-ex')} speaking={speakingKey === 'wd-ex'} size="sm" color={C.muted} />
+            </View>
+          </View>
+        )}
+        <View style={wd.section}>
+          <View style={wd.statusRow}>
+            <TouchableOpacity
+              style={[wd.statusChip, status === 'learning' && wd.statusChipX]}
+              onPress={() => onSetStatus(status === 'learning' ? 'new' : 'learning')}
+            >
+              <Text style={[wd.statusTxt, status === 'learning' && wd.statusTxtX]}>✕  不认识</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[wd.statusChip, status === 'mastered' && wd.statusChipCheck]}
+              onPress={() => onSetStatus(status === 'mastered' ? 'new' : 'mastered')}
+            >
+              <Text style={[wd.statusTxt, status === 'mastered' && wd.statusTxtCheck]}>✓  认识</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
+      <View style={wd.bottomNav}>
+        <TouchableOpacity style={[wd.bottomNavBtn, !hasPrev && wd.bottomNavBtnDisabled]} onPress={hasPrev ? onPrev : undefined} activeOpacity={hasPrev ? 0.7 : 1}>
+          <Text style={[wd.bottomNavTxt, !hasPrev && wd.bottomNavTxtDisabled]}>‹ 上一词</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[wd.bottomNavBtn, wd.bottomNavBtnNext, !hasNext && wd.bottomNavBtnDisabled]} onPress={hasNext ? onNext : undefined} activeOpacity={hasNext ? 0.7 : 1}>
+          <Text style={[wd.bottomNavTxt, !hasNext && wd.bottomNavTxtDisabled]}>下一词 ›</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+const wd = StyleSheet.create({
+  nav: { paddingHorizontal: 20, paddingTop: 16, paddingBottom: 8 },
+  navBack: { fontSize: 13, color: C.lava, fontWeight: '600' },
+  scroll: { paddingBottom: 60 },
+  hero: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20, paddingTop: 24, paddingBottom: 8, gap: 12 },
+  word: { fontSize: 36, fontWeight: '700', color: C.ink },
+  reading: { fontSize: 15, color: C.muted, marginTop: 2 },
+  posTag: { backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 3 },
+  posTagTxt: { fontSize: 11, color: C.muted, fontWeight: '600' },
+  card: { marginHorizontal: 20, marginTop: 16, backgroundColor: C.white, borderRadius: 16, padding: 18, borderWidth: 1.5, borderColor: C.border, gap: 6 },
+  zh: { fontSize: 18, fontWeight: '600', color: C.ink },
+  en: { fontSize: 12, color: C.mutedLight },
+  section: { marginHorizontal: 20, marginTop: 20, gap: 10 },
+  sectionLabel: { fontSize: 11, fontWeight: '700', color: C.mutedLight, letterSpacing: 0.8, textTransform: 'uppercase' },
+  exRow: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: C.white, borderRadius: 14, padding: 14, borderWidth: 1.5, borderColor: C.border },
+  exJp: { flex: 1, fontSize: 16, color: C.ink, fontWeight: '500' },
+  exZh: { fontSize: 13, color: C.muted, marginTop: 4 },
+  statusRow: { flexDirection: 'row', gap: 8 },
+  statusChip: { flex: 1, borderRadius: 12, paddingVertical: 13, alignItems: 'center', borderWidth: 1.5, borderColor: C.border, backgroundColor: C.white },
+  statusChipX: { backgroundColor: C.lava, borderColor: C.lava },
+  statusChipCheck: { backgroundColor: C.ink, borderColor: C.ink },
+  statusTxt: { fontSize: 14, fontWeight: '700', color: C.muted },
+  statusTxtX: { color: C.white },
+  statusTxtCheck: { color: C.white },
+  bottomNav: { flexDirection: 'row', borderTopWidth: 1, borderTopColor: C.border, backgroundColor: C.white },
+  bottomNavBtn: { flex: 1, paddingVertical: 16, alignItems: 'center' },
+  bottomNavBtnNext: { borderLeftWidth: 1, borderLeftColor: C.border },
+  bottomNavBtnDisabled: { opacity: 0.3 },
+  bottomNavTxt: { fontSize: 14, fontWeight: '600', color: C.lava },
+  bottomNavTxtDisabled: { color: C.muted },
+});
+
 // ─────────────────────────────────────────────
 // Scene Intro Screen
 // ─────────────────────────────────────────────
