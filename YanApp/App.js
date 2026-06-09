@@ -2131,6 +2131,7 @@ moduleName: {
 // 内部子导航：学习场景 / 地铁冒险 / 五十音
 // ─────────────────────────────────────────────
 function PieTab({ content, subTab, setSubTab, sceneState, setSceneState, practiceScene, setPracticeScene }) {
+  const [wbBookId, setWbBookId] = useState(null);
   return (
     <View style={{ flex: 1 }}>
       {/* 子 tab */}
@@ -2194,8 +2195,17 @@ function PieTab({ content, subTab, setSubTab, sceneState, setSceneState, practic
         {subTab === 'subway' && (
           <SubwayScreen adventure={content.subwayAdventure} />
         )}
-        {subTab === 'wordbank' && (
-          <WordBankScreen wordBank={content.wordBank || []} onBack={() => setSubTab('learn')} />
+        {subTab === 'wordbank' && !wbBookId && (
+          <WordBookShelfScreen
+            onBack={() => setSubTab('learn')}
+            onSelect={(id) => setWbBookId(id)}
+          />
+        )}
+        {subTab === 'wordbank' && wbBookId === 'n5' && (
+          <WordBankScreen
+            wordBank={content.wordBank || []}
+            onBack={() => setWbBookId(null)}
+          />
         )}
         {subTab === 'kana' && (
         <KanaScreen
@@ -2255,13 +2265,10 @@ function LearnScreen({ content, setSceneState, setSubTab }) {
       <Text style={ls.cardDesc}>发音、平片、易混字、记忆提示</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity style={ls.bookCard} onPress={() => setSubTab('wordbank')}>
-      <View style={{ flex: 1, gap: 6 }}>
-        <View style={ls.bookTag}><Text style={ls.bookTagTxt}>JLPT · N5</Text></View>
-        <Text style={ls.bookTitle}>基础词书</Text>
-        <Text style={ls.bookMeta}>718 词 · 高频词块 · 例句</Text>
-      </View>
-      <Text style={ls.bookGlyph}>語</Text>
+    <TouchableOpacity style={ls.card} onPress={() => setSubTab('wordbank')}>
+      <Text style={ls.cardGlyph}>詞</Text>
+      <Text style={ls.cardTitle}>高频词书</Text>
+      <Text style={ls.cardDesc}>按词书分级学习，从 N5 开始</Text>
     </TouchableOpacity>
 
     <TouchableOpacity style={ls.card} onPress={() => setLearnView('sentences')}>
@@ -2386,12 +2393,6 @@ lockTag: {
   fontWeight: '700',
   overflow: 'hidden',
 },
-  bookCard: { backgroundColor: C.ink, borderRadius: 14, paddingHorizontal: 16, paddingVertical: 14, flexDirection: 'row', alignItems: 'center', overflow: 'hidden' },
-  bookTag: { alignSelf: 'flex-start', backgroundColor: C.lava, borderRadius: 999, paddingHorizontal: 7, paddingVertical: 2, marginBottom: 4 },
-  bookTagTxt: { fontSize: 9, fontWeight: '800', color: C.white, letterSpacing: 0.8 },
-  bookTitle: { fontSize: 17, fontWeight: '700', color: C.white },
-  bookMeta: { fontSize: 11, color: 'rgba(255,255,255,0.4)', marginTop: 2 },
-  bookGlyph: { fontSize: 52, fontWeight: '700', color: 'rgba(255,255,255,0.07)', marginLeft: 8 },
   row: { flexDirection: 'row', alignItems: 'center', backgroundColor: C.white, borderRadius: 15, padding: 15, borderWidth: 1.5, borderColor: C.border, gap: 12 },
   icon: { width: 46, height: 46, borderRadius: 13, alignItems: 'center', justifyContent: 'center' },
   name: { fontSize: 15, fontWeight: '600', color: C.ink },
@@ -2399,6 +2400,78 @@ lockTag: {
   cnt: { fontSize: 11, fontWeight: '600' },
   arr: { fontSize: 19, fontWeight: '300' },
 });
+// ─────────────────────────────────────────────
+// Word Book Shelf
+// ─────────────────────────────────────────────
+const WORDBOOKS = [
+  { id: 'n5', level: 'N5', title: '基础词书', desc: '高频词块 · 例句', count: 718, available: true },
+  { id: 'n4', level: 'N4', title: '进阶词书', desc: '场景扩展词汇', count: null, available: false },
+  { id: 'n3', level: 'N3', title: '中级词书', desc: '表达能力跃升', count: null, available: false },
+  { id: 'n2', level: 'N2', title: '高级词书', desc: '流利阅读基础', count: null, available: false },
+];
+const JLPT_COLORS = {
+  N5: ['#e8f4ea', '#2a7a3a'],
+  N4: ['#e8eef8', '#2a4a8a'],
+  N3: ['#f0e8ff', '#6a3a9a'],
+  N2: ['#fff0e0', '#c07020'],
+  N1: ['#fde8e0', '#b0301a'],
+};
+
+function WordBookShelfScreen({ onBack, onSelect }) {
+  return (
+    <View style={{ flex: 1, backgroundColor: C.bg }}>
+      <View style={wbs.nav}>
+        <TouchableOpacity onPress={onBack}>
+          <Text style={wbs.navBack}>‹ 返回学习目录</Text>
+        </TouchableOpacity>
+        <Text style={wbs.title}>词书</Text>
+        <Text style={wbs.sub}>选择一本开始学习</Text>
+      </View>
+      <ScrollView contentContainerStyle={{ padding: 16, gap: 10 }} showsVerticalScrollIndicator={false}>
+        {WORDBOOKS.map(book => {
+          const [bg, fg] = JLPT_COLORS[book.level] || ['#f0ede6', '#888'];
+          return (
+            <TouchableOpacity
+              key={book.id}
+              style={[wbs.row, !book.available && wbs.rowLocked]}
+              onPress={book.available ? () => onSelect(book.id) : undefined}
+              activeOpacity={book.available ? 0.7 : 1}
+            >
+              <View style={[wbs.badge, { backgroundColor: bg }]}>
+                <Text style={[wbs.badgeTxt, { color: fg }]}>{book.level}</Text>
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={wbs.bookTitle}>{book.title}</Text>
+                <Text style={wbs.bookDesc}>
+                  {book.available ? `${book.count} 词 · ${book.desc}` : book.desc}
+                </Text>
+              </View>
+              {book.available
+                ? <Text style={[wbs.arr, { color: fg }]}>›</Text>
+                : <Text style={wbs.lockTxt}>即将</Text>
+              }
+            </TouchableOpacity>
+          );
+        })}
+      </ScrollView>
+    </View>
+  );
+}
+const wbs = StyleSheet.create({
+  nav: { padding: 20, paddingBottom: 14, borderBottomWidth: 1, borderBottomColor: C.border, gap: 4 },
+  navBack: { fontSize: 13, color: C.lava, fontWeight: '600', marginBottom: 6 },
+  title: { fontSize: 22, fontWeight: '700', color: C.ink },
+  sub: { fontSize: 12, color: C.muted },
+  row: { flexDirection: 'row', alignItems: 'center', backgroundColor: C.white, borderRadius: 14, padding: 14, borderWidth: 1.5, borderColor: C.border, gap: 14 },
+  rowLocked: { opacity: 0.45 },
+  badge: { width: 48, height: 48, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
+  badgeTxt: { fontSize: 14, fontWeight: '800' },
+  bookTitle: { fontSize: 15, fontWeight: '700', color: C.ink, marginBottom: 2 },
+  bookDesc: { fontSize: 12, color: C.muted },
+  arr: { fontSize: 20, fontWeight: '300' },
+  lockTxt: { fontSize: 11, fontWeight: '600', color: C.mutedLight },
+});
+
 // ─────────────────────────────────────────────
 // Word Bank Screen
 // ─────────────────────────────────────────────
@@ -2408,7 +2481,6 @@ const WB_NEXT_STATUS = { new: 'learning', learning: 'mastered', mastered: 'new' 
 const wordKey = (item) => `${item.word}-${item.reading}`;
 
 function WordBankScreen({ wordBank, onBack }) {
-  const [view, setView] = useState('cover');
   const [query, setQuery] = useState('');
   const [progress, setProgress] = useState({});
   const [statusFilter, setStatusFilter] = useState('all');
@@ -2472,31 +2544,6 @@ function WordBankScreen({ wordBank, onBack }) {
     });
   };
 
-  if (view === 'cover') {
-    return (
-      <View style={{ flex: 1, backgroundColor: C.bg }}>
-        <View style={wb.coverNav}>
-          <TouchableOpacity onPress={onBack}>
-            <Text style={wb.back}>‹ 返回学习目录</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={wb.coverBody}>
-          <View style={wb.coverHero}>
-            <Text style={wb.coverGlyph}>語</Text>
-            <View style={wb.coverTagRow}>
-              <View style={wb.coverTag}><Text style={wb.coverTagTxt}>JLPT · N5</Text></View>
-            </View>
-            <Text style={wb.coverTitle}>基础词书</Text>
-            <Text style={wb.coverSub}>718 词 · 高频词块 · 例句</Text>
-          </View>
-        </View>
-        <TouchableOpacity style={wb.coverBtn} onPress={() => setView('list')} activeOpacity={0.85}>
-          <Text style={wb.coverBtnTxt}>开始学习</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
   if (selectedWord) {
     return (
       <WBDetailPage
@@ -2517,8 +2564,8 @@ function WordBankScreen({ wordBank, onBack }) {
   return (
     <View style={{ flex: 1 }}>
       <View style={wb.hd}>
-        <TouchableOpacity onPress={() => setView('cover')}>
-          <Text style={wb.back}>‹ 基础词书</Text>
+        <TouchableOpacity onPress={onBack}>
+          <Text style={wb.back}>‹ 词书选择</Text>
         </TouchableOpacity>
         <Text style={wb.title}>N5 基础词库</Text>
         <Text style={wb.sub}>JLPT N5 · {wordBank.length} 词 · 从高频词块开始</Text>
@@ -2574,17 +2621,6 @@ function WordBankScreen({ wordBank, onBack }) {
   );
 }
 const wb = StyleSheet.create({
-  coverNav: { paddingHorizontal: 20, paddingTop: 16, paddingBottom: 8 },
-  coverBody: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 32 },
-  coverHero: { alignItems: 'center', gap: 10 },
-  coverGlyph: { fontSize: 80, fontWeight: '700', color: C.ink, opacity: 0.08, marginBottom: -16 },
-  coverTagRow: { flexDirection: 'row', gap: 6 },
-  coverTag: { backgroundColor: C.lava, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 4 },
-  coverTagTxt: { fontSize: 11, fontWeight: '800', color: C.white, letterSpacing: 0.8 },
-  coverTitle: { fontSize: 32, fontWeight: '700', color: C.ink },
-  coverSub: { fontSize: 13, color: C.muted },
-  coverBtn: { margin: 20, backgroundColor: C.ink, borderRadius: 16, paddingVertical: 16, alignItems: 'center' },
-  coverBtnTxt: { fontSize: 15, fontWeight: '700', color: C.white },
   hd: { padding: 20, paddingBottom: 14, borderBottomWidth: 1, borderBottomColor: C.border, gap: 6 },
   back: { fontSize: 13, color: C.lava, fontWeight: '600', marginBottom: 2 },
   title: { fontSize: 22, fontWeight: '700', color: C.ink },
