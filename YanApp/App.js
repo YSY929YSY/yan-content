@@ -17,7 +17,7 @@ import * as Speech from 'expo-speech';
 import { Audio } from 'expo-av';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  ActivityIndicator, Alert, Animated, Dimensions, Image, Modal,
+  ActivityIndicator, Alert, Animated, Dimensions, FlatList, Image, Modal,
   Platform, Pressable, SafeAreaView, ScrollView,
   StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View,
 } from 'react-native';
