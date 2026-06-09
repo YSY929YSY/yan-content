@@ -2255,10 +2255,13 @@ function LearnScreen({ content, setSceneState, setSubTab }) {
       <Text style={ls.cardDesc}>发音、平片、易混字、记忆提示</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity style={ls.card} onPress={() => setSubTab('wordbank')}>
-      <Text style={ls.cardGlyph}>詞</Text>
-      <Text style={ls.cardTitle}>高频词块</Text>
-      <Text style={ls.cardDesc}>先学最常见、最能立刻用上的语块</Text>
+    <TouchableOpacity style={ls.bookCard} onPress={() => setSubTab('wordbank')}>
+      <View style={{ flex: 1, gap: 6 }}>
+        <View style={ls.bookTag}><Text style={ls.bookTagTxt}>JLPT · N5</Text></View>
+        <Text style={ls.bookTitle}>基础词书</Text>
+        <Text style={ls.bookMeta}>718 词 · 高频词块 · 例句</Text>
+      </View>
+      <Text style={ls.bookGlyph}>語</Text>
     </TouchableOpacity>
 
     <TouchableOpacity style={ls.card} onPress={() => setLearnView('sentences')}>
@@ -2383,6 +2386,12 @@ lockTag: {
   fontWeight: '700',
   overflow: 'hidden',
 },
+  bookCard: { backgroundColor: C.ink, borderRadius: 16, padding: 20, flexDirection: 'row', alignItems: 'center', overflow: 'hidden', minHeight: 96 },
+  bookTag: { alignSelf: 'flex-start', backgroundColor: C.lava, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 3 },
+  bookTagTxt: { fontSize: 10, fontWeight: '800', color: C.white, letterSpacing: 0.8 },
+  bookTitle: { fontSize: 22, fontWeight: '700', color: C.white },
+  bookMeta: { fontSize: 12, color: 'rgba(255,255,255,0.4)' },
+  bookGlyph: { fontSize: 72, fontWeight: '700', color: 'rgba(255,255,255,0.07)', marginLeft: 8 },
   row: { flexDirection: 'row', alignItems: 'center', backgroundColor: C.white, borderRadius: 15, padding: 15, borderWidth: 1.5, borderColor: C.border, gap: 12 },
   icon: { width: 46, height: 46, borderRadius: 13, alignItems: 'center', justifyContent: 'center' },
   name: { fontSize: 15, fontWeight: '600', color: C.ink },
