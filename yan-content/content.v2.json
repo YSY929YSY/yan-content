@@ -14668,8 +14668,8 @@
         "memory": []
       },
       "coreChunk": "バスが遅い",
-      "exampleJp": "電車が遅れています。",
-      "exampleZh": "电车晚点了。",
+      "exampleJp": "このバスは遅いです。",
+      "exampleZh": "这辆公交很慢。",
       "id": "n5_osoi",
       "levels": [
         "N5"
@@ -14677,7 +14677,7 @@
       "yanFeatures": [
         "kanji_anchor"
       ],
-      "exampleRoma": "Densha ga okurete imasu."
+      "exampleRoma": "Kono basu wa osoi desu."
     },
     {
       "word": "お茶",
