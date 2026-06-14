@@ -30,12 +30,20 @@ https://raw.githubusercontent.com/YSY929YSY/yan-content/main/content.v2.json
 - 改完先用 jsonlint.com 验证，再 `git add / commit / push`
 - **不动 App.js** 能搞定的事不动 App.js
 
-**推送命令**（从 repo 根 `/Users/yangshiyao/my-app/` 执行）：
+**发布前必须先运行审计，确认 Blocker 为 0 再推送**：
 ```bash
-git add yan-content/content.v2.json
-git commit -m "content: 描述改了什么"
-git push origin main
+# Step 1：审计（Blocker 为 0 才继续）
+bash tools/check-content-release.sh
+
+# Step 2：发布
+bash scripts/push-content.sh
 ```
+
+审计脚本会生成：
+- `reports/wordbank-audit-report.md`：条数、必填字段、罗马字、例句对应
+- `reports/example-roma-report.md`：exampleRoma 候选与现存值的差异
+
+只有审计输出 `✓ 无 Blocker` 才可执行 `push-content.sh`。
 
 ## Git 仓库结构
 
@@ -99,6 +107,43 @@ git push origin main
 | android.package | app.json | `com.ysy929ysy.yan` |
 | 删除 expo-av import | App.js | 死代码，留着会引发路由冲突 |
 | edgeToEdgeEnabled | app.json | Android edge-to-edge 支持 |
+
+
+## 内容生产工具化原则
+
+内容准确性不能只靠 AI 手写、AI 自查和人工反复猜。完善某个内容模块或设计某个功能前，先问：有没有现成工具、词典、语料、开源库、文献、教材体系或脚本可以辅助生成、校验或分类？
+
+AI 的职责是：
+- 设计流程和规则
+- 调研可用工具与资料
+- 写脚本把工具接入内容流水线
+- 对工具无法判断的异常做复核清单
+- 帮人做最终判断
+
+AI 不应该直接凭感觉批量生成需要高准确度的内容，例如读音、罗马音、活用、词性、例句对齐、释义、声调、词源。能工具化的部分先工具化。
+
+当前优先工具方向：
+- 日文分词、读音、罗马音：`pykakasi` / `SudachiPy` / `fugashi`
+- 词性、原形、活用检测：`SudachiPy` / `fugashi + UniDic`
+- 词典释义和交叉引用：JMdict 等开放词典资源
+- 例句候选和自然度参考：Tatoeba 等语料资源（只作候选，不直接照搬）
+- 汉字结构、笔顺、部件：KanjiVG
+- 发音与 pitch accent：OJAD 等资料（后续再接）
+
+每次引入工具都要留下脚本或审计报告，让同一套检查可以重复跑。不要只做一次性手工修补。
+
+## 词书内容路线
+
+N5-N1 不是五份孤立词表，而是同一个基础词库在不同等级视图下的呈现。普通词书负责覆盖和准确，言库负责分类、记忆和特色。
+
+推荐顺序：
+1. 先用 N5 跑通标准 schema、例句、罗马音、标签、审计脚本。
+2. 用工具修正 N5 的 `exampleJp/exampleZh/exampleRoma`，确保目标词、翻译、读音对齐。
+3. 建立可重复脚本：生成罗马音、检查例句目标词、检查中文是否像释义回退、统计标签。
+4. 再导入 N4-N1，导入时就按 N5 的标准 schema 和工具流水线处理。
+5. 后续从 N5-N1 全词库里筛选高价值词进入言库：汉字锚、假朋友、外来语、音变、口语/书面差异、形近词、场景色、词源意象。
+
+不要在 N4-N1 导入前把 N5 人工打磨到完美；但必须先让 N5 的字段标准和工具审计跑通，否则后续几千词会继承同样的混乱。
 
 ## 词书架构
 
