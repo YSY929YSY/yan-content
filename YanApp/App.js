@@ -2427,7 +2427,7 @@ function WordBookShelfScreen({ onBack, onSelect }) {
         <Text style={wbs.title}>词书</Text>
         <Text style={wbs.sub}>选择一本开始学习</Text>
       </View>
-      <ScrollView contentContainerStyle={{ padding: 16, gap: 10 }} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={{ padding: 14, gap: 7 }} showsVerticalScrollIndicator={false}>
         {WORDBOOKS.map(book => {
           const [bg, fg] = JLPT_COLORS[book.level] || ['#f0ede6', '#888'];
           return (
@@ -2458,18 +2458,18 @@ function WordBookShelfScreen({ onBack, onSelect }) {
   );
 }
 const wbs = StyleSheet.create({
-  nav: { padding: 20, paddingBottom: 14, borderBottomWidth: 1, borderBottomColor: C.border, gap: 4 },
-  navBack: { fontSize: 13, color: C.lava, fontWeight: '600', marginBottom: 6 },
-  title: { fontSize: 22, fontWeight: '700', color: C.ink },
-  sub: { fontSize: 12, color: C.muted },
-  row: { flexDirection: 'row', alignItems: 'center', backgroundColor: C.white, borderRadius: 14, padding: 14, borderWidth: 1.5, borderColor: C.border, gap: 14 },
-  rowLocked: { opacity: 0.45 },
-  badge: { width: 48, height: 48, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
-  badgeTxt: { fontSize: 14, fontWeight: '800' },
-  bookTitle: { fontSize: 15, fontWeight: '700', color: C.ink, marginBottom: 2 },
-  bookDesc: { fontSize: 12, color: C.muted },
-  arr: { fontSize: 20, fontWeight: '300' },
-  lockTxt: { fontSize: 11, fontWeight: '600', color: C.mutedLight },
+  nav: { paddingHorizontal: 16, paddingTop: 14, paddingBottom: 10, borderBottomWidth: 1, borderBottomColor: C.border, gap: 3 },
+  navBack: { fontSize: 13, color: C.lava, fontWeight: '600', marginBottom: 4 },
+  title: { fontSize: 18, fontWeight: '700', color: C.ink },
+  sub: { fontSize: 11, color: C.muted },
+  row: { flexDirection: 'row', alignItems: 'center', backgroundColor: C.white, borderRadius: 8, paddingHorizontal: 12, paddingVertical: 10, borderWidth: 1, borderColor: C.border, gap: 12 },
+  rowLocked: { opacity: 0.4 },
+  badge: { width: 38, height: 38, borderRadius: 7, alignItems: 'center', justifyContent: 'center' },
+  badgeTxt: { fontSize: 12, fontWeight: '800' },
+  bookTitle: { fontSize: 14, fontWeight: '700', color: C.ink, marginBottom: 1 },
+  bookDesc: { fontSize: 11, color: C.muted },
+  arr: { fontSize: 17, fontWeight: '300' },
+  lockTxt: { fontSize: 10, fontWeight: '600', color: C.mutedLight },
 });
 
 // ─────────────────────────────────────────────
@@ -2597,7 +2597,7 @@ function WordBankScreen({ wordBank, onBack }) {
         style={{ flex: 1 }}
         data={filtered}
         keyExtractor={(item, idx) => `${item.word}-${item.reading}-${idx}`}
-        contentContainerStyle={{ padding: 16, gap: 8 }}
+        contentContainerStyle={{ padding: 12, gap: 4 }}
         showsVerticalScrollIndicator={false}
         renderItem={({ item, index }) => {
           const st = progress[wordKey(item)] || 'new';
@@ -2621,31 +2621,31 @@ function WordBankScreen({ wordBank, onBack }) {
   );
 }
 const wb = StyleSheet.create({
-  hd: { padding: 20, paddingBottom: 14, borderBottomWidth: 1, borderBottomColor: C.border, gap: 6 },
-  back: { fontSize: 13, color: C.lava, fontWeight: '600', marginBottom: 2 },
-  title: { fontSize: 22, fontWeight: '700', color: C.ink },
-  sub: { fontSize: 12, color: C.muted },
-  ctaRow: { flexDirection: 'row', gap: 8 },
-  ctaBtn: { flex: 1, borderRadius: 12, paddingVertical: 10, alignItems: 'center', borderWidth: 1.5, borderColor: C.border, backgroundColor: C.white },
+  hd: { paddingHorizontal: 16, paddingTop: 12, paddingBottom: 10, borderBottomWidth: 1, borderBottomColor: C.border, gap: 7 },
+  back: { fontSize: 13, color: C.lava, fontWeight: '600' },
+  title: { fontSize: 17, fontWeight: '700', color: C.ink },
+  sub: { fontSize: 11, color: C.muted, marginTop: -3 },
+  ctaRow: { flexDirection: 'row', gap: 6 },
+  ctaBtn: { flex: 1, borderRadius: 6, paddingVertical: 7, alignItems: 'center', borderWidth: 1, borderColor: C.border, backgroundColor: C.white },
   ctaBtnActive: { backgroundColor: C.lava, borderColor: C.lava },
-  ctaBtnTxt: { fontSize: 13, fontWeight: '700', color: C.muted },
+  ctaBtnTxt: { fontSize: 12, fontWeight: '600', color: C.muted },
   ctaBtnTxtActive: { color: C.white },
-  search: { marginTop: 2, backgroundColor: C.white, borderRadius: 12, borderWidth: 1.5, borderColor: C.border, paddingHorizontal: 14, paddingVertical: 10, fontSize: 14, color: C.ink },
-  filterRow: { flexDirection: 'row', gap: 6 },
-  filterChip: { borderRadius: 999, paddingHorizontal: 12, paddingVertical: 5, borderWidth: 1.5, borderColor: C.border, backgroundColor: C.white },
+  search: { backgroundColor: C.white, borderRadius: 6, borderWidth: 1, borderColor: C.border, paddingHorizontal: 12, paddingVertical: 8, fontSize: 13, color: C.ink },
+  filterRow: { flexDirection: 'row', gap: 5 },
+  filterChip: { borderRadius: 999, paddingHorizontal: 10, paddingVertical: 4, borderWidth: 1, borderColor: C.border, backgroundColor: C.white },
   filterChipActive: { backgroundColor: C.ink, borderColor: C.ink },
-  filterChipTxt: { fontSize: 12, fontWeight: '600', color: C.muted },
+  filterChipTxt: { fontSize: 11, fontWeight: '600', color: C.muted },
   filterChipTxtActive: { color: C.white },
-  row: { backgroundColor: C.white, borderRadius: 14, padding: 14, borderWidth: 1.5, borderColor: C.border, gap: 5 },
-  rowHead: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  word: { fontSize: 18, fontWeight: '700', color: C.ink },
-  reading: { fontSize: 12, color: C.muted },
-  posTag: { backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 2 },
-  posTagTxt: { fontSize: 10, color: C.muted, fontWeight: '600' },
-  dotLearning: { width: 7, height: 7, borderRadius: 4, backgroundColor: C.gold, marginLeft: 'auto' },
-  checkMastered: { fontSize: 13, color: C.lava, fontWeight: '700', marginLeft: 'auto' },
-  zh: { fontSize: 13, color: C.ink },
-  chunk: { fontSize: 12, color: C.muted, fontStyle: 'italic' },
+  row: { backgroundColor: C.white, borderRadius: 6, paddingHorizontal: 12, paddingVertical: 9, borderWidth: 1, borderColor: C.border, gap: 3 },
+  rowHead: { flexDirection: 'row', alignItems: 'center', gap: 7 },
+  word: { fontSize: 16, fontWeight: '700', color: C.ink },
+  reading: { fontSize: 11, color: C.muted },
+  posTag: { backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 6, paddingVertical: 1 },
+  posTagTxt: { fontSize: 9, color: C.muted, fontWeight: '600' },
+  dotLearning: { width: 6, height: 6, borderRadius: 3, backgroundColor: C.gold, marginLeft: 'auto' },
+  checkMastered: { fontSize: 12, color: C.lava, fontWeight: '700', marginLeft: 'auto' },
+  zh: { fontSize: 12, color: C.ink },
+  chunk: { fontSize: 11, color: C.muted, fontStyle: 'italic' },
   empty: { textAlign: 'center', color: C.muted, marginTop: 40, fontSize: 14 },
 });
 
@@ -2674,16 +2674,16 @@ function WBDetailPage({ entry, status, onBack, onSetStatus, speak, speakingKey, 
           </View>
           <SpeakBtn onPress={() => speak(entry.word, 'ja-JP', 'wd-word')} speaking={speakingKey === 'wd-word'} size="sm" color={C.lava} />
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 20, marginTop: 4 }}>
+        <View style={wd.metaRow}>
           <View style={wd.posTag}><Text style={wd.posTagTxt}>{entry.pos}</Text></View>
         </View>
-        <View style={wd.card}>
+        <View style={wd.meaningBlock}>
           <Text style={wd.zh}>{entry.meaning_zh}</Text>
           {!!entry.meaning_en && <Text style={wd.en}>{entry.meaning_en}</Text>}
         </View>
         {!!entry.coreChunk && (
           <View style={wd.section}>
-            <Text style={wd.sectionLabel}>词块</Text>
+            <Text style={wd.sectionLabel}>搭配</Text>
             <View style={wd.exRow}>
               <Text style={wd.exJp}>{entry.coreChunk}</Text>
               <SpeakBtn onPress={() => speak(entry.coreChunk, 'ja-JP', 'wd-chunk')} speaking={speakingKey === 'wd-chunk'} size="sm" color={C.muted} />
@@ -2694,8 +2694,9 @@ function WBDetailPage({ entry, status, onBack, onSetStatus, speak, speakingKey, 
           <View style={wd.section}>
             <Text style={wd.sectionLabel}>例句</Text>
             <View style={wd.exRow}>
-              <View style={{ flex: 1, gap: 4 }}>
+              <View style={{ flex: 1, gap: 3 }}>
                 <Text style={wd.exJp}>{entry.exampleJp}</Text>
+                {!!entry.exampleRoma && <Text style={wd.exRoma}>{entry.exampleRoma}</Text>}
                 <Text style={wd.exZh}>{entry.exampleZh}</Text>
               </View>
               <SpeakBtn onPress={() => speak(entry.exampleJp, 'ja-JP', 'wd-ex')} speaking={speakingKey === 'wd-ex'} size="sm" color={C.muted} />
@@ -2731,34 +2732,36 @@ function WBDetailPage({ entry, status, onBack, onSetStatus, speak, speakingKey, 
   );
 }
 const wd = StyleSheet.create({
-  nav: { paddingHorizontal: 20, paddingTop: 16, paddingBottom: 8 },
+  nav: { paddingHorizontal: 16, paddingTop: 14, paddingBottom: 4 },
   navBack: { fontSize: 13, color: C.lava, fontWeight: '600' },
   scroll: { paddingBottom: 60 },
-  hero: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20, paddingTop: 24, paddingBottom: 8, gap: 12 },
-  word: { fontSize: 36, fontWeight: '700', color: C.ink },
-  reading: { fontSize: 15, color: C.muted, marginTop: 2 },
-  posTag: { backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 3 },
-  posTagTxt: { fontSize: 11, color: C.muted, fontWeight: '600' },
-  card: { marginHorizontal: 20, marginTop: 16, backgroundColor: C.white, borderRadius: 16, padding: 18, borderWidth: 1.5, borderColor: C.border, gap: 6 },
-  zh: { fontSize: 18, fontWeight: '600', color: C.ink },
+  hero: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingTop: 16, paddingBottom: 4, gap: 10 },
+  word: { fontSize: 32, fontWeight: '700', color: C.ink },
+  reading: { fontSize: 14, color: C.muted, marginTop: 2 },
+  metaRow: { paddingHorizontal: 16, marginTop: 6, flexDirection: 'row', gap: 6 },
+  posTag: { backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 2 },
+  posTagTxt: { fontSize: 10, color: C.muted, fontWeight: '600' },
+  meaningBlock: { paddingHorizontal: 16, paddingVertical: 12, marginTop: 10, borderTopWidth: 1, borderBottomWidth: 1, borderColor: C.border, gap: 4 },
+  zh: { fontSize: 17, fontWeight: '600', color: C.ink },
   en: { fontSize: 12, color: C.mutedLight },
-  section: { marginHorizontal: 20, marginTop: 20, gap: 10 },
-  sectionLabel: { fontSize: 11, fontWeight: '700', color: C.mutedLight, letterSpacing: 0.8, textTransform: 'uppercase' },
-  exRow: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: C.white, borderRadius: 14, padding: 14, borderWidth: 1.5, borderColor: C.border },
-  exJp: { flex: 1, fontSize: 16, color: C.ink, fontWeight: '500' },
-  exZh: { fontSize: 13, color: C.muted, marginTop: 4 },
+  section: { marginHorizontal: 16, marginTop: 16, gap: 8 },
+  sectionLabel: { fontSize: 10, fontWeight: '700', color: C.mutedLight, letterSpacing: 0.8, textTransform: 'uppercase' },
+  exRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  exJp: { flex: 1, fontSize: 15, color: C.ink, fontWeight: '500' },
+  exRoma: { fontSize: 11, color: C.mutedLight, lineHeight: 16 },
+  exZh: { fontSize: 12, color: C.muted },
   statusRow: { flexDirection: 'row', gap: 8 },
-  statusChip: { flex: 1, borderRadius: 12, paddingVertical: 13, alignItems: 'center', borderWidth: 1.5, borderColor: C.border, backgroundColor: C.white },
+  statusChip: { flex: 1, borderRadius: 6, paddingVertical: 10, alignItems: 'center', borderWidth: 1, borderColor: C.border, backgroundColor: C.white },
   statusChipX: { backgroundColor: C.lava, borderColor: C.lava },
   statusChipCheck: { backgroundColor: C.ink, borderColor: C.ink },
-  statusTxt: { fontSize: 14, fontWeight: '700', color: C.muted },
+  statusTxt: { fontSize: 13, fontWeight: '700', color: C.muted },
   statusTxtX: { color: C.white },
   statusTxtCheck: { color: C.white },
   bottomNav: { flexDirection: 'row', borderTopWidth: 1, borderTopColor: C.border, backgroundColor: C.white },
-  bottomNavBtn: { flex: 1, paddingVertical: 16, alignItems: 'center' },
+  bottomNavBtn: { flex: 1, paddingVertical: 13, alignItems: 'center' },
   bottomNavBtnNext: { borderLeftWidth: 1, borderLeftColor: C.border },
   bottomNavBtnDisabled: { opacity: 0.3 },
-  bottomNavTxt: { fontSize: 14, fontWeight: '600', color: C.lava },
+  bottomNavTxt: { fontSize: 13, fontWeight: '600', color: C.lava },
   bottomNavTxtDisabled: { color: C.muted },
 });
 
