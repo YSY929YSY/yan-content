@@ -2203,7 +2203,7 @@ function PieTab({ content, subTab, setSubTab, sceneState, setSceneState, practic
         )}
         {subTab === 'wordbank' && wbBookId === 'n5' && (
           <WordBankScreen
-            wordBank={content.wordBank || []}
+            wordBank={(content.wordBank || []).filter(w => (w.levels || [w.level]).includes('N5'))}
             onBack={() => setWbBookId(null)}
           />
         )}
