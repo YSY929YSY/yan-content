@@ -8,6 +8,7 @@
  * ─────────────────────────────────────────────
  */
 const CONTENT_URL = 'https://raw.githubusercontent.com/YSY929YSY/yan-content/main/content.v2.json';
+const SHOULD_FETCH_REMOTE_CONTENT = typeof __DEV__ === 'undefined' ? true : !__DEV__;
 
 
 import fallbackContent from './assets/content.fallback.json';
@@ -780,6 +781,10 @@ function useContent() {
   const load = async () => {
     if (!content) setLoading(true);
     setError(false);
+    if (!SHOULD_FETCH_REMOTE_CONTENT) {
+      setLoading(false);
+      return;
+    }
     try {
       const res = await fetch(CONTENT_URL, { cache:'no-cache' });
       if (!res.ok) throw new Error(`Content fetch failed: ${res.status}`);
@@ -2201,12 +2206,18 @@ function PieTab({ content, subTab, setSubTab, sceneState, setSceneState, practic
             onSelect={(id) => setWbBookId(id)}
           />
         )}
-        {subTab === 'wordbank' && wbBookId === 'n5' && (
-          <WordBankScreen
-            wordBank={(content.wordBank || []).filter(w => (w.levels || [w.level]).includes('N5'))}
-            onBack={() => setWbBookId(null)}
-          />
-        )}
+        {subTab === 'wordbank' && wbBookId && (() => {
+          const activeBook = WORDBOOKS.find(b => b.id === wbBookId);
+          if (!activeBook?.available) return null;
+          const bookWords = (content.wordBank || []).filter(w => (w.levels || [w.level]).includes(activeBook.level));
+          return (
+            <WordBankScreen
+              wordBank={bookWords}
+              book={activeBook}
+              onBack={() => setWbBookId(null)}
+            />
+          );
+        })()}
         {subTab === 'kana' && (
         <KanaScreen
   kanaRows={content.kanaRows}
@@ -2405,7 +2416,7 @@ lockTag: {
 // ─────────────────────────────────────────────
 const WORDBOOKS = [
   { id: 'n5', level: 'N5', title: '基础词书', desc: '高频词块 · 例句', count: 718, available: true },
-  { id: 'n4', level: 'N4', title: '进阶词书', desc: '场景扩展词汇', count: null, available: false },
+  { id: 'n4', level: 'N4', title: '进阶词书', desc: '日常表达 · 例句', count: 626, available: true },
   { id: 'n3', level: 'N3', title: '中级词书', desc: '表达能力跃升', count: null, available: false },
   { id: 'n2', level: 'N2', title: '高级词书', desc: '流利阅读基础', count: null, available: false },
 ];
@@ -2480,7 +2491,7 @@ const WB_DAILY_GOAL = 10;
 const WB_NEXT_STATUS = { new: 'learning', learning: 'mastered', mastered: 'new' };
 const wordKey = (item) => `${item.word}-${item.reading}`;
 
-function WordBankScreen({ wordBank, onBack }) {
+function WordBankScreen({ wordBank, book, onBack }) {
   const [query, setQuery] = useState('');
   const [progress, setProgress] = useState({});
   const [statusFilter, setStatusFilter] = useState('all');
@@ -2567,8 +2578,8 @@ function WordBankScreen({ wordBank, onBack }) {
         <TouchableOpacity onPress={onBack}>
           <Text style={wb.back}>‹ 词书选择</Text>
         </TouchableOpacity>
-        <Text style={wb.title}>N5 基础词库</Text>
-        <Text style={wb.sub}>JLPT N5 · {wordBank.length} 词 · 从高频词块开始</Text>
+        <Text style={wb.title}>{book?.level || 'N5'} {book?.title || '基础词库'}</Text>
+        <Text style={wb.sub}>JLPT {book?.level || 'N5'} · {wordBank.length} 词 · {book?.desc || '高频词块 · 例句'}</Text>
         <View style={wb.ctaRow}>
           <TouchableOpacity style={[wb.ctaBtn, statusFilter === 'today' && wb.ctaBtnActive]} onPress={startToday}>
             <Text style={[wb.ctaBtnTxt, statusFilter === 'today' && wb.ctaBtnTxtActive]}>今日 {WB_DAILY_GOAL} 词</Text>

@@ -32508,7 +32508,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "动词",
+      "pos": "名词（する动词）",
       "meaning_zh": "问候；寒暄",
       "meaning_en": "greeting; greetings; salutation",
       "status": "candidate",
@@ -32751,7 +32751,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "副词",
+      "pos": "名词/副词",
       "meaning_zh": "明天",
       "meaning_en": "tomorrow",
       "status": "candidate",
@@ -33075,7 +33075,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "连体词",
       "meaning_zh": "那种；那样的；像那样；如此",
       "meaning_en": "that sort of; that kind of; like that",
       "status": "candidate",
@@ -33129,7 +33129,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "",
+      "pos": "名词/副词",
       "meaning_zh": "以下；低于；在下面；少于",
       "meaning_en": "below (a standard, level, etc.); under; beneath",
       "status": "candidate",
@@ -33156,7 +33156,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "",
+      "pos": "名词",
       "meaning_zh": "除……以外；除了",
       "meaning_en": "excluding; except (for); apart from",
       "status": "candidate",
@@ -33318,7 +33318,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "",
+      "pos": "名词/副词",
       "meaning_zh": "以上；不少于",
       "meaning_en": "not less than ...; ... and over; ... and above",
       "status": "candidate",
@@ -33777,7 +33777,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "名词",
       "meaning_zh": "谎言；假话",
       "meaning_en": "lie; fib; falsehood",
       "status": "candidate",
@@ -34425,7 +34425,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "",
+      "pos": "量词",
       "meaning_zh": "一亿",
       "meaning_en": "hundred million; 100,000,000; 10^8",
       "status": "candidate",
@@ -36234,7 +36234,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "名词",
       "meaning_zh": "代替；替代品",
       "meaning_en": "substitute; replacement; substituting",
       "status": "candidate",
@@ -36558,7 +36558,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "名词",
       "meaning_zh": "季节；时节",
       "meaning_en": "season; time of year",
       "status": "candidate",
@@ -37044,7 +37044,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "名词",
       "meaning_zh": "附近；周边",
       "meaning_en": "neighbourhood; neighborhood; vicinity",
       "status": "candidate",
@@ -37341,7 +37341,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "",
+      "pos": "接尾词",
       "meaning_zh": "君；先生（称呼后缀）",
       "meaning_en": "Mr; master; boy",
       "status": "candidate",
@@ -37875,7 +37875,7 @@
     },
     {
       "id": "n4_kou",
-      "word": "斯う",
+      "word": "こう",
       "reading": "こう",
       "level": "N4",
       "levels": [
@@ -38205,7 +38205,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "名词",
       "meaning_zh": "国际",
       "meaning_en": "international",
       "status": "candidate",
@@ -38637,7 +38637,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "",
+      "pos": "副词",
       "meaning_zh": "从现在起；今后",
       "meaning_en": "from now on; after this; in the future",
       "status": "candidate",
@@ -38880,7 +38880,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "名词/副词",
       "meaning_zh": "最近；近来",
       "meaning_en": "recently; lately; these days",
       "status": "candidate",
@@ -38934,7 +38934,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "名词/副词",
       "meaning_zh": "最初；开始",
       "meaning_en": "beginning; outset; first",
       "status": "candidate",
@@ -40500,7 +40500,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "名词",
       "meaning_zh": "女性",
       "meaning_en": "woman; female",
       "status": "candidate",
@@ -41985,7 +41985,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "连体词",
       "meaning_zh": "那样的；那种；像那样",
       "meaning_en": "such; that sort of; that kind of",
       "status": "candidate",
@@ -42741,7 +42741,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "名词",
       "meaning_zh": "男性",
       "meaning_en": "man; male",
       "status": "candidate",
@@ -42822,7 +42822,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "名词（する动词）",
       "meaning_zh": "格纹；格子图案",
       "meaning_en": "check (pattern); plaid",
       "status": "candidate",
@@ -42903,7 +42903,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "",
+      "pos": "接尾词",
       "meaning_zh": "昵称后缀",
       "meaning_en": "suffix for familiar person",
       "status": "candidate",
@@ -43443,7 +43443,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "副词",
       "meaning_zh": "尽可能；尽量",
       "meaning_en": "as much as one can; as much as possible; if at all possible",
       "status": "candidate",
@@ -43848,7 +43848,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "名词/副词",
       "meaning_zh": "远处；远方",
       "meaning_en": "far away; distant place; a (great) distance",
       "status": "candidate",
@@ -45117,7 +45117,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "名词",
       "meaning_zh": "兼职",
       "meaning_en": "part-time (work)",
       "status": "candidate",
@@ -45144,7 +45144,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "量词",
       "meaning_zh": "两倍",
       "meaning_en": "double; twice (as much)",
       "status": "candidate",
@@ -45300,13 +45300,13 @@
     },
     {
       "id": "n4_hazu",
-      "word": "筈",
+      "word": "はず",
       "reading": "はず",
       "level": "N4",
       "levels": [
         "N4"
       ],
-      "pos": "",
+      "pos": "名词",
       "meaning_zh": "应该；理应",
       "meaning_en": "should (be); bound (to be); expected (to be)",
       "status": "candidate",
@@ -47547,7 +47547,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "名词/副词",
       "meaning_zh": "过去；从前",
       "meaning_en": "the old days; the past; former times",
       "status": "candidate",
@@ -48843,7 +48843,7 @@
       "levels": [
         "N4"
       ],
-      "pos": "形容词",
+      "pos": "名词",
       "meaning_zh": "双方",
       "meaning_en": "both; both sides; both parties",
       "status": "candidate",
