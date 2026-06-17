@@ -10,6 +10,9 @@
 const CONTENT_URL = 'https://raw.githubusercontent.com/YSY929YSY/yan-content/main/content.v2.json';
 const SHOULD_FETCH_REMOTE_CONTENT = typeof __DEV__ === 'undefined' ? true : !__DEV__;
 
+import { ensureUser } from './src/lib/supabase';
+import { pushProgress, pullProgress } from './src/lib/sync';
+
 
 import fallbackContent from './assets/content.fallback.json';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -795,7 +798,7 @@ function useContent() {
     }
     setLoading(false);
   };
-  useEffect(() => { load(); }, []);
+  useEffect(() => { load(); ensureUser(); }, []);
   return { content, loading, error, reload: load };
 }
 
@@ -2506,9 +2509,12 @@ function WordBankScreen({ wordBank, book, onBack }) {
     (async () => {
       try {
         const raw = await AsyncStorage.getItem(WORDBANK_PROGRESS_KEY);
-        if (!alive || !raw) return;
-        const saved = JSON.parse(raw);
-        if (saved && typeof saved === 'object' && !Array.isArray(saved)) setProgress(saved);
+        const local = raw ? JSON.parse(raw) : {};
+        const cloud = await pullProgress();
+        const merged = { ...(typeof local === 'object' && !Array.isArray(local) ? local : {}), ...cloud };
+        if (!alive) return;
+        setProgress(merged);
+        AsyncStorage.setItem(WORDBANK_PROGRESS_KEY, JSON.stringify(merged)).catch(() => {});
       } catch (e) { console.warn('[WordBank] load progress failed', e); }
     })();
     return () => { alive = false; };
@@ -2551,6 +2557,7 @@ function WordBankScreen({ wordBank, book, onBack }) {
       const merged = { ...prev };
       if (id === 'new') { delete merged[key]; } else { merged[key] = id; }
       AsyncStorage.setItem(WORDBANK_PROGRESS_KEY, JSON.stringify(merged)).catch(() => {});
+      pushProgress(key, id, book?.id || 'n5');
       return merged;
     });
   };
