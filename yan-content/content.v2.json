@@ -31818,8 +31818,8 @@
       "exampleRoma": "Rajio de tenki yohou o kikimashita."
     },
     {
-      "word": "ラジオカセ",
-      "reading": "ラジオカセ",
+      "word": "ラジカセ",
+      "reading": "ラジカセ",
       "level": "N5",
       "pos": "名词",
       "meaning_zh": "收录机",
@@ -31834,8 +31834,8 @@
         ],
         "memory": []
       },
-      "coreChunk": "ラジオカセで聞く",
-      "exampleJp": "ラジオカセで聞きます。",
+      "coreChunk": "ラジカセで聞く",
+      "exampleJp": "ラジカセで聞きます。",
       "exampleZh": "用收录机听。",
       "id": "n5_rajiokase",
       "levels": [
