@@ -52842,9 +52842,9 @@
       "N3"
     ],
     "pos": "动词",
-    "meaning_zh": "",
+    "meaning_zh": "让给，转让；让步",
     "meaning_en": "to hand over; to transfer; to turn over | to give up (e.g. one's seat); to give way",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -52874,9 +52874,9 @@
       "N3"
     ],
     "pos": "形容动词",
-    "meaning_zh": "",
+    "meaning_zh": "丰富，充裕；富裕",
     "meaning_en": "abundant; plentiful; rich | rich; wealthy; affluent",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -52906,9 +52906,9 @@
       "N3"
     ],
     "pos": "动词",
-    "meaning_zh": "",
+    "meaning_zh": "允许，准许；原谅",
     "meaning_en": "to permit; to allow; to approve | to forgive; to pardon; to excuse",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -52938,9 +52938,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "夜，夜晚",
     "meaning_en": "night; evening",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -52970,9 +52970,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "黎明，破晓",
     "meaning_en": "dawn; daybreak",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53002,9 +53002,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "像……的样子；……的方法",
     "meaning_en": "appearing ...; looking ... | way to ...; method of ...ing",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53034,9 +53034,9 @@
       "N3"
     ],
     "pos": "动词",
-    "meaning_zh": "",
+    "meaning_zh": "醉；晕（车、船）",
     "meaning_en": "to get drunk; to become intoxicated | to feel sick (e.g. in a vehicle); to become nauseated",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53066,9 +53066,9 @@
       "N3"
     ],
     "pos": "形容动词",
-    "meaning_zh": "",
+    "meaning_zh": "容易，简单",
     "meaning_en": "easy; simple; plain",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53098,9 +53098,9 @@
       "N3"
     ],
     "pos": "形容动词",
-    "meaning_zh": "",
+    "meaning_zh": "开朗，活泼；天气，气候",
     "meaning_en": "cheerful; jovial; merry | weather; season",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53130,9 +53130,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "要求",
     "meaning_en": "demand; firm request; requisition",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53162,9 +53162,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "小心，谨慎；戒备",
     "meaning_en": "care; precaution; guarding",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53194,9 +53194,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "情形，情况；样子，神态",
     "meaning_en": "state (of affairs); situation; circumstances | appearance; look(s); air",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53226,9 +53226,9 @@
       "N3"
     ],
     "pos": "惯用",
-    "meaning_zh": "",
+    "meaning_zh": "总之，简而言之",
     "meaning_en": "in short; in a word; to sum up",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53258,9 +53258,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "要素，因素；元素",
     "meaning_en": "component; factor; item (e.g. in list) | element (e.g. in array); member (e.g. data structure)",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53290,9 +53290,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "要点",
     "meaning_en": "gist; main point",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53322,9 +53322,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "星期，礼拜",
     "meaning_en": "day of the week",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53354,9 +53354,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "欧洲",
     "meaning_en": "Europe",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53391,9 +53391,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "预期，预料",
     "meaning_en": "expectation; anticipation; forecast",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53423,9 +53423,9 @@
       "N3"
     ],
     "pos": "动词",
-    "meaning_zh": "",
+    "meaning_zh": "横穿，横过",
     "meaning_en": "to cross (e.g. road); to traverse",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53455,9 +53455,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "预算",
     "meaning_en": "estimate (of costs); budget",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53487,9 +53487,9 @@
       "N3"
     ],
     "pos": "动词",
-    "meaning_zh": "",
+    "meaning_zh": "停止，作罢",
     "meaning_en": "to stop (doing); to cease; to desist",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53519,9 +53519,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "预测",
     "meaning_en": "prediction; estimation",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53551,9 +53551,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "帆船，游艇",
     "meaning_en": "yacht (esp. a sailing boat with one mast); sailing boat; sailboat",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53583,9 +53583,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "半夜，深夜",
     "meaning_en": "middle of the night; dead of night",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53615,9 +53615,9 @@
       "N3"
     ],
     "pos": "惯用",
-    "meaning_zh": "",
+    "meaning_zh": "社会，世间",
     "meaning_en": "society; the world; the times",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53647,9 +53647,9 @@
       "N3"
     ],
     "pos": "形容动词",
-    "meaning_zh": "",
+    "meaning_zh": "多余，剩余",
     "meaning_en": "extra; excess; surplus",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53679,9 +53679,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "预报",
     "meaning_en": "forecast; prediction",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53711,9 +53711,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "预防",
     "meaning_en": "prevention; protection (against); precaution",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53743,9 +53743,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "读，阅读；（汉字的）读法",
     "meaning_en": "reading | reading (of a kanji, esp. kun reading)",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53775,9 +53775,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "新娘；儿媳",
     "meaning_en": "bride | (one's) daughter-in-law",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53807,9 +53807,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "富余，余地；从容",
     "meaning_en": "surplus; margin; leeway | composure; placidity; complacency",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53839,9 +53839,9 @@
       "N3"
     ],
     "pos": "动词",
-    "meaning_zh": "",
+    "meaning_zh": "由于，起因于；取决于",
     "meaning_en": "to be due to; to be caused by | to depend on; to turn on",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53871,9 +53871,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "喜悦，高兴",
     "meaning_en": "joy; delight; rapture",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53903,9 +53903,9 @@
       "N3"
     ],
     "pos": "形容词",
-    "meaning_zh": "",
+    "meaning_zh": "好，可以，行",
     "meaning_en": "good; OK; all right",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53935,9 +53935,9 @@
       "N3"
     ],
     "pos": "惯用",
-    "meaning_zh": "",
+    "meaning_zh": "妥善地；请多关照",
     "meaning_en": "well; properly; suitably | best regards; please remember me; please treat me favorably (favourably)",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53967,9 +53967,9 @@
       "N3"
     ],
     "pos": "接头",
-    "meaning_zh": "",
+    "meaning_zh": "下（年/月等），未来；以来",
     "meaning_en": "next (year, spring, etc.); coming | since (e.g. last month); for (e.g. 20 years)",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -53999,9 +53999,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "打火机",
     "meaning_en": "lighter",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54031,9 +54031,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "舒适，轻松；容易",
     "meaning_en": "comfort; ease; relief | easy; simple; without trouble",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54063,9 +54063,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "球拍",
     "meaning_en": "racket; paddle (in table-tennis)",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54095,9 +54095,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "利润；利益，好处",
     "meaning_en": "profit; gains | benefit; advantage; good",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54127,9 +54127,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "理解，领会；体谅",
     "meaning_en": "understanding; comprehension; appreciation | sympathy",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54159,9 +54159,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "陆地",
     "meaning_en": "land; shore",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54191,9 +54191,9 @@
       "N3"
     ],
     "pos": "形容动词",
-    "meaning_zh": "",
+    "meaning_zh": "聪明，伶俐；乖巧",
     "meaning_en": "clever; intelligent; bright | well-behaved (esp. of children and pets); obedient; good",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54223,9 +54223,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "离婚",
     "meaning_en": "divorce",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54255,9 +54255,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "理想",
     "meaning_en": "ideal; ideals",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54287,9 +54287,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "比率，比例",
     "meaning_en": "rate; ratio; proportion",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54319,9 +54319,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "留学",
     "meaning_en": "studying abroad | (temporarily) studying at another school (to learn a specific skill)",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54351,9 +54351,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "流行，时髦；（疾病）流行",
     "meaning_en": "fashion; trend; vogue | prevalence (of a disease); epidemic",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54383,9 +54383,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "量，数量；气量",
     "meaning_en": "quantity; amount; volume | generosity; magnanimity; tolerance",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54415,9 +54415,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "兑换，换钱",
     "meaning_en": "change; money exchange",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54447,9 +54447,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "费用，资费",
     "meaning_en": "fee; charge; fare",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54479,9 +54479,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "例子，事例；先例",
     "meaning_en": "example; instance; illustration | precedent",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54511,9 +54511,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "谢意，道谢；礼节",
     "meaning_en": "thanks; gratitude | manners; etiquette",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54543,9 +54543,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "礼仪，礼貌",
     "meaning_en": "manners; courtesy; etiquette",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54575,9 +54575,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "冷静，沉着",
     "meaning_en": "calmness; composure; coolness",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54607,9 +54607,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "行，列，队；行列",
     "meaning_en": "row; line; file | group (of peers); ranks (of); company (of)",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54639,9 +54639,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "列车，火车",
     "meaning_en": "train; railway train",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54671,9 +54671,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "联想",
     "meaning_en": "association (of ideas); being reminded (of something); suggestion",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54703,9 +54703,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "连续",
     "meaning_en": "continuation; succession; series | continuous",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54735,9 +54735,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "老人",
     "meaning_en": "old person; senior citizen; the aged",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54767,9 +54767,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "劳动，劳工",
     "meaning_en": "labor; labour; work | Labour Party",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54799,9 +54799,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "火箭",
     "meaning_en": "rocket",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54831,9 +54831,9 @@
       "N3"
     ],
     "pos": "动词",
-    "meaning_zh": "",
+    "meaning_zh": "论述，讨论",
     "meaning_en": "to discuss; to talk about; to deal with (a topic) | to argue; to dispute",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54863,9 +54863,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "争论，论战",
     "meaning_en": "dispute; controversy; debate",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54895,9 +54895,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "论文",
     "meaning_en": "thesis; essay; treatise",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54927,9 +54927,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "环，圈；箍",
     "meaning_en": "ring; circle; loop | hoop",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54959,9 +54959,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "葡萄酒",
     "meaning_en": "wine",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -54991,9 +54991,9 @@
       "N3"
     ],
     "pos": "形容动词",
-    "meaning_zh": "",
+    "meaning_zh": "任性，自私",
     "meaning_en": "selfish; egoist | self-indulgent; wilful; willful",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -55023,9 +55023,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "离别，分手",
     "meaning_en": "parting (of people); separation; farewell | breakup",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -55055,9 +55055,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "腋下；旁边，一侧",
     "meaning_en": "armpit; under one's arm; side | beside; close to; near",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -55087,9 +55087,9 @@
       "N3"
     ],
     "pos": "动词",
-    "meaning_zh": "",
+    "meaning_zh": "分，分开；分配",
     "meaning_en": "to divide (into); to split (into); to part | to share; to distribute; to deal out",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -55119,9 +55119,9 @@
       "N3"
     ],
     "pos": "副词",
-    "meaning_zh": "",
+    "meaning_zh": "故意，特意",
     "meaning_en": "on purpose; deliberately; intentionally",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -55151,9 +55151,9 @@
       "N3"
     ],
     "pos": "形容动词",
-    "meaning_zh": "",
+    "meaning_zh": "一点点，少许；仅仅",
     "meaning_en": "a little; a few; small | only; just; merely",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -55183,9 +55183,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "棉花；棉絮",
     "meaning_en": "cotton plant (Gossypium spp.) | batting; wadding; padding",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -55215,9 +55215,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "话题",
     "meaning_en": "topic; subject | much talked about; topical; in the news",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -55247,9 +55247,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "笑，笑声；微笑",
     "meaning_en": "laugh; laughter | smile",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -55279,9 +55279,9 @@
       "N3"
     ],
     "pos": "动词",
-    "meaning_zh": "",
+    "meaning_zh": "除；切开，分开",
     "meaning_en": "to divide | to cut; to halve; to separate",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -55311,9 +55311,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "坏话，辱骂",
     "meaning_en": "(verbal) abuse; speaking ill of people; bad-mouthing",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -55343,9 +55343,9 @@
       "N3"
     ],
     "pos": "代词",
-    "meaning_zh": "",
+    "meaning_zh": "我们",
     "meaning_en": "we",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
@@ -55375,9 +55375,9 @@
       "N3"
     ],
     "pos": "名词",
-    "meaning_zh": "",
+    "meaning_zh": "海湾",
     "meaning_en": "bay; gulf; inlet",
-    "status": "draft",
+    "status": "zh_drafted",
     "tags": {
       "scene": [
         "daily"
