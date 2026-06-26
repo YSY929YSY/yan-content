@@ -50,3 +50,6 @@ app-example
 
 # JMdict/词典数据(本地下载,不入库;见 tools/anchor-jmdict.py 文档)
 tools/data/
+
+# 词书导入中间产物(可由 build-*-staging.py 再生)
+staging/
