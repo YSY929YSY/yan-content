@@ -29,6 +29,16 @@ import jaconv
 DATA = Path("tools/data/tatoeba")
 SENSE_SEP = re.compile(r"[;；/／,，、]")
 
+# 繁→简:Tatoeba 中文句繁简混杂,面向大陆简体用户统一为简体。无 opencc 则降级不转。
+try:
+    import opencc
+    _T2S = opencc.OpenCC("t2s")
+    def to_simplified(s: str) -> str:
+        return _T2S.convert(s)
+except Exception:
+    def to_simplified(s: str) -> str:
+        return s
+
 
 def hira(s: str) -> str:
     return re.sub(r"[～\s・ー]", "", jaconv.kata2hira(s or ""))
@@ -70,7 +80,7 @@ def build_alignment(jpn: Dict[int, str], cmn: Dict[int, str], cache: Path) -> Di
                 continue
             # 方向 a=日 b=中
             if a_i in jpn_ids and b_i in cmn_ids:
-                zh = cmn[b_i]
+                zh = to_simplified(cmn[b_i])
                 if a_i not in best or len(zh) < len(best[a_i]):
                     best[a_i] = zh
     with cache.open("wb") as f:
