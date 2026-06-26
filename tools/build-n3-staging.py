@@ -80,6 +80,21 @@ def jm_meaning_en(entry: dict, word: str, reading: str, max_senses=2) -> str:
     return " | ".join(out)
 
 
+def jm_loan_source(entry: dict, word: str, reading: str) -> list:
+    """外来语词源(moat 燃料):アイス←eng:ice。从 languageSource 提取,休眠存储。"""
+    out = []
+    seen = set()
+    for s in applicable_senses(entry, word, reading):
+        for ls in s.get("languageSource", []):
+            lang = ls.get("lang")
+            text = ls.get("text")
+            key = (lang, text)
+            if lang and key not in seen:
+                seen.add(key)
+                out.append({"lang": lang, "word": text})
+    return out
+
+
 def jm_word_reading(entry: dict, csv_kanji: str, csv_kana: str):
     word = csv_kanji or csv_kana
     reading = csv_kana
@@ -166,6 +181,9 @@ def main() -> None:
             "exampleJp": ex_jp,
             "exampleRoma": roma(ex_jp) if ex_jp else "",
             "exampleZh": ex_zh,
+            # ↓ 休眠字段:现在抓全(免费),先不渲染,功能后续一个个上
+            "loanSource": jm_loan_source(entry, word, reading),  # 外来语词源,英语桥/多语联动 moat
+            "conceptCluster": "",                                # 概念聚类(爱字家族),留位,导入后 LLM 填
             "_uk": is_uk,
             "_jmdict_seq": seq,
             "_needs_manual_meaning": needs_manual,
