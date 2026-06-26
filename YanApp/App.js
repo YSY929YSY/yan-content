@@ -10,8 +10,9 @@
 const CONTENT_URL = 'https://raw.githubusercontent.com/YSY929YSY/yan-content/main/content.v2.json';
 const SHOULD_FETCH_REMOTE_CONTENT = typeof __DEV__ === 'undefined' ? true : !__DEV__;
 
-import { ensureUser } from './src/lib/supabase';
+import { ensureUser, signInWithApple, signOut } from './src/lib/supabase';
 import { pushProgress, pullProgress } from './src/lib/sync';
+import * as AppleAuthentication from 'expo-apple-authentication';
 
 
 import fallbackContent from './assets/content.fallback.json';
@@ -798,7 +799,7 @@ function useContent() {
     }
     setLoading(false);
   };
-  useEffect(() => { load(); ensureUser(); }, []);
+  useEffect(() => { load(); }, []);
   return { content, loading, error, reload: load };
 }
 
@@ -1534,6 +1535,58 @@ renGlyph:{
 },
 });
 
+
+// ─────────────────────────────────────────────
+// Welcome Screen — Apple 登录 / 跳过
+// ─────────────────────────────────────────────
+function WelcomeScreen({ onAppleLogin, onSkip }) {
+  const [appleAvail, setAppleAvail] = useState(false);
+  const fadeIn = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (Platform.OS === 'ios') {
+      AppleAuthentication.isAvailableAsync().then(setAppleAvail).catch(() => {});
+    }
+    Animated.timing(fadeIn, { toValue: 1, duration: 600, useNativeDriver: true }).start();
+  }, []);
+
+  return (
+    <View style={ws.screen}>
+      <StatusBar barStyle="light-content" backgroundColor={C.ink} />
+      <Animated.View style={[ws.content, { opacity: fadeIn }]}>
+        <Text style={ws.yanBig}>言</Text>
+        <Text style={ws.mono}>YAN</Text>
+        <View style={ws.card}>
+          <Text style={ws.title}>登录后数据云端同步</Text>
+          <Text style={ws.sub}>学习进度跨设备保留</Text>
+          {appleAvail && Platform.OS === 'ios' && (
+            <AppleAuthentication.AppleAuthenticationButton
+              buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
+              buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.WHITE}
+              cornerRadius={8}
+              style={{ width: '100%', height: 48, marginTop: 16 }}
+              onPress={onAppleLogin}
+            />
+          )}
+        </View>
+        <TouchableOpacity style={ws.skipBtn} onPress={onSkip}>
+          <Text style={ws.skipTxt}>先逛逛</Text>
+        </TouchableOpacity>
+      </Animated.View>
+    </View>
+  );
+}
+const ws = StyleSheet.create({
+  screen: { flex: 1, backgroundColor: C.ink, alignItems: 'center', justifyContent: 'center' },
+  content: { alignItems: 'center', width: '100%', paddingHorizontal: 40 },
+  yanBig: { fontSize: 72, color: C.white, fontWeight: '200', letterSpacing: 10, marginBottom: 4 },
+  mono: { fontSize: 11, color: '#4a4a68', letterSpacing: 6, marginBottom: 48 },
+  card: { width: '100%', backgroundColor: 'rgba(255,255,255,0.06)', borderRadius: 16, padding: 24, alignItems: 'center' },
+  title: { fontSize: 16, fontWeight: '600', color: C.white, marginBottom: 6 },
+  sub: { fontSize: 13, color: C.muted },
+  skipBtn: { marginTop: 32, paddingVertical: 12, paddingHorizontal: 32 },
+  skipTxt: { fontSize: 14, color: C.muted, letterSpacing: 1 },
+});
 
 // ─────────────────────────────────────────────
 // Tab Bar — 丿捺 新版
@@ -2420,7 +2473,7 @@ lockTag: {
 const WORDBOOKS = [
   { id: 'n5', level: 'N5', title: '基础词书', desc: '高频词块 · 例句', count: 718, available: true },
   { id: 'n4', level: 'N4', title: '进阶词书', desc: '日常表达 · 例句', count: 626, available: true },
-  { id: 'n3', level: 'N3', title: '中级词书', desc: '表达能力跃升', count: null, available: false },
+  { id: 'n3', level: 'N3', title: '中级词书', desc: '表达能力跃升', count: 1730, available: true },
   { id: 'n2', level: 'N2', title: '高级词书', desc: '流利阅读基础', count: null, available: false },
 ];
 const JLPT_COLORS = {
@@ -7990,11 +8043,23 @@ function OfflineContentNotice() {
 // ─────────────────────────────────────────────
 export default function App() {
   const [splashed, setSplashed] = useState(false);
+  const [welcomed, setWelcomed] = useState(false);
   const [tab, setTab] = useState('home');
   const [subTab, setSubTab] = useState('learn');
   const [sceneState, setSceneState] = useState(null);
   const [practiceScene, setPracticeScene] = useState(null);
+  const [user, setUser] = useState(null);
   const { content, loading, error, reload } = useContent();
+
+  useEffect(() => { ensureUser().then(u => { if (u) setUser(u); }); }, []);
+
+  const isAnonymous = !user || user.is_anonymous;
+
+  const handleAppleLogin = async () => {
+    const { user: u, error: e } = await signInWithApple();
+    if (u) { setUser(u); setWelcomed(true); }
+    if (e) Alert.alert('登录失败', e);
+  };
 
   const isDark = tab === 'pie' && (subTab === 'subway');
 
@@ -8003,6 +8068,9 @@ export default function App() {
       <StatusBar barStyle="light-content" backgroundColor={C.ink} />
       <SplashScreen onEnter={() => setSplashed(true)} />
     </>
+  );
+  if (!welcomed && isAnonymous) return (
+    <WelcomeScreen onAppleLogin={handleAppleLogin} onSkip={() => setWelcomed(true)} />
   );
   if (loading && !content) return <LoadingScreen />;
   if (!content) return <ErrorScreen onRetry={reload} />;
