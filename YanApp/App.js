@@ -1926,17 +1926,6 @@ startLockTag: {
   fontWeight: '700',
   overflow: 'hidden',
 },
-entryTitleAct: {
-  color: C.white,
-},
-
-entryLeadAct: {
-  color: '#f4d6cc',
-},
-
-entryDescAct: {
-  color: '#c2b7b2',
-},
 entryIcon: {
   fontSize: 16,
   color: C.muted,
@@ -2089,13 +2078,6 @@ goalDot: {
 goalDotOn: {
   backgroundColor: C.lava,
 },
-recoTitle: {
-  fontSize: 15,
-  fontWeight: '700',
-  color: C.ink,
-  marginBottom: 8,
-},
-
 recoTitle: {
   fontSize: 14,
   fontWeight: '700',
@@ -3968,7 +3950,6 @@ const cs = StyleSheet.create({
   wordHero: { alignItems: 'center', paddingTop: 6, paddingBottom: 12, borderBottomWidth: 1, borderBottomColor: '#eee7df', marginBottom: 12 },
   wordHead: { fontSize: 54, lineHeight: 62, fontWeight: '400', color: C.ink, textAlign: 'center' },
   wordReading: { fontSize: 18, color: C.lava, fontWeight: '700', textAlign: 'center', marginTop: 2 },
-  wordMeaning: { fontSize: 14, color: C.muted, textAlign: 'center', marginTop: 2, fontWeight: '300' },
   wordMeaning: { fontSize: 20, color: C.ink, fontWeight: '700', textAlign: 'center', marginTop: 12 },
   wordTagRow: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 7, marginTop: 8 },
   wordN4Tag: { fontSize: 11, color: C.muted, borderWidth: 0.5, borderColor: C.border, borderRadius: 6, paddingHorizontal: 6, paddingVertical: 2 },
@@ -5597,7 +5578,7 @@ const activeCompareTitle = sel?.compareTitle || '听一听，有什么不同';
 const isYoonDetail =
   kanaSection === 'yoon' ||
   /[ゃゅょャュョ]/.test(
-    `${sel?.kana || ''}${typeof activeKana !== 'undefined' ? activeKana : ''}`
+    `${sel?.kana || ''}`
   );
 
 const sectionTitle =
@@ -7231,15 +7212,6 @@ beatTextHot: {
 },
 beatTextTap: {
   color: C.lava,
-},
-sourceBlockSoft: {
-  backgroundColor: '#fffaf7',
-  borderRadius: 18,
-  paddingHorizontal: 14,
-  paddingVertical: 12,
-  borderWidth: 1,
-  borderColor: '#f3e7df',
-  marginTop: 8,
 },
 sourceBlockSoft: {
   backgroundColor: '#fdf9f6',
