@@ -120,15 +120,20 @@ def audit_entry(
     example_jp = str(entry.get("exampleJp", ""))
     example_zh = str(entry.get("exampleZh", ""))
     example_roma = str(entry.get("exampleRoma", ""))
+    status = str(entry.get("status", ""))
     issues: List[str] = []
 
-    for field, value in (
-        ("exampleJp", example_jp),
-        ("exampleZh", example_zh),
-        ("exampleRoma", example_roma),
-    ):
-        if not value:
-            issues.append(f"missing_{field}")
+    # 草稿状态(N3-N1 批量导入)缺例句不算 Blocker:词+释义已可用,例句后续补。
+    # 只对"已定稿"(非草稿)的词强制要求例句(N5/N4 精修词)。
+    DRAFT_STATUSES = {"draft", "zh_drafted", "candidate"}
+    if status not in DRAFT_STATUSES:
+        for field, value in (
+            ("exampleJp", example_jp),
+            ("exampleZh", example_zh),
+            ("exampleRoma", example_roma),
+        ):
+            if not value:
+                issues.append(f"missing_{field}")
 
     if JP_RE.search(example_roma):
         issues.append("exampleRoma_has_japanese")
@@ -204,16 +209,39 @@ def print_markdown(rows: List[AuditRow], expected_count: int, limit: int) -> Non
         print(f"... {len(review_rows) - limit} more rows omitted. Use --limit to show more.")
 
 
+def load_baseline_ids(baseline_path: Path) -> Set[str]:
+    """Load word IDs from a baseline file for incremental diff."""
+    try:
+        with baseline_path.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+        return {str(w.get("id", "")) for w in data.get("wordBank", [])}
+    except Exception:
+        return set()
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Audit wordBank example fields.")
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
-    parser.add_argument("--expected-count", type=int, default=718)
+    parser.add_argument("--expected-count", type=int, default=8298)
     parser.add_argument("--limit", type=int, default=120)
+    parser.add_argument("--diff-only", type=Path, default=None,
+                        help="Only audit entries not present in this baseline file (incremental mode)")
     args = parser.parse_args()
 
     wordbank = load_wordbank(args.input)
+
+    if args.diff_only:
+        baseline_ids = load_baseline_ids(args.diff_only)
+        wordbank = [w for w in wordbank if str(w.get("id", "")) not in baseline_ids]
+        print(f"# Incremental Audit (vs {args.diff_only})")
+        print(f"- new/changed entries: {len(wordbank)}")
+        print()
+
     rows = audit_wordbank(wordbank)
-    print_markdown(rows, args.expected_count, args.limit)
+    if not args.diff_only:
+        print_markdown(rows, args.expected_count, args.limit)
+    else:
+        print_markdown(rows, len(wordbank), args.limit)
 
 
 if __name__ == "__main__":
