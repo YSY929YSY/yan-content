@@ -2475,6 +2475,7 @@ const WORDBOOKS = [
   { id: 'n4', level: 'N4', title: '进阶词书', desc: '日常表达 · 例句', count: 626, available: true },
   { id: 'n3', level: 'N3', title: '中级词书', desc: '表达能力跃升', count: 1730, available: true },
   { id: 'n2', level: 'N2', title: '高级词书', desc: '流利阅读基础', count: 1812, available: true },
+  { id: 'n1', level: 'N1', title: '最高级词书', desc: '母语级词汇', count: 3413, available: true },
 ];
 const JLPT_COLORS = {
   N5: ['#e8f4ea', '#2a7a3a'],
