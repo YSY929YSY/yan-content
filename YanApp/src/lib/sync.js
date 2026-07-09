@@ -71,7 +71,7 @@ export async function pullPlaceCheckins() {
 
     const { data, error } = await supabase
       .from('place_checkin')
-      .select('place_id, status, note, photo_path, updated_at')
+      .select('place_id, status, note, photo_path, checked_in_at, updated_at')
       .eq('user_id', user.id);
 
     if (error) throw error;
@@ -92,6 +92,7 @@ export async function pullPlaceCheckins() {
         note: row.note || '',
         photoPath: row.photo_path || null,
         photoUri,
+        checkedInAt: row.checked_in_at || null,
         updatedAt: row.updated_at,
       };
     }
@@ -122,11 +123,14 @@ export async function pushPlaceCheckin(placeId, status, patch = {}) {
     if (Object.prototype.hasOwnProperty.call(patch, 'photoPath')) {
       row.photo_path = patch.photoPath || null;
     }
+    if (Object.prototype.hasOwnProperty.call(patch, 'checkedInAt')) {
+      row.checked_in_at = patch.checkedInAt || null;
+    }
 
     const { data, error } = await supabase
       .from('place_checkin')
       .upsert(row, { onConflict: 'user_id,place_id' })
-      .select('place_id, status, note, photo_path, updated_at')
+      .select('place_id, status, note, photo_path, checked_in_at, updated_at')
       .single();
 
     if (error) throw error;

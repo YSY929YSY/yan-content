@@ -31,7 +31,7 @@ import {
   Platform, Pressable, SafeAreaView, ScrollView,
   StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View,
 } from 'react-native';
-import Svg, { Path } from 'react-native-svg';
+import Svg, { Circle, G, Path } from 'react-native-svg';
 
 const { width: SW } = Dimensions.get('window');
 const WORLD_FOOTPRINT_PHOTOS_KEY = 'yan_world_footprint_photos';
@@ -7526,6 +7526,77 @@ memoryTxt: {
 });
 
 // ─────────────────────────────────────────────
+// 世界地图(点阵,Natural Earth 110m 4°网格烘焙)
+// 网格: 90列(lon -180..180) x 40行(lat 80..-80),每格4°
+// ─────────────────────────────────────────────
+const WORLD_DOT_GRID = '0:17,24,25,27,28,29,30,31,32,33,34,35,36,37,38,39,48,49,50;1:14,15,21,31,32,33,34,35,36,37,38,39,59,67,68,69,70,71,72;2:4,5,6,7,8,12,16,17,18,19,20,21,24,25,26,27,31,32,33,34,35,36,37,38,50,51,52,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84;3:0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,26,27,28,32,33,34,35,39,40,48,49,50,51,52,53,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89;4:4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,25,26,33,46,47,48,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88;5:11,12,13,14,15,16,17,18,19,20,21,26,27,28,48,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,84,85;6:12,13,14,15,16,17,18,19,20,21,22,23,25,26,27,28,29,30,44,47,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,84;7:13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79;8:14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,45,46,47,48,49,50,51,52,53,54,55,56,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78;9:14,15,16,17,18,19,20,21,22,23,24,25,26,27,43,44,45,48,50,51,53,55,56,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77;10:14,15,16,17,18,19,20,21,22,23,24,25,43,44,48,50,52,53,54,55,56,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,76;11:15,16,17,18,19,20,21,22,23,24,25,43,44,45,46,47,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,78;12:17,18,19,20,21,22,24,43,44,45,46,47,48,49,50,51,52,53,54,55,56,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74;13:18,19,20,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74;14:19,20,25,41,42,43,44,45,46,47,48,49,50,51,52,53,55,56,57,58,59,62,63,64,65,66,67,68,69,70,71,72;15:19,20,21,22,28,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,63,64,65,69,70,71,75;16:22,23,41,42,43,44,45,46,47,48,49,50,51,52,53,54,56,64,70,71,75;17:26,27,28,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,64,71;18:26,27,28,29,30,42,43,44,46,47,48,49,50,51,52,53,54,55,56,70;19:25,26,27,28,29,30,31,47,48,49,50,51,52,53,54,55,73;20:25,26,27,28,29,30,31,32,33,47,48,49,50,51,52,53,54,70,73,78,79;21:25,26,27,28,29,30,31,32,33,34,35,48,49,50,51,52,53,54,71,80,81,82;22:25,26,27,28,29,30,31,32,33,34,35,48,49,50,51,52,53,54,82;23:26,27,28,29,30,31,32,33,34,48,49,50,51,52,53,54,57,77,78,80;24:27,28,29,30,31,32,33,34,48,49,50,51,52,53,56,76,77,78,79,80,81,89;25:27,28,29,30,31,32,33,34,49,50,51,52,53,56,74,75,76,77,78,79,80,81,86;26:27,28,29,30,31,32,49,50,51,52,73,74,75,76,77,78,79,80,81,82;27:27,28,29,30,31,49,50,51,52,74,75,76,77,78,79,80,81,82;28:27,28,29,30,31,50,74,79,80,81,82;29:27,28,29,30,80,81,89;30:26,27,28,81,88;31:26,27,87;32:26,27;33:27;36:58,73;37:27,28,48,49,52,53,54,55,56,57,58,59,60,61,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84;38:16,19,20,21,22,23,24,25,26,27,28,29,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86;39:5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,33,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85';
+
+let _worldDotsPath = null;
+function worldDotsPath(cell) {
+  if (_worldDotsPath) return _worldDotsPath;
+  const parts = [];
+  const r = cell * 0.32;
+  WORLD_DOT_GRID.split(';').forEach(rowStr => {
+    const [row, colsStr] = rowStr.split(':');
+    const y = (parseInt(row, 10) + 0.5) * cell;
+    colsStr.split(',').forEach(col => {
+      const x = (parseInt(col, 10) + 0.5) * cell;
+      parts.push(`M${(x - r).toFixed(1)} ${y.toFixed(1)}a${r} ${r} 0 1 0 ${(r * 2).toFixed(1)} 0a${r} ${r} 0 1 0 ${(-r * 2).toFixed(1)} 0`);
+    });
+  });
+  _worldDotsPath = parts.join('');
+  return _worldDotsPath;
+}
+
+function geoToXY(geo, cell) {
+  return {
+    x: ((geo.lng + 180) / 4) * cell,
+    y: ((80 - geo.lat) / 4) * cell,
+  };
+}
+
+function WorldMapView({ places, visitedIds }) {
+  const W = Dimensions.get('window').width - 28;
+  const cell = W / 90;
+  const H = cell * 40;
+  const visitedSet = new Set(visitedIds);
+  const withGeo = places.filter(p => p.geo);
+  const been = withGeo.filter(p => visitedSet.has(p.id));
+  const wish = withGeo.filter(p => !visitedSet.has(p.id));
+  return (
+    <View style={ms.mapWrap}>
+      <Svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
+        <Path d={worldDotsPath(cell)} fill={C.ink} fillOpacity={0.13} />
+        {wish.map(p => {
+          const { x, y } = geoToXY(p.geo, cell);
+          return <Circle key={p.id} cx={x} cy={y} r={cell * 0.55} fill={C.mutedLight} fillOpacity={0.85} />;
+        })}
+        {been.map(p => {
+          const { x, y } = geoToXY(p.geo, cell);
+          return (
+            <G key={p.id}>
+              <Circle cx={x} cy={y} r={cell * 1.5} fill={C.lava} fillOpacity={0.22} />
+              <Circle cx={x} cy={y} r={cell * 0.7} fill={C.lava} />
+            </G>
+          );
+        })}
+      </Svg>
+      <View style={ms.mapLegend}>
+        <View style={ms.mapLegendItem}>
+          <View style={[ms.mapLegendDot, { backgroundColor: C.lava }]} />
+          <Text style={ms.mapLegendTxt}>去过 {been.length}</Text>
+        </View>
+        <View style={ms.mapLegendItem}>
+          <View style={[ms.mapLegendDot, { backgroundColor: C.mutedLight }]} />
+          <Text style={ms.mapLegendTxt}>想去 {wish.length}</Text>
+        </View>
+      </View>
+      <Text style={ms.mapCaption}>去过的地方教会你语言，未去过的地方给你理由出发。</Text>
+    </View>
+  );
+}
+
+// ─────────────────────────────────────────────
 // 捺 Tab — 世界打卡
 // ─────────────────────────────────────────────
 function NaTab({ mapPlaces: initialPlaces }) {
@@ -7537,6 +7608,11 @@ function NaTab({ mapPlaces: initialPlaces }) {
   const [visitedIds, setVisitedIds] = useState([]);
   const [photoUris, setPhotoUris] = useState({});
   const [photoPaths, setPhotoPaths] = useState({});
+  const [checkinDates, setCheckinDates] = useState({});
+  const [placeNotes, setPlaceNotes] = useState({});
+  const [noteDrafts, setNoteDrafts] = useState({});
+  const [ceremony, setCeremony] = useState(null);
+  const [viewMode, setViewMode] = useState('list');
   const { speak, speakingKey } = useSpeech();
 
   const shown = places.filter(
@@ -7550,6 +7626,7 @@ function NaTab({ mapPlaces: initialPlaces }) {
     { id: 'volcano', label: '火山', widthStyle: ms.fBtnShort },
     { id: 'water', label: '山河湖海', widthStyle: ms.fBtnLong },
     { id: 'cafe', label: '咖啡馆', widthStyle: ms.fBtnMedium },
+    { id: 'landmark', label: '文化地标', widthStyle: ms.fBtnLong },
   ];
   const statusFilters = [
     { id: 'all', label: '全部状态', widthStyle: ms.fBtnState },
@@ -7618,12 +7695,18 @@ function NaTab({ mapPlaces: initialPlaces }) {
       const cloudPhotoUris = {};
       const cloudPhotoPaths = {};
 
+      const cloudDates = {};
+      const cloudNotes = {};
       Object.values(cloud).forEach(checkin => {
         if (!validPlaceIds.has(checkin.placeId)) return;
         if (checkin.status === 'been') cloudVisitedIds.push(checkin.placeId);
         if (checkin.photoUri) cloudPhotoUris[checkin.placeId] = checkin.photoUri;
         if (checkin.photoPath) cloudPhotoPaths[checkin.placeId] = checkin.photoPath;
+        if (checkin.checkedInAt) cloudDates[checkin.placeId] = checkin.checkedInAt;
+        if (checkin.note) cloudNotes[checkin.placeId] = checkin.note;
       });
+      if (Object.keys(cloudDates).length > 0) setCheckinDates(prev => ({ ...cloudDates, ...prev }));
+      if (Object.keys(cloudNotes).length > 0) setPlaceNotes(prev => ({ ...cloudNotes, ...prev }));
 
       if (cloudVisitedIds.length > 0) {
         setVisitedIds(prev => {
@@ -7664,6 +7747,29 @@ useEffect(() => {
     setOpenMemoryId(null);
   }
 }, [typeF, statusF, places, sel, openMemoryId]);
+  const doCheckIn = (place) => {
+    const now = new Date().toISOString();
+    setCheckinDates(prev => ({ ...prev, [place.id]: now }));
+    setVisitedIds(prev => {
+      if (prev.includes(place.id)) return prev;
+      const next = [...prev, place.id];
+      AsyncStorage.setItem(WORLD_VISITED_IDS_KEY, JSON.stringify(next)).catch(() => {});
+      return next;
+    });
+    setCeremony(place);
+    pushPlaceCheckin(place.id, 'been', {
+      photoPath: photoPaths[place.id],
+      checkedInAt: now,
+    }).catch(e => console.warn('[WorldFootprints] check-in sync failed', e));
+  };
+
+  const saveNote = (placeId) => {
+    const draft = (noteDrafts[placeId] ?? '').trim();
+    setPlaceNotes(prev => ({ ...prev, [placeId]: draft }));
+    pushPlaceCheckin(placeId, 'been', { note: draft }).catch(e =>
+      console.warn('[WorldFootprints] note sync failed', e));
+  };
+
   const togglePlaceStatus = (placeId) => {
     const nextStatus = visitedIds.includes(placeId) ? 'wish' : 'been';
     setVisitedIds(prev => {
@@ -7866,6 +7972,26 @@ useEffect(() => {
           </View>
         </View>
       </View>
+      <View style={ms.viewSwitch}>
+        {[{ id: 'list', label: '🗺 列表' }, { id: 'world', label: '🌍 世界' }].map(v => (
+          <TouchableOpacity
+            key={v.id}
+            style={[ms.viewSwitchBtn, viewMode === v.id && ms.viewSwitchBtnAct]}
+            onPress={() => setViewMode(v.id)}
+            activeOpacity={0.85}
+          >
+            <Text style={[ms.viewSwitchTxt, viewMode === v.id && ms.viewSwitchTxtAct]}>{v.label}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {viewMode === 'world' && (
+        <ScrollView contentContainerStyle={{ padding: 14 }} showsVerticalScrollIndicator={false}>
+          <WorldMapView places={places} visitedIds={visitedIds} />
+        </ScrollView>
+      )}
+
+      {viewMode === 'list' && (
       <View style={ms.filterSection}>
         <ScrollView
   horizontal
@@ -7902,7 +8028,9 @@ useEffect(() => {
   ))}
 </ScrollView>
       </View>
+      )}
 
+      {viewMode === 'list' && (
       <ScrollView contentContainerStyle={ms.list} showsVerticalScrollIndicator={false}>
         {shown.length === 0 && (
           <View style={ms.emptyState}>
@@ -7972,6 +8100,49 @@ useEffect(() => {
 
         <Text style={ms.note}>{place.note}</Text>
 
+        {place.status !== 'been' && (
+          <TouchableOpacity
+            style={ms.hereBtn}
+            activeOpacity={0.88}
+            onPress={(event) => { event.stopPropagation(); doCheckIn(place); }}
+          >
+            <Text style={ms.hereBtnTxt}>📍 我在这里 · 打卡</Text>
+          </TouchableOpacity>
+        )}
+
+        {place.status !== 'been' && !!place.cultureEgg && (
+          <View style={ms.eggLocked}>
+            <Text style={ms.eggLockedTxt}>🥚 这里藏着一条当地人才知道的规则 · 打卡后浮现</Text>
+          </View>
+        )}
+
+        {place.status === 'been' && !!checkinDates[place.id] && (
+          <Text style={ms.checkinDate}>
+            ⛩ {new Date(checkinDates[place.id]).toLocaleDateString('zh-CN')} · 你在这里留下了足迹
+          </Text>
+        )}
+
+        {place.status === 'been' && !!place.cultureEgg && (
+          <View style={ms.eggBox}>
+            <Text style={ms.eggTitle}>当地人才知道的</Text>
+            <Text style={ms.eggBody}>{place.cultureEgg}</Text>
+          </View>
+        )}
+
+        {place.status === 'been' && (
+          <View style={ms.noteBox}>
+            <TextInput
+              style={ms.noteInput}
+              placeholder="写一句手账,留在这个坐标…"
+              placeholderTextColor={C.mutedLight}
+              value={noteDrafts[place.id] ?? placeNotes[place.id] ?? ''}
+              onChangeText={t => setNoteDrafts(prev => ({ ...prev, [place.id]: t }))}
+              onEndEditing={() => saveNote(place.id)}
+              multiline
+            />
+          </View>
+        )}
+
         {renderMemoryCard(place)}
       </View>
     )}
@@ -7983,18 +8154,80 @@ useEffect(() => {
           <Text style={ms.addTxt}>添加去过的地方</Text>
         </TouchableOpacity>
 
-        <View style={ms.globeHint}>
-          <Text style={ms.globeTxt}>🌐 3D地球仪视图 · 即将上线</Text>
-          <Text style={ms.globeSub}>用 3D 地球模式查看你的足迹轨迹</Text>
-        </View>
-
         <View style={{ height: 24 }} />
       </ScrollView>
+      )}
+
+      <Modal visible={!!ceremony} transparent animationType="fade" onRequestClose={() => setCeremony(null)}>
+        <View style={ms.cerBackdrop}>
+          <View style={ms.cerCard}>
+            <Text style={ms.cerEmoji}>{ceremony?.emoji}</Text>
+            <Text style={ms.cerHere}>你在这里</Text>
+            <Text style={ms.cerName}>{ceremony?.name}</Text>
+            <Text style={ms.cerDate}>{new Date().toLocaleDateString('zh-CN')} · {ceremony?.loc}</Text>
+            <View style={ms.cerDivider} />
+            {!!ceremony?.jp && (
+              <TouchableOpacity
+                style={ms.cerPhrase}
+                activeOpacity={0.85}
+                onPress={() => ceremony && speak(ceremony.jp, ceremony.lang, `cer-${ceremony.id}`)}
+              >
+                <Text style={ms.cerJp}>{ceremony.jp}</Text>
+                <Text style={ms.cerZh}>{ceremony.zh} · 点我开口说</Text>
+              </TouchableOpacity>
+            )}
+            {!!ceremony?.cultureEgg && (
+              <Text style={ms.cerEggHint}>🥚 一条当地人才知道的规则,已经放进你的卡片</Text>
+            )}
+            <TouchableOpacity
+              style={ms.cerBtn}
+              activeOpacity={0.88}
+              onPress={() => { const p = ceremony; setCeremony(null); setSel(p); }}
+            >
+              <Text style={ms.cerBtnTxt}>留下这一刻 →</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
 const ms = StyleSheet.create({
   hd: { padding: 18, paddingBottom: 14, borderBottomWidth: 1, borderBottomColor: C.border },
+  viewSwitch: { flexDirection: 'row', gap: 8, paddingHorizontal: 14, paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: C.border },
+  viewSwitchBtn: { flex: 1, height: 34, borderRadius: 17, borderWidth: 1, borderColor: C.border, backgroundColor: C.white, alignItems: 'center', justifyContent: 'center' },
+  viewSwitchBtnAct: { backgroundColor: C.ink, borderColor: C.ink },
+  viewSwitchTxt: { fontSize: 12, color: C.muted, fontWeight: '600' },
+  viewSwitchTxtAct: { color: C.white },
+  mapWrap: { backgroundColor: C.white, borderRadius: 16, borderWidth: 1.5, borderColor: C.border, padding: 14, alignItems: 'center' },
+  mapLegend: { flexDirection: 'row', gap: 18, marginTop: 12 },
+  mapLegendItem: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+  mapLegendDot: { width: 8, height: 8, borderRadius: 4 },
+  mapLegendTxt: { fontSize: 11, color: C.muted, fontWeight: '600' },
+  mapCaption: { fontSize: 11, color: C.mutedLight, marginTop: 10, fontStyle: 'italic', textAlign: 'center' },
+  hereBtn: { backgroundColor: C.lava, borderRadius: 12, paddingVertical: 12, alignItems: 'center' },
+  hereBtnTxt: { color: C.white, fontSize: 14, fontWeight: '700' },
+  eggLocked: { backgroundColor: C.tag, borderRadius: 10, padding: 10 },
+  eggLockedTxt: { fontSize: 11, color: C.mutedLight },
+  eggBox: { backgroundColor: '#fffaf0', borderRadius: 12, padding: 12, borderWidth: 1, borderColor: '#f0e0b0' },
+  eggTitle: { fontSize: 10, fontWeight: '700', color: '#a07818', letterSpacing: 1, marginBottom: 4 },
+  eggBody: { fontSize: 13, color: '#3a2a08', lineHeight: 20 },
+  checkinDate: { fontSize: 11, color: C.muted, fontStyle: 'italic' },
+  noteBox: { backgroundColor: C.tag, borderRadius: 12, padding: 4 },
+  noteInput: { minHeight: 44, paddingHorizontal: 10, paddingVertical: 8, fontSize: 13, color: C.ink, lineHeight: 19 },
+  cerBackdrop: { flex: 1, backgroundColor: 'rgba(14,14,18,0.86)', alignItems: 'center', justifyContent: 'center', padding: 28 },
+  cerCard: { width: '100%', backgroundColor: C.white, borderRadius: 22, padding: 26, alignItems: 'center' },
+  cerEmoji: { fontSize: 44 },
+  cerHere: { fontSize: 12, color: C.muted, letterSpacing: 4, marginTop: 10 },
+  cerName: { fontSize: 24, fontWeight: '700', color: C.ink, marginTop: 4 },
+  cerDate: { fontSize: 11, color: C.mutedLight, marginTop: 4 },
+  cerDivider: { width: 36, height: 2, backgroundColor: C.lava, borderRadius: 1, marginVertical: 14 },
+  cerPhrase: { backgroundColor: C.tag, borderRadius: 12, paddingHorizontal: 16, paddingVertical: 10, alignItems: 'center', alignSelf: 'stretch' },
+  cerJp: { fontSize: 16, fontWeight: '600', color: C.ink, textAlign: 'center' },
+  cerZh: { fontSize: 11, color: C.muted, marginTop: 4, textAlign: 'center' },
+  cerEggHint: { fontSize: 11, color: '#a07818', marginTop: 12, textAlign: 'center' },
+  cerBtn: { backgroundColor: C.lava, borderRadius: 14, paddingVertical: 12, paddingHorizontal: 34, marginTop: 16 },
+  cerBtnTxt: { color: C.white, fontSize: 14, fontWeight: '700' },
   title: { fontSize: 20, fontWeight: '700', color: C.ink },
   sub: { fontSize: 12, color: C.muted, marginTop: 3, fontStyle: 'italic' },
   stats: { flexDirection: 'row', backgroundColor: C.tag, borderRadius: 12, padding: 10, alignItems: 'center', gap: 10 },
