@@ -2709,6 +2709,13 @@ const wb = StyleSheet.create({
   empty: { textAlign: 'center', color: C.muted, marginTop: 40, fontSize: 14 },
 });
 
+// 词源桥:借词的来源语言(英语桥 = 用你已经会的学新的)
+const LOAN_LANG = {
+  eng: '英语', ger: '德语', fre: '法语', por: '葡萄牙语', dut: '荷兰语',
+  ita: '意大利语', spa: '西班牙语', kor: '韩语', chi: '汉语', rus: '俄语',
+  lat: '拉丁语', gre: '希腊语',
+};
+
 function WBDetailPage({ entry, status, onBack, onSetStatus, speak, speakingKey, hasPrev, hasNext, onPrev, onNext }) {
   useEffect(() => {
     speak(entry.word, 'ja-JP', `wd-auto-${entry.word}`);
@@ -2741,6 +2748,17 @@ function WBDetailPage({ entry, status, onBack, onSetStatus, speak, speakingKey, 
           <Text style={wd.zh}>{entry.meaning_zh}</Text>
           {!!entry.meaning_en && <Text style={wd.en}>{entry.meaning_en}</Text>}
         </View>
+        {Array.isArray(entry.loanSource) && entry.loanSource.length > 0 && (
+          <View style={wd.section}>
+            <Text style={wd.sectionLabel}>词源</Text>
+            <Text style={wd.loanTxt}>
+              {'← '}
+              {entry.loanSource
+                .map(ls => [LOAN_LANG[ls.lang] || ls.lang, ls.word].filter(Boolean).join(' '))
+                .join(' · ')}
+            </Text>
+          </View>
+        )}
         {!!entry.coreChunk && (
           <View style={wd.section}>
             <Text style={wd.sectionLabel}>搭配</Text>
@@ -2806,6 +2824,7 @@ const wd = StyleSheet.create({
   en: { fontSize: 12, color: C.mutedLight },
   section: { marginHorizontal: 16, marginTop: 16, gap: 8 },
   sectionLabel: { fontSize: 10, fontWeight: '700', color: C.mutedLight, letterSpacing: 0.8, textTransform: 'uppercase' },
+  loanTxt: { fontSize: 14, color: C.teal, fontWeight: '500', marginTop: 2 },
   exRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   exJp: { flex: 1, fontSize: 15, color: C.ink, fontWeight: '500' },
   exRoma: { fontSize: 11, color: C.mutedLight, lineHeight: 16 },
