@@ -178,3 +178,9 @@ grant select, insert, update, delete on table public.place_checkin to anon, auth
 grant select, insert, update, delete on table public.user_places to anon, authenticated;
 grant select, insert, update, delete on table public.travel_checkins to anon, authenticated;
 grant select, insert, update, delete on table public.travel_photos to anon, authenticated;
+
+-- ─────────────────────────────────────────────────────────────
+-- 5. 打卡仪式时刻(2026-07,「在这里」按下的那一秒)
+--    已建表的运行这条迁移;新建表的可忽略(上面 create table 已含则跳过)
+-- ─────────────────────────────────────────────────────────────
+alter table place_checkin add column if not exists checked_in_at timestamptz;
