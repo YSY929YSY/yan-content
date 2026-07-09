@@ -11,7 +11,13 @@ const CONTENT_URL = 'https://raw.githubusercontent.com/YSY929YSY/yan-content/mai
 const SHOULD_FETCH_REMOTE_CONTENT = typeof __DEV__ === 'undefined' ? true : !__DEV__;
 
 import { ensureUser, signInWithApple, signOut } from './src/lib/supabase';
-import { pushProgress, pullProgress } from './src/lib/sync';
+import {
+  pushProgress,
+  pullProgress,
+  pullPlaceCheckins,
+  pushPlaceCheckin,
+  uploadPlaceCheckinPhoto,
+} from './src/lib/sync';
 import * as AppleAuthentication from 'expo-apple-authentication';
 
 
@@ -7511,6 +7517,7 @@ function NaTab({ mapPlaces: initialPlaces }) {
   const [places, setPlaces] = useState(initialPlaces.map(p => ({ ...p, status: 'wish' })));
   const [visitedIds, setVisitedIds] = useState([]);
   const [photoUris, setPhotoUris] = useState({});
+  const [photoPaths, setPhotoPaths] = useState({});
   const { speak, speakingKey } = useSpeech();
 
   const shown = places.filter(
@@ -7581,6 +7588,55 @@ function NaTab({ mapPlaces: initialPlaces }) {
     };
   }, []);
 
+  useEffect(() => {
+    let alive = true;
+    const loadCloudCheckins = async () => {
+      const cloud = await pullPlaceCheckins();
+      if (!alive || !cloud) return;
+
+      const validPlaceIds = new Set(initialPlaces.map(place => place.id));
+      const cloudVisitedIds = [];
+      const cloudPhotoUris = {};
+      const cloudPhotoPaths = {};
+
+      Object.values(cloud).forEach(checkin => {
+        if (!validPlaceIds.has(checkin.placeId)) return;
+        if (checkin.status === 'been') cloudVisitedIds.push(checkin.placeId);
+        if (checkin.photoUri) cloudPhotoUris[checkin.placeId] = checkin.photoUri;
+        if (checkin.photoPath) cloudPhotoPaths[checkin.placeId] = checkin.photoPath;
+      });
+
+      if (cloudVisitedIds.length > 0) {
+        setVisitedIds(prev => {
+          const next = Array.from(new Set([...prev, ...cloudVisitedIds]));
+          AsyncStorage.setItem(WORLD_VISITED_IDS_KEY, JSON.stringify(next)).catch(e => {
+            console.warn('[WorldFootprints] Failed to cache cloud visited places', e);
+          });
+          return next;
+        });
+      }
+
+      if (Object.keys(cloudPhotoUris).length > 0) {
+        setPhotoUris(prev => {
+          const next = { ...prev, ...cloudPhotoUris };
+          AsyncStorage.setItem(WORLD_FOOTPRINT_PHOTOS_KEY, JSON.stringify(next)).catch(e => {
+            console.warn('[WorldFootprints] Failed to cache cloud photos', e);
+          });
+          return next;
+        });
+      }
+
+      if (Object.keys(cloudPhotoPaths).length > 0) {
+        setPhotoPaths(prev => ({ ...prev, ...cloudPhotoPaths }));
+      }
+    };
+
+    loadCloudCheckins();
+    return () => {
+      alive = false;
+    };
+  }, [initialPlaces]);
+
 useEffect(() => {
   if (sel && !shown.some(p => p.id === sel.id)) {
     setSel(null);
@@ -7590,6 +7646,7 @@ useEffect(() => {
   }
 }, [typeF, statusF, places, sel, openMemoryId]);
   const togglePlaceStatus = (placeId) => {
+    const nextStatus = visitedIds.includes(placeId) ? 'wish' : 'been';
     setVisitedIds(prev => {
       const next = prev.includes(placeId)
         ? prev.filter(id => id !== placeId)
@@ -7601,6 +7658,9 @@ useEffect(() => {
         console.warn('[WorldFootprints] Failed to save storage meta', e);
       });
       return next;
+    });
+    pushPlaceCheckin(placeId, nextStatus, { photoPath: photoPaths[placeId] }).catch(e => {
+      console.warn('[WorldFootprints] Failed to sync place status', e);
     });
   };
 
@@ -7620,7 +7680,8 @@ useEffect(() => {
     });
 
     if (!result.canceled && result.assets?.[0]?.uri) {
-      const photoUri = result.assets[0].uri;
+      const asset = result.assets[0];
+      const photoUri = asset.uri;
       setPhotoUris(prev => {
         const next = { ...prev, [placeId]: photoUri };
         AsyncStorage.setItem(WORLD_FOOTPRINT_PHOTOS_KEY, JSON.stringify(next)).catch(e => {
@@ -7628,6 +7689,16 @@ useEffect(() => {
         });
         return next;
       });
+
+      const upload = await uploadPlaceCheckinPhoto(placeId, photoUri, asset.mimeType || 'image/jpeg');
+      if (upload?.photoPath) {
+        setPhotoPaths(prev => ({ ...prev, [placeId]: upload.photoPath }));
+        await pushPlaceCheckin(
+          placeId,
+          visitedIds.includes(placeId) ? 'been' : 'wish',
+          { photoPath: upload.photoPath }
+        );
+      }
     }
   };
   const showCustomPlaceNotice = () => {

@@ -8,14 +8,14 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0e0e12"
     },
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.ysy929ysy.yan",
       "buildNumber": "1",
+      "usesAppleSignIn": true,
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "言需要访问照片图库，用于上传世界足迹打卡照片。",
         "ITSAppUsesNonExemptEncryption": false
@@ -34,6 +34,7 @@
     },
     "plugins": [
       "expo-dev-client",
+      "expo-apple-authentication",
       [
         "expo-image-picker",
         {
