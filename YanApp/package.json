@@ -5,6 +5,7 @@
   "scripts": {
     "start": "expo start",
     "dev:client:lan": "expo start --dev-client -c --port 8081 --lan",
+    "dev:tunnel": "expo start --dev-client -c --tunnel",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
