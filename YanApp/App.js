@@ -7622,11 +7622,12 @@ function NaTab({ mapPlaces: initialPlaces }) {
   const wish = places.length - been;
   const typeFilters = [
     { id: 'all', label: '全部', widthStyle: ms.fBtnShort },
-    { id: 'snow', label: '雪山', widthStyle: ms.fBtnShort },
     { id: 'volcano', label: '火山', widthStyle: ms.fBtnShort },
+    { id: 'snow', label: '雪山', widthStyle: ms.fBtnShort },
     { id: 'water', label: '山河湖海', widthStyle: ms.fBtnLong },
-    { id: 'cafe', label: '咖啡馆', widthStyle: ms.fBtnMedium },
-    { id: 'landmark', label: '文化地标', widthStyle: ms.fBtnLong },
+    { id: 'landmark', label: '人文地标', widthStyle: ms.fBtnLong },
+    { id: 'life', label: '在地风味', widthStyle: ms.fBtnLong },
+    { id: 'experience', label: '奇观体验', widthStyle: ms.fBtnLong },
   ];
   const statusFilters = [
     { id: 'all', label: '全部状态', widthStyle: ms.fBtnState },
