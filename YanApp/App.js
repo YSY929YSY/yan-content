@@ -8101,6 +8101,64 @@ useEffect(() => {
 
         <Text style={ms.note}>{place.note}</Text>
 
+        {Array.isArray(place.phrases) && place.phrases.length > 0 && (
+          <View style={ms.deepBlock}>
+            <Text style={ms.deepTitle}>🗣 救命句</Text>
+            {place.phrases.map((ph, i) => (
+              <View key={`ph-${i}`} style={ms.phraseItem}>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                    <Text style={ms.phraseItemJp}>{ph.text}</Text>
+                    {ph.check && <Text style={ms.phraseCheck}>待校</Text>}
+                  </View>
+                  <Text style={ms.phraseItemZh}>{ph.zh}</Text>
+                  {!!ph.use && <Text style={ms.phraseUse}>{ph.use}</Text>}
+                </View>
+                <SpeakBtn
+                  onPress={() => speak(ph.text, place.lang, `ph-${place.id}-${i}`)}
+                  speaking={speakingKey === `ph-${place.id}-${i}`}
+                  size="sm"
+                />
+              </View>
+            ))}
+          </View>
+        )}
+
+        {Array.isArray(place.sceneOps) && place.sceneOps.length > 0 && (
+          <View style={ms.deepBlock}>
+            <Text style={ms.deepTitle}>🧭 到了怎么做</Text>
+            {place.sceneOps.map((op, i) => (
+              <View key={`op-${i}`} style={ms.opRow}>
+                <Text style={ms.opNum}>{i + 1}</Text>
+                <Text style={ms.opTxt}>{op}</Text>
+              </View>
+            ))}
+          </View>
+        )}
+
+        {!!place.tips && (
+          <View style={ms.tipsRow}>
+            {!!place.tips.when && <Text style={ms.tipChip}>🕐 {place.tips.when}</Text>}
+            {!!place.tips.how && <Text style={ms.tipChip}>🧳 {place.tips.how}</Text>}
+            {!!place.tips.cost && <Text style={ms.tipChip}>💰 {place.tips.cost}</Text>}
+          </View>
+        )}
+
+        {Array.isArray(place.subSpots) && place.subSpots.length > 0 && (
+          <View style={ms.deepBlock}>
+            <Text style={ms.deepTitle}>📍 这里还有</Text>
+            {place.subSpots.map((sp, i) => (
+              <View key={`sp-${i}`} style={ms.subSpot}>
+                <Text style={{ fontSize: 18 }}>{sp.emoji}</Text>
+                <View style={{ flex: 1 }}>
+                  <Text style={ms.subSpotName}>{sp.name}</Text>
+                  {!!sp.tip && <Text style={ms.subSpotTip}>{sp.tip}</Text>}
+                </View>
+              </View>
+            ))}
+          </View>
+        )}
+
         {place.status !== 'been' && (
           <TouchableOpacity
             style={ms.hereBtn}
@@ -8206,6 +8264,21 @@ const ms = StyleSheet.create({
   mapLegendDot: { width: 8, height: 8, borderRadius: 4 },
   mapLegendTxt: { fontSize: 11, color: C.muted, fontWeight: '600' },
   mapCaption: { fontSize: 11, color: C.mutedLight, marginTop: 10, fontStyle: 'italic', textAlign: 'center' },
+  deepBlock: { backgroundColor: C.tag, borderRadius: 12, padding: 12, gap: 8 },
+  deepTitle: { fontSize: 11, fontWeight: '700', color: C.muted, letterSpacing: 1 },
+  phraseItem: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: C.white, borderRadius: 10, padding: 10 },
+  phraseItemJp: { fontSize: 14, fontWeight: '600', color: C.ink },
+  phraseItemZh: { fontSize: 12, color: C.muted, marginTop: 2 },
+  phraseUse: { fontSize: 11, color: C.mutedLight, marginTop: 3, fontStyle: 'italic' },
+  phraseCheck: { fontSize: 9, color: '#a07818', backgroundColor: '#fff6e0', paddingHorizontal: 5, paddingVertical: 1, borderRadius: 4, overflow: 'hidden' },
+  opRow: { flexDirection: 'row', gap: 8, alignItems: 'flex-start' },
+  opNum: { width: 18, height: 18, borderRadius: 9, backgroundColor: C.lava, color: C.white, fontSize: 11, fontWeight: '700', textAlign: 'center', lineHeight: 18, overflow: 'hidden' },
+  opTxt: { flex: 1, fontSize: 13, color: C.ink, lineHeight: 19 },
+  tipsRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
+  tipChip: { fontSize: 11, color: C.muted, backgroundColor: C.tag, paddingHorizontal: 8, paddingVertical: 5, borderRadius: 8, overflow: 'hidden' },
+  subSpot: { flexDirection: 'row', gap: 10, alignItems: 'flex-start', backgroundColor: C.white, borderRadius: 10, padding: 10 },
+  subSpotName: { fontSize: 13, fontWeight: '600', color: C.ink },
+  subSpotTip: { fontSize: 11, color: C.muted, marginTop: 2, lineHeight: 16 },
   hereBtn: { backgroundColor: C.lava, borderRadius: 12, paddingVertical: 12, alignItems: 'center' },
   hereBtnTxt: { color: C.white, fontSize: 14, fontWeight: '700' },
   eggLocked: { backgroundColor: C.tag, borderRadius: 10, padding: 10 },
