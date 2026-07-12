@@ -78,7 +78,52 @@ grant select, insert, update, delete on table public.moments to anon, authentica
 grant select, insert, update, delete on table public.moment_photos to anon, authenticated;
 grant select, insert, update, delete on table public.moment_tags to anon, authenticated;
 
+-- ─────────────────────────────────────────────
+-- 古法手账:用户拼贴的页(创作数据,按采集层同级保护)
+-- 言不排版,言备料——页面由用户拼贴,系统只存元素和变换
+-- ─────────────────────────────────────────────
+create table if not exists journal_pages (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references auth.users on delete cascade not null,
+  trip_id text,                            -- 归属旅行册,可空
+  page_date date,                          -- 这页写的是哪天,可空
+  bg text not null default 'paper',        -- 页面底纹
+  created_at timestamptz default now(),
+  updated_at timestamptz default now(),
+  deleted_at timestamptz                   -- 软删,永不硬删
+);
+create index if not exists journal_pages_user_idx
+  on journal_pages (user_id, created_at desc) where deleted_at is null;
+
+create table if not exists journal_items (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references auth.users on delete cascade not null,
+  page_id uuid references journal_pages on delete cascade not null,
+  kind text not null check (kind in ('sticker', 'photo', 'polaroid', 'tape', 'badge', 'text')),
+  -- sticker/badge = 派生资产(抠图贴纸/纪念章);photo/polaroid = moment 照片;text 留给未来手写体
+  asset_path text,                         -- Storage 路径(贴纸/照片)
+  moment_id uuid references moments on delete set null,  -- 溯源到瞬间,可空
+  payload jsonb,                           -- kind 专属数据(如 tape 颜色、未来的文字内容)
+  x double precision not null default 0.5, -- 相对坐标 0~1
+  y double precision not null default 0.5,
+  scale double precision not null default 1,
+  rotation double precision not null default 0,
+  z integer not null default 0,
+  created_at timestamptz default now()
+);
+create index if not exists journal_items_page_idx on journal_items (page_id, z);
+
+alter table journal_pages enable row level security;
+alter table journal_items enable row level security;
+create policy "own journal pages" on journal_pages for all
+  using (auth.uid() = user_id) with check (auth.uid() = user_id);
+create policy "own journal items" on journal_items for all
+  using (auth.uid() = user_id) with check (auth.uid() = user_id);
+grant select, insert, update, delete on table public.journal_pages to anon, authenticated;
+grant select, insert, update, delete on table public.journal_items to anon, authenticated;
+
 -- Storage:新建 private bucket `moment-photos`,路径 {user_id}/moments/...
+--         贴纸等派生资产放 {user_id}/stickers/...(同 bucket,原图永不动)
 create policy "own moment photo files" on storage.objects for all
   using (bucket_id = 'moment-photos' and (storage.foldername(name))[1] = auth.uid()::text)
   with check (bucket_id = 'moment-photos' and (storage.foldername(name))[1] = auth.uid()::text);

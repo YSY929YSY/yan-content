@@ -1,246 +1,263 @@
-<title>言 · 翻书手账 概念稿</title>
+<meta charset="utf-8">
+<title>言 · 古法手账 概念稿 v2</title>
 <style>
   :root {
     --paper: #f5f2ec;
-    --page: #fbf9f4;
+    --page: #fbf8f1;
     --ink: #17171c;
     --ink-soft: #6e6a61;
-    --ink-faint: #a9a49a;
+    --ink-faint: #aaa599;
     --line: #e4dfd4;
     --lava: #d4401a;
     --teal: #2a7a6a;
-    --gutter: rgba(23, 23, 28, 0.08);
-    --photo-a: #3d4a52;
-    --photo-b: #8a9aa4;
-    --photo-c: #d8cfc0;
+    --tape-a: rgba(212, 64, 26, 0.28);
+    --tape-b: rgba(42, 122, 106, 0.26);
+    --grid: rgba(23, 23, 28, 0.045);
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --paper: #141317;
-      --page: #1d1c21;
-      --ink: #ece8e0;
-      --ink-soft: #a39e93;
-      --ink-faint: #6b675e;
-      --line: #302e35;
-      --lava: #e05a35;
-      --teal: #4da391;
-      --gutter: rgba(0, 0, 0, 0.35);
-      --photo-a: #2a333a;
-      --photo-b: #4d5a63;
-      --photo-c: #6e655a;
+      --paper: #141317; --page: #201f24; --ink: #ece8e0; --ink-soft: #a39e93;
+      --ink-faint: #6b675e; --line: #34323a; --lava: #e05a35; --teal: #4da391;
+      --tape-a: rgba(224, 90, 53, 0.35); --tape-b: rgba(77, 163, 145, 0.32);
+      --grid: rgba(236, 232, 224, 0.05);
     }
   }
   :root[data-theme="dark"] {
-    --paper: #141317; --page: #1d1c21; --ink: #ece8e0; --ink-soft: #a39e93;
-    --ink-faint: #6b675e; --line: #302e35; --lava: #e05a35; --teal: #4da391;
-    --gutter: rgba(0,0,0,0.35);
-    --photo-a: #2a333a; --photo-b: #4d5a63; --photo-c: #6e655a;
+    --paper: #141317; --page: #201f24; --ink: #ece8e0; --ink-soft: #a39e93;
+    --ink-faint: #6b675e; --line: #34323a; --lava: #e05a35; --teal: #4da391;
+    --tape-a: rgba(224, 90, 53, 0.35); --tape-b: rgba(77, 163, 145, 0.32);
+    --grid: rgba(236, 232, 224, 0.05);
   }
   :root[data-theme="light"] {
-    --paper: #f5f2ec; --page: #fbf9f4; --ink: #17171c; --ink-soft: #6e6a61;
-    --ink-faint: #a9a49a; --line: #e4dfd4; --lava: #d4401a; --teal: #2a7a6a;
-    --gutter: rgba(23,23,28,0.08);
-    --photo-a: #3d4a52; --photo-b: #8a9aa4; --photo-c: #d8cfc0;
+    --paper: #f5f2ec; --page: #fbf8f1; --ink: #17171c; --ink-soft: #6e6a61;
+    --ink-faint: #aaa599; --line: #e4dfd4; --lava: #d4401a; --teal: #2a7a6a;
+    --tape-a: rgba(212, 64, 26, 0.28); --tape-b: rgba(42, 122, 106, 0.26);
+    --grid: rgba(23, 23, 28, 0.045);
   }
 
   * { box-sizing: border-box; }
   body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
+    margin: 0; background: var(--paper); color: var(--ink);
     font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
     line-height: 1.6;
   }
-  .serif { font-family: Georgia, "Songti SC", "Noto Serif SC", serif; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 44px 20px 72px; }
 
-  .wrap { max-width: 880px; margin: 0 auto; padding: 48px 20px 72px; }
-
-  header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 8px; }
-  .mark { font-family: Georgia, "Songti SC", serif; font-size: 30px; font-weight: 400; letter-spacing: 2px; }
+  header { display: flex; align-items: baseline; gap: 14px; }
+  .mark { font-family: Georgia, "Songti SC", serif; font-size: 30px; letter-spacing: 2px; }
   .headline { font-size: 15px; font-weight: 600; }
-  .headnote { font-size: 12px; color: var(--ink-soft); margin: 0 0 40px; }
+  .headnote { font-size: 12px; color: var(--ink-soft); margin: 6px 0 36px; }
   .headnote em { font-style: normal; color: var(--teal); }
 
-  /* ── 书页跨面 ── */
-  .spread {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background: var(--page);
+  /* ── 手账页 ── */
+  .journal {
+    position: relative;
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+      var(--page);
+    background-size: 26px 26px, 26px 26px, auto;
     border: 1px solid var(--line);
     border-radius: 4px;
-    position: relative;
-    margin-bottom: 44px;
-    box-shadow:
-      0 1px 0 var(--line),
-      0 14px 40px rgba(23, 23, 28, 0.07);
-  }
-  /* 书脊 */
-  .spread::before {
-    content: "";
-    position: absolute; top: 0; bottom: 0; left: 50%;
-    width: 44px; transform: translateX(-50%);
-    background: linear-gradient(90deg, transparent, var(--gutter) 48%, var(--gutter) 52%, transparent);
-    pointer-events: none;
-  }
-  .page { padding: 34px 32px 26px; min-height: 380px; display: flex; flex-direction: column; }
-  .page.left  { border-right: 1px solid var(--line); }
-
-  /* 左页:照片 */
-  .photo {
-    flex: 1;
-    border-radius: 2px;
-    position: relative;
+    min-height: 560px;
+    box-shadow: 0 1px 0 var(--line), 0 16px 44px rgba(23, 23, 28, 0.08);
     overflow: hidden;
+  }
+  .journal-date {
+    position: absolute; top: 22px; left: 26px;
+    font-size: 11px; letter-spacing: 0.2em; color: var(--ink-faint);
+  }
+
+  /* 拍立得 */
+  .polaroid {
+    position: absolute; top: 60px; left: 36px;
+    width: 240px; padding: 10px 10px 40px;
+    background: #fff; border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 8px 22px rgba(23,23,28,0.16);
+    transform: rotate(-3.5deg);
+  }
+  :root[data-theme="dark"] .polaroid, .dark-polaroid { background: #efece4; }
+  .polaroid .photo {
+    height: 210px;
     background:
-      radial-gradient(120% 90% at 20% 15%, var(--photo-c) 0%, transparent 55%),
-      radial-gradient(100% 100% at 85% 90%, var(--photo-a) 0%, transparent 60%),
-      linear-gradient(160deg, var(--photo-b), var(--photo-a));
+      radial-gradient(110% 80% at 72% 18%, #d8cfc0 0%, transparent 50%),
+      linear-gradient(200deg, #8a9aa4, #3d4a52 75%);
   }
-  .photo.warm {
-    background:
-      radial-gradient(110% 80% at 75% 20%, var(--photo-c) 0%, transparent 50%),
-      linear-gradient(200deg, var(--photo-c), var(--photo-b) 70%);
+  .polaroid .cap {
+    position: absolute; left: 0; right: 0; bottom: 10px;
+    text-align: center; font-size: 11px; color: #8b8578;
+    font-family: Georgia, "Songti SC", serif; font-style: italic;
   }
-  .photo-note {
-    position: absolute; left: 12px; bottom: 10px;
-    font-size: 10px; letter-spacing: 0.14em;
-    color: rgba(255,255,255,0.85);
-  }
-  .photo-caption { margin-top: 10px; font-size: 11px; color: var(--ink-faint); }
-
-  /* 斜贴的胶带:计划之外 */
-  .tape {
-    position: absolute; top: 18px; right: -14px;
-    transform: rotate(6deg);
-    background: color-mix(in srgb, var(--lava) 88%, var(--page));
-    color: #fff8f3;
-    font-size: 11px; font-weight: 600; letter-spacing: 0.22em;
-    padding: 5px 22px 5px 16px;
-    box-shadow: 0 3px 10px rgba(23,23,28,0.18);
+  .tape-strip {
+    position: absolute; width: 92px; height: 26px;
+    background: var(--tape-a);
+    backdrop-filter: blur(1px);
+    top: -12px; left: 50%; transform: translateX(-50%) rotate(2deg);
   }
 
-  /* 右页:文字 */
-  .eyebrow {
-    font-size: 11px; letter-spacing: 0.2em; color: var(--ink-soft);
-    margin-bottom: 4px;
-  }
-  .place-line { font-size: 12px; color: var(--ink-faint); margin-bottom: 26px; }
-  .moment-text {
-    font-family: Georgia, "Songti SC", "Noto Serif SC", serif;
-    font-size: 21px; line-height: 1.75; font-weight: 400;
-    text-wrap: balance;
-    margin: 0 0 auto;
-  }
-  .moment-text.quiet { font-size: 17px; color: var(--ink-soft); }
+  /* 贴纸:白色模切描边由 SVG paint-order 实现 */
+  .sticker { position: absolute; filter: drop-shadow(0 5px 12px rgba(23,23,28,0.22)); }
+  .sticker.pigeon { top: 96px; right: 52px; transform: rotate(7deg); }
+  .sticker.phonebox { top: 296px; right: 120px; transform: rotate(-6deg); }
+  .sticker.bean { top: 330px; left: 330px; transform: rotate(-12deg); }
 
-  .phrase {
-    border-left: 2px solid var(--teal);
-    padding: 2px 0 2px 14px;
-    margin: 28px 0 0;
+  /* 捡来的小东西:票根 */
+  .stub {
+    position: absolute; bottom: 64px; right: 40px;
+    width: 168px; padding: 10px 12px;
+    background: #f4e9d2; color: #6b5b3e;
+    border: 1px dashed #c8b58e; border-radius: 3px;
+    transform: rotate(4deg);
+    font-size: 10px; letter-spacing: 0.12em;
+    box-shadow: 0 6px 16px rgba(23,23,28,0.12);
   }
-  .phrase-en { font-family: Georgia, serif; font-size: 14px; font-style: italic; }
-  .phrase-zh { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+  .stub b { display: block; font-size: 12px; letter-spacing: 0.06em; margin-bottom: 2px; }
 
-  .page-foot {
-    display: flex; justify-content: space-between; align-items: baseline;
-    margin-top: 26px; padding-top: 12px;
-    border-top: 1px solid var(--line);
-    font-size: 11px; color: var(--ink-faint);
-    font-variant-numeric: tabular-nums;
+  /* 留给手写的纸片:空的,这是给你的 */
+  .note-scrap {
+    position: absolute; bottom: 56px; left: 40px;
+    width: 190px; height: 96px;
+    background: var(--page);
+    border: 1px solid var(--line);
+    box-shadow: 0 5px 14px rgba(23,23,28,0.1);
+    transform: rotate(1.5deg);
+    background-image: repeating-linear-gradient(transparent, transparent 22px, var(--line) 23px);
+  }
+  .note-scrap .tape-strip { background: var(--tape-b); width: 70px; }
+  .note-scrap .hint {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    font-size: 10px; color: var(--ink-faint); letter-spacing: 0.15em;
   }
 
-  /* 空白页示意 */
-  .blank-note {
-    margin: auto; text-align: center;
-    color: var(--ink-faint); font-size: 12px; letter-spacing: 0.1em;
+  /* 素材盘 */
+  .tray {
+    margin-top: 26px;
+    border: 1px solid var(--line); border-radius: 4px;
+    background: var(--page);
+    padding: 14px 16px;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
   }
+  .tray-label { font-size: 11px; letter-spacing: 0.18em; color: var(--ink-faint); margin-right: 4px; }
+  .chip {
+    font-size: 12px; color: var(--ink-soft);
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 6px 14px; background: var(--paper);
+  }
+  .chip.hot { color: var(--lava); border-color: color-mix(in srgb, var(--lava) 40%, var(--line)); }
 
   .principles {
-    margin-top: 8px; padding-top: 28px; border-top: 1px solid var(--line);
+    margin-top: 36px; padding-top: 26px; border-top: 1px solid var(--line);
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
   }
-  .principle h3 { font-size: 12px; letter-spacing: 0.14em; margin: 0 0 6px; color: var(--ink); }
+  .principle h3 { font-size: 12px; letter-spacing: 0.14em; margin: 0 0 6px; }
   .principle p { font-size: 12px; color: var(--ink-soft); margin: 0; }
 
   @media (max-width: 640px) {
-    .spread { grid-template-columns: 1fr; }
-    .spread::before { display: none; }
-    .page.left { border-right: none; border-bottom: 1px solid var(--line); }
-    .page { min-height: 300px; }
+    .journal { min-height: 660px; }
+    .polaroid { width: 200px; left: 20px; }
+    .polaroid .photo { height: 175px; }
+    .sticker.pigeon { right: 16px; }
+    .sticker.phonebox { right: 30px; top: 330px; }
+    .sticker.bean { left: 240px; top: 500px; }
+    .stub { right: 20px; }
+    .note-scrap { left: 20px; }
     .principles { grid-template-columns: 1fr; }
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .spread { transition: transform 0.35s ease, box-shadow 0.35s ease; }
-    .spread:hover { transform: translateY(-3px); box-shadow: 0 1px 0 var(--line), 0 22px 52px rgba(23,23,28,0.1); }
   }
 </style>
 
 <div class="wrap">
   <header>
     <span class="mark">言</span>
-    <span class="headline">翻书手账 · 概念稿</span>
+    <span class="headline">古法手账 · 概念稿 v2</span>
   </header>
-  <p class="headnote">展示层的第一个透镜 · 数据来自瞬间流 · <em>一期一会 · 一天一跨页;像翻自己的书,不像刷 feed</em></p>
+  <p class="headnote"><em>言不排版,言备料。</em>空白的页 + 你的贴纸,拼拼贴贴画画,手是你的。</p>
 
-  <!-- 跨页一:计划之外(视觉权重更高) -->
-  <article class="spread">
-    <div class="page left">
-      <div class="photo warm">
-        <span class="tape">不期而遇</span>
-        <span class="photo-note">PHOTO · EXIF 51.51°N 0.13°W</span>
-      </div>
-      <p class="photo-caption">照片直接来自相册导入,EXIF 自带时间与坐标</p>
-    </div>
-    <div class="page">
-      <p class="eyebrow">七月十二日 · 星期日</p>
-      <p class="place-line">伦敦 · Cecil Court 旧书街</p>
-      <p class="moment-text serif">本来只是抄近路。<br>结果在一家旧书店门口站了四十分钟,<br>老板搬了把椅子给我。</p>
-      <div class="phrase">
-        <p class="phrase-en">Could I have a look at that one on the top shelf?</p>
-        <p class="phrase-zh">可以看看最上层那本吗?——当时真的用上了</p>
-      </div>
-      <div class="page-foot"><span>瞬间 №14</span><span>· 07</span></div>
-    </div>
-  </article>
+  <div class="journal">
+    <span class="journal-date">七月十二日 · 伦敦</span>
 
-  <!-- 跨页二:计划内,平平(更安静的排版) -->
-  <article class="spread">
-    <div class="page left">
-      <div class="photo">
-        <span class="photo-note">PHOTO · EXIF 51.50°N 0.12°W</span>
-      </div>
-      <p class="photo-caption">计划内的瞬间没有胶带,安静地排在书里</p>
-    </div>
-    <div class="page">
-      <p class="eyebrow">七月十二日 · 星期日</p>
-      <p class="place-line">伦敦 · 特拉法加广场</p>
-      <p class="moment-text serif quiet">期待了很久的地方,<br>到了反而平平。也记下来——<br>这就是那天真实的我。</p>
-      <div class="page-foot"><span>瞬间 №13</span><span>· 06</span></div>
-    </div>
-  </article>
+    <!-- 拍立得:原图的一种相框材质 -->
+    <figure class="polaroid" style="margin:0">
+      <span class="tape-strip"></span>
+      <div class="photo"></div>
+      <figcaption class="cap">Cecil Court, 40 min</figcaption>
+    </figure>
 
-  <!-- 跨页三:空白天 -->
-  <article class="spread">
-    <div class="page left">
-      <p class="blank-note">七月十一日<br><br>这一天没有记录</p>
+    <!-- 贴纸一:胖鸽子(抠图贴纸,白色模切描边) -->
+    <svg class="sticker pigeon" width="120" height="104" viewBox="0 0 120 104" role="img" aria-label="胖鸽子贴纸">
+      <g stroke="#fff" stroke-width="10" stroke-linejoin="round" paint-order="stroke" fill="none">
+        <ellipse cx="58" cy="62" rx="38" ry="28" fill="#8d97a5"/>
+      </g>
+      <ellipse cx="58" cy="62" rx="38" ry="28" fill="#8d97a5"/>
+      <path d="M34 58 C30 40 44 28 58 30 C60 22 72 20 76 28 L90 34 L78 40 C82 52 76 62 66 66 Z" fill="#a8b1bd" stroke="#fff" stroke-width="10" stroke-linejoin="round" paint-order="stroke"/>
+      <circle cx="74" cy="33" r="2.6" fill="#17171c"/>
+      <path d="M88 33 L96 36 L88 39 Z" fill="#e8a13c" stroke="#fff" stroke-width="10" stroke-linejoin="round" paint-order="stroke"/>
+      <path d="M88 33 L96 36 L88 39 Z" fill="#e8a13c"/>
+      <path d="M40 60 C50 52 66 52 78 58 C70 66 50 68 40 60 Z" fill="#77808f"/>
+      <path d="M50 88 L50 96 M46 96 L54 96 M66 88 L66 96 M62 96 L70 96" stroke="#c96f2e" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+
+    <!-- 贴纸二:红色电话亭(风格化纪念章) -->
+    <svg class="sticker phonebox" width="88" height="130" viewBox="0 0 88 130" role="img" aria-label="伦敦电话亭纪念章">
+      <g stroke="#fff" stroke-width="9" stroke-linejoin="round" paint-order="stroke">
+        <rect x="22" y="14" width="44" height="92" rx="4" fill="#c8361c"/>
+      </g>
+      <rect x="22" y="14" width="44" height="92" rx="4" fill="#c8361c"/>
+      <path d="M20 14 L44 6 L68 14 Z" fill="#a82a14" stroke="#fff" stroke-width="9" stroke-linejoin="round" paint-order="stroke"/>
+      <path d="M20 14 L44 6 L68 14 Z" fill="#a82a14"/>
+      <rect x="30" y="26" width="28" height="10" rx="2" fill="#f2e8d8"/>
+      <rect x="30" y="42" width="12" height="14" fill="#f2e8d8" opacity="0.85"/>
+      <rect x="46" y="42" width="12" height="14" fill="#f2e8d8" opacity="0.85"/>
+      <rect x="30" y="60" width="12" height="14" fill="#f2e8d8" opacity="0.85"/>
+      <rect x="46" y="60" width="12" height="14" fill="#f2e8d8" opacity="0.85"/>
+      <rect x="16" y="106" width="56" height="14" rx="7" fill="#f2e8d8" stroke="#fff" stroke-width="9" paint-order="stroke"/>
+      <rect x="16" y="106" width="56" height="14" rx="7" fill="#f2e8d8"/>
+      <text x="44" y="116" text-anchor="middle" font-size="8" letter-spacing="1.5" fill="#8a4a2c" font-family="Georgia, serif">LONDON</text>
+    </svg>
+
+    <!-- 贴纸三:一颗咖啡豆 -->
+    <svg class="sticker bean" width="64" height="56" viewBox="0 0 64 56" role="img" aria-label="咖啡豆贴纸">
+      <g stroke="#fff" stroke-width="9" stroke-linejoin="round" paint-order="stroke">
+        <ellipse cx="32" cy="28" rx="20" ry="15" fill="#6f4a2f" transform="rotate(-18 32 28)"/>
+      </g>
+      <ellipse cx="32" cy="28" rx="20" ry="15" fill="#6f4a2f" transform="rotate(-18 32 28)"/>
+      <path d="M18 36 C26 28 38 28 46 20" stroke="#4a2f1c" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+
+    <!-- 捡来的小东西:票根 -->
+    <div class="stub">
+      <b>NATIONAL GALLERY</b>
+      ADMIT ONE · 12 JUL 2026
     </div>
-    <div class="page">
-      <p class="blank-note">空白也是诚实。<br>言不用任务和提醒填满它。</p>
+
+    <!-- 留白的纸片:写字功能后续以手写体加入 -->
+    <div class="note-scrap">
+      <span class="tape-strip"></span>
+      <span class="hint">这里留给你的字</span>
     </div>
-  </article>
+  </div>
+
+  <!-- 素材盘 -->
+  <div class="tray">
+    <span class="tray-label">素材盘</span>
+    <span class="chip hot">提取景点 → 贴纸</span>
+    <span class="chip">我的照片</span>
+    <span class="chip">拍立得框</span>
+    <span class="chip">胶带</span>
+    <span class="chip">纪念章</span>
+  </div>
 
   <section class="principles">
     <div class="principle">
-      <h3>翻页,不滚动</h3>
-      <p>手势向左翻到下一天。书的体感是核心,正式版用翻页动画,不做无限流。</p>
+      <h3>提取景点</h3>
+      <p>照片里的主体抠成白边贴纸——一颗咖啡豆、一只胖鸽子都值得。再进一档:AI 精炼成纪念章,一个瞬间一枚。</p>
     </div>
     <div class="principle">
-      <h3>不期而遇</h3>
-      <p>GPS 离当日行程远的瞬间,自动贴上这条胶带。一期一会,不用填表。</p>
+      <h3>言备料,你拼贴</h3>
+      <p>系统只准备贴纸、相框、胶带,不替你排一个字。信息密度来自你的手,不来自模板。</p>
     </div>
     <div class="principle">
-      <h3>透镜不持有数据</h3>
-      <p>这一页只是瞬间流的一种读法。推倒重排,原始记录一个字节都不动。</p>
+      <h3>页是创作,永久保护</h3>
+      <p>每一页的每个元素和位置都按采集层同级存档。翻书只用来翻你拼好的页。</p>
     </div>
   </section>
 </div>
