@@ -1,0 +1,246 @@
+<title>言 · 翻书手账 概念稿</title>
+<style>
+  :root {
+    --paper: #f5f2ec;
+    --page: #fbf9f4;
+    --ink: #17171c;
+    --ink-soft: #6e6a61;
+    --ink-faint: #a9a49a;
+    --line: #e4dfd4;
+    --lava: #d4401a;
+    --teal: #2a7a6a;
+    --gutter: rgba(23, 23, 28, 0.08);
+    --photo-a: #3d4a52;
+    --photo-b: #8a9aa4;
+    --photo-c: #d8cfc0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #141317;
+      --page: #1d1c21;
+      --ink: #ece8e0;
+      --ink-soft: #a39e93;
+      --ink-faint: #6b675e;
+      --line: #302e35;
+      --lava: #e05a35;
+      --teal: #4da391;
+      --gutter: rgba(0, 0, 0, 0.35);
+      --photo-a: #2a333a;
+      --photo-b: #4d5a63;
+      --photo-c: #6e655a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #141317; --page: #1d1c21; --ink: #ece8e0; --ink-soft: #a39e93;
+    --ink-faint: #6b675e; --line: #302e35; --lava: #e05a35; --teal: #4da391;
+    --gutter: rgba(0,0,0,0.35);
+    --photo-a: #2a333a; --photo-b: #4d5a63; --photo-c: #6e655a;
+  }
+  :root[data-theme="light"] {
+    --paper: #f5f2ec; --page: #fbf9f4; --ink: #17171c; --ink-soft: #6e6a61;
+    --ink-faint: #a9a49a; --line: #e4dfd4; --lava: #d4401a; --teal: #2a7a6a;
+    --gutter: rgba(23,23,28,0.08);
+    --photo-a: #3d4a52; --photo-b: #8a9aa4; --photo-c: #d8cfc0;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+    line-height: 1.6;
+  }
+  .serif { font-family: Georgia, "Songti SC", "Noto Serif SC", serif; }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 48px 20px 72px; }
+
+  header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 8px; }
+  .mark { font-family: Georgia, "Songti SC", serif; font-size: 30px; font-weight: 400; letter-spacing: 2px; }
+  .headline { font-size: 15px; font-weight: 600; }
+  .headnote { font-size: 12px; color: var(--ink-soft); margin: 0 0 40px; }
+  .headnote em { font-style: normal; color: var(--teal); }
+
+  /* ── 书页跨面 ── */
+  .spread {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--page);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    position: relative;
+    margin-bottom: 44px;
+    box-shadow:
+      0 1px 0 var(--line),
+      0 14px 40px rgba(23, 23, 28, 0.07);
+  }
+  /* 书脊 */
+  .spread::before {
+    content: "";
+    position: absolute; top: 0; bottom: 0; left: 50%;
+    width: 44px; transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, var(--gutter) 48%, var(--gutter) 52%, transparent);
+    pointer-events: none;
+  }
+  .page { padding: 34px 32px 26px; min-height: 380px; display: flex; flex-direction: column; }
+  .page.left  { border-right: 1px solid var(--line); }
+
+  /* 左页:照片 */
+  .photo {
+    flex: 1;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 90% at 20% 15%, var(--photo-c) 0%, transparent 55%),
+      radial-gradient(100% 100% at 85% 90%, var(--photo-a) 0%, transparent 60%),
+      linear-gradient(160deg, var(--photo-b), var(--photo-a));
+  }
+  .photo.warm {
+    background:
+      radial-gradient(110% 80% at 75% 20%, var(--photo-c) 0%, transparent 50%),
+      linear-gradient(200deg, var(--photo-c), var(--photo-b) 70%);
+  }
+  .photo-note {
+    position: absolute; left: 12px; bottom: 10px;
+    font-size: 10px; letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.85);
+  }
+  .photo-caption { margin-top: 10px; font-size: 11px; color: var(--ink-faint); }
+
+  /* 斜贴的胶带:计划之外 */
+  .tape {
+    position: absolute; top: 18px; right: -14px;
+    transform: rotate(6deg);
+    background: color-mix(in srgb, var(--lava) 88%, var(--page));
+    color: #fff8f3;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.22em;
+    padding: 5px 22px 5px 16px;
+    box-shadow: 0 3px 10px rgba(23,23,28,0.18);
+  }
+
+  /* 右页:文字 */
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.2em; color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+  .place-line { font-size: 12px; color: var(--ink-faint); margin-bottom: 26px; }
+  .moment-text {
+    font-family: Georgia, "Songti SC", "Noto Serif SC", serif;
+    font-size: 21px; line-height: 1.75; font-weight: 400;
+    text-wrap: balance;
+    margin: 0 0 auto;
+  }
+  .moment-text.quiet { font-size: 17px; color: var(--ink-soft); }
+
+  .phrase {
+    border-left: 2px solid var(--teal);
+    padding: 2px 0 2px 14px;
+    margin: 28px 0 0;
+  }
+  .phrase-en { font-family: Georgia, serif; font-size: 14px; font-style: italic; }
+  .phrase-zh { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+
+  .page-foot {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-top: 26px; padding-top: 12px;
+    border-top: 1px solid var(--line);
+    font-size: 11px; color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* 空白页示意 */
+  .blank-note {
+    margin: auto; text-align: center;
+    color: var(--ink-faint); font-size: 12px; letter-spacing: 0.1em;
+  }
+
+  .principles {
+    margin-top: 8px; padding-top: 28px; border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .principle h3 { font-size: 12px; letter-spacing: 0.14em; margin: 0 0 6px; color: var(--ink); }
+  .principle p { font-size: 12px; color: var(--ink-soft); margin: 0; }
+
+  @media (max-width: 640px) {
+    .spread { grid-template-columns: 1fr; }
+    .spread::before { display: none; }
+    .page.left { border-right: none; border-bottom: 1px solid var(--line); }
+    .page { min-height: 300px; }
+    .principles { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .spread { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+    .spread:hover { transform: translateY(-3px); box-shadow: 0 1px 0 var(--line), 0 22px 52px rgba(23,23,28,0.1); }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="mark">言</span>
+    <span class="headline">翻书手账 · 概念稿</span>
+  </header>
+  <p class="headnote">展示层的第一个透镜 · 数据来自瞬间流 · <em>一期一会 · 一天一跨页;像翻自己的书,不像刷 feed</em></p>
+
+  <!-- 跨页一:计划之外(视觉权重更高) -->
+  <article class="spread">
+    <div class="page left">
+      <div class="photo warm">
+        <span class="tape">不期而遇</span>
+        <span class="photo-note">PHOTO · EXIF 51.51°N 0.13°W</span>
+      </div>
+      <p class="photo-caption">照片直接来自相册导入,EXIF 自带时间与坐标</p>
+    </div>
+    <div class="page">
+      <p class="eyebrow">七月十二日 · 星期日</p>
+      <p class="place-line">伦敦 · Cecil Court 旧书街</p>
+      <p class="moment-text serif">本来只是抄近路。<br>结果在一家旧书店门口站了四十分钟,<br>老板搬了把椅子给我。</p>
+      <div class="phrase">
+        <p class="phrase-en">Could I have a look at that one on the top shelf?</p>
+        <p class="phrase-zh">可以看看最上层那本吗?——当时真的用上了</p>
+      </div>
+      <div class="page-foot"><span>瞬间 №14</span><span>· 07</span></div>
+    </div>
+  </article>
+
+  <!-- 跨页二:计划内,平平(更安静的排版) -->
+  <article class="spread">
+    <div class="page left">
+      <div class="photo">
+        <span class="photo-note">PHOTO · EXIF 51.50°N 0.12°W</span>
+      </div>
+      <p class="photo-caption">计划内的瞬间没有胶带,安静地排在书里</p>
+    </div>
+    <div class="page">
+      <p class="eyebrow">七月十二日 · 星期日</p>
+      <p class="place-line">伦敦 · 特拉法加广场</p>
+      <p class="moment-text serif quiet">期待了很久的地方,<br>到了反而平平。也记下来——<br>这就是那天真实的我。</p>
+      <div class="page-foot"><span>瞬间 №13</span><span>· 06</span></div>
+    </div>
+  </article>
+
+  <!-- 跨页三:空白天 -->
+  <article class="spread">
+    <div class="page left">
+      <p class="blank-note">七月十一日<br><br>这一天没有记录</p>
+    </div>
+    <div class="page">
+      <p class="blank-note">空白也是诚实。<br>言不用任务和提醒填满它。</p>
+    </div>
+  </article>
+
+  <section class="principles">
+    <div class="principle">
+      <h3>翻页,不滚动</h3>
+      <p>手势向左翻到下一天。书的体感是核心,正式版用翻页动画,不做无限流。</p>
+    </div>
+    <div class="principle">
+      <h3>不期而遇</h3>
+      <p>GPS 离当日行程远的瞬间,自动贴上这条胶带。一期一会,不用填表。</p>
+    </div>
+    <div class="principle">
+      <h3>透镜不持有数据</h3>
+      <p>这一页只是瞬间流的一种读法。推倒重排,原始记录一个字节都不动。</p>
+    </div>
+  </section>
+</div>
