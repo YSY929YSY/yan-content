@@ -26,6 +26,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import * as Speech from 'expo-speech';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { C } from './src/theme';
+import { useSpeech, SpeakBtn } from './src/components/Speech';
+import TripNotebook from './src/features/travel/TripNotebook';
 import {
   ActivityIndicator, Alert, Animated, Dimensions, FlatList, Image, Modal,
   Platform, Pressable, SafeAreaView, ScrollView,
@@ -59,13 +62,6 @@ const showWanderComingSoonAlert = () => {
   );
 };
 
-const C = {
-  ink:'#0e0e12', paper:'#f5f2ec', lava:'#d4401a', lavaLight:'#fce8e0',
-  lavaMid:'#f0b8a0', gold:'#c9a84c', blue:'#2d5fa0', blueLight:'#e6eef8',
-  teal:'#2a7a6a', tealLight:'#e0f0ec', purple:'#5a3a9a', purpleLight:'#eeebff',
-  white:'#ffffff', muted:'#888888', mutedLight:'#bbbbbb', border:'#e8e4dc',
-  tag:'#f0ede6', dark2:'#1a1a2e',
-};
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 const MINI_STROKES = {
@@ -809,101 +805,6 @@ function useContent() {
   return { content, loading, error, reload: load };
 }
 
-// ─────────────────────────────────────────────
-// TTS — 完整版，不可简化
-// iOS 静音键修复：必须用 expo-av 先激活音频会话
-// ─────────────────────────────────────────────
-function useSpeech() {
-  const [speakingKey, setSpeakingKey] = useState(null);
-
-  // Expo Go TTS: 不需要任何初始化
-  // expo-speech 在 Expo Go 里直接可用
-  // 唯一需要做的就是在 iOS 上确保音频不被静音键拦截
-  // 但 expo-speech 本身不受静音键影响（它走的是系统 TTS 路由，不是媒体路由）
-  // 如果在 Expo Go 里依然无声，99% 是 iOS 的"语音与播报"权限问题
-
-  const speak = useCallback((text, lang = 'ja-JP', key = null) => {
-    if (!text) return;
-
-    if (speakingKey === key && key !== null) {
-      Speech.stop();
-      setSpeakingKey(null);
-      return;
-    }
-
-    Speech.stop();
-    setSpeakingKey(key);
-
-    Speech.speak(text, {
-      language: lang,
-      rate: 0.8,
-      pitch: 1.0,
-      onDone: () => setSpeakingKey(null),
-      onStopped: () => setSpeakingKey(null),
-      onError: (e) => {
-        console.warn('[TTS]', e);
-        setSpeakingKey(null);
-      },
-    });
-  }, [speakingKey]);
-
-  return { speak, speakingKey };
-}
-
-// ─────────────────────────────────────────────
-// Common components
-// ─────────────────────────────────────────────
-function SpeakBtn({ onPress, speaking, size='md', color=C.lava }) {
-  const scale = useRef(new Animated.Value(1)).current;
-
-  const tap = () => {
-    Animated.sequence([
-      Animated.timing(scale, { toValue: 0.85, duration: 60, useNativeDriver: true }),
-      Animated.spring(scale, { toValue: 1, friction: 3, tension: 200, useNativeDriver: true }),
-    ]).start();
-    onPress();
-  };
-
-  const sm = size === 'sm';
-
-  return (
-    <Animated.View style={{ transform: [{ scale }] }}>
-      <TouchableOpacity
-        onPress={tap}
-        activeOpacity={0.8}
-        style={[
-          sb.btn,
-          { borderColor: color },
-          speaking && { backgroundColor: color },
-          sm && sb.sm,
-        ]}
-      >
-        {sm ? (
-          <Text style={[sb.smIconTxt, { color: speaking ? C.white : color }]}>
-            {speaking ? '♪' : '言'}
-          </Text>
-        ) : (
-          <>
-            <View style={sb.waves}>
-              {[5, 11, 16, 11, 5].map((h, i) => (
-                <View
-                  key={i}
-                  style={[
-                    sb.bar,
-                    { height: h, backgroundColor: speaking ? C.white : color },
-                  ]}
-                />
-              ))}
-            </View>
-            <Text style={[sb.txt, { color: speaking ? C.white : color }]}>
-              {speaking ? '播放中' : '听发音'}
-            </Text>
-          </>
-        )}
-      </TouchableOpacity>
-    </Animated.View>
-  );
-}
 function StrokeMini({ strokeKey, fallbackKana }) {
   const strokes = resolveMiniStrokes(strokeKey);
 
@@ -1038,44 +939,6 @@ function SourceGhost({ text, replayKey }) {
     </Animated.Text>
   );
 }
-const sb = StyleSheet.create({
-  btn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    paddingHorizontal: 18,
-    paddingVertical: 10,
-    borderRadius: 22,
-    borderWidth: 1.5,
-    backgroundColor: C.white,
-  },
-  sm: {
-    paddingHorizontal: 6,
-    paddingVertical: 3,
-    borderRadius: 999,
-    minWidth: 24,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  waves: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 1.5,
-  },
-  bar: {
-    width: 1.8,
-    borderRadius: 2,
-  },
-  txt: {
-    fontSize: 13,
-    fontWeight: '600',
-  },
-  smIconTxt: {
-    fontSize: 12,
-    fontWeight: '700',
-    lineHeight: 14,
-  },
-});
 const ksd = StyleSheet.create({
   wrap: {
     alignItems: 'center',
@@ -7555,7 +7418,7 @@ function geoToXY(geo, cell) {
   };
 }
 
-function WorldMapView({ places, visitedIds }) {
+function WorldMapView({ places, visitedIds, onSelectPlace }) {
   const W = Dimensions.get('window').width - 28;
   const cell = W / 90;
   const H = cell * 40;
@@ -7563,24 +7426,51 @@ function WorldMapView({ places, visitedIds }) {
   const withGeo = places.filter(p => p.geo);
   const been = withGeo.filter(p => visitedSet.has(p.id));
   const wish = withGeo.filter(p => !visitedSet.has(p.id));
+  const [focus, setFocus] = useState(null); // 点中的地点,先看名字再决定去不去
+  const pct = withGeo.length ? Math.round((been.length / withGeo.length) * 100) : 0;
   return (
     <View style={ms.mapWrap}>
+      {/* 点亮进度:让「又点亮一个」有累积感 */}
+      <View style={ms.mapProgress}>
+        <Text style={ms.mapProgressTxt}>已点亮 {been.length} / {withGeo.length} 个地方</Text>
+        <View style={ms.mapProgressTrack}>
+          <View style={[ms.mapProgressFill, { width: `${pct}%` }]} />
+        </View>
+      </View>
       <Svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
         <Path d={worldDotsPath(cell)} fill={C.ink} fillOpacity={0.13} />
         {wish.map(p => {
           const { x, y } = geoToXY(p.geo, cell);
-          return <Circle key={p.id} cx={x} cy={y} r={cell * 0.55} fill={C.mutedLight} fillOpacity={0.85} />;
+          return (
+            <G key={p.id} onPress={() => setFocus(p)}>
+              {/* 透明大圆扩大点击热区,肉眼看到的还是小点 */}
+              <Circle cx={x} cy={y} r={cell * 2.6} fill="transparent" />
+              <Circle cx={x} cy={y} r={cell * 0.55} fill={C.mutedLight} fillOpacity={0.85} />
+            </G>
+          );
         })}
         {been.map(p => {
           const { x, y } = geoToXY(p.geo, cell);
           return (
-            <G key={p.id}>
+            <G key={p.id} onPress={() => setFocus(p)}>
+              <Circle cx={x} cy={y} r={cell * 2.6} fill="transparent" />
               <Circle cx={x} cy={y} r={cell * 1.5} fill={C.lava} fillOpacity={0.22} />
               <Circle cx={x} cy={y} r={cell * 0.7} fill={C.lava} />
+              {focus?.id === p.id && <Circle cx={x} cy={y} r={cell * 2.2} fill="none" stroke={C.lava} strokeWidth={1} />}
             </G>
           );
         })}
       </Svg>
+      {focus && (
+        <TouchableOpacity style={ms.mapFocusCard} activeOpacity={0.88} onPress={() => { onSelectPlace?.(focus); setFocus(null); }}>
+          <Text style={{ fontSize: 20 }}>{focus.emoji}</Text>
+          <View style={{ flex: 1 }}>
+            <Text style={ms.mapFocusName}>{focus.name}</Text>
+            <Text style={ms.mapFocusLoc}>{focus.loc} · {visitedSet.has(focus.id) ? '已点亮' : '想去'}</Text>
+          </View>
+          <Text style={ms.mapFocusGo}>查看 →</Text>
+        </TouchableOpacity>
+      )}
       <View style={ms.mapLegend}>
         <View style={ms.mapLegendItem}>
           <View style={[ms.mapLegendDot, { backgroundColor: C.lava }]} />
@@ -7599,6 +7489,7 @@ function WorldMapView({ places, visitedIds }) {
 // ─────────────────────────────────────────────
 // 捺 Tab — 世界打卡
 // ─────────────────────────────────────────────
+
 function NaTab({ mapPlaces: initialPlaces }) {
   const [typeF, setTypeF] = useState('all');
   const [statusF, setStatusF] = useState('all');
@@ -7620,14 +7511,20 @@ function NaTab({ mapPlaces: initialPlaces }) {
   );
   const been = visitedIds.length;
   const wish = places.length - been;
+  // 分类从数据自动生成:content.json 里出现新 type 就自动多一个筛选项,
+  // 地点可带 typeLabel 字段自定义显示名;这里只留旧类型的兜底翻译。
+  const TYPE_LABEL_FALLBACK = {
+    volcano: '火山', snow: '雪山', water: '山河湖海', landmark: '人文地标',
+    life: '在地风味', experience: '奇观体验', island: '海岛', forest: '森林秘境',
+    onsen: '温泉', city: '城市夜色', festival: '节庆', wildlife: '野生相遇',
+  };
   const typeFilters = [
     { id: 'all', label: '全部', widthStyle: ms.fBtnShort },
-    { id: 'volcano', label: '火山', widthStyle: ms.fBtnShort },
-    { id: 'snow', label: '雪山', widthStyle: ms.fBtnShort },
-    { id: 'water', label: '山河湖海', widthStyle: ms.fBtnLong },
-    { id: 'landmark', label: '人文地标', widthStyle: ms.fBtnLong },
-    { id: 'life', label: '在地风味', widthStyle: ms.fBtnLong },
-    { id: 'experience', label: '奇观体验', widthStyle: ms.fBtnLong },
+    ...Array.from(new Set(places.map(p => p.type).filter(Boolean))).map(type => {
+      const label = places.find(p => p.type === type && p.typeLabel)?.typeLabel
+        || TYPE_LABEL_FALLBACK[type] || type;
+      return { id: type, label, widthStyle: label.length >= 4 ? ms.fBtnLong : ms.fBtnShort };
+    }),
   ];
   const statusFilters = [
     { id: 'all', label: '全部状态', widthStyle: ms.fBtnState },
@@ -7988,7 +7885,17 @@ useEffect(() => {
 
       {viewMode === 'world' && (
         <ScrollView contentContainerStyle={{ padding: 14 }} showsVerticalScrollIndicator={false}>
-          <WorldMapView places={places} visitedIds={visitedIds} />
+          <WorldMapView
+            places={places}
+            visitedIds={visitedIds}
+            onSelectPlace={(place) => {
+              // 地图上点某个点 → 回列表,清筛选,直接展开那张地点卡
+              setTypeF('all');
+              setStatusF('all');
+              setSel(place);
+              setViewMode('list');
+            }}
+          />
         </ScrollView>
       )}
 
@@ -8217,6 +8124,8 @@ useEffect(() => {
       </ScrollView>
       )}
 
+      <TripNotebook />
+
       <Modal visible={!!ceremony} transparent animationType="fade" onRequestClose={() => setCeremony(null)}>
         <View style={ms.cerBackdrop}>
           <View style={ms.cerCard}>
@@ -8258,7 +8167,15 @@ const ms = StyleSheet.create({
   viewSwitchBtnAct: { backgroundColor: C.ink, borderColor: C.ink },
   viewSwitchTxt: { fontSize: 12, color: C.muted, fontWeight: '600' },
   viewSwitchTxtAct: { color: C.white },
-  mapWrap: { backgroundColor: C.white, borderRadius: 16, borderWidth: 1.5, borderColor: C.border, padding: 14, alignItems: 'center' },
+  mapWrap: { backgroundColor: C.white, borderRadius: 16, borderWidth: 1, borderColor: C.border, padding: 14, alignItems: 'center' },
+  mapProgress: { alignSelf: 'stretch', marginBottom: 12 },
+  mapProgressTxt: { fontSize: 12, color: C.ink, fontWeight: '700', marginBottom: 6 },
+  mapProgressTrack: { height: 5, borderRadius: 3, backgroundColor: C.tag, overflow: 'hidden' },
+  mapProgressFill: { height: 5, borderRadius: 3, backgroundColor: C.lava },
+  mapFocusCard: { alignSelf: 'stretch', flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: C.paper, borderRadius: 13, borderWidth: 1, borderColor: C.border, paddingHorizontal: 12, paddingVertical: 10, marginTop: 12 },
+  mapFocusName: { fontSize: 14, color: C.ink, fontWeight: '700' },
+  mapFocusLoc: { fontSize: 11, color: C.muted, marginTop: 1 },
+  mapFocusGo: { fontSize: 12, color: C.teal, fontWeight: '800' },
   mapLegend: { flexDirection: 'row', gap: 18, marginTop: 12 },
   mapLegendItem: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   mapLegendDot: { width: 8, height: 8, borderRadius: 4 },

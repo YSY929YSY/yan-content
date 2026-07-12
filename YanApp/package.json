@@ -5,7 +5,7 @@
   "scripts": {
     "start": "expo start",
     "dev:client:lan": "expo start --dev-client -c --port 8081 --lan",
-    "dev:tunnel": "expo start --dev-client -c --tunnel",
+    "dev:tunnel": "expo start --dev-client -c --port 8081 --tunnel",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
@@ -13,7 +13,7 @@
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
     "@supabase/supabase-js": "^2.108.2",
-    "expo": "~54.0.34",
+    "expo": "~54.0.35",
     "expo-apple-authentication": "~8.0.8",
     "expo-av": "~16.0.8",
     "expo-dev-client": "~6.0.21",
