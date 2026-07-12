@@ -1,0 +1,422 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>言 · 手账</title>
+<style>
+  :root {
+    --room: #e5ddcd;
+    --ink: #2b2620;
+    --faint: #a99d86;
+    --seal: #a5381f;
+    --shadow: rgba(40, 34, 24, 0.2);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --room: #131110; --ink: #e6ddca; --faint: #6f6553; --seal: #c04a2c; --shadow: rgba(0,0,0,0.55); }
+  }
+  :root[data-theme="dark"] { --room: #131110; --ink: #e6ddca; --faint: #6f6553; --seal: #c04a2c; --shadow: rgba(0,0,0,0.55); }
+  :root[data-theme="light"] { --room: #e5ddcd; --ink: #2b2620; --faint: #a99d86; --seal: #a5381f; --shadow: rgba(40,34,24,0.2); }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; background: var(--room); color: var(--ink);
+    font-family: "PingFang SC", "Hiragino Sans GB", sans-serif;
+    overflow: hidden; user-select: none; -webkit-user-select: none;
+  }
+
+  /* ── 极简顶栏 ── */
+  .top {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 16px 22px 0; pointer-events: none;
+  }
+  .top .yan { font-family: "Songti SC", Georgia, serif; font-size: 19px; letter-spacing: 2px; opacity: 0.55; }
+  .top .date { font-family: Georgia, serif; font-size: 11px; letter-spacing: 0.3em; color: var(--faint); }
+
+  /* ── 书 ── */
+  .stage { position: fixed; inset: 0; display: grid; place-items: center; padding: 44px 18px 92px; }
+  .book {
+    position: relative; width: min(1020px, 100%); height: 100%;
+    max-height: 760px;
+    border-radius: 2px;
+    box-shadow: 0 2px 3px var(--shadow), 0 30px 70px var(--shadow);
+    overflow: hidden;
+    touch-action: none;
+  }
+  .paper { position: absolute; inset: 0; }
+  /* 纸样 */
+  .book[data-paper="plain"] .paper { background: radial-gradient(120% 90% at 25% 15%, #f6eedd 0%, transparent 55%), radial-gradient(110% 100% at 80% 90%, #e6d9bf 0%, transparent 60%), #f0e6d2; }
+  .book[data-paper="laid"]  .paper { background: radial-gradient(120% 90% at 25% 15%, #f6eedd 0%, transparent 55%), radial-gradient(110% 100% at 80% 90%, #e5d8bd 0%, transparent 60%), #efe5d0; }
+  .book[data-paper="laid"]  .paper::before {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(60,48,28,0.035) 3px 4px), repeating-linear-gradient(90deg, transparent 0 32px, rgba(60,48,28,0.03) 32px 33px);
+  }
+  .book[data-paper="grid"]  .paper { background: #f2ead9; }
+  .book[data-paper="grid"]  .paper::before {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent 0 27px, rgba(60,48,28,0.05) 27px 28px), repeating-linear-gradient(90deg, transparent 0 27px, rgba(60,48,28,0.05) 27px 28px);
+  }
+  .book[data-paper="kraft"] .paper { background: radial-gradient(120% 90% at 25% 15%, #d9c39c 0%, transparent 55%), #cdb488; }
+  @media (prefers-color-scheme: dark) {
+    .book[data-paper="plain"] .paper { background: radial-gradient(120% 90% at 25% 15%, #2b261d 0%, transparent 55%), #221e16; }
+    .book[data-paper="laid"]  .paper { background: radial-gradient(120% 90% at 25% 15%, #2b261d 0%, transparent 55%), #211d15; }
+    .book[data-paper="grid"]  .paper { background: #242017; }
+    .book[data-paper="kraft"] .paper { background: #2e2417; }
+  }
+  /* 纤维 + 页缘 + 书脊 */
+  .grain { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: multiply; opacity: 0.7;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/><feColorMatrix type='saturate' values='0'/></filter><rect width='200' height='200' filter='url(%23f)' opacity='0.05'/></svg>"); }
+  .edge { position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 70px rgba(60,46,24,0.09); }
+  .spine { position: absolute; top: 0; bottom: 0; left: 50%; width: 64px; transform: translateX(-50%); pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(40,34,24,0.075) 44%, rgba(40,34,24,0.11) 50%, rgba(40,34,24,0.075) 56%, transparent); }
+
+  /* 首次提示:唯一的一句话,放了东西就消失 */
+  .hint {
+    position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none;
+    font-size: 12px; letter-spacing: 0.5em; color: var(--faint); opacity: 0.6;
+  }
+
+  /* ── 页上的元素 ── */
+  .item { position: absolute; left: 0; top: 0; transform-origin: center; cursor: grab; }
+  .item:active { cursor: grabbing; }
+  .item .body { position: relative; }
+  .item img { display: block; pointer-events: none; }
+  /* 相框 */
+  .item[data-frame="none"]  img { box-shadow: 0 10px 26px var(--shadow); }
+  .item[data-frame="white"] .body { padding: 5px; background: #fcfaf4; box-shadow: 0 10px 26px var(--shadow); }
+  .item[data-frame="polaroid"] .body { padding: 9px 9px 40px; background: linear-gradient(172deg, #fdfcf8, #f0ede3 92%); box-shadow: 0 12px 30px var(--shadow); }
+  /* 胶带(贴在元素上) */
+  .ptape {
+    position: absolute; width: 88px; height: 24px; top: -12px; left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='40'><filter id='w'><feTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='2'/><feColorMatrix type='saturate' values='0'/></filter><rect width='120' height='40' filter='url(%23w)' opacity='0.15'/></svg>"), rgba(242, 236, 220, 0.72);
+    box-shadow: 0 1px 3px rgba(40,34,24,0.16);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 3px, #000 calc(100% - 3px), transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 3px, #000 calc(100% - 3px), transparent 100%);
+    pointer-events: none;
+  }
+  /* 独立胶带条 */
+  .item .tape-solo {
+    width: 128px; height: 30px;
+    box-shadow: 0 2px 5px rgba(40,34,24,0.18);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4px, #000 calc(100% - 4px), transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 4px, #000 calc(100% - 4px), transparent 100%);
+  }
+  .tape-solo.t0 { background: rgba(240, 233, 214, 0.78); }
+  .tape-solo.t1 { background: repeating-linear-gradient(45deg, rgba(165,56,31,0.34) 0 6px, rgba(165,56,31,0.18) 6px 12px), rgba(244,238,224,0.6); }
+  .tape-solo.t2 { background: repeating-linear-gradient(0deg, rgba(80,70,50,0.22) 0 4px, transparent 4px 8px), rgba(240,234,218,0.65); }
+  /* 言印 */
+  .item .seal {
+    width: 58px; height: 58px; display: grid; place-items: center;
+    background: radial-gradient(80% 80% at 30% 25%, rgba(255,255,255,0.15), transparent 60%), var(--seal);
+    color: #f6ecd9; font-family: "Songti SC", Georgia, serif; font-size: 31px; font-weight: 700;
+    border-radius: 7px; opacity: 0.92;
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.15' numOctaves='3' seed='4'/><feComponentTransfer><feFuncA type='discrete' tableValues='0.7 0.9 1 1 1 1 1 1 1 1'/></feComponentTransfer></filter><rect width='80' height='80' fill='black' filter='url(%23s)'/></svg>");
+            mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.15' numOctaves='3' seed='4'/><feComponentTransfer><feFuncA type='discrete' tableValues='0.7 0.9 1 1 1 1 1 1 1 1'/></feComponentTransfer></filter><rect width='80' height='80' fill='black' filter='url(%23s)'/></svg>");
+    -webkit-mask-size: cover; mask-size: cover;
+  }
+
+  /* 选中态 */
+  .item.sel .body { outline: 1px solid rgba(120, 100, 60, 0.55); outline-offset: 3px; }
+  .handle {
+    position: absolute; width: 14px; height: 14px; border-radius: 50%;
+    background: #f8f2e4; border: 1px solid rgba(120,100,60,0.7);
+    box-shadow: 0 2px 6px var(--shadow); z-index: 5;
+  }
+  .h-scale { right: -9px; bottom: -9px; cursor: nwse-resize; }
+  .h-rot { left: 50%; top: -30px; transform: translateX(-50%); cursor: grab; }
+  .h-rot::before { content: ""; position: absolute; left: 50%; top: 13px; width: 1px; height: 16px; background: rgba(120,100,60,0.5); }
+
+  /* 选中元素的小操作条(屏幕空间) */
+  .itembar {
+    position: fixed; z-index: 50; display: none; gap: 2px;
+    background: rgba(30, 26, 20, 0.88); border-radius: 10px; padding: 4px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px var(--shadow);
+  }
+  .itembar button {
+    border: 0; background: transparent; color: #ede5d2;
+    font-size: 12px; padding: 6px 11px; border-radius: 7px; cursor: pointer;
+    font-family: inherit; letter-spacing: 0.05em;
+  }
+  .itembar button:hover { background: rgba(255,255,255,0.12); }
+  .itembar .del { color: #e8927c; }
+
+  /* ── 工具抽屉 ── */
+  .drawer {
+    position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 40;
+    display: flex; gap: 4px; padding: 6px;
+    background: rgba(30, 26, 20, 0.88);
+    border-radius: 14px; backdrop-filter: blur(12px);
+    box-shadow: 0 12px 34px var(--shadow);
+  }
+  .drawer button {
+    border: 0; background: transparent; color: #ede5d2; cursor: pointer;
+    font-family: inherit; font-size: 13px; letter-spacing: 0.1em;
+    padding: 9px 16px; border-radius: 9px;
+    display: flex; flex-direction: column; align-items: center; gap: 1px;
+  }
+  .drawer button small { font-size: 9px; color: rgba(237,229,210,0.45); letter-spacing: 0.15em; }
+  .drawer button:hover { background: rgba(255,255,255,0.1); }
+  input[type="file"] { display: none; }
+
+  /* 盖印/贴带模式下的光标提示 */
+  body.placing .book { cursor: crosshair; }
+</style>
+
+<div class="top">
+  <span class="yan">言</span>
+  <span class="date" id="date"></span>
+</div>
+
+<div class="stage">
+  <div class="book" id="book" data-paper="laid">
+    <div class="paper"></div>
+    <div class="grain"></div>
+    <div class="spine"></div>
+    <div class="edge"></div>
+    <div class="hint" id="hint">空　白　等　你</div>
+  </div>
+</div>
+
+<div class="itembar" id="itembar">
+  <button id="b-frame">框</button>
+  <button id="b-tape">带</button>
+  <button id="b-front">上</button>
+  <button class="del" id="b-del">去</button>
+</div>
+
+<div class="drawer">
+  <button id="t-add">传<small>照片</small></button>
+  <button id="t-seal">印<small>言</small></button>
+  <button id="t-tape">带<small>胶带</small></button>
+  <button id="t-paper">纸<small id="papername">帘</small></button>
+</div>
+<input type="file" id="file" accept="image/*" multiple>
+
+<script>
+(() => {
+  const book = document.getElementById('book');
+  const hint = document.getElementById('hint');
+  const itembar = document.getElementById('itembar');
+  const fileInput = document.getElementById('file');
+  const KEY = 'yan-journal-proto-v1';
+  const PAPERS = [['laid','帘'],['plain','素'],['grid','格'],['kraft','牛皮']];
+  const FRAMES = ['none','white','polaroid'];
+
+  // 日期
+  const now = new Date();
+  const cn = '〇一二三四五六七八九十'.split('');
+  const mm = now.getMonth()+1, dd = now.getDate();
+  const num = n => n<=10 ? cn[n] : n<20 ? '十'+(n%10? cn[n%10]:'') : cn[Math.floor(n/10)]+'十'+(n%10? cn[n%10]:'');
+  document.getElementById('date').textContent = `${num(mm)}月${num(dd)}日`;
+
+  let state = { paper: 'laid', items: [] };
+  let sel = null;          // 选中的 item id
+  let placing = null;      // 'seal' | 'tape' | null
+  let zTop = 10;
+
+  // ── 存取 ──
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} };
+  const load = () => { try { const raw = localStorage.getItem(KEY); if (raw) state = JSON.parse(raw); } catch(e){} };
+
+  // ── 渲染 ──
+  const el = id => book.querySelector(`[data-id="${id}"]`);
+  function renderItem(it) {
+    let node = el(it.id);
+    if (!node) {
+      node = document.createElement('div');
+      node.className = 'item';
+      node.dataset.id = it.id;
+      const body = document.createElement('div');
+      body.className = 'body';
+      if (it.type === 'photo') {
+        const img = new Image(); img.src = it.src; img.draggable = false;
+        img.style.width = it.w + 'px';
+        body.appendChild(img);
+      } else if (it.type === 'seal') {
+        const s = document.createElement('div'); s.className = 'seal'; s.textContent = '言';
+        body.appendChild(s);
+      } else if (it.type === 'tape') {
+        const t = document.createElement('div'); t.className = 'tape-solo t' + (it.variant||0);
+        body.appendChild(t);
+      }
+      node.appendChild(body);
+      book.appendChild(node);
+      bindItem(node);
+    }
+    node.dataset.frame = it.type === 'photo' ? it.frame : 'none';
+    node.style.zIndex = it.z;
+    node.style.transform = `translate(${it.x}px, ${it.y}px) rotate(${it.r}deg) scale(${it.s})`;
+    // 元素上的胶带
+    const body = node.firstChild;
+    const had = body.querySelector('.ptape');
+    if (it.tape && !had) { const p = document.createElement('div'); p.className = 'ptape'; body.appendChild(p); }
+    if (!it.tape && had) had.remove();
+    node.classList.toggle('sel', sel === it.id);
+    // 手柄
+    node.querySelectorAll('.handle').forEach(h => h.remove());
+    if (sel === it.id) {
+      const hs = document.createElement('div'); hs.className = 'handle h-scale'; hs.dataset.h = 'scale';
+      const hr = document.createElement('div'); hr.className = 'handle h-rot'; hr.dataset.h = 'rot';
+      const inv = 1 / it.s;
+      hs.style.transform = `scale(${inv})`; hr.style.transform = `translateX(-50%) scale(${inv})`;
+      node.appendChild(hs); node.appendChild(hr);
+    }
+  }
+  function renderAll() {
+    book.dataset.paper = state.paper;
+    document.getElementById('papername').textContent = (PAPERS.find(p => p[0]===state.paper)||PAPERS[0])[1];
+    state.items.forEach(renderItem);
+    hint.style.display = state.items.length ? 'none' : '';
+    placeItembar();
+  }
+  function placeItembar() {
+    const it = state.items.find(i => i.id === sel);
+    if (!it) { itembar.style.display = 'none'; return; }
+    const node = el(it.id); if (!node) return;
+    const r = node.getBoundingClientRect();
+    itembar.style.display = 'flex';
+    // 照片才有「框/带」
+    itembar.querySelector('#b-frame').style.display = it.type === 'photo' ? '' : 'none';
+    itembar.querySelector('#b-tape').style.display = it.type === 'photo' ? '' : 'none';
+    const w = itembar.offsetWidth || 150;
+    itembar.style.left = Math.min(Math.max(r.left + r.width/2 - w/2, 8), innerWidth - w - 8) + 'px';
+    itembar.style.top = Math.max(r.top - 48, 8) + 'px';
+  }
+
+  // ── 交互 ──
+  function bindItem(node) {
+    node.addEventListener('pointerdown', e => {
+      const id = node.dataset.id;
+      const it = state.items.find(i => i.id === id);
+      if (!it) return;
+      e.stopPropagation();
+      sel = id; renderAll();
+      const h = e.target.dataset?.h;
+      const rect = book.getBoundingClientRect();
+      const nrect = node.getBoundingClientRect();
+      const cx = nrect.left + nrect.width/2, cy = nrect.top + nrect.height/2;
+      const start = { x: e.clientX, y: e.clientY, ix: it.x, iy: it.y, r: it.r, s: it.s,
+        a: Math.atan2(e.clientY - cy, e.clientX - cx), d: Math.hypot(e.clientX - cx, e.clientY - cy) };
+      node.setPointerCapture(e.pointerId);
+      const move = ev => {
+        if (h === 'rot') {
+          const a = Math.atan2(ev.clientY - cy, ev.clientX - cx);
+          it.r = start.r + (a - start.a) * 180 / Math.PI;
+        } else if (h === 'scale') {
+          const d = Math.hypot(ev.clientX - cx, ev.clientY - cy);
+          it.s = Math.min(4, Math.max(0.18, start.s * d / start.d));
+        } else {
+          it.x = start.ix + (ev.clientX - start.x);
+          it.y = start.iy + (ev.clientY - start.y);
+        }
+        renderItem(it); placeItembar();
+      };
+      const up = () => {
+        node.removeEventListener('pointermove', move);
+        node.removeEventListener('pointerup', up);
+        save();
+      };
+      node.addEventListener('pointermove', move);
+      node.addEventListener('pointerup', up);
+    });
+    node.addEventListener('wheel', e => {
+      const it = state.items.find(i => i.id === node.dataset.id);
+      if (!it || sel !== it.id) return;
+      e.preventDefault();
+      it.s = Math.min(4, Math.max(0.18, it.s * (1 - e.deltaY * 0.0012)));
+      renderItem(it); placeItembar(); save();
+    }, { passive: false });
+  }
+
+  // 点纸面:放印/胶带,或取消选中
+  book.addEventListener('pointerdown', e => {
+    if (e.target.closest('.item')) return;
+    const rect = book.getBoundingClientRect();
+    const x = e.clientX - rect.left, y = e.clientY - rect.top;
+    if (placing) {
+      const it = placing === 'seal'
+        ? { id: 'i'+Date.now(), type: 'seal', x: x-29, y: y-29, r: (Math.random()*10-5), s: 1, z: ++zTop }
+        : { id: 'i'+Date.now(), type: 'tape', variant: Math.floor(Math.random()*3), x: x-64, y: y-15, r: (Math.random()*14-7), s: 1, z: ++zTop };
+      state.items.push(it);
+      placing = null; document.body.classList.remove('placing');
+      sel = it.id; renderAll(); save();
+      return;
+    }
+    sel = null; renderAll();
+  });
+
+  // 双击空白纸面 = 上传
+  book.addEventListener('dblclick', e => {
+    if (!e.target.closest('.item')) fileInput.click();
+  });
+
+  // ── 工具 ──
+  document.getElementById('t-add').onclick = () => fileInput.click();
+  document.getElementById('t-seal').onclick = () => { placing = 'seal'; document.body.classList.add('placing'); };
+  document.getElementById('t-tape').onclick = () => { placing = 'tape'; document.body.classList.add('placing'); };
+  document.getElementById('t-paper').onclick = () => {
+    const i = PAPERS.findIndex(p => p[0] === state.paper);
+    state.paper = PAPERS[(i+1) % PAPERS.length][0];
+    renderAll(); save();
+  };
+
+  fileInput.onchange = async () => {
+    const files = [...fileInput.files]; fileInput.value = '';
+    const rect = book.getBoundingClientRect();
+    for (const f of files) {
+      const src = await shrink(f, 1400);
+      const dim = await imgSize(src);
+      const w = Math.min(300, dim.w);
+      const it = {
+        id: 'i' + Date.now() + Math.random().toString(16).slice(2,6),
+        type: 'photo', src, w,
+        frame: 'none', tape: false,
+        x: rect.width/2 - w/2 + (Math.random()*60-30),
+        y: rect.height/2 - (w*dim.h/dim.w)/2 + (Math.random()*40-20),
+        r: Math.random()*6-3, s: 1, z: ++zTop,
+      };
+      state.items.push(it); sel = it.id;
+    }
+    renderAll(); save();
+  };
+  const imgSize = src => new Promise(res => { const i = new Image(); i.onload = () => res({ w: i.naturalWidth, h: i.naturalHeight }); i.src = src; });
+  const shrink = (file, max) => new Promise(res => {
+    const fr = new FileReader();
+    fr.onload = () => {
+      const i = new Image();
+      i.onload = () => {
+        const k = Math.min(1, max / Math.max(i.width, i.height));
+        const c = document.createElement('canvas');
+        c.width = i.width * k; c.height = i.height * k;
+        c.getContext('2d').drawImage(i, 0, 0, c.width, c.height);
+        res(c.toDataURL('image/jpeg', 0.86));
+      };
+      i.src = fr.result;
+    };
+    fr.readAsDataURL(file);
+  });
+
+  // ── 选中元素操作条 ──
+  const withSel = fn => { const it = state.items.find(i => i.id === sel); if (it) { fn(it); renderAll(); save(); } };
+  document.getElementById('b-frame').onclick = () => withSel(it => { it.frame = FRAMES[(FRAMES.indexOf(it.frame)+1) % FRAMES.length]; });
+  document.getElementById('b-tape').onclick = () => withSel(it => { it.tape = !it.tape; });
+  document.getElementById('b-front').onclick = () => withSel(it => { it.z = ++zTop; });
+  document.getElementById('b-del').onclick = () => {
+    const it = state.items.find(i => i.id === sel); if (!it) return;
+    el(it.id)?.remove();
+    state.items = state.items.filter(i => i.id !== sel);
+    sel = null; renderAll(); save();
+  };
+  addEventListener('keydown', e => {
+    if ((e.key === 'Backspace' || e.key === 'Delete') && sel) document.getElementById('b-del').onclick();
+    if (e.key === 'Escape') { sel = null; placing = null; document.body.classList.remove('placing'); renderAll(); }
+  });
+  addEventListener('resize', placeItembar);
+
+  // ── 启动 ──
+  load();
+  zTop = Math.max(10, ...state.items.map(i => i.z || 0));
+  renderAll();
+})();
+</script>
