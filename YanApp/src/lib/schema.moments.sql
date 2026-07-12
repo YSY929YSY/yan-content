@@ -99,9 +99,10 @@ create table if not exists journal_items (
   id uuid primary key default gen_random_uuid(),
   user_id uuid references auth.users on delete cascade not null,
   page_id uuid references journal_pages on delete cascade not null,
-  kind text not null check (kind in ('sticker', 'photo', 'polaroid', 'tape', 'badge', 'text')),
-  -- sticker/badge = 派生资产(抠图贴纸/纪念章);photo/polaroid = moment 照片;text 留给未来手写体
-  asset_path text,                         -- Storage 路径(贴纸/照片)
+  kind text not null check (kind in ('cutout', 'scan', 'photo', 'polaroid', 'tape', 'seal', 'stamp', 'badge', 'text', 'ink')),
+  -- 进入路径: cutout=提取抠图(透明背景) · scan=扫描凭证(留原纸) · photo/polaroid=整图上传
+  -- 素材: tape=胶带 · seal=印章 · stamp=邮票框 · badge=AI纪念章 · text=文字/手写体 · ink=涂画笔迹
+  asset_path text,                         -- Storage 路径(资产类元素)
   moment_id uuid references moments on delete set null,  -- 溯源到瞬间,可空
   payload jsonb,                           -- kind 专属数据(如 tape 颜色、未来的文字内容)
   x double precision not null default 0.5, -- 相对坐标 0~1
