@@ -1,38 +1,33 @@
 <meta charset="utf-8">
-<title>言 · 古法手账 概念稿 v2</title>
+<title>言 · 古法手账 概念稿 v3</title>
 <style>
   :root {
-    --paper: #f5f2ec;
-    --page: #fbf8f1;
-    --ink: #17171c;
-    --ink-soft: #6e6a61;
-    --ink-faint: #aaa599;
-    --line: #e4dfd4;
-    --lava: #d4401a;
-    --teal: #2a7a6a;
-    --tape-a: rgba(212, 64, 26, 0.28);
-    --tape-b: rgba(42, 122, 106, 0.26);
-    --grid: rgba(23, 23, 28, 0.045);
+    --paper: #efe9de;
+    --page: #f7f3ea;
+    --ink: #26241f;
+    --ink-soft: #6f695c;
+    --ink-faint: #a49c8c;
+    --line: #ddd5c4;
+    --seal: #b23a22;
+    --ochre: #a67c37;
+    --shadow: rgba(38, 36, 31, 0.16);
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --paper: #141317; --page: #201f24; --ink: #ece8e0; --ink-soft: #a39e93;
-      --ink-faint: #6b675e; --line: #34323a; --lava: #e05a35; --teal: #4da391;
-      --tape-a: rgba(224, 90, 53, 0.35); --tape-b: rgba(77, 163, 145, 0.32);
-      --grid: rgba(236, 232, 224, 0.05);
+      --paper: #17161a; --page: #211f24; --ink: #e9e4d8; --ink-soft: #a29b8c;
+      --ink-faint: #6c665a; --line: #37343b; --seal: #c44a2e; --ochre: #c09a55;
+      --shadow: rgba(0, 0, 0, 0.4);
     }
   }
   :root[data-theme="dark"] {
-    --paper: #141317; --page: #201f24; --ink: #ece8e0; --ink-soft: #a39e93;
-    --ink-faint: #6b675e; --line: #34323a; --lava: #e05a35; --teal: #4da391;
-    --tape-a: rgba(224, 90, 53, 0.35); --tape-b: rgba(77, 163, 145, 0.32);
-    --grid: rgba(236, 232, 224, 0.05);
+    --paper: #17161a; --page: #211f24; --ink: #e9e4d8; --ink-soft: #a29b8c;
+    --ink-faint: #6c665a; --line: #37343b; --seal: #c44a2e; --ochre: #c09a55;
+    --shadow: rgba(0, 0, 0, 0.4);
   }
   :root[data-theme="light"] {
-    --paper: #f5f2ec; --page: #fbf8f1; --ink: #17171c; --ink-soft: #6e6a61;
-    --ink-faint: #aaa599; --line: #e4dfd4; --lava: #d4401a; --teal: #2a7a6a;
-    --tape-a: rgba(212, 64, 26, 0.28); --tape-b: rgba(42, 122, 106, 0.26);
-    --grid: rgba(23, 23, 28, 0.045);
+    --paper: #efe9de; --page: #f7f3ea; --ink: #26241f; --ink-soft: #6f695c;
+    --ink-faint: #a49c8c; --line: #ddd5c4; --seal: #b23a22; --ochre: #a67c37;
+    --shadow: rgba(38, 36, 31, 0.16);
   }
 
   * { box-sizing: border-box; }
@@ -41,126 +36,192 @@
     font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
     line-height: 1.6;
   }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 44px 20px 72px; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 20px 72px; }
 
   header { display: flex; align-items: baseline; gap: 14px; }
-  .mark { font-family: Georgia, "Songti SC", serif; font-size: 30px; letter-spacing: 2px; }
-  .headline { font-size: 15px; font-weight: 600; }
-  .headnote { font-size: 12px; color: var(--ink-soft); margin: 6px 0 36px; }
-  .headnote em { font-style: normal; color: var(--teal); }
+  .mark { font-family: Georgia, "Songti SC", serif; font-size: 28px; letter-spacing: 2px; }
+  .headline { font-size: 14px; font-weight: 600; letter-spacing: 0.04em; }
+  .headnote { font-size: 12px; color: var(--ink-soft); margin: 6px 0 40px; }
+  .headnote em { font-style: normal; color: var(--ochre); }
 
-  /* ── 手账页 ── */
+  /* ── 手账页:纤维纸 ── */
   .journal {
     position: relative;
-    background:
-      linear-gradient(var(--grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
-      var(--page);
-    background-size: 26px 26px, 26px 26px, auto;
+    background-color: var(--page);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix type='saturate' values='0'/></filter><rect width='240' height='240' filter='url(%23n)' opacity='0.055'/></svg>");
     border: 1px solid var(--line);
-    border-radius: 4px;
-    min-height: 560px;
-    box-shadow: 0 1px 0 var(--line), 0 16px 44px rgba(23, 23, 28, 0.08);
+    min-height: 680px;
+    box-shadow:
+      inset 0 0 60px rgba(38, 36, 31, 0.035),
+      0 1px 0 var(--line),
+      0 18px 48px var(--shadow);
     overflow: hidden;
   }
   .journal-date {
-    position: absolute; top: 22px; left: 26px;
+    position: absolute; top: 26px; left: 30px;
+    font-family: Georgia, serif;
+    font-size: 11px; letter-spacing: 0.32em; color: var(--ink-faint);
+  }
+  .journal-date-zh {
+    position: absolute; top: 26px; right: 30px;
     font-size: 11px; letter-spacing: 0.2em; color: var(--ink-faint);
+    writing-mode: vertical-rl;
   }
 
-  /* 拍立得 */
+  /* ── 拍立得 ── */
   .polaroid {
-    position: absolute; top: 60px; left: 36px;
-    width: 240px; padding: 10px 10px 40px;
-    background: #fff; border: 1px solid rgba(0,0,0,0.06);
-    box-shadow: 0 8px 22px rgba(23,23,28,0.16);
-    transform: rotate(-3.5deg);
+    position: absolute; top: 76px; left: 44px;
+    width: 252px; padding: 11px 11px 46px;
+    background: linear-gradient(172deg, #fdfdfb, #f1efe8 90%);
+    box-shadow:
+      0 1px 2px rgba(38,36,31,0.1),
+      0 12px 30px var(--shadow);
+    transform: rotate(-2.4deg);
   }
-  :root[data-theme="dark"] .polaroid, .dark-polaroid { background: #efece4; }
   .polaroid .photo {
-    height: 210px;
+    height: 224px; position: relative; overflow: hidden;
     background:
-      radial-gradient(110% 80% at 72% 18%, #d8cfc0 0%, transparent 50%),
-      linear-gradient(200deg, #8a9aa4, #3d4a52 75%);
+      radial-gradient(90% 60% at 78% 12%, rgba(244, 235, 214, 0.75) 0%, transparent 55%),
+      linear-gradient(196deg, #aeb9bd 0%, #79878e 38%, #40494e 78%, #2c3236 100%);
+  }
+  /* 玻璃高光 */
+  .polaroid .photo::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(115deg, rgba(255,255,255,0.16) 0%, transparent 28%, transparent 74%, rgba(255,255,255,0.05) 100%);
+  }
+  /* 颗粒 */
+  .polaroid .photo::before {
+    content: ""; position: absolute; inset: 0; z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.9'/><feColorMatrix type='saturate' values='0'/></filter><rect width='160' height='160' filter='url(%23g)' opacity='0.09'/></svg>");
   }
   .polaroid .cap {
-    position: absolute; left: 0; right: 0; bottom: 10px;
-    text-align: center; font-size: 11px; color: #8b8578;
-    font-family: Georgia, "Songti SC", serif; font-style: italic;
-  }
-  .tape-strip {
-    position: absolute; width: 92px; height: 26px;
-    background: var(--tape-a);
-    backdrop-filter: blur(1px);
-    top: -12px; left: 50%; transform: translateX(-50%) rotate(2deg);
+    position: absolute; left: 0; right: 0; bottom: 13px;
+    text-align: center;
+    font-family: Georgia, serif; font-style: italic;
+    font-size: 12.5px; letter-spacing: 0.05em; color: #77705f;
   }
 
-  /* 贴纸:白色模切描边由 SVG paint-order 实现 */
-  .sticker { position: absolute; filter: drop-shadow(0 5px 12px rgba(23,23,28,0.22)); }
-  .sticker.pigeon { top: 96px; right: 52px; transform: rotate(7deg); }
-  .sticker.phonebox { top: 296px; right: 120px; transform: rotate(-6deg); }
-  .sticker.bean { top: 330px; left: 330px; transform: rotate(-12deg); }
+  /* 和纸胶带:半透、纤维、撕边 */
+  .washi {
+    position: absolute; width: 96px; height: 24px;
+    top: -11px; left: 50%; transform: translateX(-50%) rotate(1.6deg);
+    background:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='40'><filter id='w'><feTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='2'/><feColorMatrix type='saturate' values='0'/></filter><rect width='120' height='40' filter='url(%23w)' opacity='0.16'/></svg>"),
+      rgba(240, 234, 219, 0.72);
+    box-shadow: 0 1px 3px rgba(38,36,31,0.14);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 3px, #000 calc(100% - 3px), transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 3px, #000 calc(100% - 3px), transparent 100%);
+  }
 
-  /* 捡来的小东西:票根 */
-  .stub {
-    position: absolute; bottom: 64px; right: 40px;
-    width: 168px; padding: 10px 12px;
-    background: #f4e9d2; color: #6b5b3e;
-    border: 1px dashed #c8b58e; border-radius: 3px;
+  /* ── 卷筒邮票:上下齿孔 ── */
+  .stamp {
+    position: absolute; top: 88px; right: 64px;
+    transform: rotate(2.8deg);
+    filter: drop-shadow(0 6px 14px var(--shadow));
+  }
+
+  /* ── 印章「言」 ── */
+  .seal {
+    position: absolute; top: 236px; right: 156px;
+    width: 54px; height: 54px;
+    display: grid; place-items: center;
+    background:
+      radial-gradient(80% 80% at 30% 25%, rgba(255,255,255,0.16), transparent 60%),
+      var(--seal);
+    color: #f8f1e4;
+    font-family: "Songti SC", Georgia, serif;
+    font-size: 30px; font-weight: 700;
+    border-radius: 6px;
+    transform: rotate(-7deg);
+    opacity: 0.93;
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.16' numOctaves='3'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='discrete' tableValues='0.75 0.9 1 1 1 1 1 1 1 1'/></feComponentTransfer></filter><rect width='80' height='80' fill='black' filter='url(%23s)'/></svg>");
+            mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.16' numOctaves='3'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='discrete' tableValues='0.75 0.9 1 1 1 1 1 1 1 1'/></feComponentTransfer></filter><rect width='80' height='80' fill='black' filter='url(%23s)'/></svg>");
+    -webkit-mask-size: cover; mask-size: cover;
+  }
+
+  /* ── 抠图贴纸:照片质感的有机形 + 白色模切边 ── */
+  .cutout {
+    position: absolute; top: 356px; right: 58px;
+    width: 128px; height: 108px;
+    border-radius: 58% 42% 55% 45% / 52% 48% 62% 38%;
+    border: 6px solid #fdfdfb;
+    background:
+      radial-gradient(70% 55% at 32% 28%, #d7dade 0%, transparent 55%),
+      radial-gradient(85% 80% at 78% 78%, #3f454c 0%, transparent 62%),
+      linear-gradient(165deg, #9aa2ab, #626a73 80%);
+    box-shadow: 0 10px 24px var(--shadow);
     transform: rotate(4deg);
-    font-size: 10px; letter-spacing: 0.12em;
-    box-shadow: 0 6px 16px rgba(23,23,28,0.12);
   }
-  .stub b { display: block; font-size: 12px; letter-spacing: 0.06em; margin-bottom: 2px; }
+  .cutout-label {
+    position: absolute; top: 470px; right: 66px;
+    font-size: 10px; letter-spacing: 0.18em; color: var(--ink-faint);
+    transform: rotate(0deg);
+  }
 
-  /* 留给手写的纸片:空的,这是给你的 */
-  .note-scrap {
-    position: absolute; bottom: 56px; left: 40px;
-    width: 190px; height: 96px;
-    background: var(--page);
-    border: 1px solid var(--line);
-    box-shadow: 0 5px 14px rgba(23,23,28,0.1);
-    transform: rotate(1.5deg);
-    background-image: repeating-linear-gradient(transparent, transparent 22px, var(--line) 23px);
+  /* ── 票根:打孔 + 条码 ── */
+  .stub {
+    position: absolute; bottom: 76px; right: 44px;
+    width: 208px; padding: 13px 18px 12px;
+    background: linear-gradient(174deg, #f6efdd, #ece2c8);
+    color: #6e6146;
+    transform: rotate(-2.6deg);
+    box-shadow: 0 8px 20px var(--shadow);
+    -webkit-mask-image: radial-gradient(circle 7px at 0 50%, transparent 97%, #000 100%), radial-gradient(circle 7px at 100% 50%, transparent 97%, #000 100%);
+            mask-image: radial-gradient(circle 7px at 0 50%, transparent 97%, #000 100%), radial-gradient(circle 7px at 100% 50%, transparent 97%, #000 100%);
+    -webkit-mask-composite: source-in; mask-composite: intersect;
   }
-  .note-scrap .tape-strip { background: var(--tape-b); width: 70px; }
+  .stub .t { font-family: Georgia, serif; font-size: 12px; letter-spacing: 0.22em; }
+  .stub .d { font-size: 9.5px; letter-spacing: 0.18em; color: #97876a; margin-top: 2px; }
+  .stub .barcode {
+    margin-top: 9px; height: 18px;
+    background: repeating-linear-gradient(90deg, #6e6146 0 2px, transparent 2px 4px, #6e6146 4px 5px, transparent 5px 9px, #6e6146 9px 12px, transparent 12px 14px);
+    opacity: 0.75;
+  }
+
+  /* ── 留给手写的纸片 ── */
+  .note-scrap {
+    position: absolute; bottom: 72px; left: 44px;
+    width: 216px; height: 110px;
+    background:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/><feColorMatrix type='saturate' values='0'/></filter><rect width='200' height='200' filter='url(%23p)' opacity='0.05'/></svg>"),
+      linear-gradient(176deg, #fbf8f0, #f2ecdd);
+    box-shadow: 0 6px 18px var(--shadow);
+    transform: rotate(1.2deg);
+  }
+  .note-scrap .washi { width: 74px; top: -10px; transform: translateX(-50%) rotate(-2deg); }
   .note-scrap .hint {
     position: absolute; inset: 0; display: grid; place-items: center;
-    font-size: 10px; color: var(--ink-faint); letter-spacing: 0.15em;
+    font-size: 10px; color: #b3aa97; letter-spacing: 0.3em;
   }
 
-  /* 素材盘 */
+  /* ── 素材盘 ── */
   .tray {
-    margin-top: 26px;
-    border: 1px solid var(--line); border-radius: 4px;
-    background: var(--page);
-    padding: 14px 16px;
-    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    margin-top: 28px;
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+    display: flex; align-items: baseline; gap: 22px; flex-wrap: wrap;
   }
-  .tray-label { font-size: 11px; letter-spacing: 0.18em; color: var(--ink-faint); margin-right: 4px; }
-  .chip {
-    font-size: 12px; color: var(--ink-soft);
-    border: 1px solid var(--line); border-radius: 999px;
-    padding: 6px 14px; background: var(--paper);
-  }
-  .chip.hot { color: var(--lava); border-color: color-mix(in srgb, var(--lava) 40%, var(--line)); }
+  .tray-label { font-size: 10px; letter-spacing: 0.28em; color: var(--ink-faint); }
+  .tray-item { font-size: 12px; color: var(--ink-soft); letter-spacing: 0.06em; }
+  .tray-item.hot { color: var(--ochre); border-bottom: 1px solid var(--ochre); padding-bottom: 2px; }
 
   .principles {
-    margin-top: 36px; padding-top: 26px; border-top: 1px solid var(--line);
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    margin-top: 40px; padding-top: 26px; border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px;
   }
-  .principle h3 { font-size: 12px; letter-spacing: 0.14em; margin: 0 0 6px; }
+  .principle h3 { font-size: 12px; letter-spacing: 0.16em; margin: 0 0 6px; }
   .principle p { font-size: 12px; color: var(--ink-soft); margin: 0; }
 
   @media (max-width: 640px) {
-    .journal { min-height: 660px; }
-    .polaroid { width: 200px; left: 20px; }
-    .polaroid .photo { height: 175px; }
-    .sticker.pigeon { right: 16px; }
-    .sticker.phonebox { right: 30px; top: 330px; }
-    .sticker.bean { left: 240px; top: 500px; }
-    .stub { right: 20px; }
-    .note-scrap { left: 20px; }
+    .journal { min-height: 780px; }
+    .polaroid { width: 216px; left: 22px; }
+    .polaroid .photo { height: 192px; }
+    .stamp { right: 24px; }
+    .seal { right: 116px; }
+    .cutout { right: 26px; top: 380px; }
+    .cutout-label { right: 40px; top: 494px; }
+    .stub { right: 22px; }
+    .note-scrap { left: 22px; }
     .principles { grid-template-columns: 1fr; }
   }
 </style>
@@ -168,96 +229,89 @@
 <div class="wrap">
   <header>
     <span class="mark">言</span>
-    <span class="headline">古法手账 · 概念稿 v2</span>
+    <span class="headline">古法手账 · 概念稿 v3</span>
   </header>
-  <p class="headnote"><em>言不排版,言备料。</em>空白的页 + 你的贴纸,拼拼贴贴画画,手是你的。</p>
+  <p class="headnote"><em>言不排版,言备料。</em>纸、邮票、印章、票根——材质给质感,拼贴的手是你的。</p>
 
   <div class="journal">
-    <span class="journal-date">七月十二日 · 伦敦</span>
+    <span class="journal-date">JUL 12 &nbsp;·&nbsp; LONDON</span>
+    <span class="journal-date-zh">七月十二日</span>
 
-    <!-- 拍立得:原图的一种相框材质 -->
+    <!-- 拍立得 -->
     <figure class="polaroid" style="margin:0">
-      <span class="tape-strip"></span>
+      <span class="washi"></span>
       <div class="photo"></div>
       <figcaption class="cap">Cecil Court, 40 min</figcaption>
     </figure>
 
-    <!-- 贴纸一:胖鸽子(抠图贴纸,白色模切描边) -->
-    <svg class="sticker pigeon" width="120" height="104" viewBox="0 0 120 104" role="img" aria-label="胖鸽子贴纸">
-      <g stroke="#fff" stroke-width="10" stroke-linejoin="round" paint-order="stroke" fill="none">
-        <ellipse cx="58" cy="62" rx="38" ry="28" fill="#8d97a5"/>
-      </g>
-      <ellipse cx="58" cy="62" rx="38" ry="28" fill="#8d97a5"/>
-      <path d="M34 58 C30 40 44 28 58 30 C60 22 72 20 76 28 L90 34 L78 40 C82 52 76 62 66 66 Z" fill="#a8b1bd" stroke="#fff" stroke-width="10" stroke-linejoin="round" paint-order="stroke"/>
-      <circle cx="74" cy="33" r="2.6" fill="#17171c"/>
-      <path d="M88 33 L96 36 L88 39 Z" fill="#e8a13c" stroke="#fff" stroke-width="10" stroke-linejoin="round" paint-order="stroke"/>
-      <path d="M88 33 L96 36 L88 39 Z" fill="#e8a13c"/>
-      <path d="M40 60 C50 52 66 52 78 58 C70 66 50 68 40 60 Z" fill="#77808f"/>
-      <path d="M50 88 L50 96 M46 96 L54 96 M66 88 L66 96 M62 96 L70 96" stroke="#c96f2e" stroke-width="3" stroke-linecap="round"/>
+    <!-- 卷筒邮票:上下齿孔,内为风景色 -->
+    <svg class="stamp" width="118" height="150" viewBox="0 0 118 150" role="img" aria-label="纪念邮票">
+      <defs>
+        <mask id="perf">
+          <rect x="0" y="0" width="118" height="150" fill="white"/>
+          <circle cx="7" cy="0" r="5.5" fill="black"/><circle cx="26" cy="0" r="5.5" fill="black"/>
+          <circle cx="45" cy="0" r="5.5" fill="black"/><circle cx="64" cy="0" r="5.5" fill="black"/>
+          <circle cx="83" cy="0" r="5.5" fill="black"/><circle cx="102" cy="0" r="5.5" fill="black"/>
+          <circle cx="7" cy="150" r="5.5" fill="black"/><circle cx="26" cy="150" r="5.5" fill="black"/>
+          <circle cx="45" cy="150" r="5.5" fill="black"/><circle cx="64" cy="150" r="5.5" fill="black"/>
+          <circle cx="83" cy="150" r="5.5" fill="black"/><circle cx="102" cy="150" r="5.5" fill="black"/>
+        </mask>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#d8cba9"/>
+          <stop offset="0.45" stop-color="#a99f83"/>
+          <stop offset="0.72" stop-color="#5f6657"/>
+          <stop offset="1" stop-color="#3a4038"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="118" height="150" fill="#f6f1e3" mask="url(#perf)"/>
+      <rect x="10" y="12" width="98" height="106" fill="url(#sky)"/>
+      <rect x="10" y="12" width="98" height="106" fill="none" stroke="#8e846b" stroke-width="0.8" opacity="0.6"/>
+      <text x="59" y="136" text-anchor="middle" font-size="8" letter-spacing="1.6" fill="#7d735a" font-family="Georgia, serif">IRELAND · TÜRKIYE</text>
+      <text x="96" y="30" text-anchor="end" font-size="13" fill="#f3ecd9" font-family="Georgia, serif" font-style="italic">1st</text>
     </svg>
 
-    <!-- 贴纸二:红色电话亭(风格化纪念章) -->
-    <svg class="sticker phonebox" width="88" height="130" viewBox="0 0 88 130" role="img" aria-label="伦敦电话亭纪念章">
-      <g stroke="#fff" stroke-width="9" stroke-linejoin="round" paint-order="stroke">
-        <rect x="22" y="14" width="44" height="92" rx="4" fill="#c8361c"/>
-      </g>
-      <rect x="22" y="14" width="44" height="92" rx="4" fill="#c8361c"/>
-      <path d="M20 14 L44 6 L68 14 Z" fill="#a82a14" stroke="#fff" stroke-width="9" stroke-linejoin="round" paint-order="stroke"/>
-      <path d="M20 14 L44 6 L68 14 Z" fill="#a82a14"/>
-      <rect x="30" y="26" width="28" height="10" rx="2" fill="#f2e8d8"/>
-      <rect x="30" y="42" width="12" height="14" fill="#f2e8d8" opacity="0.85"/>
-      <rect x="46" y="42" width="12" height="14" fill="#f2e8d8" opacity="0.85"/>
-      <rect x="30" y="60" width="12" height="14" fill="#f2e8d8" opacity="0.85"/>
-      <rect x="46" y="60" width="12" height="14" fill="#f2e8d8" opacity="0.85"/>
-      <rect x="16" y="106" width="56" height="14" rx="7" fill="#f2e8d8" stroke="#fff" stroke-width="9" paint-order="stroke"/>
-      <rect x="16" y="106" width="56" height="14" rx="7" fill="#f2e8d8"/>
-      <text x="44" y="116" text-anchor="middle" font-size="8" letter-spacing="1.5" fill="#8a4a2c" font-family="Georgia, serif">LONDON</text>
-    </svg>
+    <!-- 印章 -->
+    <div class="seal">言</div>
 
-    <!-- 贴纸三:一颗咖啡豆 -->
-    <svg class="sticker bean" width="64" height="56" viewBox="0 0 64 56" role="img" aria-label="咖啡豆贴纸">
-      <g stroke="#fff" stroke-width="9" stroke-linejoin="round" paint-order="stroke">
-        <ellipse cx="32" cy="28" rx="20" ry="15" fill="#6f4a2f" transform="rotate(-18 32 28)"/>
-      </g>
-      <ellipse cx="32" cy="28" rx="20" ry="15" fill="#6f4a2f" transform="rotate(-18 32 28)"/>
-      <path d="M18 36 C26 28 38 28 46 20" stroke="#4a2f1c" stroke-width="3" fill="none" stroke-linecap="round"/>
-    </svg>
+    <!-- 抠图贴纸:照片主体 → 白边模切(概念示意,真实版即用户照片的主体) -->
+    <div class="cutout"></div>
+    <span class="cutout-label">提取 · 鸽子,National Gallery 台阶</span>
 
-    <!-- 捡来的小东西:票根 -->
+    <!-- 票根 -->
     <div class="stub">
-      <b>NATIONAL GALLERY</b>
-      ADMIT ONE · 12 JUL 2026
+      <div class="t">NATIONAL GALLERY</div>
+      <div class="d">ADMIT ONE · 12 JUL 2026</div>
+      <div class="barcode"></div>
     </div>
 
-    <!-- 留白的纸片:写字功能后续以手写体加入 -->
+    <!-- 留给手写的纸片 -->
     <div class="note-scrap">
-      <span class="tape-strip"></span>
+      <span class="washi"></span>
       <span class="hint">这里留给你的字</span>
     </div>
   </div>
 
-  <!-- 素材盘 -->
   <div class="tray">
     <span class="tray-label">素材盘</span>
-    <span class="chip hot">提取景点 → 贴纸</span>
-    <span class="chip">我的照片</span>
-    <span class="chip">拍立得框</span>
-    <span class="chip">胶带</span>
-    <span class="chip">纪念章</span>
+    <span class="tray-item hot">提取景点 → 贴纸</span>
+    <span class="tray-item">拍立得</span>
+    <span class="tray-item">邮票</span>
+    <span class="tray-item">印章</span>
+    <span class="tray-item">和纸胶带</span>
   </div>
 
   <section class="principles">
     <div class="principle">
-      <h3>提取景点</h3>
-      <p>照片里的主体抠成白边贴纸——一颗咖啡豆、一只胖鸽子都值得。再进一档:AI 精炼成纪念章,一个瞬间一枚。</p>
+      <h3>材质给质感</h3>
+      <p>纤维纸、齿孔、钤痕、打孔票根——工艺细节撑高级感,不靠卡通插画。贴纸永远来自你的照片,不是画出来的。</p>
     </div>
     <div class="principle">
       <h3>言备料,你拼贴</h3>
-      <p>系统只准备贴纸、相框、胶带,不替你排一个字。信息密度来自你的手,不来自模板。</p>
+      <p>系统只递给你邮票、印章、相框、胶带。页面怎么排,一个字都不替你决定。</p>
     </div>
     <div class="principle">
       <h3>页是创作,永久保护</h3>
-      <p>每一页的每个元素和位置都按采集层同级存档。翻书只用来翻你拼好的页。</p>
+      <p>每页每个元素的位置和角度按采集层同级存档。翻书只翻你拼好的页。</p>
     </div>
   </section>
 </div>
