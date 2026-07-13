@@ -1,261 +1,335 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>言 · 手账</title>
+<title>手账</title>
 <style>
   :root {
-    --room: #e5ddcd;
-    --ink: #2b2620;
-    --faint: #a99d86;
-    --seal: #a5381f;
-    --shadow: rgba(40, 34, 24, 0.2);
+    --bg: #f3f1ec;          /* 温暖灰白 */
+    --paper: #fcfaf5;       /* 自然纸白 */
+    --ink: #292824;
+    --ink-2: #8d8980;
+    --hair: #e5e1d8;
+    --accent: #7c8b99;      /* 灰蓝,唯一的交互色 */
+    --warm: #b5573f;        /* 朱,极少量 */
+    --sh: rgba(41, 40, 36, 0.07);
   }
   @media (prefers-color-scheme: dark) {
-    :root { --room: #131110; --ink: #e6ddca; --faint: #6f6553; --seal: #c04a2c; --shadow: rgba(0,0,0,0.55); }
+    :root { --bg:#171614; --paper:#201e1a; --ink:#e4e0d6; --ink-2:#97917f; --hair:#33302a; --accent:#8b9aa8; --warm:#c06a52; --sh:rgba(0,0,0,0.35); }
   }
-  :root[data-theme="dark"] { --room: #131110; --ink: #e6ddca; --faint: #6f6553; --seal: #c04a2c; --shadow: rgba(0,0,0,0.55); }
-  :root[data-theme="light"] { --room: #e5ddcd; --ink: #2b2620; --faint: #a99d86; --seal: #a5381f; --shadow: rgba(40,34,24,0.2); }
+  :root[data-theme="dark"] { --bg:#171614; --paper:#201e1a; --ink:#e4e0d6; --ink-2:#97917f; --hair:#33302a; --accent:#8b9aa8; --warm:#c06a52; --sh:rgba(0,0,0,0.35); }
+  :root[data-theme="light"] { --bg:#f3f1ec; --paper:#fcfaf5; --ink:#292824; --ink-2:#8d8980; --hair:#e5e1d8; --accent:#7c8b99; --warm:#b5573f; --sh:rgba(41,40,36,0.07); }
 
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { height: 100%; }
   body {
-    margin: 0; background: var(--room); color: var(--ink);
-    font-family: "PingFang SC", "Hiragino Sans GB", sans-serif;
-    overflow: hidden; user-select: none; -webkit-user-select: none;
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+    user-select: none; -webkit-user-select: none;
+    overflow: hidden;
   }
 
-  /* ── 极简顶栏 ── */
+  /* ── 顶栏:返回 · 日期 · 预览 ── */
   .top {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 40;
-    display: flex; justify-content: space-between; align-items: baseline;
-    padding: 16px 22px 0; pointer-events: none;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 40; height: 52px;
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    padding: 0 8px;
   }
-  .top .yan { font-family: "Songti SC", Georgia, serif; font-size: 19px; letter-spacing: 2px; opacity: 0.55; }
-  .top .date { font-family: Georgia, serif; font-size: 11px; letter-spacing: 0.3em; color: var(--faint); }
+  .top button {
+    border: 0; background: transparent; color: var(--ink-2); cursor: pointer;
+    font-family: inherit; font-size: 13px; padding: 8px 12px; border-radius: 8px;
+  }
+  .top button:hover { color: var(--ink); }
+  .top .back { justify-self: start; font-size: 18px; line-height: 1; }
+  .top .more { justify-self: end; }
+  .date {
+    font-family: Georgia, serif; font-size: 12.5px; letter-spacing: 0.14em;
+    color: var(--ink-2); background: transparent; border: 0; text-align: center;
+    cursor: pointer; padding: 6px 10px; border-radius: 8px; font-variant-numeric: tabular-nums;
+  }
+  .date:hover { color: var(--ink); }
+  input.date-edit {
+    font: inherit; color: var(--ink); background: var(--paper);
+    border: 1px solid var(--hair); border-radius: 8px; outline: none;
+    text-align: center; padding: 5px 9px; width: 130px;
+  }
 
-  /* ── 书 ── */
-  .stage { position: fixed; inset: 0; display: grid; place-items: center; padding: 44px 18px 92px; }
-  .book {
-    position: relative; width: min(1020px, 100%); height: 100%;
-    max-height: 760px;
+  /* ── 纸 ── */
+  .stage {
+    position: fixed; inset: 0; overflow: auto;
+    display: grid; place-items: center;
+    padding: 60px 14px 96px;
+  }
+  .sheet-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .paper {
+    position: relative;
+    width: min(460px, calc(100vw - 28px));
+    aspect-ratio: 1 / 1.35;
+    max-height: calc(100dvh - 170px);
+    background: var(--paper);
     border-radius: 2px;
-    box-shadow: 0 2px 3px var(--shadow), 0 30px 70px var(--shadow);
+    box-shadow: 0 0 0 1px var(--sh), 0 10px 30px -12px var(--sh);
     overflow: hidden;
     touch-action: none;
   }
-  .paper { position: absolute; inset: 0; }
-  /* 纸样 */
-  .book[data-paper="plain"] .paper { background: radial-gradient(120% 90% at 25% 15%, #f6eedd 0%, transparent 55%), radial-gradient(110% 100% at 80% 90%, #e6d9bf 0%, transparent 60%), #f0e6d2; }
-  .book[data-paper="laid"]  .paper { background: radial-gradient(120% 90% at 25% 15%, #f6eedd 0%, transparent 55%), radial-gradient(110% 100% at 80% 90%, #e5d8bd 0%, transparent 60%), #efe5d0; }
-  .book[data-paper="laid"]  .paper::before {
-    content: ""; position: absolute; inset: 0;
-    background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(60,48,28,0.035) 3px 4px), repeating-linear-gradient(90deg, transparent 0 32px, rgba(60,48,28,0.03) 32px 33px);
+  @supports not (aspect-ratio: 1) { .paper { height: 600px; } }
+  /* 颗粒:近看隐约,不可一眼看出 */
+  .paper::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix type='saturate' values='0'/></filter><rect width='240' height='240' filter='url(%23n)' opacity='0.022'/></svg>");
   }
-  .book[data-paper="grid"]  .paper { background: #f2ead9; }
-  .book[data-paper="grid"]  .paper::before {
-    content: ""; position: absolute; inset: 0;
-    background: repeating-linear-gradient(0deg, transparent 0 27px, rgba(60,48,28,0.05) 27px 28px), repeating-linear-gradient(90deg, transparent 0 27px, rgba(60,48,28,0.05) 27px 28px);
+  /* 纸样(可选,默认素) */
+  .paper[data-grid="lines"]::after, .paper[data-grid="grid"]::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
   }
-  .book[data-paper="kraft"] .paper { background: radial-gradient(120% 90% at 25% 15%, #d9c39c 0%, transparent 55%), #cdb488; }
-  @media (prefers-color-scheme: dark) {
-    .book[data-paper="plain"] .paper { background: radial-gradient(120% 90% at 25% 15%, #2b261d 0%, transparent 55%), #221e16; }
-    .book[data-paper="laid"]  .paper { background: radial-gradient(120% 90% at 25% 15%, #2b261d 0%, transparent 55%), #211d15; }
-    .book[data-paper="grid"]  .paper { background: #242017; }
-    .book[data-paper="kraft"] .paper { background: #2e2417; }
-  }
-  /* 纤维 + 页缘 + 书脊 */
-  .grain { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: multiply; opacity: 0.7;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/><feColorMatrix type='saturate' values='0'/></filter><rect width='200' height='200' filter='url(%23f)' opacity='0.05'/></svg>"); }
-  .edge { position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 70px rgba(60,46,24,0.09); }
-  .spine { position: absolute; top: 0; bottom: 0; left: 50%; width: 64px; transform: translateX(-50%); pointer-events: none;
-    background: linear-gradient(90deg, transparent, rgba(40,34,24,0.075) 44%, rgba(40,34,24,0.11) 50%, rgba(40,34,24,0.075) 56%, transparent); }
+  .paper[data-grid="lines"]::after { background: repeating-linear-gradient(0deg, transparent 0 29px, rgba(41,40,36,0.055) 29px 30px); }
+  .paper[data-grid="grid"]::after { background: repeating-linear-gradient(0deg, transparent 0 27px, rgba(41,40,36,0.045) 27px 28px), repeating-linear-gradient(90deg, transparent 0 27px, rgba(41,40,36,0.045) 27px 28px); }
+  .paper[data-grid="kraft"] { background: #efe8d8; }
+  :root[data-theme="dark"] .paper[data-grid="kraft"], html.dark .paper[data-grid="kraft"] { background: #262218; }
 
-  /* 首次提示:唯一的一句话,放了东西就消失 */
-  .hint {
-    position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none;
-    font-size: 12px; letter-spacing: 0.5em; color: var(--faint); opacity: 0.6;
-  }
+  /* 首次提示:纸外,一次性 */
+  .hint { font-size: 12px; color: var(--ink-2); letter-spacing: 0.08em; transition: opacity 0.6s; }
+  .hint.off { opacity: 0; }
 
   /* ── 页上的元素 ── */
   .item { position: absolute; left: 0; top: 0; transform-origin: center; cursor: grab; }
   .item:active { cursor: grabbing; }
   .item .body { position: relative; }
   .item img { display: block; pointer-events: none; }
-  /* 相框 */
-  .item[data-frame="none"]  img { box-shadow: 0 10px 26px var(--shadow); }
-  .item[data-frame="white"] .body { padding: 5px; background: #fcfaf4; box-shadow: 0 10px 26px var(--shadow); }
-  .item[data-frame="polaroid"] .body { padding: 9px 9px 40px; background: linear-gradient(172deg, #fdfcf8, #f0ede3 92%); box-shadow: 0 12px 30px var(--shadow); }
-  /* 胶带(贴在元素上) */
+  /* 无边框 = 真正无边框无阴影 */
+  .item[data-frame="white"] .body { padding: 4px; background: #fff; box-shadow: 0 1px 3px rgba(41,40,36,0.10); }
+  .item[data-frame="polaroid"] .body { padding: 8px 8px 34px; background: #fff; box-shadow: 0 2px 8px rgba(41,40,36,0.12); }
+  :root[data-theme="dark"] .item[data-frame="white"] .body,
+  :root[data-theme="dark"] .item[data-frame="polaroid"] .body { background: #efece4; }
+  /* 抠图:仅微弱接触阴影 */
+  .item.cutout img { filter: drop-shadow(0 1px 2px rgba(41,40,36,0.14)); }
+  /* 扫描:保留原物,细纸边 */
+  .item.scan .body { padding: 3px; background: #fff; box-shadow: 0 1px 2px rgba(41,40,36,0.08); }
+
   .ptape {
-    position: absolute; width: 88px; height: 24px; top: -12px; left: 50%;
+    position: absolute; width: 74px; height: 20px; top: -10px; left: 50%;
     transform: translateX(-50%) rotate(-2deg);
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='40'><filter id='w'><feTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='2'/><feColorMatrix type='saturate' values='0'/></filter><rect width='120' height='40' filter='url(%23w)' opacity='0.15'/></svg>"), rgba(242, 236, 220, 0.72);
-    box-shadow: 0 1px 3px rgba(40,34,24,0.16);
+    background: rgba(252, 250, 244, 0.55);
+    box-shadow: 0 1px 2px rgba(41,40,36,0.08);
     -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 3px, #000 calc(100% - 3px), transparent 100%);
             mask-image: linear-gradient(90deg, transparent 0, #000 3px, #000 calc(100% - 3px), transparent 100%);
     pointer-events: none;
   }
-  /* 独立胶带条 */
   .item .tape-solo {
-    width: 128px; height: 30px;
-    box-shadow: 0 2px 5px rgba(40,34,24,0.18);
+    width: 110px; height: 24px; background: rgba(252, 250, 244, 0.6);
+    box-shadow: 0 1px 2px rgba(41,40,36,0.08);
     -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4px, #000 calc(100% - 4px), transparent 100%);
             mask-image: linear-gradient(90deg, transparent 0, #000 4px, #000 calc(100% - 4px), transparent 100%);
   }
-  .tape-solo.t0 { background: rgba(240, 233, 214, 0.78); }
-  .tape-solo.t1 { background: repeating-linear-gradient(45deg, rgba(165,56,31,0.34) 0 6px, rgba(165,56,31,0.18) 6px 12px), rgba(244,238,224,0.6); }
-  .tape-solo.t2 { background: repeating-linear-gradient(0deg, rgba(80,70,50,0.22) 0 4px, transparent 4px 8px), rgba(240,234,218,0.65); }
-  /* 言印 */
-  .item .seal {
-    width: 58px; height: 58px; display: grid; place-items: center;
-    background: radial-gradient(80% 80% at 30% 25%, rgba(255,255,255,0.15), transparent 60%), var(--seal);
-    color: #f6ecd9; font-family: "Songti SC", Georgia, serif; font-size: 31px; font-weight: 700;
-    border-radius: 7px; opacity: 0.92;
-    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.15' numOctaves='3' seed='4'/><feComponentTransfer><feFuncA type='discrete' tableValues='0.7 0.9 1 1 1 1 1 1 1 1'/></feComponentTransfer></filter><rect width='80' height='80' fill='black' filter='url(%23s)'/></svg>");
-            mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.15' numOctaves='3' seed='4'/><feComponentTransfer><feFuncA type='discrete' tableValues='0.7 0.9 1 1 1 1 1 1 1 1'/></feComponentTransfer></filter><rect width='80' height='80' fill='black' filter='url(%23s)'/></svg>");
-    -webkit-mask-size: cover; mask-size: cover;
-  }
 
-  /* 选中态 */
-  .item.sel .body { outline: 1px solid rgba(120, 100, 60, 0.55); outline-offset: 3px; }
-  .handle {
-    position: absolute; width: 14px; height: 14px; border-radius: 50%;
-    background: #f8f2e4; border: 1px solid rgba(120,100,60,0.7);
-    box-shadow: 0 2px 6px var(--shadow); z-index: 5;
+  /* 印章:细线、油墨感、印在纸上(multiply) */
+  .item .stamp { mix-blend-mode: multiply; opacity: 0.88; }
+  :root[data-theme="dark"] .item .stamp { mix-blend-mode: screen; opacity: 0.75; }
+  .stamp-date {
+    border: 1.2px solid var(--accent); color: var(--accent); border-radius: 3px;
+    font-family: Georgia, serif; font-size: 11px; letter-spacing: 0.22em;
+    padding: 5px 10px; white-space: nowrap;
   }
-  .h-scale { right: -9px; bottom: -9px; cursor: nwse-resize; }
-  .h-rot { left: 50%; top: -30px; transform: translateX(-50%); cursor: grab; }
-  .h-rot::before { content: ""; position: absolute; left: 50%; top: 13px; width: 1px; height: 16px; background: rgba(120,100,60,0.5); }
+  .stamp-yan {
+    width: 40px; height: 40px; border: 1.2px solid var(--ink-2); border-radius: 4px;
+    display: grid; place-items: center; color: var(--ink-2);
+    font-family: "Songti SC", Georgia, serif; font-size: 22px;
+  }
+  .stamp-travel {
+    width: 74px; height: 74px; border: 1.2px solid var(--warm); border-radius: 50%;
+    display: grid; place-content: center; text-align: center; color: var(--warm);
+    font-family: Georgia, serif; position: relative;
+  }
+  .stamp-travel::before { content: ""; position: absolute; inset: 4px; border: 0.8px solid var(--warm); border-radius: 50%; opacity: 0.7; }
+  .stamp-travel b { font-size: 9px; letter-spacing: 0.3em; font-weight: 400; }
+  .stamp-travel span { font-size: 8px; letter-spacing: 0.14em; margin-top: 2px; }
 
-  /* 选中元素的小操作条(屏幕空间) */
+  /* 文字 */
+  .titem {
+    min-width: 40px; max-width: 300px;
+    font-family: "Songti SC", Georgia, serif; font-size: 15px; line-height: 1.9;
+    color: var(--ink); outline: none; white-space: pre-wrap;
+  }
+  .titem[contenteditable="true"] { cursor: text; user-select: text; -webkit-user-select: text; }
+  .titem:empty::before { content: "写点什么"; color: var(--ink-2); opacity: 0.5; }
+
+  /* 选中 */
+  .item.sel .body, .item.sel .titem { outline: 1px solid var(--accent); outline-offset: 4px; }
+  .handle { position: absolute; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 1.2px solid var(--accent); z-index: 5; }
+  .h-scale { right: -8px; bottom: -8px; cursor: nwse-resize; }
+  .h-rot { left: 50%; top: -26px; transform: translateX(-50%); cursor: grab; }
+  .h-rot::before { content: ""; position: absolute; left: 50%; top: 11px; width: 1px; height: 14px; background: var(--accent); opacity: 0.5; }
+
+  /* 选中元素操作条:浅色 */
   .itembar {
-    position: fixed; z-index: 50; display: none; gap: 2px;
-    background: rgba(30, 26, 20, 0.88); border-radius: 10px; padding: 4px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 24px var(--shadow);
+    position: fixed; z-index: 50; display: none; gap: 0;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--hair); border-radius: 10px; padding: 3px;
+    box-shadow: 0 6px 20px -8px var(--sh);
   }
   .itembar button {
-    border: 0; background: transparent; color: #ede5d2;
-    font-size: 12px; padding: 6px 11px; border-radius: 7px; cursor: pointer;
-    font-family: inherit; letter-spacing: 0.05em;
+    border: 0; background: transparent; color: var(--ink); cursor: pointer;
+    font-family: inherit; font-size: 12px; padding: 6px 11px; border-radius: 7px;
   }
-  .itembar button:hover { background: rgba(255,255,255,0.12); }
-  .itembar .del { color: #e8927c; }
+  .itembar button:hover { background: var(--hair); }
+  .itembar .del { color: var(--warm); }
 
-  /* ── 工具抽屉 ── */
-  .drawer {
-    position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 40;
-    display: flex; gap: 4px; padding: 6px;
-    background: rgba(30, 26, 20, 0.88);
-    border-radius: 14px; backdrop-filter: blur(12px);
-    box-shadow: 0 12px 34px var(--shadow);
+  /* ── 底部工具栏:轻、融于背景 ── */
+  .dock {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 8px 10px calc(10px + env(safe-area-inset-bottom));
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid var(--hair);
   }
-  .drawer button {
-    border: 0; background: transparent; color: #ede5d2; cursor: pointer;
-    font-family: inherit; font-size: 13px; letter-spacing: 0.1em;
-    padding: 9px 16px; border-radius: 9px;
-    display: flex; flex-direction: column; align-items: center; gap: 1px;
+  .row { display: flex; gap: 2px; justify-content: center; flex-wrap: wrap; }
+  .dock button {
+    border: 0; background: transparent; color: var(--ink); cursor: pointer;
+    font-family: inherit; font-size: 11px; letter-spacing: 0.04em;
+    padding: 7px 13px; border-radius: 9px;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    min-width: 58px; white-space: nowrap;
   }
-  .drawer button small { font-size: 9px; color: rgba(237,229,210,0.45); letter-spacing: 0.15em; }
-  .drawer button:hover { background: rgba(255,255,255,0.1); }
+  .dock button svg { width: 19px; height: 19px; stroke: var(--ink); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; opacity: 0.85; }
+  .dock button:hover { background: color-mix(in srgb, var(--hair) 60%, transparent); }
+  .dock button.on { color: var(--accent); }
+  .dock button.on svg { stroke: var(--accent); }
+  .sub { display: none; padding-top: 6px; margin-top: 6px; border-top: 1px solid var(--hair); width: 100%; }
+  .sub.on { display: flex; }
+  .sub button { min-width: 54px; font-size: 11px; color: var(--ink-2); }
+  .sub button:hover { color: var(--ink); }
+
   input[type="file"] { display: none; }
+  body.placing .paper { cursor: crosshair; }
 
-  /* 盖印/贴带模式下的光标提示 */
-  body.placing .book { cursor: crosshair; }
+  /* 预览:一切退场,只剩纸 */
+  body.preview .dock, body.preview .itembar, body.preview .hint,
+  body.preview .top .back, body.preview .date { visibility: hidden; }
+  body.preview .item.sel .body, body.preview .item.sel .titem { outline: none; }
+  body.preview .handle { display: none; }
+
+  /* 轻提示 */
+  .toast {
+    position: fixed; left: 50%; bottom: 92px; transform: translateX(-50%) translateY(6px);
+    z-index: 60; font-size: 12px; color: var(--ink-2);
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    border: 1px solid var(--hair); border-radius: 999px; padding: 7px 16px;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s;
+    backdrop-filter: blur(10px);
+  }
+  .toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 
 <div class="top">
-  <span class="yan">言</span>
-  <span class="date" id="date"></span>
+  <button class="back" aria-label="返回">‹</button>
+  <button class="date" id="date"></button>
+  <button class="more" id="preview">预览</button>
 </div>
 
 <div class="stage">
-  <div class="book" id="book" data-paper="laid">
-    <div class="paper"></div>
-    <div class="grain"></div>
-    <div class="spine"></div>
-    <div class="edge"></div>
-    <div class="hint" id="hint">空　白　等　你</div>
+  <div class="sheet-wrap">
+    <div class="paper" id="paper" data-grid="plain"></div>
+    <div class="hint" id="hint">从照片、扫描或素材开始</div>
   </div>
 </div>
 
 <div class="itembar" id="itembar">
-  <button id="b-frame">框</button>
-  <button id="b-tape">带</button>
-  <button id="b-front">上</button>
-  <button class="del" id="b-del">去</button>
+  <button id="b-frame">边框</button>
+  <button id="b-tape">胶带</button>
+  <button id="b-front">上移</button>
+  <button class="del" id="b-del">删除</button>
 </div>
 
-<div class="drawer">
-  <button id="t-add">传<small>照片</small></button>
-  <button id="t-seal">印<small>言</small></button>
-  <button id="t-tape">带<small>胶带</small></button>
-  <button id="t-paper">纸<small id="papername">帘</small></button>
+<div class="dock">
+  <div class="row">
+    <button id="t-photo"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg>照片</button>
+    <button id="t-scan"><svg viewBox="0 0 24 24"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"/><path d="M4 12h16"/></svg>扫描</button>
+    <button id="t-cut"><svg viewBox="0 0 24 24"><path d="M12 4c4 0 7 2.5 7 6s-2.5 6-6 6.5c-0.5 1.8-2 3-4 3-2.5 0-4.5-2-4.5-4.5C3 13 3 11 4 9c1.2-2.8 4-5 8-5z" stroke-dasharray="3 3"/></svg>提取</button>
+    <button id="t-text"><svg viewBox="0 0 24 24"><path d="M5 6V4.5h14V6M12 4.5v15M9.5 19.5h5"/></svg>文字</button>
+    <button id="t-mat"><svg viewBox="0 0 24 24"><rect x="3.5" y="9" width="17" height="10.5" rx="1.5"/><path d="M3.5 13h17M10 16h4M7 9V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3"/></svg>素材</button>
+  </div>
+  <div class="row sub" id="sub">
+    <button id="m-paper">纸张<span id="papername" style="color:var(--ink-2)"> · 素</span></button>
+    <button id="m-tape">胶带</button>
+    <button id="m-stamp-date">日期戳</button>
+    <button id="m-stamp-travel">旅行章</button>
+    <button id="m-stamp-yan">言印</button>
+    <button id="m-frame">边框</button>
+  </div>
 </div>
+
 <input type="file" id="file" accept="image/*" multiple>
+<div class="toast" id="toast"></div>
 
 <script>
 (() => {
-  const book = document.getElementById('book');
+  const paper = document.getElementById('paper');
   const hint = document.getElementById('hint');
   const itembar = document.getElementById('itembar');
   const fileInput = document.getElementById('file');
-  const KEY = 'yan-journal-proto-v1';
-  const PAPERS = [['laid','帘'],['plain','素'],['grid','格'],['kraft','牛皮']];
+  const toastEl = document.getElementById('toast');
+  const KEY = 'yan-page-v2';
+  const GRIDS = [['plain','素'],['lines','横线'],['grid','方格'],['kraft','牛皮']];
   const FRAMES = ['none','white','polaroid'];
 
+  let state = { grid: 'plain', date: '', items: [] };
+  let sel = null, placing = null, uploadAs = 'photo', zTop = 10;
+  let undoStack = [], redoStack = [];
+
   // 日期
-  const now = new Date();
-  const cn = '〇一二三四五六七八九十'.split('');
-  const mm = now.getMonth()+1, dd = now.getDate();
-  const num = n => n<=10 ? cn[n] : n<20 ? '十'+(n%10? cn[n%10]:'') : cn[Math.floor(n/10)]+'十'+(n%10? cn[n%10]:'');
-  document.getElementById('date').textContent = `${num(mm)}月${num(dd)}日`;
+  const today = new Date();
+  const defDate = `${today.getMonth()+1} 月 ${today.getDate()} 日`;
+  const dateBtn = document.getElementById('date');
 
-  let state = { paper: 'laid', items: [] };
-  let sel = null;          // 选中的 item id
-  let placing = null;      // 'seal' | 'tape' | null
-  let zTop = 10;
-
-  // ── 存取 ──
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} };
-  const load = () => { try { const raw = localStorage.getItem(KEY); if (raw) state = JSON.parse(raw); } catch(e){} };
+  const load = () => { try { const r = localStorage.getItem(KEY); if (r) state = { ...state, ...JSON.parse(r) }; } catch(e){} };
+  const snapshot = () => { undoStack.push(JSON.stringify(state)); if (undoStack.length > 60) undoStack.shift(); redoStack = []; };
+  const toast = (m) => { toastEl.textContent = m; toastEl.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => toastEl.classList.remove('on'), 2200); };
 
   // ── 渲染 ──
-  const el = id => book.querySelector(`[data-id="${id}"]`);
-  function renderItem(it) {
-    let node = el(it.id);
-    if (!node) {
-      node = document.createElement('div');
-      node.className = 'item';
-      node.dataset.id = it.id;
-      const body = document.createElement('div');
-      body.className = 'body';
-      if (it.type === 'photo') {
-        const img = new Image(); img.src = it.src; img.draggable = false;
-        img.style.width = it.w + 'px';
-        body.appendChild(img);
-      } else if (it.type === 'seal') {
-        const s = document.createElement('div'); s.className = 'seal'; s.textContent = '言';
-        body.appendChild(s);
-      } else if (it.type === 'tape') {
-        const t = document.createElement('div'); t.className = 'tape-solo t' + (it.variant||0);
-        body.appendChild(t);
-      }
-      node.appendChild(body);
-      book.appendChild(node);
-      bindItem(node);
+  const el = id => paper.querySelector(`[data-id="${id}"]`);
+  function build(it) {
+    const node = document.createElement('div');
+    node.className = 'item' + (it.type === 'cutout' ? ' cutout' : it.type === 'scan' ? ' scan' : '');
+    node.dataset.id = it.id;
+    const body = document.createElement('div'); body.className = 'body';
+    if (it.type === 'photo' || it.type === 'cutout' || it.type === 'scan') {
+      const img = new Image(); img.src = it.src; img.draggable = false; img.style.width = it.w + 'px';
+      body.appendChild(img);
+    } else if (it.type === 'tape') {
+      const t = document.createElement('div'); t.className = 'tape-solo'; body.appendChild(t);
+    } else if (it.type === 'stamp') {
+      const s = document.createElement('div'); s.className = 'stamp';
+      if (it.stamp === 'date') { s.classList.add('stamp-date'); s.textContent = it.text; }
+      if (it.stamp === 'yan') { s.classList.add('stamp-yan'); s.textContent = '言'; }
+      if (it.stamp === 'travel') { s.classList.add('stamp-travel'); s.innerHTML = `<b>${it.place||'PASSAGE'}</b><span>${it.text}</span>`; }
+      body.appendChild(s);
+    } else if (it.type === 'text') {
+      const t = document.createElement('div'); t.className = 'titem'; t.textContent = it.text || '';
+      t.addEventListener('blur', () => {
+        it.text = t.textContent.trim(); t.contentEditable = 'false';
+        if (!it.text) { remove(it.id); return; }
+        snapshot(); save();
+      });
+      body.appendChild(t);
     }
-    node.dataset.frame = it.type === 'photo' ? it.frame : 'none';
+    node.appendChild(body);
+    paper.appendChild(node);
+    bind(node);
+    return node;
+  }
+  function renderItem(it) {
+    let node = el(it.id) || build(it);
+    node.dataset.frame = (it.type === 'photo') ? it.frame : 'none';
     node.style.zIndex = it.z;
     node.style.transform = `translate(${it.x}px, ${it.y}px) rotate(${it.r}deg) scale(${it.s})`;
-    // 元素上的胶带
     const body = node.firstChild;
     const had = body.querySelector('.ptape');
     if (it.tape && !had) { const p = document.createElement('div'); p.className = 'ptape'; body.appendChild(p); }
     if (!it.tape && had) had.remove();
     node.classList.toggle('sel', sel === it.id);
-    // 手柄
     node.querySelectorAll('.handle').forEach(h => h.remove());
-    if (sel === it.id) {
+    if (sel === it.id && !document.body.classList.contains('preview')) {
       const hs = document.createElement('div'); hs.className = 'handle h-scale'; hs.dataset.h = 'scale';
       const hr = document.createElement('div'); hr.className = 'handle h-rot'; hr.dataset.h = 'rot';
       const inv = 1 / it.s;
@@ -264,80 +338,87 @@
     }
   }
   function renderAll() {
-    book.dataset.paper = state.paper;
-    document.getElementById('papername').textContent = (PAPERS.find(p => p[0]===state.paper)||PAPERS[0])[1];
+    paper.dataset.grid = state.grid;
+    document.getElementById('papername').textContent = ' · ' + (GRIDS.find(g => g[0]===state.grid)||GRIDS[0])[1];
+    dateBtn.textContent = state.date || defDate;
+    [...paper.querySelectorAll('.item')].forEach(n => { if (!state.items.find(i => i.id === n.dataset.id)) n.remove(); });
     state.items.forEach(renderItem);
-    hint.style.display = state.items.length ? 'none' : '';
+    hint.classList.toggle('off', state.items.length > 0 || localStorage.getItem(KEY + ':hinted') === '1');
+    if (state.items.length) localStorage.setItem(KEY + ':hinted', '1');
     placeItembar();
   }
   function placeItembar() {
     const it = state.items.find(i => i.id === sel);
-    if (!it) { itembar.style.display = 'none'; return; }
+    if (!it || document.body.classList.contains('preview')) { itembar.style.display = 'none'; return; }
     const node = el(it.id); if (!node) return;
     const r = node.getBoundingClientRect();
     itembar.style.display = 'flex';
-    // 照片才有「框/带」
-    itembar.querySelector('#b-frame').style.display = it.type === 'photo' ? '' : 'none';
-    itembar.querySelector('#b-tape').style.display = it.type === 'photo' ? '' : 'none';
-    const w = itembar.offsetWidth || 150;
+    const isImg = ['photo'].includes(it.type);
+    itembar.querySelector('#b-frame').style.display = isImg ? '' : 'none';
+    itembar.querySelector('#b-tape').style.display = ['photo','cutout','scan'].includes(it.type) ? '' : 'none';
+    const w = itembar.offsetWidth || 180;
     itembar.style.left = Math.min(Math.max(r.left + r.width/2 - w/2, 8), innerWidth - w - 8) + 'px';
-    itembar.style.top = Math.max(r.top - 48, 8) + 'px';
+    itembar.style.top = Math.max(r.top - 46, 6) + 'px';
   }
 
   // ── 交互 ──
-  function bindItem(node) {
+  function bind(node) {
     node.addEventListener('pointerdown', e => {
-      const id = node.dataset.id;
-      const it = state.items.find(i => i.id === id);
-      if (!it) return;
+      if (e.target.closest('.titem[contenteditable="true"]')) return;
+      const it = state.items.find(i => i.id === node.dataset.id); if (!it) return;
       e.stopPropagation();
-      sel = id; renderAll();
+      sel = it.id; renderAll();
       const h = e.target.dataset?.h;
-      const rect = book.getBoundingClientRect();
       const nrect = node.getBoundingClientRect();
       const cx = nrect.left + nrect.width/2, cy = nrect.top + nrect.height/2;
       const start = { x: e.clientX, y: e.clientY, ix: it.x, iy: it.y, r: it.r, s: it.s,
         a: Math.atan2(e.clientY - cy, e.clientX - cx), d: Math.hypot(e.clientX - cx, e.clientY - cy) };
+      let moved = false;
       node.setPointerCapture(e.pointerId);
       const move = ev => {
-        if (h === 'rot') {
-          const a = Math.atan2(ev.clientY - cy, ev.clientX - cx);
-          it.r = start.r + (a - start.a) * 180 / Math.PI;
-        } else if (h === 'scale') {
-          const d = Math.hypot(ev.clientX - cx, ev.clientY - cy);
-          it.s = Math.min(4, Math.max(0.18, start.s * d / start.d));
-        } else {
-          it.x = start.ix + (ev.clientX - start.x);
-          it.y = start.iy + (ev.clientY - start.y);
-        }
+        moved = true;
+        if (h === 'rot') { const a = Math.atan2(ev.clientY - cy, ev.clientX - cx); it.r = start.r + (a - start.a) * 180/Math.PI; }
+        else if (h === 'scale') { const d = Math.hypot(ev.clientX - cx, ev.clientY - cy); it.s = Math.min(4, Math.max(0.2, start.s * d / start.d)); }
+        else { it.x = start.ix + (ev.clientX - start.x); it.y = start.iy + (ev.clientY - start.y); }
         renderItem(it); placeItembar();
       };
       const up = () => {
-        node.removeEventListener('pointermove', move);
-        node.removeEventListener('pointerup', up);
-        save();
+        node.removeEventListener('pointermove', move); node.removeEventListener('pointerup', up);
+        if (moved) { snapshot(); save(); }
       };
       node.addEventListener('pointermove', move);
       node.addEventListener('pointerup', up);
+    });
+    node.addEventListener('dblclick', e => {
+      const it = state.items.find(i => i.id === node.dataset.id);
+      if (it?.type === 'text') {
+        const t = node.querySelector('.titem');
+        t.contentEditable = 'true'; t.focus();
+        const r = document.createRange(); r.selectNodeContents(t); r.collapse(false);
+        const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+        e.stopPropagation();
+      }
     });
     node.addEventListener('wheel', e => {
       const it = state.items.find(i => i.id === node.dataset.id);
       if (!it || sel !== it.id) return;
       e.preventDefault();
-      it.s = Math.min(4, Math.max(0.18, it.s * (1 - e.deltaY * 0.0012)));
-      renderItem(it); placeItembar(); save();
+      it.s = Math.min(4, Math.max(0.2, it.s * (1 - e.deltaY * 0.0012)));
+      renderItem(it); placeItembar();
     }, { passive: false });
   }
 
-  // 点纸面:放印/胶带,或取消选中
-  book.addEventListener('pointerdown', e => {
+  paper.addEventListener('pointerdown', e => {
     if (e.target.closest('.item')) return;
-    const rect = book.getBoundingClientRect();
+    const rect = paper.getBoundingClientRect();
     const x = e.clientX - rect.left, y = e.clientY - rect.top;
     if (placing) {
-      const it = placing === 'seal'
-        ? { id: 'i'+Date.now(), type: 'seal', x: x-29, y: y-29, r: (Math.random()*10-5), s: 1, z: ++zTop }
-        : { id: 'i'+Date.now(), type: 'tape', variant: Math.floor(Math.random()*3), x: x-64, y: y-15, r: (Math.random()*14-7), s: 1, z: ++zTop };
+      snapshot();
+      let it;
+      if (placing === 'tape') it = { id: uid(), type: 'tape', x: x-55, y: y-12, r: rand(7), s: 1, z: ++zTop };
+      if (placing === 'stamp-date') it = { id: uid(), type: 'stamp', stamp: 'date', text: stampDate(), x: x-52, y: y-14, r: rand(4), s: 1, z: ++zTop };
+      if (placing === 'stamp-yan') it = { id: uid(), type: 'stamp', stamp: 'yan', x: x-20, y: y-20, r: rand(5), s: 1, z: ++zTop };
+      if (placing === 'stamp-travel') it = { id: uid(), type: 'stamp', stamp: 'travel', text: stampDate(), place: 'PASSAGE', x: x-37, y: y-37, r: rand(8), s: 1, z: ++zTop };
       state.items.push(it);
       placing = null; document.body.classList.remove('placing');
       sel = it.id; renderAll(); save();
@@ -345,37 +426,58 @@
     }
     sel = null; renderAll();
   });
+  paper.addEventListener('dblclick', e => { if (!e.target.closest('.item')) { uploadAs = 'photo'; fileInput.click(); } });
 
-  // 双击空白纸面 = 上传
-  book.addEventListener('dblclick', e => {
-    if (!e.target.closest('.item')) fileInput.click();
-  });
+  const uid = () => 'i' + Date.now() + Math.random().toString(16).slice(2,5);
+  const rand = n => Math.random()*n*2 - n;
+  const stampDate = () => `${String(today.getDate()).padStart(2,'0')} · ${String(today.getMonth()+1).padStart(2,'0')} · ${today.getFullYear()}`;
 
   // ── 工具 ──
-  document.getElementById('t-add').onclick = () => fileInput.click();
-  document.getElementById('t-seal').onclick = () => { placing = 'seal'; document.body.classList.add('placing'); };
-  document.getElementById('t-tape').onclick = () => { placing = 'tape'; document.body.classList.add('placing'); };
-  document.getElementById('t-paper').onclick = () => {
-    const i = PAPERS.findIndex(p => p[0] === state.paper);
-    state.paper = PAPERS[(i+1) % PAPERS.length][0];
+  const pick = as => { uploadAs = as; fileInput.click(); };
+  document.getElementById('t-photo').onclick = () => pick('photo');
+  document.getElementById('t-scan').onclick = () => { pick('scan'); };
+  document.getElementById('t-cut').onclick = () => { pick('cutout'); };
+  document.getElementById('t-text').onclick = () => {
+    snapshot();
+    const rect = paper.getBoundingClientRect();
+    const it = { id: uid(), type: 'text', text: '', x: rect.width/2 - 60, y: rect.height/2 - 14, r: 0, s: 1, z: ++zTop };
+    state.items.push(it); sel = it.id; renderAll(); save();
+    const t = el(it.id).querySelector('.titem'); t.contentEditable = 'true'; t.focus();
+  };
+  const sub = document.getElementById('sub');
+  document.getElementById('t-mat').onclick = function() { sub.classList.toggle('on'); this.classList.toggle('on'); };
+  document.getElementById('m-paper').onclick = () => {
+    snapshot();
+    const i = GRIDS.findIndex(g => g[0] === state.grid);
+    state.grid = GRIDS[(i+1) % GRIDS.length][0];
     renderAll(); save();
+  };
+  const arm = mode => { placing = mode; document.body.classList.add('placing'); };
+  document.getElementById('m-tape').onclick = () => arm('tape');
+  document.getElementById('m-stamp-date').onclick = () => arm('stamp-date');
+  document.getElementById('m-stamp-yan').onclick = () => arm('stamp-yan');
+  document.getElementById('m-stamp-travel').onclick = () => arm('stamp-travel');
+  document.getElementById('m-frame').onclick = () => {
+    const it = state.items.find(i => i.id === sel);
+    if (!it || it.type !== 'photo') { toast('先选中一张照片'); return; }
+    snapshot(); it.frame = FRAMES[(FRAMES.indexOf(it.frame)+1) % FRAMES.length]; renderAll(); save();
   };
 
   fileInput.onchange = async () => {
     const files = [...fileInput.files]; fileInput.value = '';
-    const rect = book.getBoundingClientRect();
+    if (!files.length) return;
+    if (uploadAs !== 'photo' && !localStorage.getItem(KEY + ':protoNote')) {
+      toast('原型版:提取与扫描暂以原图放入'); localStorage.setItem(KEY + ':protoNote', '1');
+    }
+    snapshot();
+    const rect = paper.getBoundingClientRect();
     for (const f of files) {
       const src = await shrink(f, 1400);
       const dim = await imgSize(src);
-      const w = Math.min(300, dim.w);
-      const it = {
-        id: 'i' + Date.now() + Math.random().toString(16).slice(2,6),
-        type: 'photo', src, w,
-        frame: 'none', tape: false,
-        x: rect.width/2 - w/2 + (Math.random()*60-30),
-        y: rect.height/2 - (w*dim.h/dim.w)/2 + (Math.random()*40-20),
-        r: Math.random()*6-3, s: 1, z: ++zTop,
-      };
+      const w = Math.min(rect.width * 0.55, dim.w);
+      const it = { id: uid(), type: uploadAs, src, w, frame: 'none', tape: false,
+        x: rect.width/2 - w/2 + rand(24), y: rect.height/2 - (w*dim.h/dim.w)/2 + rand(18),
+        r: rand(2.5), s: 1, z: ++zTop };
       state.items.push(it); sel = it.id;
     }
     renderAll(); save();
@@ -383,35 +485,59 @@
   const imgSize = src => new Promise(res => { const i = new Image(); i.onload = () => res({ w: i.naturalWidth, h: i.naturalHeight }); i.src = src; });
   const shrink = (file, max) => new Promise(res => {
     const fr = new FileReader();
-    fr.onload = () => {
-      const i = new Image();
-      i.onload = () => {
-        const k = Math.min(1, max / Math.max(i.width, i.height));
-        const c = document.createElement('canvas');
-        c.width = i.width * k; c.height = i.height * k;
-        c.getContext('2d').drawImage(i, 0, 0, c.width, c.height);
-        res(c.toDataURL('image/jpeg', 0.86));
-      };
-      i.src = fr.result;
-    };
+    fr.onload = () => { const i = new Image(); i.onload = () => {
+      const k = Math.min(1, max / Math.max(i.width, i.height));
+      const c = document.createElement('canvas'); c.width = i.width*k; c.height = i.height*k;
+      c.getContext('2d').drawImage(i, 0, 0, c.width, c.height);
+      res(c.toDataURL('image/jpeg', 0.86));
+    }; i.src = fr.result; };
     fr.readAsDataURL(file);
   });
 
-  // ── 选中元素操作条 ──
-  const withSel = fn => { const it = state.items.find(i => i.id === sel); if (it) { fn(it); renderAll(); save(); } };
+  // ── 选中操作 ──
+  const withSel = fn => { const it = state.items.find(i => i.id === sel); if (it) { snapshot(); fn(it); renderAll(); save(); } };
   document.getElementById('b-frame').onclick = () => withSel(it => { it.frame = FRAMES[(FRAMES.indexOf(it.frame)+1) % FRAMES.length]; });
   document.getElementById('b-tape').onclick = () => withSel(it => { it.tape = !it.tape; });
   document.getElementById('b-front').onclick = () => withSel(it => { it.z = ++zTop; });
-  document.getElementById('b-del').onclick = () => {
-    const it = state.items.find(i => i.id === sel); if (!it) return;
-    el(it.id)?.remove();
-    state.items = state.items.filter(i => i.id !== sel);
-    sel = null; renderAll(); save();
+  function remove(id) {
+    el(id)?.remove();
+    state.items = state.items.filter(i => i.id !== id);
+    if (sel === id) sel = null;
+    renderAll(); save();
+  }
+  document.getElementById('b-del').onclick = () => { if (sel) { snapshot(); remove(sel); } };
+
+  // ── 日期编辑 ──
+  dateBtn.onclick = () => {
+    const inp = document.createElement('input');
+    inp.className = 'date-edit'; inp.value = state.date || defDate;
+    dateBtn.replaceWith(inp); inp.focus(); inp.select();
+    const done = () => { state.date = inp.value.trim(); inp.replaceWith(dateBtn); renderAll(); save(); };
+    inp.addEventListener('blur', done);
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') inp.blur(); });
   };
+
+  // ── 预览 ──
+  document.getElementById('preview').onclick = function() {
+    document.body.classList.toggle('preview');
+    this.textContent = document.body.classList.contains('preview') ? '完成' : '预览';
+    renderAll();
+  };
+
+  // ── 撤销/重做 ──
   addEventListener('keydown', e => {
-    if ((e.key === 'Backspace' || e.key === 'Delete') && sel) document.getElementById('b-del').onclick();
+    const meta = e.metaKey || e.ctrlKey;
+    if (meta && e.key.toLowerCase() === 'z') {
+      e.preventDefault();
+      if (e.shiftKey) { if (redoStack.length) { undoStack.push(JSON.stringify(state)); state = JSON.parse(redoStack.pop()); sel = null; hardRender(); } }
+      else if (undoStack.length) { redoStack.push(JSON.stringify(state)); state = JSON.parse(undoStack.pop()); sel = null; hardRender(); }
+      return;
+    }
+    if ((e.key === 'Backspace' || e.key === 'Delete') && sel && !e.target.closest?.('[contenteditable="true"], input')) { snapshot(); remove(sel); }
     if (e.key === 'Escape') { sel = null; placing = null; document.body.classList.remove('placing'); renderAll(); }
   });
+  function hardRender() { [...paper.querySelectorAll('.item')].forEach(n => n.remove()); renderAll(); save(); }
+
   addEventListener('resize', placeItembar);
 
   // ── 启动 ──
