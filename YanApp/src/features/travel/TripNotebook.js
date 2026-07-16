@@ -44,6 +44,15 @@ const TRAVEL_BOOKS_SEED = [
         summary: '下午抵达；晚上 Temple Bar',
         detail: 'Lyra：LHR T2 15:10 → DUB T2 16:35 · Aer Lingus EI161\nNing：SHA → CAN → LGW → DUB · 14:30 到\n住：Temple Bar Inn · 40-47 Fleet St',
         phrase: 'Could we check in, please?',
+        pockets: [
+          { label: '机场', steps: [
+            { label: '取行李', look: '看 baggage claim、carousel、自己的航班号。不要只跟人流走。', say: 'Where is the baggage claim for this flight?', sayZh: '这个航班的行李在哪里取？', stuck: 'Could you show me where to go for baggage claim?' },
+            { label: '出口', look: '看 arrivals、exit、meeting point。确认自己在 T1 还是 T2。', say: 'Is this the way to arrivals?', sayZh: '这是去到达口的路吗？', stuck: 'Could you point me to the exit?' },
+            { label: '会合', look: '确认门口编号、手机电量。只报一个清楚的位置。', say: "I'm at arrivals. Where are you?", sayZh: '我在到达口了，你在哪？', stuck: "I'm near the arrivals exit. Could you send me your location?" },
+          ] },
+          { label: '酒店', look: '看 booking name、check-in time、是否含早餐。', say: 'Could we check in, please?', sayZh: '我们可以办入住吗？', stuck: 'Sorry, could you check the booking under this name?' },
+          { label: '打车', look: '看上车点、车牌、目的地地址。', say: 'Could you take us to Temple Bar Inn, please?', sayZh: '可以送我们去 Temple Bar Inn 吗？', stuck: 'This is the address. Could you take us there?' },
+        ],
       },
       {
         mon: 'JUL',
@@ -52,6 +61,10 @@ const TRAVEL_BOOKS_SEED = [
         summary: '上午 Trinity；下午火车去 Galway',
         detail: 'Dublin Heuston 15:35 → Galway Ceannt 18:00\n先回 Temple Bar Inn 取行李，再打车去 Heuston。',
         phrase: 'Which platform does the train to Galway leave from?',
+        pockets: [
+          { label: '车站', look: '看 platform、departure time、Galway / Ceannt。', say: 'Which platform does the train to Galway leave from?', sayZh: '去 Galway 的火车在几号站台？', stuck: 'Could you point me to the platform for Galway?' },
+          { label: '寄存', look: '看酒店前台是否能 hold luggage。', say: 'Could we leave our luggage here until this afternoon?', sayZh: '我们能把行李寄存到下午吗？', stuck: 'We will come back before going to the station.' },
+        ],
       },
       {
         mon: 'JUL',
@@ -60,6 +73,9 @@ const TRAVEL_BOOKS_SEED = [
         summary: 'Galway 出发，一天给海风',
         detail: '建议报 Galway 出发的一日团：Cliffs of Moher + Burren。\n自然景观对中文讲解依赖不高。',
         phrase: 'What time do we need to be back here?',
+        pockets: [
+          { label: '集合', look: '看 meeting point、bus number、return time。', say: 'What time do we need to be back here?', sayZh: '我们几点要回到这里？', stuck: 'Could you write down the meeting time for me?' },
+        ],
       },
       {
         mon: 'JUL',
@@ -68,6 +84,10 @@ const TRAVEL_BOOKS_SEED = [
         summary: '移动日；晚上 The Flint',
         detail: '待补具体交通。建议上午从 Galway 出发，经 Dublin 转 Belfast。\n住：The Flint · 48 Howard St · 7/18—7/21',
         phrase: 'Could we leave our luggage here?',
+        pockets: [
+          { label: '换乘', look: '看 Dublin / Belfast、coach bay、ticket QR code。', say: 'Is this the bus to Belfast?', sayZh: '这是去贝尔法斯特的车吗？', stuck: 'Could you check if this is the right bus for Belfast?' },
+          { label: '酒店', look: '看 check-in time、booking name、luggage storage。', say: 'Could we leave our luggage here?', sayZh: '我们能把行李寄存在这里吗？', stuck: 'Our check-in is later. Could you hold these bags?' },
+        ],
       },
       {
         mon: 'JUL',
@@ -76,6 +96,18 @@ const TRAVEL_BOOKS_SEED = [
         summary: 'BFS → STN → SAW → NAV',
         detail: '16:40 BFS → STN 18:00 · Ryanair UK RK0158\n23:00 STN → SAW 05:00 · AJet VF1992\n07:45 SAW → NAV 09:00 · AJet VF3268',
         phrase: 'Where is the shuttle to Göreme?',
+        pockets: [
+          { label: '机场', steps: [
+            { label: '值机', look: '先确认是否已 online check-in；看 bag drop。', say: 'Where is the bag drop for this flight?', sayZh: '这个航班在哪里托运行李？', stuck: 'Could you help me check in for this flight?' },
+            { label: '安检', look: '看 liquids、laptop、belt、coat。听不清就先看别人怎么做。', say: 'Do I need to take this out?', sayZh: '这个需要拿出来吗？', stuck: 'Could you show me what I need to take out?' },
+            { label: '登机口', look: '看 gate、boarding time、group。注意 gate changed 和 final call。', say: 'Has the gate changed for this flight?', sayZh: '这个航班改登机口了吗？', stuck: 'Is my group boarding now?' },
+          ] },
+          { label: '转机', steps: [
+            { label: '找门', look: '到 SAW 先看 transfer / domestic departures，别只跟着 exit。', say: 'Where is the gate for the flight to Nevsehir?', sayZh: '去内夫谢希尔的登机口在哪？', stuck: 'I have a connecting flight to Nevsehir. Where should I go?' },
+            { label: '延误', look: '上一段晚点就先找 service desk 或 gate staff。', say: 'My first flight was delayed. Can I still make this connection?', sayZh: '我上一班晚点了，还赶得上这班吗？', stuck: 'Could you check the next flight to Nevsehir for me?' },
+          ] },
+          { label: '接机', look: '到 NAV 看 arrival hall、hotel name、shuttle sign。', say: 'Where is the shuttle to Göreme?', sayZh: '去格雷梅的接驳车在哪？', stuck: 'This is my hotel. Could you help me find the transfer?' },
+        ],
       },
       {
         mon: 'JUL',
@@ -84,6 +116,10 @@ const TRAVEL_BOOKS_SEED = [
         summary: '夜巴；Esenler 或 Alibeyköy',
         detail: '候选：20:15 Göreme Otogarı → Istanbul。\n住老城选 Esenler；住 Galata/Taksim 可考虑 Alibeyköy。',
         phrase: 'Does this bus stop at Alibeyköy?',
+        pockets: [
+          { label: '巴士站', look: '看 company name、destination、seat、luggage tag。', say: 'Does this bus stop at Alibeyköy?', sayZh: '这班车在 Alibeyköy 停吗？', stuck: 'Could you check my ticket and tell me where to wait?' },
+          { label: '行李', look: '看工作人员是否给 luggage tag。拍一下行李牌。', say: 'Do I get a luggage tag for this bag?', sayZh: '这个行李有行李牌吗？', stuck: 'Could you put this bag under the bus?' },
+        ],
       },
     ],
   },
@@ -113,6 +149,9 @@ function TripNotebook() {
   const [books, setBooks] = useState(TRAVEL_BOOKS_SEED);
   const [activeBookId, setActiveBookId] = useState(TRAVEL_BOOKS_SEED[0].id);
   const [expanded, setExpanded] = useState(1);
+  const [flipped, setFlipped] = useState({});     // { legIdx: true } → 显示现场
+  const [pocketSel, setPocketSel] = useState({}); // { legIdx: pocketIdx }
+  const [stepSel, setStepSel] = useState({});     // { 'legIdx-pocketIdx': stepIdx }
   const [editIdx, setEditIdx] = useState(undefined);
   const [draft, setDraft] = useState({ title: '', summary: '', detail: '', phrase: '' });
   const [uploads, setUploads] = useState([]);
@@ -200,9 +239,36 @@ function TripNotebook() {
   const currentEyebrow = isCurrentTrip
     ? `现在 · ${today.getMonth() + 1}月${today.getDate()}日`
     : activeBook.current.eyebrow;
-  // 进入某本旅行册时，默认展开“今天”那一段
+  // 当前段：今天这段（有就用），否则下一段即将出发的，否则最后一段
+  const nowLegIdx = (() => {
+    if (!legs.length) return -1;
+    const todayIdx = legs.findIndex(leg => { const v = legDate(leg); return v && v.toDateString() === today.toDateString(); });
+    if (todayIdx >= 0) return todayIdx;
+    const nextIdx = legs.findIndex(leg => { const v = legDate(leg); return v && v > today; });
+    return nextIdx >= 0 ? nextIdx : legs.length - 1;
+  })();
+  // 「现在」卡：当前旅程且有行程段时，从那段真身派生；否则用旅行册预设
+  const nowCard = (() => {
+    if (!isCurrentTrip || nowLegIdx < 0) return activeBook.current;
+    const leg = legs[nowLegIdx];
+    const parts = (leg.title || '').split('→').map(s => s.trim());
+    const p0 = leg.pockets?.[0];
+    const say = p0?.steps?.[0]?.say || p0?.say || leg.phrase;
+    const sayZh = p0?.steps?.[0]?.sayZh || p0?.sayZh || activeBook.current.phraseZh;
+    return {
+      eyebrow: currentEyebrow,
+      title: leg.title,
+      note: leg.summary,
+      from: parts.length > 1 ? parts[0] : activeBook.current.from,
+      to: parts.length > 1 ? parts[1] : activeBook.current.to,
+      time: (leg.detail || '').split('\n')[0] || activeBook.current.time,
+      phrase: say,
+      phraseZh: sayZh,
+    };
+  })();
+  // 进入某本旅行册时，默认展开当前段
   useEffect(() => {
-    setExpanded(todayLegIdx >= 0 ? todayLegIdx : (legs.length ? 0 : null));
+    setExpanded(nowLegIdx >= 0 ? nowLegIdx : (legs.length ? 0 : null));
   }, [activeBookId]);
   const specialCount = expenses.filter(item => item.special).length;
   // 成员:进了共享账本用远端成员,否则用本地成员
@@ -758,27 +824,27 @@ function TripNotebook() {
 
                 <View style={tn.now}>
                   <Text style={tn.kicker}>{currentEyebrow}</Text>
-                  <Text style={tn.nowTitle}>{activeBook.current.title}</Text>
-                  <Text style={tn.nowText}>{activeBook.current.note}</Text>
+                  <Text style={tn.nowTitle}>{nowCard.title}</Text>
+                  <Text style={tn.nowText}>{nowCard.note}</Text>
                   <View style={tn.route}>
                     <View style={tn.place}>
                       <Text style={tn.placeK}>FROM</Text>
-                      <Text style={tn.placeT}>{activeBook.current.from}</Text>
+                      <Text style={tn.placeT}>{nowCard.from}</Text>
                     </View>
                     <Text style={tn.arrow}>→</Text>
                     <View style={tn.place}>
                       <Text style={tn.placeK}>TO</Text>
-                      <Text style={tn.placeT}>{activeBook.current.to}</Text>
+                      <Text style={tn.placeT}>{nowCard.to}</Text>
                     </View>
                   </View>
-                  <Text style={tn.timeHint}>{activeBook.current.time} · 已离线保存最近行程</Text>
+                  <Text style={tn.timeHint}>{nowCard.time} · 已离线保存最近行程</Text>
                   <View style={tn.phrase}>
                     <View style={{ flex: 1 }}>
-                      <Text style={tn.phraseEn}>{activeBook.current.phrase}</Text>
-                      <Text style={tn.phraseCn}>{activeBook.current.phraseZh}</Text>
+                      <Text style={tn.phraseEn}>{nowCard.phrase}</Text>
+                      <Text style={tn.phraseCn}>{nowCard.phraseZh}</Text>
                     </View>
                     <SpeakBtn
-                      onPress={() => speak(activeBook.current.phrase, 'en-GB', 'trip-now')}
+                      onPress={() => speak(nowCard.phrase, 'en-GB', 'trip-now')}
                       speaking={speakingKey === 'trip-now'}
                       size="sm"
                       color={C.teal}
@@ -898,7 +964,13 @@ function TripNotebook() {
                   </View>
                 )}
 
-                {legs.map((leg, i) => (
+                {legs.map((leg, i) => {
+                  const isFlipped = !!flipped[i];
+                  const pIdx = pocketSel[i] || 0;
+                  const pocket = leg.pockets?.[pIdx] || leg.pockets?.[0];
+                  const sIdx = stepSel[`${i}-${pIdx}`] || 0;
+                  const site = pocket?.steps ? (pocket.steps[sIdx] || pocket.steps[0]) : pocket;
+                  return (
                   <View key={`${leg.day}-${i}`} style={[tn.leg, expanded === i && tn.legOpen]}>
                     <TouchableOpacity
                       style={tn.legHead}
@@ -913,21 +985,70 @@ function TripNotebook() {
                         <Text style={tn.legTitle}>{leg.title}</Text>
                         <Text style={tn.legSub}>{leg.summary}</Text>
                       </View>
+                      {leg.pockets?.length > 0 && (
+                        <TouchableOpacity
+                          style={[tn.flipPill, isFlipped && tn.flipPillAct]}
+                          onPress={() => { setExpanded(i); setFlipped(prev => ({ ...prev, [i]: !prev[i] })); }}
+                        >
+                          <Text style={[tn.flipTxt, isFlipped && tn.flipTxtAct]}>{isFlipped ? '行程' : '现场'}</Text>
+                        </TouchableOpacity>
+                      )}
                       <TouchableOpacity style={tn.editPill} onPress={() => startEdit(i)}>
                         <Text style={tn.editTxt}>改</Text>
                       </TouchableOpacity>
                     </TouchableOpacity>
-                    {expanded === i && (
+                    {expanded === i && !isFlipped && (
                       <View style={tn.legBody}>
                         {leg.detail.split('\n').map((line, idx) => <Text key={idx} style={tn.line}>{line}</Text>)}
-                        <View style={tn.miniPhrase}>
-                          <Text style={tn.miniEn}>{leg.phrase}</Text>
-                          <Text style={tn.miniCn}>这句会跟着当前行程出现。</Text>
+                        {leg.pockets?.length > 0 ? (
+                          <TouchableOpacity style={tn.toSite} onPress={() => { setExpanded(i); setFlipped(prev => ({ ...prev, [i]: true })); }}>
+                            <Text style={tn.toSiteTxt}>翻到现场 · 到了这儿要说的话 →</Text>
+                          </TouchableOpacity>
+                        ) : (
+                          <View style={tn.miniPhrase}>
+                            <Text style={tn.miniEn}>{leg.phrase}</Text>
+                            <Text style={tn.miniCn}>这句会跟着当前行程出现。</Text>
+                          </View>
+                        )}
+                      </View>
+                    )}
+                    {expanded === i && isFlipped && pocket && (
+                      <View style={tn.legBody}>
+                        {/* 场景标签 */}
+                        {leg.pockets.length > 1 && (
+                          <View style={tn.sceneTabs}>
+                            {leg.pockets.map((pk, j) => (
+                              <TouchableOpacity key={pk.label} style={[tn.sceneTab, j === pIdx && tn.sceneTabAct]} onPress={() => setPocketSel(prev => ({ ...prev, [i]: j }))}>
+                                <Text style={[tn.sceneTabTxt, j === pIdx && tn.sceneTabTxtAct]}>{pk.label}</Text>
+                              </TouchableOpacity>
+                            ))}
+                          </View>
+                        )}
+                        {/* 步骤(机场那种多步场景) */}
+                        {pocket.steps && (
+                          <View style={tn.stepPath}>
+                            {pocket.steps.map((st, j) => (
+                              <TouchableOpacity key={st.label} style={[tn.stepTab, j === sIdx && tn.stepTabAct]} onPress={() => setStepSel(prev => ({ ...prev, [`${i}-${pIdx}`]: j }))}>
+                                <Text style={[tn.stepTabTxt, j === sIdx && tn.stepTabTxtAct]}>{st.label}</Text>
+                              </TouchableOpacity>
+                            ))}
+                          </View>
+                        )}
+                        {/* 看什么 / 直接问 / 找不到时 */}
+                        <Text style={tn.siteLabel}>看什么</Text>
+                        <Text style={tn.siteLook}>{site.look}</Text>
+                        <Text style={tn.siteLabel}>直接问</Text>
+                        <View style={tn.sitePhrase}>
+                          <Text style={tn.siteSay}>{site.say}</Text>
+                          <SpeakBtn onPress={() => speak(site.say, 'en-GB', `site-${i}-${pIdx}-${sIdx}`)} speaking={speakingKey === `site-${i}-${pIdx}-${sIdx}`} size="sm" color={C.teal} />
                         </View>
+                        {site.sayZh ? <Text style={tn.siteSayZh}>{site.sayZh}</Text> : null}
+                        <Text style={tn.siteLabel}>找不到时</Text>
+                        <Text style={tn.siteStuck}>{site.stuck}</Text>
                       </View>
                     )}
                   </View>
-                ))}
+                );})}
 
                 <View style={tn.todo}>
                   <Text style={tn.todoTitle}>还缺几件小事</Text>
@@ -1560,6 +1681,28 @@ const tn = StyleSheet.create({
   legSub: { fontSize: 11.5, color: C.muted, marginTop: 2 },
   editPill: { borderWidth: 1, borderColor: C.border, backgroundColor: C.white, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 5 },
   editTxt: { color: C.teal, fontSize: 11, fontWeight: '700' },
+  flipPill: { borderWidth: 1, borderColor: C.border, backgroundColor: C.white, borderRadius: 999, paddingHorizontal: 9, paddingVertical: 5, marginRight: 6 },
+  flipPillAct: { backgroundColor: C.teal, borderColor: C.teal },
+  flipTxt: { color: C.teal, fontSize: 11, fontWeight: '800' },
+  flipTxtAct: { color: C.white },
+  toSite: { marginTop: 8, alignItems: 'center', paddingVertical: 9, borderRadius: 12, backgroundColor: C.tealLight },
+  toSiteTxt: { fontSize: 12, color: C.teal, fontWeight: '800' },
+  sceneTabs: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 4, marginBottom: 2 },
+  sceneTab: { paddingHorizontal: 11, paddingVertical: 6, borderRadius: 999, backgroundColor: C.paper },
+  sceneTabAct: { backgroundColor: C.ink },
+  sceneTabTxt: { fontSize: 11.5, color: C.muted, fontWeight: '700' },
+  sceneTabTxtAct: { color: C.white },
+  stepPath: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 8 },
+  stepTab: { paddingHorizontal: 9, paddingVertical: 5, borderRadius: 8, borderWidth: 1, borderColor: C.border },
+  stepTabAct: { borderColor: C.teal, backgroundColor: C.tealLight },
+  stepTabTxt: { fontSize: 11, color: C.muted, fontWeight: '700' },
+  stepTabTxtAct: { color: C.teal },
+  siteLabel: { fontSize: 10, color: C.mutedLight, fontWeight: '800', letterSpacing: 1, marginTop: 12, marginBottom: 3 },
+  siteLook: { fontSize: 12.5, color: C.muted, lineHeight: 19 },
+  sitePhrase: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 2 },
+  siteSay: { flex: 1, fontSize: 17, color: C.ink, fontWeight: '700', lineHeight: 23 },
+  siteSayZh: { fontSize: 12, color: C.muted, marginTop: 3 },
+  siteStuck: { fontSize: 12.5, color: C.muted, lineHeight: 19, fontStyle: 'italic' },
   emptyBook: { backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 17, padding: 16, marginBottom: 8 },
   emptyTitle: { fontSize: 14, color: C.ink, fontWeight: '800' },
   emptySub: { fontSize: 12, color: C.muted, lineHeight: 18, marginTop: 4 },
