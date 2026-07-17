@@ -13,6 +13,7 @@ import {
   createLedger, joinLedger, addTagMember, myLedgers,
   fetchLedgerData, saveExpenseRemote, deleteExpenseRemote, subscribeLedger,
 } from '../../lib/tripLedger';
+import { SCENE_PACK } from './scenePack';
 
 const TRIP_STORAGE_KEY = 'yan_trip_notebook_v1';
 const MONTH_NUM = { JAN: 1, FEB: 2, MAR: 3, APR: 4, MAY: 5, JUN: 6, JUL: 7, AUG: 8, SEP: 9, OCT: 10, NOV: 11, DEC: 12 };
@@ -153,6 +154,9 @@ function TripNotebook() {
   const [pocketSel, setPocketSel] = useState({}); // { legIdx: pocketIdx }
   const [stepSel, setStepSel] = useState({});     // { 'legIdx-pocketIdx': stepIdx }
   const [siteEdit, setSiteEdit] = useState(null); // 现场编辑草稿 { i, pIdx, sIdx, label, look, say, sayZh, stuck }
+  const [scenesOpen, setScenesOpen] = useState(false);
+  const [sceneFam, setSceneFam] = useState(SCENE_PACK[0].key);
+  const [sceneOpenIdx, setSceneOpenIdx] = useState(0);
   const [editIdx, setEditIdx] = useState(undefined);
   const [draft, setDraft] = useState({ title: '', summary: '', detail: '', phrase: '' });
   const [uploads, setUploads] = useState([]);
@@ -902,6 +906,14 @@ function TripNotebook() {
                   </View>
                 </View>
 
+                <TouchableOpacity style={tn.scenesEntry} activeOpacity={0.85} onPress={() => setScenesOpen(true)}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={tn.scenesEntryTitle}>常用英语 · 照着说</Text>
+                    <Text style={tn.scenesEntrySub}>坐飞机 · 公共交通 · 入住 · 吃饭 · 逛景点</Text>
+                  </View>
+                  <Text style={tn.scenesEntryGo}>→</Text>
+                </TouchableOpacity>
+
                 {toolsOpen && (
                   <View style={tn.toolsCard}>
                     <Text style={tn.uploadTitle}>补进资料</Text>
@@ -1521,6 +1533,59 @@ function TripNotebook() {
           </View>
         </View>
       </Modal>
+
+      <Modal visible={scenesOpen} transparent animationType="slide" onRequestClose={() => setScenesOpen(false)}>
+        <View style={tn.modalLayer}>
+          <Pressable style={tn.scrim} onPress={() => setScenesOpen(false)} />
+          <View style={tn.sheet}>
+            <View style={tn.head}>
+              <View>
+                <Text style={tn.title}>常用英语</Text>
+                <Text style={tn.sub}>到了照着说 · 点 言 听发音</Text>
+              </View>
+              <TouchableOpacity onPress={() => setScenesOpen(false)}>
+                <Text style={tn.close}>×</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={tn.famTabs}>
+              {SCENE_PACK.map(fam => (
+                <TouchableOpacity key={fam.key} style={[tn.famTab, sceneFam === fam.key && tn.famTabAct]} onPress={() => { setSceneFam(fam.key); setSceneOpenIdx(0); }}>
+                  <Text style={[tn.famTabTxt, sceneFam === fam.key && tn.famTabTxtAct]}>{fam.label}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <ScrollView style={tn.body} showsVerticalScrollIndicator={false}>
+              {(SCENE_PACK.find(f => f.key === sceneFam)?.scenes || []).map((scene, si) => {
+                const open = sceneOpenIdx === si;
+                return (
+                  <View key={scene.label} style={[tn.sceneCard, open && tn.sceneCardOpen]}>
+                    <TouchableOpacity style={tn.sceneCardHead} onPress={() => setSceneOpenIdx(open ? -1 : si)} activeOpacity={0.84}>
+                      <Text style={tn.sceneCardTitle}>{scene.label}</Text>
+                      <Text style={tn.sceneCardChevron}>{open ? '—' : '+'}</Text>
+                    </TouchableOpacity>
+                    {open && (
+                      <View style={tn.sceneCardBody}>
+                        {!!scene.look && <Text style={tn.sceneLook}>{scene.look}</Text>}
+                        {scene.lines.map((ln, li) => (
+                          <View key={li} style={tn.sceneLine}>
+                            <View style={{ flex: 1 }}>
+                              {!!ln.when && <Text style={tn.sceneWhen}>{ln.when}</Text>}
+                              <Text style={tn.sceneEn}>{ln.en}</Text>
+                              <Text style={tn.sceneZh}>{ln.zh}</Text>
+                            </View>
+                            <SpeakBtn onPress={() => speak(ln.en, 'en-GB', `pack-${sceneFam}-${si}-${li}`)} speaking={speakingKey === `pack-${sceneFam}-${si}-${li}`} size="sm" color={C.teal} />
+                          </View>
+                        ))}
+                      </View>
+                    )}
+                  </View>
+                );
+              })}
+              <View style={{ height: 24 }} />
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
     </>
   );
 }
@@ -1794,6 +1859,26 @@ const tn = StyleSheet.create({
   siteDel: { fontSize: 12, color: C.lava, fontWeight: '700' },
   siteInput: { backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 11, paddingHorizontal: 11, paddingVertical: 9, fontSize: 13, color: C.ink, marginTop: 4 },
   siteArea: { minHeight: 46, textAlignVertical: 'top', lineHeight: 19 },
+  scenesEntry: { flexDirection: 'row', alignItems: 'center', backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 16, paddingHorizontal: 15, paddingVertical: 13, marginBottom: 12 },
+  scenesEntryTitle: { fontSize: 14.5, color: C.ink, fontWeight: '700' },
+  scenesEntrySub: { fontSize: 11.5, color: C.muted, marginTop: 3 },
+  scenesEntryGo: { fontSize: 16, color: C.teal, fontWeight: '700' },
+  famTabs: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, paddingHorizontal: 14, paddingTop: 12 },
+  famTab: { paddingHorizontal: 12, paddingVertical: 7, borderRadius: 999, backgroundColor: C.paper },
+  famTabAct: { backgroundColor: C.ink },
+  famTabTxt: { fontSize: 12, color: C.muted, fontWeight: '700' },
+  famTabTxtAct: { color: C.white },
+  sceneCard: { backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 14, marginBottom: 9, overflow: 'hidden' },
+  sceneCardOpen: { borderColor: C.teal, borderLeftWidth: 2 },
+  sceneCardHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 14, paddingVertical: 13 },
+  sceneCardTitle: { fontSize: 14.5, color: C.ink, fontWeight: '700' },
+  sceneCardChevron: { fontSize: 15, color: C.mutedLight, fontWeight: '700' },
+  sceneCardBody: { paddingHorizontal: 14, paddingBottom: 12 },
+  sceneLook: { fontSize: 12, color: C.muted, lineHeight: 18, marginBottom: 8 },
+  sceneLine: { flexDirection: 'row', alignItems: 'center', gap: 10, borderTopWidth: 1, borderTopColor: C.border, paddingVertical: 11 },
+  sceneWhen: { fontSize: 10, color: C.teal, fontWeight: '800', letterSpacing: 0.5, marginBottom: 3 },
+  sceneEn: { fontFamily: SERIF, fontSize: 16.5, color: C.ink, lineHeight: 22 },
+  sceneZh: { fontSize: 12, color: C.muted, marginTop: 3 },
   emptyBook: { backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 17, padding: 16, marginBottom: 8 },
   emptyTitle: { fontSize: 14, color: C.ink, fontWeight: '800' },
   emptySub: { fontSize: 12, color: C.muted, lineHeight: 18, marginTop: 4 },
