@@ -166,7 +166,7 @@ function TripNotebook() {
   ]);
   // ── 多人分账(Supabase 共享账本) ──
   const [ledgerId, setLedgerId] = useState(null);      // null = 仅本机;有值 = 已进共享账本
-  const [ledgerCode, setLedgerCode] = useState('');    // 真实加入码
+  const [ledgerCode, setLedgerCode] = useState('');    // 真实邀请码
   const [currency, setCurrency] = useState('€');
   const [remoteMembers, setRemoteMembers] = useState(null); // 远端成员;null 时用本地 ledgerMembers
   const [ledgerBusy, setLedgerBusy] = useState(false);
@@ -277,10 +277,18 @@ function TripNotebook() {
   const isShared = !!ledgerId;
   const expenseCategories = ['晚餐', '车票', '购物', '酒店', '门票', '其他'];
   const splitModes = ['均分', '各自价格', '特殊项'];
+  const MODE_LABEL = { 均分: '均分', 各自价格: '各自付', 特殊项: '单独付' };
   const CURRENCIES = ['€', '£', '₺', '$', '¥', '₩'];
   const money = (value) => {
     const n = Number.parseFloat(String(value || '').replace(/[^\d.-]/g, ''));
     return Number.isFinite(n) ? n : 0;
+  };
+  // 金额输入:只留数字和一个小数点,最多两位小数
+  const clampMoney = (v) => {
+    let s = String(v).replace(/[^\d.]/g, '');
+    const dot = s.indexOf('.');
+    if (dot >= 0) s = s.slice(0, dot + 1) + s.slice(dot + 1).replace(/\./g, '').slice(0, 2);
+    return s;
   };
   const fmtMoney = (value) => `${currency}${Math.abs(value).toFixed(2)}`;
   const specialAmountFor = (draft) => Math.max(0, Math.min(money(draft.specialAmount), money(draft.amount)));
@@ -368,7 +376,9 @@ function TripNotebook() {
     return `${person}:垫付 ${fmtMoney(paid)} · 应承担 ${fmtMoney(owed)} → ${label}`;
   }).join('\n');
   const showSettlement = () => {
-    Alert.alert('一键结算', `${settlement}\n\n——明细——\n${settlementDetail}\n\n(已自动抵消相互往来)`, [{ text: '知道了' }]);
+    const buttons = [{ text: '知道了', style: 'cancel' }];
+    if (expenses.length) buttons.push({ text: '标记已结清', onPress: () => clearExpenses() });
+    Alert.alert('结算', `${settlement}\n\n${settlementDetail}`, buttons);
   };
   // 拉取共享账本的成员 + 账目(供订阅和进入时刷新)
   const refreshLedger = useCallback(async (id) => {
@@ -421,28 +431,28 @@ function TripNotebook() {
     setCurrency(ledger.currency || '€');
     setRemoteMembers([{ name: myName, label: '成员', joined: true, status: '已加入' }]);
     setExpenses([]);
-    Alert.alert('共享账本已建好', `把加入码发给同行者：${ledger.join_code}\n他们在自己手机上「加入」后，记的每一笔都会同步过来。`, [{ text: '知道了' }]);
+    Alert.alert('邀请码', ledger.join_code, [{ text: '好' }]);
   };
 
   const inviteLedger = () => {
     if (!ledgerCode) {
-      Alert.alert('还没有共享账本', '先点「建共享账本」，或输入同行者的加入码加入。', [{ text: '好' }]);
+      Alert.alert('还没有共享账本', '先点「建共享账本」，或输入同行者的邀请码加入。', [{ text: '好' }]);
       return;
     }
-    Alert.alert('邀请同行', `加入码：${ledgerCode}\n\n同行者在他们的言里打开分账、输入这个码即可加入。`, [{ text: '好' }]);
+    Alert.alert('邀请同行', `邀请码：${ledgerCode}\n\n同行者在他们的言里打开分账、输入这个码即可加入。`, [{ text: '好' }]);
   };
 
   const joinLedgerRemote = async () => {
     const cleaned = joinCode.trim().toUpperCase();
     if (!cleaned) {
-      Alert.alert('输入加入码', '把同行者发来的加入码填进来。', [{ text: '好' }]);
+      Alert.alert('输入邀请码', '把同行者发来的邀请码填进来。', [{ text: '好' }]);
       return;
     }
     setLedgerBusy(true);
     const { ledger, error } = await joinLedger({ code: cleaned, displayName: myName });
     setLedgerBusy(false);
     if (error || !ledger) {
-      Alert.alert('加入失败', error === 'offline' ? '需要联网并配置 Supabase 才能加入。' : (error || '请确认加入码。'), [{ text: '好' }]);
+      Alert.alert('加入失败', error === 'offline' ? '需要联网并配置 Supabase 才能加入。' : (error || '请确认邀请码。'), [{ text: '好' }]);
       return;
     }
     setLedgerId(ledger.id);
@@ -450,7 +460,7 @@ function TripNotebook() {
     setCurrency(ledger.currency || '€');
     setJoinCode('');
     refreshLedger(ledger.id);
-    Alert.alert('已加入', `你已加入「${ledger.title}」。之后记的账会和同行者同步。`, [{ text: '好' }]);
+    Alert.alert('已加入', ledger.title, [{ text: '好' }]);
   };
 
   const addMember = async () => {
@@ -622,18 +632,18 @@ function TripNotebook() {
 
   const clearExpenses = () => {
     if (!expenses.length) {
-      Alert.alert('没有账目', '现在账本里还没有可以清空的账。', [{ text: '好' }]);
+      Alert.alert('还没有账目', '记一笔再结清。', [{ text: '好' }]);
       return;
     }
     Alert.alert(
-      '清空当前账目？',
+      '结清并归零？',
       isShared
-        ? '会清空这个共享账本里的账目记录，成员和加入码会保留。'
-        : '会清空本机当前旅行账本里的账目，成员会保留。',
+        ? '这些账目会标为已结清、从账本移除；远端保留记录，成员和邀请码不变。'
+        : '本机这本账的账目会清零，成员保留。',
       [
         { text: '取消', style: 'cancel' },
         {
-          text: '清空',
+          text: '结清',
           style: 'destructive',
           onPress: async () => {
             const remoteIds = isShared ? expenses.map(item => item.id).filter(isUuid) : [];
@@ -837,7 +847,7 @@ function TripNotebook() {
                       <Text style={tn.placeT}>{nowCard.to}</Text>
                     </View>
                   </View>
-                  <Text style={tn.timeHint}>{nowCard.time} · 已离线保存最近行程</Text>
+                  <Text style={tn.timeHint}>{nowCard.time}</Text>
                   <View style={tn.phrase}>
                     <View style={{ flex: 1 }}>
                       <Text style={tn.phraseEn}>{nowCard.phrase}</Text>
@@ -857,7 +867,7 @@ function TripNotebook() {
                     <View style={tn.toolsTop}>
                       <View>
                         <Text style={tn.uploadTitle}>补进资料</Text>
-                        <Text style={tn.uploadSub}>订单、截图、酒店、聊天计划，都属于这本旅行册。</Text>
+                        <Text style={tn.uploadSub}>订单 / 截图 / 酒店</Text>
                       </View>
                       {uploads.length > 0 && <Text style={tn.uploadCount}>{uploads.length} 份</Text>}
                     </View>
@@ -886,25 +896,21 @@ function TripNotebook() {
                             <Text style={tn.ledgerK}>TRIP LEDGER</Text>
                             <Text style={tn.ledgerTitle}>旅行小账本</Text>
                           </View>
-                          <Text style={tn.ledgerBadge}>{specialCount} 个特殊项</Text>
-                        </View>
-                        <Text style={tn.ledgerSub}>先轻轻记下：谁付了、哪些是个人项、哪些要均分。旅行结束再统一结清。</Text>
-                        <View style={tn.ledgerSummary}>
-                          <Text style={tn.ledgerSummaryTxt}>当前记录 {expenses.length} 笔 · 支持账单上传 / 手动修正 / 特殊项标记</Text>
+                          {specialCount > 0 && <Text style={tn.ledgerBadge}>{specialCount} 笔单独付</Text>}
                         </View>
                         <View style={tn.expenseForm}>
                           <TextInput
                             style={tn.ledgerInput}
                             value={expenseDraft.title}
                             onChangeText={title => setExpenseDraft(prev => ({ ...prev, title }))}
-                            placeholder="这笔是什么，如晚餐 / 车票 / 购物"
+                            placeholder="记点什么"
                             placeholderTextColor={C.mutedLight}
                           />
                           <View style={tn.ledgerInputRow}>
                             <TextInput
                               style={[tn.ledgerInput, { flex: 1 }]}
                               value={expenseDraft.amount}
-                              onChangeText={amount => setExpenseDraft(prev => ({ ...prev, amount }))}
+                              onChangeText={v => setExpenseDraft(prev => ({ ...prev, amount: clampMoney(v) }))}
                               placeholder="金额"
                               keyboardType="decimal-pad"
                               placeholderTextColor={C.mutedLight}
@@ -921,7 +927,7 @@ function TripNotebook() {
                             style={[tn.ledgerInput, tn.ledgerNoteInput]}
                             value={expenseDraft.note}
                             onChangeText={note => setExpenseDraft(prev => ({ ...prev, note }))}
-                            placeholder="怎么分：Ning 自己的咖啡 / 两人均分 / Lyra 私人物品…"
+                            placeholder="备注"
                             placeholderTextColor={C.mutedLight}
                           />
                           <View style={tn.ledgerActions}>
@@ -929,7 +935,7 @@ function TripNotebook() {
                               style={[tn.specialBtn, expenseDraft.special && tn.specialBtnAct]}
                               onPress={() => setExpenseDraft(prev => ({ ...prev, special: !prev.special }))}
                             >
-                              <Text style={[tn.specialBtnTxt, expenseDraft.special && tn.specialBtnTxtAct]}>特殊项</Text>
+                              <Text style={[tn.specialBtnTxt, expenseDraft.special && tn.specialBtnTxtAct]}>单独付</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={tn.addExpenseBtn} onPress={saveExpense}>
                               <Text style={tn.addExpenseTxt}>记一笔</Text>
@@ -942,7 +948,7 @@ function TripNotebook() {
                               <Text style={tn.expenseTitle}>{item.title} · {currency}{item.amount}</Text>
                               <Text style={tn.expenseMeta}>{item.payer} 付 · {item.mode} · {item.note}</Text>
                             </View>
-                            {item.special && <Text style={tn.specialPill}>特殊</Text>}
+                            {item.special && <Text style={tn.specialPill}>单独</Text>}
                           </View>
                         ))}
                       </View>
@@ -1007,8 +1013,7 @@ function TripNotebook() {
                         ) : (
                           <View style={tn.miniPhrase}>
                             <Text style={tn.miniEn}>{leg.phrase}</Text>
-                            <Text style={tn.miniCn}>这句会跟着当前行程出现。</Text>
-                          </View>
+                            </View>
                         )}
                       </View>
                     )}
@@ -1070,12 +1075,11 @@ function TripNotebook() {
                 <Text style={tn.mark}>🧮</Text>
                 <View>
                   <Text style={tn.title}>同行分账</Text>
-                  <Text style={tn.sub}>同一账本 · 各自上传 · 最后结清</Text>
                 </View>
               </View>
               <View style={tn.headActions}>
                 <TouchableOpacity style={[tn.clearLedgerBtn, !expenses.length && tn.clearLedgerBtnOff]} onPress={clearExpenses} disabled={!expenses.length}>
-                  <Text style={[tn.clearLedgerTxt, !expenses.length && tn.clearLedgerTxtOff]}>清空</Text>
+                  <Text style={[tn.clearLedgerTxt, !expenses.length && tn.clearLedgerTxtOff]}>结清</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setLedgerOpen(false)}>
                   <Text style={tn.close}>×</Text>
@@ -1089,7 +1093,7 @@ function TripNotebook() {
                     <Text style={tn.ledgerK}>LEDGER</Text>
                     <Text style={tn.ledgerTitle}>分账</Text>
                   </View>
-                  <Text style={tn.ledgerBadge}>{specialCount} 个特殊项</Text>
+                  {specialCount > 0 && <Text style={tn.ledgerBadge}>{specialCount} 笔单独付</Text>}
                 </View>
                 <View style={tn.joinBox}>
                   {/* 共享状态 */}
@@ -1097,7 +1101,7 @@ function TripNotebook() {
                     <View>
                       <View style={tn.codeRow}>
                         <View>
-                          <Text style={tn.codeK}>共享账本 · 加入码</Text>
+                          <Text style={tn.codeK}>共享账本 · 邀请码</Text>
                           <Text style={tn.codeVal}>{ledgerCode}</Text>
                         </View>
                         <TouchableOpacity style={tn.inviteBtn} onPress={inviteLedger}>
@@ -1106,8 +1110,7 @@ function TripNotebook() {
                       </View>
                       <View style={tn.joinOtherBox}>
                         <Text style={tn.joinTitle}>加入另一个账本</Text>
-                        <Text style={tn.joinSub}>如果同行者发了新的邀请码，在这里输入即可切换过去。</Text>
-                        <View style={tn.inviteRow}>
+                                                <View style={tn.inviteRow}>
                           <TextInput
                             style={tn.joinInput}
                             value={joinCode}
@@ -1124,8 +1127,7 @@ function TripNotebook() {
                     </View>
                   ) : (
                     <View>
-                      <Text style={tn.joinTitle}>开一个跨手机的共享账本</Text>
-                      <Text style={tn.joinSub}>建好后把加入码发给同行者,各自在自己手机上记账,自动同步。</Text>
+                      <Text style={tn.joinTitle}>共享账本</Text>
                       <TextInput
                         style={[tn.joinInput, { marginTop: 8, textAlign: 'left', height: 36 }]}
                         value={myName}
@@ -1220,7 +1222,7 @@ function TripNotebook() {
                       style={[tn.modeBtn, expenseDraft.mode === mode && tn.modeBtnAct]}
                       onPress={() => setExpenseDraft(prev => ({ ...prev, mode, special: mode === '特殊项' ? true : prev.special }))}
                     >
-                      <Text style={[tn.modeTxt, expenseDraft.mode === mode && tn.modeTxtAct]}>{mode}</Text>
+                      <Text style={[tn.modeTxt, expenseDraft.mode === mode && tn.modeTxtAct]}>{MODE_LABEL[mode] || mode}</Text>
                     </TouchableOpacity>
                   ))}
                 </View>
@@ -1266,7 +1268,7 @@ function TripNotebook() {
                     <TextInput
                       style={[tn.ledgerInput, { flex: 1 }]}
                       value={expenseDraft.amount}
-                      onChangeText={amount => setExpenseDraft(prev => ({ ...prev, amount }))}
+                      onChangeText={v => setExpenseDraft(prev => ({ ...prev, amount: clampMoney(v) }))}
                       placeholder="总金额"
                       keyboardType="decimal-pad"
                       placeholderTextColor={C.mutedLight}
@@ -1290,7 +1292,7 @@ function TripNotebook() {
                             value={expenseDraft.personShares?.[person] || ''}
                             onChangeText={v => setExpenseDraft(prev => ({
                               ...prev,
-                              personShares: { ...prev.personShares, [person]: v },
+                              personShares: { ...prev.personShares, [person]: clampMoney(v) },
                             }))}
                             placeholder={`${currency}0.00`}
                             keyboardType="decimal-pad"
@@ -1360,7 +1362,7 @@ function TripNotebook() {
                         <TextInput
                           style={[tn.ledgerInput, { flex: 1 }]}
                           value={expenseDraft.specialAmount}
-                          onChangeText={specialAmount => setExpenseDraft(prev => ({ ...prev, specialAmount, special: true }))}
+                          onChangeText={v => setExpenseDraft(prev => ({ ...prev, specialAmount: clampMoney(v), special: true }))}
                           placeholder="金额"
                           keyboardType="decimal-pad"
                           placeholderTextColor={C.mutedLight}
@@ -1373,7 +1375,7 @@ function TripNotebook() {
                       style={[tn.specialBtn, expenseDraft.special && tn.specialBtnAct]}
                       onPress={() => setExpenseDraft(prev => ({ ...prev, special: !prev.special, mode: !prev.special ? '特殊项' : prev.mode }))}
                     >
-                      <Text style={[tn.specialBtnTxt, expenseDraft.special && tn.specialBtnTxtAct]}>标特殊</Text>
+                      <Text style={[tn.specialBtnTxt, expenseDraft.special && tn.specialBtnTxtAct]}>单独付</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={tn.scanBtn} onPress={pickOrder}>
                       <Text style={tn.scanTxt}>上传小票</Text>
@@ -1404,7 +1406,7 @@ function TripNotebook() {
                   onPress={showSettlement}
                 >
                   <View>
-                    <Text style={tn.settleActionK}>一键结算</Text>
+                    <Text style={tn.settleActionK}>结算</Text>
                     <Text style={tn.settleActionMain}>{settlement}</Text>
                   </View>
                   <Text style={tn.settleActionArrow}>→</Text>
@@ -1433,7 +1435,7 @@ function TripNotebook() {
                         </TouchableOpacity>
                       </View>
                     </View>
-                    {item.special && <Text style={tn.specialPill}>特殊</Text>}
+                    {item.special && <Text style={tn.specialPill}>单独</Text>}
                   </View>
                 ))}
               </View>
@@ -1592,7 +1594,7 @@ const tn = StyleSheet.create({
   ledgerHead: { flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', gap: 10 },
   ledgerK: { fontSize: 9, color: C.teal, fontWeight: '900', letterSpacing: 1.4 },
   ledgerTitle: { fontSize: 16, color: C.ink, fontWeight: '800', marginTop: 2 },
-  ledgerBadge: { fontSize: 10, color: '#9a6b16', backgroundColor: '#fff0c6', borderRadius: 999, paddingHorizontal: 8, paddingVertical: 4, overflow: 'hidden', fontWeight: '800' },
+  ledgerBadge: { fontSize: 10, color: C.muted, backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 4, overflow: 'hidden', fontWeight: '700' },
   ledgerSub: { fontSize: 11, color: C.muted, lineHeight: 17, marginTop: 7 },
   settleCard: { backgroundColor: '#20352d', borderRadius: 16, padding: 12, marginTop: 10 },
   settleK: { fontSize: 9, color: 'rgba(255,255,255,0.58)', fontWeight: '900', letterSpacing: 1.4 },
@@ -1626,7 +1628,7 @@ const tn = StyleSheet.create({
   catTxtAct: { color: C.white },
   modeRow: { flexDirection: 'row', gap: 7, marginTop: 9 },
   modeBtn: { flex: 1, borderWidth: 1, borderColor: C.border, backgroundColor: C.white, borderRadius: 12, paddingVertical: 9, alignItems: 'center' },
-  modeBtnAct: { backgroundColor: '#2d584a', borderColor: '#2d584a' },
+  modeBtnAct: { backgroundColor: C.ink, borderColor: C.ink },
   modeTxt: { fontSize: 11, color: C.muted, fontWeight: '900' },
   modeTxtAct: { color: C.white },
   expenseForm: { marginTop: 10 },
@@ -1643,7 +1645,7 @@ const tn = StyleSheet.create({
   ownerTxtAct: { color: C.white },
   ledgerActions: { flexDirection: 'row', gap: 7, marginBottom: 8 },
   specialBtn: { flex: 1, borderWidth: 1, borderColor: C.border, backgroundColor: C.white, borderRadius: 999, paddingVertical: 9, alignItems: 'center' },
-  specialBtnAct: { backgroundColor: '#2d584a', borderColor: '#2d584a' },
+  specialBtnAct: { backgroundColor: C.ink, borderColor: C.ink },
   specialBtnTxt: { fontSize: 12, color: C.muted, fontWeight: '800' },
   specialBtnTxtAct: { color: C.white },
   scanBtn: { flex: 1, borderWidth: 1, borderColor: '#d8c197', backgroundColor: '#fff3d6', borderRadius: 999, paddingVertical: 9, alignItems: 'center' },
@@ -1670,7 +1672,7 @@ const tn = StyleSheet.create({
   expenseOps: { flexDirection: 'row', gap: 12, marginTop: 7 },
   expenseOpTxt: { fontSize: 11, color: C.teal, fontWeight: '900' },
   deleteTxt: { color: '#a85b45' },
-  specialPill: { fontSize: 10, color: C.white, backgroundColor: '#2d584a', borderRadius: 999, paddingHorizontal: 7, paddingVertical: 3, overflow: 'hidden', fontWeight: '800' },
+  specialPill: { fontSize: 10, color: C.muted, backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 7, paddingVertical: 3, overflow: 'hidden', fontWeight: '800' },
   sectionRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginHorizontal: 2, marginTop: 4, marginBottom: 8 },
   section: { fontSize: 14, fontWeight: '800', color: C.teal, letterSpacing: 1, marginBottom: 8 },
   add: { fontSize: 12, color: C.teal, fontWeight: '700' },
