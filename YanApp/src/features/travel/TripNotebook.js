@@ -152,6 +152,7 @@ function TripNotebook() {
   const [flipped, setFlipped] = useState({});     // { legIdx: true } → 显示现场
   const [pocketSel, setPocketSel] = useState({}); // { legIdx: pocketIdx }
   const [stepSel, setStepSel] = useState({});     // { 'legIdx-pocketIdx': stepIdx }
+  const [siteEdit, setSiteEdit] = useState(null); // 现场编辑草稿 { i, pIdx, sIdx, label, look, say, sayZh, stuck }
   const [editIdx, setEditIdx] = useState(undefined);
   const [draft, setDraft] = useState({ title: '', summary: '', detail: '', phrase: '' });
   const [uploads, setUploads] = useState([]);
@@ -542,6 +543,47 @@ function TripNotebook() {
           setEditIdx(undefined);
         },
       },
+    ]);
+  };
+
+  // ── 现场口袋:让用户改/加自己的场景和句子 ──
+  const mutateLegPockets = (legIdx, fn) => {
+    setBooks(prev => prev.map(book => (
+      book.id !== activeBook.id ? book : {
+        ...book,
+        legs: book.legs.map((leg, li) => (li !== legIdx ? leg : { ...leg, pockets: fn(leg.pockets || []) })),
+      }
+    )));
+  };
+  const startSiteEdit = (i, pIdx, sIdx, s, label) => {
+    setSiteEdit({ i, pIdx, sIdx, label: label || '', look: s?.look || '', say: s?.say || '', sayZh: s?.sayZh || '', stuck: s?.stuck || '' });
+  };
+  const saveSite = () => {
+    const { i, pIdx, sIdx, label, look, say, sayZh, stuck } = siteEdit;
+    const fields = { look: look.trim(), say: say.trim(), sayZh: sayZh.trim(), stuck: stuck.trim() };
+    mutateLegPockets(i, pockets => pockets.map((pk, pi) => {
+      if (pi !== pIdx) return pk;
+      if (pk.steps) return { ...pk, label: label.trim() || pk.label, steps: pk.steps.map((st, si) => (si === sIdx ? { ...st, ...fields } : st)) };
+      return { ...pk, label: label.trim() || pk.label, ...fields };
+    }));
+    setSiteEdit(null);
+  };
+  const addPocket = (i) => {
+    mutateLegPockets(i, pockets => [...pockets, { label: '新场景', look: '', say: '', sayZh: '', stuck: '' }]);
+    const newIdx = (legs[i]?.pockets?.length) || 0;
+    setPocketSel(prev => ({ ...prev, [i]: newIdx }));
+    setFlipped(prev => ({ ...prev, [i]: true }));
+    setExpanded(i);
+    startSiteEdit(i, newIdx, 0, {}, '新场景');
+  };
+  const removePocket = (i, pIdx) => {
+    Alert.alert('删掉这个场景？', '', [
+      { text: '取消', style: 'cancel' },
+      { text: '删除', style: 'destructive', onPress: () => {
+        mutateLegPockets(i, pockets => pockets.filter((_, pi) => pi !== pIdx));
+        setPocketSel(prev => ({ ...prev, [i]: 0 }));
+        setSiteEdit(null);
+      } },
     ]);
   };
 
@@ -1009,19 +1051,26 @@ function TripNotebook() {
                             <Text style={tn.toSiteTxt}>翻到现场 · 到了这儿要说的话 →</Text>
                           </TouchableOpacity>
                         ) : (
-                          <View style={tn.miniPhrase}>
-                            <Text style={tn.miniEn}>{leg.phrase}</Text>
+                          <>
+                            <View style={tn.miniPhrase}>
+                              <Text style={tn.miniEn}>{leg.phrase}</Text>
                             </View>
+                            <TouchableOpacity style={tn.toSite} onPress={() => addPocket(i)}>
+                              <Text style={tn.toSiteTxt}>＋ 给这段加个现场场景</Text>
+                            </TouchableOpacity>
+                          </>
                         )}
                       </View>
                     )}
-                    {expanded === i && isFlipped && pocket && (
+                    {expanded === i && isFlipped && pocket && (() => {
+                      const editing = siteEdit && siteEdit.i === i && siteEdit.pIdx === pIdx && siteEdit.sIdx === sIdx;
+                      return (
                       <View style={tn.legBody}>
                         {/* 场景标签 */}
                         {leg.pockets.length > 1 && (
                           <View style={tn.sceneTabs}>
                             {leg.pockets.map((pk, j) => (
-                              <TouchableOpacity key={pk.label} style={[tn.sceneTab, j === pIdx && tn.sceneTabAct]} onPress={() => setPocketSel(prev => ({ ...prev, [i]: j }))}>
+                              <TouchableOpacity key={j} style={[tn.sceneTab, j === pIdx && tn.sceneTabAct]} onPress={() => { setSiteEdit(null); setPocketSel(prev => ({ ...prev, [i]: j })); }}>
                                 <Text style={[tn.sceneTabTxt, j === pIdx && tn.sceneTabTxtAct]}>{pk.label}</Text>
                               </TouchableOpacity>
                             ))}
@@ -1031,25 +1080,56 @@ function TripNotebook() {
                         {pocket.steps && (
                           <View style={tn.stepPath}>
                             {pocket.steps.map((st, j) => (
-                              <TouchableOpacity key={st.label} style={[tn.stepTab, j === sIdx && tn.stepTabAct]} onPress={() => setStepSel(prev => ({ ...prev, [`${i}-${pIdx}`]: j }))}>
+                              <TouchableOpacity key={j} style={[tn.stepTab, j === sIdx && tn.stepTabAct]} onPress={() => { setSiteEdit(null); setStepSel(prev => ({ ...prev, [`${i}-${pIdx}`]: j })); }}>
                                 <Text style={[tn.stepTabTxt, j === sIdx && tn.stepTabTxtAct]}>{st.label}</Text>
                               </TouchableOpacity>
                             ))}
                           </View>
                         )}
+                        {/* 编辑控制条 */}
+                        <View style={tn.siteBar}>
+                          {editing ? (
+                            <>
+                              {!pocket.steps && <TouchableOpacity onPress={() => removePocket(i, pIdx)}><Text style={tn.siteDel}>删场景</Text></TouchableOpacity>}
+                              <View style={{ flex: 1 }} />
+                              <TouchableOpacity onPress={() => setSiteEdit(null)}><Text style={tn.siteBarTxt}>取消</Text></TouchableOpacity>
+                              <TouchableOpacity onPress={saveSite}><Text style={[tn.siteBarTxt, tn.siteSave]}>保存</Text></TouchableOpacity>
+                            </>
+                          ) : (
+                            <>
+                              <View style={{ flex: 1 }} />
+                              <TouchableOpacity onPress={() => startSiteEdit(i, pIdx, sIdx, site, pocket.label)}><Text style={tn.siteBarTxt}>改</Text></TouchableOpacity>
+                              <TouchableOpacity onPress={() => addPocket(i)}><Text style={[tn.siteBarTxt, tn.siteSave]}>＋场景</Text></TouchableOpacity>
+                            </>
+                          )}
+                        </View>
+                        {editing && !pocket.steps && (
+                          <TextInput style={tn.siteInput} value={siteEdit.label} onChangeText={v => setSiteEdit(s => ({ ...s, label: v }))} placeholder="场景名，如 车站 / 酒店" placeholderTextColor={C.mutedLight} />
+                        )}
                         {/* 看什么 / 直接问 / 找不到时 */}
                         <Text style={tn.siteLabel}>看什么</Text>
-                        <Text style={tn.siteLook}>{site.look}</Text>
+                        {editing
+                          ? <TextInput style={[tn.siteInput, tn.siteArea]} value={siteEdit.look} onChangeText={v => setSiteEdit(s => ({ ...s, look: v }))} placeholder="到了看哪些字 / 标识" placeholderTextColor={C.mutedLight} multiline />
+                          : <Text style={tn.siteLook}>{site.look || '—'}</Text>}
                         <Text style={tn.siteLabel}>直接问</Text>
-                        <View style={tn.sitePhrase}>
-                          <Text style={tn.siteSay}>{site.say}</Text>
-                          <SpeakBtn onPress={() => speak(site.say, 'en-GB', `site-${i}-${pIdx}-${sIdx}`)} speaking={speakingKey === `site-${i}-${pIdx}-${sIdx}`} size="sm" color={C.teal} />
-                        </View>
-                        {site.sayZh ? <Text style={tn.siteSayZh}>{site.sayZh}</Text> : null}
+                        {editing
+                          ? <TextInput style={tn.siteInput} value={siteEdit.say} onChangeText={v => setSiteEdit(s => ({ ...s, say: v }))} placeholder="要说的那句英文" placeholderTextColor={C.mutedLight} />
+                          : (
+                            <View style={tn.sitePhrase}>
+                              <Text style={tn.siteSay}>{site.say || '—'}</Text>
+                              {!!site.say && <SpeakBtn onPress={() => speak(site.say, 'en-GB', `site-${i}-${pIdx}-${sIdx}`)} speaking={speakingKey === `site-${i}-${pIdx}-${sIdx}`} size="sm" color={C.teal} />}
+                            </View>
+                          )}
+                        {editing
+                          ? <TextInput style={tn.siteInput} value={siteEdit.sayZh} onChangeText={v => setSiteEdit(s => ({ ...s, sayZh: v }))} placeholder="中文意思(可不填)" placeholderTextColor={C.mutedLight} />
+                          : (site.sayZh ? <Text style={tn.siteSayZh}>{site.sayZh}</Text> : null)}
                         <Text style={tn.siteLabel}>找不到时</Text>
-                        <Text style={tn.siteStuck}>{site.stuck}</Text>
+                        {editing
+                          ? <TextInput style={tn.siteInput} value={siteEdit.stuck} onChangeText={v => setSiteEdit(s => ({ ...s, stuck: v }))} placeholder="兜底那句话" placeholderTextColor={C.mutedLight} />
+                          : <Text style={tn.siteStuck}>{site.stuck || '—'}</Text>}
                       </View>
-                    )}
+                      );
+                    })()}
                   </View>
                 );})}
 
@@ -1708,6 +1788,12 @@ const tn = StyleSheet.create({
   siteSay: { flex: 1, fontFamily: SERIF, fontSize: 18, color: C.ink, lineHeight: 25 },
   siteSayZh: { fontSize: 12, color: C.muted, marginTop: 4 },
   siteStuck: { fontSize: 13, color: C.muted, lineHeight: 20, fontFamily: SERIF },
+  siteBar: { flexDirection: 'row', alignItems: 'center', gap: 14, marginTop: 6 },
+  siteBarTxt: { fontSize: 12, color: C.muted, fontWeight: '700' },
+  siteSave: { color: C.teal, fontWeight: '800' },
+  siteDel: { fontSize: 12, color: C.lava, fontWeight: '700' },
+  siteInput: { backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 11, paddingHorizontal: 11, paddingVertical: 9, fontSize: 13, color: C.ink, marginTop: 4 },
+  siteArea: { minHeight: 46, textAlignVertical: 'top', lineHeight: 19 },
   emptyBook: { backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 17, padding: 16, marginBottom: 8 },
   emptyTitle: { fontSize: 14, color: C.ink, fontWeight: '800' },
   emptySub: { fontSize: 12, color: C.muted, lineHeight: 18, marginTop: 4 },
