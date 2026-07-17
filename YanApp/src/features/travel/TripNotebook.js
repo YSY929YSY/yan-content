@@ -2,7 +2,7 @@
 // 依赖:共享色板 theme、发音组件 Speech、分账同步库 tripLedger。
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  Alert, Keyboard, Modal, Platform, Pressable, ScrollView,
+  Alert, Image, Keyboard, Modal, Platform, Pressable, ScrollView,
   StyleSheet, Text, TextInput, TouchableOpacity, View,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -489,9 +489,14 @@ function TripNotebook() {
       allowsEditing: false,
     });
     if (!result.canceled && result.assets?.[0]?.uri) {
-      setUploads(prev => [{ uri: result.assets[0].uri, name: `订单/截图 ${prev.length + 1}` }, ...prev]);
-      Alert.alert('已放入待识别', '这版先保存账单图片。正式版会识别总额、商户和明细，再让你轻轻确认特殊项。', [{ text: '好' }]);
+      setUploads(prev => [{ id: `u${Date.now()}`, uri: result.assets[0].uri }, ...prev]);
     }
+  };
+  const removeUpload = (id) => {
+    Alert.alert('移除这张？', '', [
+      { text: '取消', style: 'cancel' },
+      { text: '移除', style: 'destructive', onPress: () => setUploads(prev => prev.filter(u => u.id !== id)) },
+    ]);
   };
 
   const startEdit = (idx) => {
@@ -538,13 +543,6 @@ function TripNotebook() {
         },
       },
     ]);
-  };
-
-  const makeShare = () => {
-    setBooks(prev => prev.map(book => (
-      book.id === activeBook.id ? { ...book, shareLabel: '同行版已准备' } : book
-    )));
-    Alert.alert('同行版已准备', '正式版会生成只读链接，并可隐藏订单号、价格和私人备注。', [{ text: '知道了' }]);
   };
 
   const createDraftBook = () => {
@@ -864,13 +862,17 @@ function TripNotebook() {
 
                 {toolsOpen && (
                   <View style={tn.toolsCard}>
-                    <View style={tn.toolsTop}>
-                      <View>
-                        <Text style={tn.uploadTitle}>补进资料</Text>
-                        <Text style={tn.uploadSub}>订单 / 截图 / 酒店</Text>
-                      </View>
-                      {uploads.length > 0 && <Text style={tn.uploadCount}>{uploads.length} 份</Text>}
-                    </View>
+                    <Text style={tn.uploadTitle}>补进资料</Text>
+                    <Text style={tn.uploadSub}>订单 / 截图 / 酒店，先存着</Text>
+                    {uploads.length > 0 && (
+                      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={tn.thumbRow}>
+                        {uploads.map(u => (
+                          <TouchableOpacity key={u.id || u.uri} onPress={() => removeUpload(u.id)} activeOpacity={0.85}>
+                            <Image source={{ uri: u.uri }} style={tn.thumb} />
+                          </TouchableOpacity>
+                        ))}
+                      </ScrollView>
+                    )}
                     <View style={tn.toolGrid}>
                       <TouchableOpacity style={tn.toolBtn} onPress={pickOrder}>
                         <Text style={tn.toolBtnTxt}>上传</Text>
@@ -878,17 +880,13 @@ function TripNotebook() {
                       <TouchableOpacity style={tn.toolBtn} onPress={() => startEdit(null)}>
                         <Text style={tn.toolBtnTxt}>新增段落</Text>
                       </TouchableOpacity>
-                      <TouchableOpacity style={tn.toolBtn} onPress={makeShare}>
-                        <Text style={tn.toolBtnTxt}>同行版</Text>
-                      </TouchableOpacity>
                       <TouchableOpacity style={tn.toolBtn} onPress={() => { setToolsOpen(false); setLedgerOpen(true); }}>
-                        <Text style={tn.toolBtnTxt}>🧮 分账</Text>
+                        <Text style={tn.toolBtnTxt}>分账</Text>
                       </TouchableOpacity>
                       <TouchableOpacity style={tn.toolBtn} onPress={createDraftBook}>
                         <Text style={tn.toolBtnTxt}>新旅行册</Text>
                       </TouchableOpacity>
                     </View>
-                    <Text style={tn.shareState}>{activeBook.shareLabel} · {activeBook.gaps.length} 件待补齐</Text>
                     {ledgerOpen && (
                       <View style={tn.ledgerCard}>
                         <View style={tn.ledgerHead}>
@@ -1580,6 +1578,8 @@ const tn = StyleSheet.create({
   toolsTop: { flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', gap: 10 },
   uploadTitle: { fontSize: 14, fontWeight: '700', color: C.ink },
   uploadSub: { fontSize: 11, color: C.muted, lineHeight: 17, marginTop: 3 },
+  thumbRow: { marginTop: 10 },
+  thumb: { width: 56, height: 56, borderRadius: 9, marginRight: 8, backgroundColor: C.tag, borderWidth: 1, borderColor: C.border },
   uploadCount: { fontSize: 11, color: C.teal, fontWeight: '800', backgroundColor: C.white, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 4, overflow: 'hidden' },
   toolGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 10 },
   toolBtn: { width: '48%', backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 13, paddingVertical: 10, alignItems: 'center' },
