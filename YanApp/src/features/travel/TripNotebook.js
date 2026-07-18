@@ -171,9 +171,7 @@ function TripNotebook() {
   const [expenseEditId, setExpenseEditId] = useState(null);
   const [joinCode, setJoinCode] = useState('');
   const [ledgerMembers, setLedgerMembers] = useState([
-    { name: 'Lyra', label: '我', status: '已加入', joined: true },
-    { name: 'Ning', label: '同行', status: '待加入', joined: false },
-    { name: 'Max', label: '标签', status: '未下载', joined: false, tagOnly: true },
+    { name: '我', label: '我', status: '已加入', joined: true },
   ]);
   // ── 多人分账(Supabase 共享账本) ──
   const [ledgerId, setLedgerId] = useState(null);      // null = 仅本机;有值 = 已进共享账本
@@ -183,24 +181,20 @@ function TripNotebook() {
   const [ledgerBusy, setLedgerBusy] = useState(false);
   const [myName, setMyName] = useState('我');
   const [newMemberName, setNewMemberName] = useState('');
-  const [expenses, setExpenses] = useState([
-    { id: 'meal-1', category: '晚餐', title: 'Galway 晚餐', payer: 'Lyra', amount: '42.80', mode: '各自价格', note: 'Lyra €24.40 · Ning €18.40', special: true, shares: { Lyra: 24.4, Ning: 18.4 } },
-    { id: 'shop-1', category: '购物', title: '便利店补给', payer: 'Ning', amount: '16.20', mode: '特殊项', note: '共同零食 €10.20 · Lyra 私人物品 €6.00', special: true, shares: { Lyra: 11.1, Ning: 5.1 }, specialItem: { owner: 'Lyra', label: '私人物品', amount: 6 } },
-    { id: 'taxi-1', category: '交通', title: 'Heuston 打车', payer: 'Lyra', amount: '15.00', mode: '均分', note: '两人各 €7.50', special: false, shares: { Lyra: 7.5, Ning: 7.5 } },
-  ]);
+  const [expenses, setExpenses] = useState([]);
   const [expenseDraft, setExpenseDraft] = useState({
     category: '晚餐',
     title: '',
     amount: '',
-    payer: 'Lyra',
+    payer: '我',
     mode: '均分',
     note: '',
     special: false,
     personShares: {},          // 各自价格:{ 名字: '金额字符串' },任意人数
-    specialOwner: 'Lyra',
+    specialOwner: '我',
     specialAmount: '',
     specialLabel: '',
-    participants: ['Lyra', 'Ning'],
+    participants: ['我'],
   });
   const { speak, speakingKey } = useSpeech();
   const hydrated = useRef(false);
@@ -928,13 +922,18 @@ function TripNotebook() {
                     <Text style={tn.uploadTitle}>补进资料</Text>
                     <Text style={tn.uploadSub}>订单 / 截图 / 酒店，先存着</Text>
                     {uploads.length > 0 && (
-                      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={tn.thumbRow}>
-                        {uploads.map(u => (
-                          <TouchableOpacity key={u.id || u.uri} onPress={() => removeUpload(u.id)} activeOpacity={0.85}>
-                            <Image source={{ uri: u.uri }} style={tn.thumb} />
-                          </TouchableOpacity>
-                        ))}
-                      </ScrollView>
+                      <>
+                        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={tn.thumbRow}>
+                          {uploads.map(u => (
+                            <TouchableOpacity key={u.id || u.uri} onPress={() => removeUpload(u.id)} activeOpacity={0.85}>
+                              <Image source={{ uri: u.uri }} style={tn.thumb} />
+                            </TouchableOpacity>
+                          ))}
+                        </ScrollView>
+                        <TouchableOpacity onPress={() => startEdit(null)}>
+                          <Text style={tn.fromUpload}>照着资料，新增一段行程 →</Text>
+                        </TouchableOpacity>
+                      </>
                     )}
                     <View style={tn.toolGrid}>
                       <TouchableOpacity style={tn.toolBtn} onPress={pickOrder}>
@@ -1734,6 +1733,7 @@ const tn = StyleSheet.create({
   uploadSub: { fontSize: 11, color: C.muted, lineHeight: 17, marginTop: 3 },
   thumbRow: { marginTop: 10 },
   thumb: { width: 56, height: 56, borderRadius: 9, marginRight: 8, backgroundColor: C.tag, borderWidth: 1, borderColor: C.border },
+  fromUpload: { fontSize: 12, color: C.teal, fontWeight: '700', marginTop: 8 },
   uploadCount: { fontSize: 11, color: C.teal, fontWeight: '800', backgroundColor: C.white, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 4, overflow: 'hidden' },
   toolGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 10 },
   toolBtn: { width: '48%', backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 13, paddingVertical: 10, alignItems: 'center' },
