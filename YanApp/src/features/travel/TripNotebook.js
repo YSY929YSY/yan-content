@@ -14,6 +14,7 @@ import {
   fetchLedgerData, saveExpenseRemote, deleteExpenseRemote, subscribeLedger,
 } from '../../lib/tripLedger';
 import { SCENE_PACK } from './scenePack';
+import { parseItinerary } from '../../lib/parseItinerary';
 
 const TRIP_STORAGE_KEY = 'yan_trip_notebook_v1';
 const MONTH_NUM = { JAN: 1, FEB: 2, MAR: 3, APR: 4, MAY: 5, JUN: 6, JUL: 7, AUG: 8, SEP: 9, OCT: 10, NOV: 11, DEC: 12 };
@@ -164,6 +165,7 @@ function TripNotebook() {
   const [pocketSel, setPocketSel] = useState({}); // { legIdx: pocketIdx }
   const [stepSel, setStepSel] = useState({});     // { 'legIdx-pocketIdx': stepIdx }
   const [siteEdit, setSiteEdit] = useState(null); // 现场编辑草稿 { i, pIdx, sIdx, label, look, say, sayZh, stuck }
+  const [ocrBusy, setOcrBusy] = useState(false);
   const [scenesOpen, setScenesOpen] = useState(false);
   const [sceneFam, setSceneFam] = useState(SCENE_PACK[0].key);
   const [sceneOpenIdx, setSceneOpenIdx] = useState(0);
@@ -508,6 +510,28 @@ function TripNotebook() {
     Alert.alert('移除这张？', '', [
       { text: '取消', style: 'cancel' },
       { text: '移除', style: 'destructive', onPress: () => setUploads(prev => prev.filter(u => u.id !== id)) },
+    ]);
+  };
+
+  // 识别订单:上传的截图 → Claude vision → 行程段,确认后追加到当前旅行册
+  const recognizeUploads = async () => {
+    if (!uploads.length) { Alert.alert('先上传资料', '上传机票/酒店截图,再识别。', [{ text: '好' }]); return; }
+    setOcrBusy(true);
+    const { legs, error } = await parseItinerary(uploads);
+    setOcrBusy(false);
+    if (error) {
+      Alert.alert('识别失败', error === 'offline' ? '需要联网。' : `${error}\n(需要先部署 parse-itinerary 云函数)`, [{ text: '好' }]);
+      return;
+    }
+    if (!legs.length) { Alert.alert('没读出行程', '这些图里没识别到清晰的行程,可手动新增。', [{ text: '好' }]); return; }
+    Alert.alert('识别到 ' + legs.length + ' 段行程', legs.map(l => `${l.mon} ${l.day} · ${l.title}`).join('\n'), [
+      { text: '取消', style: 'cancel' },
+      { text: '加入行程', onPress: () => {
+        setBooks(prev => prev.map(book => (
+          book.id === activeBook.id ? { ...book, legs: [...(book.legs || []), ...legs] } : book
+        )));
+        setToolsOpen(false);
+      } },
     ]);
   };
 
@@ -941,9 +965,14 @@ function TripNotebook() {
                             </TouchableOpacity>
                           ))}
                         </ScrollView>
-                        <TouchableOpacity onPress={() => startEdit(null)}>
-                          <Text style={tn.fromUpload}>照着资料，新增一段行程 →</Text>
-                        </TouchableOpacity>
+                        <View style={tn.uploadActions}>
+                          <TouchableOpacity style={[tn.recognizeBtn, ocrBusy && tn.recognizeBtnOff]} disabled={ocrBusy} onPress={recognizeUploads}>
+                            <Text style={tn.recognizeTxt}>{ocrBusy ? '识别中…' : '识别订单 → 生成行程'}</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity onPress={() => startEdit(null)}>
+                            <Text style={tn.fromUpload}>手动新增</Text>
+                          </TouchableOpacity>
+                        </View>
                       </>
                     )}
                     <View style={tn.toolGrid}>
@@ -1755,7 +1784,11 @@ const tn = StyleSheet.create({
   uploadSub: { fontSize: 11, color: C.muted, lineHeight: 17, marginTop: 3 },
   thumbRow: { marginTop: 10 },
   thumb: { width: 56, height: 56, borderRadius: 9, marginRight: 8, backgroundColor: C.tag, borderWidth: 1, borderColor: C.border },
-  fromUpload: { fontSize: 12, color: C.teal, fontWeight: '700', marginTop: 8 },
+  fromUpload: { fontSize: 12, color: C.muted, fontWeight: '700' },
+  uploadActions: { flexDirection: 'row', alignItems: 'center', gap: 14, marginTop: 10 },
+  recognizeBtn: { backgroundColor: C.ink, borderRadius: 999, paddingHorizontal: 14, paddingVertical: 9 },
+  recognizeBtnOff: { backgroundColor: C.mutedLight },
+  recognizeTxt: { color: C.white, fontSize: 12.5, fontWeight: '800' },
   uploadCount: { fontSize: 11, color: C.teal, fontWeight: '800', backgroundColor: C.white, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 4, overflow: 'hidden' },
   toolGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 10 },
   toolBtn: { width: '48%', backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 13, paddingVertical: 10, alignItems: 'center' },
