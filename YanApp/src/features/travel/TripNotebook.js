@@ -45,6 +45,7 @@ const TRAVEL_BOOKS_SEED = [
         summary: '下午抵达；晚上 Temple Bar',
         detail: 'Lyra：LHR T2 15:10 → DUB T2 16:35 · Aer Lingus EI161\nNing：SHA → CAN → LGW → DUB · 14:30 到\n住：Temple Bar Inn · 40-47 Fleet St',
         phrase: 'Could we check in, please?',
+        family: 'flight',
         pockets: [
           { label: '机场', steps: [
             { label: '取行李', look: '看 baggage claim、carousel、自己的航班号。不要只跟人流走。', say: 'Where is the baggage claim for this flight?', sayZh: '这个航班的行李在哪里取？', stuck: 'Could you show me where to go for baggage claim?' },
@@ -62,6 +63,7 @@ const TRAVEL_BOOKS_SEED = [
         summary: '上午 Trinity；下午火车去 Galway',
         detail: 'Dublin Heuston 15:35 → Galway Ceannt 18:00\n先回 Temple Bar Inn 取行李，再打车去 Heuston。',
         phrase: 'Which platform does the train to Galway leave from?',
+        family: 'transit',
         pockets: [
           { label: '车站', look: '看 platform、departure time、Galway / Ceannt。', say: 'Which platform does the train to Galway leave from?', sayZh: '去 Galway 的火车在几号站台？', stuck: 'Could you point me to the platform for Galway?' },
           { label: '寄存', look: '看酒店前台是否能 hold luggage。', say: 'Could we leave our luggage here until this afternoon?', sayZh: '我们能把行李寄存到下午吗？', stuck: 'We will come back before going to the station.' },
@@ -74,6 +76,7 @@ const TRAVEL_BOOKS_SEED = [
         summary: 'Galway 出发，一天给海风',
         detail: '建议报 Galway 出发的一日团：Cliffs of Moher + Burren。\n自然景观对中文讲解依赖不高。',
         phrase: 'What time do we need to be back here?',
+        family: 'sights',
         pockets: [
           { label: '集合', look: '看 meeting point、bus number、return time。', say: 'What time do we need to be back here?', sayZh: '我们几点要回到这里？', stuck: 'Could you write down the meeting time for me?' },
         ],
@@ -85,6 +88,7 @@ const TRAVEL_BOOKS_SEED = [
         summary: '移动日；晚上 The Flint',
         detail: '待补具体交通。建议上午从 Galway 出发，经 Dublin 转 Belfast。\n住：The Flint · 48 Howard St · 7/18—7/21',
         phrase: 'Could we leave our luggage here?',
+        family: 'transit',
         pockets: [
           { label: '换乘', look: '看 Dublin / Belfast、coach bay、ticket QR code。', say: 'Is this the bus to Belfast?', sayZh: '这是去贝尔法斯特的车吗？', stuck: 'Could you check if this is the right bus for Belfast?' },
           { label: '酒店', look: '看 check-in time、booking name、luggage storage。', say: 'Could we leave our luggage here?', sayZh: '我们能把行李寄存在这里吗？', stuck: 'Our check-in is later. Could you hold these bags?' },
@@ -97,6 +101,7 @@ const TRAVEL_BOOKS_SEED = [
         summary: 'BFS → STN → SAW → NAV',
         detail: '16:40 BFS → STN 18:00 · Ryanair UK RK0158\n23:00 STN → SAW 05:00 · AJet VF1992\n07:45 SAW → NAV 09:00 · AJet VF3268',
         phrase: 'Where is the shuttle to Göreme?',
+        family: 'flight',
         pockets: [
           { label: '机场', steps: [
             { label: '值机', look: '先确认是否已 online check-in；看 bag drop。', say: 'Where is the bag drop for this flight?', sayZh: '这个航班在哪里托运行李？', stuck: 'Could you help me check in for this flight?' },
@@ -117,6 +122,7 @@ const TRAVEL_BOOKS_SEED = [
         summary: '夜巴；Esenler 或 Alibeyköy',
         detail: '候选：20:15 Göreme Otogarı → Istanbul。\n住老城选 Esenler；住 Galata/Taksim 可考虑 Alibeyköy。',
         phrase: 'Does this bus stop at Alibeyköy?',
+        family: 'transit',
         pockets: [
           { label: '巴士站', look: '看 company name、destination、seat、luggage tag。', say: 'Does this bus stop at Alibeyköy?', sayZh: '这班车在 Alibeyköy 停吗？', stuck: 'Could you check my ticket and tell me where to wait?' },
           { label: '行李', look: '看工作人员是否给 luggage tag。拍一下行李牌。', say: 'Do I get a luggage tag for this bag?', sayZh: '这个行李有行李牌吗？', stuck: 'Could you put this bag under the bus?' },
@@ -295,6 +301,9 @@ function TripNotebook() {
     if (dot >= 0) s = s.slice(0, dot + 1) + s.slice(dot + 1).replace(/\./g, '').slice(0, 2);
     return s;
   };
+  const stripLook = (t) => String(t || '').replace(/^看\s*/, '');   // 标签已是「看什么」,内容里的「看」冗余
+  const famLabelOf = (k) => SCENE_PACK.find(f => f.key === k)?.label || '';
+  const openScenes = (fam) => { if (fam) setSceneFam(fam); setSceneOpenIdx(0); setScenesOpen(true); };
   const fmtMoney = (value) => `${currency}${Math.abs(value).toFixed(2)}`;
   const specialAmountFor = (draft) => Math.max(0, Math.min(money(draft.specialAmount), money(draft.amount)));
   // 均分但守恒:前 n-1 人取两位小数,最后一人拿余数(3 人分 €10 → 3.33/3.33/3.34)
@@ -1058,6 +1067,11 @@ function TripNotebook() {
                     {expanded === i && !isFlipped && (
                       <View style={tn.legBody}>
                         {leg.detail.split('\n').map((line, idx) => <Text key={idx} style={tn.line}>{line}</Text>)}
+                        {leg.family && (
+                          <TouchableOpacity style={tn.legScenes} onPress={() => openScenes(leg.family)}>
+                            <Text style={tn.legScenesTxt}>常用英语 · {famLabelOf(leg.family)} →</Text>
+                          </TouchableOpacity>
+                        )}
                         {leg.pockets?.length > 0 ? (
                           <TouchableOpacity style={tn.toSite} onPress={() => { setExpanded(i); setFlipped(prev => ({ ...prev, [i]: true })); }}>
                             <Text style={tn.toSiteTxt}>翻到现场 · 到了这儿要说的话 →</Text>
@@ -1118,11 +1132,11 @@ function TripNotebook() {
                         {editing && !pocket.steps && (
                           <TextInput style={tn.siteInput} value={siteEdit.label} onChangeText={v => setSiteEdit(s => ({ ...s, label: v }))} placeholder="场景名，如 车站 / 酒店" placeholderTextColor={C.mutedLight} />
                         )}
-                        {/* 看什么 / 直接问 / 找不到时 */}
+                        {/* 看什么 / 直接问 */}
                         <Text style={tn.siteLabel}>看什么</Text>
                         {editing
                           ? <TextInput style={[tn.siteInput, tn.siteArea]} value={siteEdit.look} onChangeText={v => setSiteEdit(s => ({ ...s, look: v }))} placeholder="到了看哪些字 / 标识" placeholderTextColor={C.mutedLight} multiline />
-                          : <Text style={tn.siteLook}>{site.look || '—'}</Text>}
+                          : <Text style={tn.siteLook}>{stripLook(site.look) || '—'}</Text>}
                         <Text style={tn.siteLabel}>直接问</Text>
                         {editing
                           ? <TextInput style={tn.siteInput} value={siteEdit.say} onChangeText={v => setSiteEdit(s => ({ ...s, say: v }))} placeholder="要说的那句英文" placeholderTextColor={C.mutedLight} />
@@ -1135,10 +1149,6 @@ function TripNotebook() {
                         {editing
                           ? <TextInput style={tn.siteInput} value={siteEdit.sayZh} onChangeText={v => setSiteEdit(s => ({ ...s, sayZh: v }))} placeholder="中文意思(可不填)" placeholderTextColor={C.mutedLight} />
                           : (site.sayZh ? <Text style={tn.siteSayZh}>{site.sayZh}</Text> : null)}
-                        <Text style={tn.siteLabel}>找不到时</Text>
-                        {editing
-                          ? <TextInput style={tn.siteInput} value={siteEdit.stuck} onChangeText={v => setSiteEdit(s => ({ ...s, stuck: v }))} placeholder="兜底那句话" placeholderTextColor={C.mutedLight} />
-                          : <Text style={tn.siteStuck}>{site.stuck || '—'}</Text>}
                       </View>
                       );
                     })()}
@@ -1152,6 +1162,57 @@ function TripNotebook() {
               </ScrollView>
             )}
           </View>
+
+          {/* 常用英语:小本子内部覆盖层(不叠 Modal,避免 iOS 模态叠模态打不开) */}
+          {scenesOpen && (
+            <View style={tn.scenesOverlay}>
+              <View style={tn.head}>
+                <View>
+                  <Text style={tn.title}>常用英语</Text>
+                  <Text style={tn.sub}>到了照着说 · 点 言 听发音</Text>
+                </View>
+                <TouchableOpacity onPress={() => setScenesOpen(false)}>
+                  <Text style={tn.close}>×</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={tn.famTabs}>
+                {SCENE_PACK.map(fam => (
+                  <TouchableOpacity key={fam.key} style={[tn.famTab, sceneFam === fam.key && tn.famTabAct]} onPress={() => { setSceneFam(fam.key); setSceneOpenIdx(0); }}>
+                    <Text style={[tn.famTabTxt, sceneFam === fam.key && tn.famTabTxtAct]}>{fam.label}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+              <ScrollView style={tn.body} showsVerticalScrollIndicator={false}>
+                {(SCENE_PACK.find(f => f.key === sceneFam)?.scenes || []).map((scene, si) => {
+                  const open = sceneOpenIdx === si;
+                  return (
+                    <View key={scene.label} style={[tn.sceneCard, open && tn.sceneCardOpen]}>
+                      <TouchableOpacity style={tn.sceneCardHead} onPress={() => setSceneOpenIdx(open ? -1 : si)} activeOpacity={0.84}>
+                        <Text style={tn.sceneCardTitle}>{scene.label}</Text>
+                        <Text style={tn.sceneCardChevron}>{open ? '—' : '+'}</Text>
+                      </TouchableOpacity>
+                      {open && (
+                        <View style={tn.sceneCardBody}>
+                          {!!scene.look && <Text style={tn.sceneLook}>{stripLook(scene.look)}</Text>}
+                          {scene.lines.map((ln, li) => (
+                            <View key={li} style={tn.sceneLine}>
+                              <View style={{ flex: 1 }}>
+                                {!!ln.when && <Text style={tn.sceneWhen}>{ln.when}</Text>}
+                                <Text style={tn.sceneEn}>{ln.en}</Text>
+                                <Text style={tn.sceneZh}>{ln.zh}</Text>
+                              </View>
+                              <SpeakBtn onPress={() => speak(ln.en, 'en-GB', `pack-${sceneFam}-${si}-${li}`)} speaking={speakingKey === `pack-${sceneFam}-${si}-${li}`} size="sm" color={C.teal} />
+                            </View>
+                          ))}
+                        </View>
+                      )}
+                    </View>
+                  );
+                })}
+                <View style={{ height: 24 }} />
+              </ScrollView>
+            </View>
+          )}
         </View>
       </Modal>
 
@@ -1534,58 +1595,6 @@ function TripNotebook() {
         </View>
       </Modal>
 
-      <Modal visible={scenesOpen} transparent animationType="slide" onRequestClose={() => setScenesOpen(false)}>
-        <View style={tn.modalLayer}>
-          <Pressable style={tn.scrim} onPress={() => setScenesOpen(false)} />
-          <View style={tn.sheet}>
-            <View style={tn.head}>
-              <View>
-                <Text style={tn.title}>常用英语</Text>
-                <Text style={tn.sub}>到了照着说 · 点 言 听发音</Text>
-              </View>
-              <TouchableOpacity onPress={() => setScenesOpen(false)}>
-                <Text style={tn.close}>×</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={tn.famTabs}>
-              {SCENE_PACK.map(fam => (
-                <TouchableOpacity key={fam.key} style={[tn.famTab, sceneFam === fam.key && tn.famTabAct]} onPress={() => { setSceneFam(fam.key); setSceneOpenIdx(0); }}>
-                  <Text style={[tn.famTabTxt, sceneFam === fam.key && tn.famTabTxtAct]}>{fam.label}</Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-            <ScrollView style={tn.body} showsVerticalScrollIndicator={false}>
-              {(SCENE_PACK.find(f => f.key === sceneFam)?.scenes || []).map((scene, si) => {
-                const open = sceneOpenIdx === si;
-                return (
-                  <View key={scene.label} style={[tn.sceneCard, open && tn.sceneCardOpen]}>
-                    <TouchableOpacity style={tn.sceneCardHead} onPress={() => setSceneOpenIdx(open ? -1 : si)} activeOpacity={0.84}>
-                      <Text style={tn.sceneCardTitle}>{scene.label}</Text>
-                      <Text style={tn.sceneCardChevron}>{open ? '—' : '+'}</Text>
-                    </TouchableOpacity>
-                    {open && (
-                      <View style={tn.sceneCardBody}>
-                        {!!scene.look && <Text style={tn.sceneLook}>{scene.look}</Text>}
-                        {scene.lines.map((ln, li) => (
-                          <View key={li} style={tn.sceneLine}>
-                            <View style={{ flex: 1 }}>
-                              {!!ln.when && <Text style={tn.sceneWhen}>{ln.when}</Text>}
-                              <Text style={tn.sceneEn}>{ln.en}</Text>
-                              <Text style={tn.sceneZh}>{ln.zh}</Text>
-                            </View>
-                            <SpeakBtn onPress={() => speak(ln.en, 'en-GB', `pack-${sceneFam}-${si}-${li}`)} speaking={speakingKey === `pack-${sceneFam}-${si}-${li}`} size="sm" color={C.teal} />
-                          </View>
-                        ))}
-                      </View>
-                    )}
-                  </View>
-                );
-              })}
-              <View style={{ height: 24 }} />
-            </ScrollView>
-          </View>
-        </View>
-      </Modal>
     </>
   );
 }
@@ -1859,6 +1868,9 @@ const tn = StyleSheet.create({
   siteDel: { fontSize: 12, color: C.lava, fontWeight: '700' },
   siteInput: { backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 11, paddingHorizontal: 11, paddingVertical: 9, fontSize: 13, color: C.ink, marginTop: 4 },
   siteArea: { minHeight: 46, textAlignVertical: 'top', lineHeight: 19 },
+  scenesOverlay: { position: 'absolute', top: '13%', left: 12, right: 12, bottom: 12, backgroundColor: '#fbfaf7', borderRadius: 26, borderWidth: 1, borderColor: C.border, overflow: 'hidden' },
+  legScenes: { marginTop: 8, alignSelf: 'flex-start', borderWidth: 1, borderColor: C.border, borderRadius: 999, paddingHorizontal: 11, paddingVertical: 6 },
+  legScenesTxt: { fontSize: 12, color: C.teal, fontWeight: '700' },
   scenesEntry: { flexDirection: 'row', alignItems: 'center', backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 16, paddingHorizontal: 15, paddingVertical: 13, marginBottom: 12 },
   scenesEntryTitle: { fontSize: 14.5, color: C.ink, fontWeight: '700' },
   scenesEntrySub: { fontSize: 11.5, color: C.muted, marginTop: 3 },
