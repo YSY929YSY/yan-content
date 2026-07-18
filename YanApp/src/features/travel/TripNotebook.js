@@ -19,13 +19,14 @@ const TRIP_STORAGE_KEY = 'yan_trip_notebook_v1';
 const MONTH_NUM = { JAN: 1, FEB: 2, MAR: 3, APR: 4, MAY: 5, JUN: 6, JUL: 7, AUG: 8, SEP: 9, OCT: 10, NOV: 11, DEC: 12 };
 const MONTH_ABBR = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
-const TRAVEL_BOOKS_SEED = [
-  {
-    id: 'ireland-turkey-2026',
-    title: 'Ireland / Türkiye 2026',
-    subtitle: 'Lyra & Ning · 7月15日—7月29日',
-    status: '当前旅程',
-    shareLabel: '同行版未生成',
+// 示例行程(不进默认数据,新用户可在空态「看看示例」时载入)
+const SAMPLE_TRIP = {
+    id: 'sample-ireland',
+    title: 'Ireland / Türkiye（示例）',
+    subtitle: '这是一份示例,看完可删',
+    status: '示例',
+    sample: true,
+    shareLabel: '',
     current: {
       eyebrow: '现在 · 7月16日',
       title: '取行李，去 Heuston 坐火车。',
@@ -129,24 +130,27 @@ const TRAVEL_BOOKS_SEED = [
         ],
       },
     ],
-  },
+};
+
+// 全新用户默认:一本空的起始册(真实首屏,不预置任何行程)
+const TRAVEL_BOOKS_SEED = [
   {
-    id: 'next-trip-draft',
-    title: '下一本旅行册',
-    subtitle: '上传订单后，言会先整理成小卡',
-    status: '草稿',
-    shareLabel: '未分享',
+    id: 'my-first-trip',
+    title: '我的旅行',
+    subtitle: '还没开始 · 从上传订单或新增一段开始',
+    status: '进行中',
+    shareLabel: '',
     current: {
-      eyebrow: '草稿',
-      title: '还没有下一段路。',
-      note: '上传机票、酒店或截图后，这里会变成路上能用的小纸条。',
-      from: '出发地',
+      eyebrow: '还没有行程',
+      title: '开始记这一趟。',
+      note: '上传机票 / 酒店截图,或手动新增第一段路。到了照着「常用英语」说就行。',
+      from: '出发',
       to: '目的地',
-      time: '待补',
-      phrase: 'Could you help me check this itinerary?',
-      phraseZh: '可以帮我确认一下这个行程吗？',
+      time: '',
+      phrase: 'Could you help me with this, please?',
+      phraseZh: '可以帮我一下吗？',
     },
-    gaps: ['上传第一份订单', '补入住宿', '生成同行版'],
+    gaps: [],
     legs: [],
   },
 ];
@@ -621,6 +625,13 @@ function TripNotebook() {
     setToolsOpen(true);
   };
 
+  const loadSample = () => {
+    setBooks(prev => (prev.some(b => b.id === SAMPLE_TRIP.id) ? prev : [...prev, SAMPLE_TRIP]));
+    setActiveBookId(SAMPLE_TRIP.id);
+    setExpanded(null);
+    setToolsOpen(false);
+  };
+
   const toggleParticipant = (person) => {
     setExpenseDraft(prev => {
       const current = prev.participants || [];
@@ -1025,8 +1036,19 @@ function TripNotebook() {
 
                 {legs.length === 0 && (
                   <View style={tn.emptyBook}>
-                    <Text style={tn.emptyTitle}>这本旅行册还是空的。</Text>
-                    <Text style={tn.emptySub}>点右上角“补”，上传资料或手动新增第一段路。</Text>
+                    <Text style={tn.emptyTitle}>开始记你的第一趟。</Text>
+                    <Text style={tn.emptySub}>上传机票 / 酒店截图,或手动写第一段路。到了照着上面的「常用英语」说。</Text>
+                    <View style={tn.emptyBtns}>
+                      <TouchableOpacity style={tn.emptyBtnDark} onPress={() => startEdit(null)}>
+                        <Text style={tn.emptyBtnDarkTxt}>手动新增一段</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity style={tn.emptyBtn} onPress={pickOrder}>
+                        <Text style={tn.emptyBtnTxt}>上传资料</Text>
+                      </TouchableOpacity>
+                    </View>
+                    <TouchableOpacity onPress={loadSample}>
+                      <Text style={tn.emptySample}>先看看示例行程 →</Text>
+                    </TouchableOpacity>
                   </View>
                 )}
 
@@ -1892,6 +1914,12 @@ const tn = StyleSheet.create({
   sceneEn: { fontFamily: SERIF, fontSize: 16.5, color: C.ink, lineHeight: 22 },
   sceneZh: { fontSize: 12, color: C.muted, marginTop: 3 },
   emptyBook: { backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 17, padding: 16, marginBottom: 8 },
+  emptyBtns: { flexDirection: 'row', gap: 8, marginTop: 14 },
+  emptyBtnDark: { flex: 1, backgroundColor: C.ink, borderRadius: 999, paddingVertical: 11, alignItems: 'center' },
+  emptyBtnDarkTxt: { color: C.white, fontSize: 13, fontWeight: '700' },
+  emptyBtn: { flex: 1, borderWidth: 1, borderColor: C.border, borderRadius: 999, paddingVertical: 11, alignItems: 'center' },
+  emptyBtnTxt: { color: C.ink, fontSize: 13, fontWeight: '700' },
+  emptySample: { color: C.teal, fontSize: 12, fontWeight: '700', marginTop: 12, textAlign: 'center' },
   emptyTitle: { fontSize: 14, color: C.ink, fontWeight: '800' },
   emptySub: { fontSize: 12, color: C.muted, lineHeight: 18, marginTop: 4 },
   legBody: { paddingHorizontal: 14, paddingBottom: 14, paddingLeft: 64 },
