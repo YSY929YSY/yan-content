@@ -1,12 +1,14 @@
 // 言 · 订单识别 Edge Function
-// 收订单/机票/酒店截图 → Claude vision 读成结构化行程段 → 返回给客户端确认后入库。
+// 收订单/机票/酒店截图 → 通义千问 VL 读成结构化行程段 → 返回给客户端确认后入库。
 // 部署:
 //   supabase functions deploy parse-itinerary
-//   supabase secrets set ANTHROPIC_API_KEY=sk-ant-...
+//   supabase secrets set DASHSCOPE_API_KEY=sk-...   (阿里云百炼 API Key)
 // 说明:key 只存在服务端(Supabase secrets),App 包里没有 key。
+// 备注:OCR 在服务端跑,与用户所在国家无关;用户只连 Supabase。
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const ANTHROPIC_API_KEY = Deno.env.get("ANTHROPIC_API_KEY") ?? "";
+const DASHSCOPE_API_KEY = Deno.env.get("DASHSCOPE_API_KEY") ?? "";
+const QWEN_MODEL = Deno.env.get("QWEN_VL_MODEL") ?? "qwen-vl-max";
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
 const SUPABASE_ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY") ?? "";
 
@@ -30,57 +32,45 @@ const SYSTEM = `你是旅行订单解析器。用户会给你机票、火车票�
 - 读不出的字段留空字符串,不要编造。
 输出形如:{"legs":[{"mon":"JUL","day":"16","title":"...","summary":"...","detail":"...","family":"transit"}]}`;
 
-async function callClaude(images: string[]): Promise<any> {
-  const content: any[] = images.map((data) => {
-    const m = data.match(/^data:(image\/\w+);base64,(.*)$/);
-    return {
-      type: "image",
-      source: { type: "base64", media_type: m ? m[1] : "image/jpeg", data: m ? m[2] : data },
-    };
-  });
-  content.push({ type: "text", text: "把这些订单里的行程解析成 JSON。" });
+// 通义千问 VL(阿里云百炼)· OpenAI 兼容接口。images 为 data URL,直接塞 image_url。
+async function callQwen(images: string[]): Promise<any> {
+  const content: any[] = images.map((data) => ({
+    type: "image_url",
+    image_url: { url: data },
+  }));
+  content.push({ type: "text", text: "把这些订单里的行程解析成 JSON。只输出 JSON。" });
 
-  const resp = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      "x-api-key": ANTHROPIC_API_KEY,
-      "anthropic-version": "2023-06-01",
+  const resp = await fetch(
+    "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${DASHSCOPE_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: QWEN_MODEL,
+        max_tokens: 2048,
+        response_format: { type: "json_object" },
+        messages: [
+          { role: "system", content: SYSTEM },
+          { role: "user", content },
+        ],
+      }),
     },
-    body: JSON.stringify({
-      model: "claude-sonnet-5",
-      max_tokens: 2048,
-      system: SYSTEM,
-      output_config: { format: { type: "json_schema", schema: {
-        type: "object",
-        additionalProperties: false,
-        properties: {
-          legs: { type: "array", items: {
-            type: "object",
-            additionalProperties: false,
-            properties: {
-              mon: { type: "string" }, day: { type: "string" },
-              title: { type: "string" }, summary: { type: "string" },
-              detail: { type: "string" }, family: { type: "string" },
-            },
-            required: ["mon", "day", "title", "summary", "detail", "family"],
-          } },
-        },
-        required: ["legs"],
-      } } },
-      messages: [{ role: "user", content }],
-    }),
-  });
-  if (!resp.ok) throw new Error(`claude ${resp.status}: ${(await resp.text()).slice(0, 300)}`);
+  );
+  if (!resp.ok) throw new Error(`qwen ${resp.status}: ${(await resp.text()).slice(0, 300)}`);
   const json = await resp.json();
-  const text = (json.content || []).find((b: any) => b.type === "text")?.text || "{}";
-  return JSON.parse(text);
+  const text = json.choices?.[0]?.message?.content || "{}";
+  // 兼容模型偶尔用 ```json 包裹
+  const cleaned = text.replace(/^```(?:json)?\s*/i, "").replace(/\s*```\s*$/i, "").trim();
+  return JSON.parse(cleaned);
 }
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
   try {
-    if (!ANTHROPIC_API_KEY) throw new Error("服务端没配置 ANTHROPIC_API_KEY");
+    if (!DASHSCOPE_API_KEY) throw new Error("服务端没配置 DASHSCOPE_API_KEY");
     // 校验调用方是已登录的 Supabase 用户(挡住匿名滥用)
     const auth = req.headers.get("Authorization") || "";
     if (SUPABASE_URL && SUPABASE_ANON_KEY) {
@@ -90,7 +80,7 @@ Deno.serve(async (req) => {
     }
     const { images } = await req.json();
     if (!Array.isArray(images) || !images.length) throw new Error("没有图片");
-    const out = await callClaude(images.slice(0, 4)); // 一次最多 4 张
+    const out = await callQwen(images.slice(0, 4)); // 一次最多 4 张
     return new Response(JSON.stringify(out), { headers: { ...cors, "content-type": "application/json" } });
   } catch (e) {
     return new Response(JSON.stringify({ error: String(e?.message || e) }), {
