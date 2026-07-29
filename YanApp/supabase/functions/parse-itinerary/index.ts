@@ -18,6 +18,19 @@ const cors = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
+// 小票:只认总额和币种。刻意不去猜「谁点了什么」——那个识别不可靠,
+// 而分账的主场景本来就是均分,填对金额就够了。
+const SYSTEM_RECEIPT = `你是消费小票解析器。用户会给你餐厅账单、超市小票或收银条。
+只输出 JSON,不要任何解释文字。
+
+规则:
+- total:实付总额的数字,不带货币符号,如 "43.50"。有小费/服务费的取最终应付那一行。
+- currency:三字母货币代码(EUR/GBP/TRY/USD/CNY/KRW/JPY 等)。看货币符号或语言判断,拿不准就留空。
+- merchant:店名,简短。读不出留空。
+- 只认总额,不要拆分单品,不要猜谁点了什么。
+- 任何读不出的字段留空字符串,绝对不要编造数字。
+输出形如:{"total":"43.50","currency":"EUR","merchant":"Temple Bar"}`;
+
 // 让模型把订单读成这个结构(和 App 里的 leg 对齐)
 const SYSTEM = `你是旅行订单解析器。用户会给你机票、火车票、酒店确认单或行程截图。
 把其中每一段行程抽成结构化 JSON。只输出 JSON,不要任何解释文字。
@@ -33,12 +46,16 @@ const SYSTEM = `你是旅行订单解析器。用户会给你机票、火车票�
 输出形如:{"legs":[{"mon":"JUL","day":"16","title":"...","summary":"...","detail":"...","family":"transit"}]}`;
 
 // 通义千问 VL(阿里云百炼)· OpenAI 兼容接口。images 为 data URL,直接塞 image_url。
-async function callQwen(images: string[]): Promise<any> {
+async function callQwen(images: string[], kind: string): Promise<any> {
+  const receipt = kind === "receipt";
   const content: any[] = images.map((data) => ({
     type: "image_url",
     image_url: { url: data },
   }));
-  content.push({ type: "text", text: "把这些订单里的行程解析成 JSON。只输出 JSON。" });
+  content.push({
+    type: "text",
+    text: receipt ? "读出这张小票的总额和币种,只输出 JSON。" : "把这些订单里的行程解析成 JSON。只输出 JSON。",
+  });
 
   const resp = await fetch(
     "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
@@ -53,7 +70,7 @@ async function callQwen(images: string[]): Promise<any> {
         max_tokens: 2048,
         response_format: { type: "json_object" },
         messages: [
-          { role: "system", content: SYSTEM },
+          { role: "system", content: receipt ? SYSTEM_RECEIPT : SYSTEM },
           { role: "user", content },
         ],
       }),
@@ -78,9 +95,12 @@ Deno.serve(async (req) => {
       const { data: { user } } = await sb.auth.getUser();
       if (!user) return new Response(JSON.stringify({ error: "需要登录" }), { status: 401, headers: { ...cors, "content-type": "application/json" } });
     }
-    const { images } = await req.json();
+    const { images, kind } = await req.json();
     if (!Array.isArray(images) || !images.length) throw new Error("没有图片");
-    const out = await callQwen(images.slice(0, 4)); // 一次最多 4 张
+    // kind: "receipt" 读小票总额;缺省读行程订单
+    const out = kind === "receipt"
+      ? await callQwen(images.slice(0, 1), "receipt")   // 小票一次一张
+      : await callQwen(images.slice(0, 4), "itinerary");
     return new Response(JSON.stringify(out), { headers: { ...cors, "content-type": "application/json" } });
   } catch (e) {
     return new Response(JSON.stringify({ error: String(e?.message || e) }), {

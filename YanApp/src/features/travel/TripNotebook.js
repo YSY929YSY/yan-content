@@ -10,13 +10,13 @@ import * as ImagePicker from 'expo-image-picker';
 import { C } from '../../theme';
 import { useSpeech, SpeakBtn } from '../../components/Speech';
 import {
-  createLedger, joinLedger, addTagMember, myLedgers,
+  createLedger, joinLedger, addTagMember, myLedgers, currentUserId,
   fetchLedgerData, saveExpenseRemote, deleteExpenseRemote, subscribeLedger,
 } from '../../lib/tripLedger';
 import { SCENE_PACK } from './scenePack';
-import { parseItinerary } from '../../lib/parseItinerary';
+import { parseItinerary, parseReceipt } from '../../lib/parseItinerary';
 import FxPanel from './FxPanel';
-import { FX_CODES } from '../../lib/fx';
+import { FX_CODES, FX_SYMBOLS } from '../../lib/fx';
 
 const TRIP_STORAGE_KEY = 'yan_trip_notebook_v1';
 const MONTH_NUM = { JAN: 1, FEB: 2, MAR: 3, APR: 4, MAY: 5, JUN: 6, JUL: 7, AUG: 8, SEP: 9, OCT: 10, NOV: 11, DEC: 12 };
@@ -196,6 +196,8 @@ function TripNotebook() {
   const [remoteMembers, setRemoteMembers] = useState(null); // 远端成员;null 时用本地 ledgerMembers
   const [ledgerBusy, setLedgerBusy] = useState(false);
   const [myName, setMyName] = useState('我');
+  const [myUid, setMyUid] = useState(null);   // 匿名身份 id,用来在共享账本里认出自己
+  const [receiptBusy, setReceiptBusy] = useState(false);
   const [newMemberName, setNewMemberName] = useState('');
   const [expenses, setExpenses] = useState([]);
   const [expenseDraft, setExpenseDraft] = useState({
@@ -296,8 +298,26 @@ function TripNotebook() {
   const members = remoteMembers || ledgerMembers;
   const ledgerPeople = members.map(member => member.name || member.display_name);
   const isShared = !!ledgerId;
+  // 「我」在这本账里叫什么:共享模式按匿名身份认领自己那行,本机模式就是本机名字。
+  // 用途:谁记账通常就是谁垫的钱 —— 拿它当垫付人默认值。
+  const myLedgerName = (() => {
+    if (isShared) {
+      const mine = (remoteMembers || []).find(m => m.userId && m.userId === myUid);
+      if (mine?.name) return mine.name;
+    }
+    return ledgerPeople.includes(myName) ? myName : (ledgerPeople[0] || '我');
+  })();
   // 简单模式(均分)下参与人恒等于全体成员:加了同行者就自动进均分,不用再去勾一遍。
   // 只在均分时同步——各自付/单独付各人有各自金额,强行拉平会让草稿变成不可保存的状态。
+  useEffect(() => { currentUserId().then(setMyUid).catch(() => {}); }, []);
+  // 新草稿的垫付人默认是我;用户手动改过、或正在改旧账时不动
+  useEffect(() => {
+    if (expenseEditId) return;
+    setExpenseDraft(prev => (
+      prev.payerTouched || prev.payer === myLedgerName ? prev : { ...prev, payer: myLedgerName }
+    ));
+  }, [myLedgerName, expenseEditId]);
+
   const peopleKey = ledgerPeople.join('|');
   useEffect(() => {
     if (ledgerAdvanced || expenseEditId || expenseDraft.mode !== '均分') return;
@@ -430,6 +450,7 @@ function TripNotebook() {
       joined: !r.is_tag,
       status: r.is_tag ? '未加入' : '已加入',
       tagOnly: r.is_tag,
+      userId: r.user_id || null,   // 留着认出「哪个成员是我」
     })));
     setExpenses(remoteExpenses);
   }, [ledgerId]);
@@ -531,6 +552,37 @@ function TripNotebook() {
       setUploads(prev => [{ id: `u${Date.now()}`, uri: result.assets[0].uri }, ...prev]);
     }
   };
+  // 拍/选一张小票 → 只读总额和币种,填进金额框。识别不准也不要紧,数字是可以直接改的。
+  const scanReceipt = async () => {
+    const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!perm.granted) {
+      Alert.alert('无法访问照片', '在系统设置里允许「言」访问照片后再试。', [{ text: '知道了' }]);
+      return;
+    }
+    const picked = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      quality: 0.7,
+    });
+    if (picked.canceled || !picked.assets?.[0]?.uri) return;
+    setReceiptBusy(true);
+    const { total, currency: cur, merchant, error } = await parseReceipt(picked.assets[0].uri);
+    setReceiptBusy(false);
+    if (error) {
+      Alert.alert('没读出来', error === 'offline' ? '需要联网。' : '换一张清楚点的,或者直接手填。', [{ text: '好' }]);
+      return;
+    }
+    const sym = FX_SYMBOLS[cur];
+    setExpenseDraft(prev => ({
+      ...prev,
+      amount: clampMoney(total),
+      note: prev.note || merchant || '',
+    }));
+    // 小票币种和账本不一致时只提醒,不擅自改账本货币
+    if (sym && sym !== currency) {
+      Alert.alert('币种对不上', `这张小票是 ${sym},当前账本是 ${currency}。金额已填,币种请自己确认。`, [{ text: '好' }]);
+    }
+  };
+
   const removeUpload = (id) => {
     Alert.alert('移除这张？', '', [
       { text: '取消', style: 'cancel' },
@@ -698,6 +750,7 @@ function TripNotebook() {
       title: item.title || item.category || '',
       amount: String(item.amount || ''),
       payer: item.payer || ledgerPeople[0] || '我',
+      payerTouched: true,             // 改旧账:用它原本的垫付人,别被默认值覆盖
       mode: item.mode || '均分',
       note: item.note || '',
       special: !!item.special,
@@ -717,7 +770,8 @@ function TripNotebook() {
       category: expenseDraft.category,
       title: '',
       amount: '',
-      payer: ledgerPeople.includes(expenseDraft.payer) ? expenseDraft.payer : (ledgerPeople[0] || '我'),
+      payer: myLedgerName,            // 记完一笔回到默认:谁记账谁垫付
+      payerTouched: false,
       mode: '均分',
       note: '',
       special: false,
@@ -1360,6 +1414,7 @@ function TripNotebook() {
                       onPress={() => setExpenseDraft(prev => ({
                         ...prev,
                         payer: person,
+                        payerTouched: true,   // 手动选过就别再被「默认是我」覆盖
                         participants: prev.participants?.includes(person)
                           ? prev.participants
                           : [...(prev.participants || []), person],
@@ -1540,8 +1595,8 @@ function TripNotebook() {
                   <Text style={tn.addExpenseTxt}>{expenseEditId ? '保存修改' : '记一笔'}</Text>
                 </TouchableOpacity>
                 <View style={tn.underActions}>
-                  <TouchableOpacity onPress={pickOrder}>
-                    <Text style={tn.quietLink}>上传小票</Text>
+                  <TouchableOpacity onPress={scanReceipt} disabled={receiptBusy}>
+                    <Text style={tn.quietLink}>{receiptBusy ? '识别中…' : '扫小票'}</Text>
                   </TouchableOpacity>
                   <TouchableOpacity onPress={() => setFxOpenLedger(true)}>
                     <Text style={tn.quietLink}>汇率</Text>

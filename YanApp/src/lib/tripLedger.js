@@ -12,6 +12,15 @@ async function requireUser() {
   return data.user || null;
 }
 
+// 当前设备的匿名身份 id;共享账本里靠它认出「哪个成员是我」
+export async function currentUserId() {
+  if (!supabase) return null;
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    return session?.user?.id || null;
+  } catch { return null; }
+}
+
 // ── 建本 ─────────────────────────────────────────────
 export async function createLedger({ title, currency, displayName }) {
   if (!supabase) return { ledger: null, error: 'offline' };

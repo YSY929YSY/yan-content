@@ -11,6 +11,46 @@ const toDataUrl = async (uri) => {
   return `data:${mime};base64,${b64}`;
 };
 
+// 金额归一:欧陆小票写 "1.056,00",英美写 "1,056.00"。
+// 只按「数字和点」粗暴清洗会把 1.056,00 变成 1.05600 —— 差 1000 倍还长得像正常数字。
+// 规则:最后出现的那个分隔符才是小数点;它后面必须正好两位数字,否则视为千位分隔。
+export function normalizeAmount(raw) {
+  let s = String(raw ?? '').replace(/[^\d.,]/g, '');
+  if (!s) return '';
+  const lastDot = s.lastIndexOf('.');
+  const lastComma = s.lastIndexOf(',');
+  const sep = Math.max(lastDot, lastComma);
+  if (sep >= 0 && /^\d{2}$/.test(s.slice(sep + 1))) {
+    const intPart = s.slice(0, sep).replace(/[.,]/g, '');
+    return `${intPart || '0'}.${s.slice(sep + 1)}`;
+  }
+  return s.replace(/[.,]/g, '');   // 没有两位小数 → 全是千位分隔
+}
+
+// 小票:只取总额和币种,不猜谁点了什么(那个识别不可靠,而主场景本来就是均分)。
+// uri → { total, currency, merchant } | { error }
+export async function parseReceipt(uri) {
+  if (!supabase) return { error: 'offline' };
+  if (!uri) return { error: '没有可识别的小票' };
+  try {
+    const image = await toDataUrl(uri);
+    const { data, error } = await supabase.functions.invoke('parse-itinerary', {
+      body: { images: [image], kind: 'receipt' },
+    });
+    if (error) throw error;
+    if (data?.error) throw new Error(data.error);
+    const total = normalizeAmount(data?.total);
+    if (!total || !(Number.parseFloat(total) > 0)) throw new Error('没读出金额');
+    return {
+      total,
+      currency: String(data?.currency || '').toUpperCase().slice(0, 3),
+      merchant: String(data?.merchant || '').slice(0, 40),
+    };
+  } catch (e) {
+    return { error: e?.message || String(e) };
+  }
+}
+
 // uploads: [{ uri }] → { legs: [...] } | { error }
 export async function parseItinerary(uploads) {
   if (!supabase) return { error: 'offline' };
