@@ -413,12 +413,17 @@ function TripNotebook() {
     return looksLikeShares;
   };
   const fmtIn = (value, cur) => `${cur}${Math.abs(value).toFixed(2)}`;
-  const usedCurrencies = (() => {
+  // 结清 = 钱已经还了,不是这笔消费没发生过。
+  // 所以「谁欠谁」只看未结清的,而「我花了多少」看全部 —— 旅行中途结一次账,
+  // 个人花费和预算不该跟着归零。
+  const activeExpenses = expenses.filter(item => !item.settledAt);
+  const settledCount = expenses.length - activeExpenses.length;
+  const currenciesIn = (items) => {
     const seen = [];
-    expenses.forEach(item => { const c = curOf(item); if (!seen.includes(c)) seen.push(c); });
+    items.forEach(item => { const c = curOf(item); if (!seen.includes(c)) seen.push(c); });
     return seen.length ? seen : [currency];
-  })();
-  const multiCurrency = usedCurrencies.length > 1;
+  };
+  const multiCurrency = currenciesIn(activeExpenses).length > 1;
 
   // 单一币种下的净额化(N 人贪心:可能产生多笔转账,而不是只找一对)
   const settleOne = (items, cur) => {
@@ -457,12 +462,14 @@ function TripNotebook() {
     return { cur, lines, rows };
   };
 
-  const settleGroups = usedCurrencies.map(cur => settleOne(expenses.filter(item => curOf(item) === cur), cur));
+  const groupsFor = (items) => currenciesIn(items).map(cur => settleOne(items.filter(i => curOf(i) === cur), cur));
+  const settleGroups = groupsFor(activeExpenses);   // 谁欠谁:只算未结清的
+  const spendGroups = groupsFor(expenses);          // 我花了:算全部,结清过的也算
 
   // ── 我这趟花了多少 ──
   // 不新建一套记账数据:每个人的「应承担」就是他真实花掉的钱(垫付的会还回来)。
   // 一个人买的东西记成「参与人只有我」就会算进来。
-  const mySpend = settleGroups
+  const mySpend = spendGroups
     .map(g => ({ cur: g.cur, spent: g.rows.find(r => r.person === myLedgerName)?.owed || 0 }))
     .filter(x => x.spent > 0.005);
   const budget = budgets[activeBookId] || null;
@@ -850,30 +857,33 @@ function TripNotebook() {
     if (isShared && isUuid(id)) deleteExpenseRemote(id).then(() => refreshLedger(ledgerId));
   };
 
-  const clearExpenses = () => {
-    if (!expenses.length) {
-      Alert.alert('还没有账目', '记一笔再结清。', [{ text: '好' }]);
+  // 结清 = 大家把钱还清了,不是这些消费没发生过。
+  // 只打标记,不删账目 —— 否则「我花了」和预算会跟着归零,旅行才到一半记录就没了。
+  const settleExpenses = () => {
+    if (!activeExpenses.length) {
+      Alert.alert(expenses.length ? '已经都结清了' : '还没有账目', '', [{ text: '好' }]);
       return;
     }
     Alert.alert(
-      '结清并归零？',
-      isShared
-        ? '这些账目会标为已结清、从账本移除；远端保留记录，成员和邀请码不变。'
-        : '本机这本账的账目会清零，成员保留。',
+      '标记已还钱？',
+      `${activeExpenses.length} 笔标为已结清,谁欠谁归零。账目和「我花了」都还在。`,
       [
         { text: '取消', style: 'cancel' },
         {
           text: '结清',
-          style: 'destructive',
           onPress: async () => {
-            const remoteIds = isShared ? expenses.map(item => item.id).filter(isUuid) : [];
-            setExpenses([]);
+            const stamp = new Date().toISOString();
+            const targets = activeExpenses;
+            setExpenses(prev => prev.map(item => (item.settledAt ? item : { ...item, settledAt: stamp })));
             resetExpenseDraft();
-            if (!remoteIds.length) return;
-            const results = await Promise.all(remoteIds.map(id => deleteExpenseRemote(id)));
+            if (!isShared) return;
+            const results = await Promise.all(
+              targets.filter(item => isUuid(item.id))
+                .map(item => saveExpenseRemote(ledgerId, { ...item, settledAt: stamp })),
+            );
             const failed = results.find(res => res?.error);
             if (failed) {
-              Alert.alert('清空未完全同步', failed.error || '有几笔远端账目没有删掉，请稍后再试。', [{ text: '好' }]);
+              Alert.alert('没有完全同步', '有几笔没同步到共享账本,联网后再试一次。', [{ text: '好' }]);
             }
             refreshLedger(ledgerId);
           },
@@ -1479,8 +1489,8 @@ function TripNotebook() {
                       ))}
                     </View>
                   ))}
-                  <TouchableOpacity style={tn.settleClear} onPress={clearExpenses} disabled={!expenses.length}>
-                    <Text style={[tn.settleClearTxt, !expenses.length && tn.settleClearTxtOff]}>标记全部结清</Text>
+                  <TouchableOpacity style={tn.settleClear} onPress={settleExpenses} disabled={!activeExpenses.length}>
+                    <Text style={[tn.settleClearTxt, !activeExpenses.length && tn.settleClearTxtOff]}>标记已还钱</Text>
                   </TouchableOpacity>
                 </View>
               )}
@@ -1807,12 +1817,14 @@ function TripNotebook() {
               {/* ── 账目 ── */}
               {expenses.length > 0 && (
                 <View style={tn.listHead}>
-                  <Text style={tn.listHeadTxt}>账目 {expenses.length} 笔</Text>
+                  <Text style={tn.listHeadTxt}>
+                    账目 {expenses.length} 笔{settledCount > 0 ? ` · ${settledCount} 笔已结清` : ''}
+                  </Text>
                   {specialCount > 0 && <Text style={tn.ledgerBadge}>{specialCount} 笔单独付</Text>}
                 </View>
               )}
               {expenses.map(item => (
-                <View key={item.id} style={tn.expenseRow}>
+                <View key={item.id} style={[tn.expenseRow, item.settledAt && tn.expenseRowSettled]}>
                   <View style={{ flex: 1 }}>
                     <Text style={tn.expenseTitle}>
                       {item.title && item.title !== item.category ? `${item.category} · ${item.title}` : item.category} · {fmtIn(money(item.amount), curOf(item))}
@@ -1841,7 +1853,9 @@ function TripNotebook() {
                       </TouchableOpacity>
                     </View>
                   </View>
-                  {item.special && <Text style={tn.specialPill}>单独</Text>}
+                  {item.settledAt
+                    ? <Text style={tn.settledPill}>已结清</Text>
+                    : (item.special && <Text style={tn.specialPill}>单独</Text>)}
                 </View>
               ))}
             </ScrollView>
@@ -2103,6 +2117,11 @@ const tn = StyleSheet.create({
 
   listHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 18, marginBottom: 2 },
   listHeadTxt: { fontSize: 11, color: C.muted, fontWeight: '700', letterSpacing: 0.5 },
+  expenseRowSettled: { opacity: 0.55 },
+  settledPill: {
+    fontSize: 10, color: C.teal, backgroundColor: C.tealLight, borderRadius: 999,
+    paddingHorizontal: 7, paddingVertical: 3, overflow: 'hidden', fontWeight: '800',
+  },
   ledgerBadge: { fontSize: 10, color: C.muted, backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 4, overflow: 'hidden', fontWeight: '700' },
   joinRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 8 },
   avatarChip: { fontSize: 10, color: C.teal, backgroundColor: C.tealLight, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 4, overflow: 'hidden', fontWeight: '800' },

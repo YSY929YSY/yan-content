@@ -18,3 +18,13 @@ where e.ledger_id = l.id
 
 comment on column ledger_expenses.currency is
   '这笔账的货币符号(€ £ ₺ $ ¥ ₩)。结算按币种分组,不做汇率换算。';
+
+-- ── 结清标记(2026-07-30)────────────────────────────────
+-- 结清 = 钱已经还了,不是这笔消费没发生过。
+-- 原来「结清」直接删账目,于是「我花了」和预算跟着归零 ——
+-- 旅行才到一半,记录先没了。改成打标记:谁欠谁只算未结清的,个人花费算全部。
+alter table ledger_expenses
+  add column if not exists settled_at timestamptz;
+
+comment on column ledger_expenses.settled_at is
+  '这笔已经还过钱的时间。非空则不计入「谁欠谁」,但仍计入个人花费。';
