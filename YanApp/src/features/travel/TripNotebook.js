@@ -198,6 +198,9 @@ function TripNotebook() {
   const [myName, setMyName] = useState('我');
   const [myUid, setMyUid] = useState(null);   // 匿名身份 id,用来在共享账本里认出自己
   const [receiptBusy, setReceiptBusy] = useState(false);
+  const [budgets, setBudgets] = useState({});        // { 旅行册id: { amount, currency } }
+  const [budgetEditing, setBudgetEditing] = useState(false);
+  const [budgetDraft, setBudgetDraft] = useState('');
   const [newMemberName, setNewMemberName] = useState('');
   const [expenses, setExpenses] = useState([]);
   const [expenseDraft, setExpenseDraft] = useState({
@@ -231,6 +234,7 @@ function TripNotebook() {
           if (saved.expenses) setExpenses(saved.expenses);
           if (saved.ledgerMembers) setLedgerMembers(saved.ledgerMembers);
           if (saved.uploads) setUploads(saved.uploads);
+          if (saved.budgets) setBudgets(saved.budgets);
         }
       } catch (e) { /* 读档失败就用种子数据，静默 */ }
       hydrated.current = true;
@@ -240,9 +244,9 @@ function TripNotebook() {
     if (!hydrated.current) return;
     AsyncStorage.setItem(
       TRIP_STORAGE_KEY,
-      JSON.stringify({ books, activeBookId, expenses, ledgerMembers, uploads }),
+      JSON.stringify({ books, activeBookId, expenses, ledgerMembers, uploads, budgets }),
     ).catch(() => {});
-  }, [books, activeBookId, expenses, ledgerMembers, uploads]);
+  }, [books, activeBookId, expenses, ledgerMembers, uploads, budgets]);
 
   const activeBook = books.find(book => book.id === activeBookId) || books[0];
   const legs = activeBook.legs || [];
@@ -440,6 +444,31 @@ function TripNotebook() {
   };
 
   const settleGroups = usedCurrencies.map(cur => settleOne(expenses.filter(item => curOf(item) === cur), cur));
+
+  // ── 我这趟花了多少 ──
+  // 不新建一套记账数据:每个人的「应承担」就是他真实花掉的钱(垫付的会还回来)。
+  // 一个人买的东西记成「参与人只有我」就会算进来。
+  const mySpend = settleGroups
+    .map(g => ({ cur: g.cur, spent: g.rows.find(r => r.person === myLedgerName)?.owed || 0 }))
+    .filter(x => x.spent > 0.005);
+  const budget = budgets[activeBookId] || null;
+  const budgetSpent = budget ? (mySpend.find(x => x.cur === budget.currency)?.spent || 0) : 0;
+  const budgetPct = budget && money(budget.amount) > 0
+    ? Math.min(budgetSpent / money(budget.amount), 1)
+    : 0;
+  const overBudget = budget && money(budget.amount) > 0 && budgetSpent > money(budget.amount);
+  const saveBudget = () => {
+    const v = money(budgetDraft);
+    setBudgets(prev => {
+      const next = { ...prev };
+      if (v > 0) next[activeBookId] = { amount: String(v), currency };
+      else delete next[activeBookId];
+      return next;
+    });
+    setBudgetEditing(false);
+    setBudgetDraft('');
+    Keyboard.dismiss();
+  };
   const settlementLines = settleGroups.flatMap(g => g.lines);
   const settlement = settlementLines.length ? settlementLines.join('\n') : '现在基本扯平。';
   // 主路径的一行摘要:不展开也知道这笔怎么分
@@ -1351,7 +1380,59 @@ function TripNotebook() {
               </TouchableOpacity>
             </View>
             <ScrollView style={tn.body} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag">
-              {/* ── 结算:账本的高光,放最上面;点开看每人明细 ── */}
+              {/* ── 我花了:同一批数据换个透镜,不另建一套记账 ── */}
+              {(mySpend.length > 0 || budget) && (
+                <View style={tn.meCard}>
+                  <View style={tn.meTop}>
+                    <View style={{ flex: 1 }}>
+                      <Text style={tn.fieldK}>我花了</Text>
+                      <View style={tn.meAmounts}>
+                        {mySpend.length === 0 && <Text style={tn.meNum}>{currency}0.00</Text>}
+                        {mySpend.map(x => (
+                          <Text key={x.cur} style={tn.meNum}>{fmtIn(x.spent, x.cur)}</Text>
+                        ))}
+                      </View>
+                    </View>
+                    <TouchableOpacity
+                      onPress={() => { setBudgetDraft(budget?.amount || ''); setBudgetEditing(v => !v); }}
+                      hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                    >
+                      <Text style={tn.meBudgetTxt}>
+                        {budget ? `预算 ${fmtIn(money(budget.amount), budget.currency)}` : '设预算'}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+
+                  {budget && money(budget.amount) > 0 && (
+                    <View style={tn.meBarTrack}>
+                      <View style={[
+                        tn.meBarFill,
+                        { width: `${Math.max(budgetPct * 100, 1)}%` },
+                        overBudget && tn.meBarOver,
+                      ]} />
+                    </View>
+                  )}
+
+                  {budgetEditing && (
+                    <View style={tn.meEditRow}>
+                      <TextInput
+                        style={tn.meInput}
+                        value={budgetDraft}
+                        onChangeText={v => setBudgetDraft(clampMoney(v))}
+                        placeholder={`${currency} 预算`}
+                        keyboardType="decimal-pad"
+                        placeholderTextColor={C.mutedLight}
+                        autoFocus
+                      />
+                      <TouchableOpacity style={tn.inviteBtn} onPress={saveBudget}>
+                        <Text style={tn.inviteTxt}>{money(budgetDraft) > 0 ? '存' : '清除'}</Text>
+                      </TouchableOpacity>
+                    </View>
+                  )}
+                </View>
+              )}
+
+              {/* ── 结算:账本的高光;点开看每人明细 ── */}
               <TouchableOpacity style={tn.settleAction} activeOpacity={0.9} onPress={() => setSettleOpen(v => !v)}>
                 <View style={{ flex: 1 }}>
                   <Text style={tn.settleActionK}>结算</Text>
@@ -1916,6 +1997,24 @@ const tn = StyleSheet.create({
   toolBtn: { width: '48%', backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 13, paddingVertical: 10, alignItems: 'center' },
   toolBtnTxt: { color: C.teal, fontSize: 12, fontWeight: '800' },
   ledgerCard: { marginTop: 12, backgroundColor: C.white, borderRadius: 16, borderWidth: 1, borderColor: C.border, padding: 14 },
+
+  // 我花了 + 预算:和记一笔用同一套语言(衬线数字 + teal eyebrow)
+  meCard: {
+    backgroundColor: C.white, borderWidth: 1, borderColor: C.border,
+    borderRadius: 16, paddingHorizontal: 14, paddingTop: 2, paddingBottom: 14,
+  },
+  meTop: { flexDirection: 'row', alignItems: 'flex-end', gap: 12 },
+  meAmounts: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseline', gap: 12 },
+  meNum: { fontFamily: SERIF, fontSize: 28, color: C.ink },
+  meBudgetTxt: { fontSize: 11.5, color: C.teal, fontWeight: '700', paddingBottom: 4 },
+  meBarTrack: { height: 3, borderRadius: 2, backgroundColor: C.tag, marginTop: 12, overflow: 'hidden' },
+  meBarFill: { height: 3, borderRadius: 2, backgroundColor: C.teal },
+  meBarOver: { backgroundColor: C.lava },
+  meEditRow: { flexDirection: 'row', alignItems: 'center', gap: 7, marginTop: 12 },
+  meInput: {
+    flex: 1, height: 34, backgroundColor: C.paper, borderRadius: 999,
+    paddingHorizontal: 12, fontSize: 12.5, color: C.ink,
+  },
 
   // ── 分账 v2:金额是内容(衬线大字),其余一律安静 ──
   // 结算明细面板(替掉系统 Alert)
