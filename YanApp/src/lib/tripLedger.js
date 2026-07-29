@@ -113,6 +113,7 @@ function normalizeExpense(row) {
     title: row.title,
     currency: row.currency || null,   // 迁移前的旧行没有,由上层按账本币种兜底
     settledAt: row.settled_at || null,
+    createdAt: row.created_at || null,   // 列表里显示是哪天记的
     amount: String(row.amount),
     payer: row.payer,
     mode: row.mode,

@@ -297,7 +297,19 @@ function TripNotebook() {
   useEffect(() => {
     setExpanded(nowLegIdx >= 0 ? nowLegIdx : (legs.length ? 0 : null));
   }, [activeBookId]);
-  const specialCount = expenses.filter(item => item.special).length;
+  // 「单独」以数据为准(有没有 specialItem),不信 special 标记 ——
+  // 老版本从「单独付」切回「均分」时不会清掉那个标记,导致均分的账被错标
+  const isSpecial = (item) => !!item.specialItem;
+  // 旅行十天记三十笔,全叫「晚餐」——列表得能看出是哪天。
+  // 本地旧账目没存时间,但 id 里带着 Date.now(),能捞出来。
+  const expenseDay = (item) => {
+    const raw = item.createdAt
+      || (/^expense-(\d{13})$/.test(item.id || '') ? Number(item.id.slice(8)) : null);
+    if (!raw) return '';
+    const d = new Date(raw);
+    return Number.isNaN(d.getTime()) ? '' : `${d.getMonth() + 1}/${d.getDate()}`;
+  };
+  const specialCount = expenses.filter(isSpecial).length;
   // 成员:进了共享账本用远端成员,否则用本地成员
   const members = remoteMembers || ledgerMembers;
   const ledgerPeople = members.map(member => member.name || member.display_name);
@@ -492,6 +504,13 @@ function TripNotebook() {
   };
   const settlementLines = settleGroups.flatMap(g => g.lines);
   const settlement = settlementLines.length ? settlementLines.join('\n') : '现在基本扯平。';
+  // 这张深色卡是为一行设计的。三种货币会让它变成六行墙,
+  // 所以只露头两笔,其余数字在展开的明细里 —— 卡本身就是展开开关。
+  const SETTLE_PEEK = 2;
+  const settleHeadline = settlementLines.length
+    ? settlementLines.slice(0, SETTLE_PEEK).join('\n')
+    : '现在基本扯平。';
+  const settleRest = Math.max(settlementLines.length - SETTLE_PEEK, 0);
   // 主路径的一行摘要:不展开也知道这笔怎么分
   const splitSummary = (() => {
     const chosen = (expenseDraft.participants || []).filter(p => ledgerPeople.includes(p));
@@ -815,8 +834,9 @@ function TripNotebook() {
       title: item.title || item.category || '',
       amount: String(item.amount || ''),
       payer: item.payer || ledgerPeople[0] || '我',
-      payerTouched: true,
-      currency: item.currency || currency,             // 改旧账:用它原本的垫付人,别被默认值覆盖
+      payerTouched: true,                              // 改旧账:用它原本的垫付人,别被默认值覆盖
+      currency: item.currency || currency,
+      createdAt: item.createdAt || null,               // 保留原始时间,别因为改一下就跳到今天
       mode: item.mode || '均分',
       note: item.note || '',
       special: !!item.special,
@@ -934,6 +954,7 @@ function TripNotebook() {
       id: expenseEditId || `expense-${Date.now()}`,
       ...expenseDraft,
       currency,                       // 这笔用的币种,结算按它分组
+      createdAt: expenseDraft.createdAt || new Date().toISOString(),
       title: expenseDraft.title.trim() || expenseDraft.category,
       amount: expenseDraft.amount.trim(),
       // 备注只存用户自己写的。以前会自动生成一句「Lyra €24.40 · Ning €18.40」,
@@ -1456,7 +1477,10 @@ function TripNotebook() {
               <TouchableOpacity style={tn.settleAction} activeOpacity={0.9} onPress={() => setSettleOpen(v => !v)}>
                 <View style={{ flex: 1 }}>
                   <Text style={tn.settleActionK}>结算</Text>
-                  <Text style={tn.settleActionMain}>{settlement}</Text>
+                  <Text style={tn.settleActionMain}>{settleHeadline}</Text>
+                  {settleRest > 0 && (
+                    <Text style={tn.settleActionRest}>还有 {settleRest} 笔</Text>
+                  )}
                 </View>
                 <Text style={tn.settleActionArrow}>{settleOpen ? '−' : '→'}</Text>
               </TouchableOpacity>
@@ -1572,7 +1596,7 @@ function TripNotebook() {
                         <TouchableOpacity
                           key={mode}
                           style={[tn.modeBtn, expenseDraft.mode === mode && tn.modeBtnAct]}
-                          onPress={() => setExpenseDraft(prev => ({ ...prev, mode, special: mode === '特殊项' ? true : prev.special }))}
+                          onPress={() => setExpenseDraft(prev => ({ ...prev, mode, special: mode === '特殊项' }))}
                         >
                           <Text style={[tn.modeTxt, expenseDraft.mode === mode && tn.modeTxtAct]}>{MODE_LABEL[mode] || mode}</Text>
                         </TouchableOpacity>
@@ -1826,9 +1850,12 @@ function TripNotebook() {
               {expenses.map(item => (
                 <View key={item.id} style={[tn.expenseRow, item.settledAt && tn.expenseRowSettled]}>
                   <View style={{ flex: 1 }}>
-                    <Text style={tn.expenseTitle}>
-                      {item.title && item.title !== item.category ? `${item.category} · ${item.title}` : item.category} · {fmtIn(money(item.amount), curOf(item))}
-                    </Text>
+                    <View style={tn.expenseTitleRow}>
+                      <Text style={tn.expenseTitle}>
+                        {item.title && item.title !== item.category ? `${item.category} · ${item.title}` : item.category} · {fmtIn(money(item.amount), curOf(item))}
+                      </Text>
+                      {!!expenseDay(item) && <Text style={tn.expenseDay}>{expenseDay(item)}</Text>}
+                    </View>
                     <Text style={tn.expenseMeta}>
                       {item.payer} 垫付 · {
                         Object.entries(item.shares || {})
@@ -1855,7 +1882,7 @@ function TripNotebook() {
                   </View>
                   {item.settledAt
                     ? <Text style={tn.settledPill}>已结清</Text>
-                    : (item.special && <Text style={tn.specialPill}>单独</Text>)}
+                    : (isSpecial(item) && <Text style={tn.specialPill}>单独</Text>)}
                 </View>
               ))}
             </ScrollView>
@@ -2164,6 +2191,9 @@ const tn = StyleSheet.create({
   addExpenseTxt: { fontSize: 12, color: C.white, fontWeight: '800' },
   settleAction: { backgroundColor: '#20352d', borderRadius: 16, paddingHorizontal: 12, paddingVertical: 11, marginTop: 4, marginBottom: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   settleActionK: { fontSize: 9, color: 'rgba(255,255,255,0.58)', fontWeight: '900', letterSpacing: 1.4 },
+  settleActionRest: { fontSize: 11, color: 'rgba(255,255,255,0.55)', marginTop: 5 },
+  expenseTitleRow: { flexDirection: 'row', alignItems: 'baseline', gap: 8 },
+  expenseDay: { fontSize: 10.5, color: C.mutedLight, fontVariant: ['tabular-nums'] },
   settleActionMain: { fontSize: 15, color: C.white, fontWeight: '900', marginTop: 3 },
   settleActionArrow: { fontSize: 18, color: 'rgba(255,255,255,0.72)', fontWeight: '900' },
   expenseRow: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: 'rgba(255,255,255,0.72)', borderRadius: 13, borderWidth: 1, borderColor: C.border, padding: 10, marginTop: 7 },
