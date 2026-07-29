@@ -390,21 +390,32 @@ function TripNotebook() {
   const specialOver = expenseDraft.mode === '特殊项' && specialGap > 0.01;
   const isBalanced = (expenseDraft.mode !== '各自价格' || Math.abs(assignGap) <= 0.01) && !specialOver;
   const canSave = draftTotal > 0 && isBalanced && ledgerPeople.length > 0;
-  const ledgerNets = expenses.reduce((acc, item) => {
-    const total = money(item.amount);
+  // ── 结算:按币种分组,各算各的 ──
+  // 一趟旅行常跨币种(爱尔兰 € + 土耳其 ₺)。把 €240 和 ₺4500 相加会得到一个
+  // 看起来正常、实际毫无意义的数字。所以不做汇率换算,每种货币单独结一次。
+  const curOf = (item) => item.currency || currency;   // 迁移前的旧账目按当前账本币种算
+  const fmtIn = (value, cur) => `${cur}${Math.abs(value).toFixed(2)}`;
+  const usedCurrencies = (() => {
+    const seen = [];
+    expenses.forEach(item => { const c = curOf(item); if (!seen.includes(c)) seen.push(c); });
+    return seen.length ? seen : [currency];
+  })();
+  const multiCurrency = usedCurrencies.length > 1;
+
+  // 单一币种下的净额化(N 人贪心:可能产生多笔转账,而不是只找一对)
+  const settleOne = (items, cur) => {
+    const nets = items.reduce((acc, item) => {
+      const total = money(item.amount);
+      ledgerPeople.forEach(person => {
+        acc[person] = acc[person] || 0;
+        acc[person] -= money(item.shares?.[person]);
+      });
+      if (ledgerPeople.includes(item.payer)) acc[item.payer] += total;
+      return acc;
+    }, {});
+    const creditors = []; const debtors = [];
     ledgerPeople.forEach(person => {
-      acc[person] = acc[person] || 0;
-      acc[person] -= money(item.shares?.[person]);
-    });
-    if (ledgerPeople.includes(item.payer)) acc[item.payer] += total;
-    return acc;
-  }, {});
-  // N 人贪心净额化:可能产生多笔转账,而不是只找一对
-  const settlementLines = (() => {
-    const creditors = [];
-    const debtors = [];
-    ledgerPeople.forEach(person => {
-      const v = ledgerNets[person] || 0;
+      const v = nets[person] || 0;
       if (v > 0.01) creditors.push({ person, v });
       else if (v < -0.01) debtors.push({ person, v: -v });
     });
@@ -414,21 +425,23 @@ function TripNotebook() {
     let i = 0; let j = 0;
     while (i < creditors.length && j < debtors.length) {
       const pay = Math.min(creditors[i].v, debtors[j].v);
-      lines.push(`${debtors[j].person} → ${creditors[i].person} ${fmtMoney(pay)}`);
+      lines.push(`${debtors[j].person} → ${creditors[i].person} ${fmtIn(pay, cur)}`);
       creditors[i].v -= pay;
       debtors[j].v -= pay;
       if (creditors[i].v < 0.01) i += 1;
       if (debtors[j].v < 0.01) j += 1;
     }
-    return lines;
-  })();
+    const rows = ledgerPeople.map(person => {
+      const paid = items.reduce((s, item) => s + (item.payer === person ? money(item.amount) : 0), 0);
+      const owed = items.reduce((s, item) => s + money(item.shares?.[person]), 0);
+      return { person, paid, owed, net: paid - owed };
+    });
+    return { cur, lines, rows };
+  };
+
+  const settleGroups = usedCurrencies.map(cur => settleOne(expenses.filter(item => curOf(item) === cur), cur));
+  const settlementLines = settleGroups.flatMap(g => g.lines);
   const settlement = settlementLines.length ? settlementLines.join('\n') : '现在基本扯平。';
-  // 结算可解释:每人「垫付 / 应承担 / 净额」,渲染成面板(不再塞进系统 Alert)
-  const settleRows = ledgerPeople.map(person => {
-    const paid = expenses.reduce((s, item) => s + (item.payer === person ? money(item.amount) : 0), 0);
-    const owed = expenses.reduce((s, item) => s + money(item.shares?.[person]), 0);
-    return { person, paid, owed, net: paid - owed };
-  });
   // 主路径的一行摘要:不展开也知道这笔怎么分
   const splitSummary = (() => {
     const chosen = (expenseDraft.participants || []).filter(p => ledgerPeople.includes(p));
@@ -745,12 +758,15 @@ function TripNotebook() {
 
   const startExpenseEdit = (item) => {
     setExpenseEditId(item.id);
+    // 改一笔 ₺ 的旧账时,币种选择器也跟着切过去 —— 看到什么就存什么,别把它悄悄改成当前币种
+    if (item.currency && item.currency !== currency) setCurrency(item.currency);
     setExpenseDraft({
       category: item.category || '其他',
       title: item.title || item.category || '',
       amount: String(item.amount || ''),
       payer: item.payer || ledgerPeople[0] || '我',
-      payerTouched: true,             // 改旧账:用它原本的垫付人,别被默认值覆盖
+      payerTouched: true,
+      currency: item.currency || currency,             // 改旧账:用它原本的垫付人,别被默认值覆盖
       mode: item.mode || '均分',
       note: item.note || '',
       special: !!item.special,
@@ -864,6 +880,7 @@ function TripNotebook() {
     const nextExpense = {
       id: expenseEditId || `expense-${Date.now()}`,
       ...expenseDraft,
+      currency,                       // 这笔用的币种,结算按它分组
       title: expenseDraft.title.trim() || expenseDraft.category,
       amount: expenseDraft.amount.trim(),
       note: expenseDraft.note.trim() || (
@@ -1344,15 +1361,30 @@ function TripNotebook() {
               </TouchableOpacity>
               {settleOpen && (
                 <View style={tn.settlePanel}>
-                  {settleRows.map(row => (
-                    <View key={row.person} style={tn.settleRow}>
-                      <View style={{ flex: 1 }}>
-                        <Text style={tn.settleName}>{row.person}</Text>
-                        <Text style={tn.settleNums}>垫付 {fmtMoney(row.paid)} · 应承担 {fmtMoney(row.owed)}</Text>
-                      </View>
-                      <Text style={[tn.settleNet, row.net > 0.01 && tn.settleNetIn, row.net < -0.01 && tn.settleNetOut]}>
-                        {row.net > 0.01 ? `应收 ${fmtMoney(row.net)}` : row.net < -0.01 ? `应付 ${fmtMoney(row.net)}` : '两清'}
-                      </Text>
+                  {settleGroups.map(group => (
+                    <View key={group.cur}>
+                      {/* 只有跨币种时才需要标出这一段是哪种货币 */}
+                      {multiCurrency && (
+                        <View style={tn.curDivider}>
+                          <Text style={tn.curDividerTxt}>{group.cur}</Text>
+                          <View style={tn.curDividerLine} />
+                        </View>
+                      )}
+                      {group.rows.map(row => (
+                        <View key={row.person} style={tn.settleRow}>
+                          <View style={{ flex: 1 }}>
+                            <Text style={tn.settleName}>{row.person}</Text>
+                            <Text style={tn.settleNums}>
+                              垫付 {fmtIn(row.paid, group.cur)} · 应承担 {fmtIn(row.owed, group.cur)}
+                            </Text>
+                          </View>
+                          <Text style={[tn.settleNet, row.net > 0.01 && tn.settleNetIn, row.net < -0.01 && tn.settleNetOut]}>
+                            {row.net > 0.01
+                              ? `应收 ${fmtIn(row.net, group.cur)}`
+                              : row.net < -0.01 ? `应付 ${fmtIn(row.net, group.cur)}` : '两清'}
+                          </Text>
+                        </View>
+                      ))}
                     </View>
                   ))}
                   <TouchableOpacity style={tn.settleClear} onPress={clearExpenses} disabled={!expenses.length}>
@@ -1383,20 +1415,9 @@ function TripNotebook() {
                         key={cur}
                         style={[tn.curChip, currency === cur && tn.curChipAct]}
                         onPress={() => {
+                          // 每笔账现在各记各的币种,切换只影响接下来记的这笔,不动旧账
                           setCurOpen(false);
-                          if (cur === currency) return;
-                          if (expenses.length) {
-                            Alert.alert(
-                              '切换货币符号',
-                              `只改显示单位,不会换算已有金额:${currency}50 会直接显示为 ${cur}50。确定切换吗?`,
-                              [
-                                { text: '取消', style: 'cancel' },
-                                { text: '切换', onPress: () => setCurrency(cur) },
-                              ],
-                            );
-                          } else {
-                            setCurrency(cur);
-                          }
+                          setCurrency(cur);
                         }}
                       >
                         <Text style={[tn.curTxt, currency === cur && tn.curTxtAct]}>{cur}</Text>
@@ -1701,7 +1722,7 @@ function TripNotebook() {
                 <View key={item.id} style={tn.expenseRow}>
                   <View style={{ flex: 1 }}>
                     <Text style={tn.expenseTitle}>
-                      {item.title && item.title !== item.category ? `${item.category} · ${item.title}` : item.category} · {fmtMoney(money(item.amount))}
+                      {item.title && item.title !== item.category ? `${item.category} · ${item.title}` : item.category} · {fmtIn(money(item.amount), curOf(item))}
                     </Text>
                     <Text style={tn.expenseMeta}>
                       {item.payer} 垫付 · {
@@ -1911,6 +1932,10 @@ const tn = StyleSheet.create({
   settleNet: { fontSize: 12, color: C.muted, fontWeight: '700' },
   settleNetIn: { color: C.teal },
   settleNetOut: { color: C.ink },
+  // 跨币种时才出现的分段标题
+  curDivider: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingTop: 14, paddingBottom: 2 },
+  curDividerTxt: { fontFamily: SERIF, fontSize: 15, color: C.ink },
+  curDividerLine: { flex: 1, height: 1, backgroundColor: C.border },
   settleClear: { paddingVertical: 13, alignItems: 'center' },
   settleClearTxt: { fontSize: 12, color: C.muted, fontWeight: '600' },
   settleClearTxtOff: { color: C.mutedLight },

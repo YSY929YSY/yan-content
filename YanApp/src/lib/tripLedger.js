@@ -111,6 +111,7 @@ function normalizeExpense(row) {
     id: row.id,
     category: row.category,
     title: row.title,
+    currency: row.currency || null,   // 迁移前的旧行没有,由上层按账本币种兜底
     amount: String(row.amount),
     payer: row.payer,
     mode: row.mode,
@@ -133,6 +134,7 @@ export async function saveExpenseRemote(ledgerId, expense) {
       created_by: user?.id || null,
       category: expense.category,
       title: expense.title,
+      currency: expense.currency || null,
       amount: Number.parseFloat(String(expense.amount).replace(/[^\d.-]/g, '')) || 0,
       payer: expense.payer,
       mode: expense.mode,
@@ -145,11 +147,14 @@ export async function saveExpenseRemote(ledgerId, expense) {
     };
     // 已有 uuid 就 update,否则 insert
     const isUuid = typeof expense.id === 'string' && /^[0-9a-f-]{36}$/i.test(expense.id);
-    let res;
-    if (isUuid) {
-      res = await supabase.from('ledger_expenses').update(row).eq('id', expense.id).select().single();
-    } else {
-      res = await supabase.from('ledger_expenses').insert(row).select().single();
+    const write = (payload) => (isUuid
+      ? supabase.from('ledger_expenses').update(payload).eq('id', expense.id).select().single()
+      : supabase.from('ledger_expenses').insert(payload).select().single());
+    let res = await write(row);
+    // 还没跑 currency 迁移的账本:去掉该字段重试一次,别让记账整个失败
+    if (res.error && /currency/i.test(res.error.message || '')) {
+      const { currency: _drop, ...legacy } = row;
+      res = await write(legacy);
     }
     if (res.error) throw res.error;
     return { expense: normalizeExpense(res.data), error: null };
