@@ -1390,25 +1390,23 @@ function TripNotebook() {
               </TouchableOpacity>
             </View>
             <ScrollView style={tn.body} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag">
-              {/* ── 我花了:同一批数据换个透镜,不另建一套记账 ── */}
+              {/* ── 我花了:一行就够,不占一张卡 ── */}
               {(mySpend.length > 0 || budget) && (
-                <View style={tn.meCard}>
-                  <View style={tn.meTop}>
-                    <View style={{ flex: 1 }}>
-                      <Text style={tn.fieldK}>我花了</Text>
-                      <View style={tn.meAmounts}>
-                        {mySpend.length === 0 && <Text style={tn.meNum}>{currency}0.00</Text>}
-                        {mySpend.map(x => (
-                          <Text key={x.cur} style={tn.meNum}>{fmtIn(x.spent, x.cur)}</Text>
-                        ))}
-                      </View>
+                <View>
+                  <View style={tn.meRow}>
+                    <Text style={tn.meRowK}>我花了</Text>
+                    <View style={tn.meAmounts}>
+                      {mySpend.length === 0 && <Text style={tn.meRowNum}>{currency}0.00</Text>}
+                      {mySpend.map(x => (
+                        <Text key={x.cur} style={tn.meRowNum}>{fmtIn(x.spent, x.cur)}</Text>
+                      ))}
                     </View>
                     <TouchableOpacity
                       onPress={() => { setBudgetDraft(budget?.amount || ''); setBudgetEditing(v => !v); }}
-                      hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                      hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
                     >
                       <Text style={tn.meBudgetTxt}>
-                        {budget ? `预算 ${fmtIn(money(budget.amount), budget.currency)}` : '设预算'}
+                        {budget ? fmtIn(money(budget.amount), budget.currency) : '设预算'}
                       </Text>
                     </TouchableOpacity>
                   </View>
@@ -1463,7 +1461,8 @@ function TripNotebook() {
                           <View style={tn.curDividerLine} />
                         </View>
                       )}
-                      {group.rows.map(row => (
+                      {/* 没垫过也没承担过的人,一行零值说不了任何事 */}
+                      {group.rows.filter(r => r.paid > 0.005 || r.owed > 0.005).map(row => (
                         <View key={row.person} style={tn.settleRow}>
                           <View style={{ flex: 1 }}>
                             <Text style={tn.settleName}>{row.person}</Text>
@@ -1549,6 +1548,14 @@ function TripNotebook() {
 
                 {ledgerAdvanced && (
                   <View style={tn.advBox}>
+                    <Text style={tn.fieldK}>备注</Text>
+                    <TextInput
+                      style={tn.noteInput}
+                      value={expenseDraft.note}
+                      onChangeText={note => setExpenseDraft(prev => ({ ...prev, note }))}
+                      placeholder="可不填"
+                      placeholderTextColor={C.mutedLight}
+                    />
                     <Text style={tn.fieldK}>怎么分</Text>
                     <View style={tn.modeRow}>
                       {splitModes.map(mode => (
@@ -1682,13 +1689,6 @@ function TripNotebook() {
                   </View>
                 )}
 
-                <TextInput
-                  style={tn.noteInput}
-                  value={expenseDraft.note}
-                  onChangeText={note => setExpenseDraft(prev => ({ ...prev, note }))}
-                  placeholder="备注,可不填"
-                  placeholderTextColor={C.mutedLight}
-                />
                 {/* 按钮变灰必须给出理由,尤其原因藏在收起的「调整」里时 */}
                 {!canSave && draftTotal > 0 && !isBalanced && (
                   <TouchableOpacity style={tn.whyOff} onPress={() => setLedgerAdvanced(true)}>
@@ -2017,16 +2017,13 @@ const tn = StyleSheet.create({
   ledgerCard: { marginTop: 12, backgroundColor: C.white, borderRadius: 16, borderWidth: 1, borderColor: C.border, padding: 14 },
 
   // 我花了 + 预算:和记一笔用同一套语言(衬线数字 + teal eyebrow)
-  meCard: {
-    backgroundColor: C.white, borderWidth: 1, borderColor: C.border,
-    borderRadius: 16, paddingHorizontal: 14, paddingTop: 2, paddingBottom: 14,
-  },
-  meTop: { flexDirection: 'row', alignItems: 'flex-end', gap: 12 },
-  meAmounts: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseline', gap: 12 },
-  meNum: { fontFamily: SERIF, fontSize: 28, color: C.ink },
-  meBudgetTxt: { fontSize: 11.5, color: C.teal, fontWeight: '700', paddingBottom: 4 },
-  meBarTrack: { height: 3, borderRadius: 2, backgroundColor: C.tag, marginTop: 12, overflow: 'hidden' },
-  meBarFill: { height: 3, borderRadius: 2, backgroundColor: C.teal },
+  meRow: { flexDirection: 'row', alignItems: 'baseline', gap: 10, paddingHorizontal: 4, paddingBottom: 8 },
+  meRowK: { fontSize: 11, color: C.muted },
+  meAmounts: { flex: 1, flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseline', gap: 10 },
+  meRowNum: { fontFamily: SERIF, fontSize: 17, color: C.ink },
+  meBudgetTxt: { fontSize: 11.5, color: C.teal, fontWeight: '700' },
+  meBarTrack: { height: 2, backgroundColor: C.tag, marginHorizontal: 4, marginBottom: 10, overflow: 'hidden' },
+  meBarFill: { height: 2, backgroundColor: C.teal },
   meBarOver: { backgroundColor: C.lava },
   meEditRow: { flexDirection: 'row', alignItems: 'center', gap: 7, marginTop: 12 },
   meInput: {
@@ -2076,7 +2073,7 @@ const tn = StyleSheet.create({
   advBox: { marginTop: 2 },
 
   noteInput: {
-    marginTop: 14, backgroundColor: C.paper, borderRadius: 12,
+    backgroundColor: C.paper, borderRadius: 12,
     paddingHorizontal: 12, paddingVertical: 11, fontSize: 12.5, color: C.ink,
   },
   whyOff: { marginTop: 12, marginBottom: -4, alignItems: 'center' },
