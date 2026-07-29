@@ -398,6 +398,20 @@ function TripNotebook() {
   // 一趟旅行常跨币种(爱尔兰 € + 土耳其 ₺)。把 €240 和 ₺4500 相加会得到一个
   // 看起来正常、实际毫无意义的数字。所以不做汇率换算,每种货币单独结一次。
   const curOf = (item) => item.currency || currency;   // 迁移前的旧账目按当前账本币种算
+  // 老版本会把分摊自动写进备注,和列表上一行重复。认出这类备注,不再显示。
+  const isDerivedNote = (item) => {
+    const n = String(item.note || '').trim();
+    if (!n) return true;
+    if (n === '默认均分') return true;
+    const names = Object.keys(item.shares || {});
+    // 形如「Lyra €24.40 · Ning €18.40」或「A 的 B ...,其余均分」
+    if (/其余均分$/.test(n)) return true;
+    const looksLikeShares = names.length > 0
+      && names.some(p => n.includes(p))
+      && /[€£₺$¥₩]\s*\d/.test(n)
+      && !/[，。!?]/.test(n);
+    return looksLikeShares;
+  };
   const fmtIn = (value, cur) => `${cur}${Math.abs(value).toFixed(2)}`;
   const usedCurrencies = (() => {
     const seen = [];
@@ -912,13 +926,9 @@ function TripNotebook() {
       currency,                       // 这笔用的币种,结算按它分组
       title: expenseDraft.title.trim() || expenseDraft.category,
       amount: expenseDraft.amount.trim(),
-      note: expenseDraft.note.trim() || (
-        expenseDraft.mode === '均分'
-          ? '默认均分'
-          : expenseDraft.mode === '各自价格'
-            ? ledgerPeople.map(p => `${p} ${fmtMoney(shares[p] || 0)}`).join(' · ')
-            : `${specialItem?.owner} 的 ${specialItem?.label} ${fmtMoney(specialItem?.amount || 0)}，其余均分`
-      ),
+      // 备注只存用户自己写的。以前会自动生成一句「Lyra €24.40 · Ning €18.40」,
+      // 而列表上一行已经渲染了同样的分摊 —— 同一件事印两遍。
+      note: expenseDraft.note.trim(),
       shares,
       specialItem,
       participants: (() => {
@@ -1425,7 +1435,9 @@ function TripNotebook() {
                         autoFocus
                       />
                       <TouchableOpacity style={tn.inviteBtn} onPress={saveBudget}>
-                        <Text style={tn.inviteTxt}>{money(budgetDraft) > 0 ? '存' : '清除'}</Text>
+                        <Text style={tn.inviteTxt}>
+                          {money(budgetDraft) > 0 ? '存' : (budget ? '清除' : '取消')}
+                        </Text>
                       </TouchableOpacity>
                     </View>
                   )}
@@ -1486,7 +1498,7 @@ function TripNotebook() {
                     onChangeText={v => setExpenseDraft(prev => ({ ...prev, amount: clampMoney(v) }))}
                     placeholder="0.00"
                     keyboardType="decimal-pad"
-                    placeholderTextColor={C.mutedLight}
+                    placeholderTextColor={C.border}
                   />
                 </View>
                 {curOpen && (
@@ -1809,11 +1821,17 @@ function TripNotebook() {
                       {item.payer} 垫付 · {
                         Object.entries(item.shares || {})
                           .filter(([, v]) => money(v) > 0)
-                          .map(([p, v]) => `${p} ${fmtMoney(v)}`)
+                          .map(([p, v]) => `${p} ${fmtIn(money(v), curOf(item))}`)
                           .join(' / ') || '未分配'
                       }
+                      {item.specialItem?.label
+                        ? ` · ${item.specialItem.owner} 的${item.specialItem.label}`
+                        : ''}
                     </Text>
-                    {!!item.note && <Text style={tn.expenseMeta}>{item.note}</Text>}
+                    {/* 存量数据里那些自动生成的备注和上面重复,不再显示 */}
+                    {!!item.note && !isDerivedNote(item) && (
+                      <Text style={tn.expenseMeta}>{item.note}</Text>
+                    )}
                     <View style={tn.expenseOps}>
                       <TouchableOpacity onPress={() => startExpenseEdit(item)}>
                         <Text style={tn.expenseOpTxt}>改</Text>
