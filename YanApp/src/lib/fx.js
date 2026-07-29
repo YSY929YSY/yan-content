@@ -10,6 +10,20 @@ const FX_KEY = 'yan_fx_v1';
 const API = 'https://api.frankfurter.dev/v1';
 const BASE = 'EUR';                 // 统一以 EUR 为轴,任意两币种走交叉汇率
 const FRESH_MS = 6 * 60 * 60 * 1000; // 6 小时内的缓存直接用,不再请求
+const TIMEOUT_MS = 8000;            // 裸 fetch 会一直挂着,旅行中的弱网必须掐断
+
+// 带超时的 fetch:超时和网络错误一律抛出,交给上层回退
+async function get(url, ms = TIMEOUT_MS) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), ms);
+  try {
+    const res = await fetch(url, { signal: ctrl.signal });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 // App 里用符号,接口要 ISO 代码
 export const FX_CODES = { '€': 'EUR', '£': 'GBP', '₺': 'TRY', $: 'USD', '¥': 'CNY', '₩': 'KRW' };
@@ -31,22 +45,29 @@ const writeCache = async (data) => {
 
 const ymd = (d) => d.toISOString().slice(0, 10);
 
-// 最新汇率(以 EUR 为基准)
+// 最新汇率(以 EUR 为基准)。主源失败就换备用源,别让一个域名决定功能能不能用。
 async function fetchLatest() {
-  const res = await fetch(`${API}/latest?base=${BASE}&symbols=${SYMBOLS.join(',')}`);
-  if (!res.ok) throw new Error(`fx ${res.status}`);
-  const json = await res.json();
-  if (!json?.rates) throw new Error('fx 数据异常');
-  return { date: json.date, rates: { ...json.rates, [BASE]: 1 } };
+  try {
+    const json = await get(`${API}/latest?base=${BASE}&symbols=${SYMBOLS.join(',')}`);
+    if (!json?.rates) throw new Error('数据异常');
+    return { date: json.date, rates: { ...json.rates, [BASE]: 1 } };
+  } catch (primary) {
+    // 备用:open.er-api.com(同样免费无 key),字段名不同,取出需要的币种
+    const json = await get(`https://open.er-api.com/v6/latest/${BASE}`);
+    const all = json?.rates;
+    if (!all) throw new Error(primary?.message || '取不到汇率');
+    const rates = { [BASE]: 1 };
+    SYMBOLS.forEach(code => { if (all[code] != null) rates[code] = all[code]; });
+    const d = json.time_last_update_utc ? new Date(json.time_last_update_utc) : new Date();
+    return { date: d.toISOString().slice(0, 10), rates };
+  }
 }
 
 // 近 N 天序列,只为画一条小 sparkline;缺周末是正常的
 async function fetchSeries(days = 10) {
   const end = new Date();
   const start = new Date(end.getTime() - days * 86400000);
-  const res = await fetch(`${API}/${ymd(start)}..${ymd(end)}?base=${BASE}&symbols=${SYMBOLS.join(',')}`);
-  if (!res.ok) throw new Error(`fx series ${res.status}`);
-  const json = await res.json();
+  const json = await get(`${API}/${ymd(start)}..${ymd(end)}?base=${BASE}&symbols=${SYMBOLS.join(',')}`);
   const byDate = json?.rates || {};
   // { TRY: [{ d, v }...] },按日期升序
   const out = {};
