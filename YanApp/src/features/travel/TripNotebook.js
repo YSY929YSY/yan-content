@@ -15,6 +15,8 @@ import {
 } from '../../lib/tripLedger';
 import { SCENE_PACK } from './scenePack';
 import { parseItinerary } from '../../lib/parseItinerary';
+import FxPanel from './FxPanel';
+import { FX_CODES } from '../../lib/fx';
 
 const TRIP_STORAGE_KEY = 'yan_trip_notebook_v1';
 const MONTH_NUM = { JAN: 1, FEB: 2, MAR: 3, APR: 4, MAY: 5, JUN: 6, JUL: 7, AUG: 8, SEP: 9, OCT: 10, NOV: 11, DEC: 12 };
@@ -167,6 +169,9 @@ function TripNotebook() {
   const [siteEdit, setSiteEdit] = useState(null); // 现场编辑草稿 { i, pIdx, sIdx, label, look, say, sayZh, stuck }
   const [ocrBusy, setOcrBusy] = useState(false);
   const [scenesOpen, setScenesOpen] = useState(false);
+  // 汇率换算:两个 Modal 各挂一层(iOS 叠 Modal 打不开,只能各自用弹窗内浮层)
+  const [fxOpen, setFxOpen] = useState(false);
+  const [fxOpenLedger, setFxOpenLedger] = useState(false);
   const [sceneFam, setSceneFam] = useState(SCENE_PACK[0].key);
   const [sceneOpenIdx, setSceneOpenIdx] = useState(0);
   const [editIdx, setEditIdx] = useState(undefined);
@@ -176,6 +181,11 @@ function TripNotebook() {
   const [ledgerOpen, setLedgerOpen] = useState(false);
   const [expenseEditId, setExpenseEditId] = useState(null);
   const [joinCode, setJoinCode] = useState('');
+  // 分账主路径 = 金额 + 谁垫的 + 记一笔。其余(分类/分法/参与人/共享设置)默认收起。
+  const [ledgerAdvanced, setLedgerAdvanced] = useState(false);
+  const [ledgerSetupOpen, setLedgerSetupOpen] = useState(false);
+  const [settleOpen, setSettleOpen] = useState(false);
+  const [curOpen, setCurOpen] = useState(false);
   const [ledgerMembers, setLedgerMembers] = useState([
     { name: '我', label: '我', status: '已加入', joined: true },
   ]);
@@ -286,6 +296,15 @@ function TripNotebook() {
   const members = remoteMembers || ledgerMembers;
   const ledgerPeople = members.map(member => member.name || member.display_name);
   const isShared = !!ledgerId;
+  // 简单模式(均分)下参与人恒等于全体成员:加了同行者就自动进均分,不用再去勾一遍。
+  // 只在均分时同步——各自付/单独付各人有各自金额,强行拉平会让草稿变成不可保存的状态。
+  const peopleKey = ledgerPeople.join('|');
+  useEffect(() => {
+    if (ledgerAdvanced || expenseEditId || expenseDraft.mode !== '均分') return;
+    setExpenseDraft(prev => (
+      (prev.participants || []).join('|') === peopleKey ? prev : { ...prev, participants: [...ledgerPeople] }
+    ));
+  }, [peopleKey, ledgerAdvanced, expenseEditId, expenseDraft.mode]);
   const expenseCategories = ['晚餐', '车票', '购物', '酒店', '门票', '其他'];
   const splitModes = ['均分', '各自价格', '特殊项'];
   const MODE_LABEL = { 均分: '均分', 各自价格: '各自付', 特殊项: '单独付' };
@@ -346,7 +365,10 @@ function TripNotebook() {
     .reduce((sum, p) => sum + money(expenseDraft.personShares?.[p]), 0);
   const draftTotal = money(expenseDraft.amount);
   const assignGap = Math.round((draftTotal - perPersonAssigned) * 100) / 100;
-  const isBalanced = expenseDraft.mode !== '各自价格' || Math.abs(assignGap) <= 0.01;
+  // 单独付的那一项不能比总额还大:以前会被 Math.min 悄悄截断成总额,用户填的数被无声改掉
+  const specialGap = Math.round((money(expenseDraft.specialAmount) - draftTotal) * 100) / 100;
+  const specialOver = expenseDraft.mode === '特殊项' && specialGap > 0.01;
+  const isBalanced = (expenseDraft.mode !== '各自价格' || Math.abs(assignGap) <= 0.01) && !specialOver;
   const canSave = draftTotal > 0 && isBalanced && ledgerPeople.length > 0;
   const ledgerNets = expenses.reduce((acc, item) => {
     const total = money(item.amount);
@@ -381,19 +403,22 @@ function TripNotebook() {
     return lines;
   })();
   const settlement = settlementLines.length ? settlementLines.join('\n') : '现在基本扯平。';
-  // 结算可解释:每人「垫付 / 应承担 / 净额」
-  const settlementDetail = ledgerPeople.map(person => {
+  // 结算可解释:每人「垫付 / 应承担 / 净额」,渲染成面板(不再塞进系统 Alert)
+  const settleRows = ledgerPeople.map(person => {
     const paid = expenses.reduce((s, item) => s + (item.payer === person ? money(item.amount) : 0), 0);
     const owed = expenses.reduce((s, item) => s + money(item.shares?.[person]), 0);
-    const net = paid - owed;
-    const label = net > 0.01 ? `应收 ${fmtMoney(net)}` : net < -0.01 ? `应付 ${fmtMoney(net)}` : '两清';
-    return `${person}:垫付 ${fmtMoney(paid)} · 应承担 ${fmtMoney(owed)} → ${label}`;
-  }).join('\n');
-  const showSettlement = () => {
-    const buttons = [{ text: '知道了', style: 'cancel' }];
-    if (expenses.length) buttons.push({ text: '标记已结清', onPress: () => clearExpenses() });
-    Alert.alert('结算', `${settlement}\n\n${settlementDetail}`, buttons);
-  };
+    return { person, paid, owed, net: paid - owed };
+  });
+  // 主路径的一行摘要:不展开也知道这笔怎么分
+  const splitSummary = (() => {
+    const chosen = (expenseDraft.participants || []).filter(p => ledgerPeople.includes(p));
+    const n = chosen.length || ledgerPeople.length;
+    if (expenseDraft.mode === '各自价格') return `各自付 · ${n} 人分别记`;
+    if (expenseDraft.mode === '特殊项') return `${expenseDraft.specialOwner} 单独付一项,其余均分`;
+    const all = n === ledgerPeople.length;
+    const who = all ? '全员均分' : `${chosen.join('、')} 均分`;
+    return draftTotal > 0 && n ? `${who} · 每人 ${fmtMoney(draftTotal / n)}` : who;
+  })();
   // 拉取共享账本的成员 + 账目(供订阅和进入时刷新)
   const refreshLedger = useCallback(async (id) => {
     const target = id || ledgerId;
@@ -754,6 +779,14 @@ function TripNotebook() {
       return;
     }
     // 守恒检查:各自价格下,各人金额之和必须等于总额,否则这笔账不平
+    if (specialOver) {
+      Alert.alert(
+        '单独付的金额太大',
+        `单独付的一项是 ${fmtMoney(money(expenseDraft.specialAmount))},比这笔的总额 ${fmtMoney(draftTotal)} 还多 ${fmtMoney(specialGap)}。`,
+        [{ text: '好' }],
+      );
+      return;
+    }
     if (!isBalanced) {
       Alert.alert(
         '账不平',
@@ -952,6 +985,14 @@ function TripNotebook() {
                   <Text style={tn.scenesEntryGo}>→</Text>
                 </TouchableOpacity>
 
+                <TouchableOpacity style={tn.scenesEntry} activeOpacity={0.85} onPress={() => setFxOpen(true)}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={tn.scenesEntryTitle}>汇率 · 这值多少钱</Text>
+                    <Text style={tn.scenesEntrySub}>€ · £ · ₺ · $ · ¥ · ₩</Text>
+                  </View>
+                  <Text style={tn.scenesEntryGo}>→</Text>
+                </TouchableOpacity>
+
                 {toolsOpen && (
                   <View style={tn.toolsCard}>
                     <Text style={tn.uploadTitle}>补进资料</Text>
@@ -989,70 +1030,6 @@ function TripNotebook() {
                         <Text style={tn.toolBtnTxt}>新旅行册</Text>
                       </TouchableOpacity>
                     </View>
-                    {ledgerOpen && (
-                      <View style={tn.ledgerCard}>
-                        <View style={tn.ledgerHead}>
-                          <View>
-                            <Text style={tn.ledgerK}>TRIP LEDGER</Text>
-                            <Text style={tn.ledgerTitle}>旅行小账本</Text>
-                          </View>
-                          {specialCount > 0 && <Text style={tn.ledgerBadge}>{specialCount} 笔单独付</Text>}
-                        </View>
-                        <View style={tn.expenseForm}>
-                          <TextInput
-                            style={tn.ledgerInput}
-                            value={expenseDraft.title}
-                            onChangeText={title => setExpenseDraft(prev => ({ ...prev, title }))}
-                            placeholder="记点什么"
-                            placeholderTextColor={C.mutedLight}
-                          />
-                          <View style={tn.ledgerInputRow}>
-                            <TextInput
-                              style={[tn.ledgerInput, { flex: 1 }]}
-                              value={expenseDraft.amount}
-                              onChangeText={v => setExpenseDraft(prev => ({ ...prev, amount: clampMoney(v) }))}
-                              placeholder="金额"
-                              keyboardType="decimal-pad"
-                              placeholderTextColor={C.mutedLight}
-                            />
-                            <TextInput
-                              style={[tn.ledgerInput, { flex: 1 }]}
-                              value={expenseDraft.payer}
-                              onChangeText={payer => setExpenseDraft(prev => ({ ...prev, payer }))}
-                              placeholder="谁付的"
-                              placeholderTextColor={C.mutedLight}
-                            />
-                          </View>
-                          <TextInput
-                            style={[tn.ledgerInput, tn.ledgerNoteInput]}
-                            value={expenseDraft.note}
-                            onChangeText={note => setExpenseDraft(prev => ({ ...prev, note }))}
-                            placeholder="备注"
-                            placeholderTextColor={C.mutedLight}
-                          />
-                          <View style={tn.ledgerActions}>
-                            <TouchableOpacity
-                              style={[tn.specialBtn, expenseDraft.special && tn.specialBtnAct]}
-                              onPress={() => setExpenseDraft(prev => ({ ...prev, special: !prev.special }))}
-                            >
-                              <Text style={[tn.specialBtnTxt, expenseDraft.special && tn.specialBtnTxtAct]}>单独付</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={tn.addExpenseBtn} onPress={saveExpense}>
-                              <Text style={tn.addExpenseTxt}>记一笔</Text>
-                            </TouchableOpacity>
-                          </View>
-                        </View>
-                        {expenses.map(item => (
-                          <View key={item.id} style={tn.expenseRow}>
-                            <View style={{ flex: 1 }}>
-                              <Text style={tn.expenseTitle}>{item.title} · {currency}{item.amount}</Text>
-                              <Text style={tn.expenseMeta}>{item.payer} 付 · {item.mode} · {item.note}</Text>
-                            </View>
-                            {item.special && <Text style={tn.specialPill}>单独</Text>}
-                          </View>
-                        ))}
-                      </View>
-                    )}
                   </View>
                 )}
 
@@ -1263,6 +1240,25 @@ function TripNotebook() {
               </ScrollView>
             </View>
           )}
+
+          {/* 汇率:同样走弹窗内浮层,不叠 Modal */}
+          {fxOpen && (
+            <View style={tn.scenesOverlay}>
+              <View style={tn.head}>
+                <View>
+                  <Text style={tn.title}>汇率</Text>
+                  <Text style={tn.sub}>参考价</Text>
+                </View>
+                <TouchableOpacity onPress={() => setFxOpen(false)}>
+                  <Text style={tn.close}>×</Text>
+                </TouchableOpacity>
+              </View>
+              <ScrollView style={tn.body} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
+                <FxPanel initialFrom={FX_CODES[currency] || 'TRY'} initialTo="CNY" />
+                <View style={{ height: 24 }} />
+              </ScrollView>
+            </View>
+          )}
         </View>
       </Modal>
 
@@ -1273,118 +1269,67 @@ function TripNotebook() {
           <View style={[tn.sheet, tn.ledgerSheet]}>
             <View style={tn.head}>
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 9 }}>
-                <Text style={tn.mark}>🧮</Text>
+                <Text style={tn.mark}>言</Text>
                 <View>
-                  <Text style={tn.title}>同行分账</Text>
+                  <Text style={tn.title}>分账</Text>
+                  <Text style={tn.sub}>{isShared ? `共享账本 · ${ledgerPeople.length} 人` : '本机记账'}</Text>
                 </View>
               </View>
-              <View style={tn.headActions}>
-                <TouchableOpacity style={[tn.clearLedgerBtn, !expenses.length && tn.clearLedgerBtnOff]} onPress={clearExpenses} disabled={!expenses.length}>
-                  <Text style={[tn.clearLedgerTxt, !expenses.length && tn.clearLedgerTxtOff]}>结清</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setLedgerOpen(false)}>
-                  <Text style={tn.close}>×</Text>
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity onPress={() => setLedgerOpen(false)}>
+                <Text style={tn.close}>×</Text>
+              </TouchableOpacity>
             </View>
             <ScrollView style={tn.body} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag">
-              <View style={tn.ledgerCard}>
-                <View style={tn.ledgerHead}>
-                  <View>
-                    <Text style={tn.ledgerK}>LEDGER</Text>
-                    <Text style={tn.ledgerTitle}>分账</Text>
-                  </View>
-                  {specialCount > 0 && <Text style={tn.ledgerBadge}>{specialCount} 笔单独付</Text>}
+              {/* ── 结算:账本的高光,放最上面;点开看每人明细 ── */}
+              <TouchableOpacity style={tn.settleAction} activeOpacity={0.9} onPress={() => setSettleOpen(v => !v)}>
+                <View style={{ flex: 1 }}>
+                  <Text style={tn.settleActionK}>结算</Text>
+                  <Text style={tn.settleActionMain}>{settlement}</Text>
                 </View>
-                <View style={tn.joinBox}>
-                  {/* 共享状态 */}
-                  {isShared ? (
-                    <View>
-                      <View style={tn.codeRow}>
-                        <View>
-                          <Text style={tn.codeK}>共享账本 · 邀请码</Text>
-                          <Text style={tn.codeVal}>{ledgerCode}</Text>
-                        </View>
-                        <TouchableOpacity style={tn.inviteBtn} onPress={inviteLedger}>
-                          <Text style={tn.inviteTxt}>邀请</Text>
-                        </TouchableOpacity>
+                <Text style={tn.settleActionArrow}>{settleOpen ? '−' : '→'}</Text>
+              </TouchableOpacity>
+              {settleOpen && (
+                <View style={tn.settlePanel}>
+                  {settleRows.map(row => (
+                    <View key={row.person} style={tn.settleRow}>
+                      <View style={{ flex: 1 }}>
+                        <Text style={tn.settleName}>{row.person}</Text>
+                        <Text style={tn.settleNums}>垫付 {fmtMoney(row.paid)} · 应承担 {fmtMoney(row.owed)}</Text>
                       </View>
-                      <View style={tn.joinOtherBox}>
-                        <Text style={tn.joinTitle}>加入另一个账本</Text>
-                                                <View style={tn.inviteRow}>
-                          <TextInput
-                            style={tn.joinInput}
-                            value={joinCode}
-                            onChangeText={setJoinCode}
-                            placeholder="输入邀请码"
-                            autoCapitalize="characters"
-                            placeholderTextColor={C.mutedLight}
-                          />
-                          <TouchableOpacity style={[tn.inviteBtn, ledgerBusy && tn.inviteBtnOff]} disabled={ledgerBusy} onPress={joinLedgerRemote}>
-                            <Text style={tn.inviteTxt}>{ledgerBusy ? '处理中' : '加入'}</Text>
-                          </TouchableOpacity>
-                        </View>
-                      </View>
-                    </View>
-                  ) : (
-                    <View>
-                      <Text style={tn.joinTitle}>共享账本</Text>
-                      <TextInput
-                        style={[tn.joinInput, { marginTop: 8, textAlign: 'left', height: 36 }]}
-                        value={myName}
-                        onChangeText={setMyName}
-                        placeholder="你的名字(账本里显示)"
-                        placeholderTextColor={C.mutedLight}
-                      />
-                      <View style={[tn.inviteRow, { marginTop: 8 }]}>
-                        <TouchableOpacity style={[tn.addExpenseBtn, { flex: 1, opacity: ledgerBusy ? 0.6 : 1 }]} disabled={ledgerBusy} onPress={createSharedLedger}>
-                          <Text style={tn.addExpenseTxt}>{ledgerBusy ? '处理中…' : '建共享账本'}</Text>
-                        </TouchableOpacity>
-                      </View>
-                      <View style={[tn.inviteRow, { marginTop: 8 }]}>
-                        <TextInput
-                          style={tn.joinInput}
-                          value={joinCode}
-                          onChangeText={setJoinCode}
-                          placeholder="输入邀请码"
-                          autoCapitalize="characters"
-                          placeholderTextColor={C.mutedLight}
-                        />
-                        <TouchableOpacity style={[tn.inviteBtn, ledgerBusy && tn.inviteBtnOff]} disabled={ledgerBusy} onPress={joinLedgerRemote}>
-                          <Text style={tn.inviteTxt}>{ledgerBusy ? '处理中' : '加入'}</Text>
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                  )}
-
-                  {/* 成员 */}
-                  <View style={tn.joinRow}>
-                    {members.map(member => (
-                      <Text key={member.name} style={[tn.avatarChip, member.joined && tn.avatarChipOn]}>
-                        {member.name}{member.tagOnly ? ' · 待加入' : ''}
+                      <Text style={[tn.settleNet, row.net > 0.01 && tn.settleNetIn, row.net < -0.01 && tn.settleNetOut]}>
+                        {row.net > 0.01 ? `应收 ${fmtMoney(row.net)}` : row.net < -0.01 ? `应付 ${fmtMoney(row.net)}` : '两清'}
                       </Text>
-                    ))}
-                  </View>
-                  <View style={tn.inviteRow}>
-                    <TextInput
-                      style={[tn.joinInput, { textAlign: 'left' }]}
-                      value={newMemberName}
-                      onChangeText={setNewMemberName}
-                      placeholder="加一个同行者名字"
-                      placeholderTextColor={C.mutedLight}
-                    />
-                    <TouchableOpacity style={tn.inviteBtn} onPress={addMember}>
-                      <Text style={tn.inviteTxt}>加成员</Text>
-                    </TouchableOpacity>
-                  </View>
+                    </View>
+                  ))}
+                  <TouchableOpacity style={tn.settleClear} onPress={clearExpenses} disabled={!expenses.length}>
+                    <Text style={[tn.settleClearTxt, !expenses.length && tn.settleClearTxtOff]}>标记全部结清</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
 
-                  {/* 货币 */}
-                  <View style={tn.joinRow}>
+              {/* ── 记一笔:主路径只有「金额 + 谁垫的」,其余收在「调整」里 ── */}
+              <View style={tn.ledgerCard}>
+                <View style={tn.amountRow}>
+                  <TouchableOpacity onPress={() => setCurOpen(v => !v)} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+                    <Text style={tn.curTap}>{currency}</Text>
+                  </TouchableOpacity>
+                  <TextInput
+                    style={tn.amountInput}
+                    value={expenseDraft.amount}
+                    onChangeText={v => setExpenseDraft(prev => ({ ...prev, amount: clampMoney(v) }))}
+                    placeholder="0.00"
+                    keyboardType="decimal-pad"
+                    placeholderTextColor={C.mutedLight}
+                  />
+                </View>
+                {curOpen && (
+                  <View style={tn.curTray}>
                     {CURRENCIES.map(cur => (
                       <TouchableOpacity
                         key={cur}
                         style={[tn.curChip, currency === cur && tn.curChipAct]}
                         onPress={() => {
+                          setCurOpen(false);
                           if (cur === currency) return;
                           if (expenses.length) {
                             Alert.alert(
@@ -1404,53 +1349,51 @@ function TripNotebook() {
                       </TouchableOpacity>
                     ))}
                   </View>
-                </View>
-                <View style={tn.quickTags}>
-                  {expenseCategories.map(cat => (
+                )}
+
+                <Text style={tn.fieldK}>谁垫的</Text>
+                <View style={tn.ownerRow}>
+                  {ledgerPeople.map(person => (
                     <TouchableOpacity
-                      key={cat}
-                      style={[tn.catChip, expenseDraft.category === cat && tn.catChipAct]}
-                      onPress={() => setExpenseDraft(prev => ({ ...prev, category: cat, title: '' }))}
+                      key={person}
+                      style={[tn.ownerChip, expenseDraft.payer === person && tn.ownerChipAct]}
+                      onPress={() => setExpenseDraft(prev => ({
+                        ...prev,
+                        payer: person,
+                        participants: prev.participants?.includes(person)
+                          ? prev.participants
+                          : [...(prev.participants || []), person],
+                      }))}
                     >
-                      <Text style={[tn.catTxt, expenseDraft.category === cat && tn.catTxtAct]}>{cat}</Text>
+                      <Text style={[tn.ownerTxt, expenseDraft.payer === person && tn.ownerTxtAct]}>{person}</Text>
                     </TouchableOpacity>
                   ))}
                 </View>
-                <View style={tn.modeRow}>
-                  {splitModes.map(mode => (
-                    <TouchableOpacity
-                      key={mode}
-                      style={[tn.modeBtn, expenseDraft.mode === mode && tn.modeBtnAct]}
-                      onPress={() => setExpenseDraft(prev => ({ ...prev, mode, special: mode === '特殊项' ? true : prev.special }))}
-                    >
-                      <Text style={[tn.modeTxt, expenseDraft.mode === mode && tn.modeTxtAct]}>{MODE_LABEL[mode] || mode}</Text>
-                    </TouchableOpacity>
-                  ))}
+
+                {/* 不展开也知道这笔怎么分 */}
+                <View style={tn.splitLine}>
+                  <Text style={tn.splitLineTxt}>{splitSummary}</Text>
+                  <TouchableOpacity onPress={() => setLedgerAdvanced(v => !v)} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+                    <Text style={tn.splitLineLink}>{ledgerAdvanced ? '收起' : '调整'}</Text>
+                  </TouchableOpacity>
                 </View>
-                <View style={tn.expenseForm}>
-                  <View style={tn.microSection}>
-                    <Text style={tn.splitHint}>谁付的</Text>
-                    <View style={tn.ownerRow}>
-                      {ledgerPeople.map(person => (
+
+                {ledgerAdvanced && (
+                  <View style={tn.advBox}>
+                    <Text style={tn.fieldK}>怎么分</Text>
+                    <View style={tn.modeRow}>
+                      {splitModes.map(mode => (
                         <TouchableOpacity
-                          key={person}
-                          style={[tn.ownerChip, expenseDraft.payer === person && tn.ownerChipAct]}
-                          onPress={() => setExpenseDraft(prev => ({
-                            ...prev,
-                            payer: person,
-                            // 付款人通常自己也消费:自动勾进参与人,省一次点击
-                            participants: prev.participants?.includes(person)
-                              ? prev.participants
-                              : [...(prev.participants || []), person],
-                          }))}
+                          key={mode}
+                          style={[tn.modeBtn, expenseDraft.mode === mode && tn.modeBtnAct]}
+                          onPress={() => setExpenseDraft(prev => ({ ...prev, mode, special: mode === '特殊项' ? true : prev.special }))}
                         >
-                          <Text style={[tn.ownerTxt, expenseDraft.payer === person && tn.ownerTxtAct]}>{person}</Text>
+                          <Text style={[tn.modeTxt, expenseDraft.mode === mode && tn.modeTxtAct]}>{MODE_LABEL[mode] || mode}</Text>
                         </TouchableOpacity>
                       ))}
                     </View>
-                  </View>
-                  <View style={tn.microSection}>
-                    <Text style={tn.splitHint}>
+
+                    <Text style={tn.fieldK}>
                       {expenseDraft.mode === '各自价格' ? '这笔消费包含谁' : expenseDraft.mode === '特殊项' ? '基础分摊成员' : '谁参与均分'}
                     </Text>
                     <View style={tn.ownerRow}>
@@ -1464,183 +1407,288 @@ function TripNotebook() {
                         </TouchableOpacity>
                       ))}
                     </View>
-                  </View>
-                  <View style={tn.ledgerInputRow}>
-                    <TextInput
-                      style={[tn.ledgerInput, { flex: 1 }]}
-                      value={expenseDraft.amount}
-                      onChangeText={v => setExpenseDraft(prev => ({ ...prev, amount: clampMoney(v) }))}
-                      placeholder="总金额"
-                      keyboardType="decimal-pad"
-                      placeholderTextColor={C.mutedLight}
-                    />
-                  </View>
-                  <TextInput
-                    style={[tn.ledgerInput, tn.ledgerNoteInput]}
-                    value={expenseDraft.note}
-                    onChangeText={note => setExpenseDraft(prev => ({ ...prev, note }))}
-                    placeholder="备注，可不填"
-                    placeholderTextColor={C.mutedLight}
-                  />
-                  {expenseDraft.mode === '各自价格' && (
-                    <View style={tn.splitBox}>
-                      <Text style={tn.splitHint}>各自价格 · 每人实际消费多少</Text>
-                      {(expenseDraft.participants || []).filter(p => ledgerPeople.includes(p)).map(person => (
-                        <View key={person} style={tn.personShareRow}>
-                          <Text style={tn.personShareName}>{person}</Text>
+
+                    {expenseDraft.mode === '各自价格' && (
+                      <View style={tn.splitBox}>
+                        <Text style={tn.fieldK}>每人实际消费多少</Text>
+                        {(expenseDraft.participants || []).filter(p => ledgerPeople.includes(p)).map(person => (
+                          <View key={person} style={tn.personShareRow}>
+                            <Text style={tn.personShareName}>{person}</Text>
+                            <TextInput
+                              style={[tn.ledgerInput, { flex: 1, marginBottom: 0 }]}
+                              value={expenseDraft.personShares?.[person] || ''}
+                              onChangeText={v => setExpenseDraft(prev => ({
+                                ...prev,
+                                personShares: { ...prev.personShares, [person]: clampMoney(v) },
+                              }))}
+                              placeholder={`${currency}0.00`}
+                              keyboardType="decimal-pad"
+                              placeholderTextColor={C.mutedLight}
+                            />
+                          </View>
+                        ))}
+                        {draftTotal > 0 && (
+                          <View style={tn.balanceRow}>
+                            <Text style={[tn.balanceTxt, !isBalanced && tn.balanceTxtWarn]}>
+                              {isBalanced
+                                ? `已分配 ${fmtMoney(perPersonAssigned)},账已平`
+                                : assignGap > 0
+                                  ? `已分配 ${fmtMoney(perPersonAssigned)} / ${fmtMoney(draftTotal)},还差 ${fmtMoney(assignGap)}`
+                                  : `超出总额 ${fmtMoney(assignGap)},请调整`}
+                            </Text>
+                            {!isBalanced && assignGap > 0 && (
+                              <TouchableOpacity
+                                onPress={() => {
+                                  const ps = expenseDraft.personShares || {};
+                                  const chosen = (expenseDraft.participants || []).filter(p => ledgerPeople.includes(p));
+                                  const blanks = chosen.filter(p => !money(ps[p]));
+                                  const targets = blanks.length ? blanks : [expenseDraft.payer].filter(p => chosen.includes(p));
+                                  if (!targets.length) return;
+                                  const add = splitEven(assignGap, targets);
+                                  setExpenseDraft(prev => ({
+                                    ...prev,
+                                    personShares: {
+                                      ...prev.personShares,
+                                      ...Object.fromEntries(targets.map(p => [
+                                        p, String(Math.round(((money(ps[p]) || 0) + (add[p] || 0)) * 100) / 100),
+                                      ])),
+                                    },
+                                  }));
+                                }}
+                              >
+                                <Text style={tn.balanceFix}>剩余均分</Text>
+                              </TouchableOpacity>
+                            )}
+                          </View>
+                        )}
+                      </View>
+                    )}
+
+                    {expenseDraft.mode === '特殊项' && (
+                      <View style={tn.splitBox}>
+                        <Text style={tn.fieldK}>谁单独付了一项</Text>
+                        <View style={tn.ownerRow}>
+                          {ledgerPeople.map(person => (
+                            <TouchableOpacity
+                              key={person}
+                              style={[tn.ownerChip, expenseDraft.specialOwner === person && tn.ownerChipAct]}
+                              onPress={() => setExpenseDraft(prev => ({ ...prev, specialOwner: person, special: true }))}
+                            >
+                              <Text style={[tn.ownerTxt, expenseDraft.specialOwner === person && tn.ownerTxtAct]}>{person}</Text>
+                            </TouchableOpacity>
+                          ))}
+                        </View>
+                        <View style={tn.ledgerInputRow}>
                           <TextInput
-                            style={[tn.ledgerInput, { flex: 1, marginBottom: 0 }]}
-                            value={expenseDraft.personShares?.[person] || ''}
-                            onChangeText={v => setExpenseDraft(prev => ({
-                              ...prev,
-                              personShares: { ...prev.personShares, [person]: clampMoney(v) },
-                            }))}
-                            placeholder={`${currency}0.00`}
+                            style={[tn.ledgerInput, { flex: 1 }]}
+                            value={expenseDraft.specialLabel}
+                            onChangeText={specialLabel => setExpenseDraft(prev => ({ ...prev, specialLabel }))}
+                            placeholder="物品"
+                            placeholderTextColor={C.mutedLight}
+                          />
+                          <TextInput
+                            style={[tn.ledgerInput, { flex: 1 }]}
+                            value={expenseDraft.specialAmount}
+                            onChangeText={v => setExpenseDraft(prev => ({ ...prev, specialAmount: clampMoney(v), special: true }))}
+                            placeholder="金额"
                             keyboardType="decimal-pad"
                             placeholderTextColor={C.mutedLight}
                           />
                         </View>
+                      </View>
+                    )}
+
+                    <Text style={tn.fieldK}>分类</Text>
+                    <View style={tn.quickTags}>
+                      {expenseCategories.map(cat => (
+                        <TouchableOpacity
+                          key={cat}
+                          style={[tn.catChip, expenseDraft.category === cat && tn.catChipAct]}
+                          onPress={() => setExpenseDraft(prev => ({ ...prev, category: cat, title: '' }))}
+                        >
+                          <Text style={[tn.catTxt, expenseDraft.category === cat && tn.catTxtAct]}>{cat}</Text>
+                        </TouchableOpacity>
                       ))}
-                      {draftTotal > 0 && (
-                        <View style={tn.balanceRow}>
-                          <Text style={[tn.balanceTxt, !isBalanced && tn.balanceTxtWarn]}>
-                            {isBalanced
-                              ? `已分配 ${fmtMoney(perPersonAssigned)},账已平 ✓`
-                              : assignGap > 0
-                                ? `已分配 ${fmtMoney(perPersonAssigned)} / ${fmtMoney(draftTotal)},还差 ${fmtMoney(assignGap)}`
-                                : `超出总额 ${fmtMoney(assignGap)},请调整`}
-                          </Text>
-                          {!isBalanced && assignGap > 0 && (
-                            <TouchableOpacity
-                              onPress={() => {
-                                // 把没分完的差额均分给还没填金额的人;都填了就给付款人
-                                const ps = expenseDraft.personShares || {};
-                                const chosen = (expenseDraft.participants || []).filter(p => ledgerPeople.includes(p));
-                                const blanks = chosen.filter(p => !money(ps[p]));
-                                const targets = blanks.length ? blanks : [expenseDraft.payer].filter(p => chosen.includes(p));
-                                if (!targets.length) return;
-                                const add = splitEven(assignGap, targets);
-                                setExpenseDraft(prev => ({
-                                  ...prev,
-                                  personShares: {
-                                    ...prev.personShares,
-                                    ...Object.fromEntries(targets.map(p => [
-                                      p, String(Math.round(((money(ps[p]) || 0) + (add[p] || 0)) * 100) / 100),
-                                    ])),
-                                  },
-                                }));
-                              }}
-                            >
-                              <Text style={tn.balanceFix}>剩余均分</Text>
-                            </TouchableOpacity>
-                          )}
-                        </View>
-                      )}
                     </View>
-                  )}
-                  {expenseDraft.mode === '特殊项' && (
-                    <View style={tn.splitBox}>
-                      <Text style={tn.splitHint}>特殊项，其余默认均分</Text>
-                      <View style={tn.ownerRow}>
-                        {ledgerPeople.map(person => (
-                          <TouchableOpacity
-                            key={person}
-                            style={[tn.ownerChip, expenseDraft.specialOwner === person && tn.ownerChipAct]}
-                            onPress={() => setExpenseDraft(prev => ({ ...prev, specialOwner: person, special: true }))}
-                          >
-                            <Text style={[tn.ownerTxt, expenseDraft.specialOwner === person && tn.ownerTxtAct]}>{person}</Text>
-                          </TouchableOpacity>
-                        ))}
-                      </View>
-                      <View style={tn.ledgerInputRow}>
-                        <TextInput
-                          style={[tn.ledgerInput, { flex: 1 }]}
-                          value={expenseDraft.specialLabel}
-                          onChangeText={specialLabel => setExpenseDraft(prev => ({ ...prev, specialLabel }))}
-                          placeholder="物品"
-                          placeholderTextColor={C.mutedLight}
-                        />
-                        <TextInput
-                          style={[tn.ledgerInput, { flex: 1 }]}
-                          value={expenseDraft.specialAmount}
-                          onChangeText={v => setExpenseDraft(prev => ({ ...prev, specialAmount: clampMoney(v), special: true }))}
-                          placeholder="金额"
-                          keyboardType="decimal-pad"
-                          placeholderTextColor={C.mutedLight}
-                        />
-                      </View>
-                    </View>
-                  )}
-                  <View style={tn.ledgerActions}>
-                    <TouchableOpacity
-                      style={[tn.specialBtn, expenseDraft.special && tn.specialBtnAct]}
-                      onPress={() => setExpenseDraft(prev => ({ ...prev, special: !prev.special, mode: !prev.special ? '特殊项' : prev.mode }))}
-                    >
-                      <Text style={[tn.specialBtnTxt, expenseDraft.special && tn.specialBtnTxtAct]}>单独付</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={tn.scanBtn} onPress={pickOrder}>
-                      <Text style={tn.scanTxt}>上传小票</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={[tn.addExpenseBtn, !canSave && tn.addExpenseBtnOff]}
-                      onPress={saveExpense}
-                      disabled={!canSave}
-                    >
-                      <Text style={tn.addExpenseTxt}>{expenseEditId ? '保存修改' : '记一笔'}</Text>
-                    </TouchableOpacity>
                   </View>
-                  {/* 按下「记一笔」之前,先看到每个人会分多少 */}
-                  {draftTotal > 0 && expenseDraft.mode !== '各自价格' && (
-                    <Text style={tn.previewTxt}>
-                      预览:{Object.entries(buildShares(expenseDraft)).filter(([, v]) => v > 0).map(([p, v]) => `${p} ${fmtMoney(v)}`).join(' · ') || '选一下参与人'}
+                )}
+
+                <TextInput
+                  style={tn.noteInput}
+                  value={expenseDraft.note}
+                  onChangeText={note => setExpenseDraft(prev => ({ ...prev, note }))}
+                  placeholder="备注,可不填"
+                  placeholderTextColor={C.mutedLight}
+                />
+                {/* 按钮变灰必须给出理由,尤其原因藏在收起的「调整」里时 */}
+                {!canSave && draftTotal > 0 && !isBalanced && (
+                  <TouchableOpacity style={tn.whyOff} onPress={() => setLedgerAdvanced(true)}>
+                    <Text style={tn.whyOffTxt}>
+                      {specialOver
+                        ? `单独付的一项比总额还多 ${fmtMoney(specialGap)} · 去调整`
+                        : assignGap > 0
+                          ? `还差 ${fmtMoney(assignGap)} 没分到人 · 去调整`
+                          : `超出总额 ${fmtMoney(assignGap)} · 去调整`}
                     </Text>
-                  )}
+                  </TouchableOpacity>
+                )}
+                <TouchableOpacity
+                  style={[tn.addExpenseBtn, !canSave && tn.addExpenseBtnOff]}
+                  onPress={saveExpense}
+                  disabled={!canSave}
+                >
+                  <Text style={tn.addExpenseTxt}>{expenseEditId ? '保存修改' : '记一笔'}</Text>
+                </TouchableOpacity>
+                <View style={tn.underActions}>
+                  <TouchableOpacity onPress={pickOrder}>
+                    <Text style={tn.quietLink}>上传小票</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => setFxOpenLedger(true)}>
+                    <Text style={tn.quietLink}>汇率</Text>
+                  </TouchableOpacity>
                   {expenseEditId && (
-                    <TouchableOpacity style={tn.cancelEditBtn} onPress={resetExpenseDraft}>
-                      <Text style={tn.cancelEditTxt}>取消修改</Text>
+                    <TouchableOpacity onPress={resetExpenseDraft}>
+                      <Text style={tn.quietLink}>取消修改</Text>
                     </TouchableOpacity>
                   )}
                 </View>
-                <TouchableOpacity
-                  style={tn.settleAction}
-                  activeOpacity={0.88}
-                  onPress={showSettlement}
-                >
-                  <View>
-                    <Text style={tn.settleActionK}>结算</Text>
-                    <Text style={tn.settleActionMain}>{settlement}</Text>
+              </View>
+
+              {/* ── 同行者 / 共享账本:一趟旅行只设一次,默认收起 ── */}
+              <TouchableOpacity style={tn.setupRow} activeOpacity={0.8} onPress={() => setLedgerSetupOpen(v => !v)}>
+                <View style={{ flex: 1 }}>
+                  <Text style={tn.setupTxt}>{isShared ? `共享账本 · 邀请码 ${ledgerCode}` : '同行者'}</Text>
+                  <Text style={tn.setupMeta}>{ledgerPeople.join('、') || '还没有成员'}</Text>
+                </View>
+                <Text style={tn.setupChevron}>{ledgerSetupOpen ? '−' : '+'}</Text>
+              </TouchableOpacity>
+              {ledgerSetupOpen && (
+                <View style={tn.setupPanel}>
+                  <View style={tn.inviteRow}>
+                    <TextInput
+                      style={[tn.joinInput, { textAlign: 'left' }]}
+                      value={newMemberName}
+                      onChangeText={setNewMemberName}
+                      placeholder="加一个同行者名字"
+                      placeholderTextColor={C.mutedLight}
+                    />
+                    <TouchableOpacity style={tn.inviteBtn} onPress={addMember}>
+                      <Text style={tn.inviteTxt}>加成员</Text>
+                    </TouchableOpacity>
                   </View>
-                  <Text style={tn.settleActionArrow}>→</Text>
-                </TouchableOpacity>
-                {expenses.map(item => (
-                  <View key={item.id} style={tn.expenseRow}>
-                    <View style={{ flex: 1 }}>
-                      <Text style={tn.expenseTitle}>
-                        {item.title && item.title !== item.category ? `${item.category} · ${item.title}` : item.category} · {currency}{item.amount}
+                  <View style={tn.joinRow}>
+                    {members.map(member => (
+                      <Text key={member.name} style={[tn.avatarChip, member.joined && tn.avatarChipOn]}>
+                        {member.name}{member.tagOnly ? ' · 待加入' : ''}
                       </Text>
-                      <Text style={tn.expenseMeta}>
-                        {item.payer} 付 · {item.mode} · {
-                          Object.entries(item.shares || {})
-                            .filter(([, v]) => money(v) > 0)
-                            .map(([p, v]) => `${p} 承担 ${fmtMoney(v)}`)
-                            .join(' / ') || '未分配'
-                        }
-                      </Text>
-                      {!!item.note && <Text style={tn.expenseMeta}>{item.note}</Text>}
-                      <View style={tn.expenseOps}>
-                        <TouchableOpacity onPress={() => startExpenseEdit(item)}>
-                          <Text style={tn.expenseOpTxt}>改</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => deleteExpense(item.id)}>
-                          <Text style={[tn.expenseOpTxt, tn.deleteTxt]}>删</Text>
+                    ))}
+                  </View>
+                  <View style={tn.setupDivider} />
+                  {isShared ? (
+                    <View>
+                      <TouchableOpacity style={tn.inviteBtnWide} onPress={inviteLedger}>
+                        <Text style={tn.inviteTxt}>把邀请码发给同行者</Text>
+                      </TouchableOpacity>
+                      <View style={tn.inviteRow}>
+                        <TextInput
+                          style={tn.joinInput}
+                          value={joinCode}
+                          onChangeText={setJoinCode}
+                          placeholder="加入另一个账本"
+                          autoCapitalize="characters"
+                          placeholderTextColor={C.mutedLight}
+                        />
+                        <TouchableOpacity style={[tn.inviteBtn, ledgerBusy && tn.inviteBtnOff]} disabled={ledgerBusy} onPress={joinLedgerRemote}>
+                          <Text style={tn.inviteTxt}>{ledgerBusy ? '处理中' : '加入'}</Text>
                         </TouchableOpacity>
                       </View>
                     </View>
-                    {item.special && <Text style={tn.specialPill}>单独</Text>}
+                  ) : (
+                    <View>
+                      <View style={tn.inviteRow}>
+                        <TextInput
+                          style={[tn.joinInput, { textAlign: 'left' }]}
+                          value={myName}
+                          onChangeText={setMyName}
+                          placeholder="你的名字(账本里显示)"
+                          placeholderTextColor={C.mutedLight}
+                        />
+                        <TouchableOpacity style={[tn.inviteBtn, ledgerBusy && tn.inviteBtnOff]} disabled={ledgerBusy} onPress={createSharedLedger}>
+                          <Text style={tn.inviteTxt}>{ledgerBusy ? '处理中' : '开共享'}</Text>
+                        </TouchableOpacity>
+                      </View>
+                      <View style={tn.inviteRow}>
+                        <TextInput
+                          style={tn.joinInput}
+                          value={joinCode}
+                          onChangeText={setJoinCode}
+                          placeholder="或输入同行者的邀请码"
+                          autoCapitalize="characters"
+                          placeholderTextColor={C.mutedLight}
+                        />
+                        <TouchableOpacity style={[tn.inviteBtn, ledgerBusy && tn.inviteBtnOff]} disabled={ledgerBusy} onPress={joinLedgerRemote}>
+                          <Text style={tn.inviteTxt}>{ledgerBusy ? '处理中' : '加入'}</Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  )}
+                </View>
+              )}
+
+              {/* ── 账目 ── */}
+              {expenses.length > 0 && (
+                <View style={tn.listHead}>
+                  <Text style={tn.listHeadTxt}>账目 {expenses.length} 笔</Text>
+                  {specialCount > 0 && <Text style={tn.ledgerBadge}>{specialCount} 笔单独付</Text>}
+                </View>
+              )}
+              {expenses.map(item => (
+                <View key={item.id} style={tn.expenseRow}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={tn.expenseTitle}>
+                      {item.title && item.title !== item.category ? `${item.category} · ${item.title}` : item.category} · {fmtMoney(money(item.amount))}
+                    </Text>
+                    <Text style={tn.expenseMeta}>
+                      {item.payer} 垫付 · {
+                        Object.entries(item.shares || {})
+                          .filter(([, v]) => money(v) > 0)
+                          .map(([p, v]) => `${p} ${fmtMoney(v)}`)
+                          .join(' / ') || '未分配'
+                      }
+                    </Text>
+                    {!!item.note && <Text style={tn.expenseMeta}>{item.note}</Text>}
+                    <View style={tn.expenseOps}>
+                      <TouchableOpacity onPress={() => startExpenseEdit(item)}>
+                        <Text style={tn.expenseOpTxt}>改</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={() => deleteExpense(item.id)}>
+                        <Text style={[tn.expenseOpTxt, tn.deleteTxt]}>删</Text>
+                      </TouchableOpacity>
+                    </View>
                   </View>
-                ))}
-              </View>
+                  {item.special && <Text style={tn.specialPill}>单独</Text>}
+                </View>
+              ))}
             </ScrollView>
+
+            {/* 分账里的汇率:结算前想换算一下的时候 */}
+            {fxOpenLedger && (
+              <View style={tn.scenesOverlay}>
+                <View style={tn.head}>
+                  <View>
+                    <Text style={tn.title}>汇率</Text>
+                    <Text style={tn.sub}>参考价</Text>
+                  </View>
+                  <TouchableOpacity onPress={() => setFxOpenLedger(false)}>
+                    <Text style={tn.close}>×</Text>
+                  </TouchableOpacity>
+                </View>
+                <ScrollView style={tn.body} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
+                  <FxPanel initialFrom={FX_CODES[currency] || 'EUR'} initialTo="CNY" />
+                  <View style={{ height: 24 }} />
+                </ScrollView>
+              </View>
+            )}
           </View>
         </View>
       </Modal>
@@ -1779,7 +1827,6 @@ const tn = StyleSheet.create({
   phraseEn: { fontFamily: SERIF, fontSize: 16.5, color: C.ink, lineHeight: 23 },
   phraseCn: { fontSize: 11.5, color: C.muted, marginTop: 4 },
   toolsCard: { backgroundColor: C.white, borderRadius: 16, borderWidth: 1, borderColor: C.border, padding: 12, marginBottom: 12 },
-  toolsTop: { flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', gap: 10 },
   uploadTitle: { fontSize: 14, fontWeight: '700', color: C.ink },
   uploadSub: { fontSize: 11, color: C.muted, lineHeight: 17, marginTop: 3 },
   thumbRow: { marginTop: 10 },
@@ -1789,36 +1836,83 @@ const tn = StyleSheet.create({
   recognizeBtn: { backgroundColor: C.ink, borderRadius: 999, paddingHorizontal: 14, paddingVertical: 9 },
   recognizeBtnOff: { backgroundColor: C.mutedLight },
   recognizeTxt: { color: C.white, fontSize: 12.5, fontWeight: '800' },
-  uploadCount: { fontSize: 11, color: C.teal, fontWeight: '800', backgroundColor: C.white, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 4, overflow: 'hidden' },
   toolGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 10 },
   toolBtn: { width: '48%', backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 13, paddingVertical: 10, alignItems: 'center' },
   toolBtnTxt: { color: C.teal, fontSize: 12, fontWeight: '800' },
-  shareState: { fontSize: 11, color: C.muted, marginTop: 10 },
-  headActions: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  clearLedgerBtn: { backgroundColor: '#fff0f0', borderWidth: 1, borderColor: '#f0c8c8', borderRadius: 999, paddingHorizontal: 10, paddingVertical: 6 },
-  clearLedgerBtnOff: { opacity: 0.45 },
-  clearLedgerTxt: { fontSize: 11, color: C.lava, fontWeight: '900' },
-  clearLedgerTxtOff: { color: C.muted },
-  ledgerCard: { marginTop: 12, backgroundColor: C.white, borderRadius: 16, borderWidth: 1, borderColor: C.border, padding: 12 },
-  ledgerHead: { flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', gap: 10 },
-  ledgerK: { fontSize: 9, color: C.teal, fontWeight: '900', letterSpacing: 1.4 },
-  ledgerTitle: { fontSize: 16, color: C.ink, fontWeight: '800', marginTop: 2 },
+  ledgerCard: { marginTop: 12, backgroundColor: C.white, borderRadius: 16, borderWidth: 1, borderColor: C.border, padding: 14 },
+
+  // ── 分账 v2:金额是内容(衬线大字),其余一律安静 ──
+  // 结算明细面板(替掉系统 Alert)
+  settlePanel: {
+    backgroundColor: C.white, borderWidth: 1, borderColor: C.border,
+    borderRadius: 16, paddingHorizontal: 14, paddingVertical: 4, marginTop: 8,
+  },
+  settleRow: {
+    flexDirection: 'row', alignItems: 'center', gap: 10,
+    paddingVertical: 11, borderBottomWidth: 1, borderBottomColor: C.border,
+  },
+  settleName: { fontSize: 13, color: C.ink, fontWeight: '700' },
+  settleNums: { fontSize: 10.5, color: C.muted, marginTop: 3 },
+  settleNet: { fontSize: 12, color: C.muted, fontWeight: '700' },
+  settleNetIn: { color: C.teal },
+  settleNetOut: { color: C.ink },
+  settleClear: { paddingVertical: 13, alignItems: 'center' },
+  settleClearTxt: { fontSize: 12, color: C.muted, fontWeight: '600' },
+  settleClearTxtOff: { color: C.mutedLight },
+
+  // 金额:整个分账里唯一的大字,用衬线,和小本子的标题同一套语言
+  amountRow: { flexDirection: 'row', alignItems: 'baseline', gap: 8, paddingBottom: 4 },
+  curTap: { fontFamily: SERIF, fontSize: 22, color: C.muted },
+  amountInput: { flex: 1, fontFamily: SERIF, fontSize: 38, color: C.ink, padding: 0 },
+  curTray: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, paddingBottom: 4 },
+
+  // 字段标题:teal 小字,和小本子的 eyebrow 同款
+  fieldK: { fontSize: 10, color: C.teal, fontWeight: '800', letterSpacing: 0.6, marginTop: 14, marginBottom: 8 },
+
+  // 分法摘要:一行说清,不展开也懂
+  splitLine: {
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
+    gap: 10, marginTop: 12, paddingTop: 12, borderTopWidth: 1, borderTopColor: C.border,
+  },
+  splitLineTxt: { flex: 1, fontSize: 12, color: C.ink },
+  splitLineLink: { fontSize: 12, color: C.teal, fontWeight: '700' },
+  advBox: { marginTop: 2 },
+
+  noteInput: {
+    marginTop: 14, backgroundColor: C.paper, borderRadius: 12,
+    paddingHorizontal: 12, paddingVertical: 11, fontSize: 12.5, color: C.ink,
+  },
+  whyOff: { marginTop: 12, marginBottom: -4, alignItems: 'center' },
+  whyOffTxt: { fontSize: 11.5, color: C.lava },
+  underActions: { flexDirection: 'row', justifyContent: 'center', gap: 20, marginTop: 12 },
+  quietLink: { fontSize: 11.5, color: C.muted },
+
+  // 共享账本:低频,收成一行
+  setupRow: {
+    flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 10,
+    backgroundColor: C.white, borderWidth: 1, borderColor: C.border,
+    borderRadius: 14, paddingHorizontal: 14, paddingVertical: 12,
+  },
+  setupTxt: { fontSize: 12.5, color: C.ink, fontWeight: '700' },
+  setupMeta: { fontSize: 11, color: C.muted, marginTop: 3 },
+  setupChevron: { fontSize: 17, color: C.mutedLight },
+  setupPanel: {
+    backgroundColor: C.white, borderWidth: 1, borderColor: C.border,
+    borderTopWidth: 0, borderRadius: 14, borderTopLeftRadius: 0, borderTopRightRadius: 0,
+    paddingHorizontal: 14, paddingBottom: 14, marginTop: -10,
+  },
+  setupDivider: { height: 1, backgroundColor: C.border, marginTop: 14 },
+  inviteBtnWide: {
+    backgroundColor: C.paper, borderWidth: 1, borderColor: C.border,
+    borderRadius: 999, paddingVertical: 10, alignItems: 'center', marginTop: 12,
+  },
+
+  listHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 18, marginBottom: 2 },
+  listHeadTxt: { fontSize: 11, color: C.muted, fontWeight: '700', letterSpacing: 0.5 },
   ledgerBadge: { fontSize: 10, color: C.muted, backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 4, overflow: 'hidden', fontWeight: '700' },
-  ledgerSub: { fontSize: 11, color: C.muted, lineHeight: 17, marginTop: 7 },
-  settleCard: { backgroundColor: '#20352d', borderRadius: 16, padding: 12, marginTop: 10 },
-  settleK: { fontSize: 9, color: 'rgba(255,255,255,0.58)', fontWeight: '900', letterSpacing: 1.4 },
-  settleMain: { fontSize: 17, color: C.white, fontWeight: '900', marginTop: 4 },
-  settleSub: { fontSize: 10.5, color: 'rgba(255,255,255,0.68)', marginTop: 5, lineHeight: 15 },
-  joinBox: { backgroundColor: C.white, borderRadius: 14, borderWidth: 1, borderColor: C.border, padding: 10, marginTop: 10 },
-  joinOtherBox: { marginTop: 10, borderTopWidth: 1, borderTopColor: C.border, paddingTop: 10 },
-  joinTitle: { fontSize: 12, color: C.ink, fontWeight: '900' },
-  joinSub: { fontSize: 10.5, color: C.muted, lineHeight: 16, marginTop: 3 },
   joinRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 8 },
   avatarChip: { fontSize: 10, color: C.teal, backgroundColor: C.tealLight, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 4, overflow: 'hidden', fontWeight: '800' },
   avatarChipOn: { color: C.white, backgroundColor: C.teal },
-  codeRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  codeK: { fontSize: 10, color: C.muted, fontWeight: '800', letterSpacing: 0.5 },
-  codeVal: { fontSize: 20, color: C.ink, fontWeight: '900', letterSpacing: 3, marginTop: 2 },
   curChip: { minWidth: 34, alignItems: 'center', backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 6 },
   curChipAct: { backgroundColor: C.ink, borderColor: C.ink },
   curTxt: { fontSize: 13, color: C.muted, fontWeight: '800' },
@@ -1828,8 +1922,6 @@ const tn = StyleSheet.create({
   inviteBtnOff: { opacity: 0.6 },
   inviteTxt: { fontSize: 11, color: C.teal, fontWeight: '900' },
   joinInput: { flex: 1, height: 34, backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 999, paddingHorizontal: 11, fontSize: 11.5, color: C.ink, fontWeight: '800' },
-  ledgerSummary: { backgroundColor: C.white, borderRadius: 13, borderWidth: 1, borderColor: C.border, padding: 9, marginTop: 10 },
-  ledgerSummaryTxt: { fontSize: 11, color: C.muted, lineHeight: 16 },
   quickTags: { flexDirection: 'row', flexWrap: 'wrap', gap: 7, marginTop: 11 },
   catChip: { borderWidth: 1, borderColor: C.border, backgroundColor: C.white, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 7 },
   catChipAct: { backgroundColor: C.ink, borderColor: C.ink },
@@ -1840,28 +1932,16 @@ const tn = StyleSheet.create({
   modeBtnAct: { backgroundColor: C.ink, borderColor: C.ink },
   modeTxt: { fontSize: 11, color: C.muted, fontWeight: '900' },
   modeTxtAct: { color: C.white },
-  expenseForm: { marginTop: 10 },
-  microSection: { marginBottom: 6 },
   ledgerInput: { backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 12, paddingHorizontal: 10, paddingVertical: 9, fontSize: 12, color: C.ink, marginBottom: 7 },
   ledgerInputRow: { flexDirection: 'row', gap: 7 },
-  ledgerNoteInput: { minHeight: 38 },
   splitBox: { backgroundColor: 'rgba(255,255,255,0.62)', borderWidth: 1, borderColor: C.border, borderRadius: 13, padding: 9, marginBottom: 8 },
-  splitHint: { fontSize: 10.5, color: C.teal, fontWeight: '900', marginBottom: 7 },
   ownerRow: { flexDirection: 'row', gap: 7, marginBottom: 8 },
   ownerChip: { flex: 1, backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 999, paddingVertical: 7, alignItems: 'center' },
   ownerChipAct: { backgroundColor: C.ink, borderColor: C.ink },
   ownerTxt: { fontSize: 11, color: C.muted, fontWeight: '800' },
   ownerTxtAct: { color: C.white },
-  ledgerActions: { flexDirection: 'row', gap: 7, marginBottom: 8 },
-  specialBtn: { flex: 1, borderWidth: 1, borderColor: C.border, backgroundColor: C.white, borderRadius: 999, paddingVertical: 9, alignItems: 'center' },
-  specialBtnAct: { backgroundColor: C.ink, borderColor: C.ink },
-  specialBtnTxt: { fontSize: 12, color: C.muted, fontWeight: '800' },
-  specialBtnTxtAct: { color: C.white },
-  scanBtn: { flex: 1, borderWidth: 1, borderColor: '#d8c197', backgroundColor: '#fff3d6', borderRadius: 999, paddingVertical: 9, alignItems: 'center' },
-  scanTxt: { fontSize: 12, color: '#8a6418', fontWeight: '800' },
   addExpenseBtn: { flex: 1, backgroundColor: C.ink, borderRadius: 999, paddingVertical: 9, alignItems: 'center' },
   addExpenseBtnOff: { backgroundColor: C.mutedLight },
-  previewTxt: { fontSize: 11, color: C.teal, lineHeight: 16, marginBottom: 8 },
   personShareRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 7 },
   personShareName: { width: 56, fontSize: 12, color: C.ink, fontWeight: '700' },
   balanceRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 2 },
@@ -1869,8 +1949,6 @@ const tn = StyleSheet.create({
   balanceTxtWarn: { color: C.lava },
   balanceFix: { fontSize: 11, color: C.blue, fontWeight: '800', padding: 4 },
   addExpenseTxt: { fontSize: 12, color: C.white, fontWeight: '800' },
-  cancelEditBtn: { alignSelf: 'center', paddingVertical: 4, paddingHorizontal: 12, marginTop: -2, marginBottom: 6 },
-  cancelEditTxt: { fontSize: 11, color: C.muted, fontWeight: '800' },
   settleAction: { backgroundColor: '#20352d', borderRadius: 16, paddingHorizontal: 12, paddingVertical: 11, marginTop: 4, marginBottom: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   settleActionK: { fontSize: 9, color: 'rgba(255,255,255,0.58)', fontWeight: '900', letterSpacing: 1.4 },
   settleActionMain: { fontSize: 15, color: C.white, fontWeight: '900', marginTop: 3 },
@@ -1916,7 +1994,6 @@ const tn = StyleSheet.create({
   sitePhrase: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 2 },
   siteSay: { flex: 1, fontFamily: SERIF, fontSize: 18, color: C.ink, lineHeight: 25 },
   siteSayZh: { fontSize: 12, color: C.muted, marginTop: 4 },
-  siteStuck: { fontSize: 13, color: C.muted, lineHeight: 20, fontFamily: SERIF },
   siteBar: { flexDirection: 'row', alignItems: 'center', gap: 14, marginTop: 6 },
   siteBarTxt: { fontSize: 12, color: C.muted, fontWeight: '700' },
   siteSave: { color: C.teal, fontWeight: '800' },
@@ -1959,7 +2036,6 @@ const tn = StyleSheet.create({
   line: { borderTopWidth: 1, borderTopColor: C.border, paddingVertical: 8, fontSize: 12.5, color: C.ink, lineHeight: 19 },
   miniPhrase: { backgroundColor: C.tealLight, borderRadius: 13, padding: 11, marginTop: 8 },
   miniEn: { fontFamily: SERIF, fontSize: 14.5, color: C.ink, lineHeight: 20 },
-  miniCn: { fontSize: 11, color: C.muted, marginTop: 4 },
   todo: { backgroundColor: C.white, borderRadius: 16, borderWidth: 1, borderColor: C.border, padding: 12, marginTop: 4, marginBottom: 28 },
   todoTitle: { fontSize: 13, fontWeight: '800', color: C.ink, marginBottom: 4 },
   todoLine: { fontSize: 12, color: C.muted, lineHeight: 22 },

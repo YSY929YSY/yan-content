@@ -53,3 +53,6 @@ tools/data/
 
 # 词书导入中间产物(可由 build-*-staging.py 再生)
 staging/
+
+# Supabase CLI 本地状态(含项目 ref,不该进仓库)
+YanApp/supabase/.temp/
