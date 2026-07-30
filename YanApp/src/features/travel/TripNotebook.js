@@ -1495,7 +1495,20 @@ function TripNotebook() {
                           <View style={tn.curDividerLine} />
                         </View>
                       )}
-                      {/* 没垫过也没承担过的人,一行零值说不了任何事 */}
+                      {/* 真正要执行的动作:谁给谁多少。净额化后转账笔数已是最少 */}
+                      {group.lines.map(line => {
+                        const [pair, amt] = [line.slice(0, line.lastIndexOf(' ')), line.slice(line.lastIndexOf(' ') + 1)];
+                        return (
+                          <View key={line} style={tn.payRow}>
+                            <Text style={tn.payPair}>{pair}</Text>
+                            <Text style={tn.payAmt}>{amt}</Text>
+                          </View>
+                        );
+                      })}
+                      {!group.lines.length && <Text style={tn.payNone}>这组扯平了</Text>}
+                      <View style={tn.payRule} />
+
+                      {/* 下面是依据:每人垫付多少、该承担多少 */}
                       {group.rows.filter(r => r.paid > 0.005 || r.owed > 0.005).map(row => (
                         <View key={row.person} style={tn.settleRow}>
                           <View style={{ flex: 1 }}>
@@ -2078,6 +2091,15 @@ const tn = StyleSheet.create({
     backgroundColor: C.white, borderWidth: 1, borderColor: C.border,
     borderRadius: 16, paddingHorizontal: 14, paddingVertical: 4, marginTop: 8,
   },
+  // 转账方案:这是要照着做的事,给它重量
+  payRow: {
+    flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between',
+    gap: 12, paddingTop: 12, paddingBottom: 2,
+  },
+  payPair: { fontSize: 14, color: C.ink, fontWeight: '700' },
+  payAmt: { fontFamily: SERIF, fontSize: 17, color: C.ink },
+  payNone: { fontSize: 12, color: C.muted, paddingTop: 12, paddingBottom: 2 },
+  payRule: { height: 1, backgroundColor: C.border, marginTop: 12 },
   settleRow: {
     flexDirection: 'row', alignItems: 'center', gap: 10,
     paddingVertical: 11, borderBottomWidth: 1, borderBottomColor: C.border,
