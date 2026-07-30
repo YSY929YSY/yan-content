@@ -460,7 +460,7 @@ function TripNotebook() {
     let i = 0; let j = 0;
     while (i < creditors.length && j < debtors.length) {
       const pay = Math.min(creditors[i].v, debtors[j].v);
-      lines.push(`${debtors[j].person} → ${creditors[i].person} ${fmtIn(pay, cur)}`);
+      lines.push({ from: debtors[j].person, to: creditors[i].person, amount: pay, cur });
       creditors[i].v -= pay;
       debtors[j].v -= pay;
       if (creditors[i].v < 0.01) i += 1;
@@ -502,14 +502,27 @@ function TripNotebook() {
     setBudgetDraft('');
     Keyboard.dismiss();
   };
-  const settlementLines = settleGroups.flatMap(g => g.lines);
-  const settlement = settlementLines.length ? settlementLines.join('\n') : '现在基本扯平。';
-  // 这张深色卡是为一行设计的。三种货币会让它变成六行墙,
-  // 所以只露头两笔,其余数字在展开的明细里 —— 卡本身就是展开开关。
-  const SETTLE_PEEK = 2;
-  const settleHeadline = settlementLines.length
-    ? settlementLines.slice(0, SETTLE_PEEK).join('\n')
+  // 「应收 £4.80」是会计口径:它给结果,不给对象。人要知道的是「找谁要」。
+  // 所以一律写成「谁 给 谁 多少」,和自己有关的排最前,自己那方写「你」。
+  const sayWho = (name) => (name === myLedgerName ? '你' : name);
+  // 「Ning 给你」不留空格,「Ning 给 Max」留 —— 中文黏着,西文分开
+  const payText = (l) => {
+    const to = sayWho(l.to);
+    return `${sayWho(l.from)} 给${to === '你' ? '' : ' '}${to}`;
+  };
+  const involvesMe = (l) => l.from === myLedgerName || l.to === myLedgerName;
+  const orderMineFirst = (lines) => [
+    ...lines.filter(involvesMe),
+    ...lines.filter(l => !involvesMe(l)),
+  ];
+  const settlementLines = orderMineFirst(settleGroups.flatMap(g => g.lines));
+  const settlement = settlementLines.length
+    ? settlementLines.map(l => `${payText(l)} ${fmtIn(l.amount, l.cur)}`).join('\n')
     : '现在基本扯平。';
+  // 这张深色卡是为一行设计的,多币种会让它变成一堵墙 —— 只露头两笔,
+  // 其余在展开的明细里(卡本身就是展开开关)。
+  const SETTLE_PEEK = 2;
+  const settleHead = settlementLines.slice(0, SETTLE_PEEK);
   const settleRest = Math.max(settlementLines.length - SETTLE_PEEK, 0);
   // 主路径的一行摘要:不展开也知道这笔怎么分
   const splitSummary = (() => {
@@ -1477,7 +1490,13 @@ function TripNotebook() {
               <TouchableOpacity style={tn.settleAction} activeOpacity={0.9} onPress={() => setSettleOpen(v => !v)}>
                 <View style={{ flex: 1 }}>
                   <Text style={tn.settleActionK}>结算</Text>
-                  <Text style={tn.settleActionMain}>{settleHeadline}</Text>
+                  {settleHead.length === 0
+                    ? <Text style={tn.settleActionMain}>现在基本扯平。</Text>
+                    : settleHead.map(l => (
+                      <Text key={`${l.from}-${l.to}-${l.cur}`} style={tn.settleActionMain}>
+                        {payText(l)} {fmtIn(l.amount, l.cur)}
+                      </Text>
+                    ))}
                   {settleRest > 0 && (
                     <Text style={tn.settleActionRest}>还有 {settleRest} 笔</Text>
                   )}
@@ -1496,15 +1515,12 @@ function TripNotebook() {
                         </View>
                       )}
                       {/* 真正要执行的动作:谁给谁多少。净额化后转账笔数已是最少 */}
-                      {group.lines.map(line => {
-                        const [pair, amt] = [line.slice(0, line.lastIndexOf(' ')), line.slice(line.lastIndexOf(' ') + 1)];
-                        return (
-                          <View key={line} style={tn.payRow}>
-                            <Text style={tn.payPair}>{pair}</Text>
-                            <Text style={tn.payAmt}>{amt}</Text>
-                          </View>
-                        );
-                      })}
+                      {orderMineFirst(group.lines).map(l => (
+                        <View key={`${l.from}-${l.to}`} style={tn.payRow}>
+                          <Text style={[tn.payPair, involvesMe(l) && tn.payPairMine]}>{payText(l)}</Text>
+                          <Text style={tn.payAmt}>{fmtIn(l.amount, l.cur)}</Text>
+                        </View>
+                      ))}
                       {!group.lines.length && <Text style={tn.payNone}>这组扯平了</Text>}
                       <View style={tn.payRule} />
 
@@ -1517,11 +1533,7 @@ function TripNotebook() {
                               垫付 {fmtIn(row.paid, group.cur)} · 应承担 {fmtIn(row.owed, group.cur)}
                             </Text>
                           </View>
-                          <Text style={[tn.settleNet, row.net > 0.01 && tn.settleNetIn, row.net < -0.01 && tn.settleNetOut]}>
-                            {row.net > 0.01
-                              ? `应收 ${fmtIn(row.net, group.cur)}`
-                              : row.net < -0.01 ? `应付 ${fmtIn(row.net, group.cur)}` : '两清'}
-                          </Text>
+
                         </View>
                       ))}
                     </View>
@@ -2096,7 +2108,8 @@ const tn = StyleSheet.create({
     flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between',
     gap: 12, paddingTop: 12, paddingBottom: 2,
   },
-  payPair: { fontSize: 14, color: C.ink, fontWeight: '700' },
+  payPair: { fontSize: 14, color: C.muted, fontWeight: '700' },
+  payPairMine: { color: C.ink },   // 和自己有关的那笔,墨色;别人之间的转账压低
   payAmt: { fontFamily: SERIF, fontSize: 17, color: C.ink },
   payNone: { fontSize: 12, color: C.muted, paddingTop: 12, paddingBottom: 2 },
   payRule: { height: 1, backgroundColor: C.border, marginTop: 12 },
@@ -2106,9 +2119,6 @@ const tn = StyleSheet.create({
   },
   settleName: { fontSize: 13, color: C.ink, fontWeight: '700' },
   settleNums: { fontSize: 10.5, color: C.muted, marginTop: 3 },
-  settleNet: { fontSize: 12, color: C.muted, fontWeight: '700' },
-  settleNetIn: { color: C.teal },
-  settleNetOut: { color: C.ink },
   // 跨币种时才出现的分段标题
   curDivider: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingTop: 14, paddingBottom: 2 },
   curDividerTxt: { fontFamily: SERIF, fontSize: 15, color: C.ink },
