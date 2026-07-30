@@ -5,6 +5,9 @@
 //  2. 欧央行只在工作日发布 —— 数据会缺周末,取序列时按"最近一个有值的日子"理解。
 //  3. 这是银行间中间价,不是你刷卡拿到的价 —— 展示层必须写清楚,别让用户以为能按这个数结算。
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { FX_CODES, FX_SYMBOLS, FX_NAMES, rateOf, convert, seriesFor, fxDecimals, fmtFx } from './fxMath';
+
+export { FX_CODES, FX_SYMBOLS, FX_NAMES, rateOf, convert, seriesFor, fxDecimals, fmtFx };
 
 const FX_KEY = 'yan_fx_v1';
 const API = 'https://api.frankfurter.dev/v1';
@@ -25,12 +28,6 @@ async function get(url, ms = TIMEOUT_MS) {
   }
 }
 
-// App 里用符号,接口要 ISO 代码
-export const FX_CODES = { '€': 'EUR', '£': 'GBP', '₺': 'TRY', $: 'USD', '¥': 'CNY', '₩': 'KRW' };
-export const FX_SYMBOLS = { EUR: '€', GBP: '£', TRY: '₺', USD: '$', CNY: '¥', KRW: '₩' };
-export const FX_NAMES = {
-  EUR: '欧元', GBP: '英镑', TRY: '土耳其里拉', USD: '美元', CNY: '人民币', KRW: '韩元',
-};
 const SYMBOLS = Object.keys(FX_SYMBOLS).filter(c => c !== BASE);
 
 const readCache = async () => {
@@ -103,39 +100,3 @@ export async function getRates({ force = false } = {}) {
   }
 }
 
-// 交叉汇率:1 单位 from 值多少 to
-export function rateOf(rates, from, to) {
-  if (!rates || !rates[from] || !rates[to]) return null;
-  return rates[to] / rates[from];
-}
-
-export function convert(amount, rates, from, to) {
-  const r = rateOf(rates, from, to);
-  if (r == null || !Number.isFinite(amount)) return null;
-  return amount * r;
-}
-
-// 某个币种对 from 的近期走势(给 sparkline),已按 from 换算
-export function seriesFor(cache, from, to) {
-  const s = cache?.series || {};
-  if (from === BASE) return (s[to] || []).map(p => p.v);
-  const a = s[from] || [];
-  const b = to === BASE ? null : (s[to] || []);
-  if (!a.length) return [];
-  const bByDate = b ? Object.fromEntries(b.map(p => [p.d, p.v])) : null;
-  return a.map(p => {
-    const other = to === BASE ? 1 : bByDate?.[p.d];
-    return other == null ? null : other / p.v;
-  }).filter(v => v != null);
-}
-
-// 金额按币种习惯取小数位:日元/韩元不用小数
-export function fxDecimals(code) {
-  return code === 'JPY' || code === 'KRW' ? 0 : 2;
-}
-
-export function fmtFx(value, code) {
-  if (value == null || !Number.isFinite(value)) return '—';
-  const d = fxDecimals(code);
-  return value.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
-}

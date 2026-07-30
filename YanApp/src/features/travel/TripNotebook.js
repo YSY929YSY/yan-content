@@ -14,6 +14,10 @@ import {
   fetchLedgerData, saveExpenseRemote, deleteExpenseRemote, subscribeLedger,
 } from '../../lib/tripLedger';
 import { SCENE_PACK } from './scenePack';
+import {
+  money, clampMoney, splitEven, specialAmountFor,
+  buildShares as buildSharesFor, settleOne as settleOneFor,
+} from '../../lib/ledgerMath';
 import { parseItinerary, parseReceipt } from '../../lib/parseItinerary';
 import FxPanel from './FxPanel';
 import { FX_CODES, FX_SYMBOLS, getRates, rateOf } from '../../lib/fx';
@@ -364,56 +368,13 @@ function TripNotebook() {
   const splitModes = ['均分', '各自价格', '特殊项'];
   const MODE_LABEL = { 均分: '均分', 各自价格: '各自付', 特殊项: '单独付' };
   const CURRENCIES = ['€', '£', '₺', '$', '¥', '₩'];
-  const money = (value) => {
-    const n = Number.parseFloat(String(value || '').replace(/[^\d.-]/g, ''));
-    return Number.isFinite(n) ? n : 0;
-  };
-  // 金额输入:只留数字和一个小数点,最多两位小数
-  const clampMoney = (v) => {
-    let s = String(v).replace(/[^\d.]/g, '');
-    const dot = s.indexOf('.');
-    if (dot >= 0) s = s.slice(0, dot + 1) + s.slice(dot + 1).replace(/\./g, '').slice(0, 2);
-    return s;
-  };
   const stripLook = (t) => String(t || '').replace(/^看\s*/, '');   // 标签已是「看什么」,内容里的「看」冗余
   const famLabelOf = (k) => SCENE_PACK.find(f => f.key === k)?.label || '';
   const openScenes = (fam) => { if (fam) setSceneFam(fam); setSceneOpenIdx(0); setScenesOpen(true); };
   const fmtMoney = (value) => `${currency}${Math.abs(value).toFixed(2)}`;
-  const specialAmountFor = (draft) => Math.max(0, Math.min(money(draft.specialAmount), money(draft.amount)));
-  // 均分但守恒:前 n-1 人取两位小数,最后一人拿余数(3 人分 €10 → 3.33/3.33/3.34)
-  const splitEven = (amount, people) => {
-    const result = {};
-    if (!people.length) return result;
-    const base = Math.floor((amount / people.length) * 100) / 100;
-    people.forEach((p, i) => {
-      result[p] = i === people.length - 1
-        ? Math.round((amount - base * (people.length - 1)) * 100) / 100
-        : base;
-    });
-    return result;
-  };
-  const buildShares = (draft) => {
-    const total = money(draft.amount);
-    const emptyShares = ledgerPeople.reduce((acc, person) => ({ ...acc, [person]: 0 }), {});
-    // 成员为空(如远端拉取失败)时不做除法,直接返回全 0,避免 Infinity/NaN
-    if (!ledgerPeople.length) return emptyShares;
-    const chosen = (draft.participants || []).filter(p => ledgerPeople.includes(p));
-    const participants = chosen.length ? chosen : ledgerPeople;
-    if (draft.mode === '各自价格') {
-      const entered = {};
-      participants.forEach(p => { entered[p] = money(draft.personShares?.[p]); });
-      return { ...emptyShares, ...entered };
-    }
-    const specialAmount = specialAmountFor(draft);
-    if (draft.mode === '特殊项' && specialAmount > 0) {
-      const evenPart = splitEven(Math.max(total - specialAmount, 0), participants);
-      return ledgerPeople.reduce((acc, person) => ({
-        ...acc,
-        [person]: (evenPart[person] || 0) + (draft.specialOwner === person ? specialAmount : 0),
-      }), { ...emptyShares });
-    }
-    return { ...emptyShares, ...splitEven(total, participants) };
-  };
+  // 算术全部走 lib/ledgerMath(有测试覆盖),这里只绑定当前成员
+  const buildShares = (draft) => buildSharesFor(draft, ledgerPeople);
+
   // 各自价格的守恒检查:已分配了多少、还差多少
   const perPersonAssigned = (expenseDraft.participants || [])
     .filter(p => ledgerPeople.includes(p))
@@ -456,42 +417,7 @@ function TripNotebook() {
   };
   const multiCurrency = currenciesIn(activeExpenses).length > 1;
 
-  // 单一币种下的净额化(N 人贪心:可能产生多笔转账,而不是只找一对)
-  const settleOne = (items, cur) => {
-    const nets = items.reduce((acc, item) => {
-      const total = money(item.amount);
-      ledgerPeople.forEach(person => {
-        acc[person] = acc[person] || 0;
-        acc[person] -= money(item.shares?.[person]);
-      });
-      if (ledgerPeople.includes(item.payer)) acc[item.payer] += total;
-      return acc;
-    }, {});
-    const creditors = []; const debtors = [];
-    ledgerPeople.forEach(person => {
-      const v = nets[person] || 0;
-      if (v > 0.01) creditors.push({ person, v });
-      else if (v < -0.01) debtors.push({ person, v: -v });
-    });
-    creditors.sort((a, b) => b.v - a.v);
-    debtors.sort((a, b) => b.v - a.v);
-    const lines = [];
-    let i = 0; let j = 0;
-    while (i < creditors.length && j < debtors.length) {
-      const pay = Math.min(creditors[i].v, debtors[j].v);
-      lines.push({ from: debtors[j].person, to: creditors[i].person, amount: pay, cur });
-      creditors[i].v -= pay;
-      debtors[j].v -= pay;
-      if (creditors[i].v < 0.01) i += 1;
-      if (debtors[j].v < 0.01) j += 1;
-    }
-    const rows = ledgerPeople.map(person => {
-      const paid = items.reduce((s, item) => s + (item.payer === person ? money(item.amount) : 0), 0);
-      const owed = items.reduce((s, item) => s + money(item.shares?.[person]), 0);
-      return { person, paid, owed, net: paid - owed };
-    });
-    return { cur, lines, rows };
-  };
+  const settleOne = (items, cur) => settleOneFor(items, cur, ledgerPeople);
 
   const groupsFor = (items) => currenciesIn(items).map(cur => settleOne(items.filter(i => curOf(i) === cur), cur));
   const settleGroups = groupsFor(activeExpenses);   // 谁欠谁:只算未结清的
