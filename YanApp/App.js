@@ -2346,7 +2346,7 @@ const JLPT_COLORS = {
 
 function WordBookShelfScreen({ onBack, onSelect }) {
   return (
-    <View style={{ flex: 1, backgroundColor: C.bg }}>
+    <View style={{ flex: 1, backgroundColor: C.paper }}>
       <View style={wbs.nav}>
         <TouchableOpacity onPress={onBack}>
           <Text style={wbs.navBack}>‹ 返回学习目录</Text>
@@ -2633,7 +2633,7 @@ function WBDetailPage({ entry, status, onBack, onSetStatus, speak, speakingKey, 
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: C.bg }}>
+    <View style={{ flex: 1, backgroundColor: C.paper }}>
       <View style={wd.nav}>
         <TouchableOpacity onPress={onBack}>
           <Text style={wd.navBack}>‹ 返回词库</Text>
