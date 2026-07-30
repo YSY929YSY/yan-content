@@ -2403,6 +2403,12 @@ const wbs = StyleSheet.create({
 // Word Bank Screen
 // ─────────────────────────────────────────────
 const WORDBANK_PROGRESS_KEY = 'yan_wordbank_progress';
+
+// 词条是不是「机器起草、还没人工校对」。
+// 8298 条里 N5/N4 那 1343 条是精修的(例句 100%),N3 以上 6955 条全是 zh_drafted
+// (例句仅 39%)。数据层一直知道这件事,界面以前完全不体现 —— 用户看到的每张卡
+// 长得都一样,而作者定的标准是「词意 0 容忍」。标出来是诚实,也让人能只学精修的。
+const isDraftedWord = (w) => !w?.status || w.status === 'zh_drafted';
 const WB_DAILY_GOAL = 10;
 const WB_NEXT_STATUS = { new: 'learning', learning: 'mastered', mastered: 'new' };
 const wordKey = (item) => `${item.word}-${item.reading}`;
@@ -2411,6 +2417,7 @@ function WordBankScreen({ wordBank, book, onBack }) {
   const [query, setQuery] = useState('');
   const [progress, setProgress] = useState({});
   const [statusFilter, setStatusFilter] = useState('all');
+  const [refinedOnly, setRefinedOnly] = useState(false);   // 只看人工精修过的词
   const [todayKeys, setTodayKeys] = useState(null);
   const [selectedWord, setSelectedWord] = useState(null);
   const [selectedIdx, setSelectedIdx] = useState(0);
@@ -2445,10 +2452,12 @@ function WordBankScreen({ wordBank, book, onBack }) {
     { id: 'learning', label: '学习中' },
     { id: 'mastered', label: '已掌握' },
   ];
-  const filtered = statusFilter === 'today'
+  const byStatus = statusFilter === 'today'
     ? searched.filter(w => todayKeys && todayKeys.has(wordKey(w)))
     : statusFilter === 'all' ? searched
     : searched.filter(w => (progress[wordKey(w)] || 'new') === statusFilter);
+  const filtered = refinedOnly ? byStatus.filter(w => !isDraftedWord(w)) : byStatus;
+  const refinedTotal = wordBank.filter(w => !isDraftedWord(w)).length;
 
   const reviewCount = wordBank.filter(w => (progress[wordKey(w)] || 'new') === 'learning').length;
 
@@ -2523,6 +2532,19 @@ function WordBankScreen({ wordBank, book, onBack }) {
             </TouchableOpacity>
           ))}
         </View>
+        {/* 只看精修:不新增一排筛选,一个开关就够 */}
+        <TouchableOpacity
+          style={wb.refinedRow}
+          activeOpacity={0.7}
+          onPress={() => setRefinedOnly(v => !v)}
+        >
+          <View style={[wb.refinedBox, refinedOnly && wb.refinedBoxOn]}>
+            {refinedOnly && <Text style={wb.refinedTick}>✓</Text>}
+          </View>
+          <Text style={[wb.refinedTxt, refinedOnly && wb.refinedTxtOn]}>
+            只看精修 · {refinedTotal}
+          </Text>
+        </TouchableOpacity>
       </View>
       <FlatList
         style={{ flex: 1 }}
@@ -2567,12 +2589,25 @@ const wb = StyleSheet.create({
   filterChipActive: { backgroundColor: C.ink, borderColor: C.ink },
   filterChipTxt: { fontSize: 11, fontWeight: '600', color: C.muted },
   filterChipTxtActive: { color: C.white },
+  refinedRow: { flexDirection: 'row', alignItems: 'center', gap: 7, marginTop: 10, paddingVertical: 2 },
+  refinedBox: {
+    width: 15, height: 15, borderRadius: 4, borderWidth: 1, borderColor: C.border,
+    alignItems: 'center', justifyContent: 'center',
+  },
+  refinedBoxOn: { backgroundColor: C.teal, borderColor: C.teal },
+  refinedTick: { fontSize: 10, color: C.white, fontWeight: '900', lineHeight: 13 },
+  refinedTxt: { fontSize: 11.5, color: C.muted },
+  refinedTxtOn: { color: C.teal, fontWeight: '700' },
   row: { backgroundColor: C.white, borderRadius: 6, paddingHorizontal: 12, paddingVertical: 9, borderWidth: 1, borderColor: C.border, gap: 3 },
   rowHead: { flexDirection: 'row', alignItems: 'center', gap: 7 },
   word: { fontSize: 16, fontWeight: '700', color: C.ink },
   reading: { fontSize: 11, color: C.muted },
   posTag: { backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 6, paddingVertical: 1 },
   posTagTxt: { fontSize: 9, color: C.muted, fontWeight: '600' },
+  draftTag: {
+    backgroundColor: C.tag, borderRadius: 6, paddingHorizontal: 8, paddingVertical: 4,
+  },
+  draftTagTxt: { fontSize: 11, color: C.muted, fontWeight: '600' },
   dotLearning: { width: 6, height: 6, borderRadius: 3, backgroundColor: C.gold, marginLeft: 'auto' },
   checkMastered: { fontSize: 12, color: C.lava, fontWeight: '700', marginLeft: 'auto' },
   zh: { fontSize: 12, color: C.ink },
@@ -2614,6 +2649,9 @@ function WBDetailPage({ entry, status, onBack, onSetStatus, speak, speakingKey, 
         </View>
         <View style={wd.metaRow}>
           <View style={wd.posTag}><Text style={wd.posTagTxt}>{entry.pos}</Text></View>
+          {isDraftedWord(entry) && (
+            <View style={wd.draftTag}><Text style={wd.draftTagTxt}>未校对</Text></View>
+          )}
         </View>
         <View style={wd.meaningBlock}>
           <Text style={wd.zh}>{entry.meaning_zh}</Text>
