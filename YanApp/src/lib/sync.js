@@ -38,6 +38,72 @@ export async function pushProgress(wordKey, status, bookId = 'n5') {
   }
 }
 
+/**
+ * 登录后把本机数据补传到新账号。
+ *
+ * 为什么需要:匿名登录和 Apple 登录是两个不同的 user id。以前先「先逛逛」
+ * 攒进度、之后再登录,匿名账号下的云端行就永久孤立了,换机登录拉到的是空的。
+ * linkIdentity 走的是 OAuth 网页重定向,和 RN 原生 Apple 登录混用不可靠,
+ * 所以改成:本机 AsyncStorage 是这台设备的完整事实,登录后整体补传一次。
+ *
+ * 局限(说实话):只补传「这台设备上还留着的」数据。如果你在 A 机匿名用了半年、
+ * 从没登录,然后直接在 B 机登录 —— 那批云端行仍然找不回。所以引导上要让用户
+ * 在换机前先在旧机登录一次。
+ */
+export async function backfillProgress(progressMap, bookId = 'n5') {
+  if (!supabase) return { count: 0, error: 'offline' };
+  const entries = Object.entries(progressMap || {}).filter(([, v]) => v && v !== 'new');
+  if (!entries.length) return { count: 0, error: null };
+  try {
+    const user = await getSessionUser();
+    if (!user) return { count: 0, error: 'no session' };
+    const now = new Date().toISOString();
+    const rows = entries.map(([word_key, status]) => ({
+      user_id: user.id, word_key, book_id: bookId, status, updated_at: now,
+    }));
+    // 分批,别一次 upsert 几千行把请求撑爆
+    let done = 0;
+    for (let i = 0; i < rows.length; i += 400) {
+      const chunk = rows.slice(i, i + 400);
+      const { error } = await supabase.from('word_progress')
+        .upsert(chunk, { onConflict: 'user_id,word_key' });
+      if (error) throw error;
+      done += chunk.length;
+    }
+    console.log('[Sync] backfilled progress', done);
+    return { count: done, error: null };
+  } catch (e) {
+    console.warn('[Sync] backfill progress failed:', e.message);
+    return { count: 0, error: e.message };
+  }
+}
+
+export async function backfillCheckins(visitedIds, notes = {}) {
+  if (!supabase) return { count: 0, error: 'offline' };
+  const ids = (visitedIds || []).filter(Boolean);
+  if (!ids.length) return { count: 0, error: null };
+  try {
+    const user = await getSessionUser();
+    if (!user) return { count: 0, error: 'no session' };
+    const now = new Date().toISOString();
+    const rows = ids.map(place_id => ({
+      user_id: user.id,
+      place_id,
+      status: 'been',
+      note: notes[place_id] || null,
+      updated_at: now,
+    }));
+    const { error } = await supabase.from('place_checkin')
+      .upsert(rows, { onConflict: 'user_id,place_id' });
+    if (error) throw error;
+    console.log('[Sync] backfilled checkins', rows.length);
+    return { count: rows.length, error: null };
+  } catch (e) {
+    console.warn('[Sync] backfill checkins failed:', e.message);
+    return { count: 0, error: e.message };
+  }
+}
+
 export async function pullProgress() {
   if (!supabase) return null;
   try {

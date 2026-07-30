@@ -17,6 +17,8 @@ import {
   pullPlaceCheckins,
   pushPlaceCheckin,
   uploadPlaceCheckinPhoto,
+  backfillProgress,
+  backfillCheckins,
 } from './src/lib/sync';
 import * as AppleAuthentication from 'expo-apple-authentication';
 
@@ -1426,8 +1428,8 @@ function WelcomeScreen({ onAppleLogin, onSkip }) {
         <Text style={ws.yanBig}>言</Text>
         <Text style={ws.mono}>YAN</Text>
         <View style={ws.card}>
-          <Text style={ws.title}>登录后数据云端同步</Text>
-          <Text style={ws.sub}>学习进度跨设备保留</Text>
+          <Text style={ws.title}>登录后进度跨设备</Text>
+          <Text style={ws.sub}>词卡进度和打卡会同步;旅行本和分账留在本机</Text>
           {appleAvail && Platform.OS === 'ios' && (
             <AppleAuthentication.AppleAuthenticationButton
               buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
@@ -1452,7 +1454,7 @@ const ws = StyleSheet.create({
   mono: { fontSize: 11, color: '#4a4a68', letterSpacing: 6, marginBottom: 48 },
   card: { width: '100%', backgroundColor: 'rgba(255,255,255,0.06)', borderRadius: 16, padding: 24, alignItems: 'center' },
   title: { fontSize: 16, fontWeight: '600', color: C.white, marginBottom: 6 },
-  sub: { fontSize: 13, color: C.muted },
+  sub: { fontSize: 12.5, color: C.muted, textAlign: 'center', lineHeight: 19 },
   skipBtn: { marginTop: 32, paddingVertical: 12, paddingHorizontal: 32 },
   skipTxt: { fontSize: 14, color: C.muted, letterSpacing: 1 },
 });
@@ -8344,8 +8346,24 @@ export default function App() {
 
   const handleAppleLogin = async () => {
     const { user: u, error: e } = await signInWithApple();
-    if (u) { setUser(u); setWelcomed(true); }
-    if (e) Alert.alert('登录失败', e);
+    if (e) { Alert.alert('登录失败', e); return; }
+    if (!u) return;                     // 用户自己取消
+    setUser(u);
+    setWelcomed(true);
+    // Apple 登录换了 user id,之前匿名攒的云端行在新账号下是空的。
+    // 本机 AsyncStorage 是这台设备的完整事实 —— 整体补传一次,新账号才算完整。
+    try {
+      const rawProgress = await AsyncStorage.getItem(WORDBANK_PROGRESS_KEY);
+      const progress = rawProgress ? JSON.parse(rawProgress) : null;
+      if (progress && typeof progress === 'object' && !Array.isArray(progress)) {
+        await backfillProgress(progress);
+      }
+      const rawVisited = await AsyncStorage.getItem(WORLD_VISITED_IDS_KEY);
+      const visited = rawVisited ? JSON.parse(rawVisited) : null;
+      if (Array.isArray(visited) && visited.length) await backfillCheckins(visited);
+    } catch (err) {
+      console.warn('[Auth] backfill after login failed', err);
+    }
   };
 
   const isDark = tab === 'pie' && (subTab === 'subway');
