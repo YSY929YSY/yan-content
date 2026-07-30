@@ -16,7 +16,7 @@ import {
 import { SCENE_PACK } from './scenePack';
 import { parseItinerary, parseReceipt } from '../../lib/parseItinerary';
 import FxPanel from './FxPanel';
-import { FX_CODES, FX_SYMBOLS } from '../../lib/fx';
+import { FX_CODES, FX_SYMBOLS, getRates, rateOf } from '../../lib/fx';
 
 const TRIP_STORAGE_KEY = 'yan_trip_notebook_v1';
 const MONTH_NUM = { JAN: 1, FEB: 2, MAR: 3, APR: 4, MAY: 5, JUN: 6, JUL: 7, AUG: 8, SEP: 9, OCT: 10, NOV: 11, DEC: 12 };
@@ -201,6 +201,8 @@ function TripNotebook() {
   const [budgets, setBudgets] = useState({});        // { 旅行册id: { amount, currency } }
   const [budgetEditing, setBudgetEditing] = useState(false);
   const [budgetDraft, setBudgetDraft] = useState('');
+  const [fxRates, setFxRates] = useState(null);      // 结算合并用的参考汇率
+  const [mergeOn, setMergeOn] = useState(false);     // 默认分币种(那是真相),合并是可选的便利
   const [newMemberName, setNewMemberName] = useState('');
   const [expenses, setExpenses] = useState([]);
   const [expenseDraft, setExpenseDraft] = useState({
@@ -326,6 +328,10 @@ function TripNotebook() {
   // 简单模式(均分)下参与人恒等于全体成员:加了同行者就自动进均分,不用再去勾一遍。
   // 只在均分时同步——各自付/单独付各人有各自金额,强行拉平会让草稿变成不可保存的状态。
   useEffect(() => { currentUserId().then(setMyUid).catch(() => {}); }, []);
+  useEffect(() => {
+    if (!ledgerOpen || fxRates) return;
+    getRates().then(setFxRates).catch(() => {});
+  }, [ledgerOpen]);
   // 新草稿的垫付人默认是我;用户手动改过、或正在改旧账时不动
   useEffect(() => {
     if (expenseEditId) return;
@@ -502,6 +508,45 @@ function TripNotebook() {
     setBudgetDraft('');
     Keyboard.dismiss();
   };
+  // ── 按参考汇率合并结算 ──
+  // 分币种是真相(不会错),但会出现「他给你英镑、你给他里拉」这种来回倒。
+  // 合并是可选的便利:把各币种净额按参考汇率折算到一种货币,再净额化一次。
+  // 它是估算,不是账 —— 所以默认关着,开了要标明汇率日期。
+  const mergeTargetCode = FX_CODES[currency] || 'EUR';
+  const canMerge = multiCurrency && !!fxRates?.rates
+    && currenciesIn(activeExpenses).every(c => FX_CODES[c] && rateOf(fxRates.rates, FX_CODES[c], mergeTargetCode) != null);
+  const mergedGroup = (() => {
+    if (!canMerge || !mergeOn) return null;
+    const nets = {};
+    settleGroups.forEach(g => {
+      const r = rateOf(fxRates.rates, FX_CODES[g.cur], mergeTargetCode) || 0;
+      g.rows.forEach(row => {
+        nets[row.person] = (nets[row.person] || 0) + (row.paid - row.owed) * r;
+      });
+    });
+    const creditors = []; const debtors = [];
+    ledgerPeople.forEach(p => {
+      const v = Math.round((nets[p] || 0) * 100) / 100;
+      if (v > 0.01) creditors.push({ person: p, v });
+      else if (v < -0.01) debtors.push({ person: p, v: -v });
+    });
+    creditors.sort((a, b) => b.v - a.v);
+    debtors.sort((a, b) => b.v - a.v);
+    const lines = [];
+    let i = 0; let j = 0;
+    while (i < creditors.length && j < debtors.length) {
+      const pay = Math.min(creditors[i].v, debtors[j].v);
+      lines.push({ from: debtors[j].person, to: creditors[i].person, amount: pay, cur: currency });
+      creditors[i].v -= pay; debtors[j].v -= pay;
+      if (creditors[i].v < 0.01) i += 1;
+      if (debtors[j].v < 0.01) j += 1;
+    }
+    return { cur: currency, lines };
+  })();
+  const fxDay = fxRates?.date
+    ? `${Number(fxRates.date.slice(5, 7))}月${Number(fxRates.date.slice(8, 10))}日`
+    : '';
+
   // 「应收 £4.80」是会计口径:它给结果,不给对象。人要知道的是「找谁要」。
   // 所以一律写成「谁 给 谁 多少」,和自己有关的排最前,自己那方写「你」。
   const sayWho = (name) => (name === myLedgerName ? '你' : name);
@@ -515,7 +560,8 @@ function TripNotebook() {
     ...lines.filter(involvesMe),
     ...lines.filter(l => !involvesMe(l)),
   ];
-  const settlementLines = orderMineFirst(settleGroups.flatMap(g => g.lines));
+  const shownGroups = mergedGroup ? [mergedGroup] : settleGroups;
+  const settlementLines = orderMineFirst(shownGroups.flatMap(g => g.lines));
   const settlement = settlementLines.length
     ? settlementLines.map(l => `${payText(l)} ${fmtIn(l.amount, l.cur)}`).join('\n')
     : '现在基本扯平。';
@@ -1505,10 +1551,20 @@ function TripNotebook() {
               </TouchableOpacity>
               {settleOpen && (
                 <View style={tn.settlePanel}>
-                  {settleGroups.map(group => (
+                  {canMerge && (
+                    <TouchableOpacity style={tn.mergeRow} onPress={() => setMergeOn(v => !v)} activeOpacity={0.7}>
+                      <Text style={tn.mergeTxt}>
+                        {mergeOn ? `已折算成 ${currency}` : `合并成 ${currency}`}
+                      </Text>
+                      <Text style={tn.mergeMeta}>
+                        {mergeOn ? `参考汇率 · ${fxDay} · 看分币种` : '省得来回倒'}
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+                  {shownGroups.map(group => (
                     <View key={group.cur}>
                       {/* 只有跨币种时才需要标出这一段是哪种货币 */}
-                      {multiCurrency && (
+                      {multiCurrency && !mergedGroup && (
                         <View style={tn.curDivider}>
                           <Text style={tn.curDividerTxt}>{group.cur}</Text>
                           <View style={tn.curDividerLine} />
@@ -1525,7 +1581,7 @@ function TripNotebook() {
                       <View style={tn.payRule} />
 
                       {/* 下面是依据:每人垫付多少、该承担多少 */}
-                      {group.rows.filter(r => r.paid > 0.005 || r.owed > 0.005).map(row => (
+                      {(group.rows || []).filter(r => r.paid > 0.005 || r.owed > 0.005).map(row => (
                         <View key={row.person} style={tn.settleRow}>
                           <View style={{ flex: 1 }}>
                             <Text style={tn.settleName}>{row.person}</Text>
@@ -2113,6 +2169,13 @@ const tn = StyleSheet.create({
   payAmt: { fontFamily: SERIF, fontSize: 17, color: C.ink },
   payNone: { fontSize: 12, color: C.muted, paddingTop: 12, paddingBottom: 2 },
   payRule: { height: 1, backgroundColor: C.border, marginTop: 12 },
+  mergeRow: {
+    flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between',
+    gap: 10, paddingTop: 13, paddingBottom: 12,
+    borderBottomWidth: 1, borderBottomColor: C.border,
+  },
+  mergeTxt: { fontSize: 12.5, color: C.teal, fontWeight: '700' },
+  mergeMeta: { fontSize: 10.5, color: C.mutedLight },
   settleRow: {
     flexDirection: 'row', alignItems: 'center', gap: 10,
     paddingVertical: 11, borderBottomWidth: 1, borderBottomColor: C.border,
