@@ -1,7 +1,7 @@
 {
   "_meta": {
     "version": "2.1",
-    "updated": "2026-06-28",
+    "updated": "2026-07-09",
     "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT N5 词库（草稿，718词） + N3 词库(1730词,JMdict锚定+Tatoeba例句+LLM译释义) + N2 词库(1812词) + N1 词库(3413词)",
     "wordBankSources": {
       "n4_core": {
@@ -3608,7 +3608,13 @@
           "stampLabel": "路线确认",
           "memoryHook": "噴火口まで歩けますか？：「まで」表示到某处为止，用来确认能不能走到那里。"
         }
-      }
+      },
+      "geo": {
+        "lat": 34.72,
+        "lng": 139.4
+      },
+      "volcanoState": "active",
+      "cultureEgg": "大岛人管它叫「御神火様」——神火。1986年全岛撤离一个月,回来第一件事是去看山。"
     },
     {
       "id": "fuji",
@@ -3620,7 +3626,13 @@
       "jp": "富士山に登りたいです",
       "zh": "我想爬富士山",
       "lang": "ja-JP",
-      "note": "休眠火山，世界文化遗产。攀登季7-9月。"
+      "note": "休眠火山，世界文化遗产。攀登季7-9月。",
+      "geo": {
+        "lat": 35.36,
+        "lng": 138.73
+      },
+      "volcanoState": "active",
+      "cultureEgg": "富士山官方分类是活火山。夏季山顶有邮局,寄张明信片,盖全日本最高的邮戳。"
     },
     {
       "id": "owakudani",
@@ -3677,7 +3689,13 @@
           "stampLabel": "景点问路",
           "memoryHook": "黒たまごはどこですか？：想找什么，就把它放在「はどこですか？」前面。"
         }
-      }
+      },
+      "geo": {
+        "lat": 35.24,
+        "lng": 139.02
+      },
+      "volcanoState": "active",
+      "cultureEgg": "黑蛋是硫磺泉煮的,传说吃一个延寿七年。硫化氢浓度高的日子索道会停——山说了算。"
     },
     {
       "id": "sakura",
@@ -3689,7 +3707,13 @@
       "jp": "桜島はよく噴火しますか？",
       "zh": "樱岛经常喷发吗？",
       "lang": "ja-JP",
-      "note": "年均喷发超1000次，居民早已习惯。"
+      "note": "年均喷发超1000次，居民早已习惯。",
+      "geo": {
+        "lat": 31.58,
+        "lng": 130.66
+      },
+      "volcanoState": "active",
+      "cultureEgg": "鹿儿岛人早上先看「今天灰往哪边飘」再决定晾不晾衣服。市政府发专用「克灰袋」装火山灰。"
     },
     {
       "id": "etna",
@@ -3701,7 +3725,13 @@
       "jp": "Dov'è l'Etna?",
       "zh": "埃特纳在哪里？",
       "lang": "it-IT",
-      "note": "欧洲最活跃火山，UNESCO世界自然遗产2021。Susan Sontag的《火山情人》就写它。"
+      "note": "欧洲最活跃火山，UNESCO世界自然遗产2021。Susan Sontag的《火山情人》就写它。",
+      "geo": {
+        "lat": 37.75,
+        "lng": 14.99
+      },
+      "volcanoState": "active",
+      "cultureEgg": "西西里人叫她「Idda」——「她」。火山是女的,喷发不是灾难,是她在说话。"
     },
     {
       "id": "yulong",
@@ -3713,7 +3743,12 @@
       "jp": "雪山はどこですか？",
       "zh": "雪山在哪里？",
       "lang": "zh-CN",
-      "note": "北半球最南端雪山，索道可达4506m。"
+      "note": "北半球最南端雪山，索道可达4506m。",
+      "geo": {
+        "lat": 27.1,
+        "lng": 100.18
+      },
+      "cultureEgg": "纳西族的圣山。主峰扇子陡至今无人登顶——不是登不上,是从未开放。有些山就该留给神。"
     },
     {
       "id": "kilimanjaro",
@@ -3722,10 +3757,15 @@
       "name": "乞力马扎罗",
       "loc": "坦桑尼亚",
       "emoji": "🏔",
-      "jp": "¿Dónde está el Kilimanjaro?",
-      "zh": "乞力马扎罗在哪里？",
-      "lang": "es-ES",
-      "note": "非洲最高峰，赤道上的雪山。无需专业技术，徒步7天可登顶。"
+      "jp": "Pole pole!",
+      "zh": "慢慢来!(斯瓦希里语,向导的口头禅)",
+      "lang": "en-GB",
+      "note": "非洲最高峰，赤道上的雪山。无需专业技术，徒步7天可登顶。",
+      "geo": {
+        "lat": -3.07,
+        "lng": 37.35
+      },
+      "cultureEgg": "向导整天念「pole pole」(慢慢来)。登顶率的秘密不是体力,是走得够慢——高原教你的第一课。"
     },
     {
       "id": "baikal",
@@ -3737,7 +3777,12 @@
       "jp": "Где Байкал?",
       "zh": "贝加尔湖在哪里？",
       "lang": "ru-RU",
-      "note": "世界最深湖，全球20%淡水。冬天可以在湖面上行走。"
+      "note": "世界最深湖，全球20%淡水。冬天可以在湖面上行走。",
+      "geo": {
+        "lat": 53.5,
+        "lng": 108.0
+      },
+      "cultureEgg": "世界最深的湖,装着全球约五分之一的淡水。冬天冰厚到能开车——湖面就是公路。"
     },
     {
       "id": "amazon",
@@ -3749,11 +3794,16 @@
       "jp": "¿Dónde está el Amazonas?",
       "zh": "亚马逊河在哪里？",
       "lang": "es-ES",
-      "note": "世界最大热带雨林，占全球氧气生产的20%。"
+      "note": "世界最大热带雨林，占全球氧气生产的20%。",
+      "geo": {
+        "lat": -3.1,
+        "lng": -60.0
+      },
+      "cultureEgg": "亚马逊河上没有一座桥。不是修不起,是河和雨林不答应。"
     },
     {
       "id": "cafe_kyoto",
-      "type": "cafe",
+      "type": "life",
       "status": "been",
       "name": "京都町家咖啡",
       "loc": "京都市",
@@ -3806,11 +3856,16 @@
           "stampLabel": "咖啡点单",
           "memoryHook": "コーヒーをください：想要什么，就把它放在「をください」前面。"
         }
-      }
+      },
+      "geo": {
+        "lat": 35.01,
+        "lng": 135.77
+      },
+      "cultureEgg": "京都的咖啡消费量常年日本第一——不是东京。老铺喫茶店和抹茶,在这座城市不打架。"
     },
     {
       "id": "cafe_medellin",
-      "type": "cafe",
+      "type": "life",
       "status": "wish",
       "name": "麦德林咖啡庄园",
       "loc": "哥伦比亚",
@@ -3818,7 +3873,12 @@
       "jp": "¿Puedo visitar la finca?",
       "zh": "我可以参观庄园吗？",
       "lang": "es-ES",
-      "note": "可以在种植庄园喝到当天采摘的咖啡。"
+      "note": "可以在种植庄园喝到当天采摘的咖啡。",
+      "geo": {
+        "lat": 6.25,
+        "lng": -75.56
+      },
+      "cultureEgg": "哥伦比亚人日常喝的是 tinto(小杯黑咖啡),最好的豆子都出口了。庄园里那杯,是留下的私藏。"
     },
     {
       "id": "jungfrau",
@@ -3881,7 +3941,12 @@
           "stampLabel": "已问路",
           "memoryHook": "少女峰 + Wo ist der Zug?"
         }
-      }
+      },
+      "geo": {
+        "lat": 46.54,
+        "lng": 7.96
+      },
+      "cultureEgg": "少女峰车站海拔3454米,欧洲最高。瑞士人凿了16年隧道(1898-1912),在冰川底下修出一条铁路。"
     },
     {
       "id": "kamakura_coast",
@@ -3944,11 +4009,16 @@
           "stampLabel": "已描述",
           "memoryHook": "镰仓海岸 + 海がきれいです。"
         }
-      }
+      },
+      "geo": {
+        "lat": 35.31,
+        "lng": 139.55
+      },
+      "cultureEgg": "江之电贴着民宅缝隙跑。镰仓高校前的平交道=灌篮高手片头名场面,全世界的人在这里等一班绿色电车。"
     },
     {
       "id": "cafe_seoul_hanok",
-      "type": "cafe",
+      "type": "life",
       "status": "wish",
       "name": "首尔韩屋咖啡",
       "loc": "韩国首尔",
@@ -4007,7 +4077,791 @@
           "stampLabel": "已点单",
           "memoryHook": "韩屋咖啡 + 커피 한 잔 주세요."
         }
+      },
+      "geo": {
+        "lat": 37.58,
+        "lng": 126.98
+      },
+      "cultureEgg": "北村韩屋村是真实的居民区。上午九点前请安静——牌子上写着,住在明信片里的人也要睡觉。"
+    },
+    {
+      "id": "cappadocia",
+      "type": "experience",
+      "status": "wish",
+      "name": "卡帕多奇亚",
+      "loc": "土耳其 格雷梅",
+      "emoji": "🎈",
+      "jp": "Balon ne zaman kalkıyor?",
+      "zh": "热气球几点起飞?",
+      "lang": "tr-TR",
+      "geo": {
+        "lat": 38.64,
+        "lng": 34.83
+      },
+      "note": "日出时分百球齐飞。仙人烟囱是三百万年前埃尔吉耶斯火山灰的作品——你脚下的奇幻地貌,是火山写的信。",
+      "cultureEgg": "热气球看天吃饭:前一晚确认航班,凌晨四点酒店来接,日出前升空。被取消别沮丧——风说了不飞,就不飞。",
+      "phrases": [
+        {
+          "text": "Balon ne zaman kalkıyor?",
+          "zh": "热气球几点起飞?",
+          "use": "凌晨确认起飞时间",
+          "check": true
+        },
+        {
+          "text": "İptal olursa iade var mı?",
+          "zh": "取消的话能退款吗?",
+          "use": "天气不好被取消时",
+          "check": true
+        },
+        {
+          "text": "Biraz korkuyorum.",
+          "zh": "我有点怕。",
+          "use": "升空前跟飞行员说,他会安抚你",
+          "check": true
+        },
+        {
+          "text": "Çok güzel! İnanılmaz!",
+          "zh": "太美了!难以置信!",
+          "use": "日出百球齐飞的那一刻",
+          "check": true
+        },
+        {
+          "text": "Fotoğraf çekebilir misiniz?",
+          "zh": "能帮我拍张照吗?",
+          "use": "落地香槟庆祝时",
+          "check": true
+        }
+      ],
+      "sceneOps": [
+        "前一晚酒店确认航班(看天决定飞不飞)",
+        "凌晨4-5点酒店来接",
+        "日出前升空,约1小时",
+        "落地喝香槟、领飞行证书"
+      ],
+      "tips": {
+        "when": "4-10月最稳,冬天也飞但常取消",
+        "how": "格雷梅住宿,公司凌晨接送",
+        "cost": "约150-250欧,认准有保险的公司"
+      },
+      "subSpots": [
+        {
+          "emoji": "🎈",
+          "name": "热气球日出",
+          "phrase": "Balon turu",
+          "tip": "凌晨升空,言的第一次真实打卡就在这里"
+        },
+        {
+          "emoji": "🕳",
+          "name": "地下城(代林库尤)",
+          "phrase": "Yeraltı şehri",
+          "tip": "八层深,古代基督徒躲避用,幽闭恐惧慎入"
+        },
+        {
+          "emoji": "⛪",
+          "name": "格雷梅露天博物馆",
+          "phrase": "Açık hava müzesi",
+          "tip": "岩凿教堂群,湿壁画千年未褪"
+        }
+      ]
+    },
+    {
+      "id": "pamukkale",
+      "type": "experience",
+      "status": "wish",
+      "name": "棉花堡",
+      "loc": "土耳其 代尼兹利",
+      "emoji": "♨️",
+      "jp": "Suya girebilir miyim?",
+      "zh": "我可以下水吗?",
+      "lang": "tr-TR",
+      "geo": {
+        "lat": 37.92,
+        "lng": 29.12
+      },
+      "note": "雪白的钙华梯田,温泉水流了千万年。山顶是希拉波利斯古城——罗马人也在这里泡温泉。",
+      "cultureEgg": "必须赤脚走,保护钙华——袋子装鞋是标配。水池深浅不一,浅处烫、深处凉,慢慢试。",
+      "phrases": [
+        {
+          "text": "Suya girebilir miyim?",
+          "zh": "我可以下水吗?",
+          "use": "棉花堡钙华池",
+          "check": true
+        },
+        {
+          "text": "Ayakkabı nerede bırakılır?",
+          "zh": "鞋子放哪里?",
+          "use": "必须赤脚保护钙华",
+          "check": true
+        },
+        {
+          "text": "Su sıcak mı?",
+          "zh": "水烫吗?",
+          "use": "试探不同深浅的池子",
+          "check": true
+        },
+        {
+          "text": "Antik havuz nerede?",
+          "zh": "古罗马温泉池在哪?",
+          "use": "山顶希拉波利斯的\"艳后池\"",
+          "check": true
+        }
+      ],
+      "sceneOps": [
+        "山下买票,赤脚上钙华梯田",
+        "慢走试水温(浅烫深凉)",
+        "山顶逛希拉波利斯古城",
+        "付费泡\"艳后池\"(埋着古罗马石柱)"
+      ],
+      "tips": {
+        "when": "日落时分钙华被染成金色",
+        "how": "代尼兹利转小巴",
+        "cost": "门票约30欧含古城"
       }
+    },
+    {
+      "id": "istanbul_bazaar",
+      "type": "life",
+      "status": "wish",
+      "name": "伊斯坦布尔大巴扎",
+      "loc": "土耳其 伊斯坦布尔",
+      "emoji": "🕌",
+      "jp": "Ne kadar?",
+      "zh": "多少钱?",
+      "lang": "tr-TR",
+      "geo": {
+        "lat": 41.01,
+        "lng": 28.97
+      },
+      "note": "世界最古老的有顶市场之一,四千多家店铺,五百年的讨价还价声。",
+      "cultureEgg": "砍价是社交,不是冒犯。店主端来的红茶(çay)放心喝——那是欢迎,不是套路。",
+      "phrases": [
+        {
+          "text": "Ne kadar?",
+          "zh": "多少钱?",
+          "use": "砍价第一句",
+          "check": true
+        },
+        {
+          "text": "Çok pahalı, indirim var mı?",
+          "zh": "太贵了,能便宜点吗?",
+          "use": "砍价是社交不是冒犯",
+          "check": true
+        },
+        {
+          "text": "Sadece bakıyorum.",
+          "zh": "我只是看看。",
+          "use": "不想被缠住时",
+          "check": true
+        },
+        {
+          "text": "Teşekkürler, düşüneceğim.",
+          "zh": "谢谢,我再想想。",
+          "use": "礼貌脱身",
+          "check": true
+        }
+      ],
+      "sceneOps": [
+        "进店店主端红茶(çay)——欢迎,放心喝",
+        "看中了先问价,对半砍起",
+        "喝茶不代表必须买,砍价是游戏",
+        "谈不拢微笑走人,店主不介意"
+      ],
+      "tips": {
+        "when": "周日大巴扎关门",
+        "how": "地铁 Beyazıt 站",
+        "cost": "砍价后常到开价一半"
+      },
+      "subSpots": [
+        {
+          "emoji": "🕌",
+          "name": "蓝色清真寺",
+          "phrase": "Sultan Ahmet Camii",
+          "tip": "入内脱鞋、女性围头巾,礼拜时间闭门"
+        },
+        {
+          "emoji": "⛪",
+          "name": "圣索菲亚",
+          "phrase": "Ayasofya",
+          "tip": "教堂变清真寺变博物馆再变清真寺——一栋楼一部帝国史"
+        }
+      ]
+    },
+    {
+      "id": "istanbul_coffee",
+      "type": "life",
+      "status": "wish",
+      "name": "土耳其咖啡馆",
+      "loc": "土耳其 伊斯坦布尔",
+      "emoji": "☕",
+      "jp": "Bir Türk kahvesi, lütfen.",
+      "zh": "一杯土耳其咖啡,谢谢。",
+      "lang": "tr-TR",
+      "geo": {
+        "lat": 41.03,
+        "lng": 28.98
+      },
+      "note": "土耳其咖啡文化是 UNESCO 非遗。咖啡渣留在杯底——喝完倒扣,有人能从渣里读出你的运势。",
+      "cultureEgg": "咖啡上桌配一杯水:先喝水清口,再品咖啡。杯底的渣别喝,那是占卜师的稿纸。",
+      "phrases": [
+        {
+          "text": "Bir Türk kahvesi, lütfen.",
+          "zh": "一杯土耳其咖啡,谢谢。",
+          "use": "认准\"土耳其咖啡\"别说cappuccino",
+          "check": true
+        },
+        {
+          "text": "Şekerli mi sade mi?",
+          "zh": "要糖还是不要?",
+          "use": "店员会问,sade=不加糖",
+          "check": true
+        },
+        {
+          "text": "Falıma bakar mısınız?",
+          "zh": "能帮我看看咖啡渣占卜吗?",
+          "use": "喝完杯底倒扣,有人能读运势",
+          "check": true
+        }
+      ],
+      "sceneOps": [
+        "点单说 Türk kahvesi",
+        "配一杯水:先喝水清口再品",
+        "小口慢喝,别喝到杯底的渣",
+        "喝完杯子倒扣冷却,看渣占卜"
+      ],
+      "tips": {
+        "when": "下午配土耳其软糖(lokum)",
+        "how": "老城任意老咖啡馆",
+        "cost": "约2-4欧"
+      }
+    },
+    {
+      "id": "moher",
+      "type": "water",
+      "status": "wish",
+      "name": "莫赫悬崖",
+      "loc": "爱尔兰 克莱尔郡",
+      "emoji": "🌊",
+      "jp": "Mind the edge!",
+      "zh": "小心崖边!",
+      "lang": "en-IE",
+      "geo": {
+        "lat": 52.97,
+        "lng": -9.43
+      },
+      "note": "214米垂直坠入大西洋。爱尔兰语叫 Aillte an Mhothair——废墟之崖。",
+      "cultureEgg": "悬崖的天气一小时变四季。爱尔兰人说:「不喜欢现在的天气?等五分钟。」",
+      "phrases": [
+        {
+          "text": "Mind the edge!",
+          "zh": "小心崖边!",
+          "use": "大风天崖边没护栏,真的危险"
+        },
+        {
+          "text": "What time does the last bus leave?",
+          "zh": "末班车几点走?",
+          "use": "公共交通班次少"
+        },
+        {
+          "text": "Is the visitor centre open?",
+          "zh": "游客中心开着吗?",
+          "use": "天气差时躲雨点"
+        },
+        {
+          "text": "Sláinte!",
+          "zh": "干杯!(盖尔语)",
+          "use": "结束后小镇酒吧"
+        }
+      ],
+      "sceneOps": [
+        "游客中心停车/下车",
+        "沿崖顶步道走(风大站稳)",
+        "奥布莱恩塔看最佳全景",
+        "天气一小时四变,备雨衣"
+      ],
+      "tips": {
+        "when": "日落最美但风最大",
+        "how": "都柏林/戈尔韦有一日游巴士",
+        "cost": "游客中心约8欧"
+      }
+    },
+    {
+      "id": "giants_causeway",
+      "type": "landmark",
+      "status": "wish",
+      "name": "巨人堤道",
+      "loc": "北爱尔兰 安特里姆",
+      "emoji": "🪨",
+      "jp": "How were these formed?",
+      "zh": "这些是怎么形成的?",
+      "lang": "en-GB",
+      "geo": {
+        "lat": 55.24,
+        "lng": -6.51
+      },
+      "note": "四万根六边形玄武岩柱——六千万年前火山熔岩冷却的几何学。",
+      "cultureEgg": "地质真相是熔岩,但当地导游一定先给你讲巨人版:芬恩·麦库尔修堤道去打苏格兰巨人。两个版本都值得听。",
+      "phrases": [
+        {
+          "text": "How were these formed?",
+          "zh": "这些是怎么形成的?",
+          "use": "导游会先讲巨人版再讲地质版"
+        },
+        {
+          "text": "Can I walk on the stones?",
+          "zh": "我能踩上去吗?",
+          "use": "能,但海浪打湿会滑"
+        },
+        {
+          "text": "Where's the red trail?",
+          "zh": "红色步道在哪?",
+          "use": "三条难度不同的环线"
+        }
+      ],
+      "sceneOps": [
+        "游客中心领语音导览",
+        "走蓝/红/绿三色步道之一",
+        "六边形石柱上小心湿滑",
+        "听导游讲芬恩·麦库尔的巨人传说"
+      ],
+      "tips": {
+        "when": "退潮时能走更远",
+        "how": "贝尔法斯特一日游",
+        "cost": "游客中心约13英镑,海岸本身免费"
+      }
+    },
+    {
+      "id": "dublin_pub",
+      "type": "life",
+      "status": "wish",
+      "name": "都柏林酒吧",
+      "loc": "爱尔兰 都柏林 Temple Bar",
+      "emoji": "🍺",
+      "jp": "A pint of Guinness, please.",
+      "zh": "一品脱健力士,谢谢。",
+      "lang": "en-IE",
+      "geo": {
+        "lat": 53.35,
+        "lng": -6.26
+      },
+      "note": "酒吧是爱尔兰人的客厅。运气好撞上 trad session——小提琴和锡哨即兴合奏,没有舞台,就在你旁边的桌子。",
+      "cultureEgg": "干杯说 Sláinte!(爱尔兰语「健康」)。轮到你请一轮(round)别躲——这是社交契约,不是消费。",
+      "phrases": [
+        {
+          "text": "A pint of Guinness, please.",
+          "zh": "一品脱健力士,谢谢。",
+          "use": "爱尔兰的国民饮料"
+        },
+        {
+          "text": "Is there live music tonight?",
+          "zh": "今晚有现场音乐吗?",
+          "use": "运气好撞上 trad session"
+        },
+        {
+          "text": "It's my round.",
+          "zh": "这轮我请。",
+          "use": "轮流请客是社交契约,别躲"
+        },
+        {
+          "text": "Sláinte!",
+          "zh": "干杯!(盖尔语\"健康\")",
+          "use": "碰杯时说"
+        }
+      ],
+      "sceneOps": [
+        "进门到吧台点单(不用等服务员)",
+        "健力士要静置沉淀再续满,别催",
+        "轮到你请一轮(round)",
+        "撞上 trad session 就坐下听,别鼓掌打断"
+      ],
+      "tips": {
+        "when": "周末晚上 Temple Bar 最热闹",
+        "how": "市中心步行",
+        "cost": "一品脱约6-7欧"
+      }
+    },
+    {
+      "id": "aso",
+      "type": "volcano",
+      "status": "wish",
+      "name": "阿苏山",
+      "loc": "日本 熊本",
+      "emoji": "🌋",
+      "volcanoState": "active",
+      "jp": "火口は見られますか?",
+      "zh": "能看火山口吗?",
+      "lang": "ja-JP",
+      "geo": {
+        "lat": 32.88,
+        "lng": 131.1
+      },
+      "note": "世界最大级的破火山口,里面住着五万人——人在火山的肚子里种田、上学、生活。",
+      "cultureEgg": "火山瓦斯浓度高时火口封锁,出发前查「阿蘇山 火口規制」。哮喘患者不能靠近——山对呼吸道很诚实。"
+    },
+    {
+      "id": "unzen",
+      "type": "volcano",
+      "status": "wish",
+      "name": "云仙岳",
+      "loc": "日本 长崎",
+      "emoji": "🌋",
+      "volcanoState": "active",
+      "jp": "温泉はどこですか?",
+      "zh": "温泉在哪里?",
+      "lang": "ja-JP",
+      "geo": {
+        "lat": 32.76,
+        "lng": 130.3
+      },
+      "note": "云仙地狱:蒸汽从地面每个缝隙冒出来,硫磺味的雾里走路像穿过云。",
+      "cultureEgg": "「地獄めぐり」(地狱巡游)不是吓人,是温泉地的传统巡礼。地狱蒸的温泉蛋,咸香带硫磺味。"
+    },
+    {
+      "id": "usu",
+      "type": "volcano",
+      "status": "wish",
+      "name": "有珠山",
+      "loc": "日本 北海道",
+      "emoji": "🌋",
+      "volcanoState": "active",
+      "jp": "ロープウェイ乗り場はどこですか?",
+      "zh": "缆车乘车处在哪里?",
+      "lang": "ja-JP",
+      "geo": {
+        "lat": 42.54,
+        "lng": 140.84
+      },
+      "note": "一百年喷发四次,山脚的昭和新山是1944年从麦田里长出来的——一位邮局局长每天画图记录它长高。",
+      "cultureEgg": "山脚洞爷湖温泉街有免费足汤。北海道的规矩:泡足汤前先买支冰淇淋——冷热同修。"
+    },
+    {
+      "id": "changbai",
+      "type": "volcano",
+      "status": "wish",
+      "name": "长白山天池",
+      "loc": "中国 吉林(中朝界山)",
+      "emoji": "🏔",
+      "volcanoState": "dormant",
+      "jp": "天池能看到吗?",
+      "zh": "天池能看到吗?",
+      "lang": "zh-CN",
+      "geo": {
+        "lat": 42.01,
+        "lng": 128.06
+      },
+      "note": "一座山,三个名字:中文「长白山」,韩语「백두산」(白头山),日语「長白山(ちょうはくさん)」。韩民族的圣山,中国的界山——同一池水,倒映三门语言。",
+      "cultureEgg": "天池一年两百天罩在雾里,当地人说「看到天池要三代积德」。看不到别遗憾——它决定谁能看见它。"
+    },
+    {
+      "id": "agung",
+      "type": "volcano",
+      "status": "wish",
+      "name": "阿贡火山",
+      "loc": "印尼 巴厘岛",
+      "emoji": "🌋",
+      "volcanoState": "active",
+      "jp": "Apakah gunung aman hari ini?",
+      "zh": "今天山上安全吗?",
+      "lang": "id-ID",
+      "geo": {
+        "lat": -8.34,
+        "lng": 115.51
+      },
+      "note": "巴厘岛的圣山,印度教宇宙的中心。2017年喷发关闭机场,数万游客滞留——神要说话,飞机也得等。",
+      "cultureEgg": "巴厘岛人睡觉头朝阿贡的方向——那是神圣的方位。递东西别用左手,这条比火山预警更日常。"
+    },
+    {
+      "id": "vesuvius",
+      "type": "volcano",
+      "status": "wish",
+      "name": "维苏威火山",
+      "loc": "意大利 那不勒斯",
+      "emoji": "🌋",
+      "volcanoState": "active",
+      "jp": "A che ora chiude il sentiero?",
+      "zh": "步道几点关闭?",
+      "lang": "it-IT",
+      "geo": {
+        "lat": 40.82,
+        "lng": 14.43
+      },
+      "note": "公元79年,它用一个下午埋掉庞贝。桑塔格在《火山情人》里写:收藏家爱上火山,因为它提醒人类——一切都是暂时的。",
+      "cultureEgg": "先看庞贝再登维苏威,顺序对了故事才完整。那不勒斯人不叫它名字,只说「'A Muntagna」——那座山。"
+    },
+    {
+      "id": "kilauea",
+      "type": "volcano",
+      "status": "wish",
+      "name": "基拉韦厄",
+      "loc": "美国 夏威夷",
+      "emoji": "🌋",
+      "volcanoState": "active",
+      "jp": "Where can I see the lava?",
+      "zh": "在哪里能看到熔岩?",
+      "lang": "en-US",
+      "geo": {
+        "lat": 19.42,
+        "lng": -155.29
+      },
+      "note": "女神 Pele 的家。地球上最活跃的火山之一,熔岩流进海里的地方,新的陆地正在出生。",
+      "cultureEgg": "别带走火山石。夏威夷人相信 Pele 的诅咒——公园每年收到大量游客寄回的石头,附着道歉信。"
+    },
+    {
+      "id": "fagradalsfjall",
+      "type": "volcano",
+      "status": "wish",
+      "name": "法格拉达尔火山",
+      "loc": "冰岛 雷克雅内斯",
+      "emoji": "🌋",
+      "volcanoState": "active",
+      "jp": "Is the eruption visible today?",
+      "zh": "今天能看到喷发吗?",
+      "lang": "en-GB",
+      "geo": {
+        "lat": 63.9,
+        "lng": -22.27
+      },
+      "note": "2021年喷发时,雷克雅未克人下班开车来看岩浆,带着热狗野餐。冰岛语的火山是 eldfjall——火之山。",
+      "cultureEgg": "2010年艾雅法拉火山喷发瘫痪全欧洲航空,全球主播集体念不出它的名字(Eyjafjallajökull)。冰岛人看着新闻笑了一星期。"
+    },
+    {
+      "id": "santorini",
+      "type": "volcano",
+      "status": "wish",
+      "name": "圣托里尼",
+      "loc": "希腊 基克拉泽斯",
+      "emoji": "🏛",
+      "volcanoState": "active",
+      "jp": "Πού είναι η Οία;",
+      "zh": "伊亚在哪里?",
+      "lang": "el-GR",
+      "geo": {
+        "lat": 36.42,
+        "lng": 25.43
+      },
+      "note": "整座岛是火山口的边缘。3600年前米诺斯大喷发炸掉了岛的中心——白色悬崖小镇,盖在灾难的遗迹上。",
+      "cultureEgg": "你站的悬崖就是破火山口内壁,脚下的海是被炸空的火山中心。明信片上的蓝顶教堂全岛只有几座,都在伊亚。"
+    },
+    {
+      "id": "yandang",
+      "type": "volcano",
+      "status": "wish",
+      "name": "雁荡山",
+      "loc": "中国 浙江 温州",
+      "emoji": "🌄",
+      "volcanoState": "extinct",
+      "jp": "缆车几点停运?",
+      "zh": "缆车几点停运?",
+      "lang": "zh-CN",
+      "geo": {
+        "lat": 28.37,
+        "lng": 121.06
+      },
+      "note": "1.2亿年前白垩纪的流纹岩火山。中国东南的山水画,其实是一座死火山的遗体。",
+      "cultureEgg": "灵峰要看两遍:白天是山,入夜合掌峰变成相拥的夫妻。导游手电一照,全场惊呼——山也会换脸。"
+    },
+    {
+      "id": "fushimi_inari",
+      "type": "landmark",
+      "status": "wish",
+      "name": "伏见稻荷大社",
+      "loc": "日本 京都",
+      "emoji": "⛩",
+      "jp": "千本鳥居はこちらですか?",
+      "zh": "千本鸟居是这边吗?",
+      "lang": "ja-JP",
+      "geo": {
+        "lat": 34.97,
+        "lng": 135.77
+      },
+      "note": "一万座朱红鸟居沿山排成隧道。每一座都是一家公司或一个人还愿捐的——愿望排成了路。",
+      "cultureEgg": "鸟居正中间是神走的路,人靠边走。狐狸是稻荷神的使者,嘴里叼的是稻穗或钥匙——不是尾巴。"
+    },
+    {
+      "id": "nara_park",
+      "type": "landmark",
+      "status": "wish",
+      "name": "奈良公园",
+      "loc": "日本 奈良",
+      "emoji": "🦌",
+      "jp": "鹿せんべいはどこで買えますか?",
+      "zh": "鹿仙贝在哪里买?",
+      "lang": "ja-JP",
+      "geo": {
+        "lat": 34.69,
+        "lng": 135.84
+      },
+      "note": "一千二百头鹿在城市里自由行走。它们是神的使者——也是仙贝的忠实索取者。",
+      "cultureEgg": "鹿会鞠躬讨仙贝——但你先鞠躬,它再回礼,顺序反了会被顶。包装纸别喂,鹿的胃比游客的素质脆弱。"
+    },
+    {
+      "id": "matterhorn",
+      "type": "snow",
+      "status": "wish",
+      "name": "马特洪峰",
+      "loc": "瑞士 采尔马特",
+      "emoji": "🏔",
+      "jp": "Wann fährt die letzte Bahn?",
+      "zh": "末班车几点发车?",
+      "lang": "de-DE",
+      "geo": {
+        "lat": 45.98,
+        "lng": 7.66
+      },
+      "note": "三角巧克力包装上的那座山。采尔马特小镇禁一切燃油车——雪山面前,连引擎都要安静。",
+      "cultureEgg": "瑞士德语区问好说 Grüezi,不说 Hallo。小镇出租车是电动的,长得像高尔夫球车。"
+    },
+    {
+      "id": "halong",
+      "type": "water",
+      "status": "wish",
+      "name": "下龙湾",
+      "loc": "越南 广宁省",
+      "emoji": "🛶",
+      "jp": "Thuyền khởi hành lúc mấy giờ?",
+      "zh": "船几点出发?",
+      "lang": "vi-VN",
+      "geo": {
+        "lat": 20.91,
+        "lng": 107.18
+      },
+      "note": "一千六百座石灰岩岛从海里长出来。越南语「下龙」(Hạ Long)=龙降落的地方——传说龙吐出珍珠挡住了入侵者。",
+      "cultureEgg": "越南语有六个声调,Hạ Long 别用汉语拼音念。船宿一晚,清晨甲板上的雾中群岛,是白天看不到的版本。"
+    },
+    {
+      "id": "iguazu",
+      "type": "water",
+      "status": "wish",
+      "name": "伊瓜苏瀑布",
+      "loc": "巴西/阿根廷边境",
+      "emoji": "💦",
+      "jp": "¿Dónde está la Garganta del Diablo?",
+      "zh": "魔鬼咽喉在哪里?",
+      "lang": "es-ES",
+      "geo": {
+        "lat": -25.69,
+        "lng": -54.44
+      },
+      "note": "275条瀑布组成的瀑布群,横跨两个国家。罗斯福夫人看到它说:「可怜的尼亚加拉。」",
+      "cultureEgg": "阿根廷侧走进瀑布里,巴西侧看全景——两边都要去。彩虹下午出现在巴西侧,带雨衣,反正会湿透。"
+    },
+    {
+      "id": "uyuni",
+      "type": "experience",
+      "status": "wish",
+      "name": "乌尤尼盐湖",
+      "loc": "玻利维亚 波托西",
+      "emoji": "🪞",
+      "jp": "¿Cuándo es la temporada de espejo?",
+      "zh": "镜面季是什么时候?",
+      "lang": "es-ES",
+      "geo": {
+        "lat": -20.13,
+        "lng": -67.49
+      },
+      "note": "雨季的盐湖变成天空之镜——天地界线消失,人走在云上。",
+      "cultureEgg": "镜面=雨季(12-3月)+无风+运气,三者缺一不可。白天盐面反光极强,墨镜不是装酷,是护眼刚需。"
+    },
+    {
+      "id": "vienna_cafe",
+      "type": "life",
+      "status": "wish",
+      "name": "维也纳咖啡馆",
+      "loc": "奥地利 维也纳",
+      "emoji": "☕",
+      "jp": "Eine Melange, bitte.",
+      "zh": "一杯米朗琪,谢谢。",
+      "lang": "de-DE",
+      "geo": {
+        "lat": 48.21,
+        "lng": 16.37
+      },
+      "note": "维也纳咖啡馆文化是 UNESCO 非遗。一杯咖啡配一杯水加一份报纸,坐一下午——这是权利,不是蹭座。",
+      "cultureEgg": "点单说 Melange,别说 cappuccino——名字不同,尊严不同。服务生穿燕尾服不是摆架子,是这门手艺的制服。"
+    },
+    {
+      "id": "sagrada",
+      "type": "landmark",
+      "status": "wish",
+      "name": "圣家堂",
+      "loc": "西班牙 巴塞罗那",
+      "emoji": "⛪",
+      "jp": "¿A qué hora abre la Sagrada Família?",
+      "zh": "圣家堂几点开门?",
+      "lang": "es-ES",
+      "geo": {
+        "lat": 41.4,
+        "lng": 2.17
+      },
+      "note": "高迪的未完成交响曲,建了一百四十多年还在长。他说:直线属于人类,曲线属于上帝。",
+      "cultureEgg": "门票提前网上买,按时段进场。下午的光穿过西侧彩窗,整个中庭变成橙红色的森林——时间挑对,教堂会燃烧。"
+    },
+    {
+      "id": "petra",
+      "type": "landmark",
+      "status": "wish",
+      "name": "佩特拉",
+      "loc": "约旦 马安省",
+      "emoji": "🏛",
+      "jp": "Where is the Treasury?",
+      "zh": "宝库神殿在哪里?",
+      "lang": "en-GB",
+      "geo": {
+        "lat": 30.32,
+        "lng": 35.44
+      },
+      "note": "在岩壁里凿出来的玫瑰色古城。走过一公里长的蛇道(Siq),裂缝尽头突然出现宝库立面——两千年前的纳巴泰人计算好了你的震撼。",
+      "cultureEgg": "谢谢说 shukran(شكراً)。贝都因人的茶别拒绝第一杯——第一杯是待客,拒绝是拒人。"
+    },
+    {
+      "id": "angkor",
+      "type": "landmark",
+      "status": "wish",
+      "name": "吴哥窟",
+      "loc": "柬埔寨 暹粒",
+      "emoji": "🛕",
+      "jp": "One day pass, please.",
+      "zh": "一日票,谢谢。",
+      "lang": "en-GB",
+      "geo": {
+        "lat": 13.41,
+        "lng": 103.87
+      },
+      "note": "世界最大宗教建筑群。高棉语的问好是「សួស្តី」(suostei)——微笑之国的第一个词。",
+      "cultureEgg": "日出人潮全在小吴哥莲花池,想安静去巴戎寺看石头微笑。进寺遮肩过膝;浮雕别摸——你的手汗正在融化八百年。"
+    },
+    {
+      "id": "machu_picchu",
+      "type": "landmark",
+      "status": "wish",
+      "name": "马丘比丘",
+      "loc": "秘鲁 库斯科",
+      "emoji": "🦙",
+      "jp": "¿Dónde está la entrada?",
+      "zh": "入口在哪里?",
+      "lang": "es-ES",
+      "geo": {
+        "lat": -13.16,
+        "lng": -72.55
+      },
+      "note": "印加的失落之城,云雾中的石头都市。西班牙人找了几百年没找到——山替它保密。",
+      "cultureEgg": "高反不开玩笑:库斯科3400米,比马丘比丘还高。先到先喝古柯叶茶(mate de coca)——当地合法,且真有效。"
+    },
+    {
+      "id": "taj",
+      "type": "landmark",
+      "status": "wish",
+      "name": "泰姬陵",
+      "loc": "印度 阿格拉",
+      "emoji": "🕌",
+      "jp": "Ticket kahan milega?",
+      "zh": "票在哪里买?",
+      "lang": "hi-IN",
+      "geo": {
+        "lat": 27.17,
+        "lng": 78.04
+      },
+      "note": "一个皇帝为亡妻建的白色大理石情书,两万工匠建了二十二年。",
+      "cultureEgg": "周五不开放(清真寺礼拜日)。日出第一批进场——白色大理石随晨光从粉变金再变白,一天三副面孔。"
     }
   ],
   "kanaRows": [
@@ -12262,7 +13116,13 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Eki no chikaku ni apaato o karimashita."
+      "exampleRoma": "Eki no chikaku ni apaato o karimashita.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "apartment"
+        }
+      ]
     },
     {
       "word": "あの",
@@ -14081,7 +14941,13 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Erebeetaa wa migi ni arimasu."
+      "exampleRoma": "Erebeetaa wa migi ni arimasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "elevator"
+        }
+      ]
     },
     {
       "word": "～円",
@@ -16516,7 +17382,13 @@
       "yanFeatures": [
         "loanword"
       ],
-      "exampleRoma": "Kamera de shashin o torimashita."
+      "exampleRoma": "Kamera de shashin o torimashita.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "camera"
+        }
+      ]
     },
     {
       "word": "火曜日",
@@ -16719,7 +17591,13 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Karee raisu ga daisuki desu."
+      "exampleRoma": "Karee raisu ga daisuki desu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "curry"
+        }
+      ]
     },
     {
       "word": "カレンダー",
@@ -17075,7 +17953,13 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Gitaa o hiku no ga suki desu."
+      "exampleRoma": "Gitaa o hiku no ga suki desu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "guitar"
+        }
+      ]
     },
     {
       "word": "汚い",
@@ -18094,7 +18978,13 @@
       "yanFeatures": [
         "loanword"
       ],
-      "exampleRoma": "Hyakuguramu."
+      "exampleRoma": "Hyakuguramu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "gram"
+        }
+      ]
     },
     {
       "word": "来る",
@@ -18746,7 +19636,17 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Koohii o nomimasu."
+      "exampleRoma": "Koohii o nomimasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "coffee"
+        },
+        {
+          "lang": "dut",
+          "word": "koffie"
+        }
+      ]
     },
     {
       "word": "ここ",
@@ -19007,7 +19907,17 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Koppu ni mizu o iremasu."
+      "exampleRoma": "Koppu ni mizu o iremasu.",
+      "loanSource": [
+        {
+          "lang": "por",
+          "word": "copo"
+        },
+        {
+          "lang": "dut",
+          "word": "kop"
+        }
+      ]
     },
     {
       "word": "今年",
@@ -20566,7 +21476,13 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Shawaa o abimasu."
+      "exampleRoma": "Shawaa o abimasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "shower"
+        }
+      ]
     },
     {
       "word": "十",
@@ -21398,7 +22314,13 @@
       "yanFeatures": [
         "loanword"
       ],
-      "exampleRoma": "Zubon o hakimasu."
+      "exampleRoma": "Zubon o hakimasu.",
+      "loanSource": [
+        {
+          "lang": "fre",
+          "word": "jupon"
+        }
+      ]
     },
     {
       "word": "住む",
@@ -21573,7 +22495,13 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Seetaa o kimasu."
+      "exampleRoma": "Seetaa o kimasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "sweater"
+        }
+      ]
     },
     {
       "word": "石鹸",
@@ -21691,7 +22619,13 @@
       "yanFeatures": [
         "loanword"
       ],
-      "exampleRoma": "Zero kara hajimemasu."
+      "exampleRoma": "Zero kara hajimemasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "zero"
+        }
+      ]
     },
     {
       "word": "千",
@@ -22593,7 +23527,13 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Takushii ni norimasu."
+      "exampleRoma": "Takushii ni norimasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "taxi"
+        }
+      ]
     },
     {
       "word": "出す",
@@ -24059,7 +24999,13 @@
       "yanFeatures": [
         "loanword"
       ],
-      "exampleRoma": "Tesuto o ukeru."
+      "exampleRoma": "Tesuto o ukeru.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "test"
+        }
+      ]
     },
     {
       "word": "では",
@@ -24117,7 +25063,13 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Depaato de kaimasu."
+      "exampleRoma": "Depaato de kaimasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "department store"
+        }
+      ]
     },
     {
       "word": "でも",
@@ -24202,7 +25154,13 @@
       "yanFeatures": [
         "loanword"
       ],
-      "exampleRoma": "Terebi o mimasu."
+      "exampleRoma": "Terebi o mimasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "television"
+        }
+      ]
     },
     {
       "word": "天気",
@@ -26260,7 +27218,13 @@
       "yanFeatures": [
         "loanword"
       ],
-      "exampleRoma": "Nekutai o shimasu."
+      "exampleRoma": "Nekutai o shimasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "necktie"
+        }
+      ]
     },
     {
       "word": "猫",
@@ -26378,7 +27342,13 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Nooto ni kakimasu."
+      "exampleRoma": "Nooto ni kakimasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "notebook"
+        }
+      ]
     },
     {
       "word": "登る",
@@ -26967,7 +27937,13 @@
       "yanFeatures": [
         "loanword"
       ],
-      "exampleRoma": "Basu ni norimasu."
+      "exampleRoma": "Basu ni norimasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "bus"
+        }
+      ]
     },
     {
       "word": "バター",
@@ -27558,7 +28534,13 @@
       "yanFeatures": [
         "loanword"
       ],
-      "exampleRoma": "Pan o tabemasu."
+      "exampleRoma": "Pan o tabemasu.",
+      "loanSource": [
+        {
+          "lang": "por",
+          "word": "pão"
+        }
+      ]
     },
     {
       "word": "ハンカチ",
@@ -27587,7 +28569,13 @@
       "yanFeatures": [
         "loanword"
       ],
-      "exampleRoma": "Hankachi o tsukaimasu."
+      "exampleRoma": "Hankachi o tsukaimasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "handkerchief"
+        }
+      ]
     },
     {
       "word": "番号",
@@ -28329,7 +29317,13 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Puuru de oyogimasu."
+      "exampleRoma": "Puuru de oyogimasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "(swimming) pool"
+        }
+      ]
     },
     {
       "word": "フォーク",
@@ -28804,7 +29798,13 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Beddo de nemasu."
+      "exampleRoma": "Beddo de nemasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "bed"
+        }
+      ]
     },
     {
       "word": "ペット",
@@ -28834,7 +29834,13 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Petto o kau."
+      "exampleRoma": "Petto o kau.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "pet"
+        }
+      ]
     },
     {
       "word": "部屋",
@@ -28924,7 +29930,13 @@
       "yanFeatures": [
         "loanword"
       ],
-      "exampleRoma": "Pen de kakimasu."
+      "exampleRoma": "Pen de kakimasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "pen"
+        }
+      ]
     },
     {
       "word": "勉強",
@@ -29043,7 +30055,13 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Boorupen de kakimasu."
+      "exampleRoma": "Boorupen de kakimasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "ball pen"
+        }
+      ]
     },
     {
       "word": "外",
@@ -29102,7 +30120,13 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Poketto ni iremasu."
+      "exampleRoma": "Poketto ni iremasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "pocket"
+        }
+      ]
     },
     {
       "word": "欲しい",
@@ -29218,7 +30242,13 @@
       "yanFeatures": [
         "loanword"
       ],
-      "exampleRoma": "Botan o oshimasu."
+      "exampleRoma": "Botan o oshimasu.",
+      "loanSource": [
+        {
+          "lang": "por",
+          "word": "botão"
+        }
+      ]
     },
     {
       "word": "ホテル",
@@ -29250,7 +30280,13 @@
       "yanFeatures": [
         "loanword"
       ],
-      "exampleRoma": "Hoteru ni tomaru."
+      "exampleRoma": "Hoteru ni tomaru.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "hotel"
+        }
+      ]
     },
     {
       "word": "本",
@@ -29865,7 +30901,13 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Macchi o karite ii desu ka."
+      "exampleRoma": "Macchi o karite ii desu ka.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "match"
+        }
+      ]
     },
     {
       "word": "窓",
@@ -30638,7 +31680,13 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Hyaku meetoru hodo saki o magatte kudasai."
+      "exampleRoma": "Hyaku meetoru hodo saki o magatte kudasai.",
+      "loanSource": [
+        {
+          "lang": "fre",
+          "word": "mètre"
+        }
+      ]
     },
     {
       "word": "眼鏡",
@@ -31815,7 +32863,13 @@
       "yanFeatures": [
         "loanword"
       ],
-      "exampleRoma": "Rajio de tenki yohou o kikimashita."
+      "exampleRoma": "Rajio de tenki yohou o kikimashita.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "radio"
+        }
+      ]
     },
     {
       "word": "ラジカセ",
@@ -32115,7 +33169,13 @@
       "yanFeatures": [
         "loanword"
       ],
-      "exampleRoma": "Kono resutoran ni kita koto ga arimasu ka."
+      "exampleRoma": "Kono resutoran ni kita koto ga arimasu ka.",
+      "loanSource": [
+        {
+          "lang": "fre",
+          "word": null
+        }
+      ]
     },
     {
       "word": "練習",
@@ -32234,7 +33294,13 @@
         "loanword",
         "sound_change"
       ],
-      "exampleRoma": "Waishatsu ni airon o kakemasu."
+      "exampleRoma": "Waishatsu ni airon o kakemasu.",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "white shirt"
+        }
+      ]
     },
     {
       "word": "若い",
@@ -32741,7 +33807,13 @@
       "coreChunk": "アジア料理",
       "exampleJp": "アジアの国を勉強しています。",
       "exampleRoma": "Ajia no kuni o benkyou shite imasu.",
-      "exampleZh": "正在学习亚洲的国家。"
+      "exampleZh": "正在学习亚洲的国家。",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "asia"
+        }
+      ]
     },
     {
       "id": "n4_asu",
@@ -32903,7 +33975,13 @@
       "coreChunk": "アフリカの国",
       "exampleJp": "アフリカに行ってみたいです。",
       "exampleRoma": "Afurika ni itte mitai desu.",
-      "exampleZh": "想去非洲看看。"
+      "exampleZh": "想去非洲看看。",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "africa"
+        }
+      ]
     },
     {
       "id": "n4_amerika",
@@ -32984,7 +34062,13 @@
       "coreChunk": "アルコール飲料",
       "exampleJp": "この飲み物にアルコールは入っていません。",
       "exampleRoma": "Kono nomimono ni arukooru wa haitte imasen.",
-      "exampleZh": "这种饮料里没有酒精。"
+      "exampleZh": "这种饮料里没有酒精。",
+      "loanSource": [
+        {
+          "lang": "dut",
+          "word": null
+        }
+      ]
     },
     {
       "id": "n4_arubaito",
@@ -33011,7 +34095,13 @@
       "coreChunk": "アルバイトを探す",
       "exampleJp": "週末にアルバイトをします。",
       "exampleRoma": "Shuumatsu ni arubaito o shimasu.",
-      "exampleZh": "周末做兼职。"
+      "exampleZh": "周末做兼职。",
+      "loanSource": [
+        {
+          "lang": "ger",
+          "word": "Arbeit"
+        }
+      ]
     },
     {
       "id": "n4_anshin",
@@ -34199,7 +35289,13 @@
       "coreChunk": "下りのエスカレーター",
       "exampleJp": "エスカレーターで上に行きます。",
       "exampleRoma": "Esukareetaa de ue ni ikimasu.",
-      "exampleZh": "乘自动扶梯上去。"
+      "exampleZh": "乘自动扶梯上去。",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "escalator"
+        }
+      ]
     },
     {
       "id": "n4_eda",
@@ -34361,7 +35457,13 @@
       "coreChunk": "オートバイに乗る",
       "exampleJp": "兄はオートバイに乗ります。",
       "exampleRoma": "Ani wa ootobai ni norimasu.",
-      "exampleZh": "哥哥骑摩托车。"
+      "exampleZh": "哥哥骑摩托车。",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "auto-bi(cycle)"
+        }
+      ]
     },
     {
       "id": "n4_okage",
@@ -35603,7 +36705,17 @@
       "coreChunk": "ガスコンロ",
       "exampleJp": "ガスを止めてください。",
       "exampleRoma": "Gasu o tomete kudasai.",
-      "exampleZh": "请关掉煤气。"
+      "exampleZh": "请关掉煤气。",
+      "loanSource": [
+        {
+          "lang": "dut",
+          "word": null
+        },
+        {
+          "lang": "eng",
+          "word": null
+        }
+      ]
     },
     {
       "id": "n4_gasorin",
@@ -35630,7 +36742,13 @@
       "coreChunk": "ガソリンを入れる",
       "exampleJp": "車にガソリンを入れます。",
       "exampleRoma": "Kuruma ni gasorin o iremasu.",
-      "exampleZh": "给车加汽油。"
+      "exampleZh": "给车加汽油。",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "gasoline"
+        }
+      ]
     },
     {
       "id": "n4_gasorinsutando",
@@ -35657,7 +36775,13 @@
       "coreChunk": "ガソリンスタンドに寄る",
       "exampleJp": "ガソリンスタンドで車を止めます。",
       "exampleRoma": "Gasorin sutando de kuruma o tomemasu.",
-      "exampleZh": "在加油站停车。"
+      "exampleZh": "在加油站停车。",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "gasoline stand"
+        }
+      ]
     },
     {
       "id": "n4_katai",
@@ -36143,7 +37267,13 @@
       "coreChunk": "ガラスを割る",
       "exampleJp": "ガラスのコップを使います。",
       "exampleRoma": "Garasu no koppu o tsukaimasu.",
-      "exampleZh": "使用玻璃杯。"
+      "exampleZh": "使用玻璃杯。",
+      "loanSource": [
+        {
+          "lang": "dut",
+          "word": "glas"
+        }
+      ]
     },
     {
       "id": "n4_kare",
@@ -39248,7 +40378,17 @@
       "coreChunk": "野菜サラダ",
       "exampleJp": "昼ご飯にサラダを食べます。",
       "exampleRoma": "Hirugohan ni sarada o tabemasu.",
-      "exampleZh": "午饭吃沙拉。"
+      "exampleZh": "午饭吃沙拉。",
+      "loanSource": [
+        {
+          "lang": "por",
+          "word": "salada"
+        },
+        {
+          "lang": "dut",
+          "word": "salade"
+        }
+      ]
     },
     {
       "id": "n4_sawagu",
@@ -39356,7 +40496,13 @@
       "coreChunk": "夏のサンダル",
       "exampleJp": "夏はサンダルを履きます。",
       "exampleRoma": "Natsu wa sandaru o hakimasu.",
-      "exampleZh": "夏天穿凉鞋。"
+      "exampleZh": "夏天穿凉鞋。",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "sandal"
+        }
+      ]
     },
     {
       "id": "n4_sandoicchi",
@@ -39383,7 +40529,13 @@
       "coreChunk": "ハムサンドイッチ",
       "exampleJp": "朝、サンドイッチを作りました。",
       "exampleRoma": "Asa, sandoicchi o tsukurimashita.",
-      "exampleZh": "早上做了三明治。"
+      "exampleZh": "早上做了三明治。",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "sandwich"
+        }
+      ]
     },
     {
       "id": "n4_zannen",
@@ -40031,7 +41183,13 @@
       "coreChunk": "いちごジャム",
       "exampleJp": "パンにジャムをつけます。",
       "exampleRoma": "Pan ni jamu o tsukemasu.",
-      "exampleZh": "在面包上抹果酱。"
+      "exampleZh": "在面包上抹果酱。",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "jam"
+        }
+      ]
     },
     {
       "id": "n4_jiyuu",
@@ -41842,7 +43000,13 @@
       "coreChunk": "ソフトな雰囲気",
       "exampleJp": "このパンはソフトです。",
       "exampleRoma": "Kono pan wa sofuto desu.",
-      "exampleZh": "这个面包很软。"
+      "exampleZh": "这个面包很软。",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "soft"
+        }
+      ]
     },
     {
       "id": "n4_sobo",
@@ -42843,7 +44007,13 @@
       "coreChunk": "チェックする",
       "exampleJp": "もう一度チェックしてください。",
       "exampleRoma": "Mou ichido chekku shite kudasai.",
-      "exampleZh": "请再确认一遍。"
+      "exampleZh": "请再确认一遍。",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "check"
+        }
+      ]
     },
     {
       "id": "n4_chikara",
@@ -43520,7 +44690,13 @@
       "coreChunk": "テニスをする",
       "exampleJp": "週末にテニスをします。",
       "exampleRoma": "Shuumatsu ni tenisu o shimasu.",
-      "exampleZh": "周末打网球。"
+      "exampleZh": "周末打网球。",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "tennis"
+        }
+      ]
     },
     {
       "id": "n4_tebukuro",
@@ -45385,7 +46561,13 @@
       "coreChunk": "パソコンで調べる",
       "exampleJp": "パソコンで作文を書きます。",
       "exampleRoma": "Pasokon de sakubun o kakimasu.",
-      "exampleZh": "用电脑写作文。"
+      "exampleZh": "用电脑写作文。",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "personal computer"
+        }
+      ]
     },
     {
       "id": "n4_hatsuon",
@@ -45601,7 +46783,13 @@
       "coreChunk": "ハンドバッグを持つ",
       "exampleJp": "母はハンドバッグを持っています。",
       "exampleRoma": "Haha wa handobaggu o motte imasu.",
-      "exampleZh": "妈妈拿着手提包。"
+      "exampleZh": "妈妈拿着手提包。",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "handbag"
+        }
+      ]
     },
     {
       "id": "n4_hi",
@@ -45682,7 +46870,13 @@
       "coreChunk": "ピアノを弾く",
       "exampleJp": "妹はピアノを弾きます。",
       "exampleRoma": "Imouto wa piano o hikimasu.",
-      "exampleZh": "妹妹弹钢琴。"
+      "exampleZh": "妹妹弹钢琴。",
+      "loanSource": [
+        {
+          "lang": "ita",
+          "word": null
+        }
+      ]
     },
     {
       "id": "n4_hieru",
@@ -46114,7 +47308,13 @@
       "coreChunk": "高いビル",
       "exampleJp": "駅前のビルで働いています。",
       "exampleRoma": "Ekimae no biru de hataraite imasu.",
-      "exampleZh": "在车站前的大楼工作。"
+      "exampleZh": "在车站前的大楼工作。",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "building"
+        }
+      ]
     },
     {
       "id": "n4_hiruma",
@@ -46600,7 +47800,13 @@
       "coreChunk": "プレゼントをあげる",
       "exampleJp": "友だちにプレゼントをあげます。",
       "exampleRoma": "Tomodachi ni purezento o agemasu.",
-      "exampleZh": "送朋友礼物。"
+      "exampleZh": "送朋友礼物。",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "present"
+        }
+      ]
     },
     {
       "id": "n4_bunka",
@@ -49032,7 +50238,13 @@
       "coreChunk": "レポートを書く",
       "exampleJp": "明日までにレポートを書きます。",
       "exampleRoma": "Ashita made ni repooto o kakimasu.",
-      "exampleZh": "明天之前写报告。"
+      "exampleZh": "明天之前写报告。",
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "report"
+        }
+      ]
     },
     {
       "id": "n4_ripo_to",
@@ -53136,7 +54348,12 @@
       "exampleJp": "この万年筆はインクが切れた。",
       "exampleRoma": "Kono mannenhitsu ha inku ga kire ta .",
       "exampleZh": "这支笔没墨了。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "ink"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1022210"
     },
@@ -54581,7 +55798,12 @@
       "exampleJp": "トムはエンジンをかけた。",
       "exampleRoma": "Tomu ha enjin wokaketa .",
       "exampleZh": "汤姆发动了引擎。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "engine"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1030950"
     },
@@ -63230,7 +64452,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "grand"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1046840"
     },
@@ -74720,7 +75947,12 @@
       "exampleJp": "マイクのスイッチ入れて。",
       "exampleRoma": "Maiku no suitchi ire te .",
       "exampleZh": "开启麦克风。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "switch"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1067210"
     },
@@ -74960,7 +76192,12 @@
       "exampleJp": "スキーは滑る？",
       "exampleRoma": "Sukii ha suberu ？",
       "exampleZh": "你滑雪吗？",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "skiing"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1067770"
     },
@@ -75320,7 +76557,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "stands"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1069930"
     },
@@ -78020,7 +79262,12 @@
       "exampleJp": "私はソファーに座っている。",
       "exampleRoma": "Watashi ha sofaa ni suwatsu teiru .",
       "exampleZh": "我坐在沙发上。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "sofa"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1075480"
     },
@@ -83930,7 +85177,12 @@
       "exampleJp": "学校が我々にテントを用意してくれる。",
       "exampleRoma": "Gakkou ga wareware ni tento wo youishi tekureru .",
       "exampleZh": "学校会提供帐篷给我们。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "tent"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1081040"
     },
@@ -85340,7 +86592,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "top"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1085030"
     },
@@ -85825,7 +87082,12 @@
       "exampleJp": "彼女は赤いドレスを着ていた。",
       "exampleRoma": "Kanojo ha akai doresu wo kite ita .",
       "exampleZh": "她穿了一条红色的裙子。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "dress"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1089280"
     },
@@ -88165,7 +89427,12 @@
       "exampleJp": "ノー。",
       "exampleRoma": "Noo .",
       "exampleZh": "No。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "no"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "2080530"
     },
@@ -88795,7 +90062,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "hiking"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1095040"
     },
@@ -89635,7 +90907,12 @@
       "exampleJp": "バッグが開いてるよ。",
       "exampleRoma": "Baggu ga hirai teruyo .",
       "exampleZh": "你的包开着。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "bag"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1099100"
     },
@@ -93725,7 +95002,12 @@
       "exampleJp": "彼女はベンチに座った。",
       "exampleRoma": "Kanojo ha benchi ni suwatsu ta .",
       "exampleZh": "她坐在长椅上。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "bench"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1120280"
     },
@@ -96460,7 +97742,12 @@
       "exampleJp": "ミルクを一杯下さい。",
       "exampleRoma": "Miruku wo ippai kudasai .",
       "exampleZh": "请给我一杯牛奶。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "milk"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1131990"
     },
@@ -100065,7 +101352,12 @@
       "exampleJp": "失礼ですがそれは私のラケットです。",
       "exampleRoma": "Shitsurei desugasoreha watashi no raketto desu .",
       "exampleZh": "抱歉，这是我的球拍。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "racket"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1138710"
     },
@@ -100755,7 +102047,12 @@
       "exampleJp": "ロケットはものすごいスピードで飛ぶ。",
       "exampleRoma": "Roketto hamonosugoi supiido de tobu .",
       "exampleZh": "火箭飞得极快。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "rocket"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1147220"
     },
@@ -100905,7 +102202,12 @@
       "exampleJp": "ワインがほしいですか。",
       "exampleRoma": "Wain gahoshiidesuka .",
       "exampleZh": "你要酒吗？",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "wine"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1148850"
     },
@@ -101355,7 +102657,12 @@
       "exampleJp": "ナイスアイデア！",
       "exampleRoma": "Naisuaidea !",
       "exampleZh": "真是个好主意！",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "idea"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1014210"
     },
@@ -102945,7 +104252,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "antenna"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1020410"
     },
@@ -105505,7 +106817,12 @@
       "exampleJp": "エプロン買うほど料理しない。",
       "exampleRoma": "Epuron kau hodo ryouri shinai .",
       "exampleZh": "我下厨的次数不多，所以不需要围裙。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "apron"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1029760"
     },
@@ -112895,7 +114212,12 @@
       "exampleJp": "ギャングたちは銀行から数千ドルを奪った。",
       "exampleRoma": "Gyangu tachiha ginkou kara suusen doru wo ubatsu ta .",
       "exampleZh": "歹徒们从银行偷取了数千元。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "gang"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1043150"
     },
@@ -119155,7 +120477,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "siren"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1056150"
     },
@@ -125070,7 +126397,12 @@
       "exampleJp": "このポテトチップスは、オンラインショップ限定商品です。",
       "exampleRoma": "Kono potetochippusu ha , onrainshoppu genteishouhin desu .",
       "exampleZh": "这款洋芋片是线上门店的限定商品。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "shop"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1062820"
     },
@@ -126960,7 +128292,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "stockings"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1071000"
     },
@@ -126990,7 +128327,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "stop"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1071100"
     },
@@ -128610,7 +129952,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "cement"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1074740"
     },
@@ -130950,7 +132297,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "diagram"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1076680"
     },
@@ -130980,7 +132332,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "diamond"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1076890"
     },
@@ -131820,7 +133177,12 @@
       "exampleJp": "このダムは水と電力を与えてくれる。",
       "exampleRoma": "Kono damu ha mizu to denryoku wo atae tekureru .",
       "exampleZh": "这个水坝给我们提供水和电。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "dam"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1077140"
     },
@@ -144585,7 +145947,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "pink"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1107140"
     },
@@ -146150,7 +147517,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "print"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1116300"
     },
@@ -146210,7 +147582,12 @@
       "exampleJp": "宝石細工師はそのブローチに大きな真珠をはめ込んだ。",
       "exampleRoma": "Houseki saiku shi hasono buroochi ni ooki na shinju wohame kon da .",
       "exampleZh": "宝石师傅在胸针上镶了一枚大珍珠。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "brooch"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1114910"
     },
@@ -149395,7 +150772,12 @@
       "exampleJp": "私たちはそのマラソンに参加するつもりだ。",
       "exampleRoma": "Watashitachi hasono marason ni sanka surutsumorida .",
       "exampleZh": "我们将参加马拉松。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "marathon"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1129290"
     },
@@ -151295,7 +152677,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "menu"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1133790"
     },
@@ -151805,7 +153192,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "modern"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1134990"
     },
@@ -151895,7 +153287,12 @@
       "exampleJp": "彼女はモデルだったそうだ。",
       "exampleRoma": "Kanojo ha moderu dattasouda .",
       "exampleZh": "据说她曾经是一个模特儿。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "model"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1135270"
     },
@@ -154355,7 +155752,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "running"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1140270"
     },
@@ -154540,7 +155942,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "ribbon"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1142880"
     },
@@ -252250,7 +253657,12 @@
       "exampleJp": "日本は石油をアラブ諸国に頼っている。",
       "exampleRoma": "Nippon ha sekiyu wo arabu shokoku ni tayotsu teiru .",
       "exampleZh": "日本靠阿拉伯国家提供石油。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "arab"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1019060"
     },
@@ -252720,7 +254132,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "elegant"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1030350"
     },
@@ -253515,7 +254932,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "guest"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1048550"
     },
@@ -253695,7 +255117,12 @@
       "exampleJp": "彼女はスピーチコンテストで１等賞を取った。",
       "exampleRoma": "Kanojo ha supiichikontesuto de 1 nado shou wo totsu ta .",
       "exampleZh": "她在演讲比赛中取得了第一名。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "contest"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1052590"
     },
@@ -253725,7 +255152,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "contrast"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1052780"
     },
@@ -254095,7 +255527,12 @@
       "exampleJp": "ショーはすばらしかったが、チケットが高すぎた。",
       "exampleRoma": "Shoo hasubarashikattaga , chiketto ga takasu gita .",
       "exampleZh": "这场秀棒极了，但是门票太贵了。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "show"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1062240"
     },
@@ -254190,7 +255627,12 @@
       "exampleJp": "僕はジャズが好きだ。",
       "exampleRoma": "Bokuha jazu ga suki da .",
       "exampleZh": "我喜欢爵士乐。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "jazz"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1065290"
     },
@@ -255045,7 +256487,12 @@
       "exampleJp": "いいタイミングだ。",
       "exampleRoma": "Ii taimingu da .",
       "exampleZh": "好时机。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "timing"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1076000"
     },
@@ -255445,7 +256892,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "chime"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1077890"
     },
@@ -255475,7 +256927,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "channel"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1077960"
     },
@@ -255750,7 +257207,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "tone"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1084780"
     },
@@ -256055,7 +257517,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "nonsense"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1090840"
     },
@@ -256335,7 +257802,12 @@
       "exampleJp": "パジャマのまま朝食を食べた。",
       "exampleRoma": "Pajama nomama choushoku wo tabeta .",
       "exampleZh": "我穿著睡衣吃早饭。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "pajamas"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1101430"
     },
@@ -256455,7 +257927,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "hint"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1104300"
     },
@@ -256610,7 +258087,12 @@
       "exampleJp": "私はあなたのファンです。",
       "exampleRoma": "Watashi haanatano fan desu .",
       "exampleZh": "我是你的粉丝。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "fan"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1108540"
     },
@@ -256910,7 +258392,12 @@
       "exampleJp": "ベストを裏返さなくちゃ。表裏逆ですよ。",
       "exampleRoma": "Besuto wo urakaesa nakucha . omoteura gyaku desuyo .",
       "exampleZh": "背心反了， 要翻一个面。",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "best"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1119530"
     },
@@ -257370,7 +258857,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "misprint"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1130830"
     },
@@ -257550,7 +259042,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "media"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1133620"
     },
@@ -257730,7 +259227,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "uniform"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1137430"
     },
@@ -258289,7 +259791,12 @@
       "exampleJp": "",
       "exampleRoma": "",
       "exampleZh": "",
-      "loanSource": [],
+      "loanSource": [
+        {
+          "lang": "eng",
+          "word": "watt"
+        }
+      ],
       "conceptCluster": "",
       "jmdictSeq": "1149070"
     }
