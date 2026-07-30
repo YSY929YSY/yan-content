@@ -19,6 +19,7 @@ import {
   buildShares as buildSharesFor, settleOne as settleOneFor,
 } from '../../lib/ledgerMath';
 import { parseItinerary, parseReceipt } from '../../lib/parseItinerary';
+import { pushNotebook, pullNotebook, cloudIsNewer } from '../../lib/tripBackup';
 import FxPanel from './FxPanel';
 import { FX_CODES, FX_SYMBOLS, getRates, rateOf } from '../../lib/fx';
 
@@ -227,6 +228,8 @@ function TripNotebook() {
   });
   const { speak, speakingKey } = useSpeech();
   const hydrated = useRef(false);
+  const localRev = useRef(null);        // 本机最后一次改动时间,和云端比新旧用
+  const pushTimer = useRef(null);
 
   // 持久化：首次进入读回本地存档，之后任意改动自动落盘（离线即用，关掉 App 不丢）
   useEffect(() => {
@@ -243,18 +246,46 @@ function TripNotebook() {
           if (saved.ledgerMembers) setLedgerMembers(saved.ledgerMembers);
           if (saved.uploads) setUploads(saved.uploads);
           if (saved.budgets) setBudgets(saved.budgets);
+          localRev.current = saved.rev || null;
         }
       } catch (e) { /* 读档失败就用种子数据，静默 */ }
       hydrated.current = true;
+
+      // 本地先上屏(离线即用),再问云端有没有更新的版本。
+      // ⚠️ 只在「云端确实更新」时才覆盖:pullNotebook 失败返回 null,
+      // 空 payload 也不动本地 —— 否则就是共享账本被弱网清空那个坑的翻版。
+      try {
+        const cloud = await pullNotebook();
+        if (!cloud || !cloud.payload) return;
+        if (!cloudIsNewer(cloud.deviceRev, localRev.current)) return;
+        const c = cloud.payload;
+        if (Array.isArray(c.books) && c.books.length) {
+          setBooks(c.books);
+          setActiveBookId(c.books.some(b => b.id === c.activeBookId) ? c.activeBookId : c.books[0].id);
+        }
+        if (Array.isArray(c.expenses)) setExpenses(c.expenses);
+        if (Array.isArray(c.ledgerMembers) && c.ledgerMembers.length) setLedgerMembers(c.ledgerMembers);
+        if (Array.isArray(c.uploads)) setUploads(c.uploads);
+        if (c.budgets && typeof c.budgets === 'object') setBudgets(c.budgets);
+        localRev.current = cloud.deviceRev;
+      } catch (e) { /* 取不到就用本地这份 */ }
     })();
   }, []);
   useEffect(() => {
     if (!hydrated.current) return;
-    AsyncStorage.setItem(
-      TRIP_STORAGE_KEY,
-      JSON.stringify({ books, activeBookId, expenses, ledgerMembers, uploads, budgets }),
-    ).catch(() => {});
+    const rev = new Date().toISOString();
+    localRev.current = rev;
+    const snapshot = { books, activeBookId, expenses, ledgerMembers, uploads, budgets, rev };
+    AsyncStorage.setItem(TRIP_STORAGE_KEY, JSON.stringify(snapshot)).catch(() => {});
+    // 云端备份防抖:记一笔账会连着触发好几次 setState,不能每次都发请求。
+    // 备份失败静默 —— 本地那份才是当下能用的,云端只是换机时的保险。
+    if (pushTimer.current) clearTimeout(pushTimer.current);
+    pushTimer.current = setTimeout(() => {
+      const { uploads: _skipPhotos, ...cloudSafe } = snapshot;   // 本机图片 uri 换机后无效,不上传
+      pushNotebook(cloudSafe, rev);
+    }, 4000);
   }, [books, activeBookId, expenses, ledgerMembers, uploads, budgets]);
+  useEffect(() => () => { if (pushTimer.current) clearTimeout(pushTimer.current); }, []);
 
   const activeBook = books.find(book => book.id === activeBookId) || books[0];
   const legs = activeBook.legs || [];
