@@ -24,6 +24,7 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 
 
 import fallbackContent from './assets/content.fallback.json';
+import { fetchContent } from './src/lib/contentCache';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import * as Speech from 'expo-speech';
@@ -43,6 +44,7 @@ const WORLD_FOOTPRINT_PHOTOS_KEY = 'yan_world_footprint_photos';
 const WORLD_VISITED_IDS_KEY = 'yan_world_footprint_visited_ids';
 const WORLD_META_KEY = 'yan_world_footprint_meta';
 const SUBWAY_PROGRESS_KEY = 'yan_subway_unlocked_idx';
+const WORLD_PHOTO_PATHS_KEY = 'yan_world_footprint_photo_paths';
 const showComingSoonAlert = () => {
   Alert.alert(
     '即将开放',
@@ -794,14 +796,17 @@ function useContent() {
       setLoading(false);
       return;
     }
-    try {
-      const res = await fetch(CONTENT_URL, { cache:'no-cache' });
-      if (!res.ok) throw new Error(`Content fetch failed: ${res.status}`);
-      setContent(await res.json());
-    } catch (e) {
-      console.error('[Content]', e);
+    // 带 ETag 条件请求:内容没变时服务端回 304、下载 0 字节,
+    // 不再每次冷启动全量拉 6MB。取不到就退回缓存,再退回内置 fallback。
+    const { content: next, source, error: err } = await fetchContent(CONTENT_URL);
+    if (next) {
+      setContent(next);
+      setError(false);
+    } else {
+      console.warn('[Content] using bundled fallback:', err);
       setError(true);
     }
+    if (__DEV__) console.log('[Content] source =', source);
     setLoading(false);
   };
   useEffect(() => { load(); }, []);
@@ -7564,6 +7569,20 @@ function NaTab({ mapPlaces: initialPlaces }) {
     })));
   }, [initialPlaces, visitedIds]);
 
+  // 存过的照片路径要读回来:签名 URL 一小时就过期,只有 path 能拿来重签
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        const raw = await AsyncStorage.getItem(WORLD_PHOTO_PATHS_KEY);
+        if (!alive || !raw) return;
+        const saved = JSON.parse(raw);
+        if (saved && typeof saved === 'object') setPhotoPaths(prev => ({ ...saved, ...prev }));
+      } catch (e) { /* 读不到就等云端拉 */ }
+    })();
+    return () => { alive = false; };
+  }, []);
+
   useEffect(() => {
     let alive = true;
     const loadVisitedIds = async () => {
@@ -7644,17 +7663,18 @@ function NaTab({ mapPlaces: initialPlaces }) {
       }
 
       if (Object.keys(cloudPhotoUris).length > 0) {
-        setPhotoUris(prev => {
-          const next = { ...prev, ...cloudPhotoUris };
-          AsyncStorage.setItem(WORLD_FOOTPRINT_PHOTOS_KEY, JSON.stringify(next)).catch(e => {
-            console.warn('[WorldFootprints] Failed to cache cloud photos', e);
-          });
-          return next;
-        });
+        // 云端来的是 1 小时有效的签名 URL —— 只放内存,不写缓存。
+        // 以前会连签名 URL 一起落盘,一小时后重开 App 全是裂图。
+        // 真正该持久化的是 photoPath(见下),用它每次现签。
+        setPhotoUris(prev => ({ ...prev, ...cloudPhotoUris }));
       }
 
       if (Object.keys(cloudPhotoPaths).length > 0) {
-        setPhotoPaths(prev => ({ ...prev, ...cloudPhotoPaths }));
+        setPhotoPaths(prev => {
+          const next = { ...prev, ...cloudPhotoPaths };
+          AsyncStorage.setItem(WORLD_PHOTO_PATHS_KEY, JSON.stringify(next)).catch(() => {});
+          return next;
+        });
       }
     };
 
@@ -7742,7 +7762,11 @@ useEffect(() => {
 
       const upload = await uploadPlaceCheckinPhoto(placeId, photoUri, asset.mimeType || 'image/jpeg');
       if (upload?.photoPath) {
-        setPhotoPaths(prev => ({ ...prev, [placeId]: upload.photoPath }));
+        setPhotoPaths(prev => {
+          const next = { ...prev, [placeId]: upload.photoPath };
+          AsyncStorage.setItem(WORLD_PHOTO_PATHS_KEY, JSON.stringify(next)).catch(() => {});
+          return next;
+        });
         await pushPlaceCheckin(
           placeId,
           visitedIds.includes(placeId) ? 'been' : 'wish',
