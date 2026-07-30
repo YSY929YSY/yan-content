@@ -327,6 +327,17 @@ function TripNotebook() {
   })();
   // 简单模式(均分)下参与人恒等于全体成员:加了同行者就自动进均分,不用再去勾一遍。
   // 只在均分时同步——各自付/单独付各人有各自金额,强行拉平会让草稿变成不可保存的状态。
+  // 一次只开一个:看账的时候不会同时在记账,反之亦然。
+  // 两个折叠区同时展开时,要滚很久才够得到「记一笔」,像页面重复了一遍。
+  const openOnly = (which) => {
+    setSettleOpen(which === 'settle');
+    setLedgerAdvanced(which === 'adv');
+    setLedgerSetupOpen(which === 'setup');
+    if (which !== 'budget') setBudgetEditing(false);
+    if (which !== 'cur') setCurOpen(false);
+  };
+  const toggleOnly = (which, isOpen) => openOnly(isOpen ? null : which);
+
   useEffect(() => { currentUserId().then(setMyUid).catch(() => {}); }, []);
   useEffect(() => {
     if (!ledgerOpen || fxRates) return;
@@ -1492,7 +1503,7 @@ function TripNotebook() {
                       ))}
                     </View>
                     <TouchableOpacity
-                      onPress={() => { setBudgetDraft(budget?.amount || ''); setBudgetEditing(v => !v); }}
+                      onPress={() => { setBudgetDraft(budget?.amount || ''); openOnly(budgetEditing ? null : 'budget'); setBudgetEditing(!budgetEditing); }}
                       hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
                     >
                       <Text style={tn.meBudgetTxt}>
@@ -1533,7 +1544,7 @@ function TripNotebook() {
               )}
 
               {/* ── 结算:账本的高光;点开看每人明细 ── */}
-              <TouchableOpacity style={tn.settleAction} activeOpacity={0.9} onPress={() => setSettleOpen(v => !v)}>
+              <TouchableOpacity style={tn.settleAction} activeOpacity={0.9} onPress={() => toggleOnly('settle', settleOpen)}>
                 <View style={{ flex: 1 }}>
                   <Text style={tn.settleActionK}>结算</Text>
                   {settleHead.length === 0
@@ -1603,7 +1614,7 @@ function TripNotebook() {
               {/* ── 记一笔:主路径只有「金额 + 谁垫的」,其余收在「调整」里 ── */}
               <View style={tn.ledgerCard}>
                 <View style={tn.amountRow}>
-                  <TouchableOpacity onPress={() => setCurOpen(v => !v)} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+                  <TouchableOpacity onPress={() => toggleOnly('cur', curOpen)} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
                     <Text style={tn.curTap}>{currency}</Text>
                   </TouchableOpacity>
                   <TextInput
@@ -1656,7 +1667,7 @@ function TripNotebook() {
                 {/* 不展开也知道这笔怎么分 */}
                 <View style={tn.splitLine}>
                   <Text style={tn.splitLineTxt}>{splitSummary}</Text>
-                  <TouchableOpacity onPress={() => setLedgerAdvanced(v => !v)} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+                  <TouchableOpacity onPress={() => toggleOnly('adv', ledgerAdvanced)} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
                     <Text style={tn.splitLineLink}>{ledgerAdvanced ? '收起' : '调整'}</Text>
                   </TouchableOpacity>
                 </View>
@@ -1806,7 +1817,7 @@ function TripNotebook() {
 
                 {/* 按钮变灰必须给出理由,尤其原因藏在收起的「调整」里时 */}
                 {!canSave && draftTotal > 0 && !isBalanced && (
-                  <TouchableOpacity style={tn.whyOff} onPress={() => setLedgerAdvanced(true)}>
+                  <TouchableOpacity style={tn.whyOff} onPress={() => openOnly('adv')}>
                     <Text style={tn.whyOffTxt}>
                       {specialOver
                         ? `单独付的一项比总额还多 ${fmtMoney(specialGap)} · 去调整`
@@ -1839,7 +1850,7 @@ function TripNotebook() {
               </View>
 
               {/* ── 同行者 / 共享账本:一趟旅行只设一次,默认收起 ── */}
-              <TouchableOpacity style={tn.setupRow} activeOpacity={0.8} onPress={() => setLedgerSetupOpen(v => !v)}>
+              <TouchableOpacity style={tn.setupRow} activeOpacity={0.8} onPress={() => toggleOnly('setup', ledgerSetupOpen)}>
                 <View style={{ flex: 1 }}>
                   <Text style={tn.setupTxt}>{isShared ? `共享账本 · 邀请码 ${ledgerCode}` : '同行者'}</Text>
                   <Text style={tn.setupMeta}>{ledgerPeople.join('、') || '还没有成员'}</Text>
