@@ -28,6 +28,12 @@ create policy trip_notebooks_own on trip_notebooks
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
 
+-- 表级授权。RLS 只管「哪些行能碰」,GRANT 才管「能不能碰这张表」——
+-- 少了它 PostgREST 直接 403,和策略写没写无关。
+-- anon 也要授:言用的是匿名登录,大多数用户从头到尾都是 anon 角色。
+grant usage on schema public to anon, authenticated;
+grant select, insert, update, delete on table public.trip_notebooks to anon, authenticated;
+
 comment on table trip_notebooks is
   '旅行小本子的整块备份(旅行册/行程/账目/预算)。每用户一行,只有本人可读写。';
 comment on column trip_notebooks.device_rev is
