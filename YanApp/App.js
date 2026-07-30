@@ -42,6 +42,7 @@ const { width: SW } = Dimensions.get('window');
 const WORLD_FOOTPRINT_PHOTOS_KEY = 'yan_world_footprint_photos';
 const WORLD_VISITED_IDS_KEY = 'yan_world_footprint_visited_ids';
 const WORLD_META_KEY = 'yan_world_footprint_meta';
+const SUBWAY_PROGRESS_KEY = 'yan_subway_unlocked_idx';
 const showComingSoonAlert = () => {
   Alert.alert(
     '即将开放',
@@ -4694,7 +4695,26 @@ reply: {
   },
 });
 function SubwayScreen({ adventure }) {
+  // 「通关解锁下一站」的进度必须落盘 —— 原来只在 useState 里,
+  // 重开 App 就退回第一站,解锁这件事等于没发生过。
   const [unlockedIdx, setUnlockedIdx] = useState(0);
+  const unlockHydrated = useRef(false);
+  useEffect(() => {
+    (async () => {
+      try {
+        const raw = await AsyncStorage.getItem(SUBWAY_PROGRESS_KEY);
+        const n = Number.parseInt(raw, 10);
+        // 夹到实际站数以内:内容改版少了几站时,存着的旧下标会让渲染越界
+        const maxIdx = Math.max((adventure?.stations?.length || 1) - 1, 0);
+        if (Number.isFinite(n) && n > 0) setUnlockedIdx(Math.min(n, maxIdx));
+      } catch (e) { /* 读不到就从头开始 */ }
+      unlockHydrated.current = true;
+    })();
+  }, []);
+  useEffect(() => {
+    if (!unlockHydrated.current) return;   // 别用初始值 0 覆盖已存的进度
+    AsyncStorage.setItem(SUBWAY_PROGRESS_KEY, String(unlockedIdx)).catch(() => {});
+  }, [unlockedIdx]);
   const [view, setView] = useState('map');
   const [curStation, setCurStation] = useState(0);
   const [curStep, setCurStep] = useState(0);
