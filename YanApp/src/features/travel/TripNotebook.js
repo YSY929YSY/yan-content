@@ -19,6 +19,8 @@ import FxPanel from './FxPanel';
 import { FX_CODES, FX_SYMBOLS, getRates, rateOf } from '../../lib/fx';
 
 const TRIP_STORAGE_KEY = 'yan_trip_notebook_v1';
+// 远端账目是 uuid,本地未同步的是 expense-<时间戳>;用它区分「同步过的」和「还在本机的」
+const isUuid = (v) => typeof v === 'string' && /^[0-9a-f-]{36}$/i.test(v);
 const MONTH_NUM = { JAN: 1, FEB: 2, MAR: 3, APR: 4, MAY: 5, JUN: 6, JUL: 7, AUG: 8, SEP: 9, OCT: 10, NOV: 11, DEC: 12 };
 const MONTH_ABBR = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
@@ -595,7 +597,9 @@ function TripNotebook() {
   const refreshLedger = useCallback(async (id) => {
     const target = id || ledgerId;
     if (!target) return;
-    const { members: rows, expenses: remoteExpenses } = await fetchLedgerData(target);
+    const data = await fetchLedgerData(target);
+    if (!data) return;   // 拉取失败:保持现状,绝不用空数据覆盖本地
+    const { members: rows, expenses: remoteExpenses } = data;
     setRemoteMembers(rows.map(r => ({
       name: r.display_name,
       label: r.is_tag ? '标签' : '成员',
@@ -604,7 +608,12 @@ function TripNotebook() {
       tagOnly: r.is_tag,
       userId: r.user_id || null,   // 留着认出「哪个成员是我」
     })));
-    setExpenses(remoteExpenses);
+    // 本地还没同步上去的笔(id 不是 uuid)必须留着,否则离线记的账会被远端结果吞掉
+    setExpenses(prev => {
+      const pending = prev.filter(item => !isUuid(item.id));
+      const remoteIds = new Set(remoteExpenses.map(e => e.id));
+      return [...pending.filter(p => !remoteIds.has(p.id)), ...remoteExpenses];
+    });
   }, [ledgerId]);
 
   // 打开 App 时恢复我已加入的共享账本
@@ -939,7 +948,6 @@ function TripNotebook() {
     });
   };
 
-  const isUuid = (v) => typeof v === 'string' && /^[0-9a-f-]{36}$/i.test(v);
   const deleteExpense = (id) => {
     setExpenses(prev => prev.filter(item => item.id !== id));
     if (expenseEditId === id) resetExpenseDraft();

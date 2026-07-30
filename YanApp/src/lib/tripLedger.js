@@ -85,8 +85,11 @@ export async function myLedgers() {
 }
 
 // ── 拉取一个账本的成员 + 账目 ────────────────────────────
+// ⚠️ 失败一律返回 null,绝不返回空数组。
+// 调用方会用返回值覆盖本地账目并落盘 —— 空数组会被当成「账本真的空了」,
+// 于是弱网(地铁、电梯、飞机)抖一下就把整本账擦掉,而旅行本身就是弱网场景。
 export async function fetchLedgerData(ledgerId) {
-  if (!supabase || !ledgerId) return { members: [], expenses: [] };
+  if (!supabase || !ledgerId) return null;
   try {
     const [membersRes, expensesRes] = await Promise.all([
       supabase.from('ledger_members').select('*').eq('ledger_id', ledgerId).order('created_at'),
@@ -101,7 +104,7 @@ export async function fetchLedgerData(ledgerId) {
     };
   } catch (e) {
     console.warn('[Ledger] fetch failed:', e.message);
-    return { members: [], expenses: [] };
+    return null;
   }
 }
 
