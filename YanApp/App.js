@@ -7511,8 +7511,11 @@ function NaTab({ mapPlaces: initialPlaces }) {
   const shown = places.filter(
     p => (typeF === 'all' || p.type === typeF) && (statusF === 'all' || p.status === statusF)
   );
-  const been = visitedIds.length;
-  const wish = places.length - been;
+  // 计数只算当前内容里有的地点(记录可能包含旧内容里的地点,它们仍存在磁盘上,
+  // 只是这一版内容没有,不参与显示和计数)
+  const knownVisited = visitedIds.filter(id => places.some(p => p.id === id));
+  const been = knownVisited.length;
+  const wish = Math.max(places.length - been, 0);
   // 分类从数据自动生成:content.json 里出现新 type 就自动多一个筛选项,
   // 地点可带 typeLabel 字段自定义显示名;这里只留旧类型的兜底翻译。
   const TYPE_LABEL_FALLBACK = {
@@ -7550,9 +7553,11 @@ function NaTab({ mapPlaces: initialPlaces }) {
         if (!alive || !raw) return;
         const saved = JSON.parse(raw);
         if (Array.isArray(saved)) {
-          const validPlaceIds = new Set(initialPlaces.map(place => place.id));
-          const nextVisitedIds = saved.filter(id => typeof id === 'string' && validPlaceIds.has(id));
-          setVisitedIds(nextVisitedIds);
+          // 只校验类型,不按当前内容过滤。
+          // 内容源临时少了地点(部署失误、远端和内置版本不一致)时,过滤会让这些
+          // 打卡先从内存消失,再被下一次落盘永久删掉 —— 一次内容失误抹掉真实旅行记录。
+          // 打卡记录归用户,能不能显示归内容,两件事分开。
+          setVisitedIds(saved.filter(id => typeof id === 'string'));
         }
       } catch (e) {
         console.warn('[WorldFootprints] Failed to load visited places', e);
