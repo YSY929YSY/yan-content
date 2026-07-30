@@ -1000,7 +1000,7 @@ function JlptBadge({ level }) {
     N2:['#fff0e0','#c07020'],
     N1:['#fde8e0','#b0301a']
   };
-  const [bg, fg] = map[level] || ['#f0ede6','#888'];
+  const [bg, fg] = map[level] || [C.tag,'#888'];
   return (
     <View style={[jb.b, { backgroundColor: bg }]}>
       <Text style={[jb.t, { color: fg }]}>{level}</Text>
@@ -1017,13 +1017,13 @@ function LangLink({ links }) {
   const m = {
     ES:['#fce0e8','#9a2040','西语'],
     EN:['#e0e8ff','#2040a0','英语'],
-    JP:['#fce8e0','#c04010','日语'],
+    JP:[C.lavaLight,'#c04010','日语'],
     ZH:['#e8f4e0','#2a6020','中文']
   };
   return (
     <View style={ll.row}>
       {links.map((l, i) => {
-        const [bg, fg, langName] = m[l.lang] || ['#f0ede6','#888',l.lang];
+        const [bg, fg, langName] = m[l.lang] || [C.tag,'#888',l.lang];
         return (
           <View key={i} style={[ll.chip, { backgroundColor: bg }]}>
             <Text style={[ll.lang, { color: fg }]}>{l.lang}</Text>
@@ -1092,7 +1092,7 @@ const hk = StyleSheet.create({
   badge:{ flexDirection:'row', alignItems:'center', gap:4, borderRadius:10, paddingHorizontal:9, paddingVertical:4 },
   badgeEmoji:{ fontSize:12 },
   badgeTxt:{ fontSize:10, fontWeight:'800' },
-  title:{ fontSize:11, fontWeight:'600', color:'#8a6a10' },
+  title:{ fontSize:11, fontWeight:'600', color:C.goldInk },
   txt:{ fontSize:14, color:'#3a2a08', lineHeight:22 },
 });
 // ─────────────────────────────────────────────
@@ -1693,7 +1693,7 @@ const recoItem3 =
       <View style={hs.legendRow}>
         <Text style={hs.legendTitle}>语言标签说明</Text>
         <View style={hs.legendChips}>
-          {[{ code: 'ZH', name: '中文', bg: '#e8f4e0', fg: '#2a6020' }, { code: 'JP', name: '日语', bg: '#fce8e0', fg: '#c04010' }, { code: 'ES', name: '西语', bg: '#fce0e8', fg: '#9a2040' }, { code: 'EN', name: '英语', bg: '#e0e8ff', fg: '#2040a0' }].map(l => (
+          {[{ code: 'ZH', name: '中文', bg: '#e8f4e0', fg: '#2a6020' }, { code: 'JP', name: '日语', bg: C.lavaLight, fg: '#c04010' }, { code: 'ES', name: '西语', bg: '#fce0e8', fg: '#9a2040' }, { code: 'EN', name: '英语', bg: '#e0e8ff', fg: '#2040a0' }].map(l => (
             <View key={l.code} style={[hs.legendChip, { backgroundColor: l.bg }]}>
               <Text style={[hs.legendCode, { color: l.fg }]}>{l.code}</Text>
               <Text style={[hs.legendName, { color: l.fg }]}>{l.name}</Text>
@@ -1711,10 +1711,10 @@ hero: { backgroundColor: C.ink, borderRadius: 22, padding: 22, marginBottom: 20,
   heroBg: { position: 'absolute', right: -8, top: -18, fontSize: 100, color: C.white, opacity: 0.05, lineHeight: 110 },
   heroLbl: { fontSize: 10, color: C.lava, letterSpacing: 3, marginBottom: 8 },
   heroTitle: { fontSize: 24, color: C.white, fontWeight: '600', letterSpacing: -0.5, marginBottom: 5 },
-  heroSub: { fontSize: 12, color: '#5a5a7a' },
+  heroSub: { fontSize: 12, color: C.nightMuted },
   heroNote: {
   fontSize: 12,
-  color: '#7a7aa0',
+  color: C.nightMutedLight,
   marginTop: 10,
   lineHeight: 18,
 },
@@ -1977,7 +1977,7 @@ mapRow: {
 mapCard: {
   width: (SW - 36 - 20) / 3,
   aspectRatio: 1.15,
-  backgroundColor: '#fcfbf8',
+  backgroundColor: C.paperFaint,
   borderRadius: 16,
   borderWidth: 1.5,
   borderColor: C.border,
@@ -2037,7 +2037,7 @@ moduleName: {
   darkBg: { position: 'absolute', right: -5, top: -10, fontSize: 80, color: C.white, opacity: 0.04, lineHeight: 90 },
   darkTag: { fontSize: 9, color: C.lava, letterSpacing: 2, marginBottom: 8 },
   darkWord: { fontSize: 22, color: C.white, fontWeight: '400', marginBottom: 10 },
-  darkNote: { fontSize: 12, color: '#5a5a7a', lineHeight: 20 },
+  darkNote: { fontSize: 12, color: C.nightMuted, lineHeight: 20 },
   legendRow: { backgroundColor: C.white, borderRadius: 14, padding: 14, borderWidth: 1.5, borderColor: C.border },
   legendTitle: { fontSize: 10, fontWeight: '700', color: C.muted, letterSpacing: 1.5, marginBottom: 10 },
   legendChips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
@@ -2278,7 +2278,7 @@ grid: {
 },
 
 card: {
-  backgroundColor: '#fcfbf8',
+  backgroundColor: C.paperFaint,
   borderRadius: 16,
   padding: 14,
   borderWidth: 1.5,
@@ -2356,7 +2356,7 @@ function WordBookShelfScreen({ onBack, onSelect }) {
       </View>
       <ScrollView contentContainerStyle={{ padding: 14, gap: 7 }} showsVerticalScrollIndicator={false}>
         {WORDBOOKS.map(book => {
-          const [bg, fg] = JLPT_COLORS[book.level] || ['#f0ede6', '#888'];
+          const [bg, fg] = JLPT_COLORS[book.level] || [C.tag, '#888'];
           return (
             <TouchableOpacity
               key={book.id}
@@ -3805,7 +3805,7 @@ const cs = StyleSheet.create({
   btnTxt: { fontSize: 15, fontWeight: '600', color: C.ink },
   goalBox: {
     width: '100%',
-    backgroundColor: '#fffaf0',
+    backgroundColor: C.paperWarm,
     borderWidth: 1,
     borderColor: '#f0e2b8',
     borderRadius: 14,
@@ -3815,7 +3815,7 @@ const cs = StyleSheet.create({
   goalTitle: {
     fontSize: 13,
     fontWeight: '700',
-    color: '#8a6a10',
+    color: C.goldInk,
     marginBottom: 8,
   },
   goalItem: {
@@ -3826,7 +3826,7 @@ const cs = StyleSheet.create({
   goalBullet: {
     width: 14,
     fontSize: 13,
-    color: '#8a6a10',
+    color: C.goldInk,
     lineHeight: 20,
   },
   goalTxt: {
@@ -3849,7 +3849,7 @@ const cs = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 4,
   },
-  swapJp: { fontSize: 13, fontWeight: '700', color: '#5a3a9a' },
+  swapJp: { fontSize: 13, fontWeight: '700', color: C.purple },
   swapReading: { fontSize: 10, color: '#8c7bb8' },
   swapZh: { fontSize: 10, color: '#7a7199' },
   wordCardPage: { flex: 1, backgroundColor: C.paper },
@@ -3881,7 +3881,7 @@ const cs = StyleSheet.create({
     shadowRadius: 18,
     shadowOffset: { width: 0, height: 6 },
   },
-  wordHero: { alignItems: 'center', paddingTop: 6, paddingBottom: 12, borderBottomWidth: 1, borderBottomColor: '#eee7df', marginBottom: 12 },
+  wordHero: { alignItems: 'center', paddingTop: 6, paddingBottom: 12, borderBottomWidth: 1, borderBottomColor: C.borderSoft, marginBottom: 12 },
   wordHead: { fontSize: 54, lineHeight: 62, fontWeight: '400', color: C.ink, textAlign: 'center' },
   wordReading: { fontSize: 18, color: C.lava, fontWeight: '700', textAlign: 'center', marginTop: 2 },
   wordMeaning: { fontSize: 20, color: C.ink, fontWeight: '700', textAlign: 'center', marginTop: 12 },
@@ -3925,16 +3925,16 @@ const cs = StyleSheet.create({
   wordCoreSentence: { fontSize: 20, lineHeight: 30, color: C.ink, fontWeight: '500', textAlign: 'center', marginBottom: 6 },
   wordCoreZh: { fontSize: 15, lineHeight: 22, color: C.muted, textAlign: 'center', marginBottom: 8 },
   wordToken: {
-    color: '#3D5FA0',
-    backgroundColor: '#EBEEf8',
+    color: C.blueInk,
+    backgroundColor: C.blueFaint,
   },
   wordTokenAct: { color: C.lava, backgroundColor: C.lavaLight, fontWeight: '800' },
   wordTokenBlue: {
-    color: '#3D5FA0',
-    backgroundColor: '#EBEEf8',
+    color: C.blueInk,
+    backgroundColor: C.blueFaint,
   },
-  wordTokenBlueAct: { color: '#3D5FA0', backgroundColor: '#d8dff5', fontWeight: '800' },
-  wordTokenPlain: { color: C.ink, backgroundColor: '#EBEEf8' },
+  wordTokenBlueAct: { color: C.blueInk, backgroundColor: '#d8dff5', fontWeight: '800' },
+  wordTokenPlain: { color: C.ink, backgroundColor: C.blueFaint },
   wordNoteHint: { fontSize: 12, color: C.muted, lineHeight: 18, textAlign: 'center' },
   wordNoteChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 6 },
   wordNoteChip: { borderRadius: 999, borderWidth: 1, borderColor: C.border, paddingHorizontal: 10, paddingVertical: 4, backgroundColor: C.white },
@@ -3948,17 +3948,17 @@ const cs = StyleSheet.create({
     padding: 14,
     marginTop: 10,
     borderWidth: 1,
-    borderColor: '#eaded4',
+    borderColor: C.borderWarm,
   },
   wordNoteTitle: { fontSize: 13, fontWeight: '800', color: C.lava, marginBottom: 5 },
   wordNoteBody: { fontSize: 13, color: C.ink, lineHeight: 20 },
   wordContextText: { fontSize: 14, color: C.ink, lineHeight: 24, marginBottom: 8 },
   wordContextJa: { color: C.muted, fontSize: 14, textDecorationLine: 'underline', textDecorationStyle: 'dotted', textDecorationColor: C.muted },
-  wordRelatedBlock: { borderTopWidth: 1, borderTopColor: '#eee7df', paddingTop: 10 },
+  wordRelatedBlock: { borderTopWidth: 1, borderTopColor: C.borderSoft, paddingTop: 10 },
   examplesDrawer: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#f4ede6', borderRadius: 12, paddingHorizontal: 14, paddingVertical: 8, marginTop: 4, marginBottom: 6 },
   examplesToggleTxt: { fontSize: 13, fontWeight: '700', color: C.ink },
   examplesArrow: { fontSize: 14, color: C.lava, fontWeight: '700' },
-  pitchInlineRow: { flexDirection: 'row', alignItems: 'center', gap: 8, borderTopWidth: 1, borderTopColor: '#eee7df', paddingTop: 8, marginTop: 2 },
+  pitchInlineRow: { flexDirection: 'row', alignItems: 'center', gap: 8, borderTopWidth: 1, borderTopColor: C.borderSoft, paddingTop: 8, marginTop: 2 },
   exModal: { backgroundColor: C.white, borderTopLeftRadius: 20, borderTopRightRadius: 20, paddingHorizontal: 18, paddingTop: 16, paddingBottom: 32, maxHeight: '80%' },
   exModalHead: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 },
   exModalTitle: { fontSize: 15, fontWeight: '700', color: C.ink },
@@ -4010,22 +4010,22 @@ const cs = StyleSheet.create({
     gap: 12,
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#eee7df',
+    borderBottomColor: C.borderSoft,
   },
   wordSkeletonJp: { flex: 1.3, fontSize: 15, color: C.ink, fontWeight: '700', lineHeight: 22 },
   wordSkeletonZh: { flex: 1, fontSize: 13, color: C.muted, lineHeight: 22, textAlign: 'right' },
   wordSceneLine: { fontSize: 14, color: C.ink, lineHeight: 24, marginBottom: 3 },
   wordAccentBox: {
-    backgroundColor: '#EBEEf8',
+    backgroundColor: C.blueFaint,
     borderRadius: 14,
     borderWidth: 1,
     borderColor: '#c5cce8',
     padding: 10,
   },
-  wordAccentText: { fontSize: 15, color: '#3D5FA0', lineHeight: 23, fontWeight: '600' },
+  wordAccentText: { fontSize: 15, color: C.blueInk, lineHeight: 23, fontWeight: '600' },
   wordAccentHint: { fontSize: 11, color: '#7a8ab0', marginTop: 4, textAlign: 'center' },
-  gramParticle: { fontSize: 24, fontWeight: '700', color: '#3D5FA0', marginBottom: 2 },
-  gramLabel: { fontSize: 12, color: '#3D5FA0', letterSpacing: 1, marginBottom: 5 },
+  gramParticle: { fontSize: 24, fontWeight: '700', color: C.blueInk, marginBottom: 2 },
+  gramLabel: { fontSize: 12, color: C.blueInk, letterSpacing: 1, marginBottom: 5 },
   morphRow: { flexDirection: 'row', alignItems: 'center', marginTop: 8, marginBottom: 12, gap: 6 },
   morphPill: { flex: 1, alignItems: 'center', paddingVertical: 10, paddingHorizontal: 8, backgroundColor: '#f4f4f4', borderRadius: 16 },
   morphPillActive: { backgroundColor: '#fff0e8', borderWidth: 1.5, borderColor: C.lava },
@@ -4066,14 +4066,14 @@ const cs = StyleSheet.create({
   patSentenceRow: { marginTop: 10, paddingTop: 8, borderTopWidth: 0.5, borderTopColor: '#ddd', flexDirection: 'row', flexWrap: 'wrap' },
   patSentenceJp: { fontSize: 12, color: C.ink, fontWeight: '300' },
   patSentenceZh: { fontSize: 12, color: C.muted, fontWeight: '300' },
-  pitchLabel: { fontSize: 10, fontWeight: '700', color: '#3D5FA0', letterSpacing: 1 },
+  pitchLabel: { fontSize: 10, fontWeight: '700', color: C.blueInk, letterSpacing: 1 },
   pitchRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 4, marginBottom: 6 },
   pitchSyl: { alignItems: 'center', gap: 4, marginRight: 2 },
   pitchChar: { fontSize: 18, fontWeight: '700', color: C.ink, lineHeight: 22 },
   pitchBar: { height: 3, borderRadius: 2, width: 28 },
-  pitchBarHigh: { backgroundColor: '#3D5FA0' },
+  pitchBarHigh: { backgroundColor: C.blueInk },
   pitchBarLow: { backgroundColor: '#DDD5C8' },
-  pitchBody: { fontSize: 11.5, color: '#3D5FA0', lineHeight: 18 },
+  pitchBody: { fontSize: 11.5, color: C.blueInk, lineHeight: 18 },
   taskWrap: {
     marginTop: 14,
     marginBottom: 6,
@@ -4105,7 +4105,7 @@ const cs = StyleSheet.create({
     marginTop: 6,
   },
   extraBox: {
-  backgroundColor: '#fffaf0',
+  backgroundColor: C.paperWarm,
   borderRadius: 14,
   padding: 14,
   marginBottom: 10,
@@ -4115,7 +4115,7 @@ const cs = StyleSheet.create({
 extraTitle: {
   fontSize: 13,
   fontWeight: '700',
-  color: '#8a6a10',
+  color: C.goldInk,
   marginBottom: 8,
 },
 extraItem: {
@@ -4126,7 +4126,7 @@ extraItem: {
 extraBullet: {
   width: 14,
   fontSize: 13,
-  color: '#8a6a10',
+  color: C.goldInk,
   lineHeight: 20,
 },
 extraTxt: {
@@ -4611,7 +4611,7 @@ const sfc = StyleSheet.create({
   },
   subLine: {
     fontSize: 10,
-    color: '#7a7aa0',
+    color: C.nightMutedLight,
     letterSpacing: 2,
     marginBottom: 18,
   },
@@ -4684,7 +4684,7 @@ statusLine: {
 messageBox: {
   width: '100%',
   borderWidth: 1,
-  borderColor: '#2a2a4a',
+  borderColor: C.nightLine,
   backgroundColor: '#12121a',
   borderRadius: 0,
   paddingVertical: 18,
@@ -4715,7 +4715,7 @@ reply: {
   backgroundColor: '#161624',
   borderRadius: 0,
   borderWidth: 1,
-  borderColor: '#2a2a4a',
+  borderColor: C.nightLine,
   paddingVertical: 13,
   alignItems: 'center',
 },
@@ -4832,7 +4832,7 @@ function SubwayScreen({ adventure }) {
                   <View style={[sw.dot, done && sw.dotDone, active && sw.dotActive, locked && sw.dotLocked]}>
                     {done && <Text style={sw.dotCheck}>✓</Text>}
                   </View>
-                  <Text style={[sw.stnName, done && { color: '#5a5a8a' }, active && { color: C.lava }, locked && { color: '#2a2a4a' }]}>{s.name}</Text>
+                  <Text style={[sw.stnName, done && { color: '#5a5a8a' }, active && { color: C.lava }, locked && { color: C.nightLine }]}>{s.name}</Text>
                 </TouchableOpacity>
               );
             })}
@@ -4965,31 +4965,31 @@ function SubwayScreen({ adventure }) {
   );
 }
 const sw = StyleSheet.create({
-  header: { backgroundColor: C.ink, paddingHorizontal: 18, paddingTop: 14, paddingBottom: 16, borderBottomWidth: 1, borderBottomColor: '#1e1e3a' },
+  header: { backgroundColor: C.ink, paddingHorizontal: 18, paddingTop: 14, paddingBottom: 16, borderBottomWidth: 1, borderBottomColor: C.night },
   headerTitle: { fontSize: 11, color: C.lava, letterSpacing: 2, marginBottom: 12 },
   lineWrap: { position: 'relative', paddingBottom: 28 },
-  lineTrack: { position: 'absolute', top: 10, left: 10, right: 10, height: 2, backgroundColor: '#1e1e3a' },
+  lineTrack: { position: 'absolute', top: 10, left: 10, right: 10, height: 2, backgroundColor: C.night },
   lineFill: { position: 'absolute', top: 10, left: 10, height: 2, backgroundColor: C.lava },
   stationsRow: { flexDirection: 'row', justifyContent: 'space-between' },
   stnWrap: { alignItems: 'center', gap: 5 },
-  dot: { width: 20, height: 20, borderRadius: 10, borderWidth: 2, borderColor: '#1e1e3a', backgroundColor: C.ink, alignItems: 'center', justifyContent: 'center' },
+  dot: { width: 20, height: 20, borderRadius: 10, borderWidth: 2, borderColor: C.night, backgroundColor: C.ink, alignItems: 'center', justifyContent: 'center' },
   dotDone: { backgroundColor: C.lava, borderColor: C.lava },
   dotActive: { borderColor: C.lava },
-  dotLocked: { borderColor: '#1e1e3a' },
+  dotLocked: { borderColor: C.night },
   dotCheck: { fontSize: 9, color: C.white },
   stnName: { fontSize: 9, textAlign: 'center' },
   mapBody: { padding: 20, gap: 12 },
-  stationCard: { backgroundColor: '#0e0e18', borderRadius: 16, padding: 24, alignItems: 'center', borderWidth: 1, borderColor: '#1e1e3a' },
+  stationCard: { backgroundColor: '#0e0e18', borderRadius: 16, padding: 24, alignItems: 'center', borderWidth: 1, borderColor: C.night },
   levelBadge: { fontSize: 10, color: C.lava, letterSpacing: 3, marginBottom: 8 },
   stationBig: { fontSize: 42, color: C.white, fontWeight: '200', letterSpacing: 6 },
-  stationSteps: { fontSize: 11, color: '#2a2a4a', marginTop: 8 },
+  stationSteps: { fontSize: 11, color: C.nightLine, marginTop: 8 },
   startBtn: { marginTop: 16, borderWidth: 1, borderColor: C.lava, borderRadius: 20, paddingHorizontal: 32, paddingVertical: 10 },
   startBtnTxt: { fontSize: 13, color: C.lava, letterSpacing: 2 },
-  cultureCard: { backgroundColor: '#0e0e18', borderRadius: 14, padding: 16, borderWidth: 1, borderColor: '#1e1e3a' },
+  cultureCard: { backgroundColor: '#0e0e18', borderRadius: 14, padding: 16, borderWidth: 1, borderColor: C.night },
   cultureTitleTxt: { fontSize: 11, color: '#5a5a8a', letterSpacing: 1, marginBottom: 8 },
   cultureTxt: { fontSize: 12, color: '#3a3a5a', lineHeight: 20 },
-  sceneArea: { height: 160, backgroundColor: '#060610', position: 'relative', overflow: 'hidden', borderBottomWidth: 1, borderBottomColor: '#1e1e3a' },
-  track: { position: 'absolute', bottom: 32, left: 0, right: 0, height: 2, backgroundColor: '#1e1e3a' },
+  sceneArea: { height: 160, backgroundColor: '#060610', position: 'relative', overflow: 'hidden', borderBottomWidth: 1, borderBottomColor: C.night },
+  track: { position: 'absolute', bottom: 32, left: 0, right: 0, height: 2, backgroundColor: C.night },
   signBoard: { position: 'absolute', top: 20, left: 0, right: 0, alignItems: 'center' },
   signJp: { fontSize: 28, color: C.white, fontWeight: '200', textAlign: 'center' },
   signSub: { fontSize: 10, color: '#3a3a6a', letterSpacing: 1, marginTop: 4, textAlign: 'center' },
@@ -4997,7 +4997,7 @@ const sw = StyleSheet.create({
   personDot: { width: 12, height: 12, borderRadius: 6, backgroundColor: C.lava, shadowColor: C.lava, shadowOpacity: 0.8, shadowRadius: 6, shadowOffset: { width: 0, height: 0 } },
   personShadow: { width: 16, height: 4, borderRadius: 8, backgroundColor: C.lava, opacity: 0.25, marginTop: 2 },
   progRow: { position: 'absolute', bottom: 8, left: 0, right: 0, flexDirection: 'row', justifyContent: 'center', gap: 4 },
-  progDot: { width: 5, height: 5, borderRadius: 3, backgroundColor: '#1e1e3a' },
+  progDot: { width: 5, height: 5, borderRadius: 3, backgroundColor: C.night },
   infoPanel: { flex: 1, backgroundColor: '#0a0a12', padding: 18 },
   infoStep: { fontSize: 10, color: C.lava, letterSpacing: 2, marginBottom: 8 },
   infoJpRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 },
@@ -5010,13 +5010,13 @@ const sw = StyleSheet.create({
 },
 infoEn: {
   fontSize: 12,
-  color: '#7a7aa0',
+  color: C.nightMutedLight,
   marginBottom: 10,
   fontStyle: 'italic',
   lineHeight: 18,
 },
-  infoJpMuted: { fontSize: 14, color: '#2a2a4a', marginBottom: 10, fontStyle: 'italic' },
-  infoTip: { fontSize: 13, color: '#5a5a7a', lineHeight: 20, marginBottom: 12 },
+  infoJpMuted: { fontSize: 14, color: C.nightLine, marginBottom: 10, fontStyle: 'italic' },
+  infoTip: { fontSize: 13, color: C.nightMuted, lineHeight: 20, marginBottom: 12 },
   tagsRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginBottom: 16 },
   tag: { borderRadius: 8, paddingHorizontal: 8, paddingVertical: 4 },
   tagTxt: { fontSize: 10 },
@@ -5026,7 +5026,7 @@ infoEn: {
   clearStar: { fontSize: 48 },
   clearTitle: { fontSize: 28, color: C.white, fontWeight: '200', letterSpacing: 4 },
   clearStnName: { fontSize: 11, color: C.lava, letterSpacing: 2 },
-  phraseCard: { backgroundColor: '#0e0e18', borderRadius: 12, padding: 14, width: '100%', borderWidth: 1, borderColor: '#1e1e3a' },
+  phraseCard: { backgroundColor: '#0e0e18', borderRadius: 12, padding: 14, width: '100%', borderWidth: 1, borderColor: C.night },
   phraseJp: { fontSize: 15, color: C.white, fontWeight: '300' },
   phraseZh: { fontSize: 11, color: '#4a4a7a', marginTop: 4 },
   unlockBtn: { marginTop: 8, borderWidth: 1, borderColor: C.lava, borderRadius: 20, paddingHorizontal: 32, paddingVertical: 12, width: '100%', alignItems: 'center' },
@@ -5055,7 +5055,7 @@ railBullet: {
 railTxt: {
   flex: 1,
   fontSize: 12,
-  color: '#5a5a7a',
+  color: C.nightMuted,
   lineHeight: 18,
 },
 stationSpotlight: {
@@ -5064,11 +5064,11 @@ stationSpotlight: {
   borderRadius: 12,
   padding: 12,
   borderWidth: 1,
-  borderColor: '#2a2a4a',
+  borderColor: C.nightLine,
 },
 stationSpotlightTxt: {
   fontSize: 12,
-  color: '#7a7aa0',
+  color: C.nightMutedLight,
   lineHeight: 19,
   textAlign: 'left',
 },
@@ -6636,7 +6636,7 @@ writeInfo: {
 
 writeAnchor: {
   fontSize: 18,
-  color: '#c97845',
+  color: C.clay,
   fontWeight: '700',
   marginBottom: 6,
   fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
@@ -6734,7 +6734,7 @@ specialRuleTitle: {
 specialRuleAnchor: {
   fontSize: 19,
   lineHeight: 25,
-  color: '#c97845',
+  color: C.clay,
   fontWeight: '800',
   marginBottom: 6,
   fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
@@ -6761,11 +6761,11 @@ loanwordRule: {
   fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 loanwordComboCard: {
-  backgroundColor: '#fffaf5',
+  backgroundColor: C.paperLight,
   borderRadius: 16,
   padding: 14,
   borderWidth: 1,
-  borderColor: '#eaded4',
+  borderColor: C.borderWarm,
   marginTop: 10,
 },
 loanwordSource: {
@@ -6790,7 +6790,7 @@ loanwordRuleLines: {
 loanwordRuleLine: {
   fontSize: 11,
   lineHeight: 15,
-  color: '#8f8379',
+  color: C.mutedWarm,
   fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 specialTipWrap: {
@@ -6861,7 +6861,7 @@ ruleItemCard: {
   paddingHorizontal: 8,
   borderRadius: 12,
   borderWidth: 1,
-  borderColor: '#eaded4',
+  borderColor: C.borderWarm,
   backgroundColor: '#fff8f2',
 },
 ruleItemCardCompact: {
@@ -6871,8 +6871,8 @@ ruleItemCardCompact: {
   paddingHorizontal: 8,
   borderRadius: 12,
   borderWidth: 1,
-  borderColor: '#eaded4',
-  backgroundColor: '#fffaf5',
+  borderColor: C.borderWarm,
+  backgroundColor: C.paperLight,
 },
 ruleItemPattern: {
   fontSize: 12,
@@ -6885,7 +6885,7 @@ ruleItemExample: {
   marginTop: 3,
   fontSize: 14,
   lineHeight: 18,
-  color: '#c97845',
+  color: C.clay,
   fontWeight: '800',
   fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
 },
@@ -6896,7 +6896,7 @@ ruleItemNote: {
   marginTop: 2,
   fontSize: 10,
   lineHeight: 14,
-  color: '#8f8379',
+  color: C.mutedWarm,
   fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 rhythmBox: {
@@ -6904,7 +6904,7 @@ rhythmBox: {
   borderRadius: 16,
   padding: 10,
   borderWidth: 1,
-  borderColor: '#eee7df',
+  borderColor: C.borderSoft,
   marginTop: 8,
 },
 rhythmGrid: {
@@ -6919,8 +6919,8 @@ rhythmCard: {
   paddingHorizontal: 9,
   borderRadius: 12,
   borderWidth: 1,
-  borderColor: '#eaded4',
-  backgroundColor: '#fffaf5',
+  borderColor: C.borderWarm,
+  backgroundColor: C.paperLight,
 },
 rhythmWord: {
   fontSize: 15,
@@ -6943,7 +6943,7 @@ rhythmZh: {
   marginTop: 3,
   fontSize: 11,
   lineHeight: 15,
-  color: '#8f8379',
+  color: C.mutedWarm,
   fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 specialCompareBox: {
@@ -6951,7 +6951,7 @@ specialCompareBox: {
   borderRadius: 16,
   padding: 9,
   borderWidth: 1,
-  borderColor: '#eee7df',
+  borderColor: C.borderSoft,
   marginTop: 8,
 },
 compareItem: {
@@ -7015,7 +7015,7 @@ compareWord: {
   fontFamily: Platform.OS === 'ios' ? 'Hiragino Mincho ProN' : 'serif',
 },
 specialKeyMarkText: {
-  color: '#c97845',
+  color: C.clay,
   fontWeight: '600',
 },
 compareRoma: {
@@ -7038,7 +7038,7 @@ compareNote: {
   marginTop: 4,
   fontSize: 11,
   lineHeight: 15,
-  color: '#8f8379',
+  color: C.mutedWarm,
   fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
 travelTipsBox: {
@@ -7046,7 +7046,7 @@ travelTipsBox: {
   borderRadius: 16,
   padding: 10,
   borderWidth: 1,
-  borderColor: '#eee7df',
+  borderColor: C.borderSoft,
   marginTop: 8,
 },
 travelTipsGrid: {
@@ -7060,8 +7060,8 @@ travelTipCard: {
   paddingHorizontal: 8,
   borderRadius: 12,
   borderWidth: 1,
-  borderColor: '#eaded4',
-  backgroundColor: '#fffaf5',
+  borderColor: C.borderWarm,
+  backgroundColor: C.paperLight,
 },
 travelTipWord: {
   fontSize: 14,
@@ -7089,7 +7089,7 @@ specialWordsBox: {
   borderRadius: 16,
   padding: 12,
   borderWidth: 1,
-  borderColor: '#eee7df',
+  borderColor: C.borderSoft,
   marginTop: 10,
 },
 lifeExamplesSub: {
@@ -7104,7 +7104,7 @@ specialFoldBlock: {
   borderRadius: 15,
   padding: 10,
   borderWidth: 1,
-  borderColor: '#eee7df',
+  borderColor: C.borderSoft,
   marginTop: 8,
 },
 specialFoldHead: {
@@ -7139,8 +7139,8 @@ beatPill: {
   paddingHorizontal: 5,
   borderRadius: 999,
   borderWidth: 1,
-  borderColor: '#eaded4',
-  backgroundColor: '#fffaf5',
+  borderColor: C.borderWarm,
+  backgroundColor: C.paperLight,
   alignItems: 'center',
   justifyContent: 'center',
 },
@@ -7188,7 +7188,7 @@ sourceLine: {
 },
 sourceKanji: {
   fontSize: 30,
-  color: '#c97845',
+  color: C.clay,
   fontWeight: '700',
 },
 sourceArrow: {
@@ -7212,7 +7212,7 @@ wordsBlock: {
   paddingHorizontal: 14,
   paddingVertical: 12,
   borderWidth: 1,
-  borderColor: '#eee7df',
+  borderColor: C.borderSoft,
   marginTop: 8,
 },
 wordsTitle: {
@@ -7255,7 +7255,7 @@ wordZh: {
   color: '#8F837A',
   fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
 },
-foldBlock: {  backgroundColor: '#fbfaf7',  borderRadius: 16,  borderWidth: 1,  borderColor: '#eee7df',  marginTop: 8,  overflow: 'hidden',},
+foldBlock: {  backgroundColor: '#fbfaf7',  borderRadius: 16,  borderWidth: 1,  borderColor: C.borderSoft,  marginTop: 8,  overflow: 'hidden',},
 foldHead: {
   flexDirection: 'row',
   alignItems: 'center',
@@ -7298,7 +7298,7 @@ exampleZh: {
     padding: 16,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: '#eee7df',
+    borderColor: C.borderSoft,
   },
   theoryTitle: { fontSize: 12, fontWeight: '700', color: '#a86b44', marginBottom: 8 },
   theoryTxt: { fontSize: 12, color: '#5a5048', lineHeight: 19 },
@@ -7415,7 +7415,7 @@ memoryBox: {
   borderRadius: 18,
   backgroundColor: '#FDFAF6',
   borderWidth: 1,
-  borderColor: '#eee7df',
+  borderColor: C.borderSoft,
   shadowColor: '#6b4a2f',
   shadowOpacity: 0.06,
   shadowRadius: 10,
@@ -7431,7 +7431,7 @@ memoryTxt: {
   flexDirection: 'row',
   alignItems: 'flex-start',
   gap: 8,
-  backgroundColor: '#fffaf0',
+  backgroundColor: C.paperWarm,
   borderRadius: 12,
   padding: 12,
   borderWidth: 1,
@@ -8289,7 +8289,7 @@ const ms = StyleSheet.create({
   hereBtnTxt: { color: C.white, fontSize: 14, fontWeight: '700' },
   eggLocked: { backgroundColor: C.tag, borderRadius: 10, padding: 10 },
   eggLockedTxt: { fontSize: 11, color: C.mutedLight },
-  eggBox: { backgroundColor: '#fffaf0', borderRadius: 12, padding: 12, borderWidth: 1, borderColor: '#f0e0b0' },
+  eggBox: { backgroundColor: C.paperWarm, borderRadius: 12, padding: 12, borderWidth: 1, borderColor: '#f0e0b0' },
   eggTitle: { fontSize: 10, fontWeight: '700', color: '#a07818', letterSpacing: 1, marginBottom: 4 },
   eggBody: { fontSize: 13, color: '#3a2a08', lineHeight: 20 },
   checkinDate: { fontSize: 11, color: C.muted, fontStyle: 'italic' },
@@ -8350,7 +8350,7 @@ const ms = StyleSheet.create({
   borderTopColor: C.border,
   padding: 15,
   gap: 12,
-  backgroundColor: '#fcfbf8',
+  backgroundColor: C.paperFaint,
 },
   photoWrap: { borderRadius: 12, overflow: 'hidden', position: 'relative' },
   photo: { width: '100%', height: 180, borderRadius: 12 },
@@ -8376,7 +8376,7 @@ const ms = StyleSheet.create({
   memorySubtle: { fontSize: 11, color: C.muted, lineHeight: 17 },
   memoryPattern: { fontSize: 12, color: C.lava, lineHeight: 18, fontWeight: '700' },
   memorySwapRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  memorySwapChip: { minWidth: 76, maxWidth: '100%', borderRadius: 9, backgroundColor: '#fcfbf8', paddingHorizontal: 9, paddingVertical: 7 },
+  memorySwapChip: { minWidth: 76, maxWidth: '100%', borderRadius: 9, backgroundColor: C.paperFaint, paddingHorizontal: 9, paddingVertical: 7 },
   memorySwapText: { fontSize: 11, fontWeight: '700', color: C.ink },
   memorySwapZh: { fontSize: 10, color: C.muted, marginTop: 2 },
   memoryReview: { fontSize: 12, color: C.ink, lineHeight: 18, fontWeight: '600' },
