@@ -1,7 +1,10 @@
 // 言 · 订单识别客户端
 // 把上传的订单/截图读成 base64,发给 Supabase Edge Function(服务端调 Claude vision),
 // 拿回结构化行程段。函数没部署 / 未登录时安全报错,不会崩。
-import * as FileSystem from 'expo-file-system';
+// ⚠️ 必须从 /legacy 导入。expo-file-system v19 的主入口把 readAsStringAsync
+// 换成了抛错桩(throw errorOnLegacyMethodUse),从主入口调用 100% 失败 ——
+// 订单识别和扫小票整条链路都断在这里。
+import * as FileSystem from 'expo-file-system/legacy';
 import { supabase } from './supabase';
 
 const toDataUrl = async (uri) => {
