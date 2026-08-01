@@ -2,7 +2,7 @@
 // 依赖:共享色板 theme、发音组件 Speech、分账同步库 tripLedger。
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  Alert, Image, Keyboard, Modal, Platform, Pressable, ScrollView,
+  Alert, Image, InputAccessoryView, Keyboard, Modal, Platform, Pressable, ScrollView,
   StyleSheet, Text, TextInput, TouchableOpacity, View,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -25,6 +25,9 @@ import { FX_CODES, getRates, rateOf } from '../../lib/fx';
 
 const TRIP_STORAGE_KEY = 'yan_trip_notebook_v1';
 // 远端账目是 uuid,本地未同步的是 expense-<时间戳>;用它区分「同步过的」和「还在本机的」
+// 数字键盘没有回车键,iOS 上收不起来。给所有金额输入配一条「完成」。
+const NUM_PAD_ID = 'yan-num-pad';
+
 const isUuid = (v) => typeof v === 'string' && /^[0-9a-f-]{36}$/i.test(v);
 const MONTH_NUM = { JAN: 1, FEB: 2, MAR: 3, APR: 4, MAY: 5, JUN: 6, JUL: 7, AUG: 8, SEP: 9, OCT: 10, NOV: 11, DEC: 12 };
 const MONTH_ABBR = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
@@ -210,6 +213,9 @@ function TripNotebook() {
   const [budgetDraft, setBudgetDraft] = useState('');
   const [fxRates, setFxRates] = useState(null);      // 结算合并用的参考汇率
   const [mergeOn, setMergeOn] = useState(false);     // 默认分币种(那是真相),合并是可选的便利
+  const [settleCur, setSettleCur] = useState(null);  // 结算折算成哪种货币;null = 按花得最多的自动选
+  const [settleCurOpen, setSettleCurOpen] = useState(false);
+  const [detailOpen, setDetailOpen] = useState(false);   // 每人的垫付/应承担明细,默认收起
   const [newMemberName, setNewMemberName] = useState('');
   const [expenses, setExpenses] = useState([]);
   const [expenseDraft, setExpenseDraft] = useState({
@@ -485,7 +491,20 @@ function TripNotebook() {
   // 分币种是真相(不会错),但会出现「他给你英镑、你给他里拉」这种来回倒。
   // 合并是可选的便利:把各币种净额按参考汇率折算到一种货币,再净额化一次。
   // 它是估算,不是账 —— 所以默认关着,开了要标明汇率日期。
-  const mergeTargetCode = FX_CODES[currency] || 'EUR';
+  // 折算目标默认取「花得最多」的币种 —— 那笔钱占比最大,折算误差影响最小;
+  // 但用户可以自己改(有人就是想统一看人民币)。不跟着记账币种走:
+  // 记账币种是「我此刻在花什么钱」,结算币种是「我们最后用什么算」,两回事。
+  const dominantCur = (() => {
+    const sum = {};
+    activeExpenses.forEach(item => {
+      const c = curOf(item);
+      sum[c] = (sum[c] || 0) + money(item.amount) * (rateOf(fxRates?.rates, FX_CODES[c], 'EUR') || 1);
+    });
+    const best = Object.entries(sum).sort((a, b) => b[1] - a[1])[0];
+    return best ? best[0] : currency;
+  })();
+  const mergeCurSym = settleCur || dominantCur;
+  const mergeTargetCode = FX_CODES[mergeCurSym] || 'EUR';
   const canMerge = multiCurrency && !!fxRates?.rates
     && currenciesIn(activeExpenses).every(c => FX_CODES[c] && rateOf(fxRates.rates, FX_CODES[c], mergeTargetCode) != null);
   const mergedGroup = (() => {
@@ -509,12 +528,12 @@ function TripNotebook() {
     let i = 0; let j = 0;
     while (i < creditors.length && j < debtors.length) {
       const pay = Math.min(creditors[i].v, debtors[j].v);
-      lines.push({ from: debtors[j].person, to: creditors[i].person, amount: pay, cur: currency });
+      lines.push({ from: debtors[j].person, to: creditors[i].person, amount: pay, cur: mergeCurSym });
       creditors[i].v -= pay; debtors[j].v -= pay;
       if (creditors[i].v < 0.01) i += 1;
       if (debtors[j].v < 0.01) j += 1;
     }
-    return { cur: currency, lines };
+    return { cur: mergeCurSym, lines };
   })();
   const fxDay = fxRates?.date
     ? `${Number(fxRates.date.slice(5, 7))}月${Number(fxRates.date.slice(8, 10))}日`
@@ -1509,6 +1528,7 @@ function TripNotebook() {
                         onChangeText={v => setBudgetDraft(clampMoney(v))}
                         placeholder={`${currency} 预算`}
                         keyboardType="decimal-pad"
+                        inputAccessoryViewID={NUM_PAD_ID}
                         placeholderTextColor={C.mutedLight}
                         autoFocus
                       />
@@ -1542,14 +1562,35 @@ function TripNotebook() {
               {settleOpen && (
                 <View style={tn.settlePanel}>
                   {canMerge && (
-                    <TouchableOpacity style={tn.mergeRow} onPress={() => setMergeOn(v => !v)} activeOpacity={0.7}>
-                      <Text style={tn.mergeTxt}>
-                        {mergeOn ? `已折算成 ${currency}` : `合并成 ${currency}`}
-                      </Text>
-                      <Text style={tn.mergeMeta}>
-                        {mergeOn ? `参考汇率 · ${fxDay} · 看分币种` : '省得来回倒'}
-                      </Text>
-                    </TouchableOpacity>
+                    <View>
+                      <View style={tn.mergeRow}>
+                        <TouchableOpacity onPress={() => setMergeOn(v => !v)} activeOpacity={0.7} style={{ flex: 1 }}>
+                          <Text style={tn.mergeTxt}>
+                            {mergeOn ? `已折算成 ${mergeCurSym}` : `合并成 ${mergeCurSym}`}
+                          </Text>
+                          <Text style={tn.mergeMeta}>
+                            {mergeOn ? `参考汇率 · ${fxDay}` : '省得来回倒'}
+                          </Text>
+                        </TouchableOpacity>
+                        {/* 折算成哪种货币由用户定 —— 有人想统一看人民币,有人看美元 */}
+                        <TouchableOpacity onPress={() => setSettleCurOpen(v => !v)} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+                          <Text style={tn.mergePick}>换</Text>
+                        </TouchableOpacity>
+                      </View>
+                      {settleCurOpen && (
+                        <View style={tn.curTray}>
+                          {CURRENCIES.filter(c => FX_CODES[c] && rateOf(fxRates?.rates, 'EUR', FX_CODES[c]) != null).map(c => (
+                            <TouchableOpacity
+                              key={c}
+                              style={[tn.curChip, mergeCurSym === c && tn.curChipAct]}
+                              onPress={() => { setSettleCur(c); setSettleCurOpen(false); setMergeOn(true); }}
+                            >
+                              <Text style={[tn.curTxt, mergeCurSym === c && tn.curTxtAct]}>{c}</Text>
+                            </TouchableOpacity>
+                          ))}
+                        </View>
+                      )}
+                    </View>
                   )}
                   {shownGroups.map(group => (
                     <View key={group.cur}>
@@ -1570,8 +1611,10 @@ function TripNotebook() {
                       {!group.lines.length && <Text style={tn.payNone}>这组扯平了</Text>}
                       <View style={tn.payRule} />
 
-                      {/* 下面是依据:每人垫付多少、该承担多少 */}
-                      {(group.rows || []).filter(r => r.paid > 0.005 || r.owed > 0.005).map(row => (
+                      {/* 下面是依据:每人垫付多少、该承担多少。
+                          默认收起 —— 要照着做的是上面的转账,这部分回答「为什么是这样」,
+                          账目多了会把结算页撑得很长。 */}
+                      {detailOpen && (group.rows || []).filter(r => r.paid > 0.005 || r.owed > 0.005).map(row => (
                         <View key={row.person} style={tn.settleRow}>
                           <View style={{ flex: 1 }}>
                             <Text style={tn.settleName}>{row.person}</Text>
@@ -1584,13 +1627,19 @@ function TripNotebook() {
                       ))}
                     </View>
                   ))}
+                  <TouchableOpacity style={tn.detailToggle} onPress={() => setDetailOpen(v => !v)} activeOpacity={0.7}>
+                    <Text style={tn.detailToggleTxt}>{detailOpen ? '收起明细' : '看每人明细'}</Text>
+                  </TouchableOpacity>
                   <TouchableOpacity style={tn.settleClear} onPress={settleExpenses} disabled={!activeExpenses.length}>
                     <Text style={[tn.settleClearTxt, !activeExpenses.length && tn.settleClearTxtOff]}>标记已还钱</Text>
                   </TouchableOpacity>
                 </View>
               )}
 
-              {/* ── 记一笔:主路径只有「金额 + 谁垫的」,其余收在「调整」里 ── */}
+              {/* ── 记一笔:主路径只有「金额 + 谁垫的」,其余收在「调整」里 ──
+                  看结算的时候整块藏起来:那一刻用户在对账,不在记账,
+                  而结算本身还要展开每人明细,再叠一个记账表单页面就没法看了。 */}
+              {!settleOpen && (
               <View style={tn.ledgerCard}>
                 <View style={tn.amountRow}>
                   <TouchableOpacity onPress={() => toggleOnly('cur', curOpen)} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
@@ -1602,6 +1651,7 @@ function TripNotebook() {
                     onChangeText={v => setExpenseDraft(prev => ({ ...prev, amount: clampMoney(v) }))}
                     placeholder="0.00"
                     keyboardType="decimal-pad"
+                    inputAccessoryViewID={NUM_PAD_ID}
                     placeholderTextColor={C.border}
                   />
                 </View>
@@ -1653,14 +1703,6 @@ function TripNotebook() {
 
                 {ledgerAdvanced && (
                   <View style={tn.advBox}>
-                    <Text style={tn.fieldK}>备注</Text>
-                    <TextInput
-                      style={tn.noteInput}
-                      value={expenseDraft.note}
-                      onChangeText={note => setExpenseDraft(prev => ({ ...prev, note }))}
-                      placeholder="可不填"
-                      placeholderTextColor={C.mutedLight}
-                    />
                     <Text style={tn.fieldK}>怎么分</Text>
                     <View style={tn.modeRow}>
                       {splitModes.map(mode => (
@@ -1704,6 +1746,7 @@ function TripNotebook() {
                               }))}
                               placeholder={`${currency}0.00`}
                               keyboardType="decimal-pad"
+                              inputAccessoryViewID={NUM_PAD_ID}
                               placeholderTextColor={C.mutedLight}
                             />
                           </View>
@@ -1773,6 +1816,7 @@ function TripNotebook() {
                             onChangeText={v => setExpenseDraft(prev => ({ ...prev, specialAmount: clampMoney(v), special: true }))}
                             placeholder="金额"
                             keyboardType="decimal-pad"
+                            inputAccessoryViewID={NUM_PAD_ID}
                             placeholderTextColor={C.mutedLight}
                           />
                         </View>
@@ -1791,6 +1835,15 @@ function TripNotebook() {
                         </TouchableOpacity>
                       ))}
                     </View>
+
+                    <Text style={tn.fieldK}>备注</Text>
+                    <TextInput
+                      style={tn.noteInput}
+                      value={expenseDraft.note}
+                      onChangeText={note => setExpenseDraft(prev => ({ ...prev, note }))}
+                      placeholder="可不填"
+                      placeholderTextColor={C.mutedLight}
+                    />
                   </View>
                 )}
 
@@ -1825,7 +1878,10 @@ function TripNotebook() {
                 </View>
               </View>
 
+              )}
+
               {/* ── 同行者 / 共享账本:一趟旅行只设一次,默认收起 ── */}
+              {!settleOpen && (<>
               <TouchableOpacity style={tn.setupRow} activeOpacity={0.8} onPress={() => toggleOnly('setup', ledgerSetupOpen)}>
                 <View style={{ flex: 1 }}>
                   <Text style={tn.setupTxt}>{isShared ? `共享账本 · 邀请码 ${ledgerCode}` : '同行者'}</Text>
@@ -1927,7 +1983,20 @@ function TripNotebook() {
                 </TouchableOpacity>
               )}
               {historyOpen && expenses.filter(item => item.settledAt).map(renderExpense)}
+              </>)}
             </ScrollView>
+
+            {/* 数字键盘的「完成」条。iOS 的 decimal-pad 没有回车键,
+                不给一个出口的话输入完金额就卡在键盘里出不来。 */}
+            {Platform.OS === 'ios' && (
+              <InputAccessoryView nativeID={NUM_PAD_ID}>
+                <View style={tn.numPadBar}>
+                  <TouchableOpacity onPress={() => Keyboard.dismiss()} hitSlop={{ top: 8, bottom: 8, left: 16, right: 16 }}>
+                    <Text style={tn.numPadDone}>完成</Text>
+                  </TouchableOpacity>
+                </View>
+              </InputAccessoryView>
+            )}
 
             {/* 分账里的汇率:结算前想换算一下的时候 */}
             {fxOpenLedger && (
@@ -2152,9 +2221,15 @@ const tn = StyleSheet.create({
   settleClearTxtOff: { color: C.mutedLight },
 
   // 金额:整个分账里唯一的大字,用衬线,和小本子的标题同一套语言
-  amountRow: { flexDirection: 'row', alignItems: 'baseline', gap: 8, paddingBottom: 4 },
-  curTap: { fontFamily: SERIF, fontSize: 22, color: C.muted },
-  amountInput: { flex: 1, fontFamily: SERIF, fontSize: 38, color: C.ink, padding: 0 },
+  amountRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingBottom: 4 },
+  curTap: { fontFamily: SERIF, fontSize: 22, color: C.muted, lineHeight: 44 },
+  amountInput: {
+    flex: 1, fontFamily: SERIF, fontSize: 38, color: C.ink,
+    // 显式给高度和行高:只靠 alignItems:'baseline' 时,大字号下 iOS 的
+    // placeholder 和真实文字不在同一条基线上,空着的时候 0.00 看起来是浮的。
+    height: 48, lineHeight: 44, padding: 0, paddingTop: 0, paddingBottom: 0,
+    textAlignVertical: 'center',
+  },
   curTray: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, paddingBottom: 4 },
 
   // 字段标题:teal 小字,和小本子的 eyebrow 同款
@@ -2205,6 +2280,14 @@ const tn = StyleSheet.create({
     marginTop: 12, paddingVertical: 11, paddingHorizontal: 12,
     borderWidth: 1, borderColor: C.border, borderRadius: 13,
   },
+  mergePick: { fontSize: 12, color: C.teal, fontWeight: '700', paddingLeft: 12 },
+  detailToggle: { paddingVertical: 12, alignItems: 'center', borderTopWidth: 1, borderTopColor: C.border },
+  detailToggleTxt: { fontSize: 11.5, color: C.teal },
+  numPadBar: {
+    backgroundColor: '#f6f6f6', borderTopWidth: 1, borderTopColor: C.border,
+    paddingVertical: 9, paddingHorizontal: 18, alignItems: 'flex-end',
+  },
+  numPadDone: { fontSize: 15, color: C.teal, fontWeight: '600' },
   historyTxt: { fontSize: 11.5, color: C.muted },
   historyChev: { fontSize: 15, color: C.mutedLight },
   expenseRowSettled: { opacity: 0.55 },
