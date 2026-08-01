@@ -43,6 +43,7 @@ const SYSTEM = `你是旅行订单解析器。用户会给你机票、火车票�
 - detail:把航班号/车次/时间/地址/确认号等原样保留,多行用 \\n 分隔。
 - family:从 flight/transit/hotel/dining/sights 里选最贴切的一个;酒店入住用 hotel,航班用 flight,火车/大巴用 transit。
 - 读不出的字段留空字符串,不要编造。
+- 最多输出 12 段。同一张票的往返算两段;重复信息不要拆成多段。
 输出形如:{"legs":[{"mon":"JUL","day":"16","title":"...","summary":"...","detail":"...","family":"transit"}]}`;
 
 // 通义千问 VL(阿里云百炼)· OpenAI 兼容接口。images 为 data URL,直接塞 image_url。
@@ -67,7 +68,9 @@ async function callQwen(images: string[], kind: string): Promise<any> {
       },
       body: JSON.stringify({
         model: QWEN_MODEL,
-        max_tokens: 2048,
+        // 真实截图文字多,模型要输出的行程段也多。2048 会把 JSON 从中间截断,
+        // 客户端拿到残缺 JSON 直接 parse 失败 —— 表现为「识别不了,退回原页面」。
+        max_tokens: 8192,
         response_format: { type: "json_object" },
         messages: [
           { role: "system", content: receipt ? SYSTEM_RECEIPT : SYSTEM },
@@ -81,7 +84,45 @@ async function callQwen(images: string[], kind: string): Promise<any> {
   const text = json.choices?.[0]?.message?.content || "{}";
   // 兼容模型偶尔用 ```json 包裹
   const cleaned = text.replace(/^```(?:json)?\s*/i, "").replace(/\s*```\s*$/i, "").trim();
-  return JSON.parse(cleaned);
+  try {
+    return JSON.parse(cleaned);
+  } catch (_) {
+    // 输出被截断时,JSON 从中间断开。与其整单失败,不如把已经完整的对象捞出来 ——
+    // 用户宁可拿到 3 段行程再手动补第 4 段,也不想看到「识别不了」。
+    const salvaged = salvageObjects(cleaned);
+    if (salvaged.length) return { legs: salvaged, truncated: true };
+    throw new Error("模型输出被截断且无法修复,请分批上传");
+  }
+}
+
+// 从残缺 JSON 里逐个抠出「花括号配平」的完整对象。
+// 用栈记录每个 { 的位置,每遇到配对的 } 就尝试解析那一段 ——
+// 不能只在最外层配平时才捞:行程段套在 {"legs":[...]} 里面,
+// 外层被截断时永远等不到它闭合,只看最外层会一段都捞不到。
+// 只做括号计数 + 字符串状态机,不引第三方库(Edge Function 要尽量轻)。
+function salvageObjects(text: string): any[] {
+  const out: any[] = [];
+  const stack: number[] = [];
+  let inStr = false, esc = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inStr) {
+      if (esc) esc = false;
+      else if (c === "\\") esc = true;
+      else if (c === '"') inStr = false;
+      continue;
+    }
+    if (c === '"') { inStr = true; continue; }
+    if (c === "{") stack.push(i);
+    else if (c === "}" && stack.length) {
+      const start = stack.pop()!;
+      try {
+        const obj = JSON.parse(text.slice(start, i + 1));
+        if (obj && typeof obj === "object" && obj.title) out.push(obj);
+      } catch (_) { /* 这一段坏了就跳过 */ }
+    }
+  }
+  return out;
 }
 
 Deno.serve(async (req) => {
@@ -101,6 +142,12 @@ Deno.serve(async (req) => {
     const out = kind === "receipt"
       ? await callQwen(images.slice(0, 1), "receipt")   // 小票一次一张
       : await callQwen(images.slice(0, 4), "itinerary");
+    // 兜底截断:模型偶尔无视「最多 12 段」的约束(比如截图里有几十行重复订单),
+    // 一路输出会把耗时拖到一分钟以上。客户端还要逐条确认,给再多也没用。
+    if (Array.isArray(out?.legs) && out.legs.length > 12) {
+      out.legs = out.legs.slice(0, 12);
+      out.capped = true;
+    }
     return new Response(JSON.stringify(out), { headers: { ...cors, "content-type": "application/json" } });
   } catch (e) {
     return new Response(JSON.stringify({ error: String(e?.message || e) }), {

@@ -192,6 +192,7 @@ function TripNotebook() {
   const [ledgerAdvanced, setLedgerAdvanced] = useState(false);
   const [ledgerSetupOpen, setLedgerSetupOpen] = useState(false);
   const [settleOpen, setSettleOpen] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);   // 已结清的账目默认收起
   const [curOpen, setCurOpen] = useState(false);
   const [ledgerMembers, setLedgerMembers] = useState([
     { name: '我', label: '我', status: '已加入', joined: true },
@@ -366,11 +367,14 @@ function TripNotebook() {
   // 一次只开一个:看账的时候不会同时在记账,反之亦然。
   // 两个折叠区同时展开时,要滚很久才够得到「记一笔」,像页面重复了一遍。
   const openOnly = (which) => {
+    // 每一个都按「是不是我」直接赋值。
+    // 之前写成「不是我就关掉」,结果目标自己永远不会被打开 ——
+    // 货币托盘因此点了没反应,记账时改不了币种。
     setSettleOpen(which === 'settle');
     setLedgerAdvanced(which === 'adv');
     setLedgerSetupOpen(which === 'setup');
-    if (which !== 'budget') setBudgetEditing(false);
-    if (which !== 'cur') setCurOpen(false);
+    setBudgetEditing(which === 'budget');
+    setCurOpen(which === 'cur');
   };
   const toggleOnly = (which, isOpen) => openOnly(isOpen ? null : which);
 
@@ -698,6 +702,47 @@ function TripNotebook() {
       } },
     ]);
   };
+
+  // 单条账目的渲染。未结清和已结清两个列表复用同一份,
+  // 免得改一处忘另一处 —— 这类重复正是「同一个信息说两遍」的来源。
+  const renderExpense = (item) => (
+    <View key={item.id} style={[tn.expenseRow, item.settledAt && tn.expenseRowSettled]}>
+      <View style={{ flex: 1 }}>
+        <View style={tn.expenseTitleRow}>
+          <Text style={tn.expenseTitle}>
+            {item.title && item.title !== item.category ? `${item.category} · ${item.title}` : item.category} · {fmtIn(money(item.amount), curOf(item))}
+          </Text>
+          {!!expenseDay(item) && <Text style={tn.expenseDay}>{expenseDay(item)}</Text>}
+        </View>
+        <Text style={tn.expenseMeta}>
+          {item.payer} 垫付 · {
+            Object.entries(item.shares || {})
+              .filter(([, v]) => money(v) > 0)
+              .map(([p, v]) => `${p} ${fmtIn(money(v), curOf(item))}`)
+              .join(' / ') || '未分配'
+          }
+          {item.specialItem?.label
+            ? ` · ${item.specialItem.owner} 的${item.specialItem.label}`
+            : ''}
+        </Text>
+        {/* 存量数据里那些自动生成的备注和上面重复,不再显示 */}
+        {!!item.note && !isDerivedNote(item) && (
+          <Text style={tn.expenseMeta}>{item.note}</Text>
+        )}
+        <View style={tn.expenseOps}>
+          <TouchableOpacity onPress={() => startExpenseEdit(item)}>
+            <Text style={tn.expenseOpTxt}>改</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => deleteExpense(item.id)}>
+            <Text style={[tn.expenseOpTxt, tn.deleteTxt]}>删</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      {item.settledAt
+        ? <Text style={tn.settledPill}>已结清</Text>
+        : (isSpecial(item) && <Text style={tn.specialPill}>单独</Text>)}
+    </View>
+  );
 
   const startEdit = (idx) => {
     const base = idx === null
@@ -1437,7 +1482,7 @@ function TripNotebook() {
                       ))}
                     </View>
                     <TouchableOpacity
-                      onPress={() => { setBudgetDraft(budget?.amount || ''); openOnly(budgetEditing ? null : 'budget'); setBudgetEditing(!budgetEditing); }}
+                      onPress={() => { setBudgetDraft(budget?.amount || ''); toggleOnly('budget', budgetEditing); }}
                       hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
                     >
                       <Text style={tn.meBudgetTxt}>
@@ -1864,50 +1909,24 @@ function TripNotebook() {
               {/* ── 账目 ── */}
               {expenses.length > 0 && (
                 <View style={tn.listHead}>
-                  <Text style={tn.listHeadTxt}>
-                    账目 {expenses.length} 笔{settledCount > 0 ? ` · ${settledCount} 笔已结清` : ''}
-                  </Text>
+                  <Text style={tn.listHeadTxt}>账目 {activeExpenses.length} 笔</Text>
                   {specialCount > 0 && <Text style={tn.ledgerBadge}>{specialCount} 笔单独付</Text>}
                 </View>
               )}
-              {expenses.map(item => (
-                <View key={item.id} style={[tn.expenseRow, item.settledAt && tn.expenseRowSettled]}>
-                  <View style={{ flex: 1 }}>
-                    <View style={tn.expenseTitleRow}>
-                      <Text style={tn.expenseTitle}>
-                        {item.title && item.title !== item.category ? `${item.category} · ${item.title}` : item.category} · {fmtIn(money(item.amount), curOf(item))}
-                      </Text>
-                      {!!expenseDay(item) && <Text style={tn.expenseDay}>{expenseDay(item)}</Text>}
-                    </View>
-                    <Text style={tn.expenseMeta}>
-                      {item.payer} 垫付 · {
-                        Object.entries(item.shares || {})
-                          .filter(([, v]) => money(v) > 0)
-                          .map(([p, v]) => `${p} ${fmtIn(money(v), curOf(item))}`)
-                          .join(' / ') || '未分配'
-                      }
-                      {item.specialItem?.label
-                        ? ` · ${item.specialItem.owner} 的${item.specialItem.label}`
-                        : ''}
-                    </Text>
-                    {/* 存量数据里那些自动生成的备注和上面重复,不再显示 */}
-                    {!!item.note && !isDerivedNote(item) && (
-                      <Text style={tn.expenseMeta}>{item.note}</Text>
-                    )}
-                    <View style={tn.expenseOps}>
-                      <TouchableOpacity onPress={() => startExpenseEdit(item)}>
-                        <Text style={tn.expenseOpTxt}>改</Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity onPress={() => deleteExpense(item.id)}>
-                        <Text style={[tn.expenseOpTxt, tn.deleteTxt]}>删</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                  {item.settledAt
-                    ? <Text style={tn.settledPill}>已结清</Text>
-                    : (isSpecial(item) && <Text style={tn.specialPill}>单独</Text>)}
-                </View>
-              ))}
+              {/* 未结清的照常列;已结清的收进下面的折叠区 ——
+                  账目会越攒越长,但结清过的只在想回头看时才需要。
+                  只是收起来,不是删掉:除非用户自己点「删」,账目永远留着。 */}
+              {activeExpenses.map(renderExpense)}
+
+              {/* 已结清的收进折叠区。账目会越攒越长,而结清过的只在想回头看时才需要。
+                  注意:只是收起来,不是删掉 —— 除非用户自己点「删」,账目永远留着。 */}
+              {settledCount > 0 && (
+                <TouchableOpacity style={tn.historyRow} activeOpacity={0.7} onPress={() => setHistoryOpen(v => !v)}>
+                  <Text style={tn.historyTxt}>已结清 {settledCount} 笔</Text>
+                  <Text style={tn.historyChev}>{historyOpen ? "−" : "+"}</Text>
+                </TouchableOpacity>
+              )}
+              {historyOpen && expenses.filter(item => item.settledAt).map(renderExpense)}
             </ScrollView>
 
             {/* 分账里的汇率:结算前想换算一下的时候 */}
@@ -2181,6 +2200,13 @@ const tn = StyleSheet.create({
 
   listHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 18, marginBottom: 2 },
   listHeadTxt: { fontSize: 11, color: C.muted, fontWeight: '700', letterSpacing: 0.5 },
+  historyRow: {
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
+    marginTop: 12, paddingVertical: 11, paddingHorizontal: 12,
+    borderWidth: 1, borderColor: C.border, borderRadius: 13,
+  },
+  historyTxt: { fontSize: 11.5, color: C.muted },
+  historyChev: { fontSize: 15, color: C.mutedLight },
   expenseRowSettled: { opacity: 0.55 },
   settledPill: {
     fontSize: 10, color: C.teal, backgroundColor: C.tealLight, borderRadius: 999,
