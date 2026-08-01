@@ -103,6 +103,22 @@ export async function deleteAccount() {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) return { ok: false, error: '当前没有登录' };
 
+    // 先删打卡照片,再删账号 —— 顺序不能反:
+    // Supabase 不允许在 SQL 里直接删 storage.objects(会报 42501),
+    // 只能走 Storage API;而账号一旦删掉,就再没有权限碰自己那些文件了,
+    // 照片会变成谁也删不掉的孤儿。
+    try {
+      const dir = session.user.id;
+      const { data: files } = await supabase.storage.from('checkin-photos').list(dir);
+      if (files?.length) {
+        await supabase.storage.from('checkin-photos')
+          .remove(files.map(f => `${dir}/${f.name}`));
+      }
+    } catch (e) {
+      // 照片删不掉不该挡住账号删除 —— 用户的诉求是「把我删掉」
+      console.warn('[Auth] remove photos failed:', e.message);
+    }
+
     const { error } = await supabase.rpc('delete_my_account');
     if (error) throw error;
 

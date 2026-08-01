@@ -44,10 +44,11 @@ begin
    where l.created_by = me
      and not exists (select 1 from ledger_members m where m.ledger_id = l.id);
 
-  -- 打卡照片(Storage 对象;文件路径是 <user_id>/<place_id>.jpg)
-  delete from storage.objects
-   where bucket_id = 'checkin-photos'
-     and (storage.foldername(name))[1] = me::text;
+  -- ⚠️ 打卡照片不在这里删。
+  -- Supabase 禁止在 SQL 里直接删 storage.objects:
+  --   "Direct deletion from storage tables is not allowed. Use the Storage API instead."
+  -- 加了这段会让整个函数报 42501,导致删除账号彻底失败。
+  -- 照片由客户端在调用本函数之前,通过 Storage API 删除(见 supabase.js 的 deleteAccount)。
 
   -- 最后删账号本体
   delete from auth.users where id = me;
