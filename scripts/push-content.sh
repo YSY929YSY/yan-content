@@ -71,6 +71,14 @@ fi
 git -C "$REPO_ROOT" checkout -B main origin/main
 cp "$TMP_JSON" "$REPO_ROOT/content.v2.json"
 git -C "$REPO_ROOT" add content.v2.json
+
+# 隐私政策也发到 main:App Store 要求一个可访问的隐私政策地址,
+# 它由 GitHub Pages 从 main 的仓库根目录提供
+# (https://ysy929ysy.github.io/yan-content/privacy.html)。
+if git -C "$REPO_ROOT" show develop/v2:yan-content/privacy.html > "$REPO_ROOT/privacy.html" 2>/dev/null; then
+  git -C "$REPO_ROOT" add privacy.html
+  echo "→ 同时发布 privacy.html"
+fi
 if git -C "$REPO_ROOT" diff --cached --quiet; then
   echo "→ 内容与线上完全一致，无需发布"
   exit 0
