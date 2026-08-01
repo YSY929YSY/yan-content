@@ -12,7 +12,7 @@ echo "→ 工作目录：$REPO_ROOT"
 mkdir -p reports
 
 echo ""
-echo "【1/4】Schema 校验..."
+echo "【1/5】Schema 校验..."
 if python3 tools/validate-schema.py > reports/schema-validation-report.md 2>&1; then
   SCHEMA_OK=1
   echo "  ✓ Schema 校验通过"
@@ -23,7 +23,7 @@ fi
 echo "  → reports/schema-validation-report.md"
 
 echo ""
-echo "【2/4】Fallback 同步检查..."
+echo "【2/5】Fallback 同步检查..."
 if diff -q yan-content/content.v2.json YanApp/assets/content.fallback.json > /dev/null 2>&1; then
   FALLBACK_OK=1
   echo "  ✓ fallback.json 同步"
@@ -34,12 +34,23 @@ else
 fi
 
 echo ""
-echo "【3/4】运行 wordBank 审计..."
+echo "【3/5】运行 wordBank 审计..."
 python3 tools/audit-wordbank-examples.py > reports/wordbank-audit-report.md
 echo "  → reports/wordbank-audit-report.md"
 
 echo ""
-echo "【4/4】运行 exampleRoma 候选报告..."
+echo "【4/5】打卡点内容审计..."
+if python3 tools/check-places.py > reports/places-report.md 2>&1; then
+  PLACES_OK=1
+  echo "  ✓ 打卡点内容通过"
+else
+  PLACES_OK=0
+  echo "  ✗ 打卡点内容有 Blocker（详见 reports/places-report.md）"
+fi
+echo "  → reports/places-report.md"
+
+echo ""
+echo "【5/5】运行 exampleRoma 候选报告..."
 python3 tools/generate-example-roma.py > reports/example-roma-report.md
 echo "  → reports/example-roma-report.md"
 
@@ -59,6 +70,12 @@ BLOCKER_DETAIL=()
 if [ "$SCHEMA_OK" -eq 0 ]; then
   BLOCKER_COUNT=$((BLOCKER_COUNT + 1))
   BLOCKER_DETAIL+=("Schema 校验失败")
+fi
+
+# 打卡点内容
+if [ "${PLACES_OK:-1}" -eq 0 ]; then
+  BLOCKER_COUNT=$((BLOCKER_COUNT + 1))
+  BLOCKER_DETAIL+=("打卡点内容有 Blocker")
 fi
 
 # Fallback sync
