@@ -16,7 +16,11 @@ const toDataUrl = async (uri) => {
 };
 
 
-// 小票:只取总额和币种,不猜谁点了什么(那个识别不可靠,而主场景本来就是均分)。
+// 小票:只取总额和币种。
+// ⚠️ 当前无调用方 —— 分账里的「扫小票」已移除:实测手输金额比
+// 「开相册 → 找图 → 等 OCR → 核对」更快,且不依赖网络。
+// 保留这个函数是因为 Edge Function 的 receipt 分支还在,
+// 以后做「拍实物看重点」会复用同一条通道。
 // uri → { total, currency, merchant } | { error }
 export async function parseReceipt(uri) {
   if (!supabase) return { error: 'offline' };

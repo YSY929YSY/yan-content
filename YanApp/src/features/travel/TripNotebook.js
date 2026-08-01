@@ -18,10 +18,10 @@ import {
   money, clampMoney, splitEven, specialAmountFor,
   buildShares as buildSharesFor, settleOne as settleOneFor,
 } from '../../lib/ledgerMath';
-import { parseItinerary, parseReceipt } from '../../lib/parseItinerary';
+import { parseItinerary } from '../../lib/parseItinerary';
 import { pushNotebook, pullNotebook, cloudIsNewer } from '../../lib/tripBackup';
 import FxPanel from './FxPanel';
-import { FX_CODES, FX_SYMBOLS, getRates, rateOf } from '../../lib/fx';
+import { FX_CODES, getRates, rateOf } from '../../lib/fx';
 
 const TRIP_STORAGE_KEY = 'yan_trip_notebook_v1';
 // 远端账目是 uuid,本地未同步的是 expense-<时间戳>;用它区分「同步过的」和「还在本机的」
@@ -204,7 +204,6 @@ function TripNotebook() {
   const [ledgerBusy, setLedgerBusy] = useState(false);
   const [myName, setMyName] = useState('我');
   const [myUid, setMyUid] = useState(null);   // 匿名身份 id,用来在共享账本里认出自己
-  const [receiptBusy, setReceiptBusy] = useState(false);
   const [budgets, setBudgets] = useState({});        // { 旅行册id: { amount, currency } }
   const [budgetEditing, setBudgetEditing] = useState(false);
   const [budgetDraft, setBudgetDraft] = useState('');
@@ -668,36 +667,6 @@ function TripNotebook() {
     });
     if (!result.canceled && result.assets?.[0]?.uri) {
       setUploads(prev => [{ id: `u${Date.now()}`, uri: result.assets[0].uri }, ...prev]);
-    }
-  };
-  // 拍/选一张小票 → 只读总额和币种,填进金额框。识别不准也不要紧,数字是可以直接改的。
-  const scanReceipt = async () => {
-    const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!perm.granted) {
-      Alert.alert('无法访问照片', '在系统设置里允许「言」访问照片后再试。', [{ text: '知道了' }]);
-      return;
-    }
-    const picked = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 0.7,
-    });
-    if (picked.canceled || !picked.assets?.[0]?.uri) return;
-    setReceiptBusy(true);
-    const { total, currency: cur, merchant, error } = await parseReceipt(picked.assets[0].uri);
-    setReceiptBusy(false);
-    if (error) {
-      Alert.alert('没读出来', error === 'offline' ? '需要联网。' : '换一张清楚点的,或者直接手填。', [{ text: '好' }]);
-      return;
-    }
-    const sym = FX_SYMBOLS[cur];
-    setExpenseDraft(prev => ({
-      ...prev,
-      amount: clampMoney(total),
-      note: prev.note || merchant || '',
-    }));
-    // 小票币种和账本不一致时只提醒,不擅自改账本货币
-    if (sym && sym !== currency) {
-      Alert.alert('币种对不上', `这张小票是 ${sym},当前账本是 ${currency}。金额已填,币种请自己确认。`, [{ text: '好' }]);
     }
   };
 
@@ -1800,9 +1769,6 @@ function TripNotebook() {
                   <Text style={tn.addExpenseTxt}>{expenseEditId ? '保存修改' : '记一笔'}</Text>
                 </TouchableOpacity>
                 <View style={tn.underActions}>
-                  <TouchableOpacity onPress={scanReceipt} disabled={receiptBusy}>
-                    <Text style={tn.quietLink}>{receiptBusy ? '识别中…' : '扫小票'}</Text>
-                  </TouchableOpacity>
                   <TouchableOpacity onPress={() => setFxOpenLedger(true)}>
                     <Text style={tn.quietLink}>汇率</Text>
                   </TouchableOpacity>
