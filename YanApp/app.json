@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "YanApp",
+    "name": "言",
     "slug": "YanApp",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -17,7 +17,7 @@
       "buildNumber": "1",
       "usesAppleSignIn": true,
       "infoPlist": {
-        "NSPhotoLibraryUsageDescription": "言需要访问照片图库，用于上传世界足迹打卡照片。",
+        "NSPhotoLibraryUsageDescription": "言需要访问照片图库,用于上传世界足迹打卡照片,以及识别你选择的机票/酒店订单截图来生成行程。",
         "ITSAppUsesNonExemptEncryption": false
       }
     },

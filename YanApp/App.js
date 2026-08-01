@@ -8,9 +8,11 @@
  * ─────────────────────────────────────────────
  */
 const CONTENT_URL = 'https://raw.githubusercontent.com/YSY929YSY/yan-content/main/content.v2.json';
+// 隐私政策:App Store Connect 提交时也要填同一个地址
+const PRIVACY_URL = 'https://ysy929ysy.github.io/yan-content/privacy.html';
 const SHOULD_FETCH_REMOTE_CONTENT = typeof __DEV__ === 'undefined' ? true : !__DEV__;
 
-import { ensureUser, signInWithApple, signOut } from './src/lib/supabase';
+import { ensureUser, signInWithApple, signOut, deleteAccount } from './src/lib/supabase';
 import {
   pushProgress,
   pullProgress,
@@ -36,6 +38,7 @@ import {
   ActivityIndicator, Alert, Animated, Dimensions, FlatList, Image, Modal,
   Platform, Pressable, SafeAreaView, ScrollView,
   StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View,
+  Linking,
 } from 'react-native';
 import Svg, { Circle, G, Path } from 'react-native-svg';
 
@@ -1503,7 +1506,7 @@ const tb = StyleSheet.create({
 // ─────────────────────────────────────────────
 // 🏠 Home Screen
 // ─────────────────────────────────────────────
-function HomeScreen({ setTab, setSceneState, setSubTab, content }) {
+function HomeScreen({ setTab, setSceneState, setSubTab, content, onDeleteAccount }) {
   const [fusionIdx, setFusionIdx] = useState(0);
   const [entryMode, setEntryMode] = useState('track');
   const [goalMode, setGoalMode] = useState('travel');
@@ -1701,11 +1704,37 @@ const recoItem3 =
           ))}
         </View>
       </View>
+
+      {/* 关于:数据来源署名(JMdict / Tatoeba 的授权都要求署名)、隐私政策、删除账号。
+          删除账号是 Apple 5.1.1(v) 的硬性要求,不做会直接拒审。 */}
+      <View style={hs.aboutBox}>
+        <Text style={hs.aboutTitle}>关于</Text>
+        <Text style={hs.aboutLine}>
+          词条的读音、词性与英文释义参考 <Text style={hs.aboutStrong}>JMdict</Text>(EDRDG,CC BY-SA 4.0);
+          部分例句来自 <Text style={hs.aboutStrong}>Tatoeba</Text>(CC BY 2.0 FR)。
+        </Text>
+        <View style={hs.aboutActions}>
+          <TouchableOpacity onPress={() => Linking.openURL(PRIVACY_URL).catch(() => {})}>
+            <Text style={hs.aboutLink}>隐私政策</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onDeleteAccount}>
+            <Text style={hs.aboutDanger}>删除账号</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
       <View style={{ height: 24 }} />
     </ScrollView>
   );
 }
 const hs = StyleSheet.create({
+  aboutBox: { marginTop: 4, paddingTop: 18, borderTopWidth: 1, borderTopColor: C.borderSoft },
+  aboutTitle: { fontSize: 11, color: C.muted, fontWeight: '700', letterSpacing: 1, marginBottom: 8 },
+  aboutLine: { fontSize: 11.5, color: C.mutedWarm, lineHeight: 18 },
+  aboutStrong: { color: C.ink, fontWeight: '600' },
+  aboutActions: { flexDirection: 'row', gap: 20, marginTop: 14 },
+  aboutLink: { fontSize: 12, color: C.teal, fontWeight: '600' },
+  aboutDanger: { fontSize: 12, color: C.lava },
   c: { padding: 18, paddingBottom: 40 },
 hero: { backgroundColor: C.ink, borderRadius: 22, padding: 22, marginBottom: 20, overflow: 'hidden', position: 'relative' },
   heroBg: { position: 'absolute', right: -8, top: -18, fontSize: 100, color: C.white, opacity: 0.05, lineHeight: 110 },
@@ -8431,6 +8460,35 @@ export default function App() {
 
   const isAnonymous = !user || user.is_anonymous;
 
+  // 删除账号不可逆,给两道确认 —— 第二道明说会删掉什么
+  const handleDeleteAccount = () => {
+    Alert.alert(
+      '删除账号',
+      '会删除你的学习进度、世界足迹、打卡照片和旅行本。共享账本里同行者的账不受影响。',
+      [
+        { text: '取消', style: 'cancel' },
+        {
+          text: '继续',
+          style: 'destructive',
+          onPress: () => Alert.alert('确认删除?', '此操作无法撤销。', [
+            { text: '取消', style: 'cancel' },
+            {
+              text: '删除',
+              style: 'destructive',
+              onPress: async () => {
+                const { ok, error } = await deleteAccount();
+                if (!ok) { Alert.alert('删除失败', error || '请稍后再试'); return; }
+                setUser(null);
+                setWelcomed(false);
+                Alert.alert('已删除', '你的数据已从言里移除。');
+              },
+            },
+          ]),
+        },
+      ],
+    );
+  };
+
   const handleAppleLogin = async () => {
     const { user: u, error: e } = await signInWithApple();
     if (e) { Alert.alert('登录失败', e); return; }
@@ -8472,7 +8530,7 @@ export default function App() {
       <StatusBar barStyle={isDark ? 'light-content' : 'dark-content'} backgroundColor={isDark ? C.ink : C.paper} />
       {error && <OfflineContentNotice />}
       {tab === 'home' && (
-        <HomeScreen setTab={setTab} setSubTab={setSubTab} setSceneState={setSceneState} content={content} />
+        <HomeScreen setTab={setTab} setSubTab={setSubTab} setSceneState={setSceneState} content={content} onDeleteAccount={handleDeleteAccount} />
       )}
       {tab === 'pie' && (
      <PieTab

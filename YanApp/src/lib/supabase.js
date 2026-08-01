@@ -88,6 +88,44 @@ export async function signInWithApple() {
   }
 }
 
+/**
+ * 删除账号 + 全部数据(Apple 5.1.1(v) 要求 App 内可删)。
+ *
+ * 服务端那步是 SECURITY DEFINER 的 delete_my_account():删 auth.users
+ * 需要提权,anon key 做不到;只删业务表而留下 auth 记录不算真删除。
+ *
+ * 本地存档也要一并清 —— 否则删完账号重开 App,旅行本和进度还在,
+ * 用户会以为没删干净。
+ */
+export async function deleteAccount() {
+  if (!supabase) return { ok: false, error: 'offline' };
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) return { ok: false, error: '当前没有登录' };
+
+    const { error } = await supabase.rpc('delete_my_account');
+    if (error) throw error;
+
+    // 服务端删完再清本地,顺序不能反:先清本地而服务端失败,
+    // 会变成「数据还在云端但本机看不到」,比什么都没删更糟。
+    await AsyncStorage.multiRemove([
+      'yan_trip_notebook_v1',
+      'yan_wordbank_progress',
+      'yan_world_footprint_photos',
+      'yan_world_footprint_visited_ids',
+      'yan_world_footprint_meta',
+      'yan_subway_unlocked_idx',
+      'yan_fx_v1',
+    ]).catch(() => {});
+
+    await supabase.auth.signOut().catch(() => {});
+    return { ok: true, error: null };
+  } catch (e) {
+    console.warn('[Auth] delete account failed:', e.message);
+    return { ok: false, error: e.message };
+  }
+}
+
 export async function signOut() {
   if (!supabase) return;
   await supabase.auth.signOut();
