@@ -2125,6 +2125,7 @@ function PieTab({ content, subTab, setSubTab, sceneState, setSceneState, practic
 
 {subTab === 'card' && sceneState && (
   <CardScreen
+    content={content}
     sceneState={sceneState}
     onBack={() => setSubTab('intro')}
     onFinish={() => {
@@ -2936,7 +2937,12 @@ starterTitle: {
 // ─────────────────────────────────────────────
 // Card Screen
 // ─────────────────────────────────────────────
-const WORD_CARDS = {
+// 内置副本:兜底用。
+// 深度词卡的权威来源是 content.json 的 wordCards —— 放在内容里才能热更新、不过审。
+// 这份留着是为了:① 首次启动还没拉到远端内容时有东西可看;
+// ② 万一远端内容缺了这个字段,不至于点进去白屏。
+// 新增/修改词卡请改 content.v2.json,不要改这里。
+const WORD_CARDS_BUILTIN = {
   order: {
     word: '注文', reading: 'ちゅうもん', jlpt: 'N4', sourceLabel: '餐厅点餐',
     coreMeaning: '点餐 · 下单',
@@ -3596,7 +3602,16 @@ function WordCardScreen({ card, onBack, onDone }) {
   );
 }
 
-function CardScreen({ sceneState, onBack, onFinish }) {
+// 深度词卡取值:content.json 里的 wordCards 优先,取不到才用内置副本。
+// 逐张合并而不是整体二选一 —— 这样内容里只写新增的几张,已有的 8 张不用重复搬。
+function resolveWordCards(content) {
+  const remote = content?.wordCards;
+  if (!remote || typeof remote !== 'object' || Array.isArray(remote)) return WORD_CARDS_BUILTIN;
+  return { ...WORD_CARDS_BUILTIN, ...remote };
+}
+
+function CardScreen({ sceneState, onBack, onFinish, content }) {
+  const WORD_CARDS = resolveWordCards(content);
   const { scene, index } = sceneState;
   const [cur, setCur] = useState(index);
   const [showScene, setShowScene] = useState(false);
