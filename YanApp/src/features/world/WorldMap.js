@@ -13,8 +13,8 @@
 //   多出来的细节是峡湾和小岛的锯齿,那个尺寸下反而显脏。
 //
 // 平面和地球仪共用这一套代码,区别只是投影函数(geoNaturalEarth1 / geoOrthographic)。
-import React, { useMemo, useState } from 'react';
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useMemo, useRef, useState } from 'react';
+import { Dimensions, PanResponder, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Svg, { Circle, Path } from 'react-native-svg';
 import { geoNaturalEarth1, geoOrthographic, geoPath, geoGraticule10, geoDistance } from 'd3-geo';
 import { feature } from 'topojson-client';
@@ -24,24 +24,88 @@ import { buildJourney } from '../../lib/journey';
 
 const LAND = feature(landTopo, landTopo.objects.land);
 
+// 双指间距。PanResponder 不直接给捏合手势,自己从 touches 里算。
+function pinchDistance(e) {
+  const t = e?.nativeEvent?.touches;
+  if (!t || t.length < 2) return 0;
+  return Math.hypot(t[0].pageX - t[1].pageX, t[0].pageY - t[1].pageY);
+}
+
 export default function WorldMap({
   points = [],          // [{ id, name, lat, lng, been, visitedOn }]
   showJourney = true,
   onSelect,
 }) {
   const [globe, setGlobe] = useState(false);
-  const [spin, setSpin] = useState(0);     // 地球仪的经度旋转
+  // 地球仪:经度(左右转)、纬度(上下转)、缩放
+  const [rot, setRot] = useState({ lam: 0, phi: -22 });
+  const [zoom, setZoom] = useState(1);
+  // 平面图:平移 + 缩放
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+
+  // PanResponder 只在首次渲染时创建一次,它的闭包会永远抓住那一刻的 state。
+  // 所以手势里要读的当前值必须走 ref,否则拖第二次就会从初始位置重新开始。
+  const rotRef = useRef(rot); rotRef.current = rot;
+  const panRef = useRef(pan); panRef.current = pan;
+  const zoomRef = useRef(zoom); zoomRef.current = zoom;
+  const globeRef = useRef(globe); globeRef.current = globe;
+
+  // 手势:用 RN 自带的 PanResponder,不引新依赖。
+  // 单指拖 = 转地球 / 平移地图;双指捏 = 缩放。
+  const gestureStart = useRef(null);
+  const responder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: (_e, g) => Math.abs(g.dx) > 2 || Math.abs(g.dy) > 2,
+      onPanResponderGrant: (e) => {
+        gestureStart.current = {
+          rot: rotRef.current, pan: panRef.current, zoom: zoomRef.current,
+          pinch: pinchDistance(e), globe: globeRef.current,
+        };
+      },
+      onPanResponderMove: (e, g) => {
+        const st = gestureStart.current;
+        if (!st) return;
+        const d = pinchDistance(e);
+        if (d && st.pinch) {
+          // 双指:缩放。范围留窄一点 —— 110m 数据放太大会看到锯齿。
+          const next = Math.min(Math.max(st.zoom * (d / st.pinch), 1), 4);
+          setZoom(next);
+          return;
+        }
+        if (st.globe) {
+          // 拖动转地球。0.35 是手感系数:1:1 会转得太快,像打滑。
+          setRot({
+            lam: st.rot.lam + g.dx * 0.35 / st.zoom,
+            phi: Math.max(Math.min(st.rot.phi - g.dy * 0.35 / st.zoom, 85), -85),
+          });
+        } else {
+          setPan({ x: st.pan.x + g.dx, y: st.pan.y + g.dy });
+        }
+      },
+      onPanResponderRelease: () => { gestureStart.current = null; },
+    }),
+  ).current;
 
   const W = Dimensions.get('window').width - 28;
   const H = globe ? W : W * 0.52;
 
   const geo = useMemo(() => {
-    const proj = globe
-      ? geoOrthographic().rotate([spin, -22]).fitExtent([[8, 8], [W - 8, H - 8]], { type: 'Sphere' })
-      : geoNaturalEarth1().fitExtent([[6, 6], [W - 6, H - 6]], LAND);
-    const path = geoPath(proj);
-    return { proj, path };
-  }, [globe, spin, W, H]);
+    let proj;
+    if (globe) {
+      proj = geoOrthographic()
+        .rotate([rot.lam, rot.phi])
+        .fitExtent([[8, 8], [W - 8, H - 8]], { type: 'Sphere' });
+      proj.scale(proj.scale() * zoom);
+      proj.translate([W / 2, H / 2]);
+    } else {
+      proj = geoNaturalEarth1().fitExtent([[6, 6], [W - 6, H - 6]], LAND);
+      proj.scale(proj.scale() * zoom);
+      const [tx, ty] = proj.translate();
+      proj.translate([tx + pan.x, ty + pan.y]);
+    }
+    return { proj, path: geoPath(proj) };
+  }, [globe, rot, zoom, pan, W, H]);
 
   const valid = points.filter(p => Number.isFinite(p?.lat) && Number.isFinite(p?.lng));
   const journey = useMemo(
@@ -74,6 +138,7 @@ export default function WorldMap({
         </View>
       </View>
 
+      <View {...responder.panHandlers}>
       <Svg width={W} height={H}>
         {globe && (
           <>
@@ -92,7 +157,7 @@ export default function WorldMap({
           if (!d) return null;
           return (
             <Path key={`leg-${i}`} d={d} fill="none" stroke={C.teal}
-              strokeWidth={1.1} strokeDasharray="3,2.5" opacity={0.7} />
+              strokeWidth={1.3 * Math.sqrt(zoom)} strokeDasharray="4,3" opacity={0.8} />
           );
         })}
 
@@ -100,26 +165,30 @@ export default function WorldMap({
           if (!onFront(p)) return null;
           const c = geo.proj([p.lng, p.lat]);
           if (!c) return null;
+          // 点随缩放略微变大 —— 放大本来就是为了看清,点还是原尺寸就白放了。
+          // 但不按缩放等比放大(那样会变成大色块),开方增长更耐看。
+          const k = Math.sqrt(zoom);
           return p.been ? (
             <React.Fragment key={p.id}>
-              <Circle cx={c[0]} cy={c[1]} r={4.4} fill={C.teal} opacity={0.15} />
-              <Circle cx={c[0]} cy={c[1]} r={2.4} fill={C.teal}
+              <Circle cx={c[0]} cy={c[1]} r={6 * k} fill={C.teal} opacity={0.14} />
+              <Circle cx={c[0]} cy={c[1]} r={3.2 * k} fill={C.teal}
                 onPress={() => onSelect?.(p)} />
             </React.Fragment>
           ) : (
-            <Circle key={p.id} cx={c[0]} cy={c[1]} r={2.1} fill="#fbfaf7"
-              stroke="#b7b1a4" strokeWidth={1} onPress={() => onSelect?.(p)} />
+            <Circle key={p.id} cx={c[0]} cy={c[1]} r={2.8 * k} fill="#fbfaf7"
+              stroke="#b0a99b" strokeWidth={1.1} onPress={() => onSelect?.(p)} />
           );
         })}
       </Svg>
+      </View>
 
-      {globe && (
+      {(zoom !== 1 || pan.x !== 0 || pan.y !== 0) && (
         <View style={s.spinRow}>
-          <TouchableOpacity onPress={() => setSpin(v => v + 45)} style={s.spinBtn}>
-            <Text style={s.spinTxt}>← 转</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setSpin(v => v - 45)} style={s.spinBtn}>
-            <Text style={s.spinTxt}>转 →</Text>
+          <TouchableOpacity
+            onPress={() => { setZoom(1); setPan({ x: 0, y: 0 }); setRot({ lam: 0, phi: -22 }); }}
+            style={s.spinBtn}
+          >
+            <Text style={s.spinTxt}>回到整体</Text>
           </TouchableOpacity>
         </View>
       )}

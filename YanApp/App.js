@@ -50,6 +50,7 @@ const WORLD_FOOTPRINT_PHOTOS_KEY = 'yan_world_footprint_photos';
 const WORLD_VISITED_IDS_KEY = 'yan_world_footprint_visited_ids';
 const WORLD_META_KEY = 'yan_world_footprint_meta';
 const SUBWAY_PROGRESS_KEY = 'yan_subway_unlocked_idx';
+const WORLD_CHECKIN_DATES_KEY = 'yan_world_checkin_dates';
 const WORLD_PHOTO_PATHS_KEY = 'yan_world_footprint_photo_paths';
 const showComingSoonAlert = () => {
   Alert.alert(
@@ -7641,6 +7642,15 @@ function NaTab({ mapPlaces: initialPlaces }) {
 
   useEffect(() => {
     let alive = true;
+    // 读回打卡日期(和 visitedIds 一起,它们是一对)
+    AsyncStorage.getItem(WORLD_CHECKIN_DATES_KEY).then(raw => {
+      if (!raw) return;
+      try {
+        const saved = JSON.parse(raw);
+        if (saved && typeof saved === 'object') setCheckinDates(prev => ({ ...saved, ...prev }));
+      } catch (e) { /* 坏了就当没有 */ }
+    }).catch(() => {});
+
     const loadVisitedIds = async () => {
       try {
         await AsyncStorage.setItem(WORLD_META_KEY, JSON.stringify({ storageVersion: 1 }));
@@ -7705,7 +7715,13 @@ function NaTab({ mapPlaces: initialPlaces }) {
         if (checkin.checkedInAt) cloudDates[checkin.placeId] = checkin.checkedInAt;
         if (checkin.note) cloudNotes[checkin.placeId] = checkin.note;
       });
-      if (Object.keys(cloudDates).length > 0) setCheckinDates(prev => ({ ...cloudDates, ...prev }));
+      if (Object.keys(cloudDates).length > 0) {
+        setCheckinDates(prev => {
+          const next = { ...cloudDates, ...prev };
+          AsyncStorage.setItem(WORLD_CHECKIN_DATES_KEY, JSON.stringify(next)).catch(() => {});
+          return next;
+        });
+      }
       if (Object.keys(cloudNotes).length > 0) setPlaceNotes(prev => ({ ...cloudNotes, ...prev }));
 
       if (cloudVisitedIds.length > 0) {
@@ -7750,7 +7766,13 @@ useEffect(() => {
 }, [typeF, statusF, places, sel, openMemoryId]);
   const doCheckIn = (place) => {
     const now = new Date().toISOString();
-    setCheckinDates(prev => ({ ...prev, [place.id]: now }));
+    // 必须落盘:只存在内存里的话,重开 App 日期就没了,
+    // 而旅迹要按日期排序 —— 没日期的点会被整个过滤掉,弧线就画不出来。
+    setCheckinDates(prev => {
+      const next = { ...prev, [place.id]: now };
+      AsyncStorage.setItem(WORLD_CHECKIN_DATES_KEY, JSON.stringify(next)).catch(() => {});
+      return next;
+    });
     setVisitedIds(prev => {
       if (prev.includes(place.id)) return prev;
       const next = [...prev, place.id];
