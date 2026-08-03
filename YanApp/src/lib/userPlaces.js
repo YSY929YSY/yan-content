@@ -47,7 +47,7 @@ export async function listUserPlaces() {
     const user = await uid();
     if (!user) return local;
     const { data, error } = await supabase.from(TABLE)
-      .select('id, name, city, country, lat, lng, note, created_at')
+      .select('id, name, city, country, lat, lng, note, visited_on, created_at')
       .eq('user_id', user)
       .is('deleted_at', null)
       .order('created_at', { ascending: false });
@@ -59,6 +59,7 @@ export async function listUserPlaces() {
       country: r.country || '',
       lat: r.lat, lng: r.lng,
       note: r.note || '',
+      visitedOn: r.visited_on || null,
       createdAt: r.created_at,
       remote: true,
     }));
@@ -76,7 +77,7 @@ export async function listUserPlaces() {
 }
 
 /** 加一个自定义地点。先落本机(离线即用),再尝试上云。 */
-export async function addUserPlace({ name, city = '', country = '', lat, lng, note = '' }) {
+export async function addUserPlace({ name, city = '', country = '', lat, lng, note = '', visitedOn = null }) {
   const clean = String(name || '').trim();
   if (!clean) return { place: null, error: '地名不能为空' };
 
@@ -86,6 +87,7 @@ export async function addUserPlace({ name, city = '', country = '', lat, lng, no
     lat: Number.isFinite(lat) ? lat : null,
     lng: Number.isFinite(lng) ? lng : null,
     note,
+    visitedOn: visitedOn || new Date().toISOString().slice(0, 10),
     createdAt: new Date().toISOString(),
   };
   const local = await readLocal();
@@ -100,6 +102,7 @@ export async function addUserPlace({ name, city = '', country = '', lat, lng, no
       name: clean, city: city || null, country: country || null,
       lat: item.lat, lng: item.lng,
       note: note || null,
+      visited_on: item.visitedOn,
       source: 'manual',
     }).select('id').single();
     if (error) throw error;

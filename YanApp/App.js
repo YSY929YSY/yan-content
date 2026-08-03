@@ -29,6 +29,7 @@ import fallbackContent from './assets/content.fallback.json';
 import { fetchContent } from './src/lib/contentCache';
 import { searchPlace } from './src/lib/geocode';
 import { listUserPlaces, addUserPlace, removeUserPlace } from './src/lib/userPlaces';
+import WorldMap from './src/features/world/WorldMap';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import * as Speech from 'expo-speech';
@@ -2435,6 +2436,18 @@ const wbs = StyleSheet.create({
 // Word Bank Screen
 // ─────────────────────────────────────────────
 const WORDBANK_PROGRESS_KEY = 'yan_wordbank_progress';
+
+// 用户可能敲 2026-07-15 / 2026/7/15 / 20260715,都归一成 YYYY-MM-DD。
+// 认不出来就返回空 —— 宁可用今天,也不要存一个解析不了的日期让旅迹算错。
+const normalizeDate = (v) => {
+  const t = String(v || '').trim();
+  if (!t) return '';
+  const m = t.match(/^(\d{4})\D?(\d{1,2})\D?(\d{1,2})$/);
+  if (!m) return '';
+  const [, y, mo, d] = m;
+  const iso = `${y}-${String(mo).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+  return Number.isFinite(Date.parse(iso)) ? iso : '';
+};
 
 // 词条是不是「机器起草、还没人工校对」。
 // 8298 条里 N5/N4 那 1343 条是精修的(例句 100%),N3 以上 6955 条全是 zh_drafted
@@ -7471,28 +7484,6 @@ memoryTxt: {
   soonSub: { fontSize: 11, color: C.mutedLight, marginTop: 4, textAlign: 'center' },
 });
 
-// ─────────────────────────────────────────────
-// 世界地图(点阵,Natural Earth 110m 4°网格烘焙)
-// 网格: 90列(lon -180..180) x 40行(lat 80..-80),每格4°
-// ─────────────────────────────────────────────
-const WORLD_DOT_GRID = '0:17,24,25,27,28,29,30,31,32,33,34,35,36,37,38,39,48,49,50;1:14,15,21,31,32,33,34,35,36,37,38,39,59,67,68,69,70,71,72;2:4,5,6,7,8,12,16,17,18,19,20,21,24,25,26,27,31,32,33,34,35,36,37,38,50,51,52,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84;3:0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,26,27,28,32,33,34,35,39,40,48,49,50,51,52,53,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89;4:4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,25,26,33,46,47,48,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88;5:11,12,13,14,15,16,17,18,19,20,21,26,27,28,48,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,84,85;6:12,13,14,15,16,17,18,19,20,21,22,23,25,26,27,28,29,30,44,47,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,84;7:13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79;8:14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,45,46,47,48,49,50,51,52,53,54,55,56,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78;9:14,15,16,17,18,19,20,21,22,23,24,25,26,27,43,44,45,48,50,51,53,55,56,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77;10:14,15,16,17,18,19,20,21,22,23,24,25,43,44,48,50,52,53,54,55,56,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,76;11:15,16,17,18,19,20,21,22,23,24,25,43,44,45,46,47,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,78;12:17,18,19,20,21,22,24,43,44,45,46,47,48,49,50,51,52,53,54,55,56,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74;13:18,19,20,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74;14:19,20,25,41,42,43,44,45,46,47,48,49,50,51,52,53,55,56,57,58,59,62,63,64,65,66,67,68,69,70,71,72;15:19,20,21,22,28,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,63,64,65,69,70,71,75;16:22,23,41,42,43,44,45,46,47,48,49,50,51,52,53,54,56,64,70,71,75;17:26,27,28,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,64,71;18:26,27,28,29,30,42,43,44,46,47,48,49,50,51,52,53,54,55,56,70;19:25,26,27,28,29,30,31,47,48,49,50,51,52,53,54,55,73;20:25,26,27,28,29,30,31,32,33,47,48,49,50,51,52,53,54,70,73,78,79;21:25,26,27,28,29,30,31,32,33,34,35,48,49,50,51,52,53,54,71,80,81,82;22:25,26,27,28,29,30,31,32,33,34,35,48,49,50,51,52,53,54,82;23:26,27,28,29,30,31,32,33,34,48,49,50,51,52,53,54,57,77,78,80;24:27,28,29,30,31,32,33,34,48,49,50,51,52,53,56,76,77,78,79,80,81,89;25:27,28,29,30,31,32,33,34,49,50,51,52,53,56,74,75,76,77,78,79,80,81,86;26:27,28,29,30,31,32,49,50,51,52,73,74,75,76,77,78,79,80,81,82;27:27,28,29,30,31,49,50,51,52,74,75,76,77,78,79,80,81,82;28:27,28,29,30,31,50,74,79,80,81,82;29:27,28,29,30,80,81,89;30:26,27,28,81,88;31:26,27,87;32:26,27;33:27;36:58,73;37:27,28,48,49,52,53,54,55,56,57,58,59,60,61,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84;38:16,19,20,21,22,23,24,25,26,27,28,29,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86;39:5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,33,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85';
-
-let _worldDotsPath = null;
-function worldDotsPath(cell) {
-  if (_worldDotsPath) return _worldDotsPath;
-  const parts = [];
-  const r = cell * 0.32;
-  WORLD_DOT_GRID.split(';').forEach(rowStr => {
-    const [row, colsStr] = rowStr.split(':');
-    const y = (parseInt(row, 10) + 0.5) * cell;
-    colsStr.split(',').forEach(col => {
-      const x = (parseInt(col, 10) + 0.5) * cell;
-      parts.push(`M${(x - r).toFixed(1)} ${y.toFixed(1)}a${r} ${r} 0 1 0 ${(r * 2).toFixed(1)} 0a${r} ${r} 0 1 0 ${(-r * 2).toFixed(1)} 0`);
-    });
-  });
-  _worldDotsPath = parts.join('');
-  return _worldDotsPath;
-}
 
 function geoToXY(geo, cell) {
   return {
@@ -7501,73 +7492,6 @@ function geoToXY(geo, cell) {
   };
 }
 
-function WorldMapView({ places, visitedIds, onSelectPlace }) {
-  const W = Dimensions.get('window').width - 28;
-  const cell = W / 90;
-  const H = cell * 40;
-  const visitedSet = new Set(visitedIds);
-  const withGeo = places.filter(p => p.geo);
-  const been = withGeo.filter(p => visitedSet.has(p.id));
-  const wish = withGeo.filter(p => !visitedSet.has(p.id));
-  const [focus, setFocus] = useState(null); // 点中的地点,先看名字再决定去不去
-  const pct = withGeo.length ? Math.round((been.length / withGeo.length) * 100) : 0;
-  return (
-    <View style={ms.mapWrap}>
-      {/* 点亮进度:让「又点亮一个」有累积感 */}
-      <View style={ms.mapProgress}>
-        <Text style={ms.mapProgressTxt}>已点亮 {been.length} / {withGeo.length} 个地方</Text>
-        <View style={ms.mapProgressTrack}>
-          <View style={[ms.mapProgressFill, { width: `${pct}%` }]} />
-        </View>
-      </View>
-      <Svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
-        <Path d={worldDotsPath(cell)} fill={C.ink} fillOpacity={0.13} />
-        {wish.map(p => {
-          const { x, y } = geoToXY(p.geo, cell);
-          return (
-            <G key={p.id} onPress={() => setFocus(p)}>
-              {/* 透明大圆扩大点击热区,肉眼看到的还是小点 */}
-              <Circle cx={x} cy={y} r={cell * 2.6} fill="transparent" />
-              <Circle cx={x} cy={y} r={cell * 0.55} fill={C.mutedLight} fillOpacity={0.85} />
-            </G>
-          );
-        })}
-        {been.map(p => {
-          const { x, y } = geoToXY(p.geo, cell);
-          return (
-            <G key={p.id} onPress={() => setFocus(p)}>
-              <Circle cx={x} cy={y} r={cell * 2.6} fill="transparent" />
-              <Circle cx={x} cy={y} r={cell * 1.5} fill={C.lava} fillOpacity={0.22} />
-              <Circle cx={x} cy={y} r={cell * 0.7} fill={C.lava} />
-              {focus?.id === p.id && <Circle cx={x} cy={y} r={cell * 2.2} fill="none" stroke={C.lava} strokeWidth={1} />}
-            </G>
-          );
-        })}
-      </Svg>
-      {focus && (
-        <TouchableOpacity style={ms.mapFocusCard} activeOpacity={0.88} onPress={() => { onSelectPlace?.(focus); setFocus(null); }}>
-          <Text style={{ fontSize: 20 }}>{focus.emoji}</Text>
-          <View style={{ flex: 1 }}>
-            <Text style={ms.mapFocusName}>{focus.name}</Text>
-            <Text style={ms.mapFocusLoc}>{focus.loc} · {visitedSet.has(focus.id) ? '已点亮' : '想去'}</Text>
-          </View>
-          <Text style={ms.mapFocusGo}>查看 →</Text>
-        </TouchableOpacity>
-      )}
-      <View style={ms.mapLegend}>
-        <View style={ms.mapLegendItem}>
-          <View style={[ms.mapLegendDot, { backgroundColor: C.lava }]} />
-          <Text style={ms.mapLegendTxt}>去过 {been.length}</Text>
-        </View>
-        <View style={ms.mapLegendItem}>
-          <View style={[ms.mapLegendDot, { backgroundColor: C.mutedLight }]} />
-          <Text style={ms.mapLegendTxt}>想去 {wish.length}</Text>
-        </View>
-      </View>
-      <Text style={ms.mapCaption}>去过的地方教会你语言，未去过的地方给你理由出发。</Text>
-    </View>
-  );
-}
 
 // ─────────────────────────────────────────────
 // 捺 Tab — 世界打卡
@@ -7596,6 +7520,9 @@ function NaTab({ mapPlaces: initialPlaces }) {
   const [addBusy, setAddBusy] = useState(false);
   const [addPicked, setAddPicked] = useState(null);
   const [addNote, setAddNote] = useState('');
+  // 到访日期:必须和「记录日期」分开 —— 旅行回来一次性补记 10 个地方,
+  // created_at 全是同一天,旅迹会算成「一天飞遍东南亚」。
+  const [addDate, setAddDate] = useState('');
   const { speak, speakingKey } = useSpeech();
 
   useEffect(() => { listUserPlaces().then(setMyPlaces).catch(() => {}); }, []);
@@ -7614,7 +7541,8 @@ function NaTab({ mapPlaces: initialPlaces }) {
   }, [addQuery]);
 
   const resetAdd = () => {
-    setAddOpen(false); setAddQuery(''); setAddHits([]); setAddPicked(null); setAddNote('');
+    setAddOpen(false); setAddQuery(''); setAddHits([]); setAddPicked(null);
+    setAddNote(''); setAddDate('');
   };
   const confirmAdd = async () => {
     const name = (addPicked?.name || addQuery).trim();
@@ -7626,6 +7554,7 @@ function NaTab({ mapPlaces: initialPlaces }) {
       lat: addPicked?.lat,
       lng: addPicked?.lng,
       note: addNote.trim(),
+      visitedOn: normalizeDate(addDate) || new Date().toISOString().slice(0, 10),
     });
     if (place) setMyPlaces(prev => [place, ...prev]);
     resetAdd();
@@ -7639,6 +7568,26 @@ function NaTab({ mapPlaces: initialPlaces }) {
       } },
     ]);
   };
+
+  // 地图上的点 = 精选点 + 自己记的点。
+  // 按坐标去重而不是按名字:「京都」「Kyoto」「京都市」是三个字符串、一个地方,
+  // 名字比不出来,5km 以内视为同一处。
+  const mapPoints = (() => {
+    const out = [];
+    const near = (a, b) => Math.abs(a.lat - b.lat) < 0.045 && Math.abs(a.lng - b.lng) < 0.045;
+    places.forEach(p => {
+      if (!p.geo) return;
+      out.push({ id: p.id, name: p.name, lat: p.geo.lat, lng: p.geo.lng,
+        been: visitedIds.includes(p.id), visitedOn: checkinDates[p.id] || null });
+    });
+    myPlaces.forEach(mp => {
+      if (!Number.isFinite(mp.lat) || !Number.isFinite(mp.lng)) return;
+      if (out.some(o => near(o, mp))) return;      // 和精选点重合就不重复画
+      out.push({ id: `my-${mp.id}`, name: mp.name, lat: mp.lat, lng: mp.lng,
+        been: true, visitedOn: mp.visitedOn || mp.createdAt, custom: true });
+    });
+    return out;
+  })();
 
   const shown = places.filter(
     p => (typeF === 'all' || p.type === typeF) && (statusF === 'all' || p.status === statusF)
@@ -8036,14 +7985,15 @@ useEffect(() => {
 
       {viewMode === 'world' && (
         <ScrollView contentContainerStyle={{ padding: 14 }} showsVerticalScrollIndicator={false}>
-          <WorldMapView
-            places={places}
-            visitedIds={visitedIds}
-            onSelectPlace={(place) => {
-              // 地图上点某个点 → 回列表,清筛选,直接展开那张地点卡
+          {/* 精选点和自己记的点画在同一张图上 —— 对用户来说都是「我的足迹」,
+              区别只在点开之后有没有言的注记。 */}
+          <WorldMap
+            points={mapPoints}
+            onSelect={(p) => {
+              if (p.custom) return;          // 自己记的点没有详情页,先不跳
               setTypeF('all');
               setStatusF('all');
-              setSel(place);
+              setSel(places.find(x => x.id === p.id) || null);
               setViewMode('list');
             }}
           />
@@ -8334,6 +8284,14 @@ useEffect(() => {
                 );
               })}
             </ScrollView>
+            <TextInput
+              style={ms.addNote}
+              value={addDate}
+              onChangeText={setAddDate}
+              placeholder={`什么时候去的,如 ${new Date().toISOString().slice(0, 10)}(留空=今天)`}
+              placeholderTextColor={C.mutedLight}
+              keyboardType="numbers-and-punctuation"
+            />
             <TextInput
               style={ms.addNote}
               value={addNote}
