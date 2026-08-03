@@ -27,6 +27,8 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 
 import fallbackContent from './assets/content.fallback.json';
 import { fetchContent } from './src/lib/contentCache';
+import { searchPlace } from './src/lib/geocode';
+import { listUserPlaces, addUserPlace, removeUserPlace } from './src/lib/userPlaces';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import * as Speech from 'expo-speech';
@@ -7585,7 +7587,58 @@ function NaTab({ mapPlaces: initialPlaces }) {
   const [noteDrafts, setNoteDrafts] = useState({});
   const [ceremony, setCeremony] = useState(null);
   const [viewMode, setViewMode] = useState('list');
+  // 自定义打卡:言收录的地点是有限的,用户去的地方是无限的。
+  // 把「能不能打卡」绑在「言有没有收录」上,等于让内容产量成为产品天花板。
+  const [myPlaces, setMyPlaces] = useState([]);
+  const [addOpen, setAddOpen] = useState(false);
+  const [addQuery, setAddQuery] = useState('');
+  const [addHits, setAddHits] = useState([]);
+  const [addBusy, setAddBusy] = useState(false);
+  const [addPicked, setAddPicked] = useState(null);
+  const [addNote, setAddNote] = useState('');
   const { speak, speakingKey } = useSpeech();
+
+  useEffect(() => { listUserPlaces().then(setMyPlaces).catch(() => {}); }, []);
+
+  // 搜地名。Nominatim 要求每秒最多 1 次,所以防抖 600ms,不是每敲一个字就发。
+  useEffect(() => {
+    const q = addQuery.trim();
+    if (q.length < 2) { setAddHits([]); return; }
+    setAddBusy(true);
+    const t = setTimeout(async () => {
+      const hits = await searchPlace(q);
+      setAddHits(hits);
+      setAddBusy(false);
+    }, 600);
+    return () => { clearTimeout(t); setAddBusy(false); };
+  }, [addQuery]);
+
+  const resetAdd = () => {
+    setAddOpen(false); setAddQuery(''); setAddHits([]); setAddPicked(null); setAddNote('');
+  };
+  const confirmAdd = async () => {
+    const name = (addPicked?.name || addQuery).trim();
+    if (!name) return;
+    const { place } = await addUserPlace({
+      name,
+      city: addPicked?.city || '',
+      country: addPicked?.country || '',
+      lat: addPicked?.lat,
+      lng: addPicked?.lng,
+      note: addNote.trim(),
+    });
+    if (place) setMyPlaces(prev => [place, ...prev]);
+    resetAdd();
+  };
+  const deleteMyPlace = (id, name) => {
+    Alert.alert('删掉这个地方?', name, [
+      { text: '取消', style: 'cancel' },
+      { text: '删除', style: 'destructive', onPress: async () => {
+        setMyPlaces(prev => prev.filter(p => p.id !== id));
+        await removeUserPlace(id);
+      } },
+    ]);
+  };
 
   const shown = places.filter(
     p => (typeF === 'all' || p.type === typeF) && (statusF === 'all' || p.status === statusF)
@@ -7828,13 +7881,6 @@ useEffect(() => {
         );
       }
     }
-  };
-  const showCustomPlaceNotice = () => {
-    Alert.alert(
-      '自定义地点即将开放',
-      '这一版可以先从推荐地点里标记想去或去过。',
-      [{ text: '知道了' }]
-    );
   };
   const renderMemoryCard = (place) => {
     const memory = place.memory;
@@ -8220,7 +8266,28 @@ useEffect(() => {
   </TouchableOpacity>
 ))}
 
-        <TouchableOpacity style={ms.addCard} onPress={showCustomPlaceNotice} activeOpacity={0.82}>
+        {/* 我自己记的地方:不依赖言的内容库,去哪都能记 */}
+        {myPlaces.length > 0 && (
+          <View style={ms.mineHead}>
+            <Text style={ms.mineHeadTxt}>我记的 {myPlaces.length} 个</Text>
+          </View>
+        )}
+        {myPlaces.map(mp => (
+          <View key={mp.id} style={ms.mineRow}>
+            <View style={{ flex: 1 }}>
+              <Text style={ms.mineName}>{mp.name}</Text>
+              {!!(mp.city || mp.country) && (
+                <Text style={ms.mineMeta}>{[mp.city, mp.country].filter(Boolean).join(' · ')}</Text>
+              )}
+              {!!mp.note && <Text style={ms.mineNote}>{mp.note}</Text>}
+            </View>
+            <TouchableOpacity onPress={() => deleteMyPlace(mp.id, mp.name)} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+              <Text style={ms.mineDel}>删</Text>
+            </TouchableOpacity>
+          </View>
+        ))}
+
+        <TouchableOpacity style={ms.addCard} onPress={() => setAddOpen(true)} activeOpacity={0.82}>
           <Text style={{ fontSize: 20, color: C.mutedLight }}>＋</Text>
           <Text style={ms.addTxt}>添加去过的地方</Text>
         </TouchableOpacity>
@@ -8228,6 +8295,62 @@ useEffect(() => {
         <View style={{ height: 24 }} />
       </ScrollView>
       )}
+
+      {/* 添加去过的地方。搜地名拿真实经纬度 ——
+          存坐标而不是只存地名,以后接真实地图时历史数据能直接落到正确位置。 */}
+      <Modal visible={addOpen} transparent animationType="slide" onRequestClose={resetAdd}>
+        <View style={ms.addLayer}>
+          <Pressable style={ms.addScrim} onPress={() => Keyboard.dismiss()} />
+          <View style={ms.addSheet}>
+            <View style={ms.addHead}>
+              <Text style={ms.addTitle}>去过哪里</Text>
+              <TouchableOpacity onPress={resetAdd}><Text style={ms.addClose}>×</Text></TouchableOpacity>
+            </View>
+            <TextInput
+              style={ms.addInput}
+              value={addQuery}
+              onChangeText={(v) => { setAddQuery(v); setAddPicked(null); }}
+              placeholder="地名,中英文都行"
+              placeholderTextColor={C.mutedLight}
+              autoFocus
+              returnKeyType="search"
+            />
+            {addBusy && <Text style={ms.addHint}>搜索中…</Text>}
+            {!addBusy && addQuery.trim().length >= 2 && addHits.length === 0 && (
+              <Text style={ms.addHint}>没搜到。也可以直接用这个名字记下来。</Text>
+            )}
+            <ScrollView style={{ maxHeight: 210 }} keyboardShouldPersistTaps="handled">
+              {addHits.map((h, i) => {
+                const on = addPicked?.display === h.display;
+                return (
+                  <TouchableOpacity
+                    key={`${h.display}-${i}`}
+                    style={[ms.addHit, on && ms.addHitOn]}
+                    onPress={() => { setAddPicked(h); Keyboard.dismiss(); }}
+                  >
+                    <Text style={ms.addHitName}>{h.name}</Text>
+                    <Text style={ms.addHitMeta} numberOfLines={1}>{h.display}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </ScrollView>
+            <TextInput
+              style={ms.addNote}
+              value={addNote}
+              onChangeText={setAddNote}
+              placeholder="记一笔,可不填"
+              placeholderTextColor={C.mutedLight}
+            />
+            <TouchableOpacity
+              style={[ms.addSave, !addQuery.trim() && ms.addSaveOff]}
+              onPress={confirmAdd}
+              disabled={!addQuery.trim()}
+            >
+              <Text style={ms.addSaveTxt}>记下来</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
 
       <TripNotebook />
 
@@ -8400,6 +8523,49 @@ const ms = StyleSheet.create({
   memoryTrace: { fontSize: 12, color: C.ink, lineHeight: 18, fontWeight: '600' },
   addCard: { backgroundColor: C.white, borderRadius: 15, padding: 18, borderWidth: 1.5, borderColor: C.border, borderStyle: 'dashed', alignItems: 'center', flexDirection: 'row', justifyContent: 'center', gap: 8 },
   addTxt: { fontSize: 13, color: C.mutedLight },
+  mineHead: { marginTop: 18, marginBottom: 6, paddingHorizontal: 2 },
+  mineHeadTxt: { fontSize: 11, color: C.muted, fontWeight: '700', letterSpacing: 0.5 },
+  mineRow: {
+    flexDirection: 'row', alignItems: 'center', gap: 10,
+    backgroundColor: C.white, borderWidth: 1, borderColor: C.border,
+    borderRadius: 13, padding: 12, marginBottom: 7,
+  },
+  mineName: { fontSize: 13.5, color: C.ink, fontWeight: '700' },
+  mineMeta: { fontSize: 11, color: C.muted, marginTop: 3 },
+  mineNote: { fontSize: 11.5, color: C.mutedWarm, marginTop: 5, lineHeight: 17 },
+  mineDel: { fontSize: 11.5, color: C.lava },
+
+  addLayer: { flex: 1, justifyContent: 'flex-end' },
+  addScrim: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(20,18,14,0.32)' },
+  addSheet: {
+    backgroundColor: '#fbfaf7', borderTopLeftRadius: 24, borderTopRightRadius: 24,
+    padding: 18, paddingBottom: 30,
+  },
+  addHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 },
+  addTitle: { fontSize: 16, color: C.ink, fontWeight: '700' },
+  addClose: { fontSize: 26, color: C.muted, lineHeight: 28 },
+  addInput: {
+    backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 12,
+    paddingHorizontal: 13, paddingVertical: 12, fontSize: 14, color: C.ink,
+  },
+  addHint: { fontSize: 11.5, color: C.muted, marginTop: 10, paddingHorizontal: 2 },
+  addHit: {
+    backgroundColor: C.white, borderWidth: 1, borderColor: C.border,
+    borderRadius: 11, padding: 11, marginTop: 8,
+  },
+  addHitOn: { borderColor: C.teal, backgroundColor: C.tealLight },
+  addHitName: { fontSize: 13.5, color: C.ink, fontWeight: '600' },
+  addHitMeta: { fontSize: 10.5, color: C.muted, marginTop: 3 },
+  addNote: {
+    marginTop: 14, backgroundColor: C.paper, borderRadius: 12,
+    paddingHorizontal: 13, paddingVertical: 12, fontSize: 13, color: C.ink,
+  },
+  addSave: {
+    marginTop: 14, backgroundColor: C.ink, borderRadius: 999,
+    paddingVertical: 13, alignItems: 'center',
+  },
+  addSaveOff: { opacity: 0.35 },
+  addSaveTxt: { fontSize: 13.5, color: C.white, fontWeight: '700' },
   globeHint: {
   backgroundColor: C.tag,
   borderRadius: 15,
