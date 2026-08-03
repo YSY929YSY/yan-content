@@ -9,7 +9,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "node --test --test-reporter=spec \"src/lib/__tests__/ledgerMath.test.mjs\" \"src/lib/__tests__/parsing.test.mjs\" \"src/lib/__tests__/syncRules.test.mjs\""
+    "test": "node --test --test-reporter=spec \"src/lib/__tests__/ledgerMath.test.mjs\" \"src/lib/__tests__/parsing.test.mjs\" \"src/lib/__tests__/syncRules.test.mjs\" \"src/lib/__tests__/journey.test.mjs\""
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
