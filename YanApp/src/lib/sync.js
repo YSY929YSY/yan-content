@@ -1,4 +1,7 @@
 import { supabase } from './supabase';
+import { reuploadUserPlaces } from './userPlaces';
+import { pushNotebook } from './tripBackup';
+import { K, readJson, writeJson, remove as removeKey } from './storage';
 
 const CHECKIN_PHOTO_BUCKET = 'checkin-photos';
 
@@ -78,7 +81,14 @@ export async function backfillProgress(progressMap, bookId = 'n5') {
   }
 }
 
-export async function backfillCheckins(visitedIds, notes = {}) {
+/**
+ * 补传精选地点打卡。
+ *
+ * 四份数据必须一起传:去过的 id、打卡日期、手账备注、照片路径。
+ * 以前只传了 id —— 登录后地点还在,日期和备注没了,而「旅迹」是靠日期画的,
+ * 用户看到的就是「登录之后我的旅行线消失了」。
+ */
+export async function backfillCheckins(visitedIds, { notes = {}, dates = {}, photoPaths = {} } = {}) {
   if (!supabase) return { count: 0, error: 'offline' };
   const ids = (visitedIds || []).filter(Boolean);
   if (!ids.length) return { count: 0, error: null };
@@ -91,6 +101,13 @@ export async function backfillCheckins(visitedIds, notes = {}) {
       place_id,
       status: 'been',
       note: notes[place_id] || null,
+      checked_in_at: dates[place_id] || null,
+      // 照片本身在旧账号的 Storage 目录下({旧 uid}/xxx.jpg),新账号按 RLS 读不到。
+      // 这里只保留能用的那些:路径以当前 uid 开头才传,否则留空等用户重新上传,
+      // 传一个必然 403 的路径只会让相册位显示成裂图。
+      photo_path: (photoPaths[place_id] || '').startsWith(`${user.id}/`)
+        ? photoPaths[place_id]
+        : null,
       updated_at: now,
     }));
     const { error } = await supabase.from('place_checkin')
@@ -102,6 +119,84 @@ export async function backfillCheckins(visitedIds, notes = {}) {
     console.warn('[Sync] backfill checkins failed:', e.message);
     return { count: 0, error: e.message };
   }
+}
+
+// ─────────────────────────────────────────────────────────────
+// 登录后的整体补传
+// ─────────────────────────────────────────────────────────────
+
+/**
+ * 登录后把本机数据整体补传到新账号 —— 一个入口,补齐全部,而不是想起哪个补哪个。
+ *
+ * 背景:Apple 登录走的是 signInWithIdToken,匿名 uid 被直接丢弃,云端挂在旧 uid
+ * 下的行全部成为孤儿。所以这次补传是**唯一**的迁移机会,漏掉的就是永久漏掉。
+ * 之前只补了单词进度和「去过的地点 id」,打卡日期、手账备注、自定义地点、
+ * 整本旅行册都没补 —— 用户的感受是「登录之后我的东西少了一半」。
+ *
+ * 每一项独立成败:一项失败不阻断其它项。任何一项失败都会留下 backfillPending 标记,
+ * 下次启动自动重试 —— 静默失败是这个流程里最贵的 bug,因为用户没有第二次登录机会。
+ * 全部成功才清标记。可以安全重复调用。
+ */
+export async function backfillAll() {
+  const results = [];
+  const run = async (domain, fn) => {
+    try {
+      const r = await fn();
+      results.push({ domain, count: r?.count ?? 0, error: r?.error || null });
+    } catch (e) {
+      results.push({ domain, count: 0, error: e?.message || 'unknown' });
+    }
+  };
+
+  await run('progress', async () => {
+    const progress = await readJson(K.wordbankProgress, null);
+    if (!progress || typeof progress !== 'object' || Array.isArray(progress)) {
+      return { count: 0, error: null };
+    }
+    return backfillProgress(progress);
+  });
+
+  await run('checkins', async () => {
+    const visited = await readJson(K.worldVisitedIds, null);
+    if (!Array.isArray(visited) || !visited.length) return { count: 0, error: null };
+    const [dates, notes, photoPaths] = await Promise.all([
+      readJson(K.worldCheckinDates, {}),
+      readJson(K.worldPlaceNotes, {}),
+      readJson(K.worldPhotoPaths, {}),
+    ]);
+    return backfillCheckins(visited, { dates, notes, photoPaths });
+  });
+
+  await run('userPlaces', () => reuploadUserPlaces());
+
+  await run('notebook', async () => {
+    const snap = await readJson(K.tripNotebook, null);
+    if (!snap || !Array.isArray(snap.books) || !snap.books.length) {
+      return { count: 0, error: null };
+    }
+    // uploads 是本机图片 uri,换机后无效,和 TripNotebook 里的备份口径保持一致
+    const { uploads: _skipPhotos, ...cloudSafe } = snap;
+    const r = await pushNotebook(cloudSafe, snap.rev);
+    return { count: r.ok ? snap.books.length : 0, error: r.ok ? null : r.error };
+  });
+
+  const failed = results.filter(r => r.error);
+  if (failed.length) {
+    await writeJson(K.backfillPending, {
+      at: new Date().toISOString(),
+      domains: failed.map(r => r.domain),
+    });
+  } else {
+    await removeKey(K.backfillPending);
+  }
+
+  console.log('[Sync] backfillAll', JSON.stringify(results));
+  return { ok: failed.length === 0, results, failed: failed.map(r => r.domain) };
+}
+
+/** 有没有没补完的?返回 null 表示没有待办。 */
+export async function pendingBackfill() {
+  return readJson(K.backfillPending, null);
 }
 
 export async function pullProgress() {

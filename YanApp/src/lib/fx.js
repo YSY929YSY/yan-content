@@ -5,11 +5,12 @@
 //  2. 欧央行只在工作日发布 —— 数据会缺周末,取序列时按"最近一个有值的日子"理解。
 //  3. 这是银行间中间价,不是你刷卡拿到的价 —— 展示层必须写清楚,别让用户以为能按这个数结算。
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { K } from './storage';
 import { FX_CODES, FX_SYMBOLS, FX_NAMES, rateOf, convert, seriesFor, fxDecimals, fmtFx } from './fxMath';
 
 export { FX_CODES, FX_SYMBOLS, FX_NAMES, rateOf, convert, seriesFor, fxDecimals, fmtFx };
 
-const FX_KEY = 'yan_fx_v1';
+const FX_KEY = K.fx;
 const API = 'https://api.frankfurter.dev/v1';
 const BASE = 'EUR';                 // 统一以 EUR 为轴,任意两币种走交叉汇率
 const FRESH_MS = 6 * 60 * 60 * 1000; // 6 小时内的缓存直接用,不再请求

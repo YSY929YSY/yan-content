@@ -13,10 +13,11 @@
 //   · 每秒最多 1 次请求 —— 所以调用方要防抖,不能每敲一个字就搜
 //   · 结果要缓存,别重复问同一个词
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { K } from './storage';
 
 const ENDPOINT = 'https://nominatim.openstreetmap.org/search';
 const UA = 'YanApp/1.0 (ysy929ysy@gmail.com)';
-const CACHE_KEY = 'yan_geocode_cache_v1';
+const CACHE_KEY = K.geocodeCache;
 const TIMEOUT_MS = 8000;
 const MAX_CACHE = 200;
 

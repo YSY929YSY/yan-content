@@ -13,9 +13,10 @@
 // 这一版只接 manual。
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { supabase } from './supabase';
+import { K } from './storage';
 
 const TABLE = 'user_places';
-const LOCAL_KEY = 'yan_user_places_v1';
+const LOCAL_KEY = K.userPlaces;
 
 async function uid() {
   if (!supabase) return null;
@@ -107,12 +108,66 @@ export async function addUserPlace({ name, city = '', country = '', lat, lng, no
     }).select('id').single();
     if (error) throw error;
     // 换成远端 uuid,避免下次合并时重复
+    // ownerUid 记的是「传给了哪个账号」,登录换 id 后 reuploadUserPlaces 靠它判断该补谁
     const list = await readLocal();
-    await writeLocal(list.map(p => (p.id === item.id ? { ...p, id: data.id, remote: true } : p)));
-    return { place: { ...item, id: data.id, remote: true }, error: null };
+    await writeLocal(list.map(p => (
+      p.id === item.id ? { ...p, id: data.id, remote: true, ownerUid: user } : p
+    )));
+    return { place: { ...item, id: data.id, remote: true, ownerUid: user }, error: null };
   } catch (e) {
     console.warn('[UserPlaces] add failed (kept locally):', e?.message);
     return { place: item, error: null };   // 本机已存,不算失败
+  }
+}
+
+/**
+ * 把本机自定义地点补传到当前账号。
+ *
+ * 为什么不能只传「没标 remote 的」:Apple 登录换了 user id,之前标了 remote 的
+ * 那些行挂在匿名账号下,新账号一行都看不到。对新账号来说,本机这份才是全部事实。
+ *
+ * 为什么要记 ownerUid:这里只能用 insert(本机 id 是 up-xxx,不是 uuid,
+ * 服务端才能生成主键),而 insert 天然不幂等 —— 失败重试一次就会多出一整份重复地点。
+ * 所以每条记下「已经传给哪个账号」,只补传归属不是当前账号的那些,
+ * 重试因此可以安全地重复运行。
+ */
+export async function reuploadUserPlaces() {
+  const local = await readLocal();
+  if (!local.length) return { count: 0, error: null };
+  if (!supabase) return { count: 0, error: 'offline' };
+  try {
+    const user = await uid();
+    if (!user) return { count: 0, error: 'no session' };
+
+    const pending = local.filter(p => p.ownerUid !== user);
+    if (!pending.length) return { count: 0, error: null };
+
+    const { data, error } = await supabase.from(TABLE).insert(
+      pending.map(p => ({
+        user_id: user,
+        name: p.name,
+        city: p.city || null,
+        country: p.country || null,
+        lat: Number.isFinite(p.lat) ? p.lat : null,
+        lng: Number.isFinite(p.lng) ? p.lng : null,
+        note: p.note || null,
+        visited_on: p.visitedOn || null,
+        source: 'manual',
+      }))
+    ).select('id');
+    if (error) throw error;
+
+    // 返回顺序和传入一致,按位置把远端 uuid 回填到对应的本机记录
+    const ids = (data || []).map(r => r.id);
+    const idFor = new Map(pending.map((p, i) => [p.id, ids[i]]));
+    await writeLocal(local.map(p => {
+      const newId = idFor.get(p.id);
+      return newId ? { ...p, id: newId, remote: true, ownerUid: user } : p;
+    }));
+    return { count: ids.length, error: null };
+  } catch (e) {
+    console.warn('[UserPlaces] reupload failed:', e?.message);
+    return { count: 0, error: e?.message || 'unknown' };
   }
 }
 

@@ -17,7 +17,6 @@
       "buildNumber": "1",
       "usesAppleSignIn": true,
       "infoPlist": {
-        "NSPhotoLibraryUsageDescription": "言需要访问照片图库,用于上传世界足迹打卡照片,以及识别你选择的机票/酒店订单截图来生成行程。",
         "ITSAppUsesNonExemptEncryption": false
       }
     },
@@ -38,7 +37,18 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "言需要访问照片图库，用于上传世界足迹打卡照片。"
+          "photosPermission": "言需要访问照片图库,用于:上传你选择的世界足迹打卡照片;识别你选择的机票/酒店订单截图来生成行程;读取你选择的旅行照片的拍摄时间与地点,自动补全足迹。",
+          "cameraPermission": false,
+          "microphonePermission": false
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "言需要访问照片图库,用于:上传你选择的世界足迹打卡照片;识别你选择的机票/酒店订单截图来生成行程;读取你选择的旅行照片的拍摄时间与地点,自动补全足迹。",
+          "savePhotosPermission": false,
+          "isAccessMediaLocationEnabled": true,
+          "granularPermissions": ["photo"]
         }
       ]
     ],

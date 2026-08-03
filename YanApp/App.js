@@ -16,22 +16,19 @@ import { ensureUser, signInWithApple, signOut, deleteAccount } from './src/lib/s
 import {
   pushProgress,
   pullProgress,
-  pullPlaceCheckins,
-  pushPlaceCheckin,
-  uploadPlaceCheckinPhoto,
-  backfillProgress,
-  backfillCheckins,
+  backfillAll,
+  pendingBackfill,
 } from './src/lib/sync';
+import { K, auditKeys } from './src/lib/storage';
+import { useWorldFootprint } from './src/features/world/useWorldFootprint';
 import * as AppleAuthentication from 'expo-apple-authentication';
 
 
 import fallbackContent from './assets/content.fallback.json';
 import { fetchContent } from './src/lib/contentCache';
 import { searchPlace } from './src/lib/geocode';
-import { listUserPlaces, addUserPlace, removeUserPlace } from './src/lib/userPlaces';
 import WorldMap from './src/features/world/WorldMap';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as ImagePicker from 'expo-image-picker';
 import * as Speech from 'expo-speech';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { C } from './src/theme';
@@ -46,12 +43,16 @@ import {
 import Svg, { Circle, G, Path } from 'react-native-svg';
 
 const { width: SW } = Dimensions.get('window');
-const WORLD_FOOTPRINT_PHOTOS_KEY = 'yan_world_footprint_photos';
-const WORLD_VISITED_IDS_KEY = 'yan_world_footprint_visited_ids';
-const WORLD_META_KEY = 'yan_world_footprint_meta';
-const SUBWAY_PROGRESS_KEY = 'yan_subway_unlocked_idx';
-const WORLD_CHECKIN_DATES_KEY = 'yan_world_checkin_dates';
-const WORLD_PHOTO_PATHS_KEY = 'yan_world_footprint_photo_paths';
+// 键值统一在 src/lib/storage.js 登记 —— 这里只做别名,不再手写字符串。
+// 世界足迹那几个键已经全部收进 useWorldFootprint,不再出现在 App.js。
+const SUBWAY_PROGRESS_KEY = K.subwayProgress;
+// 补传失败时说人话:用户不认识 checkins/userPlaces 这种域名
+const BACKFILL_LABEL = {
+  progress: '单词进度',
+  checkins: '打卡记录',
+  userPlaces: '自定义地点',
+  notebook: '旅行本',
+};
 const showComingSoonAlert = () => {
   Alert.alert(
     '即将开放',
@@ -2436,7 +2437,7 @@ const wbs = StyleSheet.create({
 // ─────────────────────────────────────────────
 // Word Bank Screen
 // ─────────────────────────────────────────────
-const WORDBANK_PROGRESS_KEY = 'yan_wordbank_progress';
+const WORDBANK_PROGRESS_KEY = K.wordbankProgress;
 
 // 用户可能敲 2026-07-15 / 2026/7/15 / 20260715,都归一成 YYYY-MM-DD。
 // 认不出来就返回空 —— 宁可用今天,也不要存一个解析不了的日期让旅迹算错。
@@ -7503,18 +7504,18 @@ function NaTab({ mapPlaces: initialPlaces }) {
   const [statusF, setStatusF] = useState('all');
   const [sel, setSel] = useState(null);
   const [openMemoryId, setOpenMemoryId] = useState(null);
-  const [places, setPlaces] = useState(initialPlaces.map(p => ({ ...p, status: 'wish' })));
-  const [visitedIds, setVisitedIds] = useState([]);
-  const [photoUris, setPhotoUris] = useState({});
-  const [photoPaths, setPhotoPaths] = useState({});
-  const [checkinDates, setCheckinDates] = useState({});
-  const [placeNotes, setPlaceNotes] = useState({});
   const [noteDrafts, setNoteDrafts] = useState({});
   const [ceremony, setCeremony] = useState(null);
   const [viewMode, setViewMode] = useState('list');
+  // 足迹的 6 份数据和它们的落盘规则都在 useWorldFootprint 里 ——
+  // 这里只留纯 UI 状态(筛选、展开、弹窗草稿)。
   // 自定义打卡:言收录的地点是有限的,用户去的地方是无限的。
   // 把「能不能打卡」绑在「言有没有收录」上,等于让内容产量成为产品天花板。
-  const [myPlaces, setMyPlaces] = useState([]);
+  const {
+    places, visitedIds, checkinDates, placeNotes, photoUris, myPlaces, mapPoints,
+    checkIn, saveNote: persistNote, toggleStatus: togglePlaceStatus, pickPhoto,
+    addPlace, removePlace,
+  } = useWorldFootprint(initialPlaces);
   const [addOpen, setAddOpen] = useState(false);
   const [addQuery, setAddQuery] = useState('');
   const [addHits, setAddHits] = useState([]);
@@ -7525,8 +7526,6 @@ function NaTab({ mapPlaces: initialPlaces }) {
   // created_at 全是同一天,旅迹会算成「一天飞遍东南亚」。
   const [addDate, setAddDate] = useState('');
   const { speak, speakingKey } = useSpeech();
-
-  useEffect(() => { listUserPlaces().then(setMyPlaces).catch(() => {}); }, []);
 
   // 搜地名。Nominatim 要求每秒最多 1 次,所以防抖 600ms,不是每敲一个字就发。
   useEffect(() => {
@@ -7548,7 +7547,7 @@ function NaTab({ mapPlaces: initialPlaces }) {
   const confirmAdd = async () => {
     const name = (addPicked?.name || addQuery).trim();
     if (!name) return;
-    const { place } = await addUserPlace({
+    await addPlace({
       name,
       city: addPicked?.city || '',
       country: addPicked?.country || '',
@@ -7557,38 +7556,14 @@ function NaTab({ mapPlaces: initialPlaces }) {
       note: addNote.trim(),
       visitedOn: normalizeDate(addDate) || new Date().toISOString().slice(0, 10),
     });
-    if (place) setMyPlaces(prev => [place, ...prev]);
     resetAdd();
   };
   const deleteMyPlace = (id, name) => {
     Alert.alert('删掉这个地方?', name, [
       { text: '取消', style: 'cancel' },
-      { text: '删除', style: 'destructive', onPress: async () => {
-        setMyPlaces(prev => prev.filter(p => p.id !== id));
-        await removeUserPlace(id);
-      } },
+      { text: '删除', style: 'destructive', onPress: () => removePlace(id) },
     ]);
   };
-
-  // 地图上的点 = 精选点 + 自己记的点。
-  // 按坐标去重而不是按名字:「京都」「Kyoto」「京都市」是三个字符串、一个地方,
-  // 名字比不出来,5km 以内视为同一处。
-  const mapPoints = (() => {
-    const out = [];
-    const near = (a, b) => Math.abs(a.lat - b.lat) < 0.045 && Math.abs(a.lng - b.lng) < 0.045;
-    places.forEach(p => {
-      if (!p.geo) return;
-      out.push({ id: p.id, name: p.name, lat: p.geo.lat, lng: p.geo.lng,
-        been: visitedIds.includes(p.id), visitedOn: checkinDates[p.id] || null });
-    });
-    myPlaces.forEach(mp => {
-      if (!Number.isFinite(mp.lat) || !Number.isFinite(mp.lng)) return;
-      if (out.some(o => near(o, mp))) return;      // 和精选点重合就不重复画
-      out.push({ id: `my-${mp.id}`, name: mp.name, lat: mp.lat, lng: mp.lng,
-        been: true, visitedOn: mp.visitedOn || mp.createdAt, custom: true });
-    });
-    return out;
-  })();
 
   const shown = places.filter(
     p => (typeF === 'all' || p.type === typeF) && (statusF === 'all' || p.status === statusF)
@@ -7618,143 +7593,6 @@ function NaTab({ mapPlaces: initialPlaces }) {
     { id: 'been', label: '去过', widthStyle: ms.fBtnShort },
     { id: 'wish', label: '想去', widthStyle: ms.fBtnShort },
   ];
-  useEffect(() => {
-    const visitedSet = new Set(visitedIds);
-    setPlaces(initialPlaces.map(place => ({
-      ...place,
-      status: visitedSet.has(place.id) ? 'been' : 'wish',
-    })));
-  }, [initialPlaces, visitedIds]);
-
-  // 存过的照片路径要读回来:签名 URL 一小时就过期,只有 path 能拿来重签
-  useEffect(() => {
-    let alive = true;
-    (async () => {
-      try {
-        const raw = await AsyncStorage.getItem(WORLD_PHOTO_PATHS_KEY);
-        if (!alive || !raw) return;
-        const saved = JSON.parse(raw);
-        if (saved && typeof saved === 'object') setPhotoPaths(prev => ({ ...saved, ...prev }));
-      } catch (e) { /* 读不到就等云端拉 */ }
-    })();
-    return () => { alive = false; };
-  }, []);
-
-  useEffect(() => {
-    let alive = true;
-    // 读回打卡日期(和 visitedIds 一起,它们是一对)
-    AsyncStorage.getItem(WORLD_CHECKIN_DATES_KEY).then(raw => {
-      if (!raw) return;
-      try {
-        const saved = JSON.parse(raw);
-        if (saved && typeof saved === 'object') setCheckinDates(prev => ({ ...saved, ...prev }));
-      } catch (e) { /* 坏了就当没有 */ }
-    }).catch(() => {});
-
-    const loadVisitedIds = async () => {
-      try {
-        await AsyncStorage.setItem(WORLD_META_KEY, JSON.stringify({ storageVersion: 1 }));
-        const raw = await AsyncStorage.getItem(WORLD_VISITED_IDS_KEY);
-        if (!alive || !raw) return;
-        const saved = JSON.parse(raw);
-        if (Array.isArray(saved)) {
-          // 只校验类型,不按当前内容过滤。
-          // 内容源临时少了地点(部署失误、远端和内置版本不一致)时,过滤会让这些
-          // 打卡先从内存消失,再被下一次落盘永久删掉 —— 一次内容失误抹掉真实旅行记录。
-          // 打卡记录归用户,能不能显示归内容,两件事分开。
-          setVisitedIds(saved.filter(id => typeof id === 'string'));
-        }
-      } catch (e) {
-        console.warn('[WorldFootprints] Failed to load visited places', e);
-      }
-    };
-    loadVisitedIds();
-    return () => {
-      alive = false;
-    };
-  }, [initialPlaces]);
-
-  useEffect(() => {
-    let alive = true;
-    const loadPhotoUris = async () => {
-      try {
-        const raw = await AsyncStorage.getItem(WORLD_FOOTPRINT_PHOTOS_KEY);
-        if (!alive || !raw) return;
-        const saved = JSON.parse(raw);
-        if (saved && typeof saved === 'object' && !Array.isArray(saved)) {
-          setPhotoUris(saved);
-        }
-      } catch (e) {
-        console.warn('[WorldFootprints] Failed to load photos', e);
-      }
-    };
-    loadPhotoUris();
-    return () => {
-      alive = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    let alive = true;
-    const loadCloudCheckins = async () => {
-      const cloud = await pullPlaceCheckins();
-      if (!alive || !cloud) return;
-
-      const validPlaceIds = new Set(initialPlaces.map(place => place.id));
-      const cloudVisitedIds = [];
-      const cloudPhotoUris = {};
-      const cloudPhotoPaths = {};
-
-      const cloudDates = {};
-      const cloudNotes = {};
-      Object.values(cloud).forEach(checkin => {
-        if (!validPlaceIds.has(checkin.placeId)) return;
-        if (checkin.status === 'been') cloudVisitedIds.push(checkin.placeId);
-        if (checkin.photoUri) cloudPhotoUris[checkin.placeId] = checkin.photoUri;
-        if (checkin.photoPath) cloudPhotoPaths[checkin.placeId] = checkin.photoPath;
-        if (checkin.checkedInAt) cloudDates[checkin.placeId] = checkin.checkedInAt;
-        if (checkin.note) cloudNotes[checkin.placeId] = checkin.note;
-      });
-      if (Object.keys(cloudDates).length > 0) {
-        setCheckinDates(prev => {
-          const next = { ...cloudDates, ...prev };
-          AsyncStorage.setItem(WORLD_CHECKIN_DATES_KEY, JSON.stringify(next)).catch(() => {});
-          return next;
-        });
-      }
-      if (Object.keys(cloudNotes).length > 0) setPlaceNotes(prev => ({ ...cloudNotes, ...prev }));
-
-      if (cloudVisitedIds.length > 0) {
-        setVisitedIds(prev => {
-          const next = Array.from(new Set([...prev, ...cloudVisitedIds]));
-          AsyncStorage.setItem(WORLD_VISITED_IDS_KEY, JSON.stringify(next)).catch(e => {
-            console.warn('[WorldFootprints] Failed to cache cloud visited places', e);
-          });
-          return next;
-        });
-      }
-
-      if (Object.keys(cloudPhotoUris).length > 0) {
-        // 云端来的是 1 小时有效的签名 URL —— 只放内存,不写缓存。
-        // 以前会连签名 URL 一起落盘,一小时后重开 App 全是裂图。
-        // 真正该持久化的是 photoPath(见下),用它每次现签。
-        setPhotoUris(prev => ({ ...prev, ...cloudPhotoUris }));
-      }
-
-      if (Object.keys(cloudPhotoPaths).length > 0) {
-        setPhotoPaths(prev => {
-          const next = { ...prev, ...cloudPhotoPaths };
-          AsyncStorage.setItem(WORLD_PHOTO_PATHS_KEY, JSON.stringify(next)).catch(() => {});
-          return next;
-        });
-      }
-    };
-
-    loadCloudCheckins();
-    return () => {
-      alive = false;
-    };
-  }, [initialPlaces]);
 
 useEffect(() => {
   if (sel && !shown.some(p => p.id === sel.id)) {
@@ -7764,95 +7602,13 @@ useEffect(() => {
     setOpenMemoryId(null);
   }
 }, [typeF, statusF, places, sel, openMemoryId]);
+  // 落盘规则都在 useWorldFootprint 里。这里只留「UI 的那一半」:
+  // 打卡完要放一下仪式动画,存备注要先从草稿里取出文字。
   const doCheckIn = (place) => {
-    const now = new Date().toISOString();
-    // 必须落盘:只存在内存里的话,重开 App 日期就没了,
-    // 而旅迹要按日期排序 —— 没日期的点会被整个过滤掉,弧线就画不出来。
-    setCheckinDates(prev => {
-      const next = { ...prev, [place.id]: now };
-      AsyncStorage.setItem(WORLD_CHECKIN_DATES_KEY, JSON.stringify(next)).catch(() => {});
-      return next;
-    });
-    setVisitedIds(prev => {
-      if (prev.includes(place.id)) return prev;
-      const next = [...prev, place.id];
-      AsyncStorage.setItem(WORLD_VISITED_IDS_KEY, JSON.stringify(next)).catch(() => {});
-      return next;
-    });
+    checkIn(place);
     setCeremony(place);
-    pushPlaceCheckin(place.id, 'been', {
-      photoPath: photoPaths[place.id],
-      checkedInAt: now,
-    }).catch(e => console.warn('[WorldFootprints] check-in sync failed', e));
   };
-
-  const saveNote = (placeId) => {
-    const draft = (noteDrafts[placeId] ?? '').trim();
-    setPlaceNotes(prev => ({ ...prev, [placeId]: draft }));
-    pushPlaceCheckin(placeId, 'been', { note: draft }).catch(e =>
-      console.warn('[WorldFootprints] note sync failed', e));
-  };
-
-  const togglePlaceStatus = (placeId) => {
-    const nextStatus = visitedIds.includes(placeId) ? 'wish' : 'been';
-    setVisitedIds(prev => {
-      const next = prev.includes(placeId)
-        ? prev.filter(id => id !== placeId)
-        : [...prev, placeId];
-      AsyncStorage.setItem(WORLD_VISITED_IDS_KEY, JSON.stringify(next)).catch(e => {
-        console.warn('[WorldFootprints] Failed to save visited places', e);
-      });
-      AsyncStorage.setItem(WORLD_META_KEY, JSON.stringify({ storageVersion: 1 })).catch(e => {
-        console.warn('[WorldFootprints] Failed to save storage meta', e);
-      });
-      return next;
-    });
-    pushPlaceCheckin(placeId, nextStatus, { photoPath: photoPaths[placeId] }).catch(e => {
-      console.warn('[WorldFootprints] Failed to sync place status', e);
-    });
-  };
-
-  const pickPhoto = async (placeId) => {
-    const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!perm.granted) {
-      Alert.alert(
-        '无法访问照片',
-        '你可以在系统设置中允许“言”访问照片后，再上传打卡照片。',
-        [{ text: '知道了' }]
-      );
-      return;
-    }
-
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-    });
-
-    if (!result.canceled && result.assets?.[0]?.uri) {
-      const asset = result.assets[0];
-      const photoUri = asset.uri;
-      setPhotoUris(prev => {
-        const next = { ...prev, [placeId]: photoUri };
-        AsyncStorage.setItem(WORLD_FOOTPRINT_PHOTOS_KEY, JSON.stringify(next)).catch(e => {
-          console.warn('[WorldFootprints] Failed to save photo', e);
-        });
-        return next;
-      });
-
-      const upload = await uploadPlaceCheckinPhoto(placeId, photoUri, asset.mimeType || 'image/jpeg');
-      if (upload?.photoPath) {
-        setPhotoPaths(prev => {
-          const next = { ...prev, [placeId]: upload.photoPath };
-          AsyncStorage.setItem(WORLD_PHOTO_PATHS_KEY, JSON.stringify(next)).catch(() => {});
-          return next;
-        });
-        await pushPlaceCheckin(
-          placeId,
-          visitedIds.includes(placeId) ? 'been' : 'wish',
-          { photoPath: upload.photoPath }
-        );
-      }
-    }
-  };
+  const saveNote = (placeId) => persistNote(placeId, noteDrafts[placeId] ?? '');
   const renderMemoryCard = (place) => {
     const memory = place.memory;
     if (!memory) return null;
@@ -8590,6 +8346,9 @@ export default function App() {
   const { content, loading, error, reload } = useContent();
 
   useEffect(() => { ensureUser().then(u => { if (u) setUser(u); }); }, []);
+  // 开发期体检:有没有加了存储键却忘了在 storage.js 登记的。
+  // 忘了登记 = 删号清不掉、登录不补传,而这两件事都要等用户投诉才会发现。
+  useEffect(() => { auditKeys(); }, []);
 
   const isAnonymous = !user || user.is_anonymous;
 
@@ -8622,6 +8381,24 @@ export default function App() {
     );
   };
 
+  // 补传失败必须让用户看见并能重试。
+  // Apple 登录换了 user id,匿名 uid 被丢弃 —— 这是唯一一次迁移机会,
+  // 失败了只在 console 里 warn 一句,用户永远等不到第二次登录。
+  const runBackfill = async ({ silent = false } = {}) => {
+    const { ok, failed } = await backfillAll();
+    if (ok || silent) return ok;
+    Alert.alert(
+      '部分数据还没同步',
+      `${failed.map(d => BACKFILL_LABEL[d] || d).join('、')}没能传到新账号。` +
+      '本机数据没有丢,可以现在重试,或下次打开言时自动再试一次。',
+      [
+        { text: '稍后', style: 'cancel' },
+        { text: '重试', onPress: () => runBackfill({ silent: false }) },
+      ],
+    );
+    return false;
+  };
+
   const handleAppleLogin = async () => {
     const { user: u, error: e } = await signInWithApple();
     if (e) { Alert.alert('登录失败', e); return; }
@@ -8630,19 +8407,21 @@ export default function App() {
     setWelcomed(true);
     // Apple 登录换了 user id,之前匿名攒的云端行在新账号下是空的。
     // 本机 AsyncStorage 是这台设备的完整事实 —— 整体补传一次,新账号才算完整。
-    try {
-      const rawProgress = await AsyncStorage.getItem(WORDBANK_PROGRESS_KEY);
-      const progress = rawProgress ? JSON.parse(rawProgress) : null;
-      if (progress && typeof progress === 'object' && !Array.isArray(progress)) {
-        await backfillProgress(progress);
-      }
-      const rawVisited = await AsyncStorage.getItem(WORLD_VISITED_IDS_KEY);
-      const visited = rawVisited ? JSON.parse(rawVisited) : null;
-      if (Array.isArray(visited) && visited.length) await backfillCheckins(visited);
-    } catch (err) {
-      console.warn('[Auth] backfill after login failed', err);
-    }
+    await runBackfill();
   };
+
+  // 上次补传没做完就接着做。静默重试:用户已经被提示过一次,
+  // 每次启动再弹一遍只会让人学会忽略它。
+  useEffect(() => {
+    if (!user || user.is_anonymous) return;
+    let alive = true;
+    (async () => {
+      const pending = await pendingBackfill();
+      if (!alive || !pending) return;
+      await runBackfill({ silent: true });
+    })();
+    return () => { alive = false; };
+  }, [user]);
 
   const isDark = tab === 'pie' && (subTab === 'subway');
 

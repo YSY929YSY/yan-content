@@ -25,6 +25,7 @@ begin
   -- 业务数据
   delete from word_progress   where user_id = me;
   delete from place_checkin   where user_id = me;
+  delete from user_places     where user_id = me;
   delete from trip_notebooks  where user_id = me;
   delete from profiles        where id = me;
 

@@ -1,0 +1,189 @@
+// 言 · 本地存储登记处
+//
+// 为什么需要它:在这之前,12 个存储键散在 6 个文件里,每个功能自己发明一个键,
+// 没有任何地方知道「一共有哪些键、哪些是用户数据、删号该清哪些、登录该补传哪些」。
+// 代价不是理论上的,是已经发生过三次的真实 bug:
+//
+//   1. 删号时手写清单,漏了 5 个键 —— App 里写着「删除全部数据」,实际没删。
+//   2. 打卡日期落了盘、手账备注没落 —— 断网写的备注重开就没了。
+//   3. 登录补传只补了 2 类数据,漏了 4 类 —— 而登录后匿名 uid 被丢弃,没有第二次机会。
+//
+// 三次都是同一个原因:靠写代码的人记得。这个文件把「记得」换成「登记」——
+// 加新键必须在这里登记,否则 auditKeys() 会在开发时报出来。
+//
+// 注意:登记的是**言自己的**键,一律 yan_ 前缀。Supabase 的会话存在 sb-* 下,
+// 不归这里管(删号时单独 signOut)。
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+/**
+ * kind 决定这份数据在两个关键流程里的命运:
+ *
+ *   user   用户产生的、丢了不可再生的数据。删号要清,登录换账号要补传。
+ *   cache  可以重新拉回来的。删号要清(不清会让下一个账号看到上一个人的残留),
+ *          但不需要补传 —— 补传一份能重新下载的东西没有意义。
+ *   device 这台设备的偏好/进度,不跟账号走。删号清,不补传。
+ *
+ * backfill 标的是 backfillAll() 里对应的域名,null 表示不参与补传。
+ */
+const REGISTRY = {
+  wordbankProgress: {
+    key: 'yan_wordbank_progress', kind: 'user', backfill: 'progress',
+    desc: '单词学习进度',
+  },
+  worldVisitedIds: {
+    key: 'yan_world_footprint_visited_ids', kind: 'user', backfill: 'checkins',
+    desc: '精选地点:去过的 id',
+  },
+  worldCheckinDates: {
+    key: 'yan_world_checkin_dates', kind: 'user', backfill: 'checkins',
+    desc: '精选地点:打卡日期(旅迹靠它画)',
+  },
+  worldPlaceNotes: {
+    key: 'yan_world_place_notes', kind: 'user', backfill: 'checkins',
+    desc: '精选地点:手账备注',
+  },
+  worldPhotoPaths: {
+    key: 'yan_world_footprint_photo_paths', kind: 'user', backfill: 'checkins',
+    desc: '精选地点:Storage 照片路径(签名 URL 靠它现签)',
+  },
+  worldPhotos: {
+    key: 'yan_world_footprint_photos', kind: 'device', backfill: null,
+    desc: '精选地点:本机相册 uri(换机后无效,故不补传)',
+  },
+  worldMeta: {
+    key: 'yan_world_footprint_meta', kind: 'device', backfill: null,
+    desc: '精选地点:本地存档版本号',
+  },
+  userPlaces: {
+    key: 'yan_user_places_v1', kind: 'user', backfill: 'userPlaces',
+    desc: '自定义打卡地点',
+  },
+  tripNotebook: {
+    key: 'yan_trip_notebook_v1', kind: 'user', backfill: 'notebook',
+    desc: '旅行本(行程/账目/预算)',
+  },
+  subwayProgress: {
+    key: 'yan_subway_unlocked_idx', kind: 'device', backfill: null,
+    desc: '地铁冒险解锁进度',
+  },
+  backfillPending: {
+    key: 'yan_backfill_pending', kind: 'device', backfill: null,
+    desc: '登录补传的未完成标记(下次启动据此重试)',
+  },
+  contentEtag: {
+    key: 'yan_content_etag_v1', kind: 'cache', backfill: null,
+    desc: '远端内容 ETag',
+  },
+  geocodeCache: {
+    key: 'yan_geocode_cache_v1', kind: 'cache', backfill: null,
+    desc: '地名搜索结果缓存',
+  },
+  fx: {
+    key: 'yan_fx_v1', kind: 'cache', backfill: null,
+    desc: '汇率缓存',
+  },
+};
+
+/** 名字 → 键值。业务代码用 K.worldPlaceNotes,不要再手写字符串。 */
+export const K = Object.fromEntries(
+  Object.entries(REGISTRY).map(([name, meta]) => [name, meta.key])
+);
+
+export const PREFIX = 'yan_';
+
+/** 登记在册的全部键。 */
+export const registeredKeys = () => Object.values(REGISTRY).map(m => m.key);
+
+/** 按 kind 取键,例如 keysOfKind('user')。 */
+export const keysOfKind = (kind) =>
+  Object.values(REGISTRY).filter(m => m.kind === kind).map(m => m.key);
+
+/** 参与登录补传的键,按域名分组。backfillAll() 用它,不必各自手写键名。 */
+export function backfillGroups() {
+  const groups = {};
+  for (const meta of Object.values(REGISTRY)) {
+    if (!meta.backfill) continue;
+    (groups[meta.backfill] ||= []).push(meta.key);
+  }
+  return groups;
+}
+
+// ── 读写 ──────────────────────────────────────────────────────
+// 统一在这里做「坏数据当没有」:AsyncStorage 里可能留着上个版本写坏的 JSON,
+// 一处 JSON.parse 抛异常就能让整个 hydration 的 useEffect 静默中断,
+// 后面该读的键一个都读不到。
+
+export async function readJson(key, fallback = null) {
+  try {
+    const raw = await AsyncStorage.getItem(key);
+    if (raw == null) return fallback;
+    const v = JSON.parse(raw);
+    return v ?? fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+/** 写失败只 warn,不抛 —— 落盘失败不该让正在进行的用户操作崩掉。 */
+export async function writeJson(key, value) {
+  try {
+    await AsyncStorage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch (e) {
+    console.warn('[Storage] write failed:', key, e?.message);
+    return false;
+  }
+}
+
+export async function remove(key) {
+  try { await AsyncStorage.removeItem(key); } catch { /* 删不掉就算了 */ }
+}
+
+/**
+ * 清掉言写的全部本地数据(删号用)。
+ *
+ * 按前缀清而不是按登记表清:登记表可能漏登记,前缀不会漏。
+ * 登记表在这里只用来体检 —— 清到了没登记的键,说明有人加键忘了登记。
+ */
+export async function wipeAll() {
+  try {
+    const all = await AsyncStorage.getAllKeys();
+    const mine = all.filter(k => k.startsWith(PREFIX));
+    if (!mine.length) return { cleared: [], error: null };
+
+    if (__DEV__) {
+      const known = new Set(registeredKeys());
+      const strays = mine.filter(k => !known.has(k));
+      if (strays.length) {
+        console.warn('[Storage] 清到了未登记的键,请补登记到 storage.js:', strays);
+      }
+    }
+
+    await AsyncStorage.multiRemove(mine);
+    return { cleared: mine, error: null };
+  } catch (e) {
+    console.warn('[Storage] wipeAll failed:', e?.message);
+    return { cleared: [], error: e?.message || 'unknown' };
+  }
+}
+
+/**
+ * 开发期体检:本机存在但没登记的 yan_ 键。
+ *
+ * 这是这个文件真正的价值 —— 加了新键忘了登记,不再需要等到「删号没删干净」
+ * 或「登录后数据少了一半」才被发现,启动时就会在 console 里报出来。
+ */
+export async function auditKeys() {
+  if (!__DEV__) return [];
+  try {
+    const all = await AsyncStorage.getAllKeys();
+    const known = new Set(registeredKeys());
+    const strays = all.filter(k => k.startsWith(PREFIX) && !known.has(k));
+    if (strays.length) {
+      console.warn('[Storage] 以下键未在 storage.js 登记:', strays);
+    }
+    return strays;
+  } catch {
+    return [];
+  }
+}

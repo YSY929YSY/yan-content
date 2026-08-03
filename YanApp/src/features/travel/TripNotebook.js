@@ -6,6 +6,7 @@ import {
   StyleSheet, Text, TextInput, TouchableOpacity, View,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { K } from '../../lib/storage';
 import * as ImagePicker from 'expo-image-picker';
 import { C } from '../../theme';
 import { useSpeech, SpeakBtn } from '../../components/Speech';
@@ -23,7 +24,7 @@ import { pushNotebook, pullNotebook, cloudIsNewer } from '../../lib/tripBackup';
 import FxPanel from './FxPanel';
 import { FX_CODES, getRates, rateOf } from '../../lib/fx';
 
-const TRIP_STORAGE_KEY = 'yan_trip_notebook_v1';
+const TRIP_STORAGE_KEY = K.tripNotebook;
 // 远端账目是 uuid,本地未同步的是 expense-<时间戳>;用它区分「同步过的」和「还在本机的」
 // 数字键盘没有回车键,iOS 上收不起来。给所有金额输入配一条「完成」。
 const NUM_PAD_ID = 'yan-num-pad';

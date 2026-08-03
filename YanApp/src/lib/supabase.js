@@ -2,6 +2,7 @@ import 'react-native-url-polyfill/auto';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createClient } from '@supabase/supabase-js';
 import * as AppleAuthentication from 'expo-apple-authentication';
+import { wipeAll } from './storage';
 
 const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
@@ -124,15 +125,12 @@ export async function deleteAccount() {
 
     // 服务端删完再清本地,顺序不能反:先清本地而服务端失败,
     // 会变成「数据还在云端但本机看不到」,比什么都没删更糟。
-    await AsyncStorage.multiRemove([
-      'yan_trip_notebook_v1',
-      'yan_wordbank_progress',
-      'yan_world_footprint_photos',
-      'yan_world_footprint_visited_ids',
-      'yan_world_footprint_meta',
-      'yan_subway_unlocked_idx',
-      'yan_fx_v1',
-    ]).catch(() => {});
+    // 交给登记处按前缀清,不在这里手写清单。
+    // 手写过一版,漏了 5 个键(打卡日期、照片路径、自定义地点、地理编码缓存、
+    // 内容 ETag)—— 用户删完账号,这些还留在本机。
+    // Supabase 的会话存在 sb-* 下,不会被带走(登出在下面单独做)。
+    const { cleared } = await wipeAll();
+    console.log('[Auth] cleared local keys:', cleared.length);
 
     await supabase.auth.signOut().catch(() => {});
     return { ok: true, error: null };

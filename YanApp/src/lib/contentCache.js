@@ -9,8 +9,9 @@
 // 内容体走文件系统而不是 AsyncStorage —— 6MB 超过 Android 单条记录的默认上限。
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as FileSystem from 'expo-file-system/legacy';
+import { K } from './storage';
 
-const ETAG_KEY = 'yan_content_etag_v1';
+const ETAG_KEY = K.contentEtag;
 const FILE_NAME = 'yan_content_v2.json';
 
 const filePath = () => `${FileSystem.documentDirectory}${FILE_NAME}`;

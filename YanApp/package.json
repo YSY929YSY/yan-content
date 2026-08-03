@@ -9,7 +9,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "node --test --test-reporter=spec \"src/lib/__tests__/ledgerMath.test.mjs\" \"src/lib/__tests__/parsing.test.mjs\" \"src/lib/__tests__/syncRules.test.mjs\" \"src/lib/__tests__/journey.test.mjs\""
+    "test": "node --test --test-reporter=spec \"src/lib/__tests__/*.test.mjs\""
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
@@ -17,10 +17,10 @@
     "d3-geo": "^3.1.1",
     "expo": "~54.0.35",
     "expo-apple-authentication": "~8.0.8",
-    "expo-av": "~16.0.8",
     "expo-dev-client": "~6.0.21",
     "expo-file-system": "~19.0.23",
     "expo-image-picker": "~17.0.11",
+    "expo-media-library": "~18.2.1",
     "expo-speech": "~14.0.8",
     "expo-status-bar": "~3.0.9",
     "react": "19.1.0",
@@ -30,5 +30,8 @@
     "svg-path-properties": "^2.0.2",
     "topojson-client": "^3.1.0"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@expo/ngrok": "^4.1.3"
+  }
 }
