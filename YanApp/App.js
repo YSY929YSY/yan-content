@@ -4265,11 +4265,34 @@ function NaTab({ mapPlaces: initialPlaces }) {
     places, visitedIds, checkinDates, placeNotes, photoUris, myPlaces, mapPoints,
     customRecords,
     checkIn, saveNote: persistNote, toggleStatus: togglePlaceStatus, pickPhoto,
-    addPlace, removePlace, updatePlace, pickPhotoForCustom,
+    addPlace, removePlace, updatePlace, pickPhotoForCustom, importFromPhotos,
   } = useWorldFootprint(initialPlaces);
   // 自己记的地点:展开哪一条、手账草稿
   const [openMineId, setOpenMineId] = useState(null);
   const [mineDrafts, setMineDrafts] = useState({});
+  // 导入进度。null = 没在导入;字符串 = 当前在做什么(直接显示给用户)
+  const [importing, setImporting] = useState(null);
+
+  const runImport = async () => {
+    if (importing) return;
+    setImporting('准备中…');
+    try {
+      const r = await importFromPhotos({
+        onProgress: ({ phase, done, total }) => {
+          // 反查地名受 Nominatim 每秒 1 次限速,十几个点要等十几秒。
+          // 不报进度的话用户会以为卡死了。
+          if (phase === 'reading') setImporting(`读取照片 ${done}/${total}`);
+          else if (phase === 'naming') setImporting(`查地名 ${done}/${total} · 需要等一会`);
+          else setImporting('收尾中…');
+        },
+      });
+      if (r) Alert.alert('导入完成', r.message, [{ text: '好' }]);
+    } catch (e) {
+      Alert.alert('导入没能完成', e?.message || '未知错误,已记录的部分不受影响');
+    } finally {
+      setImporting(null);
+    }
+  };
   const [addOpen, setAddOpen] = useState(false);
   const [addQuery, setAddQuery] = useState('');
   const [addHits, setAddHits] = useState([]);
@@ -4877,6 +4900,26 @@ useEffect(() => {
         <TouchableOpacity style={ms.addCard} onPress={() => setAddOpen(true)} activeOpacity={0.82}>
           <Text style={{ fontSize: 20, color: C.mutedLight }}>＋</Text>
           <Text style={ms.addTxt}>添加去过的地方</Text>
+        </TouchableOpacity>
+
+        {/* 从照片导入:过去几年的旅行都在相册里,手动补录是不现实的。 */}
+        <TouchableOpacity
+          style={ms.addCard}
+          onPress={runImport}
+          activeOpacity={0.82}
+          disabled={!!importing}
+        >
+          {importing ? (
+            <>
+              <ActivityIndicator size="small" color={C.muted} />
+              <Text style={ms.addTxt}>{importing}</Text>
+            </>
+          ) : (
+            <>
+              <Text style={{ fontSize: 18, color: C.mutedLight }}>🖼</Text>
+              <Text style={ms.addTxt}>从照片导入足迹</Text>
+            </>
+          )}
         </TouchableOpacity>
 
         <View style={{ height: 24 }} />

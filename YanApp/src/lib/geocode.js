@@ -16,6 +16,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { K } from './storage';
 
 const ENDPOINT = 'https://nominatim.openstreetmap.org/search';
+const REVERSE_ENDPOINT = 'https://nominatim.openstreetmap.org/reverse';
 const UA = 'YanApp/1.0 (ysy929ysy@gmail.com)';
 const CACHE_KEY = K.geocodeCache;
 const TIMEOUT_MS = 8000;
@@ -49,6 +50,65 @@ function pickPlace(addr = {}) {
   const city = addr.city || addr.town || addr.village || addr.county || addr.state || '';
   const country = addr.country || '';
   return { city, country };
+}
+
+// Nominatim 每秒最多 1 次。EXIF 导入会连着反查十几个坐标,
+// 不排队就会被限流甚至封 IP —— 所有出站请求走同一条串行队列。
+let gate = Promise.resolve();
+function serialize(fn) {
+  const run = gate.then(fn, fn);
+  gate = run.then(() => new Promise(r => setTimeout(r, 1100)),
+                  () => new Promise(r => setTimeout(r, 1100)));
+  return run;
+}
+
+/**
+ * 按坐标反查地名(EXIF 导入用)。
+ *
+ * 缓存按 ~1km 网格取整,不按精确坐标 —— 同一次旅行里几十张照片的坐标各不相同
+ * 但都在一个街区,不取整的话每张都要发一次请求,限速下要等好几分钟。
+ *
+ * @returns {Promise<{name,city,country,lat,lng}|null>} 查不到返回 null(不是抛错)
+ */
+export async function reverseGeocode(lat, lng) {
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+  const cache = await loadCache();
+  const key = `r|${lat.toFixed(2)},${lng.toFixed(2)}`;
+  if (cache[key]) return cache[key];
+
+  return serialize(async () => {
+    // 排队期间可能已经被别的请求填上了
+    const c = await loadCache();
+    if (c[key]) return c[key];
+
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
+    try {
+      const url = `${REVERSE_ENDPOINT}?lat=${lat}&lon=${lng}&format=jsonv2`
+        + '&addressdetails=1&zoom=14&accept-language=zh';
+      const res = await fetch(url, {
+        signal: ctrl.signal,
+        headers: { 'User-Agent': UA, Accept: 'application/json' },
+      });
+      if (!res.ok) throw new Error(`reverse ${res.status}`);
+      const r = await res.json();
+      if (!r || r.error) return null;
+
+      const { city, country } = pickPlace(r.address);
+      const out = {
+        name: r.name || city || (r.display_name || '').split(',')[0].trim() || '未知地点',
+        city, country, lat, lng,
+      };
+      c[key] = out;
+      await saveCache(c);
+      return out;
+    } catch (e) {
+      console.warn('[Geocode] reverse failed:', e?.message);
+      return null;
+    } finally {
+      clearTimeout(timer);
+    }
+  });
 }
 
 /**

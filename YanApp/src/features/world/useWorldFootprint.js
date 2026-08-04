@@ -16,6 +16,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import * as MediaLibrary from 'expo-media-library';
 
 import { K, readJson, writeJson } from '../../lib/storage';
 import { pullPlaceCheckins, pushPlaceCheckin, uploadPlaceCheckinPhoto } from '../../lib/sync';
@@ -23,6 +24,10 @@ import {
   listUserPlaces, addUserPlace, removeUserPlace, updateUserPlace,
 } from '../../lib/userPlaces';
 import { fromCustom } from './record';
+import {
+  extractPoints, groupIntoVisits, dedupeAgainstExisting, summarize,
+} from './exifImport';
+import { reverseGeocode } from '../../lib/geocode';
 import {
   splitCloudCheckins, mergeMap, mergeIds, sanitizeVisitedIds, buildMapPoints,
 } from './footprintMerge';
@@ -207,6 +212,86 @@ export function useWorldFootprint(initialPlaces) {
     await updatePlace(id, { photoPath: upload.photoPath });
   }, [setPhotoUris, updatePlace]);
 
+  /**
+   * 从照片导入足迹。
+   *
+   * 为什么让用户自己挑照片,而不是自动扫全相册:
+   *   一是隐私 —— 「言想读你 30,883 张照片的位置」和「你选这几张」是两件事;
+   *   二是现实 —— 逐张读位置要调 getAssetInfoAsync,几万张会跑到天荒地老。
+   *
+   * 位置优先取 MediaLibrary 的 location:iOS 上 ImagePicker 返回的 EXIF
+   * 常常已经被系统抹掉 GPS,而 MediaLibrary 配合 ACCESS_MEDIA_LOCATION 才拿得到。
+   */
+  const importFromPhotos = useCallback(async ({ onProgress } = {}) => {
+    const perm = await MediaLibrary.requestPermissionsAsync();
+    if (!perm.granted) {
+      Alert.alert('需要照片权限',
+        '言要读照片的拍摄时间和地点来补全足迹。你可以在系统设置里允许后再试。',
+        [{ text: '知道了' }]);
+      return null;
+    }
+
+    const picked = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsMultipleSelection: true,
+      selectionLimit: 200,          // 一次几百张已经够一趟旅行,再多只会更慢
+      exif: true,
+    });
+    if (picked.canceled || !picked.assets?.length) return null;
+
+    onProgress?.({ phase: 'reading', done: 0, total: picked.assets.length });
+
+    // 逐张补齐位置。ImagePicker 给的 assetId 才能查到相册里的原始信息。
+    const assets = [];
+    for (let i = 0; i < picked.assets.length; i += 1) {
+      const a = picked.assets[i];
+      let loc = null;
+      let time = a.exif?.DateTimeOriginal ? Date.parse(a.exif.DateTimeOriginal.replace(/^(\d{4}):(\d{2}):/, '$1-$2-')) : null;
+      if (a.assetId) {
+        try {
+          const info = await MediaLibrary.getAssetInfoAsync(a.assetId);
+          if (info?.location) loc = info.location;
+          if (info?.creationTime) time = info.creationTime;
+        } catch { /* 单张读不到不该中断整次导入 */ }
+      }
+      if (!loc && Number.isFinite(a.exif?.GPSLatitude) && Number.isFinite(a.exif?.GPSLongitude)) {
+        loc = { latitude: a.exif.GPSLatitude, longitude: a.exif.GPSLongitude };
+      }
+      assets.push({ id: a.assetId || a.uri, location: loc, creationTime: time });
+      onProgress?.({ phase: 'reading', done: i + 1, total: picked.assets.length });
+    }
+
+    const { points, missingLocation } = extractPoints(assets);
+    const visits = groupIntoVisits(points);
+    const fresh = dedupeAgainstExisting(visits, myPlaces);
+    const skipped = visits.length - fresh.length;
+
+    // 反查地名。Nominatim 限速每秒 1 次,geocode.js 里已经排了队,
+    // 这里只需要如实报进度 —— 十几个点要等十几秒,不说的话像卡死了。
+    let imported = 0;
+    for (let i = 0; i < fresh.length; i += 1) {
+      const v = fresh[i];
+      onProgress?.({ phase: 'naming', done: i, total: fresh.length });
+      const hit = await reverseGeocode(v.lat, v.lng);
+      const place = await addPlace({
+        name: hit?.name || `${v.lat.toFixed(2)}, ${v.lng.toFixed(2)}`,
+        city: hit?.city || '',
+        country: hit?.country || '',
+        lat: v.lat,
+        lng: v.lng,
+        note: '',
+        visitedOn: v.day,
+      });
+      if (place) imported += 1;
+    }
+    onProgress?.({ phase: 'done', done: fresh.length, total: fresh.length });
+
+    return {
+      imported, skipped, missingLocation, picked: picked.assets.length,
+      message: summarize({ picked: picked.assets.length, missingLocation, imported, skipped }),
+    };
+  }, [myPlaces, addPlace]);
+
   const mapPoints = buildMapPoints(places, myPlaces, { visitedIds, checkinDates });
 
   // 自己记的地点 → 统一记录。坐标撞上收录点的,会在这里拿到那份内容。
@@ -216,6 +301,6 @@ export function useWorldFootprint(initialPlaces) {
     places, visitedIds, checkinDates, placeNotes, photoUris, photoPaths, myPlaces,
     mapPoints, customRecords,
     checkIn, saveNote, toggleStatus, pickPhoto,
-    addPlace, removePlace, updatePlace, pickPhotoForCustom,
+    addPlace, removePlace, updatePlace, pickPhotoForCustom, importFromPhotos,
   };
 }
