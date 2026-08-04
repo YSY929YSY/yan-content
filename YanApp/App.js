@@ -4353,6 +4353,25 @@ function NaTab({ mapPlaces: initialPlaces }) {
       err = r.error;
     }
 
+    // 用户没有亲手点候选项时,不能默默采用结果。
+    // 国区的系统地名服务查国外地名会返回一个国内的近似匹配 ——
+    // 「伊斯坦布尔」存成成都市、「格雷梅」存成保定市,而且毫无提示。
+    // 自动挑的一律先给他看一眼落在哪。
+    if (hit && !addPicked && Number.isFinite(hit.lat)) {
+      const where = [hit.name, hit.city, hit.country].filter(Boolean).join(' · ');
+      const suspect = hit.source === 'os';
+      Alert.alert(
+        '找到这个位置',
+        `${where}\n${hit.lat.toFixed(3)}, ${hit.lng.toFixed(3)}`
+        + (suspect ? '\n\n⚠️ 这条来自系统地名服务,在国内查国外地名时可能匹配到错误的国内位置。请核对是不是你要的地方。' : ''),
+        [
+          { text: '不对,我再改', style: 'cancel' },
+          { text: '就是这里', onPress: () => savePlace(name, hit) },
+        ],
+      );
+      return;
+    }
+
     if (!hit || !Number.isFinite(hit.lat) || !Number.isFinite(hit.lng)) {
       // 「连不上」和「查不到」要分开说 —— 前者改地名毫无用处,
       // 一直劝用户换写法只会让他反复试到放弃。

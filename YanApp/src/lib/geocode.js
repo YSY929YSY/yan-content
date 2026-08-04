@@ -16,6 +16,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
 import { Platform } from 'react-native';
 import { K } from './storage';
+import { supabase } from './supabase';
 
 // ─────────────────────────────────────────────────────────────
 // 系统自带的地名服务(iOS 用 CLGeocoder)。
@@ -35,6 +36,29 @@ import { K } from './storage';
 // 所以那边仍然走 Nominatim 兜底。
 // ─────────────────────────────────────────────────────────────
 const OS_GEOCODER_OK = Platform.OS === 'ios';
+
+// ⚠️ 系统地理编码只能当国内兜底,不能当主力。
+// 国区的 Apple 地图用高德数据,只有国内结果:查「伊斯坦布尔」返回成都市,
+// 查「格雷梅」返回保定市 —— 它不会告诉你查不到,而是给一个看起来合理的
+// 错误坐标。所以主力走服务端代理(见 supabase/functions/geocode),
+// 只有代理不可用时才退到系统,并且结果会标上来源让 UI 提醒用户核对。
+
+/**
+ * 服务端代理。手机只连 Supabase(国内可达),由服务端去连 Nominatim。
+ * 和 parse-itinerary 同一个道理:能不能连上第三方是服务端的事,不是用户的事。
+ */
+async function viaProxy(payload) {
+  if (!supabase) return null;
+  try {
+    const { data, error } = await supabase.functions.invoke('geocode', { body: payload });
+    if (error) throw error;
+    if (data?.error) throw new Error(data.error);
+    return data ?? null;
+  } catch (e) {
+    console.warn('[Geocode] proxy failed:', e?.message);
+    return null;
+  }
+}
 
 /** 系统反查。失败返回 null,由调用方决定要不要退回 Nominatim。 */
 async function osReverse(lat, lng) {
@@ -143,8 +167,16 @@ export async function reverseGeocode(lat, lng) {
   const key = `r|${lat.toFixed(2)},${lng.toFixed(2)}`;
   if (cache[key]) return cache[key];
 
-  // 先问系统。成功就不必走 Nominatim,也不必排那条每秒 1 次的队 ——
-  // 导入十几个点从「等十几秒」变成瞬时。
+  // 代理优先:它连的是 Nominatim,全球覆盖且不受用户所在国家影响。
+  const p = await viaProxy({ op: 'reverse', lat, lng });
+  if (p?.place) {
+    cache[key] = p.place;
+    await saveCache(cache);
+    return p.place;
+  }
+
+  // 代理不可用时退到系统。国区只有国内数据,查国外坐标多半返回 null,
+  // 那样反而是安全的 —— 宁可没名字,也不要一个错的名字。
   const os = await osReverse(lat, lng);
   if (os) {
     cache[key] = os;
@@ -217,12 +249,22 @@ export async function searchPlaceDetailed(query, { limit = 5 } = {}) {
   // 永久钉在本地,以后网络好了也查不出来。
   if (Array.isArray(cache[key]) && cache[key].length) return { hits: cache[key], error: null };
 
-  // 系统优先。国内 Nominatim 连不上,靠它兜底等于没有搜索功能。
+  const p = await viaProxy({ op: 'search', q, limit });
+  if (Array.isArray(p?.hits) && p.hits.length) {
+    const hits = p.hits.map(h => ({ ...h, source: 'osm' }));
+    cache[key] = hits;
+    await saveCache(cache);
+    return { hits, error: null };
+  }
+
+  // 退到系统。标 source:'os' —— 国区只有国内数据,查国外地名会返回一个
+  // 错误的国内匹配,UI 要据此提醒用户核对,不能默默采用。
   const os = await osSearch(q);
   if (os) {
-    cache[key] = os;
+    const hits = os.map(h => ({ ...h, source: 'os' }));
+    cache[key] = hits;
     await saveCache(cache);
-    return { hits: os, error: null };
+    return { hits, error: null };
   }
 
   const ctrl = new AbortController();
