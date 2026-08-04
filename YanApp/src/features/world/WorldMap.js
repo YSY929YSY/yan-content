@@ -60,27 +60,51 @@ export default function WorldMap({
       onPanResponderGrant: (e) => {
         gestureStart.current = {
           rot: rotRef.current, pan: panRef.current, zoom: zoomRef.current,
+          // Grant 只在第一根手指落下时触发,那一刻拿不到双指间距(必然是 0)。
+          // 真正的基准要等第二根手指出现时在 Move 里补,见下面。
           pinch: pinchDistance(e), globe: globeRef.current,
+          baseDx: 0, baseDy: 0,
         };
       },
       onPanResponderMove: (e, g) => {
         const st = gestureStart.current;
         if (!st) return;
         const d = pinchDistance(e);
-        if (d && st.pinch) {
+
+        if (d) {
+          if (!st.pinch) {
+            // 第二根手指刚落下。以此刻为基准重新起算 ——
+            // 少了这一步,st.pinch 会一直是 Grant 时的 0,缩放分支永远进不去。
+            st.pinch = d;
+            st.zoom = zoomRef.current;
+            return;
+          }
           // 双指:缩放。范围留窄一点 —— 110m 数据放太大会看到锯齿。
-          const next = Math.min(Math.max(st.zoom * (d / st.pinch), 1), 4);
-          setZoom(next);
+          setZoom(Math.min(Math.max(st.zoom * (d / st.pinch), 1), 4));
           return;
         }
+
+        if (st.pinch) {
+          // 从双指回到单指。g.dx 是从手势最初那一刻累计的,直接拿来平移会跳一大段,
+          // 所以这里把位移基准也一并重置。
+          st.pinch = 0;
+          st.rot = rotRef.current;
+          st.pan = panRef.current;
+          st.zoom = zoomRef.current;
+          st.baseDx = g.dx;
+          st.baseDy = g.dy;
+        }
+
+        const dx = g.dx - st.baseDx;
+        const dy = g.dy - st.baseDy;
         if (st.globe) {
           // 拖动转地球。0.35 是手感系数:1:1 会转得太快,像打滑。
           setRot({
-            lam: st.rot.lam + g.dx * 0.35 / st.zoom,
-            phi: Math.max(Math.min(st.rot.phi - g.dy * 0.35 / st.zoom, 85), -85),
+            lam: st.rot.lam + dx * 0.35 / st.zoom,
+            phi: Math.max(Math.min(st.rot.phi - dy * 0.35 / st.zoom, 85), -85),
           });
         } else {
-          setPan({ x: st.pan.x + g.dx, y: st.pan.y + g.dy });
+          setPan({ x: st.pan.x + dx, y: st.pan.y + dy });
         }
       },
       onPanResponderRelease: () => { gestureStart.current = null; },
