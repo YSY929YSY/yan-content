@@ -16,9 +16,16 @@
 // 这里只做纯计算,不碰相册也不碰网络 —— 聚合规则判错会让用户的旅行史
 // 变成一堆重复或缺失的点,这种东西必须能测。
 
-// 带 .js 后缀:Metro 不要求,但 node --test 的 ESM 解析要求。
-// 这个模块要能在测试里跑,所以按更严的那边写。
-import { NEAR_DEG } from './record.js';
+/**
+ * 一次到访的半径,约 330m。
+ *
+ * 不能复用地图去重的 NEAR_DEG(约 5km)—— 那个常数是为「『京都』和『Kyoto』
+ * 是同一个点」服务的,城市级。用它来聚合照片会把伊斯坦布尔的圣索菲亚、
+ * 蓝色清真寺、大巴扎压成一个点,而它们是三次不同的到访。
+ *
+ * 两个用途的合理半径差一个数量级,必须是两个常数。
+ */
+export const VISIT_DEG = 0.003;
 
 /** 本地日期(不是 UTC)。在东京拍的照片应该算当天,不该因为时区退回前一天。 */
 export function localDay(ts) {
@@ -48,7 +55,7 @@ export function extractPoints(assets = []) {
 }
 
 /**
- * 把照片聚成「一次到访」:同一天 + 相距 5km 以内 = 同一处。
+ * 把照片聚成「一次到访」:同一天 + 相距约 330m 以内 = 同一处。
  *
  * 为什么按天而不是按连续时间窗:用户对旅行的记忆单位是「哪天去了哪」,
  * 而不是「下午三点到五点在某个坐标」。按天聚合出来的结果,和他自己
@@ -61,8 +68,8 @@ export function groupIntoVisits(points = []) {
   for (const p of sorted) {
     const hit = visits.find(v =>
       v.day === p.day &&
-      Math.abs(v.lat - p.lat) < NEAR_DEG &&
-      Math.abs(v.lng - p.lng) < NEAR_DEG);
+      Math.abs(v.lat - p.lat) < VISIT_DEG &&
+      Math.abs(v.lng - p.lng) < VISIT_DEG);
 
     if (hit) {
       // 用均值收敛到这片区域的中心,而不是取第一张的坐标 ——
@@ -83,7 +90,7 @@ export function groupIntoVisits(points = []) {
 
 /**
  * 去掉已经记过的。
- * 判重条件和聚合一致:同一天 + 5km 以内。重复导入应该是安全的空操作。
+ * 判重条件和聚合一致:同一天 + 约 330m 以内。重复导入应该是安全的空操作。
  */
 export function dedupeAgainstExisting(visits = [], existing = []) {
   const known = existing
@@ -92,8 +99,8 @@ export function dedupeAgainstExisting(visits = [], existing = []) {
 
   return visits.filter(v => !known.some(k =>
     k.day === v.day &&
-    Math.abs(k.lat - v.lat) < NEAR_DEG &&
-    Math.abs(k.lng - v.lng) < NEAR_DEG));
+    Math.abs(k.lat - v.lat) < VISIT_DEG &&
+    Math.abs(k.lng - v.lng) < VISIT_DEG));
 }
 
 /**

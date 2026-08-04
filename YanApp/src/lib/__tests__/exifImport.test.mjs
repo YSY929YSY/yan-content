@@ -12,9 +12,9 @@ const at = (day, h = 12) => new Date(`${day}T${String(h).padStart(2, '0')}:00:00
 
 test('同一天同一片区域的照片聚成一次到访', () => {
   const { points } = extractPoints([
-    { id: 'a', location: { latitude: 35.00, longitude: 135.70 }, creationTime: at('2026-03-01', 9) },
-    { id: 'b', location: { latitude: 35.01, longitude: 135.71 }, creationTime: at('2026-03-01', 14) },
-    { id: 'c', location: { latitude: 35.02, longitude: 135.72 }, creationTime: at('2026-03-01', 18) },
+    { id: 'a', location: { latitude: 35.0000, longitude: 135.7000 }, creationTime: at('2026-03-01', 9) },
+    { id: 'b', location: { latitude: 35.0010, longitude: 135.7010 }, creationTime: at('2026-03-01', 14) },
+    { id: 'c', location: { latitude: 35.0015, longitude: 135.7015 }, creationTime: at('2026-03-01', 18) },
   ]);
   const visits = groupIntoVisits(points);
   assert.equal(visits.length, 1, '一天在京都拍的三张不该变成三条记录');
@@ -60,11 +60,23 @@ test('没有拍摄时间的也算读不出位置', () => {
 test('到访坐标收敛到区域中心,不是第一张照片的位置', () => {
   // 第一张常常是刚下飞机在机场拍的
   const { points } = extractPoints([
-    { id: 'a', location: { latitude: 35.00, longitude: 135.70 }, creationTime: at('2026-03-01', 8) },
-    { id: 'b', location: { latitude: 35.02, longitude: 135.72 }, creationTime: at('2026-03-01', 12) },
+    { id: 'a', location: { latitude: 35.0000, longitude: 135.7000 }, creationTime: at('2026-03-01', 8) },
+    { id: 'b', location: { latitude: 35.0020, longitude: 135.7020 }, creationTime: at('2026-03-01', 12) },
   ]);
   const v = groupIntoVisits(points)[0];
-  assert.ok(v.lat > 35.00 && v.lat < 35.02, `期望落在两点之间,实际 ${v.lat}`);
+  assert.ok(v.lat > 35.0000 && v.lat < 35.0020, `期望落在两点之间,实际 ${v.lat}`);
+});
+
+test('同城的不同景点算不同到访 —— 这是最容易搞错的一条', () => {
+  // 伊斯坦布尔:圣索菲亚 / 蓝色清真寺 / 大巴扎,彼此都在几百米到两公里内。
+  // 早期版本用地图去重那个 5km 半径,把它们压成了一个点 ——
+  // 用户拍了三个景点的照片,导入后只得到一条「41.02, 28.97」。
+  const { points } = extractPoints([
+    { id: 'hagia', location: { latitude: 41.0086, longitude: 28.9802 }, creationTime: at('2026-07-27', 10) },
+    { id: 'blue', location: { latitude: 41.0054, longitude: 28.9768 }, creationTime: at('2026-07-27', 13) },
+    { id: 'bazaar', location: { latitude: 41.0106, longitude: 28.9680 }, creationTime: at('2026-07-27', 16) },
+  ]);
+  assert.equal(groupIntoVisits(points).length, 3, '三个景点应该是三次到访');
 });
 
 test('封面用当天最早那张', () => {

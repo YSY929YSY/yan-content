@@ -250,6 +250,7 @@ export function useWorldFootprint(initialPlaces) {
       withAssetId: 0, fromLibrary: 0, fromExif: 0, noTime: 0, infoFailed: 0,
       locUnusable: 0,   // 有 location 对象但经纬度取不出有效数字
     };
+    const uriById = new Map();
     const assets = [];
     for (let i = 0; i < picked.assets.length; i += 1) {
       const a = picked.assets[i];
@@ -283,7 +284,9 @@ export function useWorldFootprint(initialPlaces) {
         diag.fromExif += 1;
       }
       if (loc && !time) diag.noTime += 1;
-      assets.push({ id: a.assetId || a.uri, location: loc, creationTime: time });
+      const id = a.assetId || a.uri;
+      uriById.set(id, a.uri);          // 生成记录后要拿它当封面
+      assets.push({ id, location: loc, creationTime: time });
       onProgress?.({ phase: 'reading', done: i + 1, total: picked.assets.length });
     }
     console.log('[EXIF] diag', JSON.stringify(diag));
@@ -309,7 +312,19 @@ export function useWorldFootprint(initialPlaces) {
         note: '',
         visitedOn: v.day,
       });
-      if (place) imported += 1;
+      if (!place) continue;
+      imported += 1;
+
+      // 把照片挂上去。少了这一步,导入出来的记录点开是空的 ——
+      // 用户明明是「用这张照片」生成的它。
+      const coverUri = uriById.get(v.coverId);
+      if (coverUri) {
+        setPhotoUris(prev => ({ ...prev, [place.id]: coverUri }));
+        // 上传失败不回滚:本机 uri 已经能看,换机时再补也不迟
+        uploadPlaceCheckinPhoto(place.id, coverUri, 'image/jpeg')
+          .then(up => { if (up?.photoPath) updatePlace(place.id, { photoPath: up.photoPath }); })
+          .catch(e => console.warn('[EXIF] cover upload failed', e?.message));
+      }
     }
     onProgress?.({ phase: 'done', done: fresh.length, total: fresh.length });
 

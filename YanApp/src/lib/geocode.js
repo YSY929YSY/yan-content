@@ -13,7 +13,74 @@
 //   · 每秒最多 1 次请求 —— 所以调用方要防抖,不能每敲一个字就搜
 //   · 结果要缓存,别重复问同一个词
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Location from 'expo-location';
+import { Platform } from 'react-native';
 import { K } from './storage';
+
+// ─────────────────────────────────────────────────────────────
+// 系统自带的地名服务(iOS 用 CLGeocoder)。
+//
+// 为什么要它:nominatim.openstreetmap.org 从国内访问不到 —— 不是慢,是
+// 连不上(手机 Safari 直接打不开)。整个「添加地点」和「照片导入反查地名」
+// 都建立在一个用户根本够不着的服务上。
+//
+// 系统服务的三个好处:国内可用、没有每秒 1 次的限速、不算第三方出站请求
+// (不必写进隐私政策)。
+//
+// 权限:iOS 的地理编码**不需要定位权限**(expo-location 文档里
+// 「must request location permissions」那句只针对 Android)。所以言不会
+// 申请定位权限 —— 一个不做位置追踪的 App 去要定位权限,审核一定会问。
+//
+// Android 的地理编码依赖 Google Play 服务且需要定位权限,国行机常常没有,
+// 所以那边仍然走 Nominatim 兜底。
+// ─────────────────────────────────────────────────────────────
+const OS_GEOCODER_OK = Platform.OS === 'ios';
+
+/** 系统反查。失败返回 null,由调用方决定要不要退回 Nominatim。 */
+async function osReverse(lat, lng) {
+  if (!OS_GEOCODER_OK) return null;
+  try {
+    const rows = await Location.reverseGeocodeAsync({ latitude: lat, longitude: lng });
+    const r = rows?.[0];
+    if (!r) return null;
+    // name 常常就是 POI 名(「圣索菲亚大教堂」),比区名有用得多
+    const name = r.name || r.district || r.subregion || r.city || r.region || '未知地点';
+    return {
+      name,
+      city: r.city || r.subregion || r.region || '',
+      country: r.country || '',
+      lat, lng,
+    };
+  } catch (e) {
+    console.warn('[Geocode] os reverse failed:', e?.message);
+    return null;
+  }
+}
+
+/** 系统正查。只给坐标,名字用用户输入的那个;城市国家再反查一次补上。 */
+async function osSearch(query) {
+  if (!OS_GEOCODER_OK) return null;
+  try {
+    const rows = await Location.geocodeAsync(query);
+    const hits = [];
+    for (const r of (rows || []).slice(0, 5)) {
+      if (!Number.isFinite(r?.latitude) || !Number.isFinite(r?.longitude)) continue;
+      const back = await osReverse(r.latitude, r.longitude);
+      hits.push({
+        name: query,
+        city: back?.city || '',
+        country: back?.country || '',
+        lat: r.latitude,
+        lng: r.longitude,
+        display: [back?.name, back?.city, back?.country].filter(Boolean).join(', ') || query,
+      });
+    }
+    return hits.length ? hits : null;
+  } catch (e) {
+    console.warn('[Geocode] os search failed:', e?.message);
+    return null;
+  }
+}
 
 const ENDPOINT = 'https://nominatim.openstreetmap.org/search';
 const REVERSE_ENDPOINT = 'https://nominatim.openstreetmap.org/reverse';
@@ -75,6 +142,15 @@ export async function reverseGeocode(lat, lng) {
   const cache = await loadCache();
   const key = `r|${lat.toFixed(2)},${lng.toFixed(2)}`;
   if (cache[key]) return cache[key];
+
+  // 先问系统。成功就不必走 Nominatim,也不必排那条每秒 1 次的队 ——
+  // 导入十几个点从「等十几秒」变成瞬时。
+  const os = await osReverse(lat, lng);
+  if (os) {
+    cache[key] = os;
+    await saveCache(cache);
+    return os;
+  }
 
   return serialize(async () => {
     // 排队期间可能已经被别的请求填上了
@@ -140,6 +216,14 @@ export async function searchPlaceDetailed(query, { limit = 5 } = {}) {
   // 只认非空的缓存。空结果不缓存 —— 否则一次网络抖动会把「这个地名不存在」
   // 永久钉在本地,以后网络好了也查不出来。
   if (Array.isArray(cache[key]) && cache[key].length) return { hits: cache[key], error: null };
+
+  // 系统优先。国内 Nominatim 连不上,靠它兜底等于没有搜索功能。
+  const os = await osSearch(q);
+  if (os) {
+    cache[key] = os;
+    await saveCache(cache);
+    return { hits: os, error: null };
+  }
 
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), TIMEOUT_MS);

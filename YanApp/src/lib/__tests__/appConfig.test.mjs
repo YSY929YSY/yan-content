@@ -74,6 +74,19 @@ test('不申请相机和麦克风 —— 代码里一处都没用到', () => {
   assert.equal(picker.microphonePermission, false);
 });
 
+test('不申请定位权限 —— 言只用系统地理编码,iOS 上那不需要权限', () => {
+  // expo-location 文档里「must request location permissions」只针对 Android。
+  // iOS 的 CLGeocoder 不需要授权,所以三条 usage description 全部删掉。
+  // 一个不做位置追踪的 App 去要定位权限,审核一定会问。
+  // 三个键是分开的,漏掉任何一个都会留下英文默认值
+  // 'Allow $(PRODUCT_NAME) to access your location' —— 已经漏过一次。
+  const loc = pluginOpts('expo-location');
+  assert.equal(loc.locationWhenInUsePermission, false);
+  assert.equal(loc.locationAlwaysPermission, false);
+  assert.equal(loc.locationAlwaysAndWhenInUsePermission, false);
+  assert.equal(loc.isIosBackgroundLocationEnabled, false, '后台定位会加 UIBackgroundModes,必然被问');
+});
+
 test('相册权限只要照片,不要音频和视频', () => {
   // expo-media-library 默认 ['photo','video','audio'],会申请 READ_MEDIA_AUDIO
   // 和 READ_MEDIA_VIDEO —— 言只读照片的 EXIF。

@@ -50,6 +50,17 @@
           "isAccessMediaLocationEnabled": true,
           "granularPermissions": ["photo"]
         }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": false,
+          "locationAlwaysPermission": false,
+          "locationAlwaysAndWhenInUsePermission": false,
+          "isIosBackgroundLocationEnabled": false,
+          "isAndroidBackgroundLocationEnabled": false,
+          "isAndroidForegroundServiceEnabled": false
+        }
       ]
     ],
     "extra": {
