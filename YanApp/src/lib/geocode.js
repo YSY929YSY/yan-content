@@ -117,12 +117,29 @@ export async function reverseGeocode(lat, lng) {
  *          失败返回空数组 —— 搜不到不该阻断打卡,用户仍可只记名字。
  */
 export async function searchPlace(query, { limit = 5 } = {}) {
+  const r = await searchPlaceDetailed(query, { limit });
+  return r.hits;
+}
+
+/**
+ * 同上,但把「请求失败」和「真的没这个地名」分开。
+ *
+ * 为什么必须分开:这两件事对用户的含义完全相反。
+ * 「没搜到」→ 换个写法;「连不上」→ 换个网络,写法再改也没用。
+ * 之前两者都返回空数组,于是网络不通时 App 一直在劝用户改地名 ——
+ * 和这个项目里踩过的「拿不到数据 ≠ 数据是空的」是同一个错误。
+ *
+ * @returns {Promise<{hits:Array, error:string|null}>}
+ */
+export async function searchPlaceDetailed(query, { limit = 5 } = {}) {
   const q = String(query || '').trim();
-  if (q.length < 2) return [];
+  if (q.length < 2) return { hits: [], error: null };
 
   const cache = await loadCache();
   const key = `${q}|${limit}`;
-  if (cache[key]) return cache[key];
+  // 只认非空的缓存。空结果不缓存 —— 否则一次网络抖动会把「这个地名不存在」
+  // 永久钉在本地,以后网络好了也查不出来。
+  if (Array.isArray(cache[key]) && cache[key].length) return { hits: cache[key], error: null };
 
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
@@ -148,13 +165,18 @@ export async function searchPlace(query, { limit = 5 } = {}) {
       };
     }).filter(x => Number.isFinite(x.lat) && Number.isFinite(x.lng));
 
-    cache[key] = out;
-    await saveCache(cache);
-    return out;
+    if (out.length) {
+      cache[key] = out;
+      await saveCache(cache);
+    }
+    return { hits: out, error: null };
   } catch (e) {
-    // 没网、超时、被限流 —— 一律安静失败。用户还能手动只记地名。
-    console.warn('[Geocode] search failed:', e?.message);
-    return [];
+    // 超时、被限流、DNS 不通 —— 原样报出去,由调用方决定怎么对用户说。
+    const msg = e?.name === 'AbortError'
+      ? `连接超时(${TIMEOUT_MS / 1000}s)`
+      : (e?.message || '网络错误');
+    console.warn('[Geocode] search failed:', msg);
+    return { hits: [], error: msg };
   } finally {
     clearTimeout(timer);
   }

@@ -242,24 +242,39 @@ export function useWorldFootprint(initialPlaces) {
     onProgress?.({ phase: 'reading', done: 0, total: picked.assets.length });
 
     // 逐张补齐位置。ImagePicker 给的 assetId 才能查到相册里的原始信息。
+    //
+    // 每一步都计数:位置读不到的原因有好几种(没给 assetId、相册查不到、
+    // EXIF 被抹掉),它们的修法完全不同。只报「没有位置信息」等于什么都没说 ——
+    // 用户明明知道自己的照片是带定位的。
+    const diag = { withAssetId: 0, fromLibrary: 0, fromExif: 0, noTime: 0, infoFailed: 0 };
     const assets = [];
     for (let i = 0; i < picked.assets.length; i += 1) {
       const a = picked.assets[i];
       let loc = null;
-      let time = a.exif?.DateTimeOriginal ? Date.parse(a.exif.DateTimeOriginal.replace(/^(\d{4}):(\d{2}):/, '$1-$2-')) : null;
+      let time = null;
+      const raw = a.exif?.DateTimeOriginal || a.exif?.DateTime;
+      // EXIF 的时间格式是 "2026:03:01 12:00:00",Date.parse 认不了前面那两个冒号
+      if (raw) {
+        const t = Date.parse(String(raw).replace(/^(\d{4}):(\d{2}):(\d{2})/, '$1-$2-$3'));
+        if (!Number.isNaN(t)) time = t;
+      }
       if (a.assetId) {
+        diag.withAssetId += 1;
         try {
           const info = await MediaLibrary.getAssetInfoAsync(a.assetId);
-          if (info?.location) loc = info.location;
+          if (info?.location) { loc = info.location; diag.fromLibrary += 1; }
           if (info?.creationTime) time = info.creationTime;
-        } catch { /* 单张读不到不该中断整次导入 */ }
+        } catch { diag.infoFailed += 1; }
       }
       if (!loc && Number.isFinite(a.exif?.GPSLatitude) && Number.isFinite(a.exif?.GPSLongitude)) {
         loc = { latitude: a.exif.GPSLatitude, longitude: a.exif.GPSLongitude };
+        diag.fromExif += 1;
       }
+      if (loc && !time) diag.noTime += 1;
       assets.push({ id: a.assetId || a.uri, location: loc, creationTime: time });
       onProgress?.({ phase: 'reading', done: i + 1, total: picked.assets.length });
     }
+    console.log('[EXIF] diag', JSON.stringify(diag));
 
     const { points, missingLocation } = extractPoints(assets);
     const visits = groupIntoVisits(points);
@@ -287,8 +302,8 @@ export function useWorldFootprint(initialPlaces) {
     onProgress?.({ phase: 'done', done: fresh.length, total: fresh.length });
 
     return {
-      imported, skipped, missingLocation, picked: picked.assets.length,
-      message: summarize({ picked: picked.assets.length, missingLocation, imported, skipped }),
+      imported, skipped, missingLocation, picked: picked.assets.length, diag,
+      message: summarize({ picked: picked.assets.length, missingLocation, imported, skipped, diag }),
     };
   }, [myPlaces, addPlace]);
 

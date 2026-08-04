@@ -28,7 +28,7 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 
 import fallbackContent from './assets/content.fallback.json';
 import { fetchContent } from './src/lib/contentCache';
-import { searchPlace } from './src/lib/geocode';
+import { searchPlace, searchPlaceDetailed } from './src/lib/geocode';
 import WorldMap from './src/features/world/WorldMap';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Speech from 'expo-speech';
@@ -4297,6 +4297,8 @@ function NaTab({ mapPlaces: initialPlaces }) {
   const [addQuery, setAddQuery] = useState('');
   const [addHits, setAddHits] = useState([]);
   const [addBusy, setAddBusy] = useState(false);
+  // 请求失败的原因。null = 没失败(可能是真的没搜到,两者含义相反)
+  const [addErr, setAddErr] = useState(null);
   const [addPicked, setAddPicked] = useState(null);
   const [addNote, setAddNote] = useState('');
   // 到访日期:必须和「记录日期」分开 —— 旅行回来一次性补记 10 个地方,
@@ -4310,15 +4312,16 @@ function NaTab({ mapPlaces: initialPlaces }) {
     if (q.length < 2) { setAddHits([]); return; }
     setAddBusy(true);
     const t = setTimeout(async () => {
-      const hits = await searchPlace(q);
+      const { hits, error } = await searchPlaceDetailed(q);
       setAddHits(hits);
+      setAddErr(error);
       setAddBusy(false);
     }, 600);
     return () => { clearTimeout(t); setAddBusy(false); };
   }, [addQuery]);
 
   const resetAdd = () => {
-    setAddOpen(false); setAddQuery(''); setAddHits([]); setAddPicked(null);
+    setAddOpen(false); setAddQuery(''); setAddHits([]); setAddPicked(null); setAddErr(null);
     setAddNote(''); setAddDate('');
   };
   const savePlace = async (name, hit) => {
@@ -4341,21 +4344,25 @@ function NaTab({ mapPlaces: initialPlaces }) {
     // 没坐标的地点不会出现在地图和地球仪上 —— 而按下「记下来」的人,
     // 预期就是「它会点亮」。所以没选搜索结果时先替他查一次。
     let hit = addPicked;
+    let err = null;
     if (!hit) {
       setAddBusy(true);
-      const hits = await searchPlace(name).catch(() => []);
+      const r = await searchPlaceDetailed(name).catch(e => ({ hits: [], error: e?.message }));
       setAddBusy(false);
-      hit = hits?.[0] || null;
+      hit = r.hits?.[0] || null;
+      err = r.error;
     }
 
     if (!hit || !Number.isFinite(hit.lat) || !Number.isFinite(hit.lng)) {
-      // 查不到就把代价说清楚,让他自己决定 ——
-      // 悄悄存一条永远不会点亮的记录,比拒绝保存更伤人。
+      // 「连不上」和「查不到」要分开说 —— 前者改地名毫无用处,
+      // 一直劝用户换写法只会让他反复试到放弃。
       Alert.alert(
-        '没查到这个地名的坐标',
-        `「${name}」可以记下来,但不会出现在地图和地球仪上。\n\n换个更具体的写法(比如「伊斯坦布尔」而不是「土耳其」)通常能查到。`,
+        err ? '连不上地名服务' : '没查到这个地名的坐标',
+        err
+          ? `${err}\n\n「${name}」可以先记下来,等网络恢复后重新添加就能点亮地图。`
+          : `「${name}」可以记下来,但不会出现在地图和地球仪上。\n\n换个更具体的写法(比如「伊斯坦布尔」而不是「土耳其」)通常能查到。`,
         [
-          { text: '换个写法', style: 'cancel' },
+          { text: err ? '取消' : '换个写法', style: 'cancel' },
           { text: '仍然记下', onPress: () => savePlace(name, null) },
         ],
       );
@@ -4949,7 +4956,10 @@ useEffect(() => {
               returnKeyType="search"
             />
             {addBusy && <Text style={ms.addHint}>搜索中…</Text>}
-            {!addBusy && addQuery.trim().length >= 2 && addHits.length === 0 && (
+            {!addBusy && !!addErr && (
+              <Text style={ms.addHint}>连不上地名服务({addErr})。换个网络再试 —— 改地名没用。</Text>
+            )}
+            {!addBusy && !addErr && addQuery.trim().length >= 2 && addHits.length === 0 && (
               <Text style={ms.addHint}>没搜到。换个更具体的地名(如城市名)才能点亮地图。</Text>
             )}
             <ScrollView style={{ maxHeight: 210 }} keyboardShouldPersistTaps="handled">

@@ -96,14 +96,35 @@ export function dedupeAgainstExisting(visits = [], existing = []) {
     Math.abs(k.lng - v.lng) < NEAR_DEG));
 }
 
-/** 导入结果的人话摘要。空手而归时也要说清是为什么。 */
-export function summarize({ picked = 0, missingLocation = 0, imported = 0, skipped = 0 }) {
+/**
+ * 导入结果的人话摘要。
+ *
+ * 一无所获时必须说清是**哪一步**丢的 —— 用户知道自己的照片带定位,
+ * 只说「没有位置信息」他会认为是 App 坏了(而且他多半是对的)。
+ * 三种原因的修法完全不同:
+ *   拿不到 assetId → iOS 只给了「限制访问」,要去设置里改成完全访问
+ *   拿到了但相册没位置 → 照片本身确实没有(修过图、下载的图会丢 GPS)
+ *   有位置但没时间 → 少见,通常是导出的图
+ */
+export function summarize({
+  picked = 0, missingLocation = 0, imported = 0, skipped = 0, diag = null,
+}) {
   const lines = [];
   if (imported > 0) lines.push(`新增 ${imported} 处足迹`);
   if (skipped > 0) lines.push(`${skipped} 处之前已经记过`);
   if (missingLocation > 0) {
-    lines.push(`${missingLocation} 张照片没有位置信息(截图、转发的图通常没有,或已被抹掉)`);
+    lines.push(`${missingLocation} 张没能读出位置`);
   }
-  if (!lines.length) lines.push(`选了 ${picked} 张,但没能读出任何位置信息`);
+  if (!lines.length) lines.push(`选了 ${picked} 张,一张都没能读出位置`);
+
+  if (diag && missingLocation > 0) {
+    if (!diag.withAssetId) {
+      lines.push('\n原因:系统没有把照片的相册标识给言 —— 通常是照片权限只给了「限制访问」。到 设置 → 言 → 照片,改成「完全访问」再试。');
+    } else if (!diag.fromLibrary && !diag.fromExif) {
+      lines.push('\n原因:相册里这些照片本身没有位置。修过图、从网上或大疆等设备下载的图,GPS 通常已被去掉。');
+    } else if (diag.noTime) {
+      lines.push(`\n其中 ${diag.noTime} 张有位置但读不到拍摄时间,无法归到某一天。`);
+    }
+  }
   return lines.join('\n');
 }
