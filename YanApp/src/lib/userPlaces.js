@@ -48,22 +48,31 @@ export async function listUserPlaces() {
     const user = await uid();
     if (!user) return local;
     const { data, error } = await supabase.from(TABLE)
-      .select('id, name, city, country, lat, lng, note, visited_on, created_at')
+      .select('id, name, city, country, lat, lng, note, visited_on, photo_path, created_at')
       .eq('user_id', user)
       .is('deleted_at', null)
       .order('created_at', { ascending: false });
     if (error) throw error;
-    const remote = (data || []).map(r => ({
-      id: r.id,
-      name: r.name,
-      city: r.city || '',
-      country: r.country || '',
-      lat: r.lat, lng: r.lng,
-      note: r.note || '',
-      visitedOn: r.visited_on || null,
-      createdAt: r.created_at,
-      remote: true,
-    }));
+    const localById = new Map(local.map(p => [p.id, p]));
+    const remote = (data || []).map(r => {
+      const mine = localById.get(r.id);
+      // 本机有没推上去的改动(dirty)时,以本机为准。
+      // 否则会出现:离线改了备注 → 下次拉取被远端旧值冲掉,用户以为改丢了。
+      if (mine?.dirty) return { ...mine, remote: true };
+      return {
+        id: r.id,
+        name: r.name,
+        city: r.city || '',
+        country: r.country || '',
+        lat: r.lat, lng: r.lng,
+        note: r.note || '',
+        visitedOn: r.visited_on || null,
+        photoPath: r.photo_path || null,
+        createdAt: r.created_at,
+        remote: true,
+        ownerUid: user,
+      };
+    });
     // 本机还没同步上去的(id 不是 uuid)保留,已同步的以远端为准。
     // 和分账同一条规矩:拿不到数据 ≠ 数据是空的。
     const remoteIds = new Set(remote.map(r => r.id));
@@ -168,6 +177,54 @@ export async function reuploadUserPlaces() {
   } catch (e) {
     console.warn('[UserPlaces] reupload failed:', e?.message);
     return { count: 0, error: e?.message || 'unknown' };
+  }
+}
+
+/**
+ * 改一个(备注、到访日期、照片路径)。
+ *
+ * 先落本机再推云端 —— 和添加同一条规矩:本机是用户当下看到的结果,
+ * 云端失败不该让「我明明改了」变成假象。云端失败只 warn,本机那份仍然是对的。
+ */
+export async function updateUserPlace(id, patch = {}) {
+  const allowed = ['note', 'visitedOn', 'photoPath', 'name'];
+  const clean = {};
+  for (const k of allowed) {
+    if (Object.prototype.hasOwnProperty.call(patch, k)) clean[k] = patch[k];
+  }
+  if (!Object.keys(clean).length) return { place: null, error: null };
+
+  const local = await readLocal();
+  // 先按「还没推上去」标记。推成功再清掉 —— 这样离线改的值不会在
+  // 下次 listUserPlaces 拉取时被远端旧值覆盖。
+  const next = local.map(p => (p.id === id ? { ...p, ...clean, dirty: true } : p));
+  await writeLocal(next);
+  const updated = next.find(p => p.id === id) || null;
+
+  const markClean = async () => {
+    const cur = await readLocal();
+    await writeLocal(cur.map(p => (p.id === id ? { ...p, dirty: false } : p)));
+  };
+
+  if (!supabase) return { place: updated, error: null };
+  try {
+    const user = await uid();
+    if (!user) return { place: updated, error: null };
+    const row = {};
+    if ('note' in clean) row.note = clean.note || null;
+    if ('name' in clean) row.name = clean.name;
+    if ('visitedOn' in clean) row.visited_on = clean.visitedOn || null;
+    if ('photoPath' in clean) row.photo_path = clean.photoPath || null;
+    row.updated_at = new Date().toISOString();
+
+    const { error } = await supabase.from(TABLE)
+      .update(row).eq('id', id).eq('user_id', user);
+    if (error) throw error;
+    await markClean();
+    return { place: { ...updated, dirty: false }, error: null };
+  } catch (e) {
+    console.warn('[UserPlaces] update failed (kept locally):', e?.message);
+    return { place: updated, error: null };   // 本机已改,不算失败
   }
 }
 

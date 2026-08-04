@@ -22,6 +22,7 @@ import {
 import { K, auditKeys } from './src/lib/storage';
 import { useWorldFootprint } from './src/features/world/useWorldFootprint';
 import KanaScreen from './src/features/kana/KanaScreen';
+import { bonusOf } from './src/features/world/record';
 import * as AppleAuthentication from 'expo-apple-authentication';
 
 
@@ -4262,9 +4263,13 @@ function NaTab({ mapPlaces: initialPlaces }) {
   // 把「能不能打卡」绑在「言有没有收录」上,等于让内容产量成为产品天花板。
   const {
     places, visitedIds, checkinDates, placeNotes, photoUris, myPlaces, mapPoints,
+    customRecords,
     checkIn, saveNote: persistNote, toggleStatus: togglePlaceStatus, pickPhoto,
-    addPlace, removePlace,
+    addPlace, removePlace, updatePlace, pickPhotoForCustom,
   } = useWorldFootprint(initialPlaces);
+  // 自己记的地点:展开哪一条、手账草稿
+  const [openMineId, setOpenMineId] = useState(null);
+  const [mineDrafts, setMineDrafts] = useState({});
   const [addOpen, setAddOpen] = useState(false);
   const [addQuery, setAddQuery] = useState('');
   const [addHits, setAddHits] = useState([]);
@@ -4777,24 +4782,97 @@ useEffect(() => {
             <Text style={ms.mineHeadTxt}>我记的 {myPlaces.length} 个</Text>
           </View>
         )}
-        {myPlaces.map(mp => (
-          <View key={mp.id} style={ms.mineRow}>
-            <View style={{ flex: 1 }}>
-              <Text style={ms.mineName}>{mp.name}</Text>
-              {!!(mp.city || mp.country) && (
-                <Text style={ms.mineMeta}>{[mp.city, mp.country].filter(Boolean).join(' · ')}</Text>
+        {/* 自己记的地方和精选地点是同一种东西 —— 一条打卡记录。
+            所以这里给的是同样的东西:照片、手账、日期、可展开的详情。
+            唯一的差别是有没有踩到言收录过的坐标,踩到了多一段内容(bonus)。 */}
+        {customRecords.map(rec => {
+          const isOpen = openMineId === rec.id;
+          const bonus = bonusOf(rec);
+          return (
+            <TouchableOpacity
+              key={rec.key}
+              style={[ms.mineRow, isOpen && ms.mineRowOpen]}
+              activeOpacity={0.9}
+              onPress={() => setOpenMineId(isOpen ? null : rec.id)}
+            >
+              <View style={ms.mineTop}>
+                <View style={{ flex: 1 }}>
+                  <Text style={ms.mineName}>
+                    {bonus?.emoji ? `${bonus.emoji} ` : ''}{rec.name}
+                  </Text>
+                  {!!rec.loc && <Text style={ms.mineMeta}>{rec.loc}</Text>}
+                  {!!rec.visitedOn && (
+                    <Text style={ms.mineMeta}>
+                      ⛩ {new Date(rec.visitedOn).toLocaleDateString('zh-CN')}
+                    </Text>
+                  )}
+                  {/* 没坐标就不会出现在地图上。与其让人对着「点亮 0 处」纳闷,不如直说。 */}
+                  {!rec.hasCoords && (
+                    <Text style={ms.mineMeta}>⚠️ 没有坐标,不会点亮地图</Text>
+                  )}
+                  {/* 收起时也能看见手账的头一行 —— 否则要挨个点开才知道哪条写过 */}
+                  {!isOpen && !!rec.note && (
+                    <Text style={ms.mineNote} numberOfLines={1}>{rec.note}</Text>
+                  )}
+                </View>
+                <TouchableOpacity
+                  onPress={() => deleteMyPlace(rec.id, rec.name)}
+                  hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                >
+                  <Text style={ms.mineDel}>删</Text>
+                </TouchableOpacity>
+              </View>
+
+              {isOpen && (
+                <View style={ms.mineBody}>
+                  {rec.photoUri ? (
+                    <TouchableOpacity onPress={() => pickPhotoForCustom(rec.id)}>
+                      <Image source={{ uri: rec.photoUri }} style={ms.minePhoto} />
+                    </TouchableOpacity>
+                  ) : (
+                    <TouchableOpacity
+                      style={ms.photoPlaceholder}
+                      onPress={() => pickPhotoForCustom(rec.id)}
+                    >
+                      <Text style={ms.photoPlaceholderTxt}>＋ 放一张这里的照片</Text>
+                    </TouchableOpacity>
+                  )}
+
+                  {/* 踩到收录点的奖励内容。踩不到就没有,这是常态不是缺失。 */}
+                  {!!bonus?.jp && (
+                    <View style={ms.eggBox}>
+                      <Text style={ms.eggTitle}>言在这里收了一句</Text>
+                      <Text style={ms.eggBody}>{bonus.jp}{bonus.zh ? ` · ${bonus.zh}` : ''}</Text>
+                    </View>
+                  )}
+                  {!!bonus?.cultureEgg && (
+                    <View style={ms.eggBox}>
+                      <Text style={ms.eggTitle}>当地人才知道的</Text>
+                      <Text style={ms.eggBody}>{bonus.cultureEgg}</Text>
+                    </View>
+                  )}
+
+                  <View style={ms.noteBox}>
+                    <TextInput
+                      style={ms.noteInput}
+                      placeholder="写一句手账,留在这个坐标…"
+                      placeholderTextColor={C.mutedLight}
+                      value={mineDrafts[rec.id] ?? rec.note ?? ''}
+                      onChangeText={t => setMineDrafts(prev => ({ ...prev, [rec.id]: t }))}
+                      // 没动过草稿就什么都不做 —— 否则点一下输入框再退出,
+                      // 会把已有的备注写成空字符串
+                      onEndEditing={() => {
+                        const draft = mineDrafts[rec.id];
+                        if (draft !== undefined) updatePlace(rec.id, { note: draft.trim() });
+                      }}
+                      multiline
+                    />
+                  </View>
+                </View>
               )}
-              {/* 没坐标就不会出现在地图上。与其让人对着「点亮 0 处」纳闷,不如直说。 */}
-              {!(Number.isFinite(mp.lat) && Number.isFinite(mp.lng)) && (
-                <Text style={ms.mineMeta}>⚠️ 没有坐标,不会点亮地图 · 删掉重记更具体的地名即可</Text>
-              )}
-              {!!mp.note && <Text style={ms.mineNote}>{mp.note}</Text>}
-            </View>
-            <TouchableOpacity onPress={() => deleteMyPlace(mp.id, mp.name)} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
-              <Text style={ms.mineDel}>删</Text>
             </TouchableOpacity>
-          </View>
-        ))}
+          );
+        })}
 
         <TouchableOpacity style={ms.addCard} onPress={() => setAddOpen(true)} activeOpacity={0.82}>
           <Text style={{ fontSize: 20, color: C.mutedLight }}>＋</Text>
@@ -5045,11 +5123,16 @@ const ms = StyleSheet.create({
   addTxt: { fontSize: 13, color: C.mutedLight },
   mineHead: { marginTop: 18, marginBottom: 6, paddingHorizontal: 2 },
   mineHeadTxt: { fontSize: 11, color: C.muted, fontWeight: '700', letterSpacing: 0.5 },
+  // 展开后是一条完整的打卡记录(照片/内容/手账),所以外层不再是横向行,
+  // 由 mineTop 承担原来那一行的布局
   mineRow: {
-    flexDirection: 'row', alignItems: 'center', gap: 10,
     backgroundColor: C.white, borderWidth: 1, borderColor: C.border,
     borderRadius: 13, padding: 12, marginBottom: 7,
   },
+  mineRowOpen: { borderColor: C.lava },
+  mineTop: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  mineBody: { marginTop: 12, gap: 10 },
+  minePhoto: { width: '100%', height: 160, borderRadius: 12, backgroundColor: C.tag },
   mineName: { fontSize: 13.5, color: C.ink, fontWeight: '700' },
   mineMeta: { fontSize: 11, color: C.muted, marginTop: 3 },
   mineNote: { fontSize: 11.5, color: C.mutedWarm, marginTop: 5, lineHeight: 17 },

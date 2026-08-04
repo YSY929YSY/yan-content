@@ -19,7 +19,10 @@ import * as ImagePicker from 'expo-image-picker';
 
 import { K, readJson, writeJson } from '../../lib/storage';
 import { pullPlaceCheckins, pushPlaceCheckin, uploadPlaceCheckinPhoto } from '../../lib/sync';
-import { listUserPlaces, addUserPlace, removeUserPlace } from '../../lib/userPlaces';
+import {
+  listUserPlaces, addUserPlace, removeUserPlace, updateUserPlace,
+} from '../../lib/userPlaces';
+import { fromCustom } from './record';
 import {
   splitCloudCheckins, mergeMap, mergeIds, sanitizeVisitedIds, buildMapPoints,
 } from './footprintMerge';
@@ -170,10 +173,49 @@ export function useWorldFootprint(initialPlaces) {
     await removeUserPlace(id);
   }, []);
 
+  /** 改自己记的地点(备注、到访日期)。先本地生效,云端失败也不回滚。 */
+  const updatePlace = useCallback(async (id, patch) => {
+    setMyPlaces(prev => prev.map(p => (p.id === id ? { ...p, ...patch } : p)));
+    await updateUserPlace(id, patch);
+  }, []);
+
+  /**
+   * 给自己记的地点传照片。
+   *
+   * 走的是和精选地点同一个 Storage 桶、同一套路径约定({uid}/{id}.jpg),
+   * 因为它们本来就是同一种东西 —— 一条打卡记录的照片。
+   * 自定义 id 是 uuid,精选 id 是短横线 slug,不会撞。
+   */
+  const pickPhotoForCustom = useCallback(async (id) => {
+    const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!perm.granted) {
+      Alert.alert('无法访问照片', '你可以在系统设置中允许“言”访问照片后，再上传打卡照片。',
+        [{ text: '知道了' }]);
+      return;
+    }
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    });
+    if (result.canceled || !result.assets?.[0]?.uri) return;
+
+    const asset = result.assets[0];
+    // 本机 uri 先上屏(离线也看得见),再尝试上云
+    setPhotoUris(prev => ({ ...prev, [id]: asset.uri }));
+
+    const upload = await uploadPlaceCheckinPhoto(id, asset.uri, asset.mimeType || 'image/jpeg');
+    if (!upload?.photoPath) return;
+    await updatePlace(id, { photoPath: upload.photoPath });
+  }, [setPhotoUris, updatePlace]);
+
   const mapPoints = buildMapPoints(places, myPlaces, { visitedIds, checkinDates });
 
+  // 自己记的地点 → 统一记录。坐标撞上收录点的,会在这里拿到那份内容。
+  const customRecords = myPlaces.map(mp => fromCustom(mp, initialPlaces, { photoUris }));
+
   return {
-    places, visitedIds, checkinDates, placeNotes, photoUris, photoPaths, myPlaces, mapPoints,
-    checkIn, saveNote, toggleStatus, pickPhoto, addPlace, removePlace,
+    places, visitedIds, checkinDates, placeNotes, photoUris, photoPaths, myPlaces,
+    mapPoints, customRecords,
+    checkIn, saveNote, toggleStatus, pickPhoto,
+    addPlace, removePlace, updatePlace, pickPhotoForCustom,
   };
 }
