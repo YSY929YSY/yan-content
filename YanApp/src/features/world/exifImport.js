@@ -124,7 +124,16 @@ export function summarize({
       lines.push('\n原因:相册里这些照片本身没有位置。修过图、从网上或大疆等设备下载的图,GPS 通常已被去掉。');
     } else if (diag.noTime) {
       lines.push(`\n其中 ${diag.noTime} 张有位置但读不到拍摄时间,无法归到某一天。`);
+    } else {
+      // 三条都不成立说明我对失败方式的假设不全。
+      // 与其显示一句正确但无用的话,不如把原始数字给出来。
+      lines.push('\n原因不明,以下是读取过程的原始计数:');
     }
+    lines.push(
+      `\n相册标识 ${diag.withAssetId}/${picked} · 相册给出位置 ${diag.fromLibrary}`
+      + ` · 位置不可用 ${diag.locUnusable ?? 0} · EXIF 兜底 ${diag.fromExif}`
+      + ` · 有位置无时间 ${diag.noTime} · 查询失败 ${diag.infoFailed}`,
+    );
   }
   return lines.join('\n');
 }

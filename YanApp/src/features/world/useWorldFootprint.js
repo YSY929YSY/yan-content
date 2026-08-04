@@ -246,7 +246,10 @@ export function useWorldFootprint(initialPlaces) {
     // 每一步都计数:位置读不到的原因有好几种(没给 assetId、相册查不到、
     // EXIF 被抹掉),它们的修法完全不同。只报「没有位置信息」等于什么都没说 ——
     // 用户明明知道自己的照片是带定位的。
-    const diag = { withAssetId: 0, fromLibrary: 0, fromExif: 0, noTime: 0, infoFailed: 0 };
+    const diag = {
+      withAssetId: 0, fromLibrary: 0, fromExif: 0, noTime: 0, infoFailed: 0,
+      locUnusable: 0,   // 有 location 对象但经纬度取不出有效数字
+    };
     const assets = [];
     for (let i = 0; i < picked.assets.length; i += 1) {
       const a = picked.assets[i];
@@ -262,7 +265,16 @@ export function useWorldFootprint(initialPlaces) {
         diag.withAssetId += 1;
         try {
           const info = await MediaLibrary.getAssetInfoAsync(a.assetId);
-          if (info?.location) { loc = info.location; diag.fromLibrary += 1; }
+          if (info?.location) {
+            // 有对象不等于有坐标 —— 分开计数,否则「读到了位置却用不了」
+            // 会被算成成功,诊断反而误导人
+            if (Number.isFinite(info.location.latitude) && Number.isFinite(info.location.longitude)) {
+              loc = info.location;
+              diag.fromLibrary += 1;
+            } else {
+              diag.locUnusable += 1;
+            }
+          }
           if (info?.creationTime) time = info.creationTime;
         } catch { diag.infoFailed += 1; }
       }
