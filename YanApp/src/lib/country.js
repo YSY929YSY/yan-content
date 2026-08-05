@@ -49,3 +49,28 @@ export function countriesOf(records = []) {
   }
   return [...set].sort();
 }
+
+/**
+ * 按国家汇总,给「点亮了哪些、还差哪些」用。
+ *
+ * 为什么要连未点亮的一起给:光看「25 个国家」是个死数字,而「日本还有 6 个
+ * 地方没去」是个可以行动的提示。成就感来自差距可见,不是来自总数。
+ *
+ * @returns 已点亮的在前(按去过的地点数倒序),未点亮的在后(按可去的地点数倒序)
+ */
+export function countryStats(records = []) {
+  const map = new Map();
+  for (const r of records) {
+    const c = normalizeCountry(r?.country);
+    if (!c) continue;
+    if (!map.has(c)) map.set(c, { country: c, been: [], wish: [] });
+    map.get(c)[r.been ? 'been' : 'wish'].push(r.name || '');
+  }
+  const rows = [...map.values()].map(x => ({ ...x, lit: x.been.length > 0 }));
+  return rows.sort((a, b) => {
+    if (a.lit !== b.lit) return a.lit ? -1 : 1;
+    return a.lit
+      ? b.been.length - a.been.length
+      : b.wish.length - a.wish.length;
+  });
+}

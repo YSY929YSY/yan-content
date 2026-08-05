@@ -24,7 +24,7 @@ import {
   listUserPlaces, addUserPlace, removeUserPlace, updateUserPlace,
 } from '../../lib/userPlaces';
 import { fromCurated, fromCustom } from './record';
-import { countriesOf } from '../../lib/country';
+import { countriesOf, countryStats } from '../../lib/country';
 import {
   extractPoints, groupIntoVisits, dedupeAgainstExisting, summarize,
 } from './exifImport';
@@ -359,17 +359,20 @@ export function useWorldFootprint(initialPlaces) {
   const mapPoints = buildMapPoints(places, myPlaces, { visitedIds, checkinDates });
 
   // 点亮了几个国家 —— 精选和自己记的合在一起算,因为它们本来就是同一种记录。
-  const countries = countriesOf([
+  const allRecords = [
     ...initialPlaces.map(p => fromCurated(p, { visitedIds })),
     ...myPlaces.map(mp => fromCustom(mp, [])),
-  ]);
+  ];
+  const countries = countriesOf(allRecords);
+  // 连未点亮的一起给 —— 「25 个国家」是死数字,「日本还有 6 个地方没去」才能行动
+  const countryRows = countryStats(allRecords);
 
   // 自己记的地点 → 统一记录。坐标撞上收录点的,会在这里拿到那份内容。
   const customRecords = myPlaces.map(mp => fromCustom(mp, initialPlaces, { photoUris }));
 
   return {
     places, visitedIds, checkinDates, placeNotes, photoUris, photoPaths, myPlaces,
-    mapPoints, customRecords, countries,
+    mapPoints, customRecords, countries, countryRows,
     checkIn, saveNote, toggleStatus, pickPhoto, setVisitedOn,
     addPlace, removePlace, updatePlace, pickPhotoForCustom, importFromPhotos,
   };

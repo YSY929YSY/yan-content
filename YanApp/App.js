@@ -4272,6 +4272,7 @@ function NaTab({ mapPlaces: initialPlaces }) {
   const [mineDrafts, setMineDrafts] = useState({});
   const [nameDrafts, setNameDrafts] = useState({});
   const [dateDrafts, setDateDrafts] = useState({});
+  const [countryOpen, setCountryOpen] = useState(false);
   // 导入进度。null = 没在导入;字符串 = 当前在做什么(直接显示给用户)
   const [importing, setImporting] = useState(null);
 
@@ -4571,10 +4572,14 @@ useEffect(() => {
           <View style={ms.stats}>
             {/* 国家放第一个:用户回看足迹时在意的是「点亮了几个国家」,
                 不是「打了几个卡」—— 地点数是过程,国家数才是成就。 */}
-            <View style={ms.stat}>
+            <TouchableOpacity
+              style={ms.stat}
+              onPress={() => setCountryOpen(true)}
+              activeOpacity={0.7}
+            >
               <Text style={ms.statN}>{countries.length}</Text>
-              <Text style={ms.statL}>国家</Text>
-            </View>
+              <Text style={ms.statL}>国家 ›</Text>
+            </TouchableOpacity>
             <View style={ms.statDiv} />
             <View style={ms.stat}>
               <Text style={ms.statN}>{been + customRecords.length}</Text>
@@ -5007,6 +5012,48 @@ useEffect(() => {
       </ScrollView>
       )}
 
+      {/* 国家面板。光看「25 个国家」是个死数字,而「日本还有 6 个地方没去」
+          是能行动的提示 —— 成就感来自差距可见,不是来自总数。 */}
+      <Modal visible={countryOpen} transparent animationType="slide" onRequestClose={() => setCountryOpen(false)}>
+        <View style={ms.addLayer}>
+          <Pressable style={ms.addScrim} onPress={() => setCountryOpen(false)} />
+          <View style={[ms.addSheet, { maxHeight: '82%' }]}>
+            <View style={ms.addHead}>
+              <Text style={ms.addTitle}>点亮 {countries.length} 个国家</Text>
+              <TouchableOpacity onPress={() => setCountryOpen(false)}>
+                <Text style={ms.addClose}>×</Text>
+              </TouchableOpacity>
+            </View>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              {countryRows.length === 0 && (
+                <Text style={ms.addHint}>还没有任何记录。打个卡,或者从照片导入。</Text>
+              )}
+              {countryRows.map(row => (
+                <View key={row.country} style={[ms.ctryRow, row.lit && ms.ctryRowLit]}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={[ms.ctryName, row.lit && ms.ctryNameLit]}>
+                      {row.lit ? '● ' : '○ '}{row.country}
+                    </Text>
+                    {row.been.length > 0 && (
+                      <Text style={ms.ctryMeta} numberOfLines={2}>{row.been.join('、')}</Text>
+                    )}
+                    {!row.lit && row.wish.length > 0 && (
+                      <Text style={ms.ctryMeta} numberOfLines={2}>
+                        还差一个:{row.wish.slice(0, 3).join('、')}{row.wish.length > 3 ? ' 等' : ''}
+                      </Text>
+                    )}
+                  </View>
+                  <Text style={[ms.ctryNum, row.lit && ms.ctryNumLit]}>
+                    {row.lit ? row.been.length : row.wish.length}
+                  </Text>
+                </View>
+              ))}
+              <View style={{ height: 20 }} />
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+
       {/* 添加去过的地方。搜地名拿真实经纬度 ——
           存坐标而不是只存地名,以后接真实地图时历史数据能直接落到正确位置。 */}
       <Modal visible={addOpen} transparent animationType="slide" onRequestClose={resetAdd}>
@@ -5301,6 +5348,17 @@ const ms = StyleSheet.create({
   addHitName: { fontSize: 13.5, color: C.ink, fontWeight: '600' },
   addHitMeta: { fontSize: 10.5, color: C.muted, marginTop: 3 },
   addHitWarn: { fontSize: 10.5, color: C.lava, marginTop: 4, lineHeight: 15 },
+  ctryRow: {
+    flexDirection: 'row', alignItems: 'center', gap: 10,
+    paddingVertical: 11, paddingHorizontal: 12, marginBottom: 6,
+    borderRadius: 11, backgroundColor: C.tag,
+  },
+  ctryRowLit: { backgroundColor: C.white, borderWidth: 1, borderColor: C.lava },
+  ctryName: { fontSize: 14, color: C.muted, fontWeight: '600' },
+  ctryNameLit: { color: C.ink, fontWeight: '700' },
+  ctryMeta: { fontSize: 11, color: C.muted, marginTop: 3, lineHeight: 16 },
+  ctryNum: { fontSize: 15, color: C.mutedLight, fontWeight: '700' },
+  ctryNumLit: { color: C.lava },
   addNote: {
     marginTop: 14, backgroundColor: C.paper, borderRadius: 12,
     paddingHorizontal: 13, paddingVertical: 12, fontSize: 13, color: C.ink,
