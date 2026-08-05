@@ -28,7 +28,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const REGISTRY = {
   wordbankProgress: {
     key: 'yan_wordbank_progress', kind: 'user', backfill: 'progress',
-    desc: '单词学习进度',
+    desc: '单词学习进度(间隔复习记录:档位/到期日/忘记次数)',
+  },
+  wordbankSession: {
+    key: 'yan_wordbank_session_v1', kind: 'device', backfill: null,
+    desc: '今日复习队列(哪天挑的、挑了哪些、做完了哪些)',
+    // 不补传:它能从 wordbankProgress 完整重算,补一份能重新算出来的东西没有意义。
+    // 但必须落盘 —— 在这之前它是组件里的 useState,退出页面就没了,
+    // 重进就换一批词,用户永远做不完「今天的任务」。
   },
   worldVisitedIds: {
     key: 'yan_world_footprint_visited_ids', kind: 'user', backfill: 'checkins',

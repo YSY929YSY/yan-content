@@ -2,6 +2,7 @@ import { supabase } from './supabase';
 import { reuploadUserPlaces } from './userPlaces';
 import { pushNotebook } from './tripBackup';
 import { K, readJson, writeJson, remove as removeKey } from './storage';
+import { toCloudRow, fromCloudRow } from '../features/wordbank/srs';
 
 const CHECKIN_PHOTO_BUCKET = 'checkin-photos';
 
@@ -15,26 +16,28 @@ async function getSessionUser() {
   return data.user || null;
 }
 
-export async function pushProgress(wordKey, status, bookId = 'n5') {
+/**
+ * 推一条单词进度。
+ *
+ * 第二个参数是一条**记录**(srs.js 的 { box, dueAt, reps, lapses, lastSeenAt }),
+ * 不再是 'learning' / 'mastered' 字符串 —— 云端要能回答「这个词什么时候该再见到」,
+ * 只存一个标签是答不了的。传 null 表示退回未学,删除这一行。
+ */
+export async function pushProgress(wordKey, rec, bookId = 'n5') {
   if (!supabase) return;
   try {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) return;
 
-    if (status === 'new') {
+    const row = toCloudRow(wordKey, rec, { userId: session.user.id, bookId });
+    if (!row) {
       await supabase.from('word_progress')
         .delete()
         .eq('user_id', session.user.id)
         .eq('word_key', wordKey);
     } else {
       await supabase.from('word_progress')
-        .upsert({
-          user_id: session.user.id,
-          word_key: wordKey,
-          book_id: bookId,
-          status,
-          updated_at: new Date().toISOString(),
-        }, { onConflict: 'user_id,word_key' });
+        .upsert(row, { onConflict: 'user_id,word_key' });
     }
   } catch (e) {
     console.warn('[Sync] push failed:', e.message);
@@ -55,15 +58,19 @@ export async function pushProgress(wordKey, status, bookId = 'n5') {
  */
 export async function backfillProgress(progressMap, bookId = 'n5') {
   if (!supabase) return { count: 0, error: 'offline' };
-  const entries = Object.entries(progressMap || {}).filter(([, v]) => v && v !== 'new');
+  const entries = Object.entries(progressMap || {});
   if (!entries.length) return { count: 0, error: null };
   try {
     const user = await getSessionUser();
     if (!user) return { count: 0, error: 'no session' };
     const now = new Date().toISOString();
-    const rows = entries.map(([word_key, status]) => ({
-      user_id: user.id, word_key, book_id: bookId, status, updated_at: now,
-    }));
+    // toCloudRow 顺带做了归一:本机可能还留着旧版写的字符串,那批也要补传,
+    // 而且要按和界面上完全一样的规则迁移(learning → 今天到期)。
+    // 未学的返回 null,直接排掉 —— 补传的是「学过什么」,不是「没学过什么」。
+    const rows = entries
+      .map(([word_key, rec]) => toCloudRow(word_key, rec, { userId: user.id, bookId, now }))
+      .filter(Boolean);
+    if (!rows.length) return { count: 0, error: null };
     // 分批,别一次 upsert 几千行把请求撑爆
     let done = 0;
     for (let i = 0; i < rows.length; i += 400) {
@@ -207,18 +214,24 @@ export async function pullProgress() {
 
     const { data, error } = await supabase
       .from('word_progress')
-      .select('word_key, status')
+      .select('word_key, status, box, due_at, reps, lapses, last_seen_at')
       .eq('user_id', session.user.id);
 
     if (error) throw error;
 
     const progress = {};
     for (const row of data) {
-      progress[row.word_key] = row.status;
+      // 旧账号的行只有 status,没有 box/due_at —— fromCloudRow 认得这种行,
+      // 走和本地旧数据同一套迁移落点,不需要先在数据库里跑一遍。
+      const rec = fromCloudRow(row);
+      if (rec) progress[row.word_key] = rec;
     }
     console.log('[Sync] pulled', Object.keys(progress).length, 'entries');
     return progress;
   } catch (e) {
+    // 返回 null 而不是 {} —— 调用方靠这个区分「云端是空的」和「没拉到」。
+    // 库还没跑 schema.word-srs.sql 时,上面 select 新列会直接报错走到这里,
+    // 结果是本地照常可用、不被空值覆盖(硬规矩 1)。
     console.warn('[Sync] pull failed:', e.message);
     return null;
   }

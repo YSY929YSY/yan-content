@@ -19,7 +19,11 @@ import {
   backfillAll,
   pendingBackfill,
 } from './src/lib/sync';
-import { K, auditKeys } from './src/lib/storage';
+import { K, auditKeys, readJson, writeJson } from './src/lib/storage';
+import {
+  DAILY_GOAL, todayStr, normalizeProgress, mergeProgress,
+  review, markMastered, pickSession,
+} from './src/features/wordbank/srs';
 import { useWorldFootprint } from './src/features/world/useWorldFootprint';
 import KanaScreen from './src/features/kana/KanaScreen';
 import { bonusOf } from './src/features/world/record';
@@ -663,8 +667,8 @@ function HomeScreen({ setTab, setSceneState, setSubTab, content, onDeleteAccount
               style={hs.sumCell}
               onPress={() => { setTab('pie'); setSubTab('wordbank'); }}
             >
-              <Text style={hs.sumN}>{sum.learning}</Text>
-              <Text style={hs.sumL}>学习中</Text>
+              <Text style={hs.sumN}>{sum.due}</Text>
+              <Text style={hs.sumL}>今天该复习</Text>
               {sum.mastered > 0 && <Text style={hs.sumSub}>已掌握 {sum.mastered}</Text>}
             </TouchableOpacity>
             <View style={hs.sumDiv} />
@@ -1570,7 +1574,6 @@ const wbs = StyleSheet.create({
 // ─────────────────────────────────────────────
 // Word Bank Screen
 // ─────────────────────────────────────────────
-const WORDBANK_PROGRESS_KEY = K.wordbankProgress;
 
 // 用户可能敲 2026-07-15 / 2026/7/15 / 20260715,都归一成 YYYY-MM-DD。
 // 认不出来就返回空 —— 宁可用今天,也不要存一个解析不了的日期让旅迹算错。
@@ -1589,35 +1592,78 @@ const normalizeDate = (v) => {
 // (例句仅 39%)。数据层一直知道这件事,界面以前完全不体现 —— 用户看到的每张卡
 // 长得都一样,而作者定的标准是「词意 0 容忍」。标出来是诚实,也让人能只学精修的。
 const isDraftedWord = (w) => !w?.status || w.status === 'zh_drafted';
-const WB_DAILY_GOAL = 10;
-const WB_NEXT_STATUS = { new: 'learning', learning: 'mastered', mastered: 'new' };
 const wordKey = (item) => `${item.word}-${item.reading}`;
 
 function WordBankScreen({ wordBank, book, onBack }) {
   const [query, setQuery] = useState('');
+  // key → 间隔复习记录(见 features/wordbank/srs.js)。没有记录 = 没学过。
   const [progress, setProgress] = useState({});
+  // 今日队列 { date, keys, done }。落盘的 —— 以前它是个 useState,
+  // 退出页面就没了,重进重新挑一批,用户永远做不完「今天的任务」。
+  const [session, setSession] = useState(null);
   const [statusFilter, setStatusFilter] = useState('all');
-  const [todayKeys, setTodayKeys] = useState(null);
   const [selectedWord, setSelectedWord] = useState(null);
   const [selectedIdx, setSelectedIdx] = useState(0);
   const [navList, setNavList] = useState([]);
   const { speak, speakingKey } = useSpeech();
 
+  // 队列只从定稿词里挑,和列表默认显示的口径一致 —— 不能派一个连例句都没有的词当今日任务。
+  const bankRef = useRef(wordBank);
+  bankRef.current = wordBank;
+
+  // 每本词书一条独立队列,落盘的是 { [bookId]: {date,keys,done} } 这整份。
+  // 一份全局队列会串:在 N5 挑的 10 个词切到 N4 一个都不在词库里,
+  // 用户看到的是「今日任务 10」点进去空列表。
+  const bookId = book?.id || 'n5';
+  const sessionAllRef = useRef({});
+
   useEffect(() => {
     let alive = true;
+    setSession(null);
     (async () => {
-      try {
-        const raw = await AsyncStorage.getItem(WORDBANK_PROGRESS_KEY);
-        const local = raw ? JSON.parse(raw) : {};
-        const cloud = await pullProgress();
-        const merged = { ...(typeof local === 'object' && !Array.isArray(local) ? local : {}), ...cloud };
-        if (!alive) return;
-        setProgress(merged);
-        AsyncStorage.setItem(WORDBANK_PROGRESS_KEY, JSON.stringify(merged)).catch(() => {});
-      } catch (e) { console.warn('[WordBank] load progress failed', e); }
+      const today = todayStr();
+      const [savedProgress, savedSessions] = await Promise.all([
+        readJson(K.wordbankProgress, null),
+        readJson(K.wordbankSession, null),
+      ]);
+      if (!alive) return;
+
+      // 先把本地那份显示出来,不等网络。旧版存的是 'learning' 字符串,
+      // normalizeProgress 在这里把它迁成记录 —— 读盘是唯一的迁移入口。
+      const local = normalizeProgress(savedProgress, today);
+      setProgress(local);
+
+      // 云端拉不到时 mergeProgress 原样返回本地,绝不用空值覆盖(硬规矩 1)
+      const merged = mergeProgress(local, await pullProgress(), today);
+      if (!alive) return;
+      setProgress(merged);
+      writeJson(K.wordbankProgress, merged);
+
+      const all = savedSessions && typeof savedSessions === 'object' && !Array.isArray(savedSessions)
+        ? savedSessions : {};
+      const saved = all[bookId];
+      const fresh = saved && saved.date === today && Array.isArray(saved.keys)
+        ? {
+          date: today,
+          keys: saved.keys,
+          done: Array.isArray(saved.done) ? saved.done : [],
+        }
+        // 换了一天才重挑。同一天里进出多少次都是同一批词。
+        : {
+          date: today,
+          keys: pickSession(
+            (bankRef.current || []).filter(w => !isDraftedWord(w)),
+            merged,
+            { today, limit: DAILY_GOAL, keyOf: wordKey }
+          ),
+          done: [],
+        };
+      sessionAllRef.current = { ...all, [bookId]: fresh };
+      setSession(fresh);
+      writeJson(K.wordbankSession, sessionAllRef.current);
     })();
     return () => { alive = false; };
-  }, []);
+  }, [bookId]);
 
   const q = query.trim().toLowerCase();
   const searched = !q ? wordBank : wordBank.filter(w =>
@@ -1631,37 +1677,64 @@ function WordBankScreen({ wordBank, book, onBack }) {
     { id: 'learning', label: '学习中' },
     { id: 'mastered', label: '已掌握' },
   ];
+  const today = todayStr();
+  const statusOf = (w) => progress[wordKey(w)]?.status || 'new';
+  const sessionKeys = session ? new Set(session.keys) : null;
+  const doneKeys = session ? new Set(session.done) : new Set();
+
   const byStatus = statusFilter === 'today'
-    ? searched.filter(w => todayKeys && todayKeys.has(wordKey(w)))
+    ? searched.filter(w => sessionKeys && sessionKeys.has(wordKey(w)))
+    : statusFilter === 'due'
+    ? searched.filter(w => (progress[wordKey(w)]?.dueAt || '9999') <= today)
     : statusFilter === 'all' ? searched
-    : searched.filter(w => (progress[wordKey(w)] || 'new') === statusFilter);
+    : searched.filter(w => statusOf(w) === statusFilter);
   // 词书 = 已定稿的那批(例句/罗马音/搭配齐全);其余词条只在「搜索」时出现,
   // 当词典用 —— 词典本来就不是每个词都配例句。
   // 不在界面上暴露 status,那是数据管道的词汇,不该让用户替开发者做质检。
-  const filtered = q ? byStatus : byStatus.filter(w => !isDraftedWord(w));
+  //
+  // 「今日任务」和「待复习」两个视图不过这道滤:队列和到期表是按用户实际学过的词
+  // 算出来的,用户可能是搜索时顺手学的起草词。滤掉它们会让按钮上写着「待复习 3」
+  // 而列表里只有 2 条 —— 数字和眼前的东西对不上,比多显示一个粗糙词条更伤信任。
+  const skipDraftFilter = q || statusFilter === 'today' || statusFilter === 'due';
+  const filtered = skipDraftFilter ? byStatus : byStatus.filter(w => !isDraftedWord(w));
 
-  const reviewCount = wordBank.filter(w => (progress[wordKey(w)] || 'new') === 'learning').length;
+  // 只数这本书里的词。progress 是全局的(键是「词-读音」,不分书),
+  // 直接数整张表会把 N3 的到期词算到 N5 的按钮上。
+  const dueTotal = wordBank.reduce(
+    (n, w) => n + ((progress[wordKey(w)]?.dueAt || '9999') <= today ? 1 : 0), 0
+  );
+  const todayLeft = session ? session.keys.filter(k => !doneKeys.has(k)).length : 0;
 
-  const startToday = () => {
-    if (!todayKeys) {
-      const keys = new Set();
-      for (const w of wordBank) {
-        if (keys.size >= WB_DAILY_GOAL) break;
-        if ((progress[wordKey(w)] || 'new') === 'new') keys.add(wordKey(w));
-      }
-      setTodayKeys(keys);
-    }
-    setQuery(''); setStatusFilter('today');
-  };
+  const startToday = () => { setQuery(''); setStatusFilter('today'); };
 
-  const setWordStatus = (id) => {
+  /**
+   * 评一次分。grade: 'again' | 'hard' | 'good' | 'mastered'
+   *
+   * 三件事必须一起发生:算出新记录、落盘、推云端。以前这里只改一个标签,
+   * 现在改的是「下次什么时候再见到它」—— 漏掉落盘就等于这次复习白做了。
+   */
+  const gradeWord = (grade) => {
     const key = wordKey(selectedWord);
+    const now = todayStr();
+
     setProgress(prev => {
-      const merged = { ...prev };
-      if (id === 'new') { delete merged[key]; } else { merged[key] = id; }
-      AsyncStorage.setItem(WORDBANK_PROGRESS_KEY, JSON.stringify(merged)).catch(() => {});
-      pushProgress(key, id, book?.id || 'n5');
-      return merged;
+      const rec = grade === 'mastered'
+        ? markMastered(prev[key], now)
+        : review(prev[key], grade, now);
+      const next = { ...prev, [key]: rec };
+      writeJson(K.wordbankProgress, next);
+      pushProgress(key, rec, bookId);
+      return next;
+    });
+
+    // 「忘了」不算做完 —— 它当天就该再见一次,标记成完成等于把它推到了明天。
+    if (grade === 'again') return;
+    setSession(prev => {
+      if (!prev || !prev.keys.includes(key) || prev.done.includes(key)) return prev;
+      const next = { ...prev, done: [...prev.done, key] };
+      sessionAllRef.current = { ...sessionAllRef.current, [bookId]: next };
+      writeJson(K.wordbankSession, sessionAllRef.current);
+      return next;
     });
   };
 
@@ -1669,9 +1742,10 @@ function WordBankScreen({ wordBank, book, onBack }) {
     return (
       <WBDetailPage
         entry={selectedWord}
-        status={progress[wordKey(selectedWord)] || 'new'}
+        record={progress[wordKey(selectedWord)] || null}
+        today={today}
         onBack={() => setSelectedWord(null)}
-        onSetStatus={setWordStatus}
+        onGrade={gradeWord}
         speak={speak}
         speakingKey={speakingKey}
         hasPrev={selectedIdx > 0}
@@ -1692,10 +1766,14 @@ function WordBankScreen({ wordBank, book, onBack }) {
         <Text style={wb.sub}>JLPT {book?.level || 'N5'} · {wordBank.length} 词 · {book?.desc || '高频词块 · 例句'}</Text>
         <View style={wb.ctaRow}>
           <TouchableOpacity style={[wb.ctaBtn, statusFilter === 'today' && wb.ctaBtnActive]} onPress={startToday}>
-            <Text style={[wb.ctaBtnTxt, statusFilter === 'today' && wb.ctaBtnTxtActive]}>今日 {WB_DAILY_GOAL} 词</Text>
+            <Text style={[wb.ctaBtnTxt, statusFilter === 'today' && wb.ctaBtnTxtActive]}>
+              {/* session 还没读出来时不能显示「今日已完成」—— 冷启动那一瞬间
+                  告诉用户今天没事干,他就真的关掉了 */}
+              {!session ? '今日任务' : todayLeft > 0 ? `今日任务 ${todayLeft}` : '今日已完成'}
+            </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[wb.ctaBtn, statusFilter === 'learning' && wb.ctaBtnActive]} onPress={() => { setQuery(''); setStatusFilter('learning'); }}>
-            <Text style={[wb.ctaBtnTxt, statusFilter === 'learning' && wb.ctaBtnTxtActive]}>继续复习{reviewCount > 0 ? ` (${reviewCount})` : ''}</Text>
+          <TouchableOpacity style={[wb.ctaBtn, statusFilter === 'due' && wb.ctaBtnActive]} onPress={() => { setQuery(''); setStatusFilter('due'); }}>
+            <Text style={[wb.ctaBtnTxt, statusFilter === 'due' && wb.ctaBtnTxtActive]}>待复习{dueTotal > 0 ? ` (${dueTotal})` : ''}</Text>
           </TouchableOpacity>
         </View>
         <TextInput
@@ -1721,22 +1799,31 @@ function WordBankScreen({ wordBank, book, onBack }) {
         contentContainerStyle={{ padding: 12, gap: 4 }}
         showsVerticalScrollIndicator={false}
         renderItem={({ item, index }) => {
-          const st = progress[wordKey(item)] || 'new';
+          const key = wordKey(item);
+          const st = progress[key]?.status || 'new';
+          const done = statusFilter === 'today' && doneKeys.has(key);
           return (
-            <TouchableOpacity style={wb.row} onPress={() => { setSelectedWord(item); setSelectedIdx(index); setNavList(filtered); }} activeOpacity={0.7}>
+            <TouchableOpacity style={[wb.row, done && wb.rowDone]} onPress={() => { setSelectedWord(item); setSelectedIdx(index); setNavList(filtered); }} activeOpacity={0.7}>
               <View style={wb.rowHead}>
                 <Text style={wb.word}>{item.word}</Text>
                 <Text style={wb.reading}>{item.reading}</Text>
                 <View style={wb.posTag}><Text style={wb.posTagTxt}>{item.pos}</Text></View>
-                {st === 'learning' && <View style={wb.dotLearning} />}
-                {st === 'mastered' && <Text style={wb.checkMastered}>✓</Text>}
+                {done ? <Text style={wb.checkMastered}>今天过了</Text>
+                  : st === 'learning' ? <View style={wb.dotLearning} />
+                  : st === 'mastered' ? <Text style={wb.checkMastered}>✓</Text> : null}
               </View>
               <Text style={wb.zh}>{item.meaning_zh}</Text>
               {!!item.coreChunk && <Text style={wb.chunk}>{item.coreChunk}</Text>}
             </TouchableOpacity>
           );
         }}
-        ListEmptyComponent={<Text style={wb.empty}>没有找到匹配的词</Text>}
+        ListEmptyComponent={(
+          <Text style={wb.empty}>
+            {statusFilter === 'due' ? '今天没有到期的词,明天再来'
+              : statusFilter === 'today' && session ? '今日任务已完成'
+              : '没有找到匹配的词'}
+          </Text>
+        )}
       />
     </View>
   );
@@ -1758,6 +1845,7 @@ const wb = StyleSheet.create({
   filterChipTxt: { fontSize: 11, fontWeight: '600', color: C.muted },
   filterChipTxtActive: { color: C.white },
   row: { backgroundColor: C.white, borderRadius: 6, paddingHorizontal: 12, paddingVertical: 9, borderWidth: 1, borderColor: C.border, gap: 3 },
+  rowDone: { opacity: 0.5 },
   rowHead: { flexDirection: 'row', alignItems: 'center', gap: 7 },
   word: { fontSize: 16, fontWeight: '700', color: C.ink },
   reading: { fontSize: 11, color: C.muted },
@@ -1777,15 +1865,23 @@ const LOAN_LANG = {
   lat: '拉丁语', gre: '希腊语',
 };
 
-function WBDetailPage({ entry, status, onBack, onSetStatus, speak, speakingKey, hasPrev, hasNext, onPrev, onNext }) {
+function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKey, hasPrev, hasNext, onPrev, onNext }) {
   useEffect(() => {
     speak(entry.word, 'ja-JP', `wd-auto-${entry.word}`);
   }, [entry.word]);
 
-  const handleStatus = (id) => {
-    onSetStatus(id);
-    if (hasNext) setTimeout(onNext, 120);
+  // 评分后自动翻下一词。「忘了」不翻 —— 那个词当天还要再见,
+  // 直接跳走会让人以为自己刚才标错了。
+  const handleGrade = (grade) => {
+    onGrade(grade);
+    if (hasNext && grade !== 'again') setTimeout(onNext, 120);
   };
+
+  // 让间隔可见。用户凭什么信任「系统会在合适的时候再问我」——
+  // 只有把「下次:8月12日」摆出来,这个承诺才是可验证的。
+  const nextHint = !record ? '还没学过'
+    : record.dueAt <= today ? '今天到期'
+    : `下次 ${record.dueAt.slice(5).replace('-', '月')}日`;
 
   return (
     <View style={{ flex: 1, backgroundColor: C.paper }}>
@@ -1843,20 +1939,26 @@ function WBDetailPage({ entry, status, onBack, onSetStatus, speak, speakingKey, 
           </View>
         )}
         <View style={wd.section}>
+          <View style={wd.gradeMeta}>
+            <Text style={wd.gradeHint}>{nextHint}</Text>
+            {!!record?.lapses && <Text style={wd.gradeHint}>忘过 {record.lapses} 次</Text>}
+          </View>
           <View style={wd.statusRow}>
-            <TouchableOpacity
-              style={[wd.statusChip, status === 'learning' && wd.statusChipX]}
-              onPress={() => handleStatus(status === 'learning' ? 'new' : 'learning')}
-            >
-              <Text style={[wd.statusTxt, status === 'learning' && wd.statusTxtX]}>✕  不认识</Text>
+            <TouchableOpacity style={[wd.statusChip, wd.gradeAgain]} onPress={() => handleGrade('again')}>
+              <Text style={[wd.statusTxt, wd.statusTxtX]}>忘了</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={[wd.statusChip, status === 'mastered' && wd.statusChipCheck]}
-              onPress={() => handleStatus(status === 'mastered' ? 'new' : 'mastered')}
-            >
-              <Text style={[wd.statusTxt, status === 'mastered' && wd.statusTxtCheck]}>✓  认识</Text>
+            <TouchableOpacity style={wd.statusChip} onPress={() => handleGrade('hard')}>
+              <Text style={wd.statusTxt}>一般</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[wd.statusChip, wd.gradeGood]} onPress={() => handleGrade('good')}>
+              <Text style={[wd.statusTxt, wd.statusTxtCheck]}>会了</Text>
             </TouchableOpacity>
           </View>
+          {record?.status !== 'mastered' && (
+            <TouchableOpacity style={wd.masterBtn} onPress={() => handleGrade('mastered')}>
+              <Text style={wd.masterTxt}>这个词不用再问我了</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </ScrollView>
       <View style={wd.bottomNav}>
@@ -1892,11 +1994,17 @@ const wd = StyleSheet.create({
   exZh: { fontSize: 12, color: C.muted },
   statusRow: { flexDirection: 'row', gap: 8 },
   statusChip: { flex: 1, borderRadius: 6, paddingVertical: 10, alignItems: 'center', borderWidth: 1, borderColor: C.border, backgroundColor: C.white },
-  statusChipX: { backgroundColor: C.lava, borderColor: C.lava },
-  statusChipCheck: { backgroundColor: C.ink, borderColor: C.ink },
+  // 三档评分:两端着色、中间留白 —— 「一般」是最常被点的一档,
+  // 让它最轻,免得用户为了「点哪个颜色好看」而不是按真实记忆去选。
+  gradeAgain: { backgroundColor: C.lava, borderColor: C.lava },
+  gradeGood: { backgroundColor: C.ink, borderColor: C.ink },
   statusTxt: { fontSize: 13, fontWeight: '700', color: C.muted },
   statusTxtX: { color: C.white },
   statusTxtCheck: { color: C.white },
+  gradeMeta: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 },
+  gradeHint: { fontSize: 11, color: C.muted },
+  masterBtn: { marginTop: 8, alignItems: 'center', paddingVertical: 6 },
+  masterTxt: { fontSize: 11, color: C.mutedLight, fontWeight: '600' },
   bottomNav: { flexDirection: 'row', borderTopWidth: 1, borderTopColor: C.border, backgroundColor: C.white },
   bottomNavBtn: { flex: 1, paddingVertical: 13, alignItems: 'center' },
   bottomNavBtnNext: { borderLeftWidth: 1, borderLeftColor: C.border },

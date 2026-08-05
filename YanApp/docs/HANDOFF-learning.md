@@ -66,23 +66,38 @@ WB_NEXT_STATUS = { new: 'learning', learning: 'mastered', mastered: 'new' }
 
 ---
 
-## 三、下一步建议做什么
+## 三、间隔复习(2026-08 已做)
 
-**间隔复习**是学习线的核心缺口,做完它,前面所有内容才开始产生累积。
+学习线的核心缺口,做完之后前面的内容才开始产生累积。
 
-最小可用形态:
+算法在 `src/features/wordbank/srs.js`,纯函数、零 RN 依赖,
+测试 `src/lib/__tests__/srs.test.mjs`(36 条)。
 
-1. 词的进度从 `'new'|'learning'|'mastered'` 三态,扩成一条记录:
-   `{ status, dueAt, lapses, lastSeenAt }`
-2. 「今日任务」= 从 `dueAt <= 今天` 里取 N 个,**落盘**而不是内存
-3. 标记「还不熟」→ `dueAt` 推近、`lapses+1`;标记「会了」→ 按次数递增推远
-4. 首页那个「学习中 N」变成「今天该复习 N」
+- 进度从 `'learning'` 字符串扩成 `{ box, dueAt, reps, lapses, lastSeenAt, status }`。
+  `status` 由 `box` 算出来,不再是用户直接切的开关 —— 只留一个真相来源。
+- Leitner 固定阶梯 `[1,2,4,7,15,30,60,120]` 天,不用 SM-2:
+  ease factor 要几十次评分才收敛,而这里大部分词一辈子复习不到 10 次。
+- 三档评分:忘了(回第一档、lapses+1、当天再见)/ 一般(档位不动、间隔减半)/
+  会了(前进一档)。另有「不用再问我了」直接跳到已掌握档。
+- 今日队列落 `yan_wordbank_session_v1`,**按词书分开存**
+  (`{ [bookId]: {date,keys,done} }`),换天才重挑。
+  排序是**先到期的旧词、逾期最久优先,再补新词** —— 否则每天靠学新词拿进度感,
+  旧词越积越多,最后打开看到 300 个待复习直接放弃。
+- 首页从「学习中 N」换成「今天该复习 N」:前者是只会变大的存量,后者做完就归零。
 
-**注意存储迁移**:`yan_wordbank_progress` 现在存的是 `{ wordKey: 'learning' }`
-这种扁平字符串,而且**已经同步到云端 `word_progress` 表**。改结构要考虑:
-- 本地旧格式怎么读(老用户装了新版不能丢进度)
-- `sync.js` 里的 `backfillProgress` / `pullProgress` / `pushProgress` 都要跟着改
-- `src/lib/storage.js` 里那份登记表要更新
+**迁移落点**(只在 `normalizeRecord()` 一处,本地旧数据和旧云端行共用):
+`learning` → 今天到期;`mastered` → 30 天后;认不出的值 → 当没学过。
+读盘是唯一的迁移入口,不存在「迁一半」的中间态。
+
+**⚠️ 上线前必须先在 Supabase 跑 `src/lib/schema.word-srs.sql`。**
+没跑的话 `pullProgress()` 会 select 到不存在的列而报错 —— 行为上是「拉取失败」,
+本地照常可用、不会被空值覆盖,但云端同步实际是停的,而且不会有任何提示。
+
+### 还没做的
+
+- 五十音仍然没有掌握度/易错记录/复习入口,和这套 SRS 没打通。
+- 地铁冒险通关的词句仍然不进复习队列。
+- 复习只有「认还是不认」的自评,没有真正的测验(拼写/听辨/选择)。
 
 ---
 
