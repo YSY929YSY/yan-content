@@ -2,7 +2,8 @@
 // 依赖:共享色板 theme、发音组件 Speech、分账同步库 tripLedger。
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  Alert, Image, InputAccessoryView, Keyboard, Modal, Platform, Pressable, ScrollView,
+  Alert, Image, InputAccessoryView, Keyboard, KeyboardAvoidingView, Modal, Platform,
+  Pressable, ScrollView,
   StyleSheet, Text, TextInput, TouchableOpacity, View,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -1068,7 +1069,10 @@ function TripNotebook() {
       </TouchableOpacity>
 
       <Modal visible={visible} transparent animationType="slide" onRequestClose={() => setVisible(false)}>
-        <View style={tn.modalLayer}>
+        <KeyboardAvoidingView
+          style={tn.modalLayer}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        >
           <Pressable style={tn.scrim} onPress={() => setVisible(false)} />
           <View style={tn.sheet}>
             <View style={tn.head}>
@@ -1469,11 +1473,14 @@ function TripNotebook() {
               </ScrollView>
             </View>
           )}
-        </View>
+        </KeyboardAvoidingView>
       </Modal>
 
       <Modal visible={ledgerOpen} transparent animationType="slide" onRequestClose={() => setLedgerOpen(false)}>
-        <View style={tn.modalLayer}>
+        <KeyboardAvoidingView
+          style={tn.modalLayer}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        >
           {/* 点空白处只收键盘,不关弹窗(防误触退出);关闭走右上角 × */}
           <Pressable style={tn.scrim} onPress={() => Keyboard.dismiss()} />
           <View style={[tn.sheet, tn.ledgerSheet]}>
@@ -2018,7 +2025,7 @@ function TripNotebook() {
               </View>
             )}
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </Modal>
 
     </>

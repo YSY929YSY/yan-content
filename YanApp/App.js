@@ -4270,6 +4270,7 @@ function NaTab({ mapPlaces: initialPlaces }) {
   // 自己记的地点:展开哪一条、手账草稿
   const [openMineId, setOpenMineId] = useState(null);
   const [mineDrafts, setMineDrafts] = useState({});
+  const [nameDrafts, setNameDrafts] = useState({});
   // 导入进度。null = 没在导入;字符串 = 当前在做什么(直接显示给用户)
   const [importing, setImporting] = useState(null);
 
@@ -4874,6 +4875,20 @@ useEffect(() => {
 
               {isOpen && (
                 <View style={ms.mineBody}>
+                  {/* 地名服务给的名字常常不是你叫它的那个名字(「Cankurtaran
+                      Mahallesi」而不是「圣索菲亚」)。与其追求搜得准,
+                      不如让你随时能改成自己认得的叫法。 */}
+                  <TextInput
+                    style={ms.mineNameInput}
+                    value={nameDrafts[rec.id] ?? rec.name}
+                    onChangeText={t => setNameDrafts(prev => ({ ...prev, [rec.id]: t }))}
+                    placeholder="这个地方你叫它什么"
+                    placeholderTextColor={C.mutedLight}
+                    onEndEditing={() => {
+                      const d = (nameDrafts[rec.id] ?? '').trim();
+                      if (d && d !== rec.name) updatePlace(rec.id, { name: d });
+                    }}
+                  />
                   {rec.photoUri ? (
                     <TouchableOpacity onPress={() => pickPhotoForCustom(rec.id)}>
                       <Image source={{ uri: rec.photoUri }} style={ms.minePhoto} />
@@ -4992,6 +5007,11 @@ useEffect(() => {
                   >
                     <Text style={ms.addHitName}>{h.name}</Text>
                     <Text style={ms.addHitMeta} numberOfLines={1}>{h.display}</Text>
+                    {/* 系统地名服务在国区只有国内数据,查国外地名会返回一个
+                        国内的近似匹配(「格雷梅」→ 保定市)。标出来,别让人以为这是答案。 */}
+                    {h.source === 'os' && (
+                      <Text style={ms.addHitWarn}>⚠️ 来自系统地名服务,查国外地点时常常匹配错,请核对</Text>
+                    )}
                   </TouchableOpacity>
                 );
               })}
@@ -5205,6 +5225,10 @@ const ms = StyleSheet.create({
   mineTop: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   mineBody: { marginTop: 12, gap: 10 },
   minePhoto: { width: '100%', height: 160, borderRadius: 12, backgroundColor: C.tag },
+  mineNameInput: {
+    fontSize: 14, color: C.ink, fontWeight: '600', backgroundColor: C.tag,
+    borderRadius: 10, paddingHorizontal: 12, paddingVertical: 10,
+  },
   mineName: { fontSize: 13.5, color: C.ink, fontWeight: '700' },
   mineMeta: { fontSize: 11, color: C.muted, marginTop: 3 },
   mineNote: { fontSize: 11.5, color: C.mutedWarm, marginTop: 5, lineHeight: 17 },
@@ -5231,6 +5255,7 @@ const ms = StyleSheet.create({
   addHitOn: { borderColor: C.teal, backgroundColor: C.tealLight },
   addHitName: { fontSize: 13.5, color: C.ink, fontWeight: '600' },
   addHitMeta: { fontSize: 10.5, color: C.muted, marginTop: 3 },
+  addHitWarn: { fontSize: 10.5, color: C.lava, marginTop: 4, lineHeight: 15 },
   addNote: {
     marginTop: 14, backgroundColor: C.paper, borderRadius: 12,
     paddingHorizontal: 13, paddingVertical: 12, fontSize: 13, color: C.ink,

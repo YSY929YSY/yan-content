@@ -250,10 +250,16 @@ export async function searchPlaceDetailed(query, { limit = 5 } = {}) {
   if (Array.isArray(cache[key]) && cache[key].length) return { hits: cache[key], error: null };
 
   const p = await viaProxy({ op: 'search', q, limit });
-  if (Array.isArray(p?.hits) && p.hits.length) {
+  // 注意 p !== null 就代表代理**成功**了 —— 哪怕 hits 是空的。
+  // 「代理说没这个地名」和「代理连不上」是两件事,以前混在一起:
+  // 空结果被当成失败,继续去试系统和直连,最后直连超时,报出来的是
+  // 「连不上(8s)」。用户看到的原因是错的,而且白等 8 秒。
+  if (p && Array.isArray(p.hits)) {
     const hits = p.hits.map(h => ({ ...h, source: 'osm' }));
-    cache[key] = hits;
-    await saveCache(cache);
+    if (hits.length) {
+      cache[key] = hits;
+      await saveCache(cache);
+    }
     return { hits, error: null };
   }
 
