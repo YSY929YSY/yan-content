@@ -1214,6 +1214,9 @@ function TripNotebook() {
                   <View style={tn.toolsCard}>
                     <Text style={tn.uploadTitle}>补进资料</Text>
                     <Text style={tn.uploadSub}>订单 / 截图 / 酒店，先存着</Text>
+                    {/* 这些图只存在本机(换机后 uri 失效,所以刻意不上云)。
+                        不说清楚的话,用户换手机才发现没了 —— 那是不可逆的损失。 */}
+                    <Text style={tn.uploadWarn}>只存在这台手机上,换机或删 App 会丢失。重要凭证请另存一份。</Text>
                     {uploads.length > 0 && (
                       <>
                         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={tn.thumbRow}>
@@ -2166,6 +2169,7 @@ const tn = StyleSheet.create({
   phraseCn: { fontSize: 11.5, color: C.muted, marginTop: 4 },
   toolsCard: { backgroundColor: C.white, borderRadius: 16, borderWidth: 1, borderColor: C.border, padding: 12, marginBottom: 12 },
   uploadTitle: { fontSize: 14, fontWeight: '700', color: C.ink },
+  uploadWarn: { fontSize: 11, color: C.lava, marginTop: 6, lineHeight: 16 },
   uploadSub: { fontSize: 11, color: C.muted, lineHeight: 17, marginTop: 3 },
   thumbRow: { marginTop: 10 },
   thumb: { width: 56, height: 56, borderRadius: 9, marginRight: 8, backgroundColor: C.tag, borderWidth: 1, borderColor: C.border },
