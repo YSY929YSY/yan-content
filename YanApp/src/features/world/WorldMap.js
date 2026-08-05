@@ -52,12 +52,16 @@ export default function WorldMap({
 
   // 手势:用 RN 自带的 PanResponder,不引新依赖。
   // 单指拖 = 转地球 / 平移地图;双指捏 = 缩放。
+  // 拖动中降精度。每一帧都要重算投影 + 全部陆地路径 + 经纬网 + 航线,
+  // 满精度跑不满 60 帧。松手后立刻恢复,静止时看到的仍然是完整画质。
+  const [dragging, setDragging] = useState(false);
   const gestureStart = useRef(null);
   const responder = useRef(
     PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponder: (_e, g) => Math.abs(g.dx) > 2 || Math.abs(g.dy) > 2,
       onPanResponderGrant: (e) => {
+        setDragging(true);
         gestureStart.current = {
           rot: rotRef.current, pan: panRef.current, zoom: zoomRef.current,
           // Grant 只在第一根手指落下时触发,那一刻拿不到双指间距(必然是 0)。
@@ -107,7 +111,8 @@ export default function WorldMap({
           setPan({ x: st.pan.x + dx, y: st.pan.y + dy });
         }
       },
-      onPanResponderRelease: () => { gestureStart.current = null; },
+      onPanResponderRelease: () => { gestureStart.current = null; setDragging(false); },
+      onPanResponderTerminate: () => { gestureStart.current = null; setDragging(false); },
     }),
   ).current;
 
@@ -128,23 +133,37 @@ export default function WorldMap({
       const [tx, ty] = proj.translate();
       proj.translate([tx + pan.x, ty + pan.y]);
     }
-    return { proj, path: geoPath(proj) };
-  }, [globe, rot, zoom, pan, W, H]);
+    // 限制路径里的小数位。这条是量出来的,不是猜的:
+    //   默认      40,463 字符
+    //   digits(1) 29,128 字符  -28%
+    //   digits(0) 19,584 字符  -52%
+    // 陆地路径每一帧都要作为 d 属性整个传给原生 SVG,字符数就是过桥的开销。
+    // 地图宽约 340pt,1 位小数已经是亚像素精度,肉眼无差;拖动中再降到整数。
+    //
+    // (试过 proj.precision() 放宽自适应重采样,量下来字符数**一个都没少** ——
+    //  110m 数据本身已经够粗,插值点很少。那条路是死的,别再走。)
+    const path = geoPath(proj).digits(dragging ? 0 : 1);
+    return { proj, path };
+  }, [globe, rot, zoom, pan, W, H, dragging]);
 
-  const valid = points.filter(p => Number.isFinite(p?.lat) && Number.isFinite(p?.lng));
+  // 必须 memo:原来是每次渲染新建数组,导致下面 journey 的 useMemo 永远不命中 ——
+  // buildJourney(算全部航段和里程)在每一帧拖动里都重跑了一遍。
+  const valid = useMemo(
+    () => points.filter(p => Number.isFinite(p?.lat) && Number.isFinite(p?.lng)),
+    [points],
+  );
+  const been = useMemo(() => valid.filter(p => p.been), [valid]);
   const journey = useMemo(
-    () => (showJourney ? buildJourney(valid.filter(p => p.been)) : { legs: [] }),
-    [valid, showJourney],
+    () => (showJourney ? buildJourney(been) : { legs: [] }),
+    [been, showJourney],
   );
 
-  // 地球仪:背面的点不画,否则会出现「点浮在地球外面」
-  const onFront = (p) => {
-    if (!globe) return true;
-    const [lam, phi] = geo.proj.rotate();
-    return geoDistance([p.lng, p.lat], [-lam, -phi]) < Math.PI / 2;
-  };
-
-  const been = valid.filter(p => p.been);
+  // 地球仪:背面的点不画,否则会出现「点浮在地球外面」。
+  // rotate() 提到循环外 —— 原来每个点都调一次,几十个点就是几十次无谓调用。
+  const [rotLam, rotPhi] = geo.proj.rotate();
+  const onFront = (p) => (
+    !globe || geoDistance([p.lng, p.lat], [-rotLam, -rotPhi]) < Math.PI / 2
+  );
 
   return (
     <View>
@@ -167,12 +186,15 @@ export default function WorldMap({
         {globe && (
           <>
             <Path d={geo.path({ type: 'Sphere' })} fill="#eff1f0" stroke={C.border} strokeWidth={1} />
-            <Path d={geo.path(geoGraticule10())} fill="none" stroke={C.border} strokeWidth={0.4} />
+            {/* 经纬网线很多,拖动时最贵而且最不重要 —— 转起来根本看不清 */}
+            {!dragging && (
+              <Path d={geo.path(geoGraticule10())} fill="none" stroke={C.border} strokeWidth={0.4} />
+            )}
           </>
         )}
         <Path d={geo.path(LAND)} fill="#e7e3da" stroke="#d5d0c5" strokeWidth={0.4} />
 
-        {journey.legs.map((leg, i) => {
+        {!dragging && journey.legs.map((leg, i) => {
           if (leg.mode.key === 'local') return null;   // 同城不画线,那是一个点不是一段路
           const d = geo.path({
             type: 'LineString',
