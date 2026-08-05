@@ -51,6 +51,9 @@ export function fromCurated(place, { visitedIds = [], dates = {}, notes = {}, ph
     loc: place.loc || '',
     lat: place.geo?.lat ?? null,
     lng: place.geo?.lng ?? null,
+    // 「点亮了几个国家」靠它。精选地点的 country 写在内容数据里
+    // (由真实坐标反查一次性解出,不是按名字猜的)。
+    country: place.country || '',
     been,
     visitedOn: dates[place.id] || null,
     note: notes[place.id] || '',
@@ -71,6 +74,7 @@ export function fromCustom(mp, curatedPlaces = [], { photoUris = {} } = {}) {
     loc: [mp.city, mp.country].filter(Boolean).join(' · '),
     lat: Number.isFinite(mp.lat) ? mp.lat : null,
     lng: Number.isFinite(mp.lng) ? mp.lng : null,
+    country: mp.country || '',
     // 自己记下来的,本身就意味着去过
     been: true,
     visitedOn: mp.visitedOn || mp.createdAt || null,

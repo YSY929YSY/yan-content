@@ -4569,8 +4569,15 @@ useEffect(() => {
           </View>
 
           <View style={ms.stats}>
+            {/* 国家放第一个:用户回看足迹时在意的是「点亮了几个国家」,
+                不是「打了几个卡」—— 地点数是过程,国家数才是成就。 */}
             <View style={ms.stat}>
-              <Text style={ms.statN}>{been}</Text>
+              <Text style={ms.statN}>{countries.length}</Text>
+              <Text style={ms.statL}>国家</Text>
+            </View>
+            <View style={ms.statDiv} />
+            <View style={ms.stat}>
+              <Text style={ms.statN}>{been + customRecords.length}</Text>
               <Text style={ms.statL}>去过</Text>
             </View>
             <View style={ms.statDiv} />
