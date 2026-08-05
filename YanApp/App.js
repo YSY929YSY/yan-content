@@ -23,6 +23,7 @@ import { K, auditKeys } from './src/lib/storage';
 import { useWorldFootprint } from './src/features/world/useWorldFootprint';
 import KanaScreen from './src/features/kana/KanaScreen';
 import { bonusOf } from './src/features/world/record';
+import { useHomeSummary } from './src/features/home/useHomeSummary';
 import * as AppleAuthentication from 'expo-apple-authentication';
 
 
@@ -643,29 +644,7 @@ function HomeScreen({ setTab, setSceneState, setSubTab, content, onDeleteAccount
   const [entryMode, setEntryMode] = useState('track');
   const [goalMode, setGoalMode] = useState('travel');
   const fusion = content.culturalFusion[fusionIdx];
-  const recoTitle =
-  goalMode === 'travel'
-    ? '先开口，再补规则'
-    : goalMode === 'interest'
-    ? '先找到感觉，再慢慢连成系统'
-    : '先搭框架，再一点点填满';
-
-const recoItem1 =
-  entryMode === 'track'
-    ? '1. 先完成一小步今日任务'
-    : '1. 先点开你现在最想学的那一块';
-
-const recoItem2 =
-  goalMode === 'travel'
-    ? '2. 推荐：地铁 / 餐厅 / 酒店'
-    : goalMode === 'interest'
-    ? '2. 推荐：五十音混淆字 / 星期专题'
-    : '2. 推荐：五十音 / 高频词块 / 基础句型';
-
-const recoItem3 =
-  entryMode === 'track'
-    ? '3. 学完就停，也算推进'
-    : '3. 今天先学一小块，也算向前';
+  const sum = useHomeSummary(content.mapPlaces || []);
   return (
     <ScrollView style={{ flex: 1 }} contentContainerStyle={hs.c} showsVerticalScrollIndicator={false}>
       <View style={hs.hero}>
@@ -674,6 +653,36 @@ const recoItem3 =
         <Text style={hs.heroTitle}>今天大地说什么？</Text>
         <Text style={hs.heroSub}>丿 出发 · 丶 落脚 · 丿+丶=人</Text>
         <Text style={hs.heroNote}>从一撇一捺开始，到真正开口。</Text>
+
+        {/* 三个真实数字 + 三个去处。首页原本一个数字都没有,只有口号 ——
+            用户打开 App 看不到自己在哪儿,每次都像第一次打开。
+            没有任何进度时不显示这张卡,零填满的界面比没有更让人泄气。 */}
+        {sum.ready && (sum.learning + sum.mastered + sum.station + sum.places > 0) && (
+          <View style={hs.sumCard}>
+            <TouchableOpacity
+              style={hs.sumCell}
+              onPress={() => { setTab('pie'); setSubTab('wordbank'); }}
+            >
+              <Text style={hs.sumN}>{sum.learning}</Text>
+              <Text style={hs.sumL}>学习中</Text>
+              {sum.mastered > 0 && <Text style={hs.sumSub}>已掌握 {sum.mastered}</Text>}
+            </TouchableOpacity>
+            <View style={hs.sumDiv} />
+            <TouchableOpacity
+              style={hs.sumCell}
+              onPress={() => { setTab('pie'); setSubTab('subway'); }}
+            >
+              <Text style={hs.sumN}>{sum.station}</Text>
+              <Text style={hs.sumL}>地铁站</Text>
+            </TouchableOpacity>
+            <View style={hs.sumDiv} />
+            <TouchableOpacity style={hs.sumCell} onPress={() => setTab('na')}>
+              <Text style={hs.sumN}>{sum.countries}</Text>
+              <Text style={hs.sumL}>国家</Text>
+              {sum.places > 0 && <Text style={hs.sumSub}>{sum.places} 处足迹</Text>}
+            </TouchableOpacity>
+          </View>
+        )}
         <View style={hs.section}>
   <Text style={hs.sectionTitle}>更偏向哪种目标？</Text>
 
@@ -1116,19 +1125,16 @@ goalDot: {
 goalDotOn: {
   backgroundColor: C.lava,
 },
-recoTitle: {
-  fontSize: 14,
-  fontWeight: '700',
-  color: C.ink,
-  marginBottom: 10,
+sumCard: {
+  flexDirection: 'row', alignItems: 'stretch',
+  backgroundColor: 'rgba(255,255,255,0.10)',
+  borderRadius: 16, paddingVertical: 14, marginTop: 18,
 },
-
-recoItem: {
-  fontSize: 12,
-  color: C.muted,
-  lineHeight: 20,
-  marginBottom: 4,
-},
+sumCell: { flex: 1, alignItems: 'center', gap: 2 },
+sumDiv: { width: 1, backgroundColor: 'rgba(255,255,255,0.18)', marginVertical: 4 },
+sumN: { fontSize: 22, fontWeight: '800', color: '#fff', letterSpacing: 0.5 },
+sumL: { fontSize: 11, color: 'rgba(255,255,255,0.72)' },
+sumSub: { fontSize: 10, color: 'rgba(255,255,255,0.5)', marginTop: 1 },
 mapRow: {
   flexDirection: 'row',
   flexWrap: 'wrap',
