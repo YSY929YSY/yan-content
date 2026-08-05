@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { K } from '../../lib/storage';
+import { isUuid, mergeExpenses, replaceLocalId } from '../../lib/ledgerMerge';
 import * as ImagePicker from 'expo-image-picker';
 import { C } from '../../theme';
 import { useSpeech, SpeakBtn } from '../../components/Speech';
@@ -30,7 +31,7 @@ const TRIP_STORAGE_KEY = K.tripNotebook;
 // 数字键盘没有回车键,iOS 上收不起来。给所有金额输入配一条「完成」。
 const NUM_PAD_ID = 'yan-num-pad';
 
-const isUuid = (v) => typeof v === 'string' && /^[0-9a-f-]{36}$/i.test(v);
+
 const MONTH_NUM = { JAN: 1, FEB: 2, MAR: 3, APR: 4, MAY: 5, JUN: 6, JUL: 7, AUG: 8, SEP: 9, OCT: 10, NOV: 11, DEC: 12 };
 const MONTH_ABBR = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
@@ -589,12 +590,8 @@ function TripNotebook() {
       tagOnly: r.is_tag,
       userId: r.user_id || null,   // 留着认出「哪个成员是我」
     })));
-    // 本地还没同步上去的笔(id 不是 uuid)必须留着,否则离线记的账会被远端结果吞掉
-    setExpenses(prev => {
-      const pending = prev.filter(item => !isUuid(item.id));
-      const remoteIds = new Set(remoteExpenses.map(e => e.id));
-      return [...pending.filter(p => !remoteIds.has(p.id)), ...remoteExpenses];
-    });
+    // 合并规则见 lib/ledgerMerge.js —— 判错会让一笔账变两笔、结算翻倍
+    setExpenses(prev => mergeExpenses(prev, remoteExpenses));
   }, [ledgerId]);
 
   // 打开 App 时恢复我已加入的共享账本
@@ -1039,8 +1036,14 @@ function TripNotebook() {
     };
     if (isShared) {
       // 共享账本:写远端,再拉回最新(拿到真实 uuid)
-      saveExpenseRemote(ledgerId, nextExpense).then(({ error }) => {
-        if (error) Alert.alert('同步失败', '这笔已记在本机,联网后会重试。', [{ text: '好' }]);
+      saveExpenseRemote(ledgerId, nextExpense).then(({ expense: saved, error }) => {
+        if (error) {
+          Alert.alert('同步失败', '这笔已记在本机,联网后会重试。', [{ text: '好' }]);
+          return;
+        }
+        // 换成服务端给的真实 uuid。少了这一步,下一次合并会把本地这条
+        // 当成「还没同步的笔」留下来,和远端那条并存 —— 一笔变两笔,结算翻倍。
+        setExpenses(prev => replaceLocalId(prev, nextExpense.id, saved));
         refreshLedger(ledgerId);
       });
       // 乐观更新,先让本机看到
