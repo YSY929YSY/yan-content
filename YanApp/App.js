@@ -13,19 +13,13 @@ const PRIVACY_URL = 'https://ysy929ysy.github.io/yan-content/privacy.html';
 const SHOULD_FETCH_REMOTE_CONTENT = typeof __DEV__ === 'undefined' ? true : !__DEV__;
 
 import { ensureUser, signInWithApple, signOut, deleteAccount } from './src/lib/supabase';
-import {
-  pushProgress,
-  pullProgress,
-  backfillAll,
-  pendingBackfill,
-} from './src/lib/sync';
+import { backfillAll, pendingBackfill } from './src/lib/sync';
 import { K, auditKeys, readJson, writeJson } from './src/lib/storage';
-import {
-  DAILY_GOAL, todayStr, normalizeProgress, mergeProgress,
-  review, markMastered, pickSession,
-} from './src/features/wordbank/srs';
+import { DAILY_GOAL, todayStr, pickSession } from './src/features/wordbank/srs';
+import { useReviewProgress } from './src/features/review/useReview';
 import { useWorldFootprint } from './src/features/world/useWorldFootprint';
 import KanaScreen from './src/features/kana/KanaScreen';
+import ReviewScreen from './src/features/review/ReviewScreen';
 import { bonusOf } from './src/features/world/record';
 import { useHomeSummary } from './src/features/home/useHomeSummary';
 import * as AppleAuthentication from 'expo-apple-authentication';
@@ -663,13 +657,17 @@ function HomeScreen({ setTab, setSceneState, setSubTab, content, onDeleteAccount
             没有任何进度时不显示这张卡,零填满的界面比没有更让人泄气。 */}
         {sum.ready && (sum.learning + sum.mastered + sum.station + sum.places > 0) && (
           <View style={hs.sumCard}>
+            {/* 点进去是复习页,不是词表 —— 用户看到「今天该复习 8」时想做的是
+                「那就复习」,不是「让我看看是哪 8 个」。 */}
             <TouchableOpacity
               style={hs.sumCell}
-              onPress={() => { setTab('pie'); setSubTab('wordbank'); }}
+              onPress={() => { setTab('pie'); setSubTab(sum.due > 0 ? 'review' : 'wordbank'); }}
             >
               <Text style={hs.sumN}>{sum.due}</Text>
               <Text style={hs.sumL}>今天该复习</Text>
-              {sum.mastered > 0 && <Text style={hs.sumSub}>已掌握 {sum.mastered}</Text>}
+              {sum.deepDue > 0
+                ? <Text style={hs.sumSub}>{sum.deepDue} 条来自你走过的地方</Text>
+                : sum.mastered > 0 && <Text style={hs.sumSub}>已掌握 {sum.mastered}</Text>}
             </TouchableOpacity>
             <View style={hs.sumDiv} />
             <TouchableOpacity
@@ -1287,6 +1285,9 @@ function PieTab({ content, subTab, setSubTab, sceneState, setSceneState, practic
         {subTab === 'subway' && (
           <SubwayScreen adventure={content.subwayAdventure} />
         )}
+        {subTab === 'review' && (
+          <ReviewScreen content={content} onBack={() => setSubTab('learn')} />
+        )}
         {subTab === 'wordbank' && !wbBookId && (
           <WordBookShelfScreen
             onBack={() => setSubTab('learn')}
@@ -1596,8 +1597,14 @@ const wordKey = (item) => `${item.word}-${item.reading}`;
 
 function WordBankScreen({ wordBank, book, onBack }) {
   const [query, setQuery] = useState('');
-  // key → 间隔复习记录(见 features/wordbank/srs.js)。没有记录 = 没学过。
-  const [progress, setProgress] = useState({});
+  // 读写进度的逻辑不再写在这个页面里,统一走 useReviewProgress ——
+  // 复习页读写的是同一份数据,两处各写一套迁移和落盘,迟早会长歪成两个口径。
+  //
+  // ⚠️ 它每个调用点是独立的 state,不是共享 store。现在没问题,因为词书页和复习页
+  // 由 subTab 二选一渲染,同时只挂载一个,切换时重新读盘。如果以后让两个同时挂载
+  // (比如复习页做成盖在上面的浮层),两边的内存副本就会各写各的、互相覆盖 ——
+  // 到那时要把它提到 context,别指望这条注释以外的东西提醒你。
+  const { progress, ready: progressReady, grade } = useReviewProgress();
   // 今日队列 { date, keys, done }。落盘的 —— 以前它是个 useState,
   // 退出页面就没了,重进重新挑一批,用户永远做不完「今天的任务」。
   const [session, setSession] = useState(null);
@@ -1617,27 +1624,18 @@ function WordBankScreen({ wordBank, book, onBack }) {
   const bookId = book?.id || 'n5';
   const sessionAllRef = useRef({});
 
+  // 进度就绪后挑一次今日队列。progress 不进依赖 —— 答一道题就重挑一批词是灾难。
+  const progressRef = useRef(progress);
+  progressRef.current = progress;
+
   useEffect(() => {
+    if (!progressReady) return;
     let alive = true;
     setSession(null);
     (async () => {
       const today = todayStr();
-      const [savedProgress, savedSessions] = await Promise.all([
-        readJson(K.wordbankProgress, null),
-        readJson(K.wordbankSession, null),
-      ]);
+      const savedSessions = await readJson(K.wordbankSession, null);
       if (!alive) return;
-
-      // 先把本地那份显示出来,不等网络。旧版存的是 'learning' 字符串,
-      // normalizeProgress 在这里把它迁成记录 —— 读盘是唯一的迁移入口。
-      const local = normalizeProgress(savedProgress, today);
-      setProgress(local);
-
-      // 云端拉不到时 mergeProgress 原样返回本地,绝不用空值覆盖(硬规矩 1)
-      const merged = mergeProgress(local, await pullProgress(), today);
-      if (!alive) return;
-      setProgress(merged);
-      writeJson(K.wordbankProgress, merged);
 
       const all = savedSessions && typeof savedSessions === 'object' && !Array.isArray(savedSessions)
         ? savedSessions : {};
@@ -1653,7 +1651,7 @@ function WordBankScreen({ wordBank, book, onBack }) {
           date: today,
           keys: pickSession(
             (bankRef.current || []).filter(w => !isDraftedWord(w)),
-            merged,
+            progressRef.current,
             { today, limit: DAILY_GOAL, keyOf: wordKey }
           ),
           done: [],
@@ -1663,7 +1661,7 @@ function WordBankScreen({ wordBank, book, onBack }) {
       writeJson(K.wordbankSession, sessionAllRef.current);
     })();
     return () => { alive = false; };
-  }, [bookId]);
+  }, [bookId, progressReady]);
 
   const q = query.trim().toLowerCase();
   const searched = !q ? wordBank : wordBank.filter(w =>
@@ -1707,28 +1705,13 @@ function WordBankScreen({ wordBank, book, onBack }) {
 
   const startToday = () => { setQuery(''); setStatusFilter('today'); };
 
-  /**
-   * 评一次分。grade: 'again' | 'hard' | 'good' | 'mastered'
-   *
-   * 三件事必须一起发生:算出新记录、落盘、推云端。以前这里只改一个标签,
-   * 现在改的是「下次什么时候再见到它」—— 漏掉落盘就等于这次复习白做了。
-   */
-  const gradeWord = (grade) => {
+  /** 评一次分。g: 'again' | 'hard' | 'good' | 'mastered' */
+  const gradeWord = (g) => {
     const key = wordKey(selectedWord);
-    const now = todayStr();
-
-    setProgress(prev => {
-      const rec = grade === 'mastered'
-        ? markMastered(prev[key], now)
-        : review(prev[key], grade, now);
-      const next = { ...prev, [key]: rec };
-      writeJson(K.wordbankProgress, next);
-      pushProgress(key, rec, bookId);
-      return next;
-    });
+    grade(key, g, bookId);   // 算记录 + 落盘 + 推云端,都在 hook 里,这里没有忘存的余地
 
     // 「忘了」不算做完 —— 它当天就该再见一次,标记成完成等于把它推到了明天。
-    if (grade === 'again') return;
+    if (g === 'again') return;
     setSession(prev => {
       if (!prev || !prev.keys.includes(key) || prev.done.includes(key)) return prev;
       const next = { ...prev, done: [...prev.done, key] };

@@ -14,9 +14,10 @@ import { K, readJson } from '../../lib/storage';
 import { countriesOf } from '../../lib/country';
 import { fromCurated, fromCustom } from '../world/record';
 import { statusCounts } from '../wordbank/srs';
+import { dueBySource } from '../review/units';
 
 const EMPTY = {
-  due: 0, learning: 0, mastered: 0, station: 0,
+  due: 0, deepDue: 0, learning: 0, mastered: 0, station: 0,
   countries: 0, places: 0, ready: false,
 };
 
@@ -37,6 +38,11 @@ export function useHomeSummary(mapPlaces = []) {
       // 走 srs.js 同一套口径,顺带认得旧版存的字符串 —— 首页和词书页各算一遍
       // 而算法不同,是「两处数字对不上」这类 bug 的标准做法
       const words = statusCounts(progress);
+      const bySource = dueBySource(progress);
+      const deep = {
+        place: bySource.place || 0, card: bySource.card || 0,
+        scene: bySource.scene || 0, subway: bySource.subway || 0,
+      };
       const visitedIds = Array.isArray(visited) ? visited : [];
       const myPlaces = Array.isArray(mine) ? mine : [];
 
@@ -50,6 +56,10 @@ export function useHomeSummary(mapPlaces = []) {
         // 首页那个数字从「学习中 N」换成「今天该复习 N」:前者是一个只会变大的
         // 存量,看多少天都一样;后者是今天能做完的事,做完就归零。
         due: words.due,
+        // 今天到期的里,有几条来自深内容(地点记忆卡/深卡骨架/场景句/地铁句)。
+        // 首页拿它说「3 条来自你走过的地方」—— 这句话是这个 App 和词库 App 的区别,
+        // 值得占首页一行。
+        deepDue: deep.place + deep.card + deep.scene + deep.subway,
         learning: words.learning,
         mastered: words.mastered,
         // 存的是「解锁到第几站」的下标,展示时是第几站

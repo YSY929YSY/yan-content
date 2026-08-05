@@ -30,6 +30,12 @@ const REGISTRY = {
     key: 'yan_wordbank_progress', kind: 'user', backfill: 'progress',
     desc: '单词学习进度(间隔复习记录:档位/到期日/忘记次数)',
   },
+  reviewSession: {
+    key: 'yan_review_session_v1', kind: 'device', backfill: null,
+    desc: '今日混合复习队列(词/深卡/地点/场景/地铁 五个来源混排)',
+    // 和 wordbankSession 的区别:那条属于某本词书,这条是「今天该复习的全部」。
+    // 同样不补传 —— 能从 wordbankProgress 重算。
+  },
   wordbankSession: {
     key: 'yan_wordbank_session_v1', kind: 'device', backfill: null,
     desc: '今日复习队列(哪天挑的、挑了哪些、做完了哪些)',
