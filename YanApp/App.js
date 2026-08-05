@@ -569,7 +569,10 @@ function WelcomeScreen({ onAppleLogin, onSkip }) {
         <Text style={ws.mono}>YAN</Text>
         <View style={ws.card}>
           <Text style={ws.title}>登录后进度跨设备</Text>
-          <Text style={ws.sub}>词卡进度和打卡会同步;旅行本和分账留在本机</Text>
+          {/* 这句以前写着「旅行本和分账留在本机」,而 tripBackup.js 的 pushNotebook /
+              pullNotebook 早就在同步了 —— 文案落后于实现,等于在劝用户别往旅行本里记东西。
+              照片是真的不传(本机 uri 换机就失效),所以单独说清楚。 */}
+          <Text style={ws.sub}>学习进度、打卡和旅行本都会同步;照片留在本机</Text>
           {appleAvail && Platform.OS === 'ios' && (
             <AppleAuthentication.AppleAuthenticationButton
               buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
@@ -4351,6 +4354,10 @@ function NaTab({ mapPlaces: initialPlaces }) {
   const [statusF, setStatusF] = useState('all');
   const [sel, setSel] = useState(null);
   const [openMemoryId, setOpenMemoryId] = useState(null);
+  // 小练习的答案要先藏起来。内容里 review 一直写着 { prompt, answer, hint } 三样,
+  // 界面却只渲染了问题和提示 —— 一道题问完不给答案,用户只能自己上网查,
+  // 或者更可能的是:算了。但也不能直接摊开,摊开就不是练习是阅读了。
+  const [openAnswerId, setOpenAnswerId] = useState(null);
   const [noteDrafts, setNoteDrafts] = useState({});
   const [ceremony, setCeremony] = useState(null);
   const [viewMode, setViewMode] = useState('list');
@@ -4555,6 +4562,7 @@ useEffect(() => {
       : [];
     const hasContext = !!(memory?.context?.situation || memory?.context?.note);
     const hasReview = !!(memory?.review?.prompt || memory?.review?.hint);
+    const answerOpen = openAnswerId === place.id;
 
     return (
       <>
@@ -4641,6 +4649,24 @@ useEffect(() => {
                 )}
                 {!!memory?.review?.hint && (
                   <Text style={ms.memorySubtle}>{memory.review.hint}</Text>
+                )}
+                {!!memory?.review?.answer && (
+                  answerOpen ? (
+                    <TouchableOpacity
+                      onPress={() => speak(memory.review.answer, langCode, `mem-ans-${place.id}`)}
+                      activeOpacity={0.6}
+                    >
+                      <Text style={ms.memoryAnswer}>{memory.review.answer}</Text>
+                      <Text style={ms.memorySubtle}>点一下听发音</Text>
+                    </TouchableOpacity>
+                  ) : (
+                    <TouchableOpacity
+                      style={ms.memoryAnswerBtn}
+                      onPress={() => setOpenAnswerId(place.id)}
+                    >
+                      <Text style={ms.memoryAnswerBtnTxt}>自己想一遍,再看答案</Text>
+                    </TouchableOpacity>
+                  )
                 )}
               </View>
             )}
@@ -5398,6 +5424,12 @@ const ms = StyleSheet.create({
   memorySwapText: { fontSize: 11, fontWeight: '700', color: C.ink },
   memorySwapZh: { fontSize: 10, color: C.muted, marginTop: 2 },
   memoryReview: { fontSize: 12, color: C.ink, lineHeight: 18, fontWeight: '600' },
+  memoryAnswerBtn: {
+    marginTop: 8, alignSelf: 'flex-start', borderWidth: 1, borderColor: C.border,
+    borderRadius: 6, paddingHorizontal: 12, paddingVertical: 6, backgroundColor: C.white,
+  },
+  memoryAnswerBtnTxt: { fontSize: 11, color: C.muted, fontWeight: '600' },
+  memoryAnswer: { fontSize: 15, color: C.ink, fontWeight: '700', marginTop: 8, lineHeight: 22 },
   memoryTraceBox: { borderRadius: 12, backgroundColor: '#f8efe7', padding: 10, gap: 5 },
   memoryTrace: { fontSize: 12, color: C.ink, lineHeight: 18, fontWeight: '600' },
   addCard: { backgroundColor: C.white, borderRadius: 15, padding: 18, borderWidth: 1.5, borderColor: C.border, borderStyle: 'dashed', alignItems: 'center', flexDirection: 'row', justifyContent: 'center', gap: 8 },
