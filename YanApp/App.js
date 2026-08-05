@@ -4264,13 +4264,14 @@ function NaTab({ mapPlaces: initialPlaces }) {
   const {
     places, visitedIds, checkinDates, placeNotes, photoUris, myPlaces, mapPoints,
     customRecords,
-    checkIn, saveNote: persistNote, toggleStatus: togglePlaceStatus, pickPhoto,
+    checkIn, saveNote: persistNote, toggleStatus: togglePlaceStatus, pickPhoto, setVisitedOn,
     addPlace, removePlace, updatePlace, pickPhotoForCustom, importFromPhotos,
   } = useWorldFootprint(initialPlaces);
   // 自己记的地点:展开哪一条、手账草稿
   const [openMineId, setOpenMineId] = useState(null);
   const [mineDrafts, setMineDrafts] = useState({});
   const [nameDrafts, setNameDrafts] = useState({});
+  const [dateDrafts, setDateDrafts] = useState({});
   // 导入进度。null = 没在导入;字符串 = 当前在做什么(直接显示给用户)
   const [importing, setImporting] = useState(null);
 
@@ -4799,10 +4800,36 @@ useEffect(() => {
           </View>
         )}
 
-        {place.status === 'been' && !!checkinDates[place.id] && (
-          <Text style={ms.checkinDate}>
-            ⛩ {new Date(checkinDates[place.id]).toLocaleDateString('zh-CN')} · 你在这里留下了足迹
-          </Text>
+        {/* 日期必须能改:打卡写的是「打卡那一刻」,而人常常是回来之后一次性补录。
+            不能改的话,十个地方的日期全是同一天,旅迹就成了「今天飞遍全球」。 */}
+        {place.status === 'been' && (
+          <View style={ms.dateRow}>
+            <Text style={ms.checkinDate}>⛩ 哪天去的</Text>
+            <TextInput
+              style={ms.dateInput}
+              value={
+                dateDrafts[place.id]
+                ?? (checkinDates[place.id]
+                  ? new Date(checkinDates[place.id]).toISOString().slice(0, 10)
+                  : '')
+              }
+              onChangeText={t => setDateDrafts(prev => ({ ...prev, [place.id]: t }))}
+              placeholder={new Date().toISOString().slice(0, 10)}
+              placeholderTextColor={C.mutedLight}
+              keyboardType="numbers-and-punctuation"
+              onEndEditing={() => {
+                const draft = dateDrafts[place.id];
+                if (draft === undefined) return;
+                const day = normalizeDate(draft);
+                if (!day && draft.trim()) {
+                  Alert.alert('日期看不懂', '写成 2026-03-01 这样就行。', [{ text: '好' }]);
+                  setDateDrafts(prev => { const n = { ...prev }; delete n[place.id]; return n; });
+                  return;
+                }
+                setVisitedOn(place.id, day);
+              }}
+            />
+          </View>
         )}
 
         {place.status === 'been' && !!place.cultureEgg && (
@@ -5128,6 +5155,11 @@ const ms = StyleSheet.create({
   eggTitle: { fontSize: 10, fontWeight: '700', color: '#a07818', letterSpacing: 1, marginBottom: 4 },
   eggBody: { fontSize: 13, color: '#3a2a08', lineHeight: 20 },
   checkinDate: { fontSize: 11, color: C.muted, fontStyle: 'italic' },
+  dateRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 8 },
+  dateInput: {
+    flex: 1, fontSize: 12, color: C.ink, backgroundColor: C.tag,
+    borderRadius: 8, paddingHorizontal: 10, paddingVertical: 7,
+  },
   noteBox: { backgroundColor: C.tag, borderRadius: 12, padding: 4 },
   noteInput: { minHeight: 44, paddingHorizontal: 10, paddingVertical: 8, fontSize: 13, color: C.ink, lineHeight: 19 },
   cerBackdrop: { flex: 1, backgroundColor: 'rgba(14,14,18,0.86)', alignItems: 'center', justifyContent: 'center', padding: 28 },

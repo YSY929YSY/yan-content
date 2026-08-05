@@ -129,6 +129,27 @@ export function useWorldFootprint(initialPlaces) {
       .catch(e => console.warn('[WorldFootprints] check-in sync failed', e));
   }, [photoPaths, setCheckinDates, setVisitedIds]);
 
+  /**
+   * 改精选地点的到访日期。
+   *
+   * 为什么必须能改:打卡写的是「打卡那一刻」,而用户常常是回来之后一次性补录 ——
+   * 十个地方的日期全变成同一天,旅迹就成了「今天飞遍全球」。
+   * 自定义地点一直可以填到访日期,精选地点不能,这个不一致本身就是缺陷。
+   *
+   * @param dayOrNull 'YYYY-MM-DD';传空表示清掉日期
+   */
+  const setVisitedOn = useCallback((placeId, day) => {
+    // 存 ISO 时间戳,和打卡写入的格式保持一致(旅迹按它排序)
+    const iso = day ? new Date(`${day}T12:00:00`).toISOString() : null;
+    setCheckinDates(prev => {
+      const next = { ...prev };
+      if (iso) next[placeId] = iso; else delete next[placeId];
+      return next;
+    });
+    pushPlaceCheckin(placeId, 'been', { checkedInAt: iso })
+      .catch(e => console.warn('[WorldFootprints] date sync failed', e));
+  }, [setCheckinDates]);
+
   const saveNote = useCallback((placeId, text) => {
     const note = (text ?? '').trim();
     setPlaceNotes(prev => ({ ...prev, [placeId]: note }));
@@ -342,7 +363,7 @@ export function useWorldFootprint(initialPlaces) {
   return {
     places, visitedIds, checkinDates, placeNotes, photoUris, photoPaths, myPlaces,
     mapPoints, customRecords,
-    checkIn, saveNote, toggleStatus, pickPhoto,
+    checkIn, saveNote, toggleStatus, pickPhoto, setVisitedOn,
     addPlace, removePlace, updatePlace, pickPhotoForCustom, importFromPhotos,
   };
 }
