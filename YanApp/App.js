@@ -4600,7 +4600,13 @@ useEffect(() => {
           <WorldMap
             points={mapPoints}
             onSelect={(p) => {
-              if (p.custom) return;          // 自己记的点没有详情页,先不跳
+              // 自己记的点现在有详情了(照片/手账/日期),跳到列表并展开那一条。
+              // 以前这里直接 return —— 点了没反应,用户只会觉得地图是坏的。
+              if (p.custom) {
+                setViewMode('list');
+                setOpenMineId(String(p.id).replace(/^my-/, ''));
+                return;
+              }
               setTypeF('all');
               setStatusF('all');
               setSel(places.find(x => x.id === p.id) || null);
