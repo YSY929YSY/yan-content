@@ -640,7 +640,7 @@ const tb = StyleSheet.create({
 // ─────────────────────────────────────────────
 // 🏠 Home Screen
 // ─────────────────────────────────────────────
-function HomeScreen({ setTab, setSceneState, setSubTab, content, onDeleteAccount }) {
+function HomeScreen({ setTab, setSceneState, setSubTab, content, onDataSources, onDeleteAccount }) {
   const [fusionIdx, setFusionIdx] = useState(0);
   const [entryMode, setEntryMode] = useState('track');
   const [goalMode, setGoalMode] = useState('travel');
@@ -856,10 +856,12 @@ function HomeScreen({ setTab, setSceneState, setSubTab, content, onDeleteAccount
       <View style={hs.aboutBox}>
         <Text style={hs.aboutTitle}>关于</Text>
         <Text style={hs.aboutLine}>
-          词条的读音、词性与英文释义参考 <Text style={hs.aboutStrong}>JMdict</Text>(EDRDG,CC BY-SA 4.0);
-          部分例句来自 <Text style={hs.aboutStrong}>Tatoeba</Text>(CC BY 2.0 FR)。
+          词条的读音、词性与英文释义及部分例句，使用了外部词典和语料数据。
         </Text>
         <View style={hs.aboutActions}>
+          <TouchableOpacity onPress={onDataSources}>
+            <Text style={hs.aboutLink}>数据来源</Text>
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => Linking.openURL(PRIVACY_URL).catch(() => {})}>
             <Text style={hs.aboutLink}>隐私政策</Text>
           </TouchableOpacity>
@@ -5528,6 +5530,54 @@ function OfflineContentNotice() {
   );
 }
 
+// 从首页「关于」进入的单独一屏。JMdict 的署名不能只停留在启动页或一行脚注里。
+function DataSourcesScreen({ onBack }) {
+  return (
+    <View style={ds.screen}>
+      <View style={ds.header}>
+        <TouchableOpacity accessibilityRole="button" accessibilityLabel="返回" onPress={onBack} style={ds.backBtn}>
+          <Text style={ds.back}>‹ 返回</Text>
+        </TouchableOpacity>
+        <Text style={ds.title}>数据来源</Text>
+      </View>
+      <ScrollView contentContainerStyle={ds.content} showsVerticalScrollIndicator={false}>
+        <View style={ds.card}>
+          <Text style={ds.eyebrow}>词库数据</Text>
+          <Text style={ds.body}>
+            词库中的部分词条数据派生自 JMdict/EDICT，版权归 Electronic Dictionary Research and Development Group 所有。
+          </Text>
+          <Text style={ds.body}>授权：Creative Commons Attribution-ShareAlike 4.0。</Text>
+          <TouchableOpacity onPress={() => Linking.openURL('https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project').catch(() => {})}>
+            <Text style={ds.link}>JMdict/EDICT Dictionary Project ↗</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={ds.card}>
+          <Text style={ds.eyebrow}>言的原创内容</Text>
+          <Text style={ds.body}>
+            深卡、词场、地点记忆卡和场景句为言的原创内容；它们并非 JMdict/EDICT 的衍生数据。
+          </Text>
+        </View>
+        <View style={ds.card}>
+          <Text style={ds.eyebrow}>例句语料</Text>
+          <Text style={ds.body}>部分例句来自 Tatoeba（CC BY 2.0 FR）。</Text>
+        </View>
+      </ScrollView>
+    </View>
+  );
+}
+const ds = StyleSheet.create({
+  screen: { flex: 1, backgroundColor: C.paper },
+  header: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 18, paddingTop: 14, paddingBottom: 16, borderBottomWidth: 1, borderBottomColor: C.border },
+  backBtn: { paddingVertical: 6, paddingRight: 14 },
+  back: { fontSize: 14, color: C.teal, fontWeight: '600' },
+  title: { fontSize: 18, color: C.ink, fontWeight: '700' },
+  content: { padding: 18, gap: 12, paddingBottom: 36 },
+  card: { backgroundColor: C.white, borderRadius: 16, borderWidth: 1, borderColor: C.border, padding: 16 },
+  eyebrow: { fontSize: 11, color: C.muted, fontWeight: '700', letterSpacing: 1, marginBottom: 9 },
+  body: { fontSize: 14, color: C.ink, lineHeight: 22, marginBottom: 8 },
+  link: { fontSize: 13, color: C.teal, fontWeight: '600', marginTop: 3 },
+});
+
 // ─────────────────────────────────────────────
 // App Root
 // ─────────────────────────────────────────────
@@ -5538,6 +5588,7 @@ export default function App() {
   const [subTab, setSubTab] = useState('learn');
   const [sceneState, setSceneState] = useState(null);
   const [practiceScene, setPracticeScene] = useState(null);
+  const [showDataSources, setShowDataSources] = useState(false);
   const [user, setUser] = useState(null);
   const { content, loading, error, reload } = useContent();
 
@@ -5637,8 +5688,10 @@ export default function App() {
     <SafeAreaView style={{ flex: 1, backgroundColor: isDark ? C.ink : C.paper }}>
       <StatusBar barStyle={isDark ? 'light-content' : 'dark-content'} backgroundColor={isDark ? C.ink : C.paper} />
       {error && <OfflineContentNotice />}
-      {tab === 'home' && (
-        <HomeScreen setTab={setTab} setSubTab={setSubTab} setSceneState={setSceneState} content={content} onDeleteAccount={handleDeleteAccount} />
+      {showDataSources ? (
+        <DataSourcesScreen onBack={() => setShowDataSources(false)} />
+      ) : tab === 'home' && (
+        <HomeScreen setTab={setTab} setSubTab={setSubTab} setSceneState={setSceneState} content={content} onDataSources={() => setShowDataSources(true)} onDeleteAccount={handleDeleteAccount} />
       )}
       {tab === 'pie' && (
      <PieTab
@@ -5652,7 +5705,7 @@ export default function App() {
 />
       )}
       {tab === 'na' && <NaTab mapPlaces={content.mapPlaces} />}
-      <TabBar tab={tab} setTab={(t) => { setTab(t); if (t === 'pie') setSubTab('learn'); }} />
+      {!showDataSources && <TabBar tab={tab} setTab={(t) => { setTab(t); if (t === 'pie') setSubTab('learn'); }} />}
     </SafeAreaView>
   );
 }
