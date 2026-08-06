@@ -12,8 +12,8 @@ import { readFileSync } from 'node:fs';
 
 import {
   SOURCES, unitKey, sourceOf,
-  fromWord, fromCard, fromPlace, fromScenePhrase, fromSubwayPhrase,
-  buildUnits, indexUnits, countBySource,
+  fromWord, fromCard, fromPlace, fromScenePhrase, fromSubwayPhrase, fromWordField,
+  buildUnits, indexUnits, countBySource, auditWordFields,
 } from '../../features/review/units.js';
 
 const content = JSON.parse(
@@ -166,4 +166,82 @@ test('留个数字在这儿,方便看出内容有没有长', () => {
   console.log('  当前可复习单元:', JSON.stringify(n));
   assert.ok(n.card + n.place + n.scene + n.subway >= 100,
     `深内容单元总数 ${n.card + n.place + n.scene + n.subway},比预期少`);
+});
+
+// ── 词场 ──────────────────────────────────────────────────────
+//
+// 这一组是这个文件里唯一「守规则」而不是「守代码」的测试。
+// 词场的规则是:成员必须对得上词库里真实存在的词条 id。
+// 这条规则被违反过一次 —— 设计样板时给紅葉配了 `見頃`,而它根本不在词库里,
+// 于是那个词点不进去。当时的结论是「规则没错,错在没有校验」,这就是那个校验。
+
+test('词场句能建成单元,键带 field 前缀', () => {
+  const u = fromWordField({
+    id: 'n2_kouyou', word: '紅葉', reading: 'こうよう',
+    wordField: {
+      label: '秋天会一起遇到',
+      sentence: { jp: '秋、山が紅葉する頃、温泉に行く。', zh: '秋天山变红的时候，去泡温泉。' },
+      members: [{ id: 'n5_aki' }, { id: 'n5_yama' }, { id: 'n2_onsen' }],
+    },
+  });
+  assert.equal(u.key, 'field:n2_kouyou');
+  assert.equal(sourceOf(u.key), 'field');
+  assert.equal(u.mode, 'produce');
+  assert.equal(u.ask, '秋天山变红的时候，去泡温泉。');
+  assert.equal(u.answer, '秋、山が紅葉する頃、温泉に行く。');
+});
+
+test('没有词场的词不产出单元 —— 8298 条里绝大多数都没有', () => {
+  assert.equal(fromWordField({ id: 'x', word: '水' }), null);
+  assert.equal(fromWordField({ id: 'x', wordField: { members: [] } }), null, '只有成员没有句子不成题');
+  assert.equal(fromWordField(null), null);
+});
+
+test('★ 校验能抓出对不上词库的成员', () => {
+  const bank = [
+    { id: 'n5_aki', word: '秋', reading: 'あき' },
+    {
+      id: 'n2_kouyou', word: '紅葉', reading: 'こうよう',
+      wordField: {
+        sentence: { jp: '秋、山が紅葉する頃、温泉に行く。', zh: '…' },
+        members: [{ id: 'n5_aki' }, { id: 'n2_migoro' }],
+      },
+    },
+  ];
+  const bad = auditWordFields(bank);
+  assert.equal(bad.length, 1);
+  assert.match(bad[0], /n2_migoro 不在词库里/);
+});
+
+test('★ 校验能抓出「成员没真的出现在句子里」的假同框', () => {
+  const bank = [
+    { id: 'n2_onsen', word: '温泉', reading: 'おんせん' },
+    {
+      id: 'n2_kouyou', word: '紅葉', reading: 'こうよう',
+      wordField: {
+        sentence: { jp: '山が紅葉する。', zh: '山变红了。' },
+        members: [{ id: 'n2_onsen' }],
+      },
+    },
+  ];
+  assert.match(auditWordFields(bank)[0], /找不到成员 温泉/);
+});
+
+test('★ 合格的词场一个问题都不报', () => {
+  const bank = [
+    { id: 'n5_aki', word: '秋', reading: 'あき' },
+    { id: 'n2_onsen', word: '温泉', reading: 'おんせん' },
+    {
+      id: 'n2_kouyou', word: '紅葉', reading: 'こうよう',
+      wordField: {
+        sentence: { jp: '秋、山が紅葉する頃、温泉に行く。', zh: '…' },
+        members: [{ id: 'n5_aki' }, { id: 'n2_onsen' }],
+      },
+    },
+  ];
+  assert.deepEqual(auditWordFields(bank), []);
+});
+
+test('★ 真实内容包的词场必须干净(暂时没有词场,写词场后这条自动生效)', () => {
+  assert.deepEqual(auditWordFields(content.wordBank), []);
 });

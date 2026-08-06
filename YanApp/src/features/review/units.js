@@ -28,7 +28,7 @@ import { isDue } from '../wordbank/srs.js';
 // 这不是风格问题:线上用户的 yan_wordbank_progress 和云端 word_progress 表里
 // 已经是这个格式,加前缀等于所有人的进度一夜归零。新来源才带前缀。
 
-export const SOURCES = ['word', 'card', 'place', 'scene', 'subway'];
+export const SOURCES = ['word', 'card', 'place', 'scene', 'subway', 'field'];
 
 export const unitKey = (source, id) => (source === 'word' ? String(id) : `${source}:${id}`);
 
@@ -149,6 +149,29 @@ export function fromPlace(place) {
   });
 }
 
+/**
+ * 词场句。
+ *
+ * 词场不是并列的近义词块,是一个让成员同框出现的句子 ——
+ * 「秋、山が紅葉する頃、温泉に行く」。这句话同时是例句、是词场、是一道复习题,
+ * 一份内容三个用途。做成并列词块试过一次,失败了:秋是季节、山是地点、
+ * 温泉是同时会做的事,三种关系摊平之后读者看不出相关性。
+ * 详见 docs/content-standard-wordfield.md。
+ */
+export function fromWordField(w) {
+  const f = w?.wordField;
+  if (!f?.sentence?.jp) return null;
+  return unit({
+    key: unitKey('field', w.id || `${w.word}-${w.reading}`),
+    mode: 'produce',
+    ask: f.sentence.zh,
+    answer: f.sentence.jp,
+    answerSub: f.sentence.roma,
+    speak: f.sentence.jp,
+    origin: w.word,
+  });
+}
+
 /** 场景句。hook 是现成的记忆钩子,拿来当提示。 */
 export function fromScenePhrase(sceneId, sceneLabel, p) {
   if (!p) return null;
@@ -197,6 +220,13 @@ export function buildUnits(content) {
     out.push(...fromCard(id, card));
   }
 
+  // 词场句。词库整体不在这里展平(8298 条太大),但带 wordField 的只有精选的几百条,
+  // 它们是这个产品的 moat,必须进复习队列 —— 否则又变成「写了只被看一次」。
+  for (const w of content.wordBank || []) {
+    const u = fromWordField(w);
+    if (u) out.push(u);
+  }
+
   for (const place of content.mapPlaces || []) {
     const u = fromPlace(place);
     if (u) out.push(u);
@@ -220,7 +250,38 @@ export function buildUnits(content) {
   return out;
 }
 
-/** 键 → 单元。复习页拿到队列后按键取内容。 */
+/**
+ * 词场体检:成员对不对得上词库、句子里有没有真的出现成员词。
+ *
+ * 和 storage.js 的 auditKeys() 同性质 —— 把「靠写内容的人记得」换成「机器拦」。
+ * 这条规则被违反过一次:设计样板时给紅葉配了 `見頃`,而它根本不在词库里,
+ * 于是那个词点不进去。当时的结论是「规则没错,错在没有校验」。
+ *
+ * @returns 问题描述数组,空数组 = 没问题
+ */
+export function auditWordFields(wordBank) {
+  const bank = Array.isArray(wordBank) ? wordBank : [];
+  const byId = new Map(bank.filter(w => w?.id).map(w => [w.id, w]));
+  const out = [];
+
+  for (const w of bank) {
+    const f = w?.wordField;
+    if (!f) continue;
+    if (!f.sentence?.jp) { out.push(`${w.word} 的词场没有句子`); continue; }
+
+    for (const m of f.members || []) {
+      const mw = m?.id && byId.get(m.id);
+      if (!mw) { out.push(`${w.word} 的词场成员 ${m?.id || '(没有 id)'} 不在词库里`); continue; }
+      // 成员必须真的出现在句子里 —— 否则「同框」是假的,词场就退回成了近义词列表
+      if (!f.sentence.jp.includes(mw.word) && !f.sentence.jp.includes(mw.reading)) {
+        out.push(`${w.word} 的句子里找不到成员 ${mw.word}`);
+      }
+    }
+  }
+  return out;
+}
+
+/** 键 → 单元。复习页拿到键后按它取内容。 */
 export const indexUnits = (units) => {
   const m = {};
   for (const u of units || []) if (u?.key) m[u.key] = u;
