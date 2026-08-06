@@ -856,7 +856,11 @@ function HomeScreen({ setTab, setSceneState, setSubTab, content, onDataSources, 
       <View style={hs.aboutBox}>
         <Text style={hs.aboutTitle}>关于</Text>
         <Text style={hs.aboutLine}>
-          词条的读音、词性与英文释义及部分例句，使用了外部词典和语料数据。
+          {/* 具名署名要留在常驻可见的地方。单独开一屏是 CC BY-SA 的要求,
+              但不该因此把这里换成「使用了外部词典和语料数据」这种谁也没点到的话 ——
+              两者可以都有:这里点名,那一屏说清边界。 */}
+          词条的读音、词性与英文释义参考 <Text style={hs.aboutStrong}>JMdict</Text>(EDRDG,CC BY-SA 4.0);
+          部分例句来自 <Text style={hs.aboutStrong}>Tatoeba</Text>(CC BY 2.0 FR)。详见数据来源。
         </Text>
         <View style={hs.aboutActions}>
           <TouchableOpacity onPress={onDataSources}>
