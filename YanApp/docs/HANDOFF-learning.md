@@ -51,7 +51,31 @@ WB_NEXT_STATUS = { new: 'learning', learning: 'mastered', mastered: 'new' }
 
 词库数据:`assets/content.fallback.json` 的 `wordBank`,8298 条。
 其中 N5/N4 的 1343 条是精修的(例句 100%),N3 以上 6955 条是机器起草
-(`status: 'zh_drafted'`,例句仅 39%)—— 界面上用 `isDraftedWord()` 标出来了。
+(`status: 'zh_drafted'`)—— 界面上用 `isDraftedWord()` 标出来了。
+
+**这段以前写着「例句仅 39%」,是错的。2026-08 逐条数过的真实数字:**
+
+| 缺什么 | 条数 |
+|---|---|
+| 缺例句 | 4253(**100% 落在 zh_drafted**;非 drafted 的 1343 条覆盖率 100%) |
+| 缺 `coreChunk` | **6955** —— 即全部 zh_drafted,连那 2702 条有例句的也没有 |
+
+整库例句覆盖率是 48.7%,不是 39%。缺例句按级别:N3 442 / N2 1326 / N1 2485。
+
+`status` 的取值是 `zh_drafted`(6955)/ `draft`(716)/ `candidate`(625)/ `verified`(**只有 2 条**)。
+判定「是否精修」要用 `status !== 'zh_drafted'`,**不能用 `=== 'verified'`** —— 那样会把
+1341 条精修词判成没精修。
+
+### ⚠️ 比缺例句更大的坑:那 6955 条是不可路由的
+
+缺例句的 4253 条里,`tags.scene` **100% 是 `["daily"]`**、`tags.type` **100% 是
+`["uncategorized"]`**。全库看也一样:真正有信息的 scene 标签(restaurant 53 /
+directions 42 / convenience 19 / emergency 12 / hotel 11 / subway 11)加起来只有 148 条,
+且全部落在精修的 N5/N4 里。
+
+也就是说机器起草那一轮**只灌了词义,没做任何场景/词性标注**。
+后果:任何「按场景组织学习路径」的功能(旅行速成、场景包、按主题推词)在这 6955 条上
+都跑不起来 —— 不是效果差,是压根挑不出来。这个坑建议单独立项,别混在补例句里做。
 
 ### 地铁冒险
 
