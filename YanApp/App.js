@@ -1299,6 +1299,7 @@ function PieTab({ content, subTab, setSubTab, sceneState, setSceneState, practic
         )}
         {subTab === 'wordbank' && !wbBookId && (
           <WordBookShelfScreen
+            wordBank={content.wordBank || []}
             onBack={() => setSubTab('learn')}
             onSelect={(id) => setWbBookId(id)}
           />
@@ -1526,7 +1527,54 @@ const JLPT_COLORS = {
   N1: ['#fde8e0', '#b0301a'],
 };
 
-function WordBookShelfScreen({ onBack, onSelect }) {
+/**
+ * 词书选择 + **全库搜索**。
+ *
+ * 搜索原本关在单本词书里,那是个错误的切分:没人记得「注文」是 N4 还是 N3。
+ * 用户想查一个词的时候,他脑子里没有 JLPT 级别,只有那个词。
+ *
+ * 挪出来之后两件事各归各位:
+ *   词书 = 定稿的那批(例句/罗马音/搭配齐全),按级别组织,是「学」
+ *   搜索 = 全库 8298 条,不分级别、不滤起草稿,是「查」
+ * 代码里本来就写着「其余词条只在搜索时出现,当词典用」—— 搜索被关在单本书里的时候
+ * 这句话是做不到的,现在才真的成立。
+ */
+function WordBookShelfScreen({ wordBank, onBack, onSelect }) {
+  const [query, setQuery] = useState('');
+  const [picked, setPicked] = useState(null);
+  const [pickedIdx, setPickedIdx] = useState(0);
+  const { speak, speakingKey } = useSpeech();
+  const { progress, grade } = useReviewProgress();
+
+  const q = query.trim();
+  const hits = !q ? [] : (wordBank || []).filter(w =>
+    w.word.includes(q) || w.reading.includes(q)
+    || (w.meaning_zh || '').includes(q)
+    || (w.meaning_en || '').toLowerCase().includes(q.toLowerCase())
+  ).slice(0, 80);   // 8298 条全渲染会卡,查词的人也不会翻到第 80 条
+
+  const today = todayStr();
+
+  if (picked) {
+    return (
+      <WBDetailPage
+        entry={picked}
+        record={progress[wordKey(picked)] || null}
+        today={today}
+        onBack={() => setPicked(null)}
+        // 搜索结果里评分用词条自己的级别当 bookId,而不是「当前这本书」——
+        // 这里根本没有「当前这本书」
+        onGrade={(g) => grade(wordKey(picked), g, (picked.level || 'n5').toLowerCase())}
+        speak={speak}
+        speakingKey={speakingKey}
+        hasPrev={pickedIdx > 0}
+        hasNext={pickedIdx < hits.length - 1}
+        onPrev={() => { const i = pickedIdx - 1; setPicked(hits[i]); setPickedIdx(i); }}
+        onNext={() => { const i = pickedIdx + 1; setPicked(hits[i]); setPickedIdx(i); }}
+      />
+    );
+  }
+
   return (
     <View style={{ flex: 1, backgroundColor: C.paper }}>
       <View style={wbs.nav}>
@@ -1534,8 +1582,57 @@ function WordBookShelfScreen({ onBack, onSelect }) {
           <Text style={wbs.navBack}>‹ 返回学习目录</Text>
         </TouchableOpacity>
         <Text style={wbs.title}>词书</Text>
-        <Text style={wbs.sub}>选择一本开始学习</Text>
+        <Text style={wbs.sub}>选择一本开始学习,或直接搜整个词库</Text>
+        <TextInput
+          style={wbs.search}
+          placeholder="搜索词、读音或意思"
+          placeholderTextColor={C.mutedLight}
+          value={query}
+          onChangeText={setQuery}
+          autoCorrect={false}
+          returnKeyType="search"
+        />
       </View>
+
+      {!!q && (
+        <FlatList
+          style={{ flex: 1 }}
+          data={hits}
+          keyExtractor={(item, i) => `${item.word}-${item.reading}-${i}`}
+          contentContainerStyle={{ padding: 14, gap: 6 }}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item, index }) => {
+            const [bg, fg] = JLPT_COLORS[item.level] || [C.tag, '#888'];
+            const st = progress[wordKey(item)]?.status || 'new';
+            return (
+              <TouchableOpacity
+                style={wbs.hit}
+                activeOpacity={0.7}
+                onPress={() => { setPicked(item); setPickedIdx(index); }}
+              >
+                {/* 级别标在结果上 —— 用户查完一个词,顺带知道了它属于哪本书。
+                    这正是把搜索挪出来之后才能给的信息。 */}
+                <View style={[wbs.hitLv, { backgroundColor: bg }]}>
+                  <Text style={[wbs.hitLvTxt, { color: fg }]}>{item.level}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={wbs.hitHead}>
+                    <Text style={wbs.hitWord}>{item.word}</Text>
+                    <Text style={wbs.hitReading}>{item.reading}</Text>
+                    {st === 'learning' && <View style={wbs.hitDot} />}
+                    {st === 'mastered' && <Text style={wbs.hitCheck}>✓</Text>}
+                  </View>
+                  <Text style={wbs.hitZh} numberOfLines={1}>{item.meaning_zh}</Text>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+          ListEmptyComponent={<Text style={wbs.empty}>没有找到匹配的词</Text>}
+        />
+      )}
+
+      {!q && (
       <ScrollView contentContainerStyle={{ padding: 14, gap: 7 }} showsVerticalScrollIndicator={false}>
         {WORDBOOKS.map(book => {
           const [bg, fg] = JLPT_COLORS[book.level] || [C.tag, '#888'];
@@ -1563,6 +1660,7 @@ function WordBookShelfScreen({ onBack, onSelect }) {
           );
         })}
       </ScrollView>
+      )}
     </View>
   );
 }
@@ -1571,6 +1669,22 @@ const wbs = StyleSheet.create({
   navBack: { fontSize: 13, color: C.lava, fontWeight: '600', marginBottom: 4 },
   title: { fontSize: 18, fontWeight: '700', color: C.ink },
   sub: { fontSize: 11, color: C.muted },
+  search: {
+    marginTop: 9, backgroundColor: C.white, borderRadius: 8,
+    borderWidth: 1, borderColor: C.border,
+    paddingHorizontal: 12, paddingVertical: 0, height: 40,
+    fontSize: 15, color: C.ink,
+  },
+  hit: { flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: C.white, borderRadius: 8, paddingHorizontal: 12, paddingVertical: 9, borderWidth: 1, borderColor: C.border },
+  hitLv: { borderRadius: 5, paddingHorizontal: 6, paddingVertical: 3 },
+  hitLvTxt: { fontSize: 10, fontWeight: '800' },
+  hitHead: { flexDirection: 'row', alignItems: 'center', gap: 7 },
+  hitWord: { fontSize: 16, fontWeight: '700', color: C.ink },
+  hitReading: { fontSize: 11, color: C.muted },
+  hitDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: C.gold, marginLeft: 'auto' },
+  hitCheck: { fontSize: 12, color: C.lava, fontWeight: '700', marginLeft: 'auto' },
+  hitZh: { fontSize: 12, color: C.ink, marginTop: 2 },
+  empty: { textAlign: 'center', color: C.muted, marginTop: 40, fontSize: 14 },
   row: { flexDirection: 'row', alignItems: 'center', backgroundColor: C.white, borderRadius: 8, paddingHorizontal: 12, paddingVertical: 10, borderWidth: 1, borderColor: C.border, gap: 12 },
   rowLocked: { opacity: 0.4 },
   badge: { width: 38, height: 38, borderRadius: 7, alignItems: 'center', justifyContent: 'center' },
@@ -1605,7 +1719,6 @@ const isDraftedWord = (w) => !w?.status || w.status === 'zh_drafted';
 const wordKey = (item) => `${item.word}-${item.reading}`;
 
 function WordBankScreen({ wordBank, book, onBack }) {
-  const [query, setQuery] = useState('');
   // 读写进度的逻辑不再写在这个页面里,统一走 useReviewProgress ——
   // 复习页读写的是同一份数据,两处各写一套迁移和落盘,迟早会长歪成两个口径。
   //
@@ -1672,12 +1785,9 @@ function WordBankScreen({ wordBank, book, onBack }) {
     return () => { alive = false; };
   }, [bookId, progressReady]);
 
-  const q = query.trim().toLowerCase();
-  const searched = !q ? wordBank : wordBank.filter(w =>
-    w.word.includes(query.trim()) || w.reading.includes(query.trim())
-    || (w.meaning_zh || '').includes(query.trim())
-    || (w.meaning_en || '').toLowerCase().includes(q)
-  );
+  // 这一页不再有搜索框 —— 查词是全库的事,搬到了词书选择页。
+  // 没人记得「注文」是 N4 还是 N3,按词书切分搜索本来就是错的切法。
+  const searched = wordBank;
   const STATUS_FILTERS = [
     { id: 'all', label: '全部' },
     { id: 'new', label: '未学' },
@@ -1702,7 +1812,7 @@ function WordBankScreen({ wordBank, book, onBack }) {
   // 「今日任务」和「待复习」两个视图不过这道滤:队列和到期表是按用户实际学过的词
   // 算出来的,用户可能是搜索时顺手学的起草词。滤掉它们会让按钮上写着「待复习 3」
   // 而列表里只有 2 条 —— 数字和眼前的东西对不上,比多显示一个粗糙词条更伤信任。
-  const skipDraftFilter = q || statusFilter === 'today' || statusFilter === 'due';
+  const skipDraftFilter = statusFilter === 'today' || statusFilter === 'due';
   const filtered = skipDraftFilter ? byStatus : byStatus.filter(w => !isDraftedWord(w));
 
   // 只数这本书里的词。progress 是全局的(键是「词-读音」,不分书),
@@ -1711,8 +1821,12 @@ function WordBankScreen({ wordBank, book, onBack }) {
     (n, w) => n + ((progress[wordKey(w)]?.dueAt || '9999') <= today ? 1 : 0), 0
   );
   const todayLeft = session ? session.keys.filter(k => !doneKeys.has(k)).length : 0;
+  // 这本书里有没有精修词。N3/N2/N1 现在整本都是机器起草,一条定稿词都没有,
+  // 于是队列挑出来是空的 —— 而空队列和「今天做完了」在数据上长得一模一样。
+  // 不区分的话,用户什么都没做就被告知「今日已完成」,这是界面在骗他。
+  const hasFinalWords = wordBank.some(w => !isDraftedWord(w));
 
-  const startToday = () => { setQuery(''); setStatusFilter('today'); };
+  const startToday = () => setStatusFilter('today');
 
   /** 评一次分。g: 'again' | 'hard' | 'good' | 'mastered' */
   const gradeWord = (g) => {
@@ -1761,21 +1875,15 @@ function WordBankScreen({ wordBank, book, onBack }) {
             <Text style={[wb.ctaBtnTxt, statusFilter === 'today' && wb.ctaBtnTxtActive]}>
               {/* session 还没读出来时不能显示「今日已完成」—— 冷启动那一瞬间
                   告诉用户今天没事干,他就真的关掉了 */}
-              {!session ? '今日任务' : todayLeft > 0 ? `今日任务 ${todayLeft}` : '今日已完成'}
+              {!session ? '今日任务'
+                : !hasFinalWords ? '这本还在起草'
+                : todayLeft > 0 ? `今日任务 ${todayLeft}` : '今日已完成'}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[wb.ctaBtn, statusFilter === 'due' && wb.ctaBtnActive]} onPress={() => { setQuery(''); setStatusFilter('due'); }}>
+          <TouchableOpacity style={[wb.ctaBtn, statusFilter === 'due' && wb.ctaBtnActive]} onPress={() => setStatusFilter('due')}>
             <Text style={[wb.ctaBtnTxt, statusFilter === 'due' && wb.ctaBtnTxtActive]}>待复习{dueTotal > 0 ? ` (${dueTotal})` : ''}</Text>
           </TouchableOpacity>
         </View>
-        <TextInput
-          style={wb.search}
-          placeholder="搜索词、读音或意思"
-          placeholderTextColor={C.mutedLight}
-          value={query}
-          onChangeText={setQuery}
-          autoCorrect={false}
-        />
         <View style={wb.filterRow}>
           {STATUS_FILTERS.map(f => (
             <TouchableOpacity key={f.id} style={[wb.filterChip, statusFilter === f.id && wb.filterChipActive]} onPress={() => setStatusFilter(f.id)}>
@@ -1811,9 +1919,11 @@ function WordBankScreen({ wordBank, book, onBack }) {
         }}
         ListEmptyComponent={(
           <Text style={wb.empty}>
-            {statusFilter === 'due' ? '今天没有到期的词,明天再来'
+            {statusFilter === 'today' && !hasFinalWords
+              ? '这本词书还没有精修词条。\n可以在词书选择页搜索,当词典查着用。'
+              : statusFilter === 'due' ? '今天没有到期的词,明天再来'
               : statusFilter === 'today' && session ? '今日任务已完成'
-              : '没有找到匹配的词'}
+              : '这里还没有词'}
           </Text>
         )}
       />
@@ -1830,7 +1940,6 @@ const wb = StyleSheet.create({
   ctaBtnActive: { backgroundColor: C.lava, borderColor: C.lava },
   ctaBtnTxt: { fontSize: 12, fontWeight: '600', color: C.muted },
   ctaBtnTxtActive: { color: C.white },
-  search: { backgroundColor: C.white, borderRadius: 6, borderWidth: 1, borderColor: C.border, paddingHorizontal: 12, paddingVertical: 8, fontSize: 13, color: C.ink },
   filterRow: { flexDirection: 'row', gap: 5 },
   filterChip: { borderRadius: 999, paddingHorizontal: 10, paddingVertical: 4, borderWidth: 1, borderColor: C.border, backgroundColor: C.white },
   filterChipActive: { backgroundColor: C.ink, borderColor: C.ink },
