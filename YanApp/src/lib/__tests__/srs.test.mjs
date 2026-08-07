@@ -297,3 +297,38 @@ test('云端行 → 记录 → 云端行,一圈下来不变形', () => {
   const row = toCloudRow('k', rec, { userId: 'u1', now: 'X' });
   assert.deepEqual(fromCloudRow(row, T), rec);
 });
+
+// ── 键迁移 ────────────────────────────────────────────────────
+//
+// 2026-08 合并了 267 组「同一个词两条记录」(おねがいします / お願いします 这种)。
+// 合并等于让被删那条的键消失 —— 不折算的话,用户在它上面攒的进度会静默清零。
+// 静默是关键:他不会收到任何提示,只会觉得「我明明学过这个词」。
+
+test('★ 旧键读盘时自动折算到现行键 —— 合并不能让进度静默清零', async () => {
+  const { KEY_ALIASES } = await import('../../features/wordbank/keyAliases.js');
+  const [oldKey, newKey] = Object.entries(KEY_ALIASES)[0];
+  const out = normalizeProgress({ [oldKey]: { box: 3, dueAt: '2026-09-01' } }, T);
+  assert.equal(out[oldKey], undefined, '旧键不该继续存在');
+  assert.ok(out[newKey], '进度必须出现在新键下');
+  assert.equal(out[newKey].box, 3, '档位不能在折算中丢掉');
+});
+
+test('★ 新旧键都有记录时,留学得更远的那条', async () => {
+  const { KEY_ALIASES } = await import('../../features/wordbank/keyAliases.js');
+  const [oldKey, newKey] = Object.entries(KEY_ALIASES)[0];
+  const out = normalizeProgress({
+    [oldKey]: { box: 5, dueAt: '2026-12-01', lastSeenAt: T },
+    [newKey]: { box: 0, dueAt: '2026-08-06', lastSeenAt: T },
+  }, T);
+  assert.equal(out[newKey].box, 5, '不能把推到 30 天的词拉回 1 天');
+});
+
+test('★ 别名表指向的键必须是真实存在的词条', async () => {
+  const { readFileSync } = await import('node:fs');
+  const { KEY_ALIASES } = await import('../../features/wordbank/keyAliases.js');
+  const content = JSON.parse(readFileSync(
+    new URL('../../../assets/content.fallback.json', import.meta.url), 'utf8'));
+  const live = new Set(content.wordBank.map(w => `${w.word}-${w.reading}`));
+  const bad = Object.entries(KEY_ALIASES).filter(([o, n]) => !live.has(n) || live.has(o));
+  assert.deepEqual(bad, [], '别名的目标必须在词库里,来源必须已经被删掉');
+});

@@ -19,6 +19,8 @@
 //
 // 纯函数,不碰 AsyncStorage、不碰 React —— 落盘和渲染在调用方。
 
+import { canonicalKey } from './keyAliases.js';
+
 /** 答对时的间隔阶梯(天)。box=0 的词答对后隔 1 天再见,一路走到 120 天。 */
 export const LADDER = [1, 2, 4, 7, 15, 30, 60, 120];
 
@@ -98,13 +100,25 @@ export function normalizeRecord(v, today = todayStr()) {
   return makeRecord(v, today);
 }
 
-/** 整张表归一。坏条目丢掉而不是让整张表读不出来。 */
+/**
+ * 整张表归一。坏条目丢掉而不是让整张表读不出来。
+ *
+ * 顺带把旧键折算到现行键(见 keyAliases.js):2026-08 合并了 267 组
+ * 「同一个词两条记录」,被删那条的键要是不折算,用户在它上面攒的进度就静默清零了。
+ * 折算后两个键撞上时,留「学得更远」的那条 —— 把一个已经推到 30 天的词
+ * 拉回 1 天,用户的损失是实打实的(和 mergeProgress 同一条规矩)。
+ */
 export function normalizeProgress(map, today = todayStr()) {
   const out = {};
   if (!map || typeof map !== 'object' || Array.isArray(map)) return out;
-  for (const [key, v] of Object.entries(map)) {
+  for (const [rawKey, v] of Object.entries(map)) {
     const rec = normalizeRecord(v, today);
-    if (rec) out[key] = rec;
+    if (!rec) continue;
+    const key = canonicalKey(rawKey);
+    const prev = out[key];
+    if (!prev) { out[key] = rec; continue; }
+    const tp = prev.lastSeenAt || '', tr = rec.lastSeenAt || '';
+    if (tr > tp || (tr === tp && rec.dueAt > prev.dueAt)) out[key] = rec;
   }
   return out;
 }
