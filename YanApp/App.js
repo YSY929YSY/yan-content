@@ -4373,7 +4373,10 @@ function NaTab({ mapPlaces: initialPlaces }) {
   // 把「能不能打卡」绑在「言有没有收录」上,等于让内容产量成为产品天花板。
   const {
     places, visitedIds, checkinDates, placeNotes, photoUris, myPlaces, mapPoints,
-    customRecords,
+    // countries / countryRows 曾经漏在这里 —— 下面用了它们,却没从 hook 取出来,
+    // 于是「世界打卡」一进去就 ReferenceError 白屏。JS 不会在编译期告诉你这件事,
+    // 只有真机点进那个 Tab 才会炸,而这一层没有测试覆盖。
+    customRecords, countries, countryRows,
     checkIn, saveNote: persistNote, toggleStatus: togglePlaceStatus, pickPhoto, setVisitedOn,
     addPlace, removePlace, updatePlace, pickPhotoForCustom, importFromPhotos,
   } = useWorldFootprint(initialPlaces);
