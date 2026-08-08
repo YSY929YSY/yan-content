@@ -200,3 +200,60 @@ test('结清的账目不计入「谁欠谁」,但仍算个人花费', () => {
   assert.ok(near(spend.rows.find(r => r.person === 'Lyra').owed, 100), '个人花费应含已结清的');
   assert.ok(near(owe.rows.find(r => r.person === 'Lyra').owed, 20), '谁欠谁只算未结清的');
 });
+
+// ── 金额算式 ──────────────────────────────────────────────────
+//
+// 人在小票旁边记账天然会写「90*2」「47+6」「12+22.8」—— 两张门票、
+// 打车分两段、买了两样。这是纸上记账最省事的地方。
+//
+// 在这之前这些写法被**静默算错**:清洗函数把运算符删掉再拼接,
+// 90*2 变成 902、12+22.8 变成 1222.8。不报错不提示,你以为记了 180。
+import { evalAmount, clampAmountExpr, isAmountExpr } from '../ledgerMath.js';
+
+test('算式:乘法和加法', () => {
+  assert.equal(evalAmount('90*2'), 180);
+  assert.equal(evalAmount('47+6'), 53);
+  assert.equal(evalAmount('12+22.8'), 34.8);
+  assert.equal(evalAmount('388*2'), 776);
+});
+
+test('乘法优先于加法 —— 和算术常识一致,否则 47+6*2 会算成 106', () => {
+  assert.equal(evalAmount('47+6*2'), 59);
+});
+
+test('普通金额照常,一位小数不会被当成千位分隔', () => {
+  assert.equal(evalAmount('57.8'), 57.8);
+  assert.equal(evalAmount('84.95'), 84.95);
+  assert.equal(evalAmount('100'), 100);
+});
+
+test('结果只到分 —— 浮点尾巴不该出现在账本里', () => {
+  assert.equal(evalAmount('0.1+0.2'), 0.3);
+  assert.equal(evalAmount('19.99*3'), 59.97);
+});
+
+test('算式不合法返回 null,不返回一个像模像样的错数', () => {
+  for (const s of ['', '90*', '+5', 'abc', '90--2', '90/2']) {
+    assert.equal(evalAmount(s), null, `${JSON.stringify(s)} 不该算出数来`);
+  }
+});
+
+test('money 认算式 —— 这是修掉静默算错的那一刀', () => {
+  assert.equal(money('90*2'), 180, '以前是 902');
+  assert.equal(money('12+22.8'), 34.8, '以前是 1222.8');
+  assert.equal(money('57.8'), 57.8);
+  assert.equal(money('90*'), 90, '打字打到一半时回退到已经输入的部分,不闪一个错数');
+});
+
+test('输入清洗放行运算符,但每段数字仍然最多两位小数', () => {
+  assert.equal(clampAmountExpr('90*2'), '90*2');
+  assert.equal(clampAmountExpr('12+22.8'), '12+22.8');
+  assert.equal(clampAmountExpr('9a0*2元'), '90*2');
+  assert.equal(clampAmountExpr('1.234*2'), '1.23*2', '每段各自截到两位');
+});
+
+test('isAmountExpr 只对真的带运算符的串为真', () => {
+  assert.equal(isAmountExpr('90*2'), true);
+  assert.equal(isAmountExpr('57.8'), false);
+  assert.equal(isAmountExpr(''), false);
+});

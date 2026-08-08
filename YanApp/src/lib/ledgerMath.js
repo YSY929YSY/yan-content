@@ -8,9 +8,66 @@
 //   ② 闭合:所有人的净额之和 == 0
 //   ③ 最少:转账笔数不超过「有非零净额的人数 - 1」
 
+/**
+ * 金额算式求值:支持 + 和 *,别的一律不认。
+ *
+ * 为什么要有它:人在小票旁边记账时天然会写「90*2」「47+6」「12+22.8」——
+ * 门票两张、打车分两段、买了两样东西。这是纸上记账最省事的地方,
+ * 逼用户先按计算器再输入,等于把纸的优势丢掉。
+ *
+ * 而在这之前,这些写法会被**静默算错**:清洗函数把 * 和 + 直接删掉再拼接,
+ * 「90*2」变成 902、「12+22.8」变成 1222.8。不报错、不提示,
+ * 你以为记了 180,账本里躺着 902。
+ *
+ * 只支持 + 和 *:
+ *   · 这两个覆盖了真实记账的全部写法(数量 × 单价、几笔加起来)
+ *   · 不支持 - 是因为它和负数写法有歧义
+ *   · 不支持 / 和括号是因为没人记账时会用,支持了只是扩大出错面
+ * 乘法优先级高于加法,和算术常识一致:47+6*2 = 59。
+ *
+ * @returns 数字;算式不合法(空、有别的符号、以运算符结尾)返回 null
+ */
+export function evalAmount(raw) {
+  const s = String(raw ?? '').replace(/\s/g, '');
+  if (!s) return null;
+  if (!/^[\d.]+([+*][\d.]+)*$/.test(s)) return null;   // 只认 数字(运算符 数字)*
+  let total = 0;
+  for (const term of s.split('+')) {
+    let product = 1;
+    for (const factor of term.split('*')) {
+      const n = Number.parseFloat(factor);
+      if (!Number.isFinite(n)) return null;
+      product *= n;
+    }
+    total += product;
+  }
+  // 钱只到分。0.1+0.2 这种浮点尾巴不该出现在账本里
+  return Number.isFinite(total) ? Math.round(total * 100) / 100 : null;
+}
+
+/** 这串里有没有算式(而不是一个普通数字)。界面据此决定要不要显示「= 180」。 */
+export const isAmountExpr = (raw) => /[+*]/.test(String(raw ?? ''));
+
 export const money = (value) => {
+  // 先当算式试一次 —— 「90*2」要算成 180,不是 902
+  const evaluated = evalAmount(value);
+  if (evaluated != null) return evaluated;
   const n = Number.parseFloat(String(value || '').replace(/[^\d.-]/g, ''));
   return Number.isFinite(n) ? n : 0;
+};
+
+/**
+ * 金额算式输入:在 clampMoney 的基础上放行 + 和 *。
+ *
+ * 单独一个函数而不是改 clampMoney:预算输入、各自价格那几个格子还用着旧的,
+ * 它们没有「两张票」这种语义,放开运算符只会让人困惑。
+ */
+export const clampAmountExpr = (v) => {
+  const s = String(v).replace(/[^\d.+*]/g, '');
+  // 每一段数字里最多一个小数点、最多两位小数
+  return s.split(/([+*])/).map(part => (
+    /[+*]/.test(part) ? part : clampMoney(part)
+  )).join('');
 };
 
 // 金额输入:只留数字和一个小数点,最多两位小数

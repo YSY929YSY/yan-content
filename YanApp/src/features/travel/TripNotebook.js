@@ -18,7 +18,7 @@ import {
 } from '../../lib/tripLedger';
 import { SCENE_PACK } from './scenePack';
 import {
-  money, clampMoney, splitEven, specialAmountFor,
+  money, clampMoney, clampAmountExpr, isAmountExpr, splitEven, specialAmountFor,
   buildShares as buildSharesFor, settleOne as settleOneFor,
 } from '../../lib/ledgerMath';
 import { parseItinerary } from '../../lib/parseItinerary';
@@ -728,7 +728,7 @@ function TripNotebook() {
       <View style={{ flex: 1 }}>
         <View style={tn.expenseTitleRow}>
           <Text style={tn.expenseTitle}>
-            {item.title && item.title !== item.category ? `${item.category} · ${item.title}` : item.category} · {fmtIn(money(item.amount), curOf(item))}
+            {item.title && item.title !== item.category ? `${item.category} · ${item.title}` : item.category} · {fmtIn(money(item.amount), curOf(item))}{item.amountExpr ? ` (${item.amountExpr.replace(/\*/g, '×')})` : ''}
           </Text>
           {!!expenseDay(item) && <Text style={tn.expenseDay}>{expenseDay(item)}</Text>}
         </View>
@@ -900,7 +900,7 @@ function TripNotebook() {
     setExpenseDraft({
       category: item.category || '其他',
       title: item.title || item.category || '',
-      amount: String(item.amount || ''),
+      amount: String(item.amountExpr || item.amount || ''),
       payer: item.payer || ledgerPeople[0] || '我',
       payerTouched: true,                              // 改旧账:用它原本的垫付人,别被默认值覆盖
       currency: item.currency || currency,
@@ -1023,7 +1023,11 @@ function TripNotebook() {
       currency,                       // 这笔用的币种,结算按它分组
       createdAt: expenseDraft.createdAt || new Date().toISOString(),
       title: expenseDraft.title.trim() || expenseDraft.category,
-      amount: expenseDraft.amount.trim(),
+      // amount 存算完的结果:远端 upsert、结算、导出都按纯数字读,算式不该流进去。
+      // 但算式本身有信息 ——「90*2」记着单价是 90、买了两张,这正是纸上记账
+      // 要保留的东西。所以另存一份给人看,不给机器算。
+      amount: String(money(expenseDraft.amount)),
+      amountExpr: isAmountExpr(expenseDraft.amount) ? expenseDraft.amount : undefined,
       // 备注只存用户自己写的。以前会自动生成一句「Lyra €24.40 · Ning €18.40」,
       // 而列表上一行已经渲染了同样的分摊 —— 同一件事印两遍。
       note: expenseDraft.note.trim(),
@@ -1662,12 +1666,35 @@ function TripNotebook() {
                   <TextInput
                     style={tn.amountInput}
                     value={expenseDraft.amount}
-                    onChangeText={v => setExpenseDraft(prev => ({ ...prev, amount: clampMoney(v) }))}
+                    onChangeText={v => setExpenseDraft(prev => ({ ...prev, amount: clampAmountExpr(v) }))}
                     placeholder="0.00"
                     keyboardType="decimal-pad"
                     inputAccessoryViewID={NUM_PAD_ID}
                     placeholderTextColor={C.border}
                   />
+                  {/* 运算符按钮放在行里,不放键盘配件栏:decimal-pad 两个平台都没有
+                      * 和 +,而 InputAccessoryView 只有 iOS 有 —— 放那儿等于 Android 用不了。 */}
+                  {!!expenseDraft.amount && !/[+*]$/.test(expenseDraft.amount) && (
+                    <>
+                      <TouchableOpacity
+                        style={tn.exprOp}
+                        onPress={() => setExpenseDraft(prev => ({ ...prev, amount: prev.amount + '*' }))}
+                      >
+                        <Text style={tn.exprOpTxt}>×</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={tn.exprOp}
+                        onPress={() => setExpenseDraft(prev => ({ ...prev, amount: prev.amount + '+' }))}
+                      >
+                        <Text style={tn.exprOpTxt}>+</Text>
+                      </TouchableOpacity>
+                    </>
+                  )}
+                  {/* 写了算式就把结果摆出来。不显示的话用户没法确认「90*2」有没有被理解 ——
+                      而这正是它以前静默算错(902)时最要命的地方:看不出来。 */}
+                  {isAmountExpr(expenseDraft.amount) && money(expenseDraft.amount) > 0 && (
+                    <Text style={tn.exprHint}>= {fmtMoney(money(expenseDraft.amount))}</Text>
+                  )}
                 </View>
                 {curOpen && (
                   <View style={tn.curTray}>
@@ -2237,6 +2264,12 @@ const tn = StyleSheet.create({
 
   // 金额:整个分账里唯一的大字,用衬线,和小本子的标题同一套语言
   amountRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingBottom: 4 },
+  exprHint: { fontSize: 13, color: C.muted, fontWeight: '600' },
+  exprOp: {
+    width: 30, height: 30, borderRadius: 6, alignItems: 'center', justifyContent: 'center',
+    borderWidth: 1, borderColor: C.border, backgroundColor: C.white,
+  },
+  exprOpTxt: { fontSize: 15, color: C.muted, fontWeight: '700' },
   curTap: { fontFamily: SERIF, fontSize: 22, color: C.muted, lineHeight: 44 },
   amountInput: {
     flex: 1, fontFamily: SERIF, fontSize: 38, color: C.ink,

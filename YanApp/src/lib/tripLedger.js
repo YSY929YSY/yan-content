@@ -142,6 +142,8 @@ export async function saveExpenseRemote(ledgerId, expense) {
       currency: expense.currency || null,
       settled_at: expense.settledAt || null,
       amount: Number.parseFloat(String(expense.amount).replace(/[^\d.-]/g, '')) || 0,
+      // 算式只给人看,不参与任何计算 —— amount 那列永远是算完的数
+      amount_expr: expense.amountExpr || null,
       payer: expense.payer,
       mode: expense.mode,
       note: expense.note || '',
