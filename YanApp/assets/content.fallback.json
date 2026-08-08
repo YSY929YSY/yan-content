@@ -3708,7 +3708,52 @@
     "how": "四条主要路线,吉田口最热门;需提前网上预约并交入山费",
     "cost": "入山费 + 山小屋一晚约一万日元起(含两餐)"
    },
-   "country": "日本"
+   "country": "日本",
+   "memory": {
+    "version": 1,
+    "title": "富士山：问清楚哪些是必须的",
+    "cardType": "place_phrase",
+    "language": {
+     "code": "ja-JP",
+     "name": "日本語"
+    },
+    "phrase": {
+     "text": "山小屋の予約は必要ですか？",
+     "translation": "山小屋需要预约吗？",
+     "audioText": "山小屋の予約は必要ですか？",
+     "pattern": "〇〇は必要ですか？"
+    },
+    "context": {
+     "situation": "出发前确认哪些手续、装备是硬性要求。",
+     "note": "「必要ですか」问的是必不必须，不是有没有。富士山上很多东西的答案是必须，问晚了就来不及补。"
+    },
+    "swap": {
+     "items": [
+      {
+       "text": "現金は必要ですか？",
+       "translation": "需要现金吗？"
+      },
+      {
+       "text": "ヘルメットは必要ですか？",
+       "translation": "需要头盔吗？"
+      },
+      {
+       "text": "身分証は必要ですか？",
+       "translation": "需要身份证件吗？"
+      }
+     ]
+    },
+    "review": {
+     "prompt": "如果你想问需不需要带现金，该怎么说？",
+     "answer": "現金は必要ですか？",
+     "hint": "把「山小屋の予約」换成「現金」。"
+    },
+    "footprint": {
+     "traceText": "在山下问清一句“必须吗”，省掉半山腰的麻烦。",
+     "stampLabel": "登山确认",
+     "memoryHook": "〇〇は必要ですか？：这个东西是不是非有不可。"
+    }
+   }
   },
   {
    "id": "owakudani",
@@ -3865,7 +3910,52 @@
     "how": "鹿儿岛港渡轮 15 分钟;岛上租车或坐周游巴士",
     "cost": "渡轮单程 200 日元左右,上岛不收门票"
    },
-   "country": "日本"
+   "country": "日本",
+   "memory": {
+    "version": 1,
+    "title": "樱岛：问渡轮多久一班",
+    "cardType": "place_phrase",
+    "language": {
+     "code": "ja-JP",
+     "name": "日本語"
+    },
+    "phrase": {
+     "text": "フェリーは何分おきですか？",
+     "translation": "渡轮多久一班？",
+     "audioText": "フェリーは何分おきですか？",
+     "pattern": "〇〇は何分おきですか？"
+    },
+    "context": {
+     "situation": "在码头、车站、公交站确认车船的间隔。",
+     "note": "问的是间隔，不是时刻。班次密的地方，“每几分钟一班”比一张时刻表好记得多。"
+    },
+    "swap": {
+     "items": [
+      {
+       "text": "バスは何分おきですか？",
+       "translation": "巴士多久一班？"
+      },
+      {
+       "text": "電車は何分おきですか？",
+       "translation": "电车多久一班？"
+      },
+      {
+       "text": "シャトルは何分おきですか？",
+       "translation": "接驳车多久一班？"
+      }
+     ]
+    },
+    "review": {
+     "prompt": "如果你想问巴士多久一班，该怎么说？",
+     "answer": "バスは何分おきですか？",
+     "hint": "把「フェリー」换成「バス」。"
+    },
+    "footprint": {
+     "traceText": "问到间隔，就不用守着时刻表过一天。",
+     "stampLabel": "班次确认",
+     "memoryHook": "何分おき：每隔几分钟来一趟。"
+    }
+   }
   },
   {
    "id": "etna",
@@ -3885,7 +3975,78 @@
    "volcanoState": "active",
    "cultureEgg": "西西里人叫她「Idda」——「她」。火山是女的,喷发不是灾难,是她在说话。",
    "sceneOps": [],
-   "country": "意大利"
+   "country": "意大利",
+   "phrases": [
+    {
+     "text": "Fino a dove si può salire oggi?",
+     "zh": "今天能上到哪里？",
+     "use": "山顶区域按当天活动情况划线，问“到哪儿为止”比问开不开有用",
+     "check": true
+    },
+    {
+     "text": "C'è una guida disponibile?",
+     "zh": "有向导吗？",
+     "use": "上部火山口一带通常要跟向导，自己走不上去",
+     "check": true
+    },
+    {
+     "text": "Fino a dove arriva la funivia?",
+     "zh": "缆车能到哪里？",
+     "use": "缆车终点不等于山顶，上车前问清剩下多少要靠腿",
+     "check": true
+    },
+    {
+     "text": "Che scarpe servono?",
+     "zh": "需要什么鞋？",
+     "use": "脚下是碎火山渣，不是普通山路",
+     "check": true
+    }
+   ],
+   "memory": {
+    "version": 1,
+    "title": "埃特纳：问出今天那条线在哪",
+    "cardType": "place_phrase",
+    "language": {
+     "code": "it-IT",
+     "name": "Italiano"
+    },
+    "phrase": {
+     "text": "Fino a dove si può salire oggi?",
+     "translation": "今天能上到哪里？",
+     "audioText": "Fino a dove si può salire oggi?",
+     "pattern": "Fino a dove...?"
+    },
+    "context": {
+     "situation": "在有活动限制、有临时封锁的地方，问清今天的上限在哪。",
+     "note": "埃特纳不是开或关，是今天到哪儿为止。这句直接把那条线问出来。"
+    },
+    "swap": {
+     "items": [
+      {
+       "text": "Fino a dove si può camminare?",
+       "translation": "能走到哪里？"
+      },
+      {
+       "text": "Fino a dove arriva la funivia?",
+       "translation": "缆车到哪里为止？"
+      },
+      {
+       "text": "Fino a dove arriva la strada?",
+       "translation": "路通到哪里？"
+      }
+     ]
+    },
+    "review": {
+     "prompt": "如果你想问缆车能到哪里，该怎么说？",
+     "answer": "Fino a dove arriva la funivia?",
+     "hint": "把 si può salire 换成 arriva la funivia。"
+    },
+    "footprint": {
+     "traceText": "问出今天那条线在哪，就不会白爬一段。",
+     "stampLabel": "上限确认",
+     "memoryHook": "Fino a dove...?：到哪儿为止。"
+    }
+   }
   },
   {
    "id": "yulong",
@@ -3923,7 +4084,33 @@
    },
    "cultureEgg": "向导整天念「pole pole」(慢慢来)。登顶率的秘密不是体力,是走得够慢——高原教你的第一课。",
    "sceneOps": [],
-   "country": "坦桑尼亚"
+   "country": "坦桑尼亚",
+   "phrases": [
+    {
+     "text": "How many days is this route?",
+     "zh": "这条路线要几天？",
+     "use": "路线天数直接决定你能不能适应海拔",
+     "check": true
+    },
+    {
+     "text": "Could we slow down?",
+     "zh": "能走慢一点吗？",
+     "use": "向导整天说 pole pole，你也可以主动要求慢",
+     "check": true
+    },
+    {
+     "text": "I have a headache. Is it the altitude?",
+     "zh": "我头疼，是高原反应吗？",
+     "use": "上到三千米之后，头疼要立刻说出来，别硬扛",
+     "check": true
+    },
+    {
+     "text": "Do I need to hire a porter?",
+     "zh": "需要雇挑夫吗？",
+     "use": "出发前把人数和分工谈清楚，山上再谈就晚了",
+     "check": true
+    }
+   ]
   },
   {
    "id": "baikal",
@@ -4080,7 +4267,33 @@
    },
    "cultureEgg": "哥伦比亚人日常喝的是 tinto(小杯黑咖啡),最好的豆子都出口了。庄园里那杯,是留下的私藏。",
    "sceneOps": [],
-   "country": "哥伦比亚"
+   "country": "哥伦比亚",
+   "phrases": [
+    {
+     "text": "¿Hacen visitas a la finca hoy?",
+     "zh": "今天有庄园参观吗？",
+     "use": "参观通常要约，人到了再说不一定排得上",
+     "check": true
+    },
+    {
+     "text": "Un tinto, por favor.",
+     "zh": "请给我一杯 tinto。",
+     "use": "哥伦比亚人日常喝的小杯黑咖啡，菜单上不一定写着",
+     "check": true
+    },
+    {
+     "text": "¿Este café es de aquí?",
+     "zh": "这咖啡是本地的吗？",
+     "use": "好豆子大多出口，问一句才知道杯里是什么",
+     "check": true
+    },
+    {
+     "text": "¿Venden café en grano?",
+     "zh": "有卖咖啡豆吗？",
+     "use": "想把这杯带回家，买豆比买粉靠谱",
+     "check": true
+    }
+   ]
   },
   {
    "id": "jungfrau",
@@ -4146,7 +4359,33 @@
    },
    "cultureEgg": "少女峰车站海拔3454米,欧洲最高。瑞士人凿了16年隧道(1898-1912),在冰川底下修出一条铁路。",
    "sceneOps": [],
-   "country": "瑞士"
+   "country": "瑞士",
+   "phrases": [
+    {
+     "text": "Ist die Sicht oben gut?",
+     "zh": "上面视野好吗？",
+     "use": "上山之前问，云里什么都看不到",
+     "check": true
+    },
+    {
+     "text": "Wo muss ich umsteigen?",
+     "zh": "我要在哪换乘？",
+     "use": "上少女峰不是一趟车到底",
+     "check": true
+    },
+    {
+     "text": "Wie lange dauert die Fahrt?",
+     "zh": "车程要多久？",
+     "use": "齿轨火车一段接一段，回程时间要先算",
+     "check": true
+    },
+    {
+     "text": "Gibt es hier Schließfächer?",
+     "zh": "这里有寄存柜吗？",
+     "use": "上山前把大件行李留在山下",
+     "check": true
+    }
+   ]
   },
   {
    "id": "kamakura_coast",
@@ -4316,7 +4555,33 @@
    },
    "cultureEgg": "北村韩屋村是真实的居民区。上午九点前请安静——牌子上写着,住在明信片里的人也要睡觉。",
    "sceneOps": [],
-   "country": "韩国"
+   "country": "韩国",
+   "phrases": [
+    {
+     "text": "여기 앉아도 될까요?",
+     "zh": "我可以坐这里吗？",
+     "use": "韩屋院子座位有限，先问一句再落座",
+     "check": true
+    },
+    {
+     "text": "사진 찍어도 될까요?",
+     "zh": "可以拍照吗？",
+     "use": "韩屋是老房子，有些房间不让拍",
+     "check": true
+    },
+    {
+     "text": "아이스 아메리카노 한 잔 주세요.",
+     "zh": "请给我一杯冰美式。",
+     "use": "韩国一年四季都在喝它，是最常听到的一句点单",
+     "check": true
+    },
+    {
+     "text": "화장실 어디예요?",
+     "zh": "洗手间在哪？",
+     "use": "韩屋常把洗手间设在院子另一头",
+     "check": true
+    }
+   ]
   },
   {
    "id": "cappadocia",
@@ -4774,7 +5039,52 @@
     "how": "JR 阿苏站转巴士到火口线;自驾最灵活",
     "cost": "火口区入场费数百日元;草千里免费"
    },
-   "country": "日本"
+   "country": "日本",
+   "memory": {
+    "version": 1,
+    "title": "阿苏山：问今天能靠多近",
+    "cardType": "place_phrase",
+    "language": {
+     "code": "ja-JP",
+     "name": "日本語"
+    },
+    "phrase": {
+     "text": "今日、火口まで行けますか？",
+     "translation": "今天能到火山口吗？",
+     "audioText": "今日、火口まで行けますか？",
+     "pattern": "今日、〇〇まで行けますか？"
+    },
+    "context": {
+     "situation": "去会临时封闭的地方之前，当天早上先确认一句。",
+     "note": "阿苏的门不是开或关，是今天到哪儿为止。别问“开放吗”，问“今天到得了吗”——答案才具体。"
+    },
+    "swap": {
+     "items": [
+      {
+       "text": "今日、山頂まで行けますか？",
+       "translation": "今天能到山顶吗？"
+      },
+      {
+       "text": "今日、展望台まで行けますか？",
+       "translation": "今天能到展望台吗？"
+      },
+      {
+       "text": "今日、草千里まで行けますか？",
+       "translation": "今天能到草千里吗？"
+      }
+     ]
+    },
+    "review": {
+     "prompt": "如果你想问今天能不能到山顶，该怎么说？",
+     "answer": "今日、山頂まで行けますか？",
+     "hint": "把「火口」换成「山頂」。"
+    },
+    "footprint": {
+     "traceText": "一句话把白跑一趟挡在山下。",
+     "stampLabel": "通行确认",
+     "memoryHook": "今日、〇〇まで行けますか？：今天到得了那儿吗。"
+    }
+   }
   },
   {
    "id": "unzen",
@@ -4830,7 +5140,52 @@
     "how": "长崎或谏早坐巴士上山;山路弯多易晕车",
     "cost": "地狱区免费步行;温泉入浴 500-1000 日元"
    },
-   "country": "日本"
+   "country": "日本",
+   "memory": {
+    "version": 1,
+    "title": "云仙：问走一圈要多久",
+    "cardType": "place_phrase",
+    "language": {
+     "code": "ja-JP",
+     "name": "日本語"
+    },
+    "phrase": {
+     "text": "地獄めぐりはどのくらいかかりますか？",
+     "translation": "逛一圈地狱要多久？",
+     "audioText": "地獄めぐりはどのくらいかかりますか？",
+     "pattern": "〇〇はどのくらいかかりますか？"
+    },
+    "context": {
+     "situation": "决定在一个地方留多少时间的时候。",
+     "note": "「どのくらいかかりますか」既能问时间也能问钱，语境替你分清。想确保对方答时间，前面加一句「時間は」。"
+    },
+    "swap": {
+     "items": [
+      {
+       "text": "駅まではどのくらいかかりますか？",
+       "translation": "到车站要多久？"
+      },
+      {
+       "text": "山頂まではどのくらいかかりますか？",
+       "translation": "到山顶要多久？"
+      },
+      {
+       "text": "タクシーではどのくらいかかりますか？",
+       "translation": "坐出租车要多久？"
+      }
+     ]
+    },
+    "review": {
+     "prompt": "如果你想问到车站要多久，该怎么说？",
+     "answer": "駅まではどのくらいかかりますか？",
+     "hint": "把「地獄めぐり」换成「駅まで」。"
+    },
+    "footprint": {
+     "traceText": "问清要多久，一天的行程才排得下去。",
+     "stampLabel": "时间确认",
+     "memoryHook": "どのくらいかかりますか：要花多久、多少。"
+    }
+   }
   },
   {
    "id": "usu",
@@ -4886,7 +5241,52 @@
     "how": "JR 洞爺站转巴士;自驾从札幌约 2 小时",
     "cost": "散策路免费;有珠山缆车往返约 1800 日元"
    },
-   "country": "日本"
+   "country": "日本",
+   "memory": {
+    "version": 1,
+    "title": "有珠山：问那条路开不开",
+    "cardType": "place_phrase",
+    "language": {
+     "code": "ja-JP",
+     "name": "日本語"
+    },
+    "phrase": {
+     "text": "散策路は開いていますか？",
+     "translation": "散步道开放吗？",
+     "audioText": "散策路は開いていますか？",
+     "pattern": "〇〇は開いていますか？"
+    },
+    "context": {
+     "situation": "去季节性的设施、山道、小店之前，先确认现在的状态。",
+     "note": "问的是此刻开着没有。北海道的冬天，很多地方不是今天关门，是整个季节都不开。"
+    },
+    "swap": {
+     "items": [
+      {
+       "text": "店は開いていますか？",
+       "translation": "店开着吗？"
+      },
+      {
+       "text": "ロープウェイは開いていますか？",
+       "translation": "缆车运行吗？"
+      },
+      {
+       "text": "今日は開いていますか？",
+       "translation": "今天开吗？"
+      }
+     ]
+    },
+    "review": {
+     "prompt": "如果你想问缆车开不开，该怎么说？",
+     "answer": "ロープウェイは開いていますか？",
+     "hint": "把「散策路」换成「ロープウェイ」。"
+    },
+    "footprint": {
+     "traceText": "出门前一句确认，换掉一趟空跑的车程。",
+     "stampLabel": "开放确认",
+     "memoryHook": "開いていますか：现在是开着的吗。"
+    }
+   }
   },
   {
    "id": "changbai",
@@ -4946,7 +5346,33 @@
    "note": "公元79年,它用一个下午埋掉庞贝。桑塔格在《火山情人》里写:收藏家爱上火山,因为它提醒人类——一切都是暂时的。",
    "cultureEgg": "先看庞贝再登维苏威,顺序对了故事才完整。那不勒斯人不叫它名字,只说「'A Muntagna」——那座山。",
    "sceneOps": [],
-   "country": "意大利"
+   "country": "意大利",
+   "phrases": [
+    {
+     "text": "A che ora è l'ultimo ingresso?",
+     "zh": "最后入场是几点？",
+     "use": "步道有关门时间，下午才到就要先确认",
+     "check": true
+    },
+    {
+     "text": "Si vede Pompei da qui?",
+     "zh": "从这里能看到庞贝吗？",
+     "use": "站在火山口边找那片被它埋掉的城",
+     "check": true
+    },
+    {
+     "text": "C'è vento in cima?",
+     "zh": "山顶有风吗？",
+     "use": "决定要不要多带一件，山下热不代表上面热",
+     "check": true
+    },
+    {
+     "text": "C'è una navetta per il sentiero?",
+     "zh": "有到步道口的接驳车吗？",
+     "use": "停车场到步道入口那一段，别默认能开上去",
+     "check": true
+    }
+   ]
   },
   {
    "id": "kilauea",
@@ -4966,7 +5392,33 @@
    "note": "女神 Pele 的家。地球上最活跃的火山之一,熔岩流进海里的地方,新的陆地正在出生。",
    "cultureEgg": "别带走火山石。夏威夷人相信 Pele 的诅咒——公园每年收到大量游客寄回的石头,附着道歉信。",
    "sceneOps": [],
-   "country": "美国"
+   "country": "美国",
+   "phrases": [
+    {
+     "text": "Is the crater glowing right now?",
+     "zh": "火山口现在在发光吗？",
+     "use": "出门前先问一句，免得开一趟夜路什么也没有",
+     "check": true
+    },
+    {
+     "text": "Where's the best viewpoint tonight?",
+     "zh": "今晚哪个观景点最好？",
+     "use": "发光要天黑才看得见，位置得当天问",
+     "check": true
+    },
+    {
+     "text": "Is the trail closed because of the gas?",
+     "zh": "这条步道因为火山气体关闭了吗？",
+     "use": "vog 浓度会让园区临时封路",
+     "check": true
+    },
+    {
+     "text": "Do I need a flashlight?",
+     "zh": "需要带手电吗？",
+     "use": "看完往回走的那一段没有灯",
+     "check": true
+    }
+   ]
   },
   {
    "id": "fagradalsfjall",
@@ -4986,7 +5438,33 @@
    "note": "2021年喷发时,雷克雅未克人下班开车来看岩浆,带着热狗野餐。冰岛语的火山是 eldfjall——火之山。",
    "cultureEgg": "2010年艾雅法拉火山喷发瘫痪全欧洲航空,全球主播集体念不出它的名字(Eyjafjallajökull)。冰岛人看着新闻笑了一星期。",
    "sceneOps": [],
-   "country": "冰岛"
+   "country": "冰岛",
+   "phrases": [
+    {
+     "text": "Is the eruption site open today?",
+     "zh": "喷发区今天开放吗？",
+     "use": "开不开按当天的气体和天气定，昨天能去不算数",
+     "check": true
+    },
+    {
+     "text": "Is the gas dangerous today?",
+     "zh": "今天气体危险吗？",
+     "use": "火山气体比岩浆更常见的危险，下风口尤其要问",
+     "check": true
+    },
+    {
+     "text": "How long is the walk from the car park?",
+     "zh": "从停车场走过去要多久？",
+     "use": "那段路只能靠腿，来回都得算进去",
+     "check": true
+    },
+    {
+     "text": "Is the road passable?",
+     "zh": "这条路能通行吗？",
+     "use": "冰岛的风和雪随时能把一条路关掉",
+     "check": true
+    }
+   ]
   },
   {
    "id": "santorini",
@@ -5081,7 +5559,52 @@
     "how": "JR 稲荷駅出站就是,京阪伏見稲荷駅走 5 分钟;山道无照明,天黑别上",
     "cost": "神社免费、24 小时开放;御朱印帐约 1500-2000 日元,山上小卖部只收现金"
    },
-   "country": "日本"
+   "country": "日本",
+   "memory": {
+    "version": 1,
+    "title": "伏见稻荷：请一枚御朱印",
+    "cardType": "place_phrase",
+    "language": {
+     "code": "ja-JP",
+     "name": "日本語"
+    },
+    "phrase": {
+     "text": "御朱印をお願いします。",
+     "translation": "麻烦给我盖御朱印。",
+     "audioText": "御朱印をお願いします。",
+     "pattern": "〇〇をお願いします。"
+    },
+    "context": {
+     "situation": "在社务所、柜台、前台，把一件事交给对方去办。",
+     "note": "「お願いします」不是请求，是把事情托付出去。递上御朱印帐说这一句，对方就知道该做什么，不用再解释。"
+    },
+    "swap": {
+     "items": [
+      {
+       "text": "お会計をお願いします。",
+       "translation": "麻烦结账。"
+      },
+      {
+       "text": "チェックインをお願いします。",
+       "translation": "麻烦办入住。"
+      },
+      {
+       "text": "これをお願いします。",
+       "translation": "麻烦就这个。"
+      }
+     ]
+    },
+    "review": {
+     "prompt": "如果你想结账，该怎么说？",
+     "answer": "お会計をお願いします。",
+     "hint": "把「御朱印」换成「お会計」。"
+    },
+    "footprint": {
+     "traceText": "一句「お願いします」，把事情干净地交出去。",
+     "stampLabel": "御朱印",
+     "memoryHook": "〇〇をお願いします：这件事，麻烦你了。"
+    }
+   }
   },
   {
    "id": "nara_park",
@@ -5136,7 +5659,52 @@
     "how": "近铁奈良駅出来步行 5 分钟;公园很大,东大寺方向容易走反",
     "cost": "公园免费,鹿仙贝 200 日元一份;东大寺大佛殿另收门票"
    },
-   "country": "日本"
+   "country": "日本",
+   "memory": {
+    "version": 1,
+    "title": "奈良公园：让对方停下某个动作",
+    "cardType": "place_phrase",
+    "language": {
+     "code": "ja-JP",
+     "name": "日本語"
+    },
+    "phrase": {
+     "text": "袋を見せないでください。",
+     "translation": "别把袋子露出来。",
+     "audioText": "袋を見せないでください。",
+     "pattern": "〇〇ないでください。"
+    },
+    "context": {
+     "situation": "提醒同行的人，或者请对方停下正在做的事。",
+     "note": "「ないでください」是礼貌地喊停。在奈良这句是保护你自己——鹿认得塑料袋，认出来就围上来。"
+    },
+    "swap": {
+     "items": [
+      {
+       "text": "写真を撮らないでください。",
+       "translation": "请不要拍照。"
+      },
+      {
+       "text": "触らないでください。",
+       "translation": "请不要触摸。"
+      },
+      {
+       "text": "心配しないでください。",
+       "translation": "别担心。"
+      }
+     ]
+    },
+    "review": {
+     "prompt": "如果你想请对方别拍照，该怎么说？",
+     "answer": "写真を撮らないでください。",
+     "hint": "把「見せ」换成「撮ら」，前面放「写真を」。"
+    },
+    "footprint": {
+     "traceText": "会说“别”，往往比会说“请”更早派上用场。",
+     "stampLabel": "出声制止",
+     "memoryHook": "〇〇ないでください：这个动作，请停下。"
+    }
+   }
   },
   {
    "id": "matterhorn",
@@ -5155,7 +5723,33 @@
    "note": "三角巧克力包装上的那座山。采尔马特小镇禁一切燃油车——雪山面前,连引擎都要安静。",
    "cultureEgg": "瑞士德语区问好说 Grüezi,不说 Hallo。小镇出租车是电动的,长得像高尔夫球车。",
    "sceneOps": [],
-   "country": "瑞士"
+   "country": "瑞士",
+   "phrases": [
+    {
+     "text": "Grüezi!",
+     "zh": "你好！",
+     "use": "瑞士德语区的招呼，进店、上车、山道遇见都用它，不说 Hallo",
+     "check": true
+    },
+    {
+     "text": "Ist die Sicht heute klar?",
+     "zh": "今天视野清楚吗？",
+     "use": "山尖常年藏在云里，上山前问一句",
+     "check": true
+    },
+    {
+     "text": "Wo ist die Talstation?",
+     "zh": "山下缆车站在哪？",
+     "use": "镇上没有燃油车，找路全靠走",
+     "check": true
+    },
+    {
+     "text": "Holen Sie Gäste am Bahnhof ab?",
+     "zh": "你们去车站接客人吗？",
+     "use": "行李重的时候问酒店，镇上的电动车就是干这个的",
+     "check": true
+    }
+   ]
   },
   {
    "id": "halong",
@@ -5193,7 +5787,33 @@
    "note": "275条瀑布组成的瀑布群,横跨两个国家。罗斯福夫人看到它说:「可怜的尼亚加拉。」",
    "cultureEgg": "阿根廷侧走进瀑布里,巴西侧看全景——两边都要去。彩虹下午出现在巴西侧,带雨衣,反正会湿透。",
    "sceneOps": [],
-   "country": "阿根廷"
+   "country": "阿根廷",
+   "phrases": [
+    {
+     "text": "¿Por dónde se va a la Garganta del Diablo?",
+     "zh": "魔鬼咽喉怎么走？",
+     "use": "园区步道分好几条，走反了得原路折回",
+     "check": true
+    },
+    {
+     "text": "¿A qué hora cierra el parque?",
+     "zh": "公园几点关门？",
+     "use": "走到最里面还要走回来，时间得先算好",
+     "check": true
+    },
+    {
+     "text": "¿Me voy a mojar mucho?",
+     "zh": "我会被淋得很湿吗？",
+     "use": "决定要不要买雨衣、要不要把手机收起来",
+     "check": true
+    },
+    {
+     "text": "¿Dónde puedo dejar la mochila?",
+     "zh": "包能寄放在哪？",
+     "use": "靠近瀑布之前，把干的东西先留下",
+     "check": true
+    }
+   ]
   },
   {
    "id": "uyuni",
@@ -5212,7 +5832,33 @@
    "note": "雨季的盐湖变成天空之镜——天地界线消失,人走在云上。",
    "cultureEgg": "镜面=雨季(12-3月)+无风+运气,三者缺一不可。白天盐面反光极强,墨镜不是装酷,是护眼刚需。",
    "sceneOps": [],
-   "country": "玻利维亚"
+   "country": "玻利维亚",
+   "phrases": [
+    {
+     "text": "¿Hay espejo hoy?",
+     "zh": "今天有镜面吗？",
+     "use": "水太浅太深都照不出天空，问司机最准",
+     "check": true
+    },
+    {
+     "text": "¿A qué hora salimos?",
+     "zh": "我们几点出发？",
+     "use": "追日出日落的团，出发时间天天在挪",
+     "check": true
+    },
+    {
+     "text": "¿Cuánto tiempo paramos aquí?",
+     "zh": "我们在这里停多久？",
+     "use": "团车一路走走停停，拍照前先问清有多少时间",
+     "check": true
+    },
+    {
+     "text": "Tengo frío. ¿Hay una manta?",
+     "zh": "我冷，有毯子吗？",
+     "use": "盐湖上日落之后温度掉得很快",
+     "check": true
+    }
+   ]
   },
   {
    "id": "vienna_cafe",
@@ -5231,7 +5877,78 @@
    "note": "维也纳咖啡馆文化是 UNESCO 非遗。一杯咖啡配一杯水加一份报纸,坐一下午——这是权利,不是蹭座。",
    "cultureEgg": "点单说 Melange,别说 cappuccino——名字不同,尊严不同。服务生穿燕尾服不是摆架子,是这门手艺的制服。",
    "sceneOps": [],
-   "country": "奥地利"
+   "country": "奥地利",
+   "phrases": [
+    {
+     "text": "Einen Verlängerten, bitte.",
+     "zh": "请给我一杯 Verlängerter。",
+     "use": "维也纳版的淡咖啡，菜单上不写 Americano",
+     "check": true
+    },
+    {
+     "text": "Darf ich hier sitzen?",
+     "zh": "我可以坐这儿吗？",
+     "use": "老咖啡馆常由服务生带位，别自己挑桌",
+     "check": true
+    },
+    {
+     "text": "Die Zeitung, bitte.",
+     "zh": "麻烦给我报纸。",
+     "use": "报纸夹在木杆上，问一句就能拿去看",
+     "check": true
+    },
+    {
+     "text": "Zahlen, bitte.",
+     "zh": "结账。",
+     "use": "说给一直照顾你这桌的那位，不是随便拦一个",
+     "check": true
+    }
+   ],
+   "memory": {
+    "version": 1,
+    "title": "维也纳咖啡馆：两个词就够了",
+    "cardType": "place_phrase",
+    "language": {
+     "code": "de-DE",
+     "name": "Deutsch"
+    },
+    "phrase": {
+     "text": "Zahlen, bitte.",
+     "translation": "结账。",
+     "audioText": "Zahlen, bitte.",
+     "pattern": "..., bitte."
+    },
+    "context": {
+     "situation": "在咖啡馆、餐厅、柜台提出一个请求。",
+     "note": "bitte 一放上去，最短的词也变成礼貌的请求。在维也纳，这句要说给一直照顾你这桌的那位服务生。"
+    },
+    "swap": {
+     "items": [
+      {
+       "text": "Eine Melange, bitte.",
+       "translation": "请给我一杯米朗琪。"
+      },
+      {
+       "text": "Die Zeitung, bitte.",
+       "translation": "麻烦给我报纸。"
+      },
+      {
+       "text": "Ein Glas Wasser, bitte.",
+       "translation": "请给我一杯水。"
+      }
+     ]
+    },
+    "review": {
+     "prompt": "如果你想点一杯米朗琪，该怎么说？",
+     "answer": "Eine Melange, bitte.",
+     "hint": "把 Zahlen 换成 Eine Melange。"
+    },
+    "footprint": {
+     "traceText": "坐了一下午，再用两个词体面地起身。",
+     "stampLabel": "咖啡馆结账",
+     "memoryHook": "..., bitte.：想要的放前面，bitte 收尾。"
+    }
+   }
   },
   {
    "id": "sagrada",
@@ -5250,7 +5967,33 @@
    "note": "高迪的未完成交响曲,建了一百四十多年还在长。他说:直线属于人类,曲线属于上帝。",
    "cultureEgg": "门票提前网上买,按时段进场。下午的光穿过西侧彩窗,整个中庭变成橙红色的森林——时间挑对,教堂会燃烧。",
    "sceneOps": [],
-   "country": "西班牙"
+   "country": "西班牙",
+   "phrases": [
+    {
+     "text": "¿Tengo que reservar hora?",
+     "zh": "需要预约时段吗？",
+     "use": "按时段进场，买到票不等于现在能进",
+     "check": true
+    },
+    {
+     "text": "¿Se puede subir a las torres?",
+     "zh": "能上塔吗？",
+     "use": "上塔和进主殿是两回事，先问清楚",
+     "check": true
+    },
+    {
+     "text": "¿A qué hora entra mejor la luz?",
+     "zh": "几点的光最好？",
+     "use": "彩窗把整个中庭染色，时间挑对才看得到",
+     "check": true
+    },
+    {
+     "text": "¿Hay audioguía en chino?",
+     "zh": "有中文语音导览吗？",
+     "use": "高迪的东西没人讲基本看不懂",
+     "check": true
+    }
+   ]
   },
   {
    "id": "petra",
@@ -5269,7 +6012,78 @@
    "note": "在岩壁里凿出来的玫瑰色古城。走过一公里长的蛇道(Siq),裂缝尽头突然出现宝库立面——两千年前的纳巴泰人计算好了你的震撼。",
    "cultureEgg": "谢谢说 shukran(شكراً)。贝都因人的茶别拒绝第一杯——第一杯是待客,拒绝是拒人。",
    "sceneOps": [],
-   "country": "约旦"
+   "country": "约旦",
+   "phrases": [
+    {
+     "text": "How long is the walk to the Monastery?",
+     "zh": "走到修道院要多久？",
+     "use": "宝库不是终点，修道院还在更高的地方",
+     "check": true
+    },
+    {
+     "text": "No thank you, I'll walk.",
+     "zh": "不用了，我走过去。",
+     "use": "蛇道沿途一路有人问你要不要骑驴、坐车",
+     "check": true
+    },
+    {
+     "text": "Is this included in my ticket?",
+     "zh": "这个包含在我的票里吗？",
+     "use": "园区里还有另外收费的项目，先问再上",
+     "check": true
+    },
+    {
+     "text": "Where can I refill my water?",
+     "zh": "哪里能接水？",
+     "use": "出了峡谷几乎没有遮阴，水比什么都重要",
+     "check": true
+    }
+   ],
+   "memory": {
+    "version": 1,
+    "title": "佩特拉：问还要走多远",
+    "cardType": "place_phrase",
+    "language": {
+     "code": "en-GB",
+     "name": "English"
+    },
+    "phrase": {
+     "text": "How long is the walk to the Monastery?",
+     "translation": "走到修道院要多久？",
+     "audioText": "How long is the walk to the Monastery?",
+     "pattern": "How long is the walk to ...?"
+    },
+    "context": {
+     "situation": "在遗址、山路、老城里估算下一段距离。",
+     "note": "问的是时间不是公里。脚程才是你真正需要的那个数——它决定你还走不走得动。"
+    },
+    "swap": {
+     "items": [
+      {
+       "text": "How long is the walk to the entrance?",
+       "translation": "走到入口要多久？"
+      },
+      {
+       "text": "How long is the walk to the Treasury?",
+       "translation": "走到宝库要多久？"
+      },
+      {
+       "text": "How long is the walk to the car park?",
+       "translation": "走到停车场要多久？"
+      }
+     ]
+    },
+    "review": {
+     "prompt": "如果你想问走回入口要多久，该怎么说？",
+     "answer": "How long is the walk to the entrance?",
+     "hint": "把 the Monastery 换成 the entrance。"
+    },
+    "footprint": {
+     "traceText": "在沙漠里问清一段距离，比硬撑聪明。",
+     "stampLabel": "距离确认",
+     "memoryHook": "How long is the walk to ...?：走到那儿要多久。"
+    }
+   }
   },
   {
    "id": "angkor",
@@ -5288,7 +6102,33 @@
    "note": "世界最大宗教建筑群。高棉语的问好是「សួស្តី」(suostei)——微笑之国的第一个词。",
    "cultureEgg": "日出人潮全在小吴哥莲花池,想安静去巴戎寺看石头微笑。进寺遮肩过膝;浮雕别摸——你的手汗正在融化八百年。",
    "sceneOps": [],
-   "country": "柬埔寨"
+   "country": "柬埔寨",
+   "phrases": [
+    {
+     "text": "Which temple is quietest in the morning?",
+     "zh": "早上哪座寺人最少？",
+     "use": "日出人潮集中在小吴哥，想安静就得换一座",
+     "check": true
+    },
+    {
+     "text": "Are my shoulders covered enough?",
+     "zh": "我这样肩膀遮得够吗？",
+     "use": "进寺要遮肩过膝，拿不准就在门口问一句",
+     "check": true
+    },
+    {
+     "text": "How much for the whole day?",
+     "zh": "包一整天多少钱？",
+     "use": "和突突车司机谈的是全天，不是一程",
+     "check": true
+    },
+    {
+     "text": "Can you wait for me here?",
+     "zh": "你能在这儿等我吗？",
+     "use": "进寺前说清楚，出来才找得到车",
+     "check": true
+    }
+   ]
   },
   {
    "id": "machu_picchu",
@@ -5307,7 +6147,78 @@
    "note": "印加的失落之城,云雾中的石头都市。西班牙人找了几百年没找到——山替它保密。",
    "cultureEgg": "高反不开玩笑:库斯科3400米,比马丘比丘还高。先到先喝古柯叶茶(mate de coca)——当地合法,且真有效。",
    "sceneOps": [],
-   "country": "秘鲁"
+   "country": "秘鲁",
+   "phrases": [
+    {
+     "text": "¿Se puede volver a entrar?",
+     "zh": "可以再进去吗？",
+     "use": "出园门之前先问，别出去了才发现回不来",
+     "check": true
+    },
+    {
+     "text": "¿Este circuito llega al mirador?",
+     "zh": "这条线路到观景台吗？",
+     "use": "园区按线路走，手里那条决定你看得到什么",
+     "check": true
+    },
+    {
+     "text": "¿Tiene mate de coca?",
+     "zh": "有古柯叶茶吗？",
+     "use": "库斯科比这里还高，高反从下车就开始",
+     "check": true
+    },
+    {
+     "text": "¿A qué hora sale el último bus?",
+     "zh": "末班车几点？",
+     "use": "山下小镇到园门那一段，错过就得自己走下去",
+     "check": true
+    }
+   ],
+   "memory": {
+    "version": 1,
+    "title": "马丘比丘：问一句“行不行”",
+    "cardType": "place_phrase",
+    "language": {
+     "code": "es-ES",
+     "name": "Español"
+    },
+    "phrase": {
+     "text": "¿Se puede volver a entrar?",
+     "translation": "可以再进去吗？",
+     "audioText": "¿Se puede volver a entrar?",
+     "pattern": "¿Se puede ...?"
+    },
+    "context": {
+     "situation": "想知道某件事被不被允许的时候。",
+     "note": "这句不问谁允许，只问这事行不行。规矩多的地方，它替你省掉一整段解释。"
+    },
+    "swap": {
+     "items": [
+      {
+       "text": "¿Se puede pasar por aquí?",
+       "translation": "可以从这里过吗？"
+      },
+      {
+       "text": "¿Se puede tomar fotos?",
+       "translation": "可以拍照吗？"
+      },
+      {
+       "text": "¿Se puede pagar con tarjeta?",
+       "translation": "可以刷卡吗？"
+      }
+     ]
+    },
+    "review": {
+     "prompt": "如果你想问可不可以拍照，该怎么说？",
+     "answer": "¿Se puede tomar fotos?",
+     "hint": "把 volver a entrar 换成 tomar fotos。"
+    },
+    "footprint": {
+     "traceText": "先问一句行不行，比事后道歉省事。",
+     "stampLabel": "规矩确认",
+     "memoryHook": "¿Se puede ...?：这么做，行吗。"
+    }
+   }
   },
   {
    "id": "taj",
