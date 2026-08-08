@@ -11,12 +11,15 @@ create table if not exists profiles (
 
 alter table profiles enable row level security;
 
+drop policy if exists "Users can view own profile" on profiles;
 create policy "Users can view own profile"
   on profiles for select using (auth.uid() = id);
 
+drop policy if exists "Users can update own profile" on profiles;
 create policy "Users can update own profile"
   on profiles for update using (auth.uid() = id);
 
+drop policy if exists "Users can insert own profile" on profiles;
 create policy "Users can insert own profile"
   on profiles for insert with check (auth.uid() = id);
 
@@ -32,15 +35,19 @@ create table if not exists word_progress (
 
 alter table word_progress enable row level security;
 
+drop policy if exists "Users can view own progress" on word_progress;
 create policy "Users can view own progress"
   on word_progress for select using (auth.uid() = user_id);
 
+drop policy if exists "Users can upsert own progress" on word_progress;
 create policy "Users can upsert own progress"
   on word_progress for insert with check (auth.uid() = user_id);
 
+drop policy if exists "Users can update own progress" on word_progress;
 create policy "Users can update own progress"
   on word_progress for update using (auth.uid() = user_id);
 
+drop policy if exists "Users can delete own progress" on word_progress;
 create policy "Users can delete own progress"
   on word_progress for delete using (auth.uid() = user_id);
 
@@ -59,12 +66,16 @@ create table if not exists place_checkin (
 
 alter table place_checkin enable row level security;
 
+drop policy if exists "Users can view own checkin" on place_checkin;
 create policy "Users can view own checkin"
   on place_checkin for select using (auth.uid() = user_id);
+drop policy if exists "Users can insert own checkin" on place_checkin;
 create policy "Users can insert own checkin"
   on place_checkin for insert with check (auth.uid() = user_id);
+drop policy if exists "Users can update own checkin" on place_checkin;
 create policy "Users can update own checkin"
   on place_checkin for update using (auth.uid() = user_id);
+drop policy if exists "Users can delete own checkin" on place_checkin;
 create policy "Users can delete own checkin"
   on place_checkin for delete using (auth.uid() = user_id);
 
@@ -72,6 +83,7 @@ create policy "Users can delete own checkin"
 --    在 Supabase Dashboard → Storage 新建 private bucket: checkin-photos
 --    然后运行以下 policy(照片按 user_id 分文件夹，各人只能管自己的)：
 --    路径约定: {user_id}/{place_id}.jpg
+drop policy if exists "Users manage own checkin photos" on storage;
 create policy "Users manage own checkin photos"
   on storage.objects for all
   using (bucket_id = 'checkin-photos' and (storage.foldername(name))[1] = auth.uid()::text)
@@ -101,12 +113,16 @@ create table if not exists user_places (
 
 alter table user_places enable row level security;
 
+drop policy if exists "Users can view own places" on user_places;
 create policy "Users can view own places"
   on user_places for select using (auth.uid() = user_id);
+drop policy if exists "Users can insert own places" on user_places;
 create policy "Users can insert own places"
   on user_places for insert with check (auth.uid() = user_id);
+drop policy if exists "Users can update own places" on user_places;
 create policy "Users can update own places"
   on user_places for update using (auth.uid() = user_id);
+drop policy if exists "Users can delete own places" on user_places;
 create policy "Users can delete own places"
   on user_places for delete using (auth.uid() = user_id);
 
@@ -132,12 +148,16 @@ create table if not exists travel_checkins (
 
 alter table travel_checkins enable row level security;
 
+drop policy if exists "Users can view own travel checkins" on travel_checkins;
 create policy "Users can view own travel checkins"
   on travel_checkins for select using (auth.uid() = user_id);
+drop policy if exists "Users can insert own travel checkins" on travel_checkins;
 create policy "Users can insert own travel checkins"
   on travel_checkins for insert with check (auth.uid() = user_id);
+drop policy if exists "Users can update own travel checkins" on travel_checkins;
 create policy "Users can update own travel checkins"
   on travel_checkins for update using (auth.uid() = user_id);
+drop policy if exists "Users can delete own travel checkins" on travel_checkins;
 create policy "Users can delete own travel checkins"
   on travel_checkins for delete using (auth.uid() = user_id);
 
@@ -156,12 +176,16 @@ create table if not exists travel_photos (
 
 alter table travel_photos enable row level security;
 
+drop policy if exists "Users can view own travel photos" on travel_photos;
 create policy "Users can view own travel photos"
   on travel_photos for select using (auth.uid() = user_id);
+drop policy if exists "Users can insert own travel photos" on travel_photos;
 create policy "Users can insert own travel photos"
   on travel_photos for insert with check (auth.uid() = user_id);
+drop policy if exists "Users can update own travel photos" on travel_photos;
 create policy "Users can update own travel photos"
   on travel_photos for update using (auth.uid() = user_id);
+drop policy if exists "Users can delete own travel photos" on travel_photos;
 create policy "Users can delete own travel photos"
   on travel_photos for delete using (auth.uid() = user_id);
 

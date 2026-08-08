@@ -67,10 +67,13 @@ alter table moments enable row level security;
 alter table moment_photos enable row level security;
 alter table moment_tags enable row level security;
 
+drop policy if exists "own moments" on moments;
 create policy "own moments" on moments for all
   using (auth.uid() = user_id) with check (auth.uid() = user_id);
+drop policy if exists "own moment photos" on moment_photos;
 create policy "own moment photos" on moment_photos for all
   using (auth.uid() = user_id) with check (auth.uid() = user_id);
+drop policy if exists "own moment tags" on moment_tags;
 create policy "own moment tags" on moment_tags for all
   using (auth.uid() = user_id) with check (auth.uid() = user_id);
 
@@ -116,8 +119,10 @@ create index if not exists journal_items_page_idx on journal_items (page_id, z);
 
 alter table journal_pages enable row level security;
 alter table journal_items enable row level security;
+drop policy if exists "own journal pages" on journal_pages;
 create policy "own journal pages" on journal_pages for all
   using (auth.uid() = user_id) with check (auth.uid() = user_id);
+drop policy if exists "own journal items" on journal_items;
 create policy "own journal items" on journal_items for all
   using (auth.uid() = user_id) with check (auth.uid() = user_id);
 grant select, insert, update, delete on table public.journal_pages to anon, authenticated;
@@ -125,6 +130,7 @@ grant select, insert, update, delete on table public.journal_items to anon, auth
 
 -- Storage:新建 private bucket `moment-photos`,路径 {user_id}/moments/...
 --         贴纸等派生资产放 {user_id}/stickers/...(同 bucket,原图永不动)
+drop policy if exists "own moment photo files" on storage;
 create policy "own moment photo files" on storage.objects for all
   using (bucket_id = 'moment-photos' and (storage.foldername(name))[1] = auth.uid()::text)
   with check (bucket_id = 'moment-photos' and (storage.foldername(name))[1] = auth.uid()::text);
