@@ -5326,7 +5326,33 @@
    "note": "巴厘岛的圣山,印度教宇宙的中心。2017年喷发关闭机场,数万游客滞留——神要说话,飞机也得等。",
    "cultureEgg": "巴厘岛人睡觉头朝阿贡的方向——那是神圣的方位。递东西别用左手,这条比火山预警更日常。",
    "sceneOps": [],
-   "country": "印度尼西亚"
+   "country": "印度尼西亚",
+   "phrases": [
+    {
+     "text": "Boleh masuk pura ini?",
+     "zh": "可以进这座寺庙吗？",
+     "use": "巴厘的庙有些只对信众开放，门口先问",
+     "check": true
+    },
+    {
+     "text": "Perlu pakai sarung?",
+     "zh": "需要围沙笼吗？",
+     "use": "进庙要围沙笼、腰上再系一条 selendang，门口常有租借",
+     "check": true
+    },
+    {
+     "text": "Jam berapa kita mulai mendaki?",
+     "zh": "我们几点开始爬？",
+     "use": "看日出的团半夜出发，睡前要问准",
+     "check": true
+    },
+    {
+     "text": "Terima kasih.",
+     "zh": "谢谢。",
+     "use": "递东西接东西都用右手，这句配上右手才完整",
+     "check": true
+    }
+   ]
   },
   {
    "id": "vesuvius",
