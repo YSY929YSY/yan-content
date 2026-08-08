@@ -4099,8 +4099,7 @@
     "cardType": "place_phrase",
     "language": {
      "code": "de-DE",
-     "name": "德语",
-     "romanization": "Vo ist der tsuuk tsur Jungfrau?"
+     "name": "德语"
     },
     "phrase": {
      "text": "Wo ist der Zug zur Jungfrau?",
@@ -4117,19 +4116,16 @@
      "slot": "○○",
      "items": [
       {
-       "text": "Jungfrau",
-       "translation": "少女峰",
-       "audioText": "Jungfrau"
+       "text": "Wo ist der Zug zur Jungfrau?",
+       "translation": "去少女峰的火车在哪？"
       },
       {
-       "text": "Interlaken",
-       "translation": "因特拉肯",
-       "audioText": "Interlaken"
+       "text": "Wo ist der Zug nach Interlaken?",
+       "translation": "去因特拉肯的火车在哪？"
       },
       {
-       "text": "Lauterbrunnen",
-       "translation": "劳特布伦嫩",
-       "audioText": "Lauterbrunnen"
+       "text": "Wo ist der Zug nach Lauterbrunnen?",
+       "translation": "去劳特布伦嫩的火车在哪？"
       }
      ]
     },
@@ -4169,14 +4165,14 @@
     "cardType": "place_phrase",
     "language": {
      "code": "ja-JP",
-     "name": "日语",
-     "romanization": "Umi ga kirei desu."
+     "name": "日语"
     },
     "phrase": {
      "text": "海がきれいです。",
      "translation": "海很漂亮。",
      "audioText": "海がきれいです。",
-     "pattern": "○○がきれいです。"
+     "pattern": "○○がきれいです。",
+     "roma": "Umi ga kirei desu."
     },
     "context": {
      "situation": "站在海边描述眼前看到的风景",
@@ -4187,19 +4183,16 @@
      "slot": "○○",
      "items": [
       {
-       "text": "海",
-       "translation": "海",
-       "audioText": "海"
+       "text": "海がきれいです。",
+       "translation": "海很漂亮。"
       },
       {
-       "text": "空",
-       "translation": "天空",
-       "audioText": "空"
+       "text": "空がきれいです。",
+       "translation": "天空很漂亮。"
       },
       {
-       "text": "夕日",
-       "translation": "夕阳",
-       "audioText": "夕日"
+       "text": "夕日がきれいです。",
+       "translation": "夕阳很漂亮。"
       }
      ]
     },
@@ -4275,14 +4268,14 @@
     "cardType": "place_phrase",
     "language": {
      "code": "ko-KR",
-     "name": "韩语",
-     "romanization": "Keopi han jan juseyo."
+     "name": "韩语"
     },
     "phrase": {
      "text": "커피 한 잔 주세요.",
      "translation": "请给我一杯咖啡。",
      "audioText": "커피 한 잔 주세요.",
-     "pattern": "○○ 한 잔 주세요."
+     "pattern": "○○ 한 잔 주세요.",
+     "roma": "Keopi han jan juseyo."
     },
     "context": {
      "situation": "在咖啡馆向店员点饮品",
@@ -4293,19 +4286,16 @@
      "slot": "○○",
      "items": [
       {
-       "text": "커피",
-       "translation": "咖啡",
-       "audioText": "커피"
+       "text": "커피 한 잔 주세요.",
+       "translation": "请给我一杯咖啡。"
       },
       {
-       "text": "물",
-       "translation": "水",
-       "audioText": "물"
+       "text": "물 한 잔 주세요.",
+       "translation": "请给我一杯水。"
       },
       {
-       "text": "차",
-       "translation": "茶",
-       "audioText": "차"
+       "text": "차 한 잔 주세요.",
+       "translation": "请给我一杯茶。"
       }
      ]
     },

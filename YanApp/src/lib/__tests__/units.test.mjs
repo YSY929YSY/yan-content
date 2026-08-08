@@ -245,3 +245,46 @@ test('★ 合格的词场一个问题都不报', () => {
 test('★ 真实内容包的词场必须干净(暂时没有词场,写词场后这条自动生效)', () => {
   assert.deepEqual(auditWordFields(content.wordBank), []);
 });
+
+// ── 地点记忆卡的形状 ──────────────────────────────────────────
+//
+// 2026-08 定了一套(见 docs/content-standard-wordfield.md 末节)。在这之前
+// 6 张卡长着两种结构,而两种结构的差别不是风格问题 —— 槽位那套表达不了
+// 「噴火口まで → ここから」这类会改变句子结构的替换,jungfrau 那张卡
+// 就因此把 pattern(nach ○○)和实际句子(zur Jungfrau)写成了互相矛盾的两样。
+
+test('★ 记忆卡的替换项必须是整句,不是光秃秃一个词', () => {
+  const bad = [];
+  for (const p of content.mapPlaces || []) {
+    for (const it of p.memory?.swap?.items || []) {
+      // 整句的判据:比它要替换进去的那个位置长得多。一个词 = assemble 不出可说的话,
+      // 而且朗读一个孤零零的「海」字没有练习价值。
+      if (!it.text || it.text.length < 4) bad.push(`${p.id}: ${it.text}`);
+    }
+  }
+  assert.deepEqual(bad, []);
+});
+
+test('★ 罗马音只给非拉丁文字,且挂在 phrase 上不挂在 language 上', () => {
+  const LATIN = /^(de|es|it|tr|pt|fr|nl|en|id|vi)/;
+  const bad = [];
+  for (const p of content.mapPlaces || []) {
+    const m = p.memory;
+    if (!m) continue;
+    // roma 是句子的属性,不是语言的属性
+    if (m.language?.romanization) bad.push(`${p.id}: romanization 还挂在 language 下`);
+    // 德语/西语这些本来就是拉丁字母,给它「罗马音」是把注音和转写混为一谈
+    const code = m.language?.code || p.lang || '';
+    if (m.phrase?.roma && LATIN.test(code)) bad.push(`${p.id}: ${code} 是拉丁文字,不该有 roma`);
+  }
+  assert.deepEqual(bad, []);
+});
+
+test('★ 有 review 就必须三样齐全 —— 问了不给答案是半道题', () => {
+  const bad = [];
+  for (const p of content.mapPlaces || []) {
+    const r = p.memory?.review;
+    if (r && !(r.prompt && r.answer)) bad.push(p.id);
+  }
+  assert.deepEqual(bad, []);
+});

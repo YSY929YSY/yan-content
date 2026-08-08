@@ -133,3 +133,60 @@ JMdict 的 `field` 在 sense-1 上只覆盖 112 条(1.6%),而且偏向 math/comp
 
 词场是**选出来的两三百个词才有的一层**,不是全库属性。
 其余的保持词典状态就好 —— 词典本来就不需要每个词都有灵魂。
+
+---
+
+# 附:地点记忆卡的形状(2026-08 定)
+
+在这之前 6 张卡长着两种结构,合并新内容前必须先定一套。
+
+## 决定:以整句为准
+
+`swap.items[].text` 存**完整句子**,不是槽位里那个词。
+
+决定性的理由不是审美,是槽位模型**表达不了**一部分句子:
+
+    噴火口まで歩けますか？  →  ここから歩けますか？
+
+第三个替换项换掉主语之后「まで」就没了 —— 这不是简单替换。
+`jungfrau` 那张卡更直接:pattern 写 `Wo ist der Zug nach ○○?`,
+而它自己的句子是 `Wo ist der Zug zur Jungfrau?` —— 德语介词跟着目的地变
+(die Jungfrau 带冠词用 zur,城市名无冠词用 nach)。
+照槽位套出来的 `nach Jungfrau` 是病句,而这个矛盾在线上躺了很久没人发现。
+
+深卡(注文)早就是这么解决的:`skeletons` 存整句,另给 `chipLabel` 做紧凑展示。
+**存整句、显示时再压缩**,两头都要到。
+
+顺带:item 级的 `audioText` 去掉。朗读一个孤零零的「海」字没有练习价值,
+朗读的对象就是 `text` 那句完整的话。
+
+## 字段清单
+
+| 字段 | 必填 | 说明 |
+|---|---|---|
+| `phrase.text` / `translation` | 是 | 核心句和中文 |
+| `phrase.pattern` | 否 | 句型,给界面高亮用 |
+| `phrase.roma` | 否 | **只给非拉丁文字**(日/韩/俄…) |
+| `context.situation` | 是 | 什么时候用 |
+| `context.task` | 否 | 到了现场该做什么。和 review.prompt 是两个时刻 —— 一个在现场,一个在回家之后 |
+| `context.note` | 否 | 语法/文化注记 |
+| `swap.slot` | 否 | 纯展示提示,告诉界面哪一段在变 |
+| `swap.items[].text` | 是 | **完整句子** |
+| `review.prompt` / `answer` | 一起 | 有 prompt 就必须有 answer。问了不给答案是半道题 |
+| `review.hint` | 否 | 想不起来时的脚手架 |
+
+### `phrase.roma` 那条单独说
+
+原来它叫 `language.romanization`,挂在语言对象下面 —— 这个位置本身就在误导:
+罗马音是**这句话**的属性,不是这门语言的属性。挂在 language 下会让人以为
+每种语言都该填,于是 `jungfrau` 真的填了 `"Vo ist der tsuuk tsur Jungfrau?"`。
+
+德语、西语、土耳其语本来就是拉丁字母,给它们「罗马音」是把注音和转写混为一谈。
+已移除,并有测试守着。
+
+## 有测试守着
+
+`src/lib/__tests__/units.test.mjs` 末尾三条:替换项必须是整句、
+罗马音只给非拉丁文字且挂在 phrase 上、有 review 就必须 prompt+answer 齐全。
+
+写错了在 npm test 就红,不用等到用户点进那张卡。
