@@ -1,8 +1,8 @@
 {
  "_meta": {
   "version": "2.1",
-  "updated": "2026-07-09",
-  "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT N5 词库（草稿，718词） + N3 词库(1730词,JMdict锚定+Tatoeba例句+LLM译释义) + N2 词库(1812词) + N1 词库(3413词)",
+  "updated": "2026-08-08",
+  "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8026 条（例句覆盖 51.3%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
    "n4_core": {
     "source": "stephenmk/yomitan-jlpt-vocab original_data/n4.csv",
@@ -21,7 +21,18 @@
     "skipped_duplicate_with_n5_count": 12,
     "merged_at": "2026-06-16T07:08:44.696356+00:00"
    }
-  }
+  },
+  "changelog": [
+   {
+    "date": "2026-08-08",
+    "changes": [
+     "按 jmdictSeq 合并 267 组重复词条，8298 → 8026（客户端有 keyAliases 迁移旧进度键）",
+     "1290 条名词补「する动词」词性（JMdict sense-1 n+vs，抽样 50 条人工判过）",
+     "补 99 条例句，缺例句 4253 → 3911",
+     "23 处地点补可练短语与记忆卡，有短语的地点 18 → 35，记忆卡 6 → 17"
+    ]
+   }
+  ]
  },
  "culturalFusion": [
   {
