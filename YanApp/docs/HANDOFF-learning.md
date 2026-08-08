@@ -184,3 +184,95 @@ directions 42 / convenience 19 / emergency 12 / hotel 11 / subway 11)加起来�
 内容包 `content.v2.json` 同理。
 
 V1 已上架过,带着若干「即将开放」入口,未被驳回 —— 所以那些占位入口保留。
+
+---
+
+# 附:发版流程(2026-08 走通一次,按这个顺序)
+
+踩过的坑都写在每一步后面。顺序不能换,原因见第 2 步。
+
+## 0. 改完代码
+
+```bash
+cd /Users/yangshiyao/my-app/YanApp && npm test     # 212 条,必须全绿
+```
+
+## 1. 数据库
+
+不确定线上库是不是最新的时候,**不要去回忆跑过哪些 sql** ——
+打开 `src/lib/schema.apply-all.sql`,全选,粘到 Supabase → SQL Editor → Run。
+随时可重跑,跑几次结果都一样。
+
+> 为什么不靠记忆:2026-08 这一轮,`word_progress` 的五列和
+> `place_checkin.checked_in_at` 都是「迁移文件在仓库里躺着、从没跑过」。
+> 两次都不报错,只在真机日志里留一行 warn。第二个更讽刺 —— 打卡日期没上过云,
+> 而「旅迹」那条弧线就是按日期画的,代码早修好了,数据库这列没跟上。
+
+## 2. 内容(必须早于 App 上架)
+
+**权威文件是 `yan-content/content.v2.json`,不是 `content.fallback.json`。**
+改完要把同一份复制到 `YanApp/assets/content.fallback.json` —— 审计要求两份逐字节相同。
+
+```bash
+cd /Users/yangshiyao/my-app
+cp YanApp/assets/content.fallback.json yan-content/content.v2.json   # 或反过来
+bash tools/check-content-release.sh     # Blocker 必须为 0
+bash scripts/push-content.sh            # 推到 origin/main,用户下次开 App 就同步
+```
+
+**顺序为什么不能反**:生产环境启动时会拉远端内容并**整个替换**掉内置那份
+(`App.js` 的 `useContent` → `setContent(next)`)。如果 App 先上、内容后推,
+那段时间里新客户端配旧内容 —— 比如 `keyAliases` 会把进度从**仍然存在的**
+词条上折算走,用户学了 `おねがいします` 却永远显示「没学过」,而且不自愈。
+
+反过来(内容先推)只有一个会自愈的窗口:已上架的旧版用户暂时看不到被去重掉的
+那些词条的进度,等他们更新就折算回来了。
+
+另外注意 `tools/check-content-release.sh` 里有写死的期望词条数
+(`tools/audit-wordbank-examples.py` 的 `--expected-count`)。词条数有意变动时
+改那个值,**不要绕过审计** —— 它 2026-08 那次正确地拦住了去重。
+
+## 3. 环境变量(⚠️ 最容易漏)
+
+`.env` 被 gitignore,EAS 云构建按 `.gitignore` 打包,所以**本地 .env 不会上传**。
+而 `src/lib/supabase.js` 读的是 `process.env.EXPO_PUBLIC_SUPABASE_*`。
+
+没在 EAS 上配的话,生产包里这两个值是 undefined —— App 不崩,但登录、同步、
+云备份、删号全废。而平时在手机上测的是 dev client,它读本地 .env,这条路测不出来。
+
+```bash
+eas env:list --environment production          # 先看有没有
+eas env:create --environment production --name EXPO_PUBLIC_SUPABASE_URL --value "…" --visibility plaintext
+eas env:create --environment production --name EXPO_PUBLIC_SUPABASE_ANON_KEY --value "…" --visibility plaintext
+```
+
+`plaintext` 是对的:`EXPO_PUBLIC_` 前缀的变量本来就会被打进客户端包,
+anon key 的设计就是公开的,真正的防线是 RLS。
+
+## 4. 版本号
+
+`app.json` 的 `version` 手动改(市场版本号)。`buildNumber` 不用管 ——
+`eas.json` 里 `appVersionSource: remote` + production 段 `autoIncrement`。
+
+## 5. 构建与提交
+
+```bash
+cd /Users/yangshiyao/my-app/YanApp
+eas build --platform ios --profile production
+eas submit -p ios
+```
+
+装上新包后**至少验这一条**:点登录,能弹出 Apple 登录 = 环境变量读到了。
+
+## 上架合规现状(V1 已过审,这些别动)
+
+App 内删除账号、Sign in with Apple、权限说明(不申请相机/麦克风/定位)、
+出口合规声明(`ITSAppUsesNonExemptEncryption`)、显示名「言」、
+只声明浅色外观(`userInterfaceStyle: light`)。
+
+2026-08 新增:**「关于 → 数据来源」独立一屏**。JMdict 是 CC BY-SA 4.0,
+授权明确要求署名放在「从菜单进入的单独一屏」,只放启动页或一行脚注不算数。
+这一屏把 JMdict 派生数据和言的原创内容分开写 —— 别把它们笼统地合成一句,
+原创内容不该被误认为也在 ShareAlike 之下。
+
+隐私政策在同一个 `yan-content` 仓库(`privacy.html`),`push-content.sh` 会一起发。
