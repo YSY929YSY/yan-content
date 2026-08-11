@@ -1234,6 +1234,10 @@ function TripNotebook() {
                           <TouchableOpacity style={[tn.recognizeBtn, ocrBusy && tn.recognizeBtnOff]} disabled={ocrBusy} onPress={recognizeUploads}>
                             <Text style={tn.recognizeTxt}>{ocrBusy ? '识别中…' : '识别订单 → 生成行程'}</Text>
                           </TouchableOpacity>
+                          {/* 欧盟 AI Act 第 50 条:用户直接与 AI 系统交互时应当当场知情。
+                              立法意图是「当场」,所以这句话必须在按钮旁边 ——
+                              藏进隐私政策等于没做。这也是全 App 唯一一处用到 AI。 */}
+                          <Text style={tn.aiNote}>由 AI 识别，结果请核对</Text>
                           <TouchableOpacity onPress={() => startEdit(null)}>
                             <Text style={tn.fromUpload}>手动新增</Text>
                           </TouchableOpacity>
@@ -2204,6 +2208,7 @@ const tn = StyleSheet.create({
   uploadActions: { flexDirection: 'row', alignItems: 'center', gap: 14, marginTop: 10 },
   recognizeBtn: { backgroundColor: C.ink, borderRadius: 999, paddingHorizontal: 14, paddingVertical: 9 },
   recognizeBtnOff: { backgroundColor: C.mutedLight },
+  aiNote: { fontSize: 10.5, color: C.mutedLight, marginTop: 6, textAlign: 'center' },
   recognizeTxt: { color: C.white, fontSize: 12.5, fontWeight: '800' },
   toolGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 10 },
   toolBtn: { width: '48%', backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 13, paddingVertical: 10, alignItems: 'center' },

@@ -15,7 +15,7 @@
 // 平面和地球仪共用这一套代码,区别只是投影函数(geoNaturalEarth1 / geoOrthographic)。
 import React, { useMemo, useRef, useState } from 'react';
 import { Dimensions, PanResponder, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Svg, { Circle, Path } from 'react-native-svg';
+import Svg, { Circle, ClipPath, Defs, G, Path, RadialGradient, Stop } from 'react-native-svg';
 import { geoNaturalEarth1, geoOrthographic, geoPath, geoGraticule10, geoDistance } from 'd3-geo';
 import { feature } from 'topojson-client';
 import landTopo from '../../../assets/geo/land-110m.json';
@@ -29,6 +29,14 @@ function pinchDistance(e) {
   const t = e?.nativeEvent?.touches;
   if (!t || t.length < 2) return 0;
   return Math.hypot(t[0].pageX - t[1].pageX, t[0].pageY - t[1].pageY);
+}
+
+// 两指中点(相对本视图)。缩放要朝这里去 —— 手指按着东京放大,
+// 东京就该留在指下。原来没有这一步,永远朝屏幕正中缩,手感像在打滑。
+function pinchCenter(e) {
+  const t = e?.nativeEvent?.touches;
+  if (!t || t.length < 2) return null;
+  return { x: (t[0].locationX + t[1].locationX) / 2, y: (t[0].locationY + t[1].locationY) / 2 };
 }
 
 export default function WorldMap({
@@ -68,6 +76,7 @@ export default function WorldMap({
           // 真正的基准要等第二根手指出现时在 Move 里补,见下面。
           pinch: pinchDistance(e), globe: globeRef.current,
           baseDx: 0, baseDy: 0,
+          focal: pinchCenter(e), cx: sizeRef.current.W / 2, cy: sizeRef.current.H / 2,
         };
       },
       onPanResponderMove: (e, g) => {
@@ -81,10 +90,22 @@ export default function WorldMap({
             // 少了这一步,st.pinch 会一直是 Grant 时的 0,缩放分支永远进不去。
             st.pinch = d;
             st.zoom = zoomRef.current;
+            st.focal = pinchCenter(e);
             return;
           }
           // 双指:缩放。范围留窄一点 —— 110m 数据放太大会看到锯齿。
-          setZoom(Math.min(Math.max(st.zoom * (d / st.pinch), 1), 4));
+          const next = Math.min(Math.max(st.zoom * (d / st.pinch), 1), 4);
+          // 朝两指中点缩放:把中点下的那个地理位置钉住不动。
+          // 变换是 pan → 平移到中心 → 缩放 → 平移回来,所以反解出来的 pan 是这个式子。
+          const f = st.focal;
+          if (!globeRef.current && f) {
+            const k = next / zoomRef.current;
+            setPan({
+              x: f.x - st.cx - k * (f.x - panRef.current.x - st.cx),
+              y: f.y - st.cy - k * (f.y - panRef.current.y - st.cy),
+            });
+          }
+          setZoom(next);
           return;
         }
 
@@ -118,20 +139,26 @@ export default function WorldMap({
 
   const W = Dimensions.get('window').width - 28;
   const H = globe ? W : W * 0.52;
+  const sizeRef = useRef({ W, H }); sizeRef.current = { W, H };
 
+  // ⚠️ 投影**不吃 zoom 和 pan**。
+  //
+  // 原来它吃:每次捏合或平移都要重算投影 → 重新生成全部陆地路径、经纬网、航线,
+  // 再把几万字符的 d 属性过一遍 JS→原生桥。那就是卡顿的来源,
+  // 而「拖动时降精度」只是止血。
+  //
+  // 但缩放和平移在数学上等价于对整个图层做一次 SVG transform,而 transform 是免费的
+  // —— 原生那边直接改矩阵,路径一个字符都不用重传。所以它们移到下面的 <G> 上去了。
+  // 只有地球仪的**旋转**才真的要重投影:正射投影下背面要裁掉,那不是仿射变换。
   const geo = useMemo(() => {
     let proj;
     if (globe) {
       proj = geoOrthographic()
         .rotate([rot.lam, rot.phi])
         .fitExtent([[8, 8], [W - 8, H - 8]], { type: 'Sphere' });
-      proj.scale(proj.scale() * zoom);
       proj.translate([W / 2, H / 2]);
     } else {
       proj = geoNaturalEarth1().fitExtent([[6, 6], [W - 6, H - 6]], LAND);
-      proj.scale(proj.scale() * zoom);
-      const [tx, ty] = proj.translate();
-      proj.translate([tx + pan.x, ty + pan.y]);
     }
     // 限制路径里的小数位。这条是量出来的,不是猜的:
     //   默认      40,463 字符
@@ -144,7 +171,7 @@ export default function WorldMap({
     //  110m 数据本身已经够粗,插值点很少。那条路是死的,别再走。)
     const path = geoPath(proj).digits(dragging ? 0 : 1);
     return { proj, path };
-  }, [globe, rot, zoom, pan, W, H, dragging]);
+  }, [globe, rot, W, H, dragging]);   // 刻意不含 zoom / pan,见上面
 
   // 必须 memo:原来是每次渲染新建数组,导致下面 journey 的 useMemo 永远不命中 ——
   // buildJourney(算全部航段和里程)在每一帧拖动里都重跑了一遍。
@@ -183,16 +210,37 @@ export default function WorldMap({
 
       <View {...responder.panHandlers}>
       <Svg width={W} height={H}>
+        <Defs>
+          {/* 球感:边缘压暗一档。正射投影本身只给出一个圆轮廓,不加这个就是一张
+              纯色圆片 —— 这也是「没有立体感」的全部原因。 */}
+          <RadialGradient id="sphere" cx="38%" cy="32%" r="78%">
+            <Stop offset="0" stopColor="#f6f8f7" />
+            <Stop offset="0.72" stopColor="#eaeeec" />
+            <Stop offset="1" stopColor="#d6dbd8" />
+          </RadialGradient>
+          {/* 放大时球会长出画布,而画布是矩形 —— 于是看到一个方框把球切了。
+              用一个圆形裁剪把它挡住,放大就变成「透过圆窗看球」。 */}
+          <ClipPath id="disc">
+            <Circle cx={W / 2} cy={H / 2} r={Math.min(W, H) / 2 - 7} />
+          </ClipPath>
+        </Defs>
+
+        {/* 缩放和平移全部落在这一层 transform 上,投影完全不参与 ——
+            原生只改一次矩阵,路径不重传。顺序是「先按中心缩放,再整体平移」。 */}
+        <G clipPath={globe ? 'url(#disc)' : undefined}>
+        <G transform={`translate(${pan.x}, ${pan.y}) translate(${W / 2}, ${H / 2}) scale(${zoom}) translate(${-W / 2}, ${-H / 2})`}>
         {globe && (
           <>
-            <Path d={geo.path({ type: 'Sphere' })} fill="#eff1f0" stroke={C.border} strokeWidth={1} />
+            <Path d={geo.path({ type: 'Sphere' })} fill="url(#sphere)"
+              stroke={C.border} strokeWidth={1 / zoom} />
             {/* 经纬网线很多,拖动时最贵而且最不重要 —— 转起来根本看不清 */}
             {!dragging && (
-              <Path d={geo.path(geoGraticule10())} fill="none" stroke={C.border} strokeWidth={0.4} />
+              <Path d={geo.path(geoGraticule10())} fill="none" stroke={C.border} strokeWidth={0.4 / zoom} />
             )}
           </>
         )}
-        <Path d={geo.path(LAND)} fill="#e7e3da" stroke="#d5d0c5" strokeWidth={0.4} />
+        {/* 线宽一律除以 zoom:图层被放大了,不补偿的话线会跟着变粗成色块 */}
+        <Path d={geo.path(LAND)} fill="#e7e3da" stroke="#d5d0c5" strokeWidth={0.4 / zoom} />
 
         {!dragging && journey.legs.map((leg, i) => {
           if (leg.mode.key === 'local') return null;   // 同城不画线,那是一个点不是一段路
@@ -203,7 +251,7 @@ export default function WorldMap({
           if (!d) return null;
           return (
             <Path key={`leg-${i}`} d={d} fill="none" stroke={C.teal}
-              strokeWidth={1.3 * Math.sqrt(zoom)} strokeDasharray="4,3" opacity={0.8} />
+              strokeWidth={1.3 / Math.sqrt(zoom)} strokeDasharray={`${4 / zoom},${3 / zoom}`} opacity={0.8} />
           );
         })}
 
@@ -213,7 +261,8 @@ export default function WorldMap({
           if (!c) return null;
           // 点随缩放略微变大 —— 放大本来就是为了看清,点还是原尺寸就白放了。
           // 但不按缩放等比放大(那样会变成大色块),开方增长更耐看。
-          const k = Math.sqrt(zoom);
+          // 图层已经被 transform 放大了 zoom 倍,所以这里除以 zoom 再乘 sqrt(zoom)。
+          const k = 1 / Math.sqrt(zoom);
           return p.been ? (
             <React.Fragment key={p.id}>
               <Circle cx={c[0]} cy={c[1]} r={6 * k} fill={C.teal} opacity={0.14} />
@@ -222,9 +271,11 @@ export default function WorldMap({
             </React.Fragment>
           ) : (
             <Circle key={p.id} cx={c[0]} cy={c[1]} r={2.8 * k} fill="#fbfaf7"
-              stroke="#b0a99b" strokeWidth={1.1} onPress={() => onSelect?.(p)} />
+              stroke="#b0a99b" strokeWidth={1.1 / zoom} onPress={() => onSelect?.(p)} />
           );
         })}
+        </G>
+        </G>
       </Svg>
       </View>
 
