@@ -12,7 +12,7 @@ import {
   remapCityId, addTag, removeTag, cityOfMoment,
   writtenFirsts, firstArrivalOf, isFirstArrival,
   normalizeMoment, normalizePage, normalizeMoments, normalizeInk, materialOf,
-  newAsset, newItem, dropSpot, ASSET_KINDS, ASSET_ENTRIES, assetUriIn, fitInside, ASSET_MAX_EDGE,
+  newAsset, newItem, dropSpot, NEW_ITEM_W, ASSET_KINDS, ASSET_ENTRIES, assetUriIn, fitInside, ASSET_MAX_EDGE,
   planMomentUpload, planJournalUpload, portablePath, remoteIdFor,
 } from '../../features/journal/journalModel.js';
 
@@ -199,14 +199,36 @@ test('不是素材目录里的文件就原样返回 —— 别去改不归我们
   assert.equal(assetUriIn(dir, { localUri: 'journal-assets-v1/' }), null);
 });
 
-test('★ 连着放的元素不能落在同一个点 —— 第二张会严丝合缝盖住第一张', () => {
-  // 这就是用户报的「只能上传一张」:他传上去了,但每张都是 x:0.5 y:0.5 同样大小,
-  // 后一张完全盖住前一张。**一个看不见结果的操作等于没做。**
-  const spots = Array.from({ length: 12 }, (_, i) => dropSpot(i));
+test('★ 刚放上去的那一张必须看得出来 —— 用户报了三次「只能上传一张」', () => {
+  // 三次的原因不一样,但表现一模一样:
+  //   ① 落点写死在正中 → 完全重合
+  //   ② 加了错开,但半径 0.055 而元素宽 0.42 → 盖住前一张 87%
+  //   ③ 而我当时的测试断言「两点间距 > 0.02」并且**通过了**
+  //      —— 测的是「两个数不一样」,不是「人能看出这是两个东西」
+  //
+  // 但要求也不能反过来定过头:一页放 10 张 42% 宽的照片**本来就该重叠**,
+  // 那是拼贴不是缺陷。第一版重写测试时我要求任意两张都错开 35%,
+  // 那等于禁止重叠 —— 又错到另一边去了。
+  //
+  // 真正的要求是两条:
+  const w = NEW_ITEM_W, h = NEW_ITEM_W * 1.3;
+  const spots = Array.from({ length: 10 }, (_, i) => dropSpot(i));
+  const reveal = (a, b) =>
+    Math.max(Math.abs(a.x - b.x) / w, Math.abs(a.y - b.y) / h);
+
+  // 一、**连着放的两张**要明显错开 —— 这是「我刚点了上传,看得见结果」
+  for (let i = 0; i + 1 < spots.length; i++) {
+    const r = reveal(spots[i], spots[i + 1]);
+    assert.ok(r > 0.35,
+      `第 ${i} 和第 ${i + 1} 张只错开身宽的 ${(r * 100).toFixed(0)}% —— 刚放的那张看不出来`);
+  }
+
+  // 二、**任意两张**都不能近乎重合 —— 重叠可以,消失不行
   for (let i = 0; i < spots.length; i++) {
     for (let j = i + 1; j < spots.length; j++) {
-      const d = Math.hypot(spots[i].x - spots[j].x, spots[i].y - spots[j].y);
-      assert.ok(d > 0.02, `第 ${i} 和第 ${j} 个落点几乎重合(相距 ${d.toFixed(3)})`);
+      const r = reveal(spots[i], spots[j]);
+      assert.ok(r > 0.15,
+        `第 ${i} 和第 ${j} 张只错开身宽的 ${(r * 100).toFixed(0)}% —— 后一张几乎把前一张吃掉了`);
     }
   }
 });
@@ -216,7 +238,6 @@ test('落点要收敛在页面里 —— 铺开但不跑出去', () => {
     const s = dropSpot(i);
     assert.ok(s.x > 0.12 && s.x < 0.88, `第 ${i} 个 x=${s.x.toFixed(2)} 跑太边上了`);
     assert.ok(s.y > 0.12 && s.y < 0.88, `第 ${i} 个 y=${s.y.toFixed(2)} 跑太边上了`);
-    // 手放东西不会摆正,但也不该像被打翻
     assert.ok(Math.abs(s.rotation) <= 7, `第 ${i} 个转了 ${s.rotation} 度`);
   }
 });

@@ -388,11 +388,22 @@ export function newItem(kind, assetId, patch = {}, mint = newId) {
  *
  * 步长走黄金角(137.5°)绕圈:连着放十几张也不会两张重合,
  * 而按固定方向平移的话第 n 张会跑出页面。
+ *
+ * ⚠️ **间距必须按元素尺寸定,不能随手拍一个数。**
+ * 第一版半径给了 `0.055*√n` —— 第二张只挪了 0.055,而元素宽 0.42(`newItem` 的默认),
+ * 也就是挪了自己身宽的 13%,**盖住前一张 87%**。用户第三次报「只能上传一张」。
+ * 而我当时的测试断言「两点间距 > 0.02」并且通过了 ——
+ * **我测的是「两个数不一样」,不是「人能看出这是两个东西」。**
+ *
+ * 现在按 `NEW_ITEM_W` 推:间距至少是元素宽的一半,两张之间必须露出实打实的一块。
  */
-export function dropSpot(n = 0) {
+export const NEW_ITEM_W = 0.42;                 // newItem 的默认宽,落点间距按它算
+
+export function dropSpot(n = 0, itemW = NEW_ITEM_W) {
   const GOLDEN = 2.39996;                       // 黄金角,弧度
   const a = n * GOLDEN;
-  const r = 0.055 * Math.sqrt(n);               // 越往后铺得越开,但收敛
+  // 半径按 √n 长,但**封顶** —— 不封的话第 9 张就跑到纸外面去了
+  const r = Math.min(itemW * 0.72, itemW * 0.52 * Math.sqrt(n));
   return {
     x: 0.5 + r * Math.cos(a),
     y: 0.46 + r * Math.sin(a),

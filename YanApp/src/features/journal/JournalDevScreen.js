@@ -64,7 +64,17 @@ export default function JournalDevScreen({ onBack }) {
 
   // 素材库里所有能用的素材。页面上的元素按 assetId 引用它们。
   const [library, setLibrary] = useState([]);
-  const { images } = useAssetImages(library, assetUri);
+  const { images, loading: decoding, failed } = useAssetImages(library, assetUri);
+
+  // 页面上引用了、但还没解出图的元素。
+  //
+  // ⚠️ 这一行是必须的。用户报了两次「只能上传一张」,我猜了两次都没中 ——
+  // 因为「没加进去」「加了但没解码」「解码了但没画」在屏幕上**长得一模一样**:
+  // 都是「看不见第二张」。没有这一行,只能靠猜。
+  const pending = useMemo(
+    () => page.items.filter(it => it.assetId && !images[it.assetId]).map(it => it.assetId),
+    [page.items, images],
+  );
 
   useEffect(() => {
     let alive = true;
@@ -159,6 +169,14 @@ export default function JournalDevScreen({ onBack }) {
           </Text>
         )}
         {!!note && <Text style={styles.note} numberOfLines={2}>{note}</Text>}
+        {/* 真相行:页上几个元素、解出几张图、哪些还缺。看不见第二张时,
+            这一行直接说明卡在哪一环 —— 加没加进去 / 解没解出来 / 画没画出来。 */}
+        <Text style={styles.note}>
+          页上 {page.items.length} 个 · 素材库 {library.length} · 已解码 {Object.keys(images).length}
+          {decoding ? ' · 解码中' : ''}
+          {pending.length ? ` · 缺图 ${pending.length}` : ''}
+          {failed.length ? ` · 解码失败 ${failed.length}` : ''}
+        </Text>
 
         {drawer && (
           <View style={styles.drawer}>
