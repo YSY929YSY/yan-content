@@ -8,7 +8,7 @@
 // 都自己落盘,没有「记得调用 save」这回事。
 import * as FileSystem from 'expo-file-system/legacy';
 
-import { K, readJson, writeJson } from './storage';
+import { K, readJsonResult, writeJson } from './storage';
 import {
   normalizeMoments, normalizeJournal, normalizeAsset, newAsset, assetUriIn,
   remapCityId, resolveCityId,
@@ -17,33 +17,50 @@ import {
 const clean = (arr, f) => (Array.isArray(arr) ? arr.map(f).filter(Boolean) : []);
 
 // ── 读 ────────────────────────────────────────────────────────
-// readJson 已经做了「坏数据当没有」,normalize 再做一层逐条的 ——
+// readJsonResult 区分「读失败」和「确实没有」,normalize 再做一层逐条的 ——
 // 一条写坏的记录不该让整本手账打不开。
+//
+// ⚠️ **每个读函数都带 ok。** 读完要写回去的地方(importAsset / applyCityRemap /
+// 登录补传)必须先看 ok —— 读失败当成空、再拿空的写回去,就是整本手账被清掉。
+// 这不是假想:importAsset 里 `writeAssets([...assets, asset])`,
+// assets 读失败变成 [] 的话,写回去的就只剩刚加的那一条。
 
 export async function readMoments() {
-  return normalizeMoments(await readJson(K.moments, null) || {});
+  const { ok, value } = await readJsonResult(K.moments);
+  return { ok, ...normalizeMoments(value || {}) };
 }
 
 export async function readTags() {
-  const raw = await readJson(K.momentTags, null);
-  return normalizeMoments({ tags: Array.isArray(raw) ? raw : raw?.tags }).tags;
+  const { ok, value } = await readJsonResult(K.momentTags);
+  const raw = value;
+  return { ok, tags: normalizeMoments({ tags: Array.isArray(raw) ? raw : raw?.tags }).tags };
 }
 
 export async function readJournal() {
-  return normalizeJournal(await readJson(K.journalPages, null) || {});
+  const { ok, value } = await readJsonResult(K.journalPages);
+  return { ok, ...normalizeJournal(value || {}) };
 }
 
 export async function readAssets() {
-  const raw = await readJson(K.journalAssets, null);
-  return clean(Array.isArray(raw) ? raw : raw?.assets, normalizeAsset);
+  const { ok, value } = await readJsonResult(K.journalAssets);
+  const raw = value;
+  return { ok, assets: clean(Array.isArray(raw) ? raw : raw?.assets, normalizeAsset) };
 }
 
-/** 一次读齐。手账首屏要的就是这四份,分四次读会让页面分四次跳。 */
+/**
+ * 一次读齐。手账首屏要的就是这四份,分四次读会让页面分四次跳。
+ *
+ * `ok` 是四份的**与** —— 只要有一份没读出来,整份状态就不完整,
+ * 任何「读→改→整份写回」的操作都必须停下。
+ */
 export async function readAll() {
-  const [m, tags, j, assets] = await Promise.all([
+  const [m, t, j, a] = await Promise.all([
     readMoments(), readTags(), readJournal(), readAssets(),
   ]);
-  return { moments: m.moments, tags, pages: j.pages, cities: j.cities, assets };
+  return {
+    ok: m.ok && t.ok && j.ok && a.ok,
+    moments: m.moments, tags: t.tags, pages: j.pages, cities: j.cities, assets: a.assets,
+  };
 }
 
 // ── 写 ────────────────────────────────────────────────────────
@@ -97,7 +114,14 @@ export async function importAsset(uri, { kind = 'photo', entry = 'upload',
     await FileSystem.copyAsync({ from: uri, to: dest });
 
     const asset = { ...draft, localUri: dest };
-    const assets = await readAssets();
+    // ⚠️ 读失败**必须停下**。当成空再写回去 = 整个素材库被这一条覆盖掉。
+    // (硬规矩 1:拿不到数据 ≠ 数据是空的。这个项目为此丢过至少四次用户数据,
+    //  而这一处是 2026-08-13 新写的代码,一样踩了 —— 所以读函数才改成带 ok。)
+    const { ok: readOk, assets } = await readAssets();
+    if (!readOk) {
+      await FileSystem.deleteAsync(dest, { idempotent: true });
+      return { asset: null, error: '读不到素材库,这次不写 —— 不能拿空的覆盖已有素材' };
+    }
     const ok = await writeAssets([...assets, asset]);
     if (!ok) {
       // 元数据没写成,文件就是垃圾 —— 清掉,别在磁盘上留孤儿
@@ -119,6 +143,8 @@ export async function importAsset(uri, { kind = 'photo', entry = 'upload',
  */
 export async function applyCityRemap(oldId, newId, cityPatch = {}) {
   const state = await readAll();
+  // 同上:状态没读全就改写四处,等于拿残缺的一份覆盖完整的一份
+  if (!state.ok) return { changed: false, error: '读不到手账状态,这次不改写' };
   const next = remapCityId(state, oldId, newId, cityPatch);
   if (next === state) return { changed: false };
   const ok = await Promise.all([
@@ -138,7 +164,9 @@ export async function applyCityRemap(oldId, newId, cityPatch = {}) {
 export async function ensureCity({ countryCode, name, nameLocal, lat, lng } = {}) {
   const cityId = resolveCityId({ countryCode, name, lat, lng });
   if (!cityId) return null;
-  const { pages, cities } = await readJournal();
+  const { ok, pages, cities } = await readJournal();
+  // 读不到就不要建城 —— 会把已有的城市册整份写没
+  if (!ok) return cityId;
   if (cities.some(c => c.cityId === cityId)) return cityId;
   const now = new Date().toISOString();
   await writeJournal({

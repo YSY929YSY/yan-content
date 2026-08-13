@@ -95,9 +95,9 @@ export default function JournalDevScreen({ onBack }) {
   // 不是只在内存里显示了一下。
   useEffect(() => {
     let alive = true;
-    readAssets().then((list) => {
+    readAssets().then(({ ok, assets: list }) => {
       const last = [...list].reverse().find(a => a.localUri && !a.deletedAt);
-      if (!alive || !last) return;
+      if (!alive || !ok || !last) return;
       // 走 assetUri 而不是直接用 last.localUri —— 存下来的绝对路径里的容器 UUID 会过期
       setPhotoUri(assetUri(last));
       setAssetNote(`素材库 ${list.length} 条 · 复用上次(${last.entry}/${last.kind})`);

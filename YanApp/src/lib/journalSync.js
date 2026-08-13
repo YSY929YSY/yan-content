@@ -33,7 +33,10 @@ async function upsertAll(table, rows, opts) {
  * 先落盘的话,一次失败的补传会把 id 占掉,重试时误以为传过了。
  */
 export async function backfillMoments() {
-  const { moments, tags } = await readAll();
+  // 读不到就不要补传:planMomentUpload 会拿残缺的一份去铸 id、上传,
+  // 而那份缺的记录在下一次补传里会被当成「新的」再铸一遍 —— 云端多出重复
+  const { ok: readOk, moments, tags } = await readAll();
+  if (!readOk) return { count: 0, error: '读不到本机手账,这次不补传', idMap: new Map() };
   if (!moments.length && !tags.length) return { count: 0, error: null, idMap: new Map() };
   if (!supabase) return { count: 0, error: 'offline', idMap: new Map() };
   try {
@@ -78,7 +81,8 @@ export async function backfillMoments() {
  * 不该因为溯源接不上就整批不传,溯源留空而已。
  */
 export async function backfillJournal(momentIdMap = new Map()) {
-  const { pages, cities, assets } = await readAll();
+  const { ok: readOk, pages, cities, assets } = await readAll();
+  if (!readOk) return { count: 0, error: '读不到本机手账,这次不补传' };
   if (!pages.length && !assets.length && !cities.length) return { count: 0, error: null };
   if (!supabase) return { count: 0, error: 'offline' };
   try {

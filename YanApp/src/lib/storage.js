@@ -147,15 +147,43 @@ export function backfillGroups() {
 // 一处 JSON.parse 抛异常就能让整个 hydration 的 useEffect 静默中断,
 // 后面该读的键一个都读不到。
 
-export async function readJson(key, fallback = null) {
+/**
+ * 读一个键,**区分「读失败」和「确实没有」**。
+ *
+ * `readJson` 把两者压成同一个 fallback。对只读来显示的地方无所谓,
+ * 但对**读完还要写回去**的路径是致命的:读失败 → 当成空 → 拿空的写回磁盘,
+ * 那正是硬规矩 1 禁止的「用空值覆盖本地」(这个项目为此丢过至少四次用户数据)。
+ *
+ * 范式和 `geocode.searchPlaceDetailed`(返回 `{hits, error}`)、
+ * `footprintMerge.splitCloudCheckins`(返回 `ok`)一致。
+ *
+ * 一个刻意的取舍:**JSON 解析失败算 `ok: true` + 空值**。
+ * 那是「上个版本写坏的数据」,重试一万次也还是坏的,当没有才能往前走
+ * (见下面 readJson 上面那段注释)。**只有拿不到(getItem 抛)才是 ok:false** ——
+ * 那才是「这次读不到,下次可能读得到」。
+ *
+ * @returns {{ ok: boolean, value: any, error: string|null }}
+ */
+export async function readJsonResult(key) {
+  let raw;
   try {
-    const raw = await AsyncStorage.getItem(key);
-    if (raw == null) return fallback;
-    const v = JSON.parse(raw);
-    return v ?? fallback;
-  } catch {
-    return fallback;
+    raw = await AsyncStorage.getItem(key);
+  } catch (e) {
+    // 真·读不出来。调用方必须**保持现状**,不要写回任何东西
+    console.warn('[Storage] read failed:', key, e?.message);
+    return { ok: false, value: null, error: e?.message || 'read failed' };
   }
+  if (raw == null) return { ok: true, value: null, error: null };   // 确实没有
+  try {
+    return { ok: true, value: JSON.parse(raw) ?? null, error: null };
+  } catch {
+    return { ok: true, value: null, error: null };                  // 坏数据当没有
+  }
+}
+
+export async function readJson(key, fallback = null) {
+  const { value } = await readJsonResult(key);
+  return value ?? fallback;
 }
 
 /** 写失败只 warn,不抛 —— 落盘失败不该让正在进行的用户操作崩掉。 */

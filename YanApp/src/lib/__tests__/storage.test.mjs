@@ -81,3 +81,31 @@ test('三个已修复的 bug 不会悄悄退回去', () => {
   // 旅行本:曾经登录完全不补传
   assert.equal(byKey['yan_trip_notebook_v1'].backfill, 'notebook');
 });
+
+// ── 读失败 ≠ 数据是空的 ──────────────────────────────────────
+//
+// 这几条也是从源码正则读的(同上:storage.js 在 node 里 import 不了)。
+// 测源码结构不如测行为,但**这个取舍太容易被后人"简化"掉**,而简化掉之后
+// 不会报错、不会红,只会在某次读盘失败时把用户数据清空 —— 那正是这个项目
+// 犯过至少四次的错。宁可要一条脆一点的测试,也不要没有。
+
+test('★ readJsonResult 里:拿不到才 ok:false,解析失败算 ok —— 两者不能混', () => {
+  const fn = src.match(/export async function readJsonResult[\s\S]*?\n}/)?.[0];
+  assert.ok(fn, 'readJsonResult 不见了 —— 它是「区分读失败」的唯一入口');
+
+  // getItem 那个 catch 必须报 ok:false:这次读不到,下次可能读得到,调用方要保持现状
+  assert.match(fn, /catch \(e\)[\s\S]*?ok: false/,
+    'getItem 失败必须返回 ok:false,否则调用方会拿空值写回磁盘');
+  // JSON.parse 那个 catch 必须是 ok:true:坏数据重试一万次还是坏的,当没有才能往前走
+  const parseCatch = fn.split('JSON.parse')[1] || '';
+  assert.match(parseCatch, /catch\s*\{\s*\n?\s*return \{ ok: true/,
+    '解析失败该当「确实没有」(ok:true),不然一条坏数据能让整个功能永久卡住');
+});
+
+test('★ readJson 必须委托给 readJsonResult —— 两份实现一定会漂', () => {
+  const fn = src.match(/export async function readJson\(key[\s\S]*?\n}/)?.[0];
+  assert.ok(fn, 'readJson 不见了');
+  assert.match(fn, /readJsonResult\(key\)/,
+    'readJson 要走 readJsonResult。各写一份的话,哪天只改了一边,'
+    + '「区分失败」这件事就只在一半的调用点成立 —— 而那一半是哪些没人说得清');
+});
