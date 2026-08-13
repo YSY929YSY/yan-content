@@ -46,8 +46,23 @@ export async function backfillMoments() {
     await upsertAll('moment_photos', rows.photos);
     await upsertAll('moment_tags', rows.tags, { onConflict: 'moment_id,kind,value' });
 
-    await writeMoments(nextState.moments);
-    await writeTags(nextState.tags);
+    // ⚠️ 本地写失败**必须让整次补传失败**,不能报成功。
+    //
+    // nextState 里带着刚为这个 uid 铸好的 remoteIds。远端已经写进去了,
+    // 而这一步是把「我为这个账号铸的 id 是什么」记在本机。写丢了的话:
+    //   · 远端有行,本机不知道
+    //   · backfillAll 标记成功、清掉 pending
+    //   · 下次补传发现没有 remoteIds,**重新铸一批新 uuid** → 云端多出一整份重复
+    //
+    // 那正好打破「补传可以安全重试」那条承诺(journal.test.mjs 有一条测试守着它,
+    // 但它测的是纯函数 planMomentUpload —— 纯函数确实幂等,断在这条 IO 路径上)。
+    // 报失败 + 留着 pending 才对:下次带着同一份 remoteIds 重试,upsert 不会变成两份。
+    const okM = await writeMoments(nextState.moments);
+    const okT = await writeTags(nextState.tags);
+    if (!okM || !okT) {
+      return { count: 0, error: '远端已写入但本机没记住铸好的 id,保留 pending 下次重试',
+               idMap: new Map() };
+    }
     return { count: n, error: null, idMap };
   } catch (e) {
     console.warn('[Journal] backfill moments failed:', e?.message);
@@ -77,8 +92,12 @@ export async function backfillJournal(momentIdMap = new Map()) {
     const n = await upsertAll('journal_pages', rows.pages);
     await upsertAll('journal_items', rows.items);
 
-    await writeAssets(nextState.assets);
-    await writeJournal({ pages: nextState.pages, cities: nextState.cities });
+    // 同上:本地写失败要让整次补传失败,否则下次会重新铸 id、云端多出一份重复
+    const okA = await writeAssets(nextState.assets);
+    const okJ = await writeJournal({ pages: nextState.pages, cities: nextState.cities });
+    if (!okA || !okJ) {
+      return { count: 0, error: '远端已写入但本机没记住铸好的 id,保留 pending 下次重试' };
+    }
     return { count: n, error: null };
   } catch (e) {
     console.warn('[Journal] backfill journal failed:', e?.message);

@@ -43,11 +43,26 @@ export function useReviewProgress() {
       setProgress(local);
       setReady(true);
 
-      // 拉不到时 mergeProgress 原样返回本地,绝不用空值覆盖(硬规矩 1)
-      const merged = mergeProgress(local, await pullProgress(), today);
+      const cloud = await pullProgress();
       if (!alive) return;
-      setProgress(merged);
-      writeJson(K.wordbankProgress, merged);
+
+      // ⚠️ 必须拿 **prev** 合并,不能拿上面那个 local。
+      //
+      // setReady(true) 之后用户就能评分了,而 pullProgress() 还在等。
+      // 原来的写法是 mergeProgress(local, cloud) —— local 是**启动那一刻的快照**,
+      // 等待期间用户评的那一次不在里面。于是:
+      //   联网:评分被合并结果覆盖,界面退回未评状态(云端有,下次启动才捞回来)
+      //   离线:pullProgress 失败 → mergeProgress 原样返回启动快照 → 覆盖 state 和磁盘,
+      //        而 pushProgress 同样离线失败 —— **那一次评分永久丢了**
+      //
+      // 用函数式更新拿到的 prev 一定是最新的。mergeProgress 的口径是
+      // 「云端 lastSeenAt 更新才覆盖本地」,所以刚评的分天然赢过旧的云端行。
+      // (2026-08-13 外部评审发现,不是理论风险 —— 弱网下走一遍就撞得到。)
+      setProgress(prev => {
+        const merged = mergeProgress(prev, cloud, today);
+        writeJson(K.wordbankProgress, merged);
+        return merged;
+      });
     })();
     return () => { alive = false; };
   }, []);

@@ -244,6 +244,25 @@ test('逐词取 lastSeenAt 更新的那条', () => {
   assert.equal(mergeProgress(cloud, local, T).a.box, 1, '换个方向结果一样');
 });
 
+test('★ 启动时正在等云端,用户评的那一分不能被合并结果冲掉', () => {
+  // useReview 的 hydration 竞争(2026-08-13 外部评审发现,是真 bug 不是理论风险):
+  //   setReady(true) 之后用户就能评分,而 pullProgress() 还在路上。
+  //   原来的写法是 mergeProgress(**启动快照**, cloud) —— 等待期间评的那一次不在里面,
+  //   合并完一覆盖就没了;离线时连云端都没有,那一次是永久丢的。
+  //
+  // 修法是拿函数式更新的 prev(含刚评的分)去合并。**这条测试守的是那个修法的前提**:
+  // mergeProgress 必须让「刚评的本地」赢过「旧的云端行」。
+  // 哪天有人改了这里的取舍口径,那个修复会静默失效 —— 所以在这里钉死。
+  const cloud = { a: { box: 4, dueAt: '2026-09-10', lastSeenAt: '2026-08-01' } };
+  const startup = { a: { box: 1, dueAt: '2026-08-06', lastSeenAt: '2026-08-01' } };
+  // 用户在等网络的这段时间里评了一次 —— prev 里有,startup 快照里没有
+  const afterGrade = { a: { box: 2, dueAt: '2026-08-15', lastSeenAt: T } };
+
+  assert.equal(mergeProgress(afterGrade, cloud, T).a.box, 2, '刚评的分必须留下');
+  // 反过来验一遍问题本身:拿启动快照合并,那一次评分确实会消失
+  assert.equal(mergeProgress(startup, cloud, T).a.box, 4, '这就是原来会发生的事');
+});
+
 test('同一天复习过的取 dueAt 更远的 —— 别把推到 30 天的词拉回 1 天', () => {
   const local = { a: { box: 1, dueAt: '2026-08-06', lastSeenAt: T } };
   const cloud = { a: { box: 4, dueAt: '2026-08-20', lastSeenAt: T } };
