@@ -31,10 +31,17 @@ import { searchPlace, searchPlaceDetailed } from './src/lib/geocode';
 import WorldMap from './src/features/world/WorldMap';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Speech from 'expo-speech';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { C } from './src/theme';
 import { useSpeech, SpeakBtn } from './src/components/Speech';
 import TripNotebook from './src/features/travel/TripNotebook';
+// 手账预演。只在 __DEV__ 里挂,生产包里那个入口整段不渲染。
+import JournalDevScreen from './src/features/journal/JournalDevScreen';
+// 词场预览:内容还在 staging 没并进内容包,开发期先从这份草稿读,方便边写边看。
+// 合并进 content.v2.json 之后这份和它的引用一起删。
+import WORDFIELD_PREVIEW from './src/features/wordbank/wordfield-preview.json';
+import PITCH_PREVIEW from './src/features/wordbank/pitch-preview.json';
+import { toMora, pitchPattern, accentName } from './src/features/wordbank/pitch';
 import {
   ActivityIndicator, Alert, Animated, Dimensions, FlatList, Image, Keyboard,
   KeyboardAvoidingView, Modal,
@@ -1512,12 +1519,15 @@ lockTag: {
 // ─────────────────────────────────────────────
 // Word Book Shelf
 // ─────────────────────────────────────────────
+// 词数**不写在这里**。写死过一次,内容包更新之后五个数全部漂掉了
+// (718/626/1730/1812/3413 实际是 724/633/1726/1798/3403),而且不报错、
+// 只是让用户看到一个和列表对不上的数字。现在由 WordBookShelfScreen 从内容里现算。
 const WORDBOOKS = [
-  { id: 'n5', level: 'N5', title: '基础词书', desc: '高频词块 · 例句', count: 718, available: true },
-  { id: 'n4', level: 'N4', title: '进阶词书', desc: '日常表达 · 例句', count: 626, available: true },
-  { id: 'n3', level: 'N3', title: '中级词书', desc: '表达能力跃升', count: 1730, available: true },
-  { id: 'n2', level: 'N2', title: '高级词书', desc: '流利阅读基础', count: 1812, available: true },
-  { id: 'n1', level: 'N1', title: '最高级词书', desc: '母语级词汇', count: 3413, available: true },
+  { id: 'n5', level: 'N5', title: '基础词书', desc: '高频词块 · 例句', available: true },
+  { id: 'n4', level: 'N4', title: '进阶词书', desc: '日常表达 · 例句', available: true },
+  { id: 'n3', level: 'N3', title: '中级词书', desc: '表达能力跃升', available: true },
+  { id: 'n2', level: 'N2', title: '高级词书', desc: '流利阅读基础', available: true },
+  { id: 'n1', level: 'N1', title: '最高级词书', desc: '母语级词汇', available: true },
 ];
 const JLPT_COLORS = {
   N5: ['#e8f4ea', '#2a7a3a'],
@@ -1545,6 +1555,21 @@ function WordBookShelfScreen({ wordBank, onBack, onSelect }) {
   const [pickedIdx, setPickedIdx] = useState(0);
   const { speak, speakingKey } = useSpeech();
   const { progress, grade } = useReviewProgress();
+
+  // 每本书的词数**从内容里算**,不用 WORDBOOKS 里写死的那个。
+  //
+  // 写死的五个数到 2026-08 已经全部对不上了(718/626/1730/1812/3413 实际是
+  // 724/633/1726/1798/3403)—— 内容包在更新,常量没人跟着改,而这种漂移
+  // 不会报错、只会让用户看到一个和列表对不上的数字。
+  // 顺带把「定稿多少」也算出来:一本全是起草稿的书不该和精修过的书写一样的话。
+  const stats = useMemo(() => {
+    const out = {};
+    for (const book of WORDBOOKS) {
+      const ws = (wordBank || []).filter(w => (w.levels || [w.level]).includes(book.level));
+      out[book.id] = { total: ws.length, final: ws.reduce((n, w) => n + (isDraftedWord(w) ? 0 : 1), 0) };
+    }
+    return out;
+  }, [wordBank]);
 
   const q = query.trim();
   const hits = !q ? [] : (wordBank || []).filter(w =>
@@ -1649,7 +1674,12 @@ function WordBookShelfScreen({ wordBank, onBack, onSelect }) {
               <View style={{ flex: 1 }}>
                 <Text style={wbs.bookTitle}>{book.title}</Text>
                 <Text style={wbs.bookDesc}>
-                  {book.available ? `${book.count} 词 · ${book.desc}` : book.desc}
+                  {/* 一本全是起草稿的书,别写得和精修过的一样 ——
+                      点进去发现例句时有时无,信任是这么丢的 */}
+                  {!book.available ? book.desc
+                    : stats[book.id]?.final > 0
+                      ? `${stats[book.id].final} 词 · ${book.desc}`
+                      : `${stats[book.id]?.total || 0} 条起草中 · 可当词典翻`}
                 </Text>
               </View>
               {book.available
@@ -1715,7 +1745,38 @@ const normalizeDate = (v) => {
 // 8298 条里 N5/N4 那 1343 条是精修的(例句 100%),N3 以上 6955 条全是 zh_drafted
 // (例句仅 39%)。数据层一直知道这件事,界面以前完全不体现 —— 用户看到的每张卡
 // 长得都一样,而作者定的标准是「词意 0 容忍」。标出来是诚实,也让人能只学精修的。
-const isDraftedWord = (w) => !w?.status || w.status === 'zh_drafted';
+/**
+ * 这条词够不够格进词书。
+ *
+ * **判据是「有没有完整例句」,不是 `status` 标志位。**
+ *
+ * 原来看 `status !== 'zh_drafted'`。问题是那个标志位**已经和内容脱节了**:
+ * 2026-08-13 数过,N3 有 1386 条例句齐全(jp/zh/roma 三样同步,没有半拉子),
+ * 而被标成定稿的只有 8 条 —— 内容往前走了,标志位没人跟着改,而且不报错,
+ * 只是让 1386 条做完的词一直藏在「起草」里看不见。
+ * 和 `WORDBOOKS` 里那五个写死的词数是同一种病。
+ *
+ * 改成从字段现算之后:内容补一条就自动放出一条,没有需要有人记得改的开关。
+ *
+ * ⚠️ 门槛里**不含 `coreChunk`(搭配)**,这是想清楚的:搭配是三层里唯一
+ * 没有开放权威源的字段(2026-08-13 找过,GitHub 上没有;NINJAL-LWP 不能批量
+ * 且商业利用受限),拿它当闸门等于用一个补不上的字段挡住已经做完的内容。
+ * 详见 HANDOFF-2026-08-12「有权威源的 join,和没有源的创作」。
+ */
+const isDraftedWord = (w) => !(w?.exampleJp && w?.exampleZh && w?.exampleRoma);
+
+/**
+ * 这个词的声调型。拿不到返回 null —— **不要拿 0 当缺省值**,
+ * 0 是「平板」,是一个真实存在的型,用它当「不知道」会教错一批词。
+ */
+const pitchOf = (w) => {
+  if (Number.isFinite(w?.pitchAccent)) return w.pitchAccent;
+  if (__DEV__) {
+    const v = PITCH_PREVIEW[w?.id];
+    return Number.isFinite(v) ? v : null;
+  }
+  return null;
+};
 const wordKey = (item) => `${item.word}-${item.reading}`;
 
 function WordBankScreen({ wordBank, book, onBack }) {
@@ -1731,10 +1792,21 @@ function WordBankScreen({ wordBank, book, onBack }) {
   // 退出页面就没了,重进重新挑一批,用户永远做不完「今天的任务」。
   const [session, setSession] = useState(null);
   const [statusFilter, setStatusFilter] = useState('all');
+  // 「先当词典翻」—— 只在整本还没定稿的词书上才会用到,见下面 skipDraftFilter
+  const [showDrafts, setShowDrafts] = useState(false);
   const [selectedWord, setSelectedWord] = useState(null);
   const [selectedIdx, setSelectedIdx] = useState(0);
   const [navList, setNavList] = useState([]);
+  // 从词场点进成员词时的返回栈(见下方 openMember)
+  const [stack, setStack] = useState([]);
   const { speak, speakingKey } = useSpeech();
+
+  // 词场的成员词按 id 找回词条。**全库找,不限本词书** ——
+  // 紅葉(N2)的成员是 秋(N5)、落ち葉(N1),按词书切会有一半点不开。
+  const lookupWord = useCallback(
+    (id) => (id ? (wordBank || []).find(w => w.id === id) || null : null),
+    [wordBank]
+  );
 
   // 队列只从定稿词里挑,和列表默认显示的口径一致 —— 不能派一个连例句都没有的词当今日任务。
   const bankRef = useRef(wordBank);
@@ -1812,7 +1884,12 @@ function WordBankScreen({ wordBank, book, onBack }) {
   // 「今日任务」和「待复习」两个视图不过这道滤:队列和到期表是按用户实际学过的词
   // 算出来的,用户可能是搜索时顺手学的起草词。滤掉它们会让按钮上写着「待复习 3」
   // 而列表里只有 2 条 —— 数字和眼前的东西对不上,比多显示一个粗糙词条更伤信任。
-  const skipDraftFilter = statusFilter === 'today' || statusFilter === 'due';
+  //
+  // showDrafts 是用户自己按下的第三种情况:整本都还在起草时(N3/N2/N1),
+  // 上面那条规矩会把列表滤成空的 —— 而头部还写着「1798 词」。
+  // 界面自相矛盾比内容粗糙严重得多,所以给一条出口:让他自己决定要不要当词典翻。
+  // **默认仍然不给**,词书的定义没变。
+  const skipDraftFilter = statusFilter === 'today' || statusFilter === 'due' || showDrafts;
   const filtered = skipDraftFilter ? byStatus : byStatus.filter(w => !isDraftedWord(w));
 
   // 只数这本书里的词。progress 是全局的(键是「词-读音」,不分书),
@@ -1824,7 +1901,8 @@ function WordBankScreen({ wordBank, book, onBack }) {
   // 这本书里有没有精修词。N3/N2/N1 现在整本都是机器起草,一条定稿词都没有,
   // 于是队列挑出来是空的 —— 而空队列和「今天做完了」在数据上长得一模一样。
   // 不区分的话,用户什么都没做就被告知「今日已完成」,这是界面在骗他。
-  const hasFinalWords = wordBank.some(w => !isDraftedWord(w));
+  const finalCount = wordBank.reduce((n, w) => n + (isDraftedWord(w) ? 0 : 1), 0);
+  const hasFinalWords = finalCount > 0;
 
   const startToday = () => setStatusFilter('today');
 
@@ -1844,13 +1922,33 @@ function WordBankScreen({ wordBank, book, onBack }) {
     });
   };
 
+  // 点词场里的成员词跳进去。要能跳回来 —— 否则用户点一下就丢了刚才在读的那个词,
+  // 于是再也不敢点,词场就白做了。所以留一个返回栈,而不是直接换掉当前词。
+  const openMember = (entry) => {
+    setStack(s => [...s, { word: selectedWord, idx: selectedIdx, list: navList }]);
+    setSelectedWord(entry);
+    setNavList([entry]);
+    setSelectedIdx(0);
+  };
+  const goBack = () => {
+    if (stack.length) {
+      const prev = stack[stack.length - 1];
+      setStack(s => s.slice(0, -1));
+      setSelectedWord(prev.word);
+      setSelectedIdx(prev.idx);
+      setNavList(prev.list);
+      return;
+    }
+    setSelectedWord(null);
+  };
+
   if (selectedWord) {
     return (
       <WBDetailPage
         entry={selectedWord}
         record={progress[wordKey(selectedWord)] || null}
         today={today}
-        onBack={() => setSelectedWord(null)}
+        onBack={goBack}
         onGrade={gradeWord}
         speak={speak}
         speakingKey={speakingKey}
@@ -1858,6 +1956,8 @@ function WordBankScreen({ wordBank, book, onBack }) {
         hasNext={selectedIdx < navList.length - 1}
         onPrev={() => { const ni = selectedIdx - 1; setSelectedWord(navList[ni]); setSelectedIdx(ni); }}
         onNext={() => { const ni = selectedIdx + 1; setSelectedWord(navList[ni]); setSelectedIdx(ni); }}
+        lookupWord={lookupWord}
+        onOpenWord={openMember}
       />
     );
   }
@@ -1869,7 +1969,13 @@ function WordBankScreen({ wordBank, book, onBack }) {
           <Text style={wb.back}>‹ 词书选择</Text>
         </TouchableOpacity>
         <Text style={wb.title}>{book?.level || 'N5'} {book?.title || '基础词库'}</Text>
-        <Text style={wb.sub}>JLPT {book?.level || 'N5'} · {wordBank.length} 词 · {book?.desc || '高频词块 · 例句'}</Text>
+        {/* 数字要和眼睛看到的对得上。整本都在起草时,写「1798 词」而列表是空的 ——
+            用户只会得出「这 App 坏了」。所以起草的那部分单独说出来。 */}
+        <Text style={wb.sub}>
+          JLPT {book?.level || 'N5'} · {hasFinalWords ? `${finalCount} 词` : '还没有精修词条'}
+          {wordBank.length > finalCount ? ` · 另有 ${wordBank.length - finalCount} 条起草中` : ''}
+          {' · '}{book?.desc || '高频词块 · 例句'}
+        </Text>
         <View style={wb.ctaRow}>
           <TouchableOpacity style={[wb.ctaBtn, statusFilter === 'today' && wb.ctaBtnActive]} onPress={startToday}>
             <Text style={[wb.ctaBtnTxt, statusFilter === 'today' && wb.ctaBtnTxtActive]}>
@@ -1908,6 +2014,11 @@ function WordBankScreen({ wordBank, book, onBack }) {
                 <Text style={wb.word}>{item.word}</Text>
                 <Text style={wb.reading}>{item.reading}</Text>
                 <View style={wb.posTag}><Text style={wb.posTagTxt}>{item.pos}</Text></View>
+                {/* 起草稿混进列表时必须能一眼认出来。不标的话用户会拿它和精修词条
+                    等同看待,然后得出「这本书的例句怎么时有时无」——那比粗糙本身更伤 */}
+                {isDraftedWord(item) && (
+                  <View style={wb.draftTag}><Text style={wb.draftTagTxt}>起草</Text></View>
+                )}
                 {done ? <Text style={wb.checkMastered}>今天过了</Text>
                   : st === 'learning' ? <View style={wb.dotLearning} />
                   : st === 'mastered' ? <Text style={wb.checkMastered}>✓</Text> : null}
@@ -1918,13 +2029,29 @@ function WordBankScreen({ wordBank, book, onBack }) {
           );
         }}
         ListEmptyComponent={(
-          <Text style={wb.empty}>
-            {statusFilter === 'today' && !hasFinalWords
-              ? '这本词书还没有精修词条。\n可以在词书选择页搜索,当词典查着用。'
-              : statusFilter === 'due' ? '今天没有到期的词,明天再来'
-              : statusFilter === 'today' && session ? '今日任务已完成'
-              : '这里还没有词'}
-          </Text>
+          // 整本还在起草是**最常见**的空,却曾经掉进最后那句「这里还没有词」——
+          // 而头部同时写着 1798 词。词条明明在,只是还没配例句和搭配,
+          // 说成「没有词」是界面在骗人。所以这一支单独说清楚,并且给一条出口。
+          !hasFinalWords && !showDrafts && statusFilter !== 'due' ? (
+            <View style={wb.emptyBox}>
+              <Text style={wb.empty}>
+                这本还在起草。{'\n'}
+                {wordBank.length} 条已经有释义和读音,{'\n'}
+                但还没配例句、搭配和罗马音。
+              </Text>
+              <TouchableOpacity style={wb.emptyBtn} onPress={() => setShowDrafts(true)}>
+                <Text style={wb.emptyBtnTxt}>先当词典翻</Text>
+              </TouchableOpacity>
+              {/* 说清楚按下去会得到什么,别让人点完才发现内容比别的书粗糙 */}
+              <Text style={wb.emptyNote}>翻的是起草稿,每条都会标出来</Text>
+            </View>
+          ) : (
+            <Text style={wb.empty}>
+              {statusFilter === 'due' ? '今天没有到期的词,明天再来'
+                : statusFilter === 'today' && session ? '今日任务已完成'
+                : '这里还没有词'}
+            </Text>
+          )
         )}
       />
     </View>
@@ -1952,6 +2079,14 @@ const wb = StyleSheet.create({
   reading: { fontSize: 11, color: C.muted },
   posTag: { backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 6, paddingVertical: 1 },
   posTagTxt: { fontSize: 9, color: C.muted, fontWeight: '600' },
+  // 起草标记:描边不填色,比词性标签更轻 —— 它是个说明,不是一枚勋章
+  draftTag: { borderWidth: StyleSheet.hairlineWidth, borderColor: C.muted, borderRadius: 999,
+              paddingHorizontal: 6, paddingVertical: 1 },
+  draftTagTxt: { fontSize: 9, color: C.muted },
+  emptyBox: { alignItems: 'center', marginTop: 40, gap: 14, paddingHorizontal: 24 },
+  emptyBtn: { borderWidth: 1, borderColor: C.ink, borderRadius: 8, paddingHorizontal: 20, paddingVertical: 10 },
+  emptyBtnTxt: { fontSize: 14, color: C.ink, fontWeight: '600' },
+  emptyNote: { fontSize: 12, color: C.muted, textAlign: 'center' },
   dotLearning: { width: 6, height: 6, borderRadius: 3, backgroundColor: C.gold, marginLeft: 'auto' },
   checkMastered: { fontSize: 12, color: C.lava, fontWeight: '700', marginLeft: 'auto' },
   zh: { fontSize: 12, color: C.ink },
@@ -1966,7 +2101,57 @@ const LOAN_LANG = {
   lat: '拉丁语', gre: '希腊语',
 };
 
-function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKey, hasPrev, hasNext, onPrev, onNext }) {
+/**
+ * 声调线:假名上面那条高低线。
+ *
+ * 中文母语者有声调,会**下意识给日语词安一个调**,安错了也没人纠正。
+ * 词库里有 207 组同音但声调不同的词(書く型1 / 欠く型0),在这之前它们长得一样。
+ *
+ * 画法是日语教材的标准形:高的那几拍上面拉一条线,降的地方线拐下来。
+ * 数学在 features/wordbank/pitch.js(纯函数,有测试)—— 这里只负责画。
+ */
+function PitchLine({ reading, accent }) {
+  const mora = toMora(reading);
+  if (!mora.length || !Number.isFinite(accent)) return null;
+  const { pattern, particleHigh } = pitchPattern(reading, accent);
+  return (
+    <View style={wd.pitchRow}>
+      {mora.map((m, i) => {
+        const high = pattern[i];
+        // 降调那一拍:线在它右边拐下来。这一竖是「降在哪儿」的全部信息
+        const drops = high && !pattern[i + 1] && i < mora.length - 1;
+        return (
+          <Text
+            key={i}
+            style={[wd.pitchMora,
+                    high && wd.pitchHigh,
+                    drops && wd.pitchDrop]}
+          >
+            {m}
+          </Text>
+        );
+      })}
+      {/* 后接助词那一格。
+          **没有它,平板和尾高就分不开** —— 「はな(花・型0)」和「はな(鼻・型2)」
+          在词本身上都是「低高」,差别全在后面那个助词上。
+          用 ○ 占位,表示「这里跟一个助词的话是高还是低」。 */}
+      <Text style={[wd.pitchMora, wd.pitchParticle, particleHigh && wd.pitchHigh]}>○</Text>
+      <Text style={wd.pitchName}>{accentName(reading, accent)}</Text>
+    </View>
+  );
+}
+
+function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKey, hasPrev, hasNext, onPrev, onNext, lookupWord, onOpenWord }) {
+  // 词场:这个词真实出现时,身边站着哪些词。
+  // 关键是**一个句子**而不是并列的词块 —— 秋(季节)、山(地点)、温泉(要做的事)
+  // 是三种不同的关系,摊成一排格子等于让用户自己猜关系。第一版就是这么翻的车。
+  //
+  // 内容还在 staging,没并进内容包,所以开发期先从预览表读 —— 见 wordfield-preview.json。
+  // 一个词可以有多个词场(大丈夫 的「没事」和「婉拒」是两个完全不同的场合),
+  // 但**仍然是一张卡** —— 分成两张会让用户以为是两个词。
+  const rawField = entry.wordField || (__DEV__ ? WORDFIELD_PREVIEW[entry.id] : null);
+  const wordFields = (Array.isArray(rawField) ? rawField : (rawField ? [rawField] : []))
+    .filter(f => f?.sentence?.jp);
   useEffect(() => {
     speak(entry.word, 'ja-JP', `wd-auto-${entry.word}`);
   }, [entry.word]);
@@ -1995,7 +2180,12 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
         <View style={wd.hero}>
           <View style={{ flex: 1 }}>
             <Text style={wd.word}>{entry.word}</Text>
-            <Text style={wd.reading}>{entry.reading}</Text>
+            {/* 声调数据还在 staging,没并进内容包,开发期从预览表读 ——
+                和词场同一个模式(见 pitch-preview.json,它是派生物,别手改)。
+                拿不到就退回原来那行纯假名:没有声调不影响这张卡能用。 */}
+            {pitchOf(entry) != null
+              ? <PitchLine reading={entry.reading} accent={pitchOf(entry)} />
+              : <Text style={wd.reading}>{entry.reading}</Text>}
           </View>
           <SpeakBtn onPress={() => speak(entry.word, 'ja-JP', 'wd-word')} speaking={speakingKey === 'wd-word'} size="sm" color={C.lava} />
         </View>
@@ -2006,6 +2196,36 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
           <Text style={wd.zh}>{entry.meaning_zh}</Text>
           {!!entry.meaning_en && <Text style={wd.en}>{entry.meaning_en}</Text>}
         </View>
+        {wordFields.map((wordField, fi) => (
+          <View key={fi} style={wd.section}>
+            {/* 标题跟着词走(「秋天会一起遇到」),不用固定的「相关词」——
+                固定标题会逼人把不同关系塞进同一个筐 */}
+            <Text style={wd.sectionLabel}>{wordField.label || '一起出现'}</Text>
+            <View style={wd.exRow}>
+              <View style={{ flex: 1, gap: 3 }}>
+                <Text style={wd.wfJp}>{wordField.sentence.jp}</Text>
+                {!!wordField.sentence.roma && <Text style={wd.exRoma}>{wordField.sentence.roma}</Text>}
+                <Text style={wd.exZh}>{wordField.sentence.zh}</Text>
+              </View>
+              <SpeakBtn onPress={() => speak(wordField.sentence.jp, 'ja-JP', `wd-wf${fi}`)} speaking={speakingKey === `wd-wf${fi}`} size="sm" color={C.muted} />
+            </View>
+            <View style={wd.wfChips}>
+              {(wordField.members || []).map((m) => {
+                const w = lookupWord?.(m.id);
+                // 查不到就不显示这一个,而不是显示一个点不动的空壳 ——
+                // 标准里那条硬规则:成员必须对得上词库里真实存在的词条
+                if (!w) return null;
+                return (
+                  <TouchableOpacity key={`${fi}-${m.id}`} style={wd.wfChip} activeOpacity={0.7}
+                    onPress={() => onOpenWord?.(w)}>
+                    <Text style={wd.wfChipJp}>{w.word}</Text>
+                    <Text style={wd.wfChipZh}>{w.meaning_zh}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </View>
+        ))}
         {Array.isArray(entry.loanSource) && entry.loanSource.length > 0 && (
           <View style={wd.section}>
             <Text style={wd.sectionLabel}>词源</Text>
@@ -2026,7 +2246,8 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
             </View>
           </View>
         )}
-        {!!entry.exampleJp && (
+        {/* 词场句已经是这个词最好的例句了,一模一样就别说第二遍(自查九条:不赘) */}
+        {!!entry.exampleJp && !wordFields.some(f => f.sentence.jp === entry.exampleJp) && (
           <View style={wd.section}>
             <Text style={wd.sectionLabel}>例句</Text>
             <View style={wd.exRow}>
@@ -2080,6 +2301,18 @@ const wd = StyleSheet.create({
   hero: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingTop: 16, paddingBottom: 4, gap: 10 },
   word: { fontSize: 32, fontWeight: '700', color: C.ink },
   reading: { fontSize: 14, color: C.muted, marginTop: 2 },
+  // 声调线。每一拍一格,高的那几拍顶上拉线,降的地方右边拐下来。
+  // 线画在**字的上方**(borderTop),这是日语教材的标准形,别改成下划线 ——
+  // 下划线在日语排版里是另一个意思。
+  pitchRow: { flexDirection: 'row', alignItems: 'flex-start', marginTop: 4 },
+  pitchMora: { fontSize: 14, color: C.muted, lineHeight: 20, paddingTop: 2,
+               borderColor: C.lava },
+  pitchHigh: { borderTopWidth: 1.5 },
+  pitchDrop: { borderRightWidth: 1.5 },
+  // 助词那一格:○ 是占位,表示「后面跟个助词的话它是高还是低」。
+  // 平板和尾高的差别只在这一格上,颜色要更淡,免得被当成词的一部分
+  pitchParticle: { color: C.mutedLight, marginLeft: 1 },
+  pitchName: { fontSize: 10, color: C.mutedLight, marginLeft: 7, paddingTop: 4 },
   metaRow: { paddingHorizontal: 16, marginTop: 6, flexDirection: 'row', gap: 6 },
   posTag: { backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 2 },
   posTagTxt: { fontSize: 10, color: C.muted, fontWeight: '600' },
@@ -2091,6 +2324,16 @@ const wd = StyleSheet.create({
   loanTxt: { fontSize: 14, color: C.teal, fontWeight: '500', marginTop: 2 },
   exRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   exJp: { flex: 1, fontSize: 15, color: C.ink, fontWeight: '500' },
+  // 词场句比普通例句大一号:它是这张卡的主句,不是补充材料
+  wfJp: { fontSize: 17, color: C.ink, fontWeight: '600', lineHeight: 26 },
+  wfChips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 2 },
+  wfChip: {
+    flexDirection: 'row', alignItems: 'baseline', gap: 5,
+    borderWidth: 1, borderColor: C.border, borderRadius: 999,
+    paddingHorizontal: 10, paddingVertical: 5, backgroundColor: C.white,
+  },
+  wfChipJp: { fontSize: 13, color: C.ink, fontWeight: '600' },
+  wfChipZh: { fontSize: 11, color: C.muted },
   exRoma: { fontSize: 11, color: C.mutedLight, lineHeight: 16 },
   exZh: { fontSize: 12, color: C.muted },
   statusRow: { flexDirection: 'row', gap: 8 },
@@ -5705,6 +5948,7 @@ export default function App() {
   const [sceneState, setSceneState] = useState(null);
   const [practiceScene, setPracticeScene] = useState(null);
   const [showDataSources, setShowDataSources] = useState(false);
+  const [showJournal, setShowJournal] = useState(false);   // __DEV__ 手账预演
   const [user, setUser] = useState(null);
   const { content, loading, error, reload } = useContent();
 
@@ -5800,6 +6044,9 @@ export default function App() {
   if (loading && !content) return <LoadingScreen />;
   if (!content) return <ErrorScreen onRetry={reload} />;
 
+  // 手账预演:整段被 __DEV__ 包着,生产包里连组件都不会被引用到
+  if (__DEV__ && showJournal) return <JournalDevScreen onBack={() => setShowJournal(false)} />;
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: isDark ? C.ink : C.paper }}>
       <StatusBar barStyle={isDark ? 'light-content' : 'dark-content'} backgroundColor={isDark ? C.ink : C.paper} />
@@ -5822,6 +6069,22 @@ export default function App() {
       )}
       {tab === 'na' && <NaTab mapPlaces={content.mapPlaces} />}
       {!showDataSources && <TabBar tab={tab} setTab={(t) => { setTab(t); if (t === 'pie') setSubTab('learn'); }} />}
+      {__DEV__ && !showDataSources && tab === 'na' && (
+        // 开发期入口,只在「世界打卡」这个 tab 出现 —— 手账属于世界打卡那一块,
+        // 不是一个跟全局并列的东西。正式做的时候要长进那一屏里,不是浮在上面。
+        <Pressable
+          onPress={() => setShowJournal(true)}
+          style={{
+            position: 'absolute', right: 12, bottom: 96, width: 44, height: 44,
+            borderRadius: 22, alignItems: 'center', justifyContent: 'center',
+            backgroundColor: 'rgba(40,32,22,0.82)',
+          }}
+          hitSlop={8}
+        >
+          {/* 不要写「账」—— 单字读成账单。手账和分账是两回事,名字上不能混 */}
+          <Text style={{ color: '#e6ddca', fontSize: 11, letterSpacing: 0.5 }}>手账</Text>
+        </Pressable>
+      )}
     </SafeAreaView>
   );
 }
