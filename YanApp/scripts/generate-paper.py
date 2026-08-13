@@ -38,7 +38,18 @@ import os
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 
-W, H = 1400, 2400
+# ⚠️ **按屏幕定,不是按打印定。**
+#
+# 实测(430pt 宽的机器):单页显示 378pt = 3 倍屏 1135px,对开每页只有 587px。
+# 原来出 1400 宽,也就是说每次解码都在解 20% 用不上的像素 ——
+# 一张 1400x2400 解码后 12.8MB,四档纸缓存起来 51MB。
+# 用户的反馈是「变慢了」「切换手帐要闪一会儿」,这是其中一块。
+#
+# 1200x2057:覆盖单页 1135px 还有余量,解码 9.4MB,四档 38MB。
+#
+# 「换 300dpi 重渲可打印」那条不受影响 —— 打印时把 --size 调大重出一套即可,
+# 这本来就是程序化生成的好处。**发到手机上的那份没有理由按打印尺寸做。**
+W, H = 1200, 2057
 rng = np.random.default_rng(7)
 
 # 默认落回 assets/paper/,不落在当前工作目录 —— 免得在仓库根跑一次就散一地 png
@@ -408,10 +419,16 @@ if __name__ == '__main__':
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     ap.add_argument('--out', default=DEFAULT_OUT,
                     help='输出目录(默认 YanApp/assets/paper,会直接覆盖)')
-    ap.add_argument('--png', action='store_true', help='同时留一份无损 png(每张约 4MB,别进仓库)')
+    ap.add_argument('--png', action='store_true', help='同时留一份无损 png(别进仓库)')
+    ap.add_argument('--width', type=int, default=W,
+                    help='出图宽度(默认 1200,按屏幕定;出打印稿时调大)')
     ap.add_argument('--only', action='append', metavar='NAME',
                     help='只出某几档,如 --only kraft-bag。可重复')
     args = ap.parse_args()
+    if args.width != W:
+        globals()['W'] = args.width
+        globals()['H'] = int(round(args.width * 2057 / 1200))
+        print(f'尺寸改成 {W}x{H}')
 
     wanted = set(args.only) if args.only else None
     known = {name for name, _, _ in PAPERS}

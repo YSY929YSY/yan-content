@@ -1,225 +1,121 @@
-// 手账真机预演(仅 __DEV__)
+// 手账(仅 __DEV__ 的预演入口)
 //
-// 存在的理由:这一页的对错只能靠肉眼——阴影方向、纸的亮度、元素默认大小,
-// 在 Mac 上调好的值到 OLED 屏上多半是偏的。要有个地方能立刻看见。
+// ## 这一版按产品定案重做过
 //
-// 它不进生产:App.js 里的入口被 __DEV__ 包着。
+// docs/travel-moments-design.md 第四节的定案是:
 //
-// 主照片可以「从相册选一张」。这不只是为了好看 —— 纸样图当占位时,
-// 照片和纸是同一种材质同一个色系,层次感被白送了一半,看不出阴影对不对。
-// 顺带它跑通了三条素材进入路径里的**上传**那条(设计文档第三节):
-// 相册 → 复制进素材库 → 建 journal_assets 记录 → 贴到页上,整条链路真的走一遍。
-// 其余元素(票根/贴纸/胶带)仍用纸样图顶着,那几个验的是厚度不是内容。
+//   > 手账本一开始是**完全空白的**。言只提供纸和一抽屉工具,
+//   > 一个字、一张贴纸都不预先放。
+//
+// 三条不可动摇的原则:①空白优先 ②一切皆可自选、皆非默认 ③能单独拿出手。
+//
+// **上一版违反了①和②**:一页预置好的照片 + 三个方框占位 —— 那正是文档里
+// 「v2 拼贴但预置元素(否:框定了位置)」被否掉的那一版,我把它又做了一遍。
+// 用户的判断是「还是难看」「只能上传一张图片」,根因不是纸,
+// 是**这一页本来就不该由我摆**。
+//
+// 施工顺序第 3 步写的是「空白画布 + 工具抽屉(先支持:上传整图、拖拽/旋转/缩放/层叠)」,
+// 这一版做的就是它。提取(抠图)和扫描是第 4 步,抽屉里占位但没实现。
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   View, Text, Pressable, ScrollView, StyleSheet, SafeAreaView, Alert, ActivityIndicator,
 } from 'react-native';
-import { useImage } from '@shopify/react-native-skia';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as ImagePicker from 'expo-image-picker';
 
 import JournalPage from './JournalPage';
-import { PAPERS, PAPER_KEYS, PAPERS_META } from './journalPapers';
+import { PAPER_KEYS, PAPERS_META } from './journalPapers';
+import { useAssetImages } from './useAssetImages';
+import { newItem } from './journalModel';
 import { ensureJournalFont, journalFontFamily } from '../../lib/journalFont';
 import { importAsset, readAssets, assetUri } from '../../lib/journalStore';
 
-/** 一条手写:点是 [x, y, t, w],x/y 相对页面。写得快的地方 t 间隔小 → 线变细。 */
-const scribble = (() => {
-  const pts = [];
-  for (let i = 0; i <= 40; i++) {
-    const p = i / 40;
-    pts.push([
-      0.16 + p * 0.55,
-      0.72 + Math.sin(p * Math.PI * 3) * 0.018,
-      i * (i < 20 ? 28 : 12),        // 后半程写得快 —— 用来验笔锋是不是真的在变
-      1,
-    ]);
-  }
-  return pts;
-})();
-
-// 验层次用的占位元素:票根/贴纸/胶带。**默认不显示。**
-//
-// 它们的用途是「看三种厚度的阴影是不是真的不一样」—— 那是开发者的验收需求,
-// 不是给人看的画面。而它们的样子是**拿纸样图冒充的**,页面上就是三块方框,
-// 用户的原话是「一些丑陋的框框」。三轮里我一直说「那是占位不是设计」,
-// 但你看到的就是它 —— 说三次也不会让它变好看。
-//
-// 所以拆开:默认那一页只有真东西(纸 + 照片),要验阴影时用按钮把它们叫出来。
-const LAYER_PROBES = [
-  // 越过页边的票根:一半在纸上,一半落到桌面 —— 「延展到本子外面」
-  { id: 'i2', kind: 'scan', assetId: 'scan1', material: 'scan', lift: 3,
-    x: 0.96, y: 0.52, w: 0.34, scale: 1, rotation: 5, z: 2 },
-  // 贴纸:浮得最高,影子最远最散
-  { id: 'i3', kind: 'sticker', assetId: 'sticker1', material: 'sticker', lift: 9,
-    x: 0.22, y: 0.55, w: 0.2, scale: 1, rotation: -6, z: 3 },
-  // 胶带:几乎贴着纸,接触阴影最实
-  { id: 'i4', kind: 'tape', assetId: 'tape1', material: 'tape', lift: 1,
-    x: 0.62, y: 0.1, w: 0.18, scale: 1, rotation: -22, z: 4 },
-  // 手写:验笔锋。它是一条没有意义的波浪线,同样只该在验收时出现
-  { id: 'i5', kind: 'ink', material: 'ink', lift: 0, x: 0.5, y: 0.5, z: 5,
-    payload: { strokes: [{ points: scribble, tool: 'pen' }] } },
+/**
+ * 工具抽屉。
+ *
+ * 顺序照文档:提取 · 扫描 · 上传 · 贴纸 · 胶带 · 印 · 笔 · 色。
+ * **没做的也列出来**,而且点了要说清「还没做」—— 藏起来的话下一个人
+ * (包括我)会以为这就是全部,然后照着一个残缺的形状继续加东西。
+ */
+const TOOLS = [
+  { id: 'upload', label: '上传', hint: '整张图直接放,不抠不裁', ready: true },
+  { id: 'extract', label: '提取', hint: '抠掉背景留主体 —— 端上 VisionKit,施工顺序第 4 步' },
+  { id: 'scan', label: '扫描', hint: '拍实体纸片:裁边/去反光/拉正 —— 第 4 步。和提取的区别是「留原物」' },
+  { id: 'sticker', label: '贴纸', hint: '第 5 步' },
+  { id: 'tape', label: '胶带', hint: '第 5 步' },
+  { id: 'seal', label: '印', hint: '第 5 步' },
+  { id: 'pen', label: '笔', hint: '第 6 步:先手写体,再颜色,最后真笔迹' },
+  { id: 'color', label: '色', hint: '第 6 步' },
 ];
 
-const DEMO_PAGE = {
-  id: 'demo-page-1',
-  // 默认换成干净的素纸。牛皮那档揉皱和污渍拉满,读起来像皱布 ——
-  // 用户看真机截图的判断是「不太美观」,查下来根因就是这个(和纤维叠成织纹)。
-  // 牛皮保留成可选的一档,它是另一种风格,不是被淘汰的版本。
-  bg: 'plain-cream',
-  items: [
-    // 主锚:一张大照片。参考实物里每页都有一个占 40% 以上的主元素。
-    // 单独一个 assetId,好让「从相册选一张」只换它,不把票根贴纸一起换掉
-    { id: 'i1', kind: 'photo', assetId: 'p1', material: 'photo', lift: 5,
-      x: 0.42, y: 0.26, w: 0.62, scale: 1, rotation: -1.8, z: 1 },
-  ],
-};
-
-// 右页:同一份演示元素换个位置,用来看对开时左右会不会读成复制粘贴
-const FACING_PAGE = {
-  id: 'demo-page-2',
-  // 右页**必须**是另一张纸。两页共用一张贴图的话对开时左右完全对称,
-  // 一眼就是复制粘贴 —— 真本子的相邻两页纤维走向从来不一样。
-  bg: 'grid-ivory',
-  // 右页默认空着 —— 一本真本子摊开时,有一页是空的太正常了
-  items: [],
-};
-
-const FACING_PROBES = [
-  { id: 'j1', kind: 'scan', assetId: 'scan1', material: 'scan', lift: 3,
-    x: 0.5, y: 0.22, w: 0.66, scale: 1, rotation: 1.4, z: 1 },
-  { id: 'j2', kind: 'sticker', assetId: 'sticker1', material: 'sticker', lift: 9,
-    x: 0.72, y: 0.62, w: 0.26, scale: 1, rotation: 7, z: 2 },
-];
-
-/** 占位元素的 id。拖动它们不该被存进真实页面,见 onChangeItems。 */
-const PROBE_IDS = new Set([...LAYER_PROBES, ...FACING_PROBES].map(it => it.id));
+/** 一页空白。**不预置任何元素** —— 这是原则①,不是省事。 */
+const blankPage = (bg) => ({ id: 'dev-page-1', bg, items: [] });
 
 export default function JournalDevScreen({ onBack }) {
-  // 票根/贴纸/胶带的占位图。
-  //
-  // ⚠️ 三个元素用**三张不同的纸**顶着,不是同一张。用同一张的时候页面上是
-  // 三块一模一样的土黄色方块,看着就是「这个功能很难看」—— 而那只是占位没做好。
-  //
-  // ⚠️⚠️ 这里曾经写 `PAPERS['kraft-light']`。2026-08-13 把 PAPERS 从九档裁到四档时
-  // 删掉了那个键,于是它变成 undefined → useImage(undefined) 返回 null →
-  // **五个元素全部不画**,而且不报错。页面看起来只剩一张照片,
-  // 我还对着那个结果做了一整段「构图有问题」的分析 —— 分析的东西根本不在页面上。
-  // 所以下面 missingAssets 那条诊断是必须的:**这类错误必须喊出来。**
-  // ⚠️ 关着的时候传 null,**不要解码**。三张 1400x2400 解出来是 38MB,
-  // 而它们只在「验层次」开着时才画得出来 —— 白解一次就白占一次内存,
-  // 那正是用户说的「每次加载越来越慢」的一部分。
-  const [probes, setProbes] = useState(false);
-  const standScan = useImage(probes ? PAPERS['kraft-bag'] : null);
-  const standSticker = useImage(probes ? PAPERS['grid-ivory'] : null);
-  const standTape = useImage(probes ? PAPERS['plain-cream'] : null);
-
-  // 主照片。没选过就回退到占位图 —— 空着不画的话就看不出主锚的层次了。
-  const [photoUri, setPhotoUri] = useState(null);
+  const [paper, setPaper] = useState('plain-cream');
+  const [page, setPage] = useState(() => blankPage('plain-cream'));
+  const [spread, setSpread] = useState(false);   // 编辑是单页,默认就给能动的那个
+  const [drawer, setDrawer] = useState(false);
   const [picking, setPicking] = useState(false);
-  const [assetNote, setAssetNote] = useState('');
-  const photo = useImage(photoUri);
+  const [note, setNote] = useState('');
+  const scrollRef = useRef(null);
 
-  // 冷启动时把上次选的那张捞回来。
-  // 这一步才是「跑通」的证据:重开这一屏图还在,说明文件和元数据是真落了盘,
-  // 不是只在内存里显示了一下。
+  // 素材库里所有能用的素材。页面上的元素按 assetId 引用它们。
+  const [library, setLibrary] = useState([]);
+  const { images, loading: imagesLoading } = useAssetImages(library, assetUri);
+
   useEffect(() => {
     let alive = true;
-    readAssets().then(({ ok, assets: list }) => {
-      const last = [...list].reverse().find(a => a.localUri && !a.deletedAt);
-      if (!alive || !ok || !last) return;
-      // 走 assetUri 而不是直接用 last.localUri —— 存下来的绝对路径里的容器 UUID 会过期
-      setPhotoUri(assetUri(last));
-      setAssetNote(`素材库 ${list.length} 条 · 复用上次(${last.entry}/${last.kind})`);
-    }).catch(() => { /* 读不到就用占位图,这一屏不该被素材库挡住 */ });
+    readAssets().then(({ ok, assets }) => {
+      if (alive && ok) setLibrary(assets.filter(a => a.localUri && !a.deletedAt));
+    }).catch(() => { /* 读不到就空着,这一屏不该被素材库挡住 */ });
     return () => { alive = false; };
   }, []);
 
-  const pick = useCallback(async () => {
+  const livePage = useMemo(() => ({ ...page, bg: paper }), [page, paper]);
+  const facingPage = useMemo(() => ({ id: 'dev-page-2', bg: 'grid-ivory', items: [] }), []);
+
+  const onChangeItems = useCallback((items) => setPage(p => ({ ...p, items })), []);
+
+  const addUpload = useCallback(async () => {
     const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!perm.granted) {
       Alert.alert('无法访问照片', '在系统设置里允许“言”访问照片后再试。', [{ text: '知道了' }]);
       return;
     }
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-    });
-    if (result.canceled || !result.assets?.[0]?.uri) return;   // 取消不是错误,什么都不说
+    const r = await ImagePicker.launchImageLibraryAsync({ mediaTypes: ImagePicker.MediaTypeOptions.Images });
+    if (r.canceled || !r.assets?.[0]?.uri) return;          // 取消不是错误,什么都不说
 
-    const a = result.assets[0];
+    const a = r.assets[0];
     setPicking(true);
     const { asset, error } = await importAsset(a.uri, {
       kind: 'photo', entry: 'upload', width: a.width, height: a.height,
     });
     setPicking(false);
-    if (error) {
-      // 入库失败**不上屏** —— 显示一张进不了素材库的图,下次冷启动它就消失了,
-      // 那比一开始就说失败更让人困惑。
-      setAssetNote(`入库失败:${error}`);
-      return;
-    }
-    setPhotoUri(assetUri(asset));
-    setAssetNote(`已入库 ${asset.id.slice(0, 8)} · ${asset.entry}/${asset.kind}`
-      + (asset.width && asset.height ? ` · ${asset.width}×${asset.height}` : ''));
+    if (error) { setNote(`入库失败:${error}`); return; }
+
+    setLibrary(prev => [...prev, asset]);
+    // 放在页面正中、占 42% 宽,然后由用户拖。**不替他排版** —— 原则②。
+    setPage(p => ({
+      ...p,
+      items: [...p.items, newItem('photo', asset.id, {
+        z: (p.items.reduce((m, it) => Math.max(m, it.z ?? 0), 0) || 0) + 1,
+      })],
+    }));
+    setNote(`已入库 ${asset.id.slice(0, 8)} · ${asset.width}×${asset.height}`);
+    setDrawer(false);
   }, []);
 
-  // 页在 state 里,拖拽改的是它。
-  //
-  // 这一屏没有存盘 —— 退出就回到 DEMO_PAGE 的初始摆位。**这是故意的**:
-  // 预演屏要能一次次从同一个已知状态开始看,存了盘反而每次打开都不一样,
-  // 调阴影和默认大小时就没有基准了。真正的手账页要存,那是 journalStore 的事。
-  const [page, setPage] = useState(DEMO_PAGE);
-  // 对开是**翻阅**的形态,单页才编辑得动(一页 ~170pt 宽点不准)。
-  // 两种都要能看:阴影和书脊要在对开下验,手势要在单页下验。
-  const [spread, setSpread] = useState(true);
-  // 交给 JournalPage,让拖元素的手势能挡住这一层的滚动
-  const scrollRef = useRef(null);
+  const onTool = useCallback((t) => {
+    if (t.id === 'upload') return addUpload();
+    setNote(`「${t.label}」${t.hint}`);
+  }, [addUpload]);
 
-  // 占位元素**不写回 page**。写回去的话 livePage 会把它们再叠一遍 ——
-  // 拖一下就多一份,而且退出「验层次」也去不掉了。
-  const onChangeItems = useCallback((items) => {
-    setPage(p => ({ ...p, items: items.filter(it => !PROBE_IDS.has(it.id)) }));
+  const removeLast = useCallback(() => {
+    setPage(p => ({ ...p, items: p.items.slice(0, -1) }));
   }, []);
 
-  // ⚠️ 必须记忆化。这个对象直接进 JournalPage 的 `assets`,而那边的 aspects
-  // 和整套手势对象都挂在它的**引用**上 —— 每帧新建一个字面量的话,
-  // 拖动时每一帧都在重建三个 Gesture 对象,而拖动恰好是每帧都在 setState 的那条路径。
-  // ⚠️ p1 **没有回退**。原来写的是 `photo || standScan` ——
-  // 没选过照片时拿一张纸样冒充主照片,于是页面上是「纸上贴了一张纸」。
-  // 而 itemsReady 会等它,等到了才画,所以用户的体感是
-  // 「点进去是空的,必须加图片才显示底」。没照片就不画那个元素,页面照常出来。
-  const assets = useMemo(() => (probes
-    ? { scan1: standScan, sticker1: standSticker, tape1: standTape, p1: photo }
-    : { p1: photo }), [probes, standScan, standSticker, standTape, photo]);
-
-  // 开着占位时才把那几个探针拼进去。没照片时主照片那条也不放 ——
-  // 放一个画不出来的元素只会让 itemsReady 永远等下去。
-  const livePage = useMemo(() => ({
-    ...page,
-    items: [...(photo ? page.items : page.items.filter(it => it.assetId !== 'p1')),
-            ...(probes ? LAYER_PROBES : [])],
-  }), [page, probes, photo]);
-  const liveFacing = useMemo(() => ({
-    ...FACING_PAGE,
-    items: probes ? FACING_PROBES : [],
-  }), [probes]);
-
-  // 页面上引用了但没解析出图片的 assetId。
-  // 这一条是 2026-08-13 那个 bug 的直接产物:占位图的键被删掉之后,
-  // 五个元素静默消失、页面看起来只是「有点空」,没有任何地方说出了真相。
-  // **元素画不出来必须喊,不能只是少画一个。**
-  const missingAssets = useMemo(() => {
-    const used = new Set([...livePage.items, ...liveFacing.items]
-      .filter(it => it.kind !== 'ink' && it.assetId).map(it => it.assetId));
-    return [...used].filter(id => !assets[id]);
-  }, [livePage, liveFacing, assets]);
-
-  // 「还没画」和「画不出来」在屏幕上都是一块空白。预演屏必须能分清这两件事,
-  // 否则看到白屏只能猜。这一行就是干这个的。
-  const [pageDiag, setPageDiag] = useState(null);
-  const onReadyChange = useCallback((d) => setPageDiag(d), []);
-
-  // 字体按需下载。**失败什么都不做** —— 回退系统字,这一屏照常能看。
+  // 字体按需下载。失败什么都不做 —— 回退系统字,这一屏照常能看。
   const [fontState, setFontState] = useState('loading');
   useEffect(() => {
     let alive = true;
@@ -231,96 +127,89 @@ export default function JournalDevScreen({ onBack }) {
   const fam = journalFontFamily();
 
   return (
-    // GestureHandlerRootView 包在这一屏自己的根上,不去动 App.js 的根节点。
-    //
-    // 手势必须有这一层才收得到事件(Android 上是硬要求)。全项目现在只有手账用手势,
-    // 包在这儿的好处是**出问题的范围就这一屏** —— App.js 是个 5900 行的单文件,
-    // 在它根上套一层新容器,受影响的是所有屏(RULE.md:不动 App.js 能搞定的事不动它)。
+    // GestureHandlerRootView 包在这一屏自己的根上,不动 App.js 的根节点
+    // (App.js 是 6000 行单文件,在它根上套新容器影响的是所有屏)。
     // 手账正式长进「世界打卡」那一屏时,这一层要跟着挪过去。
     <GestureHandlerRootView style={styles.root}>
-    {/* ⚠️ 必须包 SafeAreaView。第一版直接用 View,返回那一行压在状态栏底下 ——
-        看得见但点不着,用户被困在这一屏里。这种 bug 模拟器上很容易漏,
-        因为刘海屏的安全区在不同设备上不一样。 */}
     <SafeAreaView style={styles.root}>
       <View style={styles.bar}>
         <Pressable onPress={onBack} hitSlop={16} style={styles.backHit}>
           <Text style={styles.back}>‹ 返回</Text>
         </Pressable>
-        <Text style={styles.title}>手账 · 预演</Text>
+        <Text style={styles.title}>手账</Text>
         <Text style={styles.hint}>DEV</Text>
       </View>
-      <ScrollView ref={scrollRef} contentContainerStyle={styles.scroll}>
-        <JournalPage page={livePage} facing={liveFacing} spread={spread}
-                     assets={assets}
-                     editable onChangeItems={onChangeItems} blockScrollRef={scrollRef}
-                     onReadyChange={onReadyChange} />
 
-        {/* 换纸。这个选择只能看着定 —— 同一页换张纸,差别大到不像同一个功能,
-            而在 Mac 上看好看的纸到 OLED 屏上多半是偏的(这一屏存在的理由)。 */}
+      <ScrollView ref={scrollRef} contentContainerStyle={styles.scroll}>
+        <JournalPage
+          page={livePage} facing={facingPage} spread={spread}
+          assets={images} editable onChangeItems={onChangeItems}
+          blockScrollRef={scrollRef}
+        />
+
+        {/* 页面是空的时候说一句。**不在纸上写字** —— 纸必须是空的(原则①),
+            提示只能待在纸外面。 */}
+        {!page.items.length && (
+          <Text style={styles.empty}>
+            空白页。{spread ? '切到单页' : '点下面的工具'}往上放东西。
+          </Text>
+        )}
+
+        <View style={styles.row}>
+          <Pressable onPress={() => setDrawer(v => !v)} style={[styles.btn, drawer && styles.btnOn]} hitSlop={8}>
+            <Text style={[styles.btnText, drawer && styles.btnTextOn]}>
+              {drawer ? '收起工具' : '工具'}
+            </Text>
+          </Pressable>
+          <Pressable onPress={() => setSpread(s => !s)} style={styles.btn} hitSlop={8}>
+            <Text style={styles.btnText}>{spread ? '单页(可编辑)' : '对开(翻阅)'}</Text>
+          </Pressable>
+          {!!page.items.length && (
+            <Pressable onPress={removeLast} style={styles.btn} hitSlop={8}>
+              <Text style={styles.btnText}>撤掉最后一个</Text>
+            </Pressable>
+          )}
+        </View>
+
+        {/* 工具抽屉:**不占页面**,收在下面,点开才出来(文档 4.2)。 */}
+        {drawer && (
+          <View style={styles.drawer}>
+            {TOOLS.map(t => (
+              <Pressable key={t.id} onPress={() => onTool(t)} hitSlop={6}
+                         style={[styles.tool, !t.ready && styles.toolTodo]}>
+                {picking && t.id === 'upload'
+                  ? <ActivityIndicator size="small" color="#e6ddca" />
+                  : <Text style={[styles.toolTxt, !t.ready && styles.toolTxtTodo]}>{t.label}</Text>}
+              </Pressable>
+            ))}
+          </View>
+        )}
+
         <View style={styles.paperRow}>
           {PAPER_KEYS.map(k => (
-            <Pressable key={k} onPress={() => setPage(p => ({ ...p, bg: k }))} hitSlop={6}
-                       style={[styles.paperChip, page.bg === k && styles.paperChipOn]}>
-              <Text style={[styles.paperTxt, page.bg === k && styles.paperTxtOn]}>
+            <Pressable key={k} onPress={() => setPaper(k)} hitSlop={6}
+                       style={[styles.paperChip, paper === k && styles.paperChipOn]}>
+              <Text style={[styles.paperTxt, paper === k && styles.paperTxtOn]}>
                 {PAPERS_META[k]?.label || k}
               </Text>
             </Pressable>
           ))}
         </View>
 
-        <View style={styles.row}>
-          <Pressable onPress={pick} disabled={picking} style={styles.btn} hitSlop={8}>
-            {picking
-              ? <ActivityIndicator size="small" color="#e6ddca" />
-              : <Text style={styles.btnText}>
-                  {photoUri ? '换一张主照片' : '从相册选一张'}
-                </Text>}
-          </Pressable>
-          <Pressable onPress={() => setSpread(s => !s)} style={styles.btn} hitSlop={8}>
-            <Text style={styles.btnText}>{spread ? '单页(可编辑)' : '对开(翻阅)'}</Text>
-          </Pressable>
-          <Pressable onPress={() => setProbes(v => !v)} style={styles.btn} hitSlop={8}>
-            <Text style={styles.btnText}>{probes ? '收起占位' : '验层次'}</Text>
-          </Pressable>
-        </View>
-        <Text style={styles.fontState}>
-          {spread
-            ? '对开只看不动 —— 一页 ~170pt 宽点不准。切到单页拖拽/旋转/缩放'
-            : '按住拖动 · 两指缩放和旋转 · 点空白取消选中 · 拖出纸外是合法的'}
+        {!!note && <Text style={styles.note}>{note}</Text>}
+        {imagesLoading && <Text style={styles.note}>素材解码中…</Text>}
+        <Text style={styles.note}>
+          素材库 {library.length} 条 · 页上 {page.items.length} 个元素
+          {page.items.length ? ' · 按住拖动,两指缩放旋转,拖出纸外是合法的' : ''}
         </Text>
-        <Pressable onPress={() => setPage(DEMO_PAGE)} hitSlop={12}>
-          <Text style={styles.reset}>复位摆放</Text>
-        </Pressable>
-        {!!assetNote && <Text style={styles.fontState}>{assetNote}</Text>}
-        {/* 页面空白时,这一行说清楚是「纸还没到」还是「纸没加载出来」 */}
-        {pageDiag && !pageDiag.ready && (
-          <Text style={[styles.fontState, styles.diag]}>
-            页面空白:纸({pageDiag.paperKey}){pageDiag.paper ? '已到' : '未到'}
-            {pageDiag.spread ? ` · 右页纸${pageDiag.facingPaper ? '已到' : '未到'}` : ''}
-            {' · 一两秒还不消失就是加载失败,不是过场'}
-          </Text>
-        )}
-        {missingAssets.length > 0 && (
-          <Text style={[styles.fontState, styles.diag]}>
-            ⚠️ {missingAssets.length} 个元素没有图,画不出来:{missingAssets.join(' / ')}
-            {'\n'}页面会看起来「有点空」,但那不是构图问题 —— 是这几个 assetId 解析不到
-          </Text>
-        )}
-        {pageDiag?.ready && photoUri && !photo && (
-          <Text style={[styles.fontState, styles.diag]}>
-            主照片解码失败,已回退占位图 —— 文件可能不在了:{String(photoUri).slice(-42)}
-          </Text>
-        )}
 
         {/* 字体验收:三种文字一起上,一眼看出覆盖有没有洞(方块=缺字) */}
         <Text style={[styles.sample, fam && { fontFamily: fam }]}>
-          第一次自己办入住。{'\n'}
-          チェックインをお願いします。{'\n'}
-          ¿Dónde está la estación?
+          第一次自己办入住。{'\n'}チェックインをお願いします。{'\n'}¿Dónde está la estación?
         </Text>
-        <Text style={styles.fontState}>
-          字体 {fontState === 'ok' ? '已加载 · 霞鹜文楷' :
-                 fontState === 'loading' ? '下载中(24MB,首次)…' : fontState}
+        <Text style={styles.note}>
+          字体 {fontState === 'ok' ? '已加载 · 霞鹜文楷'
+            : fontState === 'loading' ? '下载中(24MB,首次)…' : fontState}
         </Text>
       </ScrollView>
     </SafeAreaView>
@@ -337,6 +226,21 @@ const styles = StyleSheet.create({
   title: { color: '#e6ddca', fontSize: 15, letterSpacing: 2 },
   hint: { color: '#6f6553', fontSize: 11, letterSpacing: 1 },
   scroll: { alignItems: 'center', paddingBottom: 40 },
+  empty: { color: '#6f6553', fontSize: 12, marginTop: 12 },
+  row: { flexDirection: 'row', gap: 10, marginTop: 16, flexWrap: 'wrap', justifyContent: 'center' },
+  btn: { paddingHorizontal: 16, minHeight: 40, justifyContent: 'center',
+         borderWidth: StyleSheet.hairlineWidth, borderColor: '#6f6553', borderRadius: 3 },
+  btnOn: { borderColor: '#c9b98f', backgroundColor: 'rgba(201,185,143,0.12)' },
+  btnText: { color: '#e6ddca', fontSize: 14, letterSpacing: 1 },
+  btnTextOn: { color: '#f0e6d2' },
+  drawer: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center',
+            gap: 8, marginTop: 12, paddingHorizontal: 20 },
+  tool: { minWidth: 62, paddingVertical: 10, alignItems: 'center', borderRadius: 3,
+          borderWidth: StyleSheet.hairlineWidth, borderColor: '#8a7f68' },
+  // 没做的画得更淡,但**不隐藏** —— 藏起来会让人以为这就是全部
+  toolTodo: { borderColor: '#3d372c' },
+  toolTxt: { color: '#e6ddca', fontSize: 14 },
+  toolTxtTodo: { color: '#6f6553' },
   paperRow: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center',
               gap: 7, marginTop: 16, paddingHorizontal: 20 },
   paperChip: { paddingHorizontal: 11, paddingVertical: 6, borderRadius: 3,
@@ -344,12 +248,6 @@ const styles = StyleSheet.create({
   paperChipOn: { borderColor: '#c9b98f', backgroundColor: 'rgba(201,185,143,0.12)' },
   paperTxt: { color: '#8a7f68', fontSize: 12 },
   paperTxtOn: { color: '#e6ddca' },
-  row: { flexDirection: 'row', gap: 10, marginTop: 18 },
-  btn: { paddingHorizontal: 18, minHeight: 40, justifyContent: 'center',
-         borderWidth: StyleSheet.hairlineWidth, borderColor: '#6f6553', borderRadius: 3 },
-  btnText: { color: '#e6ddca', fontSize: 14, letterSpacing: 1 },
-  reset: { color: '#6f6553', fontSize: 12, paddingTop: 10, textDecorationLine: 'underline' },
-  diag: { color: '#c08a5a', textAlign: 'center' },
-  sample: { color: '#e6ddca', fontSize: 20, lineHeight: 34, paddingHorizontal: 24, paddingTop: 22 },
-  fontState: { color: '#6f6553', fontSize: 11, paddingHorizontal: 24, paddingTop: 8 },
+  note: { color: '#6f6553', fontSize: 11, paddingHorizontal: 24, paddingTop: 8, textAlign: 'center' },
+  sample: { color: '#e6ddca', fontSize: 18, lineHeight: 32, paddingHorizontal: 24, paddingTop: 22 },
 });
