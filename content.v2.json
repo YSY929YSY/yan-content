@@ -14941,7 +14941,7 @@
    "level": "N5",
    "pos": "い形容词",
    "meaning_zh": "明亮的；（性格）开朗的",
-   "meaning_en": "bright (in reference to personality or weather); cheerful",
+   "meaning_en": "bright (in reference to personality or weather); cheerful | light; bright; well-lit | bright (colour)",
    "status": "draft",
    "tags": {
     "scene": [
@@ -14964,7 +14964,8 @@
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Kono heya wa akarukute kimochi ii desu."
+   "exampleRoma": "Kono heya wa akarukute kimochi ii desu.",
+   "jmdictSeq": "1532350"
   },
   {
    "word": "秋",
@@ -15148,7 +15149,7 @@
    "level": "N5",
    "pos": "名词",
    "meaning_zh": "后天",
-   "meaning_en": "day after tomorrow",
+   "meaning_en": "day after tomorrow | wrong (e.g. direction)",
    "status": "draft",
    "tags": {
     "scene": [
@@ -15171,7 +15172,8 @@
     "sound_change",
     "etymology_image"
    ],
-   "exampleRoma": "Asatte nihon ni tsukimasu."
+   "exampleRoma": "Asatte nihon ni tsukimasu.",
+   "jmdictSeq": "1584640"
   },
   {
    "word": "足; 脚",
@@ -15720,7 +15722,7 @@
    "level": "N5",
    "pos": "动词",
    "meaning_zh": "淋浴；冲（水/阳光）",
-   "meaning_en": "to bathe, to shower",
+   "meaning_en": "to bathe, to shower | to dash over oneself (e.g. water); to take (e.g. shower); to bask in (e.g. the sun) | to suffer (e.g. an attack); to draw (e.g. criticism, attention, praise); to have heaped upon",
    "status": "draft",
    "tags": {
     "scene": [
@@ -15743,7 +15745,8 @@
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Maiasa shawaa o abimasu."
+   "exampleRoma": "Maiasa shawaa o abimasu.",
+   "jmdictSeq": "1547450"
   },
   {
    "word": "危ない",
@@ -15810,7 +15813,7 @@
    "level": "N5",
    "pos": "副词/名词",
    "meaning_zh": "不太……（后接否定）；剩余",
-   "meaning_en": "not very; surplus",
+   "meaning_en": "not very; surplus | remainder; remnant; rest | (not) very; (not) much",
    "status": "draft",
    "tags": {
     "scene": [
@@ -15831,7 +15834,8 @@
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Karai tabemono wa amari suki ja nai desu."
+   "exampleRoma": "Karai tabemono wa amari suki ja nai desu.",
+   "jmdictSeq": "1584930"
   },
   {
    "word": "雨",
@@ -15929,7 +15933,7 @@
    "level": "N5",
    "pos": "动词",
    "meaning_zh": "有；在（无生命物）",
-   "meaning_en": "to be, to have",
+   "meaning_en": "to be, to have | to be; to exist; to live | to have",
    "status": "draft",
    "tags": {
     "scene": [
@@ -15951,7 +15955,8 @@
     "kanji_anchor",
     "lookalike"
    ],
-   "exampleRoma": "Tsukue no ue ni hon ga arimasu."
+   "exampleRoma": "Tsukue no ue ni hon ga arimasu.",
+   "jmdictSeq": "1296400"
   },
   {
    "word": "有る",
@@ -16075,7 +16080,7 @@
    "level": "N5",
    "pos": "感叹词",
    "meaning_zh": "不（否定回应）",
-   "meaning_en": "no, not at all",
+   "meaning_en": "no, not at all | no | you're welcome; not at all; don't mention it",
    "status": "draft",
    "tags": {
     "scene": [
@@ -16094,7 +16099,8 @@
     "N5"
    ],
    "yanFeatures": [],
-   "exampleRoma": "Iie kekkou desu."
+   "exampleRoma": "Iie kekkou desu.",
+   "jmdictSeq": "1583250"
   },
   {
    "word": "言う",
@@ -16334,8 +16340,8 @@
    "reading": "いす",
    "level": "N5",
    "pos": "名词",
-   "meaning_zh": "椅子",
-   "meaning_en": "chair",
+   "meaning_zh": "椅子；（比喻）职位",
+   "meaning_en": "chair | chair; seat; stool | post; position; seat",
    "status": "draft",
    "tags": {
     "scene": [
@@ -16356,7 +16362,8 @@
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Kono isu ni suwatte kudasai."
+   "exampleRoma": "Kono isu ni suwatte kudasai.",
+   "jmdictSeq": "1157070"
   },
   {
    "word": "忙しい",
@@ -16483,7 +16490,7 @@
    "level": "N5",
    "pos": "名词/副词",
    "meaning_zh": "最；第一",
-   "meaning_en": "best (most), first, number one",
+   "meaning_en": "best (most), first, number one | number one; first; first place | best; most",
    "status": "draft",
    "tags": {
     "scene": [
@@ -16504,7 +16511,8 @@
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Fujisan wa nihon de ichiban takai yama desu."
+   "exampleRoma": "Fujisan wa nihon de ichiban takai yama desu.",
+   "jmdictSeq": "1165970"
   },
   {
    "word": "いつ",
@@ -16954,7 +16962,7 @@
    "level": "N5",
    "pos": "な形容词/副词",
    "meaning_zh": "各种各样",
-   "meaning_en": "various",
+   "meaning_en": "various | various; a variety of; all sorts of | variously; in various ways; in many ways",
    "status": "draft",
    "tags": {
     "scene": [
@@ -16976,7 +16984,8 @@
     "kanji_anchor",
     "scene_color"
    ],
-   "exampleRoma": "Iroiro na kuni no ryouri o tabemashita."
+   "exampleRoma": "Iroiro na kuni no ryouri o tabemashita.",
+   "jmdictSeq": "1587850"
   },
   {
    "word": "上",
@@ -17248,7 +17257,7 @@
    "level": "N5",
    "pos": "い形容词",
    "meaning_zh": "吵闹的；啰嗦的",
-   "meaning_en": "noisy; annoying",
+   "meaning_en": "noisy; annoying | noisy; loud | annoying; troublesome; tiresome",
    "status": "draft",
    "tags": {
     "scene": [
@@ -17267,7 +17276,8 @@
     "N5"
    ],
    "yanFeatures": [],
-   "exampleRoma": "Yonaka ni ongaku ga urusakatta desu."
+   "exampleRoma": "Yonaka ni ongaku ga urusakatta desu.",
+   "jmdictSeq": "1481920"
   },
   {
    "word": "上着",
@@ -17572,8 +17582,8 @@
    "reading": "おいしい",
    "level": "N5",
    "pos": "い形容词",
-   "meaning_zh": "好吃的，美味的",
-   "meaning_en": "delicious, tasty",
+   "meaning_zh": "好吃的，美味的；划算，诱人",
+   "meaning_en": "delicious, tasty | good(-tasting); nice; delicious | attractive (offer, opportunity, etc.); appealing; convenient",
    "status": "draft",
    "tags": {
     "scene": [
@@ -17595,7 +17605,8 @@
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Kono raamen wa totemo oishii desu."
+   "exampleRoma": "Kono raamen wa totemo oishii desu.",
+   "jmdictSeq": "1486650"
   },
   {
    "word": "多い",
@@ -18329,7 +18340,8 @@
     "N5"
    ],
    "yanFeatures": [],
-   "exampleRoma": "Ototoshi nihon ni kimashita."
+   "exampleRoma": "Ototoshi nihon ni kimashita.",
+   "jmdictSeq": "1576060"
   },
   {
    "word": "大人",
@@ -18366,7 +18378,7 @@
    "level": "N5",
    "pos": "名词",
    "meaning_zh": "肚子",
-   "meaning_en": "stomach",
+   "meaning_en": "stomach | belly; abdomen; stomach",
    "status": "draft",
    "tags": {
     "scene": [
@@ -18387,7 +18399,8 @@
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Onaka ga suita node, nanika tabetai desu."
+   "exampleRoma": "Onaka ga suita node, nanika tabetai desu.",
+   "jmdictSeq": "1002610"
   },
   {
    "word": "同じ",
@@ -18685,7 +18698,7 @@
    "level": "N5",
    "pos": "い形容词",
    "meaning_zh": "有趣的",
-   "meaning_en": "interesting, amusing",
+   "meaning_en": "interesting, amusing | interesting; fascinating; intriguing | amusing; funny; comical",
    "status": "draft",
    "tags": {
     "scene": [
@@ -18708,7 +18721,8 @@
     "kanji_anchor",
     "scene_color"
    ],
-   "exampleRoma": "Kono eiga wa totemo omoshiroi desu."
+   "exampleRoma": "Kono eiga wa totemo omoshiroi desu.",
+   "jmdictSeq": "1533580"
   },
   {
    "id": "n5_oyu",
@@ -19535,7 +19549,7 @@
    "level": "N5",
    "pos": "名词",
    "meaning_zh": "片假名",
-   "meaning_en": "katakana",
+   "meaning_en": "katakana | katakana; angular Japanese syllabary used primarily for loanwords",
    "status": "draft",
    "tags": {
     "scene": [
@@ -19556,7 +19570,8 @@
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Katakana o mada oboete imasen."
+   "exampleRoma": "Katakana o mada oboete imasen.",
+   "jmdictSeq": "1511600"
   },
   {
    "word": "学校",
@@ -20072,8 +20087,8 @@
    "reading": "かわいい",
    "level": "N5",
    "pos": "い形容词",
-   "meaning_zh": "可爱的",
-   "meaning_en": "cute, adorable",
+   "meaning_zh": "可爱的；（对人）疼爱的，宝贝的",
+   "meaning_en": "cute, adorable | cute; adorable; charming | dear; precious; darling",
    "status": "draft",
    "tags": {
     "scene": [
@@ -20094,7 +20109,8 @@
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Kawaii neko desu ne."
+   "exampleRoma": "Kawaii neko desu ne.",
+   "jmdictSeq": "1577200"
   },
   {
    "word": "漢字",
@@ -23842,7 +23858,7 @@
    "level": "N5",
    "pos": "名词",
    "meaning_zh": "酱油",
-   "meaning_en": "soy sauce",
+   "meaning_en": "soy sauce | soy sauce; soya sauce; shoyu",
    "status": "draft",
    "tags": {
     "scene": [
@@ -23864,7 +23880,8 @@
     "kanji_anchor",
     "sound_change"
    ],
-   "exampleRoma": "Shouyu o iremasu."
+   "exampleRoma": "Shouyu o iremasu.",
+   "jmdictSeq": "1595020"
   },
   {
    "word": "食堂",
@@ -24470,7 +24487,7 @@
    "level": "N5",
    "pos": "名词",
    "meaning_zh": "身高，个子",
-   "meaning_en": "(one's) height, stature",
+   "meaning_en": "(one's) height, stature | height; stature",
    "status": "draft",
    "tags": {
     "scene": [
@@ -24491,7 +24508,8 @@
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Sei ga takai desu."
+   "exampleRoma": "Sei ga takai desu.",
+   "jmdictSeq": "1472650"
   },
   {
    "word": "生徒",
@@ -25208,7 +25226,7 @@
    "level": "N5",
    "pos": "接续词",
    "meaning_zh": "那么……（更郑重）",
-   "meaning_en": "in that situation, well then...",
+   "meaning_en": "in that situation, well then... | well, ...; right, ...; now, ... | so; then",
    "status": "draft",
    "tags": {
     "scene": [
@@ -25230,7 +25248,8 @@
    "yanFeatures": [
     "spoken_written"
    ],
-   "exampleRoma": "Soredeha mata."
+   "exampleRoma": "Soredeha mata.",
+   "jmdictSeq": "1406050"
   },
   {
    "word": "大学",
@@ -25474,7 +25493,7 @@
    "level": "N5",
    "pos": "副词/名词",
    "meaning_zh": "很多",
-   "meaning_en": "many, much",
+   "meaning_en": "many, much | a lot; lots; plenty | enough; sufficient",
    "status": "draft",
    "tags": {
     "scene": [
@@ -25496,7 +25515,8 @@
     "kanji_anchor",
     "etymology_image"
    ],
-   "exampleRoma": "Takusan tabemasu."
+   "exampleRoma": "Takusan tabemasu.",
+   "jmdictSeq": "1415870"
   },
   {
    "word": "タクシー",
@@ -25947,8 +25967,8 @@
    "reading": "だんだん",
    "level": "N5",
    "pos": "副词",
-   "meaning_zh": "渐渐地",
-   "meaning_en": "gradually, by degrees",
+   "meaning_zh": "渐渐地；台阶",
+   "meaning_en": "gradually, by degrees | gradually; by degrees; little by little | steps; stairs; staircase",
    "status": "draft",
    "tags": {
     "scene": [
@@ -25969,7 +25989,8 @@
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Dandan naremasu."
+   "exampleRoma": "Dandan naremasu.",
+   "jmdictSeq": "1597350"
   },
   {
    "word": "小さい",
@@ -26245,8 +26266,8 @@
    "reading": "ちゃわん",
    "level": "N5",
    "pos": "名词",
-   "meaning_zh": "饭碗",
-   "meaning_en": "rice bowl",
+   "meaning_zh": "碗（多指饭碗）；茶杯",
+   "meaning_en": "rice bowl | rice bowl; tea cup; teacup",
    "status": "draft",
    "tags": {
     "scene": [
@@ -26269,7 +26290,8 @@
     "kanji_anchor",
     "sound_change"
    ],
-   "exampleRoma": "Chawan o mochimasu."
+   "exampleRoma": "Chawan o mochimasu.",
+   "jmdictSeq": "1597530"
   },
   {
    "word": "丁度",
@@ -28157,7 +28179,7 @@
    "level": "N5",
    "pos": "连体词",
    "meaning_zh": "什么样的",
-   "meaning_en": "what, what kind of",
+   "meaning_en": "what, what kind of | what kind of; what sort of; what | no matter what (kind of); whatever; any",
    "status": "draft",
    "tags": {
     "scene": [
@@ -28176,7 +28198,8 @@
     "N5"
    ],
    "yanFeatures": [],
-   "exampleRoma": "Donna hito."
+   "exampleRoma": "Donna hito.",
+   "jmdictSeq": "1009330"
   },
   {
    "word": "ない",
@@ -30823,7 +30846,7 @@
    "level": "N5",
    "pos": "名词",
    "meaning_zh": "平假名",
-   "meaning_en": "hiragana",
+   "meaning_en": "hiragana | hiragana; cursive Japanese syllabary used primarily for native Japanese words (esp. function words, inflections, etc.)",
    "status": "draft",
    "tags": {
     "scene": [
@@ -30844,7 +30867,8 @@
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Hiragana o kakimasu."
+   "exampleRoma": "Hiragana o kakimasu.",
+   "jmdictSeq": "1507090"
   },
   {
    "word": "昼",
@@ -35247,8 +35271,8 @@
     "N4"
    ],
    "pos": "动词",
-   "meaning_zh": "上升；上去；提高",
-   "meaning_en": "to rise; to go up; to come up",
+   "meaning_zh": "上升；上去；提高；进入（室内）",
+   "meaning_en": "to rise; to go up; to come up | to enter (esp. from outdoors); to come in; to go in",
    "status": "candidate",
    "tags": {
     "scene": [
@@ -35263,7 +35287,8 @@
    "coreChunk": "値段が上がる",
    "exampleJp": "値段が上がりました。",
    "exampleRoma": "Nedan ga agarimashita.",
-   "exampleZh": "价格上涨了。"
+   "exampleZh": "价格上涨了。",
+   "jmdictSeq": "1352290"
   },
   {
    "id": "n4_akanbou",
@@ -35485,7 +35510,8 @@
    "coreChunk": "人が集まる",
    "exampleJp": "駅の前に集まります。",
    "exampleRoma": "Eki no mae ni atsumarimasu.",
-   "exampleZh": "在车站前集合。"
+   "exampleZh": "在车站前集合。",
+   "jmdictSeq": "1333550"
   },
   {
    "id": "n4_atsumeru",
@@ -37343,8 +37369,8 @@
     "N4"
    ],
    "pos": "动词",
-   "meaning_zh": "叫醒；引起",
-   "meaning_en": "to wake; to wake up; to waken",
+   "meaning_zh": "叫醒；引起；扶起，立起",
+   "meaning_en": "to wake; to wake up; to waken | to raise; to raise up; to set up",
    "status": "candidate",
    "tags": {
     "scene": [
@@ -37359,7 +37385,8 @@
    "coreChunk": "友だちを起こす",
    "exampleJp": "朝、弟を起こします。",
    "exampleRoma": "Asa, otouto o okoshimasu.",
-   "exampleZh": "早上叫醒弟弟。"
+   "exampleZh": "早上叫醒弟弟。",
+   "jmdictSeq": "1223660"
   },
   {
    "id": "n4_okonau",
@@ -37506,7 +37533,7 @@
    ],
    "pos": "动词",
    "meaning_zh": "掉落；下降；落选",
-   "meaning_en": "to fall; to drop; to come down",
+   "meaning_en": "to fall; to drop; to come down | to set (of the sun or moon); to sink; to dip",
    "status": "candidate",
    "tags": {
     "scene": [
@@ -37521,7 +37548,8 @@
    "coreChunk": "試験に落ちる",
    "exampleJp": "葉が木から落ちます。",
    "exampleRoma": "Ha ga ki kara ochimasu.",
-   "exampleZh": "叶子从树上落下。"
+   "exampleZh": "叶子从树上落下。",
+   "jmdictSeq": "1548550"
   },
   {
    "id": "n4_ossharu",
@@ -37640,8 +37668,8 @@
     "N4"
    ],
    "pos": "动词",
-   "meaning_zh": "掉下；弄丢；使落下",
-   "meaning_en": "to drop; to lose; to let fall",
+   "meaning_zh": "掉下；弄丢；使落下；去除（污渍）",
+   "meaning_en": "to drop; to lose; to let fall | to clean off (dirt, makeup, paint, etc.); to remove (e.g. stains or facial hair); to lose",
    "status": "candidate",
    "tags": {
     "scene": [
@@ -37656,7 +37684,8 @@
    "coreChunk": "財布を落とす",
    "exampleJp": "財布を落としました。",
    "exampleRoma": "Saifu o otoshimashita.",
-   "exampleZh": "把钱包弄丢了。"
+   "exampleZh": "把钱包弄丢了。",
+   "jmdictSeq": "1589260"
   },
   {
    "id": "n4_odori",
@@ -39558,8 +39587,8 @@
     "N4"
    ],
    "pos": "动词",
-   "meaning_zh": "决定下来；确定",
-   "meaning_en": "to be decided; to be settled; to be fixed",
+   "meaning_zh": "决定下来；确定；（动作）利落漂亮",
+   "meaning_en": "to be decided; to be settled; to be fixed | to be unchanging; to be the same (as always); to be fixed",
    "status": "candidate",
    "tags": {
     "scene": [
@@ -39574,7 +39603,8 @@
    "coreChunk": "日程が決まる",
    "exampleJp": "予定が決まるまで待ちます。",
    "exampleRoma": "Yotei ga kimaru made machimasu.",
-   "exampleZh": "等到计划定下来。"
+   "exampleZh": "等到计划定下来。",
+   "jmdictSeq": "1591420"
   },
   {
    "id": "n4_kimi",
@@ -41179,7 +41209,7 @@
    ],
    "pos": "名词",
    "meaning_zh": "回答；回复；回应",
-   "meaning_en": "answer; reply; response",
+   "meaning_en": "answer; reply; response | answer; solution; result",
    "status": "candidate",
    "tags": {
     "scene": [
@@ -41194,7 +41224,8 @@
    "coreChunk": "正しい答え",
    "exampleJp": "正しい答えを書きます。",
    "exampleRoma": "Tadashii kotae o kakimasu.",
-   "exampleZh": "写下正确答案。"
+   "exampleZh": "写下正确答案。",
+   "jmdictSeq": "1449530"
   },
   {
    "id": "n4_gochisou",
@@ -41233,7 +41264,7 @@
    ],
    "pos": "名词",
    "meaning_zh": "日本筝",
-   "meaning_en": "koto (13-stringed Japanese zither)",
+   "meaning_en": "koto (13-stringed Japanese zither) | stringed instrument",
    "status": "candidate",
    "tags": {
     "scene": [
@@ -41248,7 +41279,8 @@
    "coreChunk": "琴を弾く",
    "exampleJp": "ことの音を聞きました。",
    "exampleRoma": "Koto no oto o kikimashita.",
-   "exampleZh": "听到了日本筝的声音。"
+   "exampleZh": "听到了日本筝的声音。",
+   "jmdictSeq": "1241450"
   },
   {
    "id": "n4_kotori",
@@ -41853,8 +41885,8 @@
     "N4"
    ],
    "pos": "动词",
-   "meaning_zh": "下降；下来；降低",
-   "meaning_en": "to come down; to go down; to fall",
+   "meaning_zh": "下降；下来；降低；后退；悬挂",
+   "meaning_en": "to come down; to go down; to fall | to hang; to dangle",
    "status": "candidate",
    "tags": {
     "scene": [
@@ -41869,7 +41901,8 @@
    "coreChunk": "値段が下がる",
    "exampleJp": "気温が下がるでしょう。",
    "exampleRoma": "Kion ga sagaru deshou.",
-   "exampleZh": "气温会下降吧。"
+   "exampleZh": "气温会下降吧。",
+   "jmdictSeq": "1184160"
   },
   {
    "id": "n4_sakan",
@@ -42404,7 +42437,8 @@
    "coreChunk": "子供を叱る",
    "exampleJp": "子どもを強く叱る必要はありません。",
    "exampleRoma": "Kodomo o tsuyoku shikaru hitsuyou wa arimasen.",
-   "exampleZh": "没有必要严厉训斥孩子。"
+   "exampleZh": "没有必要严厉训斥孩子。",
+   "jmdictSeq": "1319580"
   },
   {
    "id": "n4_shiken",
@@ -45481,7 +45515,7 @@
    ],
    "pos": "动词",
    "meaning_zh": "享受；玩得开心",
-   "meaning_en": "to enjoy; to take pleasure in; to have a good time",
+   "meaning_en": "to enjoy; to take pleasure in; to have a good time | to look forward to",
    "status": "candidate",
    "tags": {
     "scene": [
@@ -45496,7 +45530,8 @@
    "coreChunk": "旅行を楽しむ",
    "exampleJp": "旅行を楽しむつもりです。",
    "exampleRoma": "Ryokou o tanoshimu tsumori desu.",
-   "exampleZh": "打算享受旅行。"
+   "exampleZh": "打算享受旅行。",
+   "jmdictSeq": "1207270"
   },
   {
    "id": "n4_tamani",
@@ -46932,7 +46967,8 @@
    "coreChunk": "床屋に行く",
    "exampleJp": "父はとこやへ行きました。",
    "exampleRoma": "Chichi wa tokoya e ikimashita.",
-   "exampleZh": "父亲去了理发店。"
+   "exampleZh": "父亲去了理发店。",
+   "jmdictSeq": "1349410"
   },
   {
    "id": "n4_tochuu",
@@ -47213,8 +47249,8 @@
     "N4"
    ],
    "pos": "副词",
-   "meaning_zh": "相当；很",
-   "meaning_en": "very; considerably; easily",
+   "meaning_zh": "相当，颇；（后接否定）怎么也（不）",
+   "meaning_en": "very; considerably; easily | by no means; not readily",
    "status": "candidate",
    "tags": {
     "scene": [
@@ -47229,7 +47265,8 @@
    "coreChunk": "なかなか難しい",
    "exampleJp": "この問題はなかなか難しいです。",
    "exampleRoma": "Kono mondai wa nakanaka muzukashii desu.",
-   "exampleZh": "这道题相当难。"
+   "exampleZh": "这道题相当难。",
+   "jmdictSeq": "1599420"
   },
   {
    "id": "n4_nakunaru",
@@ -47769,7 +47806,8 @@
    "coreChunk": "値段が高い",
    "exampleJp": "この値段は高いです。",
    "exampleRoma": "Kono nedan wa takai desu.",
-   "exampleZh": "这个价格很贵。"
+   "exampleZh": "这个价格很贵。",
+   "jmdictSeq": "1600160"
   },
   {
    "id": "n4_netsu",
@@ -47823,7 +47861,8 @@
    "coreChunk": "熱心な学生",
    "exampleJp": "彼は勉強にねっしんです。",
    "exampleRoma": "Kare wa benkyou ni nesshin desu.",
-   "exampleZh": "他对学习很热心。"
+   "exampleZh": "他对学习很热心。",
+   "jmdictSeq": "1467910"
   },
   {
    "id": "n4_nebou",
@@ -50025,7 +50064,8 @@
    "coreChunk": "子供を褒める",
    "exampleJp": "先生が作文をほめるでしょう。",
    "exampleRoma": "Sensei ga sakubun o homeru deshou.",
-   "exampleZh": "老师应该会夸奖作文吧。"
+   "exampleZh": "老师应该会夸奖作文吧。",
+   "jmdictSeq": "1603550"
   },
   {
    "id": "n4_honyaku",
@@ -50117,8 +50157,8 @@
     "N4"
    ],
    "pos": "な形容词",
-   "meaning_zh": "认真；正经",
-   "meaning_en": "serious; earnest; sober",
+   "meaning_zh": "认真；正经；诚实",
+   "meaning_en": "serious; earnest; sober | honest; sincere",
    "status": "candidate",
    "tags": {
     "scene": [
@@ -50133,7 +50173,8 @@
    "coreChunk": "真面目な人",
    "exampleJp": "彼はまじめな学生です。",
    "exampleRoma": "Kare wa majime na gakusei desu.",
-   "exampleZh": "他是认真的学生。"
+   "exampleZh": "他是认真的学生。",
+   "jmdictSeq": "1364360"
   },
   {
    "id": "n4_mazu",
@@ -51295,33 +51336,6 @@
    "exampleJp": "雨が止むまで待ちます。",
    "exampleRoma": "Ame ga yamu made machimasu.",
    "exampleZh": "等到雨停。"
-  },
-  {
-   "id": "n4_yameru",
-   "word": "辞める",
-   "reading": "やめる",
-   "level": "N4",
-   "levels": [
-    "N4"
-   ],
-   "pos": "动词",
-   "meaning_zh": "停止；放弃",
-   "meaning_en": "to stop (an activity); to cease; to discontinue",
-   "status": "candidate",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "タバコを辞める",
-   "exampleJp": "仕事を止めるつもりです。",
-   "exampleRoma": "Shigoto o yameru tsumori desu.",
-   "exampleZh": "打算辞掉工作。"
   },
   {
    "id": "n4_yawarakai",
@@ -53294,36 +53308,6 @@
    "jmdictSeq": "1254480"
   },
   {
-   "id": "n3_abiru",
-   "word": "浴びる",
-   "reading": "あびる",
-   "level": "N3",
-   "levels": [
-    "N3"
-   ],
-   "pos": "动词",
-   "meaning_zh": "淋，浇（水）；沐浴（阳光）",
-   "meaning_en": "to dash over oneself (e.g. water); to take (e.g. shower); to bask in (e.g. the sun) | to suffer (e.g. an attack); to draw (e.g. criticism, attention, praise); to have heaped upon",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "シャワーを浴びよう。",
-   "exampleRoma": "Shawaa wo abi you .",
-   "exampleZh": "去洗澡吧。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1547450"
-  },
-  {
    "id": "n3_abura",
    "word": "油",
    "reading": "あぶら",
@@ -53352,36 +53336,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1538590"
-  },
-  {
-   "id": "n3_amari",
-   "word": "余り",
-   "reading": "あまり",
-   "level": "N3",
-   "levels": [
-    "N3"
-   ],
-   "pos": "名词",
-   "meaning_zh": "剩余；（不）太，（不）怎么",
-   "meaning_en": "remainder; remnant; rest | (not) very; (not) much",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "",
-   "exampleRoma": "",
-   "exampleZh": "",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1584930"
   },
   {
    "id": "n3_ayamari",
@@ -54535,36 +54489,6 @@
    "jmdictSeq": "1157760"
   },
   {
-   "id": "n3_isu",
-   "word": "椅子",
-   "reading": "いす",
-   "level": "N3",
-   "levels": [
-    "N3"
-   ],
-   "pos": "名词",
-   "meaning_zh": "椅子；（比喻）职位",
-   "meaning_en": "chair; seat; stool | post; position; seat",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "この椅子は軽い。",
-   "exampleRoma": "Kono isu ha karui .",
-   "exampleZh": "这把椅子很轻。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1157070"
-  },
-  {
    "id": "n3_izumi",
    "word": "泉",
    "reading": "いずみ",
@@ -55046,36 +54970,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1308300"
-  },
-  {
-   "id": "n3_ichiban",
-   "word": "一番",
-   "reading": "いちばん",
-   "level": "N3",
-   "levels": [
-    "N3"
-   ],
-   "pos": "名词",
-   "meaning_zh": "第一，头一个；最",
-   "meaning_en": "number one; first; first place | best; most",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "私が一番。",
-   "exampleRoma": "Watashi ga ichiban .",
-   "exampleZh": "我是第一。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1165970"
   },
   {
    "id": "n3_ikka",
@@ -56888,37 +56782,6 @@
    "jmdictSeq": "1454500"
   },
   {
-   "id": "n3_urusai",
-   "word": "うるさい",
-   "reading": "うるさい",
-   "level": "N3",
-   "levels": [
-    "N3",
-    "N1"
-   ],
-   "pos": "い形容词",
-   "meaning_zh": "吵闹，烦人；唠叨",
-   "meaning_en": "noisy; loud | annoying; troublesome; tiresome",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "うるさい！",
-   "exampleRoma": "Urusai !",
-   "exampleZh": "烦人！",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1481920"
-  },
-  {
    "id": "n3_ureshii",
    "word": "嬉しい",
    "reading": "うれしい",
@@ -58550,36 +58413,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1558400"
-  },
-  {
-   "id": "n3_onaka",
-   "word": "お腹",
-   "reading": "おなか",
-   "level": "N3",
-   "levels": [
-    "N3"
-   ],
-   "pos": "名词",
-   "meaning_zh": "肚子，腹部",
-   "meaning_en": "belly; abdomen; stomach",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "お腹が減った。",
-   "exampleRoma": "O hara ga hetsu ta .",
-   "exampleZh": "我饿了！",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1002610"
   },
   {
    "id": "n3_oni",
@@ -72237,36 +72070,6 @@
    "jmdictSeq": "1506050"
   },
   {
-   "id": "n3_shikaru",
-   "word": "叱る",
-   "reading": "しかる",
-   "level": "N3",
-   "levels": [
-    "N3"
-   ],
-   "pos": "动词",
-   "meaning_zh": "责备，训斥",
-   "meaning_en": "to scold; to chide; to rebuke",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "私はあの先生に厳しくし叱られた。",
-   "exampleRoma": "Watashi haano sensei ni ikameshiku shi shikara reta .",
-   "exampleZh": "我被那位老师严厉斥责了。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1319580"
-  },
-  {
    "id": "n3_shiki",
    "word": "式",
    "reading": "しき",
@@ -78733,36 +78536,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1174890"
-  },
-  {
-   "id": "n3_sei",
-   "word": "背",
-   "reading": "せい",
-   "level": "N3",
-   "levels": [
-    "N3"
-   ],
-   "pos": "名词",
-   "meaning_zh": "身高，个子",
-   "meaning_en": "height; stature",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "私は背が高い。",
-   "exampleRoma": "Watashi ha sega takai .",
-   "exampleZh": "我个子高。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1472650"
   },
   {
    "id": "n3_sei_2",
@@ -88953,36 +88726,6 @@
    "jmdictSeq": "1008790"
   },
   {
-   "id": "n3_donna",
-   "word": "どんな",
-   "reading": "どんな",
-   "level": "N3",
-   "levels": [
-    "N3"
-   ],
-   "pos": "名词",
-   "meaning_zh": "什么样的；无论怎样的",
-   "meaning_en": "what kind of; what sort of; what | no matter what (kind of); whatever; any",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "トムってどんな人？",
-   "exampleRoma": "Tomu ttedonna nin ？",
-   "exampleZh": "汤姆是个什么样的人？",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1009330"
-  },
-  {
    "id": "n3_donnani",
    "word": "どんなに",
    "reading": "どんなに",
@@ -89191,36 +88934,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1552120"
-  },
-  {
-   "id": "n3_nakanaka",
-   "word": "なかなか",
-   "reading": "なかなか",
-   "level": "N3",
-   "levels": [
-    "N3"
-   ],
-   "pos": "副词",
-   "meaning_zh": "相当，颇；（后接否定）怎么也（不）",
-   "meaning_en": "very; considerably; easily | by no means; not readily",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "彼はなかなか自信が強い。",
-   "exampleRoma": "Kareha nakanaka jishin ga tsuyoi .",
-   "exampleZh": "他对自己很有自信。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1599420"
   },
   {
    "id": "n3_nakaba",
@@ -90663,66 +90376,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1397840"
-  },
-  {
-   "id": "n3_nedan",
-   "word": "値段",
-   "reading": "ねだん",
-   "level": "N3",
-   "levels": [
-    "N3"
-   ],
-   "pos": "名词",
-   "meaning_zh": "价格",
-   "meaning_en": "price; cost",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "値段聞いた？",
-   "exampleRoma": "Nedan kii ta ？",
-   "exampleZh": "你问了价钱吗？",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1600160"
-  },
-  {
-   "id": "n3_nesshin",
-   "word": "熱心",
-   "reading": "ねっしん",
-   "level": "N3",
-   "levels": [
-    "N3"
-   ],
-   "pos": "な形容词",
-   "meaning_zh": "热心，热情",
-   "meaning_en": "zealous; enthusiastic; ardent",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "この本は彼の熱心な研究の成果である。",
-   "exampleRoma": "Kono hon ha kano nesshin na kenkyuu no seika dearu .",
-   "exampleZh": "这本书是他热心研究的成果。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1467910"
   },
   {
    "id": "n3_nettai",
@@ -97634,36 +97287,6 @@
    "jmdictSeq": "1486030"
   },
   {
-   "id": "n3_homeru",
-   "word": "褒める",
-   "reading": "ほめる",
-   "level": "N3",
-   "levels": [
-    "N3"
-   ],
-   "pos": "动词",
-   "meaning_zh": "表扬，称赞",
-   "meaning_en": "to praise; to commend; to compliment",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "褒められても謙虚さが大事。",
-   "exampleRoma": "Home raretemo kenkyo saga daiji .",
-   "exampleZh": "即使在受到表扬的时候，谦虚也是很重要的。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1603550"
-  },
-  {
    "id": "n3_hori",
    "word": "濠",
    "reading": "ほり",
@@ -98144,36 +97767,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1376640"
-  },
-  {
-   "id": "n3_majime",
-   "word": "真面目",
-   "reading": "まじめ",
-   "level": "N3",
-   "levels": [
-    "N3"
-   ],
-   "pos": "な形容词",
-   "meaning_zh": "认真，正经；诚实",
-   "meaning_en": "serious; earnest; sober | honest; sincere",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "真面目な人",
-   "exampleJp": "彼は真面目に働いている。",
-   "exampleRoma": "Kare wa majime ni hataraite iru.",
-   "exampleZh": "他工作很认真。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1364360"
   },
   {
    "id": "n3_masu",
@@ -101380,7 +100973,7 @@
    ],
    "pos": "动词",
    "meaning_zh": "辞职，辞去",
-   "meaning_en": "to resign; to retire; to quit",
+   "meaning_en": "to resign; to retire; to quit | to stop (an activity); to cease; to discontinue",
    "status": "zh_drafted",
    "tags": {
     "scene": [
@@ -101392,7 +100985,7 @@
     "memory": []
    },
    "yanFeatures": [],
-   "coreChunk": "",
+   "coreChunk": "タバコを辞める",
    "exampleJp": "彼の下で働くなら辞めた方がましだ。",
    "exampleRoma": "Kano shita de hataraku nara yame ta houga mashida .",
    "exampleZh": "与其让我在他手下干，我宁愿辞职。",
@@ -105819,36 +105412,6 @@
    "jmdictSeq": "1541560"
   },
   {
-   "id": "n2_aru",
-   "word": "在る",
-   "reading": "ある",
-   "level": "N2",
-   "levels": [
-    "N2"
-   ],
-   "pos": "动词",
-   "meaning_zh": "在，存在；有",
-   "meaning_en": "to be; to exist; to live | to have",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "",
-   "exampleRoma": "",
-   "exampleZh": "",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1296400"
-  },
-  {
    "id": "n2_arekore",
    "word": "あれこれ",
    "reading": "あれこれ",
@@ -110180,36 +109743,6 @@
    "jmdictSeq": "1576050"
   },
   {
-   "id": "n2_ototoshi",
-   "word": "おととし",
-   "reading": "おととし",
-   "level": "N2",
-   "levels": [
-    "N2"
-   ],
-   "pos": "名词",
-   "meaning_zh": "前年",
-   "meaning_en": "year before last",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "おととしの夏",
-   "exampleJp": "おととしの夏に会ったきりだ。",
-   "exampleRoma": "Ototoshi no natsu ni atta kiri da.",
-   "exampleZh": "前年夏天见过一面之后就没见了。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1576060"
-  },
-  {
    "id": "n2_otonashii",
    "word": "おとなしい",
    "reading": "おとなしい",
@@ -113014,36 +112547,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1190390"
-  },
-  {
-   "id": "n2_katakana",
-   "word": "片仮名",
-   "reading": "かたかな",
-   "level": "N2",
-   "levels": [
-    "N2"
-   ],
-   "pos": "名词",
-   "meaning_zh": "片假名",
-   "meaning_en": "katakana; angular Japanese syllabary used primarily for loanwords",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "カタカナで書く",
-   "exampleJp": "外来語はカタカナで書きます。",
-   "exampleRoma": "Gairaigo wa katakana de kakimasu.",
-   "exampleZh": "外来语用片假名写。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1511600"
   },
   {
    "id": "n2_katazuku",
@@ -120970,36 +120473,6 @@
    "jmdictSeq": "1265860"
   },
   {
-   "id": "n2_koto",
-   "word": "琴",
-   "reading": "こと",
-   "level": "N2",
-   "levels": [
-    "N2"
-   ],
-   "pos": "名词",
-   "meaning_zh": "古琴，筝",
-   "meaning_en": "koto (13-stringed Japanese zither) | stringed instrument",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "",
-   "exampleRoma": "",
-   "exampleZh": "",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1241450"
-  },
-  {
    "id": "n2_kotozukeru",
    "word": "言付ける",
    "reading": "ことづける",
@@ -127640,36 +127113,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1580310"
-  },
-  {
-   "id": "n2_shouyu",
-   "word": "醤油",
-   "reading": "しょうゆ",
-   "level": "N2",
-   "levels": [
-    "N2"
-   ],
-   "pos": "名词",
-   "meaning_zh": "酱油",
-   "meaning_en": "soy sauce; soya sauce; shoyu",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "醤油を取る",
-   "exampleJp": "醤油、取ってくれる？",
-   "exampleRoma": "Shouyu, totte kureru?",
-   "exampleZh": "帮我把酱油递过来？",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1595020"
   },
   {
    "id": "n2_shouryaku",
@@ -135704,36 +135147,6 @@
    "jmdictSeq": "1597480"
   },
   {
-   "id": "n2_chawan",
-   "word": "茶碗",
-   "reading": "ちゃわん",
-   "level": "N2",
-   "levels": [
-    "N2"
-   ],
-   "pos": "名词",
-   "meaning_zh": "碗；茶杯",
-   "meaning_en": "rice bowl; tea cup; teacup",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "お茶碗一杯のご飯は約、１８０ｇです。",
-   "exampleRoma": "O chawan ippai nogo meshi ha yaku , 1 8 0 g desu .",
-   "exampleZh": "一碗饭大约重一百八十克。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1597530"
-  },
-  {
    "id": "n2_chuukan",
    "word": "中間",
    "reading": "ちゅうかん",
@@ -140400,36 +139813,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1349400"
-  },
-  {
-   "id": "n2_tokoya",
-   "word": "床屋",
-   "reading": "とこや",
-   "level": "N2",
-   "levels": [
-    "N2"
-   ],
-   "pos": "名词",
-   "meaning_zh": "理发店；理发师",
-   "meaning_en": "barbershop; barber shop; barber",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "",
-   "exampleRoma": "",
-   "exampleZh": "",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1349410"
   },
   {
    "id": "n2_tokorodokoro",
@@ -146852,36 +146235,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1490080"
-  },
-  {
-   "id": "n2_hiragana",
-   "word": "平仮名",
-   "reading": "ひらがな",
-   "level": "N2",
-   "levels": [
-    "N2"
-   ],
-   "pos": "名词",
-   "meaning_zh": "平假名",
-   "meaning_en": "hiragana; cursive Japanese syllabary used primarily for native Japanese words (esp. function words, inflections, etc.)",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "ひらがなを覚える",
-   "exampleJp": "まずひらがなから覚えよう。",
-   "exampleRoma": "Mazu hiragana kara oboeyou.",
-   "exampleZh": "先从平假名开始记吧。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1507090"
   },
   {
    "id": "n2_birudingu",
@@ -158784,66 +158137,6 @@
    "jmdictSeq": "1352190"
   },
   {
-   "id": "n1_agaru",
-   "word": "上がる",
-   "reading": "あがる",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "动词",
-   "meaning_zh": "上升，升高；进入（室内）",
-   "meaning_en": "to rise; to go up; to come up | to enter (esp. from outdoors); to come in; to go in",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "日本の円は上がった。",
-   "exampleRoma": "Nippon no en ha aga tta .",
-   "exampleZh": "日元涨了。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1352290"
-  },
-  {
-   "id": "n1_akarui",
-   "word": "明るい",
-   "reading": "あかるい",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "い形容词",
-   "meaning_zh": "明亮；（颜色）鲜亮；开朗",
-   "meaning_en": "light; bright; well-lit | bright (colour)",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "君には明るい未来がある。",
-   "exampleRoma": "Kun niha akarui mirai gaaru .",
-   "exampleZh": "你有光明的未来。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1532350"
-  },
-  {
    "id": "n1_akiudo",
    "word": "商人",
    "reading": "あきうど",
@@ -159237,36 +158530,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1315120"
-  },
-  {
-   "id": "n1_asatte",
-   "word": "明後日",
-   "reading": "あさって",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "名词",
-   "meaning_zh": "后天；（方向）不对",
-   "meaning_en": "day after tomorrow | wrong (e.g. direction)",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "明後日には出発します。",
-   "exampleRoma": "Myougonichi niha shuppatsu shimasu .",
-   "exampleZh": "我们后天出发。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1584640"
   },
   {
    "id": "n1_asanebou",
@@ -159987,36 +159250,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1016610"
-  },
-  {
-   "id": "n1_atsumaru",
-   "word": "集まる",
-   "reading": "あつまる",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "动词",
-   "meaning_zh": "聚集，集合",
-   "meaning_en": "to gather; to collect; to assemble",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "類は類をもって集まる。",
-   "exampleRoma": "Taguha rui womotte atsumaru .",
-   "exampleZh": "物以类聚。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1333550"
   },
   {
    "id": "n1_atsuraeru",
@@ -161562,36 +160795,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "2252790"
-  },
-  {
-   "id": "n1_iie",
-   "word": "いいえ",
-   "reading": "いいえ",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "感叹词",
-   "meaning_zh": "不，不是",
-   "meaning_en": "no | you're welcome; not at all; don't mention it",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "いいえ！",
-   "exampleRoma": "Iie !",
-   "exampleZh": "没关系！",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1583250"
   },
   {
    "id": "n1_iikagen",
@@ -164327,36 +163530,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1613280"
-  },
-  {
-   "id": "n1_iroiro",
-   "word": "色々",
-   "reading": "いろいろ",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "な形容词",
-   "meaning_zh": "各种各样",
-   "meaning_en": "various; a variety of; all sorts of | variously; in various ways; in many ways",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "東京には色々な人が住んでいる。",
-   "exampleRoma": "Toukyou niha iroiro na nin ga sun deiru .",
-   "exampleZh": "各种人住在东京。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1587850"
   },
   {
    "id": "n1_iron",
@@ -167429,36 +166602,6 @@
    "jmdictSeq": "1432330"
   },
   {
-   "id": "n1_oishii",
-   "word": "美味しい",
-   "reading": "おいしい",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "い形容词",
-   "meaning_zh": "好吃，美味；划算，诱人",
-   "meaning_en": "good(-tasting); nice; delicious | attractive (offer, opportunity, etc.); appealing; convenient",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "バナナは美味しい。",
-   "exampleRoma": "Banana ha oishii .",
-   "exampleZh": "香蕉很好吃。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1486650"
-  },
-  {
    "id": "n1_oidasu",
    "word": "追い出す",
    "reading": "おいだす",
@@ -168329,36 +167472,6 @@
    "jmdictSeq": "1422020"
   },
   {
-   "id": "n1_okosu",
-   "word": "起こす",
-   "reading": "おこす",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "动词",
-   "meaning_zh": "扶起，立起；唤醒；引起",
-   "meaning_en": "to raise; to raise up; to set up | to wake; to wake up; to waken",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "ごめん、起こしちゃった？",
-   "exampleRoma": "Gomen , oko shichatta ？",
-   "exampleZh": "对不起，把你吵醒了？",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1223660"
-  },
-  {
    "id": "n1_ogosoka",
    "word": "厳か",
    "reading": "おごそか",
@@ -169019,36 +168132,6 @@
    "jmdictSeq": "1585070"
   },
   {
-   "id": "n1_ochiru",
-   "word": "落ちる",
-   "reading": "おちる",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "动词",
-   "meaning_zh": "掉落；（日）落；落选",
-   "meaning_en": "to fall; to drop; to come down | to set (of the sun or moon); to sink; to dip",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "葉が落ちた。",
-   "exampleRoma": "Ha ga ochi ta .",
-   "exampleZh": "叶子落了。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1548550"
-  },
-  {
    "id": "n1_otsu",
    "word": "乙",
    "reading": "おつ",
@@ -169287,36 +168370,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1001400"
-  },
-  {
-   "id": "n1_otosu",
-   "word": "落とす",
-   "reading": "おとす",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "动词",
-   "meaning_zh": "使掉落，丢失；去除（污渍）",
-   "meaning_en": "to drop; to lose; to let fall | to clean off (dirt, makeup, paint, etc.); to remove (e.g. stains or facial hair); to lose",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "彼は床に本を落とした。",
-   "exampleRoma": "Kareha toko ni hon wo oto shita .",
-   "exampleZh": "他的书掉在地板上了。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1589260"
   },
   {
    "id": "n1_odosu",
@@ -169917,36 +168970,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1309380"
-  },
-  {
-   "id": "n1_omoshiroi",
-   "word": "面白い",
-   "reading": "おもしろい",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "い形容词",
-   "meaning_zh": "有趣，有意思；好玩",
-   "meaning_en": "interesting; fascinating; intriguing | amusing; funny; comical",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "面白そう！",
-   "exampleRoma": "Omoshiroso u !",
-   "exampleZh": "在我看来很有意思！",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1533580"
   },
   {
    "id": "n1_omocha",
@@ -175784,36 +174807,6 @@
    "jmdictSeq": "1581310"
   },
   {
-   "id": "n1_kawaii",
-   "word": "可愛い",
-   "reading": "かわいい",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "い形容词",
-   "meaning_zh": "可爱；宝贝，珍爱",
-   "meaning_en": "cute; adorable; charming | dear; precious; darling",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "可愛くなりたい。",
-   "exampleRoma": "Kawaiku naritai .",
-   "exampleZh": "想变得可爱一些。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1577200"
-  },
-  {
    "id": "n1_kawasu",
    "word": "交わす",
    "reading": "かわす",
@@ -179507,36 +178500,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1254160"
-  },
-  {
-   "id": "n1_kimaru",
-   "word": "決まる",
-   "reading": "きまる",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "动词",
-   "meaning_zh": "决定，定下；（动作）利落漂亮",
-   "meaning_en": "to be decided; to be settled; to be fixed | to be unchanging; to be the same (as always); to be fixed",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "ご注文はお決まりですか？",
-   "exampleRoma": "Go chuumon hao kima ridesuka ？",
-   "exampleZh": "您决定好要下订单了吗？",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1591420"
   },
   {
    "id": "n1_kimei",
@@ -189804,36 +188767,6 @@
    "jmdictSeq": "1265760"
   },
   {
-   "id": "n1_kotae",
-   "word": "答え",
-   "reading": "こたえ",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "名词",
-   "meaning_zh": "答案，回答",
-   "meaning_en": "answer; reply; response | answer; solution; result",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "それは答えだ。",
-   "exampleRoma": "Soreha kotae da .",
-   "exampleZh": "那就是答案。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1449530"
-  },
-  {
    "id": "n1_kotaeru",
    "word": "堪える",
    "reading": "こたえる",
@@ -192427,36 +191360,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1379730"
-  },
-  {
-   "id": "n1_sagaru",
-   "word": "下がる",
-   "reading": "さがる",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "动词",
-   "meaning_zh": "下降，降低；后退；悬挂",
-   "meaning_en": "to come down; to go down; to fall | to hang; to dangle",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "気温が急に下がった。",
-   "exampleRoma": "Kion ga kyuuni saga tta .",
-   "exampleZh": "气温突然下降了。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1184160"
   },
   {
    "id": "n1_sagi",
@@ -210549,36 +209452,6 @@
    "jmdictSeq": "1007000"
   },
   {
-   "id": "n1_soredeha",
-   "word": "それでは",
-   "reading": "それでは",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "连词",
-   "meaning_zh": "那么；这样的话",
-   "meaning_en": "well, ...; right, ...; now, ... | so; then",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "",
-   "exampleRoma": "",
-   "exampleZh": "",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1406050"
-  },
-  {
    "id": "n1_soreni",
    "word": "其れに",
    "reading": "それに",
@@ -212424,36 +211297,6 @@
    "jmdictSeq": "1596870"
   },
   {
-   "id": "n1_takusan",
-   "word": "沢山",
-   "reading": "たくさん",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "连体词",
-   "meaning_zh": "很多；足够",
-   "meaning_en": "a lot; lots; plenty | enough; sufficient",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "この湖には沢山の魚がいます。",
-   "exampleRoma": "Kono mizuumi niha takusan no sakana gaimasu .",
-   "exampleZh": "这湖里有许多鱼。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1415870"
-  },
-  {
    "id": "n1_takumashii",
    "word": "逞しい",
    "reading": "たくましい",
@@ -213382,36 +212225,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1580300"
-  },
-  {
-   "id": "n1_tanoshimu",
-   "word": "楽しむ",
-   "reading": "たのしむ",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "动词",
-   "meaning_zh": "享受，以……为乐",
-   "meaning_en": "to enjoy; to take pleasure in; to have a good time | to look forward to",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "みんな楽しんだ。",
-   "exampleRoma": "Minna tanoshi nda .",
-   "exampleZh": "大家都玩得很开心。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1207270"
   },
   {
    "id": "n1_tanomi",
@@ -214502,36 +213315,6 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1418780"
-  },
-  {
-   "id": "n1_dandan",
-   "word": "段々",
-   "reading": "だんだん",
-   "level": "N1",
-   "levels": [
-    "N1"
-   ],
-   "pos": "副词",
-   "meaning_zh": "渐渐，逐渐；台阶",
-   "meaning_en": "gradually; by degrees; little by little | steps; stairs; staircase",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "",
-   "exampleRoma": "",
-   "exampleZh": "",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1597350"
   },
   {
    "id": "n1_tanchou",
