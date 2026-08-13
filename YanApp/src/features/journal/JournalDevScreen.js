@@ -26,7 +26,7 @@ import * as ImagePicker from 'expo-image-picker';
 import JournalPage from './JournalPage';
 import { PAPER_KEYS, PAPERS_META } from './journalPapers';
 import { useAssetImages } from './useAssetImages';
-import { newItem } from './journalModel';
+import { newItem, dropSpot } from './journalModel';
 import { ensureJournalFont } from '../../lib/journalFont';
 import { importAsset, readAssets, assetUri } from '../../lib/journalStore';
 
@@ -97,14 +97,16 @@ export default function JournalDevScreen({ onBack }) {
     if (error) { setNote(`入库失败:${error}`); return; }
 
     setLibrary(prev => [...prev, asset]);
-    // 放在页面正中、占 42% 宽,然后由用户拖。**不替他排版** —— 原则②。
+    // 每张错开落点。**不替他排版**(原则②),只保证「放上去的东西看得见」——
+    // 都落正中的话第二张会严丝合缝盖住第一张,用户会以为只能传一张。
     setPage(p => ({
       ...p,
       items: [...p.items, newItem('photo', asset.id, {
-        z: (p.items.reduce((m, it) => Math.max(m, it.z ?? 0), 0) || 0) + 1,
+        ...dropSpot(p.items.length),
+        z: p.items.reduce((m, it) => Math.max(m, it.z ?? 0), 0) + 1,
       })],
     }));
-    setNote(`已入库 ${asset.id.slice(0, 8)} · ${asset.width}×${asset.height}`);
+    setNote(`已放上 · ${asset.width}×${asset.height} · 按住能拖`);
     setDrawer(false);
   }, []);
 

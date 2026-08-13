@@ -12,7 +12,7 @@ import {
   remapCityId, addTag, removeTag, cityOfMoment,
   writtenFirsts, firstArrivalOf, isFirstArrival,
   normalizeMoment, normalizePage, normalizeMoments, normalizeInk, materialOf,
-  newAsset, newItem, ASSET_KINDS, ASSET_ENTRIES, assetUriIn, fitInside, ASSET_MAX_EDGE,
+  newAsset, newItem, dropSpot, ASSET_KINDS, ASSET_ENTRIES, assetUriIn, fitInside, ASSET_MAX_EDGE,
   planMomentUpload, planJournalUpload, portablePath, remoteIdFor,
 } from '../../features/journal/journalModel.js';
 
@@ -197,6 +197,28 @@ test('不是素材目录里的文件就原样返回 —— 别去改不归我们
   assert.equal(assetUriIn(dir, { localUri: '' }), null);
   assert.equal(assetUriIn(dir, null), null);
   assert.equal(assetUriIn(dir, { localUri: 'journal-assets-v1/' }), null);
+});
+
+test('★ 连着放的元素不能落在同一个点 —— 第二张会严丝合缝盖住第一张', () => {
+  // 这就是用户报的「只能上传一张」:他传上去了,但每张都是 x:0.5 y:0.5 同样大小,
+  // 后一张完全盖住前一张。**一个看不见结果的操作等于没做。**
+  const spots = Array.from({ length: 12 }, (_, i) => dropSpot(i));
+  for (let i = 0; i < spots.length; i++) {
+    for (let j = i + 1; j < spots.length; j++) {
+      const d = Math.hypot(spots[i].x - spots[j].x, spots[i].y - spots[j].y);
+      assert.ok(d > 0.02, `第 ${i} 和第 ${j} 个落点几乎重合(相距 ${d.toFixed(3)})`);
+    }
+  }
+});
+
+test('落点要收敛在页面里 —— 铺开但不跑出去', () => {
+  for (let i = 0; i < 40; i++) {
+    const s = dropSpot(i);
+    assert.ok(s.x > 0.12 && s.x < 0.88, `第 ${i} 个 x=${s.x.toFixed(2)} 跑太边上了`);
+    assert.ok(s.y > 0.12 && s.y < 0.88, `第 ${i} 个 y=${s.y.toFixed(2)} 跑太边上了`);
+    // 手放东西不会摆正,但也不该像被打翻
+    assert.ok(Math.abs(s.rotation) <= 7, `第 ${i} 个转了 ${s.rotation} 度`);
+  }
 });
 
 test('★ 入库照片要缩 —— 相机原图每次进屏都在付解码的账', () => {
