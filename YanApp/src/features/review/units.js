@@ -159,17 +159,41 @@ export function fromPlace(place) {
  * 详见 docs/content-standard-wordfield.md。
  */
 export function fromWordField(w) {
+  return wordFieldUnits(w)[0] || null;
+}
+
+/**
+ * 一个词可以有**多个**词场。
+ *
+ * 三次撞上才定的(大丈夫、びっしょり、蒸す):同一个词的两种用法出现在完全不同的
+ * 场合 —— 「もう大丈夫です」(摔了一跤有人来扶)和「大丈夫です」(便利店问要不要袋子,
+ * 这是婉拒)身边站的词毫无交集。硬塞进一个句子只会两头不像。
+ *
+ * 但**仍然是一张卡**:词性/读音/多义都并列在同一张卡上,这是标准第四节定死的
+ * (同字多读也是两条并列,不是两张卡)。用户的原话:分成两张会让人以为是两个词。
+ *
+ * 存储形状:`wordField` 既接对象也接数组。归一在这一处做 —— 和 srs.js 的
+ * normalizeRecord 同一个套路,读取是唯一入口,不存在「迁一半」的中间态。
+ */
+export const wordFieldsOf = (w) => {
   const f = w?.wordField;
-  if (!f?.sentence?.jp) return null;
-  return unit({
-    key: unitKey('field', w.id || `${w.word}-${w.reading}`),
+  const list = Array.isArray(f) ? f : (f ? [f] : []);
+  return list.filter(x => x?.sentence?.jp);
+};
+
+export function wordFieldUnits(w) {
+  const base = w?.id || `${w?.word}-${w?.reading}`;
+  return wordFieldsOf(w).map((f, i) => unit({
+    // 第一个词场保留原来的键 —— 已经在复习的进度不能因为加了第二个场就作废。
+    // 后续的挂 #2、#3,和第一个各自独立计进度(它们本来就是两道不同的题)。
+    key: unitKey('field', i === 0 ? base : `${base}#${i + 1}`),
     mode: 'produce',
     ask: f.sentence.zh,
     answer: f.sentence.jp,
     answerSub: f.sentence.roma,
     speak: f.sentence.jp,
     origin: w.word,
-  });
+  }));
 }
 
 /** 场景句。hook 是现成的记忆钩子,拿来当提示。 */
@@ -223,8 +247,7 @@ export function buildUnits(content) {
   // 词场句。词库整体不在这里展平(8298 条太大),但带 wordField 的只有精选的几百条,
   // 它们是这个产品的 moat,必须进复习队列 —— 否则又变成「写了只被看一次」。
   for (const w of content.wordBank || []) {
-    const u = fromWordField(w);
-    if (u) out.push(u);
+    out.push(...wordFieldUnits(w));
   }
 
   for (const place of content.mapPlaces || []) {
@@ -265,9 +288,11 @@ export function auditWordFields(wordBank) {
   const out = [];
 
   for (const w of bank) {
-    const f = w?.wordField;
-    if (!f) continue;
-    if (!f.sentence?.jp) { out.push(`${w.word} 的词场没有句子`); continue; }
+    const raw = w?.wordField;
+    if (!raw) continue;
+    const list = Array.isArray(raw) ? raw : [raw];
+    for (const f of list) {
+    if (!f?.sentence?.jp) { out.push(`${w.word} 的词场没有句子`); continue; }
 
     for (const m of f.members || []) {
       const mw = m?.id && byId.get(m.id);
@@ -276,6 +301,7 @@ export function auditWordFields(wordBank) {
       if (!f.sentence.jp.includes(mw.word) && !f.sentence.jp.includes(mw.reading)) {
         out.push(`${w.word} 的句子里找不到成员 ${mw.word}`);
       }
+    }
     }
   }
   return out;

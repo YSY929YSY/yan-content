@@ -1,0 +1,1369 @@
+{
+ "n2_kouyou": {
+  "label": "秋天会一起遇到",
+  "sentence": {
+   "jp": "秋、山が紅葉する頃、落ち葉を踏んで温泉まで歩く。",
+   "zh": "秋天山变红的时候，踩着落叶走去温泉。",
+   "roma": "Aki, yama ga kouyou suru koro, ochiba o funde onsen made aruku."
+  },
+  "members": [
+   {
+    "id": "n5_aki"
+   },
+   {
+    "id": "n5_yama"
+   },
+   {
+    "id": "n1_ochiba"
+   },
+   {
+    "id": "n2_onsen"
+   }
+  ]
+ },
+ "n4_kisha": {
+  "label": "坐乡下那趟车时",
+  "sentence": {
+   "jp": "田舎の駅から汽車に乗り、窓の外の景色をずっと見ていた。",
+   "zh": "从乡下的车站坐上火车，一路看着窗外的景色。",
+   "roma": "Inaka no eki kara kisha ni nori, mado no soto no keshiki o zutto mite ita."
+  },
+  "members": [
+   {
+    "id": "n4_inaka"
+   },
+   {
+    "id": "n5_eki"
+   },
+   {
+    "id": "n5_mado"
+   },
+   {
+    "id": "n4_keshiki"
+   }
+  ]
+ },
+ "n5_tegami": {
+  "label": "寄一封信的一整套动作",
+  "sentence": {
+   "jp": "手紙を書く、切手を貼る、ポストに入れる。",
+   "zh": "写信、贴邮票、投进邮筒。",
+   "roma": "Tegami o kaku, kitte o haru, posuto ni ireru."
+  },
+  "members": [
+   {
+    "id": "n5_kaku"
+   },
+   {
+    "id": "n5_kitte"
+   },
+   {
+    "id": "n5_posuto"
+   }
+  ]
+ },
+ "n3_tsuyu": {
+  "label": "六月一起来的麻烦",
+  "sentence": {
+   "jp": "梅雨は湿気で蒸し暑いし、洗濯物は乾かないし、傘は毎日要る。",
+   "zh": "梅雨又潮又闷，洗的衣服干不了，伞天天得带。",
+   "roma": "Tsuyu wa shikke de mushiatsui shi, sentakumono wa kawakanai shi, kasa wa mainichi iru."
+  },
+  "members": [
+   {
+    "id": "n2_shikke"
+   },
+   {
+    "id": "n2_mushiatsui"
+   },
+   {
+    "id": "n5_sentaku"
+   },
+   {
+    "id": "n5_kasa"
+   }
+  ]
+ },
+ "n2_yukata": {
+  "label": "夏天晚上会一起出现",
+  "sentence": {
+   "jp": "夏の夜、浴衣で祭りに行って花火を見る。",
+   "zh": "夏天的晚上，穿浴衣去祭典看烟花。",
+   "roma": "Natsu no yoru, yukata de matsuri ni itte hanabi o miru."
+  },
+  "members": [
+   {
+    "id": "n5_natsu"
+   },
+   {
+    "id": "n3_matsuri"
+   },
+   {
+    "id": "n2_hanabi"
+   }
+  ]
+ },
+ "n5_daijoubu": {
+  "label": "有人摔倒之后的几句话",
+  "sentence": {
+   "jp": "転ぶところを見て心配したが、痛いだけで怪我はない。大丈夫。",
+   "zh": "看见他摔倒吓了一跳，结果只是疼，没受伤。没事。",
+   "roma": "Korobu tokoro o mite shinpai shita ga, itai dake de kega wa nai. Daijoubu."
+  },
+  "members": [
+   {
+    "id": "n3_korobu"
+   },
+   {
+    "id": "n4_shinpai"
+   },
+   {
+    "id": "n5_itai"
+   },
+   {
+    "id": "n4_kega"
+   }
+  ]
+ },
+ "n3_meiwaku": {
+  "label": "在电车上会一起遇到",
+  "sentence": {
+   "jp": "電車で音が漏れて隣の人に迷惑をかけ、慌てて謝る。",
+   "zh": "在电车上声音漏出来，打扰到旁边的人，赶紧道歉。",
+   "roma": "Densha de oto ga morete tonari no hito ni meiwaku o kake, awatete ayamaru."
+  },
+  "members": [
+   {
+    "id": "n5_densha"
+   },
+   {
+    "id": "n4_oto"
+   },
+   {
+    "id": "n5_tonari"
+   },
+   {
+    "id": "n4_ayamaru"
+   }
+  ]
+ },
+ "n4_nebou": {
+  "label": "睡过头的那个早上",
+  "sentence": {
+   "jp": "寝坊した朝は、眠いまま慌てるだけで、結局は遅刻。",
+   "zh": "睡过头的早上，只会困着瞎忙一通，最后还是迟到。",
+   "roma": "Nebou shita asa wa, nemui mama awateru dake de, kekkyoku wa chikoku."
+  },
+  "members": [
+   {
+    "id": "n5_asa"
+   },
+   {
+    "id": "n4_nemui"
+   },
+   {
+    "id": "n1_awateru"
+   },
+   {
+    "id": "n3_chikoku"
+   }
+  ]
+ },
+ "n2_shimijimi": {
+  "label": "安静下来之后",
+  "sentence": {
+   "jp": "久しぶりに古い写真を眺めると、思い出がしみじみ戻ってくる。",
+   "zh": "隔了很久再看老照片，往事一点点回来。",
+   "roma": "Hisashiburi ni furui shashin o nagameru to, omoide ga shimijimi modotte kuru."
+  },
+  "members": [
+   {
+    "id": "n4_hisashiburi"
+   },
+   {
+    "id": "n5_shashin"
+   },
+   {
+    "id": "n3_nagameru"
+   },
+   {
+    "id": "n3_omoide"
+   }
+  ]
+ },
+ "n2_mottainai": {
+  "label": "饭桌上会一起说",
+  "sentence": {
+   "jp": "残すのも捨てるのももったいないから、片付ける前にもう一口食べる。",
+   "zh": "剩下也可惜，扔掉也可惜，收拾之前再吃一口。",
+   "roma": "Nokosu no mo suteru no mo mottainai kara, katazukeru mae ni mou hitokuchi taberu."
+  },
+  "members": [
+   {
+    "id": "n3_nokosu"
+   },
+   {
+    "id": "n4_suteru"
+   },
+   {
+    "id": "n4_katazukeru"
+   },
+   {
+    "id": "n5_taberu"
+   }
+  ]
+ },
+ "n2_konsento": {
+  "label": "进旅馆房间先做的事",
+  "sentence": {
+   "jp": "ホテルの部屋に入って鍵を置き、荷物を下ろしたら、まずコンセントを探す。",
+   "zh": "进了酒店房间，放下钥匙和行李，第一件事是找插座。",
+   "roma": "Hoteru no heya ni haitte kagi o oki, nimotsu o oroshitara, mazu konsento o sagasu."
+  },
+  "members": [
+   {
+    "id": "n5_hoteru"
+   },
+   {
+    "id": "n5_heya"
+   },
+   {
+    "id": "n5_kagi"
+   },
+   {
+    "id": "n5_nimotsu"
+   }
+  ]
+ },
+ "n1_inkan": {
+  "label": "办手续时会一起出现",
+  "sentence": {
+   "jp": "契約の手続きは、窓口で書類に記入して印鑑を押すまで終わらない。",
+   "zh": "签合同的手续，要在柜台填完表、盖上印章才算完。",
+   "roma": "Keiyaku no tetsuzuki wa, madoguchi de shorui ni kinyuu shite inkan o osu made owaranai."
+  },
+  "members": [
+   {
+    "id": "n3_keiyaku"
+   },
+   {
+    "id": "n2_tetsuzuki"
+   },
+   {
+    "id": "n2_madoguchi"
+   },
+   {
+    "id": "n3_kinyuu"
+   }
+  ]
+ },
+ "n2_dokidoki": {
+  "label": "心跳快起来的那几分钟",
+  "sentence": {
+   "jp": "面接の前は、発表や告白の前と同じで、緊張して胸がどきどきする。",
+   "zh": "面试之前，和上台发言、告白之前是同一种：紧张得心怦怦跳。",
+   "roma": "Mensetsu no mae wa, happyou ya kokuhaku no mae to onaji de, kinchou shite mune ga dokidoki suru."
+  },
+  "members": [
+   {
+    "id": "n2_mensetsu"
+   },
+   {
+    "id": "n3_happyou"
+   },
+   {
+    "id": "n1_kokuhaku"
+   },
+   {
+    "id": "n3_kinchou"
+   }
+  ],
+  "coreImage": "不是「紧张」这个概念，是胸口那两下真实的响。所有让它响起来的场合，本质是同一件事：下一秒不由你决定。"
+ },
+ "n1_hotto": {
+  "label": "一直提着的那口气落下来",
+  "sentence": {
+   "jp": "長い受験が終わる日、合格の知らせを見て、やっと安心してほっとした。",
+   "zh": "漫长的考试结束那天，看到合格通知，才终于安心地松了口气。",
+   "roma": "Nagai juken ga owaru hi, goukaku no shirase o mite, yatto anshin shite hotto shita."
+  },
+  "members": [
+   {
+    "id": "n2_juken"
+   },
+   {
+    "id": "n1_owaru"
+   },
+   {
+    "id": "n3_goukaku"
+   },
+   {
+    "id": "n4_anshin"
+   }
+  ],
+  "coreImage": "肩膀掉下来那一下。ほっと 是身体先知道结果，脑子后知道。"
+ },
+ "n1_unzari": {
+  "label": "同一件事重复到腻",
+  "sentence": {
+   "jp": "毎日の通勤は満員電車、会社に着けば会議続き、ストレスでもううんざりだ。",
+   "zh": "每天通勤挤满员电车，到公司又是一个接一个的会，压力大得已经腻透了。",
+   "roma": "Mainichi no tsuukin wa manin densha, kaisha ni tsukeba kaigi tsuzuki, sutoresu de mou unzari da."
+  },
+  "members": [
+   {
+    "id": "n2_tsuukin"
+   },
+   {
+    "id": "n2_manin"
+   },
+   {
+    "id": "n4_kaigi"
+   },
+   {
+    "id": "n1_sutoresu"
+   }
+  ],
+  "coreImage": "不是生气，是被磨平。うんざり 的前提是「又来了」——第一次不会腻。"
+ },
+ "n1_gakkuri": {
+  "label": "一下子垮下去",
+  "sentence": {
+   "jp": "受験の日に小さなミスをして、もう諦めるしかないかとがっくり肩を落とした。",
+   "zh": "考试那天出了个小差错，想着只能放弃了，一下子垂下肩膀。",
+   "roma": "Juken no hi ni chiisana misu o shite, mou akirameru shika nai ka to gakkuri kata o otoshita."
+  },
+  "members": [
+   {
+    "id": "n2_juken"
+   },
+   {
+    "id": "n3_misu"
+   },
+   {
+    "id": "n3_akirameru"
+   }
+  ],
+  "coreImage": "がっくり 是有形状的：肩膀和头同时往下掉那一下。心里的失望先变成了身体的姿势。"
+ },
+ "n2_sosokkashii": {
+  "label": "这种人的早晨",
+  "sentence": {
+   "jp": "うっかり鍵を忘れる、走って転ぶ —— そそっかしい人の朝はいつもこうだ。",
+   "zh": "一不留神忘了钥匙，跑起来又摔一跤——毛躁的人早上总是这样。",
+   "roma": "Ukkari kagi o wasureru, hashitte korobu — sosokkashii hito no asa wa itsumo kou da."
+  },
+  "members": [
+   {
+    "id": "n2_ukkari"
+   },
+   {
+    "id": "n5_wasureru"
+   },
+   {
+    "id": "n3_korobu"
+   }
+  ],
+  "coreImage": "うっかり 是一次，そそっかしい 是一直——同一件事的偶发版和性格版。"
+ },
+ "n1_aseru": {
+  "label": "来不及的那种急",
+  "sentence": {
+   "jp": "間に合うだろうかと焦る夜は、結局徹夜になって、締切の朝にミスが出る。",
+   "zh": "担心赶不赶得上而心急的夜里，结果就是通宵，交稿那天早上出错。",
+   "roma": "Maniau darou ka to aseru yoru wa, kekkyoku tetsuya ni natte, shimekiri no asa ni misu ga deru."
+  },
+  "members": [
+   {
+    "id": "n4_maniau"
+   },
+   {
+    "id": "n3_tetsuya"
+   },
+   {
+    "id": "n2_shimekiri"
+   },
+   {
+    "id": "n3_misu"
+   }
+  ],
+  "coreImage": "焦る 是心里在跑而人还坐着。和 慌てる 的区别就在这：慌てる 是手脚乱了，焦る 时外表可能很安静。"
+ },
+ "n2_nantonaku": {
+  "label": "说不出理由的那种选择",
+  "sentence": {
+   "jp": "理由はうまく言えないけれど、この店の雰囲気がなんとなく好きで、ここに決める。",
+   "zh": "说不太上理由，就是莫名喜欢这家店的氛围，决定是这儿了。",
+   "roma": "Riyuu wa umaku ienai keredo, kono mise no fun'iki ga nantonaku suki de, koko ni kimeru."
+  },
+  "members": [
+   {
+    "id": "n4_riyuu"
+   },
+   {
+    "id": "n3_funiki"
+   },
+   {
+    "id": "n4_kimeru"
+   }
+  ],
+  "coreImage": "中文的「莫名其妙」带贬义，なんとなく 不带。它是承认「我说不清，但我知道」——日语允许这种理由存在。"
+ },
+ "n2_sukkiri": {
+  "label": "身上和屋里同时变干净",
+  "sentence": {
+   "jp": "汗を流して温泉に入り、部屋の掃除まで終えると、頭まですっきりする。",
+   "zh": "冲掉汗泡进温泉，再把屋子打扫完，连脑子都清爽了。",
+   "roma": "Ase o nagashite onsen ni hairi, heya no souji made oeru to, atama made sukkiri suru."
+  },
+  "members": [
+   {
+    "id": "n3_ase"
+   },
+   {
+    "id": "n2_onsen"
+   },
+   {
+    "id": "n5_souji"
+   }
+  ],
+  "coreImage": "すっきり 不分身体和心：洗完澡、收完屋子、感冒好了，用的是同一个词。日语把它们当成同一种清爽。"
+ },
+ "n5_komaru": {
+  "label": "一个人扛不动的时候",
+  "sentence": {
+   "jp": "面倒なトラブルで困るときは、一人で抱えずに相談すると助かる。",
+   "zh": "碰上麻烦事犯难的时候，别一个人扛，找人商量就轻松了。",
+   "roma": "Mendou na toraburu de komaru toki wa, hitori de kakaezu ni soudan suru to tasukaru."
+  },
+  "members": [
+   {
+    "id": "n3_mendou"
+   },
+   {
+    "id": "n1_toraburu"
+   },
+   {
+    "id": "n4_soudan"
+   },
+   {
+    "id": "n2_tasukaru"
+   }
+  ]
+ },
+ "n3_bonyari": {
+  "label": "看着但没在看",
+  "sentence": {
+   "jp": "眠い朝は、窓から流れる景色をぼんやり眺めるだけで駅に着く。",
+   "zh": "困倦的早上，只是发着呆看窗外流过的风景，就到站了。",
+   "roma": "Nemui asa wa, mado kara nagareru keshiki o bonyari nagameru dake de eki ni tsuku."
+  },
+  "members": [
+   {
+    "id": "n4_nemui"
+   },
+   {
+    "id": "n5_mado"
+   },
+   {
+    "id": "n4_keshiki"
+   },
+   {
+    "id": "n3_nagameru"
+   }
+  ],
+  "coreImage": "ぼんやり 同时说眼睛和脑子：看不清和没在想，日语用一个词。所以「窗外」这个画面最准——景色是清楚的，看的人不清楚。"
+ },
+ "n2_sunao": {
+  "label": "吵完架之后",
+  "sentence": {
+   "jp": "言い訳をやめて素直に謝ると、誤解は反省より早く解ける。",
+   "zh": "不再找借口、老实道个歉，误会比反省化得更快。",
+   "roma": "Iiwake o yamete sunao ni ayamaru to, gokai wa hansei yori hayaku tokeru."
+  },
+  "members": [
+   {
+    "id": "n1_iiwake"
+   },
+   {
+    "id": "n4_ayamaru"
+   },
+   {
+    "id": "n3_gokai"
+   },
+   {
+    "id": "n2_hansei"
+   }
+  ],
+  "coreImage": "中文的「素直」不成词。它是「不拧着」——不辩解、不绕、不装。日本人夸小孩和夸大人用的是同一个词。"
+ },
+ "n1_furonto": {
+  "label": "进旅馆的头五分钟",
+  "sentence": {
+   "jp": "ホテルに着いたら、まずフロントでチェックインして、鍵をもらい、荷物を部屋に置く。",
+   "zh": "到了酒店，先在前台办入住，拿钥匙，把行李放进房间。",
+   "roma": "Hoteru ni tsuitara, mazu furonto de chekkuin shite, kagi o morai, nimotsu o heya ni oku."
+  },
+  "members": [
+   {
+    "id": "n5_hoteru"
+   },
+   {
+    "id": "n4_chikuin"
+   },
+   {
+    "id": "n5_kagi"
+   },
+   {
+    "id": "n5_nimotsu"
+   }
+  ],
+  "coreImage": "英语的 front 是「前面」，日语把它钉死在旅馆那一格柜台上。要钥匙、寄存行李、问路，都是走向这一格——它不是方位，是一个具体的地点。"
+ },
+ "n3_yado": {
+  "label": "天黑前要落实的一件事",
+  "sentence": {
+   "jp": "今夜の宿が決まらないまま、駅前の旅館に電話して予約を取り、やっと荷物を下ろす。",
+   "zh": "今晚住哪儿还没着落，给站前的旅馆打了电话订上，才终于放下行李。",
+   "roma": "Kon'ya no yado ga kimaranai mama, ekimae no ryokan ni denwa shite yoyaku o tori, yatto nimotsu o orosu."
+  },
+  "members": [
+   {
+    "id": "n5_eki"
+   },
+   {
+    "id": "n4_ryokan"
+   },
+   {
+    "id": "n4_yoyaku"
+   },
+   {
+    "id": "n5_nimotsu"
+   }
+  ],
+  "coreImage": "宿 不是某一类建筑，是「今晚睡在哪儿」这件事本身。旅館、民宿、朋友家，只要今晚在那儿落脚，都能叫宿——所以它常和「探す・決まる・取る」搭。"
+ },
+ "n4_ryokan": {
+  "label": "和酒店不一样的地方",
+  "sentence": {
+   "jp": "旅館に泊まると、夕方に温泉に入り、畳の部屋で食事をして、布団で寝る。",
+   "zh": "住日式旅馆的话，傍晚先泡温泉，在铺榻榻米的房间吃饭，睡在被褥上。",
+   "roma": "Ryokan ni tomaru to, yuugata ni onsen ni hairi, tatami no heya de shokuji o shite, futon de neru."
+  },
+  "members": [
+   {
+    "id": "n2_onsen"
+   },
+   {
+    "id": "n4_tatami"
+   },
+   {
+    "id": "n4_shokuji"
+   },
+   {
+    "id": "n4_futon"
+   }
+  ]
+ },
+ "n3_miyage": {
+  "label": "出差回来的第一件事",
+  "sentence": {
+   "jp": "出張から戻る日、空港でお土産を買って、会社で同僚に配る。",
+   "zh": "出差回来那天，在机场买了伴手礼，到公司分给同事。",
+   "roma": "Shutchou kara modoru hi, kuukou de omiyage o katte, kaisha de douryou ni kubaru."
+  },
+  "members": [
+   {
+    "id": "n2_shutchou"
+   },
+   {
+    "id": "n4_kuukou"
+   },
+   {
+    "id": "n3_douryou"
+   },
+   {
+    "id": "n2_kubaru"
+   }
+  ],
+  "coreImage": "重点不在东西，在「我出门了、你没去」这层交代。所以关键是数量够分——配る 才是这个词真正的搭档，好不好吃是其次。"
+ },
+ "n2_menzei": {
+  "label": "机场那一段流程",
+  "sentence": {
+   "jp": "空港の免税店で買い物をするときはパスポートを見せ、帰りは税関を通る。",
+   "zh": "在机场免税店买东西要出示护照，回来时要过海关。",
+   "roma": "Kuukou no menzeiten de kaimono o suru toki wa pasupooto o mise, kaeri wa zeikan o tooru."
+  },
+  "members": [
+   {
+    "id": "n4_kuukou"
+   },
+   {
+    "id": "n5_kaimono"
+   },
+   {
+    "id": "n3_pasupoto"
+   },
+   {
+    "id": "n2_zeikan"
+   }
+  ]
+ },
+ "n4_annai": {
+  "label": "不知道路的时候",
+  "sentence": {
+   "jp": "道が分からないと言うと、駅の人が地図を出して、観光案内所まで案内してくれた。",
+   "zh": "说了句不认识路，车站的人就拿出地图，把我领到了旅游咨询处。",
+   "roma": "Michi ga wakaranai to iu to, eki no hito ga chizu o dashite, kankou annaijo made annai shite kureta."
+  },
+  "members": [
+   {
+    "id": "n5_michi"
+   },
+   {
+    "id": "n5_eki"
+   },
+   {
+    "id": "n5_chizu"
+   },
+   {
+    "id": "n3_kankou"
+   }
+  ],
+  "coreImage": "案内 是「把你带到那儿」，不是中文的案卷。带的可以是人，也可以是一张纸——所以「ご案内します」从店员嘴里说出来，「案内所」印在牌子上，是同一件事。"
+ },
+ "n3_doraibu": {
+  "label": "周末出门这件事",
+  "sentence": {
+   "jp": "免許を取ったばかりの弟の運転で、海まで景色のいい道をドライブした。",
+   "zh": "坐着刚拿到驾照的弟弟开的车，沿着风景好的路一路开到海边。",
+   "roma": "Menkyo o totta bakari no otouto no unten de, umi made keshiki no ii michi o doraibu shita."
+  },
+  "members": [
+   {
+    "id": "n3_menkyo"
+   },
+   {
+    "id": "n4_unten"
+   },
+   {
+    "id": "n5_umi"
+   },
+   {
+    "id": "n4_keshiki"
+   }
+  ],
+  "coreImage": "英语的 drive 是「开车」这个动作，日语的ドライブ是「开车出去玩」这件事。所以坐副驾也算ドライブ，而每天开一小时通勤不算。"
+ },
+ "n3_tsumoru": {
+  "label": "雪停之后的早上",
+  "sentence": {
+   "jp": "夜のうちに雪が積もる朝は、寒いので手袋をして駅まで歩く。",
+   "zh": "夜里积起雪的早晨，因为冷，戴上手套走去车站。",
+   "roma": "Yoru no uchi ni yuki ga tsumoru asa wa, samui node tebukuro o shite eki made aruku."
+  },
+  "members": [
+   {
+    "id": "n5_yuki"
+   },
+   {
+    "id": "n5_asa"
+   },
+   {
+    "id": "n5_samui"
+   },
+   {
+    "id": "n4_tebukuro"
+   }
+  ],
+  "coreImage": "積もる 是「一层层落下来、不走」。所以除了雪，日语也说「疲れが積もる」「積もる話」——攒着没散掉的东西，用的是同一个词。"
+ },
+ "n4_hieru": {
+  "label": "关掉暖气之后",
+  "sentence": {
+   "jp": "寒い夜、暖房を消すと足元から冷えるので、布団をもう一枚かけて風邪を防ぐ。",
+   "zh": "冷的夜里一关暖气，凉意就从脚下上来，于是多盖一床被子防感冒。",
+   "roma": "Samui yoru, danbou o kesu to ashimoto kara hieru node, futon o mou ichimai kakete kaze o fusegu."
+  },
+  "members": [
+   {
+    "id": "n5_samui"
+   },
+   {
+    "id": "n4_danbou"
+   },
+   {
+    "id": "n4_futon"
+   },
+   {
+    "id": "n5_kaze_2"
+   }
+  ],
+  "coreImage": "冷える 说的不是气温低，是「凉下来」这件事落到了身上：脚、肚子、手指。日本人说「体が冷える」时是在谈健康，不是在报天气——寒い 描述外面，冷える 描述里面。"
+ },
+ "n1_bisshori": {
+  "label": "没带伞的那天",
+  "sentence": {
+   "jp": "傘のない日に雨に降られると、服はびっしょり濡れる。",
+   "zh": "偏偏没带伞那天挨了淋，衣服湿了个透。",
+   "roma": "Kasa no nai hi ni ame ni furareru to, fuku wa bisshori nureru."
+  },
+  "members": [
+   {
+    "id": "n5_kasa"
+   },
+   {
+    "id": "n5_ame"
+   },
+   {
+    "id": "n5_fuku_2"
+   },
+   {
+    "id": "n3_nureru"
+   }
+  ],
+  "coreImage": "びっしょり 只说一件事：湿到不用再确认了。它不修饰程度轻的湿——「少しびっしょり」不成立。汗和雨都能用，共同点是一眼就看得出来。"
+ },
+ "n2_mekkiri": {
+  "label": "季节换挡的那两周",
+  "sentence": {
+   "jp": "秋になると涼しい日がめっきり増え、朝は冷えるし夜も寒い。",
+   "zh": "一入秋，凉快的日子明显多起来，早上发凉，晚上也冷。",
+   "roma": "Aki ni naru to suzushii hi ga mekkiri fue, asa wa hieru shi yoru mo samui."
+  },
+  "members": [
+   {
+    "id": "n5_aki"
+   },
+   {
+    "id": "n5_suzushii"
+   },
+   {
+    "id": "n4_hieru"
+   },
+   {
+    "id": "n5_samui"
+   }
+  ],
+  "coreImage": "めっきり 不修饰状态，只修饰变化——所以它后面几乎永远跟着 増える・減る・なる。「めっきり寒い」不对，「めっきり寒くなった」才对。用得最多的两处：天气和上了年纪。"
+ },
+ "n2_mushiatsui": {
+  "label": "夏天晚上睡不着的原因",
+  "sentence": {
+   "jp": "夏の夜は蒸し暑くて、風もなく、扇風機をつけても汗が引かない。",
+   "zh": "夏天的夜里又闷又热，一丝风也没有，开着电扇汗还是下不去。",
+   "roma": "Natsu no yoru wa mushiatsukute, kaze mo naku, senpuuki o tsukete mo ase ga hikanai."
+  },
+  "members": [
+   {
+    "id": "n5_natsu"
+   },
+   {
+    "id": "n5_kaze"
+   },
+   {
+    "id": "n2_senpuuki"
+   },
+   {
+    "id": "n3_ase"
+   }
+  ],
+  "coreImage": "「蒸」是关键：不是热，是水汽把热按在皮肤上不让它散。所以同样的温度，干燥地方的 暑い 和日本夏夜的 蒸し暑い 是两种难受。"
+ },
+ "n3_chuumon": {
+  "label": "在餐厅还会遇到",
+  "sentence": {
+   "jp": "席に着いたらメニューを見て、定食を注文し、食べ終わってから会計をする。",
+   "zh": "落座之后看菜单，点一份套餐，吃完再去结账。",
+   "roma": "Seki ni tsuitara menyuu o mite, teishoku o chuumon shi, tabeowatte kara kaikei o suru."
+  },
+  "members": [
+   {
+    "id": "n4_seki"
+   },
+   {
+    "id": "n2_menyu"
+   },
+   {
+    "id": "n1_teishoku"
+   },
+   {
+    "id": "n3_kaikei"
+   }
+  ],
+  "coreImage": "中文的「注文」是订货单据，日语第一现场是餐厅——服务员开口就是「ご注文は？」。另一头离得更远：「注文が多い」不是点得多，是要求多、挑剔。"
+ },
+ "n1_pekopeko": {
+  "label": "饭点之前",
+  "sentence": {
+   "jp": "朝から何も食べずに歩いたので、お腹がぺこぺこで、昼食は食堂で早めに済ませた。",
+   "zh": "从早上开始什么都没吃地走了一路，肚子饿瘪了，午饭早早在食堂解决了。",
+   "roma": "Asa kara nani mo tabezu ni aruita node, onaka ga pekopeko de, chuushoku wa shokudou de hayame ni sumaseta."
+  },
+  "members": [
+   {
+    "id": "n5_onaka"
+   },
+   {
+    "id": "n3_chuushoku"
+   },
+   {
+    "id": "n5_shokudou"
+   }
+  ],
+  "coreImage": "ぺこぺこ 是「瘪下去」的声音，肚子空了往里陷。同一个词换个身体部位就换意思——人对着上司ぺこぺこ，是腰一次次弯下去。"
+ },
+ "n2_kondate": {
+  "label": "一周的饭怎么安排",
+  "sentence": {
+   "jp": "一週間の献立を先に決めておくと、買い物が一回で済み、野菜も味噌も余らない。",
+   "zh": "先把一周的菜谱定下来，买菜一趟就够，蔬菜和味噌都不会剩。",
+   "roma": "Isshuukan no kondate o saki ni kimete oku to, kaimono ga ikkai de sumi, yasai mo miso mo amaranai."
+  },
+  "members": [
+   {
+    "id": "n5_kaimono"
+   },
+   {
+    "id": "n5_yasai"
+   },
+   {
+    "id": "n4_miso"
+   }
+  ],
+  "coreImage": "献立 不是菜单那张纸（那是メニュー），是「这几天吃什么」的安排。所以它连着的是买菜、冰箱和剩菜，跟餐厅没关系。"
+ },
+ "n2_ajiwau": {
+  "label": "不只是舌头",
+  "sentence": {
+   "jp": "母の料理をしみじみ味わうと、忘れていた味が戻ってくる。",
+   "zh": "静静品着母亲做的菜，忘掉的那个味道就回来了。",
+   "roma": "Haha no ryouri o shimijimi ajiwau to, wasurete ita aji ga modotte kuru."
+  },
+  "members": [
+   {
+    "id": "n5_ryouri"
+   },
+   {
+    "id": "n2_shimijimi"
+   },
+   {
+    "id": "n4_aji"
+   }
+  ],
+  "coreImage": "味わう 的宾语可以不是食物：苦労を味わう、自由を味わう。它说的是让一个东西在自己身上停留够久，吃只是最常见的那一种。"
+ },
+ "n2_kogeru": {
+  "label": "厨房里走神的那一下",
+  "sentence": {
+   "jp": "電話に出ている間にぼんやりして、台所から焦げる匂いがしてきた。",
+   "zh": "接电话的工夫走了神，厨房那边飘来一股糊味。",
+   "roma": "Denwa ni dete iru aida ni bonyari shite, daidokoro kara kogeru nioi ga shite kita."
+  },
+  "members": [
+   {
+    "id": "n3_bonyari"
+   },
+   {
+    "id": "n5_daidokoro"
+   },
+   {
+    "id": "n3_nioi"
+   }
+  ],
+  "coreImage": "焦げる 是自动词——东西自己糊的，不是你糊了它。你只是没在那儿。要说「我把它烤糊了」得换他动词 焦がす。"
+ },
+ "n4_waku": {
+  "label": "开了的不止是水",
+  "sentence": {
+   "jp": "鍋の湯が沸くまで火を弱くして、その間にお風呂も沸かしておく。",
+   "zh": "等锅里的水开之前先把火关小，趁这工夫把洗澡水也烧上。",
+   "roma": "Nabe no yu ga waku made hi o yowaku shite, sono aida ni ofuro mo wakashite oku."
+  },
+  "members": [
+   {
+    "id": "n3_nabe"
+   },
+   {
+    "id": "n4_yu"
+   },
+   {
+    "id": "n4_hi_2"
+   },
+   {
+    "id": "n5_ofuro"
+   }
+  ],
+  "coreImage": "一个 沸く 管三样：锅里的水开了、浴缸的洗澡水好了、球场上「会場が沸く」观众炸开。共同点是从底下往上翻涌，所以主语永远是那个自己翻起来的东西。"
+ },
+ "n1_itameru_2": {
+  "label": "锅里的那几分钟",
+  "sentence": {
+   "jp": "フライパンに油をひいて野菜を炒めると、焼くより早く火が通る。",
+   "zh": "平底锅里倒上油炒蔬菜，比烤熟得快。",
+   "roma": "Furaipan ni abura o hiite yasai o itameru to, yaku yori hayaku hi ga tooru."
+  },
+  "members": [
+   {
+    "id": "n2_furaipan"
+   },
+   {
+    "id": "n3_abura"
+   },
+   {
+    "id": "n5_yasai"
+   },
+   {
+    "id": "n4_yaku"
+   }
+  ],
+  "coreImage": "炒める 和「痛める」同音，但一个在锅里、一个在身上。听到 いためる，先看句子里有没有油和锅。"
+ },
+ "n2_kuriningu": {
+  "label": "换季的那一趟",
+  "sentence": {
+   "jp": "冬の服とスーツをクリーニングに出し、家で洗濯できないものは来週受け取る。",
+   "zh": "把冬天的衣服和西装送去干洗，家里洗不了的下周去取。",
+   "roma": "Fuyu no fuku to suutsu o kuriiningu ni dashi, ie de sentaku dekinai mono wa raishuu uketoru."
+  },
+  "members": [
+   {
+    "id": "n5_fuku_2"
+   },
+   {
+    "id": "n4_su_tsu"
+   },
+   {
+    "id": "n5_sentaku"
+   },
+   {
+    "id": "n3_uketoru"
+   }
+  ],
+  "coreImage": "英语的 cleaning 是打扫，日语的 クリーニング 只干一件事：把衣服送到店里去洗。家里洗衣机洗的那种叫 洗濯，两个词不互换。"
+ },
+ "n2_manshon": {
+  "label": "找房子时会撞上",
+  "sentence": {
+   "jp": "駅に近いマンションは家賃が高いので、少し歩くアパートの部屋を大家さんに見せてもらった。",
+   "zh": "靠近车站的公寓楼房租贵，就让房东带看了要走一段路的那栋公寓的房间。",
+   "roma": "Eki ni chikai manshon wa yachin ga takai node, sukoshi aruku apaato no heya o ooya-san ni misete moratta."
+  },
+  "members": [
+   {
+    "id": "n3_yachin"
+   },
+   {
+    "id": "n5_apaato"
+   },
+   {
+    "id": "n5_heya"
+   },
+   {
+    "id": "n3_ooya"
+   }
+  ],
+  "coreImage": "英语 mansion 是豪宅，日语 マンション 只是钢筋水泥的公寓楼。它和木造两三层的 アパート 分的是结构，不是档次——租房广告上这是硬分类，不是形容词。"
+ },
+ "n4_futon": {
+  "label": "每天要收起来一次",
+  "sentence": {
+   "jp": "朝は布団をたたんでしまい、夜になるとまた畳の部屋に敷く。",
+   "zh": "早上把被褥叠起来收好，到了晚上再铺回榻榻米的房间。",
+   "roma": "Asa wa futon o tatande shimai, yoru ni naru to mata tatami no heya ni shiku."
+  },
+  "members": [
+   {
+    "id": "n5_asa"
+   },
+   {
+    "id": "n5_yoru"
+   },
+   {
+    "id": "n4_tatami"
+   },
+   {
+    "id": "n5_heya"
+   }
+  ],
+  "coreImage": "布団 不是「被子」，是铺在地板上的一整套：底下的褥子（敷布団）加上盖的（掛布団）。它默认早上要收进柜子，所以配的动词是 敷く 和 たたむ，不是「铺床」。"
+ },
+ "n4_katazukeru": {
+  "label": "收拾这件事",
+  "sentence": {
+   "jp": "ごみを捨てに行くついでに机を片付けるつもりが、掃除だけで終わり、だらしない自分に呆れた。",
+   "zh": "本想趁扔垃圾顺手收拾一下桌子，结果只扫了地，对自己的邋遢感到无语。",
+   "roma": "Gomi o sute ni iku tsuide ni tsukue o katazukeru tsumori ga, souji dake de owari, darashinai jibun ni akireta."
+  },
+  "members": [
+   {
+    "id": "n5_gomi"
+   },
+   {
+    "id": "n5_souji"
+   },
+   {
+    "id": "n2_darashinai"
+   }
+  ],
+  "coreImage": "片付ける 不是打扫（那是 掃除），是把散着的东西各归各位。所以饭后收桌子、搬家前清空房间都用它，连「仕事を片付ける」也是——把堆着的活儿一件件放回该在的地方。"
+ },
+ "n2_kanpai": {
+  "label": "开场那一声",
+  "sentence": {
+   "jp": "部長の挨拶が終わってから、ビールを注ぐ人が回ってきて、全員で乾杯した。",
+   "zh": "部长致辞结束之后，有人挨个来倒啤酒，然后全体干杯。",
+   "roma": "Buchou no aisatsu ga owatte kara, biiru o tsugu hito ga mawatte kite, zen'in de kanpai shita."
+  },
+  "members": [
+   {
+    "id": "n3_aisatsu"
+   },
+   {
+    "id": "n3_biru"
+   },
+   {
+    "id": "n3_tsugu"
+   }
+  ],
+  "coreImage": "汉语的「干杯」要求喝干，日语的 乾杯 只是全体举杯的那一声，喝多少随意。它是开场信号——没喊之前谁都不动杯子。"
+ },
+ "n3_you_2": {
+  "label": "不只是喝多了",
+  "sentence": {
+   "jp": "お酒に弱い人はビール一杯でも酔うし、帰りの電車では気持ちが悪くなる。",
+   "zh": "酒量差的人一杯啤酒就醉，回去的电车上还会晕得难受。",
+   "roma": "Osake ni yowai hito wa biiru ippai demo you shi, kaeri no densha de wa kimochi ga waruku naru."
+  },
+  "members": [
+   {
+    "id": "n3_sake"
+   },
+   {
+    "id": "n3_biru"
+   },
+   {
+    "id": "n5_densha"
+   },
+   {
+    "id": "n4_kimochi"
+   }
+  ],
+  "coreImage": "酔う 管的不是酒，是身体被晃到失去平衡。所以晕车（車に酔う）、晕船、看画面头晕都是它，连「雰囲気に酔う」也算。喝酒只是最常见的那个来源。"
+ },
+ "n3_nioi": {
+  "label": "和「香り」分工",
+  "sentence": {
+   "jp": "お茶の香りは好きだが、料理の匂いが服にまで残るのは困る。",
+   "zh": "茶的香气我喜欢，可做饭的气味留到衣服上就麻烦了。",
+   "roma": "Ocha no kaori wa suki da ga, ryouri no nioi ga fuku ni made nokoru no wa komaru."
+  },
+  "members": [
+   {
+    "id": "n3_kaori"
+   },
+   {
+    "id": "n5_ocha"
+   },
+   {
+    "id": "n5_ryouri"
+   },
+   {
+    "id": "n5_fuku_2"
+   }
+  ],
+  "coreImage": "「匂」这个字中文里没有。匂い 本身中立，好闻难闻都能说；香り 只说好闻的。所以「いい匂い」成立，「悪い香り」不成立——想抱怨，只能用 匂い。"
+ },
+ "n3_jama": {
+  "label": "进别人家门的头一分钟",
+  "sentence": {
+   "jp": "「お邪魔します」と言って玄関で靴を脱ぎ、案内された部屋に上がる。",
+   "zh": "说一句「打扰了」，在玄关脱鞋，进到被领去的那个房间。",
+   "roma": "\"Ojama shimasu\" to itte genkan de kutsu o nugi, annai sareta heya ni agaru."
+  },
+  "members": [
+   {
+    "id": "n5_genkan"
+   },
+   {
+    "id": "n5_kutsu"
+   },
+   {
+    "id": "n5_heya"
+   }
+  ],
+  "coreImage": "中文的「邪魔」是妖魔鬼怪，日语里只是「碍事」。它最常出现的地方是进别人家门那句「お邪魔します」——不是自称妖怪，是说「我这就要占用你的地方了」。"
+ },
+ "n4_enryo": {
+  "label": "谢绝的时候",
+  "sentence": {
+   "jp": "招待を遠慮して断るのは、相手の気持ちを考えた上での返事でもある。",
+   "zh": "客气地谢绝邀请，也是替对方的心情想过之后才给的回答。",
+   "roma": "Shoutai o enryo shite kotowaru no wa, aite no kimochi o kangaeta ue de no henji de mo aru."
+  },
+  "members": [
+   {
+    "id": "n4_shoutai"
+   },
+   {
+    "id": "n3_kotowaru"
+   },
+   {
+    "id": "n3_aite"
+   },
+   {
+    "id": "n4_kimochi"
+   },
+   {
+    "id": "n4_henji"
+   }
+  ],
+  "coreImage": "中文的「远虑」是想得远，日语的「遠慮」是**往后退一步**：手缩回来、话咽下去。所以「遠慮なく」不是「别想太多」，是「别客气，伸手拿」。"
+ },
+ "n3_aisatsu": {
+  "label": "身体比话先动",
+  "sentence": {
+   "jp": "朝、近所で人に会うたびに頭を下げる。挨拶は言葉より先に体が動く。",
+   "zh": "早上在附近每遇到一个人就低一次头。问候是身体先动，话在后面。",
+   "roma": "Asa, kinjo de hito ni au tabi ni atama o sageru. Aisatsu wa kotoba yori saki ni karada ga ugoku."
+  },
+  "members": [
+   {
+    "id": "n4_kinjo"
+   },
+   {
+    "id": "n5_atama"
+   },
+   {
+    "id": "n4_sageru"
+   },
+   {
+    "id": "n5_kotoba"
+   }
+  ],
+  "coreImage": "「挨」和「拶」在中文里都不单用，这两个字给不了任何钩子。记它得从动作记：先低头，再出声——低头的深浅和时机，比说了什么更要紧。"
+ },
+ "n5_kekkou": {
+  "label": "说「不用了」的那一刻",
+  "sentence": {
+   "jp": "「もう結構です」と断ると、店の人はそれ以上茶を勧めなかった。",
+   "zh": "说了一句「已经够了」，店里的人就没再劝茶。",
+   "roma": "\"Mou kekkou desu\" to kotowaru to, mise no hito wa sore ijou cha o susumenakatta."
+  },
+  "members": [
+   {
+    "id": "n3_kotowaru"
+   },
+   {
+    "id": "n5_mise"
+   },
+   {
+    "id": "n3_cha"
+   }
+  ],
+  "coreImage": "結構 是言里最容易出事的词：它同时是「很好」和「不用了」。分界在语气和场合——被劝东西时说「結構です」，永远是**谢绝**。听成夸奖会一直被添茶。"
+ },
+ "n5_taihen": {
+  "label": "一个人干不动的时候",
+  "sentence": {
+   "jp": "一人で荷物を運ぶのは大変だから、隣の人が手伝うと言ってくれた。",
+   "zh": "一个人搬行李够呛，隔壁的人说来搭把手。",
+   "roma": "Hitori de nimotsu o hakobu no wa taihen dakara, tonari no hito ga tetsudau to itte kureta."
+  },
+  "members": [
+   {
+    "id": "n5_nimotsu"
+   },
+   {
+    "id": "n5_tonari"
+   },
+   {
+    "id": "n4_tetsudau"
+   }
+  ],
+  "coreImage": "中文的「大变」是变化大，日语的「大変」是**事情大了**。它既能当「非常」（大変おいしい），也能当「够呛」（大変だったね）——一个在夸，一个在慰问，靠场合分。"
+ },
+ "n3_kinodoku": {
+  "label": "听说别人出事之后",
+  "sentence": {
+   "jp": "事故で入院した人の話を聞いて、気の毒だと思い、見舞いに行くことにした。",
+   "zh": "听说有人出事故住了院，觉得可怜，决定去探望。",
+   "roma": "Jiko de nyuuin shita hito no hanashi o kiite, kinodoku da to omoi, mimai ni iku koto ni shita."
+  },
+  "members": [
+   {
+    "id": "n4_jiko"
+   },
+   {
+    "id": "n4_nyuuin"
+   },
+   {
+    "id": "n3_mimai"
+   }
+  ],
+  "coreImage": "「毒」看着吓人，其实说的是「这份心情有毒」——难受的是**说话的人自己**。所以它是同情，不是在评价对方倒霉。当面说「お気の毒に」是慰问，不是嫌弃。"
+ },
+ "n1_giri": {
+  "label": "欠着的那笔人情",
+  "sentence": {
+   "jp": "世話になった人に何かを返すのは、義理であって感謝とは限らない。",
+   "zh": "给照顾过自己的人回点什么，那是人情账，不一定是感激。",
+   "roma": "Sewa ni natta hito ni nani ka o kaesu no wa, giri de atte kansha to wa kagiranai."
+  },
+  "members": [
+   {
+    "id": "n4_sewa"
+   },
+   {
+    "id": "n5_kaesu"
+   },
+   {
+    "id": "n3_kansha"
+   }
+  ],
+  "coreImage": "義理 是**账本上欠着的那一笔**：受了照顾就得还，还多少看关系，不看心情。所以有「義理チョコ」——不是喜欢，是账上该有这一笔。"
+ },
+ "n3_battari": {
+  "label": "没有前奏的相遇",
+  "sentence": {
+   "jp": "駅で昔の友達にばったり会うのは、約束して会うより記憶に残る。",
+   "zh": "在车站冷不丁碰见老朋友，比约好了见面更记得住。",
+   "roma": "Eki de mukashi no tomodachi ni battari au no wa, yakusoku shite au yori kioku ni nokoru."
+  },
+  "members": [
+   {
+    "id": "n5_eki"
+   },
+   {
+    "id": "n5_tomodachi"
+   },
+   {
+    "id": "n4_yakusoku"
+   }
+  ],
+  "coreImage": "ばったり 本来是**东西一下子倒下**的声音。用在遇见人身上，它保留的正是那一点：没有前奏，突然就在眼前。所以它永远和「約束」相对。"
+ },
+ "n2_shitsukoi": {
+  "label": "甩不掉的时候",
+  "sentence": {
+   "jp": "勧誘の電話がしつこいので、はっきり断ることにした。",
+   "zh": "推销电话缠得没完，决定明确回绝。",
+   "roma": "Kanyuu no denwa ga shitsukoi node, hakkiri kotowaru koto ni shita."
+  },
+  "members": [
+   {
+    "id": "n1_kanyuu_2"
+   },
+   {
+    "id": "n5_denwa"
+   },
+   {
+    "id": "n3_kotowaru"
+   }
+  ],
+  "coreImage": "しつこい 最早说的是**味道太浓、油腻得散不掉**。用在人身上是同一种感觉：粘着不走，怎么擦都在。所以它形容的不是次数多，是「甩不掉」。"
+ },
+ "n1_iiwake": {
+  "label": "迟到之后先说什么",
+  "sentence": {
+   "jp": "遅刻の理由を説明しても言い訳になるだけなら、まず謝る。",
+   "zh": "迟到的理由说了也只会变成辩解的话，那就先道歉。",
+   "roma": "Chikoku no riyuu o setsumei shite mo iiwake ni naru dake nara, mazu ayamaru."
+  },
+  "members": [
+   {
+    "id": "n3_chikoku"
+   },
+   {
+    "id": "n4_riyuu"
+   },
+   {
+    "id": "n4_setsumei"
+   },
+   {
+    "id": "n4_ayamaru"
+   }
+  ],
+  "coreImage": "「訳」在中文里是翻译，在这儿是**理由**：言い訳 = 把理由说出来。同一件事说早了叫说明，说晚了、对方还在生气时说，就成了辩解——差的不是内容，是时机。"
+ },
+ "n2_tasukaru": {
+  "label": "得救的是谁",
+  "sentence": {
+   "jp": "混んだ電車で席を譲るだけで、相手はずいぶん助かる。",
+   "zh": "在挤的电车上让个座，对方就轻松很多。",
+   "roma": "Konda densha de seki o yuzuru dake de, aite wa zuibun tasukaru."
+  },
+  "members": [
+   {
+    "id": "n4_seki"
+   },
+   {
+    "id": "n3_yuzuru"
+   },
+   {
+    "id": "n3_aite"
+   }
+  ],
+  "coreImage": "助かる 是自动词——**得救的是主语自己**。所以「助かります」不是「我来帮你」，是「你救了我」，说的是自己的处境。中文说「帮大忙了」时，主语正好是反的。"
+ },
+ "n3_gokai": {
+  "label": "话不够的时候",
+  "sentence": {
+   "jp": "冗談を本気に取られると誤解が生まれるので、言葉は選ぶ。",
+   "zh": "玩笑被当了真就会生出误会，所以话要挑着说。",
+   "roma": "Joudan o honki ni torareru to gokai ga umareru node, kotoba wa erabu."
+  },
+  "members": [
+   {
+    "id": "n3_joudan"
+   },
+   {
+    "id": "n1_honki"
+   },
+   {
+    "id": "n5_kotoba"
+   }
+  ]
+ },
+ "n2_nikoniko": {
+  "label": "总在笑的人",
+  "sentence": {
+   "jp": "いつもにこにこしている人ほど、機嫌の悪い日は顔に出る。",
+   "zh": "越是平时笑呵呵的人，心情不好那天越写在脸上。",
+   "roma": "Itsumo nikoniko shite iru hito hodo, kigen no warui hi wa kao ni deru."
+  },
+  "members": [
+   {
+    "id": "n5_itsumo"
+   },
+   {
+    "id": "n3_kigen"
+   },
+   {
+    "id": "n5_kao"
+   }
+  ],
+  "coreImage": "にこにこ 是**眼睛和嘴角一起弯、没有声音**的笑。有声音的另有其词：げらげら 是放声大笑，にやにや 是憋着的坏笑。日语把笑分得细，分的是声音和意图，不是程度。"
+ },
+ "n1_taimingu": {
+  "label": "约人这件事",
+  "sentence": {
+   "jp": "誘うタイミングさえ合えば、忙しい人でも用事の合間に出てくる。",
+   "zh": "只要约的时机对上，再忙的人也会从事情的空档里出来。",
+   "roma": "Sasou taimingu sae aeba, isogashii hito demo youji no aima ni dete kuru."
+  },
+  "members": [
+   {
+    "id": "n3_sasou"
+   },
+   {
+    "id": "n5_isogashii"
+   },
+   {
+    "id": "n4_youji"
+   }
+  ],
+  "coreImage": "英语的 timing 也说计时（秒表、发动机正时），日语的 タイミング 几乎只用在**时机对不对**上。所以它搭的是「合う（对上）」「外す（错过）」，不搭秒表。"
+ }
+}

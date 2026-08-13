@@ -288,3 +288,63 @@ test('★ 有 review 就必须三样齐全 —— 问了不给答案是半道题
   }
   assert.deepEqual(bad, []);
 });
+
+// ── 一个词多个词场 ────────────────────────────────────────────
+// 三次撞上才定的(大丈夫、びっしょり、蒸す)。仍然是一张卡,但复习是两道题。
+import { wordFieldUnits, wordFieldsOf } from '../../features/review/units.js';
+
+const twoFields = {
+  id: 'n5_daijoubu', word: '大丈夫', reading: 'だいじょうぶ',
+  wordField: [
+    { label: '摔了一跤', sentence: { jp: 'もう大丈夫です。', zh: '我没事了。' } },
+    { label: '便利店婉拒', sentence: { jp: '袋は大丈夫です。', zh: '袋子不用了。' } },
+  ],
+};
+
+test('★ 第一个词场的键不变 —— 加第二个场不能让已有进度作废', () => {
+  const single = { id: 'n2_kouyou', word: '紅葉', wordField: { sentence: { jp: 'あ', zh: 'い' } } };
+  const asArray = { ...single, wordField: [single.wordField] };
+  assert.equal(wordFieldUnits(single)[0].key, wordFieldUnits(asArray)[0].key);
+  assert.equal(wordFieldUnits(single)[0].key, 'field:n2_kouyou');
+});
+
+test('★ 多个词场 = 多道题,各自独立计进度', () => {
+  const us = wordFieldUnits(twoFields);
+  assert.equal(us.length, 2);
+  assert.deepEqual(us.map(u => u.key), ['field:n5_daijoubu', 'field:n5_daijoubu#2']);
+  assert.equal(us[0].answer, 'もう大丈夫です。');
+  assert.equal(us[1].answer, '袋は大丈夫です。');
+  // 两道题都挂在同一个词上 —— 卡是一张,题是两道
+  assert.deepEqual([...new Set(us.map(u => u.origin))], ['大丈夫']);
+});
+
+test('对象和数组两种形状都认,坏的那条不拖累好的', () => {
+  assert.equal(wordFieldsOf({ wordField: { sentence: { jp: 'あ' } } }).length, 1);
+  assert.equal(wordFieldsOf({ wordField: [] }).length, 0);
+  assert.equal(wordFieldsOf({}).length, 0);
+  assert.equal(wordFieldsOf(null).length, 0);
+  assert.equal(
+    wordFieldsOf({ wordField: [{ sentence: {} }, { sentence: { jp: 'あ' } }] }).length, 1,
+    '没有句子的那条跳过,有句子的照常留下'
+  );
+});
+
+test('★ 校验按数组走 —— 第二个场的成员同样要真出现在句子里', () => {
+  const bank = [
+    { id: 'n5_fukuro', word: '袋', reading: 'ふくろ' },
+    { ...twoFields, wordField: [
+      twoFields.wordField[0],
+      { ...twoFields.wordField[1], members: [{ id: 'n5_fukuro' }] },
+    ] },
+  ];
+  assert.deepEqual(auditWordFields(bank), [], '袋 确实在「袋は大丈夫です」里');
+
+  const bad = [
+    { id: 'n5_fukuro', word: '袋', reading: 'ふくろ' },
+    { ...twoFields, wordField: [
+      { ...twoFields.wordField[0], members: [{ id: 'n5_fukuro' }] },   // 第一句里没有「袋」
+      twoFields.wordField[1],
+    ] },
+  ];
+  assert.match(auditWordFields(bad)[0], /找不到成员 袋/);
+});
