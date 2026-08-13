@@ -5,7 +5,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  toMora, pitchPattern, parseAccents, primaryAccent, accentName,
+  toMora, pitchPattern, parseAccents, primaryAccent, accentName, accentHint,
 } from '../../features/wordbank/pitch.js';
 
 // ── 拍 ───────────────────────────────────────────────────────
@@ -92,4 +92,43 @@ test('型的名字按拍数算 —— 尾高和中高的界线是「降在不在
   assert.equal(accentName('はし', 2), '尾高');      // 2 拍词的型2 = 尾高
   assert.equal(accentName('たまご', 2), '中高');    // 3 拍词的型2 = 中高
   assert.equal(accentName('たまご', 3), '尾高');
+});
+
+test('★ 型名后面那句大白话必须和高低线说的是同一件事', () => {
+  // 用户反馈「那个高低线其实我有一点没看懂」——「頭高」是行话,
+  // 而这个 App 还没教过它。所以补一句能照着念的中文。
+  // **这句话要是和线画的不一致,比不给还坏** —— 学习者会照着错的念。
+  const check = (reading, accent) => {
+    const { pattern, particleHigh } = pitchPattern(reading, accent);
+    const hint = accentHint(reading, accent);
+    assert.ok(hint, `${reading} 型${accent} 没给提示`);
+    if (accent === 0) {
+      assert.equal(pattern[0], false, '平板第1拍该低');
+      assert.equal(particleHigh, true, '平板助词该高');
+      assert.match(hint, /第1拍低/);
+      assert.match(hint, /助词也高/);
+    }
+    if (accent === 1 && pattern.length > 1) {
+      assert.equal(pattern[0], true, '頭高第1拍该高');
+      assert.equal(pattern[1], false, '頭高第2拍该低');
+      assert.match(hint, /第1拍高/);
+    }
+    if (accent >= 2 && accent >= pattern.length) {
+      assert.equal(pattern[pattern.length - 1], true, '尾高最后一拍该高');
+      assert.equal(particleHigh, false, '尾高助词该低');
+      assert.match(hint, /助词才转低/);
+    }
+  };
+  check('さくら', 0);      // 平板
+  check('あいさつ', 1);    // 頭高 —— 用户看到的那个词
+  check('はし', 1);
+  check('はな', 2);        // 尾高(2 拍词的型2)
+  check('たまご', 2);      // 中高
+  assert.match(accentHint('たまご', 2), /第2拍之后降/);
+});
+
+test('拿不到就不要编一句出来', () => {
+  assert.equal(accentHint('', 1), '');
+  assert.equal(accentHint('あいさつ', null), '');
+  assert.equal(accentHint('あいさつ', undefined), '');
 });

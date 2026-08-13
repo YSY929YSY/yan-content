@@ -43,7 +43,7 @@ import JournalDevScreen from './src/features/journal/JournalDevScreen';
 // 合并进 content.v2.json 之后这份和它的引用一起删。
 import WORDFIELD_PREVIEW from './src/features/wordbank/wordfield-preview.json';
 import PITCH_PREVIEW from './src/features/wordbank/pitch-preview.json';
-import { toMora, pitchPattern, accentName } from './src/features/wordbank/pitch';
+import { toMora, pitchPattern, accentName, accentHint } from './src/features/wordbank/pitch';
 import {
   ActivityIndicator, Alert, Animated, Dimensions, FlatList, Image, Keyboard,
   KeyboardAvoidingView, Modal,
@@ -2132,14 +2132,15 @@ function PitchLine({ reading, accent }) {
     <View style={wd.pitchRow}>
       {mora.map((m, i) => {
         const high = pattern[i];
-        // 降调那一拍:线在它右边拐下来。这一竖是「降在哪儿」的全部信息
-        const drops = high && !pattern[i + 1] && i < mora.length - 1;
+        // 下一格的高低。最后一拍的「下一格」是助词那一格 —— 尾高的那道降就在那里
+        const nextHigh = i < mora.length - 1 ? pattern[i + 1] : particleHigh;
         return (
           <Text
             key={i}
             style={[wd.pitchMora,
-                    high && wd.pitchHigh,
-                    drops && wd.pitchDrop]}
+                    high ? wd.pitchHigh : wd.pitchLow,
+                    // 高低要变的地方竖一道,把上下两条线连起来
+                    high !== nextHigh && wd.pitchStep]}
           >
             {m}
           </Text>
@@ -2149,8 +2150,11 @@ function PitchLine({ reading, accent }) {
           **没有它,平板和尾高就分不开** —— 「はな(花・型0)」和「はな(鼻・型2)」
           在词本身上都是「低高」,差别全在后面那个助词上。
           用 ○ 占位,表示「这里跟一个助词的话是高还是低」。 */}
-      <Text style={[wd.pitchMora, wd.pitchParticle, particleHigh && wd.pitchHigh]}>○</Text>
-      <Text style={wd.pitchName}>{accentName(reading, accent)}</Text>
+      <Text style={[wd.pitchMora, wd.pitchParticle,
+                    particleHigh ? wd.pitchHigh : wd.pitchLow]}>○</Text>
+      <Text style={wd.pitchName}>
+        {accentName(reading, accent)} · {accentHint(reading, accent)}
+      </Text>
     </View>
   );
 }
@@ -2315,14 +2319,20 @@ const wd = StyleSheet.create({
   hero: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingTop: 16, paddingBottom: 4, gap: 10 },
   word: { fontSize: 32, fontWeight: '700', color: C.ink },
   reading: { fontSize: 14, color: C.muted, marginTop: 2 },
-  // 声调线。每一拍一格,高的那几拍顶上拉线,降的地方右边拐下来。
-  // 线画在**字的上方**(borderTop),这是日语教材的标准形,别改成下划线 ——
-  // 下划线在日语排版里是另一个意思。
+  // 声调线:一条**完整的阶梯轮廓**,不是只在高的地方画一段。
+  //
+  // 第一版只给高的那几拍画了顶线。頭高的词(挨拶)于是只剩第一个假名头上一个小拐角,
+  // 用户的反馈是「有一点没看懂」—— 那不是他没学过,是那个图形本身没有信息:
+  // 一小段线没有对照物,读不出「相对谁高」。
+  //
+  // 现在高的画顶线、低的画底线、高低交界处竖一道连起来,整条读下来就是一个阶梯。
+  // 不需要先懂日语教材的约定也看得出形状。
   pitchRow: { flexDirection: 'row', alignItems: 'flex-start', marginTop: 4 },
   pitchMora: { fontSize: 14, color: C.muted, lineHeight: 20, paddingTop: 2,
                borderColor: C.lava },
   pitchHigh: { borderTopWidth: 1.5 },
-  pitchDrop: { borderRightWidth: 1.5 },
+  pitchLow: { borderBottomWidth: 1.5, borderColor: C.border },
+  pitchStep: { borderRightWidth: 1.5 },
   // 助词那一格:○ 是占位,表示「后面跟个助词的话它是高还是低」。
   // 平板和尾高的差别只在这一格上,颜色要更淡,免得被当成词的一部分
   pitchParticle: { color: C.mutedLight, marginLeft: 1 },

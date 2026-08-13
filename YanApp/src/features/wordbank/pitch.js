@@ -91,11 +91,30 @@ export const primaryAccent = (raw) => {
   return list.length ? list[0] : null;
 };
 
-/** 型的名字。界面上比数字好懂,而且是日语教学里的通用叫法。 */
+/** 型的名字。日语教学里的通用叫法,用户以后在别处也会遇到,所以照旧给。 */
 export function accentName(reading, accent) {
   const n = toMora(reading).length;
   if (accent === 0) return '平板';
   if (accent === 1) return '頭高';
   if (accent >= n) return '尾高';
   return '中高';
+}
+
+/**
+ * 一句能照着念的中文。
+ *
+ * 光给「頭高」不够 —— 对不懂日语的人那只是两个汉字,不是指令。
+ * 用户的原话是「那个高低线其实我有一点没看懂」,而他看不懂是合理的:
+ * 型名是**行话**,行话要先被教过才有意义,而这个 App 恰恰还没教。
+ *
+ * 所以型名后面跟一句大白话,说清「第几拍高、第几拍降」。
+ * 读过三五个词自然就内化了,那时候型名才开始有用。
+ */
+export function accentHint(reading, accent) {
+  const n = toMora(reading).length;
+  if (!n || !Number.isFinite(accent)) return '';
+  if (accent === 0) return '第1拍低，之后一直高（助词也高）';
+  if (accent === 1) return n === 1 ? '就一拍，高' : '第1拍高，之后一直低';
+  if (accent >= n) return `到第${n}拍都不降，助词才转低`;
+  return `第2拍起高，第${accent}拍之后降下来`;
 }
