@@ -19,7 +19,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as ImagePicker from 'expo-image-picker';
 
 import JournalPage from './JournalPage';
-import { PAPERS } from './journalPapers';
+import { PAPERS, PAPER_KEYS, PAPERS_META } from './journalPapers';
 import { ensureJournalFont, journalFontFamily } from '../../lib/journalFont';
 import { importAsset, readAssets, assetUri } from '../../lib/journalStore';
 
@@ -40,7 +40,10 @@ const scribble = (() => {
 
 const DEMO_PAGE = {
   id: 'demo-page-1',
-  bg: 'kraft-bag',
+  // 默认换成干净的素纸。牛皮那档揉皱和污渍拉满,读起来像皱布 ——
+  // 用户看真机截图的判断是「不太美观」,查下来根因就是这个(和纤维叠成织纹)。
+  // 牛皮保留成可选的一档,它是另一种风格,不是被淘汰的版本。
+  bg: 'plain-cream',
   items: [
     // 主锚:一张大照片。参考实物里每页都有一个占 40% 以上的主元素。
     // 单独一个 assetId,好让「从相册选一张」只换它,不把票根贴纸一起换掉
@@ -63,7 +66,9 @@ const DEMO_PAGE = {
 // 右页:同一份演示元素换个位置,用来看对开时左右会不会读成复制粘贴
 const FACING_PAGE = {
   id: 'demo-page-2',
-  bg: 'kraft-light',
+  // 右页**必须**是另一张纸。两页共用一张贴图的话对开时左右完全对称,
+  // 一眼就是复制粘贴 —— 真本子的相邻两页纤维走向从来不一样。
+  bg: 'grid-ivory',
   items: [
     { id: 'j1', kind: 'scan', assetId: 'a1', material: 'scan', lift: 3,
       x: 0.5, y: 0.22, w: 0.66, scale: 1, rotation: 1.4, z: 1 },
@@ -190,6 +195,19 @@ export default function JournalDevScreen({ onBack }) {
                      editable onChangeItems={onChangeItems} blockScrollRef={scrollRef}
                      onReadyChange={onReadyChange} />
 
+        {/* 换纸。这个选择只能看着定 —— 同一页换张纸,差别大到不像同一个功能,
+            而在 Mac 上看好看的纸到 OLED 屏上多半是偏的(这一屏存在的理由)。 */}
+        <View style={styles.paperRow}>
+          {PAPER_KEYS.map(k => (
+            <Pressable key={k} onPress={() => setPage(p => ({ ...p, bg: k }))} hitSlop={6}
+                       style={[styles.paperChip, page.bg === k && styles.paperChipOn]}>
+              <Text style={[styles.paperTxt, page.bg === k && styles.paperTxtOn]}>
+                {PAPERS_META[k]?.label || k}
+              </Text>
+            </Pressable>
+          ))}
+        </View>
+
         <View style={styles.row}>
           <Pressable onPress={pick} disabled={picking} style={styles.btn} hitSlop={8}>
             {picking
@@ -250,6 +268,13 @@ const styles = StyleSheet.create({
   title: { color: '#e6ddca', fontSize: 15, letterSpacing: 2 },
   hint: { color: '#6f6553', fontSize: 11, letterSpacing: 1 },
   scroll: { alignItems: 'center', paddingBottom: 40 },
+  paperRow: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center',
+              gap: 7, marginTop: 16, paddingHorizontal: 20 },
+  paperChip: { paddingHorizontal: 11, paddingVertical: 6, borderRadius: 3,
+               borderWidth: StyleSheet.hairlineWidth, borderColor: '#4a4234' },
+  paperChipOn: { borderColor: '#c9b98f', backgroundColor: 'rgba(201,185,143,0.12)' },
+  paperTxt: { color: '#8a7f68', fontSize: 12 },
+  paperTxtOn: { color: '#e6ddca' },
   row: { flexDirection: 'row', gap: 10, marginTop: 18 },
   btn: { paddingHorizontal: 18, minHeight: 40, justifyContent: 'center',
          borderWidth: StyleSheet.hairlineWidth, borderColor: '#6f6553', borderRadius: 3 },

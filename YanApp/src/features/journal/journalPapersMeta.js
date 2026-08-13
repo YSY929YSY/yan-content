@@ -2,11 +2,16 @@
 //
 // darkInk=false 的纸上,黑墨读不出来 —— 笔的默认色必须跟着纸走。
 // 这是从参考实物上量出来的硬约束,不是审美偏好:深牛皮上写黑字,拍出来就是一团。
-// 同理 photoFrame:牛皮底会把彩色照片压脏,所以牛皮纸上照片默认带白边。
+// 同理 photoFrame:牛皮底会把彩色照片压脏,所以牛皮纸上照片默认带白边;
+// 干净的浅色纸不需要,加了反而像贴纸。
+//
+// ⚠️ `photoFrame` **目前还没有任何代码在读**。它是占位,等照片元素做边框时接上 ——
+// 留着是因为「哪种纸需要白边」是纸的属性,不该到时候再重新判断一遍。
 export const PAPERS_META = {
-  'kraft-light': { label: '牛皮 · 浅', darkInk: true,  photoFrame: 'white' },
-  'kraft-bag':   { label: '牛皮 · 纸袋', darkInk: true,  photoFrame: 'white' },
-  'kraft-dark':  { label: '牛皮 · 深', darkInk: false, photoFrame: 'white' },
+  'plain-cream': { label: '素 · 米黄', darkInk: true, photoFrame: null },
+  'dot-cream':   { label: '点阵 · 米黄', darkInk: true, photoFrame: null },
+  'grid-ivory':  { label: '方格 · 素白', darkInk: true, photoFrame: null },
+  'kraft-bag':   { label: '牛皮 · 纸袋', darkInk: true, photoFrame: 'white' },
 };
 
 /** 这张纸上,笔的默认颜色。深纸上给米白,浅纸上给墨褐。 */

@@ -23,7 +23,7 @@ import { shadowFor, toPx, pickPaper, nibWidth, LIGHT } from './journalRender';
 import {
   hitTest, bringToFront, applyGesture, replaceItem, toPageCoords,
 } from './journalGesture';
-import { PAPERS, PAPER_KEYS } from './journalPapers';
+import { PAPERS, PAPER_DEFAULTS } from './journalPapers';
 import { defaultInkColor } from './journalPapersMeta';
 
 const SHADOW_COLOR = 'rgba(38, 28, 18, 1)';
@@ -160,13 +160,14 @@ export default function JournalPage({ page, facing, assets = {}, spread = false,
   const canvasW = winW;
   const canvasH = pageHeight + pad * 2;
 
-  const paperKey = pickPaper(page, PAPER_KEYS);
+  // 自动挑纸只在干净的那几档里挑,牛皮要用得自己选(见 journalPapers.PAPER_DEFAULTS)
+  const paperKey = pickPaper(page, PAPER_DEFAULTS);
   const paper = useCachedImage(PAPERS[paperKey]);
   const inkColor = defaultInkColor(paperKey);
 
   // 右页用**另一张**纸。两页共用一张贴图的话,对开时左右完全对称,
   // 一眼就是复制粘贴 —— 真本子的相邻两页纤维走向从来不一样。
-  const facingKey = pickPaper(facing || { id: `${page?.id || ''}-r` }, PAPER_KEYS);
+  const facingKey = pickPaper(facing || { id: `${page?.id || ''}-r` }, PAPER_DEFAULTS);
   const facingPaper = useCachedImage(PAPERS[facingKey]);
 
   const sortItems = (p) => [...(p?.items || [])].sort((a, b) => (a.z ?? 0) - (b.z ?? 0));
