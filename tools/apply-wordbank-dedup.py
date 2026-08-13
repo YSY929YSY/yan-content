@@ -81,14 +81,28 @@ MERGE_REQUIRED = {
     'n4_kimaru':   '决定下来；确定；（动作）利落漂亮',      # 決まってる
 }
 
-# 5 组「可并可不并」。默认**并**,但单列出来,好在报告里一眼找到。
-# 不想并就加 --no-secondary。
+# 「可并可不并」的那几组。2026-08-13 逐条定过,结论不是「全并」也不是「全不并」:
+#
+# 判据只有一条:**它是不是这个词本身的义项。**
+# 是 → 并,措辞别扭就改措辞;不是 → 不并,塞进释义栏会教错。
 MERGE_SECONDARY = {
     'n5_isu':     '椅子；（比喻）职位',
-    'n5_kawaii':  '可爱的；宝贝，珍爱',
     'n4_majime':  '认真；正经；诚实',
-    'n5_asatte':  '后天；（方向）不对',
-    'n5_chawan':  '碗；茶杯',                # N2 那条比 N5 的「饭碗」更宽
+    # N5 只写「饭碗」太窄,N2 的「碗;茶杯」又太宽 —— 日语 茶碗 日常压倒性指盛饭的碗,
+    # 「茶杯」那义存在但少见。所以给主次,不是并列
+    'n5_chawan':  '碗（多指饭碗）；茶杯',
+    # 「宝贝,珍爱」对应 JMdict 的 dear / precious / darling(可愛い我が子),
+    # **是真实义项**,不能因为中文措辞别扭就整条丢掉 —— 那是丢内容。改措辞
+    'n5_kawaii':  '可爱的；（对人）疼爱的，宝贝的',
+}
+
+# 明确**不并**的:被删条写的东西不是这个词的义项。
+#
+# 明後日 的「(方向)不对」只活在 あさっての方向 这个固定说法里,
+# 明後日 本身没有这个意思。并进释义栏 = 教一个不存在的义项。
+# 惯用法要收的话该另立字段(标准第四节:能进结构化字段的不要写成散文)。
+MERGE_REJECTED = {
+    'n5_asatte': '「（方向）不对」只存在于 あさっての方向,不是 明後日 的义项',
 }
 
 # 唯一一组反转:保留高级别那条。
@@ -221,6 +235,10 @@ def main():
     for r in [x for x in rows if x['merged']]:
         lines.append(f"| {r['word']} | {r['keep']} | {'/'.join(r['drop'])} | {r['zhBefore']} "
                      f"| {' / '.join(str(z) for z in r['zhDropped'])} | **{r['zhAfter']}** |")
+    lines += ['', '## 明确**不并**的(被删条写的不是这个词的义项)', '']
+    for wid, why in MERGE_REJECTED.items():
+        w = by_id.get(wid) or {}
+        lines.append(f"- **{w.get('word')}**({wid}):{why}。释义保持「{w.get('meaning_zh')}」")
     lines += ['', '## 反转的组(不按「留低级别」的规则)', '']
     for r in [x for x in rows if x['reversed']]:
         lines.append(f"- **{r['word']}**:留 {r['keep']}({r['keepLevel']}),"
