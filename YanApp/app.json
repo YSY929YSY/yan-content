@@ -63,7 +63,8 @@
           "isAndroidBackgroundLocationEnabled": false,
           "isAndroidForegroundServiceEnabled": false
         }
-      ]
+      ],
+      "expo-font"
     ],
     "extra": {
       "eas": {

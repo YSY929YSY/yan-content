@@ -75,6 +75,27 @@ const REGISTRY = {
     key: 'yan_trip_notebook_v1', kind: 'user', backfill: 'notebook',
     desc: '旅行本(行程/账目/预算)',
   },
+  moments: {
+    key: 'yan_moments_v1', kind: 'user', backfill: 'moments',
+    desc: '手账采集层:瞬间(时间/坐标/一句话)+ 照片的本机路径',
+    // 采集层。本机这份是完整事实 —— 拼一页不能等网,所以先落本机再谈上传。
+  },
+  momentTags: {
+    key: 'yan_moment_tags_v1', kind: 'user', backfill: 'moments',
+    desc: '手账语义层:city / first / trip / place… 注解标签',
+    // 标签是注解、理论上可重建,但「第一次」那句话是用户手写的,重建不出来 ——
+    // 所以是 user 不是 cache。
+  },
+  journalPages: {
+    key: 'yan_journal_pages_v1', kind: 'user', backfill: 'journal',
+    desc: '手账页(含页上元素)+ 城市册',
+    // 页是原子单位:元素内嵌在页里,不单开一个键 —— 页和它的元素分两次落盘,
+    // 中间断电就会留下一页空纸。
+  },
+  journalAssets: {
+    key: 'yan_journal_assets_v1', kind: 'user', backfill: 'journal',
+    desc: '手账素材库元数据(抠图/票根/整图;图片文件本身在 FileSystem)',
+  },
   subwayProgress: {
     key: 'yan_subway_unlocked_idx', kind: 'device', backfill: null,
     desc: '地铁冒险解锁进度',

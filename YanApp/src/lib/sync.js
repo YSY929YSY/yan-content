@@ -1,6 +1,7 @@
 import { supabase } from './supabase';
 import { reuploadUserPlaces } from './userPlaces';
 import { pushNotebook } from './tripBackup';
+import { backfillMoments, backfillJournal } from './journalSync';
 import { K, readJson, writeJson, remove as removeKey } from './storage';
 import { toCloudRow, fromCloudRow } from '../features/wordbank/srs';
 
@@ -178,14 +179,30 @@ export async function backfillAll() {
 
   await run('notebook', async () => {
     const snap = await readJson(K.tripNotebook, null);
-    if (!snap || !Array.isArray(snap.books) || !snap.books.length) {
+    // ⚠️ 不能只看 books:账本已经和旅行册解耦了,「只用分账、从不开小本子」是
+    // 明确存在的用法。只按 books 判空,那种用户登录时整本账都不会补传。
+    const books = Array.isArray(snap?.books) ? snap.books : [];
+    const ledgers = Array.isArray(snap?.ledgers) ? snap.ledgers : [];
+    const legacyExpenses = Array.isArray(snap?.expenses) ? snap.expenses : [];
+    if (!snap || (!books.length && !ledgers.length && !legacyExpenses.length)) {
       return { count: 0, error: null };
     }
     // uploads 是本机图片 uri,换机后无效,和 TripNotebook 里的备份口径保持一致
     const { uploads: _skipPhotos, ...cloudSafe } = snap;
     const r = await pushNotebook(cloudSafe, snap.rev);
-    return { count: r.ok ? snap.books.length : 0, error: r.ok ? null : r.error };
+    return { count: r.ok ? books.length + ledgers.length : 0, error: r.ok ? null : r.error };
   });
+
+  // 手账两步之间要传一张 id 映射表:换账号意味着每条记录在新账号下是**新的一行**,
+  // 素材的溯源和页上元素的 moment 引用都得接到新 id 上。采集层失败也照样传手账 ——
+  // 页和素材是用户的作品,不该因为溯源接不上就整批不传(溯源留空而已)。
+  let momentIdMap = new Map();
+  await run('moments', async () => {
+    const r = await backfillMoments();
+    momentIdMap = r.idMap || new Map();
+    return r;
+  });
+  await run('journal', () => backfillJournal(momentIdMap));
 
   const failed = results.filter(r => r.error);
   if (failed.length) {
