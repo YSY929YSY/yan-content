@@ -115,9 +115,25 @@ def main():
 
     bank = json.load(open(BANK, encoding='utf-8'))['wordBank']
 
+    # 三方交叉验证判定「各说各的」的词,一律不收。
+    #
+    # 判据在 crosscheck-pitch.py 那一处,这里只读结论 —— 两处各判一遍迟早会分叉。
+    # 空着不会教错,给一个错的会:声调是照着念的东西,念错了学习者不会知道。
+    disputed = set()
+    dp = f'{ROOT}/YanApp/staging/pitch-disputed.json'
+    if os.path.exists(dp):
+        for pair in json.load(open(dp, encoding='utf-8')).get('pairs', []):
+            disputed.add(tuple(pair))
+    else:
+        print('⚠️ 没找到 pitch-disputed.json —— 先跑 tools/crosscheck-pitch.py,'
+              '否则三个来源打架的那些词会被原样收进去')
+
     hits, stats, bad = {}, Counter(), []
     for w in bank:
         key = (w.get('word'), w.get('reading'))
+        if key in disputed:
+            stats['三方打架,不收'] += 1
+            continue
         raw = table.get(key)
         if raw is None:
             # 接尾辞(～円/～回)本来就没有独立声调,不算缺口,单独计数

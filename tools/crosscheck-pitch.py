@@ -1,57 +1,62 @@
 #!/usr/bin/env python3
-"""拿中文维基词典当**独立第二来源**,交叉验证 kanjium 的声调数据。**只出报告。**
+"""三个独立来源交叉验证声调。**只出报告,不改内容。**
 
-## 为什么需要这个
+## 为什么要三个
 
-声调数据是给学习者照着念的。念错了他不会知道,而且没人纠正 ——
-「补错的词源比没有词源坏得多」那条规矩在这里同样成立,甚至更严重。
+声调是给学习者照着念的。念错了他不会知道,也没人纠正 ——
+「宁可空着不要猜」在这里比在词源那边更硬。
 
-而我们没有权威审校(NHK / 大辞林的重音辞典是商业的,不能直接比对)。
-唯一能做的是**两个互不相干的来源互相印证**:
+而我们没有权威审校(NHK / 大辞林的重音辞典是商业的)。能做的是**互不相干的
+来源互相印证**。三个:
 
-  · kanjium `accents.txt`     —— Uros O. 整理,Yomichan / Anki 生态在用
-  · zh.wiktionary 的日语条目  —— 维基编者标注,来源与 kanjium 无关
+| 来源 | 出处 | 血统 |
+|---|---|---|
+| kanjium `accents.txt` | Uros O. 整理,Yomichan / Anki 生态在用 | 个人整理 |
+| zh.wiktionary 日语条目 | 维基编者标注 | 维基 |
+| **UniDic 2.1.2** `aType` | **国立国语研究所**,语料库标注体系 | 学术机构 |
 
-两边一致的,可信度高得多;两边打架的,**一条都不能信**,要挑出来单独处理。
-这不是「验证正确」,是「找出可疑处」—— 工具能做的只有后者。
+⚠️ **两个来源不够。** 第一版只比 kanjium 和中文维基,跑出 98% 一致 ——
+但维基各语言版之间的日语发音数据经常互相导入,**中文版很可能是英文版的下游**。
+同源的两份一致是应该的,不算印证。UniDic 才是真正第三条腿:
+它来自 NINJAL 的语料库标注,和前两者没有任何交集。
 
-## 维基那边的数据长什么样
+实测它立刻起作用:`注文` kanjium 说 0、维基说 1,UniDic 说 0 —— 判给 kanjium;
+`季節` kanjium 2、维基 1,UniDic 给的是 `1,2` —— **两个都通行,谁都没错**。
 
-    {"tags": ["Nakadaka"], "other": "にほん", "roman": "[nìhóꜜǹ]"}
+## 判定口径
 
-  · tags   Heiban(平板) / Atamadaka(頭高) / Nakadaka(中高) / Odaka(尾高)
-  · roman  每个拍标了高低(◌̀ 低 / ◌́ 高),`ꜜ` 是降调位置
+**至少两个来源一致才算「有佐证」。** 只有一个来源、或者三个各说各的,
+一律标成待定 —— 那种词宁可不显示声调。
 
-**降调位置从 roman 数**:数 `ꜜ` 前面有几个带高低标记的音节即可。
-只靠 tags 不够 —— 中高只说明「降在中间」,没说降在第几拍。
+UniDic 的 aType 可能是 `1,2`(多个都通行),按集合比,有交集就算一致。
 
 ## 用法
 
     python3 tools/crosscheck-pitch.py
 
-需要 `tools/data/kanjium-accents.txt`(取法见 join-pitch-accent.py)
-和 `tools/data/zhwikt-jpn.jsonl`。
+依赖:
+    pip install fugashi unidic-lite      # UniDic 2.1.2,BSD/GPL/LGPL 三重许可
+数据:
+    tools/data/kanjium-accents.txt       取法见 join-pitch-accent.py
+    tools/data/zhwikt-jpn.jsonl
 """
 import json
 import os
 import re
 import sys
 import unicodedata
-from collections import Counter
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ACCENTS = f'{ROOT}/tools/data/kanjium-accents.txt'
 WIKT = f'{ROOT}/tools/data/zhwikt-jpn.jsonl'
 BANK = f'{ROOT}/YanApp/assets/content.fallback.json'
+OUT = f'{ROOT}/reports/pitch-crosscheck.md'
 
-DOWNSTEP = 'ꜜ'          # ꜜ
-GRAVE, ACUTE = '̀', '́'
-
+DOWNSTEP, GRAVE, ACUTE = 'ꜜ', '̀', '́'
 SMALL = 'ゃゅょぁぃぅぇぉャュョァィゥェォゎヮ'
 
 
 def to_mora(reading):
-    """和 pitch.js / join-pitch-accent.py 的 toMora 一致。"""
     out = []
     for ch in str(reading or ''):
         if ch in SMALL and out:
@@ -61,19 +66,18 @@ def to_mora(reading):
     return out
 
 
+def kata_to_hira(s):
+    """UniDic 的 kana 是片假名,词库的 reading 是平假名 —— 不转就一条都对不上。"""
+    return ''.join(chr(ord(c) - 0x60) if 'ァ' <= c <= 'ヶ' else c for c in str(s or ''))
+
+
 def accent_from_roman(roman, reading):
-    """从 `[nìhóꜜǹ]` + 假名读音,数出降调位置。
+    """从 `[nìhóꜜǹ]` + 假名读音数出降调位置。
 
-    ⚠️ **不能只数罗马字上的高低标记。**
-    标记是打在元音上的,而 `っ` 在罗马字里写成双辅音(うっかり → ukkari),
-    **不带元音、因此没有标记**。只数标记会把每个 `っ` 都漏掉,结果比真值小。
-
-    第一版就是这么写的,跑出来 26 条「不一致」,其中十几条是清一色的
-    「kanjium 恰好比我大 1,而且词里都有 っ」—— 那不是数据打架,是我的解析器错了。
-    (`ん` 是带标记的:にほん → nìhóǹ,所以只有 `っ` 要补。)
-
-    做法:数出 `ꜜ` 前有几个**带标记的拍**,再回假名里走,
-    把路上遇到的 `っ` 一起算进去。
+    ⚠️ 不能只数罗马字上的高低标记:标记打在**元音**上,而 `っ` 在罗马字里是
+    双辅音(うっかり → ukkari),不带元音因此没有标记。只数标记会把每个 `っ` 漏掉。
+    第一版就这么错的,26 条「不一致」里十几条其实是这个 bug。
+    (`ん` 是带标记的,只有 `っ` 要补。)
     """
     if not roman or not reading:
         return None
@@ -85,21 +89,18 @@ def accent_from_roman(roman, reading):
         if ch in (GRAVE, ACUTE):
             marks += 1
     else:
-        # 没有 ꜜ:整词不降 = 平板
         return 0 if (GRAVE in s or ACUTE in s) else None
-
     mora = to_mora(reading)
     counted = 0
     for i, m in enumerate(mora):
         if m not in ('っ', 'ッ'):
             counted += 1
         if counted == marks:
-            return i + 1                 # 降在这一拍之后
+            return i + 1
     return marks
 
 
 def accent_from_tag(tags, mora_n):
-    """tags 能定的三种。中高定不了(它只说降在中间),返回 None 交给 roman。"""
     t = set(tags or [])
     if 'Heiban' in t:
         return 0
@@ -107,81 +108,147 @@ def accent_from_tag(tags, mora_n):
         return 1
     if 'Odaka' in t:
         return mora_n
-    return None
+    return None          # 中高定不了降在第几拍,交给 roman
 
 
-def main():
-    for p in (ACCENTS, WIKT):
-        if not os.path.exists(p):
-            print(f'✗ 缺文件:{p}')
-            return 2
-
-    kanjium = {}
+def load_kanjium():
+    out = {}
     for line in open(ACCENTS, encoding='utf-8'):
         p = line.rstrip('\n').split('\t')
-        if len(p) >= 3:
-            surface, reading, acc = p[0], p[1], p[2]
-            m = re.search(r'(\d+)', acc.split(',')[0])
-            if m:
-                kanjium[(surface, reading or surface)] = int(m.group(1))
+        if len(p) < 3:
+            continue
+        accs = {int(m.group(1)) for m in re.finditer(r'(\d+)\s*(?:,|$)', p[2])}
+        if accs:
+            out[(p[0], p[1] or p[0])] = accs
+    return out
 
-    # 词库里的词才有意义 —— 全量比对会把大量我们根本不展示的词算进去
-    bank = json.load(open(BANK, encoding='utf-8'))['wordBank']
-    in_bank = {(w.get('word'), w.get('reading')) for w in bank}
 
-    agree, disagree, only_one = 0, [], 0
-    seen = set()
+def load_wiktionary(in_bank):
+    out = {}
     for line in open(WIKT, encoding='utf-8'):
         d = json.loads(line)
         if d.get('lang_code') != 'ja':
             continue
-        word = d.get('word')
         for s in d.get('sounds') or []:
             reading = s.get('other')
-            if not word or not reading:
-                continue
-            key = (word, reading)
-            if key not in in_bank or key in seen:
-                continue
-            k = kanjium.get(key)
-            if k is None:
+            key = (d.get('word'), reading)
+            if not reading or key not in in_bank or key in out:
                 continue
             n = len(to_mora(reading))
-            w_acc = accent_from_tag(s.get('tags'), n)
-            if w_acc is None:
-                w_acc = accent_from_roman(s.get('roman'), reading)
-            if w_acc is None:
-                continue
-            seen.add(key)
-            if w_acc == k:
-                agree += 1
-            else:
-                disagree.append((word, reading, k, w_acc, s.get('tags'), s.get('roman')))
+            a = accent_from_tag(s.get('tags'), n)
+            if a is None:
+                a = accent_from_roman(s.get('roman'), reading)
+            if a is not None:
+                out[key] = {a}
+    return out
 
-    total = agree + len(disagree)
-    if not total:
-        print('✗ 两边没有可比对的交集 —— 检查数据文件')
-        return 1
 
-    print(f'词库里两边都有的:{total} 条')
-    print(f'  一致    {agree} ({100 * agree // total}%)')
-    print(f'  不一致  {len(disagree)} ({100 * len(disagree) // total}%)')
+def load_unidic(words):
+    """UniDic 只对**整词被切成一个词元**的情况给结论。
+
+    切成两段以上说明它不认这个词条,那时候的 aType 属于其中某一段,
+    拿来当整词的声调是错的 —— 宁可当没有。
+    """
+    try:
+        import fugashi
+        import unidic_lite
+    except ImportError:
+        print('（跳过 UniDic:pip install fugashi unidic-lite）')
+        return {}
+    tagger = fugashi.Tagger('-d ' + unidic_lite.DICDIR)
+    out = {}
+    for word, reading in words:
+        try:
+            ms = tagger(word)
+        except Exception:
+            continue
+        if len(ms) != 1:
+            continue
+        f = ms[0].feature
+        a_raw, kana = getattr(f, 'aType', None), getattr(f, 'kana', None)
+        if not a_raw or a_raw == '*':
+            continue
+        if kana and kata_to_hira(kana) != reading:
+            continue          # 读音对不上 = 不是同一个词,别硬凑
+        accs = {int(x) for x in re.findall(r'\d+', str(a_raw))}
+        if accs:
+            out[(word, reading)] = accs
+    return out
+
+
+def main():
+    bank = json.load(open(BANK, encoding='utf-8'))['wordBank']
+    keys = [(w.get('word'), w.get('reading')) for w in bank if w.get('word') and w.get('reading')]
+    in_bank = set(keys)
+
+    kanjium = load_kanjium()
+    wikt = load_wiktionary(in_bank)
+    unidic = load_unidic(keys)
+
+    print(f'词库 {len(in_bank)} 条 —— 各来源覆盖:')
+    print(f'  kanjium   {sum(1 for k in in_bank if k in kanjium)}')
+    print(f'  中文维基   {len(wikt)}')
+    print(f'  UniDic    {len(unidic)}')
     print()
-    print('不一致的**一条都不能信**,要人挑一遍。前 25 条:')
-    for word, reading, k, w, tags, roman in disagree[:25]:
-        print(f'  {word}({reading})  kanjium 型{k}  维基 型{w}  {tags} {roman}')
 
-    out = f'{ROOT}/reports/pitch-crosscheck.md'
-    os.makedirs(os.path.dirname(out), exist_ok=True)
-    with open(out, 'w', encoding='utf-8') as f:
-        f.write('# 声调交叉验证 · kanjium vs 中文维基词典\n\n')
-        f.write('两个来源互不相干。一致的可信度高;**不一致的一条都不能信**。\n\n')
-        f.write(f'- 可比对:{total}\n- 一致:{agree}({100 * agree // total}%)\n')
-        f.write(f'- 不一致:{len(disagree)}\n\n## 不一致明细\n\n')
-        f.write('| 词 | 读音 | kanjium | 维基 | 维基 tags | 维基 roman |\n|---|---|---|---|---|---|\n')
-        for word, reading, k, w, tags, roman in disagree:
-            f.write(f'| {word} | {reading} | 型{k} | 型{w} | {tags} | `{roman}` |\n')
-    print(f'\n→ {os.path.relpath(out, ROOT)}')
+    rows = {'三方一致': [], '两方一致': [], '各说各的': [], '只有一个来源': [], '无': []}
+    for key in in_bank:
+        srcs = {n: s for n, s in
+                (('kanjium', kanjium.get(key)), ('维基', wikt.get(key)), ('UniDic', unidic.get(key)))
+                if s}
+        if not srcs:
+            rows['无'].append((key, srcs)); continue
+        if len(srcs) == 1:
+            rows['只有一个来源'].append((key, srcs)); continue
+        names = list(srcs)
+        pairs = [(a, b) for i, a in enumerate(names) for b in names[i + 1:]
+                 if srcs[a] & srcs[b]]
+        if len(srcs) == 3 and len(pairs) == 3:
+            rows['三方一致'].append((key, srcs))
+        elif pairs:
+            rows['两方一致'].append((key, srcs))
+        else:
+            rows['各说各的'].append((key, srcs))
+
+    total_multi = len(rows['三方一致']) + len(rows['两方一致']) + len(rows['各说各的'])
+    print(f'有两个以上来源的 {total_multi} 条:')
+    for k in ('三方一致', '两方一致', '各说各的'):
+        n = len(rows[k])
+        print(f'  {k:<8}{n:>6}  ({100 * n // max(1, total_multi)}%)')
+    print(f'\n只有一个来源(无从印证){len(rows["只有一个来源"]):>6}')
+    print(f'一个来源都没有         {len(rows["无"]):>6}')
+
+    bad = rows['各说各的']
+    if bad:
+        print(f'\n★ 三方各说各的 {len(bad)} 条 —— **这些不该显示声调**:')
+        for (w, r), s in bad[:20]:
+            print('   ', w, f'({r})', ' · '.join(f'{n}{sorted(v)}' for n, v in s.items()))
+
+    os.makedirs(os.path.dirname(OUT), exist_ok=True)
+    with open(OUT, 'w', encoding='utf-8') as f:
+        f.write('# 声调交叉验证 · kanjium × 中文维基 × UniDic\n\n')
+        f.write('三个来源血统不同:个人整理 / 维基编者 / 国立国语研究所语料库。\n')
+        f.write('**判定:至少两个来源一致才算有佐证。**\n\n')
+        f.write(f'| 类别 | 条数 |\n|---|---|\n')
+        for k in ('三方一致', '两方一致', '各说各的', '只有一个来源', '无'):
+            f.write(f'| {k} | {len(rows[k])} |\n')
+        f.write('\n## 各说各的(建议不显示声调)\n\n| 词 | 读音 | 各家说法 |\n|---|---|---|\n')
+        for (w, r), s in bad:
+            f.write(f'| {w} | {r} | {" · ".join(f"{n}{sorted(v)}" for n, v in s.items())} |\n')
+    # 机器可读的一份,给 join-pitch-accent.py 排除用。
+    # 不让它自己再判一遍 —— 判据只该有一处,两处迟早会分叉。
+    disputed = f'{ROOT}/YanApp/staging/pitch-disputed.json'
+    os.makedirs(os.path.dirname(disputed), exist_ok=True)
+    with open(disputed, 'w', encoding='utf-8') as f:
+        json.dump({
+            'note': '三个来源各说各的。**不要显示这些词的声调** —— 空着不会教错,'
+                    '给一个错的会。判定和明细见 reports/pitch-crosscheck.md',
+            'pairs': sorted([list(k) for k, _ in bad]),
+        }, f, ensure_ascii=False, indent=1)
+        f.write('\n')
+
+    print(f'\n→ {os.path.relpath(OUT, ROOT)}')
+    print(f'→ {os.path.relpath(disputed, ROOT)}  ({len(bad)} 条,join 时自动排除)')
     return 0
 
 
