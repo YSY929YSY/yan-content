@@ -98,26 +98,61 @@ export async function signInWithApple() {
  * 本地存档也要一并清 —— 否则删完账号重开 App,旅行本和进度还在,
  * 用户会以为没删干净。
  */
+/**
+ * 删号要清的所有 Storage 桶。**新增桶必须加到这里。**
+ *
+ * 手账的素材和瞬间照片共用 `moment-photos`(见 schema.journal.sql 第 190 行)。
+ */
+const BUCKETS = ['checkin-photos', 'moment-photos'];
+
+/**
+ * 列出某个前缀下的**全部**文件路径,包括子目录里的。
+ *
+ * ⚠️ Supabase 的 `list()` **不递归**。而手账素材约定存在
+ * `{user_id}/journal/{id}.png` —— 只列 `{uid}` 一层的话,返回的是一个名叫
+ * `journal` 的「文件夹」条目,真正的文件一个都不在里面,于是全部漏删。
+ * 文件夹条目的特征是 `id` 为 null(Supabase 的对象才有 id)。
+ *
+ * 限深度 3:够覆盖现在和可预见的布局,又不会在意外的深层结构上转很久 ——
+ * 删号是用户点了「删除」正在等的操作,不能卡住。
+ */
+async function listAllUnder(bucket, prefix, depth = 3) {
+  const { data, error } = await supabase.storage.from(bucket).list(prefix, { limit: 1000 });
+  if (error || !data?.length) return [];
+  const out = [];
+  for (const entry of data) {
+    const path = `${prefix}/${entry.name}`;
+    if (entry.id == null) {
+      if (depth > 1) out.push(...await listAllUnder(bucket, path, depth - 1));
+    } else {
+      out.push(path);
+    }
+  }
+  return out;
+}
+
 export async function deleteAccount() {
   if (!supabase) return { ok: false, error: 'offline' };
   try {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) return { ok: false, error: '当前没有登录' };
 
-    // 先删打卡照片,再删账号 —— 顺序不能反:
+    // 先删所有桶里的文件,再删账号 —— 顺序不能反:
     // Supabase 不允许在 SQL 里直接删 storage.objects(会报 42501),
     // 只能走 Storage API;而账号一旦删掉,就再没有权限碰自己那些文件了,
-    // 照片会变成谁也删不掉的孤儿。
-    try {
-      const dir = session.user.id;
-      const { data: files } = await supabase.storage.from('checkin-photos').list(dir);
-      if (files?.length) {
-        await supabase.storage.from('checkin-photos')
-          .remove(files.map(f => `${dir}/${f.name}`));
+    // 文件会变成谁也删不掉的孤儿。这是合规问题,不是清理问题。
+    //
+    // ⚠️ **加了新桶就往 BUCKETS 里加一行。** 原来这里是一段写死 checkin-photos
+    // 的代码,于是手账上线时 moment-photos 会被整个漏掉 ——
+    // schema.journal.sql 第 195 行早就写了这条,但那是注释,拦不住谁。
+    for (const bucket of BUCKETS) {
+      try {
+        const paths = await listAllUnder(bucket, session.user.id);
+        if (paths.length) await supabase.storage.from(bucket).remove(paths);
+      } catch (e) {
+        // 文件删不掉不该挡住账号删除 —— 用户的诉求是「把我删掉」
+        console.warn(`[Auth] remove ${bucket} failed:`, e.message);
       }
-    } catch (e) {
-      // 照片删不掉不该挡住账号删除 —— 用户的诉求是「把我删掉」
-      console.warn('[Auth] remove photos failed:', e.message);
     }
 
     const { error } = await supabase.rpc('delete_my_account');
