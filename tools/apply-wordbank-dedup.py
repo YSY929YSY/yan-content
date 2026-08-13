@@ -137,6 +137,10 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     ap.add_argument('--report', action='store_true', help='只看报告,不写文件')
     ap.add_argument('--no-secondary', action='store_true', help='5 组「可并可不并」的不并')
+    # ⚠️ 这个开关会**改内容文件**。默认关着 —— 默认行为永远只落 staging。
+    ap.add_argument('--apply-to-content', action='store_true',
+                    help='把结果写进 yan-content/content.v2.json 和 assets/content.fallback.json'
+                         '(两份保持逐字节相同)。之后还要改 --expected-count、跑审计、再推')
     args = ap.parse_args()
 
     data = json.load(open(BANK, encoding='utf-8'))
@@ -270,8 +274,44 @@ def main():
     with open(f'{OUTDIR}/report.md', 'w', encoding='utf-8') as f:
         f.write(report)
     print(f'\n→ {os.path.relpath(OUTDIR, ROOT)}/  (wordBank.json + report.md)')
-    print('  **没有碰内容文件。** 并进内容包的五步见脚本 docstring。')
-    return 0
+
+    if not args.apply_to_content:
+        print('  **没有碰内容文件。** 要写进内容包加 --apply-to-content。')
+        return 0
+
+    # ── 写进内容包 ────────────────────────────────────────────
+    #
+    # 只换 wordBank 这一个键,其余原样保留 —— 整份重新序列化会把别的区块
+    # 的格式也动一遍,那样 diff 里全是噪声,人没法复核这次到底改了什么。
+    CONTENT = f'{ROOT}/yan-content/content.v2.json'
+    FALLBACK = f'{ROOT}/YanApp/assets/content.fallback.json'
+
+    before = open(CONTENT, encoding='utf-8').read()
+    if before != open(FALLBACK, encoding='utf-8').read():
+        print('✗ content.v2.json 和 fallback.json 现在就不一致 —— 先把这个修好再来,'
+              '否则这次改动会掩盖掉原来的偏差')
+        return 1
+
+    doc = json.loads(before)
+    if len(doc.get('wordBank') or []) != EXPECTED_BEFORE:
+        print(f"✗ 内容包里的 wordBank 是 {len(doc.get('wordBank') or [])} 条,不是 {EXPECTED_BEFORE}")
+        return 1
+    doc['wordBank'] = out_bank
+
+    # 沿用原文件的缩进风格,别在 diff 里制造无关噪声
+    indent = 1 if before.startswith('{\n ') and not before.startswith('{\n  ') else 2
+    text = json.dumps(doc, ensure_ascii=False, indent=indent) + ('\n' if before.endswith('\n') else '')
+    for p in (CONTENT, FALLBACK):
+        with open(p, 'w', encoding='utf-8') as f:
+            f.write(text)
+
+    same = open(CONTENT, encoding='utf-8').read() == open(FALLBACK, encoding='utf-8').read()
+    print(f'\n✓ 已写入内容包(两份逐字节{"相同" if same else "**不同 —— 有问题**"})')
+    print('  还没做完,剩下三步:')
+    print(f'    1. tools/audit-wordbank-examples.py 的 --expected-count 改成 {EXPECTED_AFTER}')
+    print('    2. bash tools/check-content-release.sh    Blocker 必须为 0')
+    print('    3. bash scripts/push-content.sh           内容必须先于 App 上架')
+    return 0 if same else 1
 
 
 if __name__ == '__main__':

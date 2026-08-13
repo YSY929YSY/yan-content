@@ -225,7 +225,10 @@ def main() -> None:
     # 8298 → 8026:2026-08 按 jmdictSeq 合并了 267 组「同一个词两条记录」
     # (おねがいします/お願いします 这类,同一个 seq 下假名和汉字各占一行,
     # 还挂在不同 JLPT 级别)。删掉 272 条重复。详见 keyAliases.js 和那次提交。
-    parser.add_argument("--expected-count", type=int, default=8047)
+    # 2026-08-13:8047 → 8005,去重删了 42 组同形同音重复(tools/apply-wordbank-dedup.py)。
+    # 这个数是**故意写死**的:它 2026-08 正确地拦住过一次没打算做的去重。
+    # 词条数有意变动时改这里,不要绕过审计。
+    parser.add_argument("--expected-count", type=int, default=8005)
     parser.add_argument("--limit", type=int, default=120)
     parser.add_argument("--diff-only", type=Path, default=None,
                         help="Only audit entries not present in this baseline file (incremental mode)")
