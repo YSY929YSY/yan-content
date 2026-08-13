@@ -171,19 +171,26 @@ def rand_polyline(n=5, horizontal=True, margin=0.12):
 
 
 def make(name, base_rgb, *, out_dir=DEFAULT_OUT, keep_png=False,
-         fiber=0.055, cloud=0.04, creases=3, crumple=0,
-         crumple_depth=0.16, flecks=1500, hairs=90, stains=3, foxing=18,
-         wear=0.55, crease_depth=0.10, seed=7):
+         fiber=0.055, fiber_cross=0.15, cloud=0.04, creases=3, crumple=0,
+         crumple_depth=0.16, flecks=1500, hairs=90, hair_len=(12, 40), stains=3, foxing=18,
+         wear=0.55, crease_depth=0.10, rule=None, rule_ink=(0.10, 0.12, 0.16), seed=7):
     global rng
     rng = np.random.default_rng(seed)
 
     # ── 明度层(先做灰度,最后再上色 —— 纸的颜色是染出来的,纹理是纸本身的)
     v = np.ones((H, W), np.float32)
 
-    # 纤维:两个方向叠,竖向为主(抄纸时纤维顺着流浆方向排)
+    # 纤维:主方向 + **很弱的**横向 + 各向同性细粒
+    #
+    # ⚠️ 横向那层的系数是这张纸像不像纸的分水岭。第一版给了 0.55,两个垂直方向
+    # 的条纹一样强,叠出来是**经纬** —— 眼睛立刻读成布。用户的判断是「不自然」,
+    # 放大看就是一层十字织纹。
+    # 真纸的纤维是**毡合**的:抄纸时顺流浆方向有个主轴,但绝不成网格。
+    # 所以横向压到 0.15 以下,差的那部分用各向同性细粒补回来 —— 细粒没有方向,
+    # 加多少都不会长出纹路。
     v += fiber * (stretched(H, W, 1.0, 14, 0.5) - 0.5) * 2
-    v += fiber * 0.55 * (stretched(H, W, 14, 1.0, 0.5) - 0.5) * 2
-    v += fiber * 0.35 * (noise(H, W, 0.4) - 0.5) * 2
+    v += fiber * fiber_cross * (stretched(H, W, 14, 1.0, 0.5) - 0.5) * 2
+    v += fiber * 0.9 * (noise(H, W, 0.4) - 0.5) * 2
 
     # 云斑:只要**大尺度**的深浅不均。中频一强就成迷彩,那是皮子不是纸。
     v += cloud * (fbm(H, W, 2, 1400) - 0.5) * 2
@@ -212,7 +219,9 @@ def make(name, base_rgb, *, out_dir=DEFAULT_OUT, keep_png=False,
             pts = [(x, y)]
             for _ in range(rng.integers(3, 7)):
                 ang += rng.normal(0, 0.45)
-                ln = rng.uniform(12, 40)
+                # 干净纸上要短。12~40px 的多段曲线在素纸上读成「掉在纸上的头发」,
+                # 在牛皮纸上才是「翘起来的长纤维」—— 同一层贴图,两种纸上的观感相反
+                ln = rng.uniform(*hair_len)
                 x, y = x + ln * np.cos(ang), y + ln * np.sin(ang)
                 pts.append((x, y))
             d.line(pts, fill=128 + int(rng.normal(0, 30)), width=1)
@@ -282,6 +291,35 @@ def make(name, base_rgb, *, out_dir=DEFAULT_OUT, keep_png=False,
         gray = img.mean(axis=2, keepdims=True)
         img = img * (1 - ridge * 0.30 * wear) + gray * (ridge * 0.30 * wear)
 
+    # ── 印刷格线(点阵 / 方格 / 横线)
+    #
+    # 真手账纸绝大多数是有格线的,而**印刷的规则线本身就是最强的「这是纸」信号** ——
+    # 比纹理管用得多:纹理只能说明「这是个有质感的表面」,格线说明「这是给人写字的纸」。
+    #
+    # 画在**上色之后**:格线是印上去的墨,不参与纸本身的明暗,
+    # 混进 v 里会被后面的暖色偏和污渍一起揉,看起来像洇进纸里的脏东西。
+    #
+    # 淡到「看得见但不抢」—— 格线一重,页面就成了作业本,而这一页的主角是照片和字。
+    if rule:
+        grid = Image.new('L', (W, H), 0)
+        gd = ImageDraw.Draw(grid)
+        step = int(W / 22)                      # 一页横向约 22 格,和实物手账接近
+        if rule == 'dot':
+            r_ = max(1, W // 900)
+            for gx in range(step, W, step):
+                for gy in range(step, H, step):
+                    gd.ellipse([gx - r_, gy - r_, gx + r_, gy + r_], fill=255)
+        elif rule == 'grid':
+            for gx in range(step, W, step):
+                gd.line([(gx, 0), (gx, H)], fill=255, width=1)
+            for gy in range(step, H, step):
+                gd.line([(0, gy), (W, gy)], fill=255, width=1)
+        elif rule == 'line':
+            for gy in range(step, H, step):
+                gd.line([(0, gy), (W, gy)], fill=255, width=1)
+        g = np.asarray(grid.filter(ImageFilter.GaussianBlur(0.4))).astype(np.float32) / 255
+        img -= g[..., None] * np.array(rule_ink, np.float32)[None, None, :]
+
     out = Image.fromarray((np.clip(img, 0, 1) * 255).astype(np.uint8))
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, f'{name}.jpg')
@@ -303,7 +341,9 @@ def make(name, base_rgb, *, out_dir=DEFAULT_OUT, keep_png=False,
 # 已经写过一次)。所以干净纸的配方是「减法做到极限,但三样不能丢」:
 #   纤维颗粒(纸之所以是纸)· 少量草梗(手工/再生纸的信号)· 大尺度光照不均
 # 去掉的是:揉皱、折痕、污渍、foxing 锈斑、重磨损。
-CLEAN = dict(crumple=0, crumple_depth=0, creases=0, crease_depth=0, stains=0)
+CLEAN = dict(crumple=0, crumple_depth=0, creases=0, crease_depth=0, stains=0,
+             fiber_cross=0.12,      # 高了就成经纬织纹,见 make() 里那段
+             hair_len=(6, 16))      # 长毛丝在素纸上像头发
 
 # 三档,对着参考图里的色域来:米白稻草 / 黄棕纸袋 / 红棕深牛皮。
 # crumple 是横贯整页的折线条数 —— 它决定「揉过几次」。
@@ -321,6 +361,17 @@ PAPERS = [
     ('plain-mist', (234, 233, 228), dict(
         CLEAN, fiber=0.028, cloud=0.013, flecks=600, hairs=35,
         foxing=0, wear=0.13, seed=103)),
+    # 带格线的三档。手账纸真实世界里最常见的就是这几种,
+    # 而印刷格线是「这是纸」最强的信号(见 make() 里那段)
+    ('dot-cream', (243, 236, 220), dict(
+        CLEAN, fiber=0.030, cloud=0.014, flecks=800, hairs=40,
+        foxing=1, wear=0.15, rule='dot', seed=111)),
+    ('grid-ivory', (247, 244, 236), dict(
+        CLEAN, fiber=0.026, cloud=0.012, flecks=600, hairs=30,
+        foxing=0, wear=0.13, rule='grid', rule_ink=(0.055, 0.065, 0.085), seed=112)),
+    ('line-cream', (244, 237, 221), dict(
+        CLEAN, fiber=0.030, cloud=0.014, flecks=700, hairs=35,
+        foxing=1, wear=0.15, rule='line', rule_ink=(0.07, 0.08, 0.105), seed=113)),
     ('kraft-light', (223, 206, 176), dict(
         fiber=0.05, cloud=0.035, creases=1, crumple=26, crumple_depth=0.09,
         flecks=2600, hairs=120, stains=2, foxing=22, wear=0.5,
