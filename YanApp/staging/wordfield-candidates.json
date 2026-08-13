@@ -1,0 +1,3438 @@
+[
+  {
+    "id": "n5_daijoubu",
+    "word": "大丈夫",
+    "reading": "だいじょうぶ",
+    "level": "N5",
+    "why": "中文「大丈夫」是男子汉,日语是「没事吧/不用了」。摔倒、生病、被让座时对方脱口而出的那句。",
+    "memberIds": [
+      "n3_korobu",
+      "n4_kega",
+      "n5_itai",
+      "n4_shinpai"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_chuumon",
+    "word": "注文",
+    "reading": "ちゅうもん",
+    "level": "N3",
+    "why": "中文是订购,日语第一场景是餐厅点单;「注文が多い」还有挑剔的意思。",
+    "memberIds": [
+      "n2_menyu",
+      "n4_seki",
+      "n1_teishoku",
+      "n3_kaikei"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n5_benkyou",
+    "word": "勉強",
+    "reading": "べんきょう",
+    "level": "N5",
+    "why": "中文是勉强,日语是学习,而且商家说「勉強します」是打折——同一个词两个场都真实高频。",
+    "memberIds": [
+      "n4_shiken",
+      "n1_juku",
+      "n3_tetsuya",
+      "n4_nedan"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_meiwaku",
+    "word": "迷惑",
+    "reading": "めいわく",
+    "level": "N3",
+    "why": "中文没有这个用法。它的场是很具体的:电车里、深夜、邻居——日本人给它专门造了「迷惑行為」。",
+    "memberIds": [
+      "n5_densha",
+      "n4_oto",
+      "n5_tonari",
+      "n4_ayamaru"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_gaman",
+    "word": "我慢",
+    "reading": "がまん",
+    "level": "N3",
+    "why": "中文「我慢」不成词。它的场是身体上忍着:打针、疼、想上厕所、不哭出来。",
+    "memberIds": [
+      "n5_itai",
+      "n4_chuusha",
+      "n5_kusuri",
+      "n3_namida"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_jama",
+    "word": "邪魔",
+    "reading": "じゃま",
+    "level": "N3",
+    "why": "中文是妖怪,日语是碍事;进门说「お邪魔します」又是另一头,一个词两个方向。",
+    "memberIds": [
+      "n5_nimotsu",
+      "n4_tooru",
+      "n5_michi",
+      "n4_katazukeru"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_tokui",
+    "word": "得意",
+    "reading": "とくい",
+    "level": "N3",
+    "why": "中文偏得意洋洋,日语是「擅长」。它和苦手成对出现,场是自我介绍/兴趣。",
+    "memberIds": [
+      "n3_nigate",
+      "n5_ryouri",
+      "n5_oyogu",
+      "n5_renshuu"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_nigate",
+    "word": "苦手",
+    "reading": "にがて",
+    "level": "N3",
+    "why": "和语构词,汉字骗不了人也帮不了人。场是被邀请时委婉拒绝:不敢吃、不敢做。",
+    "memberIds": [
+      "n3_tokui",
+      "n4_aji",
+      "n3_kotowaru",
+      "n5_ryouri"
+    ],
+    "missingMembers": [
+      "納豆"
+    ],
+    "tier": "A"
+  },
+  {
+    "id": "n3_mendou",
+    "word": "面倒",
+    "reading": "めんどう",
+    "level": "N3",
+    "why": "中文没这个词。场极具体:办手续、填表、跑窗口——日本社会最容易触发它的地方。",
+    "memberIds": [
+      "n2_tetsuzuki",
+      "n3_shorui",
+      "n3_kinyuu",
+      "n2_madoguchi"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n4_tsugou",
+    "word": "都合",
+    "reading": "つごう",
+    "level": "N4",
+    "why": "中文「都合」不成词,日语是「(时间上)方不方便」。约人时的核心词。",
+    "memberIds": [
+      "n4_yotei",
+      "n2_nittei",
+      "n3_enki",
+      "n4_yakusoku"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n4_youji",
+    "word": "用事",
+    "reading": "ようじ",
+    "level": "N4",
+    "why": "「有事」的固定说法,是拒绝邀请的标准借口。场是社交推辞。",
+    "memberIds": [
+      "n4_yakusoku",
+      "n3_kotowaru",
+      "n3_kesseki",
+      "n5_kaeru"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n4_shitaku",
+    "word": "支度",
+    "reading": "したく",
+    "level": "N4",
+    "why": "和「準備」近但不同:支度专指出门前收拾自己。场是早上。",
+    "memberIds": [
+      "n5_asa",
+      "n5_dekakeru",
+      "n5_kiru_2",
+      "n3_chikoku"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n4_enryo",
+    "word": "遠慮",
+    "reading": "えんりょ",
+    "level": "N4",
+    "why": "中文是深谋远虑,日语是客气/不要。「ご遠慮ください」还是禁止的委婉说法,汉字彻底骗人。",
+    "memberIds": [
+      "n2_kyoushuku",
+      "n4_sewa",
+      "n4_orei",
+      "n3_meiwaku"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_sunao",
+    "word": "素直",
+    "reading": "すなお",
+    "level": "N2",
+    "why": "中文「素直」不成词。场是吵架之后:老实认错、不找借口。",
+    "memberIds": [
+      "n4_ayamaru",
+      "n2_hansei",
+      "n1_iiwake",
+      "n3_gokai"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n4_kisha",
+    "word": "汽車",
+    "reading": "きしゃ",
+    "level": "N4",
+    "why": "中文=汽车,日语=火车。经典陷阱词,而且场很清楚:乡下、单线、看窗外。",
+    "memberIds": [
+      "n4_inaka",
+      "n5_eki",
+      "n5_mado",
+      "n4_keshiki"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n4_musume",
+    "word": "娘",
+    "reading": "むすめ",
+    "level": "N4",
+    "why": "中文是妈妈,日语是女儿。血亲关系词被汉字反向误导,必须点破。",
+    "memberIds": [
+      "n5_kekkon",
+      "n3_shiki",
+      "n4_sotsugyou",
+      "n5_haha"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n5_tegami",
+    "word": "手紙",
+    "reading": "てがみ",
+    "level": "N5",
+    "why": "中文是厕纸,日语是信。经典误读词,场是邮筒/邮票/寄。",
+    "memberIds": [
+      "n5_kitte",
+      "n5_posuto",
+      "n4_okuru",
+      "n5_kaku"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n4_yu",
+    "word": "湯",
+    "reading": "ゆ",
+    "level": "N4",
+    "why": "中文是汤,日语是热水。菜单上「お湯」不是汤,温泉的「湯」也是这个。",
+    "memberIds": [
+      "n2_onsen",
+      "n4_waku",
+      "n4_ryokan",
+      "n5_chawan"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n1_teishoku",
+    "word": "定食",
+    "reading": "ていしょく",
+    "level": "N1",
+    "why": "中文不用这个词。场是中午的食堂:一份套餐配味噌汤,是日本午饭的默认形态。",
+    "memberIds": [
+      "n5_shokudou",
+      "n3_chuushoku",
+      "n4_miso",
+      "n3_kaikei"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_on_2",
+    "word": "恩",
+    "reading": "おん",
+    "level": "N3",
+    "why": "中文有但日语更重、更具体:受了照顾要还。和义理连着,是理解日本人际的入口。",
+    "memberIds": [
+      "n4_sewa",
+      "n4_orei",
+      "n5_kaesu",
+      "n1_giri"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n1_giri",
+    "word": "義理",
+    "reading": "ぎり",
+    "level": "N1",
+    "why": "中文是道理,日语是不得不还的人情债——义理巧克力、义理出席。",
+    "memberIds": [
+      "n3_on_2",
+      "n3_seken",
+      "n4_shoutai",
+      "n4_oiwai"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_seken",
+    "word": "世間",
+    "reading": "せけん",
+    "level": "N3",
+    "why": "中文没有对应物。日语的「世間」是一个会看着你的匿名社会,和恥连着。",
+    "memberIds": [
+      "n3_uwasa",
+      "n3_hyouban",
+      "n4_hazukashii",
+      "n3_meiwaku"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_yudan",
+    "word": "油断",
+    "reading": "ゆだん",
+    "level": "N2",
+    "why": "中文完全不成词。场是事故现场的反省句:一松懈就出事。",
+    "memberIds": [
+      "n4_jiko",
+      "n4_kega",
+      "n4_suberu",
+      "n4_chuui"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_kinodoku",
+    "word": "気の毒",
+    "reading": "きのどく",
+    "level": "N3",
+    "why": "汉字看起来像有毒。实际是对别人不幸的同情,场是出事之后的一句话。",
+    "memberIds": [
+      "n4_jiko",
+      "n4_nyuuin",
+      "n4_kega",
+      "n2_nagusameru"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n5_kekkou",
+    "word": "結構",
+    "reading": "けっこう",
+    "level": "N5",
+    "why": "中文是结构,日语一个词同时是「相当」和「不用了」——点单时答错就等于点了或没点。",
+    "memberIds": [
+      "n3_chuumon",
+      "n3_kotowaru",
+      "n4_aji",
+      "n4_nedan"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n4_shinpai",
+    "word": "心配",
+    "reading": "しんぱい",
+    "level": "N4",
+    "why": "中文偏\"担心\"义相近,但日语的场更日常:孩子没回来、烧没退、联络不上。",
+    "memberIds": [
+      "n4_netsu",
+      "n4_renraku",
+      "n4_okureru",
+      "n5_haha"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_soudan",
+    "word": "相談",
+    "reading": "そうだん",
+    "level": "N4",
+    "why": "中文偏商量,日语几乎是\"找人求助\"的默认动词,职场和学校都用。",
+    "memberIds": [
+      "n3_nayamu",
+      "n1_joushi",
+      "n3_douryou",
+      "n4_kimeru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_annai",
+    "word": "案内",
+    "reading": "あんない",
+    "level": "N4",
+    "why": "中文是案卷,日语是带路/引导。旅游和接待场景的核心词。",
+    "memberIds": [
+      "n3_kankou",
+      "n5_chizu",
+      "n5_michi",
+      "n5_eki"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_aisatsu",
+    "word": "挨拶",
+    "reading": "あいさつ",
+    "level": "N3",
+    "why": "汉字生僻,义也不止打招呼——还包括致辞和上门问候,场是入职、搬家、婚礼。",
+    "memberIds": [
+      "n2_keigo",
+      "n2_meue",
+      "n2_meishi",
+      "n4_oiwai"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_muri",
+    "word": "無理",
+    "reading": "むり",
+    "level": "N4",
+    "why": "中文是不讲理,日语是\"做不到/别硬撑\",场是加班和身体。",
+    "memberIds": [
+      "n5_tsukareru",
+      "n3_tetsuya",
+      "n2_shimekiri",
+      "n5_shigoto"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n5_taihen",
+    "word": "大変",
+    "reading": "たいへん",
+    "level": "N5",
+    "why": "一个词既是\"辛苦/糟糕\"又是\"非常\",场是别人诉苦时你要接的那句。",
+    "memberIds": [
+      "n5_isogashii",
+      "n5_shigoto",
+      "n4_tetsudau",
+      "n5_tsukareru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_hyouban",
+    "word": "評判",
+    "reading": "ひょうばん",
+    "level": "N3",
+    "why": "不是\"评判\"而是\"口碑\"。场是选店、选学校前的打听。",
+    "memberIds": [
+      "n3_uwasa",
+      "n3_seken",
+      "n5_mise",
+      "n3_ninki"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_suteki",
+    "word": "素敵",
+    "reading": "すてき",
+    "level": "N3",
+    "why": "义偏离中文(不是\"素净\"),但场比较散,主要靠夸人和夸景。",
+    "memberIds": [
+      "n5_shashin",
+      "n4_keshiki",
+      "n5_fuku_2",
+      "n3_omoide"
+    ],
+    "missingMembers": [],
+    "tier": "C"
+  },
+  {
+    "id": "n3_gussuri",
+    "word": "ぐっすり",
+    "reading": "ぐっすり",
+    "level": "N3",
+    "why": "只跟\"睡\"搭。场是一整夜:躺下、天亮、疲劳消掉。",
+    "memberIds": [
+      "n5_yoru",
+      "n4_futon",
+      "n5_asa",
+      "n5_tsukareru"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_ukkari",
+    "word": "うっかり",
+    "reading": "うっかり",
+    "level": "N2",
+    "why": "专配\"本来不该忘的事忘了\"。场是出门后才发现。",
+    "memberIds": [
+      "n5_wasureru",
+      "n5_kagi",
+      "n3_chikoku",
+      "n5_saifu"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_dokidoki",
+    "word": "どきどき",
+    "reading": "どきどき",
+    "level": "N2",
+    "why": "心跳的拟态。场极窄也极准:面试前、告白前、上台前。",
+    "memberIds": [
+      "n2_mensetsu",
+      "n3_kinchou",
+      "n1_kokuhaku",
+      "n3_happyou"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_nonbiri",
+    "word": "のんびり",
+    "reading": "のんびり",
+    "level": "N3",
+    "why": "和\"闲\"不同,是主动放慢。场是连休、温泉、乡下。",
+    "memberIds": [
+      "n1_renkyuu",
+      "n2_onsen",
+      "n4_inaka",
+      "n5_yasumi"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_urouro",
+    "word": "うろうろ",
+    "reading": "うろうろ",
+    "level": "N2",
+    "why": "找不到路时的转圈。场是车站和地下街。",
+    "memberIds": [
+      "n3_maigo",
+      "n5_chizu",
+      "n5_eki",
+      "n4_sagasu"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_battari",
+    "word": "ばったり",
+    "reading": "ばったり",
+    "level": "N3",
+    "why": "偶遇的拟态,专配\"碰见人\"。场是街上撞见熟人。",
+    "memberIds": [
+      "n5_au",
+      "n4_senpai",
+      "n5_eki",
+      "n4_hisashiburi"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n1_bisshori",
+    "word": "びっしょり",
+    "reading": "びっしょり",
+    "level": "N1",
+    "why": "湿透。夏天出汗和淋雨两个场都真实。",
+    "memberIds": [
+      "n3_ase",
+      "n5_ame",
+      "n5_kasa",
+      "n5_atsui"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n1_pekopeko",
+    "word": "ぺこぺこ",
+    "reading": "ぺこぺこ",
+    "level": "N1",
+    "why": "肚子饿的拟态(另一义是点头哈腰),场是午饭前。",
+    "memberIds": [
+      "n5_onaka",
+      "n1_kuufuku",
+      "n3_chuushoku",
+      "n5_shokudou"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_kossori",
+    "word": "こっそり",
+    "reading": "こっそり",
+    "level": "N2",
+    "why": "偷偷做。场是不想被发现的具体动作。",
+    "memberIds": [
+      "n3_kakusu",
+      "n5_deru",
+      "n5_yoru",
+      "n4_mitsukeru"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_shimijimi",
+    "word": "しみじみ",
+    "reading": "しみじみ",
+    "level": "N2",
+    "why": "标准里点名的类型词。场是安静下来之后的回味:老照片、久别重逢。",
+    "memberIds": [
+      "n3_omoide",
+      "n5_shashin",
+      "n4_hisashiburi",
+      "n3_nagameru"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_mottainai",
+    "word": "もったいない",
+    "reading": "もったいない",
+    "level": "N2",
+    "why": "标准里点名的类型词。场是餐桌和垃圾桶:剩了、扔了。",
+    "memberIds": [
+      "n3_nokosu",
+      "n4_suteru",
+      "n5_taberu",
+      "n4_katazukeru"
+    ],
+    "missingMembers": [
+      "ご飯",
+      "ごみ"
+    ],
+    "tier": "A"
+  },
+  {
+    "id": "n2_nantonaku",
+    "word": "なんとなく",
+    "reading": "なんとなく",
+    "level": "N2",
+    "why": "标准里点名的类型词。场是说不上理由的选择和感觉。",
+    "memberIds": [
+      "n2_kehai",
+      "n3_funiki",
+      "n4_kimeru",
+      "n4_riyuu"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n1_jikkuri",
+    "word": "じっくり",
+    "reading": "じっくり",
+    "level": "N1",
+    "why": "慢慢地、下功夫地。场是选东西和炖东西。",
+    "memberIds": [
+      "n4_erabu",
+      "n2_niru",
+      "n4_aji",
+      "n4_kangaeru"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_bonyari",
+    "word": "ぼんやり",
+    "reading": "ぼんやり",
+    "level": "N3",
+    "why": "发呆/看不清,两义共一个画面。场是窗边和困倦。",
+    "memberIds": [
+      "n5_mado",
+      "n4_nemui",
+      "n3_nagameru",
+      "n4_keshiki"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_sukkiri",
+    "word": "すっきり",
+    "reading": "すっきり",
+    "level": "N2",
+    "why": "身心清爽。场是泡完澡、收拾完屋子、感冒好了。",
+    "memberIds": [
+      "n2_onsen",
+      "n5_souji",
+      "n4_naoru_2",
+      "n3_ase"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_mekkiri",
+    "word": "めっきり",
+    "reading": "めっきり",
+    "level": "N2",
+    "why": "几乎只用在天气/年纪的明显变化上,搭配极窄。",
+    "memberIds": [
+      "n5_samui",
+      "n5_suzushii",
+      "n5_aki",
+      "n4_hieru"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_noronoro",
+    "word": "のろのろ",
+    "reading": "のろのろ",
+    "level": "N2",
+    "why": "慢吞吞,常配堵车和动作。场是高速路和被催的人。",
+    "memberIds": [
+      "n3_juutai",
+      "n5_kuruma",
+      "n4_okureru",
+      "n4_isogu"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_sosokkashii",
+    "word": "そそっかしい",
+    "reading": "そそっかしい",
+    "level": "N2",
+    "why": "形容人毛躁,和うっかり是同一件事的性格版。",
+    "memberIds": [
+      "n2_ukkari",
+      "n5_wasureru",
+      "n3_korobu",
+      "n1_awateru"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_darashinai",
+    "word": "だらしない",
+    "reading": "だらしない",
+    "level": "N2",
+    "why": "穿着/生活散漫。场是被长辈说的那一刻。",
+    "memberIds": [
+      "n5_fuku_2",
+      "n5_souji",
+      "n4_nebou",
+      "n4_chuui"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_mittomonai",
+    "word": "みっともない",
+    "reading": "みっともない",
+    "level": "N2",
+    "why": "\"丢人\"的和语说法,和世間连着,比恥ずかしい更外部视角。",
+    "memberIds": [
+      "n3_seken",
+      "n4_hazukashii",
+      "n5_fuku_2",
+      "n4_chuui"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n1_yayakoshii",
+    "word": "ややこしい",
+    "reading": "ややこしい",
+    "level": "N1",
+    "why": "复杂到烦。场就是手续和规则。",
+    "memberIds": [
+      "n2_tetsuzuki",
+      "n3_shorui",
+      "n3_mendou",
+      "n4_setsumei"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_shitsukoi",
+    "word": "しつこい",
+    "reading": "しつこい",
+    "level": "N2",
+    "why": "纠缠不休。场是推销、味道太浓、感冒不好。",
+    "memberIds": [
+      "n3_kotowaru",
+      "n4_aji",
+      "n3_seki",
+      "n3_abura"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_ikinari",
+    "word": "いきなり",
+    "reading": "いきなり",
+    "level": "N2",
+    "why": "突然,场是没有预兆的动作和天气。",
+    "memberIds": [
+      "n4_odoroku",
+      "n5_ame",
+      "n4_okoru",
+      "n1_awateru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_tokkuni",
+    "word": "とっくに",
+    "reading": "とっくに",
+    "level": "N2",
+    "why": "早就。场是迟到和错过。",
+    "memberIds": [
+      "n3_chikoku",
+      "n1_owaru",
+      "n4_maniau",
+      "n5_kaeru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_chiratto",
+    "word": "ちらっと",
+    "reading": "ちらっと",
+    "level": "N1",
+    "why": "瞥一眼。场是偷看和一闪而过的念头。",
+    "memberIds": [
+      "n5_miru",
+      "n5_mado",
+      "n2_kehai",
+      "n3_omoide"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_zurari",
+    "word": "ずらり",
+    "reading": "ずらり",
+    "level": "N2",
+    "why": "一排排陈列。场是商店和会场。",
+    "memberIds": [
+      "n5_narabu",
+      "n3_ichiba",
+      "n2_gyouretsu",
+      "n3_sara"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_gisshiri",
+    "word": "ぎっしり",
+    "reading": "ぎっしり",
+    "level": "N2",
+    "why": "塞得满满。场是行李箱和日程表。",
+    "memberIds": [
+      "n4_su_tsuke_su",
+      "n5_nimotsu",
+      "n2_sukejuru",
+      "n4_yotei"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_nikoniko",
+    "word": "にこにこ",
+    "reading": "にこにこ",
+    "level": "N2",
+    "why": "持续微笑(和にっこり的瞬间不同)。场是接待和小孩。",
+    "memberIds": [
+      "n4_warau",
+      "n5_kodomo",
+      "n5_shashin",
+      "n3_aisatsu"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_hotto",
+    "word": "ほっと",
+    "reading": "ほっと",
+    "level": "N1",
+    "why": "松一口气。场是结果出来之后。",
+    "memberIds": [
+      "n3_goukaku",
+      "n4_anshin",
+      "n4_naoru_2",
+      "n1_owaru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_unzari",
+    "word": "うんざり",
+    "reading": "うんざり",
+    "level": "N1",
+    "why": "腻烦透了。场是重复的通勤和会议。",
+    "memberIds": [
+      "n2_tsuukin",
+      "n2_manin",
+      "n4_kaigi",
+      "n1_sutoresu"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_gakkuri",
+    "word": "がっくり",
+    "reading": "がっくり",
+    "level": "N1",
+    "why": "一下子垮掉。场是落榜/失败之后的身体反应。",
+    "memberIds": [
+      "n2_juken",
+      "n3_akirameru",
+      "n5_tsukareru",
+      "n3_misu"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_kippari",
+    "word": "きっぱり",
+    "reading": "きっぱり",
+    "level": "N1",
+    "why": "干脆地。场只有一个:拒绝。",
+    "memberIds": [
+      "n3_kotowaru",
+      "n1_iiwake",
+      "n4_kimeru",
+      "n2_sunao"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_chokuchoku",
+    "word": "ちょくちょく",
+    "reading": "ちょくちょく",
+    "level": "N1",
+    "why": "时不时地去。场是常去的店和邻居。",
+    "memberIds": [
+      "n4_kayou",
+      "n3_ichiba",
+      "n5_au",
+      "n4_kinjo"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_shotchuu",
+    "word": "しょっちゅう",
+    "reading": "しょっちゅう",
+    "level": "N1",
+    "why": "老是(偏负面)。场是坏习惯和故障。",
+    "memberIds": [
+      "n3_chikoku",
+      "n5_wasureru",
+      "n1_toraburu",
+      "n4_kowareru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_tekkiri",
+    "word": "てっきり",
+    "reading": "てっきり",
+    "level": "N1",
+    "why": "一口咬定却错了。场是误会。",
+    "memberIds": [
+      "n3_gokai",
+      "n4_omou",
+      "n4_odoroku",
+      "n4_yakusoku"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_hitomazu",
+    "word": "ひとまず",
+    "reading": "ひとまず",
+    "level": "N2",
+    "why": "先这样。场是工作中途的收口。",
+    "memberIds": [
+      "n3_houkoku",
+      "n2_shimekiri",
+      "n3_teishutsu",
+      "n4_kimeru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_zuruzuru",
+    "word": "ずるずる",
+    "reading": "ずるずる",
+    "level": "N1",
+    "why": "拖延和吸面条两个场,后者需要文化注记但库里没有麺/ラーメン。",
+    "memberIds": [
+      "n3_akirameru",
+      "n3_enki",
+      "n2_shimekiri",
+      "n5_taberu"
+    ],
+    "missingMembers": [
+      "麺",
+      "ラーメン"
+    ],
+    "tier": "C"
+  },
+  {
+    "id": "n1_burabura",
+    "word": "ぶらぶら",
+    "reading": "ぶらぶら",
+    "level": "N1",
+    "why": "闲逛。场是商店街和散步,但和のんびり有重叠。",
+    "memberIds": [
+      "n5_sanpo",
+      "n3_ichiba",
+      "n5_kaimono",
+      "n5_kouen"
+    ],
+    "missingMembers": [],
+    "tier": "C"
+  },
+  {
+    "id": "n4_arubaito",
+    "word": "アルバイト",
+    "reading": "アルバイト",
+    "level": "N4",
+    "why": "来自德语,不是英语;日本学生和打工文化的核心词,场是时给和排班。",
+    "memberIds": [
+      "n5_gakusei",
+      "n3_kyuuryou",
+      "n5_shigoto",
+      "n2_mensetsu"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_konsento",
+    "word": "コンセント",
+    "reading": "コンセント",
+    "level": "N2",
+    "why": "和製英語,英语里根本不是这个词。场是插头找不到的旅馆房间。",
+    "memberIds": [
+      "n5_heya",
+      "n5_hoteru",
+      "n5_kagi",
+      "n5_nimotsu"
+    ],
+    "missingMembers": [
+      "充電"
+    ],
+    "tier": "A"
+  },
+  {
+    "id": "n3_sabisu",
+    "word": "サービス",
+    "reading": "サービス",
+    "level": "N3",
+    "why": "日语里常指\"免费赠送\",和英语的服务不是一回事,菜单和店里天天出现。",
+    "memberIds": [
+      "n3_chuumon",
+      "n2_waribiki",
+      "n5_mise",
+      "n3_kaikei"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_rasshuawa",
+    "word": "ラッシュアワー",
+    "reading": "ラッシュアワー",
+    "level": "N2",
+    "why": "和製英語,场是东京早晚的车厢,极其具体。",
+    "memberIds": [
+      "n2_manin",
+      "n2_tsuukin",
+      "n2_kaisatsu",
+      "n3_konzatsu"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_sarariman",
+    "word": "サラリーマン",
+    "reading": "サラリーマン",
+    "level": "N2",
+    "why": "和製英語,是一整个社会角色而不是职业。场是通勤+加班+应酬。",
+    "memberIds": [
+      "n2_tsuukin",
+      "n1_joushi",
+      "n2_bonasu",
+      "n3_sake"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_manshon",
+    "word": "マンション",
+    "reading": "マンション",
+    "level": "N2",
+    "why": "日语里指公寓楼,不是英语的豪宅。租房时会直接踩坑。",
+    "memberIds": [
+      "n5_apaato",
+      "n3_yachin",
+      "n3_ooya",
+      "n5_heya"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_kuriningu",
+    "word": "クリーニング",
+    "reading": "クリーニング",
+    "level": "N2",
+    "why": "专指送洗店,不是一般的打扫。场是西装和季节交替。",
+    "memberIds": [
+      "n4_su_tsu",
+      "n5_fuku_2",
+      "n5_sentaku",
+      "n3_uketoru"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n1_nyuansu",
+    "word": "ニュアンス",
+    "reading": "ニュアンス",
+    "level": "N1",
+    "why": "标准里点名的例词。场是翻译和措辞时说不清的那点差别。",
+    "memberIds": [
+      "n2_keigo",
+      "n4_setsumei",
+      "n5_kotoba",
+      "n4_tsutaeru"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_chansu",
+    "word": "チャンス",
+    "reading": "チャンス",
+    "level": "N3",
+    "why": "日语用得比英语窄也更热血,场是比赛和机会窗口。",
+    "memberIds": [
+      "n3_taikai",
+      "n5_renshuu",
+      "n1_nogasu",
+      "n3_akirameru"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n1_toraburu",
+    "word": "トラブル",
+    "reading": "トラブル",
+    "level": "N1",
+    "why": "日语当名词用得极广:纠纷、故障、麻烦一锅端。场是客服和出差。",
+    "memberIds": [
+      "n4_jiko",
+      "n4_renraku",
+      "n4_ayamaru",
+      "n2_tetsuzuki"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n1_sutoresu",
+    "word": "ストレス",
+    "reading": "ストレス",
+    "level": "N1",
+    "why": "日语里已经完全本土化,场是职场和身体反应。",
+    "memberIds": [
+      "n5_tsukareru",
+      "n1_joushi",
+      "n4_nemui",
+      "n5_shigoto"
+    ],
+    "missingMembers": [
+      "残業"
+    ],
+    "tier": "A"
+  },
+  {
+    "id": "n1_taimingu",
+    "word": "タイミング",
+    "reading": "タイミング",
+    "level": "N1",
+    "why": "日语用来评价\"时机对不对\",场是搭话和换乘。",
+    "memberIds": [
+      "n5_au",
+      "n5_iu",
+      "n3_chansu",
+      "n4_maniau"
+    ],
+    "missingMembers": [
+      "乗り換え"
+    ],
+    "tier": "A"
+  },
+  {
+    "id": "n1_seru",
+    "word": "セール",
+    "reading": "セール",
+    "level": "N1",
+    "why": "不是英语的销售而是打折季。场是商店街和换季。",
+    "memberIds": [
+      "n2_waribiki",
+      "n4_nedan",
+      "n5_kaimono",
+      "n2_gyouretsu"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n1_furonto",
+    "word": "フロント",
+    "reading": "フロント",
+    "level": "N1",
+    "why": "和製英語,指旅馆前台。入住时第一个要找的地方。",
+    "memberIds": [
+      "n5_hoteru",
+      "n5_kagi",
+      "n5_nimotsu",
+      "n3_shukuhaku"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n4_su_tsuke_su",
+    "word": "スーツケース",
+    "reading": "スーツケース",
+    "level": "N4",
+    "why": "旅行核心物件,场是机场和行李。",
+    "memberIds": [
+      "n4_kuukou",
+      "n5_nimotsu",
+      "n2_zeikan",
+      "n3_pasupoto"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_bonasu",
+    "word": "ボーナス",
+    "reading": "ボーナス",
+    "level": "N2",
+    "why": "日本的夏冬两次奖金是有制度的,场是给付月和大件消费。",
+    "memberIds": [
+      "n3_kyuuryou",
+      "n5_shigoto",
+      "n5_kaimono",
+      "n2_sarariman"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_sukejuru",
+    "word": "スケジュール",
+    "reading": "スケジュール",
+    "level": "N2",
+    "why": "和日程/予定并存,用法有分工,场是工作安排。",
+    "memberIds": [
+      "n4_yotei",
+      "n2_nittei",
+      "n4_kaigi",
+      "n3_enki"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_anketo",
+    "word": "アンケート",
+    "reading": "アンケート",
+    "level": "N1",
+    "why": "来自法语,不是英语。场是问卷和店家回访。",
+    "memberIds": [
+      "n5_shitsumon",
+      "n4_iken",
+      "n3_kinyuu",
+      "n2_kaitou_2"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_menyu",
+    "word": "メニュー",
+    "reading": "メニュー",
+    "level": "N2",
+    "why": "餐厅第一件事,和注文成对。",
+    "memberIds": [
+      "n3_chuumon",
+      "n1_teishoku",
+      "n4_aji",
+      "n3_kaikei"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_masuku",
+    "word": "マスク",
+    "reading": "マスク",
+    "level": "N2",
+    "why": "日本的口罩场景和中文不同:花粉、感冒、礼貌。",
+    "memberIds": [
+      "n1_kafun",
+      "n2_kushami",
+      "n5_kaze_2",
+      "n3_seki"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_reji",
+    "word": "レジ",
+    "reading": "レジ",
+    "level": "N4",
+    "why": "收银台。场是便利店结账全流程。",
+    "memberIds": [
+      "n3_fukuro",
+      "n4_otsuri",
+      "n3_kaikei",
+      "n3_genkin"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_deto",
+    "word": "デート",
+    "reading": "デート",
+    "level": "N3",
+    "why": "和英语的date含义窄化了,场是约会当天。",
+    "memberIds": [
+      "n4_yakusoku",
+      "n5_matsu",
+      "n5_eiga",
+      "n3_kinchou"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_doraibu",
+    "word": "ドライブ",
+    "reading": "ドライブ",
+    "level": "N3",
+    "why": "日语指兜风这件事本身,场是周末和海边。",
+    "memberIds": [
+      "n4_unten",
+      "n3_menkyo",
+      "n5_umi",
+      "n4_keshiki"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_chippu",
+    "word": "チップ",
+    "reading": "チップ",
+    "level": "N2",
+    "why": "日本不给小费——这个词的价值恰恰在于反向文化点。",
+    "memberIds": [
+      "n3_kaikei",
+      "n3_shiharau",
+      "n3_sabisu",
+      "n5_hoteru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_reja",
+    "word": "レジャー",
+    "reading": "レジャー",
+    "level": "N2",
+    "why": "日语的\"休闲活动\"总称,略旧但新闻里还在用。",
+    "memberIds": [
+      "n1_renkyuu",
+      "n5_umi",
+      "n5_kazoku",
+      "n3_doraibu"
+    ],
+    "missingMembers": [],
+    "tier": "C"
+  },
+  {
+    "id": "n1_infure",
+    "word": "インフレ",
+    "reading": "インフレ",
+    "level": "N1",
+    "why": "新闻高频缩写,场是物价和工资。",
+    "memberIds": [
+      "n3_bukka",
+      "n3_keiki",
+      "n3_kyuuryou",
+      "n4_nedan"
+    ],
+    "missingMembers": [],
+    "tier": "C"
+  },
+  {
+    "id": "n2_kouyou",
+    "word": "紅葉",
+    "reading": "こうよう",
+    "level": "N2",
+    "why": "标准里的样板词。场是秋天出行:山、温泉、落叶。",
+    "memberIds": [
+      "n5_aki",
+      "n5_yama",
+      "n2_onsen",
+      "n1_ochiba"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_momiji",
+    "word": "紅葉",
+    "reading": "もみじ",
+    "level": "N2",
+    "why": "同字多读的另一读,义也不同(叶子本身/枫树)。按标准第四节两条并列。",
+    "memberIds": [
+      "n5_aki",
+      "n5_yama",
+      "n1_ochiba",
+      "n4_keshiki"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_tsuyu",
+    "word": "梅雨",
+    "reading": "つゆ",
+    "level": "N3",
+    "why": "中文没有对应的生活体验。场是六月:晾不干、发霉、闷。",
+    "memberIds": [
+      "n2_shikke",
+      "n2_mushiatsui",
+      "n5_sentaku",
+      "n5_kasa"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_mushiatsui",
+    "word": "蒸し暑い",
+    "reading": "むしあつい",
+    "level": "N2",
+    "why": "和语复合形容词,汉字给不了体感。场是梅雨和盛夏的夜。",
+    "memberIds": [
+      "n3_tsuyu",
+      "n3_ase",
+      "n2_senpuuki",
+      "n5_natsu"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_shikke",
+    "word": "湿気",
+    "reading": "しっけ",
+    "level": "N2",
+    "why": "日常生活词,场是梅雨季的房间和衣柜。",
+    "memberIds": [
+      "n3_tsuyu",
+      "n5_sentaku",
+      "n3_nioi",
+      "n5_heya"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n1_kafun",
+    "word": "花粉",
+    "reading": "かふん",
+    "level": "N1",
+    "why": "日本特有的国民级季节病,场是春天的口罩和喷嚏。",
+    "memberIds": [
+      "n2_masuku",
+      "n2_kushami",
+      "n5_haru",
+      "n5_me"
+    ],
+    "missingMembers": [
+      "花粉症",
+      "目薬"
+    ],
+    "tier": "A"
+  },
+  {
+    "id": "n4_taifuu",
+    "word": "台風",
+    "reading": "たいふう",
+    "level": "N4",
+    "why": "每年真实发生的事件,场是停运、停电、避难。",
+    "memberIds": [
+      "n5_kaze",
+      "n2_teiden",
+      "n1_hinan_2",
+      "n5_densha"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_teiden",
+    "word": "停電",
+    "reading": "ていでん",
+    "level": "N2",
+    "why": "场是台风夜和地震后的家里。",
+    "memberIds": [
+      "n4_taifuu",
+      "n4_jishin",
+      "n5_kurai",
+      "n5_yoru"
+    ],
+    "missingMembers": [
+      "懐中電灯"
+    ],
+    "tier": "A"
+  },
+  {
+    "id": "n1_hinan_2",
+    "word": "避難",
+    "reading": "ひなん",
+    "level": "N1",
+    "why": "防灾语汇,场是警报之后的具体动作。",
+    "memberIds": [
+      "n4_jishin",
+      "n1_tsunami",
+      "n4_taifuu",
+      "n5_nimotsu"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n4_jishin",
+    "word": "地震",
+    "reading": "じしん",
+    "level": "N4",
+    "why": "日本生活的默认背景,场是摇晃当下和之后。",
+    "memberIds": [
+      "n4_yureru",
+      "n1_hinan_2",
+      "n1_tsunami",
+      "n2_teiden"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n4_yureru",
+    "word": "揺れる",
+    "reading": "ゆれる",
+    "level": "N4",
+    "why": "和语动词,地震以外还有电车和心。场是摇晃的瞬间。",
+    "memberIds": [
+      "n4_jishin",
+      "n5_densha",
+      "n5_tatsu",
+      "n4_odoroku"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n1_tsunami",
+    "word": "津波",
+    "reading": "つなみ",
+    "level": "N1",
+    "why": "这个词被英语借走了,反向有意思。场是地震后的沿海。",
+    "memberIds": [
+      "n4_jishin",
+      "n5_umi",
+      "n1_hinan_2",
+      "n4_keisatsu"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_tsumoru",
+    "word": "積もる",
+    "reading": "つもる",
+    "level": "N3",
+    "why": "和语动词,雪堆积;引申还有\"积攒的话/疲劳\"。场是雪的早晨。",
+    "memberIds": [
+      "n5_yuki",
+      "n5_asa",
+      "n4_tebukuro",
+      "n5_samui"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n4_hieru",
+    "word": "冷える",
+    "reading": "ひえる",
+    "level": "N4",
+    "why": "和语自动词,场是冬夜和身体发凉。",
+    "memberIds": [
+      "n5_samui",
+      "n4_danbou",
+      "n4_futon",
+      "n5_kaze_2"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_atatamaru",
+    "word": "暖まる",
+    "reading": "あたたまる",
+    "level": "N2",
+    "why": "和冷える成对,场是泡澡和热汤。",
+    "memberIds": [
+      "n2_onsen",
+      "n4_yu",
+      "n3_nabe",
+      "n5_samui"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_senpuuki",
+    "word": "扇風機",
+    "reading": "せんぷうき",
+    "level": "N2",
+    "why": "汉字直观但场好:没空调的夏天房间。",
+    "memberIds": [
+      "n5_natsu",
+      "n5_atsui",
+      "n2_mushiatsui",
+      "n4_reibou"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_ka",
+    "word": "蚊",
+    "reading": "か",
+    "level": "N2",
+    "why": "一个假名的词,场是夏夜和露营。",
+    "memberIds": [
+      "n5_natsu",
+      "n5_yoru",
+      "n4_mushi",
+      "n2_kayui"
+    ],
+    "missingMembers": [
+      "蚊取り線香"
+    ],
+    "tier": "B"
+  },
+  {
+    "id": "n1_ochiba",
+    "word": "落ち葉",
+    "reading": "おちば",
+    "level": "N1",
+    "why": "和语复合词,场是秋天的路面和打扫。",
+    "memberIds": [
+      "n5_aki",
+      "n2_kouyou",
+      "n5_souji",
+      "n5_kouen"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_ryokan",
+    "word": "旅館",
+    "reading": "りょかん",
+    "level": "N4",
+    "why": "和ホテル是两套体验,场是榻榻米、被褥、晚饭。",
+    "memberIds": [
+      "n2_onsen",
+      "n4_tatami",
+      "n4_futon",
+      "n3_shukuhaku"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_yukata",
+    "word": "浴衣",
+    "reading": "ゆかた",
+    "level": "N2",
+    "why": "和着物不同,场是夏祭和旅馆房间,汉字(\"浴衣\")会让人以为是浴袍。",
+    "memberIds": [
+      "n3_matsuri",
+      "n2_hanabi",
+      "n5_natsu",
+      "n5_kiru_2"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n4_tatami",
+    "word": "畳",
+    "reading": "たたみ",
+    "level": "N4",
+    "why": "中文没有对应物,场是和室的一整套。",
+    "memberIds": [
+      "n4_ryokan",
+      "n4_futon",
+      "n5_heya",
+      "n5_suwaru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_futon",
+    "word": "布団",
+    "reading": "ふとん",
+    "level": "N4",
+    "why": "中文的\"被褥\"不含\"铺在地上睡\"这层,场是旅馆和早上收起来。",
+    "memberIds": [
+      "n4_tatami",
+      "n5_asa",
+      "n4_nebou",
+      "n5_heya"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_yado",
+    "word": "宿",
+    "reading": "やど",
+    "level": "N3",
+    "why": "和语的\"住处\",比ホテル口语,场是旅途中找地方过夜。",
+    "memberIds": [
+      "n4_ryokan",
+      "n4_yoyaku",
+      "n5_nimotsu",
+      "n3_shukuhaku"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_miyage",
+    "word": "土産",
+    "reading": "みやげ",
+    "level": "N3",
+    "why": "日本的伴手礼是义务性的,场是出差回来和公司分。",
+    "memberIds": [
+      "n2_shutchou",
+      "n3_kankou",
+      "n3_douryou",
+      "n3_okuru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_menzei",
+    "word": "免税",
+    "reading": "めんぜい",
+    "level": "N2",
+    "why": "旅游实用词,场是机场和百货店的手续。",
+    "memberIds": [
+      "n4_kuukou",
+      "n2_zeikan",
+      "n3_pasupoto",
+      "n5_kaimono"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_zeikan",
+    "word": "税関",
+    "reading": "ぜいかん",
+    "level": "N2",
+    "why": "过关场景,和荷物/申告连着。",
+    "memberIds": [
+      "n4_kuukou",
+      "n5_nimotsu",
+      "n3_pasupoto",
+      "n3_bin_2"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_kaisatsu",
+    "word": "改札",
+    "reading": "かいさつ",
+    "level": "N2",
+    "why": "日本车站的物理关口,场是刷卡进出和找不到出口。",
+    "memberIds": [
+      "n3_teiki",
+      "n5_kippu",
+      "n5_eki",
+      "n5_deguchi"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_manin",
+    "word": "満員",
+    "reading": "まんいん",
+    "level": "N2",
+    "why": "「満員電車」是一个社会现象词,场是早高峰。",
+    "memberIds": [
+      "n2_rasshuawa",
+      "n2_tsuukin",
+      "n3_konzatsu",
+      "n5_densha"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_teiki",
+    "word": "定期",
+    "reading": "ていき",
+    "level": "N3",
+    "why": "通勤定期券的简称,场是学生和上班族的月度动作。",
+    "memberIds": [
+      "n2_tsuukin",
+      "n3_tsuugaku",
+      "n2_kaisatsu",
+      "n5_kippu"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_juutai",
+    "word": "渋滞",
+    "reading": "じゅうたい",
+    "level": "N3",
+    "why": "场是黄金周的高速和事故现场。",
+    "memberIds": [
+      "n1_renkyuu",
+      "n4_unten",
+      "n4_jiko",
+      "n2_noronoro"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_maigo",
+    "word": "迷子",
+    "reading": "まいご",
+    "level": "N3",
+    "why": "和语构词,场是商场广播和人群。",
+    "memberIds": [
+      "n4_sagasu",
+      "n5_kodomo",
+      "n4_annai",
+      "n2_urouro"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_hyoushiki",
+    "word": "標識",
+    "reading": "ひょうしき",
+    "level": "N2",
+    "why": "开车和徒步都会遇到,场是路口。",
+    "memberIds": [
+      "n5_kousaten",
+      "n3_shingou",
+      "n4_unten",
+      "n1_magaru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_mensetsu",
+    "word": "面接",
+    "reading": "めんせつ",
+    "level": "N2",
+    "why": "场极其具体:西装、简历、紧张、鞠躬。",
+    "memberIds": [
+      "n4_su_tsu",
+      "n3_kinchou",
+      "n2_dokidoki",
+      "n3_shuushoku"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_meishi",
+    "word": "名刺",
+    "reading": "めいし",
+    "level": "N2",
+    "why": "日本交换名片有一整套礼仪,场是初次见面的三十秒。",
+    "memberIds": [
+      "n3_aisatsu",
+      "n2_keigo",
+      "n2_meue",
+      "n2_shutchou"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_shutchou",
+    "word": "出張",
+    "reading": "しゅっちょう",
+    "level": "N2",
+    "why": "场是新干线、酒店、伴手礼。",
+    "memberIds": [
+      "n3_miyage",
+      "n3_shukuhaku",
+      "n4_kaigi",
+      "n5_nimotsu"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_keigo",
+    "word": "敬語",
+    "reading": "けいご",
+    "level": "N2",
+    "why": "不是\"敬语\"这么简单,场是对客人和上司说话的当下。",
+    "memberIds": [
+      "n2_meue",
+      "n1_joushi",
+      "n3_aisatsu",
+      "n2_kyoushuku"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_kyoushuku",
+    "word": "恐縮",
+    "reading": "きょうしゅく",
+    "level": "N2",
+    "why": "汉字直译是\"恐惧收缩\",实际是职场的\"不好意思/劳驾\"。",
+    "memberIds": [
+      "n2_keigo",
+      "n4_orei",
+      "n4_enryo",
+      "n5_tanomu"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_shimekiri",
+    "word": "締切",
+    "reading": "しめきり",
+    "level": "N2",
+    "why": "场是提交前一晚:熬夜、催、延期。",
+    "memberIds": [
+      "n3_teishutsu",
+      "n3_tetsuya",
+      "n3_enki",
+      "n4_muri"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n1_joushi",
+    "word": "上司",
+    "reading": "じょうし",
+    "level": "N1",
+    "why": "和\"上级\"义近但日本的上下关系更结构化,场是汇报和聚餐。",
+    "memberIds": [
+      "n1_buka",
+      "n3_houkoku",
+      "n4_soudan",
+      "n2_keigo"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_buka",
+    "word": "部下",
+    "reading": "ぶか",
+    "level": "N1",
+    "why": "和上司成对,场是指示和责任。",
+    "memberIds": [
+      "n1_joushi",
+      "n3_houkoku",
+      "n1_shiji_2",
+      "n3_douryou"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_douryou",
+    "word": "同僚",
+    "reading": "どうりょう",
+    "level": "N3",
+    "why": "场是午饭、下班喝一杯。",
+    "memberIds": [
+      "n3_chuushoku",
+      "n3_sake",
+      "n1_joushi",
+      "n4_soudan"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_kyuuryou",
+    "word": "給料",
+    "reading": "きゅうりょう",
+    "level": "N3",
+    "why": "场是发薪日和房租。",
+    "memberIds": [
+      "n3_yachin",
+      "n2_bonasu",
+      "n5_shigoto",
+      "n3_bukka"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_tsuukin",
+    "word": "通勤",
+    "reading": "つうきん",
+    "level": "N2",
+    "why": "场是每天的固定路线,和满员/定期成组。",
+    "memberIds": [
+      "n2_manin",
+      "n3_teiki",
+      "n2_rasshuawa",
+      "n5_kaisha"
+    ],
+    "missingMembers": [
+      "残業"
+    ],
+    "tier": "B"
+  },
+  {
+    "id": "n3_houkoku",
+    "word": "報告",
+    "reading": "ほうこく",
+    "level": "N3",
+    "why": "日本职场的报连相文化,场是每件事都要说一声。",
+    "memberIds": [
+      "n1_joushi",
+      "n4_renraku",
+      "n4_soudan",
+      "n2_shiryou"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_shiryou",
+    "word": "資料",
+    "reading": "しりょう",
+    "level": "N2",
+    "why": "会议前要准备的东西,场是打印和分发。",
+    "memberIds": [
+      "n4_kaigi",
+      "n3_insatsu",
+      "n3_teishutsu",
+      "n3_happyou"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_shikai",
+    "word": "司会",
+    "reading": "しかい",
+    "level": "N2",
+    "why": "场是婚礼和会议的开场。",
+    "memberIds": [
+      "n4_kaijou",
+      "n3_happyou",
+      "n3_aisatsu",
+      "n5_kekkon"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_shuushoku",
+    "word": "就職",
+    "reading": "しゅうしょく",
+    "level": "N3",
+    "why": "和中文\"就业\"不同的是它指的是一次人生事件,场是毕业那年。",
+    "memberIds": [
+      "n4_sotsugyou",
+      "n2_mensetsu",
+      "n4_su_tsu",
+      "n3_kinchou"
+    ],
+    "missingMembers": [
+      "内定",
+      "履歴書"
+    ],
+    "tier": "B"
+  },
+  {
+    "id": "n4_yameru",
+    "word": "辞める",
+    "reading": "やめる",
+    "level": "N4",
+    "why": "场是递辞呈那一天,和上司/理由连着。",
+    "memberIds": [
+      "n5_shigoto",
+      "n1_joushi",
+      "n4_soudan",
+      "n4_kimeru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n5_kaze_2",
+    "word": "風邪",
+    "reading": "かぜ",
+    "level": "N5",
+    "why": "汉字是\"风邪\",中文不这么说。场是发烧、口罩、请假。",
+    "memberIds": [
+      "n4_netsu",
+      "n3_seki",
+      "n5_kusuri",
+      "n2_masuku"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_seki",
+    "word": "咳",
+    "reading": "せき",
+    "level": "N3",
+    "why": "场是感冒和电车里的尴尬。",
+    "memberIds": [
+      "n5_kaze_2",
+      "n2_masuku",
+      "n5_kusuri",
+      "n3_gaman"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_chuusha",
+    "word": "注射",
+    "reading": "ちゅうしゃ",
+    "level": "N4",
+    "why": "场是打针前的忍耐,和我慢/痛い成组。",
+    "memberIds": [
+      "n5_itai",
+      "n3_gaman",
+      "n5_kusuri",
+      "n5_isha"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_shinsatsu",
+    "word": "診察",
+    "reading": "しんさつ",
+    "level": "N3",
+    "why": "场是候诊室叫号。",
+    "memberIds": [
+      "n2_machiaishitsu",
+      "n5_isha",
+      "n3_kanja",
+      "n4_netsu"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_machiaishitsu",
+    "word": "待合室",
+    "reading": "まちあいしつ",
+    "level": "N2",
+    "why": "和语+汉字的复合,场是医院和车站。",
+    "memberIds": [
+      "n3_shinsatsu",
+      "n3_kanja",
+      "n5_matsu",
+      "n5_isha"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_kega",
+    "word": "怪我",
+    "reading": "けが",
+    "level": "N4",
+    "why": "熟字训(けが),汉字读不出来。场是受伤当场。",
+    "memberIds": [
+      "n5_itai",
+      "n4_chi",
+      "n3_korobu",
+      "n2_yudan"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_naoru_2",
+    "word": "治る",
+    "reading": "なおる",
+    "level": "N4",
+    "why": "和\"直る\"同音不同字,场是病好了那天。",
+    "memberIds": [
+      "n5_kaze_2",
+      "n5_kusuri",
+      "n4_netsu",
+      "n2_sukkiri"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_nyuuin",
+    "word": "入院",
+    "reading": "にゅういん",
+    "level": "N4",
+    "why": "场是病房、探望、请假。",
+    "memberIds": [
+      "n4_taiin",
+      "n3_kanja",
+      "n3_shujutsu",
+      "n4_shinpai"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_taion",
+    "word": "体温",
+    "reading": "たいおん",
+    "level": "N3",
+    "why": "场是量体温这个日常动作(尤其疫情后)。",
+    "memberIds": [
+      "n4_netsu",
+      "n5_kaze_2",
+      "n3_shinsatsu",
+      "n2_masuku"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_korobu",
+    "word": "転ぶ",
+    "reading": "ころぶ",
+    "level": "N3",
+    "why": "和语动词,场是雪天和石阶。",
+    "memberIds": [
+      "n5_yuki",
+      "n4_suberu",
+      "n4_kega",
+      "n5_itai"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_suberu",
+    "word": "滑る",
+    "reading": "すべる",
+    "level": "N4",
+    "why": "一词多场:路滑、手滑、考试落榜(俗)。",
+    "memberIds": [
+      "n5_yuki",
+      "n3_korobu",
+      "n5_abunai",
+      "n2_juken"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_senpai",
+    "word": "先輩",
+    "reading": "せんぱい",
+    "level": "N4",
+    "why": "中文没有这套上下级称呼文化,场是社团和职场。",
+    "memberIds": [
+      "n2_kouhai",
+      "n5_renshuu",
+      "n2_keigo",
+      "n3_taikai"
+    ],
+    "missingMembers": [
+      "部活"
+    ],
+    "tier": "A"
+  },
+  {
+    "id": "n2_kouhai",
+    "word": "後輩",
+    "reading": "こうはい",
+    "level": "N2",
+    "why": "和先輩成对,场是被照顾和照顾人。",
+    "memberIds": [
+      "n4_senpai",
+      "n5_renshuu",
+      "n3_taikai",
+      "n4_sewa"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_juken",
+    "word": "受験",
+    "reading": "じゅけん",
+    "level": "N2",
+    "why": "日本的考试季是一个社会事件,场是塾、志望校、合格发表。",
+    "memberIds": [
+      "n1_juku",
+      "n3_goukaku",
+      "n4_shiken",
+      "n3_kinchou"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_goukaku",
+    "word": "合格",
+    "reading": "ごうかく",
+    "level": "N3",
+    "why": "场是放榜那一刻。",
+    "memberIds": [
+      "n2_juken",
+      "n4_shiken",
+      "n1_hotto",
+      "n4_yorokobu"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_juku",
+    "word": "塾",
+    "reading": "じゅく",
+    "level": "N1",
+    "why": "中文没有对应制度,场是放学后的第二个学校。",
+    "memberIds": [
+      "n2_juken",
+      "n5_benkyou",
+      "n5_yoru",
+      "n4_shiken"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_tetsuya",
+    "word": "徹夜",
+    "reading": "てつや",
+    "level": "N3",
+    "why": "场是考前和赶稿。",
+    "memberIds": [
+      "n2_shimekiri",
+      "n4_nemui",
+      "n4_shiken",
+      "n4_muri"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_nebou",
+    "word": "寝坊",
+    "reading": "ねぼう",
+    "level": "N4",
+    "why": "和语复合,场是闹钟没响到迟到的一连串。",
+    "memberIds": [
+      "n3_chikoku",
+      "n5_asa",
+      "n4_nemui",
+      "n1_awateru"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_chikoku",
+    "word": "遅刻",
+    "reading": "ちこく",
+    "level": "N3",
+    "why": "场是学校和公司的迟到,和电车延误连着。",
+    "memberIds": [
+      "n4_nebou",
+      "n4_maniau",
+      "n5_densha",
+      "n4_ayamaru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_sotsugyou",
+    "word": "卒業",
+    "reading": "そつぎょう",
+    "level": "N4",
+    "why": "场是三月的毕业式,日本的仪式感很强。",
+    "memberIds": [
+      "n4_nyuugaku",
+      "n3_shiki",
+      "n3_omoide",
+      "n3_shuushoku"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_okujou",
+    "word": "屋上",
+    "reading": "おくじょう",
+    "level": "N4",
+    "why": "日漫的固定场景(天台吃饭/告白),场很有画面。",
+    "memberIds": [
+      "n3_bentou",
+      "n4_hiruyasumi",
+      "n5_sora",
+      "n1_kokuhaku"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_amaeru",
+    "word": "甘える",
+    "reading": "あまえる",
+    "level": "N1",
+    "why": "中文完全没有对应词(心理学直接借了amae)。场是撒娇和心安理得地接受好意。",
+    "memberIds": [
+      "n5_kodomo",
+      "n5_haha",
+      "n4_sewa",
+      "n3_kotowaru"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_natsukashii",
+    "word": "懐かしい",
+    "reading": "なつかしい",
+    "level": "N2",
+    "why": "中文的\"怀念\"是动词,日语是形容词——看到旧物脱口而出的一个词。",
+    "memberIds": [
+      "n3_omoide",
+      "n5_shashin",
+      "n4_hisashiburi",
+      "n2_shimijimi"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n4_hazukashii",
+    "word": "恥ずかしい",
+    "reading": "はずかしい",
+    "level": "N4",
+    "why": "同时是\"害羞\"和\"丢脸\",场是当众出错。",
+    "memberIds": [
+      "n2_mittomonai",
+      "n3_seken",
+      "n4_warau",
+      "n4_ayamaru"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n1_awateru",
+    "word": "慌てる",
+    "reading": "あわてる",
+    "level": "N2",
+    "why": "和语动词,场是来不及的那几分钟。",
+    "memberIds": [
+      "n4_nebou",
+      "n3_chikoku",
+      "n5_wasureru",
+      "n2_sosokkashii"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n1_aseru",
+    "word": "焦る",
+    "reading": "あせる",
+    "level": "N1",
+    "why": "和慌てる的区别是内心的急,场是进度落后。",
+    "memberIds": [
+      "n2_shimekiri",
+      "n4_maniau",
+      "n3_tetsuya",
+      "n3_misu"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n1_iiwake",
+    "word": "言い訳",
+    "reading": "いいわけ",
+    "level": "N1",
+    "why": "和语复合名词,场是解释迟到和失误——和素直/謝る成对。",
+    "memberIds": [
+      "n4_ayamaru",
+      "n2_sunao",
+      "n3_chikoku",
+      "n3_gokai"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_gokai",
+    "word": "誤解",
+    "reading": "ごかい",
+    "level": "N3",
+    "why": "场是话说错之后的收拾。",
+    "memberIds": [
+      "n1_iiwake",
+      "n4_ayamaru",
+      "n4_setsumei",
+      "n2_sunao"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_nagusameru",
+    "word": "慰める",
+    "reading": "なぐさめる",
+    "level": "N2",
+    "why": "和语动词,场是别人失败之后。",
+    "memberIds": [
+      "n3_kinodoku",
+      "n1_gakkuri",
+      "n5_hanasu",
+      "n3_namida"
+    ],
+    "missingMembers": [
+      "泣く"
+    ],
+    "tier": "B"
+  },
+  {
+    "id": "n1_kokuhaku",
+    "word": "告白",
+    "reading": "こくはく",
+    "level": "N1",
+    "why": "中文是坦白罪行,日语第一义是表白。日漫核心词。",
+    "memberIds": [
+      "n2_dokidoki",
+      "n1_kataomoi",
+      "n4_okujou",
+      "n3_kotowaru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_kataomoi",
+    "word": "片思い",
+    "reading": "かたおもい",
+    "level": "N1",
+    "why": "和语构词,中文的\"单相思\"更书面。场是说不出口的那段。",
+    "memberIds": [
+      "n1_kokuhaku",
+      "n3_koi",
+      "n3_akirameru",
+      "n2_dokidoki"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_uwasa",
+    "word": "噂",
+    "reading": "うわさ",
+    "level": "N3",
+    "why": "场是\"听说…\",和世間/評判成组。",
+    "memberIds": [
+      "n3_seken",
+      "n3_hyouban",
+      "n5_kiku",
+      "n5_hito"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_miokuru",
+    "word": "見送る",
+    "reading": "みおくる",
+    "level": "N2",
+    "why": "一词两场:送行,和\"这次先算了\"(见送り)。后者是职场高频。",
+    "memberIds": [
+      "n5_eki",
+      "n4_kuukou",
+      "n3_enki",
+      "n4_kimeru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_tasukaru",
+    "word": "助かる",
+    "reading": "たすかる",
+    "level": "N2",
+    "why": "自动词,场是\"你帮大忙了\"这句道谢。",
+    "memberIds": [
+      "n4_tetsudau",
+      "n4_orei",
+      "n5_komaru",
+      "n3_kansha"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n5_komaru",
+    "word": "困る",
+    "reading": "こまる",
+    "level": "N5",
+    "why": "场是遇到麻烦说不出话的那一刻。",
+    "memberIds": [
+      "n1_toraburu",
+      "n4_soudan",
+      "n2_tasukaru",
+      "n3_mendou"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_akirameru",
+    "word": "諦める",
+    "reading": "あきらめる",
+    "level": "N3",
+    "why": "场是放弃前的犹豫。",
+    "memberIds": [
+      "n4_muri",
+      "n1_gakkuri",
+      "n3_nayamu",
+      "n4_kimeru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_kanpai",
+    "word": "乾杯",
+    "reading": "かんぱい",
+    "level": "N2",
+    "why": "日本的乾杯不等于喝干,和中文的\"干杯\"有实质差别,场是聚会开场。",
+    "memberIds": [
+      "n3_biru",
+      "n3_sake",
+      "n3_tsugu",
+      "n3_aisatsu"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_tsugu",
+    "word": "注ぐ",
+    "reading": "つぐ",
+    "level": "N3",
+    "why": "给别人倒酒是一套礼仪,场是酒桌上的手。",
+    "memberIds": [
+      "n3_sake",
+      "n3_biru",
+      "n2_kanpai",
+      "n2_meue"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_you_2",
+    "word": "酔う",
+    "reading": "よう",
+    "level": "N3",
+    "why": "一词多场:醉、晕车、晕船。",
+    "memberIds": [
+      "n3_sake",
+      "n3_biru",
+      "n5_densha",
+      "n4_kimochi"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_kanjou",
+    "word": "勘定",
+    "reading": "かんじょう",
+    "level": "N3",
+    "why": "结账,和会計并存,场是居酒屋出门时。",
+    "memberIds": [
+      "n3_kaikei",
+      "n3_shiharau",
+      "n3_sake",
+      "n4_otsuri"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_kogeru",
+    "word": "焦げる",
+    "reading": "こげる",
+    "level": "N2",
+    "why": "和语自动词,场是厨房走神那一下。",
+    "memberIds": [
+      "n4_yaku",
+      "n3_nabe",
+      "n3_nioi",
+      "n3_bonyari"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n4_waku",
+    "word": "沸く",
+    "reading": "わく",
+    "level": "N4",
+    "why": "和语自动词,场是水开了和浴缸放好了。",
+    "memberIds": [
+      "n4_yu",
+      "n3_nabe",
+      "n5_chawan",
+      "n2_onsen"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_musu",
+    "word": "蒸す",
+    "reading": "むす",
+    "level": "N2",
+    "why": "既是烹饪也形容天气闷,和蒸し暑い同源。",
+    "memberIds": [
+      "n2_mushiatsui",
+      "n3_nabe",
+      "n5_yasai",
+      "n4_yu"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_itameru_2",
+    "word": "炒める",
+    "reading": "いためる",
+    "level": "N1",
+    "why": "和\"痛める\"同音,场是厨房。",
+    "memberIds": [
+      "n5_yasai",
+      "n3_abura",
+      "n3_nabe",
+      "n4_yaku"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_kizamu",
+    "word": "刻む",
+    "reading": "きざむ",
+    "level": "N2",
+    "why": "切碎,引申\"刻在心里\",场是砧板。",
+    "memberIds": [
+      "n5_yasai",
+      "n4_miso",
+      "n2_mazeru"
+    ],
+    "missingMembers": [
+      "包丁"
+    ],
+    "tier": "B"
+  },
+  {
+    "id": "n4_miso",
+    "word": "味噌",
+    "reading": "みそ",
+    "level": "N4",
+    "why": "中文没有对应物(和大酱不同),场是味增汤和定食。",
+    "memberIds": [
+      "n1_teishoku",
+      "n4_yu",
+      "n3_nabe",
+      "n5_shio"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n5_shouyu",
+    "word": "醤油",
+    "reading": "しょうゆ",
+    "level": "N5",
+    "why": "日常调味核心,场是餐桌上的小瓶子。",
+    "memberIds": [
+      "n5_shio",
+      "n4_aji",
+      "n3_sara",
+      "n4_yaku"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_kondate",
+    "word": "献立",
+    "reading": "こんだて",
+    "level": "N2",
+    "why": "和语构词的\"菜单/食谱安排\",场是家里一周的饭。",
+    "memberIds": [
+      "n5_ryouri",
+      "n5_yasai",
+      "n5_kaimono",
+      "n4_miso"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_ajiwau",
+    "word": "味わう",
+    "reading": "あじわう",
+    "level": "N2",
+    "why": "和语动词,不只是尝味道还有体会,场是慢慢吃和人生。",
+    "memberIds": [
+      "n4_aji",
+      "n2_shimijimi",
+      "n5_ryouri",
+      "n5_shokudou"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_waribiki",
+    "word": "割引",
+    "reading": "わりびき",
+    "level": "N2",
+    "why": "场是超市晚上贴标和换季打折。",
+    "memberIds": [
+      "n1_seru",
+      "n4_nedan",
+      "n5_kaimono",
+      "n4_reji"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_otsuri",
+    "word": "おつり",
+    "reading": "おつり",
+    "level": "N4",
+    "why": "和语,场是收银台找零。",
+    "memberIds": [
+      "n4_reji",
+      "n3_genkin",
+      "n3_kaikei",
+      "n3_fukuro"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n5_yaoya",
+    "word": "八百屋",
+    "reading": "やおや",
+    "level": "N5",
+    "why": "熟字训(やおや),汉字读不出来。场是商店街。",
+    "memberIds": [
+      "n3_ichiba",
+      "n5_yasai",
+      "n5_kudamono",
+      "n5_kaimono"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_gyouretsu",
+    "word": "行列",
+    "reading": "ぎょうれつ",
+    "level": "N2",
+    "why": "排队本身在日本是一种现象,场是人气店门口。",
+    "memberIds": [
+      "n5_narabu",
+      "n5_matsu",
+      "n3_hyouban",
+      "n3_konzatsu"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_yachin",
+    "word": "家賃",
+    "reading": "やちん",
+    "level": "N3",
+    "why": "租房核心词,场是每月和搬家。",
+    "memberIds": [
+      "n3_ooya",
+      "n5_apaato",
+      "n2_manshon",
+      "n3_kyuuryou"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n3_ooya",
+    "word": "大家",
+    "reading": "おおや",
+    "level": "N3",
+    "why": "中文是\"大家/名家\",日语是房东——汉字骗人。",
+    "memberIds": [
+      "n3_yachin",
+      "n5_apaato",
+      "n5_heya",
+      "n2_tetsuzuki"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_katazukeru",
+    "word": "片付ける",
+    "reading": "かたづける",
+    "level": "N4",
+    "why": "和语动词,场是饭后和搬家前。",
+    "memberIds": [
+      "n5_souji",
+      "n4_suteru",
+      "n5_heya",
+      "n2_darashinai"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n5_sentaku",
+    "word": "洗濯",
+    "reading": "せんたく",
+    "level": "N5",
+    "why": "场是梅雨季晾不干和阳台。",
+    "memberIds": [
+      "n3_tsuyu",
+      "n2_shikke",
+      "n5_fuku_2",
+      "n3_nioi"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_suteru",
+    "word": "捨てる",
+    "reading": "すてる",
+    "level": "N4",
+    "why": "场是扔垃圾的分类规则(日本特别严)。",
+    "memberIds": [
+      "n2_mottainai",
+      "n5_souji",
+      "n3_fukuro",
+      "n4_katazukeru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_nioi",
+    "word": "匂い",
+    "reading": "におい",
+    "level": "N3",
+    "why": "和\"香り\"的褒贬分工是个真实的语感点,场是厨房和房间。",
+    "memberIds": [
+      "n3_kaori",
+      "n2_kogeru",
+      "n4_aji",
+      "n5_heya"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_kaori",
+    "word": "香り",
+    "reading": "かおり",
+    "level": "N3",
+    "why": "和匂い成对,场是茶和花。",
+    "memberIds": [
+      "n3_nioi",
+      "n2_ajiwau",
+      "n3_sakura",
+      "n4_aji"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_inkan",
+    "word": "印鑑",
+    "reading": "いんかん",
+    "level": "N1",
+    "why": "日本的印章制度中文使用者完全陌生,场是银行和合同。",
+    "memberIds": [
+      "n2_tetsuzuki",
+      "n2_madoguchi",
+      "n3_kinyuu",
+      "n3_keiyaku"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_tetsuzuki",
+    "word": "手続き",
+    "reading": "てつづき",
+    "level": "N2",
+    "why": "场是办事窗口的一整套流程,和面倒/ややこしい成对。",
+    "memberIds": [
+      "n2_madoguchi",
+      "n3_kinyuu",
+      "n3_shorui",
+      "n3_mendou"
+    ],
+    "missingMembers": [],
+    "tier": "A"
+  },
+  {
+    "id": "n2_madoguchi",
+    "word": "窓口",
+    "reading": "まどぐち",
+    "level": "N2",
+    "why": "不是\"窗口\"的比喻义,是真实的柜台。场是市役所和银行。",
+    "memberIds": [
+      "n2_tetsuzuki",
+      "n3_kinyuu",
+      "n5_matsu",
+      "n5_bangou"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_kinyuu",
+    "word": "記入",
+    "reading": "きにゅう",
+    "level": "N3",
+    "why": "填表,场是表格和笔。",
+    "memberIds": [
+      "n3_shorui",
+      "n2_tetsuzuki",
+      "n2_madoguchi",
+      "n3_teishutsu"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_keiyaku",
+    "word": "契約",
+    "reading": "けいやく",
+    "level": "N3",
+    "why": "场是租房和入职签字。",
+    "memberIds": [
+      "n1_inkan",
+      "n3_shorui",
+      "n3_yachin",
+      "n2_tetsuzuki"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_senkyo",
+    "word": "選挙",
+    "reading": "せんきょ",
+    "level": "N1",
+    "why": "场是投票日的街头和开票。",
+    "memberIds": [
+      "n3_touhyou",
+      "n3_giin",
+      "n3_enzetsu",
+      "n1_shiji"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_touhyou",
+    "word": "投票",
+    "reading": "とうひょう",
+    "level": "N3",
+    "why": "场是投票所和结果。",
+    "memberIds": [
+      "n1_senkyo",
+      "n3_giin",
+      "n3_kekka",
+      "n1_shiji"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_enzetsu",
+    "word": "演説",
+    "reading": "えんぜつ",
+    "level": "N3",
+    "why": "场是选举车和街头。",
+    "memberIds": [
+      "n1_senkyo",
+      "n3_giin",
+      "n5_koe",
+      "n5_kiku"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_keiki",
+    "word": "景気",
+    "reading": "けいき",
+    "level": "N3",
+    "why": "和\"景气\"的中文用法接近但日语更日常,新闻高频。",
+    "memberIds": [
+      "n3_bukka",
+      "n1_infure",
+      "n3_kabu",
+      "n3_kyuuryou"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_bukka",
+    "word": "物価",
+    "reading": "ぶっか",
+    "level": "N3",
+    "why": "场是涨价新闻和超市。",
+    "memberIds": [
+      "n1_infure",
+      "n4_nedan",
+      "n3_keiki",
+      "n3_kyuuryou"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_genba",
+    "word": "現場",
+    "reading": "げんば",
+    "level": "N3",
+    "why": "一词两场:事故现场,和职场的\"一线\"。后者是日式管理关键词。",
+    "memberIds": [
+      "n4_jiko",
+      "n4_keisatsu",
+      "n5_shigoto",
+      "n3_houkoku"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n4_keisatsu",
+    "word": "警察",
+    "reading": "けいさつ",
+    "level": "N4",
+    "why": "场是事故和报案。",
+    "memberIds": [
+      "n4_jiko",
+      "n3_genba",
+      "n4_kega",
+      "n4_renraku"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_chuushi",
+    "word": "中止",
+    "reading": "ちゅうし",
+    "level": "N3",
+    "why": "场是台风天的活动通知。",
+    "memberIds": [
+      "n4_taifuu",
+      "n3_enki",
+      "n4_kaijou",
+      "n4_renraku"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_enki",
+    "word": "延期",
+    "reading": "えんき",
+    "level": "N3",
+    "why": "和中止的区别在新闻里要分清,场是活动和会议。",
+    "memberIds": [
+      "n3_chuushi",
+      "n2_nittei",
+      "n4_kaigi",
+      "n4_renraku"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_konzatsu",
+    "word": "混雑",
+    "reading": "こんざつ",
+    "level": "N3",
+    "why": "新闻和车站广播的固定词,场是节假日。",
+    "memberIds": [
+      "n1_renkyuu",
+      "n2_manin",
+      "n2_gyouretsu",
+      "n5_eki"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_tozan",
+    "word": "登山",
+    "reading": "とざん",
+    "level": "N3",
+    "why": "场是山、山顶、便当、汗。",
+    "memberIds": [
+      "n5_yama",
+      "n3_choujou",
+      "n3_ase",
+      "n4_keshiki"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_choujou",
+    "word": "頂上",
+    "reading": "ちょうじょう",
+    "level": "N3",
+    "why": "场是爬到最上面那一刻。",
+    "memberIds": [
+      "n3_tozan",
+      "n5_yama",
+      "n4_keshiki",
+      "n5_tsukareru"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_hiyake",
+    "word": "日焼け",
+    "reading": "ひやけ",
+    "level": "N1",
+    "why": "场是海边和运动之后。",
+    "memberIds": [
+      "n5_umi",
+      "n5_natsu",
+      "n5_itai",
+      "n3_ase"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_nagameru",
+    "word": "眺める",
+    "reading": "ながめる",
+    "level": "N3",
+    "why": "和\"見る\"的区别是持续和距离,场是窗边和展望台。",
+    "memberIds": [
+      "n4_keshiki",
+      "n5_mado",
+      "n5_yama",
+      "n3_bonyari"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n1_renkyuu",
+    "word": "連休",
+    "reading": "れんきゅう",
+    "level": "N1",
+    "why": "黄金周/盆休是日本特有节奏,场是拥堵和出游。",
+    "memberIds": [
+      "n3_juutai",
+      "n3_konzatsu",
+      "n3_nonbiri",
+      "n4_ryokan"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n2_hanabi",
+    "word": "花火",
+    "reading": "はなび",
+    "level": "N2",
+    "why": "场是夏祭:浴衣、人群、河边。",
+    "memberIds": [
+      "n2_yukata",
+      "n5_natsu",
+      "n3_matsuri",
+      "n5_shashin"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  },
+  {
+    "id": "n3_esa",
+    "word": "餌",
+    "reading": "えさ",
+    "level": "N3",
+    "why": "场是喂猫喂鸽子和钓鱼。",
+    "memberIds": [
+      "n5_sanpo",
+      "n5_naku",
+      "n4_hirou",
+      "n5_kouen"
+    ],
+    "missingMembers": [],
+    "tier": "B"
+  }
+]

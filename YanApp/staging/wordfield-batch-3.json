@@ -1,0 +1,523 @@
+{
+ "batch": "wordfield-batch-3",
+ "date": "2026-08-11",
+ "source": "staging/wordfield-candidates-v2.json 的 ryoko(旅行・宿泊) 与 tenki(天気) 两组",
+ "standard": "docs/content-standard-wordfield.md",
+ "status": "draft",
+ "note": "草稿。未写入内容包，未提交。合并由人决定。`wordField` 是可直接并入 wordBank 对应词条的负载；`review` 是本轮自查记录，合并时不要带进去。",
+ "items": [
+  {
+   "id": "n1_furonto",
+   "word": "フロント",
+   "reading": "フロント",
+   "level": "N1",
+   "tier": "A",
+   "scene": "ryoko",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "进旅馆的头五分钟",
+    "sentence": {
+     "jp": "ホテルに着いたら、まずフロントでチェックインして、鍵をもらい、荷物を部屋に置く。",
+     "zh": "到了酒店，先在前台办入住，拿钥匙，把行李放进房间。",
+     "roma": "Hoteru ni tsuitara, mazu furonto de chekkuin shite, kagi o morai, nimotsu o heya ni oku."
+    },
+    "members": [
+     {
+      "id": "n5_hoteru"
+     },
+     {
+      "id": "n4_chikuin"
+     },
+     {
+      "id": "n5_kagi"
+     },
+     {
+      "id": "n5_nimotsu"
+     }
+    ],
+    "coreImage": "英语的 front 是「前面」，日语把它钉死在旅馆那一格柜台上。要钥匙、寄存行李、问路，都是走向这一格——它不是方位，是一个具体的地点。"
+   },
+   "review": {
+    "relation": "地点 → 到那儿做的第一件事 → 拿到手的东西 → 放下的东西",
+    "dropped": [
+     "n3_shukuhaku 宿泊 —— 候选给的成员，但它是书面登记用语，放进这句口语动线里是硬塞"
+    ],
+    "memberWords": [
+     "ホテル",
+     "チェックイン",
+     "鍵",
+     "荷物"
+    ]
+   }
+  },
+  {
+   "id": "n3_yado",
+   "word": "宿",
+   "reading": "やど",
+   "level": "N3",
+   "tier": "A",
+   "scene": "ryoko",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "天黑前要落实的一件事",
+    "sentence": {
+     "jp": "今夜の宿が決まらないまま、駅前の旅館に電話して予約を取り、やっと荷物を下ろす。",
+     "zh": "今晚住哪儿还没着落，给站前的旅馆打了电话订上，才终于放下行李。",
+     "roma": "Kon'ya no yado ga kimaranai mama, ekimae no ryokan ni denwa shite yoyaku o tori, yatto nimotsu o orosu."
+    },
+    "members": [
+     {
+      "id": "n5_eki"
+     },
+     {
+      "id": "n4_ryokan"
+     },
+     {
+      "id": "n4_yoyaku"
+     },
+     {
+      "id": "n5_nimotsu"
+     }
+    ],
+    "coreImage": "宿 不是某一类建筑，是「今晚睡在哪儿」这件事本身。旅館、民宿、朋友家，只要今晚在那儿落脚，都能叫宿——所以它常和「探す・決まる・取る」搭。"
+   },
+   "review": {
+    "relation": "悬着的问题 → 打电话的地方 → 解决的动作 → 解决之后身体的反应",
+    "dropped": [
+     "n3_shukuhaku 宿泊 —— 「宿泊」里含「宿」，写进句子等于让头词自己给自己作证，是假的同框"
+    ],
+    "memberWords": [
+     "駅",
+     "旅館",
+     "予約",
+     "荷物"
+    ]
+   }
+  },
+  {
+   "id": "n4_ryokan",
+   "word": "旅館",
+   "reading": "りょかん",
+   "level": "N4",
+   "tier": "B",
+   "scene": "ryoko",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "和酒店不一样的地方",
+    "sentence": {
+     "jp": "旅館に泊まると、夕方に温泉に入り、畳の部屋で食事をして、布団で寝る。",
+     "zh": "住日式旅馆的话，傍晚先泡温泉，在铺榻榻米的房间吃饭，睡在被褥上。",
+     "roma": "Ryokan ni tomaru to, yuugata ni onsen ni hairi, tatami no heya de shokuji o shite, futon de neru."
+    },
+    "members": [
+     {
+      "id": "n2_onsen"
+     },
+     {
+      "id": "n4_tatami"
+     },
+     {
+      "id": "n4_shokuji"
+     },
+     {
+      "id": "n4_futon"
+     }
+    ]
+   },
+   "review": {
+    "relation": "一晚上的顺序：泡澡 → 地面 → 饭 → 床。四个成员合起来就是「旅館 ≠ ホテル」的全部内容",
+    "dropped": [],
+    "memberWords": [
+     "温泉",
+     "畳",
+     "食事",
+     "布団"
+    ]
+   }
+  },
+  {
+   "id": "n3_miyage",
+   "word": "土産",
+   "reading": "みやげ",
+   "level": "N3",
+   "tier": "B",
+   "scene": "ryoko",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "出差回来的第一件事",
+    "sentence": {
+     "jp": "出張から戻る日、空港でお土産を買って、会社で同僚に配る。",
+     "zh": "出差回来那天，在机场买了伴手礼，到公司分给同事。",
+     "roma": "Shutchou kara modoru hi, kuukou de omiyage o katte, kaisha de douryou ni kubaru."
+    },
+    "members": [
+     {
+      "id": "n2_shutchou"
+     },
+     {
+      "id": "n4_kuukou"
+     },
+     {
+      "id": "n3_douryou"
+     },
+     {
+      "id": "n2_kubaru"
+     }
+    ],
+    "coreImage": "重点不在东西，在「我出门了、你没去」这层交代。所以关键是数量够分——配る 才是这个词真正的搭档，好不好吃是其次。"
+   },
+   "review": {
+    "relation": "事由 → 买的地方（临上飞机才想起来） → 分给谁 → 那个动作",
+    "dropped": [
+     "n3_kankou 観光 —— 出差和观光是两个场，塞在一句里会互相打架",
+     "n3_okuru 贈る —— 贈る 太郑重，土産 走的是 配る 那一路"
+    ],
+    "memberWords": [
+     "出張",
+     "空港",
+     "同僚",
+     "配る"
+    ]
+   }
+  },
+  {
+   "id": "n2_menzei",
+   "word": "免税",
+   "reading": "めんぜい",
+   "level": "N2",
+   "tier": "B",
+   "scene": "ryoko",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "机场那一段流程",
+    "sentence": {
+     "jp": "空港の免税店で買い物をするときはパスポートを見せ、帰りは税関を通る。",
+     "zh": "在机场免税店买东西要出示护照，回来时要过海关。",
+     "roma": "Kuukou no menzeiten de kaimono o suru toki wa pasupooto o mise, kaeri wa zeikan o tooru."
+    },
+    "members": [
+     {
+      "id": "n4_kuukou"
+     },
+     {
+      "id": "n5_kaimono"
+     },
+     {
+      "id": "n3_pasupoto"
+     },
+     {
+      "id": "n2_zeikan"
+     }
+    ]
+   },
+   "review": {
+    "relation": "地点 → 做的事 → 要掏的证件 → 回程绕不开的一关",
+    "dropped": [],
+    "memberWords": [
+     "空港",
+     "買い物",
+     "パスポート",
+     "税関"
+    ]
+   }
+  },
+  {
+   "id": "n4_annai",
+   "word": "案内",
+   "reading": "あんない",
+   "level": "N4",
+   "tier": "B",
+   "scene": "ryoko",
+   "kanjiTrap": true,
+   "wordField": {
+    "label": "不知道路的时候",
+    "sentence": {
+     "jp": "道が分からないと言うと、駅の人が地図を出して、観光案内所まで案内してくれた。",
+     "zh": "说了句不认识路，车站的人就拿出地图，把我领到了旅游咨询处。",
+     "roma": "Michi ga wakaranai to iu to, eki no hito ga chizu o dashite, kankou annaijo made annai shite kureta."
+    },
+    "members": [
+     {
+      "id": "n5_michi"
+     },
+     {
+      "id": "n5_eki"
+     },
+     {
+      "id": "n5_chizu"
+     },
+     {
+      "id": "n3_kankou"
+     }
+    ],
+    "coreImage": "案内 是「把你带到那儿」，不是中文的案卷。带的可以是人，也可以是一张纸——所以「ご案内します」从店员嘴里说出来，「案内所」印在牌子上，是同一件事。"
+   },
+   "review": {
+    "relation": "困境 → 帮忙的人 → 用的工具 → 终点；「案内所」这个复合词顺带出现了",
+    "dropped": [],
+    "memberWords": [
+     "道",
+     "駅",
+     "地図",
+     "観光"
+    ]
+   }
+  },
+  {
+   "id": "n3_doraibu",
+   "word": "ドライブ",
+   "reading": "ドライブ",
+   "level": "N3",
+   "tier": "B",
+   "scene": "ryoko",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "周末出门这件事",
+    "sentence": {
+     "jp": "免許を取ったばかりの弟の運転で、海まで景色のいい道をドライブした。",
+     "zh": "坐着刚拿到驾照的弟弟开的车，沿着风景好的路一路开到海边。",
+     "roma": "Menkyo o totta bakari no otouto no unten de, umi made keshiki no ii michi o doraibu shita."
+    },
+    "members": [
+     {
+      "id": "n3_menkyo"
+     },
+     {
+      "id": "n4_unten"
+     },
+     {
+      "id": "n5_umi"
+     },
+     {
+      "id": "n4_keshiki"
+     }
+    ],
+    "coreImage": "英语的 drive 是「开车」这个动作，日语的ドライブ是「开车出去玩」这件事。所以坐副驾也算ドライブ，而每天开一小时通勤不算。"
+   },
+   "review": {
+    "relation": "资格 → 谁在开 → 去哪儿 → 路上看什么；ドライブ 是这四样加起来的那个名字",
+    "dropped": [],
+    "memberWords": [
+     "免許",
+     "運転",
+     "海",
+     "景色"
+    ]
+   }
+  },
+  {
+   "id": "n3_tsumoru",
+   "word": "積もる",
+   "reading": "つもる",
+   "level": "N3",
+   "tier": "A",
+   "scene": "tenki",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "雪停之后的早上",
+    "sentence": {
+     "jp": "夜のうちに雪が積もる朝は、寒いので手袋をして駅まで歩く。",
+     "zh": "夜里积起雪的早晨，因为冷，戴上手套走去车站。",
+     "roma": "Yoru no uchi ni yuki ga tsumoru asa wa, samui node tebukuro o shite eki made aruku."
+    },
+    "members": [
+     {
+      "id": "n5_yuki"
+     },
+     {
+      "id": "n5_asa"
+     },
+     {
+      "id": "n5_samui"
+     },
+     {
+      "id": "n4_tebukuro"
+     }
+    ],
+    "coreImage": "積もる 是「一层层落下来、不走」。所以除了雪，日语也说「疲れが積もる」「積もる話」——攒着没散掉的东西，用的是同一个词。"
+   },
+   "review": {
+    "relation": "夜里发生的事 → 你面对它的时刻 → 体感 → 因此加的一件装备",
+    "dropped": [],
+    "memberWords": [
+     "雪",
+     "朝",
+     "寒い",
+     "手袋"
+    ]
+   }
+  },
+  {
+   "id": "n4_hieru",
+   "word": "冷える",
+   "reading": "ひえる",
+   "level": "N4",
+   "tier": "B",
+   "scene": "tenki",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "关掉暖气之后",
+    "sentence": {
+     "jp": "寒い夜、暖房を消すと足元から冷えるので、布団をもう一枚かけて風邪を防ぐ。",
+     "zh": "冷的夜里一关暖气，凉意就从脚下上来，于是多盖一床被子防感冒。",
+     "roma": "Samui yoru, danbou o kesu to ashimoto kara hieru node, futon o mou ichimai kakete kaze o fusegu."
+    },
+    "members": [
+     {
+      "id": "n5_samui"
+     },
+     {
+      "id": "n4_danbou"
+     },
+     {
+      "id": "n4_futon"
+     },
+     {
+      "id": "n5_kaze_2"
+     }
+    ],
+    "coreImage": "冷える 说的不是气温低，是「凉下来」这件事落到了身上：脚、肚子、手指。日本人说「体が冷える」时是在谈健康，不是在报天气——寒い 描述外面，冷える 描述里面。"
+   },
+   "review": {
+    "relation": "外部条件 → 你做的动作 → 身体的反应 → 补救和后果",
+    "dropped": [],
+    "memberWords": [
+     "寒い",
+     "暖房",
+     "布団",
+     "風邪"
+    ]
+   }
+  },
+  {
+   "id": "n1_bisshori",
+   "word": "びっしょり",
+   "reading": "びっしょり",
+   "level": "N1",
+   "tier": "A",
+   "scene": "tenki",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "没带伞的那天",
+    "sentence": {
+     "jp": "傘のない日に雨に降られると、服はびっしょり濡れる。",
+     "zh": "偏偏没带伞那天挨了淋，衣服湿了个透。",
+     "roma": "Kasa no nai hi ni ame ni furareru to, fuku wa bisshori nureru."
+    },
+    "members": [
+     {
+      "id": "n5_kasa"
+     },
+     {
+      "id": "n5_ame"
+     },
+     {
+      "id": "n5_fuku_2"
+     },
+     {
+      "id": "n3_nureru"
+     }
+    ],
+    "coreImage": "びっしょり 只说一件事：湿到不用再确认了。它不修饰程度轻的湿——「少しびっしょり」不成立。汗和雨都能用，共同点是一眼就看得出来。"
+   },
+   "review": {
+    "relation": "缺的东西 → 遇上的事 → 遭殃的对象 → 结果；びっしょり 是「濡れる」的程度，不是它的替换词",
+    "dropped": [
+     "n3_ase 汗 / n5_atsui 暑い —— 出汗那一头是另一个场（夏天、运动），和淋雨挤在一句里就散了。见报告的问题 3"
+    ],
+    "memberWords": [
+     "傘",
+     "雨",
+     "服",
+     "濡れる"
+    ]
+   }
+  },
+  {
+   "id": "n2_mekkiri",
+   "word": "めっきり",
+   "reading": "めっきり",
+   "level": "N2",
+   "tier": "A",
+   "scene": "tenki",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "季节换挡的那两周",
+    "sentence": {
+     "jp": "秋になると涼しい日がめっきり増え、朝は冷えるし夜も寒い。",
+     "zh": "一入秋，凉快的日子明显多起来，早上发凉，晚上也冷。",
+     "roma": "Aki ni naru to suzushii hi ga mekkiri fue, asa wa hieru shi yoru mo samui."
+    },
+    "members": [
+     {
+      "id": "n5_aki"
+     },
+     {
+      "id": "n5_suzushii"
+     },
+     {
+      "id": "n4_hieru"
+     },
+     {
+      "id": "n5_samui"
+     }
+    ],
+    "coreImage": "めっきり 不修饰状态，只修饰变化——所以它后面几乎永远跟着 増える・減る・なる。「めっきり寒い」不对，「めっきり寒くなった」才对。用得最多的两处：天气和上了年纪。"
+   },
+   "review": {
+    "relation": "时间点 → 明显变化的东西 → 一天里的两个具体时刻",
+    "dropped": [],
+    "memberWords": [
+     "秋",
+     "涼しい",
+     "冷える",
+     "寒い"
+    ]
+   }
+  },
+  {
+   "id": "n2_mushiatsui",
+   "word": "蒸し暑い",
+   "reading": "むしあつい",
+   "level": "N2",
+   "tier": "A",
+   "scene": "tenki",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "夏天晚上睡不着的原因",
+    "sentence": {
+     "jp": "夏の夜は蒸し暑くて、風もなく、扇風機をつけても汗が引かない。",
+     "zh": "夏天的夜里又闷又热，一丝风也没有，开着电扇汗还是下不去。",
+     "roma": "Natsu no yoru wa mushiatsukute, kaze mo naku, senpuuki o tsukete mo ase ga hikanai."
+    },
+    "members": [
+     {
+      "id": "n5_natsu"
+     },
+     {
+      "id": "n5_kaze"
+     },
+     {
+      "id": "n2_senpuuki"
+     },
+     {
+      "id": "n3_ase"
+     }
+    ],
+    "coreImage": "「蒸」是关键：不是热，是水汽把热按在皮肤上不让它散。所以同样的温度，干燥地方的 暑い 和日本夏夜的 蒸し暑い 是两种难受。"
+   },
+   "review": {
+    "relation": "时令 → 缺的东西 → 试过的办法 → 没解决的问题",
+    "dropped": [
+     "n3_tsuyu 梅雨 —— batch-1 的 梅雨 卡已经写过「湿気で蒸し暑い」。再写一遍等于给用户看两遍同一句。本卡刻意挪到盛夏的夜"
+    ],
+    "memberWords": [
+     "夏",
+     "風",
+     "扇風機",
+     "汗"
+    ]
+   }
+  }
+ ]
+}

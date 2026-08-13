@@ -52,7 +52,20 @@ app-example
 tools/data/
 
 # 词书导入中间产物(可由 build-*-staging.py 再生)
-staging/
+# 要用 **/staging/* 三个条件都满足才行:
+#   · 不能写 staging/  —— 目录整个被排除时,里面的文件再也 negate 不回来
+#   · 不能写 staging/* —— 带斜杠的模式**锚定 .gitignore 所在目录**,
+#     那样就只管仓库根下的 staging,YanApp/staging 会整个漏出来(含 117MB 的 jmdict)
+#   · **/ 才能恢复「任意层级的 staging」这个原意
+**/staging/*
+
+# 但词场不是「可再生的中间产物」,它是**手写内容**:
+# batch-3/4/5 有生成脚本,batch-1/2 **没有**,丢了就得重写。
+# 候选表和合并日志同理,是人挑过的。这几份小(每份 10~70KB),必须进仓库。
+# 2026-08-13 提交时才发现它们一直躺在 gitignore 里。
+!YanApp/staging/wordfield-batch-*.json
+!YanApp/staging/wordfield-candidates*.json
+!YanApp/staging/wordfield-merge-log.json
 
 # Supabase CLI 本地状态(含项目 ref,不该进仓库)
 YanApp/supabase/.temp/

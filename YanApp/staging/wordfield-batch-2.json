@@ -1,0 +1,349 @@
+{
+ "batch": "wordfield-batch-2",
+ "date": "2026-08-11",
+ "source": "staging/wordfield-candidates-v2.json 的 kimochi(感情・心情)组",
+ "standard": "docs/content-standard-wordfield.md",
+ "status": "draft",
+ "note": "草稿。未写入内容包,未提交。合并由人决定。",
+ "items": [
+  {
+   "id": "n2_dokidoki",
+   "word": "どきどき",
+   "reading": "どきどき",
+   "level": "N2",
+   "tier": "A",
+   "scene": "kimochi",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "心跳快起来的那几分钟",
+    "sentence": {
+     "jp": "面接の前は、発表や告白の前と同じで、緊張して胸がどきどきする。",
+     "zh": "面试之前，和上台发言、告白之前是同一种：紧张得心怦怦跳。",
+     "roma": "Mensetsu no mae wa, happyou ya kokuhaku no mae to onaji de, kinchou shite mune ga dokidoki suru."
+    },
+    "members": [
+     {
+      "id": "n2_mensetsu"
+     },
+     {
+      "id": "n3_happyou"
+     },
+     {
+      "id": "n1_kokuhaku"
+     },
+     {
+      "id": "n3_kinchou"
+     }
+    ],
+    "coreImage": "不是「紧张」这个概念，是胸口那两下真实的响。所有让它响起来的场合，本质是同一件事：下一秒不由你决定。"
+   }
+  },
+  {
+   "id": "n1_hotto",
+   "word": "ほっと",
+   "reading": "ほっと",
+   "level": "N1",
+   "tier": "B",
+   "scene": "kimochi",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "一直提着的那口气落下来",
+    "sentence": {
+     "jp": "長い受験が終わる日、合格の知らせを見て、やっと安心してほっとした。",
+     "zh": "漫长的考试结束那天，看到合格通知，才终于安心地松了口气。",
+     "roma": "Nagai juken ga owaru hi, goukaku no shirase o mite, yatto anshin shite hotto shita."
+    },
+    "members": [
+     {
+      "id": "n2_juken"
+     },
+     {
+      "id": "n1_owaru"
+     },
+     {
+      "id": "n3_goukaku"
+     },
+     {
+      "id": "n4_anshin"
+     }
+    ],
+    "coreImage": "肩膀掉下来那一下。ほっと 是身体先知道结果，脑子后知道。"
+   }
+  },
+  {
+   "id": "n1_unzari",
+   "word": "うんざり",
+   "reading": "うんざり",
+   "level": "N1",
+   "tier": "B",
+   "scene": "kimochi",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "同一件事重复到腻",
+    "sentence": {
+     "jp": "毎日の通勤は満員電車、会社に着けば会議続き、ストレスでもううんざりだ。",
+     "zh": "每天通勤挤满员电车，到公司又是一个接一个的会，压力大得已经腻透了。",
+     "roma": "Mainichi no tsuukin wa manin densha, kaisha ni tsukeba kaigi tsuzuki, sutoresu de mou unzari da."
+    },
+    "members": [
+     {
+      "id": "n2_tsuukin"
+     },
+     {
+      "id": "n2_manin"
+     },
+     {
+      "id": "n4_kaigi"
+     },
+     {
+      "id": "n1_sutoresu"
+     }
+    ],
+    "coreImage": "不是生气，是被磨平。うんざり 的前提是「又来了」——第一次不会腻。"
+   }
+  },
+  {
+   "id": "n1_gakkuri",
+   "word": "がっくり",
+   "reading": "がっくり",
+   "level": "N1",
+   "tier": "B",
+   "scene": "kimochi",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "一下子垮下去",
+    "sentence": {
+     "jp": "受験の日に小さなミスをして、もう諦めるしかないかとがっくり肩を落とした。",
+     "zh": "考试那天出了个小差错，想着只能放弃了，一下子垂下肩膀。",
+     "roma": "Juken no hi ni chiisana misu o shite, mou akirameru shika nai ka to gakkuri kata o otoshita."
+    },
+    "members": [
+     {
+      "id": "n2_juken"
+     },
+     {
+      "id": "n3_misu"
+     },
+     {
+      "id": "n3_akirameru"
+     }
+    ],
+    "coreImage": "がっくり 是有形状的：肩膀和头同时往下掉那一下。心里的失望先变成了身体的姿势。"
+   }
+  },
+  {
+   "id": "n2_sosokkashii",
+   "word": "そそっかしい",
+   "reading": "そそっかしい",
+   "level": "N2",
+   "tier": "A",
+   "scene": "kimochi",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "这种人的早晨",
+    "sentence": {
+     "jp": "うっかり鍵を忘れる、走って転ぶ —— そそっかしい人の朝はいつもこうだ。",
+     "zh": "一不留神忘了钥匙，跑起来又摔一跤——毛躁的人早上总是这样。",
+     "roma": "Ukkari kagi o wasureru, hashitte korobu — sosokkashii hito no asa wa itsumo kou da."
+    },
+    "members": [
+     {
+      "id": "n2_ukkari"
+     },
+     {
+      "id": "n5_wasureru"
+     },
+     {
+      "id": "n3_korobu"
+     }
+    ],
+    "coreImage": "うっかり 是一次，そそっかしい 是一直——同一件事的偶发版和性格版。"
+   }
+  },
+  {
+   "id": "n1_aseru",
+   "word": "焦る",
+   "reading": "あせる",
+   "level": "N1",
+   "tier": "A",
+   "scene": "kimochi",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "来不及的那种急",
+    "sentence": {
+     "jp": "間に合うだろうかと焦る夜は、結局徹夜になって、締切の朝にミスが出る。",
+     "zh": "担心赶不赶得上而心急的夜里，结果就是通宵，交稿那天早上出错。",
+     "roma": "Maniau darou ka to aseru yoru wa, kekkyoku tetsuya ni natte, shimekiri no asa ni misu ga deru."
+    },
+    "members": [
+     {
+      "id": "n4_maniau"
+     },
+     {
+      "id": "n3_tetsuya"
+     },
+     {
+      "id": "n2_shimekiri"
+     },
+     {
+      "id": "n3_misu"
+     }
+    ],
+    "coreImage": "焦る 是心里在跑而人还坐着。和 慌てる 的区别就在这：慌てる 是手脚乱了，焦る 时外表可能很安静。"
+   }
+  },
+  {
+   "id": "n2_nantonaku",
+   "word": "なんとなく",
+   "reading": "なんとなく",
+   "level": "N2",
+   "tier": "A",
+   "scene": "kimochi",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "说不出理由的那种选择",
+    "sentence": {
+     "jp": "理由はうまく言えないけれど、この店の雰囲気がなんとなく好きで、ここに決める。",
+     "zh": "说不太上理由，就是莫名喜欢这家店的氛围，决定是这儿了。",
+     "roma": "Riyuu wa umaku ienai keredo, kono mise no fun'iki ga nantonaku suki de, koko ni kimeru."
+    },
+    "members": [
+     {
+      "id": "n4_riyuu"
+     },
+     {
+      "id": "n3_funiki"
+     },
+     {
+      "id": "n4_kimeru"
+     }
+    ],
+    "coreImage": "中文的「莫名其妙」带贬义，なんとなく 不带。它是承认「我说不清，但我知道」——日语允许这种理由存在。"
+   }
+  },
+  {
+   "id": "n2_sukkiri",
+   "word": "すっきり",
+   "reading": "すっきり",
+   "level": "N2",
+   "tier": "A",
+   "scene": "kimochi",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "身上和屋里同时变干净",
+    "sentence": {
+     "jp": "汗を流して温泉に入り、部屋の掃除まで終えると、頭まですっきりする。",
+     "zh": "冲掉汗泡进温泉，再把屋子打扫完，连脑子都清爽了。",
+     "roma": "Ase o nagashite onsen ni hairi, heya no souji made oeru to, atama made sukkiri suru."
+    },
+    "members": [
+     {
+      "id": "n3_ase"
+     },
+     {
+      "id": "n2_onsen"
+     },
+     {
+      "id": "n5_souji"
+     }
+    ],
+    "coreImage": "すっきり 不分身体和心：洗完澡、收完屋子、感冒好了，用的是同一个词。日语把它们当成同一种清爽。"
+   }
+  },
+  {
+   "id": "n5_komaru",
+   "word": "困る",
+   "reading": "こまる",
+   "level": "N5",
+   "tier": "B",
+   "scene": "kimochi",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "一个人扛不动的时候",
+    "sentence": {
+     "jp": "面倒なトラブルで困るときは、一人で抱えずに相談すると助かる。",
+     "zh": "碰上麻烦事犯难的时候，别一个人扛，找人商量就轻松了。",
+     "roma": "Mendou na toraburu de komaru toki wa, hitori de kakaezu ni soudan suru to tasukaru."
+    },
+    "members": [
+     {
+      "id": "n3_mendou"
+     },
+     {
+      "id": "n1_toraburu"
+     },
+     {
+      "id": "n4_soudan"
+     },
+     {
+      "id": "n2_tasukaru"
+     }
+    ]
+   }
+  },
+  {
+   "id": "n3_bonyari",
+   "word": "ぼんやり",
+   "reading": "ぼんやり",
+   "level": "N3",
+   "tier": "A",
+   "scene": "kimochi",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "看着但没在看",
+    "sentence": {
+     "jp": "眠い朝は、窓から流れる景色をぼんやり眺めるだけで駅に着く。",
+     "zh": "困倦的早上，只是发着呆看窗外流过的风景，就到站了。",
+     "roma": "Nemui asa wa, mado kara nagareru keshiki o bonyari nagameru dake de eki ni tsuku."
+    },
+    "members": [
+     {
+      "id": "n4_nemui"
+     },
+     {
+      "id": "n5_mado"
+     },
+     {
+      "id": "n4_keshiki"
+     },
+     {
+      "id": "n3_nagameru"
+     }
+    ],
+    "coreImage": "ぼんやり 同时说眼睛和脑子：看不清和没在想，日语用一个词。所以「窗外」这个画面最准——景色是清楚的，看的人不清楚。"
+   }
+  },
+  {
+   "id": "n2_sunao",
+   "word": "素直",
+   "reading": "すなお",
+   "level": "N2",
+   "tier": "A",
+   "scene": "kimochi",
+   "kanjiTrap": true,
+   "wordField": {
+    "label": "吵完架之后",
+    "sentence": {
+     "jp": "言い訳をやめて素直に謝ると、誤解は反省より早く解ける。",
+     "zh": "不再找借口、老实道个歉，误会比反省化得更快。",
+     "roma": "Iiwake o yamete sunao ni ayamaru to, gokai wa hansei yori hayaku tokeru."
+    },
+    "members": [
+     {
+      "id": "n1_iiwake"
+     },
+     {
+      "id": "n4_ayamaru"
+     },
+     {
+      "id": "n3_gokai"
+     },
+     {
+      "id": "n2_hansei"
+     }
+    ],
+    "coreImage": "中文的「素直」不成词。它是「不拧着」——不辩解、不绕、不装。日本人夸小孩和夸大人用的是同一个词。"
+   }
+  }
+ ]
+}

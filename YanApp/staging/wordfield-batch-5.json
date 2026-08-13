@@ -1,0 +1,583 @@
+{
+ "batch": "wordfield-batch-5",
+ "date": "2026-08-13",
+ "source": "staging/wordfield-candidates-v2.json 的 kousai(人・交際) 一组，25 条待写候选",
+ "standard": "docs/content-standard-wordfield.md",
+ "status": "draft",
+ "note": "草稿。未写入内容包，未提交。合并由人决定。`wordField` 是可直接并入 wordBank 对应词条的负载；`review` 是本轮自查记录，合并时不要带进去。",
+ "items": [
+  {
+   "id": "n3_jama",
+   "word": "邪魔",
+   "reading": "じゃま",
+   "level": "N3",
+   "tier": "A",
+   "scene": "kousai",
+   "kanjiTrap": true,
+   "wordField": {
+    "label": "进别人家门的头一分钟",
+    "sentence": {
+     "jp": "「お邪魔します」と言って玄関で靴を脱ぎ、案内された部屋に上がる。",
+     "zh": "说一句「打扰了」，在玄关脱鞋，进到被领去的那个房间。",
+     "roma": "\"Ojama shimasu\" to itte genkan de kutsu o nugi, annai sareta heya ni agaru."
+    },
+    "members": [
+     {
+      "id": "n5_genkan"
+     },
+     {
+      "id": "n5_kutsu"
+     },
+     {
+      "id": "n5_heya"
+     }
+    ],
+    "coreImage": "中文的「邪魔」是妖魔鬼怪，日语里只是「碍事」。它最常出现的地方是进别人家门那句「お邪魔します」——不是自称妖怪，是说「我这就要占用你的地方了」。"
+   },
+   "review": {
+    "relation": "进门说的那句话 → 在哪儿说 → 脱什么 → 进到哪儿",
+    "dropped": [
+     "失礼 —— 「お邪魔します」的近邻，但它根本不在词库里，配不上 id"
+    ],
+    "memberWords": [
+     "玄関",
+     "靴",
+     "部屋"
+    ]
+   }
+  },
+  {
+   "id": "n4_enryo",
+   "word": "遠慮",
+   "reading": "えんりょ",
+   "level": "N4",
+   "tier": "A",
+   "scene": "kousai",
+   "kanjiTrap": true,
+   "wordField": {
+    "label": "谢绝的时候",
+    "sentence": {
+     "jp": "招待を遠慮して断るのは、相手の気持ちを考えた上での返事でもある。",
+     "zh": "客气地谢绝邀请，也是替对方的心情想过之后才给的回答。",
+     "roma": "Shoutai o enryo shite kotowaru no wa, aite no kimochi o kangaeta ue de no henji de mo aru."
+    },
+    "members": [
+     {
+      "id": "n4_shoutai"
+     },
+     {
+      "id": "n3_kotowaru"
+     },
+     {
+      "id": "n3_aite"
+     },
+     {
+      "id": "n4_kimochi"
+     },
+     {
+      "id": "n4_henji"
+     }
+    ],
+    "coreImage": "中文的「远虑」是想得远，日语的「遠慮」是**往后退一步**：手缩回来、话咽下去。所以「遠慮なく」不是「别想太多」，是「别客气，伸手拿」。"
+   },
+   "review": {
+    "relation": "收到什么 → 怎么处理 → 顾及谁 → 顾及他的什么 → 这件事本身也是一种什么",
+    "dropped": [
+     "n4_tsugou 都合 —— 谢绝时确实常说「都合が悪くて」，但那是理由的说法，塞进来这句就成了两件事"
+    ],
+    "memberWords": [
+     "招待",
+     "断る",
+     "相手",
+     "気持ち",
+     "返事"
+    ]
+   }
+  },
+  {
+   "id": "n3_aisatsu",
+   "word": "挨拶",
+   "reading": "あいさつ",
+   "level": "N3",
+   "tier": "B",
+   "scene": "kousai",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "身体比话先动",
+    "sentence": {
+     "jp": "朝、近所で人に会うたびに頭を下げる。挨拶は言葉より先に体が動く。",
+     "zh": "早上在附近每遇到一个人就低一次头。问候是身体先动，话在后面。",
+     "roma": "Asa, kinjo de hito ni au tabi ni atama o sageru. Aisatsu wa kotoba yori saki ni karada ga ugoku."
+    },
+    "members": [
+     {
+      "id": "n4_kinjo"
+     },
+     {
+      "id": "n5_atama"
+     },
+     {
+      "id": "n4_sageru"
+     },
+     {
+      "id": "n5_kotoba"
+     }
+    ],
+    "coreImage": "「挨」和「拶」在中文里都不单用，这两个字给不了任何钩子。记它得从动作记：先低头，再出声——低头的深浅和时机，比说了什么更要紧。"
+   },
+   "review": {
+    "relation": "什么时候 → 在哪儿 → 身体做什么 → 和话的先后",
+    "dropped": [
+     "n5_ohayou —— 具体的招呼语是挨拶的一个实例，不是它的邻居"
+    ],
+    "memberWords": [
+     "近所",
+     "頭",
+     "下げる",
+     "言葉"
+    ]
+   }
+  },
+  {
+   "id": "n5_kekkou",
+   "word": "結構",
+   "reading": "けっこう",
+   "level": "N5",
+   "tier": "A",
+   "scene": "kousai",
+   "kanjiTrap": true,
+   "wordField": {
+    "label": "说「不用了」的那一刻",
+    "sentence": {
+     "jp": "「もう結構です」と断ると、店の人はそれ以上茶を勧めなかった。",
+     "zh": "说了一句「已经够了」，店里的人就没再劝茶。",
+     "roma": "\"Mou kekkou desu\" to kotowaru to, mise no hito wa sore ijou cha o susumenakatta."
+    },
+    "members": [
+     {
+      "id": "n3_kotowaru"
+     },
+     {
+      "id": "n5_mise"
+     },
+     {
+      "id": "n3_cha"
+     }
+    ],
+    "coreImage": "結構 是言里最容易出事的词：它同时是「很好」和「不用了」。分界在语气和场合——被劝东西时说「結構です」，永远是**谢绝**。听成夸奖会一直被添茶。"
+   },
+   "review": {
+    "relation": "说什么 → 这句话的作用 → 在哪儿 → 对方因此停下什么",
+    "dropped": [
+     "n5_ocha お茶 —— 和 n3_cha 茶 是同一样东西的两条词条，只挂一个"
+    ],
+    "memberWords": [
+     "断る",
+     "店",
+     "茶"
+    ]
+   }
+  },
+  {
+   "id": "n5_taihen",
+   "word": "大変",
+   "reading": "たいへん",
+   "level": "N5",
+   "tier": "B",
+   "scene": "kousai",
+   "kanjiTrap": true,
+   "wordField": {
+    "label": "一个人干不动的时候",
+    "sentence": {
+     "jp": "一人で荷物を運ぶのは大変だから、隣の人が手伝うと言ってくれた。",
+     "zh": "一个人搬行李够呛，隔壁的人说来搭把手。",
+     "roma": "Hitori de nimotsu o hakobu no wa taihen dakara, tonari no hito ga tetsudau to itte kureta."
+    },
+    "members": [
+     {
+      "id": "n5_nimotsu"
+     },
+     {
+      "id": "n5_tonari"
+     },
+     {
+      "id": "n4_tetsudau"
+     }
+    ],
+    "coreImage": "中文的「大变」是变化大，日语的「大変」是**事情大了**。它既能当「非常」（大変おいしい），也能当「够呛」（大変だったね）——一个在夸，一个在慰问，靠场合分。"
+   },
+   "review": {
+    "relation": "干什么 → 状态 → 谁看见了 → 他因此提出什么",
+    "dropped": [],
+    "memberWords": [
+     "荷物",
+     "隣",
+     "手伝う"
+    ]
+   }
+  },
+  {
+   "id": "n3_kinodoku",
+   "word": "気の毒",
+   "reading": "きのどく",
+   "level": "N3",
+   "tier": "A",
+   "scene": "kousai",
+   "kanjiTrap": true,
+   "wordField": {
+    "label": "听说别人出事之后",
+    "sentence": {
+     "jp": "事故で入院した人の話を聞いて、気の毒だと思い、見舞いに行くことにした。",
+     "zh": "听说有人出事故住了院，觉得可怜，决定去探望。",
+     "roma": "Jiko de nyuuin shita hito no hanashi o kiite, kinodoku da to omoi, mimai ni iku koto ni shita."
+    },
+    "members": [
+     {
+      "id": "n4_jiko"
+     },
+     {
+      "id": "n4_nyuuin"
+     },
+     {
+      "id": "n3_mimai"
+     }
+    ],
+    "coreImage": "「毒」看着吓人，其实说的是「这份心情有毒」——难受的是**说话的人自己**。所以它是同情，不是在评价对方倒霉。当面说「お気の毒に」是慰问，不是嫌弃。"
+   },
+   "review": {
+    "relation": "发生了什么 → 结果 → 我的心情 → 因此去做的事",
+    "dropped": [
+     "n1_doujou 同情 —— 书面的近义词，标准第三节明说不列近义词"
+    ],
+    "memberWords": [
+     "事故",
+     "入院",
+     "見舞い"
+    ]
+   }
+  },
+  {
+   "id": "n1_giri",
+   "word": "義理",
+   "reading": "ぎり",
+   "level": "N1",
+   "tier": "A",
+   "scene": "kousai",
+   "kanjiTrap": true,
+   "wordField": {
+    "label": "欠着的那笔人情",
+    "sentence": {
+     "jp": "世話になった人に何かを返すのは、義理であって感謝とは限らない。",
+     "zh": "给照顾过自己的人回点什么，那是人情账，不一定是感激。",
+     "roma": "Sewa ni natta hito ni nani ka o kaesu no wa, giri de atte kansha to wa kagiranai."
+    },
+    "members": [
+     {
+      "id": "n4_sewa"
+     },
+     {
+      "id": "n5_kaesu"
+     },
+     {
+      "id": "n3_kansha"
+     }
+    ],
+    "coreImage": "義理 是**账本上欠着的那一笔**：受了照顾就得还，还多少看关系，不看心情。所以有「義理チョコ」——不是喜欢，是账上该有这一笔。"
+   },
+   "review": {
+    "relation": "受了谁的什么 → 要做的动作 → 它是什么 → 它不是什么",
+    "dropped": [
+     "n1_ninjou 人情 —— 「義理と人情」是固定搭配，但它正好是义理的**对立面**（心意 vs 账），同框会让人以为是近义词"
+    ],
+    "memberWords": [
+     "世話",
+     "返す",
+     "感謝"
+    ]
+   }
+  },
+  {
+   "id": "n3_battari",
+   "word": "ばったり",
+   "reading": "ばったり",
+   "level": "N3",
+   "tier": "A",
+   "scene": "kousai",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "没有前奏的相遇",
+    "sentence": {
+     "jp": "駅で昔の友達にばったり会うのは、約束して会うより記憶に残る。",
+     "zh": "在车站冷不丁碰见老朋友，比约好了见面更记得住。",
+     "roma": "Eki de mukashi no tomodachi ni battari au no wa, yakusoku shite au yori kioku ni nokoru."
+    },
+    "members": [
+     {
+      "id": "n5_eki"
+     },
+     {
+      "id": "n5_tomodachi"
+     },
+     {
+      "id": "n4_yakusoku"
+     }
+    ],
+    "coreImage": "ばったり 本来是**东西一下子倒下**的声音。用在遇见人身上，它保留的正是那一点：没有前奏，突然就在眼前。所以它永远和「約束」相对。"
+   },
+   "review": {
+    "relation": "在哪儿 → 遇见谁 → 怎么遇见的 → 和「约好」对着看",
+    "dropped": [
+     "n3_guuzen 偶然 —— 意思对，但那是个中性的抽象名词；ばったり 带着声音和身体反应，两者不是一个层面"
+    ],
+    "memberWords": [
+     "駅",
+     "友達",
+     "約束"
+    ]
+   }
+  },
+  {
+   "id": "n2_shitsukoi",
+   "word": "しつこい",
+   "reading": "しつこい",
+   "level": "N2",
+   "tier": "A",
+   "scene": "kousai",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "甩不掉的时候",
+    "sentence": {
+     "jp": "勧誘の電話がしつこいので、はっきり断ることにした。",
+     "zh": "推销电话缠得没完，决定明确回绝。",
+     "roma": "Kanyuu no denwa ga shitsukoi node, hakkiri kotowaru koto ni shita."
+    },
+    "members": [
+     {
+      "id": "n1_kanyuu_2"
+     },
+     {
+      "id": "n5_denwa"
+     },
+     {
+      "id": "n3_kotowaru"
+     }
+    ],
+    "coreImage": "しつこい 最早说的是**味道太浓、油腻得散不掉**。用在人身上是同一种感觉：粘着不走，怎么擦都在。所以它形容的不是次数多，是「甩不掉」。"
+   },
+   "review": {
+    "relation": "什么事 → 通过什么来的 → 什么感觉 → 因此做的处理",
+    "dropped": [
+     "n3_meiwaku 迷惑 —— 添麻烦是结果，しつこい 是那个动作本身的质感，混在一句里会互相稀释"
+    ],
+    "memberWords": [
+     "勧誘",
+     "電話",
+     "断る"
+    ]
+   }
+  },
+  {
+   "id": "n1_iiwake",
+   "word": "言い訳",
+   "reading": "いいわけ",
+   "level": "N1",
+   "tier": "A",
+   "scene": "kousai",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "迟到之后先说什么",
+    "sentence": {
+     "jp": "遅刻の理由を説明しても言い訳になるだけなら、まず謝る。",
+     "zh": "迟到的理由说了也只会变成辩解的话，那就先道歉。",
+     "roma": "Chikoku no riyuu o setsumei shite mo iiwake ni naru dake nara, mazu ayamaru."
+    },
+    "members": [
+     {
+      "id": "n3_chikoku"
+     },
+     {
+      "id": "n4_riyuu"
+     },
+     {
+      "id": "n4_setsumei"
+     },
+     {
+      "id": "n4_ayamaru"
+     }
+    ],
+    "coreImage": "「訳」在中文里是翻译，在这儿是**理由**：言い訳 = 把理由说出来。同一件事说早了叫说明，说晚了、对方还在生气时说，就成了辩解——差的不是内容，是时机。"
+   },
+   "review": {
+    "relation": "发生了什么 → 手里有什么 → 说出来会变成什么 → 所以先做什么",
+    "dropped": [
+     "n4_uso 嘘 —— 言い訳 不一定是假话，这正是它和撒谎的区别，放一起会教错"
+    ],
+    "memberWords": [
+     "遅刻",
+     "理由",
+     "説明",
+     "謝る"
+    ]
+   }
+  },
+  {
+   "id": "n2_tasukaru",
+   "word": "助かる",
+   "reading": "たすかる",
+   "level": "N2",
+   "tier": "B",
+   "scene": "kousai",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "得救的是谁",
+    "sentence": {
+     "jp": "混んだ電車で席を譲るだけで、相手はずいぶん助かる。",
+     "zh": "在挤的电车上让个座，对方就轻松很多。",
+     "roma": "Konda densha de seki o yuzuru dake de, aite wa zuibun tasukaru."
+    },
+    "members": [
+     {
+      "id": "n4_seki"
+     },
+     {
+      "id": "n3_yuzuru"
+     },
+     {
+      "id": "n3_aite"
+     }
+    ],
+    "coreImage": "助かる 是自动词——**得救的是主语自己**。所以「助かります」不是「我来帮你」，是「你救了我」，说的是自己的处境。中文说「帮大忙了」时，主语正好是反的。"
+   },
+   "review": {
+    "relation": "在什么场合 → 做一个很小的动作 → 谁因此怎么样",
+    "dropped": [
+     "n4_tetsudau 手伝う —— 他动词，和 助かる 正好是一个动作的两头；同框会让「谁得救」这条主线糊掉"
+    ],
+    "memberWords": [
+     "席",
+     "譲る",
+     "相手"
+    ]
+   }
+  },
+  {
+   "id": "n3_gokai",
+   "word": "誤解",
+   "reading": "ごかい",
+   "level": "N3",
+   "tier": "A",
+   "scene": "kousai",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "话不够的时候",
+    "sentence": {
+     "jp": "冗談を本気に取られると誤解が生まれるので、言葉は選ぶ。",
+     "zh": "玩笑被当了真就会生出误会，所以话要挑着说。",
+     "roma": "Joudan o honki ni torareru to gokai ga umareru node, kotoba wa erabu."
+    },
+    "members": [
+     {
+      "id": "n3_joudan"
+     },
+     {
+      "id": "n1_honki"
+     },
+     {
+      "id": "n5_kotoba"
+     }
+    ]
+   },
+   "review": {
+    "relation": "说了什么 → 被怎么接住 → 因此产生什么 → 所以怎么做",
+    "dropped": [
+     "n3_setsumei? 説明 —— 已经在 言い訳 那张卡里当成员，同一个词在两张卡里当邻居会让词场看起来是通用填充"
+    ],
+    "memberWords": [
+     "冗談",
+     "本気",
+     "言葉"
+    ]
+   }
+  },
+  {
+   "id": "n2_nikoniko",
+   "word": "にこにこ",
+   "reading": "にこにこ",
+   "level": "N2",
+   "tier": "B",
+   "scene": "kousai",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "总在笑的人",
+    "sentence": {
+     "jp": "いつもにこにこしている人ほど、機嫌の悪い日は顔に出る。",
+     "zh": "越是平时笑呵呵的人，心情不好那天越写在脸上。",
+     "roma": "Itsumo nikoniko shite iru hito hodo, kigen no warui hi wa kao ni deru."
+    },
+    "members": [
+     {
+      "id": "n5_itsumo"
+     },
+     {
+      "id": "n3_kigen"
+     },
+     {
+      "id": "n5_kao"
+     }
+    ],
+    "coreImage": "にこにこ 是**眼睛和嘴角一起弯、没有声音**的笑。有声音的另有其词：げらげら 是放声大笑，にやにや 是憋着的坏笑。日语把笑分得细，分的是声音和意图，不是程度。"
+   },
+   "review": {
+    "relation": "频率 → 什么样的笑 → 反过来的那天 → 露在哪儿",
+    "dropped": [
+     "n4_warau 笑う —— 上位词。把「笑」和「にこにこ」放一句里等于自己解释自己"
+    ],
+    "memberWords": [
+     "いつも",
+     "機嫌",
+     "顔"
+    ]
+   }
+  },
+  {
+   "id": "n1_taimingu",
+   "word": "タイミング",
+   "reading": "タイミング",
+   "level": "N1",
+   "tier": "A",
+   "scene": "kousai",
+   "kanjiTrap": false,
+   "wordField": {
+    "label": "约人这件事",
+    "sentence": {
+     "jp": "誘うタイミングさえ合えば、忙しい人でも用事の合間に出てくる。",
+     "zh": "只要约的时机对上，再忙的人也会从事情的空档里出来。",
+     "roma": "Sasou taimingu sae aeba, isogashii hito demo youji no aima ni dete kuru."
+    },
+    "members": [
+     {
+      "id": "n3_sasou"
+     },
+     {
+      "id": "n5_isogashii"
+     },
+     {
+      "id": "n4_youji"
+     }
+    ],
+    "coreImage": "英语的 timing 也说计时（秒表、发动机正时），日语的 タイミング 几乎只用在**时机对不对**上。所以它搭的是「合う（对上）」「外す（错过）」，不搭秒表。"
+   },
+   "review": {
+    "relation": "做什么 → 靠什么成事 → 对方是什么状态 → 从哪儿挤出时间",
+    "dropped": [
+     "n4_tsugou 都合 —— 都合 是对方那边的客观安排，タイミング 是两边对上的那一瞬，不是一回事"
+    ],
+    "memberWords": [
+     "誘う",
+     "忙しい",
+     "用事"
+    ]
+   }
+  }
+ ]
+}

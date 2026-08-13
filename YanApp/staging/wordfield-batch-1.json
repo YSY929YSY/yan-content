@@ -1,0 +1,332 @@
+{
+  "batch": "wordfield-batch-1",
+  "date": "2026-08-11",
+  "source": "staging/wordfield-candidates.json（227 条候选中的 A 层）",
+  "standard": "docs/content-standard-wordfield.md",
+  "status": "draft",
+  "note": "草稿。未写入 yan-content/content.v2.json，未写入 YanApp/assets/content.fallback.json，未提交。合并由人决定。`wordField` 对象即为可直接并入 wordBank 对应词条的负载；`review` 是本轮的自查记录，合并时不要带进去。",
+  "items": [
+    {
+      "id": "n2_kouyou",
+      "word": "紅葉",
+      "reading": "こうよう",
+      "level": "N2",
+      "tier": "A",
+      "wordField": {
+        "label": "秋天会一起遇到",
+        "sentence": {
+          "jp": "秋、山が紅葉する頃、落ち葉を踏んで温泉まで歩く。",
+          "zh": "秋天山变红的时候，踩着落叶走去温泉。",
+          "roma": "Aki, yama ga kouyou suru koro, ochiba o funde onsen made aruku."
+        },
+        "members": [
+          { "id": "n5_aki" },
+          { "id": "n5_yama" },
+          { "id": "n1_ochiba" },
+          { "id": "n2_onsen" }
+        ]
+      },
+      "review": {
+        "memberWords": ["秋", "山", "落ち葉", "温泉"],
+        "dropped": [],
+        "relation": "季节 → 地点 → 脚下 → 目的地，一条动线串起来，不是并列词块",
+        "uncertain": []
+      }
+    },
+    {
+      "id": "n4_kisha",
+      "word": "汽車",
+      "reading": "きしゃ",
+      "level": "N4",
+      "tier": "A",
+      "wordField": {
+        "label": "坐乡下那趟车时",
+        "sentence": {
+          "jp": "田舎の駅から汽車に乗り、窓の外の景色をずっと見ていた。",
+          "zh": "从乡下的车站坐上火车，一路看着窗外的景色。",
+          "roma": "Inaka no eki kara kisha ni nori, mado no soto no keshiki o zutto mite ita."
+        },
+        "members": [
+          { "id": "n4_inaka" },
+          { "id": "n5_eki" },
+          { "id": "n5_mado" },
+          { "id": "n4_keshiki" }
+        ]
+      },
+      "review": {
+        "memberWords": ["田舎", "駅", "窓", "景色"],
+        "dropped": [],
+        "relation": "出发地 → 上车点 → 车厢里的位置 → 看到的东西",
+        "uncertain": ["汽車 现在多指蒸汽机车，现代日本人日常说电车/列車。这张卡的价值在于点破「汽車≠汽车」，句子刻意放在乡下线路上，是它还真实成立的场景；如果编辑觉得这会误导学习者以为它是通用词，可以在文化注记里补一句「现在的电力线路叫電車」——注记不在本轮范围。"]
+      }
+    },
+    {
+      "id": "n5_tegami",
+      "word": "手紙",
+      "reading": "てがみ",
+      "level": "N5",
+      "tier": "A",
+      "wordField": {
+        "label": "寄一封信的一整套动作",
+        "sentence": {
+          "jp": "手紙を書く、切手を貼る、ポストに入れる。",
+          "zh": "写信、贴邮票、投进邮筒。",
+          "roma": "Tegami o kaku, kitte o haru, posuto ni ireru."
+        },
+        "members": [
+          { "id": "n5_kaku" },
+          { "id": "n5_kitte" },
+          { "id": "n5_posuto" }
+        ]
+      },
+      "review": {
+        "memberWords": ["書く", "切手", "ポスト"],
+        "dropped": ["n4_okuru 送る —— 和「ポストに入れる」说的是同一件事，留着就是凑数"],
+        "relation": "同一件事的三个连续步骤",
+        "uncertain": []
+      }
+    },
+    {
+      "id": "n3_tsuyu",
+      "word": "梅雨",
+      "reading": "つゆ",
+      "level": "N3",
+      "tier": "A",
+      "wordField": {
+        "label": "六月一起来的麻烦",
+        "sentence": {
+          "jp": "梅雨は湿気で蒸し暑いし、洗濯物は乾かないし、傘は毎日要る。",
+          "zh": "梅雨又潮又闷，洗的衣服干不了，伞天天得带。",
+          "roma": "Tsuyu wa shikke de mushiatsui shi, sentakumono wa kawakanai shi, kasa wa mainichi iru."
+        },
+        "members": [
+          { "id": "n2_shikke" },
+          { "id": "n2_mushiatsui" },
+          { "id": "n5_sentaku" },
+          { "id": "n5_kasa" }
+        ]
+      },
+      "review": {
+        "memberWords": ["湿気", "蒸し暑い", "洗濯", "傘"],
+        "dropped": [],
+        "relation": "一个天气条件带出的三个后果，し 并列句本身就在演示因果",
+        "uncertain": ["洗濯 是靠「洗濯物」这个复合词命中的。校验按子串匹配算通过，语义上也确实是同一个词，但如果之后要求成员以独立词出现，这条会需要改写。"]
+      }
+    },
+    {
+      "id": "n2_yukata",
+      "word": "浴衣",
+      "reading": "ゆかた",
+      "level": "N2",
+      "tier": "A",
+      "wordField": {
+        "label": "夏天晚上会一起出现",
+        "sentence": {
+          "jp": "夏の夜、浴衣で祭りに行って花火を見る。",
+          "zh": "夏天的晚上，穿浴衣去祭典看烟花。",
+          "roma": "Natsu no yoru, yukata de matsuri ni itte hanabi o miru."
+        },
+        "members": [
+          { "id": "n5_natsu" },
+          { "id": "n3_matsuri" },
+          { "id": "n2_hanabi" }
+        ]
+      },
+      "review": {
+        "memberWords": ["夏", "祭", "花火"],
+        "dropped": ["n5_kiru_2 着る —— 见报告「三、句子里的动词形态」。为了让「着る」原形出现，句子只能写成「浴衣を着る人たち」这种不自然的连体修饰。宁可少一个成员。"],
+        "relation": "时令 → 场合 → 那晚看的东西；浴衣是穿去这个场合的衣服，不是和服的近义词",
+        "uncertain": ["词库里词条写作「祭」，而现实书写压倒性是「祭り」（标准第六节）。句子按现实写成「祭りに行って」，子串仍然命中「祭」，校验通过。但**词条本身的书写形式建议改成「祭り」**，这属于改词库，不在本轮范围，请人确认。"]
+      }
+    },
+    {
+      "id": "n5_daijoubu",
+      "word": "大丈夫",
+      "reading": "だいじょうぶ",
+      "level": "N5",
+      "tier": "A",
+      "wordField": {
+        "label": "有人摔倒之后的几句话",
+        "sentence": {
+          "jp": "転ぶところを見て心配したが、痛いだけで怪我はない。大丈夫。",
+          "zh": "看见他摔倒吓了一跳，结果只是疼，没受伤。没事。",
+          "roma": "Korobu tokoro o mite shinpai shita ga, itai dake de kega wa nai. Daijoubu."
+        },
+        "members": [
+          { "id": "n3_korobu" },
+          { "id": "n4_shinpai" },
+          { "id": "n5_itai" },
+          { "id": "n4_kega" }
+        ]
+      },
+      "review": {
+        "memberWords": ["転ぶ", "心配", "痛い", "怪我"],
+        "dropped": [],
+        "relation": "事件 → 旁人的反应 → 实际程度 → 结论，四个词是一条时间线上的四个点",
+        "uncertain": ["大丈夫 还有「不用了（婉拒）」那一头，这张卡只覆盖了「没事吧」这一头。婉拒那头的场是便利店和点单，和 結構(n5_kekkou) 高度重合。**建议把婉拒义整个交给 結構 那张卡**，两张卡各占一头；但也可以给 大丈夫 写第二个词场——词场是不是一词一个，标准里没写，请人定。"]
+      }
+    },
+    {
+      "id": "n3_meiwaku",
+      "word": "迷惑",
+      "reading": "めいわく",
+      "level": "N3",
+      "tier": "A",
+      "wordField": {
+        "label": "在电车上会一起遇到",
+        "sentence": {
+          "jp": "電車で音が漏れて隣の人に迷惑をかけ、慌てて謝る。",
+          "zh": "在电车上声音漏出来，打扰到旁边的人，赶紧道歉。",
+          "roma": "Densha de oto ga morete tonari no hito ni meiwaku o kake, awatete ayamaru."
+        },
+        "members": [
+          { "id": "n5_densha" },
+          { "id": "n4_oto" },
+          { "id": "n5_tonari" },
+          { "id": "n4_ayamaru" }
+        ]
+      },
+      "review": {
+        "memberWords": ["電車", "音", "隣", "謝る"],
+        "dropped": [],
+        "relation": "地点 → 起因 → 受影响的人 → 该做的事；「迷惑をかける」这个搭配也一并出现了",
+        "uncertain": []
+      }
+    },
+    {
+      "id": "n4_nebou",
+      "word": "寝坊",
+      "reading": "ねぼう",
+      "level": "N4",
+      "tier": "A",
+      "wordField": {
+        "label": "睡过头的那个早上",
+        "sentence": {
+          "jp": "寝坊した朝は、眠いまま慌てるだけで、結局は遅刻。",
+          "zh": "睡过头的早上，只会困着瞎忙一通，最后还是迟到。",
+          "roma": "Nebou shita asa wa, nemui mama awateru dake de, kekkyoku wa chikoku."
+        },
+        "members": [
+          { "id": "n5_asa" },
+          { "id": "n4_nemui" },
+          { "id": "n1_awateru" },
+          { "id": "n3_chikoku" }
+        ]
+      },
+      "review": {
+        "memberWords": ["朝", "眠い", "慌てる", "遅刻"],
+        "dropped": [],
+        "relation": "时间 → 身体状态 → 动作 → 结果，一条因果链",
+        "uncertain": ["成员 n1_awateru 的 id 前缀是 n1，但它自己的 level 字段写的是 N2（候选报告里已记过同类问题 n1_suteki）。词场只用 id，不受影响，但这条 id/level 不一致的数据仍在。"]
+      }
+    },
+    {
+      "id": "n2_shimijimi",
+      "word": "しみじみ",
+      "reading": "しみじみ",
+      "level": "N2",
+      "tier": "A",
+      "wordField": {
+        "label": "安静下来之后",
+        "sentence": {
+          "jp": "久しぶりに古い写真を眺めると、思い出がしみじみ戻ってくる。",
+          "zh": "隔了很久再看老照片，往事一点点回来。",
+          "roma": "Hisashiburi ni furui shashin o nagameru to, omoide ga shimijimi modotte kuru."
+        },
+        "members": [
+          { "id": "n4_hisashiburi" },
+          { "id": "n5_shashin" },
+          { "id": "n3_nagameru" },
+          { "id": "n3_omoide" }
+        ]
+      },
+      "review": {
+        "memberWords": ["久しぶり", "写真", "眺める", "思い出"],
+        "dropped": [],
+        "relation": "时间距离 → 对象 → 动作 → 涌上来的东西。眺める 不是 見る 的近义词替换，是这个场里那个「慢慢看」的动作",
+        "uncertain": ["しみじみ 和 懐かしい(n2_natsukashii) 的候选成员几乎完全重合（思い出/写真/久しぶり）。本批只取了 しみじみ。**懐かしい 如果也要做，必须换一个场**（比如故乡、旧校舍、老歌），否则用户会看到两遍同一句话——这正是候选报告第四节第 1 条警告的按场景去重问题。"]
+      }
+    },
+    {
+      "id": "n2_mottainai",
+      "word": "もったいない",
+      "reading": "もったいない",
+      "level": "N2",
+      "tier": "A",
+      "wordField": {
+        "label": "饭桌上会一起说",
+        "sentence": {
+          "jp": "残すのも捨てるのももったいないから、片付ける前にもう一口食べる。",
+          "zh": "剩下也可惜，扔掉也可惜，收拾之前再吃一口。",
+          "roma": "Nokosu no mo suteru no mo mottainai kara, katazukeru mae ni mou hitokuchi taberu."
+        },
+        "members": [
+          { "id": "n3_nokosu" },
+          { "id": "n4_suteru" },
+          { "id": "n4_katazukeru" },
+          { "id": "n5_taberu" }
+        ]
+      },
+      "review": {
+        "memberWords": ["残す", "捨てる", "片付ける", "食べる"],
+        "dropped": [],
+        "relation": "两个「可惜」的做法 → 收拾这个时间点 → 因此做的事",
+        "uncertain": ["候选名单给它标了 missingMembers: ご飯 / ごみ，这两个词库里都没有。这张卡在缺它们的情况下仍然立得住（用「残す/捨てる」承担了同样的画面），但补上 ご飯 会让句子更具体。补词条不在本轮范围。"]
+      }
+    },
+    {
+      "id": "n2_konsento",
+      "word": "コンセント",
+      "reading": "コンセント",
+      "level": "N2",
+      "tier": "A",
+      "wordField": {
+        "label": "进旅馆房间先做的事",
+        "sentence": {
+          "jp": "ホテルの部屋に入って鍵を置き、荷物を下ろしたら、まずコンセントを探す。",
+          "zh": "进了酒店房间，放下钥匙和行李，第一件事是找插座。",
+          "roma": "Hoteru no heya ni haitte kagi o oki, nimotsu o oroshitara, mazu konsento o sagasu."
+        },
+        "members": [
+          { "id": "n5_hoteru" },
+          { "id": "n5_heya" },
+          { "id": "n5_kagi" },
+          { "id": "n5_nimotsu" }
+        ]
+      },
+      "review": {
+        "memberWords": ["ホテル", "部屋", "鍵", "荷物"],
+        "dropped": [],
+        "relation": "地点 → 更小的地点 → 手上的两样东西 → 放下之后做的事",
+        "uncertain": ["候选名单标了 missingMembers: 充電。「充電」才是找插座的真正理由，词库里没有。这张卡目前靠场景动线成立，但补上 充電 会更完整——它也在候选报告点名的 17 个必补词里。"]
+      }
+    },
+    {
+      "id": "n1_inkan",
+      "word": "印鑑",
+      "reading": "いんかん",
+      "level": "N1",
+      "tier": "A",
+      "wordField": {
+        "label": "办手续时会一起出现",
+        "sentence": {
+          "jp": "契約の手続きは、窓口で書類に記入して印鑑を押すまで終わらない。",
+          "zh": "签合同的手续，要在柜台填完表、盖上印章才算完。",
+          "roma": "Keiyaku no tetsuzuki wa, madoguchi de shorui ni kinyuu shite inkan o osu made owaranai."
+        },
+        "members": [
+          { "id": "n3_keiyaku" },
+          { "id": "n2_tetsuzuki" },
+          { "id": "n2_madoguchi" },
+          { "id": "n3_kinyuu" }
+        ]
+      },
+      "review": {
+        "memberWords": ["契約", "手続き", "窓口", "記入"],
+        "dropped": [],
+        "relation": "事由 → 流程名 → 地点 → 两个具体动作",
+        "uncertain": ["候选名单里 手続き(n2_tetsuzuki)、面倒(n3_mendou)、ややこしい(n1_yayakoshii) 三条的场和这张几乎相同。本批只做 印鑑（因为「印章制度」对中文使用者是真正陌生的那一点），另三条建议按场景合并或明确分工，见报告第四节。"]
+      }
+    }
+  ]
+}

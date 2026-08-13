@@ -1,0 +1,200 @@
+[
+ {
+  "keep": "n1_inkan",
+  "keepWord": "印鑑",
+  "merged": [
+   {
+    "id": "n2_tetsuzuki",
+    "word": "手続き",
+    "reading": "てつづき",
+    "tier": "A",
+    "why": "场是办事窗口的一整套流程,和面倒/ややこしい成对。"
+   },
+   {
+    "id": "n3_mendou",
+    "word": "面倒",
+    "reading": "めんどう",
+    "tier": "A",
+    "why": "中文没这个词。场极具体:办手续、填表、跑窗口——日本社会最容易触发它的地方。"
+   },
+   {
+    "id": "n3_kinyuu",
+    "word": "記入",
+    "reading": "きにゅう",
+    "tier": "B",
+    "why": "填表,场是表格和笔。"
+   }
+  ],
+  "sharedMembers": [
+   "n2_madoguchi"
+  ]
+ },
+ {
+  "keep": "n4_tsugou",
+  "keepWord": "都合",
+  "merged": [
+   {
+    "id": "n2_sukejuru",
+    "word": "スケジュール",
+    "reading": "スケジュール",
+    "tier": "B",
+    "why": "和日程/予定并存,用法有分工,场是工作安排。"
+   }
+  ],
+  "sharedMembers": [
+   "n2_nittei",
+   "n3_enki",
+   "n4_yotei"
+  ]
+ },
+ {
+  "keep": "n2_shimijimi",
+  "keepWord": "しみじみ",
+  "merged": [
+   {
+    "id": "n2_natsukashii",
+    "word": "懐かしい",
+    "reading": "なつかしい",
+    "tier": "A",
+    "why": "中文的\"怀念\"是动词,日语是形容词——看到旧物脱口而出的一个词。"
+   }
+  ],
+  "sharedMembers": [
+   "n3_omoide",
+   "n4_hisashiburi",
+   "n5_shashin"
+  ]
+ },
+ {
+  "keep": "n1_furonto",
+  "keepWord": "フロント",
+  "merged": [
+   {
+    "id": "n2_konsento",
+    "word": "コンセント",
+    "reading": "コンセント",
+    "tier": "A",
+    "why": "和製英語,英语里根本不是这个词。场是插头找不到的旅馆房间。"
+   }
+  ],
+  "sharedMembers": [
+   "n5_hoteru",
+   "n5_kagi",
+   "n5_nimotsu"
+  ]
+ },
+ {
+  "keep": "n2_manshon",
+  "keepWord": "マンション",
+  "merged": [
+   {
+    "id": "n3_ooya",
+    "word": "大家",
+    "reading": "おおや",
+    "tier": "B",
+    "why": "中文是\"大家/名家\",日语是房东——汉字骗人。"
+   }
+  ],
+  "sharedMembers": [
+   "n3_yachin",
+   "n5_apaato",
+   "n5_heya"
+  ]
+ },
+ {
+  "keep": "n2_menzei",
+  "keepWord": "免税",
+  "merged": [
+   {
+    "id": "n2_zeikan",
+    "word": "税関",
+    "reading": "ぜいかん",
+    "tier": "B",
+    "why": "过关场景,和荷物/申告连着。"
+   },
+   {
+    "id": "n4_su_tsuke_su",
+    "word": "スーツケース",
+    "reading": "スーツケース",
+    "tier": "B",
+    "why": "旅行核心物件,场是机场和行李。"
+   }
+  ],
+  "sharedMembers": [
+   "n3_pasupoto",
+   "n4_kuukou"
+  ]
+ },
+ {
+  "keep": "n4_reji",
+  "keepWord": "レジ",
+  "merged": [
+   {
+    "id": "n4_otsuri",
+    "word": "おつり",
+    "reading": "おつり",
+    "tier": "B",
+    "why": "和语,场是收银台找零。"
+   }
+  ],
+  "sharedMembers": [
+   "n3_fukuro",
+   "n3_genkin",
+   "n3_kaikei"
+  ]
+ },
+ {
+  "keep": "n3_bukka",
+  "keepWord": "物価",
+  "merged": [
+   {
+    "id": "n1_infure",
+    "word": "インフレ",
+    "reading": "インフレ",
+    "tier": "C",
+    "why": "新闻高频缩写,场是物价和工资。"
+   }
+  ],
+  "sharedMembers": [
+   "n3_keiki",
+   "n3_kyuuryou",
+   "n4_nedan"
+  ]
+ },
+ {
+  "keep": "n2_kouyou",
+  "keepWord": "紅葉",
+  "merged": [
+   {
+    "id": "n2_momiji",
+    "word": "紅葉",
+    "reading": "もみじ",
+    "tier": "B",
+    "why": "同字多读的另一读,义也不同(叶子本身/枫树)。按标准第四节两条并列。"
+   }
+  ],
+  "sharedMembers": [
+   "n1_ochiba",
+   "n5_aki",
+   "n5_yama"
+  ]
+ },
+ {
+  "keep": "n4_waku",
+  "keepWord": "沸く",
+  "merged": [
+   {
+    "id": "n2_atatamaru",
+    "word": "暖まる",
+    "reading": "あたたまる",
+    "tier": "B",
+    "why": "和冷える成对,场是泡澡和热汤。"
+   }
+  ],
+  "sharedMembers": [
+   "n2_onsen",
+   "n3_nabe",
+   "n4_yu"
+  ]
+ }
+]
