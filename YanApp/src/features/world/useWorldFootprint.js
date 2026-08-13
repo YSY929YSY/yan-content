@@ -18,7 +18,7 @@ import { Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
 
-import { K, readJson, writeJson } from '../../lib/storage';
+import { K, readJsonResult, writeJson } from '../../lib/storage';
 import { pullPlaceCheckins, pushPlaceCheckin, uploadPlaceCheckinPhoto } from '../../lib/sync';
 import {
   listUserPlaces, addUserPlace, removeUserPlace, updateUserPlace,
@@ -44,12 +44,25 @@ import {
 function usePersistedState(storageKey, initial, merge = mergeMap) {
   const [value, setValue] = useState(initial);
   const alive = useRef(true);
+  // 读盘失败过就**再也不往这个键写**,直到下次冷启动读成功。
+  // 见 set 里那段 —— 这是「拿不到数据 ≠ 数据是空的」在这个 hook 里的形态。
+  const readFailed = useRef(false);
 
   useEffect(() => {
     alive.current = true;
     (async () => {
-      const saved = await readJson(storageKey, null);
-      if (!alive.current || saved == null) return;
+      const { ok, value: saved } = await readJsonResult(storageKey);
+      if (!alive.current) return;
+      if (!ok) {
+        // ⚠️ 读失败 ≠ 这个键是空的。原来这里和「确实没有」一样直接 return,
+        // 于是 state 停在 initial(空),而**任何一次 set 都会把这个空的写回磁盘** ——
+        // 用户点一下某个地点,之前所有打卡就没了。
+        // 现在:标记一下,让 set 只改内存不落盘。宁可这次改动丢,不要把已有的清掉。
+        readFailed.current = true;
+        console.warn('[Storage] 读盘失败,本次会话不再写入这个键:', storageKey);
+        return;
+      }
+      if (saved == null) return;            // 确实没有 —— 正常,用 initial
       // 读盘是异步的,期间云端那份可能已经先到了 —— 合并而不是覆盖
       setValue(prev => merge(saved, prev));
     })();
@@ -60,7 +73,8 @@ function usePersistedState(storageKey, initial, merge = mergeMap) {
   const set = useCallback((updater) => {
     setValue(prev => {
       const next = typeof updater === 'function' ? updater(prev) : updater;
-      writeJson(storageKey, next);          // 落盘失败只 warn,不影响这次交互
+      // 没读成功过就不写 —— 内存里这份是残缺的,写回去等于清空
+      if (!readFailed.current) writeJson(storageKey, next);
       return next;
     });
   }, [storageKey]);

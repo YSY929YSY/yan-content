@@ -156,8 +156,16 @@ export async function backfillAll() {
     }
   };
 
+  // ⚠️ 这几个域都是「读本机 → 传云端」。读失败必须报 error,**不能报成功**。
+  //
+  // 报成功的后果不是少传一次:backfillAll 会把 pending 清掉,而**登录换账号
+  // 只有这一次迁移机会**(Apple 登录走 signInWithIdToken,匿名 uid 直接被丢弃,
+  // 挂在旧 uid 下的行全部成为孤儿)。读盘抖一下 = 用户攒的东西永久留在旧账号里。
+  //
+  // 「确实没有」照旧返回 count 0 + error null —— 那是正常的,没数据就是没数据。
   await run('progress', async () => {
-    const progress = await readJson(K.wordbankProgress, null);
+    const { ok, value: progress } = await readJsonResult(K.wordbankProgress);
+    if (!ok) return { count: 0, error: '读不到本机进度,保留 pending 下次重试' };
     if (!progress || typeof progress !== 'object' || Array.isArray(progress)) {
       return { count: 0, error: null };
     }
@@ -165,7 +173,8 @@ export async function backfillAll() {
   });
 
   await run('checkins', async () => {
-    const visited = await readJson(K.worldVisitedIds, null);
+    const { ok, value: visited } = await readJsonResult(K.worldVisitedIds);
+    if (!ok) return { count: 0, error: '读不到本机打卡,保留 pending 下次重试' };
     if (!Array.isArray(visited) || !visited.length) return { count: 0, error: null };
     const [dates, notes, photoPaths] = await Promise.all([
       readJson(K.worldCheckinDates, {}),
@@ -178,7 +187,8 @@ export async function backfillAll() {
   await run('userPlaces', () => reuploadUserPlaces());
 
   await run('notebook', async () => {
-    const snap = await readJson(K.tripNotebook, null);
+    const { ok, value: snap } = await readJsonResult(K.tripNotebook);
+    if (!ok) return { count: 0, error: '读不到本机旅行本,保留 pending 下次重试' };
     // ⚠️ 不能只看 books:账本已经和旅行册解耦了,「只用分账、从不开小本子」是
     // 明确存在的用法。只按 books 判空,那种用户登录时整本账都不会补传。
     const books = Array.isArray(snap?.books) ? snap.books : [];

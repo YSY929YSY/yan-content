@@ -275,10 +275,17 @@ export default function JournalPage({ page, facing, assets = {}, spread = false,
 
     // .runOnJS(true):回调走 JS 线程,不写 worklet。
     //
-    // 代价是每帧一次 setState 重渲整个 Canvas —— 一页几个元素扛得住,
-    // 元素多了会掉帧。**掉帧了再上 reanimated 的 shared value**,不要提前上:
-    // Skia + reanimated 的动画值要重写整条渲染链路,而那会让 journalRender
-    // 那些纯函数没法直接用。先跑通,量到卡再换(硬规矩:先量再改)。
+    // 代价是每帧一次 setState 重渲整个 Canvas。先跑通,量到卡再换(硬规矩:先量再改)。
+    //
+    // **换的时候要重构的是「手势每帧提交 React state」这条数据流,不是数学函数。**
+    // 这里原来写的是「shared value 会让 journalRender 那些纯函数没法直接用」——
+    // 那句是错的(2026-08-13 外部评审指出)。`shadowFor` / `toPx` / `nibWidth`
+    // 都是 (数字) => 数字,worklet 里照样调。真正要改的是谁持有 x/y/scale/rotation:
+    // 现在是 React state,换成 shared value 之后 JournalPage 的渲染要跟着改。
+    //
+    // **触发门槛用量的,不是猜的**(评审给的判据,比原来「元素多了会掉帧」可执行):
+    //   目标最低档真机 · 一页 8~15 个图片元素 + 一条 ink · 拖拽/捏合/旋转
+    //   能否稳定接近 60fps。没测到问题之前不要预支这份复杂度。
     let pan = Gesture.Pan().runOnJS(true);
     // 画布如果在 ScrollView 里,竖着拖元素会被滚动抢走 —— 表现是「只能左右拖」。
     // blocksExternalGesture 让滚动等这个手势先失败,而不是反过来。
