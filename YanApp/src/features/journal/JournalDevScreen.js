@@ -38,6 +38,29 @@ const scribble = (() => {
   return pts;
 })();
 
+// 验层次用的占位元素:票根/贴纸/胶带。**默认不显示。**
+//
+// 它们的用途是「看三种厚度的阴影是不是真的不一样」—— 那是开发者的验收需求,
+// 不是给人看的画面。而它们的样子是**拿纸样图冒充的**,页面上就是三块方框,
+// 用户的原话是「一些丑陋的框框」。三轮里我一直说「那是占位不是设计」,
+// 但你看到的就是它 —— 说三次也不会让它变好看。
+//
+// 所以拆开:默认那一页只有真东西(纸 + 照片),要验阴影时用按钮把它们叫出来。
+const LAYER_PROBES = [
+  // 越过页边的票根:一半在纸上,一半落到桌面 —— 「延展到本子外面」
+  { id: 'i2', kind: 'scan', assetId: 'scan1', material: 'scan', lift: 3,
+    x: 0.96, y: 0.52, w: 0.34, scale: 1, rotation: 5, z: 2 },
+  // 贴纸:浮得最高,影子最远最散
+  { id: 'i3', kind: 'sticker', assetId: 'sticker1', material: 'sticker', lift: 9,
+    x: 0.22, y: 0.55, w: 0.2, scale: 1, rotation: -6, z: 3 },
+  // 胶带:几乎贴着纸,接触阴影最实
+  { id: 'i4', kind: 'tape', assetId: 'tape1', material: 'tape', lift: 1,
+    x: 0.62, y: 0.1, w: 0.18, scale: 1, rotation: -22, z: 4 },
+  // 手写:验笔锋。它是一条没有意义的波浪线,同样只该在验收时出现
+  { id: 'i5', kind: 'ink', material: 'ink', lift: 0, x: 0.5, y: 0.5, z: 5,
+    payload: { strokes: [{ points: scribble, tool: 'pen' }] } },
+];
+
 const DEMO_PAGE = {
   id: 'demo-page-1',
   // 默认换成干净的素纸。牛皮那档揉皱和污渍拉满,读起来像皱布 ——
@@ -49,17 +72,6 @@ const DEMO_PAGE = {
     // 单独一个 assetId,好让「从相册选一张」只换它,不把票根贴纸一起换掉
     { id: 'i1', kind: 'photo', assetId: 'p1', material: 'photo', lift: 5,
       x: 0.42, y: 0.26, w: 0.62, scale: 1, rotation: -1.8, z: 1 },
-    // 越过页边的票根:一半在纸上,一半落到桌面 —— 「延展到本子外面」
-    { id: 'i2', kind: 'scan', assetId: 'scan1', material: 'scan', lift: 3,
-      x: 0.96, y: 0.52, w: 0.34, scale: 1, rotation: 5, z: 2 },
-    // 贴纸:浮得最高,影子最远最散
-    { id: 'i3', kind: 'sticker', assetId: 'sticker1', material: 'sticker', lift: 9,
-      x: 0.22, y: 0.55, w: 0.2, scale: 1, rotation: -6, z: 3 },
-    // 胶带:几乎贴着纸,接触阴影最实
-    { id: 'i4', kind: 'tape', assetId: 'tape1', material: 'tape', lift: 1,
-      x: 0.62, y: 0.1, w: 0.18, scale: 1, rotation: -22, z: 4 },
-    { id: 'i5', kind: 'ink', material: 'ink', lift: 0, x: 0.5, y: 0.5, z: 5,
-      payload: { strokes: [{ points: scribble, tool: 'pen' }] } },
   ],
 };
 
@@ -69,16 +81,19 @@ const FACING_PAGE = {
   // 右页**必须**是另一张纸。两页共用一张贴图的话对开时左右完全对称,
   // 一眼就是复制粘贴 —— 真本子的相邻两页纤维走向从来不一样。
   bg: 'grid-ivory',
-  items: [
-    { id: 'j1', kind: 'scan', assetId: 'scan1', material: 'scan', lift: 3,
-      x: 0.5, y: 0.22, w: 0.66, scale: 1, rotation: 1.4, z: 1 },
-    { id: 'j2', kind: 'sticker', assetId: 'sticker1', material: 'sticker', lift: 9,
-      x: 0.72, y: 0.62, w: 0.26, scale: 1, rotation: 7, z: 2 },
-    { id: 'j3', kind: 'ink', material: 'ink', lift: 0, x: 0.5, y: 0.5, z: 3,
-      payload: { strokes: [{ points: scribble.map(([x, y, t, w]) => [x * 0.9, y + 0.08, t, w]),
-                             tool: 'pen' }] } },
-  ],
+  // 右页默认空着 —— 一本真本子摊开时,有一页是空的太正常了
+  items: [],
 };
+
+const FACING_PROBES = [
+  { id: 'j1', kind: 'scan', assetId: 'scan1', material: 'scan', lift: 3,
+    x: 0.5, y: 0.22, w: 0.66, scale: 1, rotation: 1.4, z: 1 },
+  { id: 'j2', kind: 'sticker', assetId: 'sticker1', material: 'sticker', lift: 9,
+    x: 0.72, y: 0.62, w: 0.26, scale: 1, rotation: 7, z: 2 },
+];
+
+/** 占位元素的 id。拖动它们不该被存进真实页面,见 onChangeItems。 */
+const PROBE_IDS = new Set([...LAYER_PROBES, ...FACING_PROBES].map(it => it.id));
 
 export default function JournalDevScreen({ onBack }) {
   // 票根/贴纸/胶带的占位图。
@@ -91,9 +106,13 @@ export default function JournalDevScreen({ onBack }) {
   // **五个元素全部不画**,而且不报错。页面看起来只剩一张照片,
   // 我还对着那个结果做了一整段「构图有问题」的分析 —— 分析的东西根本不在页面上。
   // 所以下面 missingAssets 那条诊断是必须的:**这类错误必须喊出来。**
-  const standScan = useImage(PAPERS['kraft-bag']);
-  const standSticker = useImage(PAPERS['grid-ivory']);
-  const standTape = useImage(PAPERS['plain-cream']);
+  // ⚠️ 关着的时候传 null,**不要解码**。三张 1400x2400 解出来是 38MB,
+  // 而它们只在「验层次」开着时才画得出来 —— 白解一次就白占一次内存,
+  // 那正是用户说的「每次加载越来越慢」的一部分。
+  const [probes, setProbes] = useState(false);
+  const standScan = useImage(probes ? PAPERS['kraft-bag'] : null);
+  const standSticker = useImage(probes ? PAPERS['grid-ivory'] : null);
+  const standTape = useImage(probes ? PAPERS['plain-cream'] : null);
 
   // 主照片。没选过就回退到占位图 —— 空着不画的话就看不出主锚的层次了。
   const [photoUri, setPhotoUri] = useState(null);
@@ -156,27 +175,44 @@ export default function JournalDevScreen({ onBack }) {
   // 交给 JournalPage,让拖元素的手势能挡住这一层的滚动
   const scrollRef = useRef(null);
 
+  // 占位元素**不写回 page**。写回去的话 livePage 会把它们再叠一遍 ——
+  // 拖一下就多一份,而且退出「验层次」也去不掉了。
   const onChangeItems = useCallback((items) => {
-    setPage(p => ({ ...p, items }));
+    setPage(p => ({ ...p, items: items.filter(it => !PROBE_IDS.has(it.id)) }));
   }, []);
 
   // ⚠️ 必须记忆化。这个对象直接进 JournalPage 的 `assets`,而那边的 aspects
   // 和整套手势对象都挂在它的**引用**上 —— 每帧新建一个字面量的话,
   // 拖动时每一帧都在重建三个 Gesture 对象,而拖动恰好是每帧都在 setState 的那条路径。
-  const assets = useMemo(() => ({
-    scan1: standScan, sticker1: standSticker, tape1: standTape,
-    p1: photo || standScan,
-  }), [standScan, standSticker, standTape, photo]);
+  // ⚠️ p1 **没有回退**。原来写的是 `photo || standScan` ——
+  // 没选过照片时拿一张纸样冒充主照片,于是页面上是「纸上贴了一张纸」。
+  // 而 itemsReady 会等它,等到了才画,所以用户的体感是
+  // 「点进去是空的,必须加图片才显示底」。没照片就不画那个元素,页面照常出来。
+  const assets = useMemo(() => (probes
+    ? { scan1: standScan, sticker1: standSticker, tape1: standTape, p1: photo }
+    : { p1: photo }), [probes, standScan, standSticker, standTape, photo]);
+
+  // 开着占位时才把那几个探针拼进去。没照片时主照片那条也不放 ——
+  // 放一个画不出来的元素只会让 itemsReady 永远等下去。
+  const livePage = useMemo(() => ({
+    ...page,
+    items: [...(photo ? page.items : page.items.filter(it => it.assetId !== 'p1')),
+            ...(probes ? LAYER_PROBES : [])],
+  }), [page, probes, photo]);
+  const liveFacing = useMemo(() => ({
+    ...FACING_PAGE,
+    items: probes ? FACING_PROBES : [],
+  }), [probes]);
 
   // 页面上引用了但没解析出图片的 assetId。
   // 这一条是 2026-08-13 那个 bug 的直接产物:占位图的键被删掉之后,
   // 五个元素静默消失、页面看起来只是「有点空」,没有任何地方说出了真相。
   // **元素画不出来必须喊,不能只是少画一个。**
   const missingAssets = useMemo(() => {
-    const used = new Set([...(page.items || []), ...(FACING_PAGE.items || [])]
-      .filter(it => it.kind !== 'ink').map(it => it.assetId));
+    const used = new Set([...livePage.items, ...liveFacing.items]
+      .filter(it => it.kind !== 'ink' && it.assetId).map(it => it.assetId));
     return [...used].filter(id => !assets[id]);
-  }, [page, assets]);
+  }, [livePage, liveFacing, assets]);
 
   // 「还没画」和「画不出来」在屏幕上都是一块空白。预演屏必须能分清这两件事,
   // 否则看到白屏只能猜。这一行就是干这个的。
@@ -214,7 +250,7 @@ export default function JournalDevScreen({ onBack }) {
         <Text style={styles.hint}>DEV</Text>
       </View>
       <ScrollView ref={scrollRef} contentContainerStyle={styles.scroll}>
-        <JournalPage page={page} facing={FACING_PAGE} spread={spread}
+        <JournalPage page={livePage} facing={liveFacing} spread={spread}
                      assets={assets}
                      editable onChangeItems={onChangeItems} blockScrollRef={scrollRef}
                      onReadyChange={onReadyChange} />
@@ -242,6 +278,9 @@ export default function JournalDevScreen({ onBack }) {
           </Pressable>
           <Pressable onPress={() => setSpread(s => !s)} style={styles.btn} hitSlop={8}>
             <Text style={styles.btnText}>{spread ? '单页(可编辑)' : '对开(翻阅)'}</Text>
+          </Pressable>
+          <Pressable onPress={() => setProbes(v => !v)} style={styles.btn} hitSlop={8}>
+            <Text style={styles.btnText}>{probes ? '收起占位' : '验层次'}</Text>
           </Pressable>
         </View>
         <Text style={styles.fontState}>

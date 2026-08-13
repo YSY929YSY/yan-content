@@ -41,14 +41,29 @@ const SHADOW_COLOR = 'rgba(38, 28, 18, 1)';
  *
  * 缓存的是 SkImage,不是路径。持有引用同时也防止它被 GC 掉。
  */
+// ⚠️ **必须有上限。** 第一版没有,于是每点一档纸就永久多占一张解码后的位图:
+// 1400x2400 RGBA = 12.8MB,四档点完常驻 51MB。用户的原话是「每次加载越来越慢」——
+// 那不是别的,就是这个缓存只进不出。
+//
+// 上限 3:同时显示的最多两张(对开的左右页),留一个余量给「切回上一张纸」。
+// 超了按插入顺序丢最早的(Map 是保序的,所以 keys().next() 就是最老那个)。
+const PAPER_CACHE_MAX = 3;
 const paperCache = new Map();
+
+function cachePaper(source, img) {
+  if (paperCache.has(source)) paperCache.delete(source);   // 重新插到末尾 = 标记为最近用过
+  paperCache.set(source, img);
+  while (paperCache.size > PAPER_CACHE_MAX) {
+    paperCache.delete(paperCache.keys().next().value);
+  }
+}
 
 function useCachedImage(source) {
   const cached = source == null ? null : paperCache.get(source);
   // 命中就不要再让 useImage 去解码了(传 null 它立刻返回 null)。
   // hook 必须无条件调用,所以是换参数不是换分支。
   const fresh = useImage(cached ? null : source);
-  if (!cached && fresh && source != null) paperCache.set(source, fresh);
+  if (!cached && fresh && source != null) cachePaper(source, fresh);
   return cached || fresh;
 }
 
@@ -324,14 +339,31 @@ export default function JournalPage({ page, facing, assets = {}, spread = false,
   //
   // 一页纸不该有出场动画。等纸到齐,一次性画完;等的这段时间给一块和桌面同色的空白,
   // 什么都不闪。(纸是打进包的本地图片,这个等待通常只有一两帧。)
-  const ready = !!paper && (!spread || !!facingPaper);
+  // 元素的图也要等齐。
+  //
+  // 硬规矩 4 说的是「异步图片没到位之前整页不画」,但第一版的 ready 只等了**纸** ——
+  // 于是纸铺好之后,票根、贴纸、照片各自解码完各自往上跳,用户看到的是
+  // 「一些框框依次显示」(2026-08-13 真机反馈的原话)。
+  // 那正是这条规矩要防的东西,只是当初漏了元素这一半。
+  //
+  // 只等**页面上真的引用到**的那些:assets 里多给几张没人用的,不该拖住整页。
+  const itemsReady = useMemo(() => {
+    const need = new Set([...items, ...(spread ? facingItems : [])]
+      .filter(it => it.kind !== 'ink' && it.assetId)
+      .map(it => it.assetId));
+    // 引用了一个 assets 里根本没有的 id = 那个元素永远画不出来,不能为它无限等下去
+    return [...need].every(id => !(id in assets) || !!assets[id]);
+  }, [items, facingItems, spread, assets]);
+
+  const ready = !!paper && (!spread || !!facingPaper) && itemsReady;
 
   // 「还没画」和「画不出来」在屏幕上长得一模一样(都是一块和桌面同色的空白)。
   // 生产环境这是对的 —— 一页纸不该有出场动画。但排查时它等于没有信息,
   // 所以把状态漏给调用方,预演屏拿它写一行诊断。生产环境不传这个 prop。
   useEffect(() => {
-    onReadyChange?.({ ready, paper: !!paper, facingPaper: !!facingPaper, spread, paperKey });
-  }, [onReadyChange, ready, paper, facingPaper, spread, paperKey]);
+    onReadyChange?.({ ready, paper: !!paper, facingPaper: !!facingPaper,
+                     items: itemsReady, spread, paperKey });
+  }, [onReadyChange, ready, paper, facingPaper, itemsReady, spread, paperKey]);
 
   if (!ready) {
     return <View style={[styles.desk, { width: canvasW, height: canvasH }, style]} />;
