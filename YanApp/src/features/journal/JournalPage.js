@@ -170,16 +170,30 @@ function AssetItem({ item, image, pageWidth, pageHeight, selected = false }) {
  */
 export default function JournalPage({ page, facing, assets = {}, spread = false, style,
                                       editable = false, onChangeItems, blockScrollRef,
-                                      onReadyChange }) {
+                                      onReadyChange, maxHeight }) {
   const { width: winW } = useWindowDimensions();
   // 对开:两页并排,各占一半。
   //
   // ⚠️ 这是**翻阅**的形态,不是编辑的形态。手机上一页只剩 ~170pt 宽,
   // 贴纸和字都小到点不准 —— 编辑必须单页(spread=false),对开用来「翻本子看」。
   // 真实手账也是这个分工:摊开是看,动手时会把本子转过来只对着一页。
-  const pageWidth = spread ? winW * 0.455 : winW * 0.88;
-  const pageHeight = pageWidth * (2400 / 1400);
+  //
+  // ⚠️⚠️ **尺寸必须同时受宽和高约束。**
+  //
+  // 第一版只按宽算(`winW * 0.88`,高度 = 宽 × 1.714)。在 430x932 的机器上
+  // 那是 378x648pt,加边距 ~700pt —— 于是页面撑满整个可视区,
+  // **把工具栏整个挤到屏幕外**。用户点了「工具」,抽屉展开在页面下面,他看不见,
+  // 反馈是「各方面都很难用」。那不是打磨问题,是我没给这个编辑器做布局:
+  // 画布编辑器的画布必须**装进给它的那个框**,不能自己决定要多高。
+  //
+  // maxHeight 由调用方给(工具栏之外剩下多少)。不给就退回老行为。
   const pad = winW * 0.06;
+  const byWidth = spread ? winW * 0.455 : winW * 0.88;
+  const byHeight = Number.isFinite(maxHeight) && maxHeight > 0
+    ? ((maxHeight - pad * 2) / (2400 / 1400)) / (spread ? 2 : 1)
+    : Infinity;
+  const pageWidth = Math.max(40, Math.min(byWidth, byHeight));
+  const pageHeight = pageWidth * (2400 / 1400);
   const canvasW = winW;
   const canvasH = pageHeight + pad * 2;
 
