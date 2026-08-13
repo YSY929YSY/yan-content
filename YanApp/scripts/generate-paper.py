@@ -292,10 +292,35 @@ def make(name, base_rgb, *, out_dir=DEFAULT_OUT, keep_png=False,
     return path
 
 
+# ── 干净的一组(2026-08-13 加)────────────────────────────────
+#
+# 用户看了真机截图的判断:「不太美观」。查下来牛皮那三张的问题是**太脏太重** ——
+# 揉皱 26~64 条、污渍 2~4 摊、磨损 0.5~0.72,参考的是一个揉过的纸袋。
+# 那是一种很强的风格,读起来像皱布或皮革,不像手账纸。真实手账绝大多数用的是
+# 干净的素纸、笺纸、米黄纸,痕迹只有纤维和很淡的光照不均。
+#
+# **但不能把痕迹全关掉。** 完全均匀的一块颜色一眼假(这一点在下面的注释里
+# 已经写过一次)。所以干净纸的配方是「减法做到极限,但三样不能丢」:
+#   纤维颗粒(纸之所以是纸)· 少量草梗(手工/再生纸的信号)· 大尺度光照不均
+# 去掉的是:揉皱、折痕、污渍、foxing 锈斑、重磨损。
+CLEAN = dict(crumple=0, crumple_depth=0, creases=0, crease_depth=0, stains=0)
+
 # 三档,对着参考图里的色域来:米白稻草 / 黄棕纸袋 / 红棕深牛皮。
 # crumple 是横贯整页的折线条数 —— 它决定「揉过几次」。
 # 改参数请连注释里的判断一起看:大部分默认值是排除了某个具体的翻车才定的。
 PAPERS = [
+    # 素白:最干净的一档,给「打开就是一张空白的好纸」那个定案用
+    ('plain-ivory', (247, 243, 234), dict(
+        CLEAN, fiber=0.030, cloud=0.014, flecks=700, hairs=45,
+        foxing=0, wear=0.14, seed=101)),
+    # 米黄笺纸:暖一点,长时间看不刺眼,是手账最常见的底
+    ('plain-cream', (241, 231, 210), dict(
+        CLEAN, fiber=0.034, cloud=0.018, flecks=1100, hairs=60,
+        foxing=2, wear=0.18, seed=102)),
+    # 浅灰:冷底,给照片多的页 —— 暖纸会把彩色照片压得发黄
+    ('plain-mist', (234, 233, 228), dict(
+        CLEAN, fiber=0.028, cloud=0.013, flecks=600, hairs=35,
+        foxing=0, wear=0.13, seed=103)),
     ('kraft-light', (223, 206, 176), dict(
         fiber=0.05, cloud=0.035, creases=1, crumple=26, crumple_depth=0.09,
         flecks=2600, hairs=120, stains=2, foxing=22, wear=0.5,

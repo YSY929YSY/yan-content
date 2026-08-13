@@ -110,8 +110,31 @@ def paste_item(canvas, img, pos, *, lift, rot=0.0, shadow=True):
 # ─────────────────────────────────────────────────────────────
 # 素材
 # ─────────────────────────────────────────────────────────────
+def real_paper(w, h, name):
+    """读 `assets/paper/` 里那张**真图**,和 App 看到的是同一张。
+
+    在这之前这个脚本用的是下面 `kraft()` —— paper_gen 的精简重实现。
+    也就是说验证图验的是**另一套纸**:调它调得再好看,App 里也不是那个样子。
+    2026-08-13 改掉:换纸样只要换名字,而且所见即所得。
+
+    `kraft()` 保留着,给「想快速试一组还没生成的参数」用。
+    """
+    path = os.path.join(APP, 'assets', 'paper', f'{name}.jpg')
+    im = Image.open(path).convert('RGB')
+    # 纸样是 1400x2400,这里的页面尺寸不一定一样 —— 按覆盖裁,别拉伸变形
+    src_r, dst_r = im.width / im.height, w / h
+    if src_r > dst_r:
+        nw = int(im.height * dst_r)
+        im = im.crop(((im.width - nw) // 2, 0, (im.width + nw) // 2, im.height))
+    else:
+        nh = int(im.width / dst_r)
+        im = im.crop((0, (im.height - nh) // 2, im.width, (im.height + nh) // 2))
+    return im.resize((w, h), Image.LANCZOS).convert('RGBA')
+
+
 def kraft(w, h, base=(198, 158, 108), crumple=40, seed=3):
-    """牛皮纸(paper_gen 的精简版,参数同源)。"""
+    """牛皮纸(paper_gen 的精简版,参数同源)。**渲染正式页用 real_paper**,
+    这个只在想试还没生成出来的参数时用。"""
     global rng
     rng = np.random.default_rng(seed)
     v = np.ones((h, w), np.float32)
@@ -258,21 +281,23 @@ def desk():
     return Image.fromarray((np.clip(img, 0, 1) * 255).astype(np.uint8)).convert('RGBA')
 
 
-def build(out_path='page.jpg'):
+def build(out_path='page.jpg', paper='kraft-bag', under='kraft-dark'):
+    global PAPER, UNDER_PAPER
+    PAPER, UNDER_PAPER = paper, under
     global rng
     canvas = desk()
 
     # ── 本子:底下垫两层错开的纸,这是「厚度」
     for i, (dx, dy, dim) in enumerate([(7, 9, 0.72), (4, 5, 0.86)]):
         rng = np.random.default_rng(30 + i)
-        under = kraft(PW, PH, base=(150, 120, 84), crumple=20, seed=30 + i)
+        under = real_paper(PW, PH, UNDER_PAPER)
         under.putalpha(deckle_mask(PW, PH, jitter=2.1))
         under = Image.eval(under, lambda v: int(v * dim))
         under = under.rotate(PAGE_ROT + rng.uniform(-0.6, 0.6), resample=Image.BICUBIC, expand=True)
         canvas = paste_item(canvas, under, (PX + dx, PY + dy), lift=10, shadow=(i == 0))
 
     rng = np.random.default_rng(3)
-    page = kraft(PW, PH, crumple=44, seed=3)
+    page = real_paper(PW, PH, PAPER)
     page.putalpha(deckle_mask(PW, PH, jitter=1.7))
     page = page.rotate(PAGE_ROT, resample=Image.BICUBIC, expand=True)
     canvas = paste_item(canvas, page, (PX, PY), lift=16, shadow=True)
@@ -336,5 +361,7 @@ def build(out_path='page.jpg'):
 if __name__ == '__main__':
     ap = argparse.ArgumentParser(description='渲染一页手账的设计验证图')
     ap.add_argument('--out', default='page.jpg', help='输出 jpg 路径(默认当前目录 page.jpg)')
+    ap.add_argument('--paper', default='kraft-bag', help='纸样名(assets/paper/ 里的文件名)')
+    ap.add_argument('--under', default='kraft-dark', help='垫在下面那两层的纸样')
     args = ap.parse_args()
-    print(build(out_path=args.out))
+    print(build(out_path=args.out, paper=args.paper, under=args.under))
