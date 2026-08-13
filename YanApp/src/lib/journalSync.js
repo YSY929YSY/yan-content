@@ -1,0 +1,87 @@
+// 言 · 手账的登录补传
+//
+// 只做一件事:登录换账号那一刻,把本机整本手账重传到新账号下。
+// 为什么这件事这么要紧:Apple 登录走 signInWithIdToken,匿名 uid 被直接丢弃,
+// 挂在旧 uid 下的行全部成为孤儿。这是**唯一**的迁移机会,漏掉的就是永久漏掉。
+//
+// 拉取(pull)这一版不做:云端目前没有任何手账数据,拉一份空的回来只会带来
+// 「拿不到数据 ≠ 数据是空的」那类风险。等真的有第二台设备的场景再写,
+// 到时候合并规则要像 ledgerMerge 那样单独写、单独测。
+import { supabase } from './supabase';
+import { readAll, writeMoments, writeTags, writeAssets, writeJournal } from './journalStore';
+import { planMomentUpload, planJournalUpload } from '../features/journal/journalModel';
+
+async function sessionUid() {
+  if (!supabase) return null;
+  const { data: { session } } = await supabase.auth.getSession();
+  return session?.user?.id || null;
+}
+
+/** 分批 upsert。一次传几千行会把请求撑爆,而手账的页和素材天然是几百上千的量级。 */
+async function upsertAll(table, rows, opts) {
+  for (let i = 0; i < rows.length; i += 200) {
+    const { error } = await supabase.from(table).upsert(rows.slice(i, i + 200), opts);
+    if (error) throw error;
+  }
+  return rows.length;
+}
+
+/**
+ * 补传采集层 + 语义层。
+ *
+ * nextState 里带着这次为新账号铸的 remoteIds,**上传成功之后**才落盘 ——
+ * 先落盘的话,一次失败的补传会把 id 占掉,重试时误以为传过了。
+ */
+export async function backfillMoments() {
+  const { moments, tags } = await readAll();
+  if (!moments.length && !tags.length) return { count: 0, error: null, idMap: new Map() };
+  if (!supabase) return { count: 0, error: 'offline', idMap: new Map() };
+  try {
+    const uid = await sessionUid();
+    if (!uid) return { count: 0, error: 'no session', idMap: new Map() };
+
+    const { rows, nextState, idMap } = planMomentUpload({ moments, tags }, uid);
+    // 顺序:瞬间 → 照片 / 标签(后两张表都有指向 moments 的外键)
+    let n = await upsertAll('moments', rows.moments);
+    await upsertAll('moment_photos', rows.photos);
+    await upsertAll('moment_tags', rows.tags, { onConflict: 'moment_id,kind,value' });
+
+    await writeMoments(nextState.moments);
+    await writeTags(nextState.tags);
+    return { count: n, error: null, idMap };
+  } catch (e) {
+    console.warn('[Journal] backfill moments failed:', e?.message);
+    return { count: 0, error: e?.message || 'unknown', idMap: new Map() };
+  }
+}
+
+/**
+ * 补传手账页 / 城市册 / 素材库。
+ *
+ * momentIdMap 来自 backfillMoments —— 素材的溯源和元素的 moment 引用要接到新 id 上。
+ * 拿不到映射(采集层那步失败了)也照传:素材和页本身是用户的作品,
+ * 不该因为溯源接不上就整批不传,溯源留空而已。
+ */
+export async function backfillJournal(momentIdMap = new Map()) {
+  const { pages, cities, assets } = await readAll();
+  if (!pages.length && !assets.length && !cities.length) return { count: 0, error: null };
+  if (!supabase) return { count: 0, error: 'offline' };
+  try {
+    const uid = await sessionUid();
+    if (!uid) return { count: 0, error: 'no session' };
+
+    const { rows, nextState } = planJournalUpload({ pages, cities, assets }, uid, momentIdMap);
+    // 顺序不能换:素材 → 城市册(封面外键)→ 页 → 页上的元素(asset_id / page_id 外键)
+    await upsertAll('journal_assets', rows.assets);
+    await upsertAll('journal_cities', rows.cities, { onConflict: 'user_id,city_id' });
+    const n = await upsertAll('journal_pages', rows.pages);
+    await upsertAll('journal_items', rows.items);
+
+    await writeAssets(nextState.assets);
+    await writeJournal({ pages: nextState.pages, cities: nextState.cities });
+    return { count: n, error: null };
+  } catch (e) {
+    console.warn('[Journal] backfill journal failed:', e?.message);
+    return { count: 0, error: e?.message || 'unknown' };
+  }
+}
