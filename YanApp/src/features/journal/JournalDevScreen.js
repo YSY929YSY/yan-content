@@ -50,13 +50,13 @@ const DEMO_PAGE = {
     { id: 'i1', kind: 'photo', assetId: 'p1', material: 'photo', lift: 5,
       x: 0.42, y: 0.26, w: 0.62, scale: 1, rotation: -1.8, z: 1 },
     // 越过页边的票根:一半在纸上,一半落到桌面 —— 「延展到本子外面」
-    { id: 'i2', kind: 'scan', assetId: 'a1', material: 'scan', lift: 3,
+    { id: 'i2', kind: 'scan', assetId: 'scan1', material: 'scan', lift: 3,
       x: 0.96, y: 0.52, w: 0.34, scale: 1, rotation: 5, z: 2 },
     // 贴纸:浮得最高,影子最远最散
-    { id: 'i3', kind: 'sticker', assetId: 'a1', material: 'sticker', lift: 9,
+    { id: 'i3', kind: 'sticker', assetId: 'sticker1', material: 'sticker', lift: 9,
       x: 0.22, y: 0.55, w: 0.2, scale: 1, rotation: -6, z: 3 },
     // 胶带:几乎贴着纸,接触阴影最实
-    { id: 'i4', kind: 'tape', assetId: 'a1', material: 'tape', lift: 1,
+    { id: 'i4', kind: 'tape', assetId: 'tape1', material: 'tape', lift: 1,
       x: 0.62, y: 0.1, w: 0.18, scale: 1, rotation: -22, z: 4 },
     { id: 'i5', kind: 'ink', material: 'ink', lift: 0, x: 0.5, y: 0.5, z: 5,
       payload: { strokes: [{ points: scribble, tool: 'pen' }] } },
@@ -70,9 +70,9 @@ const FACING_PAGE = {
   // 一眼就是复制粘贴 —— 真本子的相邻两页纤维走向从来不一样。
   bg: 'grid-ivory',
   items: [
-    { id: 'j1', kind: 'scan', assetId: 'a1', material: 'scan', lift: 3,
+    { id: 'j1', kind: 'scan', assetId: 'scan1', material: 'scan', lift: 3,
       x: 0.5, y: 0.22, w: 0.66, scale: 1, rotation: 1.4, z: 1 },
-    { id: 'j2', kind: 'sticker', assetId: 'a1', material: 'sticker', lift: 9,
+    { id: 'j2', kind: 'sticker', assetId: 'sticker1', material: 'sticker', lift: 9,
       x: 0.72, y: 0.62, w: 0.26, scale: 1, rotation: 7, z: 2 },
     { id: 'j3', kind: 'ink', material: 'ink', lift: 0, x: 0.5, y: 0.5, z: 3,
       payload: { strokes: [{ points: scribble.map(([x, y, t, w]) => [x * 0.9, y + 0.08, t, w]),
@@ -81,8 +81,19 @@ const FACING_PAGE = {
 };
 
 export default function JournalDevScreen({ onBack }) {
-  // 票根/贴纸/胶带的占位图:纸样顶着。这几个验的是厚度和阴影,不是内容。
-  const stand = useImage(PAPERS['kraft-light']);
+  // 票根/贴纸/胶带的占位图。
+  //
+  // ⚠️ 三个元素用**三张不同的纸**顶着,不是同一张。用同一张的时候页面上是
+  // 三块一模一样的土黄色方块,看着就是「这个功能很难看」—— 而那只是占位没做好。
+  //
+  // ⚠️⚠️ 这里曾经写 `PAPERS['kraft-light']`。2026-08-13 把 PAPERS 从九档裁到四档时
+  // 删掉了那个键,于是它变成 undefined → useImage(undefined) 返回 null →
+  // **五个元素全部不画**,而且不报错。页面看起来只剩一张照片,
+  // 我还对着那个结果做了一整段「构图有问题」的分析 —— 分析的东西根本不在页面上。
+  // 所以下面 missingAssets 那条诊断是必须的:**这类错误必须喊出来。**
+  const standScan = useImage(PAPERS['kraft-bag']);
+  const standSticker = useImage(PAPERS['grid-ivory']);
+  const standTape = useImage(PAPERS['plain-cream']);
 
   // 主照片。没选过就回退到占位图 —— 空着不画的话就看不出主锚的层次了。
   const [photoUri, setPhotoUri] = useState(null);
@@ -152,7 +163,20 @@ export default function JournalDevScreen({ onBack }) {
   // ⚠️ 必须记忆化。这个对象直接进 JournalPage 的 `assets`,而那边的 aspects
   // 和整套手势对象都挂在它的**引用**上 —— 每帧新建一个字面量的话,
   // 拖动时每一帧都在重建三个 Gesture 对象,而拖动恰好是每帧都在 setState 的那条路径。
-  const assets = useMemo(() => ({ a1: stand, p1: photo || stand }), [stand, photo]);
+  const assets = useMemo(() => ({
+    scan1: standScan, sticker1: standSticker, tape1: standTape,
+    p1: photo || standScan,
+  }), [standScan, standSticker, standTape, photo]);
+
+  // 页面上引用了但没解析出图片的 assetId。
+  // 这一条是 2026-08-13 那个 bug 的直接产物:占位图的键被删掉之后,
+  // 五个元素静默消失、页面看起来只是「有点空」,没有任何地方说出了真相。
+  // **元素画不出来必须喊,不能只是少画一个。**
+  const missingAssets = useMemo(() => {
+    const used = new Set([...(page.items || []), ...(FACING_PAGE.items || [])]
+      .filter(it => it.kind !== 'ink').map(it => it.assetId));
+    return [...used].filter(id => !assets[id]);
+  }, [page, assets]);
 
   // 「还没画」和「画不出来」在屏幕上都是一块空白。预演屏必须能分清这两件事,
   // 否则看到白屏只能猜。这一行就是干这个的。
@@ -235,6 +259,12 @@ export default function JournalDevScreen({ onBack }) {
             页面空白:纸({pageDiag.paperKey}){pageDiag.paper ? '已到' : '未到'}
             {pageDiag.spread ? ` · 右页纸${pageDiag.facingPaper ? '已到' : '未到'}` : ''}
             {' · 一两秒还不消失就是加载失败,不是过场'}
+          </Text>
+        )}
+        {missingAssets.length > 0 && (
+          <Text style={[styles.fontState, styles.diag]}>
+            ⚠️ {missingAssets.length} 个元素没有图,画不出来:{missingAssets.join(' / ')}
+            {'\n'}页面会看起来「有点空」,但那不是构图问题 —— 是这几个 assetId 解析不到
           </Text>
         )}
         {pageDiag?.ready && photoUri && !photo && (
