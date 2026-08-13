@@ -305,6 +305,32 @@ export function newAsset({
 }
 
 /**
+ * 入库照片要缩到多大。
+ *
+ * 手机相机现在随手一张就是 2560x3840(用户实测那张就是),解码后 **37.5MB**。
+ * 而它在页面上只占 ~236pt 宽 —— 3 倍屏也就 708px。多出来的像素**一个都用不上**,
+ * 只是每次进屏都在付解码和内存的账(用户的原话:「每次加载越来越慢」)。
+ *
+ * 长边 1600:
+ *   · 单页满宽(~380pt @3x = 1140px)也够,还留了放大到 1.4 倍的余量
+ *   · 解码后约 1600x1067x4 ≈ 6.8MB,比原来省 80%
+ *   · 手账要「换 300dpi 重渲可打印」,但那是**页面数据**重渲,不是把这张位图放大 ——
+ *     真要出印刷稿时从原图重新入库,那是另一条路径(设计文档第三节的 entry 区分)
+ *
+ * 比这个还小的图**不放大**:放大只会糊,不会变清楚。
+ */
+export const ASSET_MAX_EDGE = 1600;
+
+export function fitInside(width, height, maxEdge = ASSET_MAX_EDGE) {
+  const w = Number(width), h = Number(height);
+  if (!Number.isFinite(w) || !Number.isFinite(h) || w <= 0 || h <= 0) return null;
+  const long = Math.max(w, h);
+  if (long <= maxEdge) return null;          // 已经够小,不动 —— 返回 null 表示「不用缩」
+  const k = maxEdge / long;
+  return { width: Math.max(1, Math.round(w * k)), height: Math.max(1, Math.round(h * k)), scale: k };
+}
+
+/**
  * 素材文件的当前路径。
  *
  * **存下来的绝对路径不能直接用。** iOS 的 `documentDirectory` 长这样:

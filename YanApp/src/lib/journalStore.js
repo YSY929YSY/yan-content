@@ -7,10 +7,11 @@
 // 落盘是状态的属性不是调用方的责任(硬规矩 2):这个文件导出的每个写入函数
 // 都自己落盘,没有「记得调用 save」这回事。
 import * as FileSystem from 'expo-file-system/legacy';
+import { Skia, ImageFormat } from '@shopify/react-native-skia';
 
 import { K, readJsonResult, writeJson } from './storage';
 import {
-  normalizeMoments, normalizeJournal, normalizeAsset, newAsset, assetUriIn,
+  normalizeMoments, normalizeJournal, normalizeAsset, newAsset, assetUriIn, fitInside,
   remapCityId, resolveCityId,
 } from '../features/journal/journalModel';
 
@@ -89,6 +90,49 @@ async function ensureAssetDir() {
 export const assetUri = (asset) => assetUriIn(ASSET_DIR, asset);
 
 /**
+ * 缩图。**用 Skia 做,不加原生依赖。**
+ *
+ * 本来要装 expo-image-manipulator —— 那是原生依赖,按硬规矩 1b 得重打 dev client。
+ * 但 Skia 已经在装了(手账画布用它),而它自带离屏 surface 和 JPEG 编码,
+ * 这件事它本来就会做。**加依赖之前先看手上有什么** —— RULE.md 那条工具化原则
+ * 说的是内容生产,对依赖同样成立。
+ *
+ * 失败一律返回 null,调用方回退到原图 —— 缩图是省内存的优化,
+ * 不是「能不能用」的前提。为了省内存把用户的照片弄丢是本末倒置。
+ *
+ * @returns {string|null} 新文件路径;不需要缩 / 缩失败都返回 null
+ */
+async function downscaleTo(srcUri, destBase, width, height) {
+  const target = fitInside(width, height);
+  if (!target) return null;                        // 本来就够小
+  try {
+    const data = await Skia.Data.fromURI(srcUri);
+    const img = data && Skia.Image.MakeImageFromEncoded(data);
+    if (!img) return null;
+
+    const surface = Skia.Surface.Make(target.width, target.height);
+    if (!surface) return null;
+    surface.getCanvas().drawImageRect(
+      img,
+      Skia.XYWHRect(0, 0, img.width(), img.height()),
+      Skia.XYWHRect(0, 0, target.width, target.height),
+      Skia.Paint(),
+    );
+    const shot = surface.makeImageSnapshot();
+    // 质量 82:再高体积涨得快、肉眼看不出;再低天空这类大片渐变会起带子
+    const b64 = shot.encodeToBase64(ImageFormat.JPEG, 82);
+    if (!b64) return null;
+
+    const dest = `${destBase}.jpg`;
+    await FileSystem.writeAsStringAsync(dest, b64, { encoding: 'base64' });
+    return dest;
+  } catch (e) {
+    console.warn('[Journal] 缩图失败,用原图:', e?.message);
+    return null;
+  }
+}
+
+/**
  * 把一张外部图片收进素材库。
  *
  * **必须复制,不能直接存 ImagePicker 给的 uri。** 那个 uri 指向系统的临时缓存,
@@ -111,21 +155,31 @@ export async function importAsset(uri, { kind = 'photo', entry = 'upload',
     const ext = (String(uri).match(/\.(jpe?g|png|heic|webp)(?:$|\?)/i)?.[1] || 'jpg').toLowerCase();
     const dest = `${ASSET_DIR}${draft.id}.${ext}`;
 
-    await FileSystem.copyAsync({ from: uri, to: dest });
+    // 先试缩图。缩得动就用缩完的,缩不动(本来就小 / 失败)就整份复制原图 ——
+    // 缩图是省内存的优化,不是能不能用的前提。
+    let finalPath = await downscaleTo(uri, `${ASSET_DIR}${draft.id}`, width, height);
+    let finalW = width, finalH = height;
+    if (finalPath) {
+      const t = fitInside(width, height);
+      finalW = t.width; finalH = t.height;
+    } else {
+      await FileSystem.copyAsync({ from: uri, to: dest });
+      finalPath = dest;
+    }
 
-    const asset = { ...draft, localUri: dest };
+    const asset = { ...draft, localUri: finalPath, width: finalW, height: finalH };
     // ⚠️ 读失败**必须停下**。当成空再写回去 = 整个素材库被这一条覆盖掉。
     // (硬规矩 1:拿不到数据 ≠ 数据是空的。这个项目为此丢过至少四次用户数据,
     //  而这一处是 2026-08-13 新写的代码,一样踩了 —— 所以读函数才改成带 ok。)
     const { ok: readOk, assets } = await readAssets();
     if (!readOk) {
-      await FileSystem.deleteAsync(dest, { idempotent: true });
+      await FileSystem.deleteAsync(finalPath, { idempotent: true });
       return { asset: null, error: '读不到素材库,这次不写 —— 不能拿空的覆盖已有素材' };
     }
     const ok = await writeAssets([...assets, asset]);
     if (!ok) {
       // 元数据没写成,文件就是垃圾 —— 清掉,别在磁盘上留孤儿
-      await FileSystem.deleteAsync(dest, { idempotent: true });
+      await FileSystem.deleteAsync(finalPath, { idempotent: true });
       return { asset: null, error: '素材库写入失败' };
     }
     return { asset, error: null };

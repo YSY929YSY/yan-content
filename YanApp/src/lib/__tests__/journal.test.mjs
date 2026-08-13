@@ -12,7 +12,7 @@ import {
   remapCityId, addTag, removeTag, cityOfMoment,
   writtenFirsts, firstArrivalOf, isFirstArrival,
   normalizeMoment, normalizePage, normalizeMoments, normalizeInk, materialOf,
-  newAsset, newItem, ASSET_KINDS, ASSET_ENTRIES, assetUriIn,
+  newAsset, newItem, ASSET_KINDS, ASSET_ENTRIES, assetUriIn, fitInside, ASSET_MAX_EDGE,
   planMomentUpload, planJournalUpload, portablePath, remoteIdFor,
 } from '../../features/journal/journalModel.js';
 
@@ -197,6 +197,30 @@ test('不是素材目录里的文件就原样返回 —— 别去改不归我们
   assert.equal(assetUriIn(dir, { localUri: '' }), null);
   assert.equal(assetUriIn(dir, null), null);
   assert.equal(assetUriIn(dir, { localUri: 'journal-assets-v1/' }), null);
+});
+
+test('★ 入库照片要缩 —— 相机原图每次进屏都在付解码的账', () => {
+  // 用户实测那张是 2560x3840,解码后 37.5MB,而它在页面上只占 ~236pt 宽。
+  // 多出来的像素一个都用不上,只是让每次进屏都更慢(用户原话「越来越慢」)。
+  const t = fitInside(2560, 3840);
+  assert.equal(t.height, ASSET_MAX_EDGE, '按长边缩');
+  assert.equal(t.width, Math.round(2560 * (ASSET_MAX_EDGE / 3840)));
+  // 省下多少:面积比
+  const before = 2560 * 3840, after = t.width * t.height;
+  assert.ok(after / before < 0.25, `应该省掉七成以上,实际只省到 ${(after / before).toFixed(2)}`);
+
+  // 横图按宽缩
+  const w = fitInside(4000, 3000);
+  assert.equal(w.width, ASSET_MAX_EDGE);
+});
+
+test('★ 本来就小的不放大 —— 放大只会糊,不会变清楚', () => {
+  assert.equal(fitInside(800, 600), null);
+  assert.equal(fitInside(ASSET_MAX_EDGE, 900), null, '正好等于上限也不动');
+  // 拿不到尺寸就别猜,返回 null 让调用方走原图
+  assert.equal(fitInside(undefined, 3840), null);
+  assert.equal(fitInside(0, 0), null);
+  assert.equal(fitInside(-1, 5), null);
 });
 
 test('★ 新元素的厚度由 kind 决定,不让调用方填 —— 两处填不一样页面就花了', () => {
