@@ -9,6 +9,50 @@
 //   ③ 最少:转账笔数不超过「有非零净额的人数 - 1」
 
 /**
+ * 分类。2026-08 改名:晚餐 → 餐饮、车票 → 交通。
+ *
+ * 「晚餐」把一天三顿里的两顿排除在外,「车票」把打车和地铁排除在外 ——
+ * 都是名字比它想装的东西小。改名之后,存量账目里躺着的还是旧值。
+ *
+ * 为什么用别名归一(读的时候翻译)而不是写一条 SQL UPDATE 批量改:
+ *   · 共享账本的行是多台设备共用的,其中可能还有装着旧版本的同行者。
+ *     硬改远端值,老客户端拿到一个不在自己 chip 列表里的分类,
+ *     虽然还显示得出来,但选中态永远高亮不上。
+ *   · 归一是纯函数,离线也生效,不需要谁记得去数据库里跑一段。
+ *   · 最要紧的一条:**认不出的值原样放行**,绝不映射成空或「其他」。
+ *     用户自己敲过的分类、以后新加的分类,都不会因为这次改名被抹掉。
+ * 代价是远端那一行在下次被保存前仍然存着旧字符串 —— 只影响存储,不影响显示。
+ */
+export const CATEGORY_ALIASES = { 晚餐: '餐饮', 车票: '交通' };
+
+export const EXPENSE_CATEGORIES = ['餐饮', '交通', '购物', '酒店', '门票', '其他'];
+
+/** 旧分类值 → 新名字。空值保持空,认不出的原样返回。 */
+export const normalizeCategory = (raw) => {
+  if (raw == null || raw === '') return raw;
+  const s = String(raw);
+  return CATEGORY_ALIASES[s] || s;
+};
+
+/** 整条账目的分类归一。只动 category,其余字段一个不碰。 */
+export const normalizeExpenseCategory = (item) => {
+  if (!item || item.category == null) return item;
+  const next = normalizeCategory(item.category);
+  if (next === item.category) return item;
+  // title 以前会被填成和 category 一样的字符串(saveExpense 的兜底),
+  // 那种情况下也一起改,否则列表会渲染成「餐饮 · 晚餐」
+  return {
+    ...item,
+    category: next,
+    title: item.title === item.category ? next : item.title,
+  };
+};
+
+/** 一批账目的分类归一。非数组原样返回 —— 拿不到数据不等于数据是空的。 */
+export const normalizeExpenseList = (list) =>
+  (Array.isArray(list) ? list.map(normalizeExpenseCategory) : list);
+
+/**
  * 金额算式求值:支持 + 和 *,别的一律不认。
  *
  * 为什么要有它:人在小票旁边记账时天然会写「90*2」「47+6」「12+22.8」——
@@ -115,6 +159,30 @@ export const buildShares = (draft, ledgerPeople) => {
   }
   return { ...emptyShares, ...splitEven(total, participants) };
 };
+
+/**
+ * 某个人的个人支出流水:他在这批账目里**承担**的每一笔。
+ *
+ * 口径是「担」不是「垫」,这两个数经常差得很远:
+ *   · 垫(paid)= 他先付出去的钱,分账之后会还回来,不是他的消费
+ *   · 担(owed)= shares[他],才是他这趟真花掉的钱
+ * 一张 ₺4500 的门票两人均分,他垫了 4500、担了 2250。
+ * 所以每一行同时给 total 和 mine —— 只给一个数字,用户会把 4500 当成自己花的。
+ *
+ * 分摊为 0 的不算一笔消费(那笔账他没参与),但**负数照样保留** ——
+ * 出现负分摊说明账本被改坏了,悄悄滤掉只会让人对不上总额还找不到原因。
+ *
+ * @returns [{ item, mine, total }],顺序和传入一致(排序交给调用方)
+ */
+export function personSpendRows(items, person) {
+  if (!Array.isArray(items) || !person) return [];
+  return items.reduce((out, item) => {
+    const mine = money(item?.shares?.[person]);
+    if (Math.abs(mine) <= 0.005) return out;
+    out.push({ item, mine, total: money(item?.amount) });
+    return out;
+  }, []);
+}
 
 /**
  * 单一币种的净额化(N 人贪心)。

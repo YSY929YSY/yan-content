@@ -1,0 +1,633 @@
+<title>分账改版预览 · 言</title>
+
+<style>
+  /* ── 页面外壳:安静的暖灰,让两台手机成为唯一亮起来的东西 ── */
+  :root {
+    --ground: #e7e4de;
+    --ground-2: #dedad2;
+    --chrome-ink: #2b2a27;
+    --chrome-muted: #6f6c65;
+    --chrome-line: #cfcbc2;
+    --chrome-accent: #2a7a6a;
+    --card: #f3f1ec;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #17181a;
+      --ground-2: #202225;
+      --chrome-ink: #e8e6e1;
+      --chrome-muted: #99958d;
+      --chrome-line: #33352f;
+      --chrome-accent: #6fbfab;
+      --card: #1d1f21;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #17181a; --ground-2: #202225; --chrome-ink: #e8e6e1;
+    --chrome-muted: #99958d; --chrome-line: #33352f; --chrome-accent: #6fbfab; --card: #1d1f21;
+  }
+  :root[data-theme="light"] {
+    --ground: #e7e4de; --ground-2: #dedad2; --chrome-ink: #2b2a27;
+    --chrome-muted: #6f6c65; --chrome-line: #cfcbc2; --chrome-accent: #2a7a6a; --card: #f3f1ec;
+  }
+
+  /* 言 App 真实色板(theme.js 里的 C),手机内部固定明亮 —— App 本身只有浅色世界 */
+  .phone {
+    --ink: #0e0e12; --paper: #f5f2ec; --lava: #d4401a; --teal: #2a7a6a;
+    --tealLight: #e0f0ec; --white: #ffffff; --muted: #888888; --mutedLight: #bbbbbb;
+    --border: #e8e4dc; --tag: #f0ede6; --sheet: #fbfaf7; --settle: #20352d;
+  }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--chrome-ink);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 40px 20px 72px; }
+
+  header { margin-bottom: 34px; }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--chrome-accent); font-weight: 700; margin: 0 0 10px;
+  }
+  h1 {
+    font-family: Georgia, "Songti SC", serif;
+    font-size: clamp(28px, 4.2vw, 40px); font-weight: 400; letter-spacing: -.01em;
+    margin: 0 0 12px; text-wrap: balance;
+  }
+  .lede { margin: 0; max-width: 62ch; font-size: 14.5px; line-height: 1.65; color: var(--chrome-muted); }
+
+  .stage {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 34px; align-items: start;
+  }
+  .col { min-width: 0; }
+  .colhead {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 12px; padding-bottom: 12px; margin-bottom: 16px;
+    border-bottom: 1px solid var(--chrome-line);
+  }
+  .colname { font-size: 13px; font-weight: 700; letter-spacing: .04em; }
+  .pillcount { font-size: 11.5px; color: var(--chrome-muted); font-variant-numeric: tabular-nums; }
+  .pillcount b { font-family: Georgia, serif; font-size: 17px; font-weight: 400; color: var(--chrome-ink); }
+
+  /* 状态切换 */
+  .states { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .states button {
+    font: inherit; font-size: 11.5px; cursor: pointer;
+    background: transparent; color: var(--chrome-muted);
+    border: 1px solid var(--chrome-line); border-radius: 999px; padding: 6px 12px;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .states button:hover { border-color: var(--chrome-accent); color: var(--chrome-accent); }
+  .states button[aria-pressed="true"] {
+    background: var(--chrome-ink); border-color: var(--chrome-ink);
+    color: var(--ground);
+  }
+  .states button:focus-visible { outline: 2px solid var(--chrome-accent); outline-offset: 2px; }
+  .states.placeholder { visibility: hidden; }
+
+  /* ── 手机 ── */
+  .phone {
+    background: #d6d3cc; border-radius: 30px; padding: 8px;
+    box-shadow: 0 22px 48px rgba(20,18,14,.22);
+    overflow: hidden;
+  }
+  .screen {
+    background: var(--sheet); border-radius: 23px; overflow: hidden;
+    height: 660px; overflow-y: auto; scrollbar-width: thin;
+    position: relative;
+  }
+  .statusbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 9px 18px 3px; font-size: 11.5px; font-weight: 600; color: var(--ink);
+  }
+
+  .head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px; border-bottom: 1px solid var(--border);
+  }
+  .headL { display: flex; align-items: center; gap: 9px; }
+  .mark { font-size: 25px; font-weight: 300; color: var(--ink); letter-spacing: 3px; line-height: 1; }
+  .title { font-size: 16px; font-weight: 700; color: var(--ink); }
+  .sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .close { font-size: 26px; color: var(--muted); line-height: 1; }
+  .clearOld {
+    font-size: 11px; color: var(--lava); font-weight: 900;
+    background: #fff0f0; border: 1px solid #f0c8c8; border-radius: 999px; padding: 5px 10px;
+  }
+  .headActions { display: flex; align-items: center; gap: 8px; }
+
+  .body { padding: 14px; }
+
+  /* 通用小件 */
+  .pill {
+    border: 1px solid var(--border); background: var(--white); border-radius: 999px;
+    padding: 7px 11px; font-size: 11px; color: var(--muted); font-weight: 800;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .pill.on { background: var(--ink); border-color: var(--ink); color: var(--white); }
+  .row { display: flex; flex-wrap: wrap; gap: 7px; }
+  .rowEq { display: flex; gap: 7px; }
+  .rowEq > * { flex: 1; }
+  .input {
+    background: var(--white); border: 1px solid var(--border); border-radius: 999px;
+    height: 34px; display: flex; align-items: center; padding: 0 11px;
+    font-size: 11.5px; color: var(--mutedLight); font-weight: 800; flex: 1;
+  }
+  .btnDark {
+    background: var(--ink); color: var(--white); border-radius: 999px;
+    padding: 10px; text-align: center; font-size: 12px; font-weight: 800;
+  }
+  .btnQuiet {
+    background: var(--paper); border: 1px solid var(--border); border-radius: 999px;
+    padding: 8px 11px; font-size: 11px; color: var(--teal); font-weight: 900;
+    display: inline-flex; align-items: center;
+  }
+
+  /* ── 改版前专属 ── */
+  .cardOld {
+    margin-top: 12px; background: var(--white); border: 1px solid var(--border);
+    border-radius: 16px; padding: 12px;
+  }
+  .ledgerK { font-size: 9px; color: var(--teal); font-weight: 900; letter-spacing: 1.4px; }
+  .ledgerTitle { font-size: 16px; color: var(--ink); font-weight: 800; margin-top: 2px; }
+  .badge {
+    font-size: 10px; color: var(--muted); background: var(--tag); border-radius: 999px;
+    padding: 4px 8px; font-weight: 700;
+  }
+  .joinBox {
+    background: var(--white); border: 1px solid var(--border); border-radius: 14px;
+    padding: 10px; margin-top: 10px;
+  }
+  .joinTitle { font-size: 12px; color: var(--ink); font-weight: 900; }
+  .avatar {
+    font-size: 10px; color: var(--teal); background: var(--tealLight); border-radius: 999px;
+    padding: 4px 8px; font-weight: 800;
+  }
+  .avatar.on { color: var(--white); background: var(--teal); }
+  .cur {
+    min-width: 34px; border: 1px solid var(--border); background: var(--white);
+    border-radius: 999px; padding: 6px 10px; font-size: 13px; color: var(--muted);
+    font-weight: 800; text-align: center;
+  }
+  .cur.on { background: var(--ink); border-color: var(--ink); color: var(--white); }
+  .mode {
+    flex: 1; border: 1px solid var(--border); background: var(--white); border-radius: 12px;
+    padding: 9px 0; text-align: center; font-size: 11px; color: var(--muted); font-weight: 900;
+  }
+  .mode.on { background: var(--ink); border-color: var(--ink); color: var(--white); }
+  .hintOld { font-size: 10.5px; color: var(--teal); font-weight: 900; margin: 9px 0 7px; }
+  .inputSq {
+    background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+    padding: 10px; font-size: 12px; color: var(--mutedLight); margin-bottom: 7px;
+  }
+  .scanOld {
+    flex: 1; border: 1px solid #d8c197; background: #fff3d6; border-radius: 999px;
+    padding: 9px 0; text-align: center; font-size: 12px; color: #8a6d24; font-weight: 800;
+  }
+
+  /* ── 改版后专属 ── */
+  .settle {
+    background: var(--settle); border-radius: 16px; padding: 11px 12px;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    cursor: pointer;
+  }
+  .settleK { font-size: 9px; color: rgba(255,255,255,.58); font-weight: 900; letter-spacing: 1.4px; }
+  .settleMain { font-size: 15px; color: #fff; font-weight: 900; margin-top: 3px; }
+  .settleArrow { font-size: 15px; color: rgba(255,255,255,.7); }
+  .settlePanel {
+    background: var(--white); border: 1px solid var(--border); border-radius: 16px;
+    padding: 0 14px; margin-top: 8px;
+  }
+  .settleRow {
+    display: flex; align-items: center; gap: 10px; padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .settleName { font-size: 13px; color: var(--ink); font-weight: 700; }
+  .settleNums { font-size: 10.5px; color: var(--muted); margin-top: 3px; font-variant-numeric: tabular-nums; }
+  .settleNet { font-size: 12px; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .settleNet.in { color: var(--teal); }
+  .settleNet.out { color: var(--ink); }
+  .settleClear { padding: 13px 0; text-align: center; font-size: 12px; color: var(--muted); font-weight: 600; }
+
+  .cardNew {
+    margin-top: 12px; background: var(--white); border: 1px solid var(--border);
+    border-radius: 16px; padding: 14px;
+  }
+  .amountRow { display: flex; align-items: baseline; gap: 8px; padding-bottom: 4px; }
+  .curTap { font-family: Georgia, serif; font-size: 22px; color: var(--muted); cursor: pointer; }
+  .amount {
+    font-family: Georgia, serif; font-size: 38px; color: var(--ink);
+    font-variant-numeric: tabular-nums; line-height: 1.1;
+  }
+  .amount.empty { color: var(--mutedLight); }
+  .fieldK {
+    font-size: 10px; color: var(--teal); font-weight: 800; letter-spacing: .6px;
+    margin: 14px 0 8px;
+  }
+  .splitLine {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+  }
+  .splitTxt { font-size: 12px; color: var(--ink); }
+  .splitLink { font-size: 12px; color: var(--teal); font-weight: 700; cursor: pointer; }
+  .noteNew {
+    margin-top: 14px; background: var(--paper); border-radius: 12px;
+    padding: 11px 12px; font-size: 12.5px; color: var(--mutedLight);
+  }
+  .saveNew {
+    background: var(--ink); color: var(--white); border-radius: 999px;
+    padding: 11px; text-align: center; font-size: 12px; font-weight: 800; margin-top: 14px;
+  }
+  .under { display: flex; justify-content: center; gap: 20px; margin-top: 12px; }
+  .quiet { font-size: 11.5px; color: var(--muted); }
+  .setupRow {
+    display: flex; align-items: center; gap: 10px; margin-top: 10px;
+    background: var(--white); border: 1px solid var(--border); border-radius: 14px;
+    padding: 12px 14px; cursor: pointer;
+  }
+  .setupTxt { font-size: 12.5px; color: var(--ink); font-weight: 700; }
+  .setupMeta { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .chev { font-size: 17px; color: var(--mutedLight); }
+  .setupPanel {
+    background: var(--white); border: 1px solid var(--border); border-top: 0;
+    border-radius: 0 0 14px 14px; padding: 0 14px 14px; margin-top: -10px;
+  }
+  .setupHint { font-size: 11px; color: var(--muted); line-height: 1.5; margin-top: 12px; }
+  .divider { height: 1px; background: var(--border); margin-top: 14px; }
+  .listHead {
+    display: flex; align-items: center; justify-content: space-between;
+    margin: 18px 0 2px;
+  }
+  .listHeadTxt { font-size: 11px; color: var(--muted); font-weight: 700; letter-spacing: .5px; }
+  .exp {
+    background: rgba(255,255,255,.72); border: 1px solid var(--border); border-radius: 13px;
+    padding: 10px; margin-top: 7px; display: flex; gap: 8px; align-items: center;
+  }
+  .expTitle { font-size: 12.5px; color: var(--ink); font-weight: 800; }
+  .expMeta { font-size: 10.5px; color: var(--muted); line-height: 1.45; margin-top: 3px; }
+  .expOps { display: flex; gap: 12px; margin-top: 7px; font-size: 10.5px; color: var(--muted); }
+  .expOps .del { color: var(--lava); }
+  .specialPill {
+    font-size: 10px; color: var(--muted); background: var(--tag);
+    border-radius: 999px; padding: 3px 7px; font-weight: 800; white-space: nowrap;
+  }
+  .mt { margin-top: 9px; }
+  .hidden { display: none; }
+
+  /* ── 变更清单 ── */
+  .changes { margin-top: 56px; border-top: 1px solid var(--chrome-line); padding-top: 28px; }
+  .changes h2 {
+    font-family: Georgia, "Songti SC", serif; font-weight: 400;
+    font-size: 22px; margin: 0 0 20px;
+  }
+  .cgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; background: var(--chrome-line); border: 1px solid var(--chrome-line); border-radius: 10px; overflow: hidden; }
+  .citem { background: var(--card); padding: 15px 16px; }
+  .cwhat { font-size: 13px; font-weight: 700; margin-bottom: 7px; }
+  .cwhy { font-size: 12.5px; line-height: 1.6; color: var(--chrome-muted); margin: 0; }
+  .cwhy .from { text-decoration: line-through; opacity: .65; }
+  .cwhy .to { color: var(--chrome-accent); font-weight: 600; }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">言 YAN · 旅行小本子</p>
+    <h1>分账改版</h1>
+    <p class="lede">
+      改版前一屏 24 个胶囊按钮,全都长得一样,眼睛不知道先看哪。改版后默认只剩「金额 + 谁垫的 + 记一笔」,
+      其余收进「调整」。右侧手机可以点开各个状态看。
+    </p>
+  </header>
+
+  <div class="stage">
+
+    <!-- ═══ 改版前 ═══ -->
+    <div class="col">
+      <div class="colhead">
+        <span class="colname">改版前</span>
+        <span class="pillcount">可见胶囊 <b>24</b></span>
+      </div>
+      <div class="states placeholder"><button type="button">占位</button></div>
+
+      <div class="phone">
+        <div class="screen">
+          <div class="statusbar"><span>00:19</span><span>▮▮▮ ᯤ ▰</span></div>
+          <div class="head">
+            <div class="headL">
+              <span class="mark">🧮</span>
+              <span class="title">同行分账</span>
+            </div>
+            <div class="headActions">
+              <span class="clearOld">结清</span>
+              <span class="close">×</span>
+            </div>
+          </div>
+          <div class="body">
+            <div class="cardOld">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+                <div>
+                  <div class="ledgerK">LEDGER</div>
+                  <div class="ledgerTitle">分账</div>
+                </div>
+                <span class="badge">2 笔单独付</span>
+              </div>
+
+              <div class="joinBox">
+                <div class="joinTitle">共享账本</div>
+                <div class="input" style="margin-top:8px">我</div>
+                <div class="btnDark" style="margin-top:8px">建共享账本</div>
+                <div class="rowEq" style="margin-top:8px;align-items:center">
+                  <div class="input">输入邀请码</div>
+                  <span class="btnQuiet" style="flex:0 0 auto">加入</span>
+                </div>
+                <div class="row" style="margin-top:8px">
+                  <span class="avatar on">Lyra</span>
+                  <span class="avatar">Ning</span>
+                  <span class="avatar">Max · 待加入</span>
+                </div>
+                <div class="rowEq" style="margin-top:9px;align-items:center">
+                  <div class="input">加一个同行者名字</div>
+                  <span class="btnQuiet" style="flex:0 0 auto">加成员</span>
+                </div>
+                <div class="row" style="margin-top:8px">
+                  <span class="cur on">€</span><span class="cur">£</span><span class="cur">₺</span>
+                  <span class="cur">$</span><span class="cur">¥</span><span class="cur">₩</span>
+                </div>
+              </div>
+
+              <div class="row" style="margin-top:11px">
+                <span class="pill on">晚餐</span><span class="pill">车票</span><span class="pill">购物</span>
+                <span class="pill">酒店</span><span class="pill">门票</span><span class="pill">其他</span>
+              </div>
+
+              <div class="rowEq" style="margin-top:9px">
+                <span class="mode on">均分</span><span class="mode">各自付</span><span class="mode">单独付</span>
+              </div>
+
+              <div class="hintOld">谁付的</div>
+              <div class="rowEq">
+                <span class="pill">Lyra</span><span class="pill">Ning</span><span class="pill">Max</span>
+              </div>
+
+              <div class="hintOld">谁参与均分</div>
+              <div class="rowEq">
+                <span class="pill">Lyra</span><span class="pill">Ning</span><span class="pill">Max</span>
+              </div>
+
+              <div class="inputSq" style="margin-top:9px">总金额</div>
+              <div class="inputSq" style="min-height:20px">备注,可不填</div>
+
+              <div class="rowEq" style="margin-top:2px">
+                <span class="pill" style="flex:1;padding:9px 0">单独付</span>
+                <span class="scanOld">上传小票</span>
+                <span class="btnDark" style="flex:1;padding:9px 0">记一笔</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 改版后 ═══ -->
+    <div class="col">
+      <div class="colhead">
+        <span class="colname">改版后</span>
+        <span class="pillcount">可见胶囊 <b>3</b></span>
+      </div>
+      <div class="states" role="group" aria-label="查看状态">
+        <button type="button" data-state="default" aria-pressed="true">默认</button>
+        <button type="button" data-state="settle" aria-pressed="false">结算展开</button>
+        <button type="button" data-state="adv" aria-pressed="false">调整展开</button>
+        <button type="button" data-state="setup" aria-pressed="false">同行者展开</button>
+      </div>
+
+      <div class="phone">
+        <div class="screen" id="screenNew">
+          <div class="statusbar"><span>00:19</span><span>▮▮▮ ᯤ ▰</span></div>
+          <div class="head">
+            <div class="headL">
+              <span class="mark">言</span>
+              <div>
+                <div class="title">分账</div>
+                <div class="sub">本机记账</div>
+              </div>
+            </div>
+            <span class="close">×</span>
+          </div>
+          <div class="body">
+
+            <!-- 结算 -->
+            <div class="settle" data-toggle="settle">
+              <div style="flex:1">
+                <div class="settleK">结算</div>
+                <div class="settleMain">Ning → Lyra €18.50</div>
+              </div>
+              <span class="settleArrow" id="settleArrow">→</span>
+            </div>
+            <div class="settlePanel hidden" id="panelSettle">
+              <div class="settleRow">
+                <div style="flex:1">
+                  <div class="settleName">Lyra</div>
+                  <div class="settleNums">垫付 €62.00 · 应承担 €43.50</div>
+                </div>
+                <span class="settleNet in">应收 €18.50</span>
+              </div>
+              <div class="settleRow">
+                <div style="flex:1">
+                  <div class="settleName">Ning</div>
+                  <div class="settleNums">垫付 €0.00 · 应承担 €18.50</div>
+                </div>
+                <span class="settleNet out">应付 €18.50</span>
+              </div>
+              <div class="settleRow" style="border-bottom:0">
+                <div style="flex:1">
+                  <div class="settleName">Max</div>
+                  <div class="settleNums">垫付 €0.00 · 应承担 €0.00</div>
+                </div>
+                <span class="settleNet">两清</span>
+              </div>
+              <div class="settleClear">标记全部结清</div>
+            </div>
+
+            <!-- 记一笔 -->
+            <div class="cardNew">
+              <div class="amountRow">
+                <span class="curTap">€</span>
+                <span class="amount">42.00</span>
+              </div>
+
+              <div class="fieldK">谁垫的</div>
+              <div class="rowEq">
+                <span class="pill on">Lyra</span><span class="pill">Ning</span><span class="pill">Max</span>
+              </div>
+
+              <div class="splitLine">
+                <span class="splitTxt" id="splitTxt">全员均分 · 每人 €14.00</span>
+                <span class="splitLink" data-toggle="adv" id="advLink">调整</span>
+              </div>
+
+              <div class="hidden" id="panelAdv">
+                <div class="fieldK">怎么分</div>
+                <div class="rowEq">
+                  <span class="mode on">均分</span><span class="mode">各自付</span><span class="mode">单独付</span>
+                </div>
+                <div class="fieldK">谁参与均分</div>
+                <div class="rowEq">
+                  <span class="pill on">Lyra</span><span class="pill on">Ning</span><span class="pill on">Max</span>
+                </div>
+                <div class="fieldK">分类</div>
+                <div class="row">
+                  <span class="pill on">晚餐</span><span class="pill">车票</span><span class="pill">购物</span>
+                  <span class="pill">酒店</span><span class="pill">门票</span><span class="pill">其他</span>
+                </div>
+              </div>
+
+              <div class="noteNew">备注,可不填</div>
+              <div class="saveNew">记一笔</div>
+              <div class="under">
+                <span class="quiet">上传小票</span>
+              </div>
+            </div>
+
+            <!-- 同行者 -->
+            <div class="setupRow" data-toggle="setup">
+              <div style="flex:1">
+                <div class="setupTxt">同行者</div>
+                <div class="setupMeta">Lyra、Ning、Max</div>
+              </div>
+              <span class="chev" id="setupChev">+</span>
+            </div>
+            <div class="setupPanel hidden" id="panelSetup">
+              <div class="rowEq" style="padding-top:14px;align-items:center">
+                <div class="input">加一个同行者名字</div>
+                <span class="btnQuiet" style="flex:0 0 auto">加成员</span>
+              </div>
+              <div class="row mt">
+                <span class="avatar on">Lyra</span>
+                <span class="avatar on">Ning</span>
+                <span class="avatar">Max · 待加入</span>
+              </div>
+              <div class="divider"></div>
+              <div class="setupHint">跨手机同步:各自记各自的,账目实时汇到一起。</div>
+              <div class="rowEq mt" style="align-items:center">
+                <div class="input">你的名字(账本里显示)</div>
+                <span class="btnQuiet" style="flex:0 0 auto">开共享</span>
+              </div>
+              <div class="rowEq mt" style="align-items:center">
+                <div class="input">或输入同行者的邀请码</div>
+                <span class="btnQuiet" style="flex:0 0 auto">加入</span>
+              </div>
+            </div>
+
+            <!-- 账目 -->
+            <div class="listHead">
+              <span class="listHeadTxt">账目 2 笔</span>
+              <span class="badge">1 笔单独付</span>
+            </div>
+            <div class="exp">
+              <div style="flex:1">
+                <div class="expTitle">晚餐 · €43.50</div>
+                <div class="expMeta">Lyra 垫付 · Lyra €14.50 / Ning €14.50 / Max €14.50</div>
+                <div class="expOps"><span>改</span><span class="del">删</span></div>
+              </div>
+            </div>
+            <div class="exp">
+              <div style="flex:1">
+                <div class="expTitle">车票 · €18.50</div>
+                <div class="expMeta">Lyra 垫付 · Ning €18.50</div>
+                <div class="expOps"><span>改</span><span class="del">删</span></div>
+              </div>
+              <span class="specialPill">单独</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="changes">
+    <h2>改了什么</h2>
+    <div class="cgrid">
+      <div class="citem">
+        <div class="cwhat">主路径压到两步</div>
+        <p class="cwhy">金额 + 谁垫的 + 记一笔。可见胶囊 <span class="from">24 个</span> <span class="to">→ 3 个</span>,只剩每笔真要点的成员。</p>
+      </div>
+      <div class="citem">
+        <div class="cwhat">金额成为内容</div>
+        <p class="cwhy">38pt 衬线大字,和小本子的 serif 标题同一套语言。数字不再是表单控件。</p>
+      </div>
+      <div class="citem">
+        <div class="cwhat">最重的黑按钮换人</div>
+        <p class="cwhy"><span class="from">建共享账本</span>(一趟按一次)<span class="to">→ 记一笔</span>(每顿饭都按)。视觉权重对上使用频率。</p>
+      </div>
+      <div class="citem">
+        <div class="cwhat">顶栏去杂</div>
+        <p class="cwhy">🧮 emoji <span class="to">→ 言</span>,和小本子统一;粉红「结清」从关闭键旁边移进结算面板。</p>
+      </div>
+      <div class="citem">
+        <div class="cwhat">货币收进金额</div>
+        <p class="cwhy">6 个圆圈常驻 <span class="to">→ 点金额前的符号才展开</span>。形状语言也统一成圆角矩形。</p>
+      </div>
+      <div class="citem">
+        <div class="cwhat">结算不用系统弹窗</div>
+        <p class="cwhy">内联面板,每人一行「垫付 / 应承担 → 净额」。应收 teal、应付墨色。</p>
+      </div>
+      <div class="citem">
+        <div class="cwhat">「谁付的」改叫「谁垫的」</div>
+        <p class="cwhy">账本记的本来就是垫付——能当场 split 的那笔根本不用进 App。</p>
+      </div>
+      <div class="citem">
+        <div class="cwhat">顺手清了死代码</div>
+        <p class="cwhy">工具面板里埋着一套弹窗版之前的旧分账 UI,永远不会显示,64 行;另有 41 个没人用的样式。</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  (function () {
+    var screen = document.getElementById('screenNew');
+    var panels = {
+      settle: document.getElementById('panelSettle'),
+      adv: document.getElementById('panelAdv'),
+      setup: document.getElementById('panelSetup')
+    };
+    var btns = Array.prototype.slice.call(document.querySelectorAll('.states button[data-state]'));
+
+    function apply(state) {
+      Object.keys(panels).forEach(function (k) {
+        panels[k].classList.toggle('hidden', k !== state);
+      });
+      document.getElementById('settleArrow').textContent = state === 'settle' ? '−' : '→';
+      document.getElementById('advLink').textContent = state === 'adv' ? '收起' : '调整';
+      document.getElementById('setupChev').textContent = state === 'setup' ? '−' : '+';
+      btns.forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.state === state));
+      });
+      if (state !== 'default') {
+        var el = panels[state];
+        if (el) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      } else {
+        screen.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        apply(b.getAttribute('aria-pressed') === 'true' ? 'default' : b.dataset.state);
+      });
+    });
+
+    // 手机里直接点也能开合
+    document.querySelectorAll('[data-toggle]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var s = el.dataset.toggle;
+        apply(panels[s].classList.contains('hidden') ? s : 'default');
+      });
+    });
+  })();
+</script>

@@ -9,12 +9,14 @@ import { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Svg, { Polyline } from 'react-native-svg';
 import { C } from '../../theme';
-import { getRates, rateOf, convert, seriesFor, fmtFx, fxDecimals, FX_SYMBOLS, FX_NAMES } from '../../lib/fx';
+import { getRates, rateOf, convert, seriesFor, fmtFx, fxDecimals, fxRangeText, FX_SYMBOLS, FX_NAMES } from '../../lib/fx';
 
 const SERIF = Platform.select({ ios: 'Georgia', android: 'serif', default: 'Georgia' });
 const CODES = ['EUR', 'GBP', 'TRY', 'USD', 'CNY', 'KRW'];
 
-const Sparkline = ({ data }) => {
+// 分账的结算面板也要画同一条线(用户:「这个界面里也要有参考汇率波动,像小本子那里一样」),
+// 所以导出去共用 —— 复制一份迟早会变成两条长得不一样的线。
+export const Sparkline = ({ data }) => {
   if (!data || data.length < 3) return null;
   const W = 62; const H = 16;
   const min = Math.min(...data); const max = Math.max(...data);
@@ -58,9 +60,6 @@ export default function FxPanel({ initialFrom = 'TRY', initialTo = 'CNY' }) {
   const out = convert(Number.isFinite(num) ? num : 0, rates, from, to);
   const one = rateOf(rates, from, to);
   const series = seriesFor(fx, from, to);
-  const range = series.length > 2
-    ? ((Math.max(...series) - Math.min(...series)) / Math.min(...series)) * 100
-    : null;
 
   const dateTxt = fx?.date
     ? `${Number(fx.date.slice(5, 7))}月${Number(fx.date.slice(8, 10))}日`
@@ -128,13 +127,7 @@ export default function FxPanel({ initialFrom = 'TRY', initialTo = 'CNY' }) {
           <Text style={s.rateMain}>
             1 {FX_SYMBOLS[from]} = {one == null ? '—' : fmtFx(one, to)} {FX_SYMBOLS[to]}
           </Text>
-          <Text style={s.rateMeta}>
-            {range == null
-              ? '银行间参考价'
-              : range < 0.5
-                ? `近十天基本持平(${range.toFixed(1)}%)`
-                : `近十天波动 ${range.toFixed(1)}%`}
-          </Text>
+          <Text style={s.rateMeta}>{fxRangeText(series)}</Text>
         </View>
         <Sparkline data={series} />
       </View>

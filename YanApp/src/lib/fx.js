@@ -6,9 +6,15 @@
 //  3. 这是银行间中间价,不是你刷卡拿到的价 —— 展示层必须写清楚,别让用户以为能按这个数结算。
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { K } from './storage';
-import { FX_CODES, FX_SYMBOLS, FX_NAMES, rateOf, convert, seriesFor, fxDecimals, fmtFx } from './fxMath';
+import {
+  FX_CODES, FX_SYMBOLS, FX_NAMES, rateOf, convert, seriesFor,
+  fxDecimals, fmtFx, fmtRate, fxRangePct, fxRangeText, sumConverted,
+} from './fxMath';
 
-export { FX_CODES, FX_SYMBOLS, FX_NAMES, rateOf, convert, seriesFor, fxDecimals, fmtFx };
+export {
+  FX_CODES, FX_SYMBOLS, FX_NAMES, rateOf, convert, seriesFor,
+  fxDecimals, fmtFx, fmtRate, fxRangePct, fxRangeText, sumConverted,
+};
 
 const FX_KEY = K.fx;
 const API = 'https://api.frankfurter.dev/v1';

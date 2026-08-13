@@ -13,18 +13,23 @@ import * as ImagePicker from 'expo-image-picker';
 import { C } from '../../theme';
 import { useSpeech, SpeakBtn } from '../../components/Speech';
 import {
-  createLedger, joinLedger, addTagMember, myLedgers, currentUserId,
+  createLedger, joinLedger, addTagMember, removeTagMember, myLedgers, currentUserId,
   fetchLedgerData, saveExpenseRemote, deleteExpenseRemote, subscribeLedger,
 } from '../../lib/tripLedger';
 import { SCENE_PACK } from './scenePack';
 import {
   money, clampMoney, clampAmountExpr, isAmountExpr, splitEven, specialAmountFor,
   buildShares as buildSharesFor, settleOne as settleOneFor,
+  EXPENSE_CATEGORIES, normalizeCategory, personSpendRows,
 } from '../../lib/ledgerMath';
 import { parseItinerary } from '../../lib/parseItinerary';
 import { pushNotebook, pullNotebook, cloudIsNewer } from '../../lib/tripBackup';
-import FxPanel from './FxPanel';
-import { FX_CODES, getRates, rateOf } from '../../lib/fx';
+import {
+  LEDGER_TITLE_FALLBACK, normalizeLedger, findLedger, patchLedger, upsertLedger,
+  pickActiveKey, migrateLedgers, mergeRemoteLedgers, applyCloudLedgers, newLocalKey,
+} from '../../lib/ledgerBook';
+import FxPanel, { Sparkline } from './FxPanel';
+import { FX_CODES, FX_SYMBOLS, getRates, rateOf, seriesFor, fmtFx, fmtRate, fxRangeText, sumConverted } from '../../lib/fx';
 
 const TRIP_STORAGE_KEY = K.tripNotebook;
 // 远端账目是 uuid,本地未同步的是 expense-<时间戳>;用它区分「同步过的」和「还在本机的」
@@ -171,6 +176,16 @@ const TRAVEL_BOOKS_SEED = [
   },
 ];
 
+// 全新用户默认:一本空的本机账本。
+// 账本不挂在旅行册下 —— 只用分账、完全不碰小本子的人也要能直接开记。
+const SEED_LEDGER = normalizeLedger({
+  key: 'local-1',
+  title: '我的账本',
+  currency: '€',
+  members: [{ name: '我', label: '我', status: '已加入', joined: true }],
+  expenses: [],
+});
+
 function TripNotebook() {
   const [visible, setVisible] = useState(false);
   const [books, setBooks] = useState(TRAVEL_BOOKS_SEED);
@@ -200,29 +215,48 @@ function TripNotebook() {
   const [settleOpen, setSettleOpen] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);   // 已结清的账目默认收起
   const [curOpen, setCurOpen] = useState(false);
-  const [ledgerMembers, setLedgerMembers] = useState([
-    { name: '我', label: '我', status: '已加入', joined: true },
-  ]);
-  // ── 多人分账(Supabase 共享账本) ──
-  const [ledgerId, setLedgerId] = useState(null);      // null = 仅本机;有值 = 已进共享账本
-  const [ledgerCode, setLedgerCode] = useState('');    // 真实邀请码
+  // ── 账本(可以有好几本) ────────────────────────────────
+  // 账本和旅行册**完全解耦**:有人根本不用小本子,只用分账;
+  // 也有人同一周和不同的人各出去玩一趟,要两本互不相干的账同时开着。
+  // 所以账本是独立实体,不挂在册子下面,预算也跟账本走(以前跟册子走,是错的)。
+  // 每本账自己拿着:成员、账目、币种、预算、邀请码。
+  const [ledgers, setLedgers] = useState(() => [SEED_LEDGER]);
+  const [activeLedgerKey, setActiveLedgerKey] = useState(SEED_LEDGER.key);
+  const [ledgerPickerOpen, setLedgerPickerOpen] = useState(false);
+  const [ledgerRename, setLedgerRename] = useState(null);   // 改名草稿;null = 没在改
+  // 老快照里预算是按旅行册存的。迁移只搬走一条,这份原样留在盘上不再写 ——
+  // 万一挑错了,数据还在,不是猜错一次就没了。
+  const [legacyBudgets, setLegacyBudgets] = useState(null);
+  // 币种:显示用的当前选择。真相存在账本里(上一笔记的是什么钱),
+  // 切账本时从账本读回来 —— 见下面那个 effect。
   const [currency, setCurrency] = useState('€');
-  const [remoteMembers, setRemoteMembers] = useState(null); // 远端成员;null 时用本地 ledgerMembers
   const [ledgerBusy, setLedgerBusy] = useState(false);
   const [myName, setMyName] = useState('我');
   const [myUid, setMyUid] = useState(null);   // 匿名身份 id,用来在共享账本里认出自己
-  const [budgets, setBudgets] = useState({});        // { 旅行册id: { amount, currency } }
   const [budgetEditing, setBudgetEditing] = useState(false);
+  const [spendOpen, setSpendOpen] = useState(false);   // 个人支出明细表,默认收起
+  const [spendCur, setSpendCur] = useState(null);      // 看哪个币种的明细;null = 花得最多的那个
+  // 个人支出的折算开关。和结算那边的 mergeOn 分开:两块各看各的,
+  // 展开支出顺手按一下「换」,不该把结算面板也一起翻过去。
+  // 但目标币种(settleCurrency)和汇率是同一份 —— 那是同一个选择,不该问两遍。
+  const [spendMergeOn, setSpendMergeOn] = useState(false);
+  const [budgetCurDraft, setBudgetCurDraft] = useState(null);  // 正在设的这个预算用什么币种
+  const [budgetCurOpen, setBudgetCurOpen] = useState(false);   // 预算的货币托盘
   const [budgetDraft, setBudgetDraft] = useState('');
   const [fxRates, setFxRates] = useState(null);      // 结算合并用的参考汇率
   const [mergeOn, setMergeOn] = useState(false);     // 默认分币种(那是真相),合并是可选的便利
-  const [settleCur, setSettleCur] = useState(null);  // 结算折算成哪种货币;null = 按花得最多的自动选
   const [settleCurOpen, setSettleCurOpen] = useState(false);
-  const [detailOpen, setDetailOpen] = useState(false);   // 每人的垫付/应承担明细,默认收起
+  // 折算目标币种的**第二个入口**,开在「我的支出」那一块。
+  //
+  // 之前它只长在结算面板里,于是纯本机记账、从不点开结算的人根本改不了 ——
+  // 界面上一直写着「换成 €」而没有任何地方能把 € 换掉。
+  // 同一个设置出现在两处不是「问两次」(选的是同一个 settleCurrency),
+  // 是让它在用户真正想到这件事的那一屏够得着。托盘的展开状态才分两份:
+  // 在支出那块点开托盘,不该顺手把结算面板也翻过来。
+  const [spendCurOpen, setSpendCurOpen] = useState(false);
   const [newMemberName, setNewMemberName] = useState('');
-  const [expenses, setExpenses] = useState([]);
   const [expenseDraft, setExpenseDraft] = useState({
-    category: '晚餐',
+    category: '餐饮',
     title: '',
     amount: '',
     payer: '我',
@@ -251,10 +285,16 @@ function TripNotebook() {
             setBooks(saved.books);
             setActiveBookId(saved.books.some(b => b.id === saved.activeBookId) ? saved.activeBookId : saved.books[0].id);
           }
-          if (saved.expenses) setExpenses(saved.expenses);
-          if (saved.ledgerMembers) setLedgerMembers(saved.ledgerMembers);
+          // 账本分桶 + 老格式迁移都在 migrateLedgers 里(有测试覆盖)。
+          // ok 为假 = 这份快照里读不出账本,**保持现状**,不拿空数组盖掉种子账本。
+          const mig = migrateLedgers(saved);
+          if (mig.ok) {
+            setLedgers(mig.ledgers);
+            setActiveLedgerKey(mig.activeLedgerKey);
+          }
+          // 老的按旅行册存的预算映射原样留着,不再写,也不删
+          if (saved.budgets) setLegacyBudgets(saved.budgets);
           if (saved.uploads) setUploads(saved.uploads);
-          if (saved.budgets) setBudgets(saved.budgets);
           localRev.current = saved.rev || null;
         }
       } catch (e) { /* 读档失败就用种子数据，静默 */ }
@@ -272,10 +312,17 @@ function TripNotebook() {
           setBooks(c.books);
           setActiveBookId(c.books.some(b => b.id === c.activeBookId) ? c.activeBookId : c.books[0].id);
         }
-        if (Array.isArray(c.expenses)) setExpenses(c.expenses);
-        if (Array.isArray(c.ledgerMembers) && c.ledgerMembers.length) setLedgerMembers(c.ledgerMembers);
+        // 云端可能是**老版本客户端**推上去的(只有扁平 expenses、没有 ledgers)。
+        // 那种情况下只更新「遗留那一本」,绝不拿它替换整个列表 ——
+        // 否则另外几本账会被一份不知道自己有多本账的快照抹掉。规则在 applyCloudLedgers。
+        setLedgers(prev => {
+          const next = applyCloudLedgers(prev, c);
+          if (!next) return prev;            // null = 读不出东西,别动本地
+          setActiveLedgerKey(k => pickActiveKey(next, c.activeLedgerKey || k));
+          return next;
+        });
         if (Array.isArray(c.uploads)) setUploads(c.uploads);
-        if (c.budgets && typeof c.budgets === 'object') setBudgets(c.budgets);
+        if (c.budgets && typeof c.budgets === 'object') setLegacyBudgets(c.budgets);
         localRev.current = cloud.deviceRev;
       } catch (e) { /* 取不到就用本地这份 */ }
     })();
@@ -284,7 +331,13 @@ function TripNotebook() {
     if (!hydrated.current) return;
     const rev = new Date().toISOString();
     localRev.current = rev;
-    const snapshot = { books, activeBookId, expenses, ledgerMembers, uploads, budgets, rev };
+    // 账目和成员现在都在 ledgers 里,顶层不再写 expenses/ledgerMembers。
+    // budgets 是老的按册预算映射,原样带着 —— 只读不写,留着当后悔药。
+    const snapshot = {
+      books, activeBookId, uploads, rev,
+      ledgers, activeLedgerKey,
+      ...(legacyBudgets ? { budgets: legacyBudgets } : {}),
+    };
     AsyncStorage.setItem(TRIP_STORAGE_KEY, JSON.stringify(snapshot)).catch(() => {});
     // 云端备份防抖:记一笔账会连着触发好几次 setState,不能每次都发请求。
     // 备份失败静默 —— 本地那份才是当下能用的,云端只是换机时的保险。
@@ -293,11 +346,68 @@ function TripNotebook() {
       const { uploads: _skipPhotos, ...cloudSafe } = snapshot;   // 本机图片 uri 换机后无效,不上传
       pushNotebook(cloudSafe, rev);
     }, 4000);
-  }, [books, activeBookId, expenses, ledgerMembers, uploads, budgets]);
+  }, [books, activeBookId, uploads, ledgers, activeLedgerKey, legacyBudgets]);
   useEffect(() => () => { if (pushTimer.current) clearTimeout(pushTimer.current); }, []);
 
   const activeBook = books.find(book => book.id === activeBookId) || books[0];
   const legs = activeBook.legs || [];
+
+  // ── 当前账本 ────────────────────────────────────────────
+  // 下面这一圈别名让组件其余部分继续按「一本账」的写法读数据,
+  // 但每一次写都必须指名道姓写进某一本 —— 不指名就是把账记进虚空。
+  const activeLedger = findLedger(ledgers, activeLedgerKey) || ledgers[0] || SEED_LEDGER;
+  const expenses = activeLedger.expenses;
+  const ledgerMembers = activeLedger.members;
+  const ledgerId = activeLedger.id;            // null = 仅本机;有值 = 共享账本
+  const ledgerCode = activeLedger.joinCode || '';
+  const budget = activeLedger.budget;
+
+  // 改当前账本。所有对账目/成员/预算的写入都从这里过。
+  //
+  // ⚠️ 用 activeLedger.key,**不能用 activeLedgerKey**。
+  // activeLedger 在 key 指不到任何一本时会回落到第一本(界面因此永远有东西显示),
+  // 而 patchLedger 找不到 key 时按设计原样返回、绝不新建桶 ——
+  // 两者一旦不一致,用户看着第一本记账,写入却打在一个不存在的 key 上,
+  // 静默丢失。以 activeLedger.key 为准,看到哪本就写哪本。
+  const writeKey = activeLedger.key;
+  const patchActive = useCallback((patch) => {
+    setLedgers(prev => patchLedger(prev, writeKey, patch));
+  }, [writeKey]);
+  // 和原来的 setExpenses 同形(支持函数式),但写的是当前账本这一桶
+  const setExpenses = useCallback((updater) => {
+    setLedgers(prev => patchLedger(prev, writeKey, l => ({
+      expenses: typeof updater === 'function' ? updater(l.expenses) : updater,
+    })));
+  }, [writeKey]);
+  const setLedgerMembers = useCallback((updater) => {
+    setLedgers(prev => patchLedger(prev, writeKey, l => ({
+      members: typeof updater === 'function' ? updater(l.members) : updater,
+    })));
+  }, [writeKey]);
+  // 指名道姓写某一本(异步回调用)。见下面 saveExpense / refreshLedger 的说明。
+  const patchLedgerByKey = useCallback((key, patch) => {
+    setLedgers(prev => patchLedger(prev, key, patch));
+  }, []);
+
+  // 币种记住上一笔选的,不要每次弹回默认。
+  // 用户在土耳其连着记三十多笔里拉,每次都要手动切一遍;漏一次,
+  // ₺4500 的门票就成了 ¥4500 —— 一笔之差能把结论从「A 欠 B 891」翻成「B 欠 A 1358」。
+  // 连续同币种是常态,回默认才是例外。真相存在账本里,切账本时各回各的。
+  useEffect(() => {
+    setCurrency(activeLedger.currency || '€');
+    // 换了一本账,草稿里的编辑态和上一本无关了
+    setExpenseEditId(null);
+  }, [activeLedgerKey]);
+  const pickCurrency = (cur) => {
+    setCurrency(cur);
+    patchActive({ currency: cur });   // 记住,下一笔默认还是它
+  };
+  // 自愈:activeLedgerKey 指到一本已经不在的账本时(删掉了、云端换了一份),
+  // 把它拨回 activeLedger 实际落在的那一本。上面的写入已经以 activeLedger.key 为准,
+  // 这一条是让「读的 key」和「写的 key」重新合一,免得两套 key 长期并存。
+  useEffect(() => {
+    if (activeLedgerKey !== writeKey) setActiveLedgerKey(writeKey);
+  }, [activeLedgerKey, writeKey]);
 
   // 动态「现在」：按真实日期定位当前这段路，日期不再写死
   const today = new Date();
@@ -359,14 +469,16 @@ function TripNotebook() {
   };
   const specialCount = expenses.filter(isSpecial).length;
   // 成员:进了共享账本用远端成员,否则用本地成员
-  const members = remoteMembers || ledgerMembers;
+  // 成员就是这本账自己的成员列表。共享账本的成员由 refreshLedger 从远端刷进这一桶,
+  // 不再另存一份 remoteMembers —— 两份成员名单迟早会对不上,而分账是按名字算钱的。
+  const members = ledgerMembers;
   const ledgerPeople = members.map(member => member.name || member.display_name);
   const isShared = !!ledgerId;
   // 「我」在这本账里叫什么:共享模式按匿名身份认领自己那行,本机模式就是本机名字。
   // 用途:谁记账通常就是谁垫的钱 —— 拿它当垫付人默认值。
   const myLedgerName = (() => {
     if (isShared) {
-      const mine = (remoteMembers || []).find(m => m.userId && m.userId === myUid);
+      const mine = members.find(m => m.userId && m.userId === myUid);
       if (mine?.name) return mine.name;
     }
     return ledgerPeople.includes(myName) ? myName : (ledgerPeople[0] || '我');
@@ -407,10 +519,14 @@ function TripNotebook() {
       (prev.participants || []).join('|') === peopleKey ? prev : { ...prev, participants: [...ledgerPeople] }
     ));
   }, [peopleKey, ledgerAdvanced, expenseEditId, expenseDraft.mode]);
-  const expenseCategories = ['晚餐', '车票', '购物', '酒店', '门票', '其他'];
+  const expenseCategories = EXPENSE_CATEGORIES;
   const splitModes = ['均分', '各自价格', '特殊项'];
   const MODE_LABEL = { 均分: '均分', 各自价格: '各自付', 特殊项: '单独付' };
   const CURRENCIES = ['€', '£', '₺', '$', '¥', '₩'];
+  // 人民币首尾各放一次:这排 chip 横着铺开,拇指在手机上一头一尾最好够,
+  // 中间反而最难点。¥ 是回家路上唯一一定会用到的那个,两头都留一个入口。
+  // 渲染时按下标做 key —— 同一个符号出现两次,拿它当 key 会撞。
+  const CURRENCY_PICKS = ['¥', ...CURRENCIES.filter(c => c !== '¥'), '¥'];
   const stripLook = (t) => String(t || '').replace(/^看\s*/, '');   // 标签已是「看什么」,内容里的「看」冗余
   const famLabelOf = (k) => SCENE_PACK.find(f => f.key === k)?.label || '';
   const openScenes = (fam) => { if (fam) setSceneFam(fam); setSceneOpenIdx(0); setScenesOpen(true); };
@@ -462,6 +578,14 @@ function TripNotebook() {
 
   const settleOne = (items, cur) => settleOneFor(items, cur, ledgerPeople);
 
+  // 账目列表按币种分组,每组给笔数和合计。分组本身就是校对工具:
+  // 只有一两笔的币种要么真是特例,要么是记账时选错了币种(见列表处的长注释)。
+  const expenseGroups = currenciesIn(activeExpenses).map(cur => {
+    const items = activeExpenses.filter(i => curOf(i) === cur);
+    return { cur, items, total: items.reduce((s, i) => s + money(i.amount), 0) };
+  }).filter(g => g.items.length);
+  const multiCurrencyList = expenseGroups.length > 1;
+
   const groupsFor = (items) => currenciesIn(items).map(cur => settleOne(items.filter(i => curOf(i) === cur), cur));
   const settleGroups = groupsFor(activeExpenses);   // 谁欠谁:只算未结清的
   const spendGroups = groupsFor(expenses);          // 我花了:算全部,结清过的也算
@@ -472,24 +596,25 @@ function TripNotebook() {
   const mySpend = spendGroups
     .map(g => ({ cur: g.cur, spent: g.rows.find(r => r.person === myLedgerName)?.owed || 0 }))
     .filter(x => x.spent > 0.005);
-  const budget = budgets[activeBookId] || null;
-  const budgetSpent = budget ? (mySpend.find(x => x.cur === budget.currency)?.spent || 0) : 0;
-  const budgetPct = budget && money(budget.amount) > 0
-    ? Math.min(budgetSpent / money(budget.amount), 1)
-    : 0;
-  const overBudget = budget && money(budget.amount) > 0 && budgetSpent > money(budget.amount);
-  const saveBudget = () => {
-    const v = money(budgetDraft);
-    setBudgets(prev => {
-      const next = { ...prev };
-      if (v > 0) next[activeBookId] = { amount: String(v), currency };
-      else delete next[activeBookId];
-      return next;
-    });
-    setBudgetEditing(false);
-    setBudgetDraft('');
-    Keyboard.dismiss();
+
+  // ── 个人支出记录 ──
+  // 「我花了」原来只是分账的一个中间量(一行数字)。但它其实已经是一份完整的
+  // 个人消费记录了 —— 每笔账里我承担的那一份,就是我这趟真花掉的钱。
+  // 摊开成表就能回答「我在土耳其自己花了多少、花在哪」,不用再单独记一套账。
+  //
+  // ⚠️ 口径是**担**(我承担的份额),不是**垫**(我先付的钱,会还回来)。
+  // 所以每一行都要同时给出「这笔总额」和「我担」—— 只给一个数字的话,
+  // 用户会把 ₺4500 的门票当成自己花了 4500,实际只担了 2250。
+  const expenseTime = (item) => {
+    const raw = item.createdAt
+      || (/^expense-(\d{13})$/.test(item.id || '') ? Number(item.id.slice(8)) : null);
+    const t = raw ? new Date(raw).getTime() : NaN;
+    return Number.isNaN(t) ? 0 : t;
   };
+  // 「担」的口径和 0 分摊的处理在 lib/ledgerMath 的 personSpendRows 里(有测试)
+  const mySpendRows = (cur) => personSpendRows(
+    expenses.filter(item => curOf(item) === cur), myLedgerName,
+  ).sort((a, b) => expenseTime(b.item) - expenseTime(a.item));   // 新的在上,和账目列表一致
   // ── 按参考汇率合并结算 ──
   // 分币种是真相(不会错),但会出现「他给你英镑、你给他里拉」这种来回倒。
   // 合并是可选的便利:把各币种净额按参考汇率折算到一种货币,再净额化一次。
@@ -506,10 +631,75 @@ function TripNotebook() {
     const best = Object.entries(sum).sort((a, b) => b[1] - a[1])[0];
     return best ? best[0] : currency;
   })();
+  // 折算成哪种货币由用户定,而且**记在账本里** —— 人在土耳其想看里拉总账,
+  // 回国想看人民币,这个偏好不该每次关掉面板就忘。null = 还没选过,
+  // 按「花得最多」自动挑一个(那笔钱占比最大,折算误差影响最小)。
+  const settleCur = activeLedger.settleCurrency || null;
+  const setSettleCur = (cur) => patchActive({ settleCurrency: cur });
   const mergeCurSym = settleCur || dominantCur;
   const mergeTargetCode = FX_CODES[mergeCurSym] || 'EUR';
   const canMerge = multiCurrency && !!fxRates?.rates
     && currenciesIn(activeExpenses).every(c => FX_CODES[c] && rateOf(fxRates.rates, FX_CODES[c], mergeTargetCode) != null);
+
+  // ── 个人支出的折算总数 ──
+  // 「₺9,887.36 $140.00 ¥10,762.49 €308.29 £19.82」并排五个数字,
+  // 每个都是真实发生的钱,但加在一起是多少没人算得出来 ——
+  // 而「我这趟一共花了多少」正是个人消费记录最该回答的那个问题。
+  // 所以两个都给:上面那排原货币是事实,下面这个总数是折算出来的参考值。
+  // 目标币种直接用结算那边的 mergeCurSym,不让用户再选一次。
+  const spendEntries = mySpend.map(x => ({ code: FX_CODES[x.cur], amount: x.spent }));
+  const spendConverted = sumConverted(spendEntries, fxRates?.rates, mergeTargetCode);
+  // ok 为假 = 有币种换不出来。那种情况下 total 比真实数字小,而且看不出来 ——
+  // 宁可不给总数,也不给一个少算了的(见 sumConverted 的注释)。
+  const canMergeSpend = mySpend.length > 1 && spendConverted.ok;
+
+  // ── 预算 ──
+  // 预算跟**账本**走,不跟旅行册走(同一趟旅行可以有两本账,各有各的预算;
+  // 不用小本子的人也该能设预算)。
+  //
+  // 币种跟的是**折算目标币种**,不是记账默认币种。
+  // 原来跟记账币种,于是五个币种的旅行里「预算只能设置里拉」——
+  // 而进度条只统计里拉那一部分,花掉的欧元英镑美元全不算数,
+  // 那个百分比等于在骗人。心里那把「一共花了多少」的尺子是同一个货币,
+  // 所以预算和折算总数用同一个尺子才对得上。
+  const budgetCur = budget?.currency || mergeCurSym;
+  const budgetCode = FX_CODES[budgetCur];
+  // 把所有币种折算到预算币种。换不全就退回「只算同币种那部分」(老行为),
+  // 并在界面上说清楚 —— 不假装那是全部。
+  const budgetConv = budget ? sumConverted(spendEntries, fxRates?.rates, budgetCode) : null;
+  const budgetAcrossCur = !!budgetConv?.ok && mySpend.length > 1;
+  const budgetSpent = budget
+    ? (budgetConv?.ok ? budgetConv.total : (mySpend.find(x => x.cur === budgetCur)?.spent || 0))
+    : 0;
+  const budgetPct = budget && money(budget.amount) > 0
+    ? Math.min(budgetSpent / money(budget.amount), 1)
+    : 0;
+  const overBudget = budget && money(budget.amount) > 0 && budgetSpent > money(budget.amount);
+  // 设预算时直接选币种。
+  //
+  // 上一版预算跟着折算目标币种走,方向对,但落地后用户**没有任何地方能选它** ——
+  // 折算目标只能在结算面板换,而账本里只有一笔欧元的账时自动挑出来的就是欧元,
+  // 于是预算被钉死在欧元上。一个只在日本花过日元的用户,预算入口是死的。
+  // 这是全球化的前提,不是一个小选项。
+  //
+  // 默认值仍然是折算目标币种(默认对了大多数人就不用点),但选了之后
+  // **只改这个预算自己的币种,不动账本的 settleCurrency** ——
+  // 「我给自己定的上限用什么计价」和「结算最后按什么算」是两件事。
+  const budgetCurPick = budgetCurDraft || budgetCur;
+  const openBudgetEditor = () => {
+    setBudgetDraft(budget?.amount || '');
+    setBudgetCurDraft(budget?.currency || mergeCurSym);
+    setBudgetCurOpen(false);
+    toggleOnly('budget', budgetEditing);
+  };
+  const saveBudget = () => {
+    const v = money(budgetDraft);
+    patchActive({ budget: v > 0 ? { amount: String(v), currency: budgetCurPick } : null });
+    setBudgetEditing(false);
+    setBudgetCurOpen(false);
+    setBudgetDraft('');
+    Keyboard.dismiss();
+  };
   const mergedGroup = (() => {
     if (!canMerge || !mergeOn) return null;
     const nets = {};
@@ -575,62 +765,76 @@ function TripNotebook() {
     const who = all ? '全员均分' : `${chosen.join('、')} 均分`;
     return draftTotal > 0 && n ? `${who} · 每人 ${fmtMoney(draftTotal / n)}` : who;
   })();
-  // 拉取共享账本的成员 + 账目(供订阅和进入时刷新)
+  // 拉取共享账本的成员 + 账目,写进**那一本**的桶里。
+  // ⚠️ 一定要按 id 定位账本,不能写进「当前账本」——
+  // 轮询和 Realtime 是异步的,回来的时候用户可能已经切到别的账本了,
+  // 写错桶就是把 A 本的账目倒进 B 本。
   const refreshLedger = useCallback(async (id) => {
-    const target = id || ledgerId;
-    if (!target) return;
-    const data = await fetchLedgerData(target);
+    if (!id) return;
+    const data = await fetchLedgerData(id);
     if (!data) return;   // 拉取失败:保持现状,绝不用空数据覆盖本地
     const { members: rows, expenses: remoteExpenses } = data;
-    setRemoteMembers(rows.map(r => ({
-      name: r.display_name,
-      label: r.is_tag ? '标签' : '成员',
-      joined: !r.is_tag,
-      status: r.is_tag ? '未加入' : '已加入',
-      tagOnly: r.is_tag,
-      userId: r.user_id || null,   // 留着认出「哪个成员是我」
+    setLedgers(prev => patchLedger(prev, id, l => ({
+      members: rows.map(r => ({
+        name: r.display_name,
+        label: r.is_tag ? '标签' : '成员',
+        joined: !r.is_tag,
+        status: r.is_tag ? '未加入' : '已加入',
+        tagOnly: r.is_tag,
+        userId: r.user_id || null,   // 留着认出「哪个成员是我」
+      })),
+      // 合并规则见 lib/ledgerMerge.js —— 判错会让一笔账变两笔、结算翻倍
+      expenses: mergeExpenses(l.expenses, remoteExpenses),
     })));
-    // 合并规则见 lib/ledgerMerge.js —— 判错会让一笔账变两笔、结算翻倍
-    setExpenses(prev => mergeExpenses(prev, remoteExpenses));
-  }, [ledgerId]);
-
-  // 打开 App 时恢复我已加入的共享账本
-  useEffect(() => {
-    (async () => {
-      const mine = await myLedgers();
-      if (mine.length) {
-        const l = mine[0];
-        setLedgerId(l.id);
-        setLedgerCode(l.join_code);
-        setCurrency(l.currency || '€');
-        refreshLedger(l.id);
-      }
-    })();
   }, []);
 
-  // 实时同步(Realtime 推送 + 轮询兜底)
+  // 打开 App 时恢复我已加入的**全部**共享账本(以前只取 mine[0],其余静默丢弃)
   useEffect(() => {
-    if (!ledgerId) return undefined;
-    const unsub = subscribeLedger(ledgerId, () => refreshLedger(ledgerId));
-    return unsub;
-  }, [ledgerId, refreshLedger]);
+    (async () => {
+      const { ledgers: mine, ok } = await myLedgers();
+      // ok 为假 = 这次没问到,不是「没有」。并入规则见 mergeRemoteLedgers:只加不删。
+      if (!ok || !mine.length) return;
+      setLedgers(prev => mergeRemoteLedgers(prev, mine, ok));
+      mine.forEach(l => refreshLedger(l.id));
+    })();
+  }, [refreshLedger]);
 
+  // 实时同步:每一本共享账本各订一条。只订当前那本的话,
+  // 切回去才发现同行者半天前记的账没进来。
+  const sharedIdsKey = ledgers.filter(l => l.id).map(l => l.id).join('|');
+  useEffect(() => {
+    const ids = sharedIdsKey ? sharedIdsKey.split('|') : [];
+    if (!ids.length) return undefined;
+    const unsubs = ids.map(id => subscribeLedger(id, () => refreshLedger(id)));
+    return () => unsubs.forEach(fn => fn && fn());
+  }, [sharedIdsKey, refreshLedger]);
+
+  // 开一本共享账本 = **新开一本**,当前这本原样留着。
+  // 以前这里会 setExpenses([]) —— 在只有一本账的年代,那等于把已经记的账
+  // 直接抹掉换成空的共享本。现在多账本了,没有任何理由再去动别的桶。
   const createSharedLedger = async () => {
     setLedgerBusy(true);
     const { ledger, error } = await createLedger({
-      title: activeBook.title, currency, displayName: myName,
+      title: activeLedger.title || activeBook.title, currency, displayName: myName,
     });
     setLedgerBusy(false);
     if (error || !ledger) {
       Alert.alert('建账本失败', error === 'offline' ? '需要联网并配置 Supabase 才能开共享账本。' : (error || '请稍后再试。'), [{ text: '好' }]);
       return;
     }
-    setLedgerId(ledger.id);
-    setLedgerCode(ledger.join_code);
-    setCurrency(ledger.currency || '€');
-    setRemoteMembers([{ name: myName, label: '成员', joined: true, status: '已加入' }]);
-    setExpenses([]);
-    Alert.alert('邀请码', ledger.join_code, [{ text: '好' }]);
+    setLedgers(prev => upsertLedger(prev, {
+      key: ledger.id,
+      id: ledger.id,
+      shared: true,
+      joinCode: ledger.join_code,
+      title: ledger.title || '共享账本',
+      currency: ledger.currency || currency,
+      members: [{ name: myName, label: '成员', joined: true, status: '已加入' }],
+      expenses: [],
+      createdAt: new Date().toISOString(),
+    }));
+    setActiveLedgerKey(ledger.id);
+    Alert.alert('已开一本共享账本', `邀请码：${ledger.join_code}\n\n原来那本账原样留着,可以在账本列表里切回去。`, [{ text: '好' }]);
   };
 
   const inviteLedger = () => {
@@ -654,12 +858,90 @@ function TripNotebook() {
       Alert.alert('加入失败', error === 'offline' ? '需要联网并配置 Supabase 才能加入。' : (error || '请确认邀请码。'), [{ text: '好' }]);
       return;
     }
-    setLedgerId(ledger.id);
-    setLedgerCode(ledger.join_code);
-    setCurrency(ledger.currency || '€');
+    // 加入 = 多一本,不是换掉手上这本
+    setLedgers(prev => upsertLedger(prev, {
+      key: ledger.id,
+      id: ledger.id,
+      shared: true,
+      joinCode: ledger.join_code,
+      title: ledger.title || '共享账本',
+      currency: ledger.currency || '€',
+      createdAt: new Date().toISOString(),
+    }));
+    setActiveLedgerKey(ledger.id);
     setJoinCode('');
     refreshLedger(ledger.id);
     Alert.alert('已加入', ledger.title, [{ text: '好' }]);
+  };
+
+  // ── 账本的增删改 ────────────────────────────────────────
+  const createLocalLedger = () => {
+    const key = newLocalKey();
+    const n = ledgers.length + 1;
+    setLedgers(prev => upsertLedger(prev, {
+      key,
+      title: `账本 ${n}`,
+      currency,                                  // 多半还在同一个国家,沿用当前币种
+      members: [{ name: myName || '我', label: '我', status: '已加入', joined: true }],
+      expenses: [],
+      createdAt: new Date().toISOString(),
+    }));
+    setActiveLedgerKey(key);
+    setLedgerPickerOpen(false);
+    setLedgerRename({ key, text: `账本 ${n}` });   // 直接进改名,省一次点击
+  };
+
+  const saveLedgerRename = () => {
+    if (!ledgerRename) return;
+    const title = ledgerRename.text.trim();
+    setLedgers(prev => patchLedger(prev, ledgerRename.key, {
+      title: title || LEDGER_TITLE_FALLBACK,
+    }));
+    setLedgerRename(null);
+    Keyboard.dismiss();
+  };
+
+  // 删一本账本。有账目的不让删 —— 和「删成员」同一个道理:
+  // 这是一次点击就能让几十笔账消失的操作,而账目本身是用户一路手输的。
+  // 想删就先把账目删掉,那条路每一步都看得见、也撤得回。
+  const deleteLedger = (key) => {
+    const target = findLedger(ledgers, key);
+    if (!target) return;
+    if (ledgers.length <= 1) {
+      Alert.alert('至少留一本账', '删完就没地方记账了。', [{ text: '好' }]);
+      return;
+    }
+    if (target.expenses.length) {
+      Alert.alert(
+        `「${target.title}」里还有 ${target.expenses.length} 笔账`,
+        '先把账目删掉再删这本账。\n这一步不给捷径:一次点击让几十笔手输的账消失,撤不回来。',
+        [{ text: '好' }],
+      );
+      return;
+    }
+    if (target.shared) {
+      Alert.alert(
+        '共享账本不能在这里删',
+        '这本账其他人也在用。你可以先把它留着 —— 退出共享账本还没做。',
+        [{ text: '好' }],
+      );
+      return;
+    }
+    Alert.alert(`删掉「${target.title}」？`, '这本账是空的,删了不影响别的账本。', [
+      { text: '取消', style: 'cancel' },
+      {
+        text: '删除',
+        style: 'destructive',
+        onPress: () => {
+          setLedgers(prev => {
+            const next = prev.filter(l => l.key !== key);
+            if (!next.length) return prev;             // 兜底:绝不删到一本不剩
+            setActiveLedgerKey(k => pickActiveKey(next, k === key ? null : k));
+            return next;
+          });
+        },
+      },
+    ]);
   };
 
   const addMember = async () => {
@@ -675,6 +957,141 @@ function TripNotebook() {
       setNewMemberName('');
     }
   };
+
+  // 这个人身上有没有账。判据要和 settleOne 读的东西完全一致:
+  // 它只看 payer 和 shares[某人],participants 不参与任何计算。
+  // 所以「在 participants 里」不算有账,「分摊金额是 0」也不算 ——
+  // 按那两个判,加过一次账之后谁都删不掉。
+  const expenseCountFor = (person) => expenses.filter(item => (
+    item.payer === person
+    || item.specialItem?.owner === person
+    || money(item.shares?.[person]) > 0.005
+  )).length;
+
+  // 同行者删得掉,**包括已经真正加入的人**。
+  // 真实遭遇:「一开始加错了成员,均分那里每次多一个人,导致我先删除了账号」——
+  // 为了去掉一个加错的名字,把整个账号删了。这个代价太离谱,口子必须开够。
+  //
+  // 但删人仍然是会算错钱的操作:名单里少一个人,他那份分摊在结算里直接蒸发,
+  // 守恒破掉而界面看起来一切正常。所以身上有账的一律不让删,
+  // 让用户先去改那几笔账 —— 那是他自己能看懂、能撤回的路径。
+  // 而「刚加错的人」本来就还没有账,不受这条影响,一点就能删掉。
+  const removeMember = (person) => {
+    if (ledgerPeople.length <= 1) {
+      Alert.alert('至少留一个人', '账本里没有成员就没法记账了。', [{ text: '好' }]);
+      return;
+    }
+    if (person === myLedgerName) {
+      Alert.alert('不能删掉自己', '这是你在这本账里的名字。', [{ text: '好' }]);
+      return;
+    }
+    const used = expenseCountFor(person);
+    if (used > 0) {
+      Alert.alert(
+        `${person} 身上还有 ${used} 笔账`,
+        '先把那几笔改成别人,或者删掉,再移除这个人。\n直接移除会让他那份分摊凭空消失,结算就对不上了。',
+        [{ text: '好' }],
+      );
+      return;
+    }
+    Alert.alert(`移除 ${person}？`, '账目不受影响。', [
+      { text: '取消', style: 'cancel' },
+      {
+        text: '移除',
+        style: 'destructive',
+        onPress: async () => {
+          if (isShared) {
+            const { ok, error } = await removeTagMember({ ledgerId, name: person });
+            // 失败就保持现状 —— 不拿一次失败的请求去改本地名单
+            if (!ok) { Alert.alert('移除失败', error || '请稍后再试。', [{ text: '好' }]); return; }
+            refreshLedger(ledgerId);
+          } else {
+            setLedgerMembers(prev => (
+              prev.length > 1 ? prev.filter(m => (m.name || m.display_name) !== person) : prev
+            ));
+          }
+          // 草稿里可能还选着这个人,清掉免得存出一笔挂在不存在的人头上的账
+          setExpenseDraft(prev => ({
+            ...prev,
+            participants: (prev.participants || []).filter(p => p !== person),
+            payer: prev.payer === person ? myLedgerName : prev.payer,
+            specialOwner: prev.specialOwner === person ? myLedgerName : prev.specialOwner,
+            personShares: Object.fromEntries(
+              Object.entries(prev.personShares || {}).filter(([p]) => p !== person),
+            ),
+          }));
+        },
+      },
+    ]);
+  };
+
+  /**
+   * 货币托盘。三个地方用:预算编辑器、结算面板、支出那块的折算目标。
+   *
+   * 一份 JSX —— 这个文件因为「同一个东西写两遍」漂移过两次(两个预算编辑器、
+   * 几个输入框的垂直居中),修复每次都只落在其中一处。
+   *
+   * @param fxOnly 只列**换得出来**的币种。折算目标必须能真的换算,
+   *   列一个没有汇率的选项,用户选完发现总数消失了,而且看不出为什么;
+   *   预算币种没有这个限制 —— 换不出来时它退回「只算同币种那部分」,仍然有意义。
+   */
+  const renderCurTray = ({ active, onPick, fxOnly = false }) => (
+    <View style={tn.curTray}>
+      {/* CURRENCY_PICKS 里 ¥ 首尾各一个,拇指两头都够得到 */}
+      {CURRENCY_PICKS
+        .map((cur, i) => ({ cur, i }))
+        .filter(({ cur }) => !fxOnly
+          || (FX_CODES[cur] && rateOf(fxRates?.rates, 'EUR', FX_CODES[cur]) != null))
+        .map(({ cur, i }) => (
+          <TouchableOpacity
+            key={`${cur}-${i}`}
+            style={[tn.curChip, active === cur && tn.curChipAct]}
+            onPress={() => onPick(cur)}
+          >
+            <Text style={[tn.curTxt, active === cur && tn.curTxtAct]}>{cur}</Text>
+          </TouchableOpacity>
+        ))}
+    </View>
+  );
+
+  // 预算编辑器。有两个入口(空账本那行、支出面板底部),渲染成一份 ——
+  // 这个文件已经因为「同一个东西写两遍」漂移过一次(几个输入框的垂直居中各修各的)。
+  const renderBudgetEditor = () => (
+    <View>
+      <View style={tn.meEditRow}>
+        {/* 「预算」两个字在框外当标签,占位符只留货币符号。
+            混排「€ 预算」时 iOS 会按字形回退字体,中文那半截用的是另一套
+            字体度量,基线被拉低 —— 看起来就是「没居中」。而且占位符当标签
+            本来就是坏做法:一开始输入,标签就消失了。 */}
+        <Text style={tn.meEditLabel}>预算</Text>
+        <TouchableOpacity
+          onPress={() => setBudgetCurOpen(v => !v)}
+          hitSlop={{ top: 12, bottom: 12, left: 8, right: 8 }}
+        >
+          <Text style={tn.meEditCur}>{budgetCurPick}{budgetCurOpen ? ' ▾' : ' ▸'}</Text>
+        </TouchableOpacity>
+        <TextInput
+          style={tn.meInput}
+          value={budgetDraft}
+          onChangeText={v => setBudgetDraft(clampMoney(v))}
+          placeholder={budgetCurPick}
+          keyboardType="decimal-pad"
+          inputAccessoryViewID={NUM_PAD_ID}
+          placeholderTextColor={C.mutedLight}
+          autoFocus
+        />
+        <TouchableOpacity style={tn.inviteBtn} onPress={saveBudget}>
+          <Text style={tn.inviteTxt}>
+            {money(budgetDraft) > 0 ? '存' : (budget ? '清除' : '取消')}
+          </Text>
+        </TouchableOpacity>
+      </View>
+      {budgetCurOpen && renderCurTray({
+        active: budgetCurPick,
+        onPick: (cur) => { setBudgetCurDraft(cur); setBudgetCurOpen(false); },
+      })}
+    </View>
+  );
 
   const pickOrder = async () => {
     const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -895,11 +1312,16 @@ function TripNotebook() {
 
   const startExpenseEdit = (item) => {
     setExpenseEditId(item.id);
-    // 改一笔 ₺ 的旧账时,币种选择器也跟着切过去 —— 看到什么就存什么,别把它悄悄改成当前币种
+    // 改一笔 ₺ 的旧账时,币种选择器也跟着切过去 —— 看到什么就存什么,别把它悄悄改成当前币种。
+    // 用 setCurrency 而不是 pickCurrency:这只是临时看这笔账,
+    // 不该把「这本账上一笔用的币种」改成一笔老账的币种(改完 resetExpenseDraft 会还回去)。
     if (item.currency && item.currency !== currency) setCurrency(item.currency);
+    // 改一笔老账时也归一,否则「晚餐」不在 chip 列表里,选中态永远高亮不上,
+    // 而用户会以为这笔账没有分类
+    const cat = normalizeCategory(item.category) || '其他';
     setExpenseDraft({
-      category: item.category || '其他',
-      title: item.title || item.category || '',
+      category: cat,
+      title: (item.title === item.category ? cat : item.title) || cat,
       amount: String(item.amountExpr || item.amount || ''),
       payer: item.payer || ledgerPeople[0] || '我',
       payerTouched: true,                              // 改旧账:用它原本的垫付人,别被默认值覆盖
@@ -919,6 +1341,11 @@ function TripNotebook() {
   };
 
   const resetExpenseDraft = () => {
+    // 改完/取消一笔老账后,币种回到「这本账上一笔记的是什么钱」——
+    // 否则翻一下三周前那笔欧元,接下来记的里拉就默认成了欧元。
+    if (expenseEditId && activeLedger.currency && activeLedger.currency !== currency) {
+      setCurrency(activeLedger.currency);
+    }
     setExpenseEditId(null);
     setExpenseDraft({
       category: expenseDraft.category,
@@ -1039,16 +1466,24 @@ function TripNotebook() {
       })(),
     };
     if (isShared) {
+      // ⚠️ 把目标账本的 key 在这里就固定下来。这个回调是异步的,
+      // 用户完全可能在等回应的这几百毫秒里切到另一本账 ——
+      // 那时候 setExpenses 打的是「当时的当前账本」,会把 uuid 替换
+      // 做到别人家的桶里(或者做不成,留下一条永远替换不掉的临时 id)。
+      const targetKey = writeKey;
+      const targetId = ledgerId;
       // 共享账本:写远端,再拉回最新(拿到真实 uuid)
-      saveExpenseRemote(ledgerId, nextExpense).then(({ expense: saved, error }) => {
+      saveExpenseRemote(targetId, nextExpense).then(({ expense: saved, error }) => {
         if (error) {
           Alert.alert('同步失败', '这笔已记在本机,联网后会重试。', [{ text: '好' }]);
           return;
         }
         // 换成服务端给的真实 uuid。少了这一步,下一次合并会把本地这条
         // 当成「还没同步的笔」留下来,和远端那条并存 —— 一笔变两笔,结算翻倍。
-        setExpenses(prev => replaceLocalId(prev, nextExpense.id, saved));
-        refreshLedger(ledgerId);
+        patchLedgerByKey(targetKey, l => ({
+          expenses: replaceLocalId(l.expenses, nextExpense.id, saved),
+        }));
+        refreshLedger(targetId);
       });
       // 乐观更新,先让本机看到
       setExpenses(prev => (
@@ -1510,27 +1945,229 @@ function TripNotebook() {
                 <Text style={tn.close}>×</Text>
               </TouchableOpacity>
             </View>
+
+            {/* ── 账本切换 ──
+                账本和旅行册解耦之后可以同时开好几本(同一周和不同的人各出去一趟)。
+                这一行永远显示「现在记的是哪本」—— 记错本子和记错币种一样,
+                是那种事后翻半天才看得出来的错。 */}
+            <TouchableOpacity style={tn.bookBar} activeOpacity={0.8} onPress={() => setLedgerPickerOpen(v => !v)}>
+              <View style={{ flex: 1 }}>
+                <Text style={tn.bookBarName} numberOfLines={1}>{activeLedger.title}</Text>
+                <Text style={tn.bookBarMeta}>
+                  {activeLedger.shared ? '共享' : '本机'} · {activeLedger.expenses.length} 笔
+                  {ledgers.length > 1 ? ` · 共 ${ledgers.length} 本` : ''}
+                </Text>
+              </View>
+              <Text style={tn.bookBarChev}>{ledgerPickerOpen ? '−' : '⇅'}</Text>
+            </TouchableOpacity>
+            {ledgerPickerOpen && (
+              <View style={tn.bookList}>
+                {ledgers.map(l => {
+                  const on = l.key === activeLedgerKey;
+                  return (
+                    <View key={l.key} style={tn.bookRow}>
+                      <TouchableOpacity
+                        style={{ flex: 1 }}
+                        onPress={() => { setActiveLedgerKey(l.key); setLedgerPickerOpen(false); }}
+                      >
+                        <Text style={[tn.bookRowName, on && tn.bookRowNameOn]} numberOfLines={1}>
+                          {on ? '· ' : ''}{l.title}
+                        </Text>
+                        <Text style={tn.bookRowMeta}>
+                          {l.shared ? `共享 · 码 ${l.joinCode || '—'}` : '本机'} · {l.expenses.length} 笔 · {l.currency}
+                        </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => setLedgerRename({ key: l.key, text: l.title })}
+                        hitSlop={{ top: 10, bottom: 10, left: 8, right: 8 }}
+                      >
+                        <Text style={tn.bookRowOp}>改名</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => deleteLedger(l.key)}
+                        hitSlop={{ top: 10, bottom: 10, left: 8, right: 8 }}
+                      >
+                        <Text style={[tn.bookRowOp, tn.bookRowDel]}>删</Text>
+                      </TouchableOpacity>
+                    </View>
+                  );
+                })}
+                {!!ledgerRename && (
+                  <View style={tn.inviteRow}>
+                    <TextInput
+                      style={[tn.joinInput, { textAlign: 'left' }]}
+                      value={ledgerRename.text}
+                      onChangeText={text => setLedgerRename(r => ({ ...r, text }))}
+                      placeholder="账本名字"
+                      placeholderTextColor={C.mutedLight}
+                      autoFocus
+                    />
+                    <TouchableOpacity style={tn.inviteBtn} onPress={saveLedgerRename}>
+                      <Text style={tn.inviteTxt}>存</Text>
+                    </TouchableOpacity>
+                  </View>
+                )}
+                <TouchableOpacity style={tn.bookAdd} onPress={createLocalLedger}>
+                  <Text style={tn.bookAddTxt}>+ 新建一本账</Text>
+                </TouchableOpacity>
+              </View>
+            )}
             <ScrollView style={tn.body} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag">
-              {/* ── 我花了:一行就够,不占一张卡 ── */}
+              {/* ── 我的支出 ──
+                  这块原来叫「我花了」,只给一行数字,是分账的一个中间量。
+                  但它其实已经是一份完整的个人消费记录:每笔账里我承担的那一份,
+                  就是我这趟真花掉的钱。摊开成表就能回答「我在土耳其自己花了多少、
+                  花在哪」—— 不用再单独记一套账。
+                  预算降级成这块的附加物(一个安静的链接):支出记录是主体,
+                  预算是可选的、想管的时候才设的东西。 */}
+              {/* 一笔账都没有时也要露一行 —— 否则「想设预算却找不到入口」。
+                  新账本因此多一块空内容,那个代价可以接受;找不到入口不行。 */}
+              {mySpend.length === 0 && !budget ? (
+                <TouchableOpacity style={tn.meEmpty} onPress={openBudgetEditor}>
+                  <Text style={tn.meEmptyTxt}>还没有支出</Text>
+                  <Text style={tn.meEmptyLink}>设个预算</Text>
+                </TouchableOpacity>
+              ) : null}
+              {mySpend.length === 0 && !budget && budgetEditing && renderBudgetEditor()}
               {(mySpend.length > 0 || budget) && (
-                <View>
-                  <View style={tn.meRow}>
-                    <Text style={tn.meRowK}>我花了</Text>
+                <View style={tn.meBox}>
+                  <TouchableOpacity
+                    style={tn.meRow}
+                    activeOpacity={0.8}
+                    onPress={() => setSpendOpen(v => !v)}
+                  >
+                    <Text style={tn.meRowK}>我的支出</Text>
                     <View style={tn.meAmounts}>
                       {mySpend.length === 0 && <Text style={tn.meRowNum}>{currency}0.00</Text>}
                       {mySpend.map(x => (
                         <Text key={x.cur} style={tn.meRowNum}>{fmtIn(x.spent, x.cur)}</Text>
                       ))}
                     </View>
-                    <TouchableOpacity
-                      onPress={() => { setBudgetDraft(budget?.amount || ''); toggleOnly('budget', budgetEditing); }}
-                      hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-                    >
-                      <Text style={tn.meBudgetTxt}>
-                        {budget ? fmtIn(money(budget.amount), budget.currency) : '设预算'}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
+                    <Text style={tn.meChevron}>{spendOpen ? '−' : '+'}</Text>
+                  </TouchableOpacity>
+
+                  {/* ── 一共花了多少 ──
+                      上面那排是原货币,是事实,永远留着。这一行是折算出来的参考值,
+                      加一层、不替换 —— 和结算那边的「换/换回」同一条规矩。
+
+                      左边这一块管「折算成哪种货币」,右边的换/换回管开关 ——
+                      和结算面板同一个分工,免得两块地方两套操作方式。
+                      选的是**同一个** settleCurrency:一个人心里「一共花了多少」
+                      的尺子只有一把,结算和支出各记一个目标币种只会互相打架。 */}
+                  {canMergeSpend && (
+                    <>
+                      <View style={tn.meTotalRow}>
+                        <TouchableOpacity
+                          style={{ flex: 1 }}
+                          activeOpacity={0.7}
+                          onPress={() => setSpendCurOpen(v => !v)}
+                        >
+                          {spendMergeOn ? (
+                            <>
+                              <Text style={tn.meTotalNum}>
+                                一共约 {fmtIn(spendConverted.total, mergeCurSym)}
+                                <Text style={tn.mergeCaret}>{spendCurOpen ? ' ▾' : ' ▸'}</Text>
+                              </Text>
+                              <Text style={tn.meTotalMeta}>
+                                {mySpend.length} 个币种按参考汇率折算 · {fxDay || '—'} · 上面那排才是原账
+                                {spendCurOpen ? '' : ' · 点这里换一种'}
+                              </Text>
+                            </>
+                          ) : (
+                            // 没折算时也要给托盘入口和光标 —— 左边永远是「换成哪种」、
+                            // 右边永远是开关,两个状态下同一个分工,不让人猜
+                            <Text style={tn.meTotalHint}>
+                              {mySpend.length} 个币种 · 想知道一共花了多少?
+                              <Text style={tn.mergeCaret}>{spendCurOpen ? ' ▾' : ' ▸'}</Text>
+                            </Text>
+                          )}
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          onPress={() => setSpendMergeOn(v => !v)}
+                          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+                        >
+                          <Text style={[tn.mergePick, spendMergeOn && tn.mergePickOn]}>
+                            {spendMergeOn ? '换回' : `换成 ${mergeCurSym}`}
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                      {/* 选完顺手把折算打开:用户点进来换币种,想看的就是换完的结果。
+                          让他再点一次「换」等于把一个动作拆成两步。 */}
+                      {spendCurOpen && renderCurTray({
+                        active: mergeCurSym,
+                        fxOnly: true,
+                        onPick: (c) => { setSettleCur(c); setSpendCurOpen(false); setSpendMergeOn(true); },
+                      })}
+                    </>
+                  )}
+
+                  {spendOpen && (() => {
+                    // 默认看花得最多的那个币种;多币种时上面给一排可点的币种
+                    const curs = mySpend.map(x => x.cur);
+                    const pick = curs.includes(spendCur) ? spendCur : (curs[0] || currency);
+                    const rows = mySpendRows(pick);
+                    const mineTotal = rows.reduce((s, r) => s + r.mine, 0);
+                    return (
+                      <View style={tn.spendPanel}>
+                        {curs.length > 1 && (
+                          <View style={tn.curTray}>
+                            {curs.map(c => (
+                              <TouchableOpacity
+                                key={c}
+                                style={[tn.curChip, pick === c && tn.curChipAct]}
+                                onPress={() => setSpendCur(c)}
+                              >
+                                <Text style={[tn.curTxt, pick === c && tn.curTxtAct]}>{c}</Text>
+                              </TouchableOpacity>
+                            ))}
+                          </View>
+                        )}
+                        <View style={tn.spendHead}>
+                          <Text style={tn.spendHeadK}>{rows.length} 笔 · 我担</Text>
+                          <View style={{ flex: 1 }} />
+                          <Text style={tn.spendHeadNum}>{fmtIn(mineTotal, pick)}</Text>
+                        </View>
+                        {rows.map(({ item, mine, total }) => (
+                          <View key={item.id} style={tn.spendRow}>
+                            <Text style={tn.spendDay}>{expenseDay(item) || '—'}</Text>
+                            <View style={{ flex: 1 }}>
+                              <Text style={tn.spendName} numberOfLines={1}>
+                                {item.title && item.title !== item.category
+                                  ? `${item.title}`
+                                  : item.category}
+                              </Text>
+                              <Text style={tn.spendCat}>{item.category}</Text>
+                            </View>
+                            {/* 两个数字都要给:只给「我担」的话,₺4500 的门票会被
+                                当成自己花了 4500,实际只担了 2250。 */}
+                            <View style={tn.spendNums}>
+                              <Text style={tn.spendMine}>{fmtIn(mine, pick)}</Text>
+                              {Math.abs(total - mine) > 0.005 && (
+                                <Text style={tn.spendTotal}>总 {fmtIn(total, pick)}</Text>
+                              )}
+                            </View>
+                          </View>
+                        ))}
+                        {!rows.length && (
+                          <Text style={tn.payNone}>这个币种下我还没承担过任何一笔。</Text>
+                        )}
+                        <TouchableOpacity style={tn.spendBudget} onPress={openBudgetEditor}>
+                          <Text style={tn.spendBudgetTxt}>
+                            {budget
+                              ? `预算 ${fmtIn(money(budget.amount), budgetCur)} · 已用 ${Math.round(budgetPct * 100)}%`
+                              : '设个预算'}
+                          </Text>
+                          {/* 跨币种的进度是折算出来的估算,必须说出来 ——
+                              不说的话那个百分比看起来和「实打实花了多少」一模一样 */}
+                          {budget && budgetAcrossCur && (
+                            <Text style={tn.spendBudgetMeta}>
+                              含全部 {mySpend.length} 个币种,按参考汇率折算 · {fxDay || '—'}
+                            </Text>
+                          )}
+                        </TouchableOpacity>
+                      </View>
+                    );
+                  })()}
 
                   {budget && money(budget.amount) > 0 && (
                     <View style={tn.meBarTrack}>
@@ -1542,25 +2179,7 @@ function TripNotebook() {
                     </View>
                   )}
 
-                  {budgetEditing && (
-                    <View style={tn.meEditRow}>
-                      <TextInput
-                        style={tn.meInput}
-                        value={budgetDraft}
-                        onChangeText={v => setBudgetDraft(clampMoney(v))}
-                        placeholder={`${currency} 预算`}
-                        keyboardType="decimal-pad"
-                        inputAccessoryViewID={NUM_PAD_ID}
-                        placeholderTextColor={C.mutedLight}
-                        autoFocus
-                      />
-                      <TouchableOpacity style={tn.inviteBtn} onPress={saveBudget}>
-                        <Text style={tn.inviteTxt}>
-                          {money(budgetDraft) > 0 ? '存' : (budget ? '清除' : '取消')}
-                        </Text>
-                      </TouchableOpacity>
-                    </View>
-                  )}
+                  {budgetEditing && renderBudgetEditor()}
                 </View>
               )}
 
@@ -1585,31 +2204,71 @@ function TripNotebook() {
                 <View style={tn.settlePanel}>
                   {canMerge && (
                     <View>
+                      {/* 「换」是可以再点一下换回来的开关,不是一次性转换。
+                          原来它只负责打开货币托盘,选完就把 mergeOn 拨到 true ——
+                          于是原始币种的数字整片消失,而看不出有路回去。
+                          现在:左边这一块管「折算成哪种货币」,右边的换/换回管开关。
+                          账目本身永远只存原始币种和原始金额(见 saveExpense),
+                          折算是每次渲染现算的,所以换回来拿到的一定是原账,不是反算的结果。 */}
                       <View style={tn.mergeRow}>
-                        <TouchableOpacity onPress={() => setMergeOn(v => !v)} activeOpacity={0.7} style={{ flex: 1 }}>
+                        <TouchableOpacity onPress={() => setSettleCurOpen(v => !v)} activeOpacity={0.7} style={{ flex: 1 }}>
                           <Text style={tn.mergeTxt}>
                             {mergeOn ? `已折算成 ${mergeCurSym}` : `合并成 ${mergeCurSym}`}
+                            <Text style={tn.mergeCaret}>{settleCurOpen ? ' ▾' : ' ▸'}</Text>
                           </Text>
                           <Text style={tn.mergeMeta}>
-                            {mergeOn ? `参考汇率 · ${fxDay}` : '省得来回倒'}
+                            {/* 目标币种一直是可以换的,但光给一个符号看不出来能点。
+                                写清楚「点这里换一种」—— 人在土耳其想看里拉总账、
+                                回国想看人民币,这个选择不该由我们替他定死。 */}
+                            {mergeOn
+                              ? `原账仍是 ${currenciesIn(activeExpenses).join(' / ')} · 参考汇率 ${fxDay}`
+                              : '省得来回倒'}
+                            {settleCurOpen ? '' : ' · 点这里换一种'}
                           </Text>
                         </TouchableOpacity>
-                        {/* 折算成哪种货币由用户定 —— 有人想统一看人民币,有人看美元 */}
-                        <TouchableOpacity onPress={() => setSettleCurOpen(v => !v)} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
-                          <Text style={tn.mergePick}>换</Text>
+                        <TouchableOpacity
+                          onPress={() => setMergeOn(v => !v)}
+                          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+                        >
+                          <Text style={[tn.mergePick, mergeOn && tn.mergePickOn]}>
+                            {mergeOn ? '换回' : '换'}
+                          </Text>
                         </TouchableOpacity>
                       </View>
-                      {settleCurOpen && (
-                        <View style={tn.curTray}>
-                          {CURRENCIES.filter(c => FX_CODES[c] && rateOf(fxRates?.rates, 'EUR', FX_CODES[c]) != null).map(c => (
-                            <TouchableOpacity
-                              key={c}
-                              style={[tn.curChip, mergeCurSym === c && tn.curChipAct]}
-                              onPress={() => { setSettleCur(c); setSettleCurOpen(false); setMergeOn(true); }}
-                            >
-                              <Text style={[tn.curTxt, mergeCurSym === c && tn.curTxtAct]}>{c}</Text>
-                            </TouchableOpacity>
-                          ))}
+                      {settleCurOpen && renderCurTray({
+                        active: mergeCurSym,
+                        fxOnly: true,
+                        onPick: (c) => { setSettleCur(c); setSettleCurOpen(false); setMergeOn(true); },
+                      })}
+                      {/* 折算态下,**每个币种各自摆出自己的汇率和日期**。
+                          顶上只给一个总日期是不够的:没人能复核一个不知道按什么算出来的数。
+                          汇率用 fmtRate 而不是 fmtFx —— 后者按币种取两位小数,
+                          1 ₺ = 0.1418 ¥ 会被舍成 0.14,差 1.3%,拿着它对不上账。
+                          顺带把近十天走势也画上(和小本子的汇率浮层同一套说法)。 */}
+                      {mergeOn && (
+                        <View style={tn.fxTrendBox}>
+                          {currenciesIn(activeExpenses)
+                            .filter(c => c !== mergeCurSym && FX_CODES[c])
+                            .map(c => {
+                              const from = FX_CODES[c];
+                              const one = rateOf(fxRates?.rates, from, mergeTargetCode);
+                              const series = seriesFor(fxRates, from, mergeTargetCode);
+                              return (
+                                <View key={c} style={tn.fxTrendRow}>
+                                  <View style={{ flex: 1 }}>
+                                    <Text style={tn.fxTrendMain}>
+                                      1 {c} = {mergeCurSym}{fmtRate(one)}
+                                      <Text style={tn.fxTrendDay}>{fxDay ? ` · ${fxDay}` : ''}</Text>
+                                    </Text>
+                                    <Text style={tn.fxTrendMeta}>{fxRangeText(series)}</Text>
+                                  </View>
+                                  <Sparkline data={series} />
+                                </View>
+                              );
+                            })}
+                          <Text style={tn.fxTrendFoot}>
+                            银行间参考价 · 刷卡再贵 1–3%{fxRates?.stale ? ' · 离线,用的是缓存' : ''}
+                          </Text>
                         </View>
                       )}
                     </View>
@@ -1632,26 +2291,42 @@ function TripNotebook() {
                       ))}
                       {!group.lines.length && <Text style={tn.payNone}>这组扯平了</Text>}
                       <View style={tn.payRule} />
-
-                      {/* 下面是依据:每人垫付多少、该承担多少。
-                          默认收起 —— 要照着做的是上面的转账,这部分回答「为什么是这样」,
-                          账目多了会把结算页撑得很长。 */}
-                      {detailOpen && (group.rows || []).filter(r => r.paid > 0.005 || r.owed > 0.005).map(row => (
-                        <View key={row.person} style={tn.settleRow}>
-                          <View style={{ flex: 1 }}>
-                            <Text style={tn.settleName}>{row.person}</Text>
-                            <Text style={tn.settleNums}>
-                              垫付 {fmtIn(row.paid, group.cur)} · 应承担 {fmtIn(row.owed, group.cur)}
-                            </Text>
-                          </View>
-
-                        </View>
-                      ))}
                     </View>
                   ))}
-                  <TouchableOpacity style={tn.detailToggle} onPress={() => setDetailOpen(v => !v)} activeOpacity={0.7}>
-                    <Text style={tn.detailToggleTxt}>{detailOpen ? '收起明细' : '看每人明细'}</Text>
-                  </TouchableOpacity>
+
+                  {/* ── 过程 ──
+                      **结论只能验对错,过程才能定位错在哪。**
+                      2026-08 那趟旅行:一张 ₺4500 的门票被记成了 ¥4500,
+                      结论从「dyn 欠 891」翻成「ysy 欠 1358」,而界面上只有那一行结论,
+                      没有任何东西能让人看出哪里不对。如果当时摊着「人民币合计 ¥26,025」,
+                      一眼就知道错了 —— 实际只有 ¥21,525。
+                      所以这块**默认展开**,不再藏在「看每人明细」后面。
+                      ⚠️ 一律走 settleGroups(原始币种),不走 shownGroups:
+                      折算后 shownGroups 只剩一个合并组、它没有 rows,
+                      按它渲染会让整块过程在折算态下变成空白。原账永远看得到。 */}
+                  {settleGroups.map(group => {
+                    const rows = (group.rows || []).filter(r => r.paid > 0.005 || r.owed > 0.005);
+                    const total = rows.reduce((s, r) => s + r.paid, 0);
+                    const count = activeExpenses.filter(i => curOf(i) === group.cur).length;
+                    return (
+                      <View key={`detail-${group.cur}`} style={tn.procBox}>
+                        <View style={tn.procHead}>
+                          <Text style={tn.procHeadCur}>{group.cur}</Text>
+                          <Text style={tn.procHeadMeta}>{count} 笔</Text>
+                          <View style={{ flex: 1 }} />
+                          <Text style={tn.procHeadTotal}>合计 {fmtIn(total, group.cur)}</Text>
+                        </View>
+                        {rows.map(row => (
+                          <View key={row.person} style={tn.procRow}>
+                            <Text style={tn.procName}>{sayWho(row.person)}</Text>
+                            <Text style={tn.procNum}>垫 {fmtIn(row.paid, group.cur)}</Text>
+                            <Text style={tn.procNum}>担 {fmtIn(row.owed, group.cur)}</Text>
+                          </View>
+                        ))}
+                        {!rows.length && <Text style={tn.payNone}>这组没有金额</Text>}
+                      </View>
+                    );
+                  })}
                   <TouchableOpacity style={tn.settleClear} onPress={settleExpenses} disabled={!activeExpenses.length}>
                     <Text style={[tn.settleClearTxt, !activeExpenses.length && tn.settleClearTxtOff]}>标记已还钱</Text>
                   </TouchableOpacity>
@@ -1700,23 +2375,13 @@ function TripNotebook() {
                     <Text style={tn.exprHint}>= {fmtMoney(money(expenseDraft.amount))}</Text>
                   )}
                 </View>
-                {curOpen && (
-                  <View style={tn.curTray}>
-                    {CURRENCIES.map(cur => (
-                      <TouchableOpacity
-                        key={cur}
-                        style={[tn.curChip, currency === cur && tn.curChipAct]}
-                        onPress={() => {
-                          // 每笔账现在各记各的币种,切换只影响接下来记的这笔,不动旧账
-                          setCurOpen(false);
-                          setCurrency(cur);
-                        }}
-                      >
-                        <Text style={[tn.curTxt, currency === cur && tn.curTxtAct]}>{cur}</Text>
-                      </TouchableOpacity>
-                    ))}
-                  </View>
-                )}
+                {curOpen && renderCurTray({
+                  active: currency,
+                  // 每笔账各记各的币种,切换只影响接下来记的这笔,不动旧账。
+                  // pickCurrency 会把选择记进账本 —— 下一笔默认还是它,
+                  // 不用在土耳其连着记三十多笔时每笔都手动切一遍。
+                  onPick: (cur) => { setCurOpen(false); pickCurrency(cur); },
+                })}
 
                 <Text style={tn.fieldK}>谁垫的</Text>
                 <View style={tn.ownerRow}>
@@ -1748,6 +2413,32 @@ function TripNotebook() {
 
                 {ledgerAdvanced && (
                   <View style={tn.advBox}>
+                    {/* 分类和备注排在分法前面:这两个是「这笔是什么」,
+                        分法是「这笔怎么算」。人在小票旁边先想得起来的是前者,
+                        而且分法那几块(各自付、单独付)会展开成一整片输入框,
+                        排在它们后面等于把最轻的两项推到最底下。 */}
+                    <Text style={tn.fieldK}>分类</Text>
+                    <View style={tn.quickTags}>
+                      {expenseCategories.map(cat => (
+                        <TouchableOpacity
+                          key={cat}
+                          style={[tn.catChip, expenseDraft.category === cat && tn.catChipAct]}
+                          onPress={() => setExpenseDraft(prev => ({ ...prev, category: cat, title: '' }))}
+                        >
+                          <Text style={[tn.catTxt, expenseDraft.category === cat && tn.catTxtAct]}>{cat}</Text>
+                        </TouchableOpacity>
+                      ))}
+                    </View>
+
+                    <Text style={tn.fieldK}>备注</Text>
+                    <TextInput
+                      style={tn.noteInput}
+                      value={expenseDraft.note}
+                      onChangeText={note => setExpenseDraft(prev => ({ ...prev, note }))}
+                      placeholder="可不填"
+                      placeholderTextColor={C.mutedLight}
+                    />
+
                     <Text style={tn.fieldK}>怎么分</Text>
                     <View style={tn.modeRow}>
                       {splitModes.map(mode => (
@@ -1868,27 +2559,6 @@ function TripNotebook() {
                       </View>
                     )}
 
-                    <Text style={tn.fieldK}>分类</Text>
-                    <View style={tn.quickTags}>
-                      {expenseCategories.map(cat => (
-                        <TouchableOpacity
-                          key={cat}
-                          style={[tn.catChip, expenseDraft.category === cat && tn.catChipAct]}
-                          onPress={() => setExpenseDraft(prev => ({ ...prev, category: cat, title: '' }))}
-                        >
-                          <Text style={[tn.catTxt, expenseDraft.category === cat && tn.catTxtAct]}>{cat}</Text>
-                        </TouchableOpacity>
-                      ))}
-                    </View>
-
-                    <Text style={tn.fieldK}>备注</Text>
-                    <TextInput
-                      style={tn.noteInput}
-                      value={expenseDraft.note}
-                      onChangeText={note => setExpenseDraft(prev => ({ ...prev, note }))}
-                      placeholder="可不填"
-                      placeholderTextColor={C.mutedLight}
-                    />
                   </View>
                 )}
 
@@ -1949,11 +2619,27 @@ function TripNotebook() {
                     </TouchableOpacity>
                   </View>
                   <View style={tn.joinRow}>
-                    {members.map(member => (
-                      <Text key={member.name} style={[tn.avatarChip, member.joined && tn.avatarChipOn]}>
-                        {member.name}{member.tagOnly ? ' · 待加入' : ''}
-                      </Text>
-                    ))}
+                    {members.map(member => {
+                      const name = member.name || member.display_name;
+                      // 除了自己,谁都能删(身上有账的会在 removeMember 里被拦下来)。
+                      // 自己不给 —— 那是你在这本账里的名字,删了这本账就跟你没关系了。
+                      const canRemove = name !== myLedgerName && ledgerPeople.length > 1;
+                      return (
+                        <View key={name} style={[tn.memberChip, member.joined && tn.memberChipOn]}>
+                          <Text style={[tn.memberChipTxt, member.joined && tn.memberChipTxtOn]}>
+                            {name}{member.tagOnly ? ' · 待加入' : ''}
+                          </Text>
+                          {canRemove && (
+                            <TouchableOpacity
+                              onPress={() => removeMember(name)}
+                              hitSlop={{ top: 10, bottom: 10, left: 8, right: 10 }}
+                            >
+                              <Text style={tn.memberChipX}>×</Text>
+                            </TouchableOpacity>
+                          )}
+                        </View>
+                      );
+                    })}
                   </View>
                   <View style={tn.setupDivider} />
                   {isShared ? (
@@ -2016,8 +2702,32 @@ function TripNotebook() {
               )}
               {/* 未结清的照常列;已结清的收进下面的折叠区 ——
                   账目会越攒越长,但结清过的只在想回头看时才需要。
-                  只是收起来,不是删掉:除非用户自己点「删」,账目永远留着。 */}
-              {activeExpenses.map(renderExpense)}
+                  只是收起来,不是删掉:除非用户自己点「删」,账目永远留着。
+
+                  ── 按币种分组 ──
+                  币种在卡片上只是一个符号,「¥4500」和「₺4500」长得几乎一样。
+                  41 笔混在一起滑六屏,一张记错币种的门票根本看不出来。
+                  分组之后:里拉 19 笔、人民币 15 笔、欧元 5 笔、英镑 2 笔、美金 1 笔 ——
+                  **只有一两笔的那组天然可疑**,要么真是特例,要么就是选错了币种。
+                  这比按金额数量级做预警更简单,也更准。 */}
+              {expenseGroups.map(g => (
+                <View key={g.cur}>
+                  {multiCurrencyList && (
+                    <View style={tn.grpHead}>
+                      <Text style={tn.grpCur}>{g.cur}</Text>
+                      <Text style={tn.grpCount}>{g.items.length} 笔</Text>
+                      <View style={{ flex: 1 }} />
+                      <Text style={tn.grpTotal}>合计 {fmtIn(g.total, g.cur)}</Text>
+                    </View>
+                  )}
+                  {multiCurrencyList && g.items.length <= 2 && (
+                    <Text style={tn.grpOdd}>
+                      这个币种只有 {g.items.length} 笔 —— 确认一下不是记账时选错了币种。
+                    </Text>
+                  )}
+                  {g.items.map(renderExpense)}
+                </View>
+              ))}
 
               {/* 已结清的收进折叠区。账目会越攒越长,而结清过的只在想回头看时才需要。
                   注意:只是收起来,不是删掉 —— 除非用户自己点「删」,账目永远留着。 */}
@@ -2071,6 +2781,27 @@ function TripNotebook() {
 
 // 英文用衬线,让「要说的那句话」读起来像内容,不像 UI(demo 的做法)
 const SERIF = Platform.select({ ios: 'Georgia', android: 'serif', default: 'Georgia' });
+
+// 单行 TextInput 的垂直居中配方。
+//
+// 只要给了固定 height,就必须摊上这三条,否则文字会贴在框底、上半截空着。
+// 成因:iOS 的 TextInput 自带一份垂直内边距,固定高度下它把文字往下推,
+// 而组件没有机会再居中;Android 则默认顶着上边,还额外带一圈字体内边距。
+// 三条各管一件事 —— paddingVertical 归零(iOS 靠固定高度自己居中)、
+// textAlignVertical 和 includeFontPadding 管 Android。
+//
+// **另外:单行输入框绝对不要设 lineHeight。** iOS 上一旦设了,
+// 文字就按行高盒子的底部对齐,字照样沉底 —— 这是最容易「修了反而更歪」的一步。
+//
+// 抽出来一处定义,是因为这个毛病在本文件已经犯过三次(备注、预算、邀请码那几个),
+// 每次都是单独修一处。新加单行输入框直接 ...SINGLE_LINE_INPUT。
+// 没有固定 height、靠 paddingVertical 撑开的输入框不需要这个(那种本来就正常),
+// 多行输入框更不要 —— 它们用 textAlignVertical: 'top'。
+const SINGLE_LINE_INPUT = {
+  paddingVertical: 0,
+  textAlignVertical: 'center',
+  includeFontPadding: false,
+};
 
 const tn = StyleSheet.create({
   fab: {
@@ -2216,16 +2947,62 @@ const tn = StyleSheet.create({
   ledgerCard: { marginTop: 12, backgroundColor: C.white, borderRadius: 16, borderWidth: 1, borderColor: C.border, padding: 14 },
 
   // 我花了 + 预算:和记一笔用同一套语言(衬线数字 + teal eyebrow)
+  meBox: { paddingBottom: 2 },
   meRow: { flexDirection: 'row', alignItems: 'baseline', gap: 10, paddingHorizontal: 4, paddingBottom: 8 },
   meRowK: { fontSize: 11, color: C.muted },
   meAmounts: { flex: 1, flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseline', gap: 10 },
   meRowNum: { fontFamily: SERIF, fontSize: 17, color: C.ink },
-  meBudgetTxt: { fontSize: 11.5, color: C.teal, fontWeight: '700' },
+  meChevron: { fontSize: 15, color: C.mutedLight, fontWeight: '700' },
+  // 「一共花了多少」:折算出来的参考值,加在原货币那排下面,不替换它
+  meTotalRow: {
+    flexDirection: 'row', alignItems: 'center', gap: 10,
+    paddingHorizontal: 4, paddingBottom: 9,
+  },
+  meTotalNum: { fontFamily: SERIF, fontSize: 15, color: C.ink },
+  meTotalMeta: { fontSize: 10, color: C.mutedLight, marginTop: 2 },
+  meTotalHint: { fontSize: 11, color: C.muted },
+  // 空账本:也要有一条能摸到预算的路
+  meEmpty: {
+    flexDirection: 'row', alignItems: 'center', gap: 10,
+    paddingHorizontal: 4, paddingBottom: 10,
+  },
+  meEmptyTxt: { flex: 1, fontSize: 11, color: C.mutedLight },
+  meEmptyLink: { fontSize: 11.5, color: C.teal, fontWeight: '700' },
+
+  // 个人支出明细表:这一趟我自己花了多少、花在哪
+  spendPanel: {
+    borderWidth: 1, borderColor: C.border, borderRadius: 13,
+    paddingHorizontal: 12, paddingTop: 10, paddingBottom: 4, marginBottom: 10,
+  },
+  spendHead: {
+    flexDirection: 'row', alignItems: 'baseline', gap: 8,
+    paddingBottom: 6, borderBottomWidth: 1, borderBottomColor: C.border,
+  },
+  spendHeadK: { fontSize: 10.5, color: C.mutedLight, fontWeight: '700', letterSpacing: 0.4 },
+  spendHeadNum: { fontFamily: SERIF, fontSize: 16, color: C.ink },
+  spendRow: {
+    flexDirection: 'row', alignItems: 'center', gap: 10,
+    paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: C.border,
+  },
+  spendDay: { width: 30, fontSize: 10, color: C.mutedLight, fontWeight: '700' },
+  spendName: { fontSize: 12.5, color: C.ink },
+  spendCat: { fontSize: 10, color: C.mutedLight, marginTop: 2 },
+  spendNums: { alignItems: 'flex-end' },
+  spendMine: { fontFamily: SERIF, fontSize: 14, color: C.ink },
+  spendTotal: { fontSize: 9.5, color: C.mutedLight, marginTop: 2 },
+  spendBudget: { paddingVertical: 11, alignItems: 'center' },
+  spendBudgetTxt: { fontSize: 11.5, color: C.teal, fontWeight: '700' },
+  spendBudgetMeta: { fontSize: 10, color: C.mutedLight, marginTop: 3 },
   meBarTrack: { height: 2, backgroundColor: C.tag, marginHorizontal: 4, marginBottom: 10, overflow: 'hidden' },
   meBarFill: { height: 2, backgroundColor: C.teal },
   meBarOver: { backgroundColor: C.lava },
   meEditRow: { flexDirection: 'row', alignItems: 'center', gap: 7, marginTop: 12 },
+  meEditLabel: { fontSize: 12, color: C.muted, fontWeight: '600' },
+  // 预算的币种:点开是和记账那个同款的货币托盘。
+  // 衬线,和金额那些数字是同一套语言;纯符号,不和中文混排(混排会拉低基线)。
+  meEditCur: { fontFamily: SERIF, fontSize: 15, color: C.ink },
   meInput: {
+    ...SINGLE_LINE_INPUT,
     flex: 1, height: 34, backgroundColor: C.paper, borderRadius: 999,
     paddingHorizontal: 12, fontSize: 12.5, color: C.ink,
   },
@@ -2252,13 +3029,64 @@ const tn = StyleSheet.create({
     borderBottomWidth: 1, borderBottomColor: C.border,
   },
   mergeTxt: { fontSize: 12.5, color: C.teal, fontWeight: '700' },
+  mergeCaret: { fontSize: 9, color: C.mutedLight, fontWeight: '700' },
   mergeMeta: { fontSize: 10.5, color: C.mutedLight },
-  settleRow: {
-    flexDirection: 'row', alignItems: 'center', gap: 10,
-    paddingVertical: 11, borderBottomWidth: 1, borderBottomColor: C.border,
+  // 折算用的那几条汇率 + 近十天走势,和小本子的汇率浮层同一套说法
+  fxTrendBox: { paddingTop: 10, paddingBottom: 2 },
+  fxTrendRow: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 5 },
+  fxTrendMain: { fontSize: 12, color: C.ink, fontWeight: '700' },
+  fxTrendMeta: { fontSize: 10, color: C.muted, marginTop: 2 },
+  fxTrendDay: { fontSize: 10, color: C.mutedLight, fontWeight: '400' },
+  fxTrendFoot: { fontSize: 10, color: C.mutedLight, marginTop: 6 },
+
+  // 结算的「过程」:每个币种摊开垫付/应担/合计,默认展开。
+  // 结论只能验对错,过程才能定位错在哪。
+  procBox: { paddingTop: 12 },
+  procHead: { flexDirection: 'row', alignItems: 'baseline', gap: 8, paddingBottom: 6 },
+  procHeadCur: { fontFamily: SERIF, fontSize: 15, color: C.ink },
+  procHeadMeta: { fontSize: 10.5, color: C.mutedLight },
+  procHeadTotal: { fontSize: 11.5, color: C.muted, fontWeight: '700' },
+  procRow: {
+    flexDirection: 'row', alignItems: 'baseline', gap: 10,
+    paddingVertical: 5, borderTopWidth: 1, borderTopColor: C.border,
   },
-  settleName: { fontSize: 13, color: C.ink, fontWeight: '700' },
-  settleNums: { fontSize: 10.5, color: C.muted, marginTop: 3 },
+  procName: { width: 62, fontSize: 12, color: C.ink, fontWeight: '700' },
+  procNum: { flex: 1, fontSize: 11.5, color: C.muted },
+
+  // 账目列表的币种分组头
+  grpHead: {
+    flexDirection: 'row', alignItems: 'baseline', gap: 8,
+    marginTop: 14, paddingBottom: 4, borderBottomWidth: 1, borderBottomColor: C.border,
+  },
+  grpCur: { fontFamily: SERIF, fontSize: 16, color: C.ink },
+  grpCount: { fontSize: 10.5, color: C.mutedLight, fontWeight: '700' },
+  grpTotal: { fontSize: 11.5, color: C.muted, fontWeight: '700' },
+  grpOdd: { fontSize: 10.5, color: C.lava, lineHeight: 15, marginTop: 6 },
+
+  // 账本切换条
+  bookBar: {
+    flexDirection: 'row', alignItems: 'center', gap: 10,
+    marginHorizontal: 18, marginBottom: 4,
+    backgroundColor: C.paper, borderRadius: 13, paddingHorizontal: 13, paddingVertical: 9,
+  },
+  bookBarName: { fontSize: 13, color: C.ink, fontWeight: '800' },
+  bookBarMeta: { fontSize: 10.5, color: C.muted, marginTop: 2 },
+  bookBarChev: { fontSize: 14, color: C.mutedLight, fontWeight: '700' },
+  bookList: {
+    marginHorizontal: 18, marginBottom: 6,
+    borderWidth: 1, borderColor: C.border, borderRadius: 13, paddingHorizontal: 12, paddingBottom: 10,
+  },
+  bookRow: {
+    flexDirection: 'row', alignItems: 'center', gap: 10,
+    paddingVertical: 9, borderBottomWidth: 1, borderBottomColor: C.border,
+  },
+  bookRowName: { fontSize: 12.5, color: C.muted, fontWeight: '700' },
+  bookRowNameOn: { color: C.ink },
+  bookRowMeta: { fontSize: 10, color: C.mutedLight, marginTop: 2 },
+  bookRowOp: { fontSize: 11, color: C.teal, fontWeight: '700' },
+  bookRowDel: { color: C.lava },
+  bookAdd: { paddingTop: 11, alignItems: 'center' },
+  bookAddTxt: { fontSize: 11.5, color: C.teal, fontWeight: '800' },
   // 跨币种时才出现的分段标题
   curDivider: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingTop: 14, paddingBottom: 2 },
   curDividerTxt: { fontFamily: SERIF, fontSize: 15, color: C.ink },
@@ -2280,6 +3108,11 @@ const tn = StyleSheet.create({
     flex: 1, fontFamily: SERIF, fontSize: 38, color: C.ink,
     // 显式给高度和行高:只靠 alignItems:'baseline' 时,大字号下 iOS 的
     // placeholder 和真实文字不在同一条基线上,空着的时候 0.00 看起来是浮的。
+    //
+    // ⚠️ 这里是 SINGLE_LINE_INPUT 之外的**唯一例外**,别顺手统一掉:
+    // 它带着 lineHeight(那是别处要避免的),但 38px 衬线大字配 48 的固定高度,
+    // 这一组值是在真机上调出来、并且已经验过的。padding 三条已经归零,
+    // 真正的差异只有 lineHeight —— 去掉它反而会让大字重新浮起来。
     height: 48, lineHeight: 44, padding: 0, paddingTop: 0, paddingBottom: 0,
     textAlignVertical: 'center',
   },
@@ -2298,8 +3131,9 @@ const tn = StyleSheet.create({
   advBox: { marginTop: 2 },
 
   noteInput: {
-    backgroundColor: C.paper, borderRadius: 12,
-    paddingHorizontal: 12, paddingVertical: 11, fontSize: 12.5, color: C.ink,
+    ...SINGLE_LINE_INPUT,
+    height: 40, backgroundColor: C.paper, borderRadius: 12,
+    paddingHorizontal: 12, fontSize: 12.5, color: C.ink,
   },
   whyOff: { marginTop: 16, marginBottom: -12, alignItems: 'center' },
   whyOffTxt: { fontSize: 11.5, color: C.lava },
@@ -2334,8 +3168,7 @@ const tn = StyleSheet.create({
     borderWidth: 1, borderColor: C.border, borderRadius: 13,
   },
   mergePick: { fontSize: 12, color: C.teal, fontWeight: '700', paddingLeft: 12 },
-  detailToggle: { paddingVertical: 12, alignItems: 'center', borderTopWidth: 1, borderTopColor: C.border },
-  detailToggleTxt: { fontSize: 11.5, color: C.teal },
+  mergePickOn: { color: C.muted },   // 折算态下它是「退出」,不该看起来像主动作
   numPadBar: {
     backgroundColor: '#f6f6f6', borderTopWidth: 1, borderTopColor: C.border,
     paddingVertical: 9, paddingHorizontal: 18, alignItems: 'flex-end',
@@ -2350,8 +3183,15 @@ const tn = StyleSheet.create({
   },
   ledgerBadge: { fontSize: 10, color: C.muted, backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 4, overflow: 'hidden', fontWeight: '700' },
   joinRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 8 },
-  avatarChip: { fontSize: 10, color: C.teal, backgroundColor: C.tealLight, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 4, overflow: 'hidden', fontWeight: '800' },
-  avatarChipOn: { color: C.white, backgroundColor: C.teal },
+  // 成员 chip 从纯 Text 换成 View:里面要放一个「×」,Text 里塞不下可点区域
+  memberChip: {
+    flexDirection: 'row', alignItems: 'center', gap: 5,
+    backgroundColor: C.tealLight, borderRadius: 999, paddingHorizontal: 9, paddingVertical: 4,
+  },
+  memberChipOn: { backgroundColor: C.teal },
+  memberChipTxt: { fontSize: 10, color: C.teal, fontWeight: '800' },
+  memberChipTxtOn: { color: C.white },
+  memberChipX: { fontSize: 13, lineHeight: 15, color: C.muted, fontWeight: '700' },
   curChip: { minWidth: 34, alignItems: 'center', backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 6 },
   curChipAct: { backgroundColor: C.ink, borderColor: C.ink },
   curTxt: { fontSize: 13, color: C.muted, fontWeight: '800' },
@@ -2360,13 +3200,20 @@ const tn = StyleSheet.create({
   inviteBtn: { backgroundColor: C.paper, borderWidth: 1, borderColor: C.border, borderRadius: 999, paddingHorizontal: 11, paddingVertical: 8 },
   inviteBtnOff: { opacity: 0.6 },
   inviteTxt: { fontSize: 11, color: C.teal, fontWeight: '900' },
-  joinInput: { flex: 1, height: 34, backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 999, paddingHorizontal: 11, fontSize: 11.5, color: C.ink, fontWeight: '800' },
-  quickTags: { flexDirection: 'row', flexWrap: 'wrap', gap: 7, marginTop: 11, marginBottom: 2 },
+  joinInput: {
+    ...SINGLE_LINE_INPUT,
+    flex: 1, height: 34, backgroundColor: C.white, borderWidth: 1, borderColor: C.border,
+    borderRadius: 999, paddingHorizontal: 11, fontSize: 11.5, color: C.ink, fontWeight: '800',
+  },
+  // 间距一律由上面的 fieldK(marginBottom 8)给,这几行自己不再加 marginTop ——
+  // 原来 fieldK 8 + quickTags 11 = 19,而备注输入框离标签只有 8,
+  // 同一栏里两组字段的标签和内容对不齐,看着像错了一行。
+  quickTags: { flexDirection: 'row', flexWrap: 'wrap', gap: 7, marginBottom: 2 },
   catChip: { borderWidth: 1, borderColor: C.border, backgroundColor: C.white, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 7 },
   catChipAct: { backgroundColor: C.ink, borderColor: C.ink },
   catTxt: { fontSize: 11, color: C.muted, fontWeight: '800' },
   catTxtAct: { color: C.white },
-  modeRow: { flexDirection: 'row', gap: 7, marginTop: 9 },
+  modeRow: { flexDirection: 'row', gap: 7 },
   modeBtn: { flex: 1, borderWidth: 1, borderColor: C.border, backgroundColor: C.white, borderRadius: 12, paddingVertical: 9, alignItems: 'center' },
   modeBtnAct: { backgroundColor: C.ink, borderColor: C.ink },
   modeTxt: { fontSize: 11, color: C.muted, fontWeight: '900' },

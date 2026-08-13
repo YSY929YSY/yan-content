@@ -2,6 +2,7 @@
 // 和 schema.trip-ledger.sql 配套:建本 / 加入 / 加成员 / 拉取 / 记账 / 订阅同步。
 // 所有函数在 supabase 未配置时安全退化(返回 null / 空),不会崩。
 import { supabase } from './supabase';
+import { normalizeCategory } from './ledgerMath';
 
 async function requireUser() {
   if (!supabase) return null;
@@ -70,17 +71,40 @@ export async function addTagMember({ ledgerId, name }) {
   }
 }
 
+// ── 移除一个「名字标签」成员 ────────────────────────────
+// 只能删还没真正加入的名字标签,而且要求那个名字身上没有任何账目 ——
+// 判断在服务端做(见 schema.ledger-member-remove.sql),因为客户端手里
+// 那份账目可能是弱网下的旧快照,按它判会误删一个其实有账的人,
+// 结算里他那份分摊会凭空消失、总额对不上。
+export async function removeTagMember({ ledgerId, name }) {
+  if (!supabase || !ledgerId) return { ok: false, error: 'offline' };
+  try {
+    await requireUser();
+    const { error } = await supabase.rpc('remove_ledger_tag_member', {
+      p_ledger: ledgerId,
+      p_name: name,
+    });
+    if (error) throw error;
+    return { ok: true, error: null };
+  } catch (e) {
+    return { ok: false, error: e.message };
+  }
+}
+
 // ── 我加入的账本(打开 App 时恢复) ──────────────────────
+// ⚠️ 返回 { ledgers, ok }。以前失败时返回空数组 —— 单本账时代那只是「恢复不了」,
+// 多账本之后调用方要拿它并本地账本列表,空数组会被理解成「你没有共享账本」,
+// 弱网抖一下就可能把账本桶清掉。ok:false 的意思是「这次没问到」,不是「没有」。
 export async function myLedgers() {
-  if (!supabase) return [];
+  if (!supabase) return { ledgers: [], ok: false, error: 'offline' };
   try {
     await requireUser();
     const { data, error } = await supabase.rpc('my_ledgers');
     if (error) throw error;
-    return data || [];
+    return { ledgers: data || [], ok: true, error: null };
   } catch (e) {
     console.warn('[Ledger] myLedgers failed:', e.message);
-    return [];
+    return { ledgers: [], ok: false, error: e.message };
   }
 }
 
@@ -109,11 +133,14 @@ export async function fetchLedgerData(ledgerId) {
 }
 
 // 把远端行转成组件里用的形状(amount 转字符串,和本地一致)
+// 分类在这里归一(晚餐→餐饮、车票→交通):远端行是唯一入口,
+// 归一放这一处,不会出现「迁了一半」的中间态。认不出的值原样放行。
 function normalizeExpense(row) {
+  const category = normalizeCategory(row.category);
   return {
     id: row.id,
-    category: row.category,
-    title: row.title,
+    category,
+    title: row.title === row.category ? category : row.title,
     currency: row.currency || null,   // 迁移前的旧行没有,由上层按账本币种兜底
     settledAt: row.settled_at || null,
     createdAt: row.created_at || null,   // 列表里显示是哪天记的
