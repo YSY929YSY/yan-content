@@ -173,6 +173,7 @@ def rand_polyline(n=5, horizontal=True, margin=0.12):
 def make(name, base_rgb, *, out_dir=DEFAULT_OUT, keep_png=False,
          fiber=0.055, fiber_cross=0.15, cloud=0.04, creases=3, crumple=0,
          crumple_depth=0.16, flecks=1500, hairs=90, hair_len=(12, 40), stains=3, foxing=18,
+         undulate=0,
          wear=0.55, crease_depth=0.10, rule=None, rule_ink=(0.10, 0.12, 0.16), seed=7):
     global rng
     rng = np.random.default_rng(seed)
@@ -244,6 +245,21 @@ def make(name, base_rgb, *, out_dir=DEFAULT_OUT, keep_png=False,
         ridge = np.clip(shade, 0, None)
         v += ridge * 0.16 * wear
 
+    # 纸面起伏:一张平摊的纸也不是几何平面,它有很缓的波。
+    #
+    # 这一层是**干净纸唯一的明暗来源**。把揉皱污渍去掉之后,plain 那几档的
+    # 动态范围从牛皮的 35 掉到 22 —— 在 OLED 的近黑桌面上,均值 233、起伏 23
+    # 的表面就是一块白色矩形,没有厚度也没有物质感。用户的判断是「还是有点不自然」。
+    #
+    # 和 crumple 的区别:crumple 画线 → 有折痕;这里是纯低频噪声取梯度 →
+    # 只有缓慢的明暗过渡,没有任何一条边。要的就是「纸不是绝对平的」,不是「纸被折过」。
+    if undulate:
+        hf = fbm(H, W, 3, 1100) - 0.5
+        gy, gx = np.gradient(hf)
+        g = np.cos(-0.7) * gx + np.sin(-0.7) * gy
+        peak = np.abs(g).max()
+        v += (g / peak if peak > 1e-9 else g) * undulate
+
     # 边缘磨损:四边略暗、略脏,页角更明显
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
     ex = np.minimum(xx, W - 1 - xx) / (W * 0.5)
@@ -305,7 +321,7 @@ def make(name, base_rgb, *, out_dir=DEFAULT_OUT, keep_png=False,
         gd = ImageDraw.Draw(grid)
         step = int(W / 22)                      # 一页横向约 22 格,和实物手账接近
         if rule == 'dot':
-            r_ = max(1, W // 900)
+            r_ = max(2, W // 560)   # 1px 的点在真机上完全消失,实测过
             for gx in range(step, W, step):
                 for gy in range(step, H, step):
                     gd.ellipse([gx - r_, gy - r_, gx + r_, gy + r_], fill=255)
@@ -343,35 +359,36 @@ def make(name, base_rgb, *, out_dir=DEFAULT_OUT, keep_png=False,
 # 去掉的是:揉皱、折痕、污渍、foxing 锈斑、重磨损。
 CLEAN = dict(crumple=0, crumple_depth=0, creases=0, crease_depth=0, stains=0,
              fiber_cross=0.12,      # 高了就成经纬织纹,见 make() 里那段
-             hair_len=(6, 16))      # 长毛丝在素纸上像头发
+             hair_len=(6, 16),      # 长毛丝在素纸上像头发
+             undulate=0.10)         # 干净纸唯一的明暗来源,见 make() 里那段
 
 # 三档,对着参考图里的色域来:米白稻草 / 黄棕纸袋 / 红棕深牛皮。
 # crumple 是横贯整页的折线条数 —— 它决定「揉过几次」。
 # 改参数请连注释里的判断一起看:大部分默认值是排除了某个具体的翻车才定的。
 PAPERS = [
     # 素白:最干净的一档,给「打开就是一张空白的好纸」那个定案用
-    ('plain-ivory', (247, 243, 234), dict(
-        CLEAN, fiber=0.030, cloud=0.014, flecks=700, hairs=45,
-        foxing=0, wear=0.14, seed=101)),
+    ('plain-ivory', (232, 226, 213), dict(
+        CLEAN, fiber=0.034, cloud=0.030, flecks=700, hairs=45,
+        foxing=0, wear=0.34, seed=101)),
     # 米黄笺纸:暖一点,长时间看不刺眼,是手账最常见的底
-    ('plain-cream', (241, 231, 210), dict(
-        CLEAN, fiber=0.034, cloud=0.018, flecks=1100, hairs=60,
-        foxing=2, wear=0.18, seed=102)),
+    ('plain-cream', (226, 213, 187), dict(
+        CLEAN, fiber=0.038, cloud=0.034, flecks=1100, hairs=60,
+        foxing=2, wear=0.38, seed=102)),
     # 浅灰:冷底,给照片多的页 —— 暖纸会把彩色照片压得发黄
-    ('plain-mist', (234, 233, 228), dict(
-        CLEAN, fiber=0.028, cloud=0.013, flecks=600, hairs=35,
-        foxing=0, wear=0.13, seed=103)),
+    ('plain-mist', (220, 219, 213), dict(
+        CLEAN, fiber=0.032, cloud=0.028, flecks=600, hairs=35,
+        foxing=0, wear=0.32, seed=103)),
     # 带格线的三档。手账纸真实世界里最常见的就是这几种,
     # 而印刷格线是「这是纸」最强的信号(见 make() 里那段)
-    ('dot-cream', (243, 236, 220), dict(
-        CLEAN, fiber=0.030, cloud=0.014, flecks=800, hairs=40,
-        foxing=1, wear=0.15, rule='dot', seed=111)),
-    ('grid-ivory', (247, 244, 236), dict(
-        CLEAN, fiber=0.026, cloud=0.012, flecks=600, hairs=30,
-        foxing=0, wear=0.13, rule='grid', rule_ink=(0.055, 0.065, 0.085), seed=112)),
-    ('line-cream', (244, 237, 221), dict(
-        CLEAN, fiber=0.030, cloud=0.014, flecks=700, hairs=35,
-        foxing=1, wear=0.15, rule='line', rule_ink=(0.07, 0.08, 0.105), seed=113)),
+    ('dot-cream', (228, 217, 195), dict(
+        CLEAN, fiber=0.036, cloud=0.032, flecks=800, hairs=40,
+        foxing=1, wear=0.36, rule='dot', rule_ink=(0.15, 0.17, 0.21), seed=111)),
+    ('grid-ivory', (233, 228, 216), dict(
+        CLEAN, fiber=0.032, cloud=0.028, flecks=600, hairs=30,
+        foxing=0, wear=0.32, rule='grid', rule_ink=(0.075, 0.085, 0.110), seed=112)),
+    ('line-cream', (229, 218, 197), dict(
+        CLEAN, fiber=0.036, cloud=0.032, flecks=700, hairs=35,
+        foxing=1, wear=0.36, rule='line', rule_ink=(0.09, 0.10, 0.13), seed=113)),
     ('kraft-light', (223, 206, 176), dict(
         fiber=0.05, cloud=0.035, creases=1, crumple=26, crumple_depth=0.09,
         flecks=2600, hairs=120, stains=2, foxing=22, wear=0.5,
