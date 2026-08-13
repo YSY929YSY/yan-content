@@ -11,7 +11,8 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-nati
 
 import { C } from '../../theme';
 import { useSpeech } from '../../components/Speech';
-import { useReviewProgress, useDailyQueue } from './useReview';
+import { useDailyQueue } from './useReview';
+import { useReviewProgress } from './ReviewProgressContext';
 import { fromWord, indexUnits, buildUnits, sourceOf } from './units';
 
 const SOURCE_LABEL = {

@@ -16,10 +16,12 @@ import { ensureUser, signInWithApple, signOut, deleteAccount } from './src/lib/s
 import { backfillAll, pendingBackfill } from './src/lib/sync';
 import { K, auditKeys, readJson, writeJson } from './src/lib/storage';
 import { DAILY_GOAL, todayStr, pickSession } from './src/features/wordbank/srs';
-import { useReviewProgress } from './src/features/review/useReview';
 import { useWorldFootprint } from './src/features/world/useWorldFootprint';
 import KanaScreen from './src/features/kana/KanaScreen';
 import ReviewScreen from './src/features/review/ReviewScreen';
+import {
+  ReviewProgressProvider, useReviewProgress,
+} from './src/features/review/ReviewProgressContext';
 import { bonusOf } from './src/features/world/record';
 import { useHomeSummary } from './src/features/home/useHomeSummary';
 import * as AppleAuthentication from 'expo-apple-authentication';
@@ -1235,7 +1237,18 @@ moduleName: {
 // 丿 Tab — 出发·地铁
 // 内部子导航：学习场景 / 地铁冒险 / 五十音
 // ─────────────────────────────────────────────
-function PieTab({ content, subTab, setSubTab, sceneState, setSceneState, practiceScene, setPracticeScene }) {
+function PieTab(props) {
+  // 复习进度在这一层只建一份,词书页 / 词库搜索 / 复习页共用。
+  // 挂在学习 Tab 而不是 App 根:挂根上的话,用户从没进过学习 tab
+  // 也会白读一次盘、白拉一次云端。见 ReviewProgressContext 的注释。
+  return (
+    <ReviewProgressProvider>
+      <PieTabInner {...props} />
+    </ReviewProgressProvider>
+  );
+}
+
+function PieTabInner({ content, subTab, setSubTab, sceneState, setSceneState, practiceScene, setPracticeScene }) {
   const [wbBookId, setWbBookId] = useState(null);
   return (
     <View style={{ flex: 1 }}>
@@ -1783,10 +1796,11 @@ function WordBankScreen({ wordBank, book, onBack }) {
   // 读写进度的逻辑不再写在这个页面里,统一走 useReviewProgress ——
   // 复习页读写的是同一份数据,两处各写一套迁移和落盘,迟早会长歪成两个口径。
   //
-  // ⚠️ 它每个调用点是独立的 state,不是共享 store。现在没问题,因为词书页和复习页
-  // 由 subTab 二选一渲染,同时只挂载一个,切换时重新读盘。如果以后让两个同时挂载
-  // (比如复习页做成盖在上面的浮层),两边的内存副本就会各写各的、互相覆盖 ——
-  // 到那时要把它提到 context,别指望这条注释以外的东西提醒你。
+  // ✅ 2026-08-13 已提到 context(ReviewProgressProvider 挂在 PieTab)。
+  // 这条注释原来写着「以后让两个页面同时挂载就会互相覆盖,到那时要提到 context,
+  // 别指望这条注释以外的东西提醒你」—— 外部评审替它提醒了。
+  // 现在结构上不可能出现两份副本:漏包 Provider 的调用点会直接抛,不会安静地
+  // 拿到一份自己的 state。
   const { progress, ready: progressReady, grade } = useReviewProgress();
   // 今日队列 { date, keys, done }。落盘的 —— 以前它是个 useState,
   // 退出页面就没了,重进重新挑一批,用户永远做不完「今天的任务」。

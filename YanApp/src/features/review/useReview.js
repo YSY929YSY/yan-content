@@ -19,14 +19,18 @@ import {
 } from '../wordbank/srs';
 
 /**
- * 全部单词/句子的复习进度。
+ * 全部单词/句子的复习进度。**这是实现,不是给业务代码用的入口。**
+ *
+ * ⚠️ 业务代码请用 `ReviewProgressContext` 的 `useReviewProgress()`。
+ * 直接调这个函数会得到一份**独立副本** —— 两处同时挂载时各写各的盘、互相覆盖,
+ * 而且不报错。这个 hook 只该被 `ReviewProgressProvider` 调用一次。
  *
  * @returns progress  key → 记录
  * @returns ready     读盘+合并完成了没有。false 时不要拿 progress 做判断,
  *                    空的 progress 和「真的没学过」长得一样。
  * @returns grade     (key, 'again'|'hard'|'good'|'mastered', bookId?) => 新记录
  */
-export function useReviewProgress() {
+export function useReviewProgressState() {
   const [progress, setProgress] = useState({});
   const [ready, setReady] = useState(false);
 
