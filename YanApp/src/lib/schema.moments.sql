@@ -130,7 +130,8 @@ grant select, insert, update, delete on table public.journal_items to anon, auth
 
 -- Storage:新建 private bucket `moment-photos`,路径 {user_id}/moments/...
 --         贴纸等派生资产放 {user_id}/stickers/...(同 bucket,原图永不动)
-drop policy if exists "own moment photo files" on storage;
+-- 同上:storage 是 schema,策略挂在 storage.objects 上
+drop policy if exists "own moment photo files" on storage.objects;
 create policy "own moment photo files" on storage.objects for all
   using (bucket_id = 'moment-photos' and (storage.foldername(name))[1] = auth.uid()::text)
   with check (bucket_id = 'moment-photos' and (storage.foldername(name))[1] = auth.uid()::text);

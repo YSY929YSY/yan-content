@@ -83,7 +83,12 @@ create policy "Users can delete own checkin"
 --    在 Supabase Dashboard → Storage 新建 private bucket: checkin-photos
 --    然后运行以下 policy(照片按 user_id 分文件夹，各人只能管自己的)：
 --    路径约定: {user_id}/{place_id}.jpg
-drop policy if exists "Users manage own checkin photos" on storage;
+-- ⚠️ 必须写 `on storage.objects`,不能写 `on storage`。
+-- storage 是 **schema** 不是表 —— 写成 `on storage` 会报
+--   ERROR: 42P01: relation "storage" does not exist
+-- 而且 `if exists` 救不了:它宽容的是「策略不存在」,不是「表不存在」。
+-- 2026-08-13 整份 apply-all 就是卡在这一行,后面的建表一条都没跑。
+drop policy if exists "Users manage own checkin photos" on storage.objects;
 create policy "Users manage own checkin photos"
   on storage.objects for all
   using (bucket_id = 'checkin-photos' and (storage.foldername(name))[1] = auth.uid()::text)
