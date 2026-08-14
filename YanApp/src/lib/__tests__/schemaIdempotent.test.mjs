@@ -28,7 +28,12 @@ test('★ 每个 create policy 前面都有 drop policy if exists', () => {
   const bad = [];
   for (const f of files) {
     const s = read(f);
-    for (const m of s.matchAll(/create policy\s+("[^"]+")\s*\n?\s*on\s+(\w+)/g)) {
+    // ⚠️ 表名要用 [\w.]+ 而不是 \w+ —— storage 上的策略挂在 `storage.objects`,
+    // \w 不含点,会把它截成 `storage`,然后去找一条根本不该存在的
+    // `drop policy ... on storage;`。这条测试因此**在写错的代码上通过、
+    // 在改对之后失败**(2026-08-14):正确写法是 on storage.objects,
+    // 而写成 on storage 会直接 42P01,整份 schema 从那一行往下全不执行。
+    for (const m of s.matchAll(/create policy\s+("[^"]+")\s*\n?\s*on\s+([\w.]+)/g)) {
       if (!s.slice(0, m.index).includes(`drop policy if exists ${m[1]} on ${m[2]};`)) {
         bad.push(`${f}: ${m[1]} on ${m[2]}`);
       }

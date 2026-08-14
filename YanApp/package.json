@@ -9,7 +9,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "node --test --test-reporter=spec \"src/lib/__tests__/*.test.mjs\""
+    "test": "node --test --test-reporter=spec \"src/lib/__tests__/*.test.mjs\" \"src/lib/__tests__/*.test.ts\"",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
@@ -37,6 +38,8 @@
   },
   "private": true,
   "devDependencies": {
-    "@expo/ngrok": "^4.1.3"
+    "@expo/ngrok": "^4.1.3",
+    "@types/react": "^19.2.18",
+    "typescript": "~5.9.2"
   }
 }
