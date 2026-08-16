@@ -38,7 +38,7 @@ import { C } from './src/theme';
 import { useSpeech, SpeakBtn } from './src/components/Speech';
 import TripNotebook from './src/features/travel/TripNotebook';
 // 手账预演。只在 __DEV__ 里挂,生产包里那个入口整段不渲染。
-import JournalDevScreen from './src/features/journal/JournalDevScreen';
+import JournalScreen from './src/features/journal/JournalScreen';
 // 词场预览:内容还在 staging 没并进内容包,开发期先从这份草稿读,方便边写边看。
 // 合并进 content.v2.json 之后这份和它的引用一起删。
 import WORDFIELD_PREVIEW from './src/features/wordbank/wordfield-preview.json';
@@ -6069,7 +6069,7 @@ export default function App() {
   if (!content) return <ErrorScreen onRetry={reload} />;
 
   // 手账预演:整段被 __DEV__ 包着,生产包里连组件都不会被引用到
-  if (__DEV__ && showJournal) return <JournalDevScreen onBack={() => setShowJournal(false)} />;
+  if (__DEV__ && showJournal) return <JournalScreen onBack={() => setShowJournal(false)} />;
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: isDark ? C.ink : C.paper }}>

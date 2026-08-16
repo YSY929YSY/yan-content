@@ -179,7 +179,7 @@ function migrateStrokes(old: OldItem, rand: () => number): Stroke[] {
 const PAPER_MAP: Record<string, PaperId> = {
   paper: 'plain-cream', 'plain-cream': 'plain-cream',
   dot: 'dot-cream', 'dot-cream': 'dot-cream',
-  grid: 'grid-white', 'grid-white': 'grid-white',
+  grid: 'grid-ivory', 'grid-ivory': 'grid-ivory',
   kraft: 'kraft-bag', 'kraft-bag': 'kraft-bag', 'kraft-light': 'kraft-bag',
 };
 

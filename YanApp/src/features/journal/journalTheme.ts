@@ -268,7 +268,7 @@ export function strokeWidth(
 export const PAPERS: Record<PaperId, { label: string; base: string; rule: 'none' | 'dot' | 'grid' }> = {
   'plain-cream': { label: '素 · 米黄',   base: PAPER.base,  rule: 'none' },
   'dot-cream':   { label: '点阵 · 米黄', base: PAPER.base,  rule: 'dot' },
-  'grid-white':  { label: '方格 · 素白', base: '#f7f4ec',   rule: 'grid' },
+  'grid-ivory':  { label: '方格 · 素白', base: '#f7f4ec',   rule: 'grid' },
   'kraft-bag':   { label: '牛皮 · 纸袋', base: '#d8c3a0',   rule: 'none' },
 };
 

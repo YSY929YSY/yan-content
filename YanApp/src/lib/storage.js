@@ -96,6 +96,12 @@ const REGISTRY = {
     key: 'yan_journal_assets_v1', kind: 'user', backfill: 'journal',
     desc: '手账素材库元数据(抠图/票根/整图;图片文件本身在 FileSystem)',
   },
+  journalPagesV2: {
+    key: 'yan_journal_pages_v2', kind: 'user', backfill: 'journal',
+    desc: '手账页 v2(重构后的数据结构:type/zIndex/页面单位坐标/页级笔迹)',
+    // 单开一个 v2 键,**不覆盖 v1** —— 迁移脚本从 v1 读、往 v2 写,
+    // 写坏了 v1 还在。等 v2 在真机上验过再考虑清 v1。
+  },
   subwayProgress: {
     key: 'yan_subway_unlocked_idx', kind: 'device', backfill: null,
     desc: '地铁冒险解锁进度',

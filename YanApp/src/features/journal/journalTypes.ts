@@ -309,7 +309,7 @@ export type Stroke = {
 // 页 / 册
 // ─────────────────────────────────────────────────────────────
 
-export type PaperId = 'plain-cream' | 'dot-cream' | 'grid-white' | 'kraft-bag';
+export type PaperId = 'plain-cream' | 'dot-cream' | 'grid-ivory' | 'kraft-bag';
 
 export type JournalPage = {
   id: string;
