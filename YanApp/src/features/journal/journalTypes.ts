@@ -393,17 +393,26 @@ export function exportPixelSize(spec: ExportSpec) {
 /**
  * 把角度收进 -180~180。
  *
+ * ⚠️ **必须带 `'worklet'`。** 它被 journalCanvas 的手势函数调用,而那些跑在 UI 线程上 ——
+ * UI 线程只能同步调 worklet。漏标的报错是
+ * 「Tried to synchronously call a non-worklet function on the UI thread」,
+ * 而**单元测试抓不到**:测试在 JS 线程跑,`'worklet'` 只是一句无害的字符串。
+ *
  * ⚠️ **必须有。** 松手时每次叠加 ±1.5° 的随机抖动(工单 2.2),
  * 一个元素被拖上几百次之后 rotation 会漂出工单规定的范围。
  * 不收的话第四批导出时某些渲染路径会对 >360° 的角度算错。
  */
 export function wrapAngle(deg: number): number {
+  'worklet';
   let a = ((deg + 180) % 360 + 360) % 360 - 180;
   if (a === -180) a = 180;
   return a;
 }
 
-export const clampScale = (s: number) => Math.min(SCALE_MAX, Math.max(SCALE_MIN, s));
+export const clampScale = (s: number) => {
+  'worklet';
+  return Math.min(SCALE_MAX, Math.max(SCALE_MIN, s));
+};
 
 /**
  * 元素的四个角在页面坐标系里的位置(已应用旋转和缩放)。

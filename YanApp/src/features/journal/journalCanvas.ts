@@ -140,6 +140,7 @@ export function angleAt(cx: number, cy: number, px: number, py: number): number 
  * 漂出 ±180 由 wrapAngle 收 —— 不收的话导出时某些渲染路径会算错。
  */
 export function applyDropJitter(rotation: number, rand: () => number = Math.random): number {
+  'worklet';
   const span = DROP_JITTER.max - DROP_JITTER.min;
   return wrapAngle(rotation + DROP_JITTER.min + rand() * span);
 }
