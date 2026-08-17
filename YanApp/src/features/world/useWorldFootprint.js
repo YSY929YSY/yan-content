@@ -19,6 +19,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
 
 import { K, readJsonResult, writeJson } from '../../lib/storage';
+import { createWriteGuard } from '../../lib/writeGuard';
 import { pullPlaceCheckins, pushPlaceCheckin, uploadPlaceCheckinPhoto } from '../../lib/sync';
 import {
   listUserPlaces, addUserPlace, removeUserPlace, updateUserPlace,
@@ -44,23 +45,29 @@ import {
 function usePersistedState(storageKey, initial, merge = mergeMap) {
   const [value, setValue] = useState(initial);
   const alive = useRef(true);
-  // 读盘失败过就**再也不往这个键写**,直到下次冷启动读成功。
-  // 见 set 里那段 —— 这是「拿不到数据 ≠ 数据是空的」在这个 hook 里的形态。
-  const readFailed = useRef(false);
+  /**
+   * 能不能落盘,由护栏说了算。见 writeGuard.ts。
+   *
+   * ⚠️ 这里原本是 `readFailed = useRef(false)`,**只有两态**:失败 / 没失败。
+   * 但真实世界有三态,而它把第三态归错了边 —— 初值 false 意味着
+   * **从 mount 到读盘 await 结束的这段时间里 canWrite 是 true**,
+   * 用户在这段时间点一下,写回磁盘的就是内存里的初值(空的)。
+   * 窗口窄,但 AsyncStorage 越大窗口越宽,而这正是丢过四次的那类窗口。
+   */
+  const guard = useRef(createWriteGuard(storageKey));
 
   useEffect(() => {
     alive.current = true;
     (async () => {
       const { ok, value: saved } = await readJsonResult(storageKey);
       if (!alive.current) return;
+      guard.current.onRead({ ok });
       if (!ok) {
         // ⚠️ 读失败 ≠ 这个键是空的。原来这里和「确实没有」一样直接 return,
         // 于是 state 停在 initial(空),而**任何一次 set 都会把这个空的写回磁盘** ——
         // 用户点一下某个地点,之前所有打卡就没了。
         // 现在:标记一下,让 set 只改内存不落盘。宁可这次改动丢,不要把已有的清掉。
-        readFailed.current = true;
-        console.warn('[Storage] 读盘失败,本次会话不再写入这个键:', storageKey);
-        return;
+        return;   // 护栏已经记下了,不用再手工置标志位
       }
       if (saved == null) return;            // 确实没有 —— 正常,用 initial
       // 读盘是异步的,期间云端那份可能已经先到了 —— 合并而不是覆盖
@@ -73,8 +80,9 @@ function usePersistedState(storageKey, initial, merge = mergeMap) {
   const set = useCallback((updater) => {
     setValue(prev => {
       const next = typeof updater === 'function' ? updater(prev) : updater;
-      // 没读成功过就不写 —— 内存里这份是残缺的,写回去等于清空
-      if (!readFailed.current) writeJson(storageKey, next);
+      // 没读成功过就不写 —— 内存里这份是残缺的,写回去等于清空。
+      // 「还没读回来」和「读失败了」都算没读成功。
+      if (guard.current.allow()) writeJson(storageKey, next);
       return next;
     });
   }, [storageKey]);

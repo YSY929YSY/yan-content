@@ -11,7 +11,8 @@
 // 调用方没有「忘了存」这个选项。
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { K, readJson, writeJson } from '../../lib/storage';
+import { K, readJsonResult, writeJson } from '../../lib/storage';
+import { createWriteGuard } from '../../lib/writeGuard';
 import { pullProgress, pushProgress } from '../../lib/sync';
 import {
   todayStr, normalizeProgress, mergeProgress, review, markMastered,
@@ -33,13 +34,22 @@ import {
 export function useReviewProgressState() {
   const [progress, setProgress] = useState({});
   const [ready, setReady] = useState(false);
+  // 读盘之前、以及读盘失败之后,一律不许写这个键。
+  // 见 writeGuard.ts —— 这是「拿不到数据 ≠ 数据是空的」的可执行形态。
+  const guard = useRef(createWriteGuard(K.wordbankProgress));
 
   useEffect(() => {
     let alive = true;
     (async () => {
       const today = todayStr();
-      const saved = await readJson(K.wordbankProgress, null);
+      // ⚠️ 必须用 readJsonResult 而不是 readJson。
+      // readJson 把 ok 丢掉了 —— 「读失败」和「确实没有」都返回 null,
+      // 于是界面显示成「一个词都没学过」,用户随手评一个分,
+      // grade() 就把 { ...{}, [key]: rec } 写回磁盘,**全部进度清零**。
+      // 这正是这个项目丢过四次数据的那个形状。
+      const { ok, value: saved } = await readJsonResult(K.wordbankProgress);
       if (!alive) return;
+      guard.current.onRead({ ok });
 
       // 先上屏本地那份,不等网络。旧版存的是 'learning' 字符串,
       // normalizeProgress 在这里迁成记录 —— 读盘是唯一的迁移入口。
@@ -64,7 +74,7 @@ export function useReviewProgressState() {
       // (2026-08-13 外部评审发现,不是理论风险 —— 弱网下走一遍就撞得到。)
       setProgress(prev => {
         const merged = mergeProgress(prev, cloud, today);
-        writeJson(K.wordbankProgress, merged);
+        if (guard.current.allow()) writeJson(K.wordbankProgress, merged);
         return merged;
       });
     })();
@@ -78,7 +88,10 @@ export function useReviewProgressState() {
     setProgress(prev => {
       rec = g === 'mastered' ? markMastered(prev[key], today) : review(prev[key], g, today);
       const next = { ...prev, [key]: rec };
-      writeJson(K.wordbankProgress, next);
+      // 读盘没成功过就只改内存不落盘 —— 但**云端照推**:
+      // 推的是这一条记录本身,不是整份进度,不存在「拿空的覆盖」的问题,
+      // 而且这是本地写不了时唯一能保住这次评分的通道。
+      if (guard.current.allow()) writeJson(K.wordbankProgress, next);
       pushProgress(key, rec, bookId);
       return next;
     });
@@ -106,6 +119,8 @@ export function useDailyQueue({ progress, ready, resolve, newUnits, limit = DAIL
   // resolve/newUnits 每次渲染都是新引用,放 ref 里避免把 effect 拖成死循环
   const resolveRef = useRef(resolve);
   resolveRef.current = resolve;
+  // 队列是另一个键,单独一个护栏 —— 一个键读失败不该连累另一个。
+  const sessionGuard = useRef(createWriteGuard(K.reviewSession));
   const newUnitsRef = useRef(newUnits);
   newUnitsRef.current = newUnits;
 
@@ -114,7 +129,17 @@ export function useDailyQueue({ progress, ready, resolve, newUnits, limit = DAIL
     let alive = true;
     (async () => {
       const today = todayStr();
-      const saved = savedRef.current ?? await readJson(K.reviewSession, null);
+      // 同样不能用 readJson:读失败会被当成「今天还没挑过队列」,
+      // 于是重挑一批、落盘,把用户今天已经答过的进度盖掉。
+      let saved = savedRef.current;
+      if (saved == null) {
+        const r = await readJsonResult(K.reviewSession);
+        if (!alive) return;
+        sessionGuard.current.onRead({ ok: r.ok });
+        saved = r.value;
+      } else {
+        sessionGuard.current.onRead({ ok: true });   // 内存里这份就是我们自己刚写的
+      }
       if (!alive) return;
       savedRef.current = saved || {};
 
@@ -147,7 +172,7 @@ export function useDailyQueue({ progress, ready, resolve, newUnits, limit = DAIL
       const fresh = { date: today, keys, done: [] };
       savedRef.current = fresh;
       setQueue(fresh);
-      writeJson(K.reviewSession, fresh);
+      if (sessionGuard.current.allow()) writeJson(K.reviewSession, fresh);
     })();
     return () => { alive = false; };
     // progress 变化不该重挑队列 —— 答一道题就换一批词是灾难。
@@ -159,7 +184,7 @@ export function useDailyQueue({ progress, ready, resolve, newUnits, limit = DAIL
       if (!prev || prev.done.includes(key)) return prev;
       const next = { ...prev, done: [...prev.done, key] };
       savedRef.current = next;
-      writeJson(K.reviewSession, next);
+      if (sessionGuard.current.allow()) writeJson(K.reviewSession, next);
       return next;
     });
   }, []);
@@ -178,7 +203,7 @@ export function useDailyQueue({ progress, ready, resolve, newUnits, limit = DAIL
       if (rest.length === prev.keys.length) return prev;
       const next = { ...prev, keys: [...rest, key] };
       savedRef.current = next;
-      writeJson(K.reviewSession, next);
+      if (sessionGuard.current.allow()) writeJson(K.reviewSession, next);
       return next;
     });
   }, []);
