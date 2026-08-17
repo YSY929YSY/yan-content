@@ -1,0 +1,52 @@
+# 不上传到 EAS Build 的东西。
+#
+# ⚠️ 最要紧的一条:**这个文件存在时,EAS 就不看 .gitignore 了**,不是叠加关系。
+# 所以 node_modules / .git 这些必须在这里再写一遍 —— 漏了的话包会比不写还大。
+#
+# 起因:2026-08-16 那次构建上传了 320MB,光上传花了 2 分 51 秒,
+# 而其中 354MB 是构建根本用不到的(参考/ 258M + staging/ 129M)。
+#
+# ⚠️ 加东西之前先想清楚:被 ignore 的文件在构建机上**不存在**。
+# 凡是 require() 得到的、app.json 引用的、Metro 要打包的,一律不能进这个文件。
+# 尤其 assets/ —— 纸样、图标、content.fallback.json 都在里面,整个目录不能排。
+
+# ── 依赖与构建产物(构建机自己装/自己生成)
+node_modules/
+.expo/
+dist/
+web-build/
+ios/
+android/
+
+# ── 版本控制
+.git/
+.gitignore
+
+# ── 参考资料。258MB,和构建无关
+参考/
+
+# ── 内容流水线的中间产物。129MB,含 117MB 的 jmdict
+# 线上词库走 assets/content.fallback.json + 远端 content.v2.json,不读 staging
+staging/
+
+# ── 文档、报告、脚本(构建机不跑它们)
+docs/
+reports/
+scripts/
+supabase/
+*.md
+
+# ── 历史备份。这几个 App*.js 没有被 import,但会被一起打包上传
+App26.4.30.js
+App.codex-backup.js
+App.backup-before-codex.js
+*.backup
+*.bak
+
+# ── 杂项
+.DS_Store
+**/.DS_Store
+.claude/
+app_store_screenshots/
+coverage/
+*.log
