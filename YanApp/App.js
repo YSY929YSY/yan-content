@@ -19,6 +19,9 @@ import { DAILY_GOAL, todayStr, pickSession } from './src/features/wordbank/srs';
 import { useWorldFootprint } from './src/features/world/useWorldFootprint';
 import KanaScreen from './src/features/kana/KanaScreen';
 import ReviewScreen from './src/features/review/ReviewScreen';
+import LearnBatchScreen from './src/features/learn/LearnBatchScreen';
+import { KanaProgressProvider, useKanaProgress } from './src/features/kana/KanaProgressContext';
+import { requiredKana, isKanaDone } from './src/features/kana/kanaProgress';
 import {
   ReviewProgressProvider, useReviewProgress,
 } from './src/features/review/ReviewProgressContext';
@@ -662,20 +665,33 @@ const tb = StyleSheet.create({
  * 规则在 src/features/learn/dailyTask.ts,是纯函数、有 18 条测试。
  * 这里只负责把它接上界面和导航,**不做任何判断**。
  */
-function TodayCard({ content, setTab, setSubTab }) {
+function TodayCard({ content, setTab, setSubTab, setLearnBatch }) {
   const { progress, ready } = useReviewProgress();
+  const { progress: kanaProg, ready: kanaReady } = useKanaProgress();
 
   const pool = useMemo(() => anchorPool(content.wordBank || []), [content.wordBank]);
+  const requiredHira = useMemo(() => requiredKana(content.kanaRows), [content.kanaRows]);
 
   /**
-   * ⚠️ 五十音目前**没有任何进度记录**,所以这里用「学过任何一个词」当代理:
-   * 学过词的人显然已经过了五十音那一关。
+   * 五十音这道门。
    *
-   * 这是权宜之计,不是设计。真做法是五十音页自己记进度 —— 那要新开一个键
-   * 和一处 UI,属于另一件事。现在这样至少不会给一个真·零基础的人
-   * 上来就甩六个汉字词,也不会让老用户被挡在五十音前面。
+   * ⚠️ **两条路都算过,缺一不可:**
+   *
+   *   1. `isKanaDone` —— 真的进度(看过 46 个平假名,或自己声明会了)
+   *   2. 学过任何一个词 —— **老用户的兜底**
+   *
+   * 第 2 条不能删。它原本是唯一的判据(五十音页当时没有任何持久化),
+   * 现在第 1 条上线了,但**已有用户的 `kanaProgress` 是空的** ——
+   * 只认第 1 条的话,一个学了几百个词的人下次打开会被告知
+   * 「先把五十音走完」。新键上线不能把老用户打回起点。
+   *
+   * 两个 ready 都要等:任何一个还没读回来,空的进度和「真的没有」长得一样,
+   * 而这两者在这个问题上给出的是相反的界面。
    */
-  const kanaDone = useMemo(() => Object.keys(progress || {}).length > 0, [progress]);
+  const kanaDone = useMemo(
+    () => isKanaDone(kanaProg, requiredHira) || Object.keys(progress || {}).length > 0,
+    [kanaProg, requiredHira, progress],
+  );
 
   const task = useMemo(
     () => nextTask({ pool, progress: progress || {}, kanaDone, today: todayStr() }),
@@ -685,12 +701,24 @@ function TodayCard({ content, setTab, setSubTab }) {
   const prog = useMemo(() => poolProgress(pool, progress || {}), [pool, progress]);
 
   // 读盘没完就先不显示 —— 空的 progress 和「真的没学过」长得一样,
-  // 这时候渲染出来的是一句错话。
-  if (!ready || pool.length === 0) return null;
+  // 这时候渲染出来的是一句错话。两份进度都要等到。
+  if (!ready || !kanaReady || pool.length === 0) return null;
 
   const go = () => {
     setTab('pie');
-    setSubTab(task.kind === 'kana' ? 'kana' : task.kind === 'review' ? 'review' : 'wordbank');
+    if (task.kind === 'kana') return setSubTab('kana');
+    if (task.kind === 'review') return setSubTab('review');
+    if (task.kind === 'learn') {
+      // ⚠️ **必须把 task.words 一起带过去。**
+      //
+      // 这里原本是 setSubTab('wordbank') —— 卡面上写着「6 个词 · 私 行く 何…」,
+      // 点进去落在词书货架上,那 6 个词一个都没跟过去,用户得自己再挑一遍。
+      // 规则层算了半天的「下一步」到界面这一步全丢了,主线在这儿是断的。
+      setLearnBatch(task.words);
+      return setSubTab('todaybatch');
+    }
+    // clear:池子过完了,那就真的去词书 —— 这时候「自己挑」是对的动作
+    setSubTab('wordbank');
   };
 
   return (
@@ -730,7 +758,7 @@ const tc = StyleSheet.create({
   prog: { color: '#6f665b', fontSize: 10.5, marginTop: 7, fontVariant: ['tabular-nums'] },
 });
 
-function HomeScreen({ setTab, setSceneState, setSubTab, content, onDataSources, onDeleteAccount }) {
+function HomeScreen({ setTab, setSceneState, setSubTab, setLearnBatch, content, onDataSources, onDeleteAccount }) {
   const { prefs, set: setPrefs } = usePrefs();
   const [fusionIdx, setFusionIdx] = useState(0);
   const [entryMode, setEntryMode] = useState('track');
@@ -748,7 +776,7 @@ function HomeScreen({ setTab, setSceneState, setSubTab, content, onDataSources, 
 
         {/* 任何时刻只有一个下一步 —— 这张卡在最上面,是有意的。
             首页原本是「三个数字 + 三个去处」,那仍然是「你自己选一个」。 */}
-        <TodayCard content={content} setTab={setTab} setSubTab={setSubTab} />
+        <TodayCard content={content} setTab={setTab} setSubTab={setSubTab} setLearnBatch={setLearnBatch} />
 
         {/* 三个真实数字 + 三个去处。首页原本一个数字都没有,只有口号 ——
             用户打开 App 看不到自己在哪儿,每次都像第一次打开。
@@ -1358,7 +1386,7 @@ function PieTab(props) {
   return <PieTabInner {...props} />;
 }
 
-function PieTabInner({ content, subTab, setSubTab, sceneState, setSceneState, practiceScene, setPracticeScene }) {
+function PieTabInner({ content, subTab, setSubTab, sceneState, setSceneState, practiceScene, setPracticeScene, learnBatch, setLearnBatch }) {
   const [wbBookId, setWbBookId] = useState(null);
   return (
     <View style={{ flex: 1 }}>
@@ -1371,14 +1399,14 @@ function PieTabInner({ content, subTab, setSubTab, sceneState, setSceneState, pr
         ].map(s => (
           <TouchableOpacity key={s.id} style={[
             pt.subBtn,
-            ((s.id === 'learn' && ['learn', 'intro', 'card', 'practice'].includes(subTab)) || subTab === s.id) && pt.subBtnAct
+            ((s.id === 'learn' && ['learn', 'intro', 'card', 'practice', 'todaybatch'].includes(subTab)) || subTab === s.id) && pt.subBtnAct
           ]}
             onPress={() => setSubTab(s.id)}
             >
             <Text
             style={[
               pt.subTxt,
-               ((s.id === 'learn' && ['learn', 'intro', 'card', 'practice'].includes(subTab)) || subTab === s.id) && pt.subTxtAct
+               ((s.id === 'learn' && ['learn', 'intro', 'card', 'practice', 'todaybatch'].includes(subTab)) || subTab === s.id) && pt.subTxtAct
                 ]}
               >
                  {s.label}
@@ -1427,6 +1455,17 @@ function PieTabInner({ content, subTab, setSubTab, sceneState, setSceneState, pr
         {subTab === 'review' && (
           <ReviewScreen content={content} onBack={() => setSubTab('learn')} />
         )}
+        {/* 今日批次。首页那张卡点「开始」直接落在这里,不经过词书货架 ——
+            货架是「你自己挑」,而这条主线的整个前提是**任何时刻只有一个下一步**。
+            batch 为空时不渲染:那说明是直接切到这个 subTab 的(理论上没有这种路径),
+            渲染出来会是一页空卡。 */}
+        {subTab === 'todaybatch' && (learnBatch?.length ? (
+          <LearnBatchScreen
+            words={learnBatch}
+            onBack={() => setSubTab('learn')}
+            onDone={() => { setLearnBatch(null); setSubTab('learn'); }}
+          />
+        ) : null)}
         {subTab === 'wordbank' && !wbBookId && (
           <WordBookShelfScreen
             wordBank={content.wordBank || []}
@@ -6041,6 +6080,9 @@ export default function App() {
   const [subTab, setSubTab] = useState('learn');
   const [sceneState, setSceneState] = useState(null);
   const [practiceScene, setPracticeScene] = useState(null);
+  // 今日批次:首页那张卡算出来的那几个词。**状态放这里而不是 PieTab 里**,
+  // 因为写它的是首页(HomeScreen),读它的是学习 tab —— 两边都在这一层下面。
+  const [learnBatch, setLearnBatch] = useState(null);
   const [showDataSources, setShowDataSources] = useState(false);
   const [showJournal, setShowJournal] = useState(false);   // __DEV__ 手账预演
   const [user, setUser] = useState(null);
@@ -6150,11 +6192,15 @@ export default function App() {
           那个前提**现在不成立了**:首页的今日任务卡要显示学习状态,
           进首页就必须读进度,不存在「白读」。
           绝不能两处都挂 —— 两个 Provider 是两份独立的进度,各写各的盘、互相覆盖。 */}
+      {/* 五十音进度也挂在这一层,理由和上面那条一样:
+          写它的是五十音页(pie tab),读它的是首页今日卡(home tab),
+          两者同时挂载 —— 各自 useState 就是两份副本互相覆盖。 */}
       <ReviewProgressProvider>
+      <KanaProgressProvider>
       {showDataSources ? (
         <DataSourcesScreen onBack={() => setShowDataSources(false)} />
       ) : tab === 'home' && (
-        <HomeScreen setTab={setTab} setSubTab={setSubTab} setSceneState={setSceneState} content={content} onDataSources={() => setShowDataSources(true)} onDeleteAccount={handleDeleteAccount} />
+        <HomeScreen setTab={setTab} setSubTab={setSubTab} setSceneState={setSceneState} setLearnBatch={setLearnBatch} content={content} onDataSources={() => setShowDataSources(true)} onDeleteAccount={handleDeleteAccount} />
       )}
       {tab === 'pie' && (
      <PieTab
@@ -6165,9 +6211,12 @@ export default function App() {
   setSceneState={setSceneState}
   practiceScene={practiceScene}
   setPracticeScene={setPracticeScene}
+  learnBatch={learnBatch}
+  setLearnBatch={setLearnBatch}
 />
       )}
       {tab === 'na' && <NaTab mapPlaces={content.mapPlaces} />}
+      </KanaProgressProvider>
       </ReviewProgressProvider>
       {!showDataSources && <TabBar tab={tab} setTab={(t) => { setTab(t); if (t === 'pie') setSubTab('learn'); }} />}
       {__DEV__ && !showDataSources && tab === 'na' && (

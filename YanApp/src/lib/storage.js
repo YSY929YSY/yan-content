@@ -110,6 +110,14 @@ const REGISTRY = {
     key: 'yan_subway_unlocked_idx', kind: 'device', backfill: null,
     desc: '地铁冒险解锁进度',
   },
+  kanaProgress: {
+    key: 'yan_kana_progress_v1', kind: 'device', backfill: null,
+    desc: '五十音:看过哪些假名 + 有没有自己声明「已经会了」(主线的第一道门)',
+    // 为什么是 device 不是 user:它能被重新做出来(再点一遍,或者直接声明会了),
+    // 而做成 user 要多一个 backfill 域 + 云端一列 —— 而 Supabase schema 到底跑没跑
+    // 至今未验(决策记录 D3)。**不拿一个未验的地基去接一个新键。**
+    // 代价是换设备要重走一次这道门,可接受:门后面有个一键声明的出口。
+  },
   backfillPending: {
     key: 'yan_backfill_pending', kind: 'device', backfill: null,
     desc: '登录补传的未完成标记(下次启动据此重试)',

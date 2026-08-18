@@ -9,7 +9,7 @@
 //
 // 边界是量出来的不是拍的:这一整簇对 App.js 其余部分零引用,
 // 只需向外导出 KanaScreen 一个符号。
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Animated, Dimensions, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
@@ -17,6 +17,8 @@ import Svg, { Path } from 'react-native-svg';
 
 import { C } from '../../theme';
 import { useSpeech, SpeakBtn } from '../../components/Speech';
+import { useKanaProgress } from './KanaProgressContext';
+import { requiredKana, seenCount, isKanaDone } from './kanaProgress';
 
 const { width: SW } = Dimensions.get('window');
 
@@ -897,6 +899,14 @@ const ksd = StyleSheet.create({
 });
 
 function KanaScreen({ kanaRows, specialSounds, specialRows, voicedRows, yoonRows, loanwordRows }) {
+  // 主线的第一道门就在这一页上。在这之前这个页面**没有任何持久化** ——
+  // 它不会「完成」,于是 dailyTask 的第一条规则(五十音没走完 → 先走五十音)
+  // 对新用户是个死循环。见 kanaProgress.ts 开头。
+  const { progress: kanaProg, ready: kanaReady, see, declare } = useKanaProgress();
+  const requiredHira = useMemo(() => requiredKana(kanaRows), [kanaRows]);
+  const kanaSeen = seenCount(kanaProg, requiredHira);
+  const kanaDone = isKanaDone(kanaProg, requiredHira);
+
   const [sel, setSel] = useState(null);
   const [showConfuse, setShowConfuse] = useState(false);
   const [showWords, setShowWords] = useState(false);
@@ -1414,6 +1424,13 @@ const handleKanaPress = (ch) => {
       setDetailScriptMode(kanaMode);
       setStrokeReplay(v => v + 1);
       speak(ch.kana, 'ja-JP', `kana-${ch.kana}`);
+      // 记在「详情真的打开了」这一下,不记在单击(单击只是朗读)。
+      // 判据是「看过」,那就得真的把它翻开过。
+      //
+      // 记的是**屏幕上那个字**(片假名模式下就是片假名),不是折算成平假名的:
+      // 看过 カ 不等于看过 か。主线那道门只数平假名(见 requiredKana),
+      // 所以片假名照记不误,只是不参与那道门。
+      see(ch.kana);
     }
     return;
   }
@@ -1493,6 +1510,32 @@ const theoryText =
       <View style={kn.hd}>
 <Text style={kn.title}>{sectionTitle}</Text>
 <Text style={kn.sub}>{sectionSubtitle}</Text>
+{/* 这道门只画在清音那一屏 —— 浊音/拗音/特殊音/外来语不是主线的前提,
+    在那些屏上显示「离开始学词还差 N 个」是在催一件不该催的事。
+    kanaReady 之前不画:空的进度和「真的没看过」长得一样,
+    这时候渲染出来的是一句错话(0/46),而它会让老用户以为进度没了。 */}
+{kanaReady && kanaSection === 'clear' && requiredHira.length > 0 ? (
+  <View style={kn.gateRow}>
+    {kanaDone ? (
+      <Text style={kn.gateDone}>
+        ✓ 这道门过了 —— 首页现在会给你词
+      </Text>
+    ) : (
+      <>
+        <Text style={kn.gateTxt}>
+          看过 {kanaSeen} / {requiredHira.length} 个平假名
+        </Text>
+        {/* 显式出口。学过一点日语的人不该被迫点 46 下 ——
+            而这个 App 的第一个用户(开发者本人)正是这种人。
+            **不连带把 46 个 seen 填上**(见 declareKnown):
+            「他说他会」和「他逐个看过」是两件事,合并了就分不开。 */}
+        <TouchableOpacity style={kn.gateBtn} onPress={declare}>
+          <Text style={kn.gateBtnTxt}>我已经会了</Text>
+        </TouchableOpacity>
+      </>
+    )}
+  </View>
+) : null}
 {!isLoanwordMode ? (
 <View style={kn.modeTopRow}>
     <View style={kn.modeRow}>
@@ -2121,6 +2164,19 @@ const kn = StyleSheet.create({
   hd: { padding: 20, paddingBottom: 12, borderBottomWidth: 1, borderBottomColor: C.border },
   title: { fontSize: 22, fontWeight: '700', color: C.ink },
   sub: { fontSize: 12, color: C.muted, marginTop: 3 },
+  // 主线第一道门的状态条。做得克制 —— 它是个进度提示,不是这一屏的主角
+  gateRow: {
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
+    marginTop: 10, backgroundColor: C.tag, borderRadius: 8,
+    paddingLeft: 12, paddingRight: 6, paddingVertical: 6,
+  },
+  gateTxt: { fontSize: 11.5, color: C.muted, fontVariant: ['tabular-nums'] },
+  gateDone: { fontSize: 11.5, color: C.teal, paddingVertical: 5 },
+  gateBtn: {
+    backgroundColor: C.white, borderRadius: 6, borderWidth: 1, borderColor: C.border,
+    paddingHorizontal: 11, paddingVertical: 5,
+  },
+  gateBtnTxt: { fontSize: 11.5, color: C.ink, fontWeight: '600' },
  modeTopRow: {
   flexDirection: 'row',
   alignItems: 'center',
