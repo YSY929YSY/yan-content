@@ -1524,34 +1524,44 @@ const theoryText =
     在那些屏上显示「离开始学词还差 N 个」是在催一件不该催的事。
     kanaReady 之前不画:空的进度和「真的没看过」长得一样,
     这时候渲染出来的是一句错话(0/46),而它会让老用户以为进度没了。 */}
+{/* ⚠️ 这一块原本是**一行两用**:门过了就只显示「✓ 过了」,不过才显示计数。
+    真机上第一眼就露馅了 —— 老用户走兜底判据,门天然是过的,
+    于是「看过几个」**永远看不见**,点开假名也不知道有没有记上。
+    这两件事本来就不是一件:
+      · 看过几个 —— **这一页自己的进度**,任何时候都该看得见
+      · 门过了没 —— 影响的是主线,是另一层的事
+    现在计数常驻,门的状态是它旁边的一句注解。 */}
 {gate.ready && kanaSection === 'clear' ? (
   <View style={kn.gateRow}>
-    {gate.done ? (
-      <Text style={kn.gateDone}>
-        ✓ 这道门过了 —— 首页现在会给你词
+    <View style={{ flex: 1 }}>
+      <Text style={kn.gateTxt}>
+        {gate.required.length > 0
+          ? `看过 ${gate.seen} / ${gate.required.length} 个平假名`
+          : '假名表没能载入'}
       </Text>
-    ) : (
-      <>
-        {/* ⚠️ 这里原本整块的渲染条件带着 `requiredHira.length > 0`,那是个死锁:
-            内容包筛不出假名时,isKanaDone 按设计只认用户的显式声明
-            (见 kanaProgress.ts),而**恰好在这个状态下这个按钮不渲染** ——
-            用户被锁死在这个 commit 本来要修的那个死循环里。
-            护栏的两半分开写、分开看都对,合起来才露出来。
-            所以按钮无条件出现,只有那行数字在没有判据时改口。 */}
-        <Text style={kn.gateTxt}>
-          {gate.required.length > 0
-            ? `看过 ${gate.seen} / ${gate.required.length} 个平假名`
-            : '假名表没能载入'}
-        </Text>
-        {/* 显式出口。学过一点日语的人不该被迫点 46 下 ——
-            而这个 App 的第一个用户(开发者本人)正是这种人。
-            **不连带把 46 个 seen 填上**(见 declareKnown):
-            「他说他会」和「他逐个看过」是两件事,合并了就分不开。 */}
-        <TouchableOpacity style={kn.gateBtn} onPress={declare}>
-          <Text style={kn.gateBtnTxt}>我已经会了</Text>
-        </TouchableOpacity>
-      </>
-    )}
+      <Text style={kn.gateNote}>
+        {/* ⚠️ 靠兜底过的要**说实话**。这个用户没走过五十音,是因为他已经学过词
+            才被放行的 —— 显示成「✓ 走完了」就是一句他没做过的事,
+            而且他会以为自己的进度丢了(明明写着 0 / 46 却说过了)。 */}
+        {gate.legacy
+          ? '你学过词,所以首页不拦你 —— 这里的数字只是你自己点过多少'
+          : gate.done
+            ? '✓ 这道门过了 —— 首页现在会给你词'
+            : '双击一个假名看记忆钩子,就算看过了'}
+      </Text>
+    </View>
+    {/* 显式出口。学过一点日语的人不该被迫点 46 下 ——
+        而这个 App 的第一个用户(开发者本人)正是这种人。
+        **不连带把 46 个 seen 填上**(见 declareKnown):
+        「他说他会」和「他逐个看过」是两件事,合并了就分不开。
+        ⚠️ 这个按钮的渲染条件里**不能带 `required.length > 0`** ——
+        内容包筛不出假名时 isKanaDone 只认显式声明,而那正是它被藏起来的时候,
+        用户会被锁死在这个功能本来要修的那个死循环里。 */}
+    {!gate.done ? (
+      <TouchableOpacity style={kn.gateBtn} onPress={declare}>
+        <Text style={kn.gateBtnTxt}>我已经会了</Text>
+      </TouchableOpacity>
+    ) : null}
   </View>
 ) : null}
 {!isLoanwordMode ? (
@@ -2182,14 +2192,14 @@ const kn = StyleSheet.create({
   hd: { padding: 20, paddingBottom: 12, borderBottomWidth: 1, borderBottomColor: C.border },
   title: { fontSize: 22, fontWeight: '700', color: C.ink },
   sub: { fontSize: 12, color: C.muted, marginTop: 3 },
-  // 主线第一道门的状态条。做得克制 —— 它是个进度提示,不是这一屏的主角
+  // 这一页自己的进度条(顺带说一句门的状态)。做得克制 —— 不是这一屏的主角
   gateRow: {
-    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
+    flexDirection: 'row', alignItems: 'center', gap: 10,
     marginTop: 10, backgroundColor: C.tag, borderRadius: 8,
-    paddingLeft: 12, paddingRight: 6, paddingVertical: 6,
+    paddingLeft: 12, paddingRight: 6, paddingVertical: 8,
   },
-  gateTxt: { fontSize: 11.5, color: C.muted, fontVariant: ['tabular-nums'] },
-  gateDone: { fontSize: 11.5, color: C.teal, paddingVertical: 5 },
+  gateTxt: { fontSize: 12.5, color: C.ink, fontWeight: '600', fontVariant: ['tabular-nums'] },
+  gateNote: { fontSize: 10.5, color: C.mutedWarm, marginTop: 2, lineHeight: 15 },
   gateBtn: {
     backgroundColor: C.white, borderRadius: 6, borderWidth: 1, borderColor: C.border,
     paddingHorizontal: 11, paddingVertical: 5,

@@ -191,7 +191,23 @@ export default function JournalScreen({ onBack }: { onBack?: () => void }) {
     );
   }
 
-  const missing = Object.values(assetUris).filter(u => u === undefined).length;
+  /**
+   * 真正丢了文件的照片有几张。
+   *
+   * ⚠️ 原本是 `Object.values(assetUris).filter(u => u === undefined).length` ——
+   * 那会把**印章、胶带、词纸条全算成缺图**:只有 photo 元素才有 `assetId`,
+   * 其余三种 `assetUris[id]` 天然是 undefined。
+   * 真机上一页 1 张照片 + 2 印章 + 1 纸条 + 3 胶带,底下就写着「缺图 6」,
+   * 而一张都没丢。**一个会说谎的诊断比没有诊断更糟** —— 它会让下一个人
+   * 去追一个不存在的 bug,或者反过来,真丢图的那天没人信这个数。
+   *
+   * 判据改成「它是张照片(有 assetId),但文件找不着」。
+   */
+  // 不用 useMemo:这行在提前 return 之后,包成 hook 就成了条件调用。
+  // assetUris 本身已经 memo 过,这里只是数一遍元素。
+  const missing = (page?.items ?? []).filter(
+    it => (it.payload as any)?.assetId && !assetUris[it.id],
+  ).length;
 
   return (
     <GestureHandlerRootView style={styles.root}>
