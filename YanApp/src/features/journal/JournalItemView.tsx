@@ -116,16 +116,28 @@ function JournalItemViewInner({
   const longPress = Gesture.LongPress().minDuration(420).onStart(() => { runOnJS(menu)(); });
 
   /**
-   * 捏合与旋转必须 Simultaneous —— 这就是「不要拆成两个手势」在
-   * gesture-handler 里的写法:两个识别器同时激活,共用一个起手快照。
-   * 单指拖与它们是 Exclusive:一根手指时拖,两根手指时变形。
+   * ⚠️ **pan / pinch / rotate 必须三个都 Simultaneous,不能用 Exclusive。**
+   *
+   * 第一版写的是:
+   *
+   *     Gesture.Exclusive(Gesture.Simultaneous(pinch, rotate), pan, longPress, tap)
+   *
+   * 真机上的结果是**完全拖不动**,而松手时角度还会微微一变。原因:
+   * Exclusive 的语义是「后面的要等前面的**失败**才能激活」,而 Pinch 需要两根手指 ——
+   * 单指按下时它既不激活也**不失败**,一直挂在待定,把 pan 挡在门外。
+   * 等手指抬起 pinch 才失败,pan 这时才拿到机会,于是 onStart 和 onEnd 连着触发、
+   * translation 是 0:位置纹丝不动,但 onEnd 里的松手抖动照样叠加了一次。
+   *
+   * 正确的关系:
+   *   · pan + pinch + rotate → **Simultaneous**。两指操作时位移和缩放本来就该同时发生
+   *     (工单 2.2「不要拆成两个手势」说的就是这件事)。
+   *   · tap 与 longPress   → 互斥,长按赢(长按本来就是「按住不动」,和单击天然冲突)。
+   *   · 这两组之间 Simultaneous:移动会让 tap/longPress 自己因超出容差而取消,
+   *     不需要我们手动排他。
    */
-  const gesture = Gesture.Exclusive(
-    Gesture.Simultaneous(pinch, rotate),
-    pan,
-    longPress,
-    tap,
-  );
+  const manipulate = Gesture.Simultaneous(pan, pinch, rotate);
+  const taps = Gesture.Exclusive(longPress, tap);
+  const gesture = Gesture.Simultaneous(manipulate, taps);
 
   const animStyle = useAnimatedStyle(() => {
     const w = item.w * fit.scale;
