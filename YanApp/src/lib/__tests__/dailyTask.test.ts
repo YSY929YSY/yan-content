@@ -8,7 +8,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import {
-  nextTask, taskLabel, poolProgress, anchorPool, wordKey,
+  nextTask, taskLabel, poolProgress, anchorPool, wordKey, todayStats,
   type WordLike, type ProgressRec,
 } from '../../features/learn/dailyTask.ts';
 
@@ -289,4 +289,60 @@ test('★ 同一个写法也不能一批里出现两次 —— 卡片上就是�
     kanaDone: true, today: TODAY, newLimit: 3,
   });
   assert.ok(t2.kind === 'learn' && t2.words.some(x => x.word === '私'));
+});
+
+// ── 今天走到哪了 ─────────────────────────────────────────────
+//
+// 补的是主线上一个说不出口的空档:这条路只有「下一步」,没有「到此为止」。
+// 真机上走一遍就露出来:学完 6 个,首页立刻换一批新的,「今天该复习」还是 0,
+// 而那些词明天就会回来 —— 系统一个字都没说。
+
+const TSW = (word: string, reading: string): WordLike => ({ word, reading });
+const TS_POOL: WordLike[] = [TSW('私', 'わたし'), TSW('行く', 'いく'), TSW('何', 'なに')];
+const TS_TODAY = '2026-08-18';
+const TS_TMR = '2026-08-19';
+
+test('★ 今天碰过几个 / 明天回来几个', () => {
+  const progress: Record<string, ProgressRec> = {
+    '私-わたし': { dueAt: TS_TMR, lastSeenAt: TS_TODAY, status: 'learning' },
+    '行く-いく': { dueAt: TS_TMR, lastSeenAt: TS_TODAY, status: 'learning' },
+    // 昨天碰的,明天不回来
+    '何-なに': { dueAt: '2026-08-25', lastSeenAt: '2026-08-17', status: 'learning' },
+  };
+  const got = todayStats(TS_POOL, progress, TS_TODAY, TS_TMR);
+  // 字面量,不写 Object.keys(progress).length —— 期望值取自被测输入的话,
+  // 实现改成「全都数一遍」它照样绿
+  assert.equal(got.touched, 2);
+  assert.equal(got.comingBack, 2);
+});
+
+test('★ 说「碰过」不说「学会了」—— 记录里只有 lastSeenAt,没有可核的「学会」判据', () => {
+  // 一个按了「没读出来」的词:今天见过,但今天还到期,明天不回来
+  const progress: Record<string, ProgressRec> = {
+    '私-わたし': { dueAt: TS_TODAY, lastSeenAt: TS_TODAY, status: 'learning' },
+  };
+  const got = todayStats(TS_POOL, progress, TS_TODAY, TS_TMR);
+  assert.equal(got.touched, 1, '见过就算碰过,不管评的是什么分');
+  assert.equal(got.comingBack, 0, '今天到期的不算「明天回来」');
+});
+
+test('已掌握的不算「明天回来」', () => {
+  const progress: Record<string, ProgressRec> = {
+    '私-わたし': { dueAt: TS_TMR, lastSeenAt: TS_TODAY, status: 'mastered' },
+  };
+  assert.equal(todayStats(TS_POOL, progress, TS_TODAY, TS_TMR).comingBack, 0);
+});
+
+test('空进度不炸,而且是 0 不是 NaN', () => {
+  assert.deepEqual(todayStats(TS_POOL, {}, TS_TODAY, TS_TMR), { touched: 0, comingBack: 0 });
+  assert.deepEqual(todayStats([], {}, TS_TODAY, TS_TMR), { touched: 0, comingBack: 0 });
+});
+
+test('★ 只数池子里的 —— 复习进度是全局的,深卡/地点/场景句都在同一份 map 里', () => {
+  const progress: Record<string, ProgressRec> = {
+    '私-わたし': { dueAt: TS_TMR, lastSeenAt: TS_TODAY },
+    // 不在池子里的一条(比如地铁句),不该被算进主线的今日统计
+    'place:oshima': { dueAt: TS_TMR, lastSeenAt: TS_TODAY },
+  };
+  assert.equal(todayStats(TS_POOL, progress, TS_TODAY, TS_TMR).touched, 1);
 });

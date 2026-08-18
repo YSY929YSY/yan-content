@@ -39,6 +39,8 @@ export type ProgressRec = {
   status?: string;
   dueAt?: string | null;
   box?: number;
+  /** 上次见到它是哪天(YYYY-MM-DD)。srs.makeRecord 每次评分都会写。 */
+  lastSeenAt?: string | null;
 };
 
 /**
@@ -193,6 +195,43 @@ export function taskLabel(task: Task): { title: string; action: string } {
     case 'clear':
       return { title: `${task.poolTotal} 个汉字直读词都过完了`, action: '看词书' };
   }
+}
+
+/**
+ * 今天走到哪了。
+ *
+ * ─────────────────────────────────────────────────────────
+ * 补的是主线上一个说不出口的空档:**这条路只有「下一步」,没有「到此为止」。**
+ *
+ * 真机上走一遍就露出来了:学完 6 个词,首页立刻换一批新的,
+ * 「今天该复习」还是 0 —— 而那 12 个词其实明天就会回来。
+ * 系统一个字都没说。用户能得到的信号只有「还有更多」,
+ * 于是要么停不下来,要么随便一停,而**两种都不知道自己今天做成了什么**。
+ *
+ * ⚠️ 这里**不设每日上限**,只如实报数。设不设上限是产品决定
+ * (它会改变「无限往下学」这件事的性质),不该顺手在一个统计函数里定。
+ * ─────────────────────────────────────────────────────────
+ *
+ * @param tomorrow 明天(YYYY-MM-DD)。**由调用方算好传进来** ——
+ *                 这个模块不做日期运算,免得和 srs.js 的 addDays 长出两套口径。
+ */
+export function todayStats(
+  pool: readonly WordLike[],
+  progress: Record<string, ProgressRec | undefined>,
+  today: string,
+  tomorrow: string,
+) {
+  let touched = 0;
+  let comingBack = 0;
+  for (const w of pool) {
+    const rec = progress[wordKey(w)];
+    if (!rec) continue;
+    // ⚠️ 说「碰过」不说「学会了」。记录里有的只是 lastSeenAt,
+    // 而「学会」这件事我们没有任何可核的判据 —— 不做没有源的声明。
+    if (rec.lastSeenAt === today) touched += 1;
+    if (rec.dueAt === tomorrow && rec.status !== 'mastered') comingBack += 1;
+  }
+  return { touched, comingBack };
 }
 
 /** 进度数字。首页那一行的右边。 */

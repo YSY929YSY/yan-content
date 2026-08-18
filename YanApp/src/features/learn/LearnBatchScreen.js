@@ -39,7 +39,8 @@ import { PitchLine, pitchOf, hasMultiAccent } from '../wordbank/PitchLine';
 import { Furigana } from '../wordbank/FuriganaText';
 import { ExampleSentence } from '../wordbank/ExampleSentence';
 import EXAMPLE_TOKENS from '../../../assets/example_tokens.json';
-import { wordKey } from './dailyTask';
+import { wordKey, todayStats } from './dailyTask';
+import { todayStr, addDays } from '../wordbank/srs';
 
 /**
  * @param words   这一批要学的词。**调用方传进来的快照,这一页不重算。**
@@ -56,10 +57,17 @@ import { wordKey } from './dailyTask';
  * @param onBack  返回
  * @param onDone  这一批过完了、用户点「回首页」
  */
-export default function LearnBatchScreen({ words, onBack, onDone }) {
+export default function LearnBatchScreen({ words, pool, onBack, onDone }) {
   const { speak, speakingKey } = useSpeech();
   const { prefs } = usePrefs();
-  const { grade } = useReviewProgress();
+  const { grade, progress } = useReviewProgress();
+
+  // 今天走到哪了。**用主线池算,不是用整份进度** ——
+  // 复习进度是全局的,深卡/地点/场景句都在同一份 map 里(见 useReview.js)。
+  const stats = useMemo(
+    () => todayStats(pool || words || [], progress || {}, todayStr(), addDays(todayStr(), 1)),
+    [pool, words, progress],
+  );
 
   // 队列只存键,词本身按键现查 —— 和复习页一个口径
   const index = useMemo(() => {
@@ -92,9 +100,16 @@ export default function LearnBatchScreen({ words, onBack, onDone }) {
         <Header onBack={onBack} left={0} total={total} />
         <View style={s.center}>
           <Text style={s.doneBig}>这 {total} 个过完了</Text>
-          {/* 说清楚下一次在什么时候 —— 「学完了然后呢」是这条主线上
-              紧接着的下一个空档,先用一句话堵上 */}
-          <Text style={s.dim}>它们进了复习队列,到期会自己出现</Text>
+          {/* ⚠️ 这里原本是一句笼统的「它们进了复习队列,到期会自己出现」。
+              真机上走一遍就知道那句话不够:学完之后首页立刻换一批新的,
+              「今天该复习」还是 0 —— 用户唯一收到的信号是「还有更多」,
+              **没有任何地方告诉他今天做成了什么、什么时候回来**。
+              于是要么停不下来,要么随便一停,两种都不知道自己在哪儿。
+              现在给真数字。 */}
+          <Text style={s.dim}>
+            今天一共过了 {stats.touched} 个
+            {stats.comingBack > 0 ? ` · 明天有 ${stats.comingBack} 个回来` : ''}
+          </Text>
           <TouchableOpacity style={s.doneBtn} onPress={onDone}>
             <Text style={s.doneTxt}>回首页</Text>
           </TouchableOpacity>

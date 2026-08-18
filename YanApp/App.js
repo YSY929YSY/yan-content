@@ -1371,6 +1371,8 @@ function PieTab(props) {
 
 function PieTabInner({ content, subTab, setSubTab, sceneState, setSceneState, practiceScene, setPracticeScene, learnBatch, setLearnBatch }) {
   const [wbBookId, setWbBookId] = useState(null);
+  // memo 一次:内联调用每次渲染都新建数组,下游按引用比较的 memo 会全部失效
+  const mainlinePool = useMemo(() => anchorPool(content.wordBank || []), [content.wordBank]);
   return (
     <View style={{ flex: 1 }}>
       {/* 子 tab */}
@@ -1445,6 +1447,9 @@ function PieTabInner({ content, subTab, setSubTab, sceneState, setSceneState, pr
         {subTab === 'todaybatch' && (learnBatch?.length ? (
           <LearnBatchScreen
             words={learnBatch}
+            // 今日统计要按主线池算,不是按这一批的 6 个 ——
+            // 「今天一共过了几个」问的是整条主线,不是这一轮
+            pool={mainlinePool}
             onBack={() => setSubTab('learn')}
             onDone={() => { setLearnBatch(null); setSubTab('learn'); }}
           />
@@ -6036,6 +6041,21 @@ function DataSourcesScreen({ onBack }) {
             <Text style={ds.link}>Tatoeba ↗</Text>
           </TouchableOpacity>
         </View>
+        {/* ⚠️ 这一条是 2026-08-18 加的。例句的分词和注音是**离线**跑 Sudachi 得到的
+            (构建时跑,词典 207 MB 留在开发机),进 App 的只有派生出来的读音数据。
+            分发派生物同样要署名 —— 署名债这个项目已经欠过一次(kanjium 那次),
+            不要再欠第二次。 */}
+        <View style={ds.card}>
+          <Text style={ds.eyebrow}>例句的分词与注音</Text>
+          <Text style={ds.body}>
+            例句按词切开、汉字上方的假名,由 <Text style={ds.strong}>Sudachi</Text>
+            （SudachiPy + SudachiDict，Works Applications，Apache License 2.0）
+            在构建时离线分析得出。词典本身不随 App 分发，App 里只包含由它派生的读音数据。
+          </Text>
+          <TouchableOpacity onPress={() => Linking.openURL('https://github.com/WorksApplications/Sudachi').catch(() => {})}>
+            <Text style={ds.link}>Sudachi ↗</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </View>
   );
@@ -6051,6 +6071,7 @@ const ds = StyleSheet.create({
   eyebrow: { fontSize: 11, color: C.muted, fontWeight: '700', letterSpacing: 1, marginBottom: 9 },
   body: { fontSize: 14, color: C.ink, lineHeight: 22, marginBottom: 8 },
   link: { fontSize: 13, color: C.teal, fontWeight: '600', marginTop: 3 },
+  strong: { fontWeight: '700' },
 });
 
 // ─────────────────────────────────────────────
