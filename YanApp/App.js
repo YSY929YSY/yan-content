@@ -39,6 +39,9 @@ import { useSpeech, SpeakBtn } from './src/components/Speech';
 import TripNotebook from './src/features/travel/TripNotebook';
 // 手账预演。只在 __DEV__ 里挂,生产包里那个入口整段不渲染。
 import JournalScreen from './src/features/journal/JournalScreen';
+import {
+  nextTask, taskLabel, poolProgress, anchorPool,
+} from './src/features/learn/dailyTask';
 // 词场预览:内容还在 staging 没并进内容包,开发期先从这份草稿读,方便边写边看。
 // 合并进 content.v2.json 之后这份和它的引用一起删。
 import WORDFIELD_PREVIEW from './src/features/wordbank/wordfield-preview.json';
@@ -649,6 +652,84 @@ const tb = StyleSheet.create({
 // ─────────────────────────────────────────────
 // 🏠 Home Screen
 // ─────────────────────────────────────────────
+
+/**
+ * 今天该干什么 —— **整个首页最上面,只有一句话和一个按钮。**
+ *
+ * 这张卡是为了回答产品的核心困境:「我自己都不知道我要怎么去学习日语,
+ * 感觉很混乱很复杂」。十个模块并列,任何时刻用户都得自己决定点哪个。
+ *
+ * 规则在 src/features/learn/dailyTask.ts,是纯函数、有 18 条测试。
+ * 这里只负责把它接上界面和导航,**不做任何判断**。
+ */
+function TodayCard({ content, setTab, setSubTab }) {
+  const { progress, ready } = useReviewProgress();
+
+  const pool = useMemo(() => anchorPool(content.wordBank || []), [content.wordBank]);
+
+  /**
+   * ⚠️ 五十音目前**没有任何进度记录**,所以这里用「学过任何一个词」当代理:
+   * 学过词的人显然已经过了五十音那一关。
+   *
+   * 这是权宜之计,不是设计。真做法是五十音页自己记进度 —— 那要新开一个键
+   * 和一处 UI,属于另一件事。现在这样至少不会给一个真·零基础的人
+   * 上来就甩六个汉字词,也不会让老用户被挡在五十音前面。
+   */
+  const kanaDone = useMemo(() => Object.keys(progress || {}).length > 0, [progress]);
+
+  const task = useMemo(
+    () => nextTask({ pool, progress: progress || {}, kanaDone, today: todayStr() }),
+    [pool, progress, kanaDone],
+  );
+  const label = taskLabel(task);
+  const prog = useMemo(() => poolProgress(pool, progress || {}), [pool, progress]);
+
+  // 读盘没完就先不显示 —— 空的 progress 和「真的没学过」长得一样,
+  // 这时候渲染出来的是一句错话。
+  if (!ready || pool.length === 0) return null;
+
+  const go = () => {
+    setTab('pie');
+    setSubTab(task.kind === 'kana' ? 'kana' : task.kind === 'review' ? 'review' : 'wordbank');
+  };
+
+  return (
+    <TouchableOpacity style={tc.card} onPress={go} activeOpacity={0.85}>
+      <View style={{ flex: 1 }}>
+        <Text style={tc.eyebrow}>今天</Text>
+        <Text style={tc.title}>{label.title}</Text>
+        {task.kind === 'learn' ? (
+          <Text style={tc.words} numberOfLines={1}>
+            {task.words.map(w => w.word).join('   ')}
+          </Text>
+        ) : null}
+      </View>
+      <View style={tc.right}>
+        <Text style={tc.action}>{label.action}</Text>
+        <Text style={tc.prog}>{prog.learned} / {prog.total}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+}
+
+const tc = StyleSheet.create({
+  card: {
+    flexDirection: 'row', alignItems: 'center',
+    backgroundColor: '#2b2723', borderRadius: 16,
+    paddingVertical: 18, paddingHorizontal: 20, marginTop: 18,
+    borderWidth: 1, borderColor: '#3d372f',
+  },
+  eyebrow: { color: '#7d7369', fontSize: 10.5, letterSpacing: 2, marginBottom: 5 },
+  title: { color: '#e8e0d2', fontSize: 16, lineHeight: 22, letterSpacing: 0.3 },
+  words: { color: '#b4542f', fontSize: 13, marginTop: 7, letterSpacing: 1.5 },
+  right: { alignItems: 'flex-end', marginLeft: 14 },
+  action: {
+    color: '#fff', fontSize: 13, backgroundColor: '#b4542f',
+    paddingHorizontal: 14, paddingVertical: 7, borderRadius: 8, overflow: 'hidden',
+  },
+  prog: { color: '#6f665b', fontSize: 10.5, marginTop: 7, fontVariant: ['tabular-nums'] },
+});
+
 function HomeScreen({ setTab, setSceneState, setSubTab, content, onDataSources, onDeleteAccount }) {
   const [fusionIdx, setFusionIdx] = useState(0);
   const [entryMode, setEntryMode] = useState('track');
@@ -663,6 +744,10 @@ function HomeScreen({ setTab, setSceneState, setSubTab, content, onDataSources, 
         <Text style={hs.heroTitle}>今天大地说什么？</Text>
         <Text style={hs.heroSub}>丿 出发 · 丶 落脚 · 丿+丶=人</Text>
         <Text style={hs.heroNote}>从一撇一捺开始，到真正开口。</Text>
+
+        {/* 任何时刻只有一个下一步 —— 这张卡在最上面,是有意的。
+            首页原本是「三个数字 + 三个去处」,那仍然是「你自己选一个」。 */}
+        <TodayCard content={content} setTab={setTab} setSubTab={setSubTab} />
 
         {/* 三个真实数字 + 三个去处。首页原本一个数字都没有,只有口号 ——
             用户打开 App 看不到自己在哪儿,每次都像第一次打开。
@@ -1238,14 +1323,10 @@ moduleName: {
 // 内部子导航：学习场景 / 地铁冒险 / 五十音
 // ─────────────────────────────────────────────
 function PieTab(props) {
-  // 复习进度在这一层只建一份,词书页 / 词库搜索 / 复习页共用。
-  // 挂在学习 Tab 而不是 App 根:挂根上的话,用户从没进过学习 tab
-  // 也会白读一次盘、白拉一次云端。见 ReviewProgressContext 的注释。
-  return (
-    <ReviewProgressProvider>
-      <PieTabInner {...props} />
-    </ReviewProgressProvider>
-  );
+  // ⚠️ Provider 已经上移到 tab 区外面(见 render 里那段注释)。
+  // 这里不能再包一层 —— **两个 Provider = 两份独立的进度,各写各的盘、互相覆盖**,
+  // 而且不报错。见 useReviewProgressState 的文档注释。
+  return <PieTabInner {...props} />;
 }
 
 function PieTabInner({ content, subTab, setSubTab, sceneState, setSceneState, practiceScene, setPracticeScene }) {
@@ -6075,6 +6156,12 @@ export default function App() {
     <SafeAreaView style={{ flex: 1, backgroundColor: isDark ? C.ink : C.paper }}>
       <StatusBar barStyle={isDark ? 'light-content' : 'dark-content'} backgroundColor={isDark ? C.ink : C.paper} />
       {error && <OfflineContentNotice />}
+      {/* ⚠️ Provider 从 PieTab 上移到这里。
+          原来挂在 PieTab 上,理由是「用户从没进过学习 tab 也会白读一次盘」——
+          那个前提**现在不成立了**:首页的今日任务卡要显示学习状态,
+          进首页就必须读进度,不存在「白读」。
+          绝不能两处都挂 —— 两个 Provider 是两份独立的进度,各写各的盘、互相覆盖。 */}
+      <ReviewProgressProvider>
       {showDataSources ? (
         <DataSourcesScreen onBack={() => setShowDataSources(false)} />
       ) : tab === 'home' && (
@@ -6092,6 +6179,7 @@ export default function App() {
 />
       )}
       {tab === 'na' && <NaTab mapPlaces={content.mapPlaces} />}
+      </ReviewProgressProvider>
       {!showDataSources && <TabBar tab={tab} setTab={(t) => { setTab(t); if (t === 'pie') setSubTab('learn'); }} />}
       {__DEV__ && !showDataSources && tab === 'na' && (
         // 开发期入口,只在「世界打卡」这个 tab 出现 —— 手账属于世界打卡那一块,

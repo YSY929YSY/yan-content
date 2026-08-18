@@ -10,7 +10,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "node --test --test-reporter=spec \"src/lib/__tests__/*.test.mjs\" \"src/lib/__tests__/*.test.ts\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "dev": "expo start --dev-client --lan",
+    "dev:clean": "expo start --dev-client -c --lan"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
