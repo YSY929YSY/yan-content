@@ -61,6 +61,52 @@ def align(word, reading):
     return re.fullmatch(pat, to_hira(reading)) is not None
 
 
+# ── 读音覆盖表 ────────────────────────────────────────────────
+#
+# ⚠️ **这张表里的每一条都是教学判断,不是从数据里跑出来的。**
+#
+# 决策记录 E1 把声明分成两类:「有源可核的」(读音、音调、JMdict 释义)和
+# 「没有源的」(这句话自然吗、日本人真会这么说吗)。分词器给的读音属于第一类 ——
+# 它有词典可查。而「同一个词在教学场景里该教哪个读音」属于第二类。
+#
+# 所以这张表**不允许悄悄长大**:每加一条都要写清理由,而且宁可少写。
+# 真正的解法不是「让 CC 判断」,是有一天找到可核的源(比如教材词表)。
+#
+# ⚠️ 一个反面教训:我原本打算「拿词库的 reading 当准绳去纠分词器」,
+# 跑出来 101 种不一致、379 处 —— 而前 20 条几乎**全是分词器对**:
+#     来ます=きます(词库 らい)  三時=さんじ(词库 とき)
+#     弁当箱=べんとうばこ(词库 はこ,这是连浊)
+# 词库存的是词典形,句子里读音本来就会变。那个方案当场作废。
+SURFACE_OVERRIDES = {
+    # わたくし 是敬体读法;现代日常和教材里 私 一律教 わたし。
+    # 词库自己两条都有(私/わたし 和 私/わたくし),所以不是「词库说了算」能解决的。
+    '私': 'わたし',
+    # あす 偏书面/新闻;口语和 N5 教材是 あした。同一个理由。
+    '明日': 'あした',
+}
+
+# 何 的读音看后面接什么,不是固定的。分词器给了清一色「なん」,
+# 而例句里 `何を食べますか` / `何を売って` 这些该读「なに」。
+#
+# ⚠️ 只列**没有歧义**的助词。`何で` 故意不列 ——
+# なんで(为什么)和 なにで(用什么)都成立,靠后接词判断不了。
+NANI_PARTICLES = {'を', 'が', 'も', 'か', 'に'}
+
+
+def apply_overrides(toks):
+    """就地改读音。返回改了几处。"""
+    n = 0
+    for i, t in enumerate(toks):
+        want = SURFACE_OVERRIDES.get(t['t'])
+        if t['t'] == '何':
+            nxt = toks[i + 1]['t'] if i + 1 < len(toks) else ''
+            want = 'なに' if nxt in NANI_PARTICLES else None
+        if want and t['r'] != want:
+            t['r'] = want
+            n += 1
+    return n
+
+
 def main():
     write = '--write' in sys.argv
     from sudachipy import Dictionary, SplitMode
@@ -71,7 +117,7 @@ def main():
     tok = Dictionary(dict='core').create()
 
     out = {}
-    n_sent = n_tok = n_kanji_tok = n_aligned = 0
+    n_sent = n_tok = n_kanji_tok = n_aligned = n_over = 0
     broken = []          # 表层拼不回原句的
     failed = []          # 含汉字但对不上的
 
@@ -94,6 +140,8 @@ def main():
                 elif len(failed) < 20:
                     failed.append(f'{wid} {surface}/{reading}')
 
+        n_over += apply_overrides(toks)
+
         # ⚠️ 这一条是整个脚本里最重要的自检:表层拼起来必须**逐字等于原句**。
         # 分词器吞字、改字、规范化标点都在这里现原形 —— 而它不报错,
         # 只是让例句在屏幕上少一个字,没人会发现。
@@ -115,6 +163,7 @@ def main():
     print(f'token           {n_tok}')
     print(f'含汉字 token    {n_kanji_tok}')
     print(f'  能对齐        {n_aligned}  ({n_aligned / n_kanji_tok * 100:.2f}%)')
+    print(f'读音覆盖        {n_over} 处   ← 教学判断,见 SURFACE_OVERRIDES')
     print(f'表层拼不回原句  {len(broken)}   ← 这些句子整句丢弃')
     print(f'收进产物的句子  {len(out)}')
     if failed:
