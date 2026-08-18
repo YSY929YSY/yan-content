@@ -43,7 +43,7 @@ import TripNotebook from './src/features/travel/TripNotebook';
 // 手账预演。只在 __DEV__ 里挂,生产包里那个入口整段不渲染。
 import JournalScreen from './src/features/journal/JournalScreen';
 import {
-  nextTask, taskLabel, poolProgress, anchorPool,
+  nextTask, taskLabel, poolProgress, anchorPool, wordKey as poolWordKey,
 } from './src/features/learn/dailyTask';
 import { usePrefs } from './src/lib/prefs';
 // 词场预览:内容还在 staging 没并进内容包,开发期先从这份草稿读,方便边写边看。
@@ -690,14 +690,33 @@ function TodayCard({ content, setTab, setSubTab, setLearnBatch }) {
   const go = () => {
     setTab('pie');
     if (task.kind === 'kana') return setSubTab('kana');
-    if (task.kind === 'review') return setSubTab('review');
+    if (task.kind === 'review') {
+      // ⚠️ 这里原本是 setSubTab('review') —— 而那一页问的是「这个词什么意思」。
+      //
+      // 两个问题叠在一起:
+      //  ① 主线池是 563 条 kanji_anchor,**意思正是用户唯一不缺的**。
+      //     拿它问意思,等于把这个产品最强的那张牌当题目发出去。
+      //  ② 数字对不上:dailyTask 的 dueKeys **只数主线池**,而 ReviewScreen 走的是
+      //     全局混合队列(词/深卡/地点/场景/地铁,上限 10,还会补新的深内容)。
+      //     卡上写「有 6 个词到期了」,点进去是另外一批东西。
+      //
+      // 主线的到期词交给批次页(问读音),ReviewScreen 留给首页三数字卡
+      // 那条「今天该复习」—— 那条本来就是全局混合的,名副其实。
+      const byKey = new Map(pool.map(x => [poolWordKey(x), x]));
+      const dueWords = task.keys.map(k => byKey.get(k)).filter(Boolean);
+      if (dueWords.length) {
+        setLearnBatch({ mode: 'review', words: dueWords });
+        return setSubTab('todaybatch');
+      }
+      return setSubTab('review');   // 一条都解析不出来时的兜底
+    }
     if (task.kind === 'learn') {
       // ⚠️ **必须把 task.words 一起带过去。**
       //
       // 这里原本是 setSubTab('wordbank') —— 卡面上写着「6 个词 · 私 行く 何…」,
       // 点进去落在词书货架上,那 6 个词一个都没跟过去,用户得自己再挑一遍。
       // 规则层算了半天的「下一步」到界面这一步全丢了,主线在这儿是断的。
-      setLearnBatch(task.words);
+      setLearnBatch({ mode: 'learn', words: task.words });
       return setSubTab('todaybatch');
     }
     // clear:池子过完了,那就真的去词书 —— 这时候「自己挑」是对的动作
@@ -1444,9 +1463,10 @@ function PieTabInner({ content, subTab, setSubTab, sceneState, setSceneState, pr
             货架是「你自己挑」,而这条主线的整个前提是**任何时刻只有一个下一步**。
             batch 为空时不渲染:那说明是直接切到这个 subTab 的(理论上没有这种路径),
             渲染出来会是一页空卡。 */}
-        {subTab === 'todaybatch' && (learnBatch?.length ? (
+        {subTab === 'todaybatch' && (learnBatch?.words?.length ? (
           <LearnBatchScreen
-            words={learnBatch}
+            words={learnBatch.words}
+            mode={learnBatch.mode}
             // 今日统计要按主线池算,不是按这一批的 6 个 ——
             // 「今天一共过了几个」问的是整条主线,不是这一轮
             pool={mainlinePool}

@@ -57,7 +57,11 @@ import { todayStr, addDays } from '../wordbank/srs';
  * @param onBack  返回
  * @param onDone  这一批过完了、用户点「回首页」
  */
-export default function LearnBatchScreen({ words, pool, onBack, onDone }) {
+export default function LearnBatchScreen({ words, pool, mode = 'learn', onBack, onDone }) {
+  // 复习模式:同一套交互,换的是文案。**问的仍然是读音,不是意思** ——
+  // 主线池是 563 条 kanji_anchor,意思是用户唯一不缺的东西,
+  // 复习的时候它也不会突然变成缺的。
+  const isReview = mode === 'review';
   const { speak, speakingKey } = useSpeech();
   const { prefs } = usePrefs();
   const { grade, progress } = useReviewProgress();
@@ -88,7 +92,7 @@ export default function LearnBatchScreen({ words, pool, onBack, onDone }) {
     // 远端下发的,不能假设它永远自洽。给一句话而不是白屏。
     return (
       <View style={s.screen}>
-        <Header onBack={onBack} left={null} total={0} />
+        <Header onBack={onBack} left={null} total={0} isReview={isReview} />
         <View style={s.center}><Text style={s.dim}>这一批是空的</Text></View>
       </View>
     );
@@ -97,9 +101,11 @@ export default function LearnBatchScreen({ words, pool, onBack, onDone }) {
   if (!remaining.length) {
     return (
       <View style={s.screen}>
-        <Header onBack={onBack} left={0} total={total} />
+        <Header onBack={onBack} left={0} total={total} isReview={isReview} />
         <View style={s.center}>
-          <Text style={s.doneBig}>这 {total} 个过完了</Text>
+          <Text style={s.doneBig}>
+            {isReview ? `${total} 个都复习完了` : `这 ${total} 个过完了`}
+          </Text>
           {/* ⚠️ 这里原本是一句笼统的「它们进了复习队列,到期会自己出现」。
               真机上走一遍就知道那句话不够:学完之后首页立刻换一批新的,
               「今天该复习」还是 0 —— 用户唯一收到的信号是「还有更多」,
@@ -153,11 +159,11 @@ export default function LearnBatchScreen({ words, pool, onBack, onDone }) {
 
   return (
     <View style={s.screen}>
-      <Header onBack={onBack} left={remaining.length} total={total} />
+      <Header onBack={onBack} left={remaining.length} total={total} isReview={isReview} />
 
       <ScrollView contentContainerStyle={s.body} showsVerticalScrollIndicator={false}>
         {/* 第一拍:你看得懂。这句话是这个产品的底牌,要明说出来 */}
-        <Text style={s.eyebrow}>这个词你已经认识</Text>
+        <Text style={s.eyebrow}>{isReview ? '这个词你学过' : '这个词你已经认识'}</Text>
 
         <Text style={s.word}>{w.word}</Text>
         {!!w.meaning_zh && <Text style={s.meaning}>{w.meaning_zh}</Text>}
@@ -167,7 +173,9 @@ export default function LearnBatchScreen({ words, pool, onBack, onDone }) {
             {/* 第二拍:那你会读吗。**先让他自己试**,不能直接把读音摊开 ——
                 「以为自己会」和「真的会」的差别就在这一下 */}
             <View style={s.gapBox}>
-              <Text style={s.gapTxt}>那它怎么读?先自己念一遍</Text>
+              <Text style={s.gapTxt}>
+                {isReview ? '还记得怎么读吗?先自己念一遍' : '那它怎么读?先自己念一遍'}
+              </Text>
             </View>
             <TouchableOpacity style={s.flipBtn} onPress={() => setFlipped(true)}>
               <Text style={s.flipTxt}>看读音</Text>
@@ -248,14 +256,14 @@ export default function LearnBatchScreen({ words, pool, onBack, onDone }) {
   );
 }
 
-function Header({ onBack, left, total }) {
+function Header({ onBack, left, total, isReview }) {
   return (
     <View style={s.hd}>
       <TouchableOpacity onPress={onBack}>
         <Text style={s.back}>‹ 返回</Text>
       </TouchableOpacity>
       <View style={s.hdRow}>
-        <Text style={s.title}>今天这一批</Text>
+        <Text style={s.title}>{isReview ? '今天该复习' : '今天这一批'}</Text>
         {left != null && total > 0 && <Text style={s.left}>还剩 {left} / {total}</Text>}
       </View>
     </View>
