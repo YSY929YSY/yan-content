@@ -102,6 +102,10 @@ const REGISTRY = {
     // 单开一个 v2 键,**不覆盖 v1** —— 迁移脚本从 v1 读、往 v2 写,
     // 写坏了 v1 还在。等 v2 在真机上验过再考虑清 v1。
   },
+  prefs: {
+    key: 'yan_prefs_v1', kind: 'device', backfill: null,
+    desc: '显示偏好(是否并列英文释义等)。device 不是 user —— 换设备重设一次没损失',
+  },
   subwayProgress: {
     key: 'yan_subway_unlocked_idx', kind: 'device', backfill: null,
     desc: '地铁冒险解锁进度',

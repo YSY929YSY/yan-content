@@ -11,6 +11,7 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-nati
 
 import { C } from '../../theme';
 import { useSpeech, SpeakBtn } from '../../components/Speech';
+import { usePrefs } from '../../lib/prefs';
 import { useDailyQueue } from './useReview';
 import { useReviewProgress } from './ReviewProgressContext';
 import { fromWord, indexUnits, buildUnits, sourceOf } from './units';
@@ -21,6 +22,7 @@ const SOURCE_LABEL = {
 
 export default function ReviewScreen({ content, onBack }) {
   const { speak, speakingKey } = useSpeech();
+  const { prefs } = usePrefs();
   const { progress, ready, grade } = useReviewProgress();
 
   // 深内容一次建好放内存(共一百多条)。词库 8298 条按键现查,不展平。
@@ -121,6 +123,10 @@ export default function ReviewScreen({ content, onBack }) {
                 >
                   <Text style={s.answer}>{unit.answer}</Text>
                   {!!unit.answerSub && <Text style={s.answerSub}>{unit.answerSub}</Text>}
+                  {/* 英文不是中文的备份,是中文装不下的那部分。可在「关于」里关掉。 */}
+                  {prefs.showEnglish && !!unit.answerEn && (
+                    <Text style={s.answerEn} numberOfLines={3}>{unit.answerEn}</Text>
+                  )}
                 </TouchableOpacity>
                 {!!unit.speak && (
                   <SpeakBtn
@@ -205,6 +211,7 @@ const s = StyleSheet.create({
   answerSub: { fontSize: 13, color: C.muted, textAlign: 'center' },
   answerRow: { flexDirection: 'row', alignItems: 'center', gap: 12, alignSelf: 'stretch' },
   answerText: { flex: 1 },
+  answerEn: { fontSize: 12, color: C.muted, marginTop: 6, lineHeight: 17 },
   gradeRow: { flexDirection: 'row', gap: 8, alignSelf: 'stretch', marginTop: 18 },
   gradeBtn: {
     flex: 1, borderRadius: 8, paddingVertical: 13, alignItems: 'center',

@@ -42,6 +42,7 @@ import JournalScreen from './src/features/journal/JournalScreen';
 import {
   nextTask, taskLabel, poolProgress, anchorPool,
 } from './src/features/learn/dailyTask';
+import { usePrefs } from './src/lib/prefs';
 // 词场预览:内容还在 staging 没并进内容包,开发期先从这份草稿读,方便边写边看。
 // 合并进 content.v2.json 之后这份和它的引用一起删。
 import WORDFIELD_PREVIEW from './src/features/wordbank/wordfield-preview.json';
@@ -731,6 +732,7 @@ const tc = StyleSheet.create({
 });
 
 function HomeScreen({ setTab, setSceneState, setSubTab, content, onDataSources, onDeleteAccount }) {
+  const { prefs, set: setPrefs } = usePrefs();
   const [fusionIdx, setFusionIdx] = useState(0);
   const [entryMode, setEntryMode] = useState('track');
   const [goalMode, setGoalMode] = useState('travel');
@@ -954,8 +956,25 @@ function HomeScreen({ setTab, setSceneState, setSubTab, content, onDataSources, 
               但不该因此把这里换成「使用了外部词典和语料数据」这种谁也没点到的话 ——
               两者可以都有:这里点名,那一屏说清边界。 */}
           词条的读音、词性与英文释义参考 <Text style={hs.aboutStrong}>JMdict</Text>(EDRDG,CC BY-SA 4.0);
-          部分例句来自 <Text style={hs.aboutStrong}>Tatoeba</Text>(CC BY 2.0 FR)。详见数据来源。
+          声调数据来自 <Text style={hs.aboutStrong}>kanjium</Text>(Uros O.,CC BY-SA 4.0);
+          例句与词频来自 <Text style={hs.aboutStrong}>Tatoeba</Text>(CC BY 2.0 FR)。详见数据来源。
         </Text>
+        {/* 显示偏好。放「关于」里是因为目前只有这一项,不值得单开一屏 ——
+            但它必须能关:不看英文的用户,那一行就是纯噪音。
+            (无痛单词把英文释义做成卖点,用户反馈里最大的一条也是「希望能选」。) */}
+        <TouchableOpacity
+          style={hs.prefRow}
+          onPress={() => setPrefs({ showEnglish: !prefs.showEnglish })}
+        >
+          <View style={{ flex: 1 }}>
+            <Text style={hs.prefLabel}>复习时并列英文释义</Text>
+            <Text style={hs.prefHint}>中文装不下的区别,英文常常分得开(only / merely)</Text>
+          </View>
+          <Text style={[hs.prefSwitch, prefs.showEnglish && hs.prefSwitchOn]}>
+            {prefs.showEnglish ? '开' : '关'}
+          </Text>
+        </TouchableOpacity>
+
         <View style={hs.aboutActions}>
           <TouchableOpacity onPress={onDataSources}>
             <Text style={hs.aboutLink}>数据来源</Text>
@@ -978,6 +997,17 @@ const hs = StyleSheet.create({
   aboutTitle: { fontSize: 11, color: C.muted, fontWeight: '700', letterSpacing: 1, marginBottom: 8 },
   aboutLine: { fontSize: 11.5, color: C.mutedWarm, lineHeight: 18 },
   aboutStrong: { color: C.ink, fontWeight: '600' },
+  prefRow: {
+    flexDirection: 'row', alignItems: 'center', gap: 12,
+    marginTop: 14, paddingTop: 14, borderTopWidth: 1, borderTopColor: C.border,
+  },
+  prefLabel: { fontSize: 13, color: C.ink, fontWeight: '600' },
+  prefHint: { fontSize: 11, color: C.muted, marginTop: 3, lineHeight: 15 },
+  prefSwitch: {
+    fontSize: 12, color: C.muted, borderWidth: 1, borderColor: C.border,
+    borderRadius: 6, paddingHorizontal: 10, paddingVertical: 4, overflow: 'hidden',
+  },
+  prefSwitchOn: { color: C.white, backgroundColor: C.lava, borderColor: C.lava },
   aboutActions: { flexDirection: 'row', gap: 20, marginTop: 14 },
   aboutLink: { fontSize: 12, color: C.teal, fontWeight: '600' },
   aboutDanger: { fontSize: 12, color: C.lava },
@@ -6031,8 +6061,26 @@ function DataSourcesScreen({ onBack }) {
           </Text>
         </View>
         <View style={ds.card}>
-          <Text style={ds.eyebrow}>例句语料</Text>
-          <Text style={ds.body}>部分例句来自 Tatoeba（CC BY 2.0 FR）。</Text>
+          <Text style={ds.eyebrow}>声调数据</Text>
+          <Text style={ds.body}>
+            词条的东京式声调（アクセント型）派生自 kanjium，署名 Uros O.。
+            数据经 kanjium × zh.wiktionary × UniDic 三源交叉校验后收录，三方不一致的条目未收。
+          </Text>
+          <Text style={ds.body}>授权：Creative Commons Attribution-ShareAlike 4.0。</Text>
+          <TouchableOpacity onPress={() => Linking.openURL('https://github.com/mifunetoshiro/kanjium').catch(() => {})}>
+            <Text style={ds.link}>kanjium ↗</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={ds.card}>
+          <Text style={ds.eyebrow}>例句与词频</Text>
+          <Text style={ds.body}>
+            部分例句来自 Tatoeba（CC BY 2.0 FR）。
+            词条的使用频率也由 Tatoeba 语料统计得出（文档频率，248,758 句）——
+            学习顺序按它排,所以它不只是例句来源。
+          </Text>
+          <TouchableOpacity onPress={() => Linking.openURL('https://tatoeba.org/').catch(() => {})}>
+            <Text style={ds.link}>Tatoeba ↗</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>

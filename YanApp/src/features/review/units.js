@@ -81,6 +81,14 @@ export function fromWord(w) {
     mode: 'recall',
     ask: w.word,
     answer: w.meaning_zh || w.meaning_en,
+    // ⚠️ 这里原来是 `w.meaning_zh || w.meaning_en` —— 而中文**从不缺失**
+    // (实测 8005/8005 都有),所以英文永远不会出现。等于白存了一份。
+    //
+    // 现在把它单独带出来,由 ReviewScreen 决定显不显示(用户可关)。
+    // 它不是「中文的备份」,是中文装不下的那部分:
+    //   だけ  zh「只,仅;到……程度」
+    //        en「only; just; merely | as much as; to the extent of」
+    answerEn: w.meaning_en || null,
     answerSub: w.reading,
     hint: w.pos,
     speak: w.word,
