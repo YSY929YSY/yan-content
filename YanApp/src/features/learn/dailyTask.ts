@@ -28,6 +28,8 @@ export type WordLike = {
   level?: string;
   /** 词性。接尾词/量词要押后,见 orderPool。 */
   pos?: string;
+  /** 词频。df=null 表示「不适用」(接尾词),df=0 表示「真的没出现过」,两者不一样。 */
+  freq?: { df: number | null; source?: string; method?: string };
   meaning_zh?: string;
   yanFeatures?: string[];
 };
@@ -77,6 +79,12 @@ export type NextTaskInput = {
    * 还有 雨/飴(あめ)、橋/箸(はし)、花/鼻(はな)、早い/速い(はやい)。
    * 六个词一批,里面三个都念 あつい —— 那不是学习,是在制造混淆。
    * 被挤掉的词不会消失,下一批会轮到它(见测试)。
+   *
+   * ⚠️ **同一个写法也算重复,不只是同一个读音。**
+   * 换成按词频排之后第一批出来的是 `私 私 行く 何 言う 人` ——
+   * 两条 `私`(わたくし / わたし),读音不同所以都过了读音这一关,
+   * 但卡片上就是并排两个一模一样的「私」。判据和读音那条一样:
+   * **用户看到的是不是同一个东西。**
    *
    * 设成 Infinity 就是「同批对比教学」那种路线,留着这个口子,但不是默认。
    */
@@ -147,12 +155,15 @@ function pickBatch(
 ): WordLike[] {
   const out: WordLike[] = [];
   const readingCount = new Map<string, number>();
+  const wordCount = new Map<string, number>();
   for (const w of pool) {
     if (out.length >= limit) break;
     if (seen(progress[wordKey(w)])) continue;
-    const n = readingCount.get(w.reading) ?? 0;
-    if (n >= maxSameReading) continue;      // 同读音的挤到下一批,不是丢掉
-    readingCount.set(w.reading, n + 1);
+    // 同读音、同写法都算「看起来是同一个东西」,挤到下一批 —— 不是丢掉
+    if ((readingCount.get(w.reading) ?? 0) >= maxSameReading) continue;
+    if ((wordCount.get(w.word) ?? 0) >= maxSameReading) continue;
+    readingCount.set(w.reading, (readingCount.get(w.reading) ?? 0) + 1);
+    wordCount.set(w.word, (wordCount.get(w.word) ?? 0) + 1);
     out.push(w);
   }
   return out;
@@ -200,24 +211,52 @@ export function poolProgress(
 }
 
 /**
- * 接尾词 / 量词 / 接头词押后。
+ * 排序:**先学用得上的**。
  *
- * ⚠️ **这条不是教学法判断,是数据判断**:`～円`、`～階`、`～か月` 不是独立的词。
- * 钩子说的是「你已经认识这个**词**,只差读音」—— 这句话对一个量词后缀不成立,
- * 用户看到的是六个 `～` 开头的东西,产生不了「我居然看懂了」那一下。
+ * ⚠️ 这里换过一次口径,原因值得记下来。
  *
- * 实测:不排的话,**头 24 个词全是量词和接尾辞**(池子按读音排,`～` 全挤在开头)。
- * 这是只有拿真数据跑一遍才看得见的问题。
+ * 第一版按池子原顺序(等于按读音的字典序),头 24 个全是量词和接尾辞
+ * (`～円 ～回 ～階 ～か月…`),第一屏给用户六个 `～` 开头的东西。
+ * 第二版把接尾词押后,变成 `会う 青 青い 赤 赤い 明るい` —— 不难看,但那是
+ * 字典序,和「哪个先学更有用」没有关系。
  *
- * 用稳定排序,所以同一档内部的原顺序不变 —— 「下一步」不能每次都换。
+ * 现在按 Tatoeba 文档频率(248,758 句)降序,top 变成:
+ *
+ *     私 行く 何 言う 人 見る 知る 好き 自分 家
+ *
+ * 三档,顺序不能乱:
+ *
+ *   1. `df > 0`   有真实使用频率,按 df 降序
+ *   2. `df === 0` 语料里**真的一次都没出现**(420 条,其中 301 条是 N1)
+ *   3. `df === null` / 接尾词 —— **「不适用」不是「频率为零」**
+ *
+ * ⚠️ 第 2 档和第 3 档必须分开。`～人` 的 df 是 null 而不是 0,是因为
+ * 「接尾词不该有独立词频」和「这个词冷门到没人说」是两件完全不同的事。
+ * 混成一档就等于宣称接尾词是冷门词。
+ *
+ * ⚠️ 接尾词单独押后这条**不能删**,即使它们已经是 df:null:
+ * 判据是「它不是一个独立的词」,和有没有频率数据无关。
+ *
+ * 同 df 的保持原有相对顺序(Array.sort 在现代 JS 里是稳定的)——
+ * 「下一步」不能每次进来都换一批。
  */
 const isAffix = (w: WordLike) =>
   w.word.startsWith('～') || w.word.startsWith('~') || /量词|接尾|接头/.test(w.pos || '');
 
+const tierOf = (w: WordLike): number => {
+  if (isAffix(w)) return 2;
+  const df = w.freq?.df;
+  if (df == null) return 2;      // 没有 freq 字段、或明确的 not_applicable
+  return df > 0 ? 0 : 1;
+};
+
 export function orderPool(pool: readonly WordLike[]): WordLike[] {
-  const head: WordLike[] = [], tail: WordLike[] = [];
-  for (const w of pool) (isAffix(w) ? tail : head).push(w);
-  return [...head, ...tail];
+  return [...pool].sort((a, b) => {
+    const ta = tierOf(a), tb = tierOf(b);
+    if (ta !== tb) return ta - tb;
+    if (ta !== 0) return 0;                       // 非第一档内部不排,保持原序
+    return (b.freq!.df as number) - (a.freq!.df as number);
+  });
 }
 
 /**

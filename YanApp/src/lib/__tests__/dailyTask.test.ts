@@ -203,21 +203,90 @@ test('anchorPool 只挑带该 feature 的词', () => {
 test('★ 接尾词/量词押后 —— 否则第一屏给用户六个「～円」这种东西', () => {
   // 实测:不排的话真实池子头 24 个全是量词和接尾辞
   const bank = [
-    w('～円', '～えん', { pos: '量词' }),
-    w('～階', '～かい', { pos: '量词' }),
-    w('準備', 'じゅんび', { pos: '名词' }),
-    w('～人', '～にん', { pos: '接尾词' }),
-    w('注意', 'ちゅうい', { pos: '名词' }),
+    w('～円', '～えん', { pos: '量词', freq: { df: null } }),
+    w('～階', '～かい', { pos: '量词', freq: { df: null } }),
+    w('準備', 'じゅんび', { pos: '名词', freq: { df: 300 } }),
+    w('～人', '～にん', { pos: '接尾词', freq: { df: null } }),
+    w('注意', 'ちゅうい', { pos: '名词', freq: { df: 500 } }),
   ];
   const ordered = anchorPool(bank);
-  assert.deepEqual(ordered.slice(0, 2).map(x => x.word), ['準備', '注意'],
-    '真正的词必须排在接尾词前面');
+  assert.deepEqual(ordered.slice(0, 2).map(x => x.word), ['注意', '準備'],
+    '真正的词必须排在接尾词前面,而且按词频');
   assert.equal(ordered.length, bank.length, '押后不是丢掉');
   assert.ok(ordered.slice(2).every(x => x.word.startsWith('～')));
 });
 
-test('排序是稳定的 —— 同一档内部保持原顺序,「下一步」不能每次都换', () => {
-  const bank = [w('注意', 'ちゅうい'), w('準備', 'じゅんび'), w('約束', 'やくそく')];
-  assert.deepEqual(anchorPool(bank).map(x => x.word), ['注意', '準備', '約束']);
-  assert.deepEqual(anchorPool(bank).map(x => x.word), anchorPool(bank).map(x => x.word));
+// ─────────────────────────────────────────────
+// 按词频排 —— 先学用得上的
+// ─────────────────────────────────────────────
+
+test('★ 高频的排前面 —— 字典序和「哪个先学更有用」没有关系', () => {
+  const bank = [
+    w('会う', 'あう', { freq: { df: 1986 } }),
+    w('私', 'わたし', { freq: { df: 26526 } }),
+    w('青', 'あお', { freq: { df: 300 } }),
+    w('行く', 'いく', { freq: { df: 7228 } }),
+  ];
+  assert.deepEqual(anchorPool(bank).map(x => x.word), ['私', '行く', '会う', '青']);
+});
+
+test('★ df=0 和 df=null 必须分开 —— 「不适用」不是「频率为零」', () => {
+  const bank = [
+    w('～人', '～にん', { pos: '接尾词', freq: { df: null, method: 'not_applicable' } }),
+    w('昼御飯', 'ひるごはん', { freq: { df: 0, method: 'none' } }),
+    w('私', 'わたし', { freq: { df: 26526, method: 'lemma' } }),
+  ];
+  const ordered = anchorPool(bank).map(x => x.word);
+  assert.deepEqual(ordered, ['私', '昼御飯', '～人'],
+    'df=0(语料里真的没出现)要排在 df=null(接尾词,不适用)前面');
+});
+
+test('★ 接尾词即使有频率也押后 —— 判据是「它不是一个独立的词」', () => {
+  // 假设某天数据源给接尾词也算了频率,规则也不能因此把它提前
+  const bank = [
+    w('～人', '～にん', { pos: '接尾词', freq: { df: 99999 } }),
+    w('私', 'わたし', { freq: { df: 100 } }),
+  ];
+  assert.deepEqual(anchorPool(bank).map(x => x.word), ['私', '～人']);
+});
+
+test('★ 同频的保持原序 —— 「下一步」不能每次进来都换一批', () => {
+  const bank = [
+    w('乙', 'おつ', { freq: { df: 500 } }),
+    w('甲', 'こう', { freq: { df: 500 } }),
+    w('丙', 'へい', { freq: { df: 500 } }),
+  ];
+  const a = anchorPool(bank).map(x => x.word);
+  assert.deepEqual(a, ['乙', '甲', '丙'], '同 df 必须保持传入顺序');
+  assert.deepEqual(anchorPool(bank).map(x => x.word), a, '反复调用结果一致');
+});
+
+test('没有 freq 字段的词不会崩,当作「不适用」排最后', () => {
+  const bank = [w('未知', 'みち'), w('私', 'わたし', { freq: { df: 100 } })];
+  assert.deepEqual(anchorPool(bank).map(x => x.word), ['私', '未知']);
+});
+
+test('★ 同一个写法也不能一批里出现两次 —— 卡片上就是并排两个「私」', () => {
+  // 换成按词频排之后第一批真的出了 `私 私 行く 何 言う 人`:
+  // 两条 私(わたくし / わたし),读音不同所以都过了读音那一关。
+  // 判据和读音那条一样:用户看到的是不是同一个东西。
+  const bank = [
+    w('私', 'わたくし', { freq: { df: 26526 } }),
+    w('私', 'わたし', { freq: { df: 26526 } }),
+    w('行く', 'いく', { freq: { df: 7228 } }),
+    w('何', 'なに', { freq: { df: 7046 } }),
+  ];
+  const t = nextTask({ pool: anchorPool(bank), progress: {}, kanaDone: true, today: TODAY, newLimit: 3 });
+  assert.ok(t.kind === 'learn');
+  if (t.kind !== 'learn') return;
+  const words = t.words.map(x => x.word);
+  assert.equal(new Set(words).size, words.length, `一批里出现了重复写法: ${words.join(' ')}`);
+  assert.deepEqual(words, ['私', '行く', '何']);
+
+  // 被挤掉的那条 私 下一批要轮到,不能丢
+  const t2 = nextTask({
+    pool: anchorPool(bank), progress: learned(...t.words.map(wordKey)),
+    kanaDone: true, today: TODAY, newLimit: 3,
+  });
+  assert.ok(t2.kind === 'learn' && t2.words.some(x => x.word === '私'));
 });
