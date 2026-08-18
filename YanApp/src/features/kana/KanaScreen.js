@@ -9,7 +9,7 @@
 //
 // 边界是量出来的不是拍的:这一整簇对 App.js 其余部分零引用,
 // 只需向外导出 KanaScreen 一个符号。
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Animated, Dimensions, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
@@ -18,7 +18,7 @@ import Svg, { Path } from 'react-native-svg';
 import { C } from '../../theme';
 import { useSpeech, SpeakBtn } from '../../components/Speech';
 import { useKanaProgress } from './KanaProgressContext';
-import { requiredKana, seenCount, isKanaDone } from './kanaProgress';
+import { useKanaGate } from './useKanaGate';
 
 const { width: SW } = Dimensions.get('window');
 
@@ -902,10 +902,10 @@ function KanaScreen({ kanaRows, specialSounds, specialRows, voicedRows, yoonRows
   // 主线的第一道门就在这一页上。在这之前这个页面**没有任何持久化** ——
   // 它不会「完成」,于是 dailyTask 的第一条规则(五十音没走完 → 先走五十音)
   // 对新用户是个死循环。见 kanaProgress.ts 开头。
-  const { progress: kanaProg, ready: kanaReady, see, declare } = useKanaProgress();
-  const requiredHira = useMemo(() => requiredKana(kanaRows), [kanaRows]);
-  const kanaSeen = seenCount(kanaProg, requiredHira);
-  const kanaDone = isKanaDone(kanaProg, requiredHira);
+  const { see, declare } = useKanaProgress();
+  // 判据走 useKanaGate,和首页今日卡是同一份 —— 两处各判各的会让老用户
+  // 在首页看到「门过了」、在这一页看到「0 / 46」。
+  const gate = useKanaGate(kanaRows);
 
   const [sel, setSel] = useState(null);
   const [showConfuse, setShowConfuse] = useState(false);
@@ -927,7 +927,15 @@ function KanaScreen({ kanaRows, specialSounds, specialRows, voicedRows, yoonRows
     if (beatFlashRef.current) clearTimeout(beatFlashRef.current);
   }, []);
   const tapTimeoutRef = useRef(null);
-  const lastTapRef = useRef(0);
+  /**
+   * 上一次单击:**时间和是哪个字都要存**。
+   *
+   * ⚠️ 原本只存时间戳(`useRef(0)`),于是 250ms 内点「あ」再点「い」
+   * 会被判成一次双击 —— 打开的是「い」的详情,而用户以为自己在点两个不同的字。
+   * 挂上进度记录之后这个老问题变严重了:**没看过的「い」会被记成看过**,
+   * 手指快的人横扫一行就能刷掉几个格子,而这道门的判据就是「看过几个」。
+   */
+  const lastTapRef = useRef({ at: 0, kana: null });
   const { speak, speakingKey } = useSpeech();
   const splitBeats = beats =>
     typeof beats === 'string'
@@ -1373,22 +1381,23 @@ const handleKanaPress = (ch) => {
   if (isLoanwordMode) {
     const now = Date.now();
 
-    if (lastTapRef.current && now - lastTapRef.current < 250) {
+    if (lastTapRef.current.at && lastTapRef.current.kana === ch.kana
+        && now - lastTapRef.current.at < 250) {
       if (tapTimeoutRef.current) {
         clearTimeout(tapTimeoutRef.current);
       }
-      lastTapRef.current = 0;
+      lastTapRef.current = { at: 0, kana: null };
       setSel(sel?.kana === ch.kana ? null : ch);
       setShowConfuse(false);
       setShowWords(false);
       return;
     }
 
-    lastTapRef.current = now;
+    lastTapRef.current = { at: now, kana: ch.kana };
 
     tapTimeoutRef.current = setTimeout(() => {
       speak(ch.kana, 'ja-JP', `loanword-card-${ch.kana}`);
-      lastTapRef.current = 0;
+      lastTapRef.current = { at: 0, kana: null };
     }, 220);
     return;
   }
@@ -1397,7 +1406,7 @@ const handleKanaPress = (ch) => {
     if (tapTimeoutRef.current) {
       clearTimeout(tapTimeoutRef.current);
     }
-    lastTapRef.current = 0;
+    lastTapRef.current = { at: 0, kana: null };
     const isSameSpecial =
       sel &&
       ((sel.hira || sel.kana) === (ch.hira || ch.kana) ||
@@ -1411,11 +1420,12 @@ const handleKanaPress = (ch) => {
 
   const now = Date.now();
 
-  if (lastTapRef.current && now - lastTapRef.current < 250) {
+  if (lastTapRef.current.at && lastTapRef.current.kana === ch.kana
+      && now - lastTapRef.current.at < 250) {
     if (tapTimeoutRef.current) {
       clearTimeout(tapTimeoutRef.current);
     }
-    lastTapRef.current = 0;
+    lastTapRef.current = { at: 0, kana: null };
     const shouldOpen = sel?.kana !== ch.kana;
     setSel(shouldOpen ? ch : null);
     setShowConfuse(false);
@@ -1435,11 +1445,11 @@ const handleKanaPress = (ch) => {
     return;
   }
 
-  lastTapRef.current = now;
+  lastTapRef.current = { at: now, kana: ch.kana };
 
   tapTimeoutRef.current = setTimeout(() => {
     speak(ch.kana, 'ja-JP', `kana-${ch.kana}`);
-    lastTapRef.current = 0;
+    lastTapRef.current = { at: 0, kana: null };
   }, 220);
 };
 const sectionSubtitle =
@@ -1514,16 +1524,24 @@ const theoryText =
     在那些屏上显示「离开始学词还差 N 个」是在催一件不该催的事。
     kanaReady 之前不画:空的进度和「真的没看过」长得一样,
     这时候渲染出来的是一句错话(0/46),而它会让老用户以为进度没了。 */}
-{kanaReady && kanaSection === 'clear' && requiredHira.length > 0 ? (
+{gate.ready && kanaSection === 'clear' ? (
   <View style={kn.gateRow}>
-    {kanaDone ? (
+    {gate.done ? (
       <Text style={kn.gateDone}>
         ✓ 这道门过了 —— 首页现在会给你词
       </Text>
     ) : (
       <>
+        {/* ⚠️ 这里原本整块的渲染条件带着 `requiredHira.length > 0`,那是个死锁:
+            内容包筛不出假名时,isKanaDone 按设计只认用户的显式声明
+            (见 kanaProgress.ts),而**恰好在这个状态下这个按钮不渲染** ——
+            用户被锁死在这个 commit 本来要修的那个死循环里。
+            护栏的两半分开写、分开看都对,合起来才露出来。
+            所以按钮无条件出现,只有那行数字在没有判据时改口。 */}
         <Text style={kn.gateTxt}>
-          看过 {kanaSeen} / {requiredHira.length} 个平假名
+          {gate.required.length > 0
+            ? `看过 ${gate.seen} / ${gate.required.length} 个平假名`
+            : '假名表没能载入'}
         </Text>
         {/* 显式出口。学过一点日语的人不该被迫点 46 下 ——
             而这个 App 的第一个用户(开发者本人)正是这种人。

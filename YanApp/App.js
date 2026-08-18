@@ -20,8 +20,8 @@ import { useWorldFootprint } from './src/features/world/useWorldFootprint';
 import KanaScreen from './src/features/kana/KanaScreen';
 import ReviewScreen from './src/features/review/ReviewScreen';
 import LearnBatchScreen from './src/features/learn/LearnBatchScreen';
-import { KanaProgressProvider, useKanaProgress } from './src/features/kana/KanaProgressContext';
-import { requiredKana, isKanaDone } from './src/features/kana/kanaProgress';
+import { KanaProgressProvider } from './src/features/kana/KanaProgressContext';
+import { useKanaGate } from './src/features/kana/useKanaGate';
 import {
   ReviewProgressProvider, useReviewProgress,
 } from './src/features/review/ReviewProgressContext';
@@ -667,31 +667,14 @@ const tb = StyleSheet.create({
  */
 function TodayCard({ content, setTab, setSubTab, setLearnBatch }) {
   const { progress, ready } = useReviewProgress();
-  const { progress: kanaProg, ready: kanaReady } = useKanaProgress();
+  // 「五十音这道门过了没」和五十音页用**同一份**判据 —— 各判各的会让老用户
+  // 在首页看到「门过了」、在五十音页看到「0 / 46」。见 useKanaGate。
+  const gate = useKanaGate(content.kanaRows);
 
   const pool = useMemo(() => anchorPool(content.wordBank || []), [content.wordBank]);
-  const requiredHira = useMemo(() => requiredKana(content.kanaRows), [content.kanaRows]);
 
-  /**
-   * 五十音这道门。
-   *
-   * ⚠️ **两条路都算过,缺一不可:**
-   *
-   *   1. `isKanaDone` —— 真的进度(看过 46 个平假名,或自己声明会了)
-   *   2. 学过任何一个词 —— **老用户的兜底**
-   *
-   * 第 2 条不能删。它原本是唯一的判据(五十音页当时没有任何持久化),
-   * 现在第 1 条上线了,但**已有用户的 `kanaProgress` 是空的** ——
-   * 只认第 1 条的话,一个学了几百个词的人下次打开会被告知
-   * 「先把五十音走完」。新键上线不能把老用户打回起点。
-   *
-   * 两个 ready 都要等:任何一个还没读回来,空的进度和「真的没有」长得一样,
-   * 而这两者在这个问题上给出的是相反的界面。
-   */
-  const kanaDone = useMemo(
-    () => isKanaDone(kanaProg, requiredHira) || Object.keys(progress || {}).length > 0,
-    [kanaProg, requiredHira, progress],
-  );
+  // 判据(含老用户兜底、以及那条兜底对新用户是假阳性的取舍)全在 useKanaGate 里
+  const kanaDone = gate.done;
 
   const task = useMemo(
     () => nextTask({ pool, progress: progress || {}, kanaDone, today: todayStr() }),
@@ -702,7 +685,7 @@ function TodayCard({ content, setTab, setSubTab, setLearnBatch }) {
 
   // 读盘没完就先不显示 —— 空的 progress 和「真的没学过」长得一样,
   // 这时候渲染出来的是一句错话。两份进度都要等到。
-  if (!ready || !kanaReady || pool.length === 0) return null;
+  if (!ready || !gate.ready || pool.length === 0) return null;
 
   const go = () => {
     setTab('pie');
