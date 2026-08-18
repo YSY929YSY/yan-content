@@ -50,6 +50,7 @@ import { usePrefs } from './src/lib/prefs';
 // 合并进 content.v2.json 之后这份和它的引用一起删。
 import WORDFIELD_PREVIEW from './src/features/wordbank/wordfield-preview.json';
 import { PitchLine, pitchOf } from './src/features/wordbank/PitchLine';
+import { SenseList } from './src/features/wordbank/SenseList';
 import {
   ActivityIndicator, Alert, Animated, Dimensions, FlatList, Image, Keyboard,
   KeyboardAvoidingView, Modal,
@@ -2313,7 +2314,11 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
         </View>
         <View style={wd.meaningBlock}>
           <Text style={wd.zh}>{entry.meaning_zh}</Text>
-          {!!entry.meaning_en && <Text style={wd.en}>{entry.meaning_en}</Text>}
+          {/* 按义项分行,不挤成一串。一个词有几个意思,用户扫一眼就该知道 ——
+              而不是等他自己从 `a; b | c; d` 里看出那个竖线是分界。
+              ⚠️ 不和中文按下标配对:meaning_zh 全库 0 条带分隔符,
+              而且中英义项数对不上的有 881 条(见 meaningSenses.ts)。 */}
+          {!!entry.meaning_en && <SenseList text={entry.meaning_en} style={wd.enBlock} />}
         </View>
         {wordFields.map((wordField, fi) => (
           <View key={fi} style={wd.section}>
@@ -2432,7 +2437,8 @@ const wd = StyleSheet.create({
   posTagTxt: { fontSize: 10, color: C.muted, fontWeight: '600' },
   meaningBlock: { paddingHorizontal: 16, paddingVertical: 12, marginTop: 10, borderTopWidth: 1, borderBottomWidth: 1, borderColor: C.border, gap: 4 },
   zh: { fontSize: 17, fontWeight: '600', color: C.ink },
-  en: { fontSize: 12, color: C.mutedLight },
+  // 英文释义现在由 SenseList 排(要分行编号),这里只留外边距
+  enBlock: { marginTop: 4 },
   section: { marginHorizontal: 16, marginTop: 16, gap: 8 },
   sectionLabel: { fontSize: 10, fontWeight: '700', color: C.mutedLight, letterSpacing: 0.8, textTransform: 'uppercase' },
   loanTxt: { fontSize: 14, color: C.teal, fontWeight: '500', marginTop: 2 },

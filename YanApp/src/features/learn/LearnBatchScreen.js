@@ -38,6 +38,7 @@ import { useReviewProgress } from '../review/ReviewProgressContext';
 import { PitchLine, pitchOf, hasMultiAccent } from '../wordbank/PitchLine';
 import { Furigana } from '../wordbank/FuriganaText';
 import { ExampleSentence } from '../wordbank/ExampleSentence';
+import { SenseList } from '../wordbank/SenseList';
 import EXAMPLE_TOKENS from '../../../assets/example_tokens.json';
 import { wordKey, todayStats } from './dailyTask';
 import { todayStr, addDays } from '../wordbank/srs';
@@ -210,9 +211,11 @@ export default function LearnBatchScreen({ words, pool, mode = 'learn', onBack, 
                 />
               </View>
 
-              {/* 英文不是中文的备份,是中文装不下的那部分。可在「关于」里关掉。 */}
+              {/* 英文不是中文的备份,是中文装不下的那部分。可在「关于」里关掉。
+                  按义项分行而不是挤成一串:一个词有几个意思,用户扫一眼就该知道。
+                  (之前是 numberOfLines={2},两个义项被挤成一行还可能被截掉半个。) */}
               {prefs.showEnglish && !!w.meaning_en && (
-                <Text style={s.en} numberOfLines={2}>{w.meaning_en}</Text>
+                <SenseList text={w.meaning_en} />
               )}
             </View>
 
