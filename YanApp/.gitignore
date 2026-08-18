@@ -63,3 +63,15 @@ data/
 # Local scripts output
 scripts/output/
 scripts/tmp/
+
+# ── EAS 构建上传体积(2026-08-18)
+#
+# ⚠️ 这两条**必须在 .gitignore 里,光写 .easignore 不够**。
+#
+# 实测:8/18 那次构建上传 320MB,而已跟踪文件总共只有 52MB。
+# 差的就是「未跟踪、且未被 gitignore」的目录 —— EAS 会把它们一起打包,
+# 而 `参考/` 在 .easignore 里明明写了却没被挡住(它是非 ASCII 目录名,
+# git 打印时会转义成 \345\217\202\350\200\203)。
+# 不管 EAS 内部是哪一步匹配失败,让 git 自己忽略它,任何机制都挡得住。
+参考/
+.claude/
