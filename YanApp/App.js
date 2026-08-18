@@ -46,8 +46,7 @@ import { usePrefs } from './src/lib/prefs';
 // 词场预览:内容还在 staging 没并进内容包,开发期先从这份草稿读,方便边写边看。
 // 合并进 content.v2.json 之后这份和它的引用一起删。
 import WORDFIELD_PREVIEW from './src/features/wordbank/wordfield-preview.json';
-import PITCH_PREVIEW from './src/features/wordbank/pitch-preview.json';
-import { toMora, pitchPattern, accentName, accentHint } from './src/features/wordbank/pitch';
+import { PitchLine, pitchOf } from './src/features/wordbank/PitchLine';
 import {
   ActivityIndicator, Alert, Animated, Dimensions, FlatList, Image, Keyboard,
   KeyboardAvoidingView, Modal,
@@ -1889,18 +1888,6 @@ const normalizeDate = (v) => {
  */
 const isDraftedWord = (w) => !(w?.exampleJp && w?.exampleZh && w?.exampleRoma);
 
-/**
- * 这个词的声调型。拿不到返回 null —— **不要拿 0 当缺省值**,
- * 0 是「平板」,是一个真实存在的型,用它当「不知道」会教错一批词。
- */
-const pitchOf = (w) => {
-  if (Number.isFinite(w?.pitchAccent)) return w.pitchAccent;
-  if (__DEV__) {
-    const v = PITCH_PREVIEW[w?.id];
-    return Number.isFinite(v) ? v : null;
-  }
-  return null;
-};
 const wordKey = (item) => `${item.word}-${item.reading}`;
 
 function WordBankScreen({ wordBank, book, onBack }) {
@@ -2226,50 +2213,6 @@ const LOAN_LANG = {
   lat: '拉丁语', gre: '希腊语',
 };
 
-/**
- * 声调线:假名上面那条高低线。
- *
- * 中文母语者有声调,会**下意识给日语词安一个调**,安错了也没人纠正。
- * 词库里有 207 组同音但声调不同的词(書く型1 / 欠く型0),在这之前它们长得一样。
- *
- * 画法是日语教材的标准形:高的那几拍上面拉一条线,降的地方线拐下来。
- * 数学在 features/wordbank/pitch.js(纯函数,有测试)—— 这里只负责画。
- */
-function PitchLine({ reading, accent }) {
-  const mora = toMora(reading);
-  if (!mora.length || !Number.isFinite(accent)) return null;
-  const { pattern, particleHigh } = pitchPattern(reading, accent);
-  return (
-    <View style={wd.pitchRow}>
-      {mora.map((m, i) => {
-        const high = pattern[i];
-        // 下一格的高低。最后一拍的「下一格」是助词那一格 —— 尾高的那道降就在那里
-        const nextHigh = i < mora.length - 1 ? pattern[i + 1] : particleHigh;
-        return (
-          <Text
-            key={i}
-            style={[wd.pitchMora,
-                    high ? wd.pitchHigh : wd.pitchLow,
-                    // 高低要变的地方竖一道,把上下两条线连起来
-                    high !== nextHigh && wd.pitchStep]}
-          >
-            {m}
-          </Text>
-        );
-      })}
-      {/* 后接助词那一格。
-          **没有它,平板和尾高就分不开** —— 「はな(花・型0)」和「はな(鼻・型2)」
-          在词本身上都是「低高」,差别全在后面那个助词上。
-          用 ○ 占位,表示「这里跟一个助词的话是高还是低」。 */}
-      <Text style={[wd.pitchMora, wd.pitchParticle,
-                    particleHigh ? wd.pitchHigh : wd.pitchLow]}>○</Text>
-      <Text style={wd.pitchName}>
-        {accentName(reading, accent)} · {accentHint(reading, accent)}
-      </Text>
-    </View>
-  );
-}
-
 function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKey, hasPrev, hasNext, onPrev, onNext, lookupWord, onOpenWord }) {
   // 词场:这个词真实出现时,身边站着哪些词。
   // 关键是**一个句子**而不是并列的词块 —— 秋(季节)、山(地点)、温泉(要做的事)
@@ -2436,18 +2379,7 @@ const wd = StyleSheet.create({
   // 用户的反馈是「有一点没看懂」—— 那不是他没学过,是那个图形本身没有信息:
   // 一小段线没有对照物,读不出「相对谁高」。
   //
-  // 现在高的画顶线、低的画底线、高低交界处竖一道连起来,整条读下来就是一个阶梯。
-  // 不需要先懂日语教材的约定也看得出形状。
-  pitchRow: { flexDirection: 'row', alignItems: 'flex-start', marginTop: 4 },
-  pitchMora: { fontSize: 14, color: C.muted, lineHeight: 20, paddingTop: 2,
-               borderColor: C.lava },
-  pitchHigh: { borderTopWidth: 1.5 },
-  pitchLow: { borderBottomWidth: 1.5, borderColor: C.border },
-  pitchStep: { borderRightWidth: 1.5 },
-  // 助词那一格:○ 是占位,表示「后面跟个助词的话它是高还是低」。
-  // 平板和尾高的差别只在这一格上,颜色要更淡,免得被当成词的一部分
-  pitchParticle: { color: C.mutedLight, marginLeft: 1 },
-  pitchName: { fontSize: 10, color: C.mutedLight, marginLeft: 7, paddingTop: 4 },
+  // 声调线的样式跟着组件搬去了 features/wordbank/PitchLine.js
   metaRow: { paddingHorizontal: 16, marginTop: 6, flexDirection: 'row', gap: 6 },
   posTag: { backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 2 },
   posTagTxt: { fontSize: 10, color: C.muted, fontWeight: '600' },

@@ -91,6 +91,29 @@ export const primaryAccent = (raw) => {
   return list.length ? list[0] : null;
 };
 
+/**
+ * 从词条上取声调型。拿不到返回 null。
+ *
+ * ⚠️ **不要拿 0 当缺省值。** 0 是「平板」,是一个真实存在的型 ——
+ * 用它表示「不知道」会把一批词教成平板,而且不报错。
+ *
+ * ⚠️ 2026-08-18:这个函数是从 App.js 的 `pitchOf` 里抠出来的,因为它原来
+ * 只认 `w.pitchAccent`,而 2026-08 合入的 7510 条音调**全写在 `w.pitch.accent`**
+ * (实测 `pitchAccent` 字段 0 条)。App.js 那份还有个 `__DEV__` 的 preview 兜底,
+ * 于是开发构建看着一切正常、生产构建一条音调都不显示,整整一轮没人发现。
+ *
+ * 搬到这里是为了**它能被测到** —— 留在组件文件里就得先起 React Native,
+ * 而这个项目里没被测到的那一层出过每一个不报错的错。
+ *
+ * `pitchAccent` 那条留着:内容包是远端下发的,线上可能还有旧结构的包在跑。
+ */
+export function accentOf(word) {
+  const merged = word?.pitch?.accent;
+  if (Number.isFinite(merged)) return merged;
+  if (Number.isFinite(word?.pitchAccent)) return word.pitchAccent;
+  return null;
+}
+
 /** 型的名字。日语教学里的通用叫法,用户以后在别处也会遇到,所以照旧给。 */
 export function accentName(reading, accent) {
   const n = toMora(reading).length;

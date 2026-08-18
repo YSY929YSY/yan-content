@@ -5,8 +5,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  toMora, pitchPattern, parseAccents, primaryAccent, accentName, accentHint,
+  toMora, pitchPattern, parseAccents, primaryAccent, accentName, accentHint, accentOf,
 } from '../../features/wordbank/pitch.js';
+import { readFileSync } from 'node:fs';
 
 // ── 拍 ───────────────────────────────────────────────────────
 test('★ 拍不是字符 —— 拗音算一拍,促音和拨音各算一拍', () => {
@@ -131,4 +132,51 @@ test('拿不到就不要编一句出来', () => {
   assert.equal(accentHint('', 1), '');
   assert.equal(accentHint('あいさつ', null), '');
   assert.equal(accentHint('あいさつ', undefined), '');
+});
+
+// ── 从词条上取型 ─────────────────────────────────────────────
+//
+// 这一组守的是 2026-08-18 那个 bug:渲染层读 `pitchAccent`,而合入的数据
+// 写在 `pitch.accent`,于是生产构建里 7510 条音调一条都不显示。
+// 开发构建有 preview 兜底,所以「真机验过」也没验出来。
+
+test('★ 读的是 pitch.accent —— 合入的 7510 条全写在这里', () => {
+  // 字面量,不写 sample.pitch.accent:断言的期望值取自被测对象的话,
+  // 把实现改成 `return w.pitch.accent` 之外的任何东西它都照样绿。
+  assert.equal(accentOf({ pitch: { accent: 1, mora: 2, source: 'kanjium' } }), 1);
+  assert.equal(accentOf({ pitch: { accent: 2, mora: 3 } }), 2);
+});
+
+test('★ 型 0 是「平板」,不是「没有」—— 这条错了会把一批词教成平板', () => {
+  assert.equal(accentOf({ pitch: { accent: 0, mora: 3 } }), 0);
+  // 而真的没有必须是 null,两者不能长一样
+  assert.equal(accentOf({ word: '桜', reading: 'さくら' }), null);
+  assert.equal(accentOf({ pitch: {} }), null);
+  assert.equal(accentOf({ pitch: null }), null);
+  assert.equal(accentOf(null), null);
+  assert.equal(accentOf(undefined), null);
+});
+
+test('多型词取 accent 那个,不碰 all —— 「取第一个」这条规则无源可核,但至少要稳定', () => {
+  assert.equal(accentOf({ pitch: { accent: 0, all: [0, 3], mora: 4, multi: true } }), 0);
+});
+
+test('旧结构的内容包还认 —— 内容包是远端下发的,线上可能还有旧包在跑', () => {
+  assert.equal(accentOf({ pitchAccent: 3 }), 3);
+  // 两个都在时以新结构为准
+  assert.equal(accentOf({ pitch: { accent: 1 }, pitchAccent: 3 }), 1);
+});
+
+test('★ 回归:真实内容包里 accentOf 必须能取到,不是只在构造的对象上成立', () => {
+  // ⚠️ 这条读的是真文件。上一轮的五次错全是「看了局部样本就当成全库」,
+  // 而这个 bug 恰恰是构造对象怎么测都测不出来的那一类 —— 它是数据和代码
+  // 对不上,两边分开看都没问题。
+  const url = new URL('../../../assets/content.fallback.json', import.meta.url);
+  const wordBank = JSON.parse(readFileSync(url, 'utf8')).wordBank || [];
+  const got = wordBank.filter(w => accentOf(w) != null).length;
+
+  // 字面量下界。合入报告说 7510 条 —— 掉到 7000 以下说明数据或字段名又动了。
+  assert.ok(got >= 7000, `真实内容包里只有 ${got} 条取得到声调,合入时是 7510`);
+  // 而且不能是全都有:495 条本来就没音调,全绿反而说明 accentOf 在瞎给值
+  assert.ok(got < wordBank.length, `${wordBank.length} 条全都有声调,不合预期`);
 });
