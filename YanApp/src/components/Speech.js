@@ -8,7 +8,24 @@ import { C } from '../theme';
 export function useSpeech() {
   const [speakingKey, setSpeakingKey] = useState(null);
 
-  // expo-speech 走系统 TTS 路由,不受 iOS 静音键影响;无需初始化。
+  /**
+   * ⚠️ **这里原来写着「expo-speech 走系统 TTS 路由,不受 iOS 静音键影响;无需初始化」——
+   * 那是错的。** 2026-08-17 真机实测:打开静音开关就没有声音。
+   * (App.js 文件头还写着「TTS 完整修复(iOS 静音键问题)」,同样不成立。)
+   *
+   * 真实原因:AVSpeechSynthesizer 走 App 自己的 AVAudioSession,
+   * 而 RN 默认是 soloAmbient —— 这个类目**就是**会被响铃/静音拨杆切掉的。
+   * 要在静音下出声,必须把类目设成 playback。expo-speech 自己没有这个 API。
+   *
+   * 三条路都要动原生依赖(= 要重打 dev client):
+   *   · expo-av setAudioModeAsync({ playsInSilentModeIOS: true })
+   *     —— ⚠️ 工单红线 6 明令禁止引入 expo-av(和 expo-speech 路由冲突,踩过)
+   *   · expo-audio(SDK 54 里 expo-av 的替代品,是**另一个包**,未必有同样的冲突)
+   *   · 自己写 config plugin 直接设 AVAudioSession 类目
+   *
+   * 现状:**没修**,等下次本来就要重打包的时候一起做。
+   * 留这段注释是因为上一版那句话会让人以为查过了、不用再查。
+   */
   const speak = useCallback((text, lang = 'ja-JP', key = null) => {
     if (!text) return;
 
