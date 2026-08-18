@@ -37,6 +37,8 @@ import { usePrefs } from '../../lib/prefs';
 import { useReviewProgress } from '../review/ReviewProgressContext';
 import { PitchLine, pitchOf, hasMultiAccent } from '../wordbank/PitchLine';
 import { Furigana } from '../wordbank/FuriganaText';
+import { ExampleSentence } from '../wordbank/ExampleSentence';
+import EXAMPLE_TOKENS from '../../../assets/example_tokens.json';
 import { wordKey } from './dailyTask';
 
 /**
@@ -197,7 +199,15 @@ export default function LearnBatchScreen({ words, onBack, onDone }) {
                 onPress={() => speak?.(w.exampleJp, 'ja-JP', `${speakKey}-ex`)}
                 activeOpacity={0.6}
               >
-                <Text style={s.exJp}>{w.exampleJp}</Text>
+                {/* 例句也按词切开、汉字上注音 —— 对还不会读的人,
+                    一整行纯文本既看不出词边界也不知道汉字读什么。
+                    分词是离线跑好的(运行时不跑分词器),
+                    拼不回原句时整句退回纯文本(见 ExampleSentence)。 */}
+                <ExampleSentence
+                  sentence={w.exampleJp}
+                  tokens={EXAMPLE_TOKENS[w.id]}
+                  size={15}
+                />
                 {!!w.exampleZh && <Text style={s.exZh}>{w.exampleZh}</Text>}
               </TouchableOpacity>
             )}
@@ -279,7 +289,7 @@ const s = StyleSheet.create({
     borderRadius: 8, borderWidth: 1, borderColor: C.borderSoft,
     paddingHorizontal: 16, paddingVertical: 13, gap: 4,
   },
-  exJp: { fontSize: 14, color: C.ink, lineHeight: 21 },
+  // 例句正文由 ExampleSentence 自己排(要分列才能按词切开+注音)
   exZh: { fontSize: 12, color: C.muted, lineHeight: 18 },
   askGrade: { fontSize: 11.5, color: C.mutedLight, marginTop: 20 },
   gradeRow: { flexDirection: 'row', gap: 8, alignSelf: 'stretch', marginTop: 8 },
