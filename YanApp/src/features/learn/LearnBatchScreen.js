@@ -36,6 +36,7 @@ import { useSpeech, SpeakBtn } from '../../components/Speech';
 import { usePrefs } from '../../lib/prefs';
 import { useReviewProgress } from '../review/ReviewProgressContext';
 import { PitchLine, pitchOf, hasMultiAccent } from '../wordbank/PitchLine';
+import { Furigana } from '../wordbank/FuriganaText';
 import { wordKey } from './dailyTask';
 
 /**
@@ -165,7 +166,11 @@ export default function LearnBatchScreen({ words, onBack, onDone }) {
                   onPress={say}
                   activeOpacity={0.6}
                 >
-                  <Text style={s.reading}>{w.reading}</Text>
+                  {/* 假名压在对应的汉字上 —— 这一页教的就是「这个字读什么」,
+                      把读音单独摆一行,用户还得自己在心里做一次对应。
+                      `行く` 上面标一个 `い`,那一下才是这一页的意义。
+                      对不上的词会退回纯读音显示(见 furigana.ts,不瞎标)。 */}
+                  <Furigana word={w.word} reading={w.reading} size={26} color={C.lava} />
                   {accent != null && <PitchLine reading={w.reading} accent={accent} />}
                   {/* 多型词要标出来。「取第一个」这条规则无源可核 ——
                       不标的话用户会把一个可能不对的型当成唯一答案背下去 */}
@@ -265,7 +270,8 @@ const s = StyleSheet.create({
   },
   answerRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   answerText: { flex: 1 },
-  reading: { fontSize: 26, fontWeight: '700', color: C.lava },
+  // 读音那一行现在由 Furigana 组件自己排(要分列才能把假名压在字上),
+  // 这里不再需要样式 —— 留个空位说明它去哪了,免得下一个人以为漏了
   multi: { fontSize: 10.5, color: C.mutedLight, marginTop: 6, lineHeight: 15 },
   en: { fontSize: 12, color: C.muted, lineHeight: 17 },
   exBox: {
