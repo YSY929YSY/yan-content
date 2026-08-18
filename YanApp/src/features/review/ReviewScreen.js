@@ -10,7 +10,7 @@ import { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { C } from '../../theme';
-import { useSpeech } from '../../components/Speech';
+import { useSpeech, SpeakBtn } from '../../components/Speech';
 import { useDailyQueue } from './useReview';
 import { useReviewProgress } from './ReviewProgressContext';
 import { fromWord, indexUnits, buildUnits, sourceOf } from './units';
@@ -110,18 +110,26 @@ export default function ReviewScreen({ content, onBack }) {
         ) : (
           <>
             <View style={s.answerBox}>
-              <TouchableOpacity
-                onPress={() => unit.speak && speak?.(unit.speak, unit.lang, `rv-${key}`)}
-                activeOpacity={unit.speak ? 0.6 : 1}
-              >
-                <Text style={s.answer}>{unit.answer}</Text>
-                {!!unit.answerSub && <Text style={s.answerSub}>{unit.answerSub}</Text>}
+              {/* 朗读入口统一用「言」按钮(SpeakBtn),不用一行文字提示 ——
+                  词书详情页从一开始就是这个,复习页却写成「点一下听发音」,
+                  同一个动作在两个地方长得不一样,用户得重新学一次。 */}
+              <View style={s.answerRow}>
+                <TouchableOpacity
+                  style={s.answerText}
+                  onPress={() => unit.speak && speak?.(unit.speak, unit.lang, `rv-${key}`)}
+                  activeOpacity={unit.speak ? 0.6 : 1}
+                >
+                  <Text style={s.answer}>{unit.answer}</Text>
+                  {!!unit.answerSub && <Text style={s.answerSub}>{unit.answerSub}</Text>}
+                </TouchableOpacity>
                 {!!unit.speak && (
-                  <Text style={s.speakHint}>
-                    {speakingKey === `rv-${key}` ? '朗读中…' : '点一下听发音'}
-                  </Text>
+                  <SpeakBtn
+                    onPress={() => speak?.(unit.speak, unit.lang, `rv-${key}`)}
+                    speaking={speakingKey === `rv-${key}`}
+                    size="sm"
+                  />
                 )}
-              </TouchableOpacity>
+              </View>
             </View>
 
             <View style={s.gradeRow}>
@@ -195,7 +203,8 @@ const s = StyleSheet.create({
   },
   answer: { fontSize: 24, fontWeight: '700', color: C.ink, textAlign: 'center', lineHeight: 34 },
   answerSub: { fontSize: 13, color: C.muted, textAlign: 'center' },
-  speakHint: { fontSize: 10, color: C.mutedLight, textAlign: 'center', marginTop: 4 },
+  answerRow: { flexDirection: 'row', alignItems: 'center', gap: 12, alignSelf: 'stretch' },
+  answerText: { flex: 1 },
   gradeRow: { flexDirection: 'row', gap: 8, alignSelf: 'stretch', marginTop: 18 },
   gradeBtn: {
     flex: 1, borderRadius: 8, paddingVertical: 13, alignItems: 'center',

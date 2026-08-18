@@ -5118,13 +5118,21 @@ useEffect(() => {
                 )}
                 {!!memory?.review?.answer && (
                   answerOpen ? (
-                    <TouchableOpacity
-                      onPress={() => speak(memory.review.answer, langCode, `mem-ans-${place.id}`)}
-                      activeOpacity={0.6}
-                    >
-                      <Text style={ms.memoryAnswer}>{memory.review.answer}</Text>
-                      <Text style={ms.memorySubtle}>点一下听发音</Text>
-                    </TouchableOpacity>
+                    <View style={ms.memoryAnswerRow}>
+                      <TouchableOpacity
+                        style={{ flex: 1 }}
+                        onPress={() => speak(memory.review.answer, langCode, `mem-ans-${place.id}`)}
+                        activeOpacity={0.6}
+                      >
+                        <Text style={ms.memoryAnswer}>{memory.review.answer}</Text>
+                      </TouchableOpacity>
+                      {/* 同上:朗读统一走「言」按钮 */}
+                      <SpeakBtn
+                        onPress={() => speak(memory.review.answer, langCode, `mem-ans-${place.id}`)}
+                        speaking={speakingKey === `mem-ans-${place.id}`}
+                        size="sm"
+                      />
+                    </View>
                   ) : (
                     <TouchableOpacity
                       style={ms.memoryAnswerBtn}
@@ -5895,6 +5903,7 @@ const ms = StyleSheet.create({
     borderRadius: 6, paddingHorizontal: 12, paddingVertical: 6, backgroundColor: C.white,
   },
   memoryAnswerBtnTxt: { fontSize: 11, color: C.muted, fontWeight: '600' },
+  memoryAnswerRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   memoryAnswer: { fontSize: 15, color: C.ink, fontWeight: '700', marginTop: 8, lineHeight: 22 },
   memoryTraceBox: { borderRadius: 12, backgroundColor: '#f8efe7', padding: 10, gap: 5 },
   memoryTrace: { fontSize: 12, color: C.ink, lineHeight: 18, fontWeight: '600' },
