@@ -15540,6 +15540,12 @@
     "etymology_image"
    ],
    "exampleRoma": "Takusan aruite, ashi ga itaku narimashita.",
+   "pitch": {
+    "accent": 2,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "足"
+   },
    "freq": {
     "df": 450,
     "source": "tatoeba",
@@ -15618,6 +15624,12 @@
     "df": 180,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 彼処/彼所"
    }
   },
   {
@@ -15815,6 +15827,12 @@
     "df": 24,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 彼方"
    }
   },
   {
@@ -15971,6 +15989,12 @@
     "df": 48,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 彼方"
    }
   },
   {
@@ -16043,6 +16067,17 @@
     "df": 6275,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "all": [
+     2,
+     1
+    ],
+    "mora": 3,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 彼方/貴方"
    }
   },
   {
@@ -16654,6 +16689,12 @@
     "df": 499,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 彼/荒れ"
    }
   },
   {
@@ -16684,6 +16725,12 @@
     "spoken_written"
    ],
    "exampleRoma": "Tenki ga ii desu ne, sanpo shimashou.",
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "良い"
+   },
    "freq": {
     "df": 5243,
     "source": "tatoeba",
@@ -16833,6 +16880,12 @@
     "df": 264,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 如何"
    }
   },
   {
@@ -16864,6 +16917,11 @@
     "spoken_written"
    ],
    "exampleRoma": "Ashita oosaka ni ikimasu.",
+   "pitch": {
+    "accent": 0,
+    "mora": 2,
+    "source": "kanjium"
+   },
    "freq": {
     "df": 7228,
     "source": "tatoeba",
@@ -16901,6 +16959,12 @@
     "df": 392,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 幾つ"
    }
   },
   {
@@ -16934,6 +16998,17 @@
     "df": 516,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "all": [
+     1,
+     0
+    ],
+    "mora": 3,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 幾ら"
    }
   },
   {
@@ -17291,6 +17366,12 @@
     "df": 1577,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 五/何時"
    }
   },
   {
@@ -17447,6 +17528,12 @@
     "df": 1889,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 何時も"
    }
   },
   {
@@ -18126,6 +18213,12 @@
     "df": 1111,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 内/家"
    }
   },
   {
@@ -18278,6 +18371,12 @@
     "df": 117,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 五月蝿い/五月蠅い/煩い/煩さい"
    }
   },
   {
@@ -19228,6 +19327,12 @@
     "df": 48,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: お爺さん/お祖父さん"
    }
   },
   {
@@ -19298,6 +19403,12 @@
     "spoken_written"
    ],
    "exampleRoma": "Kinjo no ojisan ni oshiete moraimashita.",
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "叔父さん"
+   },
    "freq": {
     "df": 17,
     "source": "tatoeba",
@@ -19698,6 +19809,12 @@
     "df": 1,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: おと年/一昨年"
    }
   },
   {
@@ -19926,6 +20043,12 @@
     "df": 53,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: お婆さん/お祖母さん"
    }
   },
   {
@@ -19957,6 +20080,12 @@
     "spoken_written"
    ],
    "exampleRoma": "Kinjo no obasan ni moraimashita.",
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "伯母さん"
+   },
    "freq": {
     "df": 35,
     "source": "tatoeba",
@@ -20113,6 +20242,12 @@
     "df": 6,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 6,
+    "source": "kanjium",
+    "via": "同读音候选一致: お巡りさん/御巡りさん"
    }
   },
   {
@@ -20856,6 +20991,12 @@
     "df": 1051,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 係る/懸かる/懸る/掛かる/掛る/斯かる/架かる/罹る"
    }
   },
   {
@@ -21513,6 +21654,12 @@
     "df": 83,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 下番/鞄"
    }
   },
   {
@@ -21585,6 +21732,12 @@
     "df": 106,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 冠る/被る"
    }
   },
   {
@@ -21983,6 +22136,12 @@
     "etymology_image"
    ],
    "exampleRoma": "Kawa de sakana o tsurimashita.",
+   "pitch": {
+    "accent": 2,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "川"
+   },
    "freq": {
     "df": 557,
     "source": "tatoeba",
@@ -23037,6 +23196,11 @@
     "lookalike"
    ],
    "exampleRoma": "Gokiro yasemashita.",
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium"
+   },
    "freq": {
     "df": 130,
     "source": "tatoeba",
@@ -23074,6 +23238,11 @@
     "lookalike"
    ],
    "exampleRoma": "Jukkiro hashirimasu.",
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium"
+   },
    "freq": {
     "df": 130,
     "source": "tatoeba",
@@ -24756,6 +24925,12 @@
     "df": 368,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 此方"
    }
   },
   {
@@ -24791,6 +24966,12 @@
     "df": 169,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 此方"
    }
   },
   {
@@ -26025,6 +26206,12 @@
     "df": 297,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 併し/然し/私窩子"
    }
   },
   {
@@ -27466,6 +27653,12 @@
     "df": 1137,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 直ぐに"
    }
   },
   {
@@ -28028,6 +28221,12 @@
     "df": 9,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 脊広"
    }
   },
   {
@@ -28379,6 +28578,17 @@
     "spoken_written"
    ],
    "exampleRoma": "Soudesu.",
+   "pitch": {
+    "accent": 1,
+    "all": [
+     0,
+     1
+    ],
+    "mora": 2,
+    "source": "kanjium",
+    "multi": true,
+    "via": "然う(感叹词义;卡片教的是そうです=是的)"
+   },
    "freq": {
     "df": 3115,
     "source": "tatoeba",
@@ -28453,6 +28663,12 @@
     "spoken_written"
    ],
    "exampleRoma": "Soshite dekaketa.",
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "然うして"
+   },
    "freq": {
     "df": 285,
     "source": "tatoeba",
@@ -28490,6 +28706,12 @@
     "df": 1436,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 其処/底"
    }
   },
   {
@@ -28522,6 +28744,12 @@
     "df": 56,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 其方"
    }
   },
   {
@@ -28557,6 +28785,12 @@
     "df": 56,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 其方"
    }
   },
   {
@@ -28662,6 +28896,12 @@
     "df": 130,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 側/傍/蕎麦"
    }
   },
   {
@@ -29475,6 +29715,12 @@
     "df": 143,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 烟草/煙草/莨"
    }
   },
   {
@@ -30299,6 +30545,17 @@
     "df": 1044,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "all": [
+     1,
+     0
+    ],
+    "mora": 3,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 一寸/鳥渡"
    }
   },
   {
@@ -30682,6 +30939,12 @@
     "df": 70,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 詰まらない/詰らない"
    }
   },
   {
@@ -31681,6 +31944,12 @@
     "df": 1065,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 如何して"
    }
   },
   {
@@ -32029,6 +32298,12 @@
     "df": 2202,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 何処/何所/何處"
    }
   },
   {
@@ -32177,6 +32452,12 @@
     "df": 543,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 何方/孰方"
    }
   },
   {
@@ -32212,6 +32493,12 @@
     "df": 238,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 何方/孰方"
    }
   },
   {
@@ -32245,6 +32532,12 @@
     "df": 2692,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 迚も"
    }
   },
   {
@@ -32277,6 +32570,12 @@
     "df": 60,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 何方"
    }
   },
   {
@@ -32349,6 +32648,12 @@
     "df": 809,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 何の/殿"
    }
   },
   {
@@ -32699,6 +33004,12 @@
     "df": 597,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 何れ"
    }
   },
   {
@@ -32769,6 +33080,12 @@
     "df": 42020,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 亡い/内/無い"
    }
   },
   {
@@ -33033,6 +33350,12 @@
     "df": 550,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 何故"
    }
   },
   {
@@ -33409,6 +33732,11 @@
     "spoken_written"
    ],
    "exampleRoma": "Nani desu ka.",
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium"
+   },
    "freq": {
     "df": 7046,
     "source": "tatoeba",
@@ -33519,6 +33847,12 @@
     "df": 24,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 賑やか"
    }
   },
   {
@@ -34625,6 +34959,12 @@
     "spoken_written"
    ],
    "exampleRoma": "Hajime kara.",
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "初め"
+   },
    "freq": {
     "df": 99,
     "source": "tatoeba",
@@ -37040,6 +37380,12 @@
     "df": 144,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 頁"
    }
   },
   {
@@ -37957,6 +38303,11 @@
     "etymology_image"
    ],
    "exampleRoma": "Maigetsu harau.",
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium"
+   },
    "freq": {
     "df": 55,
     "source": "tatoeba",
@@ -38072,6 +38423,11 @@
     "spoken_written"
    ],
    "exampleRoma": "Mainen kimasu.",
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium"
+   },
    "freq": {
     "df": 143,
     "source": "tatoeba",
@@ -38233,6 +38589,12 @@
     "df": 51,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 不味い/拙い"
    }
   },
   {
@@ -38297,6 +38659,12 @@
     "df": 1750,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 未だ"
    }
   },
   {
@@ -38410,6 +38778,12 @@
     "df": 59,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 真すぐ/真っすぐ/真っ直/真っ直ぐ/真直ぐ"
    }
   },
   {
@@ -38527,6 +38901,17 @@
     "spoken_written"
    ],
    "exampleRoma": "Marui teeburu no seki ni shite kudasai.",
+   "pitch": {
+    "accent": 0,
+    "all": [
+     0,
+     2
+    ],
+    "mora": 3,
+    "source": "kanjium",
+    "multi": true,
+    "via": "丸い"
+   },
    "freq": {
     "df": 46,
     "source": "tatoeba",
@@ -39202,6 +39587,12 @@
     "df": 1157,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 皆"
    }
   },
   {
@@ -39490,6 +39881,12 @@
     "df": 103,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 米/米突"
    }
   },
   {
@@ -40208,6 +40605,12 @@
     "df": 3493,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 殺る/演る/犯る/行る/遣る"
    }
   },
   {
@@ -42029,6 +42432,12 @@
     "df": 28,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 挨拶"
    }
   },
   {
@@ -42098,6 +42507,12 @@
     "df": 3,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 赤ちゃん"
    }
   },
   {
@@ -43118,6 +43533,12 @@
     "df": 37,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 苛める/虐める"
    }
   },
   {
@@ -43261,6 +43682,12 @@
     "df": 344,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 戴く/頂く"
    }
   },
   {
@@ -43330,6 +43757,12 @@
     "df": 0,
     "source": "tatoeba",
     "method": "none"
+   },
+   "pitch": {
+    "accent": 5,
+    "mora": 8,
+    "source": "kanjium",
+    "via": "同读音候选一致: 一生けん命/一生懸命"
    }
   },
   {
@@ -44134,6 +44567,12 @@
     "df": 260,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 嬉しい"
    }
   },
   {
@@ -44518,6 +44957,12 @@
     "df": 7,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 5,
+    "mora": 6,
+    "source": "kanjium",
+    "via": "同读音候选一致: お出でになる/御出でになる"
    }
   },
   {
@@ -44662,6 +45107,12 @@
     "df": 273,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: お蔭/お陰/御蔭/御陰"
    }
   },
   {
@@ -44694,6 +45145,12 @@
     "df": 145,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 可笑しい/奇怪しい"
    }
   },
   {
@@ -45204,6 +45661,12 @@
     "df": 91,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 仰しゃる/仰っしゃる/仰る/仰有る"
    }
   },
   {
@@ -45273,6 +45736,12 @@
     "df": 6,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: お釣り/御釣/御釣り"
    }
   },
   {
@@ -45491,6 +45960,12 @@
     "df": 18,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 御祭/御祭り"
    }
   },
   {
@@ -45671,6 +46146,12 @@
     "df": 101,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 玩具"
    }
   },
   {
@@ -46411,6 +46892,12 @@
     "df": 73,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 瓦斯"
    }
   },
   {
@@ -46983,6 +47470,12 @@
     "df": 117,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 構う"
    }
   },
   {
@@ -47132,6 +47625,12 @@
     "df": 103,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 硝子"
    }
   },
   {
@@ -47813,6 +48312,17 @@
     "df": 327,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "all": [
+     0,
+     1
+    ],
+    "mora": 3,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 屹度/急度"
    }
   },
   {
@@ -48586,6 +49096,12 @@
     "df": 3599,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 下さる"
    }
   },
   {
@@ -50205,6 +50721,12 @@
     "df": 33,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: ご馳走/御馳走"
    }
   },
   {
@@ -50344,6 +50866,12 @@
     "df": 23,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: この頃/此の頃"
    }
   },
   {
@@ -50556,6 +51084,17 @@
     "df": 138,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 4,
+    "all": [
+     4,
+     0
+    ],
+    "mora": 4,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 此から/此れから"
    }
   },
   {
@@ -52075,6 +52614,12 @@
     "df": 171,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 確り/聢り"
    }
   },
   {
@@ -52218,6 +52763,12 @@
     "df": 234,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 暫く/暫らく/須臾"
    }
   },
   {
@@ -52435,6 +52986,12 @@
     "df": 8,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 邪魔"
    }
   },
   {
@@ -53519,6 +54076,12 @@
     "df": 105,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: ずい分/随分/隨分"
    }
   },
   {
@@ -54074,6 +54637,12 @@
     "df": 242,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 4,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 素晴しい/素晴らしい"
    }
   },
   {
@@ -54545,6 +55114,12 @@
     "df": 111,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 是非"
    }
   },
   {
@@ -55088,6 +55663,12 @@
     "df": 74,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: それ程/其れ程"
    }
   },
   {
@@ -55395,6 +55976,12 @@
     "df": 195,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 大帝/大抵/退廷"
    }
   },
   {
@@ -56062,6 +56649,12 @@
     "df": 111,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 偶に/適に"
    }
   },
   {
@@ -56128,6 +56721,12 @@
     "df": 183,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 駄目"
    }
   },
   {
@@ -56483,6 +57082,12 @@
     "df": 50,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 些とも"
    }
   },
   {
@@ -57045,6 +57650,12 @@
     "df": 1260,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 積もり/積り"
    }
   },
   {
@@ -58391,6 +59002,12 @@
     "df": 200,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 中々/中中"
    }
   },
   {
@@ -58534,6 +59151,12 @@
     "df": 3253,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 為さる"
    }
   },
   {
@@ -58566,6 +59189,17 @@
     "df": 31,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "all": [
+     0,
+     3
+    ],
+    "mora": 4,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 成るべく/成る可く"
    }
   },
   {
@@ -58598,6 +59232,12 @@
     "df": 55,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 成る程/成程"
    }
   },
   {
@@ -58667,6 +59307,12 @@
     "df": 48,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 匂/匂い/臭い"
    }
   },
   {
@@ -59069,6 +59715,12 @@
     "df": 37,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 濡る/濡れる"
    }
   },
   {
@@ -60885,6 +61537,12 @@
     "df": 557,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 酷い/非道い"
    }
   },
   {
@@ -62162,6 +62820,12 @@
     "df": 915,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 殆ど/殆んど"
    }
   },
   {
@@ -62418,6 +63082,12 @@
     "df": 39,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 又は"
    }
   },
   {
@@ -63385,6 +64055,12 @@
     "df": 166,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 勿論"
    }
   },
   {
@@ -63528,6 +64204,12 @@
     "df": 1135,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 貰う"
    }
   },
   {
@@ -63856,6 +64538,12 @@
     "df": 105,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 矢っ張り"
    }
   },
   {
@@ -63888,6 +64576,12 @@
     "df": 60,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 矢張/矢張り"
    }
   },
   {
@@ -64586,6 +65280,17 @@
     "df": 268,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "all": [
+     3,
+     0
+    ],
+    "mora": 4,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 宜しい"
    }
   },
   {
@@ -65699,6 +66404,12 @@
     "df": 52,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 合憎/生憎"
    }
   },
   {
@@ -66335,6 +67046,17 @@
     "df": 73,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "all": [
+     2,
+     3
+    ],
+    "mora": 4,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 彼方此方"
    }
   },
   {
@@ -66974,6 +67696,12 @@
     "df": 603,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 有り難う/有難う"
    }
   },
   {
@@ -67051,6 +67779,12 @@
     "df": 29,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 或いは/或は"
    }
   },
   {
@@ -67456,6 +68190,17 @@
     "df": 85,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "all": [
+     0,
+     4
+    ],
+    "mora": 4,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 余り/餘り"
    }
   },
   {
@@ -67571,6 +68316,12 @@
     "df": 24,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 否/家"
    }
   },
   {
@@ -68212,6 +68963,12 @@
     "df": 64,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 何れ/孰れ"
    }
   },
   {
@@ -69130,6 +69887,12 @@
     "df": 225,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 何時でも"
    }
   },
   {
@@ -69246,6 +70009,12 @@
     "df": 65,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 何時までも/何時迄も"
    }
   },
   {
@@ -69842,6 +70611,17 @@
     "df": 62,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "all": [
+     1,
+     0
+    ],
+    "mora": 4,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 刺々/刺刺/苛々/苛苛"
    }
   },
   {
@@ -70133,6 +70913,17 @@
     "df": 84,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "all": [
+     3,
+     2
+    ],
+    "mora": 4,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 所謂"
    }
   },
   {
@@ -73067,6 +73858,12 @@
     "df": 93,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: お喋り/御喋り"
    }
   },
   {
@@ -73143,6 +73940,12 @@
     "df": 96,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 恐らく"
    }
   },
   {
@@ -73929,6 +74732,12 @@
     "df": 46,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 凡そ"
    }
   },
   {
@@ -77282,6 +78091,12 @@
     "df": 409,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 可也/可成"
    }
   },
   {
@@ -77763,6 +78578,12 @@
     "df": 674,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 6,
+    "source": "kanjium",
+    "via": "同读音候选一致: かも知れない"
    }
   },
   {
@@ -78084,6 +78905,12 @@
     "df": 43,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 4,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 可哀想/可哀相"
    }
   },
   {
@@ -85041,6 +85868,12 @@
     "df": 0,
     "source": "tatoeba",
     "method": "none"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: けち"
    }
   },
   {
@@ -88915,6 +89748,12 @@
     "df": 466,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 是等/此れ等"
    }
   },
   {
@@ -89311,6 +90150,12 @@
     "df": 77,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 5,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 今日は"
    }
   },
   {
@@ -90762,6 +91607,12 @@
     "df": 43,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 偖/扠/扨"
    }
   },
   {
@@ -91683,6 +92534,12 @@
     "df": 48,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 併も/然も/而も"
    }
   },
   {
@@ -91884,6 +92741,12 @@
     "df": 30,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 頻りに"
    }
   },
   {
@@ -94041,6 +94904,12 @@
     "df": 189,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 喋る"
    }
   },
   {
@@ -99528,6 +100397,12 @@
     "df": 573,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 凄い"
    }
   },
   {
@@ -100055,6 +100930,12 @@
     "df": 31,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 乃ち/則ち/即ち/輒"
    }
   },
   {
@@ -100291,6 +101172,12 @@
     "df": 1,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 4,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 済みません"
    }
   },
   {
@@ -103032,6 +103919,12 @@
     "df": 271,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 其処で"
    }
   },
   {
@@ -103354,6 +104247,12 @@
     "df": 66,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: その内/其の内"
    }
   },
   {
@@ -103390,6 +104289,12 @@
     "df": 76,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 4,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 其のまま/其の儘"
    }
   },
   {
@@ -103510,6 +104415,17 @@
     "df": 129,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "all": [
+     2,
+     3
+    ],
+    "mora": 4,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 其れ其れ/夫れ夫れ"
    }
   },
   {
@@ -106288,6 +107204,12 @@
     "df": 34,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 度々/度度"
    }
   },
   {
@@ -106444,6 +107366,12 @@
     "df": 34,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 堪らない"
    }
   },
   {
@@ -107484,6 +108412,12 @@
     "df": 261,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 4,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 違い無い"
    }
   },
   {
@@ -109675,6 +110609,17 @@
     "df": 83,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "all": [
+     3,
+     1
+    ],
+    "mora": 3,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 詰まり/詰り"
    }
   },
   {
@@ -111824,6 +112769,17 @@
     "df": 208,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 4,
+    "all": [
+     4,
+     1
+    ],
+    "mora": 5,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 如何しても"
    }
   },
   {
@@ -112665,6 +113621,12 @@
     "df": 348,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 何処か"
    }
   },
   {
@@ -113229,6 +114191,12 @@
     "df": 111,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 兎に角"
    }
   },
   {
@@ -114570,6 +115538,12 @@
     "df": 58,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 何故なら"
    }
   },
   {
@@ -126113,6 +127087,12 @@
     "df": 136,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 将に/当に/正に"
    }
   },
   {
@@ -126269,6 +127249,12 @@
     "df": 150,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 増々/増す増す/増増/益/益々/益益"
    }
   },
   {
@@ -126910,6 +127896,12 @@
     "df": 244,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 丸で"
    }
   },
   {
@@ -129262,6 +130254,12 @@
     "df": 79,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 若しも"
    }
   },
   {
@@ -130004,6 +131002,12 @@
     "df": 82,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 漸て/軈て/頓て"
    }
   },
   {
@@ -133967,6 +134971,17 @@
     "df": 38,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "all": [
+     3,
+     4
+    ],
+    "mora": 4,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 我がまま/我が侭/我が儘/我侭/我儘"
    }
   },
   {
@@ -134123,6 +135138,12 @@
     "df": 66,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 態と"
    }
   },
   {
@@ -134811,6 +135832,12 @@
     "df": 0,
     "source": "tatoeba",
     "method": "none"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 赤ん坊"
    }
   },
   {
@@ -135418,6 +136445,12 @@
     "df": 14,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 4,
+    "mora": 6,
+    "source": "kanjium",
+    "via": "同读音候选一致: 彼方此方"
    }
   },
   {
@@ -135574,6 +136607,12 @@
     "df": 18,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 4,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 当てはまる/当て嵌まる"
    }
   },
   {
@@ -135731,6 +136770,12 @@
     "df": 4,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 炙る/焙る"
    }
   },
   {
@@ -135767,6 +136812,12 @@
     "df": 47,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 溢れる"
    }
   },
   {
@@ -136188,6 +137239,12 @@
     "df": 3,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 粗筋/荒筋"
    }
   },
   {
@@ -136424,6 +137481,12 @@
     "df": 22,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 彼是/彼此"
    }
   },
   {
@@ -137238,6 +138301,12 @@
     "df": 30,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 一々/一一"
    }
   },
   {
@@ -137995,6 +139064,12 @@
     "df": 13,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 愈/愈々/愈愈"
    }
   },
   {
@@ -139069,6 +140144,12 @@
     "df": 5,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 饂飩"
    }
   },
   {
@@ -141208,6 +142289,12 @@
     "df": 9,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: お数/お菜/御数/御菜"
    }
   },
   {
@@ -141438,6 +142525,12 @@
     "df": 1334,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 奥さん"
    }
   },
   {
@@ -141837,6 +142930,12 @@
     "df": 24,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: お洒落/御洒落"
    }
   },
   {
@@ -142159,6 +143258,12 @@
     "df": 19,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 一昨日"
    }
   },
   {
@@ -142195,6 +143300,12 @@
     "df": 28,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 4,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 大人しい/温和しい"
    }
   },
   {
@@ -142388,6 +143499,12 @@
     "df": 31,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: お早う/御早う"
    }
   },
   {
@@ -142498,6 +143615,12 @@
     "df": 0,
     "source": "tatoeba",
     "method": "none"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 7,
+    "source": "kanjium",
+    "via": "同读音候选一致: お待ち遠さま/お待ち遠様/御待ち遠様"
    }
   },
   {
@@ -142533,6 +143656,18 @@
     "df": 7,
     "source": "tatoeba",
     "method": "stripped_prefix"
+   },
+   "pitch": {
+    "accent": 4,
+    "all": [
+     4,
+     5,
+     0
+    ],
+    "mora": 5,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: お愛でたい/お目出度い/お芽出度い/御愛でたい/御目出度い/御芽出度い"
    }
   },
   {
@@ -142825,6 +143960,12 @@
     "df": 16,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: お八/お八つ/御八つ"
    }
   },
   {
@@ -145680,6 +146821,12 @@
     "df": 25,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 噛る/囓る/齧る"
    }
   },
   {
@@ -147212,6 +148359,12 @@
     "df": 18,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 痒い"
    }
   },
   {
@@ -147448,6 +148601,12 @@
     "df": 7,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 加留多/嘉留太/歌留多/骨牌"
    }
   },
   {
@@ -149301,6 +150460,12 @@
     "df": 24,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 切っ掛け/切掛"
    }
   },
   {
@@ -150622,6 +151787,12 @@
     "df": 19,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 嚏/嚔"
    }
   },
   {
@@ -150983,6 +152154,12 @@
     "df": 7,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 4,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 草臥れる"
    }
   },
   {
@@ -151019,6 +152196,12 @@
     "df": 33,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 下らない"
    }
   },
   {
@@ -151247,6 +152430,12 @@
     "df": 5,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 諄い"
    }
   },
   {
@@ -151739,6 +152928,12 @@
     "df": 2,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 包む"
    }
   },
   {
@@ -151775,6 +152970,17 @@
     "df": 11,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 3,
+    "all": [
+     3,
+     2
+    ],
+    "mora": 5,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 呉々も/呉れ呉れも/呉呉も"
    }
   },
   {
@@ -154395,6 +155601,12 @@
     "df": 23,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 斯うして"
    }
   },
   {
@@ -156082,6 +157294,12 @@
     "df": 3,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 拵える"
    }
   },
   {
@@ -156239,6 +157457,17 @@
     "df": 6,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 0,
+    "all": [
+     0,
+     6
+    ],
+    "mora": 6,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: ご馳走さま/御馳走様"
    }
   },
   {
@@ -156554,6 +157783,12 @@
     "df": 41,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 4,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 此間"
    }
   },
   {
@@ -156631,6 +157866,12 @@
     "df": 58,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 溢す/翻す/零す"
    }
   },
   {
@@ -156711,6 +157952,12 @@
     "df": 20,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 護謨"
    }
   },
   {
@@ -156862,6 +158109,12 @@
     "df": 26,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 堪える/怺える"
    }
   },
   {
@@ -157353,6 +158606,12 @@
     "df": 5,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 5,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 今晩は"
    }
   },
   {
@@ -159252,6 +160511,17 @@
     "df": 19,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 4,
+    "all": [
+     4,
+     5
+    ],
+    "mora": 5,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 左様なら"
    }
   },
   {
@@ -161796,6 +163066,12 @@
     "df": 18,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 痺れる"
    }
   },
   {
@@ -161872,6 +163148,12 @@
     "df": 3,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 凋む/萎む"
    }
   },
   {
@@ -162590,6 +163872,12 @@
     "df": 9,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 吃逆"
    }
   },
   {
@@ -162786,6 +164074,17 @@
     "df": 7,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "all": [
+     3,
+     0
+    ],
+    "mora": 4,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: じゃん拳"
    }
   },
   {
@@ -172237,6 +173536,12 @@
     "df": 20,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: その頃"
    }
   },
   {
@@ -172273,6 +173578,12 @@
     "df": 32,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: その為/其の為"
    }
   },
   {
@@ -174220,6 +175531,12 @@
     "df": 19,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 忽ち"
    }
   },
   {
@@ -174742,6 +176059,12 @@
     "df": 32,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 躊躇う"
    }
   },
   {
@@ -175053,6 +176376,12 @@
     "df": 1,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 箪笥"
    }
   },
   {
@@ -178700,6 +180029,17 @@
     "df": 17,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "all": [
+     0,
+     3
+    ],
+    "mora": 4,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 躓く"
    }
   },
   {
@@ -179878,6 +181218,12 @@
     "df": 11,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 出鱈目"
    }
   },
   {
@@ -182517,6 +183863,12 @@
     "df": 18,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 疾っくに"
    }
   },
   {
@@ -182880,6 +184232,12 @@
     "df": 19,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 兎も角"
    }
   },
   {
@@ -184415,6 +185773,12 @@
     "df": 16,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 4,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 何となく/何と無く"
    }
   },
   {
@@ -185459,6 +186823,12 @@
     "df": 7,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 捩子/捻子/螺子"
    }
   },
   {
@@ -185980,6 +187350,17 @@
     "df": 5,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "all": [
+     3,
+     4
+    ],
+    "mora": 4,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 鋸"
    }
   },
   {
@@ -187144,6 +188525,12 @@
     "df": 9,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 4,
+    "mora": 6,
+    "source": "kanjium",
+    "via": "同读音候选一致: 初めまして/始めまして"
    }
   },
   {
@@ -188027,6 +189414,12 @@
     "df": 1,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 弾機/撥条/発条"
    }
   },
   {
@@ -190098,6 +191491,12 @@
     "df": 7,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: ひと先ず/一まず/一先/一先ず"
    }
   },
   {
@@ -190259,6 +191658,12 @@
     "df": 19,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 一人でに/独りでに"
    }
   },
   {
@@ -192576,6 +193981,12 @@
     "df": 42,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 打つかる"
    }
   },
   {
@@ -195860,6 +197271,12 @@
     "df": 7,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 解く"
    }
   },
   {
@@ -195975,6 +197392,12 @@
     "df": 4,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 藍褸/襤褸"
    }
   },
   {
@@ -196781,6 +198204,12 @@
     "df": 4,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 跨ぐ"
    }
   },
   {
@@ -197428,6 +198857,12 @@
     "df": 5,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 目蓋/眼蓋/瞼"
    }
   },
   {
@@ -200058,6 +201493,12 @@
     "df": 31,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 滅茶苦茶/目茶苦茶"
    }
   },
   {
@@ -200134,6 +201575,12 @@
     "df": 7,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 愛でたい/目出度い/芽出度い"
    }
   },
   {
@@ -200215,6 +201662,12 @@
     "df": 12,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 目まい/目眩/目眩い/眩暈"
    }
   },
   {
@@ -200741,6 +202194,12 @@
     "df": 27,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 6,
+    "source": "kanjium",
+    "via": "同读音候选一致: 若しかしたら"
    }
   },
   {
@@ -200777,6 +202236,12 @@
     "df": 5,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 6,
+    "source": "kanjium",
+    "via": "同读音候选一致: 若しかすると"
    }
   },
   {
@@ -200813,6 +202278,12 @@
     "df": 16,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 3,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 凭れる/靠れる"
    }
   },
   {
@@ -200934,6 +202405,12 @@
     "df": 31,
     "source": "tatoeba",
     "method": "raw_substring"
+   },
+   "pitch": {
+    "accent": 5,
+    "mora": 6,
+    "source": "kanjium",
+    "via": "同读音候选一致: 勿体ない/勿体無い/物体ない/物体無い"
    }
   },
   {
@@ -201516,6 +202993,12 @@
     "df": 18,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 4,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: 八釜しい/喧しい"
    }
   },
   {
@@ -201997,6 +203480,12 @@
     "df": 20,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 矢鱈"
    }
   },
   {
@@ -202073,6 +203562,12 @@
     "df": 8,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 4,
+    "mora": 5,
+    "source": "kanjium",
+    "via": "同读音候选一致: やっ付ける/遣っつける/遣っ付ける"
    }
   },
   {
@@ -203606,6 +205101,12 @@
     "df": 37,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 寄こす/寄越す/遣す"
    }
   },
   {
@@ -208725,6 +210226,17 @@
     "df": 3,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 2,
+    "all": [
+     2,
+     1
+    ],
+    "mora": 3,
+    "source": "kanjium",
+    "multi": true,
+    "via": "同读音候选一致: 彼方/貴方"
    }
   },
   {
@@ -209920,6 +211432,12 @@
     "df": 0,
     "source": "tatoeba",
     "method": "none"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: アルカリ"
    }
   },
   {
@@ -217071,6 +218589,12 @@
     "df": 0,
     "source": "tatoeba",
     "method": "none"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 嬰/栄/海鷂魚/穎/纓/翳/英/裔/鋭"
    }
   },
   {
@@ -229128,6 +230652,12 @@
     "df": 0,
     "source": "tatoeba",
     "method": "none"
+   },
+   "pitch": {
+    "accent": 1,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: カルタ"
    }
   },
   {
@@ -253501,6 +255031,12 @@
     "df": 0,
     "source": "tatoeba",
     "method": "none"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 3,
+    "source": "kanjium",
+    "via": "同读音候选一致: 復習う/掠う/攫う/浚う/渫う"
    }
   },
   {
@@ -258471,6 +260007,12 @@
     "df": 0,
     "source": "tatoeba",
     "method": "none"
+   },
+   "pitch": {
+    "accent": 2,
+    "mora": 4,
+    "source": "kanjium",
+    "via": "同读音候选一致: 嫋か"
    }
   },
   {
@@ -286593,6 +288135,12 @@
     "df": 5,
     "source": "tatoeba",
     "method": "lemma"
+   },
+   "pitch": {
+    "accent": 0,
+    "mora": 2,
+    "source": "kanjium",
+    "via": "同读音候选一致: 坪/壺"
    }
   },
   {

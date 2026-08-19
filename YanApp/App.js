@@ -49,8 +49,12 @@ import { usePrefs } from './src/lib/prefs';
 // 词场预览:内容还在 staging 没并进内容包,开发期先从这份草稿读,方便边写边看。
 // 合并进 content.v2.json 之后这份和它的引用一起删。
 import WORDFIELD_PREVIEW from './src/features/wordbank/wordfield-preview.json';
-import { PitchLine, pitchOf } from './src/features/wordbank/PitchLine';
+import { PitchLine, pitchOf, hasMultiAccent } from './src/features/wordbank/PitchLine';
 import { SenseList } from './src/features/wordbank/SenseList';
+import { Furigana } from './src/features/wordbank/FuriganaText';
+import { ExampleSentence } from './src/features/wordbank/ExampleSentence';
+import EXAMPLE_TOKENS from './assets/example_tokens.json';
+import { primaryReading, altReadings } from './src/features/wordbank/furigana';
 import {
   ActivityIndicator, Alert, Animated, Dimensions, FlatList, Image, Keyboard,
   KeyboardAvoidingView, Modal,
@@ -2304,7 +2308,10 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
   const wordFields = (Array.isArray(rawField) ? rawField : (rawField ? [rawField] : []))
     .filter(f => f?.sentence?.jp);
   useEffect(() => {
-    speak(entry.word, 'ja-JP', `wd-auto-${entry.word}`);
+    // ⚠️ 喂读音不是汉字。TTS 拿汉字自己挑读音,而这张卡上写着的是**某一个**读音:
+    // `私` 有 わたし / わたくし 两条词条,卡上写 わたくし、念出来是 わたし,
+    // 用户没有第三个地方可以核对。批次页早就这么做了,这里(而且是进页面自动播)没跟上。
+    speak(primaryReading(entry.reading), 'ja-JP', `wd-auto-${entry.word}`);
   }, [entry.word]);
 
   // 评分后自动翻下一词。「忘了」不翻 —— 那个词当天还要再见,
@@ -2330,15 +2337,33 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
       <ScrollView contentContainerStyle={wd.scroll} showsVerticalScrollIndicator={false}>
         <View style={wd.hero}>
           <View style={{ flex: 1 }}>
-            <Text style={wd.word}>{entry.word}</Text>
+            {/* 假名压在对应汉字上。词书页是**查词**入口 ——
+                对不会读的人,这里的价值比批次页还大。
+                对不上会自己退回纯词面(见 furigana.ts,不瞎标)。 */}
+            <Furigana word={entry.word} reading={entry.reading} size={32} color={C.ink} />
             {/* 声调数据还在 staging,没并进内容包,开发期从预览表读 ——
                 和词场同一个模式(见 pitch-preview.json,它是派生物,别手改)。
                 拿不到就退回原来那行纯假名:没有声调不影响这张卡能用。 */}
+            {/* ⚠️ 喂 primaryReading 不是整串。`行く` 的 reading 是「いく; ゆく」,
+                整串扔进去 toMora 会切出 **6 拍**:い|く|;|␣|ゆ|く ——
+                声调线直接画在分号和空格上。
+                这个 bug 原本被「这 12 条没有 pitch 所以不渲染」盖着,
+                补上音调数据的当天就会露出来。批次页早就用 primaryReading 了,
+                这里没跟上 —— **同一个口径散在两个文件里,就会有一处忘记跟。** */}
             {pitchOf(entry) != null
-              ? <PitchLine reading={entry.reading} accent={pitchOf(entry)} />
-              : <Text style={wd.reading}>{entry.reading}</Text>}
+              ? <PitchLine reading={primaryReading(entry.reading)} accent={pitchOf(entry)} />
+              : <Text style={wd.reading}>{primaryReading(entry.reading)}</Text>}
+            {/* 多型 / 多读音,和批次页同一套提示 ——
+                不标的话用户会把可能不对的那个型当唯一答案背下去(850 条),
+                或者在别处听到 ゆく 时以为那是另一个词(12 条)。 */}
+            {hasMultiAccent(entry) && (
+              <Text style={wd.altNote}>这个词不止一个调型,这里显示的是其中一个</Text>
+            )}
+            {altReadings(entry.reading).length > 0 && (
+              <Text style={wd.altNote}>也读作 {altReadings(entry.reading).join(' / ')}</Text>
+            )}
           </View>
-          <SpeakBtn onPress={() => speak(entry.word, 'ja-JP', 'wd-word')} speaking={speakingKey === 'wd-word'} size="sm" color={C.lava} />
+          <SpeakBtn onPress={() => speak(primaryReading(entry.reading), 'ja-JP', 'wd-word')} speaking={speakingKey === 'wd-word'} size="sm" color={C.lava} />
         </View>
         <View style={wd.metaRow}>
           <View style={wd.posTag}><Text style={wd.posTagTxt}>{entry.pos}</Text></View>
@@ -2358,7 +2383,7 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
             <Text style={wd.sectionLabel}>{wordField.label || '一起出现'}</Text>
             <View style={wd.exRow}>
               <View style={{ flex: 1, gap: 3 }}>
-                <Text style={wd.wfJp}>{wordField.sentence.jp}</Text>
+                <ExampleSentence sentence={wordField.sentence.jp} tokens={null} size={17} />
                 {!!wordField.sentence.roma && <Text style={wd.exRoma}>{wordField.sentence.roma}</Text>}
                 <Text style={wd.exZh}>{wordField.sentence.zh}</Text>
               </View>
@@ -2396,7 +2421,7 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
           <View style={wd.section}>
             <Text style={wd.sectionLabel}>搭配</Text>
             <View style={wd.exRow}>
-              <Text style={wd.exJp}>{entry.coreChunk}</Text>
+              <ExampleSentence sentence={entry.coreChunk} tokens={null} size={15} />
               <SpeakBtn onPress={() => speak(entry.coreChunk, 'ja-JP', 'wd-chunk')} speaking={speakingKey === 'wd-chunk'} size="sm" color={C.muted} />
             </View>
           </View>
@@ -2407,7 +2432,10 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
             <Text style={wd.sectionLabel}>例句</Text>
             <View style={wd.exRow}>
               <View style={{ flex: 1, gap: 3 }}>
-                <Text style={wd.exJp}>{entry.exampleJp}</Text>
+                {/* 按词切开 + 汉字上注音。分词是离线跑好的,只有例句有 ——
+                    搭配(coreChunk)和词场句没有对应的 token,
+                    ExampleSentence 拿不到 tokens 会整句退回纯文本,所以传空也安全。 */}
+                <ExampleSentence sentence={entry.exampleJp} tokens={EXAMPLE_TOKENS[entry.id]} size={15} />
                 {!!entry.exampleRoma && <Text style={wd.exRoma}>{entry.exampleRoma}</Text>}
                 <Text style={wd.exZh}>{entry.exampleZh}</Text>
               </View>
@@ -2468,6 +2496,7 @@ const wd = StyleSheet.create({
   posTagTxt: { fontSize: 10, color: C.muted, fontWeight: '600' },
   meaningBlock: { paddingHorizontal: 16, paddingVertical: 12, marginTop: 10, borderTopWidth: 1, borderBottomWidth: 1, borderColor: C.border, gap: 4 },
   zh: { fontSize: 17, fontWeight: '600', color: C.ink },
+  altNote: { fontSize: 10.5, color: C.mutedLight, marginTop: 4, lineHeight: 15 },
   // 英文释义现在由 SenseList 排(要分行编号),这里只留外边距
   enBlock: { marginTop: 4 },
   section: { marginHorizontal: 16, marginTop: 16, gap: 8 },

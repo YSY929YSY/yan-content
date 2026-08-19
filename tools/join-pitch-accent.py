@@ -128,6 +128,26 @@ def main():
         print('⚠️ 没找到 pitch-disputed.json —— 先跑 tools/crosscheck-pitch.py,'
               '否则三个来源打架的那些词会被原样收进去')
 
+    def keys_of(w):
+        """一个词条可能对应**好几个 (表記, 読み) 组合**。
+
+        ⚠️ 2026-08-19 修的 bug:原来是 `key = (w['word'], w['reading'])` 整串匹配,
+        而词库里 12 条读音带分号(`行く` 的 reading 是「いく; ゆく」)、
+        6 条词面带分号(`足; 脚`),kanjium 里则是拆开的两行 —— **永远匹配不上**。
+
+        代价不是「少 18 条」这么轻:`行く` 是词频第 3、`何` 第 4、`いい` 也在前列,
+        **用户第一眼看到的词没有声调**,而管线一声不吭地报「对不上」。
+
+        改成把两边都按分号拆开,做笛卡尔积逐对试。
+        ⚠️ **只在所有命中的型一致时才采用** —— `足; 脚` 要 足=2 且 脚=2 才写 2。
+        不一致说明这两个表記本来就不是一个读法,那就该走「对不上」,
+        而不是随便挑一个:声调错了学习者会照着念错,而且没人纠正他。
+        """
+        import re as _re
+        words = [x.strip() for x in _re.split(r'[;；]', str(w.get('word') or '')) if x.strip()]
+        reads = [x.strip() for x in _re.split(r'[;；]', str(w.get('reading') or '')) if x.strip()]
+        return [(a, b) for a in (words or [None]) for b in (reads or [None])]
+
     hits, stats, bad = {}, Counter(), []
     for w in bank:
         key = (w.get('word'), w.get('reading'))
@@ -135,6 +155,12 @@ def main():
             stats['三方打架,不收'] += 1
             continue
         raw = table.get(key)
+        if raw is None:
+            # 词面或读音带分号的,拆开逐对试;**所有命中必须一致**
+            found = [table[k] for k in keys_of(w) if k in table]
+            if found and len(set(found)) == 1:
+                raw = found[0]
+                stats['分号拆开后命中'] += 1
         if raw is None:
             # 接尾辞(～円/～回)本来就没有独立声调,不算缺口,单独计数
             stats['接尾辞等(本就无声调)' if str(w.get('word', '')).startswith('～')
