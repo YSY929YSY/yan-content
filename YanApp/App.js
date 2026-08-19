@@ -688,6 +688,31 @@ function TodayCard({ content, setTab, setSubTab, setLearnBatch }) {
   // 这时候渲染出来的是一句错话。两份进度都要等到。
   if (!ready || !gate.ready || pool.length === 0) return null;
 
+  /**
+   * 开一个批次。**已经有一个没做完的就原样接着做,不重开。**
+   *
+   * ⚠️ 真机上暴露的:退出去再进来永远是「还剩 10 / 10」,而且每次是不同的词。
+   * 两件事叠在一起:
+   *  ① 做到哪了只活在批次页的 state 里 —— 组件一卸载就没了
+   *  ② 批次每次进入都由 nextTask 重算,而**评过分的词会从到期队列里掉出去**,
+   *     后面的补上来。所以「今天该复习」看起来像个永远做不完、还一直换人的池子。
+   *
+   * SRS 的行为本身没错(评了分就不该今天再问),错在把一个**会话**
+   * 当成了每次现算的快照。复习页(useDailyQueue)早就把当天队列冻结落盘了,
+   * 这里当初为了不新开存储键没做 —— 现在看那个取舍是错的。
+   *
+   * 这一版先把会话提到 App 层(切 tab、来回进出都保住),**不落盘**:
+   * 杀 App 重开仍然会重挑一批。要不要落盘等这一版在真机上验过再说。
+   */
+  const openBatch = (mode, words) => {
+    setLearnBatch(prev => {
+      const sameDay = prev?.day === todayStr();
+      const unfinished = prev && (prev.words || []).length > (prev.done || []).length;
+      if (sameDay && prev.mode === mode && unfinished) return prev;
+      return { mode, words, day: todayStr(), done: [] };
+    });
+  };
+
   const go = () => {
     setTab('pie');
     if (task.kind === 'kana') return setSubTab('kana');
@@ -706,7 +731,7 @@ function TodayCard({ content, setTab, setSubTab, setLearnBatch }) {
       const byKey = new Map(pool.map(x => [poolWordKey(x), x]));
       const dueWords = task.keys.map(k => byKey.get(k)).filter(Boolean);
       if (dueWords.length) {
-        setLearnBatch({ mode: 'review', words: dueWords });
+        openBatch('review', dueWords);
         return setSubTab('todaybatch');
       }
       return setSubTab('review');   // 一条都解析不出来时的兜底
@@ -717,7 +742,7 @@ function TodayCard({ content, setTab, setSubTab, setLearnBatch }) {
       // 这里原本是 setSubTab('wordbank') —— 卡面上写着「6 个词 · 私 行く 何…」,
       // 点进去落在词书货架上,那 6 个词一个都没跟过去,用户得自己再挑一遍。
       // 规则层算了半天的「下一步」到界面这一步全丢了,主线在这儿是断的。
-      setLearnBatch({ mode: 'learn', words: task.words });
+      openBatch('learn', task.words);
       return setSubTab('todaybatch');
     }
     // clear:池子过完了,那就真的去词书 —— 这时候「自己挑」是对的动作
@@ -1389,7 +1414,7 @@ function PieTab(props) {
   return <PieTabInner {...props} />;
 }
 
-function PieTabInner({ content, subTab, setSubTab, sceneState, setSceneState, practiceScene, setPracticeScene, learnBatch, setLearnBatch }) {
+function PieTabInner({ content, setTab, subTab, setSubTab, sceneState, setSceneState, practiceScene, setPracticeScene, learnBatch, setLearnBatch }) {
   const [wbBookId, setWbBookId] = useState(null);
   // memo 一次:内联调用每次渲染都新建数组,下游按引用比较的 memo 会全部失效
   const mainlinePool = useMemo(() => anchorPool(content.wordBank || []), [content.wordBank]);
@@ -1468,11 +1493,17 @@ function PieTabInner({ content, subTab, setSubTab, sceneState, setSceneState, pr
           <LearnBatchScreen
             words={learnBatch.words}
             mode={learnBatch.mode}
+            done={learnBatch.done}
+            onDoneChange={(next) => setLearnBatch(p => (p ? { ...p, done: next } : p))}
             // 今日统计要按主线池算,不是按这一批的 6 个 ——
             // 「今天一共过了几个」问的是整条主线,不是这一轮
             pool={mainlinePool}
-            onBack={() => setSubTab('learn')}
-            onDone={() => { setLearnBatch(null); setSubTab('learn'); }}
+            /* ⚠️ 返回**回首页**,不是回「出发前」。
+               这一页是从首页那张卡进来的,退出去落在一个没去过的子 tab 上
+               会让人不知道自己在哪儿 —— 用户原话:「返回的时候是不是返回到首页更好」。
+               做完了同理。 */
+            onBack={() => setTab('home')}
+            onDone={() => { setLearnBatch(null); setTab('home'); }}
           />
         ) : null)}
         {subTab === 'wordbank' && !wbBookId && (
@@ -6235,6 +6266,7 @@ export default function App() {
       {tab === 'pie' && (
      <PieTab
   content={content}
+  setTab={setTab}
   subTab={subTab}
   setSubTab={setSubTab}
   sceneState={sceneState}

@@ -59,7 +59,7 @@ import { todayStr, addDays } from '../wordbank/srs';
  * @param onBack  返回
  * @param onDone  这一批过完了、用户点「回首页」
  */
-export default function LearnBatchScreen({ words, pool, mode = 'learn', onBack, onDone }) {
+export default function LearnBatchScreen({ words, pool, mode = 'learn', done: doneProp, onDoneChange, onBack, onDone }) {
   // 复习模式:同一套交互,换的是文案。**问的仍然是读音,不是意思** ——
   // 主线池是 563 条 kanji_anchor,意思是用户唯一不缺的东西,
   // 复习的时候它也不会突然变成缺的。
@@ -83,8 +83,17 @@ export default function LearnBatchScreen({ words, pool, mode = 'learn', onBack, 
   }, [words]);
 
   const [queue, setQueue] = useState(() => (words || []).map(wordKey));
-  const [done, setDone] = useState([]);
   const [flipped, setFlipped] = useState(false);
+
+  /**
+   * 做到哪了。**由上层持有**(App 的 learnBatch.done),不是这一页的 state。
+   *
+   * ⚠️ 真机上暴露的:退出去再进来永远是「还剩 10 / 10」。
+   * 这一页一卸载 done 就没了,而 PieTab 在切 tab 时整棵卸载 ——
+   * 用户以为自己在原地打转,其实是进度被扔了。
+   */
+  const done = doneProp || [];
+  const setDone = (fn) => onDoneChange?.(typeof fn === 'function' ? fn(done) : fn);
 
   const remaining = queue.filter(k => !done.includes(k));
   const total = queue.length;
