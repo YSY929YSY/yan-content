@@ -36,6 +36,7 @@ import { useSpeech, SpeakBtn } from '../../components/Speech';
 import { usePrefs } from '../../lib/prefs';
 import { useReviewProgress } from '../review/ReviewProgressContext';
 import { PitchLine, pitchOf, hasMultiAccent } from '../wordbank/PitchLine';
+import { primaryReading, altReadings } from '../wordbank/furigana';
 import { Furigana } from '../wordbank/FuriganaText';
 import { ExampleSentence } from '../wordbank/ExampleSentence';
 import { SenseList } from '../wordbank/SenseList';
@@ -144,7 +145,9 @@ export default function LearnBatchScreen({ words, pool, mode = 'learn', onBack, 
    * 用户刚被告知「读 わたくし」,按下喇叭听见 わたし,他没有第三个地方可以核对。
    * 假名是我们唯一能保证读出来就是卡上那个音的输入。
    */
-  const say = () => speak?.(w.reading, 'ja-JP', speakKey);
+  // ⚠️ 多读音的词只念第一个。`行く` 的 reading 是「いく; ゆく」,
+  // 整串喂给 TTS 会把分号也念出来,而且卡上标的注音就是第一个。
+  const say = () => speak?.(primaryReading(w.reading), 'ja-JP', speakKey);
 
   const onGrade = (g) => {
     grade(key, g);
@@ -197,11 +200,17 @@ export default function LearnBatchScreen({ words, pool, mode = 'learn', onBack, 
                       `行く` 上面标一个 `い`,那一下才是这一页的意义。
                       对不上的词会退回纯读音显示(见 furigana.ts,不瞎标)。 */}
                   <Furigana word={w.word} reading={w.reading} size={26} color={C.lava} />
-                  {accent != null && <PitchLine reading={w.reading} accent={accent} />}
+                  {accent != null && <PitchLine reading={primaryReading(w.reading)} accent={accent} />}
                   {/* 多型词要标出来。「取第一个」这条规则无源可核 ——
                       不标的话用户会把一个可能不对的型当成唯一答案背下去 */}
                   {hasMultiAccent(w) && (
                     <Text style={s.multi}>这个词不止一个调型,这里显示的是其中一个</Text>
+                  )}
+                  {/* 多读音的词:注音只标第一个,但**不能默默把其余的丢掉** ——
+                      「这个词还有别的念法」本身就是有用的信息,
+                      而且用户在别处听到 ゆく 时得知道那不是另一个词。 */}
+                  {altReadings(w.reading).length > 0 && (
+                    <Text style={s.multi}>也读作 {altReadings(w.reading).join(' / ')}</Text>
                   )}
                 </TouchableOpacity>
                 <SpeakBtn

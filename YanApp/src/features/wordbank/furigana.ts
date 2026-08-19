@@ -41,6 +41,30 @@ const toHira = (s: string) =>
   s.replace(/[ァ-ヶ]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0x60));
 
 /**
+ * 一条 `reading` 可能装着**好几个读音**,用分号隔开:
+ *
+ *     行く  →  「いく; ゆく」
+ *     何    →  「なん; なに」
+ *
+ * ⚠️ 不拆开的话对齐会把整串当成一个读音塞给汉字:
+ * `行く / いく; ゆく` 会标成 **行=「いく; ゆ」**、く 不标 —— 真机上就是这样露馅的。
+ *
+ * 全库只有 12 条这样,但 `行く` 和 `何` 正好在主线第一批里,
+ * 是用户第一眼看到的东西。
+ *
+ * **只拿第一个读音注音**,其余交给调用方另行提示(不要默默丢掉:
+ * 「这个词还有别的念法」本身是有用的信息)。
+ */
+const READING_SEP = /[;；]/;
+
+export const primaryReading = (reading?: string | null) =>
+  String(reading || '').split(READING_SEP)[0]!.trim();
+
+/** 除第一个之外的其余读音。没有就是空数组。 */
+export const altReadings = (reading?: string | null) =>
+  String(reading || '').split(READING_SEP).slice(1).map((s) => s.trim()).filter(Boolean);
+
+/**
  * 需要注音的字。
  *
  * 汉字之外还有两个:
@@ -88,7 +112,8 @@ export function alignFurigana(
   reading: string | null | undefined,
 ): FuriSegment[] | null {
   const w = String(word || '');
-  const r = String(reading || '');
+  // 多读音只取第一个 —— 见 primaryReading
+  const r = primaryReading(reading);
   if (!w || !r) return null;
 
   const parts = runs(w);

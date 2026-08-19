@@ -162,14 +162,20 @@ function JournalItemViewInner({
         {selected ? (
           <>
             <View style={styles.outline} pointerEvents="none" />
-            {/* 左上角删除、右下角旋转把手(工单 2.2) */}
+            {/* 左上角删除。
+                ⚠️ 右下角**曾经**还有一个旋转把手(工单 2.2 的 ⟳ 圈),
+                它带着 pointerEvents="none" —— **画着但是死的**,按了没任何反应。
+                真机上第一眼就被问「那个圈还在」。
+
+                决定是**不做**,不是「以后补」:双指已经能转能缩,
+                再加一条路径只多一处状态、多一件要真机验的事,换来的只是单手也能转。
+                而一个看得见、按了没反应的控件**比没有更糟** —— 它在教用户
+                一件不存在的事。rotateHandleTo / angleAt 留在 journalGesture 里
+                (有测试,不碍事),真需要单手旋转那天再接。 */}
             <Pressable style={[styles.knob, styles.del]} onPress={() => onDelete(item.id)}
                        hitSlop={10}>
               <Text style={styles.delTxt}>×</Text>
             </Pressable>
-            <View style={[styles.knob, styles.handle]} pointerEvents="none">
-              <Text style={styles.handleTxt}>⟳</Text>
-            </View>
           </>
         ) : null}
       </Animated.View>
@@ -256,8 +262,7 @@ const styles = StyleSheet.create({
   },
   del: { left: -13, top: -13, backgroundColor: '#2b2723' },
   delTxt: { color: '#e8ddd0', fontSize: 15, lineHeight: 17 },
-  handle: { right: -13, bottom: -13, backgroundColor: ACCENT },
-  handleTxt: { color: '#fff', fontSize: 13 },
+  // handle / handleTxt 跟着那个死掉的旋转把手一起删了(见上面那段注释)
 
   photo: { flex: 1, backgroundColor: '#fdfbf5', padding: 5 },
   polaroid: { paddingBottom: 20 },
