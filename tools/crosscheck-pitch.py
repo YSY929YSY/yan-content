@@ -144,10 +144,26 @@ def load_wiktionary(in_bank):
 
 
 def load_unidic(words):
-    """UniDic 只对**整词被切成一个词元**的情况给结论。
+    """按 **(词面, 读音)** 精确查 UniDic,而不是只信分词器给的那一个最优解。
 
-    切成两段以上说明它不认这个词条,那时候的 aType 属于其中某一段,
-    拿来当整词的声调是错的 —— 宁可当没有。
+    ⚠️ 2026-08-19 改。原来的写法是 `tagger(word)` 取唯一词元,读音对不上就放弃 ——
+    那把最该查的词全丢了:
+
+        私(わたし) df=26526    分词器给 ワタクシ  → 判「读音不符」丢弃
+        言う(いう) df=6697     分词器给 ユー      → 丢弃
+        時(とき)   df=3354     分词器给 ジ        → 丢弃
+
+    而 UniDic 里这些读音**都在**,只是不是最优解。N-best 能把它们全列出来:
+
+        私  → ワタクシ 0 | ワタシ 0 | アタシ 0 | シ 1
+        時  → トキ 2   | ジ 1     | ドキ 2
+        中  → ナカ 1   | チュー 1 | ウチ 0
+
+    改成 N-best 逐条按读音匹配后,覆盖率 **6386 → 7238 条(占有声调的 94.1%)**,
+    一致率 99.6%。**丢掉的那 852 条里全是高频词** —— 越常用的词读音越多,
+    也就越容易被「只取最优解」这个写法漏掉,正好和需求相反。
+
+    仍然只认**整词**:第 0 列必须逐字等于 word,否则那是切碎后的某一段。
     """
     try:
         import fugashi
@@ -156,21 +172,35 @@ def load_unidic(words):
         print('（跳过 UniDic:pip install fugashi unidic-lite）')
         return {}
     tagger = fugashi.Tagger('-d ' + unidic_lite.DICDIR)
+
+    def norm(s):
+        # 长音记号要去掉:UniDic 的 pron 写 チュー,词库的 reading 写 ちゅう
+        return kata_to_hira(str(s or '')).replace('ー', '')
+
     out = {}
     for word, reading in words:
+        want = norm(reading)
+        if not word or not want:
+            continue
         try:
-            ms = tagger(word)
+            raw = tagger.nbest(word, 12)
         except Exception:
             continue
-        if len(ms) != 1:
-            continue
-        f = ms[0].feature
-        a_raw, kana = getattr(f, 'aType', None), getattr(f, 'kana', None)
-        if not a_raw or a_raw == '*':
-            continue
-        if kana and kata_to_hira(kana) != reading:
-            continue          # 读音对不上 = 不是同一个词,别硬凑
-        accs = {int(x) for x in re.findall(r'\d+', str(a_raw))}
+        accs = set()
+        for line in raw.split('\n'):
+            if not line or line == 'EOS':
+                continue
+            col = line.split('\t')
+            # 0=表層 1=発音 2=語彙素読み 7=aType
+            if len(col) < 8 or col[0] != word:
+                continue
+            a_raw = col[7].strip()
+            if not a_raw or a_raw == '*':
+                continue
+            # 発音和語彙素読み两列都比:あたし 的 pron 是 アタシ 而 kana 是 ワタシ
+            if norm(col[1]) != want and norm(col[2]) != want:
+                continue
+            accs |= {int(x) for x in re.findall(r'\d+', a_raw)}
         if accs:
             out[(word, reading)] = accs
     return out

@@ -5,41 +5,33 @@
 
 | 类别 | 条数 |
 |---|---|
-| 三方一致 | 437 |
-| 两方一致 | 5905 |
-| 各说各的 | 28 |
-| 只有一个来源 | 1403 |
-| 无 | 232 |
+| 三方一致 | 523 |
+| 两方一致 | 6595 |
+| 各说各的 | 20 |
+| 只有一个来源 | 661 |
+| 无 | 206 |
 
 ## 各说各的(建议不显示声调)
 
 | 词 | 读音 | 各家说法 |
 |---|---|---|
-| たった | たった | kanjium[0] · UniDic[3] |
-| 聞き取り | ききとり | kanjium[0] · UniDic[3] |
-| 招き | まねき | kanjium[3] · UniDic[2] |
-| 切れ | きれ | kanjium[2] · UniDic[1] |
-| あっ | あっ | 维基[0] · UniDic[1] |
-| 新 | しん | kanjium[1] · UniDic[0] |
-| 所 | ところ | kanjium[0] · UniDic[1] |
-| 余っ程 | よっぽど | kanjium[0] · UniDic[4] |
-| 恰度 | ちょうど | kanjium[1] · UniDic[0] |
-| 粗 | あら | kanjium[2] · UniDic[0] |
-| びり | びり | kanjium[1] · UniDic[2] |
-| 持ち | もち | kanjium[2] · UniDic[1] |
-| 丸々 | まるまる | kanjium[0] · UniDic[3] |
-| ああ | ああ | kanjium[0] · UniDic[1] |
-| 福 | ふく | kanjium[2] · UniDic[1] |
-| 着替え | きがえ | kanjium[0] · UniDic[3] |
-| 原 | はら | kanjium[1] · UniDic[0] |
-| 一心 | いっしん | kanjium[3] · UniDic[1] |
-| 泉 | いずみ | kanjium[0] · UniDic[1] |
-| 札 | さつ | kanjium[0] · UniDic[1] |
-| 諦め | あきらめ | kanjium[0] · UniDic[4] |
-| 泳ぎ | およぎ | kanjium[3] · UniDic[2] |
-| おおい | おおい | kanjium[2] · UniDic[1] |
-| 心掛け | こころがけ | kanjium[0] · UniDic[5] |
-| これ | これ | kanjium[1] · UniDic[0] |
 | 煌びやか | きらびやか | kanjium[3] · UniDic[0] |
-| 揃い | そろい | kanjium[0, 3] · UniDic[2] |
-| 岸 | きし | kanjium[2] · UniDic[1] |
+| オンライン | オンライン | kanjium[3] · UniDic[0] |
+| 余っ程 | よっぽど | kanjium[0] · UniDic[4] |
+| ドライブイン | ドライブイン | kanjium[4, 5] · UniDic[0] |
+| たった | たった | kanjium[0] · UniDic[3] |
+| ティッシュペーパー | ティッシュペーパー | kanjium[4] · UniDic[0] |
+| テープレコーダー | テープレコーダー | kanjium[5] · UniDic[0] |
+| 一定 | いちじょう | kanjium[0] · UniDic[2] |
+| テニスコート | テニスコート | kanjium[4] · UniDic[0] |
+| レインコート | レインコート | kanjium[4] · UniDic[0] |
+| ドライクリーニング | ドライクリーニング | kanjium[5, 7] · UniDic[0] |
+| だから | だから | kanjium[1] · UniDic[3] |
+| スポーツカー | スポーツカー | kanjium[4, 5] · UniDic[0] |
+| 恰度 | ちょうど | kanjium[1] · UniDic[0] |
+| ラッシュアワー | ラッシュアワー | kanjium[4] · UniDic[0] |
+| あっ | あっ | 维基[0] · UniDic[1] |
+| チェックイン | チェックイン | kanjium[3, 4] · UniDic[0] |
+| ガソリンスタンド | ガソリンスタンド | kanjium[6] · UniDic[0] |
+| アイスクリーム | アイスクリーム | kanjium[5] · UniDic[0] |
+| 三日月 | みかづき | kanjium[0] · UniDic[2] |
