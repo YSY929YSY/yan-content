@@ -49,6 +49,25 @@ export const pitchOf = (w) => {
 export const hasMultiAccent = (w) => !!w?.pitch?.multi;
 
 /**
+ * 这条声调有几个来源印证。3 三方 / 2 两方 / 1 只有一个 / undefined 没标过。
+ *
+ * ⚠️ **这是这个 App 最该说出口的一件事。**
+ * 在这之前,「三个独立来源都认」和「只有一个人这么说」在屏幕上**长得一模一样** ——
+ * 而这个产品的全部资产就是「说的话可核对」。
+ *
+ * 三方各说各的那一类不会走到这里:它们的 pitch 在内容包里已经被删掉了
+ * (tools/stamp-pitch-confidence.py)。空着不会教错,给一个错的会。
+ */
+export const pitchAgree = (w) => {
+  const a = w?.pitch?.agree;
+  return Number.isFinite(a) ? a : null;
+};
+
+/** 只有一个来源、无从印证 —— 界面上要标一句。 */
+export const pitchUnconfirmed = (w) => pitchAgree(w) === 1;
+
+
+/**
  * 声调线:假名上面那条高低线。
  *
  * 中文母语者有声调,会**下意识给日语词安一个调**,安错了也没人纠正。

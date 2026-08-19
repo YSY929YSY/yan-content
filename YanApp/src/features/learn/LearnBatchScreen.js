@@ -35,7 +35,7 @@ import { C } from '../../theme';
 import { useSpeech, SpeakBtn } from '../../components/Speech';
 import { usePrefs } from '../../lib/prefs';
 import { useReviewProgress } from '../review/ReviewProgressContext';
-import { PitchLine, pitchOf, hasMultiAccent } from '../wordbank/PitchLine';
+import { PitchLine, pitchOf, hasMultiAccent, pitchUnconfirmed } from '../wordbank/PitchLine';
 import { primaryReading, altReadings } from '../wordbank/furigana';
 import { Furigana } from '../wordbank/FuriganaText';
 import { ExampleSentence } from '../wordbank/ExampleSentence';
@@ -220,6 +220,13 @@ export default function LearnBatchScreen({ words, pool, mode = 'learn', done: do
                       而且用户在别处听到 ゆく 时得知道那不是另一个词。 */}
                   {altReadings(w.reading).length > 0 && (
                     <Text style={s.multi}>也读作 {altReadings(w.reading).join(' / ')}</Text>
+                  )}
+                  {/* ⚠️ 只有一个来源的声调要**说出来**。
+                      在这之前「三方印证过的」和「只有一个人说的」在屏幕上
+                      长得一模一样 —— 而这个产品的全部资产就是「说的话可核对」。
+                      三方打架的那类根本不会到这儿:它们的 pitch 已经从内容包里删了。 */}
+                  {pitchUnconfirmed(w) && (
+                    <Text style={s.multi}>这个调型只有一个来源,还没有第二处印证</Text>
                   )}
                 </TouchableOpacity>
                 <SpeakBtn

@@ -240,6 +240,28 @@ def main():
         else:
             rows['各说各的'].append((key, srcs))
 
+    # ── 机器可读的确定性清单 ────────────────────────────────
+    #
+    # ⚠️ 光出报告是不够的。2026-08-19 发现:disputed 清单自己写着
+    # 「不要显示这些词的声调」,而**内容包里 15 条照样带着 pitch 在显示** ——
+    # 工具算出来了,没有任何一步去执行它。
+    #
+    # 所以这里同时吐一份 (词, 读音) → 印证等级,给 stamp 脚本用:
+    #   3 = 三方一致   2 = 两方一致   1 = 只有一个来源   0 = 各说各的(不该显示)
+    #
+    # **等级要进内容包**,因为「三方印证过的」和「只有一个人说的」在屏幕上
+    # 长得一模一样,是这个 App 最不该有的那种沉默。
+    levels = {}
+    for lvl, k in ((3, '三方一致'), (2, '两方一致'), (1, '只有一个来源'), (0, '各说各的')):
+        for key, srcs in rows[k]:
+            levels['\t'.join(key)] = {'agree': lvl, 'srcs': sorted(srcs)}
+    lv_path = f'{ROOT}/YanApp/staging/pitch-confidence.json'
+    with open(lv_path, 'w', encoding='utf-8') as f:
+        json.dump({'note': '(词\t读音) → 印证等级。3 三方 / 2 两方 / 1 单一 / 0 打架(不该显示)',
+                   'levels': levels}, f, ensure_ascii=False, indent=1)
+        f.write('\n')
+    print(f'→ {lv_path}  ({len(levels)} 条)')
+
     total_multi = len(rows['三方一致']) + len(rows['两方一致']) + len(rows['各说各的'])
     print(f'有两个以上来源的 {total_multi} 条:')
     for k in ('三方一致', '两方一致', '各说各的'):

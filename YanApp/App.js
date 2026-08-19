@@ -49,7 +49,7 @@ import { usePrefs } from './src/lib/prefs';
 // 词场预览:内容还在 staging 没并进内容包,开发期先从这份草稿读,方便边写边看。
 // 合并进 content.v2.json 之后这份和它的引用一起删。
 import WORDFIELD_PREVIEW from './src/features/wordbank/wordfield-preview.json';
-import { PitchLine, pitchOf, hasMultiAccent } from './src/features/wordbank/PitchLine';
+import { PitchLine, pitchOf, hasMultiAccent, pitchUnconfirmed } from './src/features/wordbank/PitchLine';
 import { SenseList } from './src/features/wordbank/SenseList';
 import { Furigana } from './src/features/wordbank/FuriganaText';
 import { ExampleSentence } from './src/features/wordbank/ExampleSentence';
@@ -2361,6 +2361,10 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
             )}
             {altReadings(entry.reading).length > 0 && (
               <Text style={wd.altNote}>也读作 {altReadings(entry.reading).join(' / ')}</Text>
+            )}
+            {/* 声调的确定性要说出来,词书页和批次页同一句话 */}
+            {pitchUnconfirmed(entry) && (
+              <Text style={wd.altNote}>这个调型只有一个来源,还没有第二处印证</Text>
             )}
           </View>
           <SpeakBtn onPress={() => speak(primaryReading(entry.reading), 'ja-JP', 'wd-word')} speaking={speakingKey === 'wd-word'} size="sm" color={C.lava} />
