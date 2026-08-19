@@ -59,8 +59,26 @@ export default function JournalScreen({ onBack }: { onBack?: () => void }) {
       if (!alive) return;
       setAssets(a?.ok ? a.assets : []);
       if (!r.ok) { setNote('读不到本地手账 —— 这次不新建,免得覆盖已有的一页'); return; }
-      const stored = (r.value as any)?.pages?.[0];
-      setPage(stored ?? emptyPage());
+
+      // ⚠️ 这里原本是 `setPage(stored ?? emptyPage())` —— 只要 pages[0] 取不到
+      // 就新建一页,而 save() 是 `writeJson(K, { pages: [stamped] })`,
+      // **一次覆盖整个数组**。于是「键里有东西但不是我们认得的形状」这一种情况,
+      // 会安静地把用户已有的那一页顶掉。真机上就发生了:一页 7 个元素(含照片)
+      // 变成一页 2 个,日期也换了 —— 那是新建的空页。
+      //
+      // 三态要分开,不能压成两态:
+      //   读失败        → 上面已经挡了
+      //   键里真的是空的 → 首次使用,该新建
+      //   键里有东西但形状不对 → **绝不新建**,宁可这一屏不可用
+      //
+      // 「读不到当成空的」是这个项目丢过四次数据的形状,这是第五处。
+      const raw = r.value as any;
+      const pages = raw?.pages;
+      if (raw != null && !(Array.isArray(pages) && pages.length > 0)) {
+        setNote('本地手账数据读出来不是预期的形状 —— 这次不新建,免得覆盖掉已有的');
+        return;
+      }
+      setPage(pages?.[0] ?? emptyPage());
     })();
     return () => { alive = false; };
   }, []);
