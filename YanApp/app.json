@@ -3,7 +3,7 @@
     "name": "言",
     "slug": "YanApp",
     "version": "1.1.0",
-    "runtimeVersion": "1",
+    "runtimeVersion": "2",
     "updates": {
       "url": "https://u.expo.dev/390f09a4-3211-4fec-8702-45ee711a9245",
       "fallbackToCacheTimeout": 0
