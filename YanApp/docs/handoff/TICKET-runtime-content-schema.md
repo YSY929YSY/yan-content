@@ -1,8 +1,8 @@
 # 工单：P0-2 · 远端内容运行时结构闸门
 
-> 实现者：待定  
-> 复核者：CC（先做影响分析，后做短审）  
-> 状态：影响分析完成，待 CC 核对  
+> 实现者：Codex
+> 复核者：CC（实现后短审）
+> 状态：已完成
 > 前置：P0-1 已完成并推送；本工单不生产、不修改内容
 
 ## 要解决的问题
@@ -39,14 +39,15 @@ App.js useContent()
 
 运行时只需要锁住会让主要页面直接失效的边界：
 
-- 根节点为普通对象；`_meta` 为对象且具有非空版本标识；
-- `scenes`、`mapPlaces`、五个假名行数组、`culturalFusion`、`wordBank` 均为数组；
+- 根节点为普通对象；`_meta` 若存在必须为对象，不校验版本；
+- `scenes`、`mapPlaces`、`culturalFusion`、`kanaRows`、`wordBank` 均为数组；
 - `subwayAdventure` 为对象，`stations` 为数组；
-- `wordCards` 若存在必须为数组（可为空）；
+- `voicedRows`、`yoonRows`、`specialRows`、`loanwordRows` 若存在必须为数组；
+- 不校验 `wordCards`：正式内容中它是对象，且消费端已有对象形状的 fallback；
 - 不冻结数量、不要求所有数组非空、不限制未知顶层字段；
 - 不校验单词/例句的真实性、完整性或 publication，避免和 P0-1/P2-2 混层。
 
-最终字段清单必须由 CC 用实际 App 消费点复核；不得凭本工单文字自行扩张成内容质量审查器。
+CC 已完成实际消费点复核。不得凭本工单文字自行扩张成内容质量审查器。
 
 ## 允许修改
 
@@ -64,11 +65,7 @@ App.js useContent()
 
 ## CC 核对任务（只读）
 
-1. 复现 200/304/network-error 三条路径，确认缓存写入和消费点；
-2. 列出所有实际读取的顶层字段，判断“最小结构”是否漏项或过宽；
-3. 证明 validator 应位于下载/写缓存之前，且缓存读取也会调用它；
-4. 检查 ETag 的失败语义；
-5. 写出允许实现的最小 diff 与验收矩阵，不编码。
+已完成，见 `CC-REPORT.md` §46–§53；Codex 独立复核接受其字段与 ETag 裁定。
 
 ## 未来实现验收
 
@@ -82,3 +79,9 @@ App.js useContent()
 | bundled fallback | 通过相同最小结构校验 |
 
 所有失败测试必须同时断言“旧有效缓存未被覆盖”，而不只是断言函数返回 `null`。
+
+## Codex 复核后的实现约束
+
+CC 的字段与 ETag 裁定全部接受。唯一实现层修正：不能只在 `contentCache.js` 上添加依赖参数来测试，因为该文件顶层 import 的 `expo-file-system` 和 AsyncStorage 会使裸 Node 测试无法加载模块。
+
+应新增一个只依赖标准 JavaScript 与 `validateContentShape` 的 `contentCacheCore`：由它接收 `fetch`、读取/写入缓存、读取/清除 ETag 的适配器；`contentCache.js` 只保留 Expo 文件系统适配与生产入口。这样分支测试可在 Node 中直接验证“不覆盖旧缓存 / 不错误清 ETag”，而生产调用点不变。

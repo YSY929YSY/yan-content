@@ -1056,3 +1056,216 @@ npm run typecheck exit 0
 eslint App.js     0 errors
 git diff --check  exit 0
 ```
+
+---
+
+# P0-2 · 远端内容运行时结构闸门（只读核对）
+
+> 核对日期：2026-08-20
+> 范围：`src/lib/contentCache.js`、`App.js` 的 `useContent()` / `CONTENT_URL`、各顶层字段的实际消费点
+> 结论：**工单方向成立；但「最小结构」清单有 1 处会误伤合法内容的错误、2 处过宽、2 处漏项**
+> 本轮未编码、未 commit、未 push。
+
+## 46. 三条路径的实际行为
+
+`CONTENT_URL = https://raw.githubusercontent.com/YSY929YSY/yan-content/main/content.v2.json`（`App.js:10`）。
+`SHOULD_FETCH_REMOTE_CONTENT`（`App.js:13`）在 `__DEV__` 下为 false —— **开发与测试期根本不走远端路径**，所以这条路径没有任何现存测试覆盖，也不会在本机自然暴露。
+
+| 路径 | 代码 | 写入 | 消费 | ETag |
+|---|---|---|---|---|
+| 200 | `contentCache.js:65-70` | `JSON.parse` 成功后立刻 `writeCachedContent(text, etag)` 覆盖 `yan_content_v2.json` | `source:'network'` → `setContent` | 用响应头 etag 覆盖 |
+| 304 | `:57-63` | 无 | `readCachedContent()` 直接 `setContent`，**中途无任何结构判断** | 缓存缺失时 `removeItem(ETAG_KEY)` |
+| 网络失败/超时/`!res.ok` | `:71-75` | 无 | `readCachedContent()` → `source:'cache'` | 不动 |
+
+关键事实三条：
+
+1. **唯一的闸门是 `JSON.parse` 的语法性**（`:68` 注释自称「别把坏 JSON 存进去」，但它只挡语法）。结构错误的合法 JSON 直接落盘。
+2. **缓存读取路径（304 与 network-error）完全没有校验**。所以即使将来只在 200 处加校验，历史上已落盘的坏缓存仍会经 304 无限期复活。**validator 必须同时挂在写入前和读取后**，工单第 3 条要求成立。
+3. `writeCachedContent` 先写文件、后写 ETag，且自身 try/catch 吞掉异常。因此存在「文件写成功、ETag 未写成功」的中间态；反向的「ETag 写了但文件没写」不会发生。这个顺序对本工单有利，实现时应保留。
+
+## 47. App 实际依赖的顶层字段
+
+内置包顶层 14 个键。实际消费点与守卫情况：
+
+| 字段 | 内置包类型 | 消费点 | 现有守卫 | 缺失/类型错时 |
+|---|---|---|---|---|
+| `scenes` | array(6) | `App.js:943` `.filter`、`:1634` `.map` | 无 | 崩溃 |
+| `mapPlaces` | array(43) | `:6299` 原样传 `NaTab` → `useWorldFootprint.js:111` `initialPlaces.map` | `:805` 有 `\|\| []`，**`:6299` 没有** | 崩溃 |
+| `culturalFusion` | array(4) | `:804` `[fusionIdx]`、`:987` `.map` | 无 | 崩溃 |
+| `subwayAdventure` | object | `:1496` → `SubwayScreen` `adventure.stations`、`stations.length` | hydrate 处有 `?.`，渲染处 `const stations = adventure.stations` 无守卫 | 崩溃 |
+| `kanaRows` | array(20) | `:680` `useKanaGate`、`KanaScreen.js:990/991` `.filter` | `requiredKana` 内部有 `\|\| []`，**KanaScreen 的 `.filter` 无守卫** | 崩溃 |
+| `voicedRows` `yoonRows` `specialRows` `loanwordRows` | array | `KanaScreen.js:1056/1076/1102/1117` | 全部 `(x \|\| []).map` | 缺失安全；**非数组真值仍崩溃** |
+| `wordBank` | array(8005) | `:683/1431` `anchorPool(content.wordBank \|\| [])` → `dailyTask.ts:308` `bank.filter`；`:1524/1532` | 一律 `\|\| []` | 缺失安全；非数组真值崩溃 |
+| `specialSounds` | **object** | `KanaScreen.js:1685` `specialSounds?.sections?.map` | 全程可选链 | 安全降级 |
+| `wordCards` | **object** | `App.js:3379 resolveWordCards` | 自带类型闸门：非对象或**数组**一律退回 `WORD_CARDS_BUILTIN` | 安全降级 |
+| `_meta` | object | **App 与 src 内 0 处消费** | — | 无影响 |
+| `cultureNotes` | array(6) | **App 与 src 内 0 处消费** | — | 无影响 |
+
+## 48. 对工单「最小结构」的裁定
+
+### 48.1 必须改：`wordCards` 的规则是错的
+
+工单写「`wordCards` 若存在必须为数组（可为空）」。**内置包里 `wordCards` 是对象**（键为 `order,sumimasen,oyu,...`），`resolveWordCards` 也明确把数组当作非法输入丢弃。按工单实现，validator 会判定当前正式内容包无效，导致所有安装退回 fallback —— 这是本次核对发现的唯一会造成即时线上故障的条款。
+
+裁定：**`wordCards` 从最小结构中整条删除**。它已有本地闸门，validator 不需要重复表态。
+
+### 48.2 过宽：`_meta` 的「非空版本标识」
+
+`_meta` 在 App 运行时零消费，删掉它不会让任何页面失效，不符合工单自设的「只锁会让主要页面直接失效的边界」。而拒绝 `{}` 这件事已由 `scenes`/`wordBank` 等必需字段完成，不需要 `_meta` 兜底。
+
+裁定：**降级为 `_meta` 必须是对象（若存在）**，不校验 version 非空。理由是保留一个廉价的「这是内容包不是别的 JSON」标记，但不把发布契约带进运行时。若产品负责人希望保留版本校验，须先明确：谁保证远端每次都写 version、写错了怎么发现 —— 那是发布期 CI 的职责，不是客户端闸门。
+
+### 48.3 过宽：「五个假名行数组」中的四个
+
+`voicedRows/yoonRows/specialRows/loanwordRows` 全部是 `(x || []).map`，缺失时页面只是少一块，不会失效。把它们列为**必需**会让一个只是暂时没带这四个字段的合法内容包被整包拒绝。
+
+裁定：**改为「若存在必须为数组」**，不要求存在。`kanaRows` 例外 —— 见下。
+
+### 48.4 漏项：`kanaRows` 的必需性被「五个数组」这个说法掩盖了
+
+`KanaScreen.js:990/991` 对 `kanaRows` 直接 `.filter`，无守卫；五十音是新用户主线的第一道门。`kanaRows` 与其余四个不是同一级别，必须单列为**必需数组**。
+
+### 48.5 漏项：`specialSounds` 不必列（确认无需补）
+
+曾疑为漏项，核实后 `specialSounds?.sections?.map` 全程可选链，且它是对象不是数组。**确认不进最小结构**，工单省略它是对的。
+
+### 48.6 建议的最终最小结构
+
+必需，且必须为数组：`scenes`、`mapPlaces`、`culturalFusion`、`kanaRows`、`wordBank`。
+必需，且必须为对象、其 `stations` 必须为数组：`subwayAdventure`。
+若存在则必须为数组：`voicedRows`、`yoonRows`、`specialRows`、`loanwordRows`。
+若存在则必须为对象：`_meta`。
+根节点必须是普通对象（非数组、非 null）。
+不校验：`wordCards`、`specialSounds`、`cultureNotes`、任何未知顶层字段、任何数组的长度与元素结构。
+
+一句话判据：**只有「无守卫地被解引用、且失效会让主线页面白屏」的字段进最小结构**。`cultureNotes` 零消费、`wordCards`/`specialSounds` 自带降级，都不进。
+
+### 48.7 已知残留风险（不在本工单修）
+
+元素级形状仍无保护：`KanaScreen.js:1021` 的 `hiraRow.chars.map`、`:994` 的 `row.row[0]` 在行对象形状错误时仍会崩。顶层闸门不覆盖这一层，这是有意的取舍 —— 元素级校验会把 validator 推向内容质量审查器。登记为已知残留，不扩本工单范围。
+
+## 49. ETag 失败语义核对
+
+| 场景 | 当前行为 | 是否达标 | 要求的最小改动 |
+|---|---|---|---|
+| 200 + 结构无效 | 落盘 + 覆盖 ETag，坏内容成为新缓存 | **否，主漏洞** | 校验在 `writeCachedContent` **之前**；不写文件、不写 ETag、不动旧 ETag，转走缓存/fallback |
+| 304 + 缓存有效 | 直接返回 | 部分 | 返回前须过 validator |
+| 304 + 缓存缺失 | 清 ETag，返回 none | 是 | 保持不变 |
+| 304 + 缓存无效 | **直接把坏缓存交给 `setContent`** | **否** | 清 ETag（复用现有 `:61` 分支），返回 none。缓存文件建议保留不删——下次必然走 200 全量拉取并覆盖，删文件不增加安全性只增大 diff |
+| 网络失败 + 缓存有效 | 返回 cache | 部分 | 返回前须过 validator |
+| 网络失败 + 缓存无效 | 返回坏内容 | **否** | 返回 none；**ETag 不动**（此时并无证据说明远端或 ETag 有问题，清掉只会让下次多下 6MB） |
+
+ETag 的判据可以收成一句：**只有在「服务端说没变、而我方拿不出一份通得过校验的内容」时才清 ETag**；结构无效导致的拒绝不构成清 ETag 的理由，网络失败更不构成。
+
+一个当前已存在、本工单不必修但应记录的边界：200 响应若不带 `etag` 头，`writeCachedContent` 只写文件、旧 ETag 留存（`:34` 的 `if (etag)`），下次会带着过期 ETag 请求。raw.githubusercontent 恒发 ETag，风险为零，但实现时不要顺手「修」成无条件写入 —— 无条件写会引入 `setItem(null)`。
+
+## 50. 允许实现的最小 diff
+
+1. 新增 `src/lib/contentSchema.ts`：纯函数 `validateContentShape(value) => { ok, reason }`。**不得 import 任何 expo/react-native 模块**，否则无法进 `node --test`（现有 `src/lib/__tests__/*` 全部依赖这一点）。`reason` 只含字段路径与失败类型，不含值 —— 满足工单第 6 条不落日志内容。
+2. `contentCache.js` 三处接线：`readCachedContent` 返回前校验；200 分支在 `JSON.parse` 与 `writeCachedContent` 之间校验；304 无效缓存复用现有清 ETag 分支。
+3. 可测性：`contentCache.js` 直接 import 了 `expo-file-system` 与 AsyncStorage，现有测试框架下**无法覆盖六行验收矩阵**。最小可行做法是给 `fetchContent` 加一个带默认值的依赖参数（`{ fetchImpl, readCache, writeCache, getEtag, clearEtag }`），生产调用点一字不改。不接受用「测不了」为由只测 validator —— 工单要求断言「旧有效缓存未被覆盖」，那是分支行为，不是 validator 行为。
+4. 新增测试：`contentSchema.test.mjs`（含「内置 `assets/content.fallback.json` 必须通过」这一条，即工单第 5 条）+ `contentCache-branches.test.mjs`（六行矩阵，每行同时断言返回值与 `writeCache`/`clearEtag` 是否被调用）。
+
+## 51. 验收矩阵（供实现工单直接采用）
+
+| # | 输入 | 期望 source | 写内容 | 写 ETag | 清 ETag |
+|---|---|---|---|---|---|
+| 1 | 200 + 合法包 | `network` | 是 | 是 | 否 |
+| 2 | 200 + `{}` + 旧有效缓存 | `cache` | **否** | **否** | 否 |
+| 3 | 200 + `wordBank` 为对象 + 无缓存 | `none` | 否 | 否 | 否 |
+| 4 | 200 + 合法包但 `wordCards` 为对象 | `network` | 是 | 是 | 否 |
+| 5 | 304 + 有效缓存 | `not-modified` | 否 | 否 | 否 |
+| 6 | 304 + 缓存缺失 | `none` | 否 | 否 | **是** |
+| 7 | 304 + 坏缓存 | `none` | 否 | 否 | **是** |
+| 8 | 网络失败 + 有效缓存 | `cache` | 否 | 否 | 否 |
+| 9 | 网络失败 + 坏缓存 | `none` | 否 | 否 | **否** |
+| 10 | `assets/content.fallback.json` | validator 通过 | — | — | — |
+
+第 4 行是防回归行，专门守住 §48.1 那条错误规则不被重新写进来。
+第 2、7、9 行必须额外断言磁盘上的旧缓存文件内容未变。
+
+## 52. 对 App 层的核对（无需改动）
+
+`useContent()` 初始 state 即 `fallbackContent`（`App.js:124`，静态 import 的 JSON，恒为真值），`next` 为 null 时只 `setError(true)` 而不清空 content。因此 `App.js:6261` 的 `ErrorScreen` 在当前接线下实际不可达，**远端拒绝不会让 App 白屏，只会静默停留在内置包**。这正是本工单期望的降级形态，`App.js` 不需要任何改动 —— 工单「允许修改」中不含 App 页面行为，与事实一致。
+
+## 53. 停止声明
+
+只读核对完成。未编码、未改 `contentCache.js`、未 commit、未 push。
+下一步按 `ACTIVE.md` 分工：由 Codex 独立复核本报告（重点复核 §48.1 与 §49 的 ETag 判据），通过后再形成最小实现工单。
+
+---
+
+# P0-2 · Codex 实现记录（待 CC 短审）
+
+Codex 独立复核接受 §48 的最终最小结构与 §49 的 ETag 判据。实现额外收紧了一点：`contentCache.js` 顶层依赖 Expo 模块，不能仅靠向它注入依赖就进入裸 Node 测试；因此将状态机抽为纯 `contentCacheCore`，Expo 文件系统/AsyncStorage 仍由原文件适配，生产调用签名不变。
+
+实现只新增 schema、纯状态机及其测试，未改 App 或内容 JSON。最终验收为 `npm test` 561/561、`npm run typecheck`、`git diff --check`、iOS Expo bundle 均通过。
+
+篡改验证已执行并还原：移除 200 结构闸门会使 2 条分支测试失败；网络失败时错误清 ETag 会使 1 条分支测试失败。
+
+---
+
+# P0-2 · 结构闸门实施短审
+
+> 审核日期：2026-08-20
+> 范围：`src/lib/contentSchema.ts`、`src/lib/contentCacheCore.ts`、`src/lib/contentCache.js`、三个新测试与交接文档
+> 结论：**通过。六项重点核对全部达标；有 1 条建议在本轮顺手消除的低概率高影响风险（§56），3 处非阻塞测试缺口（§57）**
+> 本轮只读，未编码、未 commit、未 push。
+
+## 54. 六项重点核对
+
+| # | 核对项 | 结论 | 证据 |
+|---|---|---|---|
+| 1 | 200 坏包不写缓存/不覆盖 ETag | 通过 | `contentCacheCore.ts:72-78` 校验在 `writeCache` 之前；失败分支直接 `return cacheResult(...)`，`writeCache` 与 `clearEtag` 均不可达 |
+| 2 | 304 坏缓存清 ETag | 通过 | `:60-66` 有效缓存才提前 return，否则 `await deps.clearEtag()`。缺失与结构无效走同一分支，符合 §49 |
+| 3 | 网络失败坏缓存不清 ETag | 通过 | `:80-83` catch 内只 `readValidCache` 后返回，全程无 `clearEtag`；`:82` 注释写明判据 |
+| 4 | 读缓存与远端同一 validator | 通过 | 两条路径都收敛到 `readValidCache`（`:26-33`）与 `:72`，共用 `validateContentShape`；无第二套判据 |
+| 5 | `wordCards` 对象不被误拒 | 通过 | `contentSchema.ts` 全文无 `wordCards`，等于不表态；`contentSchema.test.ts` 与 `contentCacheCore.test.ts` 各有一条正向防回归 |
+| 6 | 未越界到 App/内容 JSON | 通过 | 工作区改动仅 5 文件 + 5 新增，`App.js`、`assets/content.fallback.json`、内容脚本、publication 全部未触碰 |
+
+`validateContentShape` 的字段清单与 §48.6 逐条一致：五个必需数组含 `kanaRows`，四个假名可选数组为「若存在须为数组」，`_meta` 降级为「若存在须为对象」、不校验 version，`specialSounds`/`cultureNotes`/`wordCards`/未知字段一律不表态。`isPlainObject`（`:12-16`）额外排除了数组与非 `Object.prototype` 原型，`JSON.parse` 的产物恒满足，判据没有过紧。
+
+## 55. 适配层委托核对
+
+`contentCache.js` 现在只剩 Expo 适配：`readCachedContent`/`writeCachedContent` 保持原样，`fetchContent` 退化为一次 `fetchContentCore` 调用，**对 App 的签名与返回形状一字未变**（`App.js` 因此不需要、也确实没有改动）。原文件里的 200/304/失败三条分支逻辑已整段移入纯 core，没有留下第二条绕过闸门的路径。
+
+`writeCachedContent` 仍先写文件再写 ETag、且自吞异常（§46 事实 3），这个顺序被保留下来了，正确。
+
+本地复跑与实现记录一致：
+
+```text
+npm test          561 / 561
+npx tsc --noEmit  exit 0
+git diff --check  clean
+```
+
+按「不改代码」的约束，本轮未做篡改验证，采信实施记录中的三条篡改结果；上面的分支证据是直接读源码得到的，不依赖那三条。
+
+## 56. 建议在本轮顺手消除：`fetchImpl: fetch` 未绑定
+
+`contentCache.js:49` 把全局 `fetch` 作为属性值传入，core 在 `:55` 以 `deps.fetchImpl(...)` 调用它，`this` 因此是 `deps` 而不是原来的 undefined/global。React Native 的 `fetch` 来自 whatwg-fetch polyfill，实现中不引用 `this`，所以当前运行时大概率无影响 —— 但这是本 diff 引入的、与改动前不等价的调用形态。
+
+值得处理的原因不是概率，是**这条路径没有任何东西能发现它**：`SHOULD_FETCH_REMOTE_CONTENT` 在 `__DEV__` 下为 false，开发期不走远端；bundle 只打包不执行；Node 测试注入的是假 `fetchImpl`。一旦某天宿主换成有 brand check 的实现（Expo Web、或 polyfill 变更），表现是每次请求抛错 → 落入 catch → 静默退回缓存/内置包，**内容更新永久停止且不报错**。
+
+建议改为 `fetchImpl: (u, init) => fetch(u, init)`，一行、零行为风险。注意 `contentCache-wiring.test.mjs:10` 的正则里写死了 `fetchImpl: fetch,` 字面量，改这一行必须同步改该断言 —— 顺带说明那条正则把接线测试绑到了实现的字面写法上，未来重构会误报，可考虑改成断言「存在 fetchImpl 键且 core 被调用」。
+
+以上是建议，不是阻塞项。产品负责人若选择原样提交，风险已记录在案。
+
+## 57. 非阻塞测试缺口
+
+1. **根节点非对象未测**：`contentSchema.ts:25` 的 `$: expected object` 是唯一没有对应用例的规则；`null`、数组、字符串三种输入都未断言。这条恰好是「远端返回 HTML 错误页且碰巧能被 parse」的最后一道防线。
+2. **200 成功路径未断言 ETag 被更新**：`contentCacheCore.test.ts` 的 harness 里 `writeCache` 丢弃了第二个参数，测试只断言 `writes() === 1`。实施工单矩阵第 1 行写的是「写内容**和 ETag**」，其中后半句实际无覆盖。真正写 ETag 的是适配层 `writeCachedContent`，本轮未改、未回归，因此不阻塞。
+3. **`wordCards` 为数组时仍应放行未测**：§48.1 那条错误规则的反面（数组也不该被拒）没有用例。现有正向用例只覆盖对象。
+
+三条都属于「加断言」，不涉及行为改动，可并入本轮，也可留作后续。
+
+## 58. 停止声明
+
+短审完成，结论为通过。未编码、未 commit、未 push。
+下一步由产品负责人决定是否采纳 §56 的一行修改，然后提交本轮 diff；`ROADMAP-STATUS.md` 的 P0-2 可在提交后由 `已实现待复核` 改为 `完成`。
+
+## 59. 建议采纳与最终状态
+
+产品负责人授权后，Codex 已采纳 §56 与 §57 的全部四项：全局 `fetch` 改为普通函数调用；200 成功路径断言写入 ETag；根节点非对象用例；`wordCards` 数组放行用例。复跑结果为 `npm test` 562/562、`npm run typecheck`、`git diff --check` 与 iOS Expo bundle 均通过。
+
+P0-2 现可标记为完成。

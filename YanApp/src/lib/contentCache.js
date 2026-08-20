@@ -10,6 +10,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as FileSystem from 'expo-file-system/legacy';
 import { K } from './storage';
+import { fetchContentCore } from './contentCacheCore';
 
 const ETAG_KEY = K.contentEtag;
 const FILE_NAME = 'yan_content_v2.json';
@@ -44,36 +45,12 @@ async function writeCachedContent(text, etag) {
  *   source: 'not-modified' | 'network' | 'cache' | 'none'
  */
 export async function fetchContent(url, { timeoutMs = 20000 } = {}) {
-  const etag = await AsyncStorage.getItem(ETAG_KEY).catch(() => null);
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
-  try {
-    const res = await fetch(url, {
-      signal: ctrl.signal,
-      headers: etag ? { 'If-None-Match': etag } : {},
-    });
-
-    // 没变:一个字节都不用下,直接用缓存
-    if (res.status === 304) {
-      const cached = await readCachedContent();
-      if (cached) return { content: cached, source: 'not-modified', error: null };
-      // 缓存文件丢了但 ETag 还在 → 清掉 ETag,下次强拉
-      await AsyncStorage.removeItem(ETAG_KEY).catch(() => {});
-      return { content: null, source: 'none', error: 'cache missing' };
-    }
-
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-    const text = await res.text();
-    const parsed = JSON.parse(text);            // 先解析再落盘,别把坏 JSON 存进去
-    await writeCachedContent(text, res.headers.get('etag'));
-    return { content: parsed, source: 'network', error: null };
-  } catch (e) {
-    // 没网 / 超时 / 服务端坏了:用上次存下来的
-    const cached = await readCachedContent();
-    if (cached) return { content: cached, source: 'cache', error: e.message };
-    return { content: null, source: 'none', error: e.message };
-  } finally {
-    clearTimeout(timer);
-  }
+  return fetchContentCore(url, {
+    // 以普通函数调用全局 fetch，别把宿主实现的 this 绑定改成 deps。
+    fetchImpl: (requestUrl, init) => fetch(requestUrl, init),
+    getEtag: () => AsyncStorage.getItem(ETAG_KEY).catch(() => null),
+    clearEtag: () => AsyncStorage.removeItem(ETAG_KEY).catch(() => {}),
+    readCache: readCachedContent,
+    writeCache: writeCachedContent,
+  }, { timeoutMs });
 }
