@@ -2305,6 +2305,11 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
     : record.dueAt <= today ? '今天到期'
     : `下次 ${record.dueAt.slice(5).replace('-', '月')}日`;
 
+  // 主例句是一份完整的阅读材料，不是“有日文就先摆出来”。四件套缺任一项
+  // 都不进入这个主学习面：没有 token 就不能安全逐词注音；没有罗马音或中文，
+  // 用户读到一半还要自己在页面别处补信息。
+  const hasPrimaryExample = hasCompleteExample(entry) && !!EXAMPLE_TOKENS[entry.id];
+
   return (
     <View style={{ flex: 1, backgroundColor: C.paper }}>
       <View style={wd.nav}>
@@ -2358,6 +2363,21 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
               而且中英义项数对不上的有 881 条(见 meaningSenses.ts)。 */}
           {!!entry.meaning_en && <SenseList text={entry.meaning_en} style={wd.enBlock} />}
         </View>
+        {hasPrimaryExample ? (
+          <View style={wd.primaryExample}>
+            <View style={wd.primaryExampleHead}>
+              <Text style={wd.primaryExampleLabel}>例句</Text>
+              <SpeakBtn onPress={() => speak(entry.exampleJp, 'ja-JP', 'wd-ex')} speaking={speakingKey === 'wd-ex'} size="sm" color={C.muted} />
+            </View>
+            {/* 顺序是阅读顺序：日文（逐词假名）→ 罗马音 → 中文。
+                token 与原句不一致时 ExampleSentence 自己退回纯日文，绝不吞字。 */}
+            <ExampleSentence sentence={entry.exampleJp} tokens={EXAMPLE_TOKENS[entry.id]} size={19} style={wd.primaryExampleJp} />
+            <Text style={wd.primaryExampleRoma}>{entry.exampleRoma}</Text>
+            <Text style={wd.primaryExampleZh}>{entry.exampleZh}</Text>
+          </View>
+        ) : (
+          <Text style={wd.contentNote}>暂无例句</Text>
+        )}
         {wordFields.map((wordField, fi) => (
           <View key={fi} style={wd.section}>
             {/* 标题跟着词走(「秋天会一起遇到」),不用固定的「相关词」——
@@ -2398,35 +2418,6 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
                 .join(' · ')}
             </Text>
           </View>
-        )}
-        {!!entry.coreChunk && (
-          <View style={wd.section}>
-            <Text style={wd.sectionLabel}>搭配</Text>
-            <View style={wd.exRow}>
-              <ExampleSentence sentence={entry.coreChunk} tokens={null} size={15} />
-              <SpeakBtn onPress={() => speak(entry.coreChunk, 'ja-JP', 'wd-chunk')} speaking={speakingKey === 'wd-chunk'} size="sm" color={C.muted} />
-            </View>
-          </View>
-        )}
-        {/* 词场句已经是这个词最好的例句了,一模一样就别说第二遍(自查九条:不赘) */}
-        {!!entry.exampleJp && !wordFields.some(f => f.sentence.jp === entry.exampleJp) && (
-          <View style={wd.section}>
-            <Text style={wd.sectionLabel}>例句</Text>
-            <View style={wd.exRow}>
-              <View style={{ flex: 1, gap: 3 }}>
-                {/* 按词切开 + 汉字上注音。分词是离线跑好的,只有例句有 ——
-                    搭配(coreChunk)和词场句没有对应的 token,
-                    ExampleSentence 拿不到 tokens 会整句退回纯文本,所以传空也安全。 */}
-                <ExampleSentence sentence={entry.exampleJp} tokens={EXAMPLE_TOKENS[entry.id]} size={15} />
-                {!!entry.exampleRoma && <Text style={wd.exRoma}>{entry.exampleRoma}</Text>}
-                <Text style={wd.exZh}>{entry.exampleZh}</Text>
-              </View>
-              <SpeakBtn onPress={() => speak(entry.exampleJp, 'ja-JP', 'wd-ex')} speaking={speakingKey === 'wd-ex'} size="sm" color={C.muted} />
-            </View>
-          </View>
-        )}
-        {!hasCompleteExample(entry) && (
-          <Text style={wd.contentNote}>暂无例句</Text>
         )}
         {onGrade ? <View style={wd.section}>
           <View style={wd.gradeMeta}>
@@ -2488,6 +2479,13 @@ const wd = StyleSheet.create({
   altNote: { fontSize: 10.5, color: C.mutedLight, marginTop: 4, lineHeight: 15 },
   // 英文释义现在由 SenseList 排(要分行编号),这里只留外边距
   enBlock: { marginTop: 4 },
+  // 主例句不是附注：它把“这个词怎样在一句话里活起来”放在释义之后、评分之前。
+  primaryExample: { marginHorizontal: 16, marginTop: 16, padding: 14, gap: 8, backgroundColor: C.white, borderRadius: 12, borderWidth: 1, borderColor: C.border },
+  primaryExampleHead: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  primaryExampleLabel: { fontSize: 12, fontWeight: '700', color: C.lava, letterSpacing: 1 },
+  primaryExampleJp: { marginTop: 2 },
+  primaryExampleRoma: { fontSize: 13, color: C.mutedLight, lineHeight: 19 },
+  primaryExampleZh: { fontSize: 15, color: C.ink, lineHeight: 23 },
   section: { marginHorizontal: 16, marginTop: 16, gap: 8 },
   sectionLabel: { fontSize: 10, fontWeight: '700', color: C.mutedLight, letterSpacing: 0.8, textTransform: 'uppercase' },
   loanTxt: { fontSize: 14, color: C.teal, fontWeight: '500', marginTop: 2 },

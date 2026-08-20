@@ -1,23 +1,23 @@
-# 当前状态 · P0-1 Commit 3 已提交，待真机验收
+# 当前状态 · P2-1 词条主例句阅读面进行中
 
-> 状态：Commit 3 已提交；待真机验收
+> 状态：CC 短审通过；已提交
 >
-> 当前工单：`docs/handoff/TICKET-publication-behavior.md`
+> 当前工单：`docs/handoff/TICKET-word-detail-primary-example.md`
 >
 >
 > 更新日期：2026-08-20
 
-Commit 1（selector）与 Commit 2（显式 publication 迁移）均已完成并通过独立复核。数据迁移是**兼容迁移，不等于真实性核验**。
+P0-1 的三个提交均已完成并通过 CC 短审；用户已在真机确认 N3 的 dictionary-only 空态。P0-1 尚保留“dictionary-only 详情无评分”的最后一项手动验收，但不影响本 P2 展示工单的数据边界。
 
-本轮已接入既有 selector 到 App 的主线、词书、搜索详情和详情评分入口，并更新已确认的 UI 语义；未修改内容 JSON、迁移脚本或通用 `grade()`。
+本轮只重排词条详情中已有完整例句的阅读顺序，不新增内容、不修改内容 JSON、publication、声调/假名算法或评分逻辑。
 
 分工：
 
-- Codex：Commit 3 已创建；不再修改本轮实现；
+- Codex：已补齐 CC 指出的测试缺口并提交；
 - CC：短审已通过，无阻塞项；
 - 同一文件同一时间仍只允许一个实现者。
 
-下一步只做真机验收：优先打开 N3/N2/N1，确认空态与“浏览词典”；再确认一条 dictionary-only 详情无评分、一条旧 record 仍可评分。通过前仍不 push、不发布远端内容。
+P0-1 的最终手动检查仍应补做：从 N3“浏览词典”打开一词，确认无评分；带旧 record 的词仍可评分。P2-1 复核前不 commit、不 push、不发布远端内容。
 
 ## 非阻塞后续硬化
 
