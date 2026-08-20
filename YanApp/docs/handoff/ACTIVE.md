@@ -1,24 +1,19 @@
-# 当前状态 · P0-2 远端内容运行时结构闸门已完成
+# 当前状态 · P2-2A 来源审计输出契约
 
-> 状态：已完成，待推送
+> 状态：已完成，本地提交待推送
 >
-> 当前工单：`docs/handoff/TICKET-runtime-content-schema.md`
->
+> 当前工单：`docs/handoff/TICKET-source-audit-implementation.md`
 >
 > 更新日期：2026-08-20
 
-P0-1 与 P2-1 已完成并推送。P0-2 已完成实现、CC 短审与补强验收；本次只改内容下载/缓存的结构边界，不修改内容、词条 UI、假名、声调或评分逻辑。
-
-已确认的风险是：远端响应只经 `JSON.parse` 就被写入缓存，语法正确但结构错误的 JSON 可经 HTTP 304/离线 cache fallback 跨启动进入 App。
+P0-1、P2-1 与 P0-2 已完成并推送。P2-2A 只定义来源注册表、字段 claim、evidence、run manifest 与自动分流规则，解决“模型反复查、内容反复漂”的协作接口问题。
 
 分工：
 
-- Codex：已完成实现、补强与验收；
-- CC：短审已通过，无阻塞项；
+- Codex：已完成纯 schema、CLI、JMdict 历史重锁样本与验收；已补 CLI/claim 闭集、无归档降级与 run 脚本 SHA 校验；
+- CC：已完成两轮独立 diff 复审，无阻塞项；
 - 同一文件同一时间仍只允许一个实现者。
 
-本轮提交并推送后，下一项只启动 P2-2A 的来源流水线输出契约；不得扩展到内容生产、元素级结构校验或 App 页面改动。
+禁止事项：不修改内容包、`publication`、App 页面、例句 token、假名、声调或评分逻辑；不下载/抓取新来源；不把 AI 输出视为真实性来源；不启动 P2-2B span 或 P2-2C usage。
 
-## 非阻塞后续硬化
-
-`write_all_atomic()` 已保证“两个临时文件都准备成功后才替换第一个目标”。极端情况下若第二个 `os.replace` 本身失败，脚本可留下第二个临时文件；内容状态会是“精确 migrated + baseline”，可由经过完整 SHA/投影验证的单边恢复收敛，不会复制未验证内容。未来若继续复用这类双文件写入器，再补 replace 阶段异常清理；不阻塞这次一次性迁移提交。
+本轮改动只包含纯 schema、只读 CLI、测试、JMdict 许可/归属快照与 `staging/source-audit/` 的最小注册/运行样本；不改内容包、`publication`、App、UI、声调或例句。复审已确认：`export-claims`/`summarize` 均不能绕过 validator；claim/evidence 闭集隔离 `publication`；缺失本地归档稳定派生 `incomplete`；run 脚本 SHA 会实测比对。

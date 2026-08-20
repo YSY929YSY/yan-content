@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "runId": "jmdict-aizu-relock-20260820",
+  "executedAt": "2026-08-20T00:00:00+08:00",
+  "baseCommit": "df14aee899364c0dadf5fdbaa753f76167b9643a",
+  "scriptContentSha256": "9e8ecd9efa40dd256e18b0b99e1159f69b9ed5c9d8dc4de87b0cff414eefff40",
+  "nodeVersion": "v24.14.1",
+  "inputs": {
+    "registry": "e50ff1568c23381d7aa9754d9090395887db13904b2139bbfae03b9c582c3f5c",
+    "claims": "b4af7f76c6b708b50a2637e6a7431867745ed79c4f9a2559e03a0ba7a7971cb7",
+    "evidence": "785939263ac6d5de0bb86fbe5c024ae299e074619f48dbfdd63f37f91f0ef48d"
+  },
+  "sourceArtifacts": {
+    "jmdict-simplified:3.6.2+20260803141815": "2fb280ac1737161795f4bce157466f69c7e51a50aa6a3353ac59ca06a2e07c5f"
+  },
+  "reportPath": "staging/source-audit/reports/jmdict-aizu.summary.json"
+}

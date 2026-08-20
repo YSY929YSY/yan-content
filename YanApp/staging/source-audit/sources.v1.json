@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "sourceId": "jmdict-simplified:3.6.2+20260803141815",
+      "familyId": "edrdg-jmdict",
+      "lineage": ["edrdg-jmdict", "scriptin-jmdict-simplified"],
+      "title": "JMdict-simplified",
+      "role": ["dictionary_identity", "pos", "sense_boundary"],
+      "canonicalUrl": "https://github.com/scriptin/jmdict-simplified",
+      "version": "3.6.2+20260803141815",
+      "artifact": {
+        "kind": "source-archive",
+        "path": "staging/jmdict-eng.json.tgz",
+        "bytes": 11475164,
+        "sha256": "2fb280ac1737161795f4bce157466f69c7e51a50aa6a3353ac59ca06a2e07c5f"
+      },
+      "license": {
+        "name": "CC BY-SA 4.0",
+        "url": "https://www.edrdg.org/edrdg/licence.html",
+        "noticePath": "docs/sources/jmdict-notice.md"
+      },
+      "redistribution": "derived-data-with-attribution",
+      "retrievedAt": null,
+      "relockedAt": "2026-08-20T00:00:00+08:00",
+      "attribution": "James William Breen and the Electronic Dictionary Research and Development Group (EDRDG)"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "claims": [
+    {
+      "claimId": "n3_aizu/identity/01",
+      "wordId": "n3_aizu",
+      "wordKey": "合図\tあいず",
+      "field": "identity",
+      "claimType": "dictionary_fact",
+      "proposed": {"word": "合図", "reading": "あいず", "jmdictSeq": "1284930"},
+      "policy": {"minimumEvidence": "dictionary-entry", "requiredRoles": ["dictionary_identity"], "independentFamilies": 0},
+      "status": "candidate"
+    }
+  ]
+}

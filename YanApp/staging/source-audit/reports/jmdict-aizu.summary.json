@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "source-audit",
+  "inputs": {
+    "registry": "e50ff1568c23381d7aa9754d9090395887db13904b2139bbfae03b9c582c3f5c",
+    "claims": "b4af7f76c6b708b50a2637e6a7431867745ed79c4f9a2559e03a0ba7a7971cb7",
+    "evidence": "785939263ac6d5de0bb86fbe5c024ae299e074619f48dbfdd63f37f91f0ef48d"
+  },
+  "states": {
+    "n3_aizu/identity/01": {
+      "status": "supported",
+      "supportFamilies": 1,
+      "diagnostics": [],
+      "publication": null
+    }
+  }
+}

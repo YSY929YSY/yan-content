@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "evidence": [
+    {
+      "schemaVersion": 1,
+      "evidenceId": "ev:jmdict-aizu:001",
+      "claimId": "n3_aizu/identity/01",
+      "sourceId": "jmdict-simplified:3.6.2+20260803141815",
+      "locator": {"kind": "entry", "value": "1284930"},
+      "relation": "supports",
+      "observed": {"word": "合図", "reading": "あいず"},
+      "rights": {"license": "CC BY-SA 4.0", "attribution": null},
+      "method": "historical_relock_sample",
+      "producer": {"kind": "script", "name": "source-audit", "version": "uncommitted"},
+      "createdAt": "2026-08-20T00:00:00+08:00"
+    }
+  ]
+}
