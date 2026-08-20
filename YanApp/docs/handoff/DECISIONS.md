@@ -80,6 +80,7 @@
 - 8005 条现有结构完整词设为 `dictionary: true`，依据为 `legacy_dictionary_compat`；
 - 563 条 N5 `kanji_anchor` 设为 `learning: true`，依据为 `legacy_mainline_anchor`；
 - 其余 7442 条 `learning: false`；
+- `learning: false` 时不写 `learningBasis`，也不写 `null`；只有正向准入 Learning 的词记录该层 basis；
 - Dictionary 与 Learning 分别记录迁移依据，均不等同 `verified` 或 evidence strength。
 
 ### D2. dictionary-only 的评分边界
