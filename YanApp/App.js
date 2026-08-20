@@ -45,6 +45,9 @@ import JournalScreen from './src/features/journal/JournalScreen';
 import {
   nextTask, taskLabel, poolProgress, anchorPool, wordKey as poolWordKey,
 } from './src/features/learn/dailyTask';
+import {
+  canGradeWord, canIntroduceWord, canReviewWord, hasCompleteExample, isDictionaryEntry,
+} from './src/features/wordbank/publication';
 import { usePrefs } from './src/lib/prefs';
 // 词场预览:内容还在 staging 没并进内容包,开发期先从这份草稿读,方便边写边看。
 // 合并进 content.v2.json 之后这份和它的引用一起删。
@@ -676,7 +679,10 @@ function TodayCard({ content, setTab, setSubTab, setLearnBatch }) {
   // 在首页看到「门过了」、在五十音页看到「0 / 46」。见 useKanaGate。
   const gate = useKanaGate(content.kanaRows);
 
-  const pool = useMemo(() => anchorPool(content.wordBank || []), [content.wordBank]);
+  const pool = useMemo(
+    () => anchorPool(content.wordBank || []).filter(canIntroduceWord),
+    [content.wordBank],
+  );
 
   // 判据(含老用户兜底、以及那条兜底对新用户是假阳性的取舍)全在 useKanaGate 里
   const kanaDone = gate.done;
@@ -1421,7 +1427,10 @@ function PieTab(props) {
 function PieTabInner({ content, setTab, subTab, setSubTab, sceneState, setSceneState, practiceScene, setPracticeScene, learnBatch, setLearnBatch }) {
   const [wbBookId, setWbBookId] = useState(null);
   // memo 一次:内联调用每次渲染都新建数组,下游按引用比较的 memo 会全部失效
-  const mainlinePool = useMemo(() => anchorPool(content.wordBank || []), [content.wordBank]);
+  const mainlinePool = useMemo(
+    () => anchorPool(content.wordBank || []).filter(canIntroduceWord),
+    [content.wordBank],
+  );
   return (
     <View style={{ flex: 1 }}>
       {/* 子 tab */}
@@ -1750,10 +1759,9 @@ const JLPT_COLORS = {
  * 用户想查一个词的时候,他脑子里没有 JLPT 级别,只有那个词。
  *
  * 挪出来之后两件事各归各位:
- *   词书 = 定稿的那批(例句/罗马音/搭配齐全),按级别组织,是「学」
- *   搜索 = 全库 8298 条,不分级别、不滤起草稿,是「查」
- * 代码里本来就写着「其余词条只在搜索时出现,当词典用」—— 搜索被关在单本书里的时候
- * 这句话是做不到的,现在才真的成立。
+ *   词书 = 明确获准 Learning 的那批,按级别组织,是「学」
+ *   搜索 = 获准 Dictionary 的全库词条,不受词书级别限制,是「查」。
+ * “有例句”只是内容形状,不是学习准入；准入只读 publication selector。
  */
 function WordBookShelfScreen({ wordBank, onBack, onSelect }) {
   const [query, setQuery] = useState('');
@@ -1767,35 +1775,43 @@ function WordBookShelfScreen({ wordBank, onBack, onSelect }) {
   // 写死的五个数到 2026-08 已经全部对不上了(718/626/1730/1812/3413 实际是
   // 724/633/1726/1798/3403)—— 内容包在更新,常量没人跟着改,而这种漂移
   // 不会报错、只会让用户看到一个和列表对不上的数字。
-  // 顺带把「定稿多少」也算出来:一本全是起草稿的书不该和精修过的书写一样的话。
+  // “可查 / 可学习”都从显式 publication 算，不能再从例句形状猜。
   const stats = useMemo(() => {
     const out = {};
     for (const book of WORDBOOKS) {
       const ws = (wordBank || []).filter(w => (w.levels || [w.level]).includes(book.level));
-      out[book.id] = { total: ws.length, final: ws.reduce((n, w) => n + (isDraftedWord(w) ? 0 : 1), 0) };
+      out[book.id] = {
+        dictionary: ws.reduce((n, w) => n + (isDictionaryEntry(w) ? 1 : 0), 0),
+        learning: ws.reduce((n, w) => n + (canIntroduceWord(w) ? 1 : 0), 0),
+      };
     }
     return out;
   }, [wordBank]);
 
   const q = query.trim();
   const hits = !q ? [] : (wordBank || []).filter(w =>
-    w.word.includes(q) || w.reading.includes(q)
-    || (w.meaning_zh || '').includes(q)
-    || (w.meaning_en || '').toLowerCase().includes(q.toLowerCase())
-  ).slice(0, 80);   // 8298 条全渲染会卡,查词的人也不会翻到第 80 条
+    isDictionaryEntry(w) && (
+      w.word.includes(q) || w.reading.includes(q)
+      || (w.meaning_zh || '').includes(q)
+      || (w.meaning_en || '').toLowerCase().includes(q.toLowerCase())
+    )
+  ).slice(0, 80);   // 全库都渲染会卡,查词的人也不会翻到第 80 条
 
   const today = todayStr();
 
   if (picked) {
+    const pickedRecord = progress[wordKey(picked)] || null;
     return (
       <WBDetailPage
         entry={picked}
-        record={progress[wordKey(picked)] || null}
+        record={pickedRecord}
         today={today}
         onBack={() => setPicked(null)}
         // 搜索结果里评分用词条自己的级别当 bookId,而不是「当前这本书」——
         // 这里根本没有「当前这本书」
-        onGrade={(g) => grade(wordKey(picked), g, (picked.level || 'n5').toLowerCase())}
+        onGrade={canGradeWord(picked, pickedRecord)
+          ? (g) => grade(wordKey(picked), g, (picked.level || 'n5').toLowerCase())
+          : undefined}
         speak={speak}
         speakingKey={speakingKey}
         hasPrev={pickedIdx > 0}
@@ -1880,12 +1896,8 @@ function WordBookShelfScreen({ wordBank, onBack, onSelect }) {
               <View style={{ flex: 1 }}>
                 <Text style={wbs.bookTitle}>{book.title}</Text>
                 <Text style={wbs.bookDesc}>
-                  {/* 一本全是起草稿的书,别写得和精修过的一样 ——
-                      点进去发现例句时有时无,信任是这么丢的 */}
                   {!book.available ? book.desc
-                    : stats[book.id]?.final > 0
-                      ? `${stats[book.id].final} 词 · ${book.desc}`
-                      : `${stats[book.id]?.total || 0} 条起草中 · 可当词典翻`}
+                    : `${stats[book.id]?.dictionary || 0} 可查 · ${stats[book.id]?.learning || 0} 可学习 · ${book.desc}`}
                 </Text>
               </View>
               {book.available
@@ -1947,30 +1959,6 @@ const normalizeDate = (v) => {
   return Number.isFinite(Date.parse(iso)) ? iso : '';
 };
 
-// 词条是不是「机器起草、还没人工校对」。
-// 8298 条里 N5/N4 那 1343 条是精修的(例句 100%),N3 以上 6955 条全是 zh_drafted
-// (例句仅 39%)。数据层一直知道这件事,界面以前完全不体现 —— 用户看到的每张卡
-// 长得都一样,而作者定的标准是「词意 0 容忍」。标出来是诚实,也让人能只学精修的。
-/**
- * 这条词够不够格进词书。
- *
- * **判据是「有没有完整例句」,不是 `status` 标志位。**
- *
- * 原来看 `status !== 'zh_drafted'`。问题是那个标志位**已经和内容脱节了**:
- * 2026-08-13 数过,N3 有 1386 条例句齐全(jp/zh/roma 三样同步,没有半拉子),
- * 而被标成定稿的只有 8 条 —— 内容往前走了,标志位没人跟着改,而且不报错,
- * 只是让 1386 条做完的词一直藏在「起草」里看不见。
- * 和 `WORDBOOKS` 里那五个写死的词数是同一种病。
- *
- * 改成从字段现算之后:内容补一条就自动放出一条,没有需要有人记得改的开关。
- *
- * ⚠️ 门槛里**不含 `coreChunk`(搭配)**,这是想清楚的:搭配是三层里唯一
- * 没有开放权威源的字段(2026-08-13 找过,GitHub 上没有;NINJAL-LWP 不能批量
- * 且商业利用受限),拿它当闸门等于用一个补不上的字段挡住已经做完的内容。
- * 详见 HANDOFF-2026-08-12「有权威源的 join,和没有源的创作」。
- */
-const isDraftedWord = (w) => !(w?.exampleJp && w?.exampleZh && w?.exampleRoma);
-
 const wordKey = (item) => `${item.word}-${item.reading}`;
 
 function WordBankScreen({ wordBank, book, onBack }) {
@@ -1987,8 +1975,8 @@ function WordBankScreen({ wordBank, book, onBack }) {
   // 退出页面就没了,重进重新挑一批,用户永远做不完「今天的任务」。
   const [session, setSession] = useState(null);
   const [statusFilter, setStatusFilter] = useState('all');
-  // 「先当词典翻」—— 只在整本还没定稿的词书上才会用到,见下面 skipDraftFilter
-  const [showDrafts, setShowDrafts] = useState(false);
+  // 用户明确选择“浏览词典”时，才把 dictionary-only 词列进当前书。
+  const [browseDictionary, setBrowseDictionary] = useState(false);
   const [selectedWord, setSelectedWord] = useState(null);
   const [selectedIdx, setSelectedIdx] = useState(0);
   const [navList, setNavList] = useState([]);
@@ -2003,7 +1991,7 @@ function WordBankScreen({ wordBank, book, onBack }) {
     [wordBank]
   );
 
-  // 队列只从定稿词里挑,和列表默认显示的口径一致 —— 不能派一个连例句都没有的词当今日任务。
+  // 队列只从获准 Learning 的词里挑，和默认列表的新词口径一致。
   const bankRef = useRef(wordBank);
   bankRef.current = wordBank;
 
@@ -2039,7 +2027,7 @@ function WordBankScreen({ wordBank, book, onBack }) {
         : {
           date: today,
           keys: pickSession(
-            (bankRef.current || []).filter(w => !isDraftedWord(w)),
+            (bankRef.current || []).filter(canIntroduceWord),
             progressRef.current,
             { today, limit: DAILY_GOAL, keyOf: wordKey }
           ),
@@ -2072,20 +2060,15 @@ function WordBankScreen({ wordBank, book, onBack }) {
     ? searched.filter(w => (progress[wordKey(w)]?.dueAt || '9999') <= today)
     : statusFilter === 'all' ? searched
     : searched.filter(w => statusOf(w) === statusFilter);
-  // 词书 = 已定稿的那批(例句/罗马音/搭配齐全);其余词条只在「搜索」时出现,
-  // 当词典用 —— 词典本来就不是每个词都配例句。
-  // 不在界面上暴露 status,那是数据管道的词汇,不该让用户替开发者做质检。
-  //
-  // 「今日任务」和「待复习」两个视图不过这道滤:队列和到期表是按用户实际学过的词
-  // 算出来的,用户可能是搜索时顺手学的起草词。滤掉它们会让按钮上写着「待复习 3」
-  // 而列表里只有 2 条 —— 数字和眼前的东西对不上,比多显示一个粗糙词条更伤信任。
-  //
-  // showDrafts 是用户自己按下的第三种情况:整本都还在起草时(N3/N2/N1),
-  // 上面那条规矩会把列表滤成空的 —— 而头部还写着「1798 词」。
-  // 界面自相矛盾比内容粗糙严重得多,所以给一条出口:让他自己决定要不要当词典翻。
-  // **默认仍然不给**,词书的定义没变。
-  const skipDraftFilter = statusFilter === 'today' || statusFilter === 'due' || showDrafts;
-  const filtered = skipDraftFilter ? byStatus : byStatus.filter(w => !isDraftedWord(w));
+  // 默认词书只放 Learning 内容；“浏览词典”是用户显式选择的查询模式。
+  // today / due 刻意保留旧 record 对应的词，否则历史进度会在列表里凭空消失。
+  // 它们能不能评分仍由详情页的 canGradeWord 统一决定，不能把列表当安全边界。
+  const visibleDictionaryOrHistory = (w) =>
+    isDictionaryEntry(w) || canReviewWord(w, progress[wordKey(w)] || null);
+  const skipLearningFilter = statusFilter === 'today' || statusFilter === 'due' || browseDictionary;
+  const filtered = skipLearningFilter
+    ? byStatus.filter(visibleDictionaryOrHistory)
+    : byStatus.filter(canIntroduceWord);
 
   // 只数这本书里的词。progress 是全局的(键是「词-读音」,不分书),
   // 直接数整张表会把 N3 的到期词算到 N5 的按钮上。
@@ -2093,11 +2076,9 @@ function WordBankScreen({ wordBank, book, onBack }) {
     (n, w) => n + ((progress[wordKey(w)]?.dueAt || '9999') <= today ? 1 : 0), 0
   );
   const todayLeft = session ? session.keys.filter(k => !doneKeys.has(k)).length : 0;
-  // 这本书里有没有精修词。N3/N2/N1 现在整本都是机器起草,一条定稿词都没有,
-  // 于是队列挑出来是空的 —— 而空队列和「今天做完了」在数据上长得一模一样。
-  // 不区分的话,用户什么都没做就被告知「今日已完成」,这是界面在骗他。
-  const finalCount = wordBank.reduce((n, w) => n + (isDraftedWord(w) ? 0 : 1), 0);
-  const hasFinalWords = finalCount > 0;
+  const dictionaryCount = wordBank.reduce((n, w) => n + (isDictionaryEntry(w) ? 1 : 0), 0);
+  const learningCount = wordBank.reduce((n, w) => n + (canIntroduceWord(w) ? 1 : 0), 0);
+  const hasLearningWords = learningCount > 0;
 
   const startToday = () => setStatusFilter('today');
 
@@ -2144,7 +2125,9 @@ function WordBankScreen({ wordBank, book, onBack }) {
         record={progress[wordKey(selectedWord)] || null}
         today={today}
         onBack={goBack}
-        onGrade={gradeWord}
+        onGrade={canGradeWord(selectedWord, progress[wordKey(selectedWord)] || null)
+          ? gradeWord
+          : undefined}
         speak={speak}
         speakingKey={speakingKey}
         hasPrev={selectedIdx > 0}
@@ -2164,11 +2147,8 @@ function WordBankScreen({ wordBank, book, onBack }) {
           <Text style={wb.back}>‹ 词书选择</Text>
         </TouchableOpacity>
         <Text style={wb.title}>{book?.level || 'N5'} {book?.title || '基础词库'}</Text>
-        {/* 数字要和眼睛看到的对得上。整本都在起草时,写「1798 词」而列表是空的 ——
-            用户只会得出「这 App 坏了」。所以起草的那部分单独说出来。 */}
         <Text style={wb.sub}>
-          JLPT {book?.level || 'N5'} · {hasFinalWords ? `${finalCount} 词` : '还没有精修词条'}
-          {wordBank.length > finalCount ? ` · 另有 ${wordBank.length - finalCount} 条起草中` : ''}
+          JLPT {book?.level || 'N5'} · {dictionaryCount} 可查 · {learningCount} 可学习
           {' · '}{book?.desc || '高频词块 · 例句'}
         </Text>
         <View style={wb.ctaRow}>
@@ -2177,7 +2157,7 @@ function WordBankScreen({ wordBank, book, onBack }) {
               {/* session 还没读出来时不能显示「今日已完成」—— 冷启动那一瞬间
                   告诉用户今天没事干,他就真的关掉了 */}
               {!session ? '今日任务'
-                : !hasFinalWords ? '这本还在起草'
+                : !hasLearningWords ? '暂无可学习词'
                 : todayLeft > 0 ? `今日任务 ${todayLeft}` : '今日已完成'}
             </Text>
           </TouchableOpacity>
@@ -2209,10 +2189,12 @@ function WordBankScreen({ wordBank, book, onBack }) {
                 <Text style={wb.word}>{item.word}</Text>
                 <Text style={wb.reading}>{item.reading}</Text>
                 <View style={wb.posTag}><Text style={wb.posTagTxt}>{item.pos}</Text></View>
-                {/* 起草稿混进列表时必须能一眼认出来。不标的话用户会拿它和精修词条
-                    等同看待,然后得出「这本书的例句怎么时有时无」——那比粗糙本身更伤 */}
-                {isDraftedWord(item) && (
-                  <View style={wb.draftTag}><Text style={wb.draftTagTxt}>起草</Text></View>
+                {isDictionaryEntry(item) && !canIntroduceWord(item) && (
+                  <View style={wb.dictionaryTag}>
+                    <Text style={wb.dictionaryTagTxt}>
+                      {hasCompleteExample(item) ? '仅词典' : '仅词典 · 暂无例句'}
+                    </Text>
+                  </View>
                 )}
                 {done ? <Text style={wb.checkMastered}>今天过了</Text>
                   : st === 'learning' ? <View style={wb.dotLearning} />
@@ -2224,21 +2206,16 @@ function WordBankScreen({ wordBank, book, onBack }) {
           );
         }}
         ListEmptyComponent={(
-          // 整本还在起草是**最常见**的空,却曾经掉进最后那句「这里还没有词」——
-          // 而头部同时写着 1798 词。词条明明在,只是还没配例句和搭配,
-          // 说成「没有词」是界面在骗人。所以这一支单独说清楚,并且给一条出口。
-          !hasFinalWords && !showDrafts && statusFilter !== 'due' ? (
+          !hasLearningWords && !browseDictionary && statusFilter !== 'due' ? (
             <View style={wb.emptyBox}>
               <Text style={wb.empty}>
-                这本还在起草。{'\n'}
-                {wordBank.length} 条已经有释义和读音,{'\n'}
-                但还没配例句、搭配和罗马音。
+                开放词典查询，{'\n'}
+                学习内容正在分批核验。
               </Text>
-              <TouchableOpacity style={wb.emptyBtn} onPress={() => setShowDrafts(true)}>
-                <Text style={wb.emptyBtnTxt}>先当词典翻</Text>
+              <TouchableOpacity style={wb.emptyBtn} onPress={() => setBrowseDictionary(true)}>
+                <Text style={wb.emptyBtnTxt}>浏览词典</Text>
               </TouchableOpacity>
-              {/* 说清楚按下去会得到什么,别让人点完才发现内容比别的书粗糙 */}
-              <Text style={wb.emptyNote}>翻的是起草稿,每条都会标出来</Text>
+              <Text style={wb.emptyNote}>{dictionaryCount} 条可查词会保留“仅词典”标记</Text>
             </View>
           ) : (
             <Text style={wb.empty}>
@@ -2274,10 +2251,10 @@ const wb = StyleSheet.create({
   reading: { fontSize: 11, color: C.muted },
   posTag: { backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 6, paddingVertical: 1 },
   posTagTxt: { fontSize: 9, color: C.muted, fontWeight: '600' },
-  // 起草标记:描边不填色,比词性标签更轻 —— 它是个说明,不是一枚勋章
-  draftTag: { borderWidth: StyleSheet.hairlineWidth, borderColor: C.muted, borderRadius: 999,
+  // Dictionary-only 是内容范围说明，不是质量或真实性等级。
+  dictionaryTag: { borderWidth: StyleSheet.hairlineWidth, borderColor: C.muted, borderRadius: 999,
               paddingHorizontal: 6, paddingVertical: 1 },
-  draftTagTxt: { fontSize: 9, color: C.muted },
+  dictionaryTagTxt: { fontSize: 9, color: C.muted },
   emptyBox: { alignItems: 'center', marginTop: 40, gap: 14, paddingHorizontal: 24 },
   emptyBtn: { borderWidth: 1, borderColor: C.ink, borderRadius: 8, paddingHorizontal: 20, paddingVertical: 10 },
   emptyBtnTxt: { fontSize: 14, color: C.ink, fontWeight: '600' },
@@ -2317,6 +2294,7 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
   // 评分后自动翻下一词。「忘了」不翻 —— 那个词当天还要再见,
   // 直接跳走会让人以为自己刚才标错了。
   const handleGrade = (grade) => {
+    if (!onGrade) return;
     onGrade(grade);
     if (hasNext && grade !== 'again') setTimeout(onNext, 120);
   };
@@ -2447,7 +2425,10 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
             </View>
           </View>
         )}
-        <View style={wd.section}>
+        {!hasCompleteExample(entry) && (
+          <Text style={wd.contentNote}>暂无例句</Text>
+        )}
+        {onGrade ? <View style={wd.section}>
           <View style={wd.gradeMeta}>
             <Text style={wd.gradeHint}>{nextHint}</Text>
             {!!record?.lapses && <Text style={wd.gradeHint}>忘过 {record.lapses} 次</Text>}
@@ -2468,7 +2449,11 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
               <Text style={wd.masterTxt}>这个词不用再问我了</Text>
             </TouchableOpacity>
           )}
-        </View>
+        </View> : (
+          <View style={wd.readonlyBox}>
+            <Text style={wd.readonlyTxt}>仅供查询，暂未开放学习</Text>
+          </View>
+        )}
       </ScrollView>
       <View style={wd.bottomNav}>
         <TouchableOpacity style={[wd.bottomNavBtn, !hasPrev && wd.bottomNavBtnDisabled]} onPress={hasPrev ? onPrev : undefined} activeOpacity={hasPrev ? 0.7 : 1}>
@@ -2520,6 +2505,9 @@ const wd = StyleSheet.create({
   wfChipZh: { fontSize: 11, color: C.muted },
   exRoma: { fontSize: 11, color: C.mutedLight, lineHeight: 16 },
   exZh: { fontSize: 12, color: C.muted },
+  contentNote: { marginHorizontal: 16, marginTop: 16, fontSize: 12, color: C.mutedLight },
+  readonlyBox: { marginHorizontal: 16, marginTop: 16, padding: 12, borderRadius: 8, backgroundColor: C.tag },
+  readonlyTxt: { fontSize: 13, color: C.muted, textAlign: 'center' },
   statusRow: { flexDirection: 'row', gap: 8 },
   statusChip: { flex: 1, borderRadius: 6, paddingVertical: 10, alignItems: 'center', borderWidth: 1, borderColor: C.border, backgroundColor: C.white },
   // 三档评分:两端着色、中间留白 —— 「一般」是最常被点的一档,

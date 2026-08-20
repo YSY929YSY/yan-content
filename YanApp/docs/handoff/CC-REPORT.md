@@ -1024,3 +1024,35 @@ publication 形状齐全,但整体校验失败:字节数 7754233,迁移后应为
 未 commit、未 push、未接 App、未开始 Commit 3。
 
 按新分工：**Commit 2 由产品负责人复核并提交；Commit 3 起由产品负责人实现，CC 只做一次短审核。**
+
+---
+
+# Commit 3 · publication 行为接入短审
+
+> 审核日期：2026-08-20
+> 结论：**通过，无阻塞项，可以 commit**
+
+## 44. 范围与五项核对
+
+本轮只改 `App.js`、接线测试与交接文档；内容 JSON、迁移器、`publication.ts` 均未变化。
+
+| 问题 | 结论 | 证据 |
+|---|---|---|
+| Q1 旧例句准入是否清除 | 通过 | `isDraftedWord` / `showDrafts` / `draftTag` / “起草” / “定稿”在 `App.js` 均 0 命中 |
+| Q2 评分入口是否同一守门 | 通过 | 搜索详情和词书详情均条件传 `onGrade`；词场成员跳转复用词书详情，不另设评分入口 |
+| Q3 dictionary-only + 旧 record | 通过 | 独立逻辑验证：无 record false，有 record true；可学习词无 record true |
+| Q4 新词入口 | 通过 | 两条主线、session、默认列表均使用 `canIntroduceWord` |
+| Q5 越界/夸大 | 通过 | 没有内容/迁移改动；兼容迁移文案没有称为真实性核验 |
+
+详情页评分区与“这个词不用再问我了”按钮整体位于 `onGrade ?` 分支；无 `onGrade` 时只显示只读说明。
+
+## 45. 篡改与复跑
+
+三项篡改均被新接线测试抓到：移除词书详情守门、移除主线 `canIntroduceWord` 交集、移除默认词书列表过滤。源码已还原。
+
+```text
+npm test          546 / 546
+npm run typecheck exit 0
+eslint App.js     0 errors
+git diff --check  exit 0
+```
