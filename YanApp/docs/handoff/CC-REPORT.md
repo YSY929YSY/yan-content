@@ -742,3 +742,285 @@ npm run typecheck → tsc --noEmit, exit 0，无输出
 ```
 
 **未开始 Commit 2。** 等待 Codex 再审。
+
+---
+
+# Commit 2 实现结果 · publication 兼容迁移
+
+> 完成日期：2026-08-20 · **未 commit、未 push、未接 App**
+>
+> 下一步：等待 Codex 独立复核。**未开始 Commit 3。**
+
+## 27. 开工前基线(§11-1)
+
+```
+git status --short -- yan-content/content.v2.json YanApp/assets/content.fallback.json
+  → 空(两份都干净)
+cmp -s …                      → 逐字节相同
+```
+
+| 项 | 实测 | 工单 §2 基线 | |
+|---|---|---|---|
+| 字节 | 6,743,897 | 6,743,897 | ✓ |
+| SHA-256 | `c7e24daf…0c06f67a` | `c7e24daf…0c06f67a` | ✓ |
+| `wordBank` | 8005 | 8005 | ✓ |
+| 已有 `publication` | 0 | 0 | ✓ |
+| `kanji_anchor` | 563 | 563 | ✓ |
+| 末尾换行 / 缩进 | 有 / 1 空格 | 同 | ✓ |
+| id 缺失 / 重复 | 0 / 0 | — | ✓ |
+
+另外**独立验证了工单 §6 的序列化前提**：
+`json.dumps(doc, ensure_ascii=False, indent=1) + "\n"` 对基线文件**逐字节 round-trip 成立**。
+这是整个 diff 预算的地基，不先验它，后面 40,588 这个数字没有意义。
+
+基线测试：`npm test` **531/531**、`npm run typecheck` **exit 0**。**无既有失败。**
+
+## 28. 实际修改文件(§11-2)
+
+| 文件 | 状态 |
+|---|---|
+| `tools/stamp-wordbank-publication.py` | 新增(迁移脚本) |
+| `yan-content/content.v2.json` | 修改(+40,588 / −0) |
+| `YanApp/assets/content.fallback.json` | 修改(+40,588 / −0) |
+| `YanApp/src/lib/__tests__/publication-content.test.mjs` | 新增(9 条契约测试) |
+| `YanApp/src/lib/__tests__/publication.test.mjs` | 仅删除「publication 仍为 0」的过期注释(§4 允许) |
+| `YanApp/docs/handoff/CC-REPORT.md` | 追加本节 |
+
+**未修改** `App.js`、`publication.ts`、任何 validator 或其他业务文件。
+
+## 29. dry-run / apply / check 统计(§11-3)
+
+三个模式统计一致：
+
+```
+dictionary_true                  8005
+learning_true                     563
+learning_false                   7442
+learning_without_dictionary         0
+dictionaryBasis_ok               8005
+learningBasis_ok                  563
+learning_false_with_basis           0
+learners_equal_anchors           True
+```
+
+最后一项是**集合相等**判断，不是计数相等 —— 数字撞对但集合不同的情况会被它抓到。
+
+## 30. 迁移后 SHA / 大小 / numstat(§11-4)
+
+| | 实测 | 工单 §6 预算 | |
+|---|---|---|---|
+| 输出大小 | **7,754,410** bytes | 7,754,410 | ✓ |
+| 输出 SHA-256 | **`86a4235d40830a6758883ab0cf67a6b7422a91adcaecce853868779eee3b3631`** | 同 | ✓ |
+| numstat | **40,588 / 0** ×2 文件 | 40,588 / 0 | ✓ |
+| 两份 `cmp` | 逐字节相同 | — | ✓ |
+| `git diff --check` | 空 | — | ✓ |
+
+**三项预算全部逐字符命中**，且**零删除行** —— 没有发生任何格式化重排。
+
+## 31. 非 publication 字段零变化的证明(§11-5)
+
+用两条互相独立的证据，不只靠一条：
+
+**证据一 · 投影哈希。** 把迁移前(`git show HEAD:`)与迁移后各自去掉 `publication` 再序列化：
+
+```
+迁移前投影 SHA  8d36ec078321bef6e5292e328a95704f
+迁移后投影 SHA  8d36ec078321bef6e5292e328a95704f     ← 完全相同
+```
+
+这一条同时锁住了**词序、字段顺序、顶层键、`_meta`** —— 任何一处漂移都会让字符串不同。
+脚本内部在写盘前也跑同一个投影比较，不过才生成字节。
+
+**证据二 · diff 内容审计。** 新增行里**非 publication 相关的行数 = 0**：
+
+```
+git diff -- yan-content/content.v2.json | grep '^+' | grep -v '^+++' \
+  | grep -vcE '"(publication|dictionary|learning|dictionaryBasis|learningBasis)"|^\+\s*[}],?\s*$'
+→ 0
+```
+
+另外单独核过：顶层键顺序不变、词序不变、`_meta.updated` 未改、
+**8005 个 `publication` 全部追加在词对象末尾**(`set(每个词的最后一个键) == {'publication'}`)。
+
+## 32. 失败前不写 / 重复 no-op / 单边中断(§11-6)
+
+⚠️ **失败路径全部在 `/tmp` 沙箱副本上验证**，不在真文件上制造损坏状态。
+每次都记录运行**前后**的 SHA，证明脚本一个字节都没动过：
+
+| 失败场景 | exit | 脚本是否动过文件 | 诊断输出 |
+|---|---:|---|---|
+| 两份输入不同(fallback `_meta` 被改) | 1 | **没有** | `不是基线 SHA(内容已被改动),且 0 条 publication` |
+| `wordBank` 少一条 | 1 | **没有** | `wordBank 是 8004 条,基线要求 8005` |
+| 有词结构坏(`reading` 全空白) | 1 | **没有** | 同上类 |
+| 已存在残缺 publication | 1 | **没有** | `部分迁移:1/8005 条有 publication —— 8004 条缺…;1 条不合法…` |
+
+四次均无 `.stamp-pub-*` / `.bak` / `.tmp` 残留。
+
+⚠️ **中途修过一次诊断措辞**：第一版对「内容被改过但根本没有 publication」的文件
+报的是「publication 不是合法迁移后状态」—— 会把人引到错的方向去查。
+失败路径是这个脚本最该说清楚的地方(它拒绝写文件时，操作者只有那一行字可看)，
+所以改成区分「不是基线 SHA」「缺 publication」「publication 不合法」三种原因。
+
+**重复 `--apply`**：识别为「两份都已是合法迁移后状态」，打印 no-op 并跳过写入，
+SHA 前后完全不变(`86a4235d…` → `86a4235d…`)。
+
+**单边中断态**(一份已迁移、一份仍是精确基线)：
+- dry-run 只报告，**运行前后 SHA 不变**；
+- `--apply` 用已验证的迁移后字节修复另一份，修复后两份一致且 `--check` 通过。
+
+**原子性**：同目录临时文件 → `fsync` → **回读比对** → `os.replace`。
+两份都写完后再逐一回读验证。跨文件系统拿不到真正的单事务，所以才需要上面那条中断态修复。
+
+## 33. 新增测试与篡改验证(§11-7)
+
+`publication-content.test.mjs` 9 条，对应工单 §7 的 9 条不变量。
+
+⚠️ **刻意不冻结 8005 / 563 / 7442**。那三个数字属于本次迁移验收(在 `--check` 和本报告里)，
+写进永久测试的话，以后内容一增长就会因为历史数字报错 ——
+**那时失败的原因和契约对不对无关，这种测试只会被人改掉，不会被人当真。**
+
+### 四个篡改（在真文件上做，每次立即还原）
+
+| 篡改 | `npm test` | `--check` |
+|---|---|---|
+| 删掉一条 publication | **539/1 挂** | **拒绝** |
+| `dictionary` 改成字符串 `'true'` | **538/2 挂** | **拒绝** |
+| 制造 learning-without-dictionary | **539/1 挂** | **拒绝** |
+| 删掉 `learningBasis` | **539/1 挂** | **拒绝** |
+
+**测试和脚本双双抓到** —— 两道闸互相独立，不是同一份逻辑写两遍。
+还原后 `--check` 通过，SHA 回到 `86a4235d…`。
+
+## 34. 验收命令与结果(§11-8)
+
+```
+python3 tools/stamp-wordbank-publication.py --check   → ✓ 通过
+cmp -s <两份>                                          → 逐字节相同
+git diff --check                                       → 空
+git diff --numstat                                     → 40588/0 ×2
+bash tools/check-content-release.sh                    → Blocker 0，exit 0
+npm test                                               → 540 / 540（基线 531，+9）
+npm run typecheck                                      → exit 0
+```
+
+`check-content-release.sh` 的 5 步全过，**Blocker 数 0**。基线在开工前已确认无既有失败，
+因此没有需要「前后完全相同的证据」来对照的无关问题。
+
+## 35. ⚠️ 兼容迁移不等于真实性核验(§11-9)
+
+**这次迁移没有核验任何一条内容。**
+
+- `legacy_dictionary_compat` 只表示「保留当前查询能力」——
+  依据是这 8005 条现在就能被搜索到，不是它们的释义、义项对齐或来源经过了检查；
+- `legacy_mainline_anchor` 只表示「保留当前 N5 主线候选」——
+  依据是这 563 条现在就在主线池里，同样不构成任何内容层面的背书。
+
+两者**都不得**映射成 `verified`、双源印证或人工核验。全库 `verified` 仍然只有 2 条，
+本次迁移**一条都没有增加**。
+
+后续来源流水线复核这些词时，必须**另外生成 evidence**，不能拿这两个 basis 冒充；
+发现明确错误、授权问题或结构失败时，对应的 Dictionary publication 应当被关闭并进入异常清单。
+
+## 36. 停止声明(§11-10)
+
+| | |
+|---|---|
+| 是否接入 App | **否** —— `App.js` 未触碰，selector 仍零调用点，界面与 SRS 行为无变化 |
+| 是否开始 Commit 3 | **否** |
+| 是否 commit | **否** —— 停在未提交状态 |
+| 是否 push | **否** |
+| 是否执行内容发布 | **否** —— 只跑了只读的 `check-content-release.sh`，未跑 `push-content.sh` |
+| 是否新增 verified / evidence | **否** |
+| 临时文件残留 | 无(已确认无 `.stamp-pub-*` / `.bak` / `.tmp`) |
+
+等待 Codex 独立复核。
+
+---
+
+# Commit 2 修订 · 回应 C5–C7
+
+> 修订日期：2026-08-20 · **只改脚本，两份 JSON 零变化**
+>
+> 下一步：等待 Codex 复核并提交。**Commit 3 起由产品负责人实现，CC 只做一次短审核。**
+
+## 37. 三条都先复现，再改
+
+| | 复现结果 |
+|---|---|
+| **C5** 两份都删掉同一个非 anchor 词 | 8004 条，`--check` **exit 0** ✗ |
+| **C6** 一份基线 + 一份 `_meta` 改坏但 publication 全合法 | 坏文件被判 migrated，**覆盖了好文件**，并报「✓ 通过」✗ |
+| **C7** 正常 apply | 循环内 `mkstemp → 写 → replace`，第一份先落盘 ✗ |
+
+**C6 是三条里最危险的** —— 它不是漏检，是**主动把坏内容复制到好文件上**，还给出通过信号。
+
+## 38. C5 · 唯一的迁移后验证入口
+
+新增 `verify_migrated(raw)`，锁死整份产物而不只是 publication 形状：
+
+| 检查 | 值 |
+|---|---|
+| 字节数 | `7,754,410` |
+| SHA-256 | `86a4235d…3631` |
+| `wordBank` / anchor | 8005 / 563 |
+| id | 完整、唯一 |
+| 每条结构 | 满足 dictionary shape |
+| publication | 8 项精确统计 + 集合约束 |
+| **投影 SHA** | `8d36ec07…c01c3` |
+
+最后一项是关键：**它锁的是「publication 之外的一切」** —— 词序、字段顺序、顶层键、`_meta`，
+任何一处漂移它都会变。只数 publication 形状的校验挡不住 C5/C6 那两类。
+
+`--check`、`classify()` 判 migrated、单边修复取源 **三处全部走这一个入口**，
+不再各写一份会漂的弱校验。它返回 `(ok, reason, stats)` 而不打印/退出，
+所以同一份逻辑既能当校验又能当分类判据。
+
+## 39. C6 · 单边修复的来源必须完整校验过
+
+`classify()` 现在在 publication 形状全过之后**再走一次 `verify_migrated`**：
+
+```
+publication 形状齐全,但整体校验失败:字节数 7754233,迁移后应为 7754410
+```
+
+所以「publication 合法但内容已漂移」的文件被判 `other` → `exit 1` → 两份零写入，
+**不可能再成为修复源**。
+
+## 40. C7 · 两阶段 prepare / commit
+
+拆成 `prepare()`（写临时文件 + `fsync` + 回读，**不替换**）和 `write_all_atomic()`
+（全部准备成功后再依次 `os.replace`）。准备阶段任意失败：清理所有临时文件，两个目标零变化。
+
+原写法的问题不是「不够原子」，而是**它制造了一个本可以避免的中断态**：
+第二份准备失败时第一份已经被换掉了。现在窗口从「整个生成+写入」缩到「两次 `replace` 之间」，
+剩下那一段仍由单边恢复兜底（跨文件 `replace` 拿不到真正的单事务）。
+
+## 41. 修订验收（5 条全过）
+
+⚠️ 前三条在 `/tmp/c567` 副本上做，不在真文件上制造损坏。
+
+| # | 场景 | 结果 |
+|---|---|---|
+| 1 | 两份都删同一个非 anchor 词 | `--check` **exit 1**，`✗ 字节数 7753625,迁移后应为 7754410` |
+| 2 | 一份精确基线 + 一份 `_meta` 坏 | dry-run 与 `--apply` **均 exit 1**；基线那份 **污染 0 处、SHA 不变** |
+| 3 | 第二个临时文件准备失败（目录设只读） | **第一份目标 SHA 未变**、第二份未变、**临时文件残留 0 个** |
+| 4 | 真文件 `--check` | 通过；两份 SHA 仍是 `86a4235d…`；**`git diff --numstat` 仍是 40588/0** |
+| 5 | 测试 / typecheck / release audit | `npm test` **540/540**、typecheck **exit 0**、`check-content-release.sh` **Blocker 0, exit 0** |
+
+第 4 条同时满足工单「不要改 JSON；若修订导致 JSON 出现 diff 变化，立即停止」——
+**JSON 一个字节都没动。**
+
+## 42. 本轮变更
+
+| 文件 | 变更 |
+|---|---|
+| `tools/stamp-wordbank-publication.py` | 新增 `verify_migrated` / `prepare` / `write_all_atomic`；删除旧 `write_atomic`（已确认零残留）；`classify` 与 `cmd_check` 改用统一入口 |
+| 两份 JSON | **零变化**（SHA 与 numstat 均未变） |
+| 测试文件 | 未改 |
+| `App.js` | 未触碰 |
+| `CC-REPORT.md` | 追加 §37–§42 |
+
+## 43. 停止声明
+
+未 commit、未 push、未接 App、未开始 Commit 3。
+
+按新分工：**Commit 2 由产品负责人复核并提交；Commit 3 起由产品负责人实现，CC 只做一次短审核。**

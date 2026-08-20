@@ -333,3 +333,39 @@ publication.test.mjs        215 行
 - C4：修订报告给出的 218/215 行已复现，并明确新增的是领域源文件与测试、只是零调用点；不再把空的普通 `git diff --stat` 当作 untracked 文件不存在的证据。
 
 Codex 另以直接调用覆盖 13 个对抗边界，结果全部符合约定；`App.js`、fallback 内容包和既有已跟踪源码仍无 diff，未发现遗留备份文件。
+
+## 8. Commit 2 第一轮独立复核（2026-08-20）
+
+结论：**数据结果正确，迁移脚本不通过；Commit 2 暂不提交。**
+
+已独立复现通过的部分：两份内容包逐字节相同；单份 SHA `86a4235d…3631`、大小 7,754,410、numstat 40,588/0；publication 统计 8005/563/7442/0；去 publication 后投影与基线完全相同；`npm test` 540/540、typecheck 0、官方 release audit Blocker 0。
+
+### C5 · [P1] `--check` 会接受缺词的“完整迁移”
+
+删除同一个非 anchor 词并把两份文件保持一致后，wordBank 变成 8004；所有剩余 publication 仍合法。实测 `--check` exit 0，并打印通过。原因是 `cmd_check()` 用 `len(wb)` 自洽比较，却没和本次迁移的 `EXPECT_WORDS=8005`、输出 SHA 或基线投影比较。
+
+### C6 · [P1] 单边恢复会把非-publication 损坏复制到好文件
+
+把一份迁移后文件的 `_meta.note` 改掉、保留 publication 全部合法，再配一份精确基线。实测 `classify()` 把坏文件判成 migrated，`--apply` 随后用它覆盖基线文件并 exit 0。单边恢复来源必须是精确通过完整迁移后验证的字节，不能只看 publication。
+
+### C7 · [P2] 正常 apply 没有先准备完两个临时文件
+
+工单要求两个临时文件均写入、fsync、回读成功后才替换目标。当前 `for p in TARGETS: write_atomic(p, out)` 会先替换第一份，再开始准备第二份。它有单边恢复能力，因此不是不可恢复的数据损失，但准备阶段失败本可做到目标零变化，当前实现没有兑现。
+
+最小修订与验收矩阵已写入 `ACTIVE.md`。本轮不要求重做正确的 JSON，也不扩大到 Commit 3。
+
+## 9. Commit 2 第二轮复核结论（2026-08-20）
+
+结论：**通过。** C5–C7 均已关闭，Commit 2 可以提交。
+
+Codex 独立复现：
+
+- 删除同一个非 anchor 词：`--check` exit 1，明确报迁移后字节预算不符；
+- 一份精确基线 + 一份 `_meta` 漂移但 publication 合法：`--apply` exit 1，基线字节完全不变，坏内容未复制；
+- 模拟第二份临时文件 prepare 失败：两个目标均保持原字节，临时文件为 0；
+- 真文件 `--check` 通过，单份 SHA `86a4235d…3631`，两份逐字节一致，内容 diff 仍为 40,588 additions / 0 deletions；
+- `npm test` 540/540，typecheck exit 0。官方 release audit 已独立运行，Blocker 0。
+
+`verify_migrated()` 现为 `--check`、`classify(migrated)` 和单边恢复来源的唯一完整验证入口，锁定字节、SHA、词数、anchor、id、结构、publication 统计与非-publication 投影。数据本身没有因 C5–C7 修订而改变。
+
+非阻塞记录：若第二个 `os.replace` 本身失败，尚未 replace 的临时文件可能残留；它不会复制未经验证的数据，且会留下“完整 migrated + baseline”的可恢复状态。对于本次一次性本地迁移，接受该剩余操作系统级故障窗口；未来复用双文件写入器时补 replace 阶段清理。

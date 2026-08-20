@@ -1,31 +1,23 @@
-# 当前唯一任务 · P0-1 Commit 2 publication 数据迁移
+# 当前状态 · P0-1 Commit 2 已通过独立复核
 
-> 状态：已授权 CC 按工单实现
+> 状态：完成；当前无授权中的实现任务
 >
-> 预计实现者：CC
+> Commit 2 实现：CC
 >
 > 独立复核：Codex
 >
 > 更新日期：2026-08-20
 
-Commit 1 已通过并提交。Commit 2 的完整任务书在：
+Commit 2 已通过第二轮独立复核：publication 迁移脚本、两份内容包、内容契约测试与报告均可提交。数据迁移仍是**兼容迁移，不等于真实性核验**；没有接入 App，也没有开始 Commit 3。
 
-- `docs/handoff/TICKET-publication-migration.md`
+下一阶段分工已确认：
 
-产品负责人已确认 schema 细节。CC 可以严格按工单修改允许范围内的脚本、两份内容包与测试；完成后停在未提交状态，等待 Codex 独立复核。
+- Codex 实现 Commit 3（主要在 `App.js`、详情页与 UI）；
+- CC 做一次短审，只读当前工单、聚焦 diff、验收输出与高风险入口；
+- 同一文件同一时间仍只允许一个实现者。
 
-CC 若要预读，只读：
+当前停止。Commit 3 必须另写独立工单后才可开始。
 
-1. 本文件；
-2. `TICKET-publication-migration.md`；
-3. 工单直接点名的现有代码。
+## 非阻塞后续硬化
 
-不需要重读路线图、旧 `CC-REPORT`、旧 `CODEX-REVIEW`、JMdict、声调、UI、手账或世界相关文档。
-
-## 已确认的 schema 细节
-
-`learning: false` 时不写 `learningBasis`，也不写 `null`；只有 563 个 `learning: true` 的兼容主线词携带 `learningBasis: "legacy_mainline_anchor"`。
-
-理由：basis 是正向准入依据；尚未准入没有证据依据。这样也避免把 `null` 当成一个需要解释的第三种业务状态。
-
-这条已由产品负责人于 2026-08-20 确认，不再是待决定项。
+`write_all_atomic()` 已保证“两个临时文件都准备成功后才替换第一个目标”。极端情况下若第二个 `os.replace` 本身失败，脚本可留下第二个临时文件；内容状态会是“精确 migrated + baseline”，可由经过完整 SHA/投影验证的单边恢复收敛，不会复制未验证内容。未来若继续复用这类双文件写入器，再补 replace 阶段异常清理；不阻塞这次一次性迁移提交。

@@ -3,9 +3,10 @@
 // 守的是一种「不报错但越权」的失败:一个还没核验的词悄悄进了正式学习,
 // 或者反过来 —— 收紧规则把用户已经学过的词剥夺掉。
 //
-// ⚠️ 本轮(Commit 1)**没有任何调用点**,所以这里全部是纯函数测试。
-// 特意**不写**「主线池交集非空」那种断言:内容包里 publication 还是 0 条,
-// 那条断言现在必然失败,而它失败的原因和这些函数对不对无关。
+// ⚠️ 这个文件只测**纯函数**,不读内容包。
+// 内容包侧的契约(两份一致、布尔真假、Learning/Dictionary 矛盾态、
+// selector 与数据一致)在 publication-content.test.mjs 里,两者刻意分开:
+// 纯函数的对错不该因为内容包换了一代而变红。
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
