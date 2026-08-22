@@ -1667,3 +1667,46 @@ known_differences:
 - 没有把所有 `high-frequency`/“高频”相关的非词书旅行文案顺手重写；本轮只处理词书描述范围。
 - 没有拆 `App.js`，没有重做排序算法结构、SRS、units、publication 或 content schema，也没有改变裸的 `词-读音` 进度键。
 - A4 没有把未锁定 artifact 的 registry 条目伪装成 eligible；三条新增来源如实保留为 incomplete，后续要补工件与许可快照再谈 release gate。
+
+## PLAN v2 第二批（commit 7–10）
+
+### 内容 commit 与统计输出对比
+
+每一组均为 `node scripts/content-stats.mjs` 的完整字段对比；未列字段表示前后逐项相同。基线就是第一批末尾记录的 fallback 实测输出：`wordBank.total=8005`、`publication.learning=563`、`tags.scene.effective.convenience=23`、`jmdictSeq=6683/8005`、`kanji_anchor.complete=19/563`，其余 level/status/coverage/freq/pitch/daily/其他场景计数均保持原值。
+
+| commit | before → after | 结论 |
+|---|---|---|
+| 7 `556e96a` | `wordBank 8005 → 8005`；`jmdictSeq 6683/8005 → 6683/8005`；`kanji_anchor 19/563 → 19/563`；`publication.learning 563 → 563` | 所有统计不变，只改一条深卡文案 |
+| 8 `9171af3` | `jmdictSeq 6683/8005 (83.5%) → 7186/8005 (89.8%)`；`kanji_anchor.complete 19/563 → 518/563`；missing `jmdictSeq 544 → 41`；`publication.learning 563 → 563` | 其余字段逐项不变 |
+| 9 `9d4e92b` | `convenience 23 → 35`；`wordBank 8005 → 8005`；`jmdictSeq 7186/8005 → 7186/8005`；`publication.learning 563 → 563` | 其余字段逐项不变 |
+| release `8160b00` | `version 2.1 → 2.2`；统计字段全部不变；`publication.learning 563 → 563` | 只递增一次版本并追加一次 changelog |
+
+首次输出的完整基线仍以本文件第一批的 `content-stats` 原文为准；本批每个 commit 的 before/after 原始日志在执行过程中分别核对，核心差异如上，且没有用改数据去迁就 plan。持续存在的已知差异为 `_meta.note=8026` 对实测 `wordBank.total=8005`（21 条），以及 pitch staging `agree=0` 实测 20 对旧 commit 文案 15（差 5）。
+
+### W-T2 三类报告
+
+目标为 544 个缺 `jmdictSeq` 的 `kanji_anchor`。join 严格使用 `词面+读音`，不是词面单独：自动通过 503、冲突 0、未命中 41，总数 544。自动通过的 503 条写入内容包；0 条冲突和 41 条未命中分别留在：
+
+- `staging/jmdict-join-auto-pass.json`：503
+- `staging/jmdict-join-conflicts.json`：0
+- `staging/jmdict-join-unmatched.json`：41
+
+### L-T1 最终便利店选择
+
+最终 `convenience` 有 35 条：
+
+`～円、～屋、いくら、要る、入れる、売る、お金、お弁当、買い物、買う、かかる、喫茶店、ごみ、コンビニ、財布、高い、デパート、部屋、便利、ホテル、丸い/円い、店、見せる、八百屋、安い、探す、店員、払う、レジ、レシート、カード、現金、充電、袋、ポイント`。
+
+保留原有 23 条，因为它们已有 `daily` 且与价格、商品、店铺、支付等便利店任务直接相关；新增 12 条为 `店員、レジ、袋、払う、現金、カード、ポイント、探す、お弁当、入れる、要る、見せる`，理由是它们能覆盖收银、袋子、支付、找货和店员互动。没有用场景句子子串抽词；冲突和未命中未被“看起来最像”的词替代。10 条短句与 6 条 mini-dialogue 均只绑定真实存在的 wordBank ID，并由 validator 检查 ID。
+
+### W-T3/W-T4 备料
+
+`staging/convenience-meaning-review.json` 并列 35 条现有 `meaning_zh`、JMdict 英文 gloss、jmdictSeq 与疑点；只标疑点，不改释义。`staging/convenience-wordfield-candidates.json` 提供 8 条 review-only 候选；`node staging/audit-convenience-wordfield-candidates.mjs` 输出 `candidates=8, errors=[]`。这些产物不写入内容包。
+
+### 发布、未做事项与待回答分叉
+
+发布前审计 Blocker=0，fallback 与 sibling `yan-content/content.v2.json` 已同步；但 `bash scripts/push-content.sh` 对 `git@github.com:YSY929YSY/yan-content.git` 的 `origin/main` 推送被安全审批拦截，故本报告不声称远端发布完成，也未声称完成真机拉新包验证。
+
+本批想改但忍住的地方：没有处理 41 个 W-T2 未命中、没有处理冲突（本次为 0）、没有改 `assets/content.fallback.json` 的其他释义/场景数据，没有补全全部 wordField，没有改 publication 或进度键，没有重构 UI/业务文件。
+
+项目所有者需要回答但本批不解决的分叉：便利店 8 个核心词当前不可学时，是（a）继续只作为场景句 `core_vocab` 引用但不进 SRS，（b）另开 publication 例外让它们可学习，还是（c）先补齐证据/例句后再进入 Learning；本批不替项目所有者决定，也不实现其中任何方案。
