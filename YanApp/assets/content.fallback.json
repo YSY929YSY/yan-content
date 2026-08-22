@@ -15237,6 +15237,7 @@
    "exampleJp": "明日、友だちに会います。",
    "exampleZh": "明天我要见朋友。",
    "id": "n5_au",
+   "jmdictSeq": "1198180",
    "levels": [
     "N5"
    ],
@@ -15283,6 +15284,7 @@
    "exampleJp": "信号が青になったら渡ってください。",
    "exampleZh": "等信号变绿再过马路。",
    "id": "n5_ao",
+   "jmdictSeq": "1381380",
    "levels": [
     "N5"
    ],
@@ -15330,6 +15332,7 @@
    "exampleJp": "青い空です。",
    "exampleZh": "是蓝色的天空。",
    "id": "n5_aoi",
+   "jmdictSeq": "1381390",
    "levels": [
     "N5"
    ],
@@ -15377,6 +15380,7 @@
    "exampleJp": "信号が赤です。止まってください。",
    "exampleZh": "红灯，请停下。",
    "id": "n5_aka",
+   "jmdictSeq": "2013900",
    "levels": [
     "N5"
    ],
@@ -15424,6 +15428,7 @@
    "exampleJp": "赤い花です。",
    "exampleZh": "是红色的花。",
    "id": "n5_akai",
+   "jmdictSeq": "1383240",
    "levels": [
     "N5"
    ],
@@ -15525,6 +15530,7 @@
    "exampleJp": "秋になると、葉が赤くなります。",
    "exampleZh": "到了秋天，树叶变红。",
    "id": "n5_aki",
+   "jmdictSeq": "1332650",
    "levels": [
     "N5"
    ],
@@ -15571,6 +15577,7 @@
    "exampleJp": "ドアが自動で開きます。",
    "exampleZh": "门会自动打开。",
    "id": "n5_aku",
+   "jmdictSeq": "1586270",
    "levels": [
     "N5"
    ],
@@ -15617,6 +15624,7 @@
    "exampleJp": "窓を開けてもいいですか。",
    "exampleZh": "可以开窗吗？",
    "id": "n5_akeru",
+   "jmdictSeq": "1202450",
    "levels": [
     "N5"
    ],
@@ -15664,6 +15672,7 @@
    "exampleJp": "荷物を棚の上に上げてください。",
    "exampleZh": "请把行李放到架子上。",
    "id": "n5_ageru",
+   "jmdictSeq": "1352320",
    "levels": [
     "N5"
    ],
@@ -15710,6 +15719,7 @@
    "exampleJp": "朝、コーヒーを飲みます。",
    "exampleZh": "早上喝咖啡。",
    "id": "n5_asa",
+   "jmdictSeq": "1428280",
    "levels": [
     "N5"
    ],
@@ -15757,6 +15767,7 @@
    "exampleJp": "朝御飯はパンを食べました。",
    "exampleZh": "早饭吃了面包。",
    "id": "n5_asagohan",
+   "jmdictSeq": "1586330",
    "levels": [
     "N5"
    ],
@@ -15901,6 +15912,7 @@
    "exampleJp": "明日、何時に会いますか。",
    "exampleZh": "明天几点见面？",
    "id": "n5_ashita",
+   "jmdictSeq": "1584660",
    "levels": [
     "N5"
    ],
@@ -15995,6 +16007,7 @@
    "exampleJp": "子供たちが公園で遊んでいます。",
    "exampleZh": "孩子们在公园玩。",
    "id": "n5_asobu",
+   "jmdictSeq": "1542160",
    "levels": [
     "N5"
    ],
@@ -16041,6 +16054,7 @@
    "exampleJp": "今日は暖かいですね。",
    "exampleZh": "今天真暖和啊。",
    "id": "n5_atatakai",
+   "jmdictSeq": "1586420",
    "levels": [
     "N5"
    ],
@@ -16087,6 +16101,7 @@
    "exampleJp": "頭が痛いので、薬を飲みました。",
    "exampleZh": "头痛，所以吃了药。",
    "id": "n5_atama",
+   "jmdictSeq": "1582310",
    "levels": [
     "N5"
    ],
@@ -16138,6 +16153,7 @@
    "exampleJp": "新しいスマホを買いました。",
    "exampleZh": "买了新手机。",
    "id": "n5_atarashii",
+   "jmdictSeq": "1361490",
    "levels": [
     "N5"
    ],
@@ -16232,6 +16248,7 @@
    "exampleJp": "今日はとても暑いですね。",
    "exampleZh": "今天真的好热啊。",
    "id": "n5_atsui",
+   "jmdictSeq": "1343460",
    "levels": [
     "N5"
    ],
@@ -16279,6 +16296,7 @@
    "exampleJp": "このスープは熱いので気をつけて。",
    "exampleZh": "这个汤很烫，小心。",
    "id": "n5_atsui_2",
+   "jmdictSeq": "1467720",
    "levels": [
     "N5"
    ],
@@ -16326,6 +16344,7 @@
    "exampleJp": "この本はとても厚いです。",
    "exampleZh": "这本书非常厚。",
    "id": "n5_atsui_3",
+   "jmdictSeq": "1275320",
    "levels": [
     "N5"
    ],
@@ -16421,6 +16440,7 @@
    "exampleJp": "後で電話します。",
    "exampleZh": "稍后给你打电话。",
    "id": "n5_ato",
+   "jmdictSeq": "1269320",
    "levels": [
     "N5"
    ],
@@ -16511,6 +16531,7 @@
    "exampleJp": "兄は東京に住んでいます。",
    "exampleZh": "哥哥住在东京。",
    "id": "n5_ani",
+   "jmdictSeq": "1249900",
    "levels": [
     "N5"
    ],
@@ -16558,6 +16579,7 @@
    "exampleJp": "姉は先生です。",
    "exampleZh": "姐姐是老师。",
    "id": "n5_ane",
+   "jmdictSeq": "1307630",
    "levels": [
     "N5"
    ],
@@ -16753,6 +16775,7 @@
    "exampleJp": "あそこは危ないので気をつけて。",
    "exampleZh": "那里危险，小心。",
    "id": "n5_abunai",
+   "jmdictSeq": "1218380",
    "levels": [
     "N5"
    ],
@@ -16804,6 +16827,7 @@
    "exampleJp": "このケーキはとても甘いです。",
    "exampleZh": "这个蛋糕非常甜。",
    "id": "n5_amai",
+   "jmdictSeq": "1213400",
    "levels": [
     "N5"
    ],
@@ -16903,6 +16927,7 @@
    "exampleJp": "今日は雨が降っています。",
    "exampleZh": "今天在下雨。",
    "id": "n5_ame",
+   "jmdictSeq": "1171900",
    "levels": [
     "N5"
    ],
@@ -16951,6 +16976,7 @@
    "exampleJp": "のどが痛いので、飴をなめています。",
    "exampleZh": "嗓子痛，在含糖。",
    "id": "n5_ame_2",
+   "jmdictSeq": "1153520",
    "levels": [
     "N5"
    ],
@@ -16998,6 +17024,7 @@
    "exampleJp": "食事の前に手を洗ってください。",
    "exampleZh": "饭前请洗手。",
    "id": "n5_arau",
+   "jmdictSeq": "1390930",
    "levels": [
     "N5"
    ],
@@ -17092,6 +17119,7 @@
    "exampleJp": "財布にお金があります。",
    "exampleZh": "钱包里有钱。",
    "id": "n5_aru_2",
+   "jmdictSeq": "1296400",
    "levels": [
     "N5"
    ],
@@ -17139,6 +17167,7 @@
    "exampleJp": "駅まで歩いて十分かかります。",
    "exampleZh": "走路到车站要十分钟。",
    "id": "n5_aruku",
+   "jmdictSeq": "1514320",
    "levels": [
     "N5"
    ],
@@ -17314,6 +17343,7 @@
    "exampleJp": "すみません、もう一度言ってください。",
    "exampleZh": "不好意思，请再说一遍。",
    "id": "n5_iu",
+   "jmdictSeq": "1587040",
    "levels": [
     "N5"
    ],
@@ -17360,6 +17390,7 @@
    "exampleJp": "早く家に帰りたいです。",
    "exampleZh": "想早点回家。",
    "id": "n5_ie",
+   "jmdictSeq": "1191730",
    "levels": [
     "N5"
    ],
@@ -17587,6 +17618,7 @@
    "exampleJp": "公園の池で鯉を見ました。",
    "exampleZh": "在公园的池塘看到了锦鲤。",
    "id": "n5_ike",
+   "jmdictSeq": "1421700",
    "levels": [
     "N5"
    ],
@@ -17634,6 +17666,7 @@
    "exampleJp": "風邪をひいたので医者に行きました。",
    "exampleZh": "感冒了，去看了医生。",
    "id": "n5_isha",
+   "jmdictSeq": "1159980",
    "levels": [
     "N5"
    ],
@@ -17729,6 +17762,7 @@
    "exampleJp": "今週はとても忙しいです。",
    "exampleZh": "这周非常忙。",
    "id": "n5_isogashii",
+   "jmdictSeq": "1519290",
    "levels": [
     "N5"
    ],
@@ -17776,6 +17810,7 @@
    "exampleJp": "お腹が痛いです。",
    "exampleZh": "肚子痛。",
    "id": "n5_itai",
+   "jmdictSeq": "1432680",
    "levels": [
     "N5"
    ],
@@ -17822,6 +17857,7 @@
    "exampleJp": "もう一度言ってください。",
    "exampleZh": "请再说一遍。",
    "id": "n5_ichi",
+   "jmdictSeq": "1160790",
    "levels": [
     "N5"
    ],
@@ -17868,6 +17904,7 @@
    "exampleJp": "一日に何回食べますか。",
    "exampleZh": "一天吃几次？",
    "id": "n5_ichinichi",
+   "jmdictSeq": "1576260",
    "levels": [
     "N5"
    ],
@@ -18012,6 +18049,7 @@
    "exampleJp": "五日に出発します。",
    "exampleZh": "五号出发。",
    "id": "n5_itsuka",
+   "jmdictSeq": "1268570",
    "levels": [
     "N5"
    ],
@@ -18064,6 +18102,7 @@
    "exampleJp": "一緒に写真を撮りましょう。",
    "exampleZh": "一起拍张照吧。",
    "id": "n5_issho",
+   "jmdictSeq": "1163400",
    "levels": [
     "N5"
    ],
@@ -18111,6 +18150,7 @@
    "exampleJp": "みかんを五つください。",
    "exampleZh": "请给我五个橘子。",
    "id": "n5_itsutsu",
+   "jmdictSeq": "1268070",
    "levels": [
     "N5"
    ],
@@ -18194,6 +18234,7 @@
    "exampleJp": "この犬はとてもかわいいですね。",
    "exampleZh": "这只狗真可爱啊。",
    "id": "n5_inu",
+   "jmdictSeq": "1258330",
    "levels": [
     "N5"
    ],
@@ -18241,6 +18282,7 @@
    "exampleJp": "今、何時ですか。",
    "exampleZh": "现在几点？",
    "id": "n5_ima",
+   "jmdictSeq": "1288850",
    "levels": [
     "N5"
    ],
@@ -18287,6 +18329,7 @@
    "exampleJp": "この言葉の意味がわかりません。",
    "exampleZh": "不懂这个词的意思。",
    "id": "n5_imi",
+   "jmdictSeq": "1156800",
    "levels": [
     "N5"
    ],
@@ -18334,6 +18377,7 @@
    "exampleJp": "妹は高校生です。",
    "exampleZh": "妹妹是高中生。",
    "id": "n5_imouto",
+   "jmdictSeq": "1524590",
    "levels": [
     "N5"
    ],
@@ -18381,6 +18425,7 @@
    "exampleJp": "辛い食べ物が嫌いです。",
    "exampleZh": "讨厌辣的东西。",
    "id": "n5_iya",
+   "jmdictSeq": "1587610",
    "levels": [
     "N5"
    ],
@@ -18428,6 +18473,7 @@
    "exampleJp": "入口でチケットを見せてください。",
    "exampleZh": "请在入口处出示票据。",
    "id": "n5_iriguchi",
+   "jmdictSeq": "1582820",
    "levels": [
     "N5"
    ],
@@ -18475,6 +18521,7 @@
    "exampleJp": "部屋に誰かいますか。",
    "exampleZh": "房间里有人吗？",
    "id": "n5_iru",
+   "jmdictSeq": "1577980",
    "levels": [
     "N5"
    ],
@@ -18522,6 +18569,7 @@
    "exampleJp": "パスポートが要りますか。",
    "exampleZh": "需要护照吗？",
    "id": "n5_iru_2",
+   "jmdictSeq": "1546640",
    "levels": [
     "N5"
    ],
@@ -18569,6 +18617,7 @@
    "exampleJp": "バッグに荷物を入れてください。",
    "exampleZh": "请把行李放进包里。",
    "id": "n5_ireru",
+   "jmdictSeq": "1465610",
    "levels": [
     "N5"
    ],
@@ -18615,6 +18664,7 @@
    "exampleJp": "何色が好きですか。",
    "exampleZh": "你喜欢什么颜色？",
    "id": "n5_iro",
+   "jmdictSeq": "1357600",
    "levels": [
     "N5"
    ],
@@ -18711,6 +18761,7 @@
    "exampleJp": "荷物を棚の上に置いてください。",
    "exampleZh": "请把行李放到架子上面。",
    "id": "n5_ue",
+   "jmdictSeq": "1352130",
    "levels": [
     "N5"
    ],
@@ -18763,6 +18814,7 @@
    "exampleJp": "後ろを向いてください。",
    "exampleZh": "请转过身去。",
    "id": "n5_ushiro",
+   "jmdictSeq": "1269410",
    "levels": [
     "N5"
    ],
@@ -18810,6 +18862,7 @@
    "exampleJp": "このスープは味が薄いです。",
    "exampleZh": "这个汤味道很淡。",
    "id": "n5_usui",
+   "jmdictSeq": "1475480",
    "levels": [
     "N5"
    ],
@@ -18861,6 +18914,7 @@
    "exampleJp": "この歌が大好きです。",
    "exampleZh": "非常喜欢这首歌。",
    "id": "n5_uta",
+   "jmdictSeq": "1193180",
    "levels": [
     "N5"
    ],
@@ -18907,6 +18961,7 @@
    "exampleJp": "みんなで歌を歌いましょう。",
    "exampleZh": "大家一起唱歌吧。",
    "id": "n5_utau",
+   "jmdictSeq": "1588120",
    "levels": [
     "N5"
    ],
@@ -18997,6 +19052,7 @@
    "exampleJp": "私は東京で生まれました。",
    "exampleZh": "我在东京出生。",
    "id": "n5_umareru",
+   "jmdictSeq": "1378690",
    "levels": [
     "N5"
    ],
@@ -19043,6 +19099,7 @@
    "exampleJp": "夏は海で泳ぎました。",
    "exampleZh": "夏天在海里游了泳。",
    "id": "n5_umi",
+   "jmdictSeq": "1201190",
    "levels": [
     "N5"
    ],
@@ -19091,6 +19148,7 @@
    "exampleJp": "このお店では何を売っていますか。",
    "exampleZh": "这家店卖什么？",
    "id": "n5_uru",
+   "jmdictSeq": "1473950",
    "levels": [
     "N5"
    ],
@@ -19182,6 +19240,7 @@
    "exampleJp": "上着を持ってきました。",
    "exampleZh": "带了外套。",
    "id": "n5_uwagi",
+   "jmdictSeq": "1580340",
    "levels": [
     "N5"
    ],
@@ -19229,6 +19288,7 @@
    "exampleJp": "この絵はとても上手ですね。",
    "exampleZh": "这幅画画得真好啊。",
    "id": "n5_e",
+   "jmdictSeq": "1202270",
    "levels": [
     "N5"
    ],
@@ -19275,6 +19335,7 @@
    "exampleJp": "昨日、映画を見に行きました。",
    "exampleZh": "昨天去看了电影。",
    "id": "n5_eiga",
+   "jmdictSeq": "1173720",
    "levels": [
     "N5"
    ],
@@ -19327,6 +19388,7 @@
    "exampleJp": "映画館は駅の近くにあります。",
    "exampleZh": "电影院在车站附近。",
    "id": "n5_eigakan",
+   "jmdictSeq": "1173750",
    "levels": [
     "N5"
    ],
@@ -19373,6 +19435,7 @@
    "exampleJp": "英語が少し話せます。",
    "exampleZh": "会说一点英语。",
    "id": "n5_eigo",
+   "jmdictSeq": "1174420",
    "levels": [
     "N5"
    ],
@@ -19469,6 +19532,7 @@
    "exampleJp": "この電車はどの駅に止まりますか。",
    "exampleZh": "这列电车停哪些站？",
    "id": "n5_eki",
+   "jmdictSeq": "1175140",
    "levels": [
     "N5"
    ],
@@ -19567,6 +19631,7 @@
    "exampleJp": "鉛筆で書いてもいいですか。",
    "exampleZh": "可以用铅笔写吗？",
    "id": "n5_enpitsu",
+   "jmdictSeq": "1178590",
    "levels": [
     "N5"
    ],
@@ -19705,6 +19770,7 @@
    "exampleJp": "今日は人が多いですね。",
    "exampleZh": "今天人真多啊。",
    "id": "n5_ooi",
+   "jmdictSeq": "1407460",
    "levels": [
     "N5"
    ],
@@ -19756,6 +19822,7 @@
    "exampleJp": "もう少し大きい声で話してください。",
    "exampleZh": "请说得再大声一点。",
    "id": "n5_ookii",
+   "jmdictSeq": "1588880",
    "levels": [
     "N5"
    ],
@@ -19803,6 +19870,7 @@
    "exampleJp": "大きな荷物は預けてください。",
    "exampleZh": "大件行李请寄存。",
    "id": "n5_ookina",
+   "jmdictSeq": "1412890",
    "levels": [
     "N5"
    ],
@@ -19850,6 +19918,7 @@
    "exampleJp": "駅に大勢の人がいました。",
    "exampleZh": "车站里有很多人。",
    "id": "n5_oozei",
+   "jmdictSeq": "1414220",
    "levels": [
     "N5"
    ],
@@ -19896,6 +19965,7 @@
    "exampleJp": "お母さんに電話してください。",
    "exampleZh": "请给妈妈打电话。",
    "id": "n5_okaasan",
+   "jmdictSeq": "1002650",
    "levels": [
     "N5"
    ],
@@ -19942,6 +20012,7 @@
    "exampleJp": "お菓子を食べすぎました。",
    "exampleZh": "零食吃多了。",
    "id": "n5_okashi",
+   "jmdictSeq": "1001710",
    "levels": [
     "N5"
    ],
@@ -19989,6 +20060,7 @@
    "exampleJp": "すみません、お金が足りません。",
    "exampleZh": "对不起，钱不够。",
    "id": "n5_okane",
+   "jmdictSeq": "1001820",
    "levels": [
     "N5"
    ],
@@ -20036,6 +20108,7 @@
    "exampleJp": "毎朝六時に起きます。",
    "exampleZh": "每天早上六点起床。",
    "id": "n5_okiru",
+   "jmdictSeq": "1223640",
    "levels": [
     "N5"
    ],
@@ -20083,6 +20156,7 @@
    "exampleJp": "荷物をここに置いてください。",
    "exampleZh": "请把行李放在这里。",
    "id": "n5_oku",
+   "jmdictSeq": "1421850",
    "levels": [
     "N5"
    ],
@@ -20129,6 +20203,7 @@
    "exampleJp": "奥さんもご一緒ですか。",
    "exampleZh": "夫人也一起来吗？",
    "id": "n5_okusan",
+   "jmdictSeq": "1179330",
    "levels": [
     "N5"
    ],
@@ -20175,6 +20250,7 @@
    "exampleJp": "お酒は飲みません。",
    "exampleZh": "不喝酒。",
    "id": "n5_osake",
+   "jmdictSeq": "1329015",
    "levels": [
     "N5"
    ],
@@ -20215,6 +20291,7 @@
    "exampleJp": "お皿を洗ってくれますか。",
    "exampleZh": "可以帮我洗盘子吗？",
    "id": "n5_osara",
+   "jmdictSeq": "1299685",
    "levels": [
     "N5"
    ],
@@ -20292,6 +20369,7 @@
    "exampleJp": "道を教えてください。",
    "exampleZh": "请告诉我怎么走。",
    "id": "n5_oshieru",
+   "jmdictSeq": "1236900",
    "levels": [
     "N5"
    ],
@@ -20386,6 +20464,7 @@
    "exampleJp": "このボタンを押してください。",
    "exampleZh": "请按这个按钮。",
    "id": "n5_osu",
+   "jmdictSeq": "1180470",
    "levels": [
     "N5"
    ],
@@ -20432,6 +20511,7 @@
    "exampleJp": "このバスは遅いです。",
    "exampleZh": "这辆公交很慢。",
    "id": "n5_osoi",
+   "jmdictSeq": "1421970",
    "levels": [
     "N5"
    ],
@@ -20484,6 +20564,7 @@
    "exampleJp": "お茶を一杯いただけますか。",
    "exampleZh": "可以给我一杯茶吗？",
    "id": "n5_ocha",
+   "jmdictSeq": "1002430",
    "levels": [
     "N5"
    ],
@@ -20532,6 +20613,7 @@
    "exampleJp": "お手洗いはどこですか。",
    "exampleZh": "请问洗手间在哪里？",
    "id": "n5_otearai",
+   "jmdictSeq": "1002100",
    "levels": [
     "N5"
    ],
@@ -20579,6 +20661,7 @@
    "exampleJp": "お父さんに相談しました。",
    "exampleZh": "和爸爸商量了。",
    "id": "n5_otousan",
+   "jmdictSeq": "1002590",
    "levels": [
     "N5"
    ],
@@ -20626,6 +20709,7 @@
    "exampleJp": "弟と一緒に帰りました。",
    "exampleZh": "和弟弟一起回家了。",
    "id": "n5_otouto",
+   "jmdictSeq": "1581930",
    "levels": [
     "N5"
    ],
@@ -20673,6 +20757,7 @@
    "exampleJp": "男の人が道を聞いてきました。",
    "exampleZh": "一个男人来问路了。",
    "id": "n5_otoko",
+   "jmdictSeq": "1419990",
    "levels": [
     "N5"
    ],
@@ -20719,6 +20804,7 @@
    "exampleJp": "男の子が公園で遊んでいます。",
    "exampleZh": "男孩子在公园玩。",
    "id": "n5_otokonoko",
+   "jmdictSeq": "1420010",
    "levels": [
     "N5"
    ],
@@ -20765,6 +20851,7 @@
    "exampleJp": "一昨日から風邪をひいています。",
    "exampleZh": "从前天开始感冒了。",
    "id": "n5_ototoi",
+   "jmdictSeq": "1576050",
    "levels": [
     "N5"
    ],
@@ -20857,6 +20944,7 @@
    "exampleJp": "大人のチケットを二枚ください。",
    "exampleZh": "请给我两张成人票。",
    "id": "n5_otona",
+   "jmdictSeq": "1414170",
    "levels": [
     "N5"
    ],
@@ -20950,6 +21038,7 @@
    "exampleJp": "二人は同じクラスです。",
    "exampleZh": "两个人是同一个班的。",
    "id": "n5_onaji",
+   "jmdictSeq": "1451750",
    "levels": [
     "N5"
    ],
@@ -20996,6 +21085,7 @@
    "exampleJp": "お兄さんに聞いてみてください。",
    "exampleZh": "可以去问问哥哥。",
    "id": "n5_oniisan",
+   "jmdictSeq": "1001830",
    "levels": [
     "N5"
    ],
@@ -21042,6 +21132,7 @@
    "exampleJp": "お姉さんと買い物に行きました。",
    "exampleZh": "和姐姐去买东西了。",
    "id": "n5_oneesan",
+   "jmdictSeq": "1001990",
    "levels": [
     "N5"
    ],
@@ -21174,6 +21265,7 @@
    "exampleJp": "お風呂に入ってから寝ます。",
    "exampleZh": "洗完澡再睡。",
    "id": "n5_ofuro",
+   "jmdictSeq": "2220600",
    "levels": [
     "N5"
    ],
@@ -21221,6 +21313,7 @@
    "exampleJp": "コンビニでお弁当を買いました。",
    "exampleZh": "在便利店买了盒饭。",
    "id": "n5_obentou",
+   "jmdictSeq": "1513065",
    "levels": [
     "N5"
    ],
@@ -21267,6 +21360,7 @@
    "exampleJp": "単語を覚えるのは大変です。",
    "exampleZh": "记单词很辛苦。",
    "id": "n5_oboeru",
+   "jmdictSeq": "1206050",
    "levels": [
     "N5"
    ],
@@ -21351,6 +21445,7 @@
    "exampleJp": "この荷物は重すぎます。",
    "exampleZh": "这个行李太重了。",
    "id": "n5_omoi",
+   "jmdictSeq": "1335750",
    "levels": [
     "N5"
    ],
@@ -21489,6 +21584,7 @@
    "exampleJp": "夏は海で泳ぐのが好きです。",
    "exampleZh": "夏天喜欢在海里游泳。",
    "id": "n5_oyogu",
+   "jmdictSeq": "1174340",
    "levels": [
     "N5"
    ],
@@ -21536,6 +21632,7 @@
    "exampleJp": "次の駅で降りてください。",
    "exampleZh": "请在下一站下车。",
    "id": "n5_oriru",
+   "jmdictSeq": "1589500",
    "levels": [
     "N5"
    ],
@@ -21582,6 +21679,7 @@
    "exampleJp": "授業は三時に終わります。",
    "exampleZh": "课三点结束。",
    "id": "n5_owaru",
+   "jmdictSeq": "1589600",
    "levels": [
     "N5"
    ],
@@ -21628,6 +21726,7 @@
    "exampleJp": "音楽を聴きながら歩きます。",
    "exampleZh": "一边听音乐一边走路。",
    "id": "n5_ongaku",
+   "jmdictSeq": "1183720",
    "levels": [
     "N5"
    ],
@@ -21674,6 +21773,7 @@
    "exampleJp": "女の人が荷物を持っています。",
    "exampleZh": "一个女人拿着行李。",
    "id": "n5_onna",
+   "jmdictSeq": "1344930",
    "levels": [
     "N5"
    ],
@@ -21720,6 +21820,7 @@
    "exampleJp": "女の子が歌を歌っています。",
    "exampleZh": "女孩子在唱歌。",
    "id": "n5_onnanoko",
+   "jmdictSeq": "1344970",
    "levels": [
     "N5"
    ],
@@ -21767,6 +21868,7 @@
    "exampleJp": "外国に行ったことがありますか。",
    "exampleZh": "你去过外国吗？",
    "id": "n5_gaikoku",
+   "jmdictSeq": "1203620",
    "levels": [
     "N5"
    ],
@@ -21813,6 +21915,7 @@
    "exampleJp": "外国人の友だちがいます。",
    "exampleZh": "有外国朋友。",
    "id": "n5_gaikokujin",
+   "jmdictSeq": "1203650",
    "levels": [
     "N5"
    ],
@@ -21859,6 +21962,7 @@
    "exampleJp": "毎日会社に行きます。",
    "exampleZh": "每天去公司。",
    "id": "n5_kaisha",
+   "jmdictSeq": "1198550",
    "levels": [
     "N5"
    ],
@@ -21906,6 +22010,7 @@
    "exampleJp": "階段を使ってください。",
    "exampleZh": "请使用楼梯。",
    "id": "n5_kaidan",
+   "jmdictSeq": "1203090",
    "levels": [
     "N5"
    ],
@@ -21953,6 +22058,7 @@
    "exampleJp": "週末、買い物に行きませんか。",
    "exampleZh": "周末要不要去买东西？",
    "id": "n5_kaimono",
+   "jmdictSeq": "1589730",
    "levels": [
     "N5"
    ],
@@ -22000,6 +22106,7 @@
    "exampleJp": "スーパーで野菜を買いました。",
    "exampleZh": "在超市买了蔬菜。",
    "id": "n5_kau",
+   "jmdictSeq": "1473740",
    "levels": [
     "N5"
    ],
@@ -22046,6 +22153,7 @@
    "exampleJp": "借りた本を返しました。",
    "exampleZh": "把借的书还回去了。",
    "id": "n5_kaesu",
+   "jmdictSeq": "1512130",
    "levels": [
     "N5"
    ],
@@ -22093,6 +22201,7 @@
    "exampleJp": "早く家に帰りたいです。",
    "exampleZh": "想早点回家。",
    "id": "n5_kaeru",
+   "jmdictSeq": "1221270",
    "levels": [
     "N5"
    ],
@@ -22139,6 +22248,7 @@
    "exampleJp": "朝、顔を洗います。",
    "exampleZh": "早上洗脸。",
    "id": "n5_kao",
+   "jmdictSeq": "1217730",
    "levels": [
     "N5"
    ],
@@ -22231,6 +22341,7 @@
    "exampleJp": "鍵をかけるのを忘れました。",
    "exampleZh": "忘记锁门了。",
    "id": "n5_kagi",
+   "jmdictSeq": "1260490",
    "levels": [
     "N5"
    ],
@@ -22277,6 +22388,7 @@
    "exampleJp": "手紙を日本語で書きました。",
    "exampleZh": "用日语写了信。",
    "id": "n5_kaku",
+   "jmdictSeq": "1343950",
    "levels": [
     "N5"
    ],
@@ -22323,6 +22435,7 @@
    "exampleJp": "私は日本語の学生です。",
    "exampleZh": "我是学日语的学生。",
    "id": "n5_gakusei",
+   "jmdictSeq": "1206900",
    "levels": [
     "N5"
    ],
@@ -22369,6 +22482,7 @@
    "exampleJp": "眼鏡を掛けている人は誰ですか。",
    "exampleZh": "戴眼镜的那个人是谁？",
    "id": "n5_kakeru",
+   "jmdictSeq": "1207610",
    "levels": [
     "N5"
    ],
@@ -22455,6 +22569,7 @@
    "exampleJp": "雨が降ってきたので傘をさしました。",
    "exampleZh": "下雨了，撑起了雨伞。",
    "id": "n5_kasa",
+   "jmdictSeq": "1301940",
    "levels": [
     "N5"
    ],
@@ -22501,6 +22616,7 @@
    "exampleJp": "友だちにお金を貸しました。",
    "exampleZh": "借给朋友钱了。",
    "id": "n5_kasu",
+   "jmdictSeq": "1411160",
    "levels": [
     "N5"
    ],
@@ -22547,6 +22663,7 @@
    "exampleJp": "今日は風が強いですね。",
    "exampleZh": "今天风真大啊。",
    "id": "n5_kaze",
+   "jmdictSeq": "1499720",
    "levels": [
     "N5"
    ],
@@ -22594,6 +22711,7 @@
    "exampleJp": "風邪をひいたので休みます。",
    "exampleZh": "感冒了，请假休息。",
    "id": "n5_kaze_2",
+   "jmdictSeq": "1583720",
    "levels": [
     "N5"
    ],
@@ -22641,6 +22759,7 @@
    "exampleJp": "家族と旅行に行きました。",
    "exampleZh": "和家人去旅行了。",
    "id": "n5_kazoku",
+   "jmdictSeq": "1192150",
    "levels": [
     "N5"
    ],
@@ -22687,6 +22806,7 @@
    "exampleJp": "この料理の作り方を教えてください。",
    "exampleZh": "请告诉我这道菜的做法。",
    "id": "n5_kata",
+   "jmdictSeq": "1516925",
    "levels": [
     "N5"
    ],
@@ -22780,6 +22900,7 @@
    "exampleJp": "学校まで電車で行きます。",
    "exampleZh": "坐电车去学校。",
    "id": "n5_gakkou",
+   "jmdictSeq": "1206730",
    "levels": [
     "N5"
    ],
@@ -22873,6 +22994,7 @@
    "exampleJp": "幸せな家庭を作りたいです。",
    "exampleZh": "想建立一个幸福的家庭。",
    "id": "n5_katei",
+   "jmdictSeq": "1192280",
    "levels": [
     "N5"
    ],
@@ -22919,6 +23041,7 @@
    "exampleJp": "次の角を右に曲がってください。",
    "exampleZh": "请在下一个路口右转。",
    "id": "n5_kado",
+   "jmdictSeq": "1206110",
    "levels": [
     "N5"
    ],
@@ -23009,6 +23132,7 @@
    "exampleJp": "花瓶に花を入れました。",
    "exampleZh": "把花插进了花瓶。",
    "id": "n5_kabin",
+   "jmdictSeq": "1194870",
    "levels": [
     "N5"
    ],
@@ -23100,6 +23224,7 @@
    "exampleJp": "紙に名前を書いてください。",
    "exampleZh": "请在纸上写上名字。",
    "id": "n5_kami",
+   "jmdictSeq": "1311530",
    "levels": [
     "N5"
    ],
@@ -23197,6 +23322,7 @@
    "exampleJp": "火曜日に授業があります。",
    "exampleZh": "星期二有课。",
    "id": "n5_kayoubi",
+   "jmdictSeq": "1194290",
    "levels": [
     "N5"
    ],
@@ -23244,6 +23370,7 @@
    "exampleJp": "辛い食べ物が好きですか。",
    "exampleZh": "喜欢辣的东西吗？",
    "id": "n5_karai",
+   "jmdictSeq": "1365850",
    "levels": [
     "N5"
    ],
@@ -23290,6 +23417,7 @@
    "exampleJp": "体に気をつけてください。",
    "exampleZh": "请保重身体。",
    "id": "n5_karada",
+   "jmdictSeq": "1409140",
    "levels": [
     "N5"
    ],
@@ -23336,6 +23464,7 @@
    "exampleJp": "銀行でお金を借りました。",
    "exampleZh": "从银行借了钱。",
    "id": "n5_kariru",
+   "jmdictSeq": "1323560",
    "levels": [
     "N5"
    ],
@@ -23382,6 +23511,7 @@
    "exampleJp": "このかばんは軽くて持ちやすいです。",
    "exampleZh": "这个包很轻，容易拿。",
    "id": "n5_karui",
+   "jmdictSeq": "1252560",
    "levels": [
     "N5"
    ],
@@ -23622,6 +23752,7 @@
    "exampleJp": "漢字が読めません。",
    "exampleZh": "不会读汉字。",
    "id": "n5_kanji",
+   "jmdictSeq": "1213170",
    "levels": [
     "N5"
    ],
@@ -23668,6 +23799,7 @@
    "exampleJp": "公園の木の下で休みました。",
    "exampleZh": "在公园的树下休息了。",
    "id": "n5_ki",
+   "jmdictSeq": "1534520",
    "levels": [
     "N5"
    ],
@@ -23715,6 +23847,7 @@
    "exampleJp": "黄色いシャツを着た人を知っていますか。",
    "exampleZh": "你认识那个穿黄色衬衫的人吗？",
    "id": "n5_kiiro",
+   "jmdictSeq": "1576760",
    "levels": [
     "N5"
    ],
@@ -23762,6 +23895,7 @@
    "exampleJp": "バナナが黄色くなりました。",
    "exampleZh": "香蕉变黄了。",
    "id": "n5_kiiroi",
+   "jmdictSeq": "1182030",
    "levels": [
     "N5"
    ],
@@ -23809,6 +23943,7 @@
    "exampleJp": "電気が消えて、真っ暗になりました。",
    "exampleZh": "灯灭了，变得漆黑一片。",
    "id": "n5_kieru",
+   "jmdictSeq": "1350040",
    "levels": [
     "N5"
    ],
@@ -23855,6 +23990,7 @@
    "exampleJp": "音楽を聞きながら勉強します。",
    "exampleZh": "一边听音乐一边学习。",
    "id": "n5_kiku",
+   "jmdictSeq": "1591110",
    "levels": [
     "N5"
    ],
@@ -23902,6 +24038,7 @@
    "exampleJp": "北に向かって歩いてください。",
    "exampleZh": "请向北走。",
    "id": "n5_kita",
+   "jmdictSeq": "1520670",
    "levels": [
     "N5"
    ],
@@ -24005,6 +24142,7 @@
    "exampleJp": "部屋が汚いので掃除しました。",
    "exampleZh": "房间很脏，所以打扫了。",
    "id": "n5_kitanai",
+   "jmdictSeq": "1178940",
    "levels": [
     "N5"
    ],
@@ -24053,6 +24191,7 @@
    "exampleJp": "喫茶店でコーヒーを飲みました。",
    "exampleZh": "在咖啡馆喝了咖啡。",
    "id": "n5_kissaten",
+   "jmdictSeq": "1226440",
    "levels": [
     "N5"
    ],
@@ -24105,6 +24244,7 @@
    "exampleJp": "封筒に切手を貼ってください。",
    "exampleZh": "请在信封上贴邮票。",
    "id": "n5_kitte",
+   "jmdictSeq": "1385070",
    "levels": [
     "N5"
    ],
@@ -24154,6 +24294,7 @@
    "exampleJp": "駅で切符を買いました。",
    "exampleZh": "在车站买了票。",
    "id": "n5_kippu",
+   "jmdictSeq": "1385170",
    "levels": [
     "N5"
    ],
@@ -24201,6 +24342,7 @@
    "exampleJp": "昨日の夕方、友だちに会いました。",
    "exampleZh": "昨天傍晚见到了朋友。",
    "id": "n5_kinou",
+   "jmdictSeq": "1579260",
    "levels": [
     "N5"
    ],
@@ -24248,6 +24390,7 @@
    "exampleJp": "九時に来ます。",
    "exampleZh": "九点来。",
    "id": "n5_kyuu",
+   "jmdictSeq": "1578150",
    "levels": [
     "N5"
    ],
@@ -24296,6 +24439,7 @@
    "exampleJp": "牛肉を焼きます。",
    "exampleZh": "烤牛肉。",
    "id": "n5_gyuuniku",
+   "jmdictSeq": "1231580",
    "levels": [
     "N5"
    ],
@@ -24344,6 +24488,7 @@
    "exampleJp": "牛乳を飲みます。",
    "exampleZh": "喝牛奶。",
    "id": "n5_gyuunyuu",
+   "jmdictSeq": "1231590",
    "levels": [
     "N5"
    ],
@@ -24391,6 +24536,7 @@
    "exampleJp": "今日の天気はいいです。",
    "exampleZh": "今天天气很好。",
    "id": "n5_kyou",
+   "jmdictSeq": "1579110",
    "levels": [
     "N5"
    ],
@@ -24440,6 +24586,7 @@
    "exampleJp": "教室に入ります。",
    "exampleZh": "进入教室。",
    "id": "n5_kyoushitsu",
+   "jmdictSeq": "1237150",
    "levels": [
     "N5"
    ],
@@ -24487,6 +24634,7 @@
    "exampleJp": "兄弟が三人います。",
    "exampleZh": "有三个兄弟姐妹。",
    "id": "n5_kyoudai",
+   "jmdictSeq": "1249960",
    "levels": [
     "N5"
    ],
@@ -24534,6 +24682,7 @@
    "exampleJp": "去年の夏に行きました。",
    "exampleZh": "去年夏天去了。",
    "id": "n5_kyonen",
+   "jmdictSeq": "1231690",
    "levels": [
     "N5"
    ],
@@ -24581,6 +24730,7 @@
    "exampleJp": "野菜が嫌いです。",
    "exampleZh": "不喜欢蔬菜。",
    "id": "n5_kirai",
+   "jmdictSeq": "1257240",
    "levels": [
     "N5"
    ],
@@ -24627,6 +24777,7 @@
    "exampleJp": "野菜を切ります。",
    "exampleZh": "切蔬菜。",
    "id": "n5_kiru",
+   "jmdictSeq": "1384830",
    "levels": [
     "N5"
    ],
@@ -24674,6 +24825,7 @@
    "exampleJp": "セーターを着ます。",
    "exampleZh": "穿毛衣。",
    "id": "n5_kiru_2",
+   "jmdictSeq": "1423000",
    "levels": [
     "N5"
    ],
@@ -24721,6 +24873,7 @@
    "exampleJp": "綺麗な花です。",
    "exampleZh": "是漂亮的花。",
    "id": "n5_kirei",
+   "jmdictSeq": "1591900",
    "levels": [
     "N5"
    ],
@@ -24862,6 +25015,7 @@
    "exampleJp": "銀行に行きます。",
    "exampleZh": "去银行。",
    "id": "n5_ginkou",
+   "jmdictSeq": "1243490",
    "levels": [
     "N5"
    ],
@@ -24908,6 +25062,7 @@
    "exampleJp": "金曜日の夜に会います。",
    "exampleZh": "星期五晚上见面。",
    "id": "n5_kinyoubi",
+   "jmdictSeq": "1243320",
    "levels": [
     "N5"
    ],
@@ -24955,6 +25110,7 @@
    "exampleJp": "九時に起きます。",
    "exampleZh": "九点起床。",
    "id": "n5_ku",
+   "jmdictSeq": "1578150",
    "levels": [
     "N5"
    ],
@@ -25002,6 +25158,7 @@
    "exampleJp": "薬を飲みます。",
    "exampleZh": "吃药。",
    "id": "n5_kusuri",
+   "jmdictSeq": "1538160",
    "levels": [
     "N5"
    ],
@@ -25048,6 +25205,7 @@
    "exampleJp": "水をください。",
    "exampleZh": "请给我水。",
    "id": "n5_kudasai",
+   "jmdictSeq": "1184270",
    "levels": [
     "N5"
    ],
@@ -25096,6 +25254,7 @@
    "exampleJp": "果物を食べます。",
    "exampleZh": "吃水果。",
    "id": "n5_kudamono",
+   "jmdictSeq": "1193060",
    "levels": [
     "N5"
    ],
@@ -25142,6 +25301,7 @@
    "exampleJp": "口を開けます。",
    "exampleZh": "张开嘴。",
    "id": "n5_kuchi",
+   "jmdictSeq": "1275640",
    "levels": [
     "N5"
    ],
@@ -25189,6 +25349,7 @@
    "exampleJp": "靴を脱ぎます。",
    "exampleZh": "脱鞋。",
    "id": "n5_kutsu",
+   "jmdictSeq": "1246700",
    "levels": [
     "N5"
    ],
@@ -25235,6 +25396,7 @@
    "exampleJp": "靴下をはきます。",
    "exampleZh": "穿袜子。",
    "id": "n5_kutsushita",
+   "jmdictSeq": "1246740",
    "levels": [
     "N5"
    ],
@@ -25286,6 +25448,7 @@
    "exampleJp": "国に帰ります。",
    "exampleZh": "回国。",
    "id": "n5_kuni",
+   "jmdictSeq": "1592250",
    "levels": [
     "N5"
    ],
@@ -25333,6 +25496,7 @@
    "exampleJp": "今日は曇り。",
    "exampleZh": "今天阴天。",
    "id": "n5_kumori",
+   "jmdictSeq": "1592340",
    "levels": [
     "N5"
    ],
@@ -25379,6 +25543,7 @@
    "exampleJp": "空が曇ります。",
    "exampleZh": "天变阴了。",
    "id": "n5_kumoru",
+   "jmdictSeq": "1457560",
    "levels": [
     "N5"
    ],
@@ -25425,6 +25590,7 @@
    "exampleJp": "暗い部屋。",
    "exampleZh": "昏暗的房间。",
    "id": "n5_kurai",
+   "jmdictSeq": "1154330",
    "levels": [
     "N5"
    ],
@@ -25561,6 +25727,7 @@
    "exampleJp": "駅まで来ます。",
    "exampleZh": "来到车站。",
    "id": "n5_kuru",
+   "jmdictSeq": "1547720",
    "levels": [
     "N5"
    ],
@@ -25607,6 +25774,7 @@
    "exampleJp": "車に乗ります。",
    "exampleZh": "坐车。",
    "id": "n5_kuruma",
+   "jmdictSeq": "1323080",
    "levels": [
     "N5"
    ],
@@ -25654,6 +25822,7 @@
    "exampleJp": "黒色のコート。",
    "exampleZh": "黑色的大衣。",
    "id": "n5_kuro",
+   "jmdictSeq": "1287410",
    "levels": [
     "N5"
    ],
@@ -25701,6 +25870,7 @@
    "exampleJp": "黒い猫。",
    "exampleZh": "黑猫。",
    "id": "n5_kuroi",
+   "jmdictSeq": "1287420",
    "levels": [
     "N5"
    ],
@@ -25749,6 +25919,7 @@
    "exampleJp": "警官に話します。",
    "exampleZh": "和警察说话。",
    "id": "n5_keikan",
+   "jmdictSeq": "1252330",
    "levels": [
     "N5"
    ],
@@ -25795,6 +25966,7 @@
    "exampleJp": "今朝早く起きた。",
    "exampleZh": "今天早上起得很早。",
    "id": "n5_kesa",
+   "jmdictSeq": "1579100",
    "levels": [
     "N5"
    ],
@@ -25841,6 +26013,7 @@
    "exampleJp": "電気を消します。",
    "exampleZh": "关灯。",
    "id": "n5_kesu",
+   "jmdictSeq": "1350110",
    "levels": [
     "N5"
    ],
@@ -25887,6 +26060,7 @@
    "exampleJp": "結構です。",
    "exampleZh": "不用了。",
    "id": "n5_kekkou",
+   "jmdictSeq": "1254760",
    "levels": [
     "N5"
    ],
@@ -25940,6 +26114,7 @@
    "exampleJp": "来月結婚します。",
    "exampleZh": "下个月结婚。",
    "id": "n5_kekkon",
+   "jmdictSeq": "1254790",
    "levels": [
     "N5"
    ],
@@ -25987,6 +26162,7 @@
    "exampleJp": "月曜日に会議があります。",
    "exampleZh": "星期一有会议。",
    "id": "n5_getsuyoubi",
+   "jmdictSeq": "1255890",
    "levels": [
     "N5"
    ],
@@ -26035,6 +26211,7 @@
    "exampleJp": "玄関で待ちます。",
    "exampleZh": "在玄关等。",
    "id": "n5_genkan",
+   "jmdictSeq": "1263400",
    "levels": [
     "N5"
    ],
@@ -26081,6 +26258,7 @@
    "exampleJp": "お元気ですか。",
    "exampleZh": "您好吗？",
    "id": "n5_genki",
+   "jmdictSeq": "1260720",
    "levels": [
     "N5"
    ],
@@ -26127,6 +26305,7 @@
    "exampleJp": "五時に来ます。",
    "exampleZh": "五点来。",
    "id": "n5_go",
+   "jmdictSeq": "1268060",
    "levels": [
     "N5"
    ],
@@ -26173,6 +26352,7 @@
    "exampleJp": "公園で遊びます。",
    "exampleZh": "在公园玩。",
    "id": "n5_kouen",
+   "jmdictSeq": "1273270",
    "levels": [
     "N5"
    ],
@@ -26219,6 +26399,7 @@
    "exampleJp": "交差点を渡ります。",
    "exampleZh": "过十字路口。",
    "id": "n5_kousaten",
+   "jmdictSeq": "1592970",
    "levels": [
     "N5"
    ],
@@ -26271,6 +26452,7 @@
    "exampleJp": "紅茶を飲みます。",
    "exampleZh": "喝红茶。",
    "id": "n5_koucha",
+   "jmdictSeq": "1280770",
    "levels": [
     "N5"
    ],
@@ -26319,6 +26501,7 @@
    "exampleJp": "交番で聞きます。",
    "exampleZh": "在派出所问。",
    "id": "n5_kouban",
+   "jmdictSeq": "1272500",
    "levels": [
     "N5"
    ],
@@ -26365,6 +26548,7 @@
    "exampleJp": "大きい声で話します。",
    "exampleZh": "大声说话。",
    "id": "n5_koe",
+   "jmdictSeq": "1380440",
    "levels": [
     "N5"
    ],
@@ -26552,6 +26736,7 @@
    "exampleJp": "午後三時。",
    "exampleZh": "下午三点。",
    "id": "n5_gogo",
+   "jmdictSeq": "1268990",
    "levels": [
     "N5"
    ],
@@ -26598,6 +26783,7 @@
    "exampleJp": "九日に来ます。",
    "exampleZh": "九号来。",
    "id": "n5_kokonoka",
+   "jmdictSeq": "1243850",
    "levels": [
     "N5"
    ],
@@ -26645,6 +26831,7 @@
    "exampleJp": "りんごを九つ。",
    "exampleZh": "九个苹果。",
    "id": "n5_kokonotsu",
+   "jmdictSeq": "1243600",
    "levels": [
     "N5"
    ],
@@ -26691,6 +26878,7 @@
    "exampleJp": "午前中に終わります。",
    "exampleZh": "上午结束。",
    "id": "n5_gozen",
+   "jmdictSeq": "1269060",
    "levels": [
     "N5"
    ],
@@ -26737,6 +26925,7 @@
    "exampleJp": "質問に答えます。",
    "exampleZh": "回答问题。",
    "id": "n5_kotaeru",
+   "jmdictSeq": "1449540",
    "levels": [
     "N5"
    ],
@@ -26935,6 +27124,7 @@
    "exampleJp": "今年の夏。",
    "exampleZh": "今年夏天。",
    "id": "n5_kotoshi",
+   "jmdictSeq": "1579130",
    "levels": [
     "N5"
    ],
@@ -26981,6 +27171,7 @@
    "exampleJp": "日本の言葉。",
    "exampleZh": "日本的语言。",
    "id": "n5_kotoba",
+   "jmdictSeq": "1264540",
    "levels": [
     "N5"
    ],
@@ -27027,6 +27218,7 @@
    "exampleJp": "子供と遊びます。",
    "exampleZh": "和孩子玩。",
    "id": "n5_kodomo",
+   "jmdictSeq": "1307850",
    "levels": [
     "N5"
    ],
@@ -27111,6 +27303,7 @@
    "exampleJp": "御飯を食べます。",
    "exampleZh": "吃饭。",
    "id": "n5_gohan",
+   "jmdictSeq": "1270590",
    "levels": [
     "N5"
    ],
@@ -27240,6 +27433,7 @@
    "exampleJp": "道に迷って困ります。",
    "exampleZh": "为难，困扰。",
    "id": "n5_komaru",
+   "jmdictSeq": "1289590",
    "levels": [
     "N5"
    ],
@@ -27360,6 +27554,7 @@
    "exampleJp": "今月中に終わります。",
    "exampleZh": "这个月内结束。",
    "id": "n5_kongetsu",
+   "jmdictSeq": "1289100",
    "levels": [
     "N5"
    ],
@@ -27407,6 +27602,7 @@
    "exampleJp": "今週末。",
    "exampleZh": "这个周末。",
    "id": "n5_konshuu",
+   "jmdictSeq": "1289220",
    "levels": [
     "N5"
    ],
@@ -27498,6 +27694,7 @@
    "exampleJp": "今晩会いましょう。",
    "exampleZh": "今晚见吧。",
    "id": "n5_konban",
+   "jmdictSeq": "1289470",
    "levels": [
     "N5"
    ],
@@ -27639,6 +27836,7 @@
    "exampleJp": "財布をなくします。",
    "exampleZh": "钱包丢了。",
    "id": "n5_saifu",
+   "jmdictSeq": "1296970",
    "levels": [
     "N5"
    ],
@@ -27686,6 +27884,7 @@
    "exampleJp": "魚を食べます。",
    "exampleZh": "吃鱼。",
    "id": "n5_sakana",
+   "jmdictSeq": "1578010",
    "levels": [
     "N5"
    ],
@@ -27734,6 +27933,7 @@
    "exampleJp": "先に行きます。",
    "exampleZh": "先走。",
    "id": "n5_saki",
+   "jmdictSeq": "1387210",
    "levels": [
     "N5"
    ],
@@ -27780,6 +27980,7 @@
    "exampleJp": "桜が咲きます。",
    "exampleZh": "樱花开了。",
    "id": "n5_saku",
+   "jmdictSeq": "1297210",
    "levels": [
     "N5"
    ],
@@ -27826,6 +28027,7 @@
    "exampleJp": "作文を書きます。",
    "exampleZh": "写作文。",
    "id": "n5_sakubun",
+   "jmdictSeq": "1297960",
    "levels": [
     "N5"
    ],
@@ -27872,6 +28074,7 @@
    "exampleJp": "傘を差します。",
    "exampleZh": "撑伞。",
    "id": "n5_sasu",
+   "jmdictSeq": "1291330",
    "levels": [
     "N5"
    ],
@@ -27918,6 +28121,7 @@
    "exampleJp": "雑誌を読みます。",
    "exampleZh": "读杂志。",
    "id": "n5_zasshi",
+   "jmdictSeq": "1299400",
    "levels": [
     "N5"
    ],
@@ -27966,6 +28170,7 @@
    "exampleJp": "砂糖を入れます。",
    "exampleZh": "放糖。",
    "id": "n5_satou",
+   "jmdictSeq": "1291600",
    "levels": [
     "N5"
    ],
@@ -28013,6 +28218,7 @@
    "exampleJp": "今日は寒いです。",
    "exampleZh": "今天很冷。",
    "id": "n5_samui",
+   "jmdictSeq": "1210360",
    "levels": [
     "N5"
    ],
@@ -28059,6 +28265,7 @@
    "exampleJp": "さ来年また来ます。",
    "exampleZh": "后年再来。",
    "id": "n5_sarainen",
+   "jmdictSeq": "1293660",
    "levels": [
     "N5"
    ],
@@ -28105,6 +28312,7 @@
    "exampleJp": "三時に来ます。",
    "exampleZh": "三点来。",
    "id": "n5_san_2",
+   "jmdictSeq": "1579350",
    "levels": [
     "N5"
    ],
@@ -28145,6 +28353,7 @@
    "exampleJp": "公園を散歩します。",
    "exampleZh": "在公园散步。",
    "id": "n5_sanpo",
+   "jmdictSeq": "1303620",
    "levels": [
     "N5"
    ],
@@ -28191,6 +28400,7 @@
    "exampleJp": "四時に起きます。",
    "exampleZh": "四点起床。",
    "id": "n5_shi",
+   "jmdictSeq": "1579470",
    "levels": [
     "N5"
    ],
@@ -28238,6 +28448,7 @@
    "exampleJp": "塩を入れます。",
    "exampleZh": "放盐。",
    "id": "n5_shio",
+   "jmdictSeq": "1576630",
    "levels": [
     "N5"
    ],
@@ -28328,6 +28539,7 @@
    "exampleJp": "時間がないです。",
    "exampleZh": "没有时间。",
    "id": "n5_jikan",
+   "jmdictSeq": "1315920",
    "levels": [
     "N5"
    ],
@@ -28374,6 +28586,7 @@
    "exampleJp": "仕事に行きます。",
    "exampleZh": "去工作。",
    "id": "n5_shigoto",
+   "jmdictSeq": "1304970",
    "levels": [
     "N5"
    ],
@@ -28420,6 +28633,7 @@
    "exampleJp": "辞書で調べます。",
    "exampleZh": "用词典查。",
    "id": "n5_jisho",
+   "jmdictSeq": "1318970",
    "levels": [
     "N5"
    ],
@@ -28467,6 +28681,7 @@
    "exampleJp": "静かな場所。",
    "exampleZh": "安静的地方。",
    "id": "n5_shizuka",
+   "jmdictSeq": "1381820",
    "levels": [
     "N5"
    ],
@@ -28515,6 +28730,7 @@
    "exampleJp": "机の下。",
    "exampleZh": "桌子下面。",
    "id": "n5_shita",
+   "jmdictSeq": "1184140",
    "levels": [
     "N5"
    ],
@@ -28561,6 +28777,7 @@
    "exampleJp": "七時に起きます。",
    "exampleZh": "七点起床。",
    "id": "n5_shichi",
+   "jmdictSeq": "1319210",
    "levels": [
     "N5"
    ],
@@ -28607,6 +28824,7 @@
    "exampleJp": "質問に答えます。",
    "exampleZh": "回答问题。",
    "id": "n5_shitsumon",
+   "jmdictSeq": "1320760",
    "levels": [
     "N5"
    ],
@@ -28653,6 +28871,7 @@
    "exampleJp": "自転車で行きます。",
    "exampleZh": "骑自行车去。",
    "id": "n5_jitensha",
+   "jmdictSeq": "1318290",
    "levels": [
     "N5"
    ],
@@ -28706,6 +28925,7 @@
    "exampleJp": "自動車を運転します。",
    "exampleZh": "开汽车。",
    "id": "n5_jidousha",
+   "jmdictSeq": "1318400",
    "levels": [
     "N5"
    ],
@@ -28760,6 +28980,7 @@
    "exampleJp": "花が死にます。",
    "exampleZh": "花枯死了。",
    "id": "n5_shinu",
+   "jmdictSeq": "1310730",
    "levels": [
     "N5"
    ],
@@ -28806,6 +29027,7 @@
    "exampleJp": "字引で調べます。",
    "exampleZh": "用词典查。",
    "id": "n5_jibiki",
+   "jmdictSeq": "1315140",
    "levels": [
     "N5"
    ],
@@ -28852,6 +29074,7 @@
    "exampleJp": "自分でやる。",
    "exampleZh": "自己做。",
    "id": "n5_jibun",
+   "jmdictSeq": "1318610",
    "levels": [
     "N5"
    ],
@@ -28898,6 +29121,7 @@
    "exampleJp": "ドアが閉まる。",
    "exampleZh": "门关上。",
    "id": "n5_shimaru",
+   "jmdictSeq": "1436560",
    "levels": [
     "N5"
    ],
@@ -28944,6 +29168,7 @@
    "exampleJp": "窓を閉めます。",
    "exampleZh": "关窗。",
    "id": "n5_shimeru",
+   "jmdictSeq": "1508590",
    "levels": [
     "N5"
    ],
@@ -28991,6 +29216,7 @@
    "exampleJp": "ネクタイを締めます。",
    "exampleZh": "系领带。",
    "id": "n5_shimeru_2",
+   "jmdictSeq": "1436570",
    "levels": [
     "N5"
    ],
@@ -29078,6 +29304,7 @@
    "exampleJp": "写真を撮る。",
    "exampleZh": "拍照。",
    "id": "n5_shashin",
+   "jmdictSeq": "1321900",
    "levels": [
     "N5"
    ],
@@ -29224,6 +29451,7 @@
    "exampleJp": "十時に来ます。",
    "exampleZh": "十点来。",
    "id": "n5_juu",
+   "jmdictSeq": "1579840",
    "levels": [
     "N5"
    ],
@@ -29271,6 +29499,7 @@
    "exampleJp": "授業が始まります。",
    "exampleZh": "开始上课。",
    "id": "n5_jugyou",
+   "jmdictSeq": "1330290",
    "levels": [
     "N5"
    ],
@@ -29318,6 +29547,7 @@
    "exampleJp": "宿題をします。",
    "exampleZh": "做作业。",
    "id": "n5_shukudai",
+   "jmdictSeq": "1337270",
    "levels": [
     "N5"
    ],
@@ -29365,6 +29595,7 @@
    "exampleJp": "料理が上手。",
    "exampleZh": "擅长，拿手。",
    "id": "n5_jouzu",
+   "jmdictSeq": "1353320",
    "levels": [
     "N5"
    ],
@@ -29413,6 +29644,7 @@
    "exampleJp": "丈夫な体。",
    "exampleZh": "结实，健壮。",
    "id": "n5_joubu",
+   "jmdictSeq": "1580480",
    "levels": [
     "N5"
    ],
@@ -29509,6 +29741,7 @@
    "exampleJp": "食堂で食べます。",
    "exampleZh": "在食堂吃。",
    "id": "n5_shokudou",
+   "jmdictSeq": "1358550",
    "levels": [
     "N5"
    ],
@@ -29558,6 +29791,7 @@
    "exampleJp": "名前を知る。",
    "exampleZh": "知道名字。",
    "id": "n5_shiru",
+   "jmdictSeq": "1420470",
    "levels": [
     "N5"
    ],
@@ -29604,6 +29838,7 @@
    "exampleJp": "白色のシャツ。",
    "exampleZh": "白色衬衫。",
    "id": "n5_shiro",
+   "jmdictSeq": "1474900",
    "levels": [
     "N5"
    ],
@@ -29651,6 +29886,7 @@
    "exampleJp": "白い雪。",
    "exampleZh": "白雪。",
    "id": "n5_shiroi",
+   "jmdictSeq": "1474910",
    "levels": [
     "N5"
    ],
@@ -29698,6 +29934,7 @@
    "exampleJp": "新聞を読みます。",
    "exampleZh": "读报纸。",
    "id": "n5_shinbun",
+   "jmdictSeq": "1362360",
    "levels": [
     "N5"
    ],
@@ -29745,6 +29982,7 @@
    "exampleJp": "水曜日に来ます。",
    "exampleZh": "星期三来。",
    "id": "n5_suiyoubi",
+   "jmdictSeq": "1372190",
    "levels": [
     "N5"
    ],
@@ -29793,6 +30031,7 @@
    "exampleJp": "たばこを吸います。",
    "exampleZh": "抽烟。",
    "id": "n5_suu",
+   "jmdictSeq": "1228260",
    "levels": [
     "N5"
    ],
@@ -29885,6 +30124,7 @@
    "exampleJp": "音楽が好き。",
    "exampleZh": "喜欢音乐。",
    "id": "n5_suki",
+   "jmdictSeq": "1277450",
    "levels": [
     "N5"
    ],
@@ -29931,6 +30171,7 @@
    "exampleJp": "人が少ないです。",
    "exampleZh": "人很少。",
    "id": "n5_sukunai",
+   "jmdictSeq": "1348910",
    "levels": [
     "N5"
    ],
@@ -30014,6 +30255,7 @@
    "exampleJp": "少し待ちます。",
    "exampleZh": "一点儿，稍微。",
    "id": "n5_sukoshi",
+   "jmdictSeq": "1348870",
    "levels": [
     "N5"
    ],
@@ -30061,6 +30303,7 @@
    "exampleJp": "涼しい風。",
    "exampleZh": "凉爽的风。",
    "id": "n5_suzushii",
+   "jmdictSeq": "1554370",
    "levels": [
     "N5"
    ],
@@ -30302,6 +30545,7 @@
    "exampleJp": "東京に住みます。",
    "exampleZh": "住在东京。",
    "id": "n5_sumu",
+   "jmdictSeq": "1334040",
    "levels": [
     "N5"
    ],
@@ -30386,6 +30630,7 @@
    "exampleJp": "椅子に座る。",
    "exampleZh": "坐在椅子上。",
    "id": "n5_suwaru",
+   "jmdictSeq": "1291800",
    "levels": [
     "N5"
    ],
@@ -30479,6 +30724,7 @@
    "exampleJp": "生徒に教えます。",
    "exampleZh": "教学生。",
    "id": "n5_seito",
+   "jmdictSeq": "1379380",
    "levels": [
     "N5"
    ],
@@ -30578,6 +30824,7 @@
    "exampleJp": "石鹸で洗います。",
    "exampleZh": "用肥皂洗。",
    "id": "n5_sekken",
+   "jmdictSeq": "1382590",
    "levels": [
     "N5"
    ],
@@ -30626,6 +30873,7 @@
    "exampleJp": "背広を着ます。",
    "exampleZh": "穿西装。",
    "id": "n5_sebiro",
+   "jmdictSeq": "1472740",
    "levels": [
     "N5"
    ],
@@ -30673,6 +30921,7 @@
    "exampleJp": "狭い部屋。",
    "exampleZh": "狭窄的房间。",
    "id": "n5_semai",
+   "jmdictSeq": "1237680",
    "levels": [
     "N5"
    ],
@@ -30770,6 +31019,7 @@
    "exampleJp": "千円。",
    "exampleZh": "一千日元。",
    "id": "n5_sen",
+   "jmdictSeq": "1388740",
    "levels": [
     "N5"
    ],
@@ -30816,6 +31066,7 @@
    "exampleJp": "先月来た。",
    "exampleZh": "上个月来了。",
    "id": "n5_sengetsu",
+   "jmdictSeq": "1387500",
    "levels": [
     "N5"
    ],
@@ -30863,6 +31114,7 @@
    "exampleJp": "先週会った。",
    "exampleZh": "上周见过。",
    "id": "n5_senshuu",
+   "jmdictSeq": "1387870",
    "levels": [
     "N5"
    ],
@@ -30911,6 +31163,7 @@
    "exampleJp": "先生に聞きます。",
    "exampleZh": "问老师。",
    "id": "n5_sensei",
+   "jmdictSeq": "1387990",
    "levels": [
     "N5"
    ],
@@ -30957,6 +31210,7 @@
    "exampleJp": "洗濯をします。",
    "exampleZh": "洗衣服。",
    "id": "n5_sentaku",
+   "jmdictSeq": "1390980",
    "levels": [
     "N5"
    ],
@@ -31003,6 +31257,7 @@
    "exampleJp": "全部食べます。",
    "exampleZh": "全部吃完。",
    "id": "n5_zenbu",
+   "jmdictSeq": "1396130",
    "levels": [
     "N5"
    ],
@@ -31100,6 +31355,7 @@
    "exampleJp": "部屋を掃除します。",
    "exampleZh": "打扫房间。",
    "id": "n5_souji",
+   "jmdictSeq": "1399790",
    "levels": [
     "N5"
    ],
@@ -31329,6 +31585,7 @@
    "exampleJp": "外で遊びます。",
    "exampleZh": "在外面玩。",
    "id": "n5_soto",
+   "jmdictSeq": "1203250",
    "levels": [
     "N5"
    ],
@@ -31458,6 +31715,7 @@
    "exampleJp": "青い空。",
    "exampleZh": "蓝天。",
    "id": "n5_sora",
+   "jmdictSeq": "1245290",
    "levels": [
     "N5"
    ],
@@ -31626,6 +31884,7 @@
    "exampleJp": "大学に入ります。",
    "exampleZh": "上大学。",
    "id": "n5_daigaku",
+   "jmdictSeq": "1413240",
    "levels": [
     "N5"
    ],
@@ -31673,6 +31932,7 @@
    "exampleJp": "大使館に行きます。",
    "exampleZh": "去大使馆。",
    "id": "n5_taishikan",
+   "jmdictSeq": "1413890",
    "levels": [
     "N5"
    ],
@@ -31720,6 +31980,7 @@
    "exampleJp": "大丈夫ですか。",
    "exampleZh": "没事吗？",
    "id": "n5_daijoubu",
+   "jmdictSeq": "1414150",
    "levels": [
     "N5"
    ],
@@ -31767,6 +32028,7 @@
    "exampleJp": "音楽が大好き。",
    "exampleZh": "非常喜欢音乐。",
    "id": "n5_daisuki",
+   "jmdictSeq": "1413660",
    "levels": [
     "N5"
    ],
@@ -31813,6 +32075,7 @@
    "exampleJp": "大切にします。",
    "exampleZh": "会珍惜。",
    "id": "n5_taisetsu",
+   "jmdictSeq": "1414340",
    "levels": [
     "N5"
    ],
@@ -31859,6 +32122,7 @@
    "exampleJp": "台所で料理します。",
    "exampleZh": "在厨房做菜。",
    "id": "n5_daidokoro",
+   "jmdictSeq": "1412640",
    "levels": [
     "N5"
    ],
@@ -31905,6 +32169,7 @@
    "exampleJp": "大変だった。",
    "exampleZh": "很辛苦。",
    "id": "n5_taihen",
+   "jmdictSeq": "1415000",
    "levels": [
     "N5"
    ],
@@ -31952,6 +32217,7 @@
    "exampleJp": "値段が高いです。",
    "exampleZh": "价格很高。",
    "id": "n5_takai",
+   "jmdictSeq": "1283190",
    "levels": [
     "N5"
    ],
@@ -32099,6 +32365,7 @@
    "exampleJp": "宿題を出します。",
    "exampleZh": "交作业。",
    "id": "n5_dasu",
+   "jmdictSeq": "1338180",
    "levels": [
     "N5"
    ],
@@ -32145,6 +32412,7 @@
    "exampleJp": "その場に立ちます。",
    "exampleZh": "站在那个地方。",
    "id": "n5_tatsu",
+   "jmdictSeq": "1597040",
    "levels": [
     "N5"
    ],
@@ -32228,6 +32496,7 @@
    "exampleJp": "古い建物。",
    "exampleZh": "旧建筑。",
    "id": "n5_tatemono",
+   "jmdictSeq": "1257540",
    "levels": [
     "N5"
    ],
@@ -32279,6 +32548,7 @@
    "exampleJp": "楽しい旅行。",
    "exampleZh": "愉快的旅行。",
    "id": "n5_tanoshii",
+   "jmdictSeq": "1207240",
    "levels": [
     "N5"
    ],
@@ -32325,6 +32595,7 @@
    "exampleJp": "友だちに頼みます。",
    "exampleZh": "拜托，请求。",
    "id": "n5_tanomu",
+   "jmdictSeq": "1548370",
    "levels": [
     "N5"
    ],
@@ -32415,6 +32686,7 @@
    "exampleJp": "多分雨が降ります。",
    "exampleZh": "大概，也许。",
    "id": "n5_tabun",
+   "jmdictSeq": "1407980",
    "levels": [
     "N5"
    ],
@@ -32467,6 +32739,7 @@
    "exampleJp": "好きな食べ物。",
    "exampleZh": "喜欢的食物。",
    "id": "n5_tabemono",
+   "jmdictSeq": "1358340",
    "levels": [
     "N5"
    ],
@@ -32519,6 +32792,7 @@
    "exampleJp": "野菜を食べます。",
    "exampleZh": "吃蔬菜。",
    "id": "n5_taberu",
+   "jmdictSeq": "1358280",
    "levels": [
     "N5"
    ],
@@ -32566,6 +32840,7 @@
    "exampleJp": "卵を割ります。",
    "exampleZh": "打鸡蛋。",
    "id": "n5_tamago",
+   "jmdictSeq": "1549140",
    "levels": [
     "N5"
    ],
@@ -32617,6 +32892,7 @@
    "exampleJp": "誰ですか。",
    "exampleZh": "是谁？",
    "id": "n5_dare",
+   "jmdictSeq": "1416830",
    "levels": [
     "N5"
    ],
@@ -32663,6 +32939,7 @@
    "exampleJp": "誰かいますか。",
    "exampleZh": "有人吗？",
    "id": "n5_dareka",
+   "jmdictSeq": "1416840",
    "levels": [
     "N5"
    ],
@@ -32709,6 +32986,7 @@
    "exampleJp": "誕生日おめでとう。",
    "exampleZh": "生日快乐。",
    "id": "n5_tanjoubi",
+   "jmdictSeq": "1419110",
    "levels": [
     "N5"
    ],
@@ -32809,6 +33087,7 @@
    "exampleJp": "小さい声。",
    "exampleZh": "小声。",
    "id": "n5_chiisai",
+   "jmdictSeq": "1347750",
    "levels": [
     "N5"
    ],
@@ -32856,6 +33135,7 @@
    "exampleJp": "小さな子供です。",
    "exampleZh": "是小孩子。",
    "id": "n5_chiisana",
+   "jmdictSeq": "2136180",
    "levels": [
     "N5"
    ],
@@ -32903,6 +33183,7 @@
    "exampleJp": "駅が近いです。",
    "exampleZh": "车站很近。",
    "id": "n5_chikai",
+   "jmdictSeq": "1242130",
    "levels": [
     "N5"
    ],
@@ -32949,6 +33230,7 @@
    "exampleJp": "違います。",
    "exampleZh": "不一样。",
    "id": "n5_chigau",
+   "jmdictSeq": "1158880",
    "levels": [
     "N5"
    ],
@@ -32996,6 +33278,7 @@
    "exampleJp": "駅の近く。",
    "exampleZh": "车站附近。",
    "id": "n5_chikaku",
+   "jmdictSeq": "1242160",
    "levels": [
     "N5"
    ],
@@ -33048,6 +33331,7 @@
    "exampleJp": "地下鉄に乗ります。",
    "exampleZh": "坐地铁。",
    "id": "n5_chikatetsu",
+   "jmdictSeq": "1420900",
    "levels": [
     "N5"
    ],
@@ -33094,6 +33378,7 @@
    "exampleJp": "地図を見ます。",
    "exampleZh": "看地图。",
    "id": "n5_chizu",
+   "jmdictSeq": "1421290",
    "levels": [
     "N5"
    ],
@@ -33140,6 +33425,7 @@
    "exampleJp": "父に話します。",
    "exampleZh": "和父亲说。",
    "id": "n5_chichi",
+   "jmdictSeq": "1497610",
    "levels": [
     "N5"
    ],
@@ -33193,6 +33479,7 @@
    "exampleJp": "茶色のかばん。",
    "exampleZh": "棕色的包。",
    "id": "n5_chairo",
+   "jmdictSeq": "1422720",
    "levels": [
     "N5"
    ],
@@ -33291,6 +33578,7 @@
    "exampleJp": "ちょうど三時。",
    "exampleZh": "正好三点。",
    "id": "n5_choudo",
+   "jmdictSeq": "1427340",
    "levels": [
     "N5"
    ],
@@ -33390,6 +33678,7 @@
    "exampleJp": "四月一日に来ます。",
    "exampleZh": "四月一号来。",
    "id": "n5_tsuitachi",
+   "jmdictSeq": "2225040",
    "levels": [
     "N5"
    ],
@@ -33437,6 +33726,7 @@
    "exampleJp": "パソコンを使います。",
    "exampleZh": "使用电脑。",
    "id": "n5_tsukau",
+   "jmdictSeq": "1305990",
    "levels": [
     "N5"
    ],
@@ -33483,6 +33773,7 @@
    "exampleJp": "仕事で疲れる。",
    "exampleZh": "因为工作累了。",
    "id": "n5_tsukareru",
+   "jmdictSeq": "1483740",
    "levels": [
     "N5"
    ],
@@ -33529,6 +33820,7 @@
    "exampleJp": "次の駅。",
    "exampleZh": "下一站。",
    "id": "n5_tsugi",
+   "jmdictSeq": "1316380",
    "levels": [
     "N5"
    ],
@@ -33575,6 +33867,7 @@
    "exampleJp": "駅に着く。",
    "exampleZh": "到达车站。",
    "id": "n5_tsuku",
+   "jmdictSeq": "1422970",
    "levels": [
     "N5"
    ],
@@ -33626,6 +33919,7 @@
    "exampleJp": "机に座る。",
    "exampleZh": "坐在桌旁。",
    "id": "n5_tsukue",
+   "jmdictSeq": "1220210",
    "levels": [
     "N5"
    ],
@@ -33673,6 +33967,7 @@
    "exampleJp": "料理を作る。",
    "exampleZh": "做菜。",
    "id": "n5_tsukuru",
+   "jmdictSeq": "1597890",
    "levels": [
     "N5"
    ],
@@ -33756,6 +34051,7 @@
    "exampleJp": "会社に勤める。",
    "exampleZh": "在公司工作。",
    "id": "n5_tsutomeru",
+   "jmdictSeq": "1240825",
    "levels": [
     "N5"
    ],
@@ -33839,6 +34135,7 @@
    "exampleJp": "冷たい水。",
    "exampleZh": "凉水。",
    "id": "n5_tsumetai",
+   "jmdictSeq": "1556730",
    "levels": [
     "N5"
    ],
@@ -33890,6 +34187,7 @@
    "exampleJp": "強い風。",
    "exampleZh": "强风。",
    "id": "n5_tsuyoi",
+   "jmdictSeq": "1236070",
    "levels": [
     "N5"
    ],
@@ -33936,6 +34234,7 @@
    "exampleJp": "手を洗います。",
    "exampleZh": "洗手。",
    "id": "n5_te",
+   "jmdictSeq": "1327190",
    "levels": [
     "N5"
    ],
@@ -34116,6 +34415,7 @@
    "exampleJp": "今日出かけます。",
    "exampleZh": "今天出门。",
    "id": "n5_dekakeru",
+   "jmdictSeq": "1598550",
    "levels": [
     "N5"
    ],
@@ -34162,6 +34462,7 @@
    "exampleJp": "手紙を書きます。",
    "exampleZh": "写信。",
    "id": "n5_tegami",
+   "jmdictSeq": "1327720",
    "levels": [
     "N5"
    ],
@@ -34247,6 +34548,7 @@
    "exampleJp": "出口を探す。",
    "exampleZh": "找出口。",
    "id": "n5_deguchi",
+   "jmdictSeq": "1338850",
    "levels": [
     "N5"
    ],
@@ -34484,6 +34786,7 @@
    "exampleJp": "外に出ます。",
    "exampleZh": "出去。",
    "id": "n5_deru",
+   "jmdictSeq": "1338240",
    "levels": [
     "N5"
    ],
@@ -34582,6 +34885,7 @@
    "exampleJp": "天気がいいです。",
    "exampleZh": "天气很好。",
    "id": "n5_tenki",
+   "jmdictSeq": "1438690",
    "levels": [
     "N5"
    ],
@@ -34628,6 +34932,7 @@
    "exampleJp": "電気を消します。",
    "exampleZh": "关灯。",
    "id": "n5_denki",
+   "jmdictSeq": "1443000",
    "levels": [
     "N5"
    ],
@@ -34675,6 +34980,7 @@
    "exampleJp": "電車に乗ります。",
    "exampleZh": "坐电车。",
    "id": "n5_densha",
+   "jmdictSeq": "1443530",
    "levels": [
     "N5"
    ],
@@ -34728,6 +35034,7 @@
    "exampleJp": "電話をかけます。",
    "exampleZh": "打电话。",
    "id": "n5_denwa",
+   "jmdictSeq": "1443840",
    "levels": [
     "N5"
    ],
@@ -34774,6 +35081,7 @@
    "exampleJp": "戸を開けます。",
    "exampleZh": "打开门。",
    "id": "n5_to",
+   "jmdictSeq": "1266970",
    "levels": [
     "N5"
    ],
@@ -35035,6 +35343,7 @@
    "exampleJp": "動物が好き。",
    "exampleZh": "喜欢动物。",
    "id": "n5_doubutsu",
+   "jmdictSeq": "1451470",
    "levels": [
     "N5"
    ],
@@ -35124,6 +35433,7 @@
    "exampleJp": "十個。",
    "exampleZh": "十个。",
    "id": "n5_too",
+   "jmdictSeq": "1579840",
    "levels": [
     "N5"
    ],
@@ -35171,6 +35481,7 @@
    "exampleJp": "遠い国。",
    "exampleZh": "遥远的国家。",
    "id": "n5_tooi",
+   "jmdictSeq": "1177800",
    "levels": [
     "N5"
    ],
@@ -35217,6 +35528,7 @@
    "exampleJp": "十日に来ます。",
    "exampleZh": "十号来。",
    "id": "n5_tooka",
+   "jmdictSeq": "1335000",
    "levels": [
     "N5"
    ],
@@ -35264,6 +35576,7 @@
    "exampleJp": "時々雨が降ります。",
    "exampleZh": "有时会下雨。",
    "id": "n5_tokidoki",
+   "jmdictSeq": "1598680",
    "levels": [
     "N5"
    ],
@@ -35315,6 +35628,7 @@
    "exampleJp": "時計を見ます。",
    "exampleZh": "看表。",
    "id": "n5_tokei",
+   "jmdictSeq": "1316140",
    "levels": [
     "N5"
    ],
@@ -35406,6 +35720,7 @@
    "exampleJp": "いい所。",
    "exampleZh": "好地方。",
    "id": "n5_tokoro",
+   "jmdictSeq": "1343100",
    "levels": [
     "N5"
    ],
@@ -35446,6 +35761,7 @@
    "exampleJp": "年を取る。",
    "exampleZh": "上了年纪。",
    "id": "n5_toshi",
+   "jmdictSeq": "1468060",
    "levels": [
     "N5"
    ],
@@ -35492,6 +35808,7 @@
    "exampleJp": "図書館で勉強します。",
    "exampleZh": "在图书馆学习。",
    "id": "n5_toshokan",
+   "jmdictSeq": "1370420",
    "levels": [
     "N5"
    ],
@@ -35723,6 +36040,7 @@
    "exampleJp": "隣に座る。",
    "exampleZh": "坐在旁边。",
    "id": "n5_tonari",
+   "jmdictSeq": "1555830",
    "levels": [
     "N5"
    ],
@@ -35813,6 +36131,7 @@
    "exampleJp": "鳥が飛ぶ。",
    "exampleZh": "鸟在飞。",
    "id": "n5_tobu",
+   "jmdictSeq": "1429700",
    "levels": [
     "N5"
    ],
@@ -35859,6 +36178,7 @@
    "exampleJp": "電車が止まる。",
    "exampleZh": "电车停下。",
    "id": "n5_tomaru",
+   "jmdictSeq": "1310620",
    "levels": [
     "N5"
    ],
@@ -35905,6 +36225,7 @@
    "exampleJp": "友達と遊びます。",
    "exampleZh": "和朋友玩。",
    "id": "n5_tomodachi",
+   "jmdictSeq": "1540170",
    "levels": [
     "N5"
    ],
@@ -35951,6 +36272,7 @@
    "exampleJp": "土曜日に会う。",
    "exampleZh": "星期六见。",
    "id": "n5_doyoubi",
+   "jmdictSeq": "1445590",
    "levels": [
     "N5"
    ],
@@ -35999,6 +36321,7 @@
    "exampleJp": "鳥が鳴く。",
    "exampleZh": "鸟在叫。",
    "id": "n5_tori",
+   "jmdictSeq": "1430250",
    "levels": [
     "N5"
    ],
@@ -36046,6 +36369,7 @@
    "exampleJp": "鶏肉を焼く。",
    "exampleZh": "烤鸡肉。",
    "id": "n5_toriniku",
+   "jmdictSeq": "1253020",
    "levels": [
     "N5"
    ],
@@ -36092,6 +36416,7 @@
    "exampleJp": "切符を取ります。",
    "exampleZh": "取票。",
    "id": "n5_toru",
+   "jmdictSeq": "1326980",
    "levels": [
     "N5"
    ],
@@ -36140,6 +36465,7 @@
    "exampleJp": "写真を撮る。",
    "exampleZh": "拍照。",
    "id": "n5_toru_2",
+   "jmdictSeq": "1298790",
    "levels": [
     "N5"
    ],
@@ -36364,6 +36690,7 @@
    "exampleJp": "箱の中。",
    "exampleZh": "箱子里面。",
    "id": "n5_naka",
+   "jmdictSeq": "1423310",
    "levels": [
     "N5"
    ],
@@ -36410,6 +36737,7 @@
    "exampleJp": "長い道。",
    "exampleZh": "长长的路。",
    "id": "n5_nagai",
+   "jmdictSeq": "1429750",
    "levels": [
     "N5"
    ],
@@ -36456,6 +36784,7 @@
    "exampleJp": "犬が鳴く。",
    "exampleZh": "狗在叫。",
    "id": "n5_naku",
+   "jmdictSeq": "1532870",
    "levels": [
     "N5"
    ],
@@ -36545,6 +36874,7 @@
    "exampleJp": "鍵をなくします。",
    "exampleZh": "钥匙丢了。",
    "id": "n5_nakusu",
+   "jmdictSeq": "1529530",
    "levels": [
     "N5"
    ],
@@ -36635,6 +36965,7 @@
    "exampleJp": "夏が好き。",
    "exampleZh": "喜欢夏天。",
    "id": "n5_natsu",
+   "jmdictSeq": "1191320",
    "levels": [
     "N5"
    ],
@@ -36681,6 +37012,7 @@
    "exampleJp": "夏休みに旅行します。",
    "exampleZh": "暑假去旅行。",
    "id": "n5_natsuyasumi",
+   "jmdictSeq": "1191420",
    "levels": [
     "N5"
    ],
@@ -36727,6 +37059,7 @@
    "exampleJp": "りんごを七つ。",
    "exampleZh": "七个苹果。",
    "id": "n5_nanatsu",
+   "jmdictSeq": "1319220",
    "levels": [
     "N5"
    ],
@@ -36773,6 +37106,7 @@
    "exampleJp": "七日に来ます。",
    "exampleZh": "七号来。",
    "id": "n5_nanoka",
+   "jmdictSeq": "1579630",
    "levels": [
     "N5"
    ],
@@ -36820,6 +37154,7 @@
    "exampleJp": "名前を書きます。",
    "exampleZh": "写名字。",
    "id": "n5_namae",
+   "jmdictSeq": "1531710",
    "levels": [
     "N5"
    ],
@@ -36866,6 +37201,7 @@
    "exampleJp": "日本語を習う。",
    "exampleZh": "学习日语。",
    "id": "n5_narau",
+   "jmdictSeq": "1333070",
    "levels": [
     "N5"
    ],
@@ -36912,6 +37248,7 @@
    "exampleJp": "列に並ぶ。",
    "exampleZh": "排队。",
    "id": "n5_narabu",
+   "jmdictSeq": "1508380",
    "levels": [
     "N5"
    ],
@@ -36958,6 +37295,7 @@
    "exampleJp": "椅子を並べる。",
    "exampleZh": "摆椅子。",
    "id": "n5_naraberu",
+   "jmdictSeq": "1508390",
    "levels": [
     "N5"
    ],
@@ -37128,6 +37466,7 @@
    "exampleJp": "二時に来ます。",
    "exampleZh": "两点来。",
    "id": "n5_ni",
+   "jmdictSeq": "1461140",
    "levels": [
     "N5"
    ],
@@ -37220,6 +37559,7 @@
    "exampleJp": "肉を食べます。",
    "exampleZh": "吃肉。",
    "id": "n5_niku",
+   "jmdictSeq": "1463520",
    "levels": [
     "N5"
    ],
@@ -37267,6 +37607,7 @@
    "exampleJp": "西に向かう。",
    "exampleZh": "向西走。",
    "id": "n5_nishi",
+   "jmdictSeq": "1380840",
    "levels": [
     "N5"
    ],
@@ -37313,6 +37654,7 @@
    "exampleJp": "日曜日に休みます。",
    "exampleZh": "星期天休息。",
    "id": "n5_nichiyoubi",
+   "jmdictSeq": "1464900",
    "levels": [
     "N5"
    ],
@@ -37360,6 +37702,7 @@
    "exampleJp": "荷物を持ちます。",
    "exampleZh": "拿行李。",
    "id": "n5_nimotsu",
+   "jmdictSeq": "1195430",
    "levels": [
     "N5"
    ],
@@ -37452,6 +37795,7 @@
    "exampleJp": "庭で遊びます。",
    "exampleZh": "在院子里玩。",
    "id": "n5_niwa",
+   "jmdictSeq": "1436130",
    "levels": [
     "N5"
    ],
@@ -37498,6 +37842,7 @@
    "exampleJp": "靴を脱ぐ。",
    "exampleZh": "脱鞋。",
    "id": "n5_nugu",
+   "jmdictSeq": "1416400",
    "levels": [
     "N5"
    ],
@@ -37544,6 +37889,7 @@
    "exampleJp": "ぬるいお湯。",
    "exampleZh": "温水。",
    "id": "n5_nurui",
+   "jmdictSeq": "1183300",
    "levels": [
     "N5"
    ],
@@ -37641,6 +37987,7 @@
    "exampleJp": "猫を飼う。",
    "exampleZh": "养猫。",
    "id": "n5_neko",
+   "jmdictSeq": "1467640",
    "levels": [
     "N5"
    ],
@@ -37687,6 +38034,7 @@
    "exampleJp": "早く寝ます。",
    "exampleZh": "早点睡。",
    "id": "n5_neru",
+   "jmdictSeq": "1360010",
    "levels": [
     "N5"
    ],
@@ -37785,6 +38133,7 @@
    "exampleJp": "山に登る。",
    "exampleZh": "爬山。",
    "id": "n5_noboru",
+   "jmdictSeq": "1352570",
    "levels": [
     "N5"
    ],
@@ -37832,6 +38181,7 @@
    "exampleJp": "飲み物を買います。",
    "exampleZh": "买饮料。",
    "id": "n5_nomimono",
+   "jmdictSeq": "1600430",
    "levels": [
     "N5"
    ],
@@ -37884,6 +38234,7 @@
    "exampleJp": "水を飲みます。",
    "exampleZh": "喝水。",
    "id": "n5_nomu",
+   "jmdictSeq": "1169870",
    "levels": [
     "N5"
    ],
@@ -37931,6 +38282,7 @@
    "exampleJp": "電車に乗ります。",
    "exampleZh": "坐电车。",
    "id": "n5_noru",
+   "jmdictSeq": "1355120",
    "levels": [
     "N5"
    ],
@@ -37977,6 +38329,7 @@
    "exampleJp": "歯を磨く。",
    "exampleZh": "刷牙。",
    "id": "n5_ha",
+   "jmdictSeq": "1313000",
    "levels": [
     "N5"
    ],
@@ -38113,6 +38466,7 @@
    "exampleJp": "灰皿を使います。",
    "exampleZh": "使用烟灰缸。",
    "id": "n5_haizara",
+   "jmdictSeq": "1201940",
    "levels": [
     "N5"
    ],
@@ -38160,6 +38514,7 @@
    "exampleJp": "部屋に入ります。",
    "exampleZh": "进入房间。",
    "id": "n5_hairu",
+   "jmdictSeq": "1465590",
    "levels": [
     "N5"
    ],
@@ -38206,6 +38561,7 @@
    "exampleJp": "葉書を送る。",
    "exampleZh": "寄明信片。",
    "id": "n5_hagaki",
+   "jmdictSeq": "1546590",
    "levels": [
     "N5"
    ],
@@ -38289,6 +38645,7 @@
    "exampleJp": "箱に入れます。",
    "exampleZh": "放进箱子里。",
    "id": "n5_hako",
+   "jmdictSeq": "1585650",
    "levels": [
     "N5"
    ],
@@ -38336,6 +38693,7 @@
    "exampleJp": "橋を渡ります。",
    "exampleZh": "过桥。",
    "id": "n5_hashi",
+   "jmdictSeq": "1237410",
    "levels": [
     "N5"
    ],
@@ -38383,6 +38741,7 @@
    "exampleJp": "箸を使います。",
    "exampleZh": "使用筷子。",
    "id": "n5_hashi_2",
+   "jmdictSeq": "1476410",
    "levels": [
     "N5"
    ],
@@ -38430,6 +38789,7 @@
    "exampleJp": "授業が始まります。",
    "exampleZh": "开始上课。",
    "id": "n5_hajimaru",
+   "jmdictSeq": "1307500",
    "levels": [
     "N5"
    ],
@@ -38524,6 +38884,7 @@
    "exampleJp": "初めて日本に来た。",
    "exampleZh": "第一次来日本。",
    "id": "n5_hajimete",
+   "jmdictSeq": "1342550",
    "levels": [
     "N5"
    ],
@@ -38570,6 +38931,7 @@
    "exampleJp": "道を走ります。",
    "exampleZh": "在路上跑。",
    "id": "n5_hashiru",
+   "jmdictSeq": "1402540",
    "levels": [
     "N5"
    ],
@@ -38715,6 +39077,7 @@
    "exampleJp": "二十歳になります。",
    "exampleZh": "到二十岁。",
    "id": "n5_hatachi",
+   "jmdictSeq": "1600790",
    "levels": [
     "N5"
    ],
@@ -38761,6 +39124,7 @@
    "exampleJp": "会社で働きます。",
    "exampleZh": "在公司工作。",
    "id": "n5_hataraku",
+   "jmdictSeq": "1451150",
    "levels": [
     "N5"
    ],
@@ -38807,6 +39171,7 @@
    "exampleJp": "八時に来ます。",
    "exampleZh": "八点来。",
    "id": "n5_hachi",
+   "jmdictSeq": "1583090",
    "levels": [
     "N5"
    ],
@@ -38853,6 +39218,7 @@
    "exampleJp": "二十日に来ます。",
    "exampleZh": "二十号来。",
    "id": "n5_hatsuka",
+   "jmdictSeq": "1600850",
    "levels": [
     "N5"
    ],
@@ -38900,6 +39266,7 @@
    "exampleJp": "花が咲きます。",
    "exampleZh": "花开了。",
    "id": "n5_hana",
+   "jmdictSeq": "1194500",
    "levels": [
     "N5"
    ],
@@ -38948,6 +39315,7 @@
    "exampleJp": "鼻が痛いです。",
    "exampleZh": "鼻子痛。",
    "id": "n5_hana_2",
+   "jmdictSeq": "1486720",
    "levels": [
     "N5"
    ],
@@ -38995,6 +39363,7 @@
    "exampleJp": "話を聞きます。",
    "exampleZh": "听故事。",
    "id": "n5_hanashi",
+   "jmdictSeq": "1600900",
    "levels": [
     "N5"
    ],
@@ -39041,6 +39410,7 @@
    "exampleJp": "日本語で話します。",
    "exampleZh": "用日语说话。",
    "id": "n5_hanasu",
+   "jmdictSeq": "1562350",
    "levels": [
     "N5"
    ],
@@ -39087,6 +39457,7 @@
    "exampleJp": "母に電話します。",
    "exampleZh": "给母亲打电话。",
    "id": "n5_haha",
+   "jmdictSeq": "1514990",
    "levels": [
     "N5"
    ],
@@ -39134,6 +39505,7 @@
    "exampleJp": "朝早いです。",
    "exampleZh": "早上很早。",
    "id": "n5_hayai",
+   "jmdictSeq": "1404975",
    "levels": [
     "N5"
    ],
@@ -39181,6 +39553,7 @@
    "exampleJp": "速い車。",
    "exampleZh": "速度快的车。",
    "id": "n5_hayai_2",
+   "jmdictSeq": "1404975",
    "levels": [
     "N5"
    ],
@@ -39228,6 +39601,7 @@
    "exampleJp": "春の花。",
    "exampleZh": "春天的花。",
    "id": "n5_haru",
+   "jmdictSeq": "1341000",
    "levels": [
     "N5"
    ],
@@ -39275,6 +39649,7 @@
    "exampleJp": "切手を貼る。",
    "exampleZh": "贴邮票。",
    "id": "n5_haru_2",
+   "jmdictSeq": "1427900",
    "levels": [
     "N5"
    ],
@@ -39323,6 +39698,7 @@
    "exampleJp": "今日は晴れ。",
    "exampleZh": "今天是晴天。",
    "id": "n5_hare",
+   "jmdictSeq": "1376460",
    "levels": [
     "N5"
    ],
@@ -39369,6 +39745,7 @@
    "exampleJp": "空が晴れます。",
    "exampleZh": "天放晴了。",
    "id": "n5_hareru",
+   "jmdictSeq": "1376470",
    "levels": [
     "N5"
    ],
@@ -39415,6 +39792,7 @@
    "exampleJp": "三時半。",
    "exampleZh": "三点半。",
    "id": "n5_han",
+   "jmdictSeq": "1478750",
    "levels": [
     "N5"
    ],
@@ -39461,6 +39839,7 @@
    "exampleJp": "晩に来ます。",
    "exampleZh": "晚上来。",
    "id": "n5_ban",
+   "jmdictSeq": "1482110",
    "levels": [
     "N5"
    ],
@@ -39614,6 +39993,7 @@
    "exampleJp": "電話番号。",
    "exampleZh": "电话号码。",
    "id": "n5_bangou",
+   "jmdictSeq": "1482290",
    "levels": [
     "N5"
    ],
@@ -39661,6 +40041,7 @@
    "exampleJp": "晩御飯を食べます。",
    "exampleZh": "吃晚饭。",
    "id": "n5_bangohan",
+   "jmdictSeq": "1601340",
    "levels": [
     "N5"
    ],
@@ -39707,6 +40088,7 @@
    "exampleJp": "半分食べます。",
    "exampleZh": "吃一半。",
    "id": "n5_hanbun",
+   "jmdictSeq": "1479890",
    "levels": [
     "N5"
    ],
@@ -39754,6 +40136,7 @@
    "exampleJp": "東に向かう。",
    "exampleZh": "向东走。",
    "id": "n5_higashi",
+   "jmdictSeq": "1447440",
    "levels": [
     "N5"
    ],
@@ -39805,6 +40188,7 @@
    "exampleJp": "辞書を引く。",
    "exampleZh": "查词典。",
    "id": "n5_hiku",
+   "jmdictSeq": "1169250",
    "levels": [
     "N5"
    ],
@@ -39852,6 +40236,7 @@
    "exampleJp": "ピアノを弾きます。",
    "exampleZh": "弹钢琴。",
    "id": "n5_hiku_2",
+   "jmdictSeq": "1419370",
    "levels": [
     "N5"
    ],
@@ -39899,6 +40284,7 @@
    "exampleJp": "声が低いです。",
    "exampleZh": "声音很低。",
    "id": "n5_hikui",
+   "jmdictSeq": "1434180",
    "levels": [
     "N5"
    ],
@@ -39945,6 +40331,7 @@
    "exampleJp": "飛行機に乗ります。",
    "exampleZh": "坐飞机。",
    "id": "n5_hikouki",
+   "jmdictSeq": "1485470",
    "levels": [
     "N5"
    ],
@@ -39992,6 +40379,7 @@
    "exampleJp": "左に曲がります。",
    "exampleZh": "向左转。",
    "id": "n5_hidari",
+   "jmdictSeq": "1290800",
    "levels": [
     "N5"
    ],
@@ -40038,6 +40426,7 @@
    "exampleJp": "知らない人。",
    "exampleZh": "不认识的人。",
    "id": "n5_hito",
+   "jmdictSeq": "1580640",
    "levels": [
     "N5"
    ],
@@ -40084,6 +40473,7 @@
    "exampleJp": "りんごを一つ。",
    "exampleZh": "一个苹果。",
    "id": "n5_hitotsu",
+   "jmdictSeq": "1160820",
    "levels": [
     "N5"
    ],
@@ -40130,6 +40520,7 @@
    "exampleJp": "一月後に来ます。",
    "exampleZh": "一个月后来。",
    "id": "n5_hitotsuki",
+   "jmdictSeq": "1162130",
    "levels": [
     "N5"
    ],
@@ -40177,6 +40568,7 @@
    "exampleJp": "一人で行きます。",
    "exampleZh": "一个人去。",
    "id": "n5_hitori",
+   "jmdictSeq": "1576150",
    "levels": [
     "N5"
    ],
@@ -40223,6 +40615,7 @@
    "exampleJp": "今日は暇です。",
    "exampleZh": "今天有空。",
    "id": "n5_hima",
+   "jmdictSeq": "1577280",
    "levels": [
     "N5"
    ],
@@ -40269,6 +40662,7 @@
    "exampleJp": "百円。",
    "exampleZh": "一百日元。",
    "id": "n5_hyaku",
+   "jmdictSeq": "1488000",
    "levels": [
     "N5"
    ],
@@ -40317,6 +40711,7 @@
    "exampleJp": "病院に行きます。",
    "exampleZh": "去医院。",
    "id": "n5_byouin",
+   "jmdictSeq": "1490220",
    "levels": [
     "N5"
    ],
@@ -40365,6 +40760,7 @@
    "exampleJp": "病気になります。",
    "exampleZh": "生病。",
    "id": "n5_byouki",
+   "jmdictSeq": "1490230",
    "levels": [
     "N5"
    ],
@@ -40460,6 +40856,7 @@
    "exampleJp": "昼に食べます。",
    "exampleZh": "中午吃。",
    "id": "n5_hiru",
+   "jmdictSeq": "1426250",
    "levels": [
     "N5"
    ],
@@ -40508,6 +40905,7 @@
    "exampleJp": "昼御飯を食べます。",
    "exampleZh": "吃午饭。",
    "id": "n5_hirugohan",
+   "jmdictSeq": "1602340",
    "levels": [
     "N5"
    ],
@@ -40555,6 +40953,7 @@
    "exampleJp": "広い部屋。",
    "exampleZh": "宽敞的房间。",
    "id": "n5_hiroi",
+   "jmdictSeq": "1278410",
    "levels": [
     "N5"
    ],
@@ -40646,6 +41045,7 @@
    "exampleJp": "封筒に入れます。",
    "exampleZh": "放进信封里。",
    "id": "n5_fuutou",
+   "jmdictSeq": "1499690",
    "levels": [
     "N5"
    ],
@@ -40790,6 +41190,7 @@
    "exampleJp": "風が吹きます。",
    "exampleZh": "风在吹。",
    "id": "n5_fuku",
+   "jmdictSeq": "1370760",
    "levels": [
     "N5"
    ],
@@ -40842,6 +41243,7 @@
    "exampleJp": "服を着ます。",
    "exampleZh": "穿衣服。",
    "id": "n5_fuku_2",
+   "jmdictSeq": "1500940",
    "levels": [
     "N5"
    ],
@@ -40889,6 +41291,7 @@
    "exampleJp": "りんごを二つ。",
    "exampleZh": "两个苹果。",
    "id": "n5_futatsu",
+   "jmdictSeq": "1461160",
    "levels": [
     "N5"
    ],
@@ -40936,6 +41339,7 @@
    "exampleJp": "豚肉を焼く。",
    "exampleZh": "烤猪肉。",
    "id": "n5_butaniku",
+   "jmdictSeq": "1457440",
    "levels": [
     "N5"
    ],
@@ -40982,6 +41386,7 @@
    "exampleJp": "二人で行きます。",
    "exampleZh": "两个人一起去。",
    "id": "n5_futari",
+   "jmdictSeq": "1582670",
    "levels": [
     "N5"
    ],
@@ -41028,6 +41433,7 @@
    "exampleJp": "二日に来ます。",
    "exampleZh": "二号来。",
    "id": "n5_futsuka",
+   "jmdictSeq": "1462900",
    "levels": [
     "N5"
    ],
@@ -41075,6 +41481,7 @@
    "exampleJp": "太い木。",
    "exampleZh": "粗壮的树。",
    "id": "n5_futoi",
+   "jmdictSeq": "1408180",
    "levels": [
     "N5"
    ],
@@ -41121,6 +41528,7 @@
    "exampleJp": "冬が寒いです。",
    "exampleZh": "冬天很冷。",
    "id": "n5_fuyu",
+   "jmdictSeq": "1446070",
    "levels": [
     "N5"
    ],
@@ -41167,6 +41575,7 @@
    "exampleJp": "雨が降ります。",
    "exampleZh": "下雨。",
    "id": "n5_furu",
+   "jmdictSeq": "1282790",
    "levels": [
     "N5"
    ],
@@ -41213,6 +41622,7 @@
    "exampleJp": "古い建物。",
    "exampleZh": "旧建筑。",
    "id": "n5_furui",
+   "jmdictSeq": "1265070",
    "levels": [
     "N5"
    ],
@@ -41259,6 +41669,7 @@
    "exampleJp": "文章を読みます。",
    "exampleZh": "读文章。",
    "id": "n5_bunshou",
+   "jmdictSeq": "1505470",
    "levels": [
     "N5"
    ],
@@ -41346,6 +41757,7 @@
    "exampleJp": "料理が下手。",
    "exampleZh": "不擅长做菜。",
    "id": "n5_heta",
+   "jmdictSeq": "1185200",
    "levels": [
     "N5"
    ],
@@ -41500,6 +41912,7 @@
    "exampleJp": "部屋に入ります。",
    "exampleZh": "进入房间。",
    "id": "n5_heya",
+   "jmdictSeq": "1499320",
    "levels": [
     "N5"
    ],
@@ -41547,6 +41960,7 @@
    "exampleJp": "この辺。",
    "exampleZh": "一带，附近。",
    "id": "n5_hen",
+   "jmdictSeq": "1512070",
    "levels": [
     "N5"
    ],
@@ -41644,6 +42058,7 @@
    "exampleJp": "日本語を勉強します。",
    "exampleZh": "学习日语。",
    "id": "n5_benkyou",
+   "jmdictSeq": "1512670",
    "levels": [
     "N5"
    ],
@@ -41692,6 +42107,7 @@
    "exampleJp": "便利な場所です。",
    "exampleZh": "是方便的地方。",
    "id": "n5_benri",
+   "jmdictSeq": "1512610",
    "levels": [
     "N5"
    ],
@@ -41738,6 +42154,7 @@
    "exampleJp": "帽子をかぶる。",
    "exampleZh": "戴帽子。",
    "id": "n5_boushi",
+   "jmdictSeq": "1519170",
    "levels": [
     "N5"
    ],
@@ -41836,6 +42253,7 @@
    "exampleJp": "ほかに何かある。",
    "exampleZh": "还有别的吗？",
    "id": "n5_hoka",
+   "jmdictSeq": "1203260",
    "levels": [
     "N5"
    ],
@@ -41939,6 +42357,7 @@
    "exampleJp": "新しい服が欲しいです。",
    "exampleZh": "想要新衣服。",
    "id": "n5_hoshii",
+   "jmdictSeq": "1547330",
    "levels": [
     "N5"
    ],
@@ -42030,6 +42449,7 @@
    "exampleJp": "細い道。",
    "exampleZh": "狭窄的小路。",
    "id": "n5_hosoi",
+   "jmdictSeq": "1295510",
    "levels": [
     "N5"
    ],
@@ -42181,6 +42601,7 @@
    "exampleJp": "本を読みます。",
    "exampleZh": "读书。",
    "id": "n5_hon",
+   "jmdictSeq": "1522150",
    "levels": [
     "N5"
    ],
@@ -42227,6 +42648,7 @@
    "exampleJp": "本棚に置きます。",
    "exampleZh": "放在书架上。",
    "id": "n5_hondana",
+   "jmdictSeq": "1522980",
    "levels": [
     "N5"
    ],
@@ -42273,6 +42695,7 @@
    "exampleJp": "本当ですか。",
    "exampleZh": "真的吗？",
    "id": "n5_hontou",
+   "jmdictSeq": "1523060",
    "levels": [
     "N5"
    ],
@@ -42319,6 +42742,7 @@
    "exampleJp": "毎朝七時に起きます。",
    "exampleZh": "每天早上七点起床。",
    "id": "n5_maiasa",
+   "jmdictSeq": "1524700",
    "levels": [
     "N5"
    ],
@@ -42418,6 +42842,7 @@
    "exampleJp": "毎週会う。",
    "exampleZh": "每周见面。",
    "id": "n5_maishuu",
+   "jmdictSeq": "1524690",
    "levels": [
     "N5"
    ],
@@ -42465,6 +42890,7 @@
    "exampleJp": "毎日練習します。",
    "exampleZh": "每天练习。",
    "id": "n5_mainichi",
+   "jmdictSeq": "1524720",
    "levels": [
     "N5"
    ],
@@ -42559,6 +42985,7 @@
    "exampleJp": "毎晩電話します。",
    "exampleZh": "每晚打电话。",
    "id": "n5_maiban",
+   "jmdictSeq": "1524730",
    "levels": [
     "N5"
    ],
@@ -42611,6 +43038,7 @@
    "exampleJp": "改札口の前で待ち合わせします。",
    "exampleZh": "在检票口前面碰面。",
    "id": "n5_mae",
+   "jmdictSeq": "1392580",
    "levels": [
     "N5"
    ],
@@ -42658,6 +43086,7 @@
    "exampleJp": "次の角を右に曲がってください。",
    "exampleZh": "请在下一个路口向右转。",
    "id": "n5_magaru",
+   "jmdictSeq": "1239730",
    "levels": [
     "N5"
    ],
@@ -42831,6 +43260,7 @@
    "exampleJp": "町を歩いて観光しました。",
    "exampleZh": "步行在镇上观光了。",
    "id": "n5_machi",
+   "jmdictSeq": "1603990",
    "levels": [
     "N5"
    ],
@@ -42877,6 +43307,7 @@
    "exampleJp": "友だちを空港で待ちました。",
    "exampleZh": "在机场等了朋友。",
    "id": "n5_matsu",
+   "jmdictSeq": "1410590",
    "levels": [
     "N5"
    ],
@@ -43021,6 +43452,7 @@
    "exampleJp": "暑いので窓を開けてもいいですか。",
    "exampleZh": "天热，可以开窗吗？",
    "id": "n5_mado",
+   "jmdictSeq": "1401400",
    "levels": [
     "N5"
    ],
@@ -43121,6 +43553,7 @@
    "exampleJp": "一万円札を崩してもらえますか。",
    "exampleZh": "可以帮我破开一张一万日元吗？",
    "id": "n5_man",
+   "jmdictSeq": "1584460",
    "levels": [
     "N5"
    ],
@@ -43167,6 +43600,7 @@
    "exampleJp": "万年筆で書いてもいいですか。",
    "exampleZh": "可以用钢笔写吗？",
    "id": "n5_mannenhitsu",
+   "jmdictSeq": "1526360",
    "levels": [
     "N5"
    ],
@@ -43213,6 +43647,7 @@
    "exampleJp": "歯を磨きます。",
    "exampleZh": "刷牙。",
    "id": "n5_migaku",
+   "jmdictSeq": "1523940",
    "levels": [
     "N5"
    ],
@@ -43260,6 +43695,7 @@
    "exampleJp": "次の信号を右に曲がってください。",
    "exampleZh": "请在下一个红绿灯右转。",
    "id": "n5_migi",
+   "jmdictSeq": "1171010",
    "levels": [
     "N5"
    ],
@@ -43306,6 +43742,7 @@
    "exampleJp": "少し短い話をします。",
    "exampleZh": "我来讲一个简短的故事。",
    "id": "n5_mijikai",
+   "jmdictSeq": "1418620",
    "levels": [
     "N5"
    ],
@@ -43353,6 +43790,7 @@
    "exampleJp": "喉が渇いたので水を飲みました。",
    "exampleZh": "口渴了，喝了水。",
    "id": "n5_mizu",
+   "jmdictSeq": "1371260",
    "levels": [
     "N5"
    ],
@@ -43401,6 +43839,7 @@
    "exampleJp": "店に入ります。",
    "exampleZh": "进店。",
    "id": "n5_mise",
+   "jmdictSeq": "1582120",
    "levels": [
     "N5"
    ],
@@ -43447,6 +43886,7 @@
    "exampleJp": "スマホで写真を見せてもらいました。",
    "exampleZh": "让我看了手机里的照片。",
    "id": "n5_miseru",
+   "jmdictSeq": "1259210",
    "levels": [
     "N5"
    ],
@@ -43494,6 +43934,7 @@
    "exampleJp": "どの道を歩けばいいですか。",
    "exampleZh": "走哪条路好？",
    "id": "n5_michi",
+   "jmdictSeq": "1454080",
    "levels": [
     "N5"
    ],
@@ -43540,6 +43981,7 @@
    "exampleJp": "三日の午後に来てください。",
    "exampleZh": "请三号下午来。",
    "id": "n5_mikka",
+   "jmdictSeq": "1301330",
    "levels": [
     "N5"
    ],
@@ -43588,6 +44030,7 @@
    "exampleJp": "りんごを三つください。",
    "exampleZh": "请给我三个苹果。",
    "id": "n5_mittsu",
+   "jmdictSeq": "1299740",
    "levels": [
     "N5"
    ],
@@ -43635,6 +44078,7 @@
    "exampleJp": "緑の葉がきれいです。",
    "exampleZh": "绿色的叶子很漂亮。",
    "id": "n5_midori",
+   "jmdictSeq": "1555300",
    "levels": [
     "N5"
    ],
@@ -43683,6 +44127,7 @@
    "exampleJp": "皆さん、こちらに集まってください。",
    "exampleZh": "大家，请聚到这边来。",
    "id": "n5_minasan",
+   "jmdictSeq": "1202170",
    "levels": [
     "N5"
    ],
@@ -43730,6 +44175,7 @@
    "exampleJp": "南口から出てください。",
    "exampleZh": "请从南口出去。",
    "id": "n5_minami",
+   "jmdictSeq": "1459870",
    "levels": [
     "N5"
    ],
@@ -43776,6 +44222,7 @@
    "exampleJp": "飛行機で耳が痛くなりました。",
    "exampleZh": "坐飞机耳朵痛了。",
    "id": "n5_mimi",
+   "jmdictSeq": "1317170",
    "levels": [
     "N5"
    ],
@@ -43823,6 +44270,7 @@
    "exampleJp": "映画を一人で見ました。",
    "exampleZh": "一个人看了电影。",
    "id": "n5_miru",
+   "jmdictSeq": "1259290",
    "levels": [
     "N5"
    ],
@@ -43921,6 +44369,7 @@
    "exampleJp": "六日の午前中に来てください。",
    "exampleZh": "请六号上午来。",
    "id": "n5_muika",
+   "jmdictSeq": "1561470",
    "levels": [
     "N5"
    ],
@@ -43968,6 +44417,7 @@
    "exampleJp": "向こうのカフェで待ちましょう。",
    "exampleZh": "在对面的咖啡馆等吧。",
    "id": "n5_mukou",
+   "jmdictSeq": "1277140",
    "levels": [
     "N5"
    ],
@@ -44019,6 +44469,7 @@
    "exampleJp": "この問題は難しすぎます。",
    "exampleZh": "这道题太难了。",
    "id": "n5_muzukashii",
+   "jmdictSeq": "1460850",
    "levels": [
     "N5"
    ],
@@ -44070,6 +44521,7 @@
    "exampleJp": "りんごを六つください。",
    "exampleZh": "请给我六个苹果。",
    "id": "n5_muttsu",
+   "jmdictSeq": "1585315",
    "levels": [
     "N5"
    ],
@@ -44117,6 +44569,7 @@
    "exampleJp": "静かな村で一週間過ごしました。",
    "exampleZh": "在安静的村子里待了一周。",
    "id": "n5_mura",
+   "jmdictSeq": "1406820",
    "levels": [
     "N5"
    ],
@@ -44163,6 +44616,7 @@
    "exampleJp": "目が乾いています。",
    "exampleZh": "眼睛干涩。",
    "id": "n5_me",
+   "jmdictSeq": "1604890",
    "levels": [
     "N5"
    ],
@@ -44256,6 +44710,7 @@
    "exampleJp": "眼鏡が合わなくなりました。",
    "exampleZh": "眼镜不合适了。",
    "id": "n5_megane",
+   "jmdictSeq": "1577670",
    "levels": [
     "N5"
    ],
@@ -44350,6 +44805,7 @@
    "exampleJp": "木曜日の午前中はいかがですか。",
    "exampleZh": "星期四上午怎么样？",
    "id": "n5_mokuyoubi",
+   "jmdictSeq": "1534890",
    "levels": [
     "N5"
    ],
@@ -44440,6 +44896,7 @@
    "exampleJp": "重いかばんを持ってあげました。",
    "exampleZh": "帮忙拿了重包。",
    "id": "n5_motsu",
+   "jmdictSeq": "1315720",
    "levels": [
     "N5"
    ],
@@ -44532,6 +44989,7 @@
    "exampleJp": "大切な物を忘れないでください。",
    "exampleZh": "请不要忘记重要的东西。",
    "id": "n5_mono",
+   "jmdictSeq": "1502390",
    "levels": [
     "N5"
    ],
@@ -44585,6 +45043,7 @@
    "exampleJp": "門が閉まっています。",
    "exampleZh": "门关着。",
    "id": "n5_mon",
+   "jmdictSeq": "1584800",
    "levels": [
     "N5"
    ],
@@ -44632,6 +45091,7 @@
    "exampleJp": "問題があれば教えてください。",
    "exampleZh": "有问题的话请告诉我。",
    "id": "n5_mondai",
+   "jmdictSeq": "1536010",
    "levels": [
     "N5"
    ],
@@ -44680,6 +45140,7 @@
    "exampleJp": "八百屋で新鮮な野菜を買いました。",
    "exampleZh": "在蔬菜店买了新鲜蔬菜。",
    "id": "n5_yaoya",
+   "jmdictSeq": "1476960",
    "levels": [
     "N5"
    ],
@@ -44727,6 +45188,7 @@
    "exampleJp": "毎日野菜を食べてください。",
    "exampleZh": "请每天吃蔬菜。",
    "id": "n5_yasai",
+   "jmdictSeq": "1537370",
    "levels": [
     "N5"
    ],
@@ -44773,6 +45235,7 @@
    "exampleJp": "この問題は易しいです。",
    "exampleZh": "这道题很简单。",
    "id": "n5_yasashii",
+   "jmdictSeq": "1157000",
    "levels": [
     "N5"
    ],
@@ -44825,6 +45288,7 @@
    "exampleJp": "安い服を探しています。",
    "exampleZh": "在找便宜的衣服。",
    "id": "n5_yasui",
+   "jmdictSeq": "1153670",
    "levels": [
     "N5"
    ],
@@ -44871,6 +45335,7 @@
    "exampleJp": "夏休みを楽しみにしています。",
    "exampleZh": "期待着暑假。",
    "id": "n5_yasumi",
+   "jmdictSeq": "1227500",
    "levels": [
     "N5"
    ],
@@ -44918,6 +45383,7 @@
    "exampleJp": "少し休んでから続けます。",
    "exampleZh": "休息一下再继续。",
    "id": "n5_yasumu",
+   "jmdictSeq": "1227560",
    "levels": [
     "N5"
    ],
@@ -44964,6 +45430,7 @@
    "exampleJp": "りんごを八つください。",
    "exampleZh": "请给我八个苹果。",
    "id": "n5_yattsu",
+   "jmdictSeq": "1583095",
    "levels": [
     "N5"
    ],
@@ -45011,6 +45478,7 @@
    "exampleJp": "山に登ったことがありますか。",
    "exampleZh": "你爬过山吗？",
    "id": "n5_yama",
+   "jmdictSeq": "1302680",
    "levels": [
     "N5"
    ],
@@ -45102,6 +45570,7 @@
    "exampleJp": "夕方に迎えに来ます。",
    "exampleZh": "傍晚来接你。",
    "id": "n5_yuugata",
+   "jmdictSeq": "1542790",
    "levels": [
     "N5"
    ],
@@ -45149,6 +45618,7 @@
    "exampleJp": "夕飯は何を食べますか。",
    "exampleZh": "晚饭吃什么？",
    "id": "n5_yuuhan",
+   "jmdictSeq": "1584910",
    "levels": [
     "N5"
    ],
@@ -45195,6 +45665,7 @@
    "exampleJp": "郵便局で荷物を送りました。",
    "exampleZh": "在邮局寄了快递。",
    "id": "n5_yuubinkyoku",
+   "jmdictSeq": "1542430",
    "levels": [
     "N5"
    ],
@@ -45242,6 +45713,7 @@
    "exampleJp": "昨夜は遅く帰りました。",
    "exampleZh": "昨晚很晚才回来。",
    "id": "n5_yuube",
+   "jmdictSeq": "1542640",
    "levels": [
     "N5"
    ],
@@ -45288,6 +45760,7 @@
    "exampleJp": "この場所はとても有名です。",
    "exampleZh": "这个地方非常有名。",
    "id": "n5_yuumei",
+   "jmdictSeq": "1541620",
    "levels": [
     "N5"
    ],
@@ -45334,6 +45807,7 @@
    "exampleJp": "雪が降っています。",
    "exampleZh": "正在下雪。",
    "id": "n5_yuki",
+   "jmdictSeq": "1386500",
    "levels": [
     "N5"
    ],
@@ -45420,6 +45894,7 @@
    "exampleJp": "八日の朝に出発します。",
    "exampleZh": "八号早上出发。",
    "id": "n5_youka",
+   "jmdictSeq": "1476920",
    "levels": [
     "N5"
    ],
@@ -45468,6 +45943,7 @@
    "exampleJp": "どんな洋服が好きですか。",
    "exampleZh": "喜欢什么样的衣服？",
    "id": "n5_youfuku",
+   "jmdictSeq": "1546020",
    "levels": [
     "N5"
    ],
@@ -45552,6 +46028,7 @@
    "exampleJp": "横に座ってもいいですか。",
    "exampleZh": "可以坐旁边吗？",
    "id": "n5_yoko",
+   "jmdictSeq": "1180570",
    "levels": [
     "N5"
    ],
@@ -45598,6 +46075,7 @@
    "exampleJp": "四日の午後はどうですか。",
    "exampleZh": "四号下午怎么样？",
    "id": "n5_yokka",
+   "jmdictSeq": "1307320",
    "levels": [
     "N5"
    ],
@@ -45646,6 +46124,7 @@
    "exampleJp": "りんごを四つください。",
    "exampleZh": "请给我四个苹果。",
    "id": "n5_yottsu",
+   "jmdictSeq": "1307040",
    "levels": [
     "N5"
    ],
@@ -45693,6 +46172,7 @@
    "exampleJp": "友だちを呼んでもいいですか。",
    "exampleZh": "可以叫朋友来吗？",
    "id": "n5_yobu",
+   "jmdictSeq": "1266440",
    "levels": [
     "N5"
    ],
@@ -45739,6 +46219,7 @@
    "exampleJp": "この本を読んでみてください。",
    "exampleZh": "请试着读一读这本书。",
    "id": "n5_yomu",
+   "jmdictSeq": "1456360",
    "levels": [
     "N5"
    ],
@@ -45785,6 +46266,7 @@
    "exampleJp": "夜遅くまで仕事しました。",
    "exampleZh": "工作到很晚。",
    "id": "n5_yoru",
+   "jmdictSeq": "1536350",
    "levels": [
     "N5"
    ],
@@ -45831,6 +46313,7 @@
    "exampleJp": "風が弱いです。",
    "exampleZh": "风很弱。",
    "id": "n5_yowai",
+   "jmdictSeq": "1324520",
    "levels": [
     "N5"
    ],
@@ -45928,6 +46411,7 @@
    "exampleJp": "来月また来ます。",
    "exampleZh": "下个月再来。",
    "id": "n5_raigetsu",
+   "jmdictSeq": "1547900",
    "levels": [
     "N5"
    ],
@@ -45975,6 +46459,7 @@
    "exampleJp": "来週、また会いましょう。",
    "exampleZh": "下周再见面吧。",
    "id": "n5_raishuu",
+   "jmdictSeq": "1548010",
    "levels": [
     "N5"
    ],
@@ -46022,6 +46507,7 @@
    "exampleJp": "来年、また日本に来ます。",
    "exampleZh": "明年再来日本。",
    "id": "n5_rainen",
+   "jmdictSeq": "1548220",
    "levels": [
     "N5"
    ],
@@ -46205,6 +46691,7 @@
    "exampleJp": "留学生として日本に来ました。",
    "exampleZh": "作为留学生来到了日本。",
    "id": "n5_ryuugakusei",
+   "jmdictSeq": "1552750",
    "levels": [
     "N5"
    ],
@@ -46257,6 +46744,7 @@
    "exampleJp": "両親に電話しました。",
    "exampleZh": "给父母打了电话。",
    "id": "n5_ryoushin",
+   "jmdictSeq": "1602710",
    "levels": [
     "N5"
    ],
@@ -46305,6 +46793,7 @@
    "exampleJp": "日本料理の作り方を習いました。",
    "exampleZh": "学了日本料理的做法。",
    "id": "n5_ryouri",
+   "jmdictSeq": "1554310",
    "levels": [
     "N5"
    ],
@@ -46353,6 +46842,7 @@
    "exampleJp": "日本を旅行するのが夢でした。",
    "exampleZh": "去日本旅行一直是我的梦想。",
    "id": "n5_ryokou",
+   "jmdictSeq": "1553170",
    "levels": [
     "N5"
    ],
@@ -46400,6 +46890,7 @@
    "exampleJp": "零から始めます。",
    "exampleZh": "从零开始。",
    "id": "n5_rei",
+   "jmdictSeq": "1557630",
    "levels": [
     "N5"
    ],
@@ -46446,6 +46937,7 @@
    "exampleJp": "牛乳を冷蔵庫に入れてください。",
    "exampleZh": "请把牛奶放进冰箱。",
    "id": "n5_reizouko",
+   "jmdictSeq": "1557110",
    "levels": [
     "N5"
    ],
@@ -46590,6 +47082,7 @@
    "exampleJp": "毎日練習します。",
    "exampleZh": "每天练习。",
    "id": "n5_renshuu",
+   "jmdictSeq": "1559160",
    "levels": [
     "N5"
    ],
@@ -46637,6 +47130,7 @@
    "exampleJp": "廊下を走らないでください。",
    "exampleZh": "请不要在走廊奔跑。",
    "id": "n5_rouka",
+   "jmdictSeq": "1560670",
    "levels": [
     "N5"
    ],
@@ -46683,6 +47177,7 @@
    "exampleJp": "六時に会いましょう。",
    "exampleZh": "六点见吧。",
    "id": "n5_roku",
+   "jmdictSeq": "1585310",
    "levels": [
     "N5"
    ],
@@ -46776,6 +47271,7 @@
    "exampleJp": "若い人が多い店です。",
    "exampleZh": "年轻人很多的店。",
    "id": "n5_wakai",
+   "jmdictSeq": "1324300",
    "levels": [
     "N5"
    ],
@@ -46823,6 +47319,7 @@
    "exampleJp": "この言葉の意味が分かりますか。",
    "exampleZh": "你明白这个词的意思吗？",
    "id": "n5_wakaru",
+   "jmdictSeq": "1606560",
    "levels": [
     "N5"
    ],
@@ -46870,6 +47367,7 @@
    "exampleJp": "名前を忘れてしまいました。",
    "exampleZh": "把名字忘了。",
    "id": "n5_wasureru",
+   "jmdictSeq": "1519210",
    "levels": [
     "N5"
    ],
@@ -46917,6 +47415,7 @@
    "exampleJp": "わたくしは田中です。",
    "exampleZh": "我是田中。",
    "id": "n5_watakushi",
+   "jmdictSeq": "2842390",
    "levels": [
     "N5"
    ],
@@ -46964,6 +47463,7 @@
    "exampleJp": "私の名前は田中です。",
    "exampleZh": "我叫田中。",
    "id": "n5_watashi",
+   "jmdictSeq": "1311110",
    "levels": [
     "N5"
    ],
@@ -47010,6 +47510,7 @@
    "exampleJp": "書類をここに渡してください。",
    "exampleZh": "请把文件交到这里。",
    "id": "n5_watasu",
+   "jmdictSeq": "1444610",
    "levels": [
     "N5"
    ],
@@ -47057,6 +47558,7 @@
    "exampleJp": "橋を渡ると右にホテルがあります。",
    "exampleZh": "过了桥，右边有酒店。",
    "id": "n5_wataru",
+   "jmdictSeq": "1444680",
    "levels": [
     "N5"
    ],
@@ -47103,6 +47605,7 @@
    "exampleJp": "今日は天気が悪いですね。",
    "exampleZh": "今天天气真差啊。",
    "id": "n5_warui",
+   "jmdictSeq": "1151260",
    "levels": [
     "N5"
    ],

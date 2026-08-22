@@ -1,0 +1,3535 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "W-T2 exact word+reading join",
+  "input": "staging/jmdict-eng-3.6.2.json",
+  "target": "kanji_anchor words missing jmdictSeq",
+  "counts": {
+    "targets": 544,
+    "auto": 503,
+    "conflict": 0,
+    "unmatched": 41
+  },
+  "entries": [
+    {
+      "id": "n5_au",
+      "word": "会う",
+      "reading": "あう",
+      "key": "会う\tあう",
+      "jmdictSeq": "1198180"
+    },
+    {
+      "id": "n5_ao",
+      "word": "青",
+      "reading": "あお",
+      "key": "青\tあお",
+      "jmdictSeq": "1381380"
+    },
+    {
+      "id": "n5_aoi",
+      "word": "青い",
+      "reading": "あおい",
+      "key": "青い\tあおい",
+      "jmdictSeq": "1381390"
+    },
+    {
+      "id": "n5_aka",
+      "word": "赤",
+      "reading": "あか",
+      "key": "赤\tあか",
+      "jmdictSeq": "2013900"
+    },
+    {
+      "id": "n5_akai",
+      "word": "赤い",
+      "reading": "あかい",
+      "key": "赤い\tあかい",
+      "jmdictSeq": "1383240"
+    },
+    {
+      "id": "n5_aki",
+      "word": "秋",
+      "reading": "あき",
+      "key": "秋\tあき",
+      "jmdictSeq": "1332650"
+    },
+    {
+      "id": "n5_aku",
+      "word": "開く",
+      "reading": "あく",
+      "key": "開く\tあく",
+      "jmdictSeq": "1586270"
+    },
+    {
+      "id": "n5_akeru",
+      "word": "開ける",
+      "reading": "あける",
+      "key": "開ける\tあける",
+      "jmdictSeq": "1202450"
+    },
+    {
+      "id": "n5_ageru",
+      "word": "上げる",
+      "reading": "あげる",
+      "key": "上げる\tあげる",
+      "jmdictSeq": "1352320"
+    },
+    {
+      "id": "n5_asa",
+      "word": "朝",
+      "reading": "あさ",
+      "key": "朝\tあさ",
+      "jmdictSeq": "1428280"
+    },
+    {
+      "id": "n5_asagohan",
+      "word": "朝御飯",
+      "reading": "あさごはん",
+      "key": "朝御飯\tあさごはん",
+      "jmdictSeq": "1586330"
+    },
+    {
+      "id": "n5_ashita",
+      "word": "明日",
+      "reading": "あした",
+      "key": "明日\tあした",
+      "jmdictSeq": "1584660"
+    },
+    {
+      "id": "n5_asobu",
+      "word": "遊ぶ",
+      "reading": "あそぶ",
+      "key": "遊ぶ\tあそぶ",
+      "jmdictSeq": "1542160"
+    },
+    {
+      "id": "n5_atatakai",
+      "word": "暖かい",
+      "reading": "あたたかい",
+      "key": "暖かい\tあたたかい",
+      "jmdictSeq": "1586420"
+    },
+    {
+      "id": "n5_atama",
+      "word": "頭",
+      "reading": "あたま",
+      "key": "頭\tあたま",
+      "jmdictSeq": "1582310"
+    },
+    {
+      "id": "n5_atarashii",
+      "word": "新しい",
+      "reading": "あたらしい",
+      "key": "新しい\tあたらしい",
+      "jmdictSeq": "1361490"
+    },
+    {
+      "id": "n5_atsui",
+      "word": "暑い",
+      "reading": "あつい",
+      "key": "暑い\tあつい",
+      "jmdictSeq": "1343460"
+    },
+    {
+      "id": "n5_atsui_2",
+      "word": "熱い",
+      "reading": "あつい",
+      "key": "熱い\tあつい",
+      "jmdictSeq": "1467720"
+    },
+    {
+      "id": "n5_atsui_3",
+      "word": "厚い",
+      "reading": "あつい",
+      "key": "厚い\tあつい",
+      "jmdictSeq": "1275320"
+    },
+    {
+      "id": "n5_ato",
+      "word": "後",
+      "reading": "あと",
+      "key": "後\tあと",
+      "jmdictSeq": "1269320"
+    },
+    {
+      "id": "n5_ani",
+      "word": "兄",
+      "reading": "あに",
+      "key": "兄\tあに",
+      "jmdictSeq": "1249900"
+    },
+    {
+      "id": "n5_ane",
+      "word": "姉",
+      "reading": "あね",
+      "key": "姉\tあね",
+      "jmdictSeq": "1307630"
+    },
+    {
+      "id": "n5_abunai",
+      "word": "危ない",
+      "reading": "あぶない",
+      "key": "危ない\tあぶない",
+      "jmdictSeq": "1218380"
+    },
+    {
+      "id": "n5_amai",
+      "word": "甘い",
+      "reading": "あまい",
+      "key": "甘い\tあまい",
+      "jmdictSeq": "1213400"
+    },
+    {
+      "id": "n5_ame",
+      "word": "雨",
+      "reading": "あめ",
+      "key": "雨\tあめ",
+      "jmdictSeq": "1171900"
+    },
+    {
+      "id": "n5_ame_2",
+      "word": "飴",
+      "reading": "あめ",
+      "key": "飴\tあめ",
+      "jmdictSeq": "1153520"
+    },
+    {
+      "id": "n5_arau",
+      "word": "洗う",
+      "reading": "あらう",
+      "key": "洗う\tあらう",
+      "jmdictSeq": "1390930"
+    },
+    {
+      "id": "n5_aru_2",
+      "word": "有る",
+      "reading": "ある",
+      "key": "有る\tある",
+      "jmdictSeq": "1296400"
+    },
+    {
+      "id": "n5_aruku",
+      "word": "歩く",
+      "reading": "あるく",
+      "key": "歩く\tあるく",
+      "jmdictSeq": "1514320"
+    },
+    {
+      "id": "n5_iu",
+      "word": "言う",
+      "reading": "いう",
+      "key": "言う\tいう",
+      "jmdictSeq": "1587040"
+    },
+    {
+      "id": "n5_ie",
+      "word": "家",
+      "reading": "いえ",
+      "key": "家\tいえ",
+      "jmdictSeq": "1191730"
+    },
+    {
+      "id": "n5_ike",
+      "word": "池",
+      "reading": "いけ",
+      "key": "池\tいけ",
+      "jmdictSeq": "1421700"
+    },
+    {
+      "id": "n5_isha",
+      "word": "医者",
+      "reading": "いしゃ",
+      "key": "医者\tいしゃ",
+      "jmdictSeq": "1159980"
+    },
+    {
+      "id": "n5_isogashii",
+      "word": "忙しい",
+      "reading": "いそがしい",
+      "key": "忙しい\tいそがしい",
+      "jmdictSeq": "1519290"
+    },
+    {
+      "id": "n5_itai",
+      "word": "痛い",
+      "reading": "いたい",
+      "key": "痛い\tいたい",
+      "jmdictSeq": "1432680"
+    },
+    {
+      "id": "n5_ichi",
+      "word": "一",
+      "reading": "いち",
+      "key": "一\tいち",
+      "jmdictSeq": "1160790"
+    },
+    {
+      "id": "n5_ichinichi",
+      "word": "一日",
+      "reading": "いちにち",
+      "key": "一日\tいちにち",
+      "jmdictSeq": "1576260"
+    },
+    {
+      "id": "n5_itsuka",
+      "word": "五日",
+      "reading": "いつか",
+      "key": "五日\tいつか",
+      "jmdictSeq": "1268570"
+    },
+    {
+      "id": "n5_issho",
+      "word": "一緒",
+      "reading": "いっしょ",
+      "key": "一緒\tいっしょ",
+      "jmdictSeq": "1163400"
+    },
+    {
+      "id": "n5_itsutsu",
+      "word": "五つ",
+      "reading": "いつつ",
+      "key": "五つ\tいつつ",
+      "jmdictSeq": "1268070"
+    },
+    {
+      "id": "n5_inu",
+      "word": "犬",
+      "reading": "いぬ",
+      "key": "犬\tいぬ",
+      "jmdictSeq": "1258330"
+    },
+    {
+      "id": "n5_ima",
+      "word": "今",
+      "reading": "いま",
+      "key": "今\tいま",
+      "jmdictSeq": "1288850"
+    },
+    {
+      "id": "n5_imi",
+      "word": "意味",
+      "reading": "いみ",
+      "key": "意味\tいみ",
+      "jmdictSeq": "1156800"
+    },
+    {
+      "id": "n5_imouto",
+      "word": "妹",
+      "reading": "いもうと",
+      "key": "妹\tいもうと",
+      "jmdictSeq": "1524590"
+    },
+    {
+      "id": "n5_iya",
+      "word": "嫌",
+      "reading": "いや",
+      "key": "嫌\tいや",
+      "jmdictSeq": "1587610"
+    },
+    {
+      "id": "n5_iriguchi",
+      "word": "入口",
+      "reading": "いりぐち",
+      "key": "入口\tいりぐち",
+      "jmdictSeq": "1582820"
+    },
+    {
+      "id": "n5_iru",
+      "word": "居る",
+      "reading": "いる",
+      "key": "居る\tいる",
+      "jmdictSeq": "1577980"
+    },
+    {
+      "id": "n5_iru_2",
+      "word": "要る",
+      "reading": "いる",
+      "key": "要る\tいる",
+      "jmdictSeq": "1546640"
+    },
+    {
+      "id": "n5_ireru",
+      "word": "入れる",
+      "reading": "いれる",
+      "key": "入れる\tいれる",
+      "jmdictSeq": "1465610"
+    },
+    {
+      "id": "n5_iro",
+      "word": "色",
+      "reading": "いろ",
+      "key": "色\tいろ",
+      "jmdictSeq": "1357600"
+    },
+    {
+      "id": "n5_ue",
+      "word": "上",
+      "reading": "うえ",
+      "key": "上\tうえ",
+      "jmdictSeq": "1352130"
+    },
+    {
+      "id": "n5_ushiro",
+      "word": "後ろ",
+      "reading": "うしろ",
+      "key": "後ろ\tうしろ",
+      "jmdictSeq": "1269410"
+    },
+    {
+      "id": "n5_usui",
+      "word": "薄い",
+      "reading": "うすい",
+      "key": "薄い\tうすい",
+      "jmdictSeq": "1475480"
+    },
+    {
+      "id": "n5_uta",
+      "word": "歌",
+      "reading": "うた",
+      "key": "歌\tうた",
+      "jmdictSeq": "1193180"
+    },
+    {
+      "id": "n5_utau",
+      "word": "歌う",
+      "reading": "うたう",
+      "key": "歌う\tうたう",
+      "jmdictSeq": "1588120"
+    },
+    {
+      "id": "n5_umareru",
+      "word": "生まれる",
+      "reading": "うまれる",
+      "key": "生まれる\tうまれる",
+      "jmdictSeq": "1378690"
+    },
+    {
+      "id": "n5_umi",
+      "word": "海",
+      "reading": "うみ",
+      "key": "海\tうみ",
+      "jmdictSeq": "1201190"
+    },
+    {
+      "id": "n5_uru",
+      "word": "売る",
+      "reading": "うる",
+      "key": "売る\tうる",
+      "jmdictSeq": "1473950"
+    },
+    {
+      "id": "n5_uwagi",
+      "word": "上着",
+      "reading": "うわぎ",
+      "key": "上着\tうわぎ",
+      "jmdictSeq": "1580340"
+    },
+    {
+      "id": "n5_e",
+      "word": "絵",
+      "reading": "え",
+      "key": "絵\tえ",
+      "jmdictSeq": "1202270"
+    },
+    {
+      "id": "n5_eiga",
+      "word": "映画",
+      "reading": "えいが",
+      "key": "映画\tえいが",
+      "jmdictSeq": "1173720"
+    },
+    {
+      "id": "n5_eigakan",
+      "word": "映画館",
+      "reading": "えいがかん",
+      "key": "映画館\tえいがかん",
+      "jmdictSeq": "1173750"
+    },
+    {
+      "id": "n5_eigo",
+      "word": "英語",
+      "reading": "えいご",
+      "key": "英語\tえいご",
+      "jmdictSeq": "1174420"
+    },
+    {
+      "id": "n5_eki",
+      "word": "駅",
+      "reading": "えき",
+      "key": "駅\tえき",
+      "jmdictSeq": "1175140"
+    },
+    {
+      "id": "n5_enpitsu",
+      "word": "鉛筆",
+      "reading": "えんぴつ",
+      "key": "鉛筆\tえんぴつ",
+      "jmdictSeq": "1178590"
+    },
+    {
+      "id": "n5_ooi",
+      "word": "多い",
+      "reading": "おおい",
+      "key": "多い\tおおい",
+      "jmdictSeq": "1407460"
+    },
+    {
+      "id": "n5_ookii",
+      "word": "大きい",
+      "reading": "おおきい",
+      "key": "大きい\tおおきい",
+      "jmdictSeq": "1588880"
+    },
+    {
+      "id": "n5_ookina",
+      "word": "大きな",
+      "reading": "おおきな",
+      "key": "大きな\tおおきな",
+      "jmdictSeq": "1412890"
+    },
+    {
+      "id": "n5_oozei",
+      "word": "大勢",
+      "reading": "おおぜい",
+      "key": "大勢\tおおぜい",
+      "jmdictSeq": "1414220"
+    },
+    {
+      "id": "n5_okaasan",
+      "word": "お母さん",
+      "reading": "おかあさん",
+      "key": "お母さん\tおかあさん",
+      "jmdictSeq": "1002650"
+    },
+    {
+      "id": "n5_okashi",
+      "word": "お菓子",
+      "reading": "おかし",
+      "key": "お菓子\tおかし",
+      "jmdictSeq": "1001710"
+    },
+    {
+      "id": "n5_okane",
+      "word": "お金",
+      "reading": "おかね",
+      "key": "お金\tおかね",
+      "jmdictSeq": "1001820"
+    },
+    {
+      "id": "n5_okiru",
+      "word": "起きる",
+      "reading": "おきる",
+      "key": "起きる\tおきる",
+      "jmdictSeq": "1223640"
+    },
+    {
+      "id": "n5_oku",
+      "word": "置く",
+      "reading": "おく",
+      "key": "置く\tおく",
+      "jmdictSeq": "1421850"
+    },
+    {
+      "id": "n5_okusan",
+      "word": "奥さん",
+      "reading": "おくさん",
+      "key": "奥さん\tおくさん",
+      "jmdictSeq": "1179330"
+    },
+    {
+      "id": "n5_osake",
+      "word": "お酒",
+      "reading": "おさけ",
+      "key": "お酒\tおさけ",
+      "jmdictSeq": "1329015"
+    },
+    {
+      "id": "n5_osara",
+      "word": "お皿",
+      "reading": "おさら",
+      "key": "お皿\tおさら",
+      "jmdictSeq": "1299685"
+    },
+    {
+      "id": "n5_oshieru",
+      "word": "教える",
+      "reading": "おしえる",
+      "key": "教える\tおしえる",
+      "jmdictSeq": "1236900"
+    },
+    {
+      "id": "n5_osu",
+      "word": "押す",
+      "reading": "おす",
+      "key": "押す\tおす",
+      "jmdictSeq": "1180470"
+    },
+    {
+      "id": "n5_osoi",
+      "word": "遅い",
+      "reading": "おそい",
+      "key": "遅い\tおそい",
+      "jmdictSeq": "1421970"
+    },
+    {
+      "id": "n5_ocha",
+      "word": "お茶",
+      "reading": "おちゃ",
+      "key": "お茶\tおちゃ",
+      "jmdictSeq": "1002430"
+    },
+    {
+      "id": "n5_otearai",
+      "word": "お手洗い",
+      "reading": "おてあらい",
+      "key": "お手洗い\tおてあらい",
+      "jmdictSeq": "1002100"
+    },
+    {
+      "id": "n5_otousan",
+      "word": "お父さん",
+      "reading": "おとうさん",
+      "key": "お父さん\tおとうさん",
+      "jmdictSeq": "1002590"
+    },
+    {
+      "id": "n5_otouto",
+      "word": "弟",
+      "reading": "おとうと",
+      "key": "弟\tおとうと",
+      "jmdictSeq": "1581930"
+    },
+    {
+      "id": "n5_otoko",
+      "word": "男",
+      "reading": "おとこ",
+      "key": "男\tおとこ",
+      "jmdictSeq": "1419990"
+    },
+    {
+      "id": "n5_otokonoko",
+      "word": "男の子",
+      "reading": "おとこのこ",
+      "key": "男の子\tおとこのこ",
+      "jmdictSeq": "1420010"
+    },
+    {
+      "id": "n5_ototoi",
+      "word": "一昨日",
+      "reading": "おととい",
+      "key": "一昨日\tおととい",
+      "jmdictSeq": "1576050"
+    },
+    {
+      "id": "n5_otona",
+      "word": "大人",
+      "reading": "おとな",
+      "key": "大人\tおとな",
+      "jmdictSeq": "1414170"
+    },
+    {
+      "id": "n5_onaji",
+      "word": "同じ",
+      "reading": "おなじ",
+      "key": "同じ\tおなじ",
+      "jmdictSeq": "1451750"
+    },
+    {
+      "id": "n5_oniisan",
+      "word": "お兄さん",
+      "reading": "おにいさん",
+      "key": "お兄さん\tおにいさん",
+      "jmdictSeq": "1001830"
+    },
+    {
+      "id": "n5_oneesan",
+      "word": "お姉さん",
+      "reading": "おねえさん",
+      "key": "お姉さん\tおねえさん",
+      "jmdictSeq": "1001990"
+    },
+    {
+      "id": "n5_ofuro",
+      "word": "お風呂",
+      "reading": "おふろ",
+      "key": "お風呂\tおふろ",
+      "jmdictSeq": "2220600"
+    },
+    {
+      "id": "n5_obentou",
+      "word": "お弁当",
+      "reading": "おべんとう",
+      "key": "お弁当\tおべんとう",
+      "jmdictSeq": "1513065"
+    },
+    {
+      "id": "n5_oboeru",
+      "word": "覚える",
+      "reading": "おぼえる",
+      "key": "覚える\tおぼえる",
+      "jmdictSeq": "1206050"
+    },
+    {
+      "id": "n5_omoi",
+      "word": "重い",
+      "reading": "おもい",
+      "key": "重い\tおもい",
+      "jmdictSeq": "1335750"
+    },
+    {
+      "id": "n5_oyogu",
+      "word": "泳ぐ",
+      "reading": "およぐ",
+      "key": "泳ぐ\tおよぐ",
+      "jmdictSeq": "1174340"
+    },
+    {
+      "id": "n5_oriru",
+      "word": "降りる",
+      "reading": "おりる",
+      "key": "降りる\tおりる",
+      "jmdictSeq": "1589500"
+    },
+    {
+      "id": "n5_owaru",
+      "word": "終る",
+      "reading": "おわる",
+      "key": "終る\tおわる",
+      "jmdictSeq": "1589600"
+    },
+    {
+      "id": "n5_ongaku",
+      "word": "音楽",
+      "reading": "おんがく",
+      "key": "音楽\tおんがく",
+      "jmdictSeq": "1183720"
+    },
+    {
+      "id": "n5_onna",
+      "word": "女",
+      "reading": "おんな",
+      "key": "女\tおんな",
+      "jmdictSeq": "1344930"
+    },
+    {
+      "id": "n5_onnanoko",
+      "word": "女の子",
+      "reading": "おんなのこ",
+      "key": "女の子\tおんなのこ",
+      "jmdictSeq": "1344970"
+    },
+    {
+      "id": "n5_gaikoku",
+      "word": "外国",
+      "reading": "がいこく",
+      "key": "外国\tがいこく",
+      "jmdictSeq": "1203620"
+    },
+    {
+      "id": "n5_gaikokujin",
+      "word": "外国人",
+      "reading": "がいこくじん",
+      "key": "外国人\tがいこくじん",
+      "jmdictSeq": "1203650"
+    },
+    {
+      "id": "n5_kaisha",
+      "word": "会社",
+      "reading": "かいしゃ",
+      "key": "会社\tかいしゃ",
+      "jmdictSeq": "1198550"
+    },
+    {
+      "id": "n5_kaidan",
+      "word": "階段",
+      "reading": "かいだん",
+      "key": "階段\tかいだん",
+      "jmdictSeq": "1203090"
+    },
+    {
+      "id": "n5_kaimono",
+      "word": "買い物",
+      "reading": "かいもの",
+      "key": "買い物\tかいもの",
+      "jmdictSeq": "1589730"
+    },
+    {
+      "id": "n5_kau",
+      "word": "買う",
+      "reading": "かう",
+      "key": "買う\tかう",
+      "jmdictSeq": "1473740"
+    },
+    {
+      "id": "n5_kaesu",
+      "word": "返す",
+      "reading": "かえす",
+      "key": "返す\tかえす",
+      "jmdictSeq": "1512130"
+    },
+    {
+      "id": "n5_kaeru",
+      "word": "帰る",
+      "reading": "かえる",
+      "key": "帰る\tかえる",
+      "jmdictSeq": "1221270"
+    },
+    {
+      "id": "n5_kao",
+      "word": "顔",
+      "reading": "かお",
+      "key": "顔\tかお",
+      "jmdictSeq": "1217730"
+    },
+    {
+      "id": "n5_kagi",
+      "word": "鍵",
+      "reading": "かぎ",
+      "key": "鍵\tかぎ",
+      "jmdictSeq": "1260490"
+    },
+    {
+      "id": "n5_kaku",
+      "word": "書く",
+      "reading": "かく",
+      "key": "書く\tかく",
+      "jmdictSeq": "1343950"
+    },
+    {
+      "id": "n5_gakusei",
+      "word": "学生",
+      "reading": "がくせい",
+      "key": "学生\tがくせい",
+      "jmdictSeq": "1206900"
+    },
+    {
+      "id": "n5_kakeru",
+      "word": "掛ける",
+      "reading": "かける",
+      "key": "掛ける\tかける",
+      "jmdictSeq": "1207610"
+    },
+    {
+      "id": "n5_kasa",
+      "word": "傘",
+      "reading": "かさ",
+      "key": "傘\tかさ",
+      "jmdictSeq": "1301940"
+    },
+    {
+      "id": "n5_kasu",
+      "word": "貸す",
+      "reading": "かす",
+      "key": "貸す\tかす",
+      "jmdictSeq": "1411160"
+    },
+    {
+      "id": "n5_kaze",
+      "word": "風",
+      "reading": "かぜ",
+      "key": "風\tかぜ",
+      "jmdictSeq": "1499720"
+    },
+    {
+      "id": "n5_kaze_2",
+      "word": "風邪",
+      "reading": "かぜ",
+      "key": "風邪\tかぜ",
+      "jmdictSeq": "1583720"
+    },
+    {
+      "id": "n5_kazoku",
+      "word": "家族",
+      "reading": "かぞく",
+      "key": "家族\tかぞく",
+      "jmdictSeq": "1192150"
+    },
+    {
+      "id": "n5_kata",
+      "word": "方",
+      "reading": "かた",
+      "key": "方\tかた",
+      "jmdictSeq": "1516925"
+    },
+    {
+      "id": "n5_gakkou",
+      "word": "学校",
+      "reading": "がっこう",
+      "key": "学校\tがっこう",
+      "jmdictSeq": "1206730"
+    },
+    {
+      "id": "n5_katei",
+      "word": "家庭",
+      "reading": "かてい",
+      "key": "家庭\tかてい",
+      "jmdictSeq": "1192280"
+    },
+    {
+      "id": "n5_kado",
+      "word": "角",
+      "reading": "かど",
+      "key": "角\tかど",
+      "jmdictSeq": "1206110"
+    },
+    {
+      "id": "n5_kabin",
+      "word": "花瓶",
+      "reading": "かびん",
+      "key": "花瓶\tかびん",
+      "jmdictSeq": "1194870"
+    },
+    {
+      "id": "n5_kami",
+      "word": "紙",
+      "reading": "かみ",
+      "key": "紙\tかみ",
+      "jmdictSeq": "1311530"
+    },
+    {
+      "id": "n5_kayoubi",
+      "word": "火曜日",
+      "reading": "かようび",
+      "key": "火曜日\tかようび",
+      "jmdictSeq": "1194290"
+    },
+    {
+      "id": "n5_karai",
+      "word": "辛い",
+      "reading": "からい",
+      "key": "辛い\tからい",
+      "jmdictSeq": "1365850"
+    },
+    {
+      "id": "n5_karada",
+      "word": "体",
+      "reading": "からだ",
+      "key": "体\tからだ",
+      "jmdictSeq": "1409140"
+    },
+    {
+      "id": "n5_kariru",
+      "word": "借りる",
+      "reading": "かりる",
+      "key": "借りる\tかりる",
+      "jmdictSeq": "1323560"
+    },
+    {
+      "id": "n5_karui",
+      "word": "軽い",
+      "reading": "かるい",
+      "key": "軽い\tかるい",
+      "jmdictSeq": "1252560"
+    },
+    {
+      "id": "n5_kanji",
+      "word": "漢字",
+      "reading": "かんじ",
+      "key": "漢字\tかんじ",
+      "jmdictSeq": "1213170"
+    },
+    {
+      "id": "n5_ki",
+      "word": "木",
+      "reading": "き",
+      "key": "木\tき",
+      "jmdictSeq": "1534520"
+    },
+    {
+      "id": "n5_kiiro",
+      "word": "黄色",
+      "reading": "きいろ",
+      "key": "黄色\tきいろ",
+      "jmdictSeq": "1576760"
+    },
+    {
+      "id": "n5_kiiroi",
+      "word": "黄色い",
+      "reading": "きいろい",
+      "key": "黄色い\tきいろい",
+      "jmdictSeq": "1182030"
+    },
+    {
+      "id": "n5_kieru",
+      "word": "消える",
+      "reading": "きえる",
+      "key": "消える\tきえる",
+      "jmdictSeq": "1350040"
+    },
+    {
+      "id": "n5_kiku",
+      "word": "聞く",
+      "reading": "きく",
+      "key": "聞く\tきく",
+      "jmdictSeq": "1591110"
+    },
+    {
+      "id": "n5_kita",
+      "word": "北",
+      "reading": "きた",
+      "key": "北\tきた",
+      "jmdictSeq": "1520670"
+    },
+    {
+      "id": "n5_kitanai",
+      "word": "汚い",
+      "reading": "きたない",
+      "key": "汚い\tきたない",
+      "jmdictSeq": "1178940"
+    },
+    {
+      "id": "n5_kissaten",
+      "word": "喫茶店",
+      "reading": "きっさてん",
+      "key": "喫茶店\tきっさてん",
+      "jmdictSeq": "1226440"
+    },
+    {
+      "id": "n5_kitte",
+      "word": "切手",
+      "reading": "きって",
+      "key": "切手\tきって",
+      "jmdictSeq": "1385070"
+    },
+    {
+      "id": "n5_kippu",
+      "word": "切符",
+      "reading": "きっぷ",
+      "key": "切符\tきっぷ",
+      "jmdictSeq": "1385170"
+    },
+    {
+      "id": "n5_kinou",
+      "word": "昨日",
+      "reading": "きのう",
+      "key": "昨日\tきのう",
+      "jmdictSeq": "1579260"
+    },
+    {
+      "id": "n5_kyuu",
+      "word": "九",
+      "reading": "きゅう",
+      "key": "九\tきゅう",
+      "jmdictSeq": "1578150"
+    },
+    {
+      "id": "n5_gyuuniku",
+      "word": "牛肉",
+      "reading": "ぎゅうにく",
+      "key": "牛肉\tぎゅうにく",
+      "jmdictSeq": "1231580"
+    },
+    {
+      "id": "n5_gyuunyuu",
+      "word": "牛乳",
+      "reading": "ぎゅうにゅう",
+      "key": "牛乳\tぎゅうにゅう",
+      "jmdictSeq": "1231590"
+    },
+    {
+      "id": "n5_kyou",
+      "word": "今日",
+      "reading": "きょう",
+      "key": "今日\tきょう",
+      "jmdictSeq": "1579110"
+    },
+    {
+      "id": "n5_kyoushitsu",
+      "word": "教室",
+      "reading": "きょうしつ",
+      "key": "教室\tきょうしつ",
+      "jmdictSeq": "1237150"
+    },
+    {
+      "id": "n5_kyoudai",
+      "word": "兄弟",
+      "reading": "きょうだい",
+      "key": "兄弟\tきょうだい",
+      "jmdictSeq": "1249960"
+    },
+    {
+      "id": "n5_kyonen",
+      "word": "去年",
+      "reading": "きょねん",
+      "key": "去年\tきょねん",
+      "jmdictSeq": "1231690"
+    },
+    {
+      "id": "n5_kirai",
+      "word": "嫌い",
+      "reading": "きらい",
+      "key": "嫌い\tきらい",
+      "jmdictSeq": "1257240"
+    },
+    {
+      "id": "n5_kiru",
+      "word": "切る",
+      "reading": "きる",
+      "key": "切る\tきる",
+      "jmdictSeq": "1384830"
+    },
+    {
+      "id": "n5_kiru_2",
+      "word": "着る",
+      "reading": "きる",
+      "key": "着る\tきる",
+      "jmdictSeq": "1423000"
+    },
+    {
+      "id": "n5_kirei",
+      "word": "綺麗",
+      "reading": "きれい",
+      "key": "綺麗\tきれい",
+      "jmdictSeq": "1591900"
+    },
+    {
+      "id": "n5_ginkou",
+      "word": "銀行",
+      "reading": "ぎんこう",
+      "key": "銀行\tぎんこう",
+      "jmdictSeq": "1243490"
+    },
+    {
+      "id": "n5_kinyoubi",
+      "word": "金曜日",
+      "reading": "きんようび",
+      "key": "金曜日\tきんようび",
+      "jmdictSeq": "1243320"
+    },
+    {
+      "id": "n5_ku",
+      "word": "九",
+      "reading": "く",
+      "key": "九\tく",
+      "jmdictSeq": "1578150"
+    },
+    {
+      "id": "n5_kusuri",
+      "word": "薬",
+      "reading": "くすり",
+      "key": "薬\tくすり",
+      "jmdictSeq": "1538160"
+    },
+    {
+      "id": "n5_kudasai",
+      "word": "下さい",
+      "reading": "ください",
+      "key": "下さい\tください",
+      "jmdictSeq": "1184270"
+    },
+    {
+      "id": "n5_kudamono",
+      "word": "果物",
+      "reading": "くだもの",
+      "key": "果物\tくだもの",
+      "jmdictSeq": "1193060"
+    },
+    {
+      "id": "n5_kuchi",
+      "word": "口",
+      "reading": "くち",
+      "key": "口\tくち",
+      "jmdictSeq": "1275640"
+    },
+    {
+      "id": "n5_kutsu",
+      "word": "靴",
+      "reading": "くつ",
+      "key": "靴\tくつ",
+      "jmdictSeq": "1246700"
+    },
+    {
+      "id": "n5_kutsushita",
+      "word": "靴下",
+      "reading": "くつした",
+      "key": "靴下\tくつした",
+      "jmdictSeq": "1246740"
+    },
+    {
+      "id": "n5_kuni",
+      "word": "国",
+      "reading": "くに",
+      "key": "国\tくに",
+      "jmdictSeq": "1592250"
+    },
+    {
+      "id": "n5_kumori",
+      "word": "曇り",
+      "reading": "くもり",
+      "key": "曇り\tくもり",
+      "jmdictSeq": "1592340"
+    },
+    {
+      "id": "n5_kumoru",
+      "word": "曇る",
+      "reading": "くもる",
+      "key": "曇る\tくもる",
+      "jmdictSeq": "1457560"
+    },
+    {
+      "id": "n5_kurai",
+      "word": "暗い",
+      "reading": "くらい",
+      "key": "暗い\tくらい",
+      "jmdictSeq": "1154330"
+    },
+    {
+      "id": "n5_kuru",
+      "word": "来る",
+      "reading": "くる",
+      "key": "来る\tくる",
+      "jmdictSeq": "1547720"
+    },
+    {
+      "id": "n5_kuruma",
+      "word": "車",
+      "reading": "くるま",
+      "key": "車\tくるま",
+      "jmdictSeq": "1323080"
+    },
+    {
+      "id": "n5_kuro",
+      "word": "黒",
+      "reading": "くろ",
+      "key": "黒\tくろ",
+      "jmdictSeq": "1287410"
+    },
+    {
+      "id": "n5_kuroi",
+      "word": "黒い",
+      "reading": "くろい",
+      "key": "黒い\tくろい",
+      "jmdictSeq": "1287420"
+    },
+    {
+      "id": "n5_keikan",
+      "word": "警官",
+      "reading": "けいかん",
+      "key": "警官\tけいかん",
+      "jmdictSeq": "1252330"
+    },
+    {
+      "id": "n5_kesa",
+      "word": "今朝",
+      "reading": "けさ",
+      "key": "今朝\tけさ",
+      "jmdictSeq": "1579100"
+    },
+    {
+      "id": "n5_kesu",
+      "word": "消す",
+      "reading": "けす",
+      "key": "消す\tけす",
+      "jmdictSeq": "1350110"
+    },
+    {
+      "id": "n5_kekkou",
+      "word": "結構",
+      "reading": "けっこう",
+      "key": "結構\tけっこう",
+      "jmdictSeq": "1254760"
+    },
+    {
+      "id": "n5_kekkon",
+      "word": "結婚",
+      "reading": "けっこん",
+      "key": "結婚\tけっこん",
+      "jmdictSeq": "1254790"
+    },
+    {
+      "id": "n5_getsuyoubi",
+      "word": "月曜日",
+      "reading": "げつようび",
+      "key": "月曜日\tげつようび",
+      "jmdictSeq": "1255890"
+    },
+    {
+      "id": "n5_genkan",
+      "word": "玄関",
+      "reading": "げんかん",
+      "key": "玄関\tげんかん",
+      "jmdictSeq": "1263400"
+    },
+    {
+      "id": "n5_genki",
+      "word": "元気",
+      "reading": "げんき",
+      "key": "元気\tげんき",
+      "jmdictSeq": "1260720"
+    },
+    {
+      "id": "n5_go",
+      "word": "五",
+      "reading": "ご",
+      "key": "五\tご",
+      "jmdictSeq": "1268060"
+    },
+    {
+      "id": "n5_kouen",
+      "word": "公園",
+      "reading": "こうえん",
+      "key": "公園\tこうえん",
+      "jmdictSeq": "1273270"
+    },
+    {
+      "id": "n5_kousaten",
+      "word": "交差点",
+      "reading": "こうさてん",
+      "key": "交差点\tこうさてん",
+      "jmdictSeq": "1592970"
+    },
+    {
+      "id": "n5_koucha",
+      "word": "紅茶",
+      "reading": "こうちゃ",
+      "key": "紅茶\tこうちゃ",
+      "jmdictSeq": "1280770"
+    },
+    {
+      "id": "n5_kouban",
+      "word": "交番",
+      "reading": "こうばん",
+      "key": "交番\tこうばん",
+      "jmdictSeq": "1272500"
+    },
+    {
+      "id": "n5_koe",
+      "word": "声",
+      "reading": "こえ",
+      "key": "声\tこえ",
+      "jmdictSeq": "1380440"
+    },
+    {
+      "id": "n5_gogo",
+      "word": "午後",
+      "reading": "ごご",
+      "key": "午後\tごご",
+      "jmdictSeq": "1268990"
+    },
+    {
+      "id": "n5_kokonoka",
+      "word": "九日",
+      "reading": "ここのか",
+      "key": "九日\tここのか",
+      "jmdictSeq": "1243850"
+    },
+    {
+      "id": "n5_kokonotsu",
+      "word": "九つ",
+      "reading": "ここのつ",
+      "key": "九つ\tここのつ",
+      "jmdictSeq": "1243600"
+    },
+    {
+      "id": "n5_gozen",
+      "word": "午前",
+      "reading": "ごぜん",
+      "key": "午前\tごぜん",
+      "jmdictSeq": "1269060"
+    },
+    {
+      "id": "n5_kotaeru",
+      "word": "答える",
+      "reading": "こたえる",
+      "key": "答える\tこたえる",
+      "jmdictSeq": "1449540"
+    },
+    {
+      "id": "n5_kotoshi",
+      "word": "今年",
+      "reading": "ことし",
+      "key": "今年\tことし",
+      "jmdictSeq": "1579130"
+    },
+    {
+      "id": "n5_kotoba",
+      "word": "言葉",
+      "reading": "ことば",
+      "key": "言葉\tことば",
+      "jmdictSeq": "1264540"
+    },
+    {
+      "id": "n5_kodomo",
+      "word": "子供",
+      "reading": "こども",
+      "key": "子供\tこども",
+      "jmdictSeq": "1307850"
+    },
+    {
+      "id": "n5_gohan",
+      "word": "御飯",
+      "reading": "ごはん",
+      "key": "御飯\tごはん",
+      "jmdictSeq": "1270590"
+    },
+    {
+      "id": "n5_komaru",
+      "word": "困る",
+      "reading": "こまる",
+      "key": "困る\tこまる",
+      "jmdictSeq": "1289590"
+    },
+    {
+      "id": "n5_kongetsu",
+      "word": "今月",
+      "reading": "こんげつ",
+      "key": "今月\tこんげつ",
+      "jmdictSeq": "1289100"
+    },
+    {
+      "id": "n5_konshuu",
+      "word": "今週",
+      "reading": "こんしゅう",
+      "key": "今週\tこんしゅう",
+      "jmdictSeq": "1289220"
+    },
+    {
+      "id": "n5_konban",
+      "word": "今晩",
+      "reading": "こんばん",
+      "key": "今晩\tこんばん",
+      "jmdictSeq": "1289470"
+    },
+    {
+      "id": "n5_saifu",
+      "word": "財布",
+      "reading": "さいふ",
+      "key": "財布\tさいふ",
+      "jmdictSeq": "1296970"
+    },
+    {
+      "id": "n5_sakana",
+      "word": "魚",
+      "reading": "さかな",
+      "key": "魚\tさかな",
+      "jmdictSeq": "1578010"
+    },
+    {
+      "id": "n5_saki",
+      "word": "先",
+      "reading": "さき",
+      "key": "先\tさき",
+      "jmdictSeq": "1387210"
+    },
+    {
+      "id": "n5_saku",
+      "word": "咲く",
+      "reading": "さく",
+      "key": "咲く\tさく",
+      "jmdictSeq": "1297210"
+    },
+    {
+      "id": "n5_sakubun",
+      "word": "作文",
+      "reading": "さくぶん",
+      "key": "作文\tさくぶん",
+      "jmdictSeq": "1297960"
+    },
+    {
+      "id": "n5_sasu",
+      "word": "差す",
+      "reading": "さす",
+      "key": "差す\tさす",
+      "jmdictSeq": "1291330"
+    },
+    {
+      "id": "n5_zasshi",
+      "word": "雑誌",
+      "reading": "ざっし",
+      "key": "雑誌\tざっし",
+      "jmdictSeq": "1299400"
+    },
+    {
+      "id": "n5_satou",
+      "word": "砂糖",
+      "reading": "さとう",
+      "key": "砂糖\tさとう",
+      "jmdictSeq": "1291600"
+    },
+    {
+      "id": "n5_samui",
+      "word": "寒い",
+      "reading": "さむい",
+      "key": "寒い\tさむい",
+      "jmdictSeq": "1210360"
+    },
+    {
+      "id": "n5_sarainen",
+      "word": "さ来年",
+      "reading": "さらいねん",
+      "key": "さ来年\tさらいねん",
+      "jmdictSeq": "1293660"
+    },
+    {
+      "id": "n5_san_2",
+      "word": "三",
+      "reading": "さん",
+      "key": "三\tさん",
+      "jmdictSeq": "1579350"
+    },
+    {
+      "id": "n5_sanpo",
+      "word": "散歩",
+      "reading": "さんぽ",
+      "key": "散歩\tさんぽ",
+      "jmdictSeq": "1303620"
+    },
+    {
+      "id": "n5_shi",
+      "word": "四",
+      "reading": "し",
+      "key": "四\tし",
+      "jmdictSeq": "1579470"
+    },
+    {
+      "id": "n5_shio",
+      "word": "塩",
+      "reading": "しお",
+      "key": "塩\tしお",
+      "jmdictSeq": "1576630"
+    },
+    {
+      "id": "n5_jikan",
+      "word": "時間",
+      "reading": "じかん",
+      "key": "時間\tじかん",
+      "jmdictSeq": "1315920"
+    },
+    {
+      "id": "n5_shigoto",
+      "word": "仕事",
+      "reading": "しごと",
+      "key": "仕事\tしごと",
+      "jmdictSeq": "1304970"
+    },
+    {
+      "id": "n5_jisho",
+      "word": "辞書",
+      "reading": "じしょ",
+      "key": "辞書\tじしょ",
+      "jmdictSeq": "1318970"
+    },
+    {
+      "id": "n5_shizuka",
+      "word": "静か",
+      "reading": "しずか",
+      "key": "静か\tしずか",
+      "jmdictSeq": "1381820"
+    },
+    {
+      "id": "n5_shita",
+      "word": "下",
+      "reading": "した",
+      "key": "下\tした",
+      "jmdictSeq": "1184140"
+    },
+    {
+      "id": "n5_shichi",
+      "word": "七",
+      "reading": "しち",
+      "key": "七\tしち",
+      "jmdictSeq": "1319210"
+    },
+    {
+      "id": "n5_shitsumon",
+      "word": "質問",
+      "reading": "しつもん",
+      "key": "質問\tしつもん",
+      "jmdictSeq": "1320760"
+    },
+    {
+      "id": "n5_jitensha",
+      "word": "自転車",
+      "reading": "じてんしゃ",
+      "key": "自転車\tじてんしゃ",
+      "jmdictSeq": "1318290"
+    },
+    {
+      "id": "n5_jidousha",
+      "word": "自動車",
+      "reading": "じどうしゃ",
+      "key": "自動車\tじどうしゃ",
+      "jmdictSeq": "1318400"
+    },
+    {
+      "id": "n5_shinu",
+      "word": "死ぬ",
+      "reading": "しぬ",
+      "key": "死ぬ\tしぬ",
+      "jmdictSeq": "1310730"
+    },
+    {
+      "id": "n5_jibiki",
+      "word": "字引",
+      "reading": "じびき",
+      "key": "字引\tじびき",
+      "jmdictSeq": "1315140"
+    },
+    {
+      "id": "n5_jibun",
+      "word": "自分",
+      "reading": "じぶん",
+      "key": "自分\tじぶん",
+      "jmdictSeq": "1318610"
+    },
+    {
+      "id": "n5_shimaru",
+      "word": "閉まる",
+      "reading": "しまる",
+      "key": "閉まる\tしまる",
+      "jmdictSeq": "1436560"
+    },
+    {
+      "id": "n5_shimeru",
+      "word": "閉める",
+      "reading": "しめる",
+      "key": "閉める\tしめる",
+      "jmdictSeq": "1508590"
+    },
+    {
+      "id": "n5_shimeru_2",
+      "word": "締める",
+      "reading": "しめる",
+      "key": "締める\tしめる",
+      "jmdictSeq": "1436570"
+    },
+    {
+      "id": "n5_shashin",
+      "word": "写真",
+      "reading": "しゃしん",
+      "key": "写真\tしゃしん",
+      "jmdictSeq": "1321900"
+    },
+    {
+      "id": "n5_juu",
+      "word": "十",
+      "reading": "じゅう",
+      "key": "十\tじゅう",
+      "jmdictSeq": "1579840"
+    },
+    {
+      "id": "n5_jugyou",
+      "word": "授業",
+      "reading": "じゅぎょう",
+      "key": "授業\tじゅぎょう",
+      "jmdictSeq": "1330290"
+    },
+    {
+      "id": "n5_shukudai",
+      "word": "宿題",
+      "reading": "しゅくだい",
+      "key": "宿題\tしゅくだい",
+      "jmdictSeq": "1337270"
+    },
+    {
+      "id": "n5_jouzu",
+      "word": "上手",
+      "reading": "じょうず",
+      "key": "上手\tじょうず",
+      "jmdictSeq": "1353320"
+    },
+    {
+      "id": "n5_joubu",
+      "word": "丈夫",
+      "reading": "じょうぶ",
+      "key": "丈夫\tじょうぶ",
+      "jmdictSeq": "1580480"
+    },
+    {
+      "id": "n5_shokudou",
+      "word": "食堂",
+      "reading": "しょくどう",
+      "key": "食堂\tしょくどう",
+      "jmdictSeq": "1358550"
+    },
+    {
+      "id": "n5_shiru",
+      "word": "知る",
+      "reading": "しる",
+      "key": "知る\tしる",
+      "jmdictSeq": "1420470"
+    },
+    {
+      "id": "n5_shiro",
+      "word": "白",
+      "reading": "しろ",
+      "key": "白\tしろ",
+      "jmdictSeq": "1474900"
+    },
+    {
+      "id": "n5_shiroi",
+      "word": "白い",
+      "reading": "しろい",
+      "key": "白い\tしろい",
+      "jmdictSeq": "1474910"
+    },
+    {
+      "id": "n5_shinbun",
+      "word": "新聞",
+      "reading": "しんぶん",
+      "key": "新聞\tしんぶん",
+      "jmdictSeq": "1362360"
+    },
+    {
+      "id": "n5_suiyoubi",
+      "word": "水曜日",
+      "reading": "すいようび",
+      "key": "水曜日\tすいようび",
+      "jmdictSeq": "1372190"
+    },
+    {
+      "id": "n5_suu",
+      "word": "吸う",
+      "reading": "すう",
+      "key": "吸う\tすう",
+      "jmdictSeq": "1228260"
+    },
+    {
+      "id": "n5_suki",
+      "word": "好き",
+      "reading": "すき",
+      "key": "好き\tすき",
+      "jmdictSeq": "1277450"
+    },
+    {
+      "id": "n5_sukunai",
+      "word": "少ない",
+      "reading": "すくない",
+      "key": "少ない\tすくない",
+      "jmdictSeq": "1348910"
+    },
+    {
+      "id": "n5_sukoshi",
+      "word": "少し",
+      "reading": "すこし",
+      "key": "少し\tすこし",
+      "jmdictSeq": "1348870"
+    },
+    {
+      "id": "n5_suzushii",
+      "word": "涼しい",
+      "reading": "すずしい",
+      "key": "涼しい\tすずしい",
+      "jmdictSeq": "1554370"
+    },
+    {
+      "id": "n5_sumu",
+      "word": "住む",
+      "reading": "すむ",
+      "key": "住む\tすむ",
+      "jmdictSeq": "1334040"
+    },
+    {
+      "id": "n5_suwaru",
+      "word": "座る",
+      "reading": "すわる",
+      "key": "座る\tすわる",
+      "jmdictSeq": "1291800"
+    },
+    {
+      "id": "n5_seito",
+      "word": "生徒",
+      "reading": "せいと",
+      "key": "生徒\tせいと",
+      "jmdictSeq": "1379380"
+    },
+    {
+      "id": "n5_sekken",
+      "word": "石鹸",
+      "reading": "せっけん",
+      "key": "石鹸\tせっけん",
+      "jmdictSeq": "1382590"
+    },
+    {
+      "id": "n5_sebiro",
+      "word": "背広",
+      "reading": "せびろ",
+      "key": "背広\tせびろ",
+      "jmdictSeq": "1472740"
+    },
+    {
+      "id": "n5_semai",
+      "word": "狭い",
+      "reading": "せまい",
+      "key": "狭い\tせまい",
+      "jmdictSeq": "1237680"
+    },
+    {
+      "id": "n5_sen",
+      "word": "千",
+      "reading": "せん",
+      "key": "千\tせん",
+      "jmdictSeq": "1388740"
+    },
+    {
+      "id": "n5_sengetsu",
+      "word": "先月",
+      "reading": "せんげつ",
+      "key": "先月\tせんげつ",
+      "jmdictSeq": "1387500"
+    },
+    {
+      "id": "n5_senshuu",
+      "word": "先週",
+      "reading": "せんしゅう",
+      "key": "先週\tせんしゅう",
+      "jmdictSeq": "1387870"
+    },
+    {
+      "id": "n5_sensei",
+      "word": "先生",
+      "reading": "せんせい",
+      "key": "先生\tせんせい",
+      "jmdictSeq": "1387990"
+    },
+    {
+      "id": "n5_sentaku",
+      "word": "洗濯",
+      "reading": "せんたく",
+      "key": "洗濯\tせんたく",
+      "jmdictSeq": "1390980"
+    },
+    {
+      "id": "n5_zenbu",
+      "word": "全部",
+      "reading": "ぜんぶ",
+      "key": "全部\tぜんぶ",
+      "jmdictSeq": "1396130"
+    },
+    {
+      "id": "n5_souji",
+      "word": "掃除",
+      "reading": "そうじ",
+      "key": "掃除\tそうじ",
+      "jmdictSeq": "1399790"
+    },
+    {
+      "id": "n5_soto",
+      "word": "外",
+      "reading": "そと",
+      "key": "外\tそと",
+      "jmdictSeq": "1203250"
+    },
+    {
+      "id": "n5_sora",
+      "word": "空",
+      "reading": "そら",
+      "key": "空\tそら",
+      "jmdictSeq": "1245290"
+    },
+    {
+      "id": "n5_daigaku",
+      "word": "大学",
+      "reading": "だいがく",
+      "key": "大学\tだいがく",
+      "jmdictSeq": "1413240"
+    },
+    {
+      "id": "n5_taishikan",
+      "word": "大使館",
+      "reading": "たいしかん",
+      "key": "大使館\tたいしかん",
+      "jmdictSeq": "1413890"
+    },
+    {
+      "id": "n5_daijoubu",
+      "word": "大丈夫",
+      "reading": "だいじょうぶ",
+      "key": "大丈夫\tだいじょうぶ",
+      "jmdictSeq": "1414150"
+    },
+    {
+      "id": "n5_daisuki",
+      "word": "大好き",
+      "reading": "だいすき",
+      "key": "大好き\tだいすき",
+      "jmdictSeq": "1413660"
+    },
+    {
+      "id": "n5_taisetsu",
+      "word": "大切",
+      "reading": "たいせつ",
+      "key": "大切\tたいせつ",
+      "jmdictSeq": "1414340"
+    },
+    {
+      "id": "n5_daidokoro",
+      "word": "台所",
+      "reading": "だいどころ",
+      "key": "台所\tだいどころ",
+      "jmdictSeq": "1412640"
+    },
+    {
+      "id": "n5_taihen",
+      "word": "大変",
+      "reading": "たいへん",
+      "key": "大変\tたいへん",
+      "jmdictSeq": "1415000"
+    },
+    {
+      "id": "n5_takai",
+      "word": "高い",
+      "reading": "たかい",
+      "key": "高い\tたかい",
+      "jmdictSeq": "1283190"
+    },
+    {
+      "id": "n5_dasu",
+      "word": "出す",
+      "reading": "だす",
+      "key": "出す\tだす",
+      "jmdictSeq": "1338180"
+    },
+    {
+      "id": "n5_tatsu",
+      "word": "立つ",
+      "reading": "たつ",
+      "key": "立つ\tたつ",
+      "jmdictSeq": "1597040"
+    },
+    {
+      "id": "n5_tatemono",
+      "word": "建物",
+      "reading": "たてもの",
+      "key": "建物\tたてもの",
+      "jmdictSeq": "1257540"
+    },
+    {
+      "id": "n5_tanoshii",
+      "word": "楽しい",
+      "reading": "たのしい",
+      "key": "楽しい\tたのしい",
+      "jmdictSeq": "1207240"
+    },
+    {
+      "id": "n5_tanomu",
+      "word": "頼む",
+      "reading": "たのむ",
+      "key": "頼む\tたのむ",
+      "jmdictSeq": "1548370"
+    },
+    {
+      "id": "n5_tabun",
+      "word": "多分",
+      "reading": "たぶん",
+      "key": "多分\tたぶん",
+      "jmdictSeq": "1407980"
+    },
+    {
+      "id": "n5_tabemono",
+      "word": "食べ物",
+      "reading": "たべもの",
+      "key": "食べ物\tたべもの",
+      "jmdictSeq": "1358340"
+    },
+    {
+      "id": "n5_taberu",
+      "word": "食べる",
+      "reading": "たべる",
+      "key": "食べる\tたべる",
+      "jmdictSeq": "1358280"
+    },
+    {
+      "id": "n5_tamago",
+      "word": "卵",
+      "reading": "たまご",
+      "key": "卵\tたまご",
+      "jmdictSeq": "1549140"
+    },
+    {
+      "id": "n5_dare",
+      "word": "誰",
+      "reading": "だれ",
+      "key": "誰\tだれ",
+      "jmdictSeq": "1416830"
+    },
+    {
+      "id": "n5_dareka",
+      "word": "誰か",
+      "reading": "だれか",
+      "key": "誰か\tだれか",
+      "jmdictSeq": "1416840"
+    },
+    {
+      "id": "n5_tanjoubi",
+      "word": "誕生日",
+      "reading": "たんじょうび",
+      "key": "誕生日\tたんじょうび",
+      "jmdictSeq": "1419110"
+    },
+    {
+      "id": "n5_chiisai",
+      "word": "小さい",
+      "reading": "ちいさい",
+      "key": "小さい\tちいさい",
+      "jmdictSeq": "1347750"
+    },
+    {
+      "id": "n5_chiisana",
+      "word": "小さな",
+      "reading": "ちいさな",
+      "key": "小さな\tちいさな",
+      "jmdictSeq": "2136180"
+    },
+    {
+      "id": "n5_chikai",
+      "word": "近い",
+      "reading": "ちかい",
+      "key": "近い\tちかい",
+      "jmdictSeq": "1242130"
+    },
+    {
+      "id": "n5_chigau",
+      "word": "違う",
+      "reading": "ちがう",
+      "key": "違う\tちがう",
+      "jmdictSeq": "1158880"
+    },
+    {
+      "id": "n5_chikaku",
+      "word": "近く",
+      "reading": "ちかく",
+      "key": "近く\tちかく",
+      "jmdictSeq": "1242160"
+    },
+    {
+      "id": "n5_chikatetsu",
+      "word": "地下鉄",
+      "reading": "ちかてつ",
+      "key": "地下鉄\tちかてつ",
+      "jmdictSeq": "1420900"
+    },
+    {
+      "id": "n5_chizu",
+      "word": "地図",
+      "reading": "ちず",
+      "key": "地図\tちず",
+      "jmdictSeq": "1421290"
+    },
+    {
+      "id": "n5_chichi",
+      "word": "父",
+      "reading": "ちち",
+      "key": "父\tちち",
+      "jmdictSeq": "1497610"
+    },
+    {
+      "id": "n5_chairo",
+      "word": "茶色",
+      "reading": "ちゃいろ",
+      "key": "茶色\tちゃいろ",
+      "jmdictSeq": "1422720"
+    },
+    {
+      "id": "n5_choudo",
+      "word": "丁度",
+      "reading": "ちょうど",
+      "key": "丁度\tちょうど",
+      "jmdictSeq": "1427340"
+    },
+    {
+      "id": "n5_tsuitachi",
+      "word": "一日",
+      "reading": "ついたち",
+      "key": "一日\tついたち",
+      "jmdictSeq": "2225040"
+    },
+    {
+      "id": "n5_tsukau",
+      "word": "使う",
+      "reading": "つかう",
+      "key": "使う\tつかう",
+      "jmdictSeq": "1305990"
+    },
+    {
+      "id": "n5_tsukareru",
+      "word": "疲れる",
+      "reading": "つかれる",
+      "key": "疲れる\tつかれる",
+      "jmdictSeq": "1483740"
+    },
+    {
+      "id": "n5_tsugi",
+      "word": "次",
+      "reading": "つぎ",
+      "key": "次\tつぎ",
+      "jmdictSeq": "1316380"
+    },
+    {
+      "id": "n5_tsuku",
+      "word": "着く",
+      "reading": "つく",
+      "key": "着く\tつく",
+      "jmdictSeq": "1422970"
+    },
+    {
+      "id": "n5_tsukue",
+      "word": "机",
+      "reading": "つくえ",
+      "key": "机\tつくえ",
+      "jmdictSeq": "1220210"
+    },
+    {
+      "id": "n5_tsukuru",
+      "word": "作る",
+      "reading": "つくる",
+      "key": "作る\tつくる",
+      "jmdictSeq": "1597890"
+    },
+    {
+      "id": "n5_tsutomeru",
+      "word": "勤める",
+      "reading": "つとめる",
+      "key": "勤める\tつとめる",
+      "jmdictSeq": "1240825"
+    },
+    {
+      "id": "n5_tsumetai",
+      "word": "冷たい",
+      "reading": "つめたい",
+      "key": "冷たい\tつめたい",
+      "jmdictSeq": "1556730"
+    },
+    {
+      "id": "n5_tsuyoi",
+      "word": "強い",
+      "reading": "つよい",
+      "key": "強い\tつよい",
+      "jmdictSeq": "1236070"
+    },
+    {
+      "id": "n5_te",
+      "word": "手",
+      "reading": "て",
+      "key": "手\tて",
+      "jmdictSeq": "1327190"
+    },
+    {
+      "id": "n5_dekakeru",
+      "word": "出かける",
+      "reading": "でかける",
+      "key": "出かける\tでかける",
+      "jmdictSeq": "1598550"
+    },
+    {
+      "id": "n5_tegami",
+      "word": "手紙",
+      "reading": "てがみ",
+      "key": "手紙\tてがみ",
+      "jmdictSeq": "1327720"
+    },
+    {
+      "id": "n5_deguchi",
+      "word": "出口",
+      "reading": "でぐち",
+      "key": "出口\tでぐち",
+      "jmdictSeq": "1338850"
+    },
+    {
+      "id": "n5_deru",
+      "word": "出る",
+      "reading": "でる",
+      "key": "出る\tでる",
+      "jmdictSeq": "1338240"
+    },
+    {
+      "id": "n5_tenki",
+      "word": "天気",
+      "reading": "てんき",
+      "key": "天気\tてんき",
+      "jmdictSeq": "1438690"
+    },
+    {
+      "id": "n5_denki",
+      "word": "電気",
+      "reading": "でんき",
+      "key": "電気\tでんき",
+      "jmdictSeq": "1443000"
+    },
+    {
+      "id": "n5_densha",
+      "word": "電車",
+      "reading": "でんしゃ",
+      "key": "電車\tでんしゃ",
+      "jmdictSeq": "1443530"
+    },
+    {
+      "id": "n5_denwa",
+      "word": "電話",
+      "reading": "でんわ",
+      "key": "電話\tでんわ",
+      "jmdictSeq": "1443840"
+    },
+    {
+      "id": "n5_to",
+      "word": "戸",
+      "reading": "と",
+      "key": "戸\tと",
+      "jmdictSeq": "1266970"
+    },
+    {
+      "id": "n5_doubutsu",
+      "word": "動物",
+      "reading": "どうぶつ",
+      "key": "動物\tどうぶつ",
+      "jmdictSeq": "1451470"
+    },
+    {
+      "id": "n5_too",
+      "word": "十",
+      "reading": "とお",
+      "key": "十\tとお",
+      "jmdictSeq": "1579840"
+    },
+    {
+      "id": "n5_tooi",
+      "word": "遠い",
+      "reading": "とおい",
+      "key": "遠い\tとおい",
+      "jmdictSeq": "1177800"
+    },
+    {
+      "id": "n5_tooka",
+      "word": "十日",
+      "reading": "とおか",
+      "key": "十日\tとおか",
+      "jmdictSeq": "1335000"
+    },
+    {
+      "id": "n5_tokidoki",
+      "word": "時々",
+      "reading": "ときどき",
+      "key": "時々\tときどき",
+      "jmdictSeq": "1598680"
+    },
+    {
+      "id": "n5_tokei",
+      "word": "時計",
+      "reading": "とけい",
+      "key": "時計\tとけい",
+      "jmdictSeq": "1316140"
+    },
+    {
+      "id": "n5_tokoro",
+      "word": "所",
+      "reading": "ところ",
+      "key": "所\tところ",
+      "jmdictSeq": "1343100"
+    },
+    {
+      "id": "n5_toshi",
+      "word": "年",
+      "reading": "とし",
+      "key": "年\tとし",
+      "jmdictSeq": "1468060"
+    },
+    {
+      "id": "n5_toshokan",
+      "word": "図書館",
+      "reading": "としょかん",
+      "key": "図書館\tとしょかん",
+      "jmdictSeq": "1370420"
+    },
+    {
+      "id": "n5_tonari",
+      "word": "隣",
+      "reading": "となり",
+      "key": "隣\tとなり",
+      "jmdictSeq": "1555830"
+    },
+    {
+      "id": "n5_tobu",
+      "word": "飛ぶ",
+      "reading": "とぶ",
+      "key": "飛ぶ\tとぶ",
+      "jmdictSeq": "1429700"
+    },
+    {
+      "id": "n5_tomaru",
+      "word": "止まる",
+      "reading": "とまる",
+      "key": "止まる\tとまる",
+      "jmdictSeq": "1310620"
+    },
+    {
+      "id": "n5_tomodachi",
+      "word": "友達",
+      "reading": "ともだち",
+      "key": "友達\tともだち",
+      "jmdictSeq": "1540170"
+    },
+    {
+      "id": "n5_doyoubi",
+      "word": "土曜日",
+      "reading": "どようび",
+      "key": "土曜日\tどようび",
+      "jmdictSeq": "1445590"
+    },
+    {
+      "id": "n5_tori",
+      "word": "鳥",
+      "reading": "とり",
+      "key": "鳥\tとり",
+      "jmdictSeq": "1430250"
+    },
+    {
+      "id": "n5_toriniku",
+      "word": "鶏肉",
+      "reading": "とりにく",
+      "key": "鶏肉\tとりにく",
+      "jmdictSeq": "1253020"
+    },
+    {
+      "id": "n5_toru",
+      "word": "取る",
+      "reading": "とる",
+      "key": "取る\tとる",
+      "jmdictSeq": "1326980"
+    },
+    {
+      "id": "n5_toru_2",
+      "word": "撮る",
+      "reading": "とる",
+      "key": "撮る\tとる",
+      "jmdictSeq": "1298790"
+    },
+    {
+      "id": "n5_naka",
+      "word": "中",
+      "reading": "なか",
+      "key": "中\tなか",
+      "jmdictSeq": "1423310"
+    },
+    {
+      "id": "n5_nagai",
+      "word": "長い",
+      "reading": "ながい",
+      "key": "長い\tながい",
+      "jmdictSeq": "1429750"
+    },
+    {
+      "id": "n5_naku",
+      "word": "鳴く",
+      "reading": "なく",
+      "key": "鳴く\tなく",
+      "jmdictSeq": "1532870"
+    },
+    {
+      "id": "n5_nakusu",
+      "word": "無くす",
+      "reading": "なくす",
+      "key": "無くす\tなくす",
+      "jmdictSeq": "1529530"
+    },
+    {
+      "id": "n5_natsu",
+      "word": "夏",
+      "reading": "なつ",
+      "key": "夏\tなつ",
+      "jmdictSeq": "1191320"
+    },
+    {
+      "id": "n5_natsuyasumi",
+      "word": "夏休み",
+      "reading": "なつやすみ",
+      "key": "夏休み\tなつやすみ",
+      "jmdictSeq": "1191420"
+    },
+    {
+      "id": "n5_nanatsu",
+      "word": "七つ",
+      "reading": "ななつ",
+      "key": "七つ\tななつ",
+      "jmdictSeq": "1319220"
+    },
+    {
+      "id": "n5_nanoka",
+      "word": "七日",
+      "reading": "なのか",
+      "key": "七日\tなのか",
+      "jmdictSeq": "1579630"
+    },
+    {
+      "id": "n5_namae",
+      "word": "名前",
+      "reading": "なまえ",
+      "key": "名前\tなまえ",
+      "jmdictSeq": "1531710"
+    },
+    {
+      "id": "n5_narau",
+      "word": "習う",
+      "reading": "ならう",
+      "key": "習う\tならう",
+      "jmdictSeq": "1333070"
+    },
+    {
+      "id": "n5_narabu",
+      "word": "並ぶ",
+      "reading": "ならぶ",
+      "key": "並ぶ\tならぶ",
+      "jmdictSeq": "1508380"
+    },
+    {
+      "id": "n5_naraberu",
+      "word": "並べる",
+      "reading": "ならべる",
+      "key": "並べる\tならべる",
+      "jmdictSeq": "1508390"
+    },
+    {
+      "id": "n5_ni",
+      "word": "二",
+      "reading": "に",
+      "key": "二\tに",
+      "jmdictSeq": "1461140"
+    },
+    {
+      "id": "n5_niku",
+      "word": "肉",
+      "reading": "にく",
+      "key": "肉\tにく",
+      "jmdictSeq": "1463520"
+    },
+    {
+      "id": "n5_nishi",
+      "word": "西",
+      "reading": "にし",
+      "key": "西\tにし",
+      "jmdictSeq": "1380840"
+    },
+    {
+      "id": "n5_nichiyoubi",
+      "word": "日曜日",
+      "reading": "にちようび",
+      "key": "日曜日\tにちようび",
+      "jmdictSeq": "1464900"
+    },
+    {
+      "id": "n5_nimotsu",
+      "word": "荷物",
+      "reading": "にもつ",
+      "key": "荷物\tにもつ",
+      "jmdictSeq": "1195430"
+    },
+    {
+      "id": "n5_niwa",
+      "word": "庭",
+      "reading": "にわ",
+      "key": "庭\tにわ",
+      "jmdictSeq": "1436130"
+    },
+    {
+      "id": "n5_nugu",
+      "word": "脱ぐ",
+      "reading": "ぬぐ",
+      "key": "脱ぐ\tぬぐ",
+      "jmdictSeq": "1416400"
+    },
+    {
+      "id": "n5_nurui",
+      "word": "温い",
+      "reading": "ぬるい",
+      "key": "温い\tぬるい",
+      "jmdictSeq": "1183300"
+    },
+    {
+      "id": "n5_neko",
+      "word": "猫",
+      "reading": "ねこ",
+      "key": "猫\tねこ",
+      "jmdictSeq": "1467640"
+    },
+    {
+      "id": "n5_neru",
+      "word": "寝る",
+      "reading": "ねる",
+      "key": "寝る\tねる",
+      "jmdictSeq": "1360010"
+    },
+    {
+      "id": "n5_noboru",
+      "word": "登る",
+      "reading": "のぼる",
+      "key": "登る\tのぼる",
+      "jmdictSeq": "1352570"
+    },
+    {
+      "id": "n5_nomimono",
+      "word": "飲み物",
+      "reading": "のみもの",
+      "key": "飲み物\tのみもの",
+      "jmdictSeq": "1600430"
+    },
+    {
+      "id": "n5_nomu",
+      "word": "飲む",
+      "reading": "のむ",
+      "key": "飲む\tのむ",
+      "jmdictSeq": "1169870"
+    },
+    {
+      "id": "n5_noru",
+      "word": "乗る",
+      "reading": "のる",
+      "key": "乗る\tのる",
+      "jmdictSeq": "1355120"
+    },
+    {
+      "id": "n5_ha",
+      "word": "歯",
+      "reading": "は",
+      "key": "歯\tは",
+      "jmdictSeq": "1313000"
+    },
+    {
+      "id": "n5_haizara",
+      "word": "灰皿",
+      "reading": "はいざら",
+      "key": "灰皿\tはいざら",
+      "jmdictSeq": "1201940"
+    },
+    {
+      "id": "n5_hairu",
+      "word": "入る",
+      "reading": "はいる",
+      "key": "入る\tはいる",
+      "jmdictSeq": "1465590"
+    },
+    {
+      "id": "n5_hagaki",
+      "word": "葉書",
+      "reading": "はがき",
+      "key": "葉書\tはがき",
+      "jmdictSeq": "1546590"
+    },
+    {
+      "id": "n5_hako",
+      "word": "箱",
+      "reading": "はこ",
+      "key": "箱\tはこ",
+      "jmdictSeq": "1585650"
+    },
+    {
+      "id": "n5_hashi",
+      "word": "橋",
+      "reading": "はし",
+      "key": "橋\tはし",
+      "jmdictSeq": "1237410"
+    },
+    {
+      "id": "n5_hashi_2",
+      "word": "箸",
+      "reading": "はし",
+      "key": "箸\tはし",
+      "jmdictSeq": "1476410"
+    },
+    {
+      "id": "n5_hajimaru",
+      "word": "始まる",
+      "reading": "はじまる",
+      "key": "始まる\tはじまる",
+      "jmdictSeq": "1307500"
+    },
+    {
+      "id": "n5_hajimete",
+      "word": "初めて",
+      "reading": "はじめて",
+      "key": "初めて\tはじめて",
+      "jmdictSeq": "1342550"
+    },
+    {
+      "id": "n5_hashiru",
+      "word": "走る",
+      "reading": "はしる",
+      "key": "走る\tはしる",
+      "jmdictSeq": "1402540"
+    },
+    {
+      "id": "n5_hatachi",
+      "word": "二十歳",
+      "reading": "はたち",
+      "key": "二十歳\tはたち",
+      "jmdictSeq": "1600790"
+    },
+    {
+      "id": "n5_hataraku",
+      "word": "働く",
+      "reading": "はたらく",
+      "key": "働く\tはたらく",
+      "jmdictSeq": "1451150"
+    },
+    {
+      "id": "n5_hachi",
+      "word": "八",
+      "reading": "はち",
+      "key": "八\tはち",
+      "jmdictSeq": "1583090"
+    },
+    {
+      "id": "n5_hatsuka",
+      "word": "二十日",
+      "reading": "はつか",
+      "key": "二十日\tはつか",
+      "jmdictSeq": "1600850"
+    },
+    {
+      "id": "n5_hana",
+      "word": "花",
+      "reading": "はな",
+      "key": "花\tはな",
+      "jmdictSeq": "1194500"
+    },
+    {
+      "id": "n5_hana_2",
+      "word": "鼻",
+      "reading": "はな",
+      "key": "鼻\tはな",
+      "jmdictSeq": "1486720"
+    },
+    {
+      "id": "n5_hanashi",
+      "word": "話",
+      "reading": "はなし",
+      "key": "話\tはなし",
+      "jmdictSeq": "1600900"
+    },
+    {
+      "id": "n5_hanasu",
+      "word": "話す",
+      "reading": "はなす",
+      "key": "話す\tはなす",
+      "jmdictSeq": "1562350"
+    },
+    {
+      "id": "n5_haha",
+      "word": "母",
+      "reading": "はは",
+      "key": "母\tはは",
+      "jmdictSeq": "1514990"
+    },
+    {
+      "id": "n5_hayai",
+      "word": "早い",
+      "reading": "はやい",
+      "key": "早い\tはやい",
+      "jmdictSeq": "1404975"
+    },
+    {
+      "id": "n5_hayai_2",
+      "word": "速い",
+      "reading": "はやい",
+      "key": "速い\tはやい",
+      "jmdictSeq": "1404975"
+    },
+    {
+      "id": "n5_haru",
+      "word": "春",
+      "reading": "はる",
+      "key": "春\tはる",
+      "jmdictSeq": "1341000"
+    },
+    {
+      "id": "n5_haru_2",
+      "word": "貼る",
+      "reading": "はる",
+      "key": "貼る\tはる",
+      "jmdictSeq": "1427900"
+    },
+    {
+      "id": "n5_hare",
+      "word": "晴れ",
+      "reading": "はれ",
+      "key": "晴れ\tはれ",
+      "jmdictSeq": "1376460"
+    },
+    {
+      "id": "n5_hareru",
+      "word": "晴れる",
+      "reading": "はれる",
+      "key": "晴れる\tはれる",
+      "jmdictSeq": "1376470"
+    },
+    {
+      "id": "n5_han",
+      "word": "半",
+      "reading": "はん",
+      "key": "半\tはん",
+      "jmdictSeq": "1478750"
+    },
+    {
+      "id": "n5_ban",
+      "word": "晩",
+      "reading": "ばん",
+      "key": "晩\tばん",
+      "jmdictSeq": "1482110"
+    },
+    {
+      "id": "n5_bangou",
+      "word": "番号",
+      "reading": "ばんごう",
+      "key": "番号\tばんごう",
+      "jmdictSeq": "1482290"
+    },
+    {
+      "id": "n5_bangohan",
+      "word": "晩御飯",
+      "reading": "ばんごはん",
+      "key": "晩御飯\tばんごはん",
+      "jmdictSeq": "1601340"
+    },
+    {
+      "id": "n5_hanbun",
+      "word": "半分",
+      "reading": "はんぶん",
+      "key": "半分\tはんぶん",
+      "jmdictSeq": "1479890"
+    },
+    {
+      "id": "n5_higashi",
+      "word": "東",
+      "reading": "ひがし",
+      "key": "東\tひがし",
+      "jmdictSeq": "1447440"
+    },
+    {
+      "id": "n5_hiku",
+      "word": "引く",
+      "reading": "ひく",
+      "key": "引く\tひく",
+      "jmdictSeq": "1169250"
+    },
+    {
+      "id": "n5_hiku_2",
+      "word": "弾く",
+      "reading": "ひく",
+      "key": "弾く\tひく",
+      "jmdictSeq": "1419370"
+    },
+    {
+      "id": "n5_hikui",
+      "word": "低い",
+      "reading": "ひくい",
+      "key": "低い\tひくい",
+      "jmdictSeq": "1434180"
+    },
+    {
+      "id": "n5_hikouki",
+      "word": "飛行機",
+      "reading": "ひこうき",
+      "key": "飛行機\tひこうき",
+      "jmdictSeq": "1485470"
+    },
+    {
+      "id": "n5_hidari",
+      "word": "左",
+      "reading": "ひだり",
+      "key": "左\tひだり",
+      "jmdictSeq": "1290800"
+    },
+    {
+      "id": "n5_hito",
+      "word": "人",
+      "reading": "ひと",
+      "key": "人\tひと",
+      "jmdictSeq": "1580640"
+    },
+    {
+      "id": "n5_hitotsu",
+      "word": "一つ",
+      "reading": "ひとつ",
+      "key": "一つ\tひとつ",
+      "jmdictSeq": "1160820"
+    },
+    {
+      "id": "n5_hitotsuki",
+      "word": "一月",
+      "reading": "ひとつき",
+      "key": "一月\tひとつき",
+      "jmdictSeq": "1162130"
+    },
+    {
+      "id": "n5_hitori",
+      "word": "一人",
+      "reading": "ひとり",
+      "key": "一人\tひとり",
+      "jmdictSeq": "1576150"
+    },
+    {
+      "id": "n5_hima",
+      "word": "暇",
+      "reading": "ひま",
+      "key": "暇\tひま",
+      "jmdictSeq": "1577280"
+    },
+    {
+      "id": "n5_hyaku",
+      "word": "百",
+      "reading": "ひゃく",
+      "key": "百\tひゃく",
+      "jmdictSeq": "1488000"
+    },
+    {
+      "id": "n5_byouin",
+      "word": "病院",
+      "reading": "びょういん",
+      "key": "病院\tびょういん",
+      "jmdictSeq": "1490220"
+    },
+    {
+      "id": "n5_byouki",
+      "word": "病気",
+      "reading": "びょうき",
+      "key": "病気\tびょうき",
+      "jmdictSeq": "1490230"
+    },
+    {
+      "id": "n5_hiru",
+      "word": "昼",
+      "reading": "ひる",
+      "key": "昼\tひる",
+      "jmdictSeq": "1426250"
+    },
+    {
+      "id": "n5_hirugohan",
+      "word": "昼御飯",
+      "reading": "ひるごはん",
+      "key": "昼御飯\tひるごはん",
+      "jmdictSeq": "1602340"
+    },
+    {
+      "id": "n5_hiroi",
+      "word": "広い",
+      "reading": "ひろい",
+      "key": "広い\tひろい",
+      "jmdictSeq": "1278410"
+    },
+    {
+      "id": "n5_fuutou",
+      "word": "封筒",
+      "reading": "ふうとう",
+      "key": "封筒\tふうとう",
+      "jmdictSeq": "1499690"
+    },
+    {
+      "id": "n5_fuku",
+      "word": "吹く",
+      "reading": "ふく",
+      "key": "吹く\tふく",
+      "jmdictSeq": "1370760"
+    },
+    {
+      "id": "n5_fuku_2",
+      "word": "服",
+      "reading": "ふく",
+      "key": "服\tふく",
+      "jmdictSeq": "1500940"
+    },
+    {
+      "id": "n5_futatsu",
+      "word": "二つ",
+      "reading": "ふたつ",
+      "key": "二つ\tふたつ",
+      "jmdictSeq": "1461160"
+    },
+    {
+      "id": "n5_butaniku",
+      "word": "豚肉",
+      "reading": "ぶたにく",
+      "key": "豚肉\tぶたにく",
+      "jmdictSeq": "1457440"
+    },
+    {
+      "id": "n5_futari",
+      "word": "二人",
+      "reading": "ふたり",
+      "key": "二人\tふたり",
+      "jmdictSeq": "1582670"
+    },
+    {
+      "id": "n5_futsuka",
+      "word": "二日",
+      "reading": "ふつか",
+      "key": "二日\tふつか",
+      "jmdictSeq": "1462900"
+    },
+    {
+      "id": "n5_futoi",
+      "word": "太い",
+      "reading": "ふとい",
+      "key": "太い\tふとい",
+      "jmdictSeq": "1408180"
+    },
+    {
+      "id": "n5_fuyu",
+      "word": "冬",
+      "reading": "ふゆ",
+      "key": "冬\tふゆ",
+      "jmdictSeq": "1446070"
+    },
+    {
+      "id": "n5_furu",
+      "word": "降る",
+      "reading": "ふる",
+      "key": "降る\tふる",
+      "jmdictSeq": "1282790"
+    },
+    {
+      "id": "n5_furui",
+      "word": "古い",
+      "reading": "ふるい",
+      "key": "古い\tふるい",
+      "jmdictSeq": "1265070"
+    },
+    {
+      "id": "n5_bunshou",
+      "word": "文章",
+      "reading": "ぶんしょう",
+      "key": "文章\tぶんしょう",
+      "jmdictSeq": "1505470"
+    },
+    {
+      "id": "n5_heta",
+      "word": "下手",
+      "reading": "へた",
+      "key": "下手\tへた",
+      "jmdictSeq": "1185200"
+    },
+    {
+      "id": "n5_heya",
+      "word": "部屋",
+      "reading": "へや",
+      "key": "部屋\tへや",
+      "jmdictSeq": "1499320"
+    },
+    {
+      "id": "n5_hen",
+      "word": "辺",
+      "reading": "へん",
+      "key": "辺\tへん",
+      "jmdictSeq": "1512070"
+    },
+    {
+      "id": "n5_benkyou",
+      "word": "勉強",
+      "reading": "べんきょう",
+      "key": "勉強\tべんきょう",
+      "jmdictSeq": "1512670"
+    },
+    {
+      "id": "n5_benri",
+      "word": "便利",
+      "reading": "べんり",
+      "key": "便利\tべんり",
+      "jmdictSeq": "1512610"
+    },
+    {
+      "id": "n5_boushi",
+      "word": "帽子",
+      "reading": "ぼうし",
+      "key": "帽子\tぼうし",
+      "jmdictSeq": "1519170"
+    },
+    {
+      "id": "n5_hoka",
+      "word": "外",
+      "reading": "ほか",
+      "key": "外\tほか",
+      "jmdictSeq": "1203260"
+    },
+    {
+      "id": "n5_hoshii",
+      "word": "欲しい",
+      "reading": "ほしい",
+      "key": "欲しい\tほしい",
+      "jmdictSeq": "1547330"
+    },
+    {
+      "id": "n5_hosoi",
+      "word": "細い",
+      "reading": "ほそい",
+      "key": "細い\tほそい",
+      "jmdictSeq": "1295510"
+    },
+    {
+      "id": "n5_hon",
+      "word": "本",
+      "reading": "ほん",
+      "key": "本\tほん",
+      "jmdictSeq": "1522150"
+    },
+    {
+      "id": "n5_hondana",
+      "word": "本棚",
+      "reading": "ほんだな",
+      "key": "本棚\tほんだな",
+      "jmdictSeq": "1522980"
+    },
+    {
+      "id": "n5_hontou",
+      "word": "本当",
+      "reading": "ほんとう",
+      "key": "本当\tほんとう",
+      "jmdictSeq": "1523060"
+    },
+    {
+      "id": "n5_maiasa",
+      "word": "毎朝",
+      "reading": "まいあさ",
+      "key": "毎朝\tまいあさ",
+      "jmdictSeq": "1524700"
+    },
+    {
+      "id": "n5_maishuu",
+      "word": "毎週",
+      "reading": "まいしゅう",
+      "key": "毎週\tまいしゅう",
+      "jmdictSeq": "1524690"
+    },
+    {
+      "id": "n5_mainichi",
+      "word": "毎日",
+      "reading": "まいにち",
+      "key": "毎日\tまいにち",
+      "jmdictSeq": "1524720"
+    },
+    {
+      "id": "n5_maiban",
+      "word": "毎晩",
+      "reading": "まいばん",
+      "key": "毎晩\tまいばん",
+      "jmdictSeq": "1524730"
+    },
+    {
+      "id": "n5_mae",
+      "word": "前",
+      "reading": "まえ",
+      "key": "前\tまえ",
+      "jmdictSeq": "1392580"
+    },
+    {
+      "id": "n5_magaru",
+      "word": "曲る",
+      "reading": "まがる",
+      "key": "曲る\tまがる",
+      "jmdictSeq": "1239730"
+    },
+    {
+      "id": "n5_machi",
+      "word": "町",
+      "reading": "まち",
+      "key": "町\tまち",
+      "jmdictSeq": "1603990"
+    },
+    {
+      "id": "n5_matsu",
+      "word": "待つ",
+      "reading": "まつ",
+      "key": "待つ\tまつ",
+      "jmdictSeq": "1410590"
+    },
+    {
+      "id": "n5_mado",
+      "word": "窓",
+      "reading": "まど",
+      "key": "窓\tまど",
+      "jmdictSeq": "1401400"
+    },
+    {
+      "id": "n5_man",
+      "word": "万",
+      "reading": "まん",
+      "key": "万\tまん",
+      "jmdictSeq": "1584460"
+    },
+    {
+      "id": "n5_mannenhitsu",
+      "word": "万年筆",
+      "reading": "まんねんひつ",
+      "key": "万年筆\tまんねんひつ",
+      "jmdictSeq": "1526360"
+    },
+    {
+      "id": "n5_migaku",
+      "word": "磨く",
+      "reading": "みがく",
+      "key": "磨く\tみがく",
+      "jmdictSeq": "1523940"
+    },
+    {
+      "id": "n5_migi",
+      "word": "右",
+      "reading": "みぎ",
+      "key": "右\tみぎ",
+      "jmdictSeq": "1171010"
+    },
+    {
+      "id": "n5_mijikai",
+      "word": "短い",
+      "reading": "みじかい",
+      "key": "短い\tみじかい",
+      "jmdictSeq": "1418620"
+    },
+    {
+      "id": "n5_mizu",
+      "word": "水",
+      "reading": "みず",
+      "key": "水\tみず",
+      "jmdictSeq": "1371260"
+    },
+    {
+      "id": "n5_mise",
+      "word": "店",
+      "reading": "みせ",
+      "key": "店\tみせ",
+      "jmdictSeq": "1582120"
+    },
+    {
+      "id": "n5_miseru",
+      "word": "見せる",
+      "reading": "みせる",
+      "key": "見せる\tみせる",
+      "jmdictSeq": "1259210"
+    },
+    {
+      "id": "n5_michi",
+      "word": "道",
+      "reading": "みち",
+      "key": "道\tみち",
+      "jmdictSeq": "1454080"
+    },
+    {
+      "id": "n5_mikka",
+      "word": "三日",
+      "reading": "みっか",
+      "key": "三日\tみっか",
+      "jmdictSeq": "1301330"
+    },
+    {
+      "id": "n5_mittsu",
+      "word": "三つ",
+      "reading": "みっつ",
+      "key": "三つ\tみっつ",
+      "jmdictSeq": "1299740"
+    },
+    {
+      "id": "n5_midori",
+      "word": "緑",
+      "reading": "みどり",
+      "key": "緑\tみどり",
+      "jmdictSeq": "1555300"
+    },
+    {
+      "id": "n5_minasan",
+      "word": "皆さん",
+      "reading": "みなさん",
+      "key": "皆さん\tみなさん",
+      "jmdictSeq": "1202170"
+    },
+    {
+      "id": "n5_minami",
+      "word": "南",
+      "reading": "みなみ",
+      "key": "南\tみなみ",
+      "jmdictSeq": "1459870"
+    },
+    {
+      "id": "n5_mimi",
+      "word": "耳",
+      "reading": "みみ",
+      "key": "耳\tみみ",
+      "jmdictSeq": "1317170"
+    },
+    {
+      "id": "n5_miru",
+      "word": "見る",
+      "reading": "みる",
+      "key": "見る\tみる",
+      "jmdictSeq": "1259290"
+    },
+    {
+      "id": "n5_muika",
+      "word": "六日",
+      "reading": "むいか",
+      "key": "六日\tむいか",
+      "jmdictSeq": "1561470"
+    },
+    {
+      "id": "n5_mukou",
+      "word": "向こう",
+      "reading": "むこう",
+      "key": "向こう\tむこう",
+      "jmdictSeq": "1277140"
+    },
+    {
+      "id": "n5_muzukashii",
+      "word": "難しい",
+      "reading": "むずかしい",
+      "key": "難しい\tむずかしい",
+      "jmdictSeq": "1460850"
+    },
+    {
+      "id": "n5_muttsu",
+      "word": "六つ",
+      "reading": "むっつ",
+      "key": "六つ\tむっつ",
+      "jmdictSeq": "1585315"
+    },
+    {
+      "id": "n5_mura",
+      "word": "村",
+      "reading": "むら",
+      "key": "村\tむら",
+      "jmdictSeq": "1406820"
+    },
+    {
+      "id": "n5_me",
+      "word": "目",
+      "reading": "め",
+      "key": "目\tめ",
+      "jmdictSeq": "1604890"
+    },
+    {
+      "id": "n5_megane",
+      "word": "眼鏡",
+      "reading": "めがね",
+      "key": "眼鏡\tめがね",
+      "jmdictSeq": "1577670"
+    },
+    {
+      "id": "n5_mokuyoubi",
+      "word": "木曜日",
+      "reading": "もくようび",
+      "key": "木曜日\tもくようび",
+      "jmdictSeq": "1534890"
+    },
+    {
+      "id": "n5_motsu",
+      "word": "持つ",
+      "reading": "もつ",
+      "key": "持つ\tもつ",
+      "jmdictSeq": "1315720"
+    },
+    {
+      "id": "n5_mono",
+      "word": "物",
+      "reading": "もの",
+      "key": "物\tもの",
+      "jmdictSeq": "1502390"
+    },
+    {
+      "id": "n5_mon",
+      "word": "門",
+      "reading": "もん",
+      "key": "門\tもん",
+      "jmdictSeq": "1584800"
+    },
+    {
+      "id": "n5_mondai",
+      "word": "問題",
+      "reading": "もんだい",
+      "key": "問題\tもんだい",
+      "jmdictSeq": "1536010"
+    },
+    {
+      "id": "n5_yaoya",
+      "word": "八百屋",
+      "reading": "やおや",
+      "key": "八百屋\tやおや",
+      "jmdictSeq": "1476960"
+    },
+    {
+      "id": "n5_yasai",
+      "word": "野菜",
+      "reading": "やさい",
+      "key": "野菜\tやさい",
+      "jmdictSeq": "1537370"
+    },
+    {
+      "id": "n5_yasashii",
+      "word": "易しい",
+      "reading": "やさしい",
+      "key": "易しい\tやさしい",
+      "jmdictSeq": "1157000"
+    },
+    {
+      "id": "n5_yasui",
+      "word": "安い",
+      "reading": "やすい",
+      "key": "安い\tやすい",
+      "jmdictSeq": "1153670"
+    },
+    {
+      "id": "n5_yasumi",
+      "word": "休み",
+      "reading": "やすみ",
+      "key": "休み\tやすみ",
+      "jmdictSeq": "1227500"
+    },
+    {
+      "id": "n5_yasumu",
+      "word": "休む",
+      "reading": "やすむ",
+      "key": "休む\tやすむ",
+      "jmdictSeq": "1227560"
+    },
+    {
+      "id": "n5_yattsu",
+      "word": "八つ",
+      "reading": "やっつ",
+      "key": "八つ\tやっつ",
+      "jmdictSeq": "1583095"
+    },
+    {
+      "id": "n5_yama",
+      "word": "山",
+      "reading": "やま",
+      "key": "山\tやま",
+      "jmdictSeq": "1302680"
+    },
+    {
+      "id": "n5_yuugata",
+      "word": "夕方",
+      "reading": "ゆうがた",
+      "key": "夕方\tゆうがた",
+      "jmdictSeq": "1542790"
+    },
+    {
+      "id": "n5_yuuhan",
+      "word": "夕飯",
+      "reading": "ゆうはん",
+      "key": "夕飯\tゆうはん",
+      "jmdictSeq": "1584910"
+    },
+    {
+      "id": "n5_yuubinkyoku",
+      "word": "郵便局",
+      "reading": "ゆうびんきょく",
+      "key": "郵便局\tゆうびんきょく",
+      "jmdictSeq": "1542430"
+    },
+    {
+      "id": "n5_yuube",
+      "word": "昨夜",
+      "reading": "ゆうべ",
+      "key": "昨夜\tゆうべ",
+      "jmdictSeq": "1542640"
+    },
+    {
+      "id": "n5_yuumei",
+      "word": "有名",
+      "reading": "ゆうめい",
+      "key": "有名\tゆうめい",
+      "jmdictSeq": "1541620"
+    },
+    {
+      "id": "n5_yuki",
+      "word": "雪",
+      "reading": "ゆき",
+      "key": "雪\tゆき",
+      "jmdictSeq": "1386500"
+    },
+    {
+      "id": "n5_youka",
+      "word": "八日",
+      "reading": "ようか",
+      "key": "八日\tようか",
+      "jmdictSeq": "1476920"
+    },
+    {
+      "id": "n5_youfuku",
+      "word": "洋服",
+      "reading": "ようふく",
+      "key": "洋服\tようふく",
+      "jmdictSeq": "1546020"
+    },
+    {
+      "id": "n5_yoko",
+      "word": "横",
+      "reading": "よこ",
+      "key": "横\tよこ",
+      "jmdictSeq": "1180570"
+    },
+    {
+      "id": "n5_yokka",
+      "word": "四日",
+      "reading": "よっか",
+      "key": "四日\tよっか",
+      "jmdictSeq": "1307320"
+    },
+    {
+      "id": "n5_yottsu",
+      "word": "四つ",
+      "reading": "よっつ",
+      "key": "四つ\tよっつ",
+      "jmdictSeq": "1307040"
+    },
+    {
+      "id": "n5_yobu",
+      "word": "呼ぶ",
+      "reading": "よぶ",
+      "key": "呼ぶ\tよぶ",
+      "jmdictSeq": "1266440"
+    },
+    {
+      "id": "n5_yomu",
+      "word": "読む",
+      "reading": "よむ",
+      "key": "読む\tよむ",
+      "jmdictSeq": "1456360"
+    },
+    {
+      "id": "n5_yoru",
+      "word": "夜",
+      "reading": "よる",
+      "key": "夜\tよる",
+      "jmdictSeq": "1536350"
+    },
+    {
+      "id": "n5_yowai",
+      "word": "弱い",
+      "reading": "よわい",
+      "key": "弱い\tよわい",
+      "jmdictSeq": "1324520"
+    },
+    {
+      "id": "n5_raigetsu",
+      "word": "来月",
+      "reading": "らいげつ",
+      "key": "来月\tらいげつ",
+      "jmdictSeq": "1547900"
+    },
+    {
+      "id": "n5_raishuu",
+      "word": "来週",
+      "reading": "らいしゅう",
+      "key": "来週\tらいしゅう",
+      "jmdictSeq": "1548010"
+    },
+    {
+      "id": "n5_rainen",
+      "word": "来年",
+      "reading": "らいねん",
+      "key": "来年\tらいねん",
+      "jmdictSeq": "1548220"
+    },
+    {
+      "id": "n5_ryuugakusei",
+      "word": "留学生",
+      "reading": "りゅうがくせい",
+      "key": "留学生\tりゅうがくせい",
+      "jmdictSeq": "1552750"
+    },
+    {
+      "id": "n5_ryoushin",
+      "word": "両親",
+      "reading": "りょうしん",
+      "key": "両親\tりょうしん",
+      "jmdictSeq": "1602710"
+    },
+    {
+      "id": "n5_ryouri",
+      "word": "料理",
+      "reading": "りょうり",
+      "key": "料理\tりょうり",
+      "jmdictSeq": "1554310"
+    },
+    {
+      "id": "n5_ryokou",
+      "word": "旅行",
+      "reading": "りょこう",
+      "key": "旅行\tりょこう",
+      "jmdictSeq": "1553170"
+    },
+    {
+      "id": "n5_rei",
+      "word": "零",
+      "reading": "れい",
+      "key": "零\tれい",
+      "jmdictSeq": "1557630"
+    },
+    {
+      "id": "n5_reizouko",
+      "word": "冷蔵庫",
+      "reading": "れいぞうこ",
+      "key": "冷蔵庫\tれいぞうこ",
+      "jmdictSeq": "1557110"
+    },
+    {
+      "id": "n5_renshuu",
+      "word": "練習",
+      "reading": "れんしゅう",
+      "key": "練習\tれんしゅう",
+      "jmdictSeq": "1559160"
+    },
+    {
+      "id": "n5_rouka",
+      "word": "廊下",
+      "reading": "ろうか",
+      "key": "廊下\tろうか",
+      "jmdictSeq": "1560670"
+    },
+    {
+      "id": "n5_roku",
+      "word": "六",
+      "reading": "ろく",
+      "key": "六\tろく",
+      "jmdictSeq": "1585310"
+    },
+    {
+      "id": "n5_wakai",
+      "word": "若い",
+      "reading": "わかい",
+      "key": "若い\tわかい",
+      "jmdictSeq": "1324300"
+    },
+    {
+      "id": "n5_wakaru",
+      "word": "分かる",
+      "reading": "わかる",
+      "key": "分かる\tわかる",
+      "jmdictSeq": "1606560"
+    },
+    {
+      "id": "n5_wasureru",
+      "word": "忘れる",
+      "reading": "わすれる",
+      "key": "忘れる\tわすれる",
+      "jmdictSeq": "1519210"
+    },
+    {
+      "id": "n5_watakushi",
+      "word": "私",
+      "reading": "わたくし",
+      "key": "私\tわたくし",
+      "jmdictSeq": "2842390"
+    },
+    {
+      "id": "n5_watashi",
+      "word": "私",
+      "reading": "わたし",
+      "key": "私\tわたし",
+      "jmdictSeq": "1311110"
+    },
+    {
+      "id": "n5_watasu",
+      "word": "渡す",
+      "reading": "わたす",
+      "key": "渡す\tわたす",
+      "jmdictSeq": "1444610"
+    },
+    {
+      "id": "n5_wataru",
+      "word": "渡る",
+      "reading": "わたる",
+      "key": "渡る\tわたる",
+      "jmdictSeq": "1444680"
+    },
+    {
+      "id": "n5_warui",
+      "word": "悪い",
+      "reading": "わるい",
+      "key": "悪い\tわるい",
+      "jmdictSeq": "1151260"
+    }
+  ]
+}

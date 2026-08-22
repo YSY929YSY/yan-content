@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "W-T2 exact word+reading join",
+  "input": "staging/jmdict-eng-3.6.2.json",
+  "target": "kanji_anchor words missing jmdictSeq",
+  "counts": {
+    "targets": 544,
+    "auto": 503,
+    "conflict": 0,
+    "unmatched": 41
+  },
+  "entries": []
+}
