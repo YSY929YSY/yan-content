@@ -22,7 +22,7 @@ const SOURCE_LABEL = {
   word: '词库', card: '词卡', place: '足迹', scene: '场景', subway: '地铁',
 };
 
-export default function ReviewScreen({ content, onBack }) {
+export default function ReviewScreen({ content, onBack, onOpenOrigin }) {
   const { speak, speakingKey } = useSpeech();
   const { prefs } = usePrefs();
   const { progress, ready, grade } = useReviewProgress();
@@ -192,9 +192,14 @@ export default function ReviewScreen({ content, onBack }) {
         )}
 
         {!!unit.origin && (
-          <Text style={s.origin}>
-            {SOURCE_LABEL[sourceOf(key)] || ''} · {unit.origin}
-          </Text>
+          <View style={s.originRow}>
+            <Text style={s.origin}>{SOURCE_LABEL[sourceOf(key)] || ''} · {unit.origin}</Text>
+            {sourceOf(key) === 'scene' && !!onOpenOrigin && (
+              <TouchableOpacity style={s.originBtn} onPress={() => onOpenOrigin({ key, origin: unit.origin })}>
+                <Text style={s.originBtnTxt}>回到场景</Text>
+              </TouchableOpacity>
+            )}
+          </View>
         )}
       </ScrollView>
     </View>
@@ -262,6 +267,9 @@ const s = StyleSheet.create({
   gradeTxtOn: { color: C.white },
   // 「三原山」出现在一道题下面,是这个产品和词库 App 的分界线,别把它做小到看不见
   origin: { fontSize: 11, color: C.mutedLight, marginTop: 24 },
+  originRow: { alignItems: 'center', gap: 8, marginTop: 12 },
+  originBtn: { borderWidth: 1, borderColor: C.lava, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 4 },
+  originBtnTxt: { fontSize: 11, color: C.lava, fontWeight: '600' },
   doneBig: { fontSize: 17, fontWeight: '700', color: C.ink },
   dim: { fontSize: 13, color: C.muted, textAlign: 'center' },
   dimSmall: { fontSize: 11, color: C.mutedLight, textAlign: 'center', marginTop: 10 },

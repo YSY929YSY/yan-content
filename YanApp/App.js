@@ -1499,7 +1499,18 @@ function PieTabInner({ content, setTab, subTab, setSubTab, sceneState, setSceneS
           <SubwayScreen adventure={content.subwayAdventure} />
         )}
         {subTab === 'review' && (
-          <ReviewScreen content={content} onBack={() => setSubTab('learn')} />
+          <ReviewScreen
+            content={content}
+            onBack={() => setSubTab('learn')}
+            onOpenOrigin={({ key }) => {
+              const [, sceneId, phraseId] = String(key).split(':');
+              const scene = content.scenes?.find(item => item.id === sceneId);
+              if (!scene) return;
+              const index = (scene.phrases || []).findIndex(p => String(p.id) === String(phraseId));
+              setSceneState({ scene, index: index < 0 ? 0 : index });
+              setSubTab('card');
+            }}
+          />
         )}
         {/* 今日批次。首页那张卡点「开始」直接落在这里,不经过词书货架 ——
             货架是「你自己挑」,而这条主线的整个前提是**任何时刻只有一个下一步**。
