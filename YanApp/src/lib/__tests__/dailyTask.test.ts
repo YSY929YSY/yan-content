@@ -220,7 +220,7 @@ test('★ 接尾词/量词押后 —— 否则第一屏给用户六个「～円�
 // 按词频排 —— 先学用得上的
 // ─────────────────────────────────────────────
 
-test('★ 高频的排前面 —— 字典序和「哪个先学更有用」没有关系', () => {
+test('★ 例句库出现次数多的排前面 —— 字典序和「哪个先学更有用」没有关系', () => {
   const bank = [
     w('会う', 'あう', { freq: { df: 1986 } }),
     w('私', 'わたし', { freq: { df: 26526 } }),
@@ -239,6 +239,22 @@ test('★ df=0 和 df=null 必须分开 —— 「不适用」不是「频率为
   const ordered = anchorPool(bank).map(x => x.word);
   assert.deepEqual(ordered, ['私', '昼御飯', '～人'],
     'df=0(语料里真的没出现)要排在 df=null(接尾词,不适用)前面');
+});
+
+test('★ raw_substring 不参与「更常用」判断 —— 它可能把恋愛计入愛', () => {
+  const bank = [
+    w('愛', 'あい', { freq: { df: 99999, method: 'raw_substring' } }),
+    w('行く', 'いく', { freq: { df: 2, method: 'lemma' } }),
+  ];
+  assert.deepEqual(anchorPool(bank).map(x => x.word), ['行く', '愛']);
+});
+
+test('★ df=0 仍与 df=null 分开 —— raw_substring 只是降级排序', () => {
+  const bank = [
+    w('無し', 'なし', { freq: { df: 0, method: 'lemma' } }),
+    w('未知', 'みち', { freq: { df: null, method: 'not_applicable' } }),
+  ];
+  assert.deepEqual(anchorPool(bank).map(x => x.word), ['無し', '未知']);
 });
 
 test('★ 接尾词即使有频率也押后 —— 判据是「它不是一个独立的词」', () => {

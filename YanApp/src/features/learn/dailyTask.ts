@@ -28,7 +28,7 @@ export type WordLike = {
   level?: string;
   /** 词性。接尾词/量词要押后,见 orderPool。 */
   pos?: string;
-  /** 词频。df=null 表示「不适用」(接尾词),df=0 表示「真的没出现过」,两者不一样。 */
+  /** 例句库出现次数。df=null 表示「不适用」,df=0 表示「库里没出现」,两者不一样。 */
   freq?: { df: number | null; source?: string; method?: string };
   meaning_zh?: string;
   yanFeatures?: string[];
@@ -259,15 +259,16 @@ export function poolProgress(
  * 第二版把接尾词押后,变成 `会う 青 青い 赤 赤い 明るい` —— 不难看,但那是
  * 字典序,和「哪个先学更有用」没有关系。
  *
- * 现在按 Tatoeba 文档频率(248,758 句)降序,top 变成:
+ * 现在按 Tatoeba 例句库出现次数(248,758 句)降序,top 变成:
  *
  *     私 行く 何 言う 人 見る 知る 好き 自分 家
  *
  * 三档,顺序不能乱:
  *
- *   1. `df > 0`   有真实使用频率,按 df 降序
- *   2. `df === 0` 语料里**真的一次都没出现**(420 条,其中 301 条是 N1)
- *   3. `df === null` / 接尾词 —— **「不适用」不是「频率为零」**
+ *   1. `df > 0` 且不是 `raw_substring` —— 例句库出现次数按 df 降序
+ *   2. `raw_substring` —— 字符串包含匹配不参与「更常用」判断
+ *   3. `df === 0` 例句库里**真的一次都没出现**(420 条,其中 301 条是 N1)
+ *   4. `df === null` / 接尾词 —— **「不适用」不是「库里为零」**
  *
  * ⚠️ 第 2 档和第 3 档必须分开。`～人` 的 df 是 null 而不是 0,是因为
  * 「接尾词不该有独立词频」和「这个词冷门到没人说」是两件完全不同的事。
@@ -283,17 +284,18 @@ const isAffix = (w: WordLike) =>
   w.word.startsWith('～') || w.word.startsWith('~') || /量词|接尾|接头/.test(w.pos || '');
 
 const tierOf = (w: WordLike): number => {
-  if (isAffix(w)) return 2;
+  if (isAffix(w)) return 3;
   const df = w.freq?.df;
-  if (df == null) return 2;      // 没有 freq 字段、或明确的 not_applicable
-  return df > 0 ? 0 : 1;
+  if (df == null) return 3;      // 没有字段、或明确的 not_applicable
+  if (w.freq?.method === 'raw_substring') return 1;
+  return df > 0 ? 0 : 2;
 };
 
 export function orderPool(pool: readonly WordLike[]): WordLike[] {
   return [...pool].sort((a, b) => {
     const ta = tierOf(a), tb = tierOf(b);
     if (ta !== tb) return ta - tb;
-    if (ta !== 0) return 0;                       // 非第一档内部不排,保持原序
+    if (ta !== 0) return 0;                       // 非主排序档内部不排,保持原序
     return (b.freq!.df as number) - (a.freq!.df as number);
   });
 }
