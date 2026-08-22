@@ -122,3 +122,23 @@ node -e "const x=require('./staging/pitch-confidence.json').levels; const c={}; 
 ```
 
 本次登记的三个来源及根 lineage 是 `ninjal-unidic`、`kanjium`、`wiktionary-ja`；它们的 staging 工件、版本与许可快照尚未补齐，因此 registry 会将其标为 incomplete，登记不等于已证明可计入 release gate。
+
+## 数据库迁移执行记录（2026-08-22）
+
+**`schema.word-pocket.sql` 与 `schema.apply-all.sql` 已由项目负责人在 Supabase Dashboard → SQL Editor 执行。**
+
+为什么要专门记这一条：这个项目栽过两次「迁移文件躺在仓库里从没跑过」——
+`word_progress` 的五列没跑，间隔复习的云端同步整个静默停摆；
+`place_checkin.checked_in_at` 没跑，打卡日期从来没上过云，而「旅迹」那条弧线就是按日期画的。
+两次都不报错、不提示，只在真机日志里留一行 warn。仓库里没有执行记录，是那两次的共同前提。
+
+所以从这次起：**跑过就记在这里**，不靠记忆，也不靠「应该跑过了吧」。
+
+可复核（在 Supabase SQL Editor 里跑，期望 4 行）：
+
+```sql
+select policyname, cmd from pg_policies where tablename = 'word_pocket';
+```
+
+⚠️ 这条记录只证明 SQL 执行过，**不证明口袋同步在真机上跑通了**。
+后者要等一次真实的登录/换账号验证，尚未做。
