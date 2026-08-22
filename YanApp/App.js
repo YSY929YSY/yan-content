@@ -53,6 +53,7 @@ import { meaningTrust } from './src/features/wordbank/meaningTrust';
 import { addToPocket, isPocketed, normalizePocket, pocketKey, removeFromPocket } from './src/features/wordbank/pocket';
 import { usePrefs } from './src/lib/prefs';
 import { pullPocket, pushPocket } from './src/lib/sync';
+import { scenesOfWord } from './src/features/wordbank/sceneWords';
 // 词场预览:内容还在 staging 没并进内容包,开发期先从这份草稿读,方便边写边看。
 // 合并进 content.v2.json 之后这份和它的引用一起删。
 import WORDFIELD_PREVIEW from './src/features/wordbank/wordfield-preview.json';
@@ -1990,6 +1991,7 @@ function WordBankScreen({ wordBank, book, onBack }) {
   // 退出页面就没了,重进重新挑一批,用户永远做不完「今天的任务」。
   const [session, setSession] = useState(null);
   const [statusFilter, setStatusFilter] = useState('all');
+  const [viewMode, setViewMode] = useState('default');
   // 用户明确选择“浏览词典”时，才把 dictionary-only 词列进当前书。
   const [browseDictionary, setBrowseDictionary] = useState(false);
   const [pocket, setPocket] = useState([]);
@@ -2086,9 +2088,15 @@ function WordBankScreen({ wordBank, book, onBack }) {
     return () => { alive = false; };
   }, [bookId, progressReady]);
 
-  // 这一页不再有搜索框 —— 查词是全库的事,搬到了词书选择页。
-  // 没人记得「注文」是 N4 还是 N3,按词书切分搜索本来就是错的切法。
-  const searched = wordBank;
+  // 默认先给用户自己攒的口袋；空口袋退回有明确场景标签的可学词。
+  // 可信度只影响同一默认列表里的两段顺序，不把内部状态显示给用户。
+  const trustRank = (word) => ['human_reviewed', 'editorial_published'].includes(meaningTrust(word)) ? 0 : 1;
+  const sortByTrust = (words) => [...words].sort((a, b) => trustRank(a) - trustRank(b));
+  const pocketWordsInBook = wordBank.filter(w => pocket.includes(pocketKey(w)));
+  const sceneWordsInBook = wordBank.filter(w => canIntroduceWord(w) && scenesOfWord(w).length > 0);
+  const defaultWords = sortByTrust(pocketWordsInBook.length ? pocketWordsInBook : sceneWordsInBook);
+  // 全量词库仍保留，只需在默认视图点一次「浏览全库」。搜索仍在词书选择页。
+  const searched = viewMode === 'default' ? defaultWords : wordBank;
   const STATUS_FILTERS = [
     { id: 'all', label: '全部' },
     { id: 'new', label: '未学' },
@@ -2114,7 +2122,9 @@ function WordBankScreen({ wordBank, book, onBack }) {
   const visibleDictionaryOrHistory = (w) =>
     isDictionaryEntry(w) || canReviewWord(w, progress[wordKey(w)] || null);
   const skipLearningFilter = statusFilter === 'today' || statusFilter === 'due' || statusFilter === 'pocket' || browseDictionary;
-  const filtered = skipLearningFilter
+  const filtered = viewMode === 'default'
+    ? byStatus.filter(canIntroduceWord)
+    : skipLearningFilter
     ? byStatus.filter(visibleDictionaryOrHistory)
     : byStatus.filter(canIntroduceWord);
 
@@ -2199,10 +2209,15 @@ function WordBankScreen({ wordBank, book, onBack }) {
         </TouchableOpacity>
         <Text style={wb.title}>{book?.level || 'N5'} {book?.title || '基础词库'}</Text>
         <Text style={wb.sub}>
-          {book?.level || 'N5'} 学习分级 · {dictionaryCount} 可查 · {learningCount} 可学习
+          {viewMode === 'default'
+            ? (pocketWordsInBook.length ? `口袋 ${defaultWords.length}` : `场景词 ${defaultWords.length}`)
+            : `${book?.level || 'N5'} 学习分级 · ${dictionaryCount} 可查 · ${learningCount} 可学习`}
           {' · '}{book?.desc || '词块 · 例句'}
         </Text>
         <View style={wb.ctaRow}>
+          <TouchableOpacity style={wb.ctaBtn} onPress={() => { setViewMode(viewMode === 'default' ? 'all' : 'default'); setBrowseDictionary(false); setStatusFilter('all'); }}>
+            <Text style={wb.ctaBtnTxt}>{viewMode === 'default' ? '浏览全库' : '回到默认'}</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={[wb.ctaBtn, statusFilter === 'today' && wb.ctaBtnActive]} onPress={startToday}>
             <Text style={[wb.ctaBtnTxt, statusFilter === 'today' && wb.ctaBtnTxtActive]}>
               {/* session 还没读出来时不能显示「今日已完成」—— 冷启动那一瞬间
@@ -2262,7 +2277,14 @@ function WordBankScreen({ wordBank, book, onBack }) {
           );
         }}
         ListEmptyComponent={(
-          !hasLearningWords && !browseDictionary && statusFilter !== 'due' ? (
+          viewMode === 'default' ? (
+            <View style={wb.emptyBox}>
+              <Text style={wb.empty}>口袋还是空的，这本词书暂时没有场景词</Text>
+              <TouchableOpacity style={wb.emptyBtn} onPress={() => setViewMode('all')}>
+                <Text style={wb.emptyBtnTxt}>浏览全库</Text>
+              </TouchableOpacity>
+            </View>
+          ) : !hasLearningWords && !browseDictionary && statusFilter !== 'due' ? (
             <View style={wb.emptyBox}>
               <Text style={wb.empty}>
                 开放词典查询，{'\n'}
