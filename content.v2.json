@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "version": "2.2",
+  "version": "2.3",
   "updated": "2026-08-22",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8005 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
@@ -38,6 +38,13 @@
      "S-T5：将未经证实的 order.notes.es 词源断言改为明确标注的记忆联想",
      "W-T2：按词面+读音为 503 个主线锚点补回 jmdictSeq；41 个未命中留在报告",
      "L-T1：为便利店场景绑定 35 个词与 10 条短句、6 条对话的 core_vocab"
+    ]
+   },
+   {
+    "date": "2026-08-22",
+    "changes": [
+     "L-T2b：修正 6 条便利店多义词的中文释义并标明人工审阅",
+     "L-T2b：将便利店场景中原仅词典的 16 条词纳入 Learning，保留 kanji_anchor 主线池 563 条"
     ]
    }
   ]
@@ -17617,8 +17624,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+   "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -22343,8 +22351,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+   "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -27519,8 +27528,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+   "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -27794,8 +27804,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+   "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -34745,8 +34756,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+   "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -42603,8 +42615,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+   "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -58227,7 +58240,8 @@
     "N4"
    ],
    "pos": "动词",
-   "meaning_zh": "寻找；找",
+   "meaning_zh": "找（商品），寻找；找",
+   "meaning_zh_status": "human_reviewed",
    "meaning_en": "to search for; to look for; to hunt for",
    "status": "candidate",
    "tags": {
@@ -58258,8 +58272,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+   "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -65796,8 +65811,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+   "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -68870,6 +68886,7 @@
    ],
    "pos": "动词",
    "meaning_zh": "支付；付钱",
+   "meaning_zh_status": "human_reviewed",
    "meaning_en": "to pay (e.g. money, bill)",
    "status": "candidate",
    "tags": {
@@ -68900,8 +68917,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+   "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -74504,8 +74522,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+   "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -74555,8 +74574,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+   "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -85438,7 +85458,8 @@
     "N3"
    ],
    "pos": "名词",
-   "meaning_zh": "卡片；贺卡",
+   "meaning_zh": "积分卡/银行卡，卡片；贺卡",
+   "meaning_zh_status": "human_reviewed",
    "meaning_en": "card (information, filing, etc.) | card (greetings, congratulations, etc.)",
    "status": "zh_drafted",
    "tags": {
@@ -85472,8 +85493,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+   "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -98403,6 +98425,7 @@
    ],
    "pos": "名词",
    "meaning_zh": "现金；现实，势利",
+   "meaning_zh_status": "human_reviewed",
    "meaning_en": "cash; ready money; money on hand | mercenary; self-interested; calculating",
    "status": "zh_drafted",
    "tags": {
@@ -98436,8 +98459,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+   "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -108876,8 +108900,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+   "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -140362,6 +140387,7 @@
    ],
    "pos": "名词",
    "meaning_zh": "袋子；（橘子等的）瓤",
+   "meaning_zh_status": "human_reviewed",
    "meaning_en": "bag; sack; pouch | skin of an orange (and other like fruits)",
    "status": "zh_drafted",
    "tags": {
@@ -140395,8 +140421,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+   "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -362002,7 +362029,8 @@
     "N1"
    ],
    "pos": "名词",
-   "meaning_zh": "要点，关键；分数",
+   "meaning_zh": "积分，要点，关键；分数",
+   "meaning_zh_status": "human_reviewed",
    "meaning_en": "point (of a story, argument, etc.); key point; important part | point; site; spot",
    "status": "zh_drafted",
    "tags": {
@@ -362036,8 +362064,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+   "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
