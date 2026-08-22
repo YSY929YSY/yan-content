@@ -1614,3 +1614,56 @@ git status --porcelain -- staging → 空
 - run manifest 的脚本 SHA 会与当前 CLI 实测比对；当前样本的脚本 SHA 与输入 SHA 均一致，端到端 validate 退出码为 0。
 
 复核验收：`npm test` 572/572、`npm run typecheck` 通过。非阻塞保留项：当 `independentFamilies <= 1` 时，不合格反证只保留诊断、不阻止 `supported`；这条有意的不对称须在 P2-2B 契约中写明。提交 staging 时仍须逐个 `git add -f` 本工单列出的五个路径，禁止使用目录形式。
+
+## PLAN v2 第一批
+
+### 实际提交
+
+- `37dce0e chore(content): make content accuracy measurable`：新增只读 `scripts/content-stats.mjs`。
+- `085d939 fix(wordbank): stop presenting an unsupported JLPT scope`：词书首页/词书页去掉“高频”与“JLPT”事实暗示；数据来源页逐字读取 fallback 的 `scope_note` 与 `source_url`。
+- `695dd3e feat(wordbank): make scene membership queryable without UI coupling`：新增 `sceneWordsOf()`、`scenesOfWord()` 及纯函数测试；未接 UI。
+- `c9345c7 feat(wordbank): make meaning trust explicit instead of inferred`：新增 `meaningTrust()`、测试和 App 接线；缺字段 fail closed 为 `machine_drafted`。
+- `cddedb2 fix(learn): stop treating substring counts as usage evidence`：`raw_substring` 排在可比较的例句库计数之后；df=0 与 df=null 仍分开。
+- `e77659c fix(pitch): avoid calling recycled sources independent corroboration`：40 条含维基的两方组合按单源提示；登记 UniDic、kanjium、Wiktionary lineage；A4 结论写入 `DECISIONS.md`。
+
+### content-stats.mjs 首次输出（基线全文）
+
+```text
+content-stats: assets/content.fallback.json (read-only)
+wordBank.total: 8005
+level: {"N5":724,"N4":631,"N3":1712,"N2":1774,"N1":3164}
+status: {"draft":716,"verified":2,"candidate":645,"zh_drafted":6642}
+tags.scene.effective: {"convenience":23,"directions":43,"restaurant":58,"hotel":16,"emergency":14,"subway":14}
+tags.scene.daily_tagged: 7985
+tags.scene.words_with_any_tag: 8005
+coverage:
+  exampleJp: 4400/8005 (55.0%)
+  coreChunk: 1758/8005 (22.0%)
+  jmdictSeq: 6683/8005 (83.5%)
+  pitch: 7674/8005 (95.9%)
+  wordField: 0/8005 (0.0%)
+freq.method: {"not_applicable":41,"lemma":7188,"raw_substring":338,"stripped_prefix":18,"none":420}
+freq.df_zero: 420
+freq.df_null: 41
+pitch.agree: {"1":588,"2":6563,"3":523}
+publication.dictionary: 8005
+publication.learning: 563
+kanji_anchor.total: 563
+kanji_anchor.complete: 19/563
+kanji_anchor.missing: {"exampleJp":0,"coreChunk":0,"jmdictSeq":544,"pitch":35}
+known_differences:
+  _meta.note says 8026; measured wordBank.total is 8005; difference=21
+  staging/pitch-confidence.json agree=0 is 20; commit 81efe21 said 15; difference=5
+```
+
+### 与 plan 数字不符的事实
+
+本地 fallback 的总数、级别、状态、场景标签、主线池和字段覆盖率与 plan 的实测口径基本一致；脚本把差异打印为 8026 vs 8005（21 条）及 agree=0 的 20 vs 15（5 条）。此外，当前 fallback 的 `freq.method` 并非 8005 条全为 `tatoeba`：`source` 可以是 Tatoeba，但 method 实测为 `lemma` 7188、`raw_substring` 338、`none` 420、`not_applicable` 41、`stripped_prefix` 18。当前 fallback 的 `pitch.agree=2` 是 6563 条，staging 的 UniDic+kanjium 组合是 6549 条；两者不是同一运行代次，报告保留实测值，没有改数据迁就 plan。
+
+### 想改但忍住没改
+
+- 没有给 8005 条词批量补 `meaning_zh_status`，也没有进入 commit 7–11 的内容窗口。
+- 没有修改 `assets/content.fallback.json`、远端内容包、`_meta.version`、jmdictSeq、词源卡或场景标签。
+- 没有把所有 `high-frequency`/“高频”相关的非词书旅行文案顺手重写；本轮只处理词书描述范围。
+- 没有拆 `App.js`，没有重做排序算法结构、SRS、units、publication 或 content schema，也没有改变裸的 `词-读音` 进度键。
+- A4 没有把未锁定 artifact 的 registry 条目伪装成 eligible；三条新增来源如实保留为 incomplete，后续要补工件与许可快照再谈 release gate。
