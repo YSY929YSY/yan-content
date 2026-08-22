@@ -10,7 +10,9 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { C } from '../../theme';
 import PITCH_PREVIEW from './pitch-preview.json';
-import { toMora, pitchPattern, accentName, accentHint, accentOf } from './pitch';
+import {
+  toMora, pitchPattern, accentName, accentHint, accentOf, pitchUnconfirmed,
+} from './pitch';
 
 /**
  * 这个词的声调型。取字段那一步在 `pitch.js` 的 `accentOf`(纯函数,有测试),
@@ -63,8 +65,7 @@ export const pitchAgree = (w) => {
   return Number.isFinite(a) ? a : null;
 };
 
-/** 只有一个来源、无从印证 —— 界面上要标一句。 */
-export const pitchUnconfirmed = (w) => pitchAgree(w) === 1;
+export { pitchUnconfirmed };
 
 
 /**

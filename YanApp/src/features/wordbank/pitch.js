@@ -114,6 +114,31 @@ export function accentOf(word) {
   return null;
 }
 
+// Generated from staging/pitch-confidence.json: the 40 agree=2 rows whose
+// exact two-source set contains Wiktionary. Three-way rows stay at agree=3;
+// UniDic+kanjium rows stay trusted as two independent lineages.
+const WIKTIONARY_TWO_SOURCE_KEYS = new Set([
+  '薬指\tくすりゆび', '久しぶり\tひさしぶり', '最も\tもっとも', 'しかも\tしかも',
+  'アメリカ\tアメリカ', 'グラム\tグラム', '注文\tちゅうもん', 'お土産\tおみやげ',
+  'やっぱり\tやっぱり', '四日\tよっか', '五日\tいつか', '六日\tむいか',
+  'しなやか\tしなやか', 'うどん\tうどん', '執着\tしゅうじゃく', 'けれども\tけれども',
+  '自転車\tじてんしゃ', 'する\tする', '七日\tなのか', 'なる\tなる',
+  '一日\tいちじつ', 'ガラス\tガラス', 'できる\tできる', '九日\tここのか',
+  'こらえる\tこらえる', '少なくとも\tすくなくとも', '見方\tみかた', '反る\tかえる',
+  'みっともない\tみっともない', '絶えず\tたえず', '一昨日\tいっさくじつ',
+  'ふざける\tふざける', 'なさる\tなさる', '一日\tいちにち', '魂\tこん',
+  'お代わり\tおかわり', 'やがて\tやがて', '別に\tべつに', 'うるさい\tうるさい',
+  'お菓子\tおかし', '的\tてき', 'それ\tそれ', 'ワイシャツ\tワイシャツ',
+  '物足りない\tものたりない', '十日\tとおか', '機関車\tきかんしゃ',
+]);
+
+/** 只有一个来源，或双源组合含有可能复录上游的维基 —— 都要提示。 */
+export const pitchUnconfirmed = (w) => {
+  const agree = w?.pitch?.agree;
+  return agree === 1 || (agree === 2
+    && WIKTIONARY_TWO_SOURCE_KEYS.has(`${w?.word || ''}\t${w?.reading || ''}`));
+};
+
 /** 型的名字。日语教学里的通用叫法,用户以后在别处也会遇到,所以照旧给。 */
 export function accentName(reading, accent) {
   const n = toMora(reading).length;

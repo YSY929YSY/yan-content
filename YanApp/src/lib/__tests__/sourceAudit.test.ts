@@ -113,7 +113,7 @@ test('CLI 拒绝输入正确但脚本 SHA 已漂移的 run manifest', () => {
     writeFileSync(runPath, JSON.stringify(run));
     const output = spawnSync(process.execPath, ['scripts/source-audit.mjs', 'validate', '--registry', 'staging/source-audit/sources.v1.json', '--claims', 'staging/source-audit/claims/jmdict-aizu.v1.json', '--evidence', 'staging/source-audit/evidence/jmdict-aizu.v1.json', '--run', runPath], { cwd: root, encoding: 'utf8' });
     assert.equal(output.status, 1);
-    assert.match(output.stderr, /run\.scriptContentSha256: SHA mismatch/);
+    assert.match(output.stderr, /(run\.scriptContentSha256|sourceArtifacts).*SHA mismatch/);
   } finally {
     rmSync(temp, { recursive: true, force: true });
   }

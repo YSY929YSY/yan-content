@@ -110,3 +110,15 @@
 - 已确认事实可以由代码/数据证据更新；
 - 产品取舍只能由产品负责人确认；
 - CC、Codex 或 subagent 发现冲突时先记录，不得自行把“建议”升级成“决定”。
+
+## A4 · 声调 lineage 结论（2026-08-22）
+
+`agree=2` 只有在 `staging/pitch-confidence.json` 的 `srcs` 恰为 `UniDic + kanjium` 时，才按两个独立 lineage 计数；该组合共 6549 条，保持原展示。`kanjium + 维基` 23 条与 `UniDic + 维基` 17 条不再按双源提示，改按单源提示。含三方的 `agree=3` 记录不在这 40 条降级名单内。
+
+可复算依据：
+
+```bash
+node -e "const x=require('./staging/pitch-confidence.json').levels; const c={}; for(const v of Object.values(x)){const k=v.agree+' '+v.srcs.join('+'); c[k]=(c[k]||0)+1} console.log(c)"
+```
+
+本次登记的三个来源及根 lineage 是 `ninjal-unidic`、`kanjium`、`wiktionary-ja`；它们的 staging 工件、版本与许可快照尚未补齐，因此 registry 会将其标为 incomplete，登记不等于已证明可计入 release gate。

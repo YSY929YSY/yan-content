@@ -6,6 +6,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   toMora, pitchPattern, parseAccents, primaryAccent, accentName, accentHint, accentOf,
+  pitchUnconfirmed,
 } from '../../features/wordbank/pitch.js';
 import { readFileSync } from 'node:fs';
 
@@ -165,6 +166,13 @@ test('旧结构的内容包还认 —— 内容包是远端下发的,线上可�
   assert.equal(accentOf({ pitchAccent: 3 }), 3);
   // 两个都在时以新结构为准
   assert.equal(accentOf({ pitch: { accent: 1 }, pitchAccent: 3 }), 1);
+});
+
+test('★ 含维基的 agree=2 按单源提示，UniDic+kanjium 的双源提示不变', () => {
+  assert.equal(pitchUnconfirmed({ word: '注文', reading: 'ちゅうもん', pitch: { agree: 2 } }), true);
+  assert.equal(pitchUnconfirmed({ word: '芸術', reading: 'げいじゅつ', pitch: { agree: 2 } }), false);
+  assert.equal(pitchUnconfirmed({ word: '注文', reading: 'ちゅうもん', pitch: { agree: 3 } }), false);
+  assert.equal(pitchUnconfirmed({ pitch: { agree: 1 } }), true);
 });
 
 test('★ 回归:真实内容包里 accentOf 必须能取到,不是只在构造的对象上成立', () => {
