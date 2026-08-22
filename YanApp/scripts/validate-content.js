@@ -26,11 +26,13 @@ const REQUIRED_MEMORY_CONTEXT_KEYS = ['situation'];
 const REQUIRED_MEMORY_REVIEW_KEYS = ['prompt', 'answer'];
 const REQUIRED_KANA_CHAR_KEYS = ['kana', 'roma'];
 const KANA_ROW_KEYS = ['kanaRows', 'voicedRows', 'yoonRows', 'specialRows', 'loanwordRows'];
-const VALID_PLACE_TYPES = new Set(['snow', 'volcano', 'water', 'cafe']);
+const VALID_PLACE_TYPES = new Set(['snow', 'volcano', 'water', 'cafe', 'life', 'experience', 'landmark']);
 const KNOWN_TOP_LEVEL_KEYS = new Set([
   ...REQUIRED_TOP_LEVEL_KEYS,
   'specialSounds',
   'cultureNotes',
+  'wordBank',
+  'wordCards',
 ]);
 const PLACEHOLDER_RE = /TODO|placeholder|lorem|待补充|开发中|test/i;
 
@@ -162,6 +164,38 @@ function validateScenes(content) {
   });
 
   return { readySceneCount, phraseCount };
+}
+
+function validateCoreVocab(content) {
+  const wordIds = new Set(Array.isArray(content.wordBank) ? content.wordBank.map(word => word?.id).filter(Boolean) : []);
+  if (!Array.isArray(content.wordBank)) {
+    addError('top-level wordBank must be an array when core_vocab is present');
+    return;
+  }
+  for (const scene of content.scenes || []) {
+    for (const [index, phrase] of (scene.phrases || []).entries()) {
+      if (phrase.core_vocab === undefined) continue;
+      if (!Array.isArray(phrase.core_vocab)) {
+        addError(`scenes (${scene.id}).phrases[${index}].core_vocab must be an array`);
+        continue;
+      }
+      phrase.core_vocab.forEach(id => {
+        if (!wordIds.has(id)) addError(`scenes (${scene.id}).phrases[${index}].core_vocab unknown wordBank id: ${id}`);
+      });
+    }
+    for (const [dialogueIndex, dialogue] of (scene.miniDialogues || []).entries()) {
+      for (const [lineIndex, line] of (dialogue.lines || []).entries()) {
+        if (line.core_vocab === undefined) continue;
+        if (!Array.isArray(line.core_vocab)) {
+          addError(`scenes (${scene.id}).miniDialogues[${dialogueIndex}].lines[${lineIndex}].core_vocab must be an array`);
+          continue;
+        }
+        line.core_vocab.forEach(id => {
+          if (!wordIds.has(id)) addError(`scenes (${scene.id}).miniDialogues[${dialogueIndex}].lines[${lineIndex}].core_vocab unknown wordBank id: ${id}`);
+        });
+      }
+    }
+  }
 }
 
 function validateMapPlaces(content) {
@@ -393,6 +427,7 @@ for (const key of Object.keys(content)) {
 }
 
 const { readySceneCount, phraseCount } = validateScenes(content);
+validateCoreVocab(content);
 const { placeCount, placeTypeCounts, placesWithMemory, memoryCardTypeCounts, memoryLanguageCounts } = validateMapPlaces(content);
 const kanaCounts = validateKanaRows(content);
 validateSubway(content);

@@ -1729,18 +1729,21 @@
       {
        "role": "A",
        "jp": "これと、これをお願いします。",
+       "core_vocab": ["n5_kore","n1_onegaishimasu"],
        "roma": "Kore to, kore o onegaishimasu.",
        "zh": "这个和这个，麻烦了。"
       },
       {
        "role": "B",
        "jp": "温めますか？",
+       "core_vocab": ["n5_obentou"],
        "roma": "Atatamemasu ka?",
        "zh": "需要加热吗？"
       },
       {
        "role": "A",
        "jp": "はい、お願いします。",
+       "core_vocab": ["n1_onegaishimasu"],
        "roma": "Hai, onegaishimasu.",
        "zh": "好的，麻烦了。"
       }
@@ -1760,18 +1763,21 @@
       {
        "role": "A",
        "jp": "すみません、水はどこですか？",
+       "core_vocab": ["n3_sumimasen","n5_mizu","n5_doko"],
        "roma": "Sumimasen, mizu wa doko desu ka?",
        "zh": "不好意思，水在哪里？"
       },
       {
        "role": "B",
        "jp": "あちらです。",
+       "core_vocab": ["n5_achira"],
        "roma": "Achira desu.",
        "zh": "在那边。"
       },
       {
        "role": "A",
        "jp": "ありがとうございます。",
+       "core_vocab": ["n3_arigatou"],
        "roma": "Arigatou gozaimasu.",
        "zh": "谢谢您。"
       }
@@ -1791,6 +1797,7 @@
      "id": 1,
      "type": "core",
      "jp": "ポイントカードはありますか？",
+     "core_vocab": ["n1_pointo","n3_kado"],
      "roma": "Pointo kādo wa arimasu ka?",
      "zh": "您有积分卡吗？",
      "en": "Do you have a points card?",
@@ -1823,6 +1830,7 @@
      "id": 2,
      "type": "core",
      "jp": "いりません",
+     "core_vocab": ["n5_iru_2"],
      "roma": "Irimasen",
      "zh": "不需要",
      "en": "No, thank you",
@@ -1848,6 +1856,7 @@
     },
     {
      "id": 3,
+     "core_vocab": ["n5_obentou"],
      "type": "core",
      "jp": "温めますか？",
      "roma": "Atatamemasu ka?",
@@ -1878,6 +1887,7 @@
      "id": 4,
      "type": "core",
      "jp": "温めてください",
+     "core_vocab": ["n5_obentou"],
      "roma": "Atatamete kudasai",
      "zh": "请帮我加热",
      "en": "Please heat it up",
@@ -1905,6 +1915,7 @@
      "id": 5,
      "type": "core",
      "jp": "袋はいりますか？",
+     "core_vocab": ["n3_fukuro","n5_iru_2"],
      "roma": "Fukuro wa irimasu ka?",
      "zh": "需要袋子吗？",
      "en": "Do you need a bag?",
@@ -1937,6 +1948,7 @@
      "id": 6,
      "type": "support",
      "jp": "カードで払えますか？",
+     "core_vocab": ["n3_kado","n4_harau"],
      "roma": "Kādo de haraemasu ka?",
      "zh": "可以刷卡吗？",
      "en": "Can I pay by card?",
@@ -1968,6 +1980,7 @@
      "id": 306,
      "type": "core",
      "jp": "店内で食べられますか？",
+     "core_vocab": ["n5_obentou"],
      "roma": "Ten'nai de taberaremasu ka?",
      "zh": "可以在里面吃吗？",
      "en": "Can I eat inside?",
@@ -1980,6 +1993,7 @@
      "id": 8,
      "type": "template",
      "jp": "〇〇はどこですか？",
+     "core_vocab": ["n5_doko"],
      "roma": "〇〇 wa doko desu ka?",
      "zh": "〇〇在哪里？",
      "en": "Where is 〇〇?",
@@ -2025,6 +2039,7 @@
      "id": 9,
      "type": "template",
      "jp": "〇〇はありますか？",
+     "core_vocab": ["n5_doko"],
      "roma": "〇〇 wa arimasu ka?",
      "zh": "有 〇〇 吗？",
      "en": "Do you have 〇〇?",
@@ -2070,6 +2085,7 @@
      "id": 10,
      "type": "flavor",
      "jp": "ありがとうございました",
+     "core_vocab": ["n3_arigatou"],
      "roma": "Arigatou gozaimashita",
      "zh": "谢谢您（离开时）",
      "en": "Thank you — farewell",
@@ -18558,7 +18574,8 @@
    "status": "draft",
    "tags": {
     "scene": [
-     "daily"
+     "daily",
+     "convenience"
     ],
     "type": [
      "action"
@@ -18606,7 +18623,8 @@
    "status": "draft",
    "tags": {
     "scene": [
-     "daily"
+     "daily",
+     "convenience"
     ],
     "type": [
      "action"
@@ -21302,7 +21320,8 @@
    "tags": {
     "scene": [
      "daily",
-     "restaurant"
+     "restaurant",
+     "convenience"
     ],
     "type": [
      "uncategorized"
@@ -43875,7 +43894,8 @@
    "status": "draft",
    "tags": {
     "scene": [
-     "daily"
+     "daily",
+     "convenience"
     ],
     "type": [
      "action"
@@ -58204,7 +58224,8 @@
    "status": "candidate",
    "tags": {
     "scene": [
-     "daily"
+     "daily",
+     "convenience"
     ],
     "type": [
      "uncategorized"
@@ -65741,7 +65762,8 @@
    "status": "candidate",
    "tags": {
     "scene": [
-     "daily"
+     "daily",
+     "convenience"
     ],
     "type": [
      "uncategorized"
@@ -68844,7 +68866,8 @@
    "status": "candidate",
    "tags": {
     "scene": [
-     "daily"
+     "daily",
+     "convenience"
     ],
     "type": [
      "uncategorized"
@@ -74447,7 +74470,8 @@
    "status": "candidate",
    "tags": {
     "scene": [
-     "daily"
+     "daily",
+     "convenience"
     ],
     "type": [
      "uncategorized"
@@ -85411,7 +85435,8 @@
    "status": "zh_drafted",
    "tags": {
     "scene": [
-     "daily"
+     "daily",
+     "convenience"
     ],
     "type": [
      "uncategorized"
@@ -98374,7 +98399,8 @@
    "status": "zh_drafted",
    "tags": {
     "scene": [
-     "daily"
+     "daily",
+     "convenience"
     ],
     "type": [
      "uncategorized"
@@ -140332,7 +140358,8 @@
    "status": "zh_drafted",
    "tags": {
     "scene": [
-     "daily"
+     "daily",
+     "convenience"
     ],
     "type": [
      "uncategorized"
@@ -361972,7 +361999,8 @@
    "status": "zh_drafted",
    "tags": {
     "scene": [
-     "daily"
+     "daily",
+     "convenience"
     ],
     "type": [
      "uncategorized"
