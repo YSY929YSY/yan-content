@@ -1,0 +1,15 @@
+{
+  "kind": "W-T4",
+  "status": "review_only",
+  "description": "候选词场；只做机器体检与人工备料，本批不写入 wordBank。",
+  "candidates": [
+    {"anchorId":"n5_konbini","wordField":{"members":[{"id":"n5_obentou"}],"sentence":{"jp":"コンビニでお弁当を買いました。","roma":"Konbini de obentou o kaimashita.","zh":"我在便利店买了便当。"}}},
+    {"anchorId":"n4_reji","wordField":{"members":[{"id":"n3_genkin"}],"sentence":{"jp":"レジで現金を払います。","roma":"Reji de genkin o haraimasu.","zh":"在收银台用现金付款。"}}},
+    {"anchorId":"n4_tenin","wordField":{"members":[{"id":"n3_kado"}],"sentence":{"jp":"店員にカードを見せます。","roma":"Ten'in ni kaado o misemasu.","zh":"给店员看卡。"}}},
+    {"anchorId":"n5_saifu","wordField":{"members":[{"id":"n5_okane"}],"sentence":{"jp":"財布からお金を出します。","roma":"Saifu kara okane o dashimasu.","zh":"从钱包里拿出钱。"}}},
+    {"anchorId":"n4_sagasu","wordField":{"members":[{"id":"n5_yasui"},{"id":"n5_obentou"}],"sentence":{"jp":"安いお弁当を探します。","roma":"Yasui obentou o sagashimasu.","zh":"寻找便宜的便当。"}}},
+    {"anchorId":"n4_reshito","wordField":{"members":[{"id":"n3_fukuro"}],"sentence":{"jp":"レシートを袋に入れます。","roma":"Reshiito o fukuro ni iremasu.","zh":"把小票放进袋子。"}}},
+    {"anchorId":"n1_pointo","wordField":{"members":[{"id":"n3_kado"}],"sentence":{"jp":"ポイントカードがあります。","roma":"Pointo kaado ga arimasu.","zh":"有积分卡。"}}},
+    {"anchorId":"n5_ikura","wordField":{"members":[{"id":"n5_okane"}],"sentence":{"jp":"お金はいくらですか？","roma":"Okane wa ikura desu ka?","zh":"钱是多少？"}}}
+  ]
+}
