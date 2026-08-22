@@ -1,8 +1,8 @@
 {
  "_meta": {
   "version": "2.2",
-  "updated": "2026-08-08",
-  "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8026 条（例句覆盖 51.3%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
+  "updated": "2026-08-22",
+  "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8005 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
    "n4_core": {
     "source": "stephenmk/yomitan-jlpt-vocab original_data/n4.csv",
