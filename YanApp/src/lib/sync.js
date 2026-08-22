@@ -45,6 +45,30 @@ export async function pushProgress(wordKey, rec, bookId = 'n5') {
   }
 }
 
+/** 口袋是用户主动选择的数据,沿用 word_progress 的裸词-读音键。 */
+export async function pushPocket(wordKey, inPocket) {
+  if (!supabase || !wordKey) return { ok: false, error: 'offline' };
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) return { ok: false, error: 'no session' };
+    if (inPocket) {
+      const { error } = await supabase.from('word_pocket').upsert(
+        { user_id: session.user.id, word_key: wordKey },
+        { onConflict: 'user_id,word_key' },
+      );
+      if (error) throw error;
+    } else {
+      const { error } = await supabase.from('word_pocket').delete()
+        .eq('user_id', session.user.id).eq('word_key', wordKey);
+      if (error) throw error;
+    }
+    return { ok: true, error: null };
+  } catch (e) {
+    console.warn('[Sync] pocket push failed:', e.message);
+    return { ok: false, error: e.message };
+  }
+}
+
 /**
  * 登录后把本机数据补传到新账号。
  *
@@ -85,6 +109,31 @@ export async function backfillProgress(progressMap, bookId = 'n5') {
     return { count: done, error: null };
   } catch (e) {
     console.warn('[Sync] backfill progress failed:', e.message);
+    return { count: 0, error: e.message };
+  }
+}
+
+/** 登录迁移时口袋取并集:本机 ∪ 云端。分批 upsert,可安全重复。 */
+export async function backfillPocket(pocketList) {
+  if (!supabase) return { count: 0, error: 'offline' };
+  const keys = [...new Set((Array.isArray(pocketList) ? pocketList : [])
+    .filter(key => typeof key === 'string' && key.trim()))];
+  if (!keys.length) return { count: 0, error: null };
+  try {
+    const user = await getSessionUser();
+    if (!user) return { count: 0, error: 'no session' };
+    let done = 0;
+    for (let i = 0; i < keys.length; i += 400) {
+      const rows = keys.slice(i, i + 400).map(word_key => ({ user_id: user.id, word_key }));
+      const { error } = await supabase.from('word_pocket')
+        .upsert(rows, { onConflict: 'user_id,word_key' });
+      if (error) throw error;
+      done += rows.length;
+    }
+    console.log('[Sync] backfilled pocket', done);
+    return { count: done, error: null };
+  } catch (e) {
+    console.warn('[Sync] backfill pocket failed:', e.message);
     return { count: 0, error: e.message };
   }
 }
@@ -170,6 +219,15 @@ export async function backfillAll() {
       return { count: 0, error: null };
     }
     return backfillProgress(progress);
+  });
+
+  await run('pocket', async () => {
+    const { ok, value: pocket } = await readJsonResult(K.pocket);
+    if (!ok) return { count: 0, error: '读不到本机口袋,保留 pending 下次重试' };
+    // 口袋迁移是并集(本机 ∪ 云端),只发生在这次登录补传。
+    // 后续入袋/移出立即 push,启动 pull 覆盖本地。已知局限:并集之后如果 A 机移出,
+    // B 机尚未 pull 就 push,词会复活。当前接受这个代价,不假装不存在。
+    return backfillPocket(Array.isArray(pocket) ? pocket : []);
   });
 
   await run('checkins', async () => {
@@ -260,6 +318,21 @@ export async function pullProgress() {
     // 库还没跑 schema.word-srs.sql 时,上面 select 新列会直接报错走到这里,
     // 结果是本地照常可用、不被空值覆盖(硬规矩 1)。
     console.warn('[Sync] pull failed:', e.message);
+    return null;
+  }
+}
+
+export async function pullPocket() {
+  if (!supabase) return null;
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) return null;
+    const { data, error } = await supabase.from('word_pocket')
+      .select('word_key').eq('user_id', session.user.id);
+    if (error) throw error;
+    return (data || []).map(row => row.word_key).filter(Boolean);
+  } catch (e) {
+    console.warn('[Sync] pocket pull failed:', e.message);
     return null;
   }
 }

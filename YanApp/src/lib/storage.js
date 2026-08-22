@@ -44,7 +44,7 @@ const REGISTRY = {
     // 重进就换一批词,用户永远做不完「今天的任务」。
   },
   pocket: {
-    key: 'yan_wordbank_pocket_v1', kind: 'user', backfill: null,
+    key: 'yan_wordbank_pocket_v1', kind: 'user', backfill: 'pocket',
     desc: '用户主动收入袋的词（键沿用裸的词-读音）',
   },
   worldVisitedIds: {
