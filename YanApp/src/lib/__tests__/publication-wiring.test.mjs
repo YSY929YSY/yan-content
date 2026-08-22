@@ -46,7 +46,7 @@ test('★★ 详情页没有 onGrade 就完全不渲染评分区', () => {
 
 test('UI 术语对齐已确认的 publication 语义', () => {
   assert.match(app, /可查 · .*可学习/);
-  assert.match(app, /仅词典 · 暂无例句/);
+  assert.match(app, /仅词典 · 中文释义待核/);
   assert.match(app, /开放词典查询，[\s\S]{0,40}学习内容正在分批核验/);
   assert.match(app, /浏览词典/);
   assert.doesNotMatch(app, /showDrafts|draftTag/);

@@ -48,6 +48,7 @@ import {
 import {
   canGradeWord, canIntroduceWord, canReviewWord, hasCompleteExample, isDictionaryEntry,
 } from './src/features/wordbank/publication';
+import { meaningTrust } from './src/features/wordbank/meaningTrust';
 import { usePrefs } from './src/lib/prefs';
 // 词场预览:内容还在 staging 没并进内容包,开发期先从这份草稿读,方便边写边看。
 // 合并进 content.v2.json 之后这份和它的引用一起删。
@@ -2192,7 +2193,9 @@ function WordBankScreen({ wordBank, book, onBack }) {
                 {isDictionaryEntry(item) && !canIntroduceWord(item) && (
                   <View style={wb.dictionaryTag}>
                     <Text style={wb.dictionaryTagTxt}>
-                      {hasCompleteExample(item) ? '仅词典' : '仅词典 · 暂无例句'}
+                      {meaningTrust(item) === 'machine_drafted'
+                        ? '仅词典 · 中文释义待核'
+                        : '仅词典'}
                     </Text>
                   </View>
                 )}
