@@ -6,7 +6,7 @@
 // 题目来自五个地方(词库/深卡骨架/地点记忆卡/场景句/地铁句),在这里长得一样:
 // 正面一个问题,点开背面,然后说实话。用户不需要知道这道题是从哪个模块来的,
 // 但页脚会告诉他 —— 「三原山」这三个字出现在一道题下面,是这个产品的意义所在。
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { C } from '../../theme';
@@ -15,6 +15,8 @@ import { usePrefs } from '../../lib/prefs';
 import { useDailyQueue } from './useReview';
 import { useReviewProgress } from './ReviewProgressContext';
 import { fromWord, indexUnits, buildUnits, sourceOf } from './units';
+import { buildProduceChoices, isProduceAnswer } from './produceChoices';
+import { sceneWordsOf } from '../wordbank/sceneWords';
 
 const SOURCE_LABEL = {
   word: '词库', card: '词卡', place: '足迹', scene: '场景', subway: '地铁',
@@ -44,8 +46,15 @@ export default function ReviewScreen({ content, onBack }) {
 
   const newUnits = useMemo(() => Object.values(deep), [deep]);
   const { queue, remaining, markDone, defer } = useDailyQueue({ progress, ready, resolve, newUnits });
+  const sceneWords = useMemo(() => sceneWordsOf(content?.wordBank || [], 'convenience').map(w => w.word), [content]);
 
   const [flipped, setFlipped] = useState(false);
+  const [pickedBlocks, setPickedBlocks] = useState([]);
+  const currentKey = remaining?.[0] || null;
+  useEffect(() => {
+    setFlipped(false);
+    setPickedBlocks([]);
+  }, [currentKey]);
 
   if (!ready || !queue) {
     return (
@@ -70,6 +79,7 @@ export default function ReviewScreen({ content, onBack }) {
 
   const key = remaining[0];
   const unit = resolve(key);
+  const produce = unit?.mode === 'produce' ? buildProduceChoices(unit, sceneWords) : null;
   if (!unit) {
     // 理论上进不来(队列已经过滤过),但内容包是远端下发的,不能假设它永远自洽。
     // 跳过这一条而不是白屏。
@@ -83,6 +93,13 @@ export default function ReviewScreen({ content, onBack }) {
     // 「忘了」不算做完 —— 它今天还要再见一次。挪到队尾,过几道题再问一遍。
     if (g === 'again') defer(key);
     else markDone(key);
+  };
+
+  const submitProduce = () => {
+    if (!produce || produce.mode !== 'choices' || !pickedBlocks.length) return;
+    const correct = isProduceAnswer(pickedBlocks, produce.correct);
+    setFlipped(true);
+    onGrade(correct ? 'good' : 'again');
   };
 
   return (
@@ -99,6 +116,28 @@ export default function ReviewScreen({ content, onBack }) {
 
         {!flipped ? (
           <>
+            {produce?.mode === 'choices' ? (
+              <View style={s.choiceBox}>
+                <Text style={s.choicePrompt}>按顺序拼出这句话</Text>
+                <View style={s.choiceRow}>
+                  {pickedBlocks.map((block, index) => (
+                    <TouchableOpacity key={`picked-${index}-${block}`} style={s.choiceSelected} onPress={() => setPickedBlocks(pickedBlocks.filter((_, i) => i !== index))}>
+                      <Text style={s.choiceText}>{block}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+                <View style={s.choiceRow}>
+                  {produce.choices.filter(block => !pickedBlocks.includes(block)).map((block) => (
+                    <TouchableOpacity key={block} style={s.choiceBtn} onPress={() => setPickedBlocks([...pickedBlocks, block])}>
+                      <Text style={s.choiceText}>{block}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+                <TouchableOpacity style={[s.submitBtn, !pickedBlocks.length && s.submitDisabled]} onPress={submitProduce} disabled={!pickedBlocks.length}>
+                  <Text style={s.submitTxt}>提交</Text>
+                </TouchableOpacity>
+              </View>
+            ) : <>
             {!!unit.hint && (
               <View style={s.hintBox}>
                 <Text style={s.hintTxt}>{unit.hint}</Text>
@@ -108,7 +147,7 @@ export default function ReviewScreen({ content, onBack }) {
               <Text style={s.flipTxt}>看答案</Text>
             </TouchableOpacity>
             <Text style={s.dimSmall}>先自己想一遍再翻 —— 想不起来本身就是有用的信息</Text>
-          </>
+            </>}
         ) : (
           <>
             <View style={s.answerBox}>
@@ -226,4 +265,13 @@ const s = StyleSheet.create({
   doneBig: { fontSize: 17, fontWeight: '700', color: C.ink },
   dim: { fontSize: 13, color: C.muted, textAlign: 'center' },
   dimSmall: { fontSize: 11, color: C.mutedLight, textAlign: 'center', marginTop: 10 },
+  choiceBox: { alignSelf: 'stretch', gap: 12, marginTop: 12 },
+  choicePrompt: { fontSize: 13, color: C.muted, textAlign: 'center' },
+  choiceRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 7, justifyContent: 'center', minHeight: 34 },
+  choiceBtn: { borderWidth: 1, borderColor: C.border, borderRadius: 8, backgroundColor: C.white, paddingHorizontal: 10, paddingVertical: 8 },
+  choiceSelected: { borderWidth: 1, borderColor: C.lava, borderRadius: 8, backgroundColor: C.tag, paddingHorizontal: 10, paddingVertical: 8 },
+  choiceText: { fontSize: 14, color: C.ink },
+  submitBtn: { alignSelf: 'center', backgroundColor: C.ink, borderRadius: 8, paddingHorizontal: 28, paddingVertical: 10 },
+  submitDisabled: { opacity: 0.4 },
+  submitTxt: { color: C.white, fontWeight: '700' },
 });
