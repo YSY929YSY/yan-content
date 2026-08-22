@@ -1598,7 +1598,7 @@ function LearnScreen({ content, setSceneState, setSubTab }) {
 
     <TouchableOpacity style={ls.card} onPress={() => setSubTab('wordbank')}>
       <Text style={ls.cardGlyph}>詞</Text>
-      <Text style={ls.cardTitle}>高频词书</Text>
+      <Text style={ls.cardTitle}>词书</Text>
       <Text style={ls.cardDesc}>按词书分级学习，从 N5 开始</Text>
     </TouchableOpacity>
 
@@ -1738,7 +1738,7 @@ lockTag: {
 // (718/626/1730/1812/3413 实际是 724/633/1726/1798/3403),而且不报错、
 // 只是让用户看到一个和列表对不上的数字。现在由 WordBookShelfScreen 从内容里现算。
 const WORDBOOKS = [
-  { id: 'n5', level: 'N5', title: '基础词书', desc: '高频词块 · 例句', available: true },
+  { id: 'n5', level: 'N5', title: '基础词书', desc: '词块 · 例句', available: true },
   { id: 'n4', level: 'N4', title: '进阶词书', desc: '日常表达 · 例句', available: true },
   { id: 'n3', level: 'N3', title: '中级词书', desc: '表达能力跃升', available: true },
   { id: 'n2', level: 'N2', title: '高级词书', desc: '流利阅读基础', available: true },
@@ -2148,8 +2148,8 @@ function WordBankScreen({ wordBank, book, onBack }) {
         </TouchableOpacity>
         <Text style={wb.title}>{book?.level || 'N5'} {book?.title || '基础词库'}</Text>
         <Text style={wb.sub}>
-          JLPT {book?.level || 'N5'} · {dictionaryCount} 可查 · {learningCount} 可学习
-          {' · '}{book?.desc || '高频词块 · 例句'}
+          {book?.level || 'N5'} 学习分级 · {dictionaryCount} 可查 · {learningCount} 可学习
+          {' · '}{book?.desc || '词块 · 例句'}
         </Text>
         <View style={wb.ctaRow}>
           <TouchableOpacity style={[wb.ctaBtn, statusFilter === 'today' && wb.ctaBtnActive]} onPress={startToday}>
@@ -6087,6 +6087,15 @@ function DataSourcesScreen({ onBack }) {
           <Text style={ds.body}>授权：Creative Commons Attribution-ShareAlike 4.0。</Text>
           <TouchableOpacity onPress={() => Linking.openURL('https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project').catch(() => {})}>
             <Text style={ds.link}>JMdict/EDICT Dictionary Project ↗</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={ds.card}>
+          <Text style={ds.eyebrow}>JLPT 分级词库</Text>
+          <Text style={ds.body}>
+            {fallbackContent?._meta?.wordBankSources?.n4_core?.scope_note}
+          </Text>
+          <TouchableOpacity onPress={() => Linking.openURL(fallbackContent?._meta?.wordBankSources?.n4_core?.source_url).catch(() => {})}>
+            <Text style={ds.link}>{fallbackContent?._meta?.wordBankSources?.n4_core?.source_url} ↗</Text>
           </TouchableOpacity>
         </View>
         <View style={ds.card}>
