@@ -1709,4 +1709,48 @@ known_differences:
 
 本批想改但忍住的地方：没有处理 41 个 W-T2 未命中、没有处理冲突（本次为 0）、没有改 `assets/content.fallback.json` 的其他释义/场景数据，没有补全全部 wordField，没有改 publication 或进度键，没有重构 UI/业务文件。
 
+## PLAN v2 第四批（commit 17–20）
+
+### 先修红灯：上一批报告勘误
+
+本批开始时树确实是 `582` 中 `581` 通过、`1` 失败：`storage.test.mjs` 报口袋登记为 `kind:'user'` 却 `backfill:null`。上一批交接中把它写成“通过测试”不准确，本节予以更正。
+
+第一步没有改成 device，而是保留项目所有者已经决定的“口袋上云”方案，把 `K.pocket` 的补传域改为 `backfill:'pocket'`。先跑验证确认红灯消失，再提交同步域接线；最终 commit 18 后 `npm test` 为 582/582，typecheck 通过。
+
+### Commit 17：schema
+
+`3696a79` 已包含 `src/lib/schema.word-pocket.sql` 和 `schema.apply-all.sql` 接线。表名完整使用 `word_pocket`，主键为 `(user_id, word_key)`，RLS 四条策略分别限制本人；每条 `create policy` 前都有完全对应的 `drop policy if exists ... on word_pocket`。
+
+这只是仓库迁移文件验收。**`schema.word-pocket.sql` 待项目所有者在 Supabase Dashboard → SQL Editor 执行**；本报告不把它写成已执行，也没有假设云端表已存在。
+
+### Commit 18：同步三件套与 fail-closed
+
+`5c68eb5` 新增：
+
+- `pushPocket(wordKey, inPocket)`：入袋 upsert，移出 delete；使用裸的 `词-读音`。
+- `backfillPocket(pocketList)`：登录迁移时按 400 条分批 upsert。
+- `pullPocket()`：按当前用户拉取 `word_key` 列表。
+- `backfillAll()` 的 `run('pocket', ...)`：使用 `readJsonResult(K.pocket)`；读不到返回 `读不到本机口袋,保留 pending 下次重试`，不会报成功，也不会清除 pending。
+
+合并语义写死为：登录那一次补传取并集“本机 ∪ 云端”；之后入袋/移出立即 push，启动 pull 成功后覆盖本地。已知局限是并集之后，若 A 机移出而 B 机尚未 pull 就 push，词可能复活；当前接受这个代价，没有假装成冲突解决系统。
+
+### Commit 19：UI 同步行为
+
+`baf8e7d` 接通启动 pull 与入袋/移出 push。远端 pull 返回 `null` 时保留本地；本地读失败由 write guard 阻止写回；本地写成功但远端 push 失败时，词仍可在本机使用，并显示“已存本机，联网后同步”，没有显示云端成功。实际 Supabase 真机/SQL Editor 联通验证尚未完成，因为 schema 仍待项目所有者执行；上述为代码路径和自动化验收结果，不冒充线上行为已验证。
+
+### Commit 20：L-T2b 默认词书视图
+
+`e36956f` 将词书打开后的默认列表改为：当前词书中口袋词优先；口袋为空时退回带产品场景标签的可学习词。默认列表按已有 `meaningTrust()` 排两段：`human_reviewed` / `editorial_published` 在前，其他未审词在后；UI 不展示内部状态名。原有全库入口、词书入口、四个状态筛选和仅词典路径保留，进度键未动。
+
+### 本批之后的四件闭环
+
+场景词：便利店 35 条、短句和对话已在 2.3 内容包；口袋：本地持久化 + 云同步代码已接线；主动输出：已有 `mode:'produce'` 单元现在可切块、选择、提交，拼错走 `again/lapses`，单块答案降级自评；回场景：场景来源卡显示“回到场景”，按 `scene:<sceneId>:<phraseId>` 定位原句。词书默认视图现在从口袋/场景词开始。
+
+### 想改但忍住的地方
+
+- 没有绕过项目所有者去执行 Supabase SQL，也没有声称云端表已存在。
+- 没有把口袋改成 device，没有新增云端冲突解决策略，没有改 SRS 算法或进度键格式。
+- 没有修改内容包、publication、`yanFeatures` 或 `kanji_anchor`，没有推进 commit 13 的旧版本实现，而是按本批要求落地为 commit 20。
+- 没有拆 `App.js`，没有新增第二场景、第二种题型、词场内容或综合挑战。
+
 项目所有者需要回答但本批不解决的分叉：便利店 8 个核心词当前不可学时，是（a）继续只作为场景句 `core_vocab` 引用但不进 SRS，（b）另开 publication 例外让它们可学习，还是（c）先补齐证据/例句后再进入 Learning；本批不替项目所有者决定，也不实现其中任何方案。
