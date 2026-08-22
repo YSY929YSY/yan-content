@@ -52,6 +52,7 @@ import {
 import { meaningTrust } from './src/features/wordbank/meaningTrust';
 import { addToPocket, isPocketed, normalizePocket, pocketKey, removeFromPocket } from './src/features/wordbank/pocket';
 import { usePrefs } from './src/lib/prefs';
+import { pullPocket, pushPocket } from './src/lib/sync';
 // 词场预览:内容还在 staging 没并进内容包,开发期先从这份草稿读,方便边写边看。
 // 合并进 content.v2.json 之后这份和它的引用一起删。
 import WORDFIELD_PREVIEW from './src/features/wordbank/wordfield-preview.json';
@@ -1992,6 +1993,7 @@ function WordBankScreen({ wordBank, book, onBack }) {
   // 用户明确选择“浏览词典”时，才把 dictionary-only 词列进当前书。
   const [browseDictionary, setBrowseDictionary] = useState(false);
   const [pocket, setPocket] = useState([]);
+  const [pocketSyncNote, setPocketSyncNote] = useState('');
   const pocketGuard = useRef(createWriteGuard(K.pocket));
   const [selectedWord, setSelectedWord] = useState(null);
   const [selectedIdx, setSelectedIdx] = useState(0);
@@ -2006,6 +2008,12 @@ function WordBankScreen({ wordBank, book, onBack }) {
       if (!alive) return;
       pocketGuard.current.onRead(result);
       setPocket(normalizePocket(result.value));
+      pullPocket().then((remote) => {
+        if (!alive || remote === null) return;
+        const next = normalizePocket(remote);
+        setPocket(next);
+        if (pocketGuard.current.allow()) writeJson(K.pocket, next);
+      });
     });
     return () => { alive = false; };
   }, []);
@@ -2017,6 +2025,8 @@ function WordBankScreen({ wordBank, book, onBack }) {
       : addToPocket(pocket, entry);
     if (!await writeJson(K.pocket, next)) return false;
     setPocket(next);
+    const pushed = await pushPocket(pocketKey(entry), next.includes(pocketKey(entry)));
+    setPocketSyncNote(pushed.ok ? '' : '已存本机，联网后同步');
     return true;
   };
 
@@ -2168,6 +2178,7 @@ function WordBankScreen({ wordBank, book, onBack }) {
           : undefined}
         pocketed={isPocketed(pocket, selectedWord)}
         onPocketToggle={togglePocket}
+        pocketSyncNote={pocketSyncNote}
         speak={speak}
         speakingKey={speakingKey}
         hasPrev={selectedIdx > 0}
@@ -2318,7 +2329,7 @@ const LOAN_LANG = {
   lat: '拉丁语', gre: '希腊语',
 };
 
-function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKey, hasPrev, hasNext, onPrev, onNext, lookupWord, onOpenWord, pocketed, onPocketToggle }) {
+function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKey, hasPrev, hasNext, onPrev, onNext, lookupWord, onOpenWord, pocketed, onPocketToggle, pocketSyncNote }) {
   // 词场:这个词真实出现时,身边站着哪些词。
   // 关键是**一个句子**而不是并列的词块 —— 秋(季节)、山(地点)、温泉(要做的事)
   // 是三种不同的关系,摊成一排格子等于让用户自己猜关系。第一版就是这么翻的车。
@@ -2400,9 +2411,12 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
         <View style={wd.metaRow}>
           <View style={wd.posTag}><Text style={wd.posTagTxt}>{entry.pos}</Text></View>
           {!!onPocketToggle && (
-            <TouchableOpacity style={wd.pocketBtn} onPress={() => onPocketToggle(entry)}>
-              <Text style={wd.pocketBtnTxt}>{pocketed ? '移出口袋' : '收入口袋'}</Text>
-            </TouchableOpacity>
+            <View style={wd.pocketWrap}>
+              <TouchableOpacity style={wd.pocketBtn} onPress={() => onPocketToggle(entry)}>
+                <Text style={wd.pocketBtnTxt}>{pocketed ? '移出口袋' : '收入口袋'}</Text>
+              </TouchableOpacity>
+              {!!pocketSyncNote && <Text style={wd.pocketNote}>{pocketSyncNote}</Text>}
+            </View>
           )}
         </View>
         <View style={wd.meaningBlock}>
@@ -2526,6 +2540,8 @@ const wd = StyleSheet.create({
   posTagTxt: { fontSize: 10, color: C.muted, fontWeight: '600' },
   pocketBtn: { borderWidth: 1, borderColor: C.lava, borderRadius: 999, paddingHorizontal: 9, paddingVertical: 2 },
   pocketBtnTxt: { fontSize: 10, color: C.lava, fontWeight: '600' },
+  pocketWrap: { alignItems: 'flex-end', gap: 2 },
+  pocketNote: { fontSize: 9, color: C.muted },
   meaningBlock: { paddingHorizontal: 16, paddingVertical: 12, marginTop: 10, borderTopWidth: 1, borderBottomWidth: 1, borderColor: C.border, gap: 4 },
   zh: { fontSize: 17, fontWeight: '600', color: C.ink },
   altNote: { fontSize: 10.5, color: C.mutedLight, marginTop: 4, lineHeight: 15 },
