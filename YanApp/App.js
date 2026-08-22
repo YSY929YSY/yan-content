@@ -14,7 +14,8 @@ const SHOULD_FETCH_REMOTE_CONTENT = typeof __DEV__ === 'undefined' ? true : !__D
 
 import { ensureUser, signInWithApple, signOut, deleteAccount } from './src/lib/supabase';
 import { backfillAll, pendingBackfill } from './src/lib/sync';
-import { K, auditKeys, readJson, writeJson } from './src/lib/storage';
+import { K, auditKeys, readJson, readJsonResult, writeJson } from './src/lib/storage';
+import { createWriteGuard } from './src/lib/writeGuard';
 import { DAILY_GOAL, todayStr, pickSession } from './src/features/wordbank/srs';
 import { useWorldFootprint } from './src/features/world/useWorldFootprint';
 import KanaScreen from './src/features/kana/KanaScreen';
@@ -49,6 +50,7 @@ import {
   canGradeWord, canIntroduceWord, canReviewWord, hasCompleteExample, isDictionaryEntry,
 } from './src/features/wordbank/publication';
 import { meaningTrust } from './src/features/wordbank/meaningTrust';
+import { addToPocket, isPocketed, normalizePocket, pocketKey, removeFromPocket } from './src/features/wordbank/pocket';
 import { usePrefs } from './src/lib/prefs';
 // 词场预览:内容还在 staging 没并进内容包,开发期先从这份草稿读,方便边写边看。
 // 合并进 content.v2.json 之后这份和它的引用一起删。
@@ -1978,12 +1980,34 @@ function WordBankScreen({ wordBank, book, onBack }) {
   const [statusFilter, setStatusFilter] = useState('all');
   // 用户明确选择“浏览词典”时，才把 dictionary-only 词列进当前书。
   const [browseDictionary, setBrowseDictionary] = useState(false);
+  const [pocket, setPocket] = useState([]);
+  const pocketGuard = useRef(createWriteGuard(K.pocket));
   const [selectedWord, setSelectedWord] = useState(null);
   const [selectedIdx, setSelectedIdx] = useState(0);
   const [navList, setNavList] = useState([]);
   // 从词场点进成员词时的返回栈(见下方 openMember)
   const [stack, setStack] = useState([]);
   const { speak, speakingKey } = useSpeech();
+
+  useEffect(() => {
+    let alive = true;
+    readJsonResult(K.pocket).then((result) => {
+      if (!alive) return;
+      pocketGuard.current.onRead(result);
+      setPocket(normalizePocket(result.value));
+    });
+    return () => { alive = false; };
+  }, []);
+
+  const togglePocket = async (entry) => {
+    if (!pocketGuard.current.allow()) return false;
+    const next = isPocketed(pocket, entry)
+      ? removeFromPocket(pocket, entry)
+      : addToPocket(pocket, entry);
+    if (!await writeJson(K.pocket, next)) return false;
+    setPocket(next);
+    return true;
+  };
 
   // 词场的成员词按 id 找回词条。**全库找,不限本词书** ——
   // 紅葉(N2)的成员是 秋(N5)、落ち葉(N1),按词书切会有一半点不开。
@@ -2059,6 +2083,8 @@ function WordBankScreen({ wordBank, book, onBack }) {
     ? searched.filter(w => sessionKeys && sessionKeys.has(wordKey(w)))
     : statusFilter === 'due'
     ? searched.filter(w => (progress[wordKey(w)]?.dueAt || '9999') <= today)
+    : statusFilter === 'pocket'
+    ? searched.filter(w => pocket.includes(pocketKey(w)))
     : statusFilter === 'all' ? searched
     : searched.filter(w => statusOf(w) === statusFilter);
   // 默认词书只放 Learning 内容；“浏览词典”是用户显式选择的查询模式。
@@ -2066,7 +2092,7 @@ function WordBankScreen({ wordBank, book, onBack }) {
   // 它们能不能评分仍由详情页的 canGradeWord 统一决定，不能把列表当安全边界。
   const visibleDictionaryOrHistory = (w) =>
     isDictionaryEntry(w) || canReviewWord(w, progress[wordKey(w)] || null);
-  const skipLearningFilter = statusFilter === 'today' || statusFilter === 'due' || browseDictionary;
+  const skipLearningFilter = statusFilter === 'today' || statusFilter === 'due' || statusFilter === 'pocket' || browseDictionary;
   const filtered = skipLearningFilter
     ? byStatus.filter(visibleDictionaryOrHistory)
     : byStatus.filter(canIntroduceWord);
@@ -2129,6 +2155,8 @@ function WordBankScreen({ wordBank, book, onBack }) {
         onGrade={canGradeWord(selectedWord, progress[wordKey(selectedWord)] || null)
           ? gradeWord
           : undefined}
+        pocketed={isPocketed(pocket, selectedWord)}
+        onPocketToggle={togglePocket}
         speak={speak}
         speakingKey={speakingKey}
         hasPrev={selectedIdx > 0}
@@ -2172,6 +2200,9 @@ function WordBankScreen({ wordBank, book, onBack }) {
               <Text style={[wb.filterChipTxt, statusFilter === f.id && wb.filterChipTxtActive]}>{f.label}</Text>
             </TouchableOpacity>
           ))}
+          <TouchableOpacity style={[wb.filterChip, statusFilter === 'pocket' && wb.filterChipActive]} onPress={() => setStatusFilter('pocket')}>
+            <Text style={[wb.filterChipTxt, statusFilter === 'pocket' && wb.filterChipTxtActive]}>口袋 {pocket.length}</Text>
+          </TouchableOpacity>
         </View>
       </View>
       <FlatList
@@ -2276,7 +2307,7 @@ const LOAN_LANG = {
   lat: '拉丁语', gre: '希腊语',
 };
 
-function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKey, hasPrev, hasNext, onPrev, onNext, lookupWord, onOpenWord }) {
+function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKey, hasPrev, hasNext, onPrev, onNext, lookupWord, onOpenWord, pocketed, onPocketToggle }) {
   // 词场:这个词真实出现时,身边站着哪些词。
   // 关键是**一个句子**而不是并列的词块 —— 秋(季节)、山(地点)、温泉(要做的事)
   // 是三种不同的关系,摊成一排格子等于让用户自己猜关系。第一版就是这么翻的车。
@@ -2357,6 +2388,11 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
         </View>
         <View style={wd.metaRow}>
           <View style={wd.posTag}><Text style={wd.posTagTxt}>{entry.pos}</Text></View>
+          {!!onPocketToggle && (
+            <TouchableOpacity style={wd.pocketBtn} onPress={() => onPocketToggle(entry)}>
+              <Text style={wd.pocketBtnTxt}>{pocketed ? '移出口袋' : '收入口袋'}</Text>
+            </TouchableOpacity>
+          )}
         </View>
         <View style={wd.meaningBlock}>
           <Text style={wd.zh}>{entry.meaning_zh}</Text>
@@ -2477,6 +2513,8 @@ const wd = StyleSheet.create({
   metaRow: { paddingHorizontal: 16, marginTop: 6, flexDirection: 'row', gap: 6 },
   posTag: { backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 2 },
   posTagTxt: { fontSize: 10, color: C.muted, fontWeight: '600' },
+  pocketBtn: { borderWidth: 1, borderColor: C.lava, borderRadius: 999, paddingHorizontal: 9, paddingVertical: 2 },
+  pocketBtnTxt: { fontSize: 10, color: C.lava, fontWeight: '600' },
   meaningBlock: { paddingHorizontal: 16, paddingVertical: 12, marginTop: 10, borderTopWidth: 1, borderBottomWidth: 1, borderColor: C.border, gap: 4 },
   zh: { fontSize: 17, fontWeight: '600', color: C.ink },
   altNote: { fontSize: 10.5, color: C.mutedLight, marginTop: 4, lineHeight: 15 },

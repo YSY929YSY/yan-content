@@ -43,6 +43,10 @@ const REGISTRY = {
     // 但必须落盘 —— 在这之前它是组件里的 useState,退出页面就没了,
     // 重进就换一批词,用户永远做不完「今天的任务」。
   },
+  pocket: {
+    key: 'yan_wordbank_pocket_v1', kind: 'user', backfill: null,
+    desc: '用户主动收入袋的词（键沿用裸的词-读音）',
+  },
   worldVisitedIds: {
     key: 'yan_world_footprint_visited_ids', kind: 'user', backfill: 'checkins',
     desc: '精选地点:去过的 id',
