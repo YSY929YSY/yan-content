@@ -80,6 +80,52 @@ bash scripts/push-content.sh
 - 第一次 Android build 会自动生成 keystore，EAS 托管，不要手动管理
 - 命令：`eas build --platform android --profile development`
 
+### ⚠️ 环境变量：`.env` 不会上传到 EAS
+
+`.env` 被 gitignore，而 **EAS 云构建按 `.gitignore` 打包** —— 所以本地 `.env` 里的
+`EXPO_PUBLIC_SUPABASE_*` **根本不会进云构建**。没在 EAS 上单独配的话，包里那两个值是
+undefined，`src/lib/supabase.js` 拿到 null。
+
+后果不是崩溃，是**登录、同步、口袋上云全部静默失效**。2026-08-23 因此白烧过一次 preview 构建。
+
+查：
+
+```bash
+npx eas-cli env:list --environment preview
+npx eas-cli env:list --environment production
+```
+
+配（值从本机 `.env` 读，不要手抄）：
+
+```bash
+npx eas-cli env:create preview --name EXPO_PUBLIC_SUPABASE_URL \
+  --value "$(grep '^EXPO_PUBLIC_SUPABASE_URL=' .env | cut -d= -f2-)" \
+  --visibility plaintext --non-interactive
+```
+
+`ANON_KEY` 同理。**用 `plaintext` 是对的**：`EXPO_PUBLIC_` 前缀的值本来就会被打进客户端包，
+不是秘密；设成 secret 反而构建读不到。
+
+⚠️ **`production` 环境同样要配**，否则下次发 TestFlight 会踩一模一样的坑。
+
+### ⚠️ preview 是 Ad Hoc：只能装在注册过的设备上
+
+`preview` profile 是 internal 分发，凭证里只有已注册 UDID 的设备能安装。
+给别人试用要么先 `eas device:create` 注册对方设备再重新构建，要么走 TestFlight（不需要 UDID）。
+
+**做可用性测试时，让对方用你自己的手机反而更简单** —— 你坐旁边看，不用管对方设备环境。
+
+### ⚠️ 开发模式不拉远端内容
+
+`App.js` 的 `SHOULD_FETCH_REMOTE_CONTENT = !__DEV__`。所以：
+
+- `expo start` 跑 dev client → 读**打包进去的** `assets/content.fallback.json`，**不拉远端**
+- preview / production 构建 → 拉 `raw.githubusercontent.com/.../content.v2.json`
+
+也就是说 **dev 模式验证不了「远端内容包发布有没有生效」**。要验那条链路必须用 preview 或
+TestFlight 构建。另外 dev 包里还有生产包没有的东西（手账预演入口、词场预览），
+**做真人测试时不要用 dev 包** —— 测的会是用户根本看不到的界面。
+
 ## 外部 AI（Codex/ChatGPT）修改 App.js 时的注意事项
 
 **背景**：Codex 第一次帮建 build 是对的，第二次很怪；Claude Code 这次改法是对的。
