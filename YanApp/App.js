@@ -746,7 +746,7 @@ function TodayCard({ content, setTab, setSubTab, setLearnBatch }) {
       const byKey = new Map(pool.map(x => [poolWordKey(x), x]));
       const dueWords = task.keys.map(k => byKey.get(k)).filter(Boolean);
       if (dueWords.length) {
-        openBatch('review', dueWords);
+        openBatch('mainline', dueWords);
         return setSubTab('todaybatch');
       }
       return setSubTab('review');   // 一条都解析不出来时的兜底
@@ -757,7 +757,7 @@ function TodayCard({ content, setTab, setSubTab, setLearnBatch }) {
       // 这里原本是 setSubTab('wordbank') —— 卡面上写着「6 个词 · 私 行く 何…」,
       // 点进去落在词书货架上,那 6 个词一个都没跟过去,用户得自己再挑一遍。
       // 规则层算了半天的「下一步」到界面这一步全丢了,主线在这儿是断的。
-      openBatch('learn', task.words);
+      openBatch('mainline', task.words);
       return setSubTab('todaybatch');
     }
     // clear:池子过完了,那就真的去词书 —— 这时候「自己挑」是对的动作
@@ -1518,7 +1518,14 @@ function PieTabInner({ content, setTab, subTab, setSubTab, sceneState, setSceneS
             货架是「你自己挑」,而这条主线的整个前提是**任何时刻只有一个下一步**。
             batch 为空时不渲染:那说明是直接切到这个 subTab 的(理论上没有这种路径),
             渲染出来会是一页空卡。 */}
-        {subTab === 'todaybatch' && (learnBatch?.words?.length ? (
+        {subTab === 'todaybatch' && learnBatch?.mode === 'mainline' && (learnBatch?.words?.length ? (
+          <ReviewScreen
+            content={content}
+            mainlineWords={learnBatch.words}
+            onBack={() => setTab('home')}
+          />
+        ) : null)}
+        {subTab === 'todaybatch' && learnBatch?.mode !== 'mainline' && (learnBatch?.words?.length ? (
           <LearnBatchScreen
             words={learnBatch.words}
             mode={learnBatch.mode}

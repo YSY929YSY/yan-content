@@ -22,7 +22,7 @@ const SOURCE_LABEL = {
   word: '词库', card: '词卡', place: '足迹', scene: '场景', subway: '地铁',
 };
 
-export default function ReviewScreen({ content, onBack, onOpenOrigin }) {
+export default function ReviewScreen({ content, onBack, onOpenOrigin, mainlineWords = null }) {
   const { speak, speakingKey } = useSpeech();
   const { prefs } = usePrefs();
   const { progress, ready, grade } = useReviewProgress();
@@ -44,8 +44,24 @@ export default function ReviewScreen({ content, onBack, onOpenOrigin }) {
     return w ? fromWord(w) : null;
   };
 
-  const newUnits = useMemo(() => Object.values(deep), [deep]);
-  const { queue, remaining, markDone, defer } = useDailyQueue({ progress, ready, resolve, newUnits });
+  const mainlineDeep = useMemo(
+    () => mainlineWords
+      ? Object.values(deep).filter(u => u.mode === 'produce' && !progress[u.key]).slice(0, 1)
+      : [],
+    [deep, mainlineWords, progress],
+  );
+  const newUnits = useMemo(
+    () => mainlineWords
+      ? [...mainlineWords.map(fromWord), ...mainlineDeep]
+      : Object.values(deep),
+    [deep, mainlineDeep, mainlineWords],
+  );
+  const scopeKeys = mainlineWords ? newUnits.map(u => u.key) : null;
+  const { queue, remaining, markDone, defer } = useDailyQueue({
+    progress, ready, resolve, newUnits, scopeKeys,
+    limit: mainlineWords ? newUnits.length : undefined,
+    persist: !mainlineWords,
+  });
   const sceneWords = useMemo(() => sceneWordsOf(content?.wordBank || [], 'convenience').map(w => w.word), [content]);
 
   const [flipped, setFlipped] = useState(false);
@@ -120,15 +136,21 @@ export default function ReviewScreen({ content, onBack, onOpenOrigin }) {
 
       <ScrollView contentContainerStyle={s.body} showsVerticalScrollIndicator={false}>
         <Text style={s.eyebrow}>
-          {unit.mode === 'recall' ? '这个词什么意思' : '这时候该怎么说'}
+          {unit.mode === 'recall' ? (mainlineWords ? '这个词你已经认识' : '这个词什么意思') : '这时候该怎么说'}
         </Text>
 
         <Text style={unit.mode === 'recall' ? s.askWord : s.askLine}>{unit.ask}</Text>
-        {!!unit.askSub && <Text style={s.askSub}>{unit.askSub}</Text>}
+        {mainlineWords && unit.mode === 'recall'
+          ? <Text style={s.askSub}>{unit.answer}</Text>
+          : !!unit.askSub && <Text style={s.askSub}>{unit.askSub}</Text>}
 
         {!flipped ? (
           <>
-            {produce?.mode === 'choices' ? (
+            {mainlineWords && unit.mode === 'recall' ? (
+              <TouchableOpacity style={s.flipBtn} onPress={() => setFlipped(true)}>
+                <Text style={s.flipTxt}>看读音</Text>
+              </TouchableOpacity>
+            ) : produce?.mode === 'choices' ? (
               produceResult ? (
                 <View style={s.choiceBox}>
                   <Text style={[s.resultTitle, produceResult.correct ? s.resultGood : s.resultWrong]}>
@@ -187,8 +209,8 @@ export default function ReviewScreen({ content, onBack, onOpenOrigin }) {
                   onPress={() => unit.speak && speak?.(unit.speak, unit.lang, `rv-${key}`)}
                   activeOpacity={unit.speak ? 0.6 : 1}
                 >
-                  <Text style={s.answer}>{unit.answer}</Text>
-                  {!!unit.answerSub && <Text style={s.answerSub}>{unit.answerSub}</Text>}
+                  <Text style={s.answer}>{mainlineWords && unit.mode === 'recall' ? unit.answerSub : unit.answer}</Text>
+                  {!mainlineWords && !!unit.answerSub && <Text style={s.answerSub}>{unit.answerSub}</Text>}
                   {/* 英文不是中文的备份,是中文装不下的那部分。可在「关于」里关掉。 */}
                   {prefs.showEnglish && !!unit.answerEn && (
                     <Text style={s.answerEn} numberOfLines={3}>{unit.answerEn}</Text>

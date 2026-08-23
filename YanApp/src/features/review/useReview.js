@@ -112,7 +112,7 @@ export function useReviewProgressState() {
  *                 内容包换过版本、某个词被删掉时,不能让队列里出现一道空白题。
  * @param newUnits 没学过的候选单元,用来在到期的不够时补足。
  */
-export function useDailyQueue({ progress, ready, resolve, newUnits, limit = DAILY_GOAL }) {
+export function useDailyQueue({ progress, ready, resolve, newUnits, limit = DAILY_GOAL, scopeKeys = null, persist = true }) {
   const [queue, setQueue] = useState(null);
   const savedRef = useRef(null);
 
@@ -133,9 +133,9 @@ export function useDailyQueue({ progress, ready, resolve, newUnits, limit = DAIL
       // 于是重挑一批、落盘,把用户今天已经答过的进度盖掉。
       let saved = savedRef.current;
       if (saved == null) {
-        const r = await readJsonResult(K.reviewSession);
+        const r = persist ? await readJsonResult(K.reviewSession) : { ok: true, value: null };
         if (!alive) return;
-        sessionGuard.current.onRead({ ok: r.ok });
+        sessionGuard.current.onRead({ ok: persist && r.ok });
         saved = r.value;
       } else {
         sessionGuard.current.onRead({ ok: true });   // 内存里这份就是我们自己刚写的
@@ -153,7 +153,9 @@ export function useDailyQueue({ progress, ready, resolve, newUnits, limit = DAIL
       }
 
       // 到期的全部收上来,逾期最久的排最前 —— 复习欠账优先于摄入新内容
+      const allowed = scopeKeys ? new Set(scopeKeys) : null;
       const due = Object.entries(progress)
+        .filter(([k]) => !allowed || allowed.has(k))
         .filter(([k, rec]) => isDue(rec, today) && resolveRef.current(k))
         .sort((a, b) => (a[1].dueAt < b[1].dueAt ? -1 : a[1].dueAt > b[1].dueAt ? 1 : 0))
         .map(([k]) => k);
@@ -172,7 +174,7 @@ export function useDailyQueue({ progress, ready, resolve, newUnits, limit = DAIL
       const fresh = { date: today, keys, done: [] };
       savedRef.current = fresh;
       setQueue(fresh);
-      if (sessionGuard.current.allow()) writeJson(K.reviewSession, fresh);
+      if (persist && sessionGuard.current.allow()) writeJson(K.reviewSession, fresh);
     })();
     return () => { alive = false; };
     // progress 变化不该重挑队列 —— 答一道题就换一批词是灾难。
@@ -184,7 +186,7 @@ export function useDailyQueue({ progress, ready, resolve, newUnits, limit = DAIL
       if (!prev || prev.done.includes(key)) return prev;
       const next = { ...prev, done: [...prev.done, key] };
       savedRef.current = next;
-      if (sessionGuard.current.allow()) writeJson(K.reviewSession, next);
+      if (persist && sessionGuard.current.allow()) writeJson(K.reviewSession, next);
       return next;
     });
   }, []);
@@ -203,7 +205,7 @@ export function useDailyQueue({ progress, ready, resolve, newUnits, limit = DAIL
       if (rest.length === prev.keys.length) return prev;
       const next = { ...prev, keys: [...rest, key] };
       savedRef.current = next;
-      if (sessionGuard.current.allow()) writeJson(K.reviewSession, next);
+      if (persist && sessionGuard.current.allow()) writeJson(K.reviewSession, next);
       return next;
     });
   }, []);
