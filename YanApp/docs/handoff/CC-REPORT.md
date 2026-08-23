@@ -1782,3 +1782,68 @@ known_differences:
 ### 本批忍住没改
 
 没有做地铁游戏化、英日优先、手账、分账/行程、地图性能、内容缺口、世界打卡地名匹配、五十音测验、首页“即将开放”清理，也没有改内容包、线上版本、SRS 算法或其他测试中出现但不属于本批的行为。
+
+## Harness v0（2026-08-24）
+
+### 实际改动范围
+
+- 新增 `scripts/audit.mjs`：只读调用 `content-stats.mjs`、`validate-content.js`、`meaning-audit.mjs`；扫描 `App.js` 与 `src/features/**` 的用户侧断言；检查两份内容包 SHA、authority 文件 Git 工作树状态、版本/内容变化；断言 `kanji_anchor=563` 与 `_meta.note` 词条数和实测 `wordBank.length` 一致；打印 `publication.learning` 但不做断言。
+- `package.json` 新增一行：`"audit": "node scripts/audit.mjs"`。
+- `docs/handoff/ACTIVE.md` 覆盖为 Harness v0 状态。
+- 未新增 `docs/ai-contracts/`，未修改业务代码与内容 JSON。
+
+### `npm run audit` 完整基线输出
+
+```text
+
+> yanapp@1.0.0 audit
+> node scripts/audit.mjs
+
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:2813: review editorial claim "旅行高频"
+WARN user-claims App.js:2857: review editorial claim "旅行高频"
+WARN user-claims App.js:2951: review editorial claim "高频"
+WARN user-claims App.js:2994: review editorial claim "高频"
+WARN user-claims App.js:3041: review editorial claim "高频"
+WARN user-claims App.js:3059: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 4323789bdfb757e5d7ab4f7fd6387d67c58c527934456fa8607194351cde9235
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=579 (not asserted)
+--- audit summary ---
+FAIL: 0
+WARN: 7
+Result: PASS
+```
+
+### 故意制造 FAIL 的验收
+
+临时把 `scripts/audit.mjs` 中 `EXPECTED_KANJI_ANCHOR_TOTAL` 从 563 改为 562，再运行 `npm run audit`，实际结果：
+
+```text
+exit=1
+FAIL invariant kanji_anchor.total=563, expected 562
+--- audit summary ---
+FAIL: 1
+Result: FAIL
+```
+
+随后已把断言恢复为 563；错误数字没有进入提交。
+
+### 与工单/当前事实的对照
+
+- 当前 fallback 实测 `wordBank.total=8005`、`kanji_anchor.total=563`、`publication.learning=579`；后者只打印不阻断，符合工单“开池会变化”的要求。
+- `validate-content.js` 本身会产生大量既有 warning，但 exit 0；Harness 只以其 exit status 判定，不重写它的规则，也不把 warning 伪装成 FAIL。
+- 用户侧扫描的 7 条 WARN 全是现有“高频”编辑判断，当前没有内部状态词或词库“高频/官方/必考/已核验”断言，因此整体 exit 0。
+
+### 本轮想加但忍住没加（留给 v1）
+
+- 没有拆分 `audit:deep-cards`、`audit:produce-units`、`audit:scene-tags`。
+- 没有重写三个已有脚本，也没有新增独立测试文件。
+- 没有把 `publication.learning` 写成硬断言，没有扫描内容 JSON 的用户文案，也没有把所有编辑判断 warning 升格为失败。
