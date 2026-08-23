@@ -15,7 +15,7 @@ import { usePrefs } from '../../lib/prefs';
 import { useDailyQueue } from './useReview';
 import { useReviewProgress } from './ReviewProgressContext';
 import { fromWord, indexUnits, buildUnits, sourceOf } from './units';
-import { buildProduceChoices, isProduceAnswer } from './produceChoices';
+import { buildProduceChoices, evaluateProduceSubmission } from './produceChoices';
 import { sceneWordsOf } from '../wordbank/sceneWords';
 
 const SOURCE_LABEL = {
@@ -50,10 +50,14 @@ export default function ReviewScreen({ content, onBack, onOpenOrigin }) {
 
   const [flipped, setFlipped] = useState(false);
   const [pickedBlocks, setPickedBlocks] = useState([]);
+  const [produceResult, setProduceResult] = useState(null);
+  const [produceFailed, setProduceFailed] = useState(false);
   const currentKey = remaining?.[0] || null;
   useEffect(() => {
     setFlipped(false);
     setPickedBlocks([]);
+    setProduceResult(null);
+    setProduceFailed(false);
   }, [currentKey]);
 
   if (!ready || !queue) {
@@ -97,9 +101,17 @@ export default function ReviewScreen({ content, onBack, onOpenOrigin }) {
 
   const submitProduce = () => {
     if (!produce || produce.mode !== 'choices' || !pickedBlocks.length) return;
-    const correct = isProduceAnswer(pickedBlocks, produce.correct);
-    setFlipped(true);
-    onGrade(correct ? 'good' : 'again');
+    setProduceResult(evaluateProduceSubmission(pickedBlocks, produce.correct));
+  };
+
+  const retryProduce = () => {
+    setProduceFailed(true);
+    setProduceResult(null);
+    setPickedBlocks([]);
+  };
+
+  const finishProduce = () => {
+    onGrade(produceFailed ? 'again' : 'good');
   };
 
   return (
@@ -117,26 +129,40 @@ export default function ReviewScreen({ content, onBack, onOpenOrigin }) {
         {!flipped ? (
           <>
             {produce?.mode === 'choices' ? (
-              <View style={s.choiceBox}>
-                <Text style={s.choicePrompt}>按顺序拼出这句话</Text>
-                <View style={s.choiceRow}>
-                  {pickedBlocks.map((block, index) => (
-                    <TouchableOpacity key={`picked-${index}-${block}`} style={s.choiceSelected} onPress={() => setPickedBlocks(pickedBlocks.filter((_, i) => i !== index))}>
-                      <Text style={s.choiceText}>{block}</Text>
-                    </TouchableOpacity>
-                  ))}
+              produceResult ? (
+                <View style={s.choiceBox}>
+                  <Text style={[s.resultTitle, produceResult.correct ? s.resultGood : s.resultWrong]}>
+                    {produceResult.correct ? '对了' : '错了'}
+                  </Text>
+                  {!produceResult.correct && (
+                    <Text style={s.correctOrder}>正确顺序：{produceResult.answer.join('')}</Text>
+                  )}
+                  <TouchableOpacity style={s.submitBtn} onPress={produceResult.correct ? finishProduce : retryProduce}>
+                    <Text style={s.submitTxt}>{produceResult.correct ? '继续' : '再拼一次'}</Text>
+                  </TouchableOpacity>
                 </View>
-                <View style={s.choiceRow}>
-                  {produce.choices.filter(block => !pickedBlocks.includes(block)).map((block) => (
-                    <TouchableOpacity key={block} style={s.choiceBtn} onPress={() => setPickedBlocks([...pickedBlocks, block])}>
-                      <Text style={s.choiceText}>{block}</Text>
-                    </TouchableOpacity>
-                  ))}
+              ) : (
+                <View style={s.choiceBox}>
+                  <Text style={s.choicePrompt}>按顺序拼出这句话</Text>
+                  <View style={s.choiceRow}>
+                    {pickedBlocks.map((block, index) => (
+                      <TouchableOpacity key={`picked-${index}-${block}`} style={s.choiceSelected} onPress={() => setPickedBlocks(pickedBlocks.filter((_, i) => i !== index))}>
+                        <Text style={s.choiceText}>{block}</Text>
+                      </TouchableOpacity>
+                    ))}
+                  </View>
+                  <View style={s.choiceRow}>
+                    {produce.choices.filter(block => !pickedBlocks.includes(block)).map((block) => (
+                      <TouchableOpacity key={block} style={s.choiceBtn} onPress={() => setPickedBlocks([...pickedBlocks, block])}>
+                        <Text style={s.choiceText}>{block}</Text>
+                      </TouchableOpacity>
+                    ))}
+                  </View>
+                  <TouchableOpacity style={[s.submitBtn, !pickedBlocks.length && s.submitDisabled]} onPress={submitProduce} disabled={!pickedBlocks.length}>
+                    <Text style={s.submitTxt}>提交</Text>
+                  </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={[s.submitBtn, !pickedBlocks.length && s.submitDisabled]} onPress={submitProduce} disabled={!pickedBlocks.length}>
-                  <Text style={s.submitTxt}>提交</Text>
-                </TouchableOpacity>
-              </View>
+              )
             ) : <>
             {!!unit.hint && (
               <View style={s.hintBox}>
@@ -283,4 +309,8 @@ const s = StyleSheet.create({
   submitBtn: { alignSelf: 'center', backgroundColor: C.ink, borderRadius: 8, paddingHorizontal: 28, paddingVertical: 10 },
   submitDisabled: { opacity: 0.4 },
   submitTxt: { color: C.white, fontWeight: '700' },
+  resultTitle: { fontSize: 22, fontWeight: '700', textAlign: 'center' },
+  resultGood: { color: C.ink },
+  resultWrong: { color: C.lava },
+  correctOrder: { fontSize: 16, color: C.ink, textAlign: 'center', lineHeight: 24 },
 });

@@ -1990,7 +1990,7 @@ function WordBankScreen({ wordBank, book, onBack }) {
   // 今日队列 { date, keys, done }。落盘的 —— 以前它是个 useState,
   // 退出页面就没了,重进重新挑一批,用户永远做不完「今天的任务」。
   const [session, setSession] = useState(null);
-  const [statusFilter, setStatusFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState('pocket');
   const [viewMode, setViewMode] = useState('default');
   // 用户明确选择“浏览词典”时，才把 dictionary-only 词列进当前书。
   const [browseDictionary, setBrowseDictionary] = useState(false);
@@ -2088,15 +2088,15 @@ function WordBankScreen({ wordBank, book, onBack }) {
     return () => { alive = false; };
   }, [bookId, progressReady]);
 
-  // 默认先给用户自己攒的口袋；空口袋退回有明确场景标签的可学词。
-  // 可信度只影响同一默认列表里的两段顺序，不把内部状态显示给用户。
+  // 默认先选口袋 chip；空口袋时显示有明确场景标签的可学词。
+  // 可信度只影响列表里的两段顺序，不把内部状态显示给用户。
   const trustRank = (word) => ['human_reviewed', 'editorial_published'].includes(meaningTrust(word)) ? 0 : 1;
   const sortByTrust = (words) => [...words].sort((a, b) => trustRank(a) - trustRank(b));
   const pocketWordsInBook = wordBank.filter(w => pocket.includes(pocketKey(w)));
   const sceneWordsInBook = wordBank.filter(w => canIntroduceWord(w) && scenesOfWord(w).length > 0);
   const defaultWords = sortByTrust(pocketWordsInBook.length ? pocketWordsInBook : sceneWordsInBook);
-  // 全量词库仍保留，只需在默认视图点一次「浏览全库」。搜索仍在词书选择页。
-  const searched = viewMode === 'default' ? defaultWords : wordBank;
+  // 两种视图都在整本书上筛选；默认视图只是预选口袋 chip，不替换数据集。
+  const searched = sortByTrust(wordBank);
   const STATUS_FILTERS = [
     { id: 'all', label: '全部' },
     { id: 'new', label: '未学' },
@@ -2113,7 +2113,9 @@ function WordBankScreen({ wordBank, book, onBack }) {
     : statusFilter === 'due'
     ? searched.filter(w => (progress[wordKey(w)]?.dueAt || '9999') <= today)
     : statusFilter === 'pocket'
-    ? searched.filter(w => pocket.includes(pocketKey(w)))
+    ? (pocketWordsInBook.length
+      ? searched.filter(w => pocket.includes(pocketKey(w)))
+      : searched.filter(w => canIntroduceWord(w) && scenesOfWord(w).length > 0))
     : statusFilter === 'all' ? searched
     : searched.filter(w => statusOf(w) === statusFilter);
   // 默认词书只放 Learning 内容；“浏览词典”是用户显式选择的查询模式。
@@ -2121,10 +2123,8 @@ function WordBankScreen({ wordBank, book, onBack }) {
   // 它们能不能评分仍由详情页的 canGradeWord 统一决定，不能把列表当安全边界。
   const visibleDictionaryOrHistory = (w) =>
     isDictionaryEntry(w) || canReviewWord(w, progress[wordKey(w)] || null);
-  const skipLearningFilter = statusFilter === 'today' || statusFilter === 'due' || statusFilter === 'pocket' || browseDictionary;
-  const filtered = viewMode === 'default'
-    ? byStatus.filter(canIntroduceWord)
-    : skipLearningFilter
+  const skipLearningFilter = statusFilter === 'today' || statusFilter === 'due' || statusFilter === 'pocket' || statusFilter === 'all' || browseDictionary;
+  const filtered = skipLearningFilter
     ? byStatus.filter(visibleDictionaryOrHistory)
     : byStatus.filter(canIntroduceWord);
 
@@ -2215,7 +2215,7 @@ function WordBankScreen({ wordBank, book, onBack }) {
           {' · '}{book?.desc || '词块 · 例句'}
         </Text>
         <View style={wb.ctaRow}>
-          <TouchableOpacity style={wb.ctaBtn} onPress={() => { setViewMode(viewMode === 'default' ? 'all' : 'default'); setBrowseDictionary(false); setStatusFilter('all'); }}>
+          <TouchableOpacity style={wb.ctaBtn} onPress={() => { setViewMode(viewMode === 'default' ? 'all' : 'default'); setBrowseDictionary(false); setStatusFilter('pocket'); }}>
             <Text style={wb.ctaBtnTxt}>{viewMode === 'default' ? '浏览全库' : '回到默认'}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[wb.ctaBtn, statusFilter === 'today' && wb.ctaBtnActive]} onPress={startToday}>
@@ -2277,9 +2277,9 @@ function WordBankScreen({ wordBank, book, onBack }) {
           );
         }}
         ListEmptyComponent={(
-          viewMode === 'default' ? (
+          viewMode === 'default' && !pocketWordsInBook.length && !sceneWordsInBook.length ? (
             <View style={wb.emptyBox}>
-              <Text style={wb.empty}>口袋还是空的，这本词书暂时没有场景词</Text>
+              <Text style={wb.empty}>收入口袋后会进入复习，之后还会再问你。</Text>
               <TouchableOpacity style={wb.emptyBtn} onPress={() => setViewMode('all')}>
                 <Text style={wb.emptyBtnTxt}>浏览全库</Text>
               </TouchableOpacity>
@@ -2437,6 +2437,7 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
               <TouchableOpacity style={wd.pocketBtn} onPress={() => onPocketToggle(entry)}>
                 <Text style={wd.pocketBtnTxt}>{pocketed ? '移出口袋' : '收入口袋'}</Text>
               </TouchableOpacity>
+              <Text style={wd.pocketHint}>收进来后会进入复习，之后还会再问你。</Text>
               {!!pocketSyncNote && <Text style={wd.pocketNote}>{pocketSyncNote}</Text>}
             </View>
           )}
@@ -2563,6 +2564,7 @@ const wd = StyleSheet.create({
   pocketBtn: { borderWidth: 1, borderColor: C.lava, borderRadius: 999, paddingHorizontal: 9, paddingVertical: 2 },
   pocketBtnTxt: { fontSize: 10, color: C.lava, fontWeight: '600' },
   pocketWrap: { alignItems: 'flex-end', gap: 2 },
+  pocketHint: { fontSize: 9, color: C.muted, maxWidth: 210, textAlign: 'right' },
   pocketNote: { fontSize: 9, color: C.muted },
   meaningBlock: { paddingHorizontal: 16, paddingVertical: 12, marginTop: 10, borderTopWidth: 1, borderBottomWidth: 1, borderColor: C.border, gap: 4 },
   zh: { fontSize: 17, fontWeight: '600', color: C.ink },

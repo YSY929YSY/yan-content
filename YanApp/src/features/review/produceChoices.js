@@ -36,3 +36,11 @@ export function isProduceAnswer(selected, correct) {
     && selected.length === correct.length
     && selected.every((block, index) => block === correct[index]);
 }
+
+export function evaluateProduceSubmission(selected, correct) {
+  return {
+    correct: isProduceAnswer(selected, correct),
+    selected: Array.isArray(selected) ? [...selected] : [],
+    answer: Array.isArray(correct) ? [...correct] : [],
+  };
+}

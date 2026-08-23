@@ -1,23 +1,23 @@
-# 当前状态 · PLAN v2 第四批（commit 17–20）
+# 当前状态 · PLAN v2 第五批
 
-> 状态：本地实现完成，线上内容包保持 2.3；SQL 尚未执行。
+> 状态：B5-1、B5-2、B5-3 本地实现完成；线上内容包保持 2.3；SQL 尚未执行。
 >
-> 更新日期：2026-08-22
+> 更新日期：2026-08-23
 
-## 本批提交
+## 本批完成
 
-- `3696a79` commit 17：新增 `schema.word-pocket.sql` 并挂入 `schema.apply-all.sql`；四条 RLS policy 均有完全对应的 drop。
-- `5c68eb5` commit 18：修复口袋 `user`/补传域矛盾，加入 push/backfill/pull 与 `backfillAll` fail-closed 接线；树由 581/1 恢复为 582/582。
-- `baf8e7d` commit 19：口袋 UI 接本地写入、启动远端拉取和入袋/移出 push；断网时保留本地并显示待同步说明。
-- `e36956f` commit 20：词书默认显示口袋，口袋为空退回场景词；按释义可信度分两段排序，保留浏览全库入口。
+- B5-1：默认视图预选口袋 chip，但两种视图都在整本词书上筛选；保留 `sortByTrust` 两段式排序；N5「全部」实测 724 条，今日任务实测 10 条。
+- B5-2：拼句提交先显示“对了/错了”；错题可重拼，重拼答对仍按第一次错误结果评分；未改 SRS 算法。
+- B5-3：在“收入口袋”按钮旁加入一句自解释文案。
 
 ## 验收
 
-- 最终 `npm test`：582 passed；`npm run typecheck`：passed。
+- `npm test`：584 passed；`npm run typecheck`：passed。
+- `node --test src/features/review/__tests__/produceChoices.test.mjs`：5 passed。
 - 本批未修改 `assets/content.fallback.json` 或 `yan-content/content.v2.json`，线上停在 2.3。
 - 未修改裸的“词-读音”进度键、`yanFeatures`、`srs.js`、`units.js`、`publication.ts`、`contentSchema.ts`。
 - **`schema.word-pocket.sql` 待项目所有者在 Supabase Dashboard → SQL Editor 执行**；不能把仓库文件存在写成云端迁移已完成。
 
 ## 当前闭环状态
 
-场景词已绑定，口袋可持久化并可上云，已有 produce 单元支持拼句，复习卡可回到原场景句；词书默认从口袋/场景词开始，两段排序后仍可浏览全库。下一步不是继续加功能，而是找未看过 App 的真人走完“进场景 → 入袋 → 拼句 → 从复习跳回场景”的 10 分钟测试。
+场景词已绑定，口袋可持久化并可上云；词书筛选与今日任务回归，拼句结果可见且不会因重试刷成 good，口袋按钮有自解释。下一步只做同一位真人的第二次测试，不新增功能。

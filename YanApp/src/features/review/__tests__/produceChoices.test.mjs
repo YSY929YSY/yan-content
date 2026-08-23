@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildProduceChoices, isProduceAnswer, splitJapanese } from '../produceChoices.js';
+import { buildProduceChoices, evaluateProduceSubmission, isProduceAnswer, splitJapanese } from '../produceChoices.js';
 
 test('便利店句子切成可回拼的唯一词块', () => {
   const blocks = splitJapanese('カードで払えますか？');
@@ -23,4 +23,12 @@ test('只有一个词块时降级自评', () => {
 test('拼对和拼错是有限集比较', () => {
   assert.equal(isProduceAnswer(['カードで', '払えますか', '？'], ['カードで', '払えますか', '？']), true);
   assert.equal(isProduceAnswer(['袋', 'カードで'], ['カードで', '袋']), false);
+});
+
+test('提交判定结果可被调用方读取', () => {
+  assert.deepEqual(evaluateProduceSubmission(['袋'], ['カードで', '袋']), {
+    correct: false,
+    selected: ['袋'],
+    answer: ['カードで', '袋'],
+  });
 });
