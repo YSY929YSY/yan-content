@@ -1787,6 +1787,7 @@ known_differences:
 
 ### 实际改动范围
 
+- 实现提交：`4574f53`（`chore: add pre-batch release safety harness`）。
 - 新增 `scripts/audit.mjs`：只读调用 `content-stats.mjs`、`validate-content.js`、`meaning-audit.mjs`；扫描 `App.js` 与 `src/features/**` 的用户侧断言；检查两份内容包 SHA、authority 文件 Git 工作树状态、版本/内容变化；断言 `kanji_anchor=563` 与 `_meta.note` 词条数和实测 `wordBank.length` 一致；打印 `publication.learning` 但不做断言。
 - `package.json` 新增一行：`"audit": "node scripts/audit.mjs"`。
 - `docs/handoff/ACTIVE.md` 覆盖为 Harness v0 状态。
