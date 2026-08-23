@@ -1,0 +1,368 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "B6-1 exact word+reading join",
+  "input": "staging/jmdict-eng-3.6.2.json",
+  "target": "N5 words missing jmdictSeq",
+  "counts": {
+    "targets": 197,
+    "auto": 92,
+    "conflict": 46,
+    "unmatched": 59
+  },
+  "entries": [
+    {
+      "id": "n5_en",
+      "word": "～円",
+      "reading": "～えん",
+      "key": "～円\t～えん"
+    },
+    {
+      "id": "n5_kai",
+      "word": "～回",
+      "reading": "～かい",
+      "key": "～回\t～かい"
+    },
+    {
+      "id": "n5_kai_2",
+      "word": "～階",
+      "reading": "～かい",
+      "key": "～階\t～かい"
+    },
+    {
+      "id": "n5_kagetsu",
+      "word": "～か月",
+      "reading": "～かげつ",
+      "key": "～か月\t～かげつ"
+    },
+    {
+      "id": "n5_gatsu",
+      "word": "～月",
+      "reading": "～がつ",
+      "key": "～月\t～がつ"
+    },
+    {
+      "id": "n5_garu",
+      "word": "～がる",
+      "reading": "～がる",
+      "key": "～がる\t～がる"
+    },
+    {
+      "id": "n5_gawa",
+      "word": "～側",
+      "reading": "～がわ",
+      "key": "～側\t～がわ"
+    },
+    {
+      "id": "n5_kurai_2",
+      "word": "～くらい; ぐらい",
+      "reading": "～くらい; ぐらい",
+      "key": "～くらい; ぐらい\t～くらい; ぐらい"
+    },
+    {
+      "id": "n5_ko",
+      "word": "～個",
+      "reading": "～こ",
+      "key": "～個\t～こ"
+    },
+    {
+      "id": "n5_go_2",
+      "word": "～語",
+      "reading": "～ご",
+      "key": "～語\t～ご"
+    },
+    {
+      "id": "n5_koro",
+      "word": "～ころ; ～ごろ",
+      "reading": "～ころ; ～ごろ",
+      "key": "～ころ; ～ごろ\t～ころ; ～ごろ"
+    },
+    {
+      "id": "n5_sai",
+      "word": "～歳",
+      "reading": "～さい",
+      "key": "～歳\t～さい"
+    },
+    {
+      "id": "n5_satsu",
+      "word": "～冊",
+      "reading": "～さつ",
+      "key": "～冊\t～さつ"
+    },
+    {
+      "id": "n5_san",
+      "word": "～さん",
+      "reading": "～さん",
+      "key": "～さん\t～さん"
+    },
+    {
+      "id": "n5_ji",
+      "word": "～時",
+      "reading": "～じ",
+      "key": "～時\t～じ"
+    },
+    {
+      "id": "n5_jikan_2",
+      "word": "～時間",
+      "reading": "～じかん",
+      "key": "～時間\t～じかん"
+    },
+    {
+      "id": "n5_juu_2",
+      "word": "～中",
+      "reading": "～じゅう",
+      "key": "～中\t～じゅう"
+    },
+    {
+      "id": "n5_shuukan",
+      "word": "～週間",
+      "reading": "～しゅうかん",
+      "key": "～週間\t～しゅうかん"
+    },
+    {
+      "id": "n5_jin",
+      "word": "～人",
+      "reading": "～じん",
+      "key": "～人\t～じん"
+    },
+    {
+      "id": "n5_sugi",
+      "word": "～すぎ",
+      "reading": "～すぎ",
+      "key": "～すぎ\t～すぎ"
+    },
+    {
+      "id": "n5_zutsu",
+      "word": "～ずつ",
+      "reading": "～ずつ",
+      "key": "～ずつ\t～ずつ"
+    },
+    {
+      "id": "n5_dai",
+      "word": "～台",
+      "reading": "～だい",
+      "key": "～台\t～だい"
+    },
+    {
+      "id": "n5_dake",
+      "word": "～だけ",
+      "reading": "～だけ",
+      "key": "～だけ\t～だけ"
+    },
+    {
+      "id": "n5_tachi",
+      "word": "～たち",
+      "reading": "～たち",
+      "key": "～たち\t～たち"
+    },
+    {
+      "id": "n5_chuu",
+      "word": "～中",
+      "reading": "～ちゅう",
+      "key": "～中\t～ちゅう"
+    },
+    {
+      "id": "n5_do",
+      "word": "～度",
+      "reading": "～ど",
+      "key": "～度\t～ど"
+    },
+    {
+      "id": "n5_toki",
+      "word": "～時",
+      "reading": "～とき",
+      "key": "～時\t～とき"
+    },
+    {
+      "id": "n5_nado",
+      "word": "～など",
+      "reading": "～など",
+      "key": "～など\t～など"
+    },
+    {
+      "id": "n5_nichi",
+      "word": "～日",
+      "reading": "～にち",
+      "key": "～日\t～にち"
+    },
+    {
+      "id": "n5_nin",
+      "word": "～人",
+      "reading": "～にん",
+      "key": "～人\t～にん"
+    },
+    {
+      "id": "n5_nen",
+      "word": "～年",
+      "reading": "～ねん",
+      "key": "～年\t～ねん"
+    },
+    {
+      "id": "n5_hai_2",
+      "word": "～杯",
+      "reading": "～はい",
+      "key": "～杯\t～はい"
+    },
+    {
+      "id": "n5_ban_2",
+      "word": "～番",
+      "reading": "～ばん",
+      "key": "～番\t～ばん"
+    },
+    {
+      "id": "n5_hiki",
+      "word": "～匹",
+      "reading": "～ひき",
+      "key": "～匹\t～ひき"
+    },
+    {
+      "id": "n5_fun",
+      "word": "～分",
+      "reading": "～ふん",
+      "key": "～分\t～ふん"
+    },
+    {
+      "id": "n5_hon_2",
+      "word": "～本",
+      "reading": "～ほん",
+      "key": "～本\t～ほん"
+    },
+    {
+      "id": "n5_mai",
+      "word": "～枚",
+      "reading": "～まい",
+      "key": "～枚\t～まい"
+    },
+    {
+      "id": "n5_mae_2",
+      "word": "～前",
+      "reading": "～まえ",
+      "key": "～前\t～まえ"
+    },
+    {
+      "id": "n5_ya",
+      "word": "～屋",
+      "reading": "～や",
+      "key": "～屋\t～や"
+    },
+    {
+      "id": "n5_ashi",
+      "word": "足; 脚",
+      "reading": "あし",
+      "key": "足; 脚\tあし"
+    },
+    {
+      "id": "n5_ii",
+      "word": "いい; よい",
+      "reading": "いい; よい",
+      "key": "いい; よい\tいい; よい"
+    },
+    {
+      "id": "n5_iku",
+      "word": "行く",
+      "reading": "いく; ゆく",
+      "key": "行く\tいく; ゆく"
+    },
+    {
+      "id": "n5_o",
+      "word": "お～",
+      "reading": "お～",
+      "key": "お～\tお～"
+    },
+    {
+      "id": "n5_ojisan",
+      "word": "伯父; 叔父さん",
+      "reading": "おじさん",
+      "key": "伯父; 叔父さん\tおじさん"
+    },
+    {
+      "id": "n5_obasan",
+      "word": "伯母さん; 叔母さん",
+      "reading": "おばさん",
+      "key": "伯母さん; 叔母さん\tおばさん"
+    },
+    {
+      "id": "n5_kawa",
+      "word": "川; 河",
+      "reading": "かわ",
+      "key": "川; 河\tかわ"
+    },
+    {
+      "id": "n5_kiro",
+      "word": "キロ; キログラム",
+      "reading": "キロ; キログラム",
+      "key": "キロ; キログラム\tキロ; キログラム"
+    },
+    {
+      "id": "n5_kiro_2",
+      "word": "キロ; キロメートル",
+      "reading": "キロ; キロメートル",
+      "key": "キロ; キロメートル\tキロ; キロメートル"
+    },
+    {
+      "id": "n5_kopiisuru",
+      "word": "コピーする",
+      "reading": "コピーする",
+      "key": "コピーする\tコピーする"
+    },
+    {
+      "id": "n5_ja",
+      "word": "じゃ; じゃあ",
+      "reading": "じゃ; じゃあ",
+      "key": "じゃ; じゃあ\tじゃ; じゃあ"
+    },
+    {
+      "id": "n5_sou",
+      "word": "そう; そうです",
+      "reading": "そう; そうです",
+      "key": "そう; そうです\tそう; そうです"
+    },
+    {
+      "id": "n5_soushite",
+      "word": "そうして; そして",
+      "reading": "そうして; そして",
+      "key": "そうして; そして\tそうして; そして"
+    },
+    {
+      "id": "n5_nan",
+      "word": "何",
+      "reading": "なん; なに",
+      "key": "何\tなん; なに"
+    },
+    {
+      "id": "n5_nan_2",
+      "word": "何～",
+      "reading": "なん～",
+      "key": "何～\tなん～"
+    },
+    {
+      "id": "n5_hajime",
+      "word": "初め; 始め",
+      "reading": "はじめ",
+      "key": "初め; 始め\tはじめ"
+    },
+    {
+      "id": "n5_maigetsu",
+      "word": "毎月",
+      "reading": "まいげつ; まいつき",
+      "key": "毎月\tまいげつ; まいつき"
+    },
+    {
+      "id": "n5_mainen",
+      "word": "毎年",
+      "reading": "まいねん; まいとし",
+      "key": "毎年\tまいねん; まいとし"
+    },
+    {
+      "id": "n5_marui",
+      "word": "丸い; 円い",
+      "reading": "まるい",
+      "key": "丸い; 円い\tまるい"
+    },
+    {
+      "id": "n5_yukkurito",
+      "word": "ゆっくりと",
+      "reading": "ゆっくりと",
+      "key": "ゆっくりと\tゆっくりと"
+    }
+  ]
+}

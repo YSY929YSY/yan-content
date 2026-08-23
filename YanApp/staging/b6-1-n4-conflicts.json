@@ -1,0 +1,866 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "B6-1 exact word+reading join",
+  "input": "staging/jmdict-eng-3.6.2.json",
+  "target": "N4 words missing jmdictSeq",
+  "counts": {
+    "targets": 615,
+    "auto": 596,
+    "conflict": 19,
+    "unmatched": 0
+  },
+  "entries": [
+    {
+      "id": "n4_a",
+      "word": "あ",
+      "reading": "あ",
+      "key": "あ\tあ",
+      "candidates": [
+        {
+          "seq": "1149990",
+          "word": "あ",
+          "reading": "あ"
+        },
+        {
+          "seq": "1196670",
+          "word": "あ",
+          "reading": "あ"
+        },
+        {
+          "seq": "2220160",
+          "word": "あ",
+          "reading": "あ"
+        },
+        {
+          "seq": "2394370",
+          "word": "あ",
+          "reading": "あ"
+        },
+        {
+          "seq": "2844412",
+          "word": "あ",
+          "reading": "あ"
+        }
+      ]
+    },
+    {
+      "id": "n4_arubaito",
+      "word": "アルバイト",
+      "reading": "アルバイト",
+      "key": "アルバイト\tアルバイト",
+      "candidates": [
+        {
+          "seq": "1019420",
+          "word": "アルバイト",
+          "reading": "アルバイト"
+        },
+        {
+          "seq": "2855080",
+          "word": "アルバイト",
+          "reading": "アルバイト"
+        }
+      ]
+    },
+    {
+      "id": "n4_anna",
+      "word": "あんな",
+      "reading": "あんな",
+      "key": "あんな\tあんな",
+      "candidates": [
+        {
+          "seq": "1000590",
+          "word": "あんな",
+          "reading": "あんな"
+        },
+        {
+          "seq": "2090240",
+          "word": "あんな",
+          "reading": "あんな"
+        }
+      ]
+    },
+    {
+      "id": "n4_un",
+      "word": "うん",
+      "reading": "うん",
+      "key": "うん\tうん",
+      "candidates": [
+        {
+          "seq": "1001090",
+          "word": "うん",
+          "reading": "うん"
+        },
+        {
+          "seq": "1172610",
+          "word": "うん",
+          "reading": "うん"
+        },
+        {
+          "seq": "1957130",
+          "word": "うん",
+          "reading": "うん"
+        },
+        {
+          "seq": "2759530",
+          "word": "うん",
+          "reading": "うん"
+        }
+      ]
+    },
+    {
+      "id": "n4_kagami",
+      "word": "鏡",
+      "reading": "かがみ",
+      "key": "鏡\tかがみ",
+      "candidates": [
+        {
+          "seq": "1238550",
+          "word": "鏡",
+          "reading": "かがみ"
+        },
+        {
+          "seq": "2017840",
+          "word": "鏡",
+          "reading": "かがみ"
+        }
+      ]
+    },
+    {
+      "id": "n4_kou",
+      "word": "こう",
+      "reading": "こう",
+      "key": "こう\tこう",
+      "candidates": [
+        {
+          "seq": "1004310",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1167880",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1272630",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1272680",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1275120",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1277850",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1278370",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1280050",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1280660",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1282680",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1282980",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1558750",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1578630",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1578710",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1578730",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1578760",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1578910",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1592920",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1663390",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "1956250",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2062440",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2079550",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2085750",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2179140",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2183260",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2229860",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2232150",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2247770",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2248340",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2249700",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2254120",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2259610",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2260180",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2270390",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2271620",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2411590",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2414410",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2414420",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2414430",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2414450",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2414460",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2414470",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2414480",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2415020",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2679630",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2744640",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2837865",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2842507",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2842968",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2842972",
+          "word": "こう",
+          "reading": "こう"
+        },
+        {
+          "seq": "2844246",
+          "word": "こう",
+          "reading": "こう"
+        }
+      ]
+    },
+    {
+      "id": "n4_sakki",
+      "word": "さっき",
+      "reading": "さっき",
+      "key": "さっき\tさっき",
+      "candidates": [
+        {
+          "seq": "1005180",
+          "word": "さっき",
+          "reading": "さっき"
+        },
+        {
+          "seq": "1299060",
+          "word": "さっき",
+          "reading": "さっき"
+        },
+        {
+          "seq": "1373000",
+          "word": "さっき",
+          "reading": "さっき"
+        },
+        {
+          "seq": "2827653",
+          "word": "さっき",
+          "reading": "さっき"
+        },
+        {
+          "seq": "2848393",
+          "word": "さっき",
+          "reading": "さっき"
+        },
+        {
+          "seq": "2853309",
+          "word": "さっき",
+          "reading": "さっき"
+        }
+      ]
+    },
+    {
+      "id": "n4_suri",
+      "word": "すり",
+      "reading": "すり",
+      "key": "すり\tすり",
+      "candidates": [
+        {
+          "seq": "1332400",
+          "word": "すり",
+          "reading": "すり"
+        },
+        {
+          "seq": "1567450",
+          "word": "すり",
+          "reading": "すり"
+        },
+        {
+          "seq": "1657910",
+          "word": "すり",
+          "reading": "すり"
+        }
+      ]
+    },
+    {
+      "id": "n4_sou",
+      "word": "そう",
+      "reading": "そう",
+      "key": "そう\tそう",
+      "candidates": [
+        {
+          "seq": "1006610",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "1176700",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "1241450",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "1272690",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "1290810",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "1375190",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "1398030",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "1398670",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "1399250",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "1399540",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "1399590",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "1399990",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "1400810",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "1401470",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "1440810",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "1581200",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2027990",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2033880",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2077160",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2137720",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2249280",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2253390",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2406720",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2414580",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2414600",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2609760",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2639080",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2681340",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2843362",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2843365",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2843386",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2843387",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2843388",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2843390",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2843391",
+          "word": "そう",
+          "reading": "そう"
+        },
+        {
+          "seq": "2844287",
+          "word": "そう",
+          "reading": "そう"
+        }
+      ]
+    },
+    {
+      "id": "n4_taitei",
+      "word": "たいてい",
+      "reading": "たいてい",
+      "key": "たいてい\tたいてい",
+      "candidates": [
+        {
+          "seq": "1414580",
+          "word": "たいてい",
+          "reading": "たいてい"
+        },
+        {
+          "seq": "1779160",
+          "word": "たいてい",
+          "reading": "たいてい"
+        },
+        {
+          "seq": "1786140",
+          "word": "たいてい",
+          "reading": "たいてい"
+        }
+      ]
+    },
+    {
+      "id": "n4_tame",
+      "word": "ため",
+      "reading": "ため",
+      "key": "ため\tため",
+      "candidates": [
+        {
+          "seq": "1157080",
+          "word": "ため",
+          "reading": "ため"
+        },
+        {
+          "seq": "1891920",
+          "word": "ため",
+          "reading": "ため"
+        },
+        {
+          "seq": "2615440",
+          "word": "ため",
+          "reading": "ため"
+        }
+      ]
+    },
+    {
+      "id": "n4_chan",
+      "word": "ちゃん",
+      "reading": "ちゃん",
+      "key": "ちゃん\tちゃん",
+      "candidates": [
+        {
+          "seq": "1007660",
+          "word": "ちゃん",
+          "reading": "ちゃん"
+        },
+        {
+          "seq": "1497610",
+          "word": "ちゃん",
+          "reading": "ちゃん"
+        }
+      ]
+    },
+    {
+      "id": "n4_tsuma",
+      "word": "妻",
+      "reading": "つま",
+      "key": "妻\tつま",
+      "candidates": [
+        {
+          "seq": "1294330",
+          "word": "妻",
+          "reading": "つま"
+        },
+        {
+          "seq": "2746070",
+          "word": "妻",
+          "reading": "つま"
+        },
+        {
+          "seq": "2852371",
+          "word": "妻",
+          "reading": "つま"
+        }
+      ]
+    },
+    {
+      "id": "n4_tsumori",
+      "word": "つもり",
+      "reading": "つもり",
+      "key": "つもり\tつもり",
+      "candidates": [
+        {
+          "seq": "1382980",
+          "word": "つもり",
+          "reading": "つもり"
+        },
+        {
+          "seq": "1663770",
+          "word": "つもり",
+          "reading": "つもり"
+        }
+      ]
+    },
+    {
+      "id": "n4_toutou",
+      "word": "とうとう",
+      "reading": "とうとう",
+      "key": "とうとう\tとうとう",
+      "candidates": [
+        {
+          "seq": "1449890",
+          "word": "とうとう",
+          "reading": "とうとう"
+        },
+        {
+          "seq": "1563840",
+          "word": "とうとう",
+          "reading": "とうとう"
+        },
+        {
+          "seq": "1717240",
+          "word": "とうとう",
+          "reading": "とうとう"
+        },
+        {
+          "seq": "1774480",
+          "word": "とうとう",
+          "reading": "とうとう"
+        },
+        {
+          "seq": "1855690",
+          "word": "とうとう",
+          "reading": "とうとう"
+        },
+        {
+          "seq": "2175360",
+          "word": "とうとう",
+          "reading": "とうとう"
+        },
+        {
+          "seq": "2857308",
+          "word": "とうとう",
+          "reading": "とうとう"
+        }
+      ]
+    },
+    {
+      "id": "n4_hazu",
+      "word": "はず",
+      "reading": "はず",
+      "key": "はず\tはず",
+      "candidates": [
+        {
+          "seq": "1476430",
+          "word": "はず",
+          "reading": "はず"
+        },
+        {
+          "seq": "2461070",
+          "word": "はず",
+          "reading": "はず"
+        }
+      ]
+    },
+    {
+      "id": "n4_biru",
+      "word": "ビル",
+      "reading": "ビル",
+      "key": "ビル\tビル",
+      "candidates": [
+        {
+          "seq": "1106010",
+          "word": "ビル",
+          "reading": "ビル"
+        },
+        {
+          "seq": "2856006",
+          "word": "ビル",
+          "reading": "ビル"
+        }
+      ]
+    },
+    {
+      "id": "n4_beru",
+      "word": "ベル",
+      "reading": "ベル",
+      "key": "ベル\tベル",
+      "candidates": [
+        {
+          "seq": "1120010",
+          "word": "ベル",
+          "reading": "ベル"
+        },
+        {
+          "seq": "2857911",
+          "word": "ベル",
+          "reading": "ベル"
+        }
+      ]
+    },
+    {
+      "id": "n4_moshi",
+      "word": "もし",
+      "reading": "もし",
+      "key": "もし\tもし",
+      "candidates": [
+        {
+          "seq": "1012500",
+          "word": "もし",
+          "reading": "もし"
+        },
+        {
+          "seq": "1912410",
+          "word": "もし",
+          "reading": "もし"
+        },
+        {
+          "seq": "2607730",
+          "word": "もし",
+          "reading": "もし"
+        }
+      ]
+    }
+  ]
+}

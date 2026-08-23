@@ -1,0 +1,4186 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "B6-1 exact word+reading join",
+  "input": "staging/jmdict-eng-3.6.2.json",
+  "target": "N4 words missing jmdictSeq",
+  "counts": {
+    "targets": 615,
+    "auto": 596,
+    "conflict": 19,
+    "unmatched": 0
+  },
+  "entries": [
+    {
+      "id": "n5_minna",
+      "word": "みんな",
+      "reading": "みんな",
+      "key": "みんな\tみんな",
+      "jmdictSeq": "1202150"
+    },
+    {
+      "id": "n4_aisatsu",
+      "word": "あいさつ",
+      "reading": "あいさつ",
+      "key": "あいさつ\tあいさつ",
+      "jmdictSeq": "1151120"
+    },
+    {
+      "id": "n4_aida",
+      "word": "間",
+      "reading": "あいだ",
+      "key": "間\tあいだ",
+      "jmdictSeq": "1215230"
+    },
+    {
+      "id": "n4_akachan",
+      "word": "あかちゃん",
+      "reading": "あかちゃん",
+      "key": "あかちゃん\tあかちゃん",
+      "jmdictSeq": "1383260"
+    },
+    {
+      "id": "n4_akanbou",
+      "word": "赤ん坊",
+      "reading": "あかんぼう",
+      "key": "赤ん坊\tあかんぼう",
+      "jmdictSeq": "1383310"
+    },
+    {
+      "id": "n4_akusesari",
+      "word": "アクセサリー",
+      "reading": "アクセサリー",
+      "key": "アクセサリー\tアクセサリー",
+      "jmdictSeq": "1015220"
+    },
+    {
+      "id": "n4_asai",
+      "word": "浅い",
+      "reading": "あさい",
+      "key": "浅い\tあさい",
+      "jmdictSeq": "1390800"
+    },
+    {
+      "id": "n4_aji",
+      "word": "味",
+      "reading": "あじ",
+      "key": "味\tあじ",
+      "jmdictSeq": "1526960"
+    },
+    {
+      "id": "n4_ajia",
+      "word": "アジア",
+      "reading": "アジア",
+      "key": "アジア\tアジア",
+      "jmdictSeq": "1015840"
+    },
+    {
+      "id": "n4_asu",
+      "word": "明日",
+      "reading": "あす",
+      "key": "明日\tあす",
+      "jmdictSeq": "1584660"
+    },
+    {
+      "id": "n4_asobi",
+      "word": "遊び",
+      "reading": "あそび",
+      "key": "遊び\tあそび",
+      "jmdictSeq": "1542070"
+    },
+    {
+      "id": "n4_atsumeru",
+      "word": "集める",
+      "reading": "あつめる",
+      "key": "集める\tあつめる",
+      "jmdictSeq": "1333560"
+    },
+    {
+      "id": "n4_anaunsa",
+      "word": "アナウンサー",
+      "reading": "アナウンサー",
+      "key": "アナウンサー\tアナウンサー",
+      "jmdictSeq": "1017330"
+    },
+    {
+      "id": "n4_afurika",
+      "word": "アフリカ",
+      "reading": "アフリカ",
+      "key": "アフリカ\tアフリカ",
+      "jmdictSeq": "1929050"
+    },
+    {
+      "id": "n4_amerika",
+      "word": "アメリカ",
+      "reading": "アメリカ",
+      "key": "アメリカ\tアメリカ",
+      "jmdictSeq": "1149830"
+    },
+    {
+      "id": "n4_ayamaru",
+      "word": "謝る",
+      "reading": "あやまる",
+      "key": "謝る\tあやまる",
+      "jmdictSeq": "1323010"
+    },
+    {
+      "id": "n4_aruko_ru",
+      "word": "アルコール",
+      "reading": "アルコール",
+      "key": "アルコール\tアルコール",
+      "jmdictSeq": "1019280"
+    },
+    {
+      "id": "n4_anshin",
+      "word": "安心",
+      "reading": "あんしん",
+      "key": "安心\tあんしん",
+      "jmdictSeq": "1153890"
+    },
+    {
+      "id": "n4_anzen",
+      "word": "安全",
+      "reading": "あんぜん",
+      "key": "安全\tあんぜん",
+      "jmdictSeq": "1153930"
+    },
+    {
+      "id": "n4_annai",
+      "word": "案内",
+      "reading": "あんない",
+      "key": "案内\tあんない",
+      "jmdictSeq": "1154860"
+    },
+    {
+      "id": "n4_ika",
+      "word": "以下",
+      "reading": "いか",
+      "key": "以下\tいか",
+      "jmdictSeq": "1155060"
+    },
+    {
+      "id": "n4_igai",
+      "word": "以外",
+      "reading": "いがい",
+      "key": "以外\tいがい",
+      "jmdictSeq": "1155090"
+    },
+    {
+      "id": "n4_igaku",
+      "word": "医学",
+      "reading": "いがく",
+      "key": "医学\tいがく",
+      "jmdictSeq": "1159810"
+    },
+    {
+      "id": "n4_ikiru",
+      "word": "生きる",
+      "reading": "いきる",
+      "key": "生きる\tいきる",
+      "jmdictSeq": "1378520"
+    },
+    {
+      "id": "n4_iken",
+      "word": "意見",
+      "reading": "いけん",
+      "key": "意見\tいけん",
+      "jmdictSeq": "1156530"
+    },
+    {
+      "id": "n4_ishi",
+      "word": "石",
+      "reading": "いし",
+      "key": "石\tいし",
+      "jmdictSeq": "1382440"
+    },
+    {
+      "id": "n4_ijimeru",
+      "word": "いじめる",
+      "reading": "いじめる",
+      "key": "いじめる\tいじめる",
+      "jmdictSeq": "1195140"
+    },
+    {
+      "id": "n4_ijou",
+      "word": "以上",
+      "reading": "いじょう",
+      "key": "以上\tいじょう",
+      "jmdictSeq": "1155120"
+    },
+    {
+      "id": "n4_isogu",
+      "word": "急ぐ",
+      "reading": "いそぐ",
+      "key": "急ぐ\tいそぐ",
+      "jmdictSeq": "1228650"
+    },
+    {
+      "id": "n4_itasu",
+      "word": "致す",
+      "reading": "いたす",
+      "key": "致す\tいたす",
+      "jmdictSeq": "1421900"
+    },
+    {
+      "id": "n4_itadaku",
+      "word": "いただく",
+      "reading": "いただく",
+      "key": "いただく\tいただく",
+      "jmdictSeq": "1587290"
+    },
+    {
+      "id": "n4_ichido",
+      "word": "一度",
+      "reading": "いちど",
+      "key": "一度\tいちど",
+      "jmdictSeq": "1576250"
+    },
+    {
+      "id": "n4_isshoukenmei",
+      "word": "一生けんめい",
+      "reading": "いっしょうけんめい",
+      "key": "一生けんめい\tいっしょうけんめい",
+      "jmdictSeq": "1164010"
+    },
+    {
+      "id": "n4_ippai",
+      "word": "一ぱい",
+      "reading": "いっぱい",
+      "key": "一ぱい\tいっぱい",
+      "jmdictSeq": "1165670"
+    },
+    {
+      "id": "n4_ito",
+      "word": "糸",
+      "reading": "いと",
+      "key": "糸\tいと",
+      "jmdictSeq": "1311450"
+    },
+    {
+      "id": "n4_inai",
+      "word": "以内",
+      "reading": "いない",
+      "key": "以内\tいない",
+      "jmdictSeq": "1155180"
+    },
+    {
+      "id": "n4_inaka",
+      "word": "田舎",
+      "reading": "いなか",
+      "key": "田舎\tいなか",
+      "jmdictSeq": "1442750"
+    },
+    {
+      "id": "n4_inoru",
+      "word": "祈る",
+      "reading": "いのる",
+      "key": "祈る\tいのる",
+      "jmdictSeq": "1222770"
+    },
+    {
+      "id": "n4_irassharu",
+      "word": "いらっしゃる",
+      "reading": "いらっしゃる",
+      "key": "いらっしゃる\tいらっしゃる",
+      "jmdictSeq": "1000940"
+    },
+    {
+      "id": "n4_ueru",
+      "word": "植える",
+      "reading": "うえる",
+      "key": "植える\tうえる",
+      "jmdictSeq": "1357250"
+    },
+    {
+      "id": "n4_ukagau",
+      "word": "伺う",
+      "reading": "うかがう",
+      "key": "伺う\tうかがう",
+      "jmdictSeq": "1305700"
+    },
+    {
+      "id": "n4_uketsuke",
+      "word": "受け付け",
+      "reading": "うけつけ",
+      "key": "受け付け\tうけつけ",
+      "jmdictSeq": "1588060"
+    },
+    {
+      "id": "n4_ukeru",
+      "word": "受ける",
+      "reading": "うける",
+      "key": "受ける\tうける",
+      "jmdictSeq": "1329590"
+    },
+    {
+      "id": "n4_ugoku",
+      "word": "動く",
+      "reading": "うごく",
+      "key": "動く\tうごく",
+      "jmdictSeq": "1451210"
+    },
+    {
+      "id": "n4_uso",
+      "word": "嘘",
+      "reading": "うそ",
+      "key": "嘘\tうそ",
+      "jmdictSeq": "1172400"
+    },
+    {
+      "id": "n4_uchi",
+      "word": "内",
+      "reading": "うち",
+      "key": "内\tうち",
+      "jmdictSeq": "1457730"
+    },
+    {
+      "id": "n4_utsu",
+      "word": "打つ",
+      "reading": "うつ",
+      "key": "打つ\tうつ",
+      "jmdictSeq": "1408810"
+    },
+    {
+      "id": "n4_utsukushii",
+      "word": "美しい",
+      "reading": "うつくしい",
+      "key": "美しい\tうつくしい",
+      "jmdictSeq": "1486360"
+    },
+    {
+      "id": "n4_utsusu",
+      "word": "写す",
+      "reading": "うつす",
+      "key": "写す\tうつす",
+      "jmdictSeq": "1588320"
+    },
+    {
+      "id": "n4_utsuru",
+      "word": "移る",
+      "reading": "うつる",
+      "key": "移る\tうつる",
+      "jmdictSeq": "1158210"
+    },
+    {
+      "id": "n4_ude",
+      "word": "腕",
+      "reading": "うで",
+      "key": "腕\tうで",
+      "jmdictSeq": "1562850"
+    },
+    {
+      "id": "n4_umai",
+      "word": "上手い",
+      "reading": "うまい",
+      "key": "上手い\tうまい",
+      "jmdictSeq": "1310460"
+    },
+    {
+      "id": "n4_ura",
+      "word": "裏",
+      "reading": "うら",
+      "key": "裏\tうら",
+      "jmdictSeq": "1550190"
+    },
+    {
+      "id": "n4_uriba",
+      "word": "売り場",
+      "reading": "うりば",
+      "key": "売り場\tうりば",
+      "jmdictSeq": "1588550"
+    },
+    {
+      "id": "n4_ureshii",
+      "word": "うれしい",
+      "reading": "うれしい",
+      "key": "うれしい\tうれしい",
+      "jmdictSeq": "1219510"
+    },
+    {
+      "id": "n4_unten",
+      "word": "運転",
+      "reading": "うんてん",
+      "key": "運転\tうんてん",
+      "jmdictSeq": "1172830"
+    },
+    {
+      "id": "n4_untenshu",
+      "word": "運転手",
+      "reading": "うんてんしゅ",
+      "key": "運転手\tうんてんしゅ",
+      "jmdictSeq": "1172870"
+    },
+    {
+      "id": "n4_undou",
+      "word": "運動",
+      "reading": "うんどう",
+      "key": "運動\tうんどう",
+      "jmdictSeq": "1172910"
+    },
+    {
+      "id": "n4_eakon",
+      "word": "エアコン",
+      "reading": "エアコン",
+      "key": "エアコン\tエアコン",
+      "jmdictSeq": "1027180"
+    },
+    {
+      "id": "n4_esukare_ta",
+      "word": "エスカレーター",
+      "reading": "エスカレーター",
+      "key": "エスカレーター\tエスカレーター",
+      "jmdictSeq": "1028580"
+    },
+    {
+      "id": "n4_eda",
+      "word": "枝",
+      "reading": "えだ",
+      "key": "枝\tえだ",
+      "jmdictSeq": "1310530"
+    },
+    {
+      "id": "n4_erabu",
+      "word": "選ぶ",
+      "reading": "えらぶ",
+      "key": "選ぶ\tえらぶ",
+      "jmdictSeq": "1588730"
+    },
+    {
+      "id": "n4_enryo",
+      "word": "遠慮",
+      "reading": "えんりょ",
+      "key": "遠慮\tえんりょ",
+      "jmdictSeq": "1178450"
+    },
+    {
+      "id": "n4_oideninaru",
+      "word": "おいでになる",
+      "reading": "おいでになる",
+      "key": "おいでになる\tおいでになる",
+      "jmdictSeq": "1001180"
+    },
+    {
+      "id": "n4_oiwai",
+      "word": "お祝い",
+      "reading": "おいわい",
+      "key": "お祝い\tおいわい",
+      "jmdictSeq": "1612770"
+    },
+    {
+      "id": "n4_o_tobai",
+      "word": "オートバイ",
+      "reading": "オートバイ",
+      "key": "オートバイ\tオートバイ",
+      "jmdictSeq": "1032030"
+    },
+    {
+      "id": "n4_okaikei",
+      "word": "お会計",
+      "reading": "おかいけい",
+      "key": "お会計\tおかいけい",
+      "jmdictSeq": "2513640"
+    },
+    {
+      "id": "n4_okage",
+      "word": "おかげ",
+      "reading": "おかげ",
+      "key": "おかげ\tおかげ",
+      "jmdictSeq": "1001640"
+    },
+    {
+      "id": "n4_okashii",
+      "word": "おかしい",
+      "reading": "おかしい",
+      "key": "おかしい\tおかしい",
+      "jmdictSeq": "1190860"
+    },
+    {
+      "id": "n4_okanemochi",
+      "word": "お金持ち",
+      "reading": "おかねもち",
+      "key": "お金持ち\tおかねもち",
+      "jmdictSeq": "2429350"
+    },
+    {
+      "id": "n4_oku",
+      "word": "億",
+      "reading": "おく",
+      "key": "億\tおく",
+      "jmdictSeq": "1182620"
+    },
+    {
+      "id": "n4_okujou",
+      "word": "屋上",
+      "reading": "おくじょう",
+      "key": "屋上\tおくじょう",
+      "jmdictSeq": "1182710"
+    },
+    {
+      "id": "n4_okurimono",
+      "word": "贈り物",
+      "reading": "おくりもの",
+      "key": "贈り物\tおくりもの",
+      "jmdictSeq": "1589030"
+    },
+    {
+      "id": "n4_okuru",
+      "word": "送る",
+      "reading": "おくる",
+      "key": "送る\tおくる",
+      "jmdictSeq": "1402730"
+    },
+    {
+      "id": "n4_okureru",
+      "word": "遅れる",
+      "reading": "おくれる",
+      "key": "遅れる\tおくれる",
+      "jmdictSeq": "1589040"
+    },
+    {
+      "id": "n4_okonau",
+      "word": "行う",
+      "reading": "おこなう",
+      "key": "行う\tおこなう",
+      "jmdictSeq": "1589060"
+    },
+    {
+      "id": "n4_okoru",
+      "word": "怒る",
+      "reading": "おこる",
+      "key": "怒る\tおこる",
+      "jmdictSeq": "1445690"
+    },
+    {
+      "id": "n4_oshiire",
+      "word": "押入れ",
+      "reading": "おしいれ",
+      "key": "押入れ\tおしいれ",
+      "jmdictSeq": "1589110"
+    },
+    {
+      "id": "n4_ojousan",
+      "word": "お嬢さん",
+      "reading": "おじょうさん",
+      "key": "お嬢さん\tおじょうさん",
+      "jmdictSeq": "1002170"
+    },
+    {
+      "id": "n4_otaku",
+      "word": "お宅",
+      "reading": "おたく",
+      "key": "お宅\tおたく",
+      "jmdictSeq": "1002400"
+    },
+    {
+      "id": "n4_ossharu",
+      "word": "おっしゃる",
+      "reading": "おっしゃる",
+      "key": "おっしゃる\tおっしゃる",
+      "jmdictSeq": "1238840"
+    },
+    {
+      "id": "n4_otto",
+      "word": "夫",
+      "reading": "おっと",
+      "key": "夫\tおっと",
+      "jmdictSeq": "1496480"
+    },
+    {
+      "id": "n4_otsuri",
+      "word": "おつり",
+      "reading": "おつり",
+      "key": "おつり\tおつり",
+      "jmdictSeq": "1270550"
+    },
+    {
+      "id": "n4_oto",
+      "word": "音",
+      "reading": "おと",
+      "key": "音\tおと",
+      "jmdictSeq": "1576900"
+    },
+    {
+      "id": "n4_odori",
+      "word": "踊り",
+      "reading": "おどり",
+      "key": "踊り\tおどり",
+      "jmdictSeq": "1546880"
+    },
+    {
+      "id": "n4_odoru",
+      "word": "踊る",
+      "reading": "おどる",
+      "key": "踊る\tおどる",
+      "jmdictSeq": "1538440"
+    },
+    {
+      "id": "n4_odoroku",
+      "word": "驚く",
+      "reading": "おどろく",
+      "key": "驚く\tおどろく",
+      "jmdictSeq": "1238680"
+    },
+    {
+      "id": "n4_omatsuri",
+      "word": "お祭り",
+      "reading": "おまつり",
+      "key": "お祭り\tおまつり",
+      "jmdictSeq": "1604135"
+    },
+    {
+      "id": "n4_omimai",
+      "word": "お見舞い",
+      "reading": "おみまい",
+      "key": "お見舞い\tおみまい",
+      "jmdictSeq": "1001870"
+    },
+    {
+      "id": "n4_omiyage",
+      "word": "お土産",
+      "reading": "おみやげ",
+      "key": "お土産\tおみやげ",
+      "jmdictSeq": "1002500"
+    },
+    {
+      "id": "n4_omoidasu",
+      "word": "思い出す",
+      "reading": "おもいだす",
+      "key": "思い出す\tおもいだす",
+      "jmdictSeq": "1309260"
+    },
+    {
+      "id": "n4_omou",
+      "word": "思う",
+      "reading": "おもう",
+      "key": "思う\tおもう",
+      "jmdictSeq": "1589350"
+    },
+    {
+      "id": "n4_omocha",
+      "word": "おもちゃ",
+      "reading": "おもちゃ",
+      "key": "おもちゃ\tおもちゃ",
+      "jmdictSeq": "1217070"
+    },
+    {
+      "id": "n4_omote",
+      "word": "表",
+      "reading": "おもて",
+      "key": "表\tおもて",
+      "jmdictSeq": "1489340"
+    },
+    {
+      "id": "n4_oya",
+      "word": "親",
+      "reading": "おや",
+      "key": "親\tおや",
+      "jmdictSeq": "1365040"
+    },
+    {
+      "id": "n4_oyogikata",
+      "word": "泳ぎ方",
+      "reading": "およぎかた",
+      "key": "泳ぎ方\tおよぎかた",
+      "jmdictSeq": "2005990"
+    },
+    {
+      "id": "n4_oru",
+      "word": "折る",
+      "reading": "おる",
+      "key": "折る\tおる",
+      "jmdictSeq": "1385910"
+    },
+    {
+      "id": "n4_orei",
+      "word": "お礼",
+      "reading": "おれい",
+      "key": "お礼\tおれい",
+      "jmdictSeq": "1270810"
+    },
+    {
+      "id": "n4_oreru",
+      "word": "折れる",
+      "reading": "おれる",
+      "key": "折れる\tおれる",
+      "jmdictSeq": "1385920"
+    },
+    {
+      "id": "n4_owari",
+      "word": "終わり",
+      "reading": "おわり",
+      "key": "終わり\tおわり",
+      "jmdictSeq": "1589590"
+    },
+    {
+      "id": "n4_ka_ten",
+      "word": "カーテン",
+      "reading": "カーテン",
+      "key": "カーテン\tカーテン",
+      "jmdictSeq": "1036290"
+    },
+    {
+      "id": "n4_kaigan",
+      "word": "海岸",
+      "reading": "かいがん",
+      "key": "海岸\tかいがん",
+      "jmdictSeq": "1201280"
+    },
+    {
+      "id": "n4_kaigi",
+      "word": "会議",
+      "reading": "かいぎ",
+      "key": "会議\tかいぎ",
+      "jmdictSeq": "1198360"
+    },
+    {
+      "id": "n4_kaigishitsu",
+      "word": "会議室",
+      "reading": "かいぎしつ",
+      "key": "会議室\tかいぎしつ",
+      "jmdictSeq": "1198380"
+    },
+    {
+      "id": "n4_kaisatsuguchi",
+      "word": "改札口",
+      "reading": "かいさつぐち",
+      "key": "改札口\tかいさつぐち",
+      "jmdictSeq": "1200850"
+    },
+    {
+      "id": "n4_kaijou",
+      "word": "会場",
+      "reading": "かいじょう",
+      "key": "会場\tかいじょう",
+      "jmdictSeq": "1198660"
+    },
+    {
+      "id": "n4_kaiwa",
+      "word": "会話",
+      "reading": "かいわ",
+      "key": "会話\tかいわ",
+      "jmdictSeq": "1198880"
+    },
+    {
+      "id": "n4_kaeri",
+      "word": "帰り",
+      "reading": "かえり",
+      "key": "帰り\tかえり",
+      "jmdictSeq": "1221250"
+    },
+    {
+      "id": "n4_kagaku",
+      "word": "科学",
+      "reading": "かがく",
+      "key": "科学\tかがく",
+      "jmdictSeq": "1192700"
+    },
+    {
+      "id": "n4_kazaru",
+      "word": "飾る",
+      "reading": "かざる",
+      "key": "飾る\tかざる",
+      "jmdictSeq": "1357210"
+    },
+    {
+      "id": "n4_kaji",
+      "word": "火事",
+      "reading": "かじ",
+      "key": "火事\tかじ",
+      "jmdictSeq": "1193950"
+    },
+    {
+      "id": "n4_gasu",
+      "word": "ガス",
+      "reading": "ガス",
+      "key": "ガス\tガス",
+      "jmdictSeq": "1040060"
+    },
+    {
+      "id": "n4_gasorin",
+      "word": "ガソリン",
+      "reading": "ガソリン",
+      "key": "ガソリン\tガソリン",
+      "jmdictSeq": "1040250"
+    },
+    {
+      "id": "n4_gasorinsutando",
+      "word": "ガソリンスタンド",
+      "reading": "ガソリンスタンド",
+      "key": "ガソリンスタンド\tガソリンスタンド",
+      "jmdictSeq": "1040260"
+    },
+    {
+      "id": "n4_katai",
+      "word": "硬い",
+      "reading": "かたい",
+      "key": "硬い\tかたい",
+      "jmdictSeq": "1257110"
+    },
+    {
+      "id": "n4_katachi",
+      "word": "形",
+      "reading": "かたち",
+      "key": "形\tかたち",
+      "jmdictSeq": "1250220"
+    },
+    {
+      "id": "n4_katazukeru",
+      "word": "片付ける",
+      "reading": "かたづける",
+      "key": "片付ける\tかたづける",
+      "jmdictSeq": "1511790"
+    },
+    {
+      "id": "n4_kachou",
+      "word": "課長",
+      "reading": "かちょう",
+      "key": "課長\tかちょう",
+      "jmdictSeq": "1195840"
+    },
+    {
+      "id": "n4_katsu",
+      "word": "勝つ",
+      "reading": "かつ",
+      "key": "勝つ\tかつ",
+      "jmdictSeq": "1346150"
+    },
+    {
+      "id": "n4_kakkou",
+      "word": "格好",
+      "reading": "かっこう",
+      "key": "格好\tかっこう",
+      "jmdictSeq": "1590480"
+    },
+    {
+      "id": "n4_kanai",
+      "word": "家内",
+      "reading": "かない",
+      "key": "家内\tかない",
+      "jmdictSeq": "1192420"
+    },
+    {
+      "id": "n4_kanashii",
+      "word": "悲しい",
+      "reading": "かなしい",
+      "key": "悲しい\tかなしい",
+      "jmdictSeq": "1483190"
+    },
+    {
+      "id": "n4_kanarazu",
+      "word": "必ず",
+      "reading": "かならず",
+      "key": "必ず\tかならず",
+      "jmdictSeq": "1487400"
+    },
+    {
+      "id": "n4_kanemochi",
+      "word": "金持ち",
+      "reading": "かねもち",
+      "key": "金持ち\tかねもち",
+      "jmdictSeq": "1242970"
+    },
+    {
+      "id": "n4_kanojo",
+      "word": "彼女",
+      "reading": "かのじょ",
+      "key": "彼女\tかのじょ",
+      "jmdictSeq": "1483150"
+    },
+    {
+      "id": "n4_kabe",
+      "word": "壁",
+      "reading": "かべ",
+      "key": "壁\tかべ",
+      "jmdictSeq": "1509290"
+    },
+    {
+      "id": "n4_kamau",
+      "word": "かまう",
+      "reading": "かまう",
+      "key": "かまう\tかまう",
+      "jmdictSeq": "1279680"
+    },
+    {
+      "id": "n4_kami",
+      "word": "髪",
+      "reading": "かみ",
+      "key": "髪\tかみ",
+      "jmdictSeq": "1477950"
+    },
+    {
+      "id": "n4_kamu",
+      "word": "噛む",
+      "reading": "かむ",
+      "key": "噛む\tかむ",
+      "jmdictSeq": "1209240"
+    },
+    {
+      "id": "n4_kayou",
+      "word": "通う",
+      "reading": "かよう",
+      "key": "通う\tかよう",
+      "jmdictSeq": "1432850"
+    },
+    {
+      "id": "n4_garasu",
+      "word": "ガラス",
+      "reading": "ガラス",
+      "key": "ガラス\tガラス",
+      "jmdictSeq": "1040380"
+    },
+    {
+      "id": "n4_kare",
+      "word": "彼",
+      "reading": "かれ",
+      "key": "彼\tかれ",
+      "jmdictSeq": "1483070"
+    },
+    {
+      "id": "n4_karera",
+      "word": "彼ら",
+      "reading": "かれら",
+      "key": "彼ら\tかれら",
+      "jmdictSeq": "1483090"
+    },
+    {
+      "id": "n4_kawaku",
+      "word": "乾く",
+      "reading": "かわく",
+      "key": "乾く\tかわく",
+      "jmdictSeq": "1209650"
+    },
+    {
+      "id": "n4_kawari",
+      "word": "代わり",
+      "reading": "かわり",
+      "key": "代わり\tかわり",
+      "jmdictSeq": "1590770"
+    },
+    {
+      "id": "n4_kawaru",
+      "word": "変わる",
+      "reading": "かわる",
+      "key": "変わる\tかわる",
+      "jmdictSeq": "1510790"
+    },
+    {
+      "id": "n4_kangaeru",
+      "word": "考える",
+      "reading": "かんがえる",
+      "key": "考える\tかんがえる",
+      "jmdictSeq": "1281020"
+    },
+    {
+      "id": "n4_kankei",
+      "word": "関係",
+      "reading": "かんけい",
+      "key": "関係\tかんけい",
+      "jmdictSeq": "1215810"
+    },
+    {
+      "id": "n4_kangofu",
+      "word": "看護婦",
+      "reading": "かんごふ",
+      "key": "看護婦\tかんごふ",
+      "jmdictSeq": "1213870"
+    },
+    {
+      "id": "n4_kantan",
+      "word": "簡単",
+      "reading": "かんたん",
+      "key": "簡単\tかんたん",
+      "jmdictSeq": "1214330"
+    },
+    {
+      "id": "n4_ki",
+      "word": "気",
+      "reading": "き",
+      "key": "気\tき",
+      "jmdictSeq": "1221520"
+    },
+    {
+      "id": "n4_kikai",
+      "word": "機会",
+      "reading": "きかい",
+      "key": "機会\tきかい",
+      "jmdictSeq": "1220800"
+    },
+    {
+      "id": "n4_kiken",
+      "word": "危険",
+      "reading": "きけん",
+      "key": "危険\tきけん",
+      "jmdictSeq": "1218560"
+    },
+    {
+      "id": "n4_kikoeru",
+      "word": "聞こえる",
+      "reading": "きこえる",
+      "key": "聞こえる\tきこえる",
+      "jmdictSeq": "1591150"
+    },
+    {
+      "id": "n4_kisha",
+      "word": "汽車",
+      "reading": "きしゃ",
+      "key": "汽車\tきしゃ",
+      "jmdictSeq": "1222700"
+    },
+    {
+      "id": "n4_gijutsu",
+      "word": "技術",
+      "reading": "ぎじゅつ",
+      "key": "技術\tぎじゅつ",
+      "jmdictSeq": "1225130"
+    },
+    {
+      "id": "n4_kisetsu",
+      "word": "季節",
+      "reading": "きせつ",
+      "key": "季節\tきせつ",
+      "jmdictSeq": "1222840"
+    },
+    {
+      "id": "n4_kisoku",
+      "word": "規則",
+      "reading": "きそく",
+      "key": "規則\tきそく",
+      "jmdictSeq": "1223021"
+    },
+    {
+      "id": "n4_kitto",
+      "word": "きっと",
+      "reading": "きっと",
+      "key": "きっと\tきっと",
+      "jmdictSeq": "1003430"
+    },
+    {
+      "id": "n4_kinu",
+      "word": "絹",
+      "reading": "きぬ",
+      "key": "絹\tきぬ",
+      "jmdictSeq": "1258710"
+    },
+    {
+      "id": "n4_kibishii",
+      "word": "厳しい",
+      "reading": "きびしい",
+      "key": "厳しい\tきびしい",
+      "jmdictSeq": "1262530"
+    },
+    {
+      "id": "n4_kibun",
+      "word": "気分",
+      "reading": "きぶん",
+      "key": "気分\tきぶん",
+      "jmdictSeq": "1222590"
+    },
+    {
+      "id": "n4_kimi",
+      "word": "君",
+      "reading": "きみ",
+      "key": "君\tきみ",
+      "jmdictSeq": "1247250"
+    },
+    {
+      "id": "n4_kimeru",
+      "word": "決める",
+      "reading": "きめる",
+      "key": "決める\tきめる",
+      "jmdictSeq": "1254180"
+    },
+    {
+      "id": "n4_kimochi",
+      "word": "気持ち",
+      "reading": "きもち",
+      "key": "気持ち\tきもち",
+      "jmdictSeq": "1591430"
+    },
+    {
+      "id": "n4_kimono",
+      "word": "着物",
+      "reading": "きもの",
+      "key": "着物\tきもの",
+      "jmdictSeq": "1423240"
+    },
+    {
+      "id": "n4_kyaku",
+      "word": "客",
+      "reading": "きゃく",
+      "key": "客\tきゃく",
+      "jmdictSeq": "1226630"
+    },
+    {
+      "id": "n4_kyuu",
+      "word": "急",
+      "reading": "きゅう",
+      "key": "急\tきゅう",
+      "jmdictSeq": "1228560"
+    },
+    {
+      "id": "n4_kyuukou",
+      "word": "急行",
+      "reading": "きゅうこう",
+      "key": "急行\tきゅうこう",
+      "jmdictSeq": "1228690"
+    },
+    {
+      "id": "n4_kyouiku",
+      "word": "教育",
+      "reading": "きょういく",
+      "key": "教育\tきょういく",
+      "jmdictSeq": "1236950"
+    },
+    {
+      "id": "n4_kyoukai",
+      "word": "教会",
+      "reading": "きょうかい",
+      "key": "教会\tきょうかい",
+      "jmdictSeq": "1237030"
+    },
+    {
+      "id": "n4_kyousou",
+      "word": "競争",
+      "reading": "きょうそう",
+      "key": "競争\tきょうそう",
+      "jmdictSeq": "1234140"
+    },
+    {
+      "id": "n4_kyoumi",
+      "word": "興味",
+      "reading": "きょうみ",
+      "key": "興味\tきょうみ",
+      "jmdictSeq": "1238410"
+    },
+    {
+      "id": "n4_kinjo",
+      "word": "近所",
+      "reading": "きんじょ",
+      "key": "近所\tきんじょ",
+      "jmdictSeq": "1242350"
+    },
+    {
+      "id": "n4_guai",
+      "word": "具合い",
+      "reading": "ぐあい",
+      "key": "具合い\tぐあい",
+      "jmdictSeq": "1592500"
+    },
+    {
+      "id": "n4_kuuki",
+      "word": "空気",
+      "reading": "くうき",
+      "key": "空気\tくうき",
+      "jmdictSeq": "1245470"
+    },
+    {
+      "id": "n4_kuukou",
+      "word": "空港",
+      "reading": "くうこう",
+      "key": "空港\tくうこう",
+      "jmdictSeq": "1245570"
+    },
+    {
+      "id": "n4_kusa",
+      "word": "草",
+      "reading": "くさ",
+      "key": "草\tくさ",
+      "jmdictSeq": "1401910"
+    },
+    {
+      "id": "n4_kudasaru",
+      "word": "くださる",
+      "reading": "くださる",
+      "key": "くださる\tくださる",
+      "jmdictSeq": "1184280"
+    },
+    {
+      "id": "n4_kubi",
+      "word": "首",
+      "reading": "くび",
+      "key": "首\tくび",
+      "jmdictSeq": "1592270"
+    },
+    {
+      "id": "n4_kumo",
+      "word": "雲",
+      "reading": "くも",
+      "key": "雲\tくも",
+      "jmdictSeq": "1173100"
+    },
+    {
+      "id": "n4_kuraberu",
+      "word": "比べる",
+      "reading": "くらべる",
+      "key": "比べる\tくらべる",
+      "jmdictSeq": "1483540"
+    },
+    {
+      "id": "n4_kureru",
+      "word": "呉れる",
+      "reading": "くれる",
+      "key": "呉れる\tくれる",
+      "jmdictSeq": "1269130"
+    },
+    {
+      "id": "n4_kureru_2",
+      "word": "暮れる",
+      "reading": "くれる",
+      "key": "暮れる\tくれる",
+      "jmdictSeq": "1514960"
+    },
+    {
+      "id": "n4_kun",
+      "word": "君",
+      "reading": "くん",
+      "key": "君\tくん",
+      "jmdictSeq": "1247260"
+    },
+    {
+      "id": "n4_ke",
+      "word": "毛",
+      "reading": "け",
+      "key": "毛\tけ",
+      "jmdictSeq": "1533820"
+    },
+    {
+      "id": "n4_keikaku",
+      "word": "計画",
+      "reading": "けいかく",
+      "key": "計画\tけいかく",
+      "jmdictSeq": "1252090"
+    },
+    {
+      "id": "n4_keiken",
+      "word": "経験",
+      "reading": "けいけん",
+      "key": "経験\tけいけん",
+      "jmdictSeq": "1251270"
+    },
+    {
+      "id": "n4_keizai",
+      "word": "経済",
+      "reading": "けいざい",
+      "key": "経済\tけいざい",
+      "jmdictSeq": "1251320"
+    },
+    {
+      "id": "n4_keisatsu",
+      "word": "警察",
+      "reading": "けいさつ",
+      "key": "警察\tけいさつ",
+      "jmdictSeq": "1252390"
+    },
+    {
+      "id": "n4_ke_ki",
+      "word": "ケーキ",
+      "reading": "ケーキ",
+      "key": "ケーキ\tケーキ",
+      "jmdictSeq": "1047860"
+    },
+    {
+      "id": "n4_kega",
+      "word": "怪我",
+      "reading": "けが",
+      "key": "怪我\tけが",
+      "jmdictSeq": "1200220"
+    },
+    {
+      "id": "n4_keshiki",
+      "word": "景色",
+      "reading": "けしき",
+      "key": "景色\tけしき",
+      "jmdictSeq": "1250870"
+    },
+    {
+      "id": "n4_keshigomu",
+      "word": "消しゴム",
+      "reading": "けしゴム",
+      "key": "消しゴム\tけしゴム",
+      "jmdictSeq": "1350080"
+    },
+    {
+      "id": "n4_geshuku",
+      "word": "下宿",
+      "reading": "げしゅく",
+      "key": "下宿\tげしゅく",
+      "jmdictSeq": "1185290"
+    },
+    {
+      "id": "n4_kesshite",
+      "word": "決して",
+      "reading": "けっして",
+      "key": "決して\tけっして",
+      "jmdictSeq": "1254130"
+    },
+    {
+      "id": "n4_keredo",
+      "word": "けれど",
+      "reading": "けれど",
+      "key": "けれど\tけれど",
+      "jmdictSeq": "2853889"
+    },
+    {
+      "id": "n4_keredomo",
+      "word": "けれども",
+      "reading": "けれども",
+      "key": "けれども\tけれども",
+      "jmdictSeq": "2853889"
+    },
+    {
+      "id": "n4_genin",
+      "word": "原因",
+      "reading": "げんいん",
+      "key": "原因\tげんいん",
+      "jmdictSeq": "1261190"
+    },
+    {
+      "id": "n4_kenka",
+      "word": "喧嘩",
+      "reading": "けんか",
+      "key": "喧嘩\tけんか",
+      "jmdictSeq": "1257040"
+    },
+    {
+      "id": "n4_kenkyuu",
+      "word": "研究",
+      "reading": "けんきゅう",
+      "key": "研究\tけんきゅう",
+      "jmdictSeq": "1258520"
+    },
+    {
+      "id": "n4_kenkyuushitsu",
+      "word": "研究室",
+      "reading": "けんきゅうしつ",
+      "key": "研究室\tけんきゅうしつ",
+      "jmdictSeq": "1258570"
+    },
+    {
+      "id": "n4_kenbutsu",
+      "word": "見物",
+      "reading": "けんぶつ",
+      "key": "見物\tけんぶつ",
+      "jmdictSeq": "1260000"
+    },
+    {
+      "id": "n4_ko",
+      "word": "子",
+      "reading": "こ",
+      "key": "子\tこ",
+      "jmdictSeq": "1307770"
+    },
+    {
+      "id": "n4_kougai",
+      "word": "郊外",
+      "reading": "こうがい",
+      "key": "郊外\tこうがい",
+      "jmdictSeq": "1282490"
+    },
+    {
+      "id": "n4_kougi",
+      "word": "講義",
+      "reading": "こうぎ",
+      "key": "講義\tこうぎ",
+      "jmdictSeq": "1282260"
+    },
+    {
+      "id": "n4_kougyou",
+      "word": "工業",
+      "reading": "こうぎょう",
+      "key": "工業\tこうぎょう",
+      "jmdictSeq": "1278040"
+    },
+    {
+      "id": "n4_koukou",
+      "word": "高校",
+      "reading": "こうこう",
+      "key": "高校\tこうこう",
+      "jmdictSeq": "1283500"
+    },
+    {
+      "id": "n4_koukousei",
+      "word": "高校生",
+      "reading": "こうこうせい",
+      "key": "高校生\tこうこうせい",
+      "jmdictSeq": "1283510"
+    },
+    {
+      "id": "n4_koujou",
+      "word": "工場",
+      "reading": "こうじょう",
+      "key": "工場\tこうじょう",
+      "jmdictSeq": "1578700"
+    },
+    {
+      "id": "n4_kouchou",
+      "word": "校長",
+      "reading": "こうちょう",
+      "key": "校長\tこうちょう",
+      "jmdictSeq": "1279590"
+    },
+    {
+      "id": "n4_koutsuu",
+      "word": "交通",
+      "reading": "こうつう",
+      "key": "交通\tこうつう",
+      "jmdictSeq": "1272280"
+    },
+    {
+      "id": "n4_koudou",
+      "word": "講堂",
+      "reading": "こうどう",
+      "key": "講堂\tこうどう",
+      "jmdictSeq": "1282340"
+    },
+    {
+      "id": "n4_koutougakkou",
+      "word": "高等学校",
+      "reading": "こうとうがっこう",
+      "key": "高等学校\tこうとうがっこう",
+      "jmdictSeq": "1283860"
+    },
+    {
+      "id": "n4_koumuin",
+      "word": "公務員",
+      "reading": "こうむいん",
+      "key": "公務員\tこうむいん",
+      "jmdictSeq": "1274820"
+    },
+    {
+      "id": "n4_kokusai",
+      "word": "国際",
+      "reading": "こくさい",
+      "key": "国際\tこくさい",
+      "jmdictSeq": "1286400"
+    },
+    {
+      "id": "n4_kokoro",
+      "word": "心",
+      "reading": "こころ",
+      "key": "心\tこころ",
+      "jmdictSeq": "1360480"
+    },
+    {
+      "id": "n4_goshujin",
+      "word": "ご主人",
+      "reading": "ごしゅじん",
+      "key": "ご主人\tごしゅじん",
+      "jmdictSeq": "1270390"
+    },
+    {
+      "id": "n4_koshou",
+      "word": "故障",
+      "reading": "こしょう",
+      "key": "故障\tこしょう",
+      "jmdictSeq": "1267180"
+    },
+    {
+      "id": "n4_gozonji",
+      "word": "ご存知",
+      "reading": "ごぞんじ",
+      "key": "ご存知\tごぞんじ",
+      "jmdictSeq": "1593570"
+    },
+    {
+      "id": "n4_gochisou",
+      "word": "ごちそう",
+      "reading": "ごちそう",
+      "key": "ごちそう\tごちそう",
+      "jmdictSeq": "1593590"
+    },
+    {
+      "id": "n4_kotori",
+      "word": "小鳥",
+      "reading": "ことり",
+      "key": "小鳥\tことり",
+      "jmdictSeq": "1348530"
+    },
+    {
+      "id": "n4_konoaida",
+      "word": "このあいだ",
+      "reading": "このあいだ",
+      "key": "このあいだ\tこのあいだ",
+      "jmdictSeq": "1004690"
+    },
+    {
+      "id": "n4_konogoro",
+      "word": "このごろ",
+      "reading": "このごろ",
+      "key": "このごろ\tこのごろ",
+      "jmdictSeq": "1004710"
+    },
+    {
+      "id": "n4_komakai",
+      "word": "細かい",
+      "reading": "こまかい",
+      "key": "細かい\tこまかい",
+      "jmdictSeq": "1295530"
+    },
+    {
+      "id": "n4_gomi",
+      "word": "塵",
+      "reading": "ごみ",
+      "key": "塵\tごみ",
+      "jmdictSeq": "1369900"
+    },
+    {
+      "id": "n4_komu",
+      "word": "込む",
+      "reading": "こむ",
+      "key": "込む\tこむ",
+      "jmdictSeq": "1593410"
+    },
+    {
+      "id": "n4_kome",
+      "word": "米",
+      "reading": "こめ",
+      "key": "米\tこめ",
+      "jmdictSeq": "1508750"
+    },
+    {
+      "id": "n4_goranninaru",
+      "word": "ごらんになる",
+      "reading": "ごらんになる",
+      "key": "ごらんになる\tごらんになる",
+      "jmdictSeq": "2217040"
+    },
+    {
+      "id": "n4_korekara",
+      "word": "これから",
+      "reading": "これから",
+      "key": "これから\tこれから",
+      "jmdictSeq": "1004790"
+    },
+    {
+      "id": "n4_kowai",
+      "word": "怖い",
+      "reading": "こわい",
+      "key": "怖い\tこわい",
+      "jmdictSeq": "1593480"
+    },
+    {
+      "id": "n4_kowasu",
+      "word": "壊す",
+      "reading": "こわす",
+      "key": "壊す\tこわす",
+      "jmdictSeq": "1199890"
+    },
+    {
+      "id": "n4_kowareru",
+      "word": "壊れる",
+      "reading": "こわれる",
+      "key": "壊れる\tこわれる",
+      "jmdictSeq": "1199900"
+    },
+    {
+      "id": "n4_konsa_to",
+      "word": "コンサート",
+      "reading": "コンサート",
+      "key": "コンサート\tコンサート",
+      "jmdictSeq": "1051970"
+    },
+    {
+      "id": "n4_kondo",
+      "word": "今度",
+      "reading": "こんど",
+      "key": "今度\tこんど",
+      "jmdictSeq": "1289370"
+    },
+    {
+      "id": "n4_konpyu_ta",
+      "word": "コンピュータ",
+      "reading": "コンピュータ",
+      "key": "コンピュータ\tコンピュータ",
+      "jmdictSeq": "1053350"
+    },
+    {
+      "id": "n4_konpyu_ta_2",
+      "word": "コンピューター",
+      "reading": "コンピューター",
+      "key": "コンピューター\tコンピューター",
+      "jmdictSeq": "1053350"
+    },
+    {
+      "id": "n4_konya",
+      "word": "今夜",
+      "reading": "こんや",
+      "key": "今夜\tこんや",
+      "jmdictSeq": "1289520"
+    },
+    {
+      "id": "n4_saikin",
+      "word": "最近",
+      "reading": "さいきん",
+      "key": "最近\tさいきん",
+      "jmdictSeq": "1293780"
+    },
+    {
+      "id": "n4_saigo",
+      "word": "最後",
+      "reading": "さいご",
+      "key": "最後\tさいご",
+      "jmdictSeq": "1293810"
+    },
+    {
+      "id": "n4_saisho",
+      "word": "最初",
+      "reading": "さいしょ",
+      "key": "最初\tさいしょ",
+      "jmdictSeq": "1293990"
+    },
+    {
+      "id": "n4_saka",
+      "word": "坂",
+      "reading": "さか",
+      "key": "坂\tさか",
+      "jmdictSeq": "1297110"
+    },
+    {
+      "id": "n4_sagasu",
+      "word": "探す",
+      "reading": "さがす",
+      "key": "探す\tさがす",
+      "jmdictSeq": "1593670"
+    },
+    {
+      "id": "n4_sakan",
+      "word": "盛ん",
+      "reading": "さかん",
+      "key": "盛ん\tさかん",
+      "jmdictSeq": "1379750"
+    },
+    {
+      "id": "n4_sageru",
+      "word": "下げる",
+      "reading": "さげる",
+      "key": "下げる\tさげる",
+      "jmdictSeq": "1184170"
+    },
+    {
+      "id": "n4_sashiageru",
+      "word": "差し上げる",
+      "reading": "さしあげる",
+      "key": "差し上げる\tさしあげる",
+      "jmdictSeq": "1291270"
+    },
+    {
+      "id": "n4_sabishii",
+      "word": "寂しい",
+      "reading": "さびしい",
+      "key": "寂しい\tさびしい",
+      "jmdictSeq": "1579720"
+    },
+    {
+      "id": "n4_saraigetsu",
+      "word": "さ来月",
+      "reading": "さらいげつ",
+      "key": "さ来月\tさらいげつ",
+      "jmdictSeq": "1293640"
+    },
+    {
+      "id": "n4_saraishuu",
+      "word": "さ来週",
+      "reading": "さらいしゅう",
+      "key": "さ来週\tさらいしゅう",
+      "jmdictSeq": "1293650"
+    },
+    {
+      "id": "n4_sarada",
+      "word": "サラダ",
+      "reading": "サラダ",
+      "key": "サラダ\tサラダ",
+      "jmdictSeq": "1057850"
+    },
+    {
+      "id": "n4_sawagu",
+      "word": "騒ぐ",
+      "reading": "さわぐ",
+      "key": "騒ぐ\tさわぐ",
+      "jmdictSeq": "1403040"
+    },
+    {
+      "id": "n4_sawaru",
+      "word": "触る",
+      "reading": "さわる",
+      "key": "触る\tさわる",
+      "jmdictSeq": "1357980"
+    },
+    {
+      "id": "n4_sangyou",
+      "word": "産業",
+      "reading": "さんぎょう",
+      "key": "産業\tさんぎょう",
+      "jmdictSeq": "1303770"
+    },
+    {
+      "id": "n4_sandaru",
+      "word": "サンダル",
+      "reading": "サンダル",
+      "key": "サンダル\tサンダル",
+      "jmdictSeq": "1058480"
+    },
+    {
+      "id": "n4_sandoicchi",
+      "word": "サンドイッチ",
+      "reading": "サンドイッチ",
+      "key": "サンドイッチ\tサンドイッチ",
+      "jmdictSeq": "1058580"
+    },
+    {
+      "id": "n4_zannen",
+      "word": "残念",
+      "reading": "ざんねん",
+      "key": "残念\tざんねん",
+      "jmdictSeq": "1304680"
+    },
+    {
+      "id": "n4_shi",
+      "word": "市",
+      "reading": "し",
+      "key": "市\tし",
+      "jmdictSeq": "1308090"
+    },
+    {
+      "id": "n4_ji",
+      "word": "字",
+      "reading": "じ",
+      "key": "字\tじ",
+      "jmdictSeq": "1315130"
+    },
+    {
+      "id": "n4_shiai",
+      "word": "試合",
+      "reading": "しあい",
+      "key": "試合\tしあい",
+      "jmdictSeq": "1312420"
+    },
+    {
+      "id": "n4_shikata",
+      "word": "仕方",
+      "reading": "しかた",
+      "key": "仕方\tしかた",
+      "jmdictSeq": "1594110"
+    },
+    {
+      "id": "n4_shiken",
+      "word": "試験",
+      "reading": "しけん",
+      "key": "試験\tしけん",
+      "jmdictSeq": "1312350"
+    },
+    {
+      "id": "n4_jiko",
+      "word": "事故",
+      "reading": "じこ",
+      "key": "事故\tじこ",
+      "jmdictSeq": "1313850"
+    },
+    {
+      "id": "n4_jishin",
+      "word": "地震",
+      "reading": "じしん",
+      "key": "地震\tじしん",
+      "jmdictSeq": "1421210"
+    },
+    {
+      "id": "n4_jidai",
+      "word": "時代",
+      "reading": "じだい",
+      "key": "時代\tじだい",
+      "jmdictSeq": "1316300"
+    },
+    {
+      "id": "n4_shitagi",
+      "word": "下着",
+      "reading": "したぎ",
+      "key": "下着\tしたぎ",
+      "jmdictSeq": "1185930"
+    },
+    {
+      "id": "n4_shitaku",
+      "word": "支度",
+      "reading": "したく",
+      "key": "支度\tしたく",
+      "jmdictSeq": "1310260"
+    },
+    {
+      "id": "n4_shikkari",
+      "word": "しっかり",
+      "reading": "しっかり",
+      "key": "しっかり\tしっかり",
+      "jmdictSeq": "1594400"
+    },
+    {
+      "id": "n4_shippai",
+      "word": "失敗",
+      "reading": "しっぱい",
+      "key": "失敗\tしっぱい",
+      "jmdictSeq": "1320140"
+    },
+    {
+      "id": "n4_jiten",
+      "word": "辞典",
+      "reading": "じてん",
+      "key": "辞典\tじてん",
+      "jmdictSeq": "1595270"
+    },
+    {
+      "id": "n4_shinamono",
+      "word": "品物",
+      "reading": "しなもの",
+      "key": "品物\tしなもの",
+      "jmdictSeq": "1490670"
+    },
+    {
+      "id": "n4_shibaraku",
+      "word": "しばらく",
+      "reading": "しばらく",
+      "key": "しばらく\tしばらく",
+      "jmdictSeq": "1304420"
+    },
+    {
+      "id": "n4_shima",
+      "word": "島",
+      "reading": "しま",
+      "key": "島\tしま",
+      "jmdictSeq": "1446760"
+    },
+    {
+      "id": "n4_shimin",
+      "word": "市民",
+      "reading": "しみん",
+      "key": "市民\tしみん",
+      "jmdictSeq": "1308690"
+    },
+    {
+      "id": "n4_jimusho",
+      "word": "事務所",
+      "reading": "じむしょ",
+      "key": "事務所\tじむしょ",
+      "jmdictSeq": "1314400"
+    },
+    {
+      "id": "n4_shakai",
+      "word": "社会",
+      "reading": "しゃかい",
+      "key": "社会\tしゃかい",
+      "jmdictSeq": "1322700"
+    },
+    {
+      "id": "n4_shachou",
+      "word": "社長",
+      "reading": "しゃちょう",
+      "key": "社長\tしゃちょう",
+      "jmdictSeq": "1322920"
+    },
+    {
+      "id": "n4_jama",
+      "word": "じゃま",
+      "reading": "じゃま",
+      "key": "じゃま\tじゃま",
+      "jmdictSeq": "1323500"
+    },
+    {
+      "id": "n4_jamu",
+      "word": "ジャム",
+      "reading": "ジャム",
+      "key": "ジャム\tジャム",
+      "jmdictSeq": "1065680"
+    },
+    {
+      "id": "n4_jiyuu",
+      "word": "自由",
+      "reading": "じゆう",
+      "key": "自由\tじゆう",
+      "jmdictSeq": "1318720"
+    },
+    {
+      "id": "n4_shuukan",
+      "word": "習慣",
+      "reading": "しゅうかん",
+      "key": "習慣\tしゅうかん",
+      "jmdictSeq": "1333090"
+    },
+    {
+      "id": "n4_juusho",
+      "word": "住所",
+      "reading": "じゅうしょ",
+      "key": "住所\tじゅうしょ",
+      "jmdictSeq": "1334080"
+    },
+    {
+      "id": "n4_juudou",
+      "word": "柔道",
+      "reading": "じゅうどう",
+      "key": "柔道\tじゅうどう",
+      "jmdictSeq": "1335440"
+    },
+    {
+      "id": "n4_juubun",
+      "word": "十分",
+      "reading": "じゅうぶん",
+      "key": "十分\tじゅうぶん",
+      "jmdictSeq": "1335080"
+    },
+    {
+      "id": "n4_shusseki",
+      "word": "出席",
+      "reading": "しゅっせき",
+      "key": "出席\tしゅっせき",
+      "jmdictSeq": "1339460"
+    },
+    {
+      "id": "n4_shuppatsu",
+      "word": "出発",
+      "reading": "しゅっぱつ",
+      "key": "出発\tしゅっぱつ",
+      "jmdictSeq": "1340000"
+    },
+    {
+      "id": "n4_shumi",
+      "word": "趣味",
+      "reading": "しゅみ",
+      "key": "趣味\tしゅみ",
+      "jmdictSeq": "1329000"
+    },
+    {
+      "id": "n4_junbi",
+      "word": "準備",
+      "reading": "じゅんび",
+      "key": "準備\tじゅんび",
+      "jmdictSeq": "1341670"
+    },
+    {
+      "id": "n4_shoukai",
+      "word": "紹介",
+      "reading": "しょうかい",
+      "key": "紹介\tしょうかい",
+      "jmdictSeq": "1351430"
+    },
+    {
+      "id": "n4_shougakkou",
+      "word": "小学校",
+      "reading": "しょうがっこう",
+      "key": "小学校\tしょうがっこう",
+      "jmdictSeq": "1347870"
+    },
+    {
+      "id": "n4_shousetsu",
+      "word": "小説",
+      "reading": "しょうせつ",
+      "key": "小説\tしょうせつ",
+      "jmdictSeq": "1348430"
+    },
+    {
+      "id": "n4_shoutai",
+      "word": "招待",
+      "reading": "しょうたい",
+      "key": "招待\tしょうたい",
+      "jmdictSeq": "1349610"
+    },
+    {
+      "id": "n4_shouchi",
+      "word": "承知",
+      "reading": "しょうち",
+      "key": "承知\tしょうち",
+      "jmdictSeq": "1349480"
+    },
+    {
+      "id": "n4_shourai",
+      "word": "将来",
+      "reading": "しょうらい",
+      "key": "将来\tしょうらい",
+      "jmdictSeq": "1347710"
+    },
+    {
+      "id": "n4_shokuji",
+      "word": "食事",
+      "reading": "しょくじ",
+      "key": "食事\tしょくじ",
+      "jmdictSeq": "1358490"
+    },
+    {
+      "id": "n4_shokuryouhin",
+      "word": "食料品",
+      "reading": "しょくりょうひん",
+      "key": "食料品\tしょくりょうひん",
+      "jmdictSeq": "1358680"
+    },
+    {
+      "id": "n4_josei",
+      "word": "女性",
+      "reading": "じょせい",
+      "key": "女性\tじょせい",
+      "jmdictSeq": "1345250"
+    },
+    {
+      "id": "n4_shiraseru",
+      "word": "知らせる",
+      "reading": "しらせる",
+      "key": "知らせる\tしらせる",
+      "jmdictSeq": "1420410"
+    },
+    {
+      "id": "n4_shiraberu",
+      "word": "調べる",
+      "reading": "しらべる",
+      "key": "調べる\tしらべる",
+      "jmdictSeq": "1429060"
+    },
+    {
+      "id": "n4_jinkou",
+      "word": "人口",
+      "reading": "じんこう",
+      "key": "人口\tじんこう",
+      "jmdictSeq": "1367300"
+    },
+    {
+      "id": "n4_jinja",
+      "word": "神社",
+      "reading": "じんじゃ",
+      "key": "神社\tじんじゃ",
+      "jmdictSeq": "1364670"
+    },
+    {
+      "id": "n4_shinsetsu",
+      "word": "親切",
+      "reading": "しんせつ",
+      "key": "親切\tしんせつ",
+      "jmdictSeq": "1365250"
+    },
+    {
+      "id": "n4_shinpai",
+      "word": "心配",
+      "reading": "しんぱい",
+      "key": "心配\tしんぱい",
+      "jmdictSeq": "1360930"
+    },
+    {
+      "id": "n4_shinbunsha",
+      "word": "新聞社",
+      "reading": "しんぶんしゃ",
+      "key": "新聞社\tしんぶんしゃ",
+      "jmdictSeq": "1362400"
+    },
+    {
+      "id": "n4_suiei",
+      "word": "水泳",
+      "reading": "すいえい",
+      "key": "水泳\tすいえい",
+      "jmdictSeq": "1371320"
+    },
+    {
+      "id": "n4_suidou",
+      "word": "水道",
+      "reading": "すいどう",
+      "key": "水道\tすいどう",
+      "jmdictSeq": "1371920"
+    },
+    {
+      "id": "n4_zuibun",
+      "word": "ずいぶん",
+      "reading": "ずいぶん",
+      "key": "ずいぶん\tずいぶん",
+      "jmdictSeq": "1372800"
+    },
+    {
+      "id": "n4_suugaku",
+      "word": "数学",
+      "reading": "すうがく",
+      "key": "数学\tすうがく",
+      "jmdictSeq": "1372980"
+    },
+    {
+      "id": "n4_su_tsu",
+      "word": "スーツ",
+      "reading": "スーツ",
+      "key": "スーツ\tスーツ",
+      "jmdictSeq": "1066680"
+    },
+    {
+      "id": "n4_su_tsuke_su",
+      "word": "スーツケース",
+      "reading": "スーツケース",
+      "key": "スーツケース\tスーツケース",
+      "jmdictSeq": "1066690"
+    },
+    {
+      "id": "n4_sugiru",
+      "word": "過ぎる",
+      "reading": "すぎる",
+      "key": "過ぎる\tすぎる",
+      "jmdictSeq": "1195970"
+    },
+    {
+      "id": "n4_suku",
+      "word": "空く",
+      "reading": "すく",
+      "key": "空く\tすく",
+      "jmdictSeq": "1586265"
+    },
+    {
+      "id": "n4_sukuri_n",
+      "word": "スクリーン",
+      "reading": "スクリーン",
+      "key": "スクリーン\tスクリーン",
+      "jmdictSeq": "1068550"
+    },
+    {
+      "id": "n4_sugoi",
+      "word": "凄い",
+      "reading": "すごい",
+      "key": "凄い\tすごい",
+      "jmdictSeq": "1374550"
+    },
+    {
+      "id": "n4_susumu",
+      "word": "進む",
+      "reading": "すすむ",
+      "key": "進む\tすすむ",
+      "jmdictSeq": "1365980"
+    },
+    {
+      "id": "n4_sukkari",
+      "word": "すっかり",
+      "reading": "すっかり",
+      "key": "すっかり\tすっかり",
+      "jmdictSeq": "1006110"
+    },
+    {
+      "id": "n4_sutto",
+      "word": "すっと",
+      "reading": "すっと",
+      "key": "すっと\tすっと",
+      "jmdictSeq": "1006140"
+    },
+    {
+      "id": "n4_sute_ki",
+      "word": "ステーキ",
+      "reading": "ステーキ",
+      "key": "ステーキ\tステーキ",
+      "jmdictSeq": "1070280"
+    },
+    {
+      "id": "n4_suteru",
+      "word": "捨てる",
+      "reading": "すてる",
+      "key": "捨てる\tすてる",
+      "jmdictSeq": "1322320"
+    },
+    {
+      "id": "n4_sutereo",
+      "word": "ステレオ",
+      "reading": "ステレオ",
+      "key": "ステレオ\tステレオ",
+      "jmdictSeq": "1070650"
+    },
+    {
+      "id": "n4_suna",
+      "word": "砂",
+      "reading": "すな",
+      "key": "砂\tすな",
+      "jmdictSeq": "1291500"
+    },
+    {
+      "id": "n4_subarashii",
+      "word": "すばらしい",
+      "reading": "すばらしい",
+      "key": "すばらしい\tすばらしい",
+      "jmdictSeq": "1397300"
+    },
+    {
+      "id": "n4_suberu",
+      "word": "滑る",
+      "reading": "すべる",
+      "key": "滑る\tすべる",
+      "jmdictSeq": "1208640"
+    },
+    {
+      "id": "n4_sumi",
+      "word": "隅",
+      "reading": "すみ",
+      "key": "隅\tすみ",
+      "jmdictSeq": "1246440"
+    },
+    {
+      "id": "n4_suruto",
+      "word": "すると",
+      "reading": "すると",
+      "key": "すると\tすると",
+      "jmdictSeq": "1006280"
+    },
+    {
+      "id": "n4_seikatsu",
+      "word": "生活",
+      "reading": "せいかつ",
+      "key": "生活\tせいかつ",
+      "jmdictSeq": "1378860"
+    },
+    {
+      "id": "n4_seisan",
+      "word": "生産",
+      "reading": "せいさん",
+      "key": "生産\tせいさん",
+      "jmdictSeq": "1378990"
+    },
+    {
+      "id": "n4_seiji",
+      "word": "政治",
+      "reading": "せいじ",
+      "key": "政治\tせいじ",
+      "jmdictSeq": "1375970"
+    },
+    {
+      "id": "n4_seiyou",
+      "word": "西洋",
+      "reading": "せいよう",
+      "key": "西洋\tせいよう",
+      "jmdictSeq": "1381100"
+    },
+    {
+      "id": "n4_sekai",
+      "word": "世界",
+      "reading": "せかい",
+      "key": "世界\tせかい",
+      "jmdictSeq": "1373860"
+    },
+    {
+      "id": "n4_seki",
+      "word": "席",
+      "reading": "せき",
+      "key": "席\tせき",
+      "jmdictSeq": "1382250"
+    },
+    {
+      "id": "n4_setsumei",
+      "word": "説明",
+      "reading": "せつめい",
+      "key": "説明\tせつめい",
+      "jmdictSeq": "1386460"
+    },
+    {
+      "id": "n4_senaka",
+      "word": "背中",
+      "reading": "せなか",
+      "key": "背中\tせなか",
+      "jmdictSeq": "1472800"
+    },
+    {
+      "id": "n4_zehi",
+      "word": "ぜひ",
+      "reading": "ぜひ",
+      "key": "ぜひ\tぜひ",
+      "jmdictSeq": "1374530"
+    },
+    {
+      "id": "n4_sewa",
+      "word": "世話",
+      "reading": "せわ",
+      "key": "世話\tせわ",
+      "jmdictSeq": "1374300"
+    },
+    {
+      "id": "n4_sen",
+      "word": "線",
+      "reading": "せん",
+      "key": "線\tせん",
+      "jmdictSeq": "1391780"
+    },
+    {
+      "id": "n4_zenzen",
+      "word": "全然",
+      "reading": "ぜんぜん",
+      "key": "全然\tぜんぜん",
+      "jmdictSeq": "1395620"
+    },
+    {
+      "id": "n4_sensou",
+      "word": "戦争",
+      "reading": "せんそう",
+      "key": "戦争\tせんそう",
+      "jmdictSeq": "1390360"
+    },
+    {
+      "id": "n4_senpai",
+      "word": "先輩",
+      "reading": "せんぱい",
+      "key": "先輩\tせんぱい",
+      "jmdictSeq": "1388410"
+    },
+    {
+      "id": "n4_soudan",
+      "word": "相談",
+      "reading": "そうだん",
+      "key": "相談\tそうだん",
+      "jmdictSeq": "1401210"
+    },
+    {
+      "id": "n4_sodateru",
+      "word": "育てる",
+      "reading": "そだてる",
+      "key": "育てる\tそだてる",
+      "jmdictSeq": "1160570"
+    },
+    {
+      "id": "n4_sotsugyou",
+      "word": "卒業",
+      "reading": "そつぎょう",
+      "key": "卒業\tそつぎょう",
+      "jmdictSeq": "1405890"
+    },
+    {
+      "id": "n4_sofu",
+      "word": "祖父",
+      "reading": "そふ",
+      "key": "祖父\tそふ",
+      "jmdictSeq": "1396840"
+    },
+    {
+      "id": "n4_sofuto",
+      "word": "ソフト",
+      "reading": "ソフト",
+      "key": "ソフト\tソフト",
+      "jmdictSeq": "1075500"
+    },
+    {
+      "id": "n4_sobo",
+      "word": "祖母",
+      "reading": "そぼ",
+      "key": "祖母\tそぼ",
+      "jmdictSeq": "1396860"
+    },
+    {
+      "id": "n4_sorede",
+      "word": "それで",
+      "reading": "それで",
+      "key": "それで\tそれで",
+      "jmdictSeq": "1007000"
+    },
+    {
+      "id": "n4_soreni",
+      "word": "それに",
+      "reading": "それに",
+      "key": "それに\tそれに",
+      "jmdictSeq": "1007040"
+    },
+    {
+      "id": "n4_sorehodo",
+      "word": "それほど",
+      "reading": "それほど",
+      "key": "それほど\tそれほど",
+      "jmdictSeq": "1007060"
+    },
+    {
+      "id": "n4_sorosoro",
+      "word": "そろそろ",
+      "reading": "そろそろ",
+      "key": "そろそろ\tそろそろ",
+      "jmdictSeq": "1345605"
+    },
+    {
+      "id": "n4_sonna",
+      "word": "そんな",
+      "reading": "そんな",
+      "key": "そんな\tそんな",
+      "jmdictSeq": "1007130"
+    },
+    {
+      "id": "n4_sonnani",
+      "word": "そんなに",
+      "reading": "そんなに",
+      "key": "そんなに\tそんなに",
+      "jmdictSeq": "2008740"
+    },
+    {
+      "id": "n4_taiin",
+      "word": "退院",
+      "reading": "たいいん",
+      "key": "退院\tたいいん",
+      "jmdictSeq": "1411300"
+    },
+    {
+      "id": "n4_daigakusei",
+      "word": "大学生",
+      "reading": "だいがくせい",
+      "key": "大学生\tだいがくせい",
+      "jmdictSeq": "1413260"
+    },
+    {
+      "id": "n4_daiji",
+      "word": "大事",
+      "reading": "だいじ",
+      "key": "大事\tだいじ",
+      "jmdictSeq": "1413940"
+    },
+    {
+      "id": "n4_daitai",
+      "word": "大体",
+      "reading": "だいたい",
+      "key": "大体\tだいたい",
+      "jmdictSeq": "1414470"
+    },
+    {
+      "id": "n4_taipu",
+      "word": "タイプ",
+      "reading": "タイプ",
+      "key": "タイプ\tタイプ",
+      "jmdictSeq": "1075940"
+    },
+    {
+      "id": "n4_daibu",
+      "word": "大分",
+      "reading": "だいぶ",
+      "key": "大分\tだいぶ",
+      "jmdictSeq": "1414920"
+    },
+    {
+      "id": "n4_taifuu",
+      "word": "台風",
+      "reading": "たいふう",
+      "key": "台風\tたいふう",
+      "jmdictSeq": "1596780"
+    },
+    {
+      "id": "n4_taoreru",
+      "word": "倒れる",
+      "reading": "たおれる",
+      "key": "倒れる\tたおれる",
+      "jmdictSeq": "1445790"
+    },
+    {
+      "id": "n4_dakara",
+      "word": "だから",
+      "reading": "だから",
+      "key": "だから\tだから",
+      "jmdictSeq": "1007310"
+    },
+    {
+      "id": "n4_tashika",
+      "word": "確か",
+      "reading": "たしか",
+      "key": "確か\tたしか",
+      "jmdictSeq": "1596930"
+    },
+    {
+      "id": "n4_tasu",
+      "word": "足す",
+      "reading": "たす",
+      "key": "足す\tたす",
+      "jmdictSeq": "1404700"
+    },
+    {
+      "id": "n4_tazuneru",
+      "word": "訪ねる",
+      "reading": "たずねる",
+      "key": "訪ねる\tたずねる",
+      "jmdictSeq": "1518070"
+    },
+    {
+      "id": "n4_tazuneru_2",
+      "word": "尋ねる",
+      "reading": "たずねる",
+      "key": "尋ねる\tたずねる",
+      "jmdictSeq": "1369940"
+    },
+    {
+      "id": "n4_tadashii",
+      "word": "正しい",
+      "reading": "ただしい",
+      "key": "正しい\tただしい",
+      "jmdictSeq": "1376600"
+    },
+    {
+      "id": "n4_tatami",
+      "word": "畳",
+      "reading": "たたみ",
+      "key": "畳\tたたみ",
+      "jmdictSeq": "1356750"
+    },
+    {
+      "id": "n4_tateru",
+      "word": "立てる",
+      "reading": "たてる",
+      "key": "立てる\tたてる",
+      "jmdictSeq": "1551530"
+    },
+    {
+      "id": "n4_tateru_2",
+      "word": "建てる",
+      "reading": "たてる",
+      "key": "建てる\tたてる",
+      "jmdictSeq": "1257330"
+    },
+    {
+      "id": "n4_tatoeba",
+      "word": "例えば",
+      "reading": "たとえば",
+      "key": "例えば\tたとえば",
+      "jmdictSeq": "1556370"
+    },
+    {
+      "id": "n4_tana",
+      "word": "棚",
+      "reading": "たな",
+      "key": "棚\tたな",
+      "jmdictSeq": "1416700"
+    },
+    {
+      "id": "n4_tanoshimi",
+      "word": "楽しみ",
+      "reading": "たのしみ",
+      "key": "楽しみ\tたのしみ",
+      "jmdictSeq": "1207250"
+    },
+    {
+      "id": "n4_tamani",
+      "word": "たまに",
+      "reading": "たまに",
+      "key": "たまに\tたまに",
+      "jmdictSeq": "1634500"
+    },
+    {
+      "id": "n4_dame",
+      "word": "だめ",
+      "reading": "だめ",
+      "key": "だめ\tだめ",
+      "jmdictSeq": "1409110"
+    },
+    {
+      "id": "n4_tariru",
+      "word": "足りる",
+      "reading": "たりる",
+      "key": "足りる\tたりる",
+      "jmdictSeq": "1404740"
+    },
+    {
+      "id": "n4_dansei",
+      "word": "男性",
+      "reading": "だんせい",
+      "key": "男性\tだんせい",
+      "jmdictSeq": "1420160"
+    },
+    {
+      "id": "n4_danbou",
+      "word": "暖房",
+      "reading": "だんぼう",
+      "key": "暖房\tだんぼう",
+      "jmdictSeq": "1419860"
+    },
+    {
+      "id": "n4_chi",
+      "word": "血",
+      "reading": "ち",
+      "key": "血\tち",
+      "jmdictSeq": "1255060"
+    },
+    {
+      "id": "n4_chiekku",
+      "word": "チェック",
+      "reading": "チェック",
+      "key": "チェック\tチェック",
+      "jmdictSeq": "1077550"
+    },
+    {
+      "id": "n4_chikuauto",
+      "word": "チェックアウト",
+      "reading": "チェックアウト",
+      "key": "チェックアウト\tチェックアウト",
+      "jmdictSeq": "1077560"
+    },
+    {
+      "id": "n4_chikuin",
+      "word": "チェックイン",
+      "reading": "チェックイン",
+      "key": "チェックイン\tチェックイン",
+      "jmdictSeq": "1077570"
+    },
+    {
+      "id": "n4_chikara",
+      "word": "力",
+      "reading": "ちから",
+      "key": "力\tちから",
+      "jmdictSeq": "1554820"
+    },
+    {
+      "id": "n4_chittomo",
+      "word": "ちっとも",
+      "reading": "ちっとも",
+      "key": "ちっとも\tちっとも",
+      "jmdictSeq": "1007560"
+    },
+    {
+      "id": "n4_chuui",
+      "word": "注意",
+      "reading": "ちゅうい",
+      "key": "注意\tちゅうい",
+      "jmdictSeq": "1426530"
+    },
+    {
+      "id": "n4_chuugakkou",
+      "word": "中学校",
+      "reading": "ちゅうがっこう",
+      "key": "中学校\tちゅうがっこう",
+      "jmdictSeq": "1423650"
+    },
+    {
+      "id": "n4_chuusha",
+      "word": "注射",
+      "reading": "ちゅうしゃ",
+      "key": "注射\tちゅうしゃ",
+      "jmdictSeq": "1426590"
+    },
+    {
+      "id": "n4_chuushajou",
+      "word": "駐車場",
+      "reading": "ちゅうしゃじょう",
+      "key": "駐車場\tちゅうしゃじょう",
+      "jmdictSeq": "1426920"
+    },
+    {
+      "id": "n4_chiri",
+      "word": "地理",
+      "reading": "ちり",
+      "key": "地理\tちり",
+      "jmdictSeq": "1421540"
+    },
+    {
+      "id": "n4_tsukamaeru",
+      "word": "捕まえる",
+      "reading": "つかまえる",
+      "key": "捕まえる\tつかまえる",
+      "jmdictSeq": "1597780"
+    },
+    {
+      "id": "n4_tsuki",
+      "word": "月",
+      "reading": "つき",
+      "key": "月\tつき",
+      "jmdictSeq": "1255430"
+    },
+    {
+      "id": "n4_tsugou",
+      "word": "都合",
+      "reading": "つごう",
+      "key": "都合\tつごう",
+      "jmdictSeq": "1444980"
+    },
+    {
+      "id": "n4_tsutaeru",
+      "word": "伝える",
+      "reading": "つたえる",
+      "key": "伝える\tつたえる",
+      "jmdictSeq": "1441870"
+    },
+    {
+      "id": "n4_tsuzuku",
+      "word": "続く",
+      "reading": "つづく",
+      "key": "続く\tつづく",
+      "jmdictSeq": "1405790"
+    },
+    {
+      "id": "n4_tsuzukeru",
+      "word": "続ける",
+      "reading": "つづける",
+      "key": "続ける\tつづける",
+      "jmdictSeq": "1405800"
+    },
+    {
+      "id": "n4_tsutsumu",
+      "word": "包む",
+      "reading": "つつむ",
+      "key": "包む\tつつむ",
+      "jmdictSeq": "1584060"
+    },
+    {
+      "id": "n4_tsuru",
+      "word": "釣る",
+      "reading": "つる",
+      "key": "釣る\tつる",
+      "jmdictSeq": "1434120"
+    },
+    {
+      "id": "n4_tsureru",
+      "word": "連れる",
+      "reading": "つれる",
+      "key": "連れる\tつれる",
+      "jmdictSeq": "1559290"
+    },
+    {
+      "id": "n4_teinei",
+      "word": "丁寧",
+      "reading": "ていねい",
+      "key": "丁寧\tていねい",
+      "jmdictSeq": "1427360"
+    },
+    {
+      "id": "n4_tekisuto",
+      "word": "テキスト",
+      "reading": "テキスト",
+      "key": "テキスト\tテキスト",
+      "jmdictSeq": "1079290"
+    },
+    {
+      "id": "n4_tekitou",
+      "word": "適当",
+      "reading": "てきとう",
+      "key": "適当\tてきとう",
+      "jmdictSeq": "1437450"
+    },
+    {
+      "id": "n4_dekirudake",
+      "word": "できるだけ",
+      "reading": "できるだけ",
+      "key": "できるだけ\tできるだけ",
+      "jmdictSeq": "1340460"
+    },
+    {
+      "id": "n4_tetsudau",
+      "word": "手伝う",
+      "reading": "てつだう",
+      "key": "手伝う\tてつだう",
+      "jmdictSeq": "1328190"
+    },
+    {
+      "id": "n4_tenisu",
+      "word": "テニス",
+      "reading": "テニス",
+      "key": "テニス\tテニス",
+      "jmdictSeq": "1080000"
+    },
+    {
+      "id": "n4_tebukuro",
+      "word": "手袋",
+      "reading": "てぶくろ",
+      "key": "手袋\tてぶくろ",
+      "jmdictSeq": "1328090"
+    },
+    {
+      "id": "n4_tera",
+      "word": "寺",
+      "reading": "てら",
+      "key": "寺\tてら",
+      "jmdictSeq": "1315240"
+    },
+    {
+      "id": "n4_ten",
+      "word": "点",
+      "reading": "てん",
+      "key": "点\tてん",
+      "jmdictSeq": "1441390"
+    },
+    {
+      "id": "n4_tenin",
+      "word": "店員",
+      "reading": "てんいん",
+      "key": "店員\tてんいん",
+      "jmdictSeq": "1440670"
+    },
+    {
+      "id": "n4_tenkiyohou",
+      "word": "天気予報",
+      "reading": "てんきよほう",
+      "key": "天気予報\tてんきよほう",
+      "jmdictSeq": "1438770"
+    },
+    {
+      "id": "n4_dentou",
+      "word": "電灯",
+      "reading": "でんとう",
+      "key": "電灯\tでんとう",
+      "jmdictSeq": "1443660"
+    },
+    {
+      "id": "n4_denpou",
+      "word": "電報",
+      "reading": "でんぽう",
+      "key": "電報\tでんぽう",
+      "jmdictSeq": "1443760"
+    },
+    {
+      "id": "n4_tenrankai",
+      "word": "展覧会",
+      "reading": "てんらんかい",
+      "key": "展覧会\tてんらんかい",
+      "jmdictSeq": "1440660"
+    },
+    {
+      "id": "n4_to",
+      "word": "都",
+      "reading": "と",
+      "key": "都\tと",
+      "jmdictSeq": "1621470"
+    },
+    {
+      "id": "n4_dougu",
+      "word": "道具",
+      "reading": "どうぐ",
+      "key": "道具\tどうぐ",
+      "jmdictSeq": "1454180"
+    },
+    {
+      "id": "n4_doubutsuen",
+      "word": "動物園",
+      "reading": "どうぶつえん",
+      "key": "動物園\tどうぶつえん",
+      "jmdictSeq": "1451490"
+    },
+    {
+      "id": "n4_tooku",
+      "word": "遠く",
+      "reading": "とおく",
+      "key": "遠く\tとおく",
+      "jmdictSeq": "1177820"
+    },
+    {
+      "id": "n4_tooru",
+      "word": "通る",
+      "reading": "とおる",
+      "key": "通る\tとおる",
+      "jmdictSeq": "1433030"
+    },
+    {
+      "id": "n4_tokuni",
+      "word": "特に",
+      "reading": "とくに",
+      "key": "特に\tとくに",
+      "jmdictSeq": "1454670"
+    },
+    {
+      "id": "n4_tokubetsu",
+      "word": "特別",
+      "reading": "とくべつ",
+      "key": "特別\tとくべつ",
+      "jmdictSeq": "1455280"
+    },
+    {
+      "id": "n4_tochuu",
+      "word": "途中",
+      "reading": "とちゅう",
+      "key": "途中\tとちゅう",
+      "jmdictSeq": "1582200"
+    },
+    {
+      "id": "n4_tokkyuu",
+      "word": "特急",
+      "reading": "とっきゅう",
+      "key": "特急\tとっきゅう",
+      "jmdictSeq": "1454750"
+    },
+    {
+      "id": "n4_todokeru",
+      "word": "届ける",
+      "reading": "とどける",
+      "key": "届ける\tとどける",
+      "jmdictSeq": "1457210"
+    },
+    {
+      "id": "n4_tomeru",
+      "word": "止める",
+      "reading": "とめる",
+      "key": "止める\tとめる",
+      "jmdictSeq": "1310670"
+    },
+    {
+      "id": "n4_torikaeru",
+      "word": "取り替える",
+      "reading": "とりかえる",
+      "key": "取り替える\tとりかえる",
+      "jmdictSeq": "1326830"
+    },
+    {
+      "id": "n4_dorobou",
+      "word": "泥棒",
+      "reading": "どろぼう",
+      "key": "泥棒\tどろぼう",
+      "jmdictSeq": "1599340"
+    },
+    {
+      "id": "n4_dondon",
+      "word": "どんどん",
+      "reading": "どんどん",
+      "key": "どんどん\tどんどん",
+      "jmdictSeq": "1009320"
+    },
+    {
+      "id": "n4_naosu",
+      "word": "直す",
+      "reading": "なおす",
+      "key": "直す\tなおす",
+      "jmdictSeq": "1599390"
+    },
+    {
+      "id": "n4_naoru",
+      "word": "直る",
+      "reading": "なおる",
+      "key": "直る\tなおる",
+      "jmdictSeq": "2846390"
+    },
+    {
+      "id": "n4_naoru_2",
+      "word": "治る",
+      "reading": "なおる",
+      "key": "治る\tなおる",
+      "jmdictSeq": "1599400"
+    },
+    {
+      "id": "n4_nakunaru",
+      "word": "無くなる",
+      "reading": "なくなる",
+      "key": "無くなる\tなくなる",
+      "jmdictSeq": "1529550"
+    },
+    {
+      "id": "n4_nakunaru_2",
+      "word": "亡くなる",
+      "reading": "なくなる",
+      "key": "亡くなる\tなくなる",
+      "jmdictSeq": "1518540"
+    },
+    {
+      "id": "n4_nageru",
+      "word": "投げる",
+      "reading": "なげる",
+      "key": "投げる\tなげる",
+      "jmdictSeq": "1447000"
+    },
+    {
+      "id": "n4_nasaru",
+      "word": "なさる",
+      "reading": "なさる",
+      "key": "なさる\tなさる",
+      "jmdictSeq": "1157090"
+    },
+    {
+      "id": "n4_narubeku",
+      "word": "なるべく",
+      "reading": "なるべく",
+      "key": "なるべく\tなるべく",
+      "jmdictSeq": "1375620"
+    },
+    {
+      "id": "n4_naruhodo",
+      "word": "なるほど",
+      "reading": "なるほど",
+      "key": "なるほど\tなるほど",
+      "jmdictSeq": "1375820"
+    },
+    {
+      "id": "n4_nareru",
+      "word": "慣れる",
+      "reading": "なれる",
+      "key": "慣れる\tなれる",
+      "jmdictSeq": "1212670"
+    },
+    {
+      "id": "n4_nioi",
+      "word": "におい",
+      "reading": "におい",
+      "key": "におい\tにおい",
+      "jmdictSeq": "1599760"
+    },
+    {
+      "id": "n4_nigai",
+      "word": "苦い",
+      "reading": "にがい",
+      "key": "苦い\tにがい",
+      "jmdictSeq": "1244310"
+    },
+    {
+      "id": "n4_nikaidate",
+      "word": "二階建て",
+      "reading": "にかいだて",
+      "key": "二階建て\tにかいだて",
+      "jmdictSeq": "1599800"
+    },
+    {
+      "id": "n4_nigeru",
+      "word": "逃げる",
+      "reading": "にげる",
+      "key": "逃げる\tにげる",
+      "jmdictSeq": "1450330"
+    },
+    {
+      "id": "n4_nikki",
+      "word": "日記",
+      "reading": "にっき",
+      "key": "日記\tにっき",
+      "jmdictSeq": "1463930"
+    },
+    {
+      "id": "n4_nyuuin",
+      "word": "入院",
+      "reading": "にゅういん",
+      "key": "入院\tにゅういん",
+      "jmdictSeq": "1465720"
+    },
+    {
+      "id": "n4_nyuugaku",
+      "word": "入学",
+      "reading": "にゅうがく",
+      "key": "入学\tにゅうがく",
+      "jmdictSeq": "1465850"
+    },
+    {
+      "id": "n4_niru",
+      "word": "似る",
+      "reading": "にる",
+      "key": "似る\tにる",
+      "jmdictSeq": "1314600"
+    },
+    {
+      "id": "n4_ningyou",
+      "word": "人形",
+      "reading": "にんぎょう",
+      "key": "人形\tにんぎょう",
+      "jmdictSeq": "1367120"
+    },
+    {
+      "id": "n4_nusumu",
+      "word": "盗む",
+      "reading": "ぬすむ",
+      "key": "盗む\tぬすむ",
+      "jmdictSeq": "1448440"
+    },
+    {
+      "id": "n4_nuru",
+      "word": "塗る",
+      "reading": "ぬる",
+      "key": "塗る\tぬる",
+      "jmdictSeq": "1444270"
+    },
+    {
+      "id": "n4_nureru",
+      "word": "ぬれる",
+      "reading": "ぬれる",
+      "key": "ぬれる\tぬれる",
+      "jmdictSeq": "1467620"
+    },
+    {
+      "id": "n4_netsu",
+      "word": "熱",
+      "reading": "ねつ",
+      "key": "熱\tねつ",
+      "jmdictSeq": "1467710"
+    },
+    {
+      "id": "n4_nebou",
+      "word": "寝坊",
+      "reading": "ねぼう",
+      "key": "寝坊\tねぼう",
+      "jmdictSeq": "1360320"
+    },
+    {
+      "id": "n4_nemui",
+      "word": "眠い",
+      "reading": "ねむい",
+      "key": "眠い\tねむい",
+      "jmdictSeq": "1529330"
+    },
+    {
+      "id": "n4_nemuru",
+      "word": "眠る",
+      "reading": "ねむる",
+      "key": "眠る\tねむる",
+      "jmdictSeq": "1529390"
+    },
+    {
+      "id": "n4_nokoru",
+      "word": "残る",
+      "reading": "のこる",
+      "key": "残る\tのこる",
+      "jmdictSeq": "1304510"
+    },
+    {
+      "id": "n4_nodo",
+      "word": "喉",
+      "reading": "のど",
+      "key": "喉\tのど",
+      "jmdictSeq": "1600280"
+    },
+    {
+      "id": "n4_norikaeru",
+      "word": "乗り換える",
+      "reading": "のりかえる",
+      "key": "乗り換える\tのりかえる",
+      "jmdictSeq": "1600470"
+    },
+    {
+      "id": "n4_norimono",
+      "word": "乗り物",
+      "reading": "のりもの",
+      "key": "乗り物\tのりもの",
+      "jmdictSeq": "1600530"
+    },
+    {
+      "id": "n4_ha",
+      "word": "葉",
+      "reading": "は",
+      "key": "葉\tは",
+      "jmdictSeq": "1546550"
+    },
+    {
+      "id": "n4_baai",
+      "word": "場合",
+      "reading": "ばあい",
+      "key": "場合\tばあい",
+      "jmdictSeq": "1355810"
+    },
+    {
+      "id": "n4_pa_to",
+      "word": "パート",
+      "reading": "パート",
+      "key": "パート\tパート",
+      "jmdictSeq": "1100810"
+    },
+    {
+      "id": "n4_bai",
+      "word": "倍",
+      "reading": "ばい",
+      "key": "倍\tばい",
+      "jmdictSeq": "1473230"
+    },
+    {
+      "id": "n4_haiken",
+      "word": "拝見",
+      "reading": "はいけん",
+      "key": "拝見\tはいけん",
+      "jmdictSeq": "1472270"
+    },
+    {
+      "id": "n4_haisha",
+      "word": "歯医者",
+      "reading": "はいしゃ",
+      "key": "歯医者\tはいしゃ",
+      "jmdictSeq": "1313080"
+    },
+    {
+      "id": "n4_hakobu",
+      "word": "運ぶ",
+      "reading": "はこぶ",
+      "key": "運ぶ\tはこぶ",
+      "jmdictSeq": "1172660"
+    },
+    {
+      "id": "n4_hajimeru",
+      "word": "始める",
+      "reading": "はじめる",
+      "key": "始める\tはじめる",
+      "jmdictSeq": "1307550"
+    },
+    {
+      "id": "n4_basho",
+      "word": "場所",
+      "reading": "ばしょ",
+      "key": "場所\tばしょ",
+      "jmdictSeq": "1355850"
+    },
+    {
+      "id": "n4_hazukashii",
+      "word": "恥ずかしい",
+      "reading": "はずかしい",
+      "key": "恥ずかしい\tはずかしい",
+      "jmdictSeq": "1421630"
+    },
+    {
+      "id": "n4_pasuwado",
+      "word": "パスワード",
+      "reading": "パスワード",
+      "key": "パスワード\tパスワード",
+      "jmdictSeq": "1101520"
+    },
+    {
+      "id": "n4_pasokon",
+      "word": "パソコン",
+      "reading": "パソコン",
+      "key": "パソコン\tパソコン",
+      "jmdictSeq": "1101570"
+    },
+    {
+      "id": "n4_hatsuon",
+      "word": "発音",
+      "reading": "はつおん",
+      "key": "発音\tはつおん",
+      "jmdictSeq": "1477170"
+    },
+    {
+      "id": "n4_hakkiri",
+      "word": "はっきり",
+      "reading": "はっきり",
+      "key": "はっきり\tはっきり",
+      "jmdictSeq": "1010150"
+    },
+    {
+      "id": "n4_hanami",
+      "word": "花見",
+      "reading": "はなみ",
+      "key": "花見\tはなみ",
+      "jmdictSeq": "1194660"
+    },
+    {
+      "id": "n4_hayashi",
+      "word": "林",
+      "reading": "はやし",
+      "key": "林\tはやし",
+      "jmdictSeq": "1555440"
+    },
+    {
+      "id": "n4_harau",
+      "word": "払う",
+      "reading": "はらう",
+      "key": "払う\tはらう",
+      "jmdictSeq": "1501620"
+    },
+    {
+      "id": "n4_bangumi",
+      "word": "番組",
+      "reading": "ばんぐみ",
+      "key": "番組\tばんぐみ",
+      "jmdictSeq": "1482340"
+    },
+    {
+      "id": "n4_hantai",
+      "word": "反対",
+      "reading": "はんたい",
+      "key": "反対\tはんたい",
+      "jmdictSeq": "1480670"
+    },
+    {
+      "id": "n4_handobaggu",
+      "word": "ハンドバッグ",
+      "reading": "ハンドバッグ",
+      "key": "ハンドバッグ\tハンドバッグ",
+      "jmdictSeq": "1096770"
+    },
+    {
+      "id": "n4_hi",
+      "word": "日",
+      "reading": "ひ",
+      "key": "日\tひ",
+      "jmdictSeq": "1463770"
+    },
+    {
+      "id": "n4_hi_2",
+      "word": "火",
+      "reading": "ひ",
+      "key": "火\tひ",
+      "jmdictSeq": "1193610"
+    },
+    {
+      "id": "n4_piano",
+      "word": "ピアノ",
+      "reading": "ピアノ",
+      "key": "ピアノ\tピアノ",
+      "jmdictSeq": "1106400"
+    },
+    {
+      "id": "n4_hieru",
+      "word": "冷える",
+      "reading": "ひえる",
+      "key": "冷える\tひえる",
+      "jmdictSeq": "1556630"
+    },
+    {
+      "id": "n4_hikari",
+      "word": "光",
+      "reading": "ひかり",
+      "key": "光\tひかり",
+      "jmdictSeq": "1272780"
+    },
+    {
+      "id": "n4_hikaru",
+      "word": "光る",
+      "reading": "ひかる",
+      "key": "光る\tひかる",
+      "jmdictSeq": "1272820"
+    },
+    {
+      "id": "n4_hikidashi",
+      "word": "引き出し",
+      "reading": "ひきだし",
+      "key": "引き出し\tひきだし",
+      "jmdictSeq": "1601650"
+    },
+    {
+      "id": "n4_hikidasu",
+      "word": "引き出す",
+      "reading": "ひきだす",
+      "key": "引き出す\tひきだす",
+      "jmdictSeq": "1601660"
+    },
+    {
+      "id": "n4_hige",
+      "word": "髭",
+      "reading": "ひげ",
+      "key": "髭\tひげ",
+      "jmdictSeq": "1601810"
+    },
+    {
+      "id": "n4_hikoujou",
+      "word": "飛行場",
+      "reading": "ひこうじょう",
+      "key": "飛行場\tひこうじょう",
+      "jmdictSeq": "1485520"
+    },
+    {
+      "id": "n4_hisashiburi",
+      "word": "久しぶり",
+      "reading": "ひさしぶり",
+      "key": "久しぶり\tひさしぶり",
+      "jmdictSeq": "1227370"
+    },
+    {
+      "id": "n4_bijutsukan",
+      "word": "美術館",
+      "reading": "びじゅつかん",
+      "key": "美術館\tびじゅつかん",
+      "jmdictSeq": "1486460"
+    },
+    {
+      "id": "n4_hijouni",
+      "word": "非常に",
+      "reading": "ひじょうに",
+      "key": "非常に\tひじょうに",
+      "jmdictSeq": "1484930"
+    },
+    {
+      "id": "n4_bikkuri",
+      "word": "びっくり",
+      "reading": "びっくり",
+      "key": "びっくり\tびっくり",
+      "jmdictSeq": "1226360"
+    },
+    {
+      "id": "n4_hikkosu",
+      "word": "引っ越す",
+      "reading": "ひっこす",
+      "key": "引っ越す\tひっこす",
+      "jmdictSeq": "1169340"
+    },
+    {
+      "id": "n4_hitsuyou",
+      "word": "必要",
+      "reading": "ひつよう",
+      "key": "必要\tひつよう",
+      "jmdictSeq": "1487660"
+    },
+    {
+      "id": "n4_hidoi",
+      "word": "ひどい",
+      "reading": "ひどい",
+      "key": "ひどい\tひどい",
+      "jmdictSeq": "1602060"
+    },
+    {
+      "id": "n4_hiraku",
+      "word": "開く",
+      "reading": "ひらく",
+      "key": "開く\tひらく",
+      "jmdictSeq": "1202440"
+    },
+    {
+      "id": "n4_hiruma",
+      "word": "昼間",
+      "reading": "ひるま",
+      "key": "昼間\tひるま",
+      "jmdictSeq": "1581710"
+    },
+    {
+      "id": "n4_hiruyasumi",
+      "word": "昼休み",
+      "reading": "ひるやすみ",
+      "key": "昼休み\tひるやすみ",
+      "jmdictSeq": "1426290"
+    },
+    {
+      "id": "n4_hirou",
+      "word": "拾う",
+      "reading": "ひろう",
+      "key": "拾う\tひろう",
+      "jmdictSeq": "1332570"
+    },
+    {
+      "id": "n4_fakkusu",
+      "word": "ファックス",
+      "reading": "ファックス",
+      "key": "ファックス\tファックス",
+      "jmdictSeq": "1108180"
+    },
+    {
+      "id": "n4_fueru",
+      "word": "増える",
+      "reading": "ふえる",
+      "key": "増える\tふえる",
+      "jmdictSeq": "1602440"
+    },
+    {
+      "id": "n4_fukai",
+      "word": "深い",
+      "reading": "ふかい",
+      "key": "深い\tふかい",
+      "jmdictSeq": "1362640"
+    },
+    {
+      "id": "n4_fukuzatsu",
+      "word": "複雑",
+      "reading": "ふくざつ",
+      "key": "複雑\tふくざつ",
+      "jmdictSeq": "1501350"
+    },
+    {
+      "id": "n4_fukushuu",
+      "word": "復習",
+      "reading": "ふくしゅう",
+      "key": "復習\tふくしゅう",
+      "jmdictSeq": "1500800"
+    },
+    {
+      "id": "n4_buchou",
+      "word": "部長",
+      "reading": "ぶちょう",
+      "key": "部長\tぶちょう",
+      "jmdictSeq": "1499460"
+    },
+    {
+      "id": "n4_futsuu",
+      "word": "普通",
+      "reading": "ふつう",
+      "key": "普通\tふつう",
+      "jmdictSeq": "1497190"
+    },
+    {
+      "id": "n4_budou",
+      "word": "葡萄",
+      "reading": "ぶどう",
+      "key": "葡萄\tぶどう",
+      "jmdictSeq": "1499230"
+    },
+    {
+      "id": "n4_futoru",
+      "word": "太る",
+      "reading": "ふとる",
+      "key": "太る\tふとる",
+      "jmdictSeq": "1408220"
+    },
+    {
+      "id": "n4_futon",
+      "word": "布団",
+      "reading": "ふとん",
+      "key": "布団\tふとん",
+      "jmdictSeq": "1496890"
+    },
+    {
+      "id": "n4_fune",
+      "word": "舟",
+      "reading": "ふね",
+      "key": "舟\tふね",
+      "jmdictSeq": "1602800"
+    },
+    {
+      "id": "n4_fuben",
+      "word": "不便",
+      "reading": "ふべん",
+      "key": "不便\tふべん",
+      "jmdictSeq": "1494860"
+    },
+    {
+      "id": "n4_fumu",
+      "word": "踏む",
+      "reading": "ふむ",
+      "key": "踏む\tふむ",
+      "jmdictSeq": "1450270"
+    },
+    {
+      "id": "n4_furidasu",
+      "word": "降り出す",
+      "reading": "ふりだす",
+      "key": "降り出す\tふりだす",
+      "jmdictSeq": "1282770"
+    },
+    {
+      "id": "n4_purezento",
+      "word": "プレゼント",
+      "reading": "プレゼント",
+      "key": "プレゼント\tプレゼント",
+      "jmdictSeq": "1116840"
+    },
+    {
+      "id": "n4_bunka",
+      "word": "文化",
+      "reading": "ぶんか",
+      "key": "文化\tぶんか",
+      "jmdictSeq": "1505120"
+    },
+    {
+      "id": "n4_bungaku",
+      "word": "文学",
+      "reading": "ぶんがく",
+      "key": "文学\tぶんがく",
+      "jmdictSeq": "1505190"
+    },
+    {
+      "id": "n4_bunpou",
+      "word": "文法",
+      "reading": "ぶんぽう",
+      "key": "文法\tぶんぽう",
+      "jmdictSeq": "1505600"
+    },
+    {
+      "id": "n4_betsu",
+      "word": "別",
+      "reading": "べつ",
+      "key": "別\tべつ",
+      "jmdictSeq": "1509430"
+    },
+    {
+      "id": "n4_hen",
+      "word": "変",
+      "reading": "へん",
+      "key": "変\tへん",
+      "jmdictSeq": "1510640"
+    },
+    {
+      "id": "n4_henji",
+      "word": "返事",
+      "reading": "へんじ",
+      "key": "返事\tへんじ",
+      "jmdictSeq": "1512220"
+    },
+    {
+      "id": "n4_boueki",
+      "word": "貿易",
+      "reading": "ぼうえき",
+      "key": "貿易\tぼうえき",
+      "jmdictSeq": "1520120"
+    },
+    {
+      "id": "n4_housou",
+      "word": "放送",
+      "reading": "ほうそう",
+      "key": "放送\tほうそう",
+      "jmdictSeq": "1516750"
+    },
+    {
+      "id": "n4_houritsu",
+      "word": "法律",
+      "reading": "ほうりつ",
+      "key": "法律\tほうりつ",
+      "jmdictSeq": "1517480"
+    },
+    {
+      "id": "n4_boku",
+      "word": "僕",
+      "reading": "ぼく",
+      "key": "僕\tぼく",
+      "jmdictSeq": "1521400"
+    },
+    {
+      "id": "n4_hoshi",
+      "word": "星",
+      "reading": "ほし",
+      "key": "星\tほし",
+      "jmdictSeq": "1376310"
+    },
+    {
+      "id": "n4_hodo",
+      "word": "程",
+      "reading": "ほど",
+      "key": "程\tほど",
+      "jmdictSeq": "1436510"
+    },
+    {
+      "id": "n4_hotondo",
+      "word": "ほとんど",
+      "reading": "ほとんど",
+      "key": "ほとんど\tほとんど",
+      "jmdictSeq": "1522050"
+    },
+    {
+      "id": "n4_honyaku",
+      "word": "翻訳",
+      "reading": "ほんやく",
+      "key": "翻訳\tほんやく",
+      "jmdictSeq": "1523400"
+    },
+    {
+      "id": "n4_mairu",
+      "word": "参る",
+      "reading": "まいる",
+      "key": "参る\tまいる",
+      "jmdictSeq": "1302070"
+    },
+    {
+      "id": "n4_makeru",
+      "word": "負ける",
+      "reading": "まける",
+      "key": "負ける\tまける",
+      "jmdictSeq": "1497980"
+    },
+    {
+      "id": "n4_mazu",
+      "word": "先ず",
+      "reading": "まず",
+      "key": "先ず\tまず",
+      "jmdictSeq": "1387240"
+    },
+    {
+      "id": "n4_mataha",
+      "word": "または",
+      "reading": "または",
+      "key": "または\tまたは",
+      "jmdictSeq": "1524990"
+    },
+    {
+      "id": "n4_machigaeru",
+      "word": "間違える",
+      "reading": "まちがえる",
+      "key": "間違える\tまちがえる",
+      "jmdictSeq": "1215330"
+    },
+    {
+      "id": "n4_maniau",
+      "word": "間に合う",
+      "reading": "まにあう",
+      "key": "間に合う\tまにあう",
+      "jmdictSeq": "1215260"
+    },
+    {
+      "id": "n4_mawari",
+      "word": "周り",
+      "reading": "まわり",
+      "key": "周り\tまわり",
+      "jmdictSeq": "1604290"
+    },
+    {
+      "id": "n4_mawaru",
+      "word": "回る",
+      "reading": "まわる",
+      "key": "回る\tまわる",
+      "jmdictSeq": "1604300"
+    },
+    {
+      "id": "n4_manga",
+      "word": "漫画",
+      "reading": "まんが",
+      "key": "漫画\tまんが",
+      "jmdictSeq": "1526920"
+    },
+    {
+      "id": "n4_mannaka",
+      "word": "真ん中",
+      "reading": "まんなか",
+      "key": "真ん中\tまんなか",
+      "jmdictSeq": "1604350"
+    },
+    {
+      "id": "n4_mieru",
+      "word": "見える",
+      "reading": "みえる",
+      "key": "見える\tみえる",
+      "jmdictSeq": "1259140"
+    },
+    {
+      "id": "n4_mizuumi",
+      "word": "湖",
+      "reading": "みずうみ",
+      "key": "湖\tみずうみ",
+      "jmdictSeq": "1267280"
+    },
+    {
+      "id": "n4_miso",
+      "word": "味噌",
+      "reading": "みそ",
+      "key": "味噌\tみそ",
+      "jmdictSeq": "1527040"
+    },
+    {
+      "id": "n4_mitsukaru",
+      "word": "見つかる",
+      "reading": "みつかる",
+      "key": "見つかる\tみつかる",
+      "jmdictSeq": "1604550"
+    },
+    {
+      "id": "n4_mitsukeru",
+      "word": "見つける",
+      "reading": "みつける",
+      "key": "見つける\tみつける",
+      "jmdictSeq": "1604570"
+    },
+    {
+      "id": "n4_minato",
+      "word": "港",
+      "reading": "みなと",
+      "key": "港\tみなと",
+      "jmdictSeq": "1279990"
+    },
+    {
+      "id": "n4_mukau",
+      "word": "向かう",
+      "reading": "むかう",
+      "key": "向かう\tむかう",
+      "jmdictSeq": "1604800"
+    },
+    {
+      "id": "n4_mukaeru",
+      "word": "迎える",
+      "reading": "むかえる",
+      "key": "迎える\tむかえる",
+      "jmdictSeq": "1253190"
+    },
+    {
+      "id": "n4_mukashi",
+      "word": "昔",
+      "reading": "むかし",
+      "key": "昔\tむかし",
+      "jmdictSeq": "1382370"
+    },
+    {
+      "id": "n4_mushi",
+      "word": "虫",
+      "reading": "むし",
+      "key": "虫\tむし",
+      "jmdictSeq": "1426680"
+    },
+    {
+      "id": "n4_musuko",
+      "word": "息子",
+      "reading": "むすこ",
+      "key": "息子\tむすこ",
+      "jmdictSeq": "1404390"
+    },
+    {
+      "id": "n4_musume",
+      "word": "娘",
+      "reading": "むすめ",
+      "key": "娘\tむすめ",
+      "jmdictSeq": "1531190"
+    },
+    {
+      "id": "n4_muri",
+      "word": "無理",
+      "reading": "むり",
+      "key": "無理\tむり",
+      "jmdictSeq": "1530970"
+    },
+    {
+      "id": "n4_meshiagaru",
+      "word": "召し上がる",
+      "reading": "めしあがる",
+      "key": "召し上がる\tめしあがる",
+      "jmdictSeq": "1346370"
+    },
+    {
+      "id": "n4_mezurashii",
+      "word": "珍しい",
+      "reading": "めずらしい",
+      "key": "珍しい\tめずらしい",
+      "jmdictSeq": "1431850"
+    },
+    {
+      "id": "n4_moushiageru",
+      "word": "申し上げる",
+      "reading": "もうしあげる",
+      "key": "申し上げる\tもうしあげる",
+      "jmdictSeq": "1362950"
+    },
+    {
+      "id": "n4_mousu",
+      "word": "申す",
+      "reading": "もうす",
+      "key": "申す\tもうす",
+      "jmdictSeq": "1363090"
+    },
+    {
+      "id": "n4_mousugu",
+      "word": "もうすぐ",
+      "reading": "もうすぐ",
+      "key": "もうすぐ\tもうすぐ",
+      "jmdictSeq": "2015610"
+    },
+    {
+      "id": "n4_mochiron",
+      "word": "もちろん",
+      "reading": "もちろん",
+      "key": "もちろん\tもちろん",
+      "jmdictSeq": "1535780"
+    },
+    {
+      "id": "n4_mottomo",
+      "word": "最も",
+      "reading": "もっとも",
+      "key": "最も\tもっとも",
+      "jmdictSeq": "1293700"
+    },
+    {
+      "id": "n4_modoru",
+      "word": "戻る",
+      "reading": "もどる",
+      "key": "戻る\tもどる",
+      "jmdictSeq": "1535880"
+    },
+    {
+      "id": "n4_momen",
+      "word": "木綿",
+      "reading": "もめん",
+      "key": "木綿\tもめん",
+      "jmdictSeq": "1534870"
+    },
+    {
+      "id": "n4_morau",
+      "word": "もらう",
+      "reading": "もらう",
+      "key": "もらう\tもらう",
+      "jmdictSeq": "1535910"
+    },
+    {
+      "id": "n4_mori",
+      "word": "森",
+      "reading": "もり",
+      "key": "森\tもり",
+      "jmdictSeq": "1362490"
+    },
+    {
+      "id": "n4_yaku",
+      "word": "焼く",
+      "reading": "やく",
+      "key": "焼く\tやく",
+      "jmdictSeq": "1350600"
+    },
+    {
+      "id": "n4_yakusoku",
+      "word": "約束",
+      "reading": "やくそく",
+      "key": "約束\tやくそく",
+      "jmdictSeq": "1538130"
+    },
+    {
+      "id": "n4_yakunitatsu",
+      "word": "役に立つ",
+      "reading": "やくにたつ",
+      "key": "役に立つ\tやくにたつ",
+      "jmdictSeq": "1537980"
+    },
+    {
+      "id": "n4_yakeru",
+      "word": "焼ける",
+      "reading": "やける",
+      "key": "焼ける\tやける",
+      "jmdictSeq": "1350610"
+    },
+    {
+      "id": "n4_yasashii",
+      "word": "優しい",
+      "reading": "やさしい",
+      "key": "優しい\tやさしい",
+      "jmdictSeq": "1539040"
+    },
+    {
+      "id": "n4_yaseru",
+      "word": "痩せる",
+      "reading": "やせる",
+      "key": "痩せる\tやせる",
+      "jmdictSeq": "1605510"
+    },
+    {
+      "id": "n4_yatto",
+      "word": "やっと",
+      "reading": "やっと",
+      "key": "やっと\tやっと",
+      "jmdictSeq": "1012800"
+    },
+    {
+      "id": "n4_yappari",
+      "word": "やっぱり",
+      "reading": "やっぱり",
+      "key": "やっぱり\tやっぱり",
+      "jmdictSeq": "1012810"
+    },
+    {
+      "id": "n4_yahari",
+      "word": "やはり",
+      "reading": "やはり",
+      "key": "やはり\tやはり",
+      "jmdictSeq": "2772770"
+    },
+    {
+      "id": "n4_yamu",
+      "word": "止む",
+      "reading": "やむ",
+      "key": "止む\tやむ",
+      "jmdictSeq": "1310640"
+    },
+    {
+      "id": "n4_yawarakai",
+      "word": "柔らかい",
+      "reading": "やわらかい",
+      "key": "柔らかい\tやわらかい",
+      "jmdictSeq": "1605630"
+    },
+    {
+      "id": "n4_yu",
+      "word": "湯",
+      "reading": "ゆ",
+      "key": "湯\tゆ",
+      "jmdictSeq": "1448580"
+    },
+    {
+      "id": "n4_yushutsu",
+      "word": "輸出",
+      "reading": "ゆしゅつ",
+      "key": "輸出\tゆしゅつ",
+      "jmdictSeq": "1538820"
+    },
+    {
+      "id": "n4_yunyuu",
+      "word": "輸入",
+      "reading": "ゆにゅう",
+      "key": "輸入\tゆにゅう",
+      "jmdictSeq": "1538870"
+    },
+    {
+      "id": "n4_yubi",
+      "word": "指",
+      "reading": "ゆび",
+      "key": "指\tゆび",
+      "jmdictSeq": "1309650"
+    },
+    {
+      "id": "n4_yubiwa",
+      "word": "指輪",
+      "reading": "ゆびわ",
+      "key": "指輪\tゆびわ",
+      "jmdictSeq": "1310050"
+    },
+    {
+      "id": "n4_yume",
+      "word": "夢",
+      "reading": "ゆめ",
+      "key": "夢\tゆめ",
+      "jmdictSeq": "1529410"
+    },
+    {
+      "id": "n4_yureru",
+      "word": "揺れる",
+      "reading": "ゆれる",
+      "key": "揺れる\tゆれる",
+      "jmdictSeq": "1545710"
+    },
+    {
+      "id": "n4_you",
+      "word": "用",
+      "reading": "よう",
+      "key": "用\tよう",
+      "jmdictSeq": "1546200"
+    },
+    {
+      "id": "n4_youi",
+      "word": "用意",
+      "reading": "ようい",
+      "key": "用意\tようい",
+      "jmdictSeq": "1546220"
+    },
+    {
+      "id": "n4_youji",
+      "word": "用事",
+      "reading": "ようじ",
+      "key": "用事\tようじ",
+      "jmdictSeq": "1546300"
+    },
+    {
+      "id": "n4_yogoreru",
+      "word": "汚れる",
+      "reading": "よごれる",
+      "key": "汚れる\tよごれる",
+      "jmdictSeq": "1179005"
+    },
+    {
+      "id": "n4_yoshuu",
+      "word": "予習",
+      "reading": "よしゅう",
+      "key": "予習\tよしゅう",
+      "jmdictSeq": "1543070"
+    },
+    {
+      "id": "n4_yotei",
+      "word": "予定",
+      "reading": "よてい",
+      "key": "予定\tよてい",
+      "jmdictSeq": "1543240"
+    },
+    {
+      "id": "n4_yoyaku",
+      "word": "予約",
+      "reading": "よやく",
+      "key": "予約\tよやく",
+      "jmdictSeq": "1543750"
+    },
+    {
+      "id": "n4_yoru",
+      "word": "寄る",
+      "reading": "よる",
+      "key": "寄る\tよる",
+      "jmdictSeq": "1219680"
+    },
+    {
+      "id": "n4_yorokobu",
+      "word": "喜ぶ",
+      "reading": "よろこぶ",
+      "key": "喜ぶ\tよろこぶ",
+      "jmdictSeq": "1218760"
+    },
+    {
+      "id": "n4_yoroshii",
+      "word": "よろしい",
+      "reading": "よろしい",
+      "key": "よろしい\tよろしい",
+      "jmdictSeq": "1224880"
+    },
+    {
+      "id": "n4_ripo_to",
+      "word": "リポート",
+      "reading": "リポート",
+      "key": "リポート\tリポート",
+      "jmdictSeq": "1145990"
+    },
+    {
+      "id": "n4_riyuu",
+      "word": "理由",
+      "reading": "りゆう",
+      "key": "理由\tりゆう",
+      "jmdictSeq": "1550140"
+    },
+    {
+      "id": "n4_riyou",
+      "word": "利用",
+      "reading": "りよう",
+      "key": "利用\tりよう",
+      "jmdictSeq": "1549660"
+    },
+    {
+      "id": "n4_ryouhou",
+      "word": "両方",
+      "reading": "りょうほう",
+      "key": "両方\tりょうほう",
+      "jmdictSeq": "1554010"
+    },
+    {
+      "id": "n4_ryokan",
+      "word": "旅館",
+      "reading": "りょかん",
+      "key": "旅館\tりょかん",
+      "jmdictSeq": "1553130"
+    },
+    {
+      "id": "n4_rusu",
+      "word": "留守",
+      "reading": "るす",
+      "key": "留守\tるす",
+      "jmdictSeq": "1552760"
+    },
+    {
+      "id": "n4_reibou",
+      "word": "冷房",
+      "reading": "れいぼう",
+      "key": "冷房\tれいぼう",
+      "jmdictSeq": "1557290"
+    },
+    {
+      "id": "n4_rekishi",
+      "word": "歴史",
+      "reading": "れきし",
+      "key": "歴史\tれきし",
+      "jmdictSeq": "1558050"
+    },
+    {
+      "id": "n4_reji",
+      "word": "レジ",
+      "reading": "レジ",
+      "key": "レジ\tレジ",
+      "jmdictSeq": "1145130"
+    },
+    {
+      "id": "n4_reshito",
+      "word": "レシート",
+      "reading": "レシート",
+      "key": "レシート\tレシート",
+      "jmdictSeq": "1145060"
+    },
+    {
+      "id": "n4_repo_to",
+      "word": "レポート",
+      "reading": "レポート",
+      "key": "レポート\tレポート",
+      "jmdictSeq": "1145990"
+    },
+    {
+      "id": "n4_renraku",
+      "word": "連絡",
+      "reading": "れんらく",
+      "key": "連絡\tれんらく",
+      "jmdictSeq": "1559900"
+    },
+    {
+      "id": "n4_wa_puro",
+      "word": "ワープロ",
+      "reading": "ワープロ",
+      "key": "ワープロ\tワープロ",
+      "jmdictSeq": "1148520"
+    },
+    {
+      "id": "n4_wakasu",
+      "word": "沸かす",
+      "reading": "わかす",
+      "key": "沸かす\tわかす",
+      "jmdictSeq": "1501660"
+    },
+    {
+      "id": "n4_wakareru",
+      "word": "別れる",
+      "reading": "わかれる",
+      "key": "別れる\tわかれる",
+      "jmdictSeq": "1606590"
+    },
+    {
+      "id": "n4_waku",
+      "word": "沸く",
+      "reading": "わく",
+      "key": "沸く\tわく",
+      "jmdictSeq": "1606680"
+    },
+    {
+      "id": "n4_wake",
+      "word": "訳",
+      "reading": "わけ",
+      "key": "訳\tわけ",
+      "jmdictSeq": "1538330"
+    },
+    {
+      "id": "n4_wasuremono",
+      "word": "忘れ物",
+      "reading": "わすれもの",
+      "key": "忘れ物\tわすれもの",
+      "jmdictSeq": "1519230"
+    },
+    {
+      "id": "n4_warau",
+      "word": "笑う",
+      "reading": "わらう",
+      "key": "笑う\tわらう",
+      "jmdictSeq": "1351360"
+    },
+    {
+      "id": "n4_wariai",
+      "word": "割合",
+      "reading": "わりあい",
+      "key": "割合\tわりあい",
+      "jmdictSeq": "1606810"
+    },
+    {
+      "id": "n4_wareru",
+      "word": "割れる",
+      "reading": "われる",
+      "key": "割れる\tわれる",
+      "jmdictSeq": "1208020"
+    }
+  ]
+}

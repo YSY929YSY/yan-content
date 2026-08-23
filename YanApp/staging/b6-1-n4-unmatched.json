@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "B6-1 exact word+reading join",
+  "input": "staging/jmdict-eng-3.6.2.json",
+  "target": "N4 words missing jmdictSeq",
+  "counts": {
+    "targets": 615,
+    "auto": 596,
+    "conflict": 19,
+    "unmatched": 0
+  },
+  "entries": []
+}

@@ -1744,21 +1744,28 @@
       {
        "role": "A",
        "jp": "これと、これをお願いします。",
-       "core_vocab": ["n5_kore","n1_onegaishimasu"],
+       "core_vocab": [
+        "n5_kore",
+        "n1_onegaishimasu"
+       ],
        "roma": "Kore to, kore o onegaishimasu.",
        "zh": "这个和这个，麻烦了。"
       },
       {
        "role": "B",
        "jp": "温めますか？",
-       "core_vocab": ["n5_obentou"],
+       "core_vocab": [
+        "n5_obentou"
+       ],
        "roma": "Atatamemasu ka?",
        "zh": "需要加热吗？"
       },
       {
        "role": "A",
        "jp": "はい、お願いします。",
-       "core_vocab": ["n1_onegaishimasu"],
+       "core_vocab": [
+        "n1_onegaishimasu"
+       ],
        "roma": "Hai, onegaishimasu.",
        "zh": "好的，麻烦了。"
       }
@@ -1778,21 +1785,29 @@
       {
        "role": "A",
        "jp": "すみません、水はどこですか？",
-       "core_vocab": ["n3_sumimasen","n5_mizu","n5_doko"],
+       "core_vocab": [
+        "n3_sumimasen",
+        "n5_mizu",
+        "n5_doko"
+       ],
        "roma": "Sumimasen, mizu wa doko desu ka?",
        "zh": "不好意思，水在哪里？"
       },
       {
        "role": "B",
        "jp": "あちらです。",
-       "core_vocab": ["n5_achira"],
+       "core_vocab": [
+        "n5_achira"
+       ],
        "roma": "Achira desu.",
        "zh": "在那边。"
       },
       {
        "role": "A",
        "jp": "ありがとうございます。",
-       "core_vocab": ["n3_arigatou"],
+       "core_vocab": [
+        "n3_arigatou"
+       ],
        "roma": "Arigatou gozaimasu.",
        "zh": "谢谢您。"
       }
@@ -1812,7 +1827,10 @@
      "id": 1,
      "type": "core",
      "jp": "ポイントカードはありますか？",
-     "core_vocab": ["n1_pointo","n3_kado"],
+     "core_vocab": [
+      "n1_pointo",
+      "n3_kado"
+     ],
      "roma": "Pointo kādo wa arimasu ka?",
      "zh": "您有积分卡吗？",
      "en": "Do you have a points card?",
@@ -1845,7 +1863,9 @@
      "id": 2,
      "type": "core",
      "jp": "いりません",
-     "core_vocab": ["n5_iru_2"],
+     "core_vocab": [
+      "n5_iru_2"
+     ],
      "roma": "Irimasen",
      "zh": "不需要",
      "en": "No, thank you",
@@ -1871,7 +1891,9 @@
     },
     {
      "id": 3,
-     "core_vocab": ["n5_obentou"],
+     "core_vocab": [
+      "n5_obentou"
+     ],
      "type": "core",
      "jp": "温めますか？",
      "roma": "Atatamemasu ka?",
@@ -1902,7 +1924,9 @@
      "id": 4,
      "type": "core",
      "jp": "温めてください",
-     "core_vocab": ["n5_obentou"],
+     "core_vocab": [
+      "n5_obentou"
+     ],
      "roma": "Atatamete kudasai",
      "zh": "请帮我加热",
      "en": "Please heat it up",
@@ -1930,7 +1954,10 @@
      "id": 5,
      "type": "core",
      "jp": "袋はいりますか？",
-     "core_vocab": ["n3_fukuro","n5_iru_2"],
+     "core_vocab": [
+      "n3_fukuro",
+      "n5_iru_2"
+     ],
      "roma": "Fukuro wa irimasu ka?",
      "zh": "需要袋子吗？",
      "en": "Do you need a bag?",
@@ -1963,7 +1990,10 @@
      "id": 6,
      "type": "support",
      "jp": "カードで払えますか？",
-     "core_vocab": ["n3_kado","n4_harau"],
+     "core_vocab": [
+      "n3_kado",
+      "n4_harau"
+     ],
      "roma": "Kādo de haraemasu ka?",
      "zh": "可以刷卡吗？",
      "en": "Can I pay by card?",
@@ -1995,7 +2025,9 @@
      "id": 306,
      "type": "core",
      "jp": "店内で食べられますか？",
-     "core_vocab": ["n5_obentou"],
+     "core_vocab": [
+      "n5_obentou"
+     ],
      "roma": "Ten'nai de taberaremasu ka?",
      "zh": "可以在里面吃吗？",
      "en": "Can I eat inside?",
@@ -2008,7 +2040,9 @@
      "id": 8,
      "type": "template",
      "jp": "〇〇はどこですか？",
-     "core_vocab": ["n5_doko"],
+     "core_vocab": [
+      "n5_doko"
+     ],
      "roma": "〇〇 wa doko desu ka?",
      "zh": "〇〇在哪里？",
      "en": "Where is 〇〇?",
@@ -2054,7 +2088,9 @@
      "id": 9,
      "type": "template",
      "jp": "〇〇はありますか？",
-     "core_vocab": ["n5_doko"],
+     "core_vocab": [
+      "n5_doko"
+     ],
      "roma": "〇〇 wa arimasu ka?",
      "zh": "有 〇〇 吗？",
      "en": "Do you have 〇〇?",
@@ -2100,7 +2136,9 @@
      "id": 10,
      "type": "flavor",
      "jp": "ありがとうございました",
-     "core_vocab": ["n3_arigatou"],
+     "core_vocab": [
+      "n3_arigatou"
+     ],
      "roma": "Arigatou gozaimashita",
      "zh": "谢谢您（离开时）",
      "en": "Thank you — farewell",
@@ -16014,7 +16052,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1000320"
   },
   {
    "word": "遊ぶ",
@@ -16255,7 +16294,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1483185"
   },
   {
    "word": "暑い",
@@ -16447,7 +16487,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1483185"
   },
   {
    "word": "後",
@@ -16733,7 +16774,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1017760"
   },
   {
    "word": "浴びる",
@@ -17491,7 +17533,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "2845606"
   },
   {
    "word": "行く",
@@ -17576,7 +17619,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1219960"
   },
   {
    "word": "いくら",
@@ -17626,7 +17670,7 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-   "learningBasis": "scene_convenience_reviewed_2026-08-22"
+    "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -18243,7 +18287,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1188890"
   },
   {
    "word": "犬",
@@ -19542,7 +19587,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1001140"
   },
   {
    "word": "駅",
@@ -19642,7 +19688,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1030630"
   },
   {
    "word": "鉛筆",
@@ -20380,7 +20427,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1002320"
   },
   {
    "word": "教える",
@@ -21227,7 +21275,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1002330"
   },
   {
    "word": "伯母さん; 叔母さん",
@@ -21457,7 +21506,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1002120"
   },
   {
    "word": "重い",
@@ -21596,7 +21646,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1002510"
   },
   {
    "word": "泳ぐ",
@@ -22353,7 +22404,7 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-   "learningBasis": "scene_convenience_reviewed_2026-08-22"
+    "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -23007,7 +23058,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1037670"
   },
   {
    "word": "家庭",
@@ -23237,7 +23289,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1484330"
   },
   {
    "word": "紙",
@@ -23335,7 +23388,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1038350"
   },
   {
    "word": "火曜日",
@@ -23623,7 +23677,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1039140"
   },
   {
    "word": "カレンダー",
@@ -23669,7 +23724,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1039220"
   },
   {
    "word": "川; 河",
@@ -24155,7 +24211,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1042820"
   },
   {
    "word": "汚い",
@@ -25695,7 +25752,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1044070"
   },
   {
    "word": "グラム",
@@ -25740,7 +25798,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1046810"
   },
   {
    "word": "来る",
@@ -26711,7 +26770,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1049180"
   },
   {
    "word": "ここ",
@@ -27034,7 +27094,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1004500"
   },
   {
    "word": "こっち",
@@ -27406,7 +27467,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1270590"
   },
   {
    "word": "コピーする",
@@ -27530,7 +27592,7 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-   "learningBasis": "scene_convenience_reviewed_2026-08-22"
+    "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -27708,7 +27770,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1004880"
   },
   {
    "word": "今晩",
@@ -27806,8 +27869,9 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-   "learningBasis": "scene_convenience_reviewed_2026-08-22"
-   }
+    "learningBasis": "scene_convenience_reviewed_2026-08-22"
+   },
+   "jmdictSeq": "1053280"
   },
   {
    "word": "さあ",
@@ -27850,7 +27914,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1005110"
   },
   {
    "word": "財布",
@@ -29413,7 +29478,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1061520"
   },
   {
    "word": "シャワー",
@@ -29466,7 +29532,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1061820"
   },
   {
    "word": "十",
@@ -30139,7 +30206,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1067470"
   },
   {
    "word": "好き",
@@ -30270,7 +30338,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1430620"
   },
   {
    "word": "少し",
@@ -30412,7 +30481,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1070790"
   },
   {
    "word": "スプーン",
@@ -30458,7 +30528,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1072590"
   },
   {
    "word": "スポーツ",
@@ -30504,7 +30575,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1073210"
   },
   {
    "word": "ズボン",
@@ -30560,7 +30632,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1074260"
   },
   {
    "word": "住む",
@@ -30839,7 +30912,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1074270"
   },
   {
    "word": "石鹸",
@@ -31034,7 +31108,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "2839962"
   },
   {
    "word": "千",
@@ -31553,7 +31628,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1006780"
   },
   {
    "word": "そっち",
@@ -31600,7 +31676,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1006780"
   },
   {
    "word": "外",
@@ -31858,7 +31935,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1006980"
   },
   {
    "word": "それでは",
@@ -32380,7 +32458,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1076190"
   },
   {
    "word": "出す",
@@ -32701,7 +32780,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1597150"
   },
   {
    "word": "多分",
@@ -33693,7 +33773,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1163940"
   },
   {
    "word": "一日",
@@ -34150,7 +34231,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1008190"
   },
   {
    "word": "冷たい",
@@ -34343,7 +34425,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1078750"
   },
   {
    "word": "テーブル",
@@ -34389,7 +34472,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1078630"
   },
   {
    "word": "テープレコーダー",
@@ -34429,7 +34513,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1078810"
   },
   {
    "word": "出かける",
@@ -34662,7 +34747,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1079760"
   },
   {
    "word": "では",
@@ -34758,8 +34844,9 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-   "learningBasis": "scene_convenience_reviewed_2026-08-22"
-   }
+    "learningBasis": "scene_convenience_reviewed_2026-08-22"
+   },
+   "jmdictSeq": "1083590"
   },
   {
    "word": "でも",
@@ -34802,7 +34889,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1008460"
   },
   {
    "word": "出る",
@@ -34900,7 +34988,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1080510"
   },
   {
    "word": "天気",
@@ -35190,7 +35279,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1087820"
   },
   {
    "word": "トイレ",
@@ -35236,7 +35326,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1084810"
   },
   {
    "word": "どう",
@@ -35316,7 +35407,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1466940"
   },
   {
    "word": "どうぞ",
@@ -35359,7 +35451,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1189130"
   },
   {
    "word": "動物",
@@ -35449,7 +35542,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1009000"
   },
   {
    "word": "十",
@@ -35736,7 +35830,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1577140"
   },
   {
    "word": "所",
@@ -35919,7 +36014,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1189360"
   },
   {
    "word": "どっち",
@@ -35966,7 +36062,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1189360"
   },
   {
    "word": "とても",
@@ -36011,7 +36108,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1008630"
   },
   {
    "word": "どなた",
@@ -36055,7 +36153,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1189370"
   },
   {
    "word": "隣",
@@ -36573,7 +36672,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1009290"
   },
   {
    "word": "どんな",
@@ -36706,7 +36806,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1089890"
   },
   {
    "word": "中",
@@ -36890,7 +36991,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1229840"
   },
   {
    "word": "無くす",
@@ -36981,7 +37083,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1577120"
   },
   {
    "word": "夏",
@@ -37574,7 +37677,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1463480"
   },
   {
    "word": "肉",
@@ -37811,7 +37915,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1091500"
   },
   {
    "word": "庭",
@@ -38003,7 +38108,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1092820"
   },
   {
    "word": "猫",
@@ -38149,7 +38255,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1093450"
   },
   {
    "word": "登る",
@@ -38438,7 +38545,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1100760"
   },
   {
    "word": "はい",
@@ -39093,7 +39201,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1098620"
   },
   {
    "word": "二十歳",
@@ -40009,7 +40118,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1096420"
   },
   {
    "word": "番号",
@@ -41061,7 +41171,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1109380"
   },
   {
    "word": "封筒",
@@ -41160,7 +41271,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1115150"
   },
   {
    "word": "フォーク",
@@ -41773,7 +41885,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1120410"
   },
   {
    "word": "下手",
@@ -41874,7 +41987,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1119650"
   },
   {
    "word": "ペット",
@@ -42269,7 +42383,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1123590"
   },
   {
    "word": "外",
@@ -42373,7 +42488,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1124970"
   },
   {
    "word": "欲しい",
@@ -42465,7 +42581,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1125150"
   },
   {
    "word": "細い",
@@ -42617,8 +42734,9 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-   "learningBasis": "scene_convenience_reviewed_2026-08-22"
-   }
+    "learningBasis": "scene_convenience_reviewed_2026-08-22"
+   },
+   "jmdictSeq": "1122650"
   },
   {
    "word": "本",
@@ -43195,7 +43313,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1495000"
   },
   {
    "word": "また",
@@ -43276,7 +43395,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1527110"
   },
   {
    "word": "町",
@@ -43417,7 +43537,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1580600"
   },
   {
    "word": "マッチ",
@@ -44387,7 +44508,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1202150"
   },
   {
    "word": "六日",
@@ -44728,7 +44850,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1132570"
   },
   {
    "word": "眼鏡",
@@ -44914,7 +45037,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1012550"
   },
   {
    "word": "持つ",
@@ -45006,7 +45130,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1012620"
   },
   {
    "word": "物",
@@ -46623,7 +46748,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1138860"
   },
   {
    "word": "ラジカセ",
@@ -46668,7 +46794,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1138960"
   },
   {
    "word": "りっぱ",
@@ -47048,7 +47175,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1144940"
   },
   {
    "word": "レストラン",
@@ -47100,7 +47228,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1145310"
   },
   {
    "word": "練習",
@@ -47289,7 +47418,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1148640"
   },
   {
    "word": "若い",
@@ -47757,7 +47887,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1151120"
   },
   {
    "id": "n4_aida",
@@ -47800,7 +47931,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1215230"
   },
   {
    "id": "n4_akachan",
@@ -47844,7 +47976,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1383260"
   },
   {
    "id": "n4_agaru",
@@ -47931,7 +48064,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1383310"
   },
   {
    "id": "n4_akusesari",
@@ -47979,7 +48113,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1015220"
   },
   {
    "id": "n4_asai",
@@ -48027,7 +48162,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1390800"
   },
   {
    "id": "n4_aji",
@@ -48070,7 +48206,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1526960"
   },
   {
    "id": "n4_ajia",
@@ -48119,7 +48256,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1015840"
   },
   {
    "id": "n4_asu",
@@ -48162,7 +48300,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1584660"
   },
   {
    "id": "n4_asobi",
@@ -48205,7 +48344,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1542070"
   },
   {
    "id": "n4_atsumaru",
@@ -48292,7 +48432,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1333560"
   },
   {
    "id": "n4_anaunsa",
@@ -48335,7 +48476,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1017330"
   },
   {
    "id": "n4_afurika",
@@ -48378,7 +48520,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1929050"
   },
   {
    "id": "n4_amerika",
@@ -48415,7 +48558,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1149830"
   },
   {
    "id": "n4_ayamaru",
@@ -48458,7 +48602,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1323010"
   },
   {
    "id": "n4_aruko_ru",
@@ -48507,7 +48652,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1019280"
   },
   {
    "id": "n4_arubaito",
@@ -48599,7 +48745,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1153890"
   },
   {
    "id": "n4_anzen",
@@ -48642,7 +48789,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1153930"
   },
   {
    "id": "n4_anna",
@@ -48728,7 +48876,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1154860"
   },
   {
    "id": "n4_ika",
@@ -48771,7 +48920,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1155060"
   },
   {
    "id": "n4_igai",
@@ -48814,7 +48964,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1155090"
   },
   {
    "id": "n4_igaku",
@@ -48857,7 +49008,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1159810"
   },
   {
    "id": "n4_ikiru",
@@ -48900,7 +49052,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1378520"
   },
   {
    "id": "n4_iken",
@@ -48943,7 +49096,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1156530"
   },
   {
    "id": "n4_ishi",
@@ -48986,7 +49140,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1382440"
   },
   {
    "id": "n4_ijimeru",
@@ -49030,7 +49185,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1195140"
   },
   {
    "id": "n4_ijou",
@@ -49073,7 +49229,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1155120"
   },
   {
    "id": "n4_isogu",
@@ -49116,7 +49273,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1228650"
   },
   {
    "id": "n4_itasu",
@@ -49159,7 +49317,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1421900"
   },
   {
    "id": "n4_itadaku",
@@ -49203,7 +49362,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1587290"
   },
   {
    "id": "n4_ichido",
@@ -49246,7 +49406,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1576250"
   },
   {
    "id": "n4_isshoukenmei",
@@ -49283,7 +49444,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1164010"
   },
   {
    "id": "n4_ippai",
@@ -49320,7 +49482,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1165670"
   },
   {
    "id": "n4_ito",
@@ -49363,7 +49526,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1311450"
   },
   {
    "id": "n4_inai",
@@ -49406,7 +49570,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1155180"
   },
   {
    "id": "n4_inaka",
@@ -49449,7 +49614,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1442750"
   },
   {
    "id": "n4_inoru",
@@ -49492,7 +49658,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1222770"
   },
   {
    "id": "n4_irassharu",
@@ -49535,7 +49702,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1000940"
   },
   {
    "id": "n4_ueru",
@@ -49578,7 +49746,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1357250"
   },
   {
    "id": "n4_ukagau",
@@ -49621,7 +49790,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1305700"
   },
   {
    "id": "n4_uketsuke",
@@ -49664,7 +49834,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1588060"
   },
   {
    "id": "n4_ukeru",
@@ -49707,7 +49878,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1329590"
   },
   {
    "id": "n4_ugoku",
@@ -49750,7 +49922,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1451210"
   },
   {
    "id": "n4_uso",
@@ -49793,7 +49966,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1172400"
   },
   {
    "id": "n4_uchi",
@@ -49836,7 +50010,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1457730"
   },
   {
    "id": "n4_utsu",
@@ -49879,7 +50054,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1408810"
   },
   {
    "id": "n4_utsukushii",
@@ -49922,7 +50098,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1486360"
   },
   {
    "id": "n4_utsusu",
@@ -49965,7 +50142,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1588320"
   },
   {
    "id": "n4_utsuru",
@@ -50008,7 +50186,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1158210"
   },
   {
    "id": "n4_ude",
@@ -50051,7 +50230,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1562850"
   },
   {
    "id": "n4_umai",
@@ -50094,7 +50274,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1310460"
   },
   {
    "id": "n4_ura",
@@ -50137,7 +50318,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1550190"
   },
   {
    "id": "n4_uriba",
@@ -50180,7 +50362,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1588550"
   },
   {
    "id": "n4_ureshii",
@@ -50224,7 +50407,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1219510"
   },
   {
    "id": "n4_un",
@@ -50310,7 +50494,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1172830"
   },
   {
    "id": "n4_untenshu",
@@ -50353,7 +50538,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1172870"
   },
   {
    "id": "n4_undou",
@@ -50396,7 +50582,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1172910"
   },
   {
    "id": "n4_eakon",
@@ -50447,7 +50634,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1027180"
   },
   {
    "id": "n4_esukare_ta",
@@ -50496,7 +50684,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1028580"
   },
   {
    "id": "n4_eda",
@@ -50539,7 +50728,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1310530"
   },
   {
    "id": "n4_erabu",
@@ -50582,7 +50772,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1588730"
   },
   {
    "id": "n4_enryo",
@@ -50630,7 +50821,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1178450"
   },
   {
    "id": "n4_oideninaru",
@@ -50667,7 +50859,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1001180"
   },
   {
    "id": "n4_oiwai",
@@ -50710,7 +50903,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1612770"
   },
   {
    "id": "n4_o_tobai",
@@ -50759,7 +50953,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1032030"
   },
   {
    "id": "n4_okaikei",
@@ -50796,7 +50991,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "2513640"
   },
   {
    "id": "n4_okage",
@@ -50840,7 +51036,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1001640"
   },
   {
    "id": "n4_okashii",
@@ -50884,7 +51081,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1190860"
   },
   {
    "id": "n4_okanemochi",
@@ -50921,7 +51119,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "2429350"
   },
   {
    "id": "n4_oku",
@@ -50964,7 +51163,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1182620"
   },
   {
    "id": "n4_okujou",
@@ -51007,7 +51207,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1182710"
   },
   {
    "id": "n4_okurimono",
@@ -51050,7 +51251,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1589030"
   },
   {
    "id": "n4_okuru",
@@ -51093,7 +51295,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1402730"
   },
   {
    "id": "n4_okureru",
@@ -51136,7 +51339,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1589040"
   },
   {
    "id": "n4_okosu",
@@ -51223,7 +51427,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1589060"
   },
   {
    "id": "n4_okoru",
@@ -51266,7 +51471,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1445690"
   },
   {
    "id": "n4_oshiire",
@@ -51309,7 +51515,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1589110"
   },
   {
    "id": "n4_ojousan",
@@ -51352,7 +51559,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1002170"
   },
   {
    "id": "n4_otaku",
@@ -51395,7 +51603,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1002400"
   },
   {
    "id": "n4_ochiru",
@@ -51476,7 +51685,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1238840"
   },
   {
    "id": "n4_otto",
@@ -51519,7 +51729,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1496480"
   },
   {
    "id": "n4_otsuri",
@@ -51556,7 +51767,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1270550"
   },
   {
    "id": "n4_oto",
@@ -51599,7 +51811,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1576900"
   },
   {
    "id": "n4_otosu",
@@ -51686,7 +51899,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1546880"
   },
   {
    "id": "n4_odoru",
@@ -51729,7 +51943,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1538440"
   },
   {
    "id": "n4_odoroku",
@@ -51772,7 +51987,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1238680"
   },
   {
    "id": "n4_omatsuri",
@@ -51809,7 +52025,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1604135"
   },
   {
    "id": "n4_omimai",
@@ -51846,7 +52063,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1001870"
   },
   {
    "id": "n4_omiyage",
@@ -51889,7 +52107,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1002500"
   },
   {
    "id": "n4_omoidasu",
@@ -51937,7 +52156,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1309260"
   },
   {
    "id": "n4_omou",
@@ -51980,7 +52200,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1589350"
   },
   {
    "id": "n4_omocha",
@@ -52024,7 +52245,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1217070"
   },
   {
    "id": "n4_omote",
@@ -52067,7 +52289,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1489340"
   },
   {
    "id": "n4_oya",
@@ -52110,7 +52333,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1365040"
   },
   {
    "id": "n4_oyogikata",
@@ -52147,7 +52371,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "2005990"
   },
   {
    "id": "n4_oru",
@@ -52190,7 +52415,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1385910"
   },
   {
    "id": "n4_orei",
@@ -52233,7 +52459,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1270810"
   },
   {
    "id": "n4_oreru",
@@ -52276,7 +52503,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1385920"
   },
   {
    "id": "n4_owari",
@@ -52319,7 +52547,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1589590"
   },
   {
    "id": "n4_ka_ten",
@@ -52362,7 +52591,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1036290"
   },
   {
    "id": "n4_kaigan",
@@ -52405,7 +52635,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1201280"
   },
   {
    "id": "n4_kaigi",
@@ -52453,7 +52684,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1198360"
   },
   {
    "id": "n4_kaigishitsu",
@@ -52490,7 +52722,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1198380"
   },
   {
    "id": "n4_kaisatsuguchi",
@@ -52533,7 +52766,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1200850"
   },
   {
    "id": "n4_kaijou",
@@ -52576,7 +52810,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1198660"
   },
   {
    "id": "n4_kaiwa",
@@ -52619,7 +52854,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1198880"
   },
   {
    "id": "n4_kaeri",
@@ -52662,7 +52898,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1221250"
   },
   {
    "id": "n4_kagaku",
@@ -52705,7 +52942,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1192700"
   },
   {
    "id": "n4_kagami",
@@ -52791,7 +53029,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1357210"
   },
   {
    "id": "n4_kaji",
@@ -52834,7 +53073,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1193950"
   },
   {
    "id": "n4_gasu",
@@ -52881,7 +53121,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1040060"
   },
   {
    "id": "n4_gasorin",
@@ -52930,7 +53171,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1040250"
   },
   {
    "id": "n4_gasorinsutando",
@@ -52973,7 +53215,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1040260"
   },
   {
    "id": "n4_katai",
@@ -53021,7 +53264,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1257110"
   },
   {
    "id": "n4_katachi",
@@ -53064,7 +53308,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1250220"
   },
   {
    "id": "n4_katazukeru",
@@ -53107,7 +53352,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1511790"
   },
   {
    "id": "n4_kachou",
@@ -53150,7 +53396,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1195840"
   },
   {
    "id": "n4_katsu",
@@ -53193,7 +53440,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1346150"
   },
   {
    "id": "n4_kakkou",
@@ -53236,7 +53484,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1590480"
   },
   {
    "id": "n4_kanai",
@@ -53279,7 +53528,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1192420"
   },
   {
    "id": "n4_kanashii",
@@ -53327,7 +53577,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1483190"
   },
   {
    "id": "n4_kanarazu",
@@ -53370,7 +53621,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1487400"
   },
   {
    "id": "n4_kanemochi",
@@ -53413,7 +53665,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1242970"
   },
   {
    "id": "n4_kanojo",
@@ -53456,7 +53709,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1483150"
   },
   {
    "id": "n4_kabe",
@@ -53499,7 +53753,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1509290"
   },
   {
    "id": "n4_kamau",
@@ -53543,7 +53798,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1279680"
   },
   {
    "id": "n4_kami",
@@ -53586,7 +53842,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1477950"
   },
   {
    "id": "n4_kamu",
@@ -53629,7 +53886,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1209240"
   },
   {
    "id": "n4_kayou",
@@ -53672,7 +53930,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1432850"
   },
   {
    "id": "n4_garasu",
@@ -53715,7 +53974,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1040380"
   },
   {
    "id": "n4_kare",
@@ -53758,7 +54018,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1483070"
   },
   {
    "id": "n4_karera",
@@ -53801,7 +54062,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1483090"
   },
   {
    "id": "n4_kawaku",
@@ -53844,7 +54106,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1209650"
   },
   {
    "id": "n4_kawari",
@@ -53887,7 +54150,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1590770"
   },
   {
    "id": "n4_kawaru",
@@ -53930,7 +54194,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1510790"
   },
   {
    "id": "n4_kangaeru",
@@ -53978,7 +54243,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1281020"
   },
   {
    "id": "n4_kankei",
@@ -54021,7 +54287,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1215810"
   },
   {
    "id": "n4_kangofu",
@@ -54064,7 +54331,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1213870"
   },
   {
    "id": "n4_kantan",
@@ -54107,7 +54375,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1214330"
   },
   {
    "id": "n4_ki",
@@ -54150,7 +54419,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1221520"
   },
   {
    "id": "n4_kikai",
@@ -54198,7 +54468,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1220800"
   },
   {
    "id": "n4_kiken",
@@ -54241,7 +54512,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1218560"
   },
   {
    "id": "n4_kikoeru",
@@ -54284,7 +54556,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1591150"
   },
   {
    "id": "n4_kisha",
@@ -54327,7 +54600,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1222700"
   },
   {
    "id": "n4_gijutsu",
@@ -54370,7 +54644,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1225130"
   },
   {
    "id": "n4_kisetsu",
@@ -54418,7 +54693,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1222840"
   },
   {
    "id": "n4_kisoku",
@@ -54466,7 +54742,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1223021"
   },
   {
    "id": "n4_kitto",
@@ -54510,7 +54787,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1003430"
   },
   {
    "id": "n4_kinu",
@@ -54553,7 +54831,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1258710"
   },
   {
    "id": "n4_kibishii",
@@ -54596,7 +54875,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1262530"
   },
   {
    "id": "n4_kibun",
@@ -54639,7 +54919,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1222590"
   },
   {
    "id": "n4_kimaru",
@@ -54726,7 +55007,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1247250"
   },
   {
    "id": "n4_kimeru",
@@ -54769,7 +55051,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1254180"
   },
   {
    "id": "n4_kimochi",
@@ -54812,7 +55095,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1591430"
   },
   {
    "id": "n4_kimono",
@@ -54855,7 +55139,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1423240"
   },
   {
    "id": "n4_kyaku",
@@ -54898,7 +55183,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1226630"
   },
   {
    "id": "n4_kyuu",
@@ -54941,7 +55227,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1228560"
   },
   {
    "id": "n4_kyuukou",
@@ -54984,7 +55271,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1228690"
   },
   {
    "id": "n4_kyouiku",
@@ -55027,7 +55315,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1236950"
   },
   {
    "id": "n4_kyoukai",
@@ -55070,7 +55359,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1237030"
   },
   {
    "id": "n4_kyousou",
@@ -55113,7 +55403,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1234140"
   },
   {
    "id": "n4_kyoumi",
@@ -55156,7 +55447,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1238410"
   },
   {
    "id": "n4_kinjo",
@@ -55199,7 +55491,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1242350"
   },
   {
    "id": "n4_guai",
@@ -55242,7 +55535,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1592500"
   },
   {
    "id": "n4_kuuki",
@@ -55285,7 +55579,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1245470"
   },
   {
    "id": "n4_kuukou",
@@ -55328,7 +55623,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1245570"
   },
   {
    "id": "n4_kusa",
@@ -55371,7 +55667,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1401910"
   },
   {
    "id": "n4_kudasaru",
@@ -55415,7 +55712,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1184280"
   },
   {
    "id": "n4_kubi",
@@ -55458,7 +55756,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1592270"
   },
   {
    "id": "n4_kumo",
@@ -55501,7 +55800,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1173100"
   },
   {
    "id": "n4_kuraberu",
@@ -55544,7 +55844,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1483540"
   },
   {
    "id": "n4_kureru",
@@ -55587,7 +55888,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1269130"
   },
   {
    "id": "n4_kureru_2",
@@ -55630,7 +55932,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1514960"
   },
   {
    "id": "n4_kun",
@@ -55673,7 +55976,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1247260"
   },
   {
    "id": "n4_ke",
@@ -55716,7 +56020,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1533820"
   },
   {
    "id": "n4_keikaku",
@@ -55759,7 +56064,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1252090"
   },
   {
    "id": "n4_keiken",
@@ -55802,7 +56108,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1251270"
   },
   {
    "id": "n4_keizai",
@@ -55845,7 +56152,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1251320"
   },
   {
    "id": "n4_keisatsu",
@@ -55888,7 +56196,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1252390"
   },
   {
    "id": "n4_ke_ki",
@@ -55931,7 +56240,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1047860"
   },
   {
    "id": "n4_kega",
@@ -55974,7 +56284,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1200220"
   },
   {
    "id": "n4_keshiki",
@@ -56017,7 +56328,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1250870"
   },
   {
    "id": "n4_keshigomu",
@@ -56060,7 +56372,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1350080"
   },
   {
    "id": "n4_geshuku",
@@ -56103,7 +56416,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1185290"
   },
   {
    "id": "n4_kesshite",
@@ -56146,7 +56460,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1254130"
   },
   {
    "id": "n4_keredo",
@@ -56189,7 +56504,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "2853889"
   },
   {
    "id": "n4_keredomo",
@@ -56232,7 +56548,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "2853889"
   },
   {
    "id": "n4_genin",
@@ -56275,7 +56592,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1261190"
   },
   {
    "id": "n4_kenka",
@@ -56318,7 +56636,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1257040"
   },
   {
    "id": "n4_kenkyuu",
@@ -56361,7 +56680,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1258520"
   },
   {
    "id": "n4_kenkyuushitsu",
@@ -56404,7 +56724,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1258570"
   },
   {
    "id": "n4_kenbutsu",
@@ -56447,7 +56768,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1260000"
   },
   {
    "id": "n4_ko",
@@ -56490,7 +56812,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1307770"
   },
   {
    "id": "n4_kou",
@@ -56570,7 +56893,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1282490"
   },
   {
    "id": "n4_kougi",
@@ -56613,7 +56937,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1282260"
   },
   {
    "id": "n4_kougyou",
@@ -56656,7 +56981,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1278040"
   },
   {
    "id": "n4_koukou",
@@ -56699,7 +57025,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1283500"
   },
   {
    "id": "n4_koukousei",
@@ -56742,7 +57069,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1283510"
   },
   {
    "id": "n4_koujou",
@@ -56785,7 +57113,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1578700"
   },
   {
    "id": "n4_kouchou",
@@ -56828,7 +57157,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1279590"
   },
   {
    "id": "n4_koutsuu",
@@ -56871,7 +57201,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1272280"
   },
   {
    "id": "n4_koudou",
@@ -56914,7 +57245,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1282340"
   },
   {
    "id": "n4_koutougakkou",
@@ -56957,7 +57289,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1283860"
   },
   {
    "id": "n4_koumuin",
@@ -57000,7 +57333,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1274820"
   },
   {
    "id": "n4_kokusai",
@@ -57043,7 +57377,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1286400"
   },
   {
    "id": "n4_kokoro",
@@ -57091,7 +57426,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1360480"
   },
   {
    "id": "n4_goshujin",
@@ -57128,7 +57464,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1270390"
   },
   {
    "id": "n4_koshou",
@@ -57171,7 +57508,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1267180"
   },
   {
    "id": "n4_gozonji",
@@ -57214,7 +57552,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1593570"
   },
   {
    "id": "n4_kotae",
@@ -57295,7 +57634,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1593590"
   },
   {
    "id": "n4_koto",
@@ -57382,7 +57722,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1348530"
   },
   {
    "id": "n4_konoaida",
@@ -57419,7 +57760,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1004690"
   },
   {
    "id": "n4_konogoro",
@@ -57463,7 +57805,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1004710"
   },
   {
    "id": "n4_komakai",
@@ -57506,7 +57849,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1295530"
   },
   {
    "id": "n4_gomi",
@@ -57549,7 +57893,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1369900"
   },
   {
    "id": "n4_komu",
@@ -57592,7 +57937,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1593410"
   },
   {
    "id": "n4_kome",
@@ -57635,7 +57981,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1508750"
   },
   {
    "id": "n4_goranninaru",
@@ -57672,7 +58019,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "2217040"
   },
   {
    "id": "n4_korekara",
@@ -57709,7 +58057,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1004790"
   },
   {
    "id": "n4_kowai",
@@ -57752,7 +58101,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1593480"
   },
   {
    "id": "n4_kowasu",
@@ -57795,7 +58145,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1199890"
   },
   {
    "id": "n4_kowareru",
@@ -57838,7 +58189,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1199900"
   },
   {
    "id": "n4_konsa_to",
@@ -57886,7 +58238,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1051970"
   },
   {
    "id": "n4_kondo",
@@ -57929,7 +58282,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1289370"
   },
   {
    "id": "n4_konpyu_ta",
@@ -57966,7 +58320,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1053350"
   },
   {
    "id": "n4_konpyu_ta_2",
@@ -58009,7 +58364,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1053350"
   },
   {
    "id": "n4_konya",
@@ -58052,7 +58408,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1289520"
   },
   {
    "id": "n4_saikin",
@@ -58095,7 +58452,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1293780"
   },
   {
    "id": "n4_saigo",
@@ -58138,7 +58496,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1293810"
   },
   {
    "id": "n4_saisho",
@@ -58181,7 +58540,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1293990"
   },
   {
    "id": "n4_saka",
@@ -58229,7 +58589,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1297110"
   },
   {
    "id": "n4_sagasu",
@@ -58274,8 +58635,9 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-   "learningBasis": "scene_convenience_reviewed_2026-08-22"
-   }
+    "learningBasis": "scene_convenience_reviewed_2026-08-22"
+   },
+   "jmdictSeq": "1593670"
   },
   {
    "id": "n4_sagaru",
@@ -58362,7 +58724,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1379750"
   },
   {
    "id": "n4_sageru",
@@ -58405,7 +58768,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1184170"
   },
   {
    "id": "n4_sashiageru",
@@ -58453,7 +58817,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1291270"
   },
   {
    "id": "n4_sakki",
@@ -58533,7 +58898,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1579720"
   },
   {
    "id": "n4_saraigetsu",
@@ -58581,7 +58947,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1293640"
   },
   {
    "id": "n4_saraishuu",
@@ -58624,7 +58991,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1293650"
   },
   {
    "id": "n4_sarada",
@@ -58677,7 +59045,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1057850"
   },
   {
    "id": "n4_sawagu",
@@ -58720,7 +59089,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1403040"
   },
   {
    "id": "n4_sawaru",
@@ -58763,7 +59133,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1357980"
   },
   {
    "id": "n4_sangyou",
@@ -58806,7 +59177,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1303770"
   },
   {
    "id": "n4_sandaru",
@@ -58860,7 +59232,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1058480"
   },
   {
    "id": "n4_sandoicchi",
@@ -58909,7 +59282,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1058580"
   },
   {
    "id": "n4_zannen",
@@ -58952,7 +59326,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1304680"
   },
   {
    "id": "n4_shi",
@@ -58995,7 +59370,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1308090"
   },
   {
    "id": "n4_ji",
@@ -59038,7 +59414,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1315130"
   },
   {
    "id": "n4_shiai",
@@ -59081,7 +59458,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1312420"
   },
   {
    "id": "n4_shikata",
@@ -59124,7 +59502,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1594110"
   },
   {
    "id": "n4_shikaru",
@@ -59216,7 +59595,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1312350"
   },
   {
    "id": "n4_jiko",
@@ -59259,7 +59639,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1313850"
   },
   {
    "id": "n4_jishin",
@@ -59302,7 +59683,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1421210"
   },
   {
    "id": "n4_jidai",
@@ -59345,7 +59727,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1316300"
   },
   {
    "id": "n4_shitagi",
@@ -59388,7 +59771,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1185930"
   },
   {
    "id": "n4_shitaku",
@@ -59431,7 +59815,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1310260"
   },
   {
    "id": "n4_shikkari",
@@ -59475,7 +59860,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1594400"
   },
   {
    "id": "n4_shippai",
@@ -59518,7 +59904,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1320140"
   },
   {
    "id": "n4_jiten",
@@ -59561,7 +59948,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1595270"
   },
   {
    "id": "n4_shinamono",
@@ -59604,7 +59992,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1490670"
   },
   {
    "id": "n4_shibaraku",
@@ -59648,7 +60037,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1304420"
   },
   {
    "id": "n4_shima",
@@ -59691,7 +60081,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1446760"
   },
   {
    "id": "n4_shimin",
@@ -59734,7 +60125,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1308690"
   },
   {
    "id": "n4_jimusho",
@@ -59777,7 +60169,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1314400"
   },
   {
    "id": "n4_shakai",
@@ -59820,7 +60213,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1322700"
   },
   {
    "id": "n4_shachou",
@@ -59863,7 +60257,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1322920"
   },
   {
    "id": "n4_jama",
@@ -59907,7 +60302,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1323500"
   },
   {
    "id": "n4_jamu",
@@ -59956,7 +60352,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1065680"
   },
   {
    "id": "n4_jiyuu",
@@ -59999,7 +60396,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1318720"
   },
   {
    "id": "n4_shuukan",
@@ -60042,7 +60440,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1333090"
   },
   {
    "id": "n4_juusho",
@@ -60085,7 +60484,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1334080"
   },
   {
    "id": "n4_juudou",
@@ -60128,7 +60528,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1335440"
   },
   {
    "id": "n4_juubun",
@@ -60171,7 +60572,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1335080"
   },
   {
    "id": "n4_shusseki",
@@ -60214,7 +60616,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1339460"
   },
   {
    "id": "n4_shuppatsu",
@@ -60257,7 +60660,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1340000"
   },
   {
    "id": "n4_shumi",
@@ -60300,7 +60704,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1329000"
   },
   {
    "id": "n4_junbi",
@@ -60343,7 +60748,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1341670"
   },
   {
    "id": "n4_shoukai",
@@ -60386,7 +60792,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1351430"
   },
   {
    "id": "n4_shougakkou",
@@ -60429,7 +60836,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1347870"
   },
   {
    "id": "n4_shousetsu",
@@ -60472,7 +60880,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1348430"
   },
   {
    "id": "n4_shoutai",
@@ -60515,7 +60924,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1349610"
   },
   {
    "id": "n4_shouchi",
@@ -60558,7 +60968,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1349480"
   },
   {
    "id": "n4_shourai",
@@ -60606,7 +61017,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1347710"
   },
   {
    "id": "n4_shokuji",
@@ -60649,7 +61061,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1358490"
   },
   {
    "id": "n4_shokuryouhin",
@@ -60692,7 +61105,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1358680"
   },
   {
    "id": "n4_josei",
@@ -60735,7 +61149,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1345250"
   },
   {
    "id": "n4_shiraseru",
@@ -60778,7 +61193,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1420410"
   },
   {
    "id": "n4_shiraberu",
@@ -60821,7 +61237,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1429060"
   },
   {
    "id": "n4_jinkou",
@@ -60864,7 +61281,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1367300"
   },
   {
    "id": "n4_jinja",
@@ -60907,7 +61325,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1364670"
   },
   {
    "id": "n4_shinsetsu",
@@ -60955,7 +61374,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1365250"
   },
   {
    "id": "n4_shinpai",
@@ -60998,7 +61418,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1360930"
   },
   {
    "id": "n4_shinbunsha",
@@ -61041,7 +61462,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1362400"
   },
   {
    "id": "n4_suiei",
@@ -61084,7 +61506,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1371320"
   },
   {
    "id": "n4_suidou",
@@ -61127,7 +61550,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1371920"
   },
   {
    "id": "n4_zuibun",
@@ -61171,7 +61595,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1372800"
   },
   {
    "id": "n4_suugaku",
@@ -61214,7 +61639,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1372980"
   },
   {
    "id": "n4_su_tsu",
@@ -61257,7 +61683,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1066680"
   },
   {
    "id": "n4_su_tsuke_su",
@@ -61300,7 +61727,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1066690"
   },
   {
    "id": "n4_sugiru",
@@ -61343,7 +61771,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1195970"
   },
   {
    "id": "n4_suku",
@@ -61386,7 +61815,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1586265"
   },
   {
    "id": "n4_sukuri_n",
@@ -61429,7 +61859,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1068550"
   },
   {
    "id": "n4_sugoi",
@@ -61472,7 +61903,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1374550"
   },
   {
    "id": "n4_susumu",
@@ -61515,7 +61947,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1365980"
   },
   {
    "id": "n4_sukkari",
@@ -61558,7 +61991,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1006110"
   },
   {
    "id": "n4_sutto",
@@ -61606,7 +62040,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1006140"
   },
   {
    "id": "n4_sute_ki",
@@ -61649,7 +62084,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1070280"
   },
   {
    "id": "n4_suteru",
@@ -61692,7 +62128,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1322320"
   },
   {
    "id": "n4_sutereo",
@@ -61735,7 +62172,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1070650"
   },
   {
    "id": "n4_suna",
@@ -61778,7 +62216,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1291500"
   },
   {
    "id": "n4_subarashii",
@@ -61822,7 +62261,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1397300"
   },
   {
    "id": "n4_suberu",
@@ -61865,7 +62305,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1208640"
   },
   {
    "id": "n4_sumi",
@@ -61908,7 +62349,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1246440"
   },
   {
    "id": "n4_suri",
@@ -61988,7 +62430,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1006280"
   },
   {
    "id": "n4_seikatsu",
@@ -62031,7 +62474,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1378860"
   },
   {
    "id": "n4_seisan",
@@ -62074,7 +62518,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1378990"
   },
   {
    "id": "n4_seiji",
@@ -62117,7 +62562,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1375970"
   },
   {
    "id": "n4_seiyou",
@@ -62160,7 +62606,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1381100"
   },
   {
    "id": "n4_sekai",
@@ -62203,7 +62650,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1373860"
   },
   {
    "id": "n4_seki",
@@ -62246,7 +62694,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1382250"
   },
   {
    "id": "n4_setsumei",
@@ -62289,7 +62738,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1386460"
   },
   {
    "id": "n4_senaka",
@@ -62332,7 +62782,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1472800"
   },
   {
    "id": "n4_zehi",
@@ -62376,7 +62827,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1374530"
   },
   {
    "id": "n4_sewa",
@@ -62419,7 +62871,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1374300"
   },
   {
    "id": "n4_sen",
@@ -62462,7 +62915,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1391780"
   },
   {
    "id": "n4_zenzen",
@@ -62505,7 +62959,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1395620"
   },
   {
    "id": "n4_sensou",
@@ -62548,7 +63003,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1390360"
   },
   {
    "id": "n4_senpai",
@@ -62591,7 +63047,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1388410"
   },
   {
    "id": "n4_sou",
@@ -62673,7 +63130,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1401210"
   },
   {
    "id": "n4_sodateru",
@@ -62716,7 +63174,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1160570"
   },
   {
    "id": "n4_sotsugyou",
@@ -62759,7 +63218,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1405890"
   },
   {
    "id": "n4_sofu",
@@ -62802,7 +63262,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1396840"
   },
   {
    "id": "n4_sofuto",
@@ -62851,7 +63312,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1075500"
   },
   {
    "id": "n4_sobo",
@@ -62894,7 +63356,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1396860"
   },
   {
    "id": "n4_sorede",
@@ -62931,7 +63394,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1007000"
   },
   {
    "id": "n4_soreni",
@@ -62968,7 +63432,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1007040"
   },
   {
    "id": "n4_sorehodo",
@@ -63005,7 +63470,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1007060"
   },
   {
    "id": "n4_sorosoro",
@@ -63048,7 +63514,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1345605"
   },
   {
    "id": "n4_sonna",
@@ -63091,7 +63558,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1007130"
   },
   {
    "id": "n4_sonnani",
@@ -63134,7 +63602,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "2008740"
   },
   {
    "id": "n4_taiin",
@@ -63177,7 +63646,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1411300"
   },
   {
    "id": "n4_daigakusei",
@@ -63225,7 +63695,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1413260"
   },
   {
    "id": "n4_daiji",
@@ -63274,7 +63745,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1413940"
   },
   {
    "id": "n4_daitai",
@@ -63322,7 +63794,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1414470"
   },
   {
    "id": "n4_taitei",
@@ -63409,7 +63882,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1075940"
   },
   {
    "id": "n4_daibu",
@@ -63452,7 +63926,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1414920"
   },
   {
    "id": "n4_taifuu",
@@ -63495,7 +63970,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1596780"
   },
   {
    "id": "n4_taoreru",
@@ -63538,7 +64014,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1445790"
   },
   {
    "id": "n4_dakara",
@@ -63575,7 +64052,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1007310"
   },
   {
    "id": "n4_tashika",
@@ -63618,7 +64096,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1596930"
   },
   {
    "id": "n4_tasu",
@@ -63661,7 +64140,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1404700"
   },
   {
    "id": "n4_tazuneru",
@@ -63704,7 +64184,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1518070"
   },
   {
    "id": "n4_tazuneru_2",
@@ -63747,7 +64228,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1369940"
   },
   {
    "id": "n4_tadashii",
@@ -63790,7 +64272,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1376600"
   },
   {
    "id": "n4_tatami",
@@ -63833,7 +64316,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1356750"
   },
   {
    "id": "n4_tateru",
@@ -63876,7 +64360,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1551530"
   },
   {
    "id": "n4_tateru_2",
@@ -63919,7 +64404,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1257330"
   },
   {
    "id": "n4_tatoeba",
@@ -63962,7 +64448,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1556370"
   },
   {
    "id": "n4_tana",
@@ -64005,7 +64492,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1416700"
   },
   {
    "id": "n4_tanoshimi",
@@ -64053,7 +64541,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1207250"
   },
   {
    "id": "n4_tanoshimu",
@@ -64141,7 +64630,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1634500"
   },
   {
    "id": "n4_tame",
@@ -64224,7 +64714,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1409110"
   },
   {
    "id": "n4_tariru",
@@ -64267,7 +64758,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1404740"
   },
   {
    "id": "n4_dansei",
@@ -64310,7 +64802,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1420160"
   },
   {
    "id": "n4_danbou",
@@ -64353,7 +64846,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1419860"
   },
   {
    "id": "n4_chi",
@@ -64396,7 +64890,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1255060"
   },
   {
    "id": "n4_chiekku",
@@ -64445,7 +64940,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1077550"
   },
   {
    "id": "n4_chikuauto",
@@ -64496,7 +64992,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1077560"
   },
   {
    "id": "n4_chikuin",
@@ -64541,7 +65038,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1077570"
   },
   {
    "id": "n4_chikara",
@@ -64584,7 +65082,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1554820"
   },
   {
    "id": "n4_chittomo",
@@ -64628,7 +65127,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1007560"
   },
   {
    "id": "n4_chan",
@@ -64714,7 +65214,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1426530"
   },
   {
    "id": "n4_chuugakkou",
@@ -64757,7 +65258,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1423650"
   },
   {
    "id": "n4_chuusha",
@@ -64800,7 +65302,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1426590"
   },
   {
    "id": "n4_chuushajou",
@@ -64843,7 +65346,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1426920"
   },
   {
    "id": "n4_chiri",
@@ -64886,7 +65390,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1421540"
   },
   {
    "id": "n4_tsukamaeru",
@@ -64929,7 +65434,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1597780"
   },
   {
    "id": "n4_tsuki",
@@ -64972,7 +65478,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1255430"
   },
   {
    "id": "n4_tsugou",
@@ -65020,7 +65527,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1444980"
   },
   {
    "id": "n4_tsutaeru",
@@ -65063,7 +65571,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1441870"
   },
   {
    "id": "n4_tsuzuku",
@@ -65106,7 +65615,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1405790"
   },
   {
    "id": "n4_tsuzukeru",
@@ -65149,7 +65659,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1405800"
   },
   {
    "id": "n4_tsutsumu",
@@ -65192,7 +65703,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1584060"
   },
   {
    "id": "n4_tsuma",
@@ -65329,7 +65841,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1434120"
   },
   {
    "id": "n4_tsureru",
@@ -65372,7 +65885,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1559290"
   },
   {
    "id": "n4_teinei",
@@ -65415,7 +65929,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1427360"
   },
   {
    "id": "n4_tekisuto",
@@ -65463,7 +65978,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1079290"
   },
   {
    "id": "n4_tekitou",
@@ -65506,7 +66022,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1437450"
   },
   {
    "id": "n4_dekirudake",
@@ -65543,7 +66060,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1340460"
   },
   {
    "id": "n4_tetsudau",
@@ -65586,7 +66104,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1328190"
   },
   {
    "id": "n4_tenisu",
@@ -65635,7 +66154,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1080000"
   },
   {
    "id": "n4_tebukuro",
@@ -65678,7 +66198,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1328090"
   },
   {
    "id": "n4_tera",
@@ -65726,7 +66247,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1315240"
   },
   {
    "id": "n4_ten",
@@ -65769,7 +66291,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1441390"
   },
   {
    "id": "n4_tenin",
@@ -65813,8 +66336,9 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-   "learningBasis": "scene_convenience_reviewed_2026-08-22"
-   }
+    "learningBasis": "scene_convenience_reviewed_2026-08-22"
+   },
+   "jmdictSeq": "1440670"
   },
   {
    "id": "n4_tenkiyohou",
@@ -65857,7 +66381,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1438770"
   },
   {
    "id": "n4_dentou",
@@ -65900,7 +66425,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1443660"
   },
   {
    "id": "n4_denpou",
@@ -65943,7 +66469,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1443760"
   },
   {
    "id": "n4_tenrankai",
@@ -65986,7 +66513,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1440660"
   },
   {
    "id": "n4_to",
@@ -66029,7 +66557,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1621470"
   },
   {
    "id": "n4_dougu",
@@ -66072,7 +66601,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1454180"
   },
   {
    "id": "n4_toutou",
@@ -66152,7 +66682,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1451490"
   },
   {
    "id": "n4_tooku",
@@ -66200,7 +66731,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1177820"
   },
   {
    "id": "n4_tooru",
@@ -66243,7 +66775,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1433030"
   },
   {
    "id": "n4_tokuni",
@@ -66286,7 +66819,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1454670"
   },
   {
    "id": "n4_tokubetsu",
@@ -66329,7 +66863,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1455280"
   },
   {
    "id": "n4_tokoya",
@@ -66416,7 +66951,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1582200"
   },
   {
    "id": "n4_tokkyuu",
@@ -66459,7 +66995,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1454750"
   },
   {
    "id": "n4_todokeru",
@@ -66502,7 +67039,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1457210"
   },
   {
    "id": "n4_tomeru",
@@ -66545,7 +67083,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1310670"
   },
   {
    "id": "n4_torikaeru",
@@ -66594,7 +67133,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1326830"
   },
   {
    "id": "n4_dorobou",
@@ -66637,7 +67177,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1599340"
   },
   {
    "id": "n4_dondon",
@@ -66680,7 +67221,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1009320"
   },
   {
    "id": "n4_naosu",
@@ -66723,7 +67265,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1599390"
   },
   {
    "id": "n4_naoru",
@@ -66766,7 +67309,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "2846390"
   },
   {
    "id": "n4_naoru_2",
@@ -66809,7 +67353,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1599400"
   },
   {
    "id": "n4_nakanaka",
@@ -66897,7 +67442,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1529550"
   },
   {
    "id": "n4_nakunaru_2",
@@ -66940,7 +67486,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1518540"
   },
   {
    "id": "n4_nageru",
@@ -66983,7 +67530,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1447000"
   },
   {
    "id": "n4_nasaru",
@@ -67027,7 +67575,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1157090"
   },
   {
    "id": "n4_narubeku",
@@ -67076,7 +67625,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1375620"
   },
   {
    "id": "n4_naruhodo",
@@ -67120,7 +67670,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1375820"
   },
   {
    "id": "n4_nareru",
@@ -67163,7 +67714,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1212670"
   },
   {
    "id": "n4_nioi",
@@ -67207,7 +67759,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1599760"
   },
   {
    "id": "n4_nigai",
@@ -67250,7 +67803,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1244310"
   },
   {
    "id": "n4_nikaidate",
@@ -67293,7 +67847,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1599800"
   },
   {
    "id": "n4_nigeru",
@@ -67336,7 +67891,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1450330"
   },
   {
    "id": "n4_nikki",
@@ -67379,7 +67935,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1463930"
   },
   {
    "id": "n4_nyuuin",
@@ -67422,7 +67979,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1465720"
   },
   {
    "id": "n4_nyuugaku",
@@ -67465,7 +68023,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1465850"
   },
   {
    "id": "n4_niru",
@@ -67508,7 +68067,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1314600"
   },
   {
    "id": "n4_ningyou",
@@ -67551,7 +68111,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1367120"
   },
   {
    "id": "n4_nusumu",
@@ -67594,7 +68155,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1448440"
   },
   {
    "id": "n4_nuru",
@@ -67637,7 +68199,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1444270"
   },
   {
    "id": "n4_nureru",
@@ -67681,7 +68244,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1467620"
   },
   {
    "id": "n4_nedan",
@@ -67768,7 +68332,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1467710"
   },
   {
    "id": "n4_nesshin",
@@ -67860,7 +68425,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1360320"
   },
   {
    "id": "n4_nemui",
@@ -67908,7 +68474,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1529330"
   },
   {
    "id": "n4_nemuru",
@@ -67951,7 +68518,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1529390"
   },
   {
    "id": "n4_nokoru",
@@ -67994,7 +68562,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1304510"
   },
   {
    "id": "n4_nodo",
@@ -68037,7 +68606,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1600280"
   },
   {
    "id": "n4_norikaeru",
@@ -68085,7 +68655,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1600470"
   },
   {
    "id": "n4_norimono",
@@ -68128,7 +68699,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1600530"
   },
   {
    "id": "n4_ha",
@@ -68171,7 +68743,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1546550"
   },
   {
    "id": "n4_baai",
@@ -68214,7 +68787,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1355810"
   },
   {
    "id": "n4_pa_to",
@@ -68257,7 +68831,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1100810"
   },
   {
    "id": "n4_bai",
@@ -68300,7 +68875,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1473230"
   },
   {
    "id": "n4_haiken",
@@ -68343,7 +68919,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1472270"
   },
   {
    "id": "n4_haisha",
@@ -68386,7 +68963,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1313080"
   },
   {
    "id": "n4_hakobu",
@@ -68429,7 +69007,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1172660"
   },
   {
    "id": "n4_hajimeru",
@@ -68472,7 +69051,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1307550"
   },
   {
    "id": "n4_basho",
@@ -68515,7 +69095,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1355850"
   },
   {
    "id": "n4_hazu",
@@ -68597,7 +69178,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1421630"
   },
   {
    "id": "n4_pasuwado",
@@ -68648,7 +69230,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1101520"
   },
   {
    "id": "n4_pasokon",
@@ -68697,7 +69280,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1101570"
   },
   {
    "id": "n4_hatsuon",
@@ -68740,7 +69324,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1477170"
   },
   {
    "id": "n4_hakkiri",
@@ -68783,7 +69368,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1010150"
   },
   {
    "id": "n4_hanami",
@@ -68826,7 +69412,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1194660"
   },
   {
    "id": "n4_hayashi",
@@ -68874,7 +69461,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1555440"
   },
   {
    "id": "n4_harau",
@@ -68919,8 +69507,9 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-   "learningBasis": "scene_convenience_reviewed_2026-08-22"
-   }
+    "learningBasis": "scene_convenience_reviewed_2026-08-22"
+   },
+   "jmdictSeq": "1501620"
   },
   {
    "id": "n4_bangumi",
@@ -68963,7 +69552,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1482340"
   },
   {
    "id": "n4_hantai",
@@ -69006,7 +69596,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1480670"
   },
   {
    "id": "n4_handobaggu",
@@ -69055,7 +69646,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1096770"
   },
   {
    "id": "n4_hi",
@@ -69098,7 +69690,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1463770"
   },
   {
    "id": "n4_hi_2",
@@ -69141,7 +69734,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1193610"
   },
   {
    "id": "n4_piano",
@@ -69190,7 +69784,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1106400"
   },
   {
    "id": "n4_hieru",
@@ -69233,7 +69828,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1556630"
   },
   {
    "id": "n4_hikari",
@@ -69276,7 +69872,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1272780"
   },
   {
    "id": "n4_hikaru",
@@ -69319,7 +69916,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1272820"
   },
   {
    "id": "n4_hikidashi",
@@ -69362,7 +69960,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1601650"
   },
   {
    "id": "n4_hikidasu",
@@ -69405,7 +70004,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1601660"
   },
   {
    "id": "n4_hige",
@@ -69448,7 +70048,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1601810"
   },
   {
    "id": "n4_hikoujou",
@@ -69491,7 +70092,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1485520"
   },
   {
    "id": "n4_hisashiburi",
@@ -69539,7 +70141,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1227370"
   },
   {
    "id": "n4_bijutsukan",
@@ -69582,7 +70185,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1486460"
   },
   {
    "id": "n4_hijouni",
@@ -69625,7 +70229,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1484930"
   },
   {
    "id": "n4_bikkuri",
@@ -69662,7 +70267,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1226360"
   },
   {
    "id": "n4_hikkosu",
@@ -69705,7 +70311,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1169340"
   },
   {
    "id": "n4_hitsuyou",
@@ -69748,7 +70355,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1487660"
   },
   {
    "id": "n4_hidoi",
@@ -69792,7 +70400,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1602060"
   },
   {
    "id": "n4_hiraku",
@@ -69835,7 +70444,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1202440"
   },
   {
    "id": "n4_biru",
@@ -69927,7 +70537,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1581710"
   },
   {
    "id": "n4_hiruyasumi",
@@ -69970,7 +70581,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1426290"
   },
   {
    "id": "n4_hirou",
@@ -70013,7 +70625,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1332570"
   },
   {
    "id": "n4_fakkusu",
@@ -70056,7 +70669,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1108180"
   },
   {
    "id": "n4_fueru",
@@ -70099,7 +70713,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1602440"
   },
   {
    "id": "n4_fukai",
@@ -70142,7 +70757,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1362640"
   },
   {
    "id": "n4_fukuzatsu",
@@ -70185,7 +70801,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1501350"
   },
   {
    "id": "n4_fukushuu",
@@ -70228,7 +70845,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1500800"
   },
   {
    "id": "n4_buchou",
@@ -70271,7 +70889,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1499460"
   },
   {
    "id": "n4_futsuu",
@@ -70314,7 +70933,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1497190"
   },
   {
    "id": "n4_budou",
@@ -70357,7 +70977,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1499230"
   },
   {
    "id": "n4_futoru",
@@ -70400,7 +71021,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1408220"
   },
   {
    "id": "n4_futon",
@@ -70443,7 +71065,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1496890"
   },
   {
    "id": "n4_fune",
@@ -70486,7 +71109,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1602800"
   },
   {
    "id": "n4_fuben",
@@ -70529,7 +71153,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1494860"
   },
   {
    "id": "n4_fumu",
@@ -70572,7 +71197,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1450270"
   },
   {
    "id": "n4_furidasu",
@@ -70620,7 +71246,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1282770"
   },
   {
    "id": "n4_purezento",
@@ -70669,7 +71296,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1116840"
   },
   {
    "id": "n4_bunka",
@@ -70712,7 +71340,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1505120"
   },
   {
    "id": "n4_bungaku",
@@ -70755,7 +71384,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1505190"
   },
   {
    "id": "n4_bunpou",
@@ -70798,7 +71428,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1505600"
   },
   {
    "id": "n4_betsu",
@@ -70841,7 +71472,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1509430"
   },
   {
    "id": "n4_beru",
@@ -70927,7 +71559,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1510640"
   },
   {
    "id": "n4_henji",
@@ -70970,7 +71603,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1512220"
   },
   {
    "id": "n4_boueki",
@@ -71013,7 +71647,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1520120"
   },
   {
    "id": "n4_housou",
@@ -71056,7 +71691,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1516750"
   },
   {
    "id": "n4_houritsu",
@@ -71099,7 +71735,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1517480"
   },
   {
    "id": "n4_boku",
@@ -71142,7 +71779,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1521400"
   },
   {
    "id": "n4_hoshi",
@@ -71185,7 +71823,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1376310"
   },
   {
    "id": "n4_hodo",
@@ -71235,7 +71874,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1436510"
   },
   {
    "id": "n4_hotondo",
@@ -71279,7 +71919,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1522050"
   },
   {
    "id": "n4_homeru",
@@ -71366,7 +72007,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1523400"
   },
   {
    "id": "n4_mairu",
@@ -71409,7 +72051,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1302070"
   },
   {
    "id": "n4_makeru",
@@ -71452,7 +72095,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1497980"
   },
   {
    "id": "n4_majime",
@@ -71539,7 +72183,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1387240"
   },
   {
    "id": "n4_mataha",
@@ -71576,7 +72221,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1524990"
   },
   {
    "id": "n4_machigaeru",
@@ -71624,7 +72270,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1215330"
   },
   {
    "id": "n4_maniau",
@@ -71667,7 +72314,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1215260"
   },
   {
    "id": "n4_mawari",
@@ -71710,7 +72358,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1604290"
   },
   {
    "id": "n4_mawaru",
@@ -71753,7 +72402,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1604300"
   },
   {
    "id": "n4_manga",
@@ -71796,7 +72446,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1526920"
   },
   {
    "id": "n4_mannaka",
@@ -71839,7 +72490,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1604350"
   },
   {
    "id": "n4_mieru",
@@ -71882,7 +72534,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1259140"
   },
   {
    "id": "n4_mizuumi",
@@ -71925,7 +72578,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1267280"
   },
   {
    "id": "n4_miso",
@@ -71968,7 +72622,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1527040"
   },
   {
    "id": "n4_mitsukaru",
@@ -72011,7 +72666,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1604550"
   },
   {
    "id": "n4_mitsukeru",
@@ -72054,7 +72710,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1604570"
   },
   {
    "id": "n4_minato",
@@ -72097,7 +72754,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1279990"
   },
   {
    "id": "n4_mukau",
@@ -72140,7 +72798,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1604800"
   },
   {
    "id": "n4_mukaeru",
@@ -72183,7 +72842,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1253190"
   },
   {
    "id": "n4_mukashi",
@@ -72226,7 +72886,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1382370"
   },
   {
    "id": "n4_mushi",
@@ -72269,7 +72930,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1426680"
   },
   {
    "id": "n4_musuko",
@@ -72312,7 +72974,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1404390"
   },
   {
    "id": "n4_musume",
@@ -72355,7 +73018,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1531190"
   },
   {
    "id": "n4_muri",
@@ -72398,7 +73062,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1530970"
   },
   {
    "id": "n4_meshiagaru",
@@ -72446,7 +73111,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1346370"
   },
   {
    "id": "n4_mezurashii",
@@ -72489,7 +73155,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1431850"
   },
   {
    "id": "n4_moushiageru",
@@ -72537,7 +73204,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1362950"
   },
   {
    "id": "n4_mousu",
@@ -72580,7 +73248,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1363090"
   },
   {
    "id": "n4_mousugu",
@@ -72617,7 +73286,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "2015610"
   },
   {
    "id": "n4_moshi",
@@ -72704,7 +73374,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1535780"
   },
   {
    "id": "n4_mottomo",
@@ -72747,7 +73418,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1293700"
   },
   {
    "id": "n4_modoru",
@@ -72790,7 +73462,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1535880"
   },
   {
    "id": "n4_momen",
@@ -72833,7 +73506,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1534870"
   },
   {
    "id": "n4_morau",
@@ -72877,7 +73551,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1535910"
   },
   {
    "id": "n4_mori",
@@ -72920,7 +73595,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1362490"
   },
   {
    "id": "n4_yaku",
@@ -72963,7 +73639,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1350600"
   },
   {
    "id": "n4_yakusoku",
@@ -73006,7 +73683,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1538130"
   },
   {
    "id": "n4_yakunitatsu",
@@ -73043,7 +73721,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1537980"
   },
   {
    "id": "n4_yakeru",
@@ -73086,7 +73765,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1350610"
   },
   {
    "id": "n4_yasashii",
@@ -73134,7 +73814,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1539040"
   },
   {
    "id": "n4_yaseru",
@@ -73177,7 +73858,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1605510"
   },
   {
    "id": "n4_yatto",
@@ -73220,7 +73902,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1012800"
   },
   {
    "id": "n4_yappari",
@@ -73264,7 +73947,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1012810"
   },
   {
    "id": "n4_yahari",
@@ -73308,7 +73992,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "2772770"
   },
   {
    "id": "n4_yamu",
@@ -73351,7 +74036,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1310640"
   },
   {
    "id": "n4_yawarakai",
@@ -73394,7 +74080,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1605630"
   },
   {
    "id": "n4_yu",
@@ -73437,7 +74124,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1448580"
   },
   {
    "id": "n4_yushutsu",
@@ -73480,7 +74168,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1538820"
   },
   {
    "id": "n4_yunyuu",
@@ -73523,7 +74212,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1538870"
   },
   {
    "id": "n4_yubi",
@@ -73566,7 +74256,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1309650"
   },
   {
    "id": "n4_yubiwa",
@@ -73609,7 +74300,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1310050"
   },
   {
    "id": "n4_yume",
@@ -73652,7 +74344,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1529410"
   },
   {
    "id": "n4_yureru",
@@ -73695,7 +74388,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1545710"
   },
   {
    "id": "n4_you",
@@ -73738,7 +74432,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1546200"
   },
   {
    "id": "n4_youi",
@@ -73781,7 +74476,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1546220"
   },
   {
    "id": "n4_youji",
@@ -73824,7 +74520,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1546300"
   },
   {
    "id": "n4_yogoreru",
@@ -73867,7 +74564,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1179005"
   },
   {
    "id": "n4_yoshuu",
@@ -73910,7 +74608,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1543070"
   },
   {
    "id": "n4_yotei",
@@ -73953,7 +74652,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1543240"
   },
   {
    "id": "n4_yoyaku",
@@ -73996,7 +74696,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1543750"
   },
   {
    "id": "n4_yoru",
@@ -74039,7 +74740,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1219680"
   },
   {
    "id": "n4_yorokobu",
@@ -74082,7 +74784,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1218760"
   },
   {
    "id": "n4_yoroshii",
@@ -74131,7 +74834,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1224880"
   },
   {
    "id": "n4_ripo_to",
@@ -74174,7 +74878,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1145990"
   },
   {
    "id": "n4_riyuu",
@@ -74217,7 +74922,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1550140"
   },
   {
    "id": "n4_riyou",
@@ -74260,7 +74966,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1549660"
   },
   {
    "id": "n4_ryouhou",
@@ -74308,7 +75015,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1554010"
   },
   {
    "id": "n4_ryokan",
@@ -74351,7 +75059,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1553130"
   },
   {
    "id": "n4_rusu",
@@ -74394,7 +75103,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1552760"
   },
   {
    "id": "n4_reibou",
@@ -74437,7 +75147,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1557290"
   },
   {
    "id": "n4_rekishi",
@@ -74480,7 +75191,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1558050"
   },
   {
    "id": "n4_reji",
@@ -74524,8 +75236,9 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-   "learningBasis": "scene_convenience_reviewed_2026-08-22"
-   }
+    "learningBasis": "scene_convenience_reviewed_2026-08-22"
+   },
+   "jmdictSeq": "1145130"
   },
   {
    "id": "n4_reshito",
@@ -74576,8 +75289,9 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-   "learningBasis": "scene_convenience_reviewed_2026-08-22"
-   }
+    "learningBasis": "scene_convenience_reviewed_2026-08-22"
+   },
+   "jmdictSeq": "1145060"
   },
   {
    "id": "n4_repo_to",
@@ -74626,7 +75340,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1145990"
   },
   {
    "id": "n4_renraku",
@@ -74669,7 +75384,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1559900"
   },
   {
    "id": "n4_wa_puro",
@@ -74712,7 +75428,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1148520"
   },
   {
    "id": "n4_wakasu",
@@ -74755,7 +75472,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1501660"
   },
   {
    "id": "n4_wakareru",
@@ -74798,7 +75516,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1606590"
   },
   {
    "id": "n4_waku",
@@ -74841,7 +75560,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1606680"
   },
   {
    "id": "n4_wake",
@@ -74886,7 +75606,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1538330"
   },
   {
    "id": "n4_wasuremono",
@@ -74929,7 +75650,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1519230"
   },
   {
    "id": "n4_warau",
@@ -74972,7 +75694,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1351360"
   },
   {
    "id": "n4_wariai",
@@ -75015,7 +75738,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1606810"
   },
   {
    "id": "n4_wareru",
@@ -75058,7 +75782,8 @@
     "dictionary": true,
     "learning": false,
     "dictionaryBasis": "legacy_dictionary_compat"
-   }
+   },
+   "jmdictSeq": "1208020"
   },
   {
    "id": "n3_ai",
@@ -85495,7 +86220,7 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-   "learningBasis": "scene_convenience_reviewed_2026-08-22"
+    "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -98461,7 +99186,7 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-   "learningBasis": "scene_convenience_reviewed_2026-08-22"
+    "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -108902,7 +109627,7 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-   "learningBasis": "scene_convenience_reviewed_2026-08-22"
+    "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -140423,7 +141148,7 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-   "learningBasis": "scene_convenience_reviewed_2026-08-22"
+    "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {
@@ -362066,7 +362791,7 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-   "learningBasis": "scene_convenience_reviewed_2026-08-22"
+    "learningBasis": "scene_convenience_reviewed_2026-08-22"
    }
   },
   {

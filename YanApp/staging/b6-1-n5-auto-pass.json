@@ -1,0 +1,658 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "B6-1 exact word+reading join",
+  "input": "staging/jmdict-eng-3.6.2.json",
+  "target": "N5 words missing jmdictSeq",
+  "counts": {
+    "targets": 197,
+    "auto": 92,
+    "conflict": 46,
+    "unmatched": 59
+  },
+  "entries": [
+    {
+      "id": "n5_asoko",
+      "word": "あそこ",
+      "reading": "あそこ",
+      "key": "あそこ\tあそこ",
+      "jmdictSeq": "1000320"
+    },
+    {
+      "id": "n5_achira",
+      "word": "あちら",
+      "reading": "あちら",
+      "key": "あちら\tあちら",
+      "jmdictSeq": "1483185"
+    },
+    {
+      "id": "n5_acchi",
+      "word": "あっち",
+      "reading": "あっち",
+      "key": "あっち\tあっち",
+      "jmdictSeq": "1483185"
+    },
+    {
+      "id": "n5_apaato",
+      "word": "アパート",
+      "reading": "アパート",
+      "key": "アパート\tアパート",
+      "jmdictSeq": "1017760"
+    },
+    {
+      "id": "n5_ikaga",
+      "word": "いかが",
+      "reading": "いかが",
+      "key": "いかが\tいかが",
+      "jmdictSeq": "2845606"
+    },
+    {
+      "id": "n5_ikutsu",
+      "word": "いくつ",
+      "reading": "いくつ",
+      "key": "いくつ\tいくつ",
+      "jmdictSeq": "1219960"
+    },
+    {
+      "id": "n5_itsumo",
+      "word": "いつも",
+      "reading": "いつも",
+      "key": "いつも\tいつも",
+      "jmdictSeq": "1188890"
+    },
+    {
+      "id": "n5_ee",
+      "word": "ええ",
+      "reading": "ええ",
+      "key": "ええ\tええ",
+      "jmdictSeq": "1001140"
+    },
+    {
+      "id": "n5_erebeetaa",
+      "word": "エレベーター",
+      "reading": "エレベーター",
+      "key": "エレベーター\tエレベーター",
+      "jmdictSeq": "1030630"
+    },
+    {
+      "id": "n5_ojiisan",
+      "word": "おじいさん",
+      "reading": "おじいさん",
+      "key": "おじいさん\tおじいさん",
+      "jmdictSeq": "1002320"
+    },
+    {
+      "id": "n5_obaasan",
+      "word": "おばあさん",
+      "reading": "おばあさん",
+      "key": "おばあさん\tおばあさん",
+      "jmdictSeq": "1002330"
+    },
+    {
+      "id": "n5_omawarisan",
+      "word": "おまわりさん",
+      "reading": "おまわりさん",
+      "key": "おまわりさん\tおまわりさん",
+      "jmdictSeq": "1002120"
+    },
+    {
+      "id": "n5_oyu",
+      "word": "お湯",
+      "reading": "おゆ",
+      "key": "お湯\tおゆ",
+      "jmdictSeq": "1002510"
+    },
+    {
+      "id": "n5_kappu",
+      "word": "カップ",
+      "reading": "カップ",
+      "key": "カップ\tカップ",
+      "jmdictSeq": "1037670"
+    },
+    {
+      "id": "n5_kaburu",
+      "word": "かぶる",
+      "reading": "かぶる",
+      "key": "かぶる\tかぶる",
+      "jmdictSeq": "1484330"
+    },
+    {
+      "id": "n5_kamera",
+      "word": "カメラ",
+      "reading": "カメラ",
+      "key": "カメラ\tカメラ",
+      "jmdictSeq": "1038350"
+    },
+    {
+      "id": "n5_karee",
+      "word": "カレー",
+      "reading": "カレー",
+      "key": "カレー\tカレー",
+      "jmdictSeq": "1039140"
+    },
+    {
+      "id": "n5_karendaa",
+      "word": "カレンダー",
+      "reading": "カレンダー",
+      "key": "カレンダー\tカレンダー",
+      "jmdictSeq": "1039220"
+    },
+    {
+      "id": "n5_gitaa",
+      "word": "ギター",
+      "reading": "ギター",
+      "key": "ギター\tギター",
+      "jmdictSeq": "1042820"
+    },
+    {
+      "id": "n5_kurasu",
+      "word": "クラス",
+      "reading": "クラス",
+      "key": "クラス\tクラス",
+      "jmdictSeq": "1044070"
+    },
+    {
+      "id": "n5_guramu",
+      "word": "グラム",
+      "reading": "グラム",
+      "key": "グラム\tグラム",
+      "jmdictSeq": "1046810"
+    },
+    {
+      "id": "n5_koohii",
+      "word": "コーヒー",
+      "reading": "コーヒー",
+      "key": "コーヒー\tコーヒー",
+      "jmdictSeq": "1049180"
+    },
+    {
+      "id": "n5_kochira",
+      "word": "こちら",
+      "reading": "こちら",
+      "key": "こちら\tこちら",
+      "jmdictSeq": "1004500"
+    },
+    {
+      "id": "n5_gohan_2",
+      "word": "ご飯",
+      "reading": "ごはん",
+      "key": "ご飯\tごはん",
+      "jmdictSeq": "1270590"
+    },
+    {
+      "id": "n5_konna",
+      "word": "こんな",
+      "reading": "こんな",
+      "key": "こんな\tこんな",
+      "jmdictSeq": "1004880"
+    },
+    {
+      "id": "n5_konbini",
+      "word": "コンビニ",
+      "reading": "コンビニ",
+      "key": "コンビニ\tコンビニ",
+      "jmdictSeq": "1053280"
+    },
+    {
+      "id": "n5_saa",
+      "word": "さあ",
+      "reading": "さあ",
+      "key": "さあ\tさあ",
+      "jmdictSeq": "1005110"
+    },
+    {
+      "id": "n5_shatsu",
+      "word": "シャツ",
+      "reading": "シャツ",
+      "key": "シャツ\tシャツ",
+      "jmdictSeq": "1061520"
+    },
+    {
+      "id": "n5_shawaa",
+      "word": "シャワー",
+      "reading": "シャワー",
+      "key": "シャワー\tシャワー",
+      "jmdictSeq": "1061820"
+    },
+    {
+      "id": "n5_sukaato",
+      "word": "スカート",
+      "reading": "スカート",
+      "key": "スカート\tスカート",
+      "jmdictSeq": "1067470"
+    },
+    {
+      "id": "n5_suguni",
+      "word": "すぐに",
+      "reading": "すぐに",
+      "key": "すぐに\tすぐに",
+      "jmdictSeq": "1430620"
+    },
+    {
+      "id": "n5_sutoobu",
+      "word": "ストーブ",
+      "reading": "ストーブ",
+      "key": "ストーブ\tストーブ",
+      "jmdictSeq": "1070790"
+    },
+    {
+      "id": "n5_supuun",
+      "word": "スプーン",
+      "reading": "スプーン",
+      "key": "スプーン\tスプーン",
+      "jmdictSeq": "1072590"
+    },
+    {
+      "id": "n5_supootsu",
+      "word": "スポーツ",
+      "reading": "スポーツ",
+      "key": "スポーツ\tスポーツ",
+      "jmdictSeq": "1073210"
+    },
+    {
+      "id": "n5_zubon",
+      "word": "ズボン",
+      "reading": "ズボン",
+      "key": "ズボン\tズボン",
+      "jmdictSeq": "1074260"
+    },
+    {
+      "id": "n5_seetaa",
+      "word": "セーター",
+      "reading": "セーター",
+      "key": "セーター\tセーター",
+      "jmdictSeq": "1074270"
+    },
+    {
+      "id": "n5_zero",
+      "word": "ゼロ",
+      "reading": "ゼロ",
+      "key": "ゼロ\tゼロ",
+      "jmdictSeq": "2839962"
+    },
+    {
+      "id": "n5_sochira",
+      "word": "そちら",
+      "reading": "そちら",
+      "key": "そちら\tそちら",
+      "jmdictSeq": "1006780"
+    },
+    {
+      "id": "n5_socchi",
+      "word": "そっち",
+      "reading": "そっち",
+      "key": "そっち\tそっち",
+      "jmdictSeq": "1006780"
+    },
+    {
+      "id": "n5_sorekara",
+      "word": "それから",
+      "reading": "それから",
+      "key": "それから\tそれから",
+      "jmdictSeq": "1006980"
+    },
+    {
+      "id": "n5_takushii",
+      "word": "タクシー",
+      "reading": "タクシー",
+      "key": "タクシー\tタクシー",
+      "jmdictSeq": "1076190"
+    },
+    {
+      "id": "n5_tabako",
+      "word": "たばこ",
+      "reading": "たばこ",
+      "key": "たばこ\tたばこ",
+      "jmdictSeq": "1597150"
+    },
+    {
+      "id": "n5_chotto",
+      "word": "ちょっと",
+      "reading": "ちょっと",
+      "key": "ちょっと\tちょっと",
+      "jmdictSeq": "1163940"
+    },
+    {
+      "id": "n5_tsumaranai",
+      "word": "つまらない",
+      "reading": "つまらない",
+      "key": "つまらない\tつまらない",
+      "jmdictSeq": "1008190"
+    },
+    {
+      "id": "n5_teepu",
+      "word": "テープ",
+      "reading": "テープ",
+      "key": "テープ\tテープ",
+      "jmdictSeq": "1078750"
+    },
+    {
+      "id": "n5_teeburu",
+      "word": "テーブル",
+      "reading": "テーブル",
+      "key": "テーブル\tテーブル",
+      "jmdictSeq": "1078630"
+    },
+    {
+      "id": "n5_teepurekoodaa",
+      "word": "テープレコーダー",
+      "reading": "テープレコーダー",
+      "key": "テープレコーダー\tテープレコーダー",
+      "jmdictSeq": "1078810"
+    },
+    {
+      "id": "n5_tesuto",
+      "word": "テスト",
+      "reading": "テスト",
+      "key": "テスト\tテスト",
+      "jmdictSeq": "1079760"
+    },
+    {
+      "id": "n5_depaato",
+      "word": "デパート",
+      "reading": "デパート",
+      "key": "デパート\tデパート",
+      "jmdictSeq": "1083590"
+    },
+    {
+      "id": "n5_demo",
+      "word": "でも",
+      "reading": "でも",
+      "key": "でも\tでも",
+      "jmdictSeq": "1008460"
+    },
+    {
+      "id": "n5_terebi",
+      "word": "テレビ",
+      "reading": "テレビ",
+      "key": "テレビ\tテレビ",
+      "jmdictSeq": "1080510"
+    },
+    {
+      "id": "n5_doa",
+      "word": "ドア",
+      "reading": "ドア",
+      "key": "ドア\tドア",
+      "jmdictSeq": "1087820"
+    },
+    {
+      "id": "n5_toire",
+      "word": "トイレ",
+      "reading": "トイレ",
+      "key": "トイレ\tトイレ",
+      "jmdictSeq": "1084810"
+    },
+    {
+      "id": "n5_doushite",
+      "word": "どうして",
+      "reading": "どうして",
+      "key": "どうして\tどうして",
+      "jmdictSeq": "1466940"
+    },
+    {
+      "id": "n5_douzo",
+      "word": "どうぞ",
+      "reading": "どうぞ",
+      "key": "どうぞ\tどうぞ",
+      "jmdictSeq": "1189130"
+    },
+    {
+      "id": "n5_doumo",
+      "word": "どうも",
+      "reading": "どうも",
+      "key": "どうも\tどうも",
+      "jmdictSeq": "1009000"
+    },
+    {
+      "id": "n5_doko",
+      "word": "どこ",
+      "reading": "どこ",
+      "key": "どこ\tどこ",
+      "jmdictSeq": "1577140"
+    },
+    {
+      "id": "n5_dochira",
+      "word": "どちら",
+      "reading": "どちら",
+      "key": "どちら\tどちら",
+      "jmdictSeq": "1189360"
+    },
+    {
+      "id": "n5_docchi",
+      "word": "どっち",
+      "reading": "どっち",
+      "key": "どっち\tどっち",
+      "jmdictSeq": "1189360"
+    },
+    {
+      "id": "n5_totemo",
+      "word": "とても",
+      "reading": "とても",
+      "key": "とても\tとても",
+      "jmdictSeq": "1008630"
+    },
+    {
+      "id": "n5_donata",
+      "word": "どなた",
+      "reading": "どなた",
+      "key": "どなた\tどなた",
+      "jmdictSeq": "1189370"
+    },
+    {
+      "id": "n5_dore",
+      "word": "どれ",
+      "reading": "どれ",
+      "key": "どれ\tどれ",
+      "jmdictSeq": "1009290"
+    },
+    {
+      "id": "n5_naifu",
+      "word": "ナイフ",
+      "reading": "ナイフ",
+      "key": "ナイフ\tナイフ",
+      "jmdictSeq": "1089890"
+    },
+    {
+      "id": "n5_naku_2",
+      "word": "泣く",
+      "reading": "なく",
+      "key": "泣く\tなく",
+      "jmdictSeq": "1229840"
+    },
+    {
+      "id": "n5_naze",
+      "word": "なぜ",
+      "reading": "なぜ",
+      "key": "なぜ\tなぜ",
+      "jmdictSeq": "1577120"
+    },
+    {
+      "id": "n5_nigiyaka",
+      "word": "にぎやか",
+      "reading": "にぎやか",
+      "key": "にぎやか\tにぎやか",
+      "jmdictSeq": "1463480"
+    },
+    {
+      "id": "n5_nyuusu",
+      "word": "ニュース",
+      "reading": "ニュース",
+      "key": "ニュース\tニュース",
+      "jmdictSeq": "1091500"
+    },
+    {
+      "id": "n5_nekutai",
+      "word": "ネクタイ",
+      "reading": "ネクタイ",
+      "key": "ネクタイ\tネクタイ",
+      "jmdictSeq": "1092820"
+    },
+    {
+      "id": "n5_nooto",
+      "word": "ノート",
+      "reading": "ノート",
+      "key": "ノート\tノート",
+      "jmdictSeq": "1093450"
+    },
+    {
+      "id": "n5_paateii",
+      "word": "パーティー",
+      "reading": "パーティー",
+      "key": "パーティー\tパーティー",
+      "jmdictSeq": "1100760"
+    },
+    {
+      "id": "n5_bataa",
+      "word": "バター",
+      "reading": "バター",
+      "key": "バター\tバター",
+      "jmdictSeq": "1098620"
+    },
+    {
+      "id": "n5_hankachi",
+      "word": "ハンカチ",
+      "reading": "ハンカチ",
+      "key": "ハンカチ\tハンカチ",
+      "jmdictSeq": "1096420"
+    },
+    {
+      "id": "n5_fuirumu",
+      "word": "フィルム",
+      "reading": "フィルム",
+      "key": "フィルム\tフィルム",
+      "jmdictSeq": "1109380"
+    },
+    {
+      "id": "n5_puuru",
+      "word": "プール",
+      "reading": "プール",
+      "key": "プール\tプール",
+      "jmdictSeq": "1115150"
+    },
+    {
+      "id": "n5_peeji",
+      "word": "ページ",
+      "reading": "ページ",
+      "key": "ページ\tページ",
+      "jmdictSeq": "1120410"
+    },
+    {
+      "id": "n5_beddo",
+      "word": "ベッド",
+      "reading": "ベッド",
+      "key": "ベッド\tベッド",
+      "jmdictSeq": "1119650"
+    },
+    {
+      "id": "n5_boorupen",
+      "word": "ボールペン",
+      "reading": "ボールペン",
+      "key": "ボールペン\tボールペン",
+      "jmdictSeq": "1123590"
+    },
+    {
+      "id": "n5_poketto",
+      "word": "ポケット",
+      "reading": "ポケット",
+      "key": "ポケット\tポケット",
+      "jmdictSeq": "1124970"
+    },
+    {
+      "id": "n5_posuto",
+      "word": "ポスト",
+      "reading": "ポスト",
+      "key": "ポスト\tポスト",
+      "jmdictSeq": "1125150"
+    },
+    {
+      "id": "n5_hoteru",
+      "word": "ホテル",
+      "reading": "ホテル",
+      "key": "ホテル\tホテル",
+      "jmdictSeq": "1122650"
+    },
+    {
+      "id": "n5_mazui",
+      "word": "まずい",
+      "reading": "まずい",
+      "key": "まずい\tまずい",
+      "jmdictSeq": "1495000"
+    },
+    {
+      "id": "n5_mada",
+      "word": "まだ",
+      "reading": "まだ",
+      "key": "まだ\tまだ",
+      "jmdictSeq": "1527110"
+    },
+    {
+      "id": "n5_massugu",
+      "word": "まっすぐ",
+      "reading": "まっすぐ",
+      "key": "まっすぐ\tまっすぐ",
+      "jmdictSeq": "1580600"
+    },
+    {
+      "id": "n5_minna",
+      "word": "みんな",
+      "reading": "みんな",
+      "key": "みんな\tみんな",
+      "jmdictSeq": "1202150"
+    },
+    {
+      "id": "n5_meetoru",
+      "word": "メートル",
+      "reading": "メートル",
+      "key": "メートル\tメートル",
+      "jmdictSeq": "1132570"
+    },
+    {
+      "id": "n5_moshimoshi",
+      "word": "もしもし",
+      "reading": "もしもし",
+      "key": "もしもし\tもしもし",
+      "jmdictSeq": "1012550"
+    },
+    {
+      "id": "n5_motto",
+      "word": "もっと",
+      "reading": "もっと",
+      "key": "もっと\tもっと",
+      "jmdictSeq": "1012620"
+    },
+    {
+      "id": "n5_rajio",
+      "word": "ラジオ",
+      "reading": "ラジオ",
+      "key": "ラジオ\tラジオ",
+      "jmdictSeq": "1138860"
+    },
+    {
+      "id": "n5_rajiokase",
+      "word": "ラジカセ",
+      "reading": "ラジカセ",
+      "key": "ラジカセ\tラジカセ",
+      "jmdictSeq": "1138960"
+    },
+    {
+      "id": "n5_rekoodo",
+      "word": "レコード",
+      "reading": "レコード",
+      "key": "レコード\tレコード",
+      "jmdictSeq": "1144940"
+    },
+    {
+      "id": "n5_resutoran",
+      "word": "レストラン",
+      "reading": "レストラン",
+      "key": "レストラン\tレストラン",
+      "jmdictSeq": "1145310"
+    },
+    {
+      "id": "n5_waishatsu",
+      "word": "ワイシャツ",
+      "reading": "ワイシャツ",
+      "key": "ワイシャツ\tワイシャツ",
+      "jmdictSeq": "1148640"
+    }
+  ]
+}

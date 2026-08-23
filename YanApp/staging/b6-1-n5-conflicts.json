@@ -1,0 +1,1262 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "B6-1 exact word+reading join",
+  "input": "staging/jmdict-eng-3.6.2.json",
+  "target": "N5 words missing jmdictSeq",
+  "counts": {
+    "targets": 197,
+    "auto": 92,
+    "conflict": 46,
+    "unmatched": 59
+  },
+  "entries": [
+    {
+      "id": "n5_aa",
+      "word": "ああ",
+      "reading": "ああ",
+      "key": "ああ\tああ",
+      "candidates": [
+        {
+          "seq": "1565440",
+          "word": "ああ",
+          "reading": "ああ"
+        },
+        {
+          "seq": "2085080",
+          "word": "ああ",
+          "reading": "ああ"
+        },
+        {
+          "seq": "2252550",
+          "word": "ああ",
+          "reading": "ああ"
+        }
+      ]
+    },
+    {
+      "id": "n5_anata",
+      "word": "あなた",
+      "reading": "あなた",
+      "key": "あなた\tあなた",
+      "candidates": [
+        {
+          "seq": "1223615",
+          "word": "あなた",
+          "reading": "あなた"
+        },
+        {
+          "seq": "1483180",
+          "word": "あなた",
+          "reading": "あなた"
+        }
+      ]
+    },
+    {
+      "id": "n5_ano",
+      "word": "あの",
+      "reading": "あの",
+      "key": "あの\tあの",
+      "candidates": [
+        {
+          "seq": "1000420",
+          "word": "あの",
+          "reading": "あの"
+        },
+        {
+          "seq": "1000430",
+          "word": "あの",
+          "reading": "あの"
+        }
+      ]
+    },
+    {
+      "id": "n5_are",
+      "word": "あれ",
+      "reading": "あれ",
+      "key": "あれ\tあれ",
+      "candidates": [
+        {
+          "seq": "1000580",
+          "word": "あれ",
+          "reading": "あれ"
+        },
+        {
+          "seq": "1196670",
+          "word": "あれ",
+          "reading": "あれ"
+        },
+        {
+          "seq": "1857320",
+          "word": "あれ",
+          "reading": "あれ"
+        },
+        {
+          "seq": "2847612",
+          "word": "あれ",
+          "reading": "あれ"
+        },
+        {
+          "seq": "2859257",
+          "word": "あれ",
+          "reading": "あれ"
+        }
+      ]
+    },
+    {
+      "id": "n5_ikura",
+      "word": "いくら",
+      "reading": "いくら",
+      "key": "いくら\tいくら",
+      "candidates": [
+        {
+          "seq": "1021180",
+          "word": "いくら",
+          "reading": "いくら"
+        },
+        {
+          "seq": "1219980",
+          "word": "いくら",
+          "reading": "いくら"
+        }
+      ]
+    },
+    {
+      "id": "n5_itsu",
+      "word": "いつ",
+      "reading": "いつ",
+      "key": "いつ\tいつ",
+      "candidates": [
+        {
+          "seq": "1188760",
+          "word": "いつ",
+          "reading": "いつ"
+        },
+        {
+          "seq": "1268060",
+          "word": "いつ",
+          "reading": "いつ"
+        },
+        {
+          "seq": "1585390",
+          "word": "いつ",
+          "reading": "いつ"
+        },
+        {
+          "seq": "2837668",
+          "word": "いつ",
+          "reading": "いつ"
+        },
+        {
+          "seq": "2843147",
+          "word": "いつ",
+          "reading": "いつ"
+        }
+      ]
+    },
+    {
+      "id": "n5_uchi",
+      "word": "うち",
+      "reading": "うち",
+      "key": "うち\tうち",
+      "candidates": [
+        {
+          "seq": "1191740",
+          "word": "うち",
+          "reading": "うち"
+        },
+        {
+          "seq": "1457730",
+          "word": "うち",
+          "reading": "うち"
+        },
+        {
+          "seq": "2859852",
+          "word": "うち",
+          "reading": "うち"
+        }
+      ]
+    },
+    {
+      "id": "n5_kakaru",
+      "word": "かかる",
+      "reading": "かかる",
+      "key": "かかる\tかかる",
+      "candidates": [
+        {
+          "seq": "1193110",
+          "word": "かかる",
+          "reading": "かかる"
+        },
+        {
+          "seq": "1207590",
+          "word": "かかる",
+          "reading": "かかる"
+        },
+        {
+          "seq": "1249300",
+          "word": "かかる",
+          "reading": "かかる"
+        },
+        {
+          "seq": "1609500",
+          "word": "かかる",
+          "reading": "かかる"
+        },
+        {
+          "seq": "2076580",
+          "word": "かかる",
+          "reading": "かかる"
+        },
+        {
+          "seq": "2841189",
+          "word": "かかる",
+          "reading": "かかる"
+        }
+      ]
+    },
+    {
+      "id": "n5_kakeru_2",
+      "word": "かける",
+      "reading": "かける",
+      "key": "かける\tかける",
+      "candidates": [
+        {
+          "seq": "1207610",
+          "word": "かける",
+          "reading": "かける"
+        },
+        {
+          "seq": "1244720",
+          "word": "かける",
+          "reading": "かける"
+        },
+        {
+          "seq": "1253920",
+          "word": "かける",
+          "reading": "かける"
+        },
+        {
+          "seq": "1444840",
+          "word": "かける",
+          "reading": "かける"
+        },
+        {
+          "seq": "1570710",
+          "word": "かける",
+          "reading": "かける"
+        },
+        {
+          "seq": "2208960",
+          "word": "かける",
+          "reading": "かける"
+        }
+      ]
+    },
+    {
+      "id": "n5_kaban",
+      "word": "かばん",
+      "reading": "かばん",
+      "key": "かばん\tかばん",
+      "candidates": [
+        {
+          "seq": "1186150",
+          "word": "かばん",
+          "reading": "かばん"
+        },
+        {
+          "seq": "1208910",
+          "word": "かばん",
+          "reading": "かばん"
+        },
+        {
+          "seq": "2856280",
+          "word": "かばん",
+          "reading": "かばん"
+        }
+      ]
+    },
+    {
+      "id": "n5_kooto",
+      "word": "コート",
+      "reading": "コート",
+      "key": "コート\tコート",
+      "candidates": [
+        {
+          "seq": "1049000",
+          "word": "コート",
+          "reading": "コート"
+        },
+        {
+          "seq": "2842174",
+          "word": "コート",
+          "reading": "コート"
+        }
+      ]
+    },
+    {
+      "id": "n5_koko",
+      "word": "ここ",
+      "reading": "ここ",
+      "key": "ここ\tここ",
+      "candidates": [
+        {
+          "seq": "1288810",
+          "word": "ここ",
+          "reading": "ここ"
+        },
+        {
+          "seq": "1578150",
+          "word": "ここ",
+          "reading": "ここ"
+        },
+        {
+          "seq": "1593190",
+          "word": "ここ",
+          "reading": "ここ"
+        },
+        {
+          "seq": "1639930",
+          "word": "ここ",
+          "reading": "ここ"
+        },
+        {
+          "seq": "1955390",
+          "word": "ここ",
+          "reading": "ここ"
+        }
+      ]
+    },
+    {
+      "id": "n5_kocchi",
+      "word": "こっち",
+      "reading": "こっち",
+      "key": "こっち\tこっち",
+      "candidates": [
+        {
+          "seq": "1004500",
+          "word": "こっち",
+          "reading": "こっち"
+        },
+        {
+          "seq": "2843401",
+          "word": "こっち",
+          "reading": "こっち"
+        }
+      ]
+    },
+    {
+      "id": "n5_koppu",
+      "word": "コップ",
+      "reading": "コップ",
+      "key": "コップ\tコップ",
+      "candidates": [
+        {
+          "seq": "1050390",
+          "word": "コップ",
+          "reading": "コップ"
+        },
+        {
+          "seq": "2846389",
+          "word": "コップ",
+          "reading": "コップ"
+        },
+        {
+          "seq": "5000045",
+          "word": "コップ",
+          "reading": "コップ"
+        }
+      ]
+    },
+    {
+      "id": "n5_kono",
+      "word": "この",
+      "reading": "この",
+      "key": "この\tこの",
+      "candidates": [
+        {
+          "seq": "1578150",
+          "word": "この",
+          "reading": "この"
+        },
+        {
+          "seq": "1582920",
+          "word": "この",
+          "reading": "この"
+        }
+      ]
+    },
+    {
+      "id": "n5_gomi",
+      "word": "ごみ",
+      "reading": "ごみ",
+      "key": "ごみ\tごみ",
+      "candidates": [
+        {
+          "seq": "1369900",
+          "word": "ごみ",
+          "reading": "ごみ"
+        },
+        {
+          "seq": "2573390",
+          "word": "ごみ",
+          "reading": "ごみ"
+        },
+        {
+          "seq": "2846427",
+          "word": "ごみ",
+          "reading": "ごみ"
+        }
+      ]
+    },
+    {
+      "id": "n5_kore",
+      "word": "これ",
+      "reading": "これ",
+      "key": "これ\tこれ",
+      "candidates": [
+        {
+          "seq": "1628530",
+          "word": "これ",
+          "reading": "これ"
+        },
+        {
+          "seq": "2216120",
+          "word": "これ",
+          "reading": "これ"
+        }
+      ]
+    },
+    {
+      "id": "n5_shikashi",
+      "word": "しかし",
+      "reading": "しかし",
+      "key": "しかし\tしかし",
+      "candidates": [
+        {
+          "seq": "1505990",
+          "word": "しかし",
+          "reading": "しかし"
+        },
+        {
+          "seq": "2586170",
+          "word": "しかし",
+          "reading": "しかし"
+        }
+      ]
+    },
+    {
+      "id": "n5_suru",
+      "word": "する",
+      "reading": "する",
+      "key": "する\tする",
+      "candidates": [
+        {
+          "seq": "1157170",
+          "word": "する",
+          "reading": "する"
+        },
+        {
+          "seq": "1298670",
+          "word": "する",
+          "reading": "する"
+        },
+        {
+          "seq": "1567440",
+          "word": "する",
+          "reading": "する"
+        },
+        {
+          "seq": "1581900",
+          "word": "する",
+          "reading": "する"
+        },
+        {
+          "seq": "1595910",
+          "word": "する",
+          "reading": "する"
+        }
+      ]
+    },
+    {
+      "id": "n5_soko",
+      "word": "そこ",
+      "reading": "そこ",
+      "key": "そこ\tそこ",
+      "candidates": [
+        {
+          "seq": "1006670",
+          "word": "そこ",
+          "reading": "そこ"
+        },
+        {
+          "seq": "1436050",
+          "word": "そこ",
+          "reading": "そこ"
+        }
+      ]
+    },
+    {
+      "id": "n5_sono",
+      "word": "その",
+      "reading": "その",
+      "key": "その\tその",
+      "candidates": [
+        {
+          "seq": "1006830",
+          "word": "その",
+          "reading": "その"
+        },
+        {
+          "seq": "1176240",
+          "word": "その",
+          "reading": "その"
+        }
+      ]
+    },
+    {
+      "id": "n5_soba",
+      "word": "そば",
+      "reading": "そば",
+      "key": "そば\tそば",
+      "candidates": [
+        {
+          "seq": "1238460",
+          "word": "そば",
+          "reading": "そば"
+        },
+        {
+          "seq": "1403830",
+          "word": "そば",
+          "reading": "そば"
+        }
+      ]
+    },
+    {
+      "id": "n5_sore",
+      "word": "それ",
+      "reading": "それ",
+      "key": "それ\tそれ",
+      "candidates": [
+        {
+          "seq": "1006970",
+          "word": "それ",
+          "reading": "それ"
+        },
+        {
+          "seq": "2216210",
+          "word": "それ",
+          "reading": "それ"
+        }
+      ]
+    },
+    {
+      "id": "n5_tate",
+      "word": "たて",
+      "reading": "たて",
+      "key": "たて\tたて",
+      "candidates": [
+        {
+          "seq": "1299150",
+          "word": "たて",
+          "reading": "たて"
+        },
+        {
+          "seq": "1335640",
+          "word": "たて",
+          "reading": "たて"
+        },
+        {
+          "seq": "1341840",
+          "word": "たて",
+          "reading": "たて"
+        },
+        {
+          "seq": "2081610",
+          "word": "たて",
+          "reading": "たて"
+        },
+        {
+          "seq": "2609790",
+          "word": "たて",
+          "reading": "たて"
+        },
+        {
+          "seq": "2868182",
+          "word": "たて",
+          "reading": "たて"
+        }
+      ]
+    },
+    {
+      "id": "n5_tsukeru",
+      "word": "つける",
+      "reading": "つける",
+      "key": "つける\tつける",
+      "candidates": [
+        {
+          "seq": "1331540",
+          "word": "つける",
+          "reading": "つける"
+        },
+        {
+          "seq": "1433680",
+          "word": "つける",
+          "reading": "つける"
+        },
+        {
+          "seq": "1495770",
+          "word": "つける",
+          "reading": "つける"
+        },
+        {
+          "seq": "1610400",
+          "word": "つける",
+          "reading": "つける"
+        },
+        {
+          "seq": "2100600",
+          "word": "つける",
+          "reading": "つける"
+        }
+      ]
+    },
+    {
+      "id": "n5_dekiru",
+      "word": "できる",
+      "reading": "できる",
+      "key": "できる\tできる",
+      "candidates": [
+        {
+          "seq": "1339500",
+          "word": "できる",
+          "reading": "できる"
+        },
+        {
+          "seq": "1340450",
+          "word": "できる",
+          "reading": "できる"
+        }
+      ]
+    },
+    {
+      "id": "n5_deha",
+      "word": "では",
+      "reading": "では",
+      "key": "では\tでは",
+      "candidates": [
+        {
+          "seq": "1008450",
+          "word": "では",
+          "reading": "では"
+        },
+        {
+          "seq": "1580130",
+          "word": "では",
+          "reading": "では"
+        }
+      ]
+    },
+    {
+      "id": "n5_dou",
+      "word": "どう",
+      "reading": "どう",
+      "key": "どう\tどう",
+      "candidates": [
+        {
+          "seq": "1000050",
+          "word": "どう",
+          "reading": "どう"
+        },
+        {
+          "seq": "1008910",
+          "word": "どう",
+          "reading": "どう"
+        },
+        {
+          "seq": "1451160",
+          "word": "どう",
+          "reading": "どう"
+        },
+        {
+          "seq": "1451730",
+          "word": "どう",
+          "reading": "どう"
+        },
+        {
+          "seq": "1453640",
+          "word": "どう",
+          "reading": "どう"
+        },
+        {
+          "seq": "1454010",
+          "word": "どう",
+          "reading": "どう"
+        },
+        {
+          "seq": "1582390",
+          "word": "どう",
+          "reading": "どう"
+        },
+        {
+          "seq": "2158900",
+          "word": "どう",
+          "reading": "どう"
+        },
+        {
+          "seq": "2252690",
+          "word": "どう",
+          "reading": "どう"
+        },
+        {
+          "seq": "2255350",
+          "word": "どう",
+          "reading": "どう"
+        },
+        {
+          "seq": "2271820",
+          "word": "どう",
+          "reading": "どう"
+        },
+        {
+          "seq": "2844351",
+          "word": "どう",
+          "reading": "どう"
+        }
+      ]
+    },
+    {
+      "id": "n5_dono",
+      "word": "どの",
+      "reading": "どの",
+      "key": "どの\tどの",
+      "candidates": [
+        {
+          "seq": "1442500",
+          "word": "どの",
+          "reading": "どの"
+        },
+        {
+          "seq": "1920240",
+          "word": "どの",
+          "reading": "どの"
+        }
+      ]
+    },
+    {
+      "id": "n5_nai",
+      "word": "ない",
+      "reading": "ない",
+      "key": "ない\tない",
+      "candidates": [
+        {
+          "seq": "1518450",
+          "word": "ない",
+          "reading": "ない"
+        },
+        {
+          "seq": "1529520",
+          "word": "ない",
+          "reading": "ない"
+        },
+        {
+          "seq": "2098290",
+          "word": "ない",
+          "reading": "ない"
+        },
+        {
+          "seq": "2257550",
+          "word": "ない",
+          "reading": "ない"
+        },
+        {
+          "seq": "2861097",
+          "word": "ない",
+          "reading": "ない"
+        },
+        {
+          "seq": "2862777",
+          "word": "ない",
+          "reading": "ない"
+        }
+      ]
+    },
+    {
+      "id": "n5_naru",
+      "word": "なる",
+      "reading": "なる",
+      "key": "なる\tなる",
+      "candidates": [
+        {
+          "seq": "1375610",
+          "word": "なる",
+          "reading": "なる"
+        },
+        {
+          "seq": "1532910",
+          "word": "なる",
+          "reading": "なる"
+        },
+        {
+          "seq": "1611000",
+          "word": "なる",
+          "reading": "なる"
+        },
+        {
+          "seq": "2138260",
+          "word": "なる",
+          "reading": "なる"
+        }
+      ]
+    },
+    {
+      "id": "n5_hai",
+      "word": "はい",
+      "reading": "はい",
+      "key": "はい\tはい",
+      "candidates": [
+        {
+          "seq": "1010080",
+          "word": "はい",
+          "reading": "はい"
+        },
+        {
+          "seq": "1201860",
+          "word": "はい",
+          "reading": "はい"
+        },
+        {
+          "seq": "1472870",
+          "word": "はい",
+          "reading": "はい"
+        },
+        {
+          "seq": "1563260",
+          "word": "はい",
+          "reading": "はい"
+        },
+        {
+          "seq": "1586010",
+          "word": "はい",
+          "reading": "はい"
+        },
+        {
+          "seq": "1633870",
+          "word": "はい",
+          "reading": "はい"
+        },
+        {
+          "seq": "1901390",
+          "word": "はい",
+          "reading": "はい"
+        },
+        {
+          "seq": "2019640",
+          "word": "はい",
+          "reading": "はい"
+        },
+        {
+          "seq": "2060070",
+          "word": "はい",
+          "reading": "はい"
+        },
+        {
+          "seq": "2178790",
+          "word": "はい",
+          "reading": "はい"
+        },
+        {
+          "seq": "2577430",
+          "word": "はい",
+          "reading": "はい"
+        },
+        {
+          "seq": "2751340",
+          "word": "はい",
+          "reading": "はい"
+        },
+        {
+          "seq": "2826260",
+          "word": "はい",
+          "reading": "はい"
+        },
+        {
+          "seq": "2871113",
+          "word": "はい",
+          "reading": "はい"
+        }
+      ]
+    },
+    {
+      "id": "n5_haku",
+      "word": "はく",
+      "reading": "はく",
+      "key": "はく\tはく",
+      "candidates": [
+        {
+          "seq": "1399760",
+          "word": "はく",
+          "reading": "はく"
+        },
+        {
+          "seq": "1474240",
+          "word": "はく",
+          "reading": "はく"
+        },
+        {
+          "seq": "1488000",
+          "word": "はく",
+          "reading": "はく"
+        },
+        {
+          "seq": "1583000",
+          "word": "はく",
+          "reading": "はく"
+        },
+        {
+          "seq": "1607260",
+          "word": "はく",
+          "reading": "はく"
+        },
+        {
+          "seq": "1919550",
+          "word": "はく",
+          "reading": "はく"
+        },
+        {
+          "seq": "2020200",
+          "word": "はく",
+          "reading": "はく"
+        },
+        {
+          "seq": "2177290",
+          "word": "はく",
+          "reading": "はく"
+        },
+        {
+          "seq": "2236150",
+          "word": "はく",
+          "reading": "はく"
+        },
+        {
+          "seq": "2594450",
+          "word": "はく",
+          "reading": "はく"
+        },
+        {
+          "seq": "2646460",
+          "word": "はく",
+          "reading": "はく"
+        },
+        {
+          "seq": "2751420",
+          "word": "はく",
+          "reading": "はく"
+        },
+        {
+          "seq": "2833893",
+          "word": "はく",
+          "reading": "はく"
+        }
+      ]
+    },
+    {
+      "id": "n5_basu",
+      "word": "バス",
+      "reading": "バス",
+      "key": "バス\tバス",
+      "candidates": [
+        {
+          "seq": "1098390",
+          "word": "バス",
+          "reading": "バス"
+        },
+        {
+          "seq": "2845312",
+          "word": "バス",
+          "reading": "バス"
+        },
+        {
+          "seq": "2845314",
+          "word": "バス",
+          "reading": "バス"
+        },
+        {
+          "seq": "2845315",
+          "word": "バス",
+          "reading": "バス"
+        }
+      ]
+    },
+    {
+      "id": "n5_pan",
+      "word": "パン",
+      "reading": "パン",
+      "key": "パン\tパン",
+      "candidates": [
+        {
+          "seq": "1103090",
+          "word": "パン",
+          "reading": "パン"
+        },
+        {
+          "seq": "2827858",
+          "word": "パン",
+          "reading": "パン"
+        },
+        {
+          "seq": "2850596",
+          "word": "パン",
+          "reading": "パン"
+        },
+        {
+          "seq": "2850597",
+          "word": "パン",
+          "reading": "パン"
+        }
+      ]
+    },
+    {
+      "id": "n5_fuooku",
+      "word": "フォーク",
+      "reading": "フォーク",
+      "key": "フォーク\tフォーク",
+      "candidates": [
+        {
+          "seq": "1110110",
+          "word": "フォーク",
+          "reading": "フォーク"
+        },
+        {
+          "seq": "2848171",
+          "word": "フォーク",
+          "reading": "フォーク"
+        }
+      ]
+    },
+    {
+      "id": "n5_petto",
+      "word": "ペット",
+      "reading": "ペット",
+      "key": "ペット\tペット",
+      "candidates": [
+        {
+          "seq": "1120990",
+          "word": "ペット",
+          "reading": "ペット"
+        },
+        {
+          "seq": "2189230",
+          "word": "ペット",
+          "reading": "ペット"
+        }
+      ]
+    },
+    {
+      "id": "n5_pen",
+      "word": "ペン",
+      "reading": "ペン",
+      "key": "ペン\tペン",
+      "candidates": [
+        {
+          "seq": "1121380",
+          "word": "ペン",
+          "reading": "ペン"
+        },
+        {
+          "seq": "5000059",
+          "word": "ペン",
+          "reading": "ペン"
+        }
+      ]
+    },
+    {
+      "id": "n5_botan",
+      "word": "ボタン",
+      "reading": "ボタン",
+      "key": "ボタン\tボタン",
+      "candidates": [
+        {
+          "seq": "1123880",
+          "word": "ボタン",
+          "reading": "ボタン"
+        },
+        {
+          "seq": "1182880",
+          "word": "ボタン",
+          "reading": "ボタン"
+        }
+      ]
+    },
+    {
+      "id": "n5_mata",
+      "word": "また",
+      "reading": "また",
+      "key": "また\tまた",
+      "candidates": [
+        {
+          "seq": "1267460",
+          "word": "また",
+          "reading": "また"
+        },
+        {
+          "seq": "1524930",
+          "word": "また",
+          "reading": "また"
+        },
+        {
+          "seq": "2251410",
+          "word": "また",
+          "reading": "また"
+        }
+      ]
+    },
+    {
+      "id": "n5_macchi",
+      "word": "マッチ",
+      "reading": "マッチ",
+      "key": "マッチ\tマッチ",
+      "candidates": [
+        {
+          "seq": "1128430",
+          "word": "マッチ",
+          "reading": "マッチ"
+        },
+        {
+          "seq": "2784220",
+          "word": "マッチ",
+          "reading": "マッチ"
+        }
+      ]
+    },
+    {
+      "id": "n5_mou",
+      "word": "もう",
+      "reading": "もう",
+      "key": "もう\tもう",
+      "candidates": [
+        {
+          "seq": "1012480",
+          "word": "もう",
+          "reading": "もう"
+        },
+        {
+          "seq": "1912250",
+          "word": "もう",
+          "reading": "もう"
+        },
+        {
+          "seq": "2081490",
+          "word": "もう",
+          "reading": "もう"
+        },
+        {
+          "seq": "2127920",
+          "word": "もう",
+          "reading": "もう"
+        },
+        {
+          "seq": "2434690",
+          "word": "もう",
+          "reading": "もう"
+        },
+        {
+          "seq": "2844205",
+          "word": "もう",
+          "reading": "もう"
+        }
+      ]
+    },
+    {
+      "id": "n5_yaru",
+      "word": "やる",
+      "reading": "やる",
+      "key": "やる\tやる",
+      "candidates": [
+        {
+          "seq": "1012980",
+          "word": "やる",
+          "reading": "やる"
+        },
+        {
+          "seq": "2011110",
+          "word": "やる",
+          "reading": "やる"
+        },
+        {
+          "seq": "2446940",
+          "word": "やる",
+          "reading": "やる"
+        },
+        {
+          "seq": "2678900",
+          "word": "やる",
+          "reading": "やる"
+        }
+      ]
+    },
+    {
+      "id": "n5_yoku",
+      "word": "よく",
+      "reading": "よく",
+      "key": "よく\tよく",
+      "candidates": [
+        {
+          "seq": "1547320",
+          "word": "よく",
+          "reading": "よく"
+        },
+        {
+          "seq": "1547530",
+          "word": "よく",
+          "reading": "よく"
+        },
+        {
+          "seq": "1605870",
+          "word": "よく",
+          "reading": "よく"
+        },
+        {
+          "seq": "2064170",
+          "word": "よく",
+          "reading": "よく"
+        }
+      ]
+    },
+    {
+      "id": "n5_ramen",
+      "word": "ラーメン",
+      "reading": "ラーメン",
+      "key": "ラーメン\tラーメン",
+      "candidates": [
+        {
+          "seq": "1137720",
+          "word": "ラーメン",
+          "reading": "ラーメン"
+        },
+        {
+          "seq": "2207500",
+          "word": "ラーメン",
+          "reading": "ラーメン"
+        }
+      ]
+    },
+    {
+      "id": "n5_rippa",
+      "word": "りっぱ",
+      "reading": "りっぱ",
+      "key": "りっぱ\tりっぱ",
+      "candidates": [
+        {
+          "seq": "1551790",
+          "word": "りっぱ",
+          "reading": "りっぱ"
+        },
+        {
+          "seq": "2255560",
+          "word": "りっぱ",
+          "reading": "りっぱ"
+        }
+      ]
+    }
+  ]
+}
