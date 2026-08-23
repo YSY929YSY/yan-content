@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "version": "2.3",
+  "version": "2.4",
   "updated": "2026-08-22",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8005 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
@@ -45,6 +45,13 @@
     "changes": [
      "L-T2b：修正 6 条便利店多义词的中文释义并标明人工审阅",
      "L-T2b：将便利店场景中原仅词典的 16 条词纳入 Learning，保留 kanji_anchor 主线池 563 条"
+    ]
+   },
+   {
+    "date": "2026-08-24",
+    "changes": [
+     "B6-1：按词面+读音从 JMdict 3.6.2 自动回锁 N4/N5；仅自动通过写入 jmdictSeq，冲突与未命中留在 staging 报告",
+     "B6-2：按回锁结果开放 608 条 N4 学习池，learningBasis=n4_refined_relocked_2026-08-24；kanji_anchor 保持 563 条"
     ]
    }
   ]
@@ -44506,8 +44513,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1202150"
   },
@@ -47885,8 +47893,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1151120"
   },
@@ -47929,8 +47938,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1215230"
   },
@@ -47974,8 +47984,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1383260"
   },
@@ -48019,8 +48030,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    }
   },
   {
@@ -48062,8 +48074,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1383310"
   },
@@ -48111,8 +48124,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1015220"
   },
@@ -48160,8 +48174,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1390800"
   },
@@ -48204,8 +48219,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1526960"
   },
@@ -48254,8 +48270,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1015840"
   },
@@ -48298,8 +48315,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1584660"
   },
@@ -48342,8 +48360,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1542070"
   },
@@ -48387,8 +48406,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    }
   },
   {
@@ -48430,8 +48450,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1333560"
   },
@@ -48474,8 +48495,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1017330"
   },
@@ -48518,8 +48540,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1929050"
   },
@@ -48556,8 +48579,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1149830"
   },
@@ -48600,8 +48624,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1323010"
   },
@@ -48650,8 +48675,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1019280"
   },
@@ -48743,8 +48769,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1153890"
   },
@@ -48787,8 +48814,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1153930"
   },
@@ -48874,8 +48902,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1154860"
   },
@@ -48918,8 +48947,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1155060"
   },
@@ -48962,8 +48992,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1155090"
   },
@@ -49006,8 +49037,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1159810"
   },
@@ -49050,8 +49082,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1378520"
   },
@@ -49094,8 +49127,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1156530"
   },
@@ -49138,8 +49172,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1382440"
   },
@@ -49183,8 +49218,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1195140"
   },
@@ -49227,8 +49263,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1155120"
   },
@@ -49271,8 +49308,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1228650"
   },
@@ -49315,8 +49353,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1421900"
   },
@@ -49360,8 +49399,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1587290"
   },
@@ -49404,8 +49444,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1576250"
   },
@@ -49442,8 +49483,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1164010"
   },
@@ -49480,8 +49522,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1165670"
   },
@@ -49524,8 +49567,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1311450"
   },
@@ -49568,8 +49612,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1155180"
   },
@@ -49612,8 +49657,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1442750"
   },
@@ -49656,8 +49702,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1222770"
   },
@@ -49700,8 +49747,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1000940"
   },
@@ -49744,8 +49792,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1357250"
   },
@@ -49788,8 +49837,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1305700"
   },
@@ -49832,8 +49882,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1588060"
   },
@@ -49876,8 +49927,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1329590"
   },
@@ -49920,8 +49972,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1451210"
   },
@@ -49964,8 +50017,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1172400"
   },
@@ -50008,8 +50062,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1457730"
   },
@@ -50052,8 +50107,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1408810"
   },
@@ -50096,8 +50152,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1486360"
   },
@@ -50140,8 +50197,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1588320"
   },
@@ -50184,8 +50242,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1158210"
   },
@@ -50228,8 +50287,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1562850"
   },
@@ -50272,8 +50332,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1310460"
   },
@@ -50316,8 +50377,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1550190"
   },
@@ -50360,8 +50422,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1588550"
   },
@@ -50405,8 +50468,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1219510"
   },
@@ -50492,8 +50556,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1172830"
   },
@@ -50536,8 +50601,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1172870"
   },
@@ -50580,8 +50646,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1172910"
   },
@@ -50632,8 +50699,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1027180"
   },
@@ -50682,8 +50750,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1028580"
   },
@@ -50726,8 +50795,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1310530"
   },
@@ -50770,8 +50840,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1588730"
   },
@@ -50819,8 +50890,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1178450"
   },
@@ -50857,8 +50929,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1001180"
   },
@@ -50901,8 +50974,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1612770"
   },
@@ -50951,8 +51025,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1032030"
   },
@@ -50989,8 +51064,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "2513640"
   },
@@ -51034,8 +51110,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1001640"
   },
@@ -51079,8 +51156,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1190860"
   },
@@ -51117,8 +51195,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "2429350"
   },
@@ -51161,8 +51240,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1182620"
   },
@@ -51205,8 +51285,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1182710"
   },
@@ -51249,8 +51330,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1589030"
   },
@@ -51293,8 +51375,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1402730"
   },
@@ -51337,8 +51420,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1589040"
   },
@@ -51382,8 +51466,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    }
   },
   {
@@ -51425,8 +51510,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1589060"
   },
@@ -51469,8 +51555,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1445690"
   },
@@ -51513,8 +51600,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1589110"
   },
@@ -51557,8 +51645,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1002170"
   },
@@ -51601,8 +51690,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1002400"
   },
@@ -51646,8 +51736,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    }
   },
   {
@@ -51683,8 +51774,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1238840"
   },
@@ -51727,8 +51819,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1496480"
   },
@@ -51765,8 +51858,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1270550"
   },
@@ -51809,8 +51903,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1576900"
   },
@@ -51854,8 +51949,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    }
   },
   {
@@ -51897,8 +51993,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1546880"
   },
@@ -51941,8 +52038,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1538440"
   },
@@ -51985,8 +52083,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1238680"
   },
@@ -52023,8 +52122,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1604135"
   },
@@ -52061,8 +52161,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1001870"
   },
@@ -52105,8 +52206,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1002500"
   },
@@ -52154,8 +52256,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1309260"
   },
@@ -52198,8 +52301,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1589350"
   },
@@ -52243,8 +52347,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1217070"
   },
@@ -52287,8 +52392,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1489340"
   },
@@ -52331,8 +52437,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1365040"
   },
@@ -52369,8 +52476,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "2005990"
   },
@@ -52413,8 +52521,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1385910"
   },
@@ -52457,8 +52566,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1270810"
   },
@@ -52501,8 +52611,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1385920"
   },
@@ -52545,8 +52656,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1589590"
   },
@@ -52589,8 +52701,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1036290"
   },
@@ -52633,8 +52746,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1201280"
   },
@@ -52682,8 +52796,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1198360"
   },
@@ -52720,8 +52835,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1198380"
   },
@@ -52764,8 +52880,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1200850"
   },
@@ -52808,8 +52925,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1198660"
   },
@@ -52852,8 +52970,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1198880"
   },
@@ -52896,8 +53015,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1221250"
   },
@@ -52940,8 +53060,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1192700"
   },
@@ -53027,8 +53148,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1357210"
   },
@@ -53071,8 +53193,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1193950"
   },
@@ -53119,8 +53242,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1040060"
   },
@@ -53169,8 +53293,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1040250"
   },
@@ -53213,8 +53338,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1040260"
   },
@@ -53262,8 +53388,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1257110"
   },
@@ -53306,8 +53433,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1250220"
   },
@@ -53350,8 +53478,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1511790"
   },
@@ -53394,8 +53523,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1195840"
   },
@@ -53438,8 +53568,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1346150"
   },
@@ -53482,8 +53613,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1590480"
   },
@@ -53526,8 +53658,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1192420"
   },
@@ -53575,8 +53708,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1483190"
   },
@@ -53619,8 +53753,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1487400"
   },
@@ -53663,8 +53798,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1242970"
   },
@@ -53707,8 +53843,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1483150"
   },
@@ -53751,8 +53888,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1509290"
   },
@@ -53796,8 +53934,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1279680"
   },
@@ -53840,8 +53979,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1477950"
   },
@@ -53884,8 +54024,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1209240"
   },
@@ -53928,8 +54069,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1432850"
   },
@@ -53972,8 +54114,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1040380"
   },
@@ -54016,8 +54159,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1483070"
   },
@@ -54060,8 +54204,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1483090"
   },
@@ -54104,8 +54249,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1209650"
   },
@@ -54148,8 +54294,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1590770"
   },
@@ -54192,8 +54339,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1510790"
   },
@@ -54241,8 +54389,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1281020"
   },
@@ -54285,8 +54434,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1215810"
   },
@@ -54329,8 +54479,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1213870"
   },
@@ -54373,8 +54524,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1214330"
   },
@@ -54417,8 +54569,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1221520"
   },
@@ -54466,8 +54619,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1220800"
   },
@@ -54510,8 +54664,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1218560"
   },
@@ -54554,8 +54709,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1591150"
   },
@@ -54598,8 +54754,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1222700"
   },
@@ -54642,8 +54799,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1225130"
   },
@@ -54691,8 +54849,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1222840"
   },
@@ -54740,8 +54899,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1223021"
   },
@@ -54785,8 +54945,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1003430"
   },
@@ -54829,8 +54990,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1258710"
   },
@@ -54873,8 +55035,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1262530"
   },
@@ -54917,8 +55080,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1222590"
   },
@@ -54962,8 +55126,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    }
   },
   {
@@ -55005,8 +55170,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1247250"
   },
@@ -55049,8 +55215,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1254180"
   },
@@ -55093,8 +55260,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1591430"
   },
@@ -55137,8 +55305,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1423240"
   },
@@ -55181,8 +55350,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1226630"
   },
@@ -55225,8 +55395,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1228560"
   },
@@ -55269,8 +55440,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1228690"
   },
@@ -55313,8 +55485,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1236950"
   },
@@ -55357,8 +55530,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1237030"
   },
@@ -55401,8 +55575,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1234140"
   },
@@ -55445,8 +55620,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1238410"
   },
@@ -55489,8 +55665,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1242350"
   },
@@ -55533,8 +55710,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1592500"
   },
@@ -55577,8 +55755,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1245470"
   },
@@ -55621,8 +55800,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1245570"
   },
@@ -55665,8 +55845,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1401910"
   },
@@ -55710,8 +55891,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1184280"
   },
@@ -55754,8 +55936,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1592270"
   },
@@ -55798,8 +55981,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1173100"
   },
@@ -55842,8 +56026,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1483540"
   },
@@ -55886,8 +56071,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1269130"
   },
@@ -55930,8 +56116,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1514960"
   },
@@ -55974,8 +56161,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1247260"
   },
@@ -56018,8 +56206,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1533820"
   },
@@ -56062,8 +56251,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1252090"
   },
@@ -56106,8 +56296,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1251270"
   },
@@ -56150,8 +56341,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1251320"
   },
@@ -56194,8 +56386,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1252390"
   },
@@ -56238,8 +56431,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1047860"
   },
@@ -56282,8 +56476,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1200220"
   },
@@ -56326,8 +56521,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1250870"
   },
@@ -56370,8 +56566,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1350080"
   },
@@ -56414,8 +56611,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1185290"
   },
@@ -56458,8 +56656,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1254130"
   },
@@ -56502,8 +56701,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "2853889"
   },
@@ -56546,8 +56746,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "2853889"
   },
@@ -56590,8 +56791,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1261190"
   },
@@ -56634,8 +56836,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1257040"
   },
@@ -56678,8 +56881,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1258520"
   },
@@ -56722,8 +56926,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1258570"
   },
@@ -56766,8 +56971,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1260000"
   },
@@ -56810,8 +57016,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1307770"
   },
@@ -56891,8 +57098,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1282490"
   },
@@ -56935,8 +57143,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1282260"
   },
@@ -56979,8 +57188,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1278040"
   },
@@ -57023,8 +57233,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1283500"
   },
@@ -57067,8 +57278,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1283510"
   },
@@ -57111,8 +57323,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1578700"
   },
@@ -57155,8 +57368,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1279590"
   },
@@ -57199,8 +57413,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1272280"
   },
@@ -57243,8 +57458,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1282340"
   },
@@ -57287,8 +57503,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1283860"
   },
@@ -57331,8 +57548,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1274820"
   },
@@ -57375,8 +57593,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1286400"
   },
@@ -57424,8 +57643,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1360480"
   },
@@ -57462,8 +57682,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1270390"
   },
@@ -57506,8 +57727,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1267180"
   },
@@ -57550,8 +57772,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1593570"
   },
@@ -57595,8 +57818,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    }
   },
   {
@@ -57632,8 +57856,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1593590"
   },
@@ -57677,8 +57902,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    }
   },
   {
@@ -57720,8 +57946,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1348530"
   },
@@ -57758,8 +57985,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1004690"
   },
@@ -57803,8 +58031,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1004710"
   },
@@ -57847,8 +58076,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1295530"
   },
@@ -57891,8 +58121,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1369900"
   },
@@ -57935,8 +58166,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1593410"
   },
@@ -57979,8 +58211,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1508750"
   },
@@ -58017,8 +58250,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "2217040"
   },
@@ -58055,8 +58289,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1004790"
   },
@@ -58099,8 +58334,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1593480"
   },
@@ -58143,8 +58379,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1199890"
   },
@@ -58187,8 +58424,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1199900"
   },
@@ -58236,8 +58474,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1051970"
   },
@@ -58280,8 +58519,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1289370"
   },
@@ -58318,8 +58558,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1053350"
   },
@@ -58362,8 +58603,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1053350"
   },
@@ -58406,8 +58648,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1289520"
   },
@@ -58450,8 +58693,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1293780"
   },
@@ -58494,8 +58738,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1293810"
   },
@@ -58538,8 +58783,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1293990"
   },
@@ -58587,8 +58833,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1297110"
   },
@@ -58635,7 +58882,7 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-    "learningBasis": "scene_convenience_reviewed_2026-08-22"
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1593670"
   },
@@ -58679,8 +58926,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    }
   },
   {
@@ -58722,8 +58970,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1379750"
   },
@@ -58766,8 +59015,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1184170"
   },
@@ -58815,8 +59065,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1291270"
   },
@@ -58896,8 +59147,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1579720"
   },
@@ -58945,8 +59197,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1293640"
   },
@@ -58989,8 +59242,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1293650"
   },
@@ -59043,8 +59297,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1057850"
   },
@@ -59087,8 +59342,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1403040"
   },
@@ -59131,8 +59387,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1357980"
   },
@@ -59175,8 +59432,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1303770"
   },
@@ -59230,8 +59488,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1058480"
   },
@@ -59280,8 +59539,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1058580"
   },
@@ -59324,8 +59584,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1304680"
   },
@@ -59368,8 +59629,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1308090"
   },
@@ -59412,8 +59674,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1315130"
   },
@@ -59456,8 +59719,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1312420"
   },
@@ -59500,8 +59764,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1594110"
   },
@@ -59550,8 +59815,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    }
   },
   {
@@ -59593,8 +59859,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1312350"
   },
@@ -59637,8 +59904,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1313850"
   },
@@ -59681,8 +59949,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1421210"
   },
@@ -59725,8 +59994,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1316300"
   },
@@ -59769,8 +60039,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1185930"
   },
@@ -59813,8 +60084,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1310260"
   },
@@ -59858,8 +60130,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1594400"
   },
@@ -59902,8 +60175,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1320140"
   },
@@ -59946,8 +60220,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1595270"
   },
@@ -59990,8 +60265,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1490670"
   },
@@ -60035,8 +60311,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1304420"
   },
@@ -60079,8 +60356,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1446760"
   },
@@ -60123,8 +60401,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1308690"
   },
@@ -60167,8 +60446,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1314400"
   },
@@ -60211,8 +60491,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1322700"
   },
@@ -60255,8 +60536,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1322920"
   },
@@ -60300,8 +60582,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1323500"
   },
@@ -60350,8 +60633,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1065680"
   },
@@ -60394,8 +60678,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1318720"
   },
@@ -60438,8 +60723,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1333090"
   },
@@ -60482,8 +60768,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1334080"
   },
@@ -60526,8 +60813,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1335440"
   },
@@ -60570,8 +60858,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1335080"
   },
@@ -60614,8 +60903,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1339460"
   },
@@ -60658,8 +60948,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1340000"
   },
@@ -60702,8 +60993,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1329000"
   },
@@ -60746,8 +61038,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1341670"
   },
@@ -60790,8 +61083,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1351430"
   },
@@ -60834,8 +61128,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1347870"
   },
@@ -60878,8 +61173,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1348430"
   },
@@ -60922,8 +61218,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1349610"
   },
@@ -60966,8 +61263,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1349480"
   },
@@ -61015,8 +61313,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1347710"
   },
@@ -61059,8 +61358,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1358490"
   },
@@ -61103,8 +61403,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1358680"
   },
@@ -61147,8 +61448,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1345250"
   },
@@ -61191,8 +61493,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1420410"
   },
@@ -61235,8 +61538,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1429060"
   },
@@ -61279,8 +61583,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1367300"
   },
@@ -61323,8 +61628,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1364670"
   },
@@ -61372,8 +61678,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1365250"
   },
@@ -61416,8 +61723,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1360930"
   },
@@ -61460,8 +61768,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1362400"
   },
@@ -61504,8 +61813,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1371320"
   },
@@ -61548,8 +61858,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1371920"
   },
@@ -61593,8 +61904,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1372800"
   },
@@ -61637,8 +61949,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1372980"
   },
@@ -61681,8 +61994,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1066680"
   },
@@ -61725,8 +62039,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1066690"
   },
@@ -61769,8 +62084,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1195970"
   },
@@ -61813,8 +62129,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1586265"
   },
@@ -61857,8 +62174,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1068550"
   },
@@ -61901,8 +62219,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1374550"
   },
@@ -61945,8 +62264,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1365980"
   },
@@ -61989,8 +62309,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1006110"
   },
@@ -62038,8 +62359,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1006140"
   },
@@ -62082,8 +62404,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1070280"
   },
@@ -62126,8 +62449,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1322320"
   },
@@ -62170,8 +62494,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1070650"
   },
@@ -62214,8 +62539,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1291500"
   },
@@ -62259,8 +62585,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1397300"
   },
@@ -62303,8 +62630,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1208640"
   },
@@ -62347,8 +62675,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1246440"
   },
@@ -62428,8 +62757,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1006280"
   },
@@ -62472,8 +62802,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1378860"
   },
@@ -62516,8 +62847,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1378990"
   },
@@ -62560,8 +62892,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1375970"
   },
@@ -62604,8 +62937,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1381100"
   },
@@ -62648,8 +62982,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1373860"
   },
@@ -62692,8 +63027,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1382250"
   },
@@ -62736,8 +63072,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1386460"
   },
@@ -62780,8 +63117,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1472800"
   },
@@ -62825,8 +63163,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1374530"
   },
@@ -62869,8 +63208,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1374300"
   },
@@ -62913,8 +63253,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1391780"
   },
@@ -62957,8 +63298,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1395620"
   },
@@ -63001,8 +63343,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1390360"
   },
@@ -63045,8 +63388,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1388410"
   },
@@ -63128,8 +63472,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1401210"
   },
@@ -63172,8 +63517,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1160570"
   },
@@ -63216,8 +63562,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1405890"
   },
@@ -63260,8 +63607,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1396840"
   },
@@ -63310,8 +63658,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1075500"
   },
@@ -63354,8 +63703,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1396860"
   },
@@ -63392,8 +63742,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1007000"
   },
@@ -63430,8 +63781,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1007040"
   },
@@ -63468,8 +63820,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1007060"
   },
@@ -63512,8 +63865,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1345605"
   },
@@ -63556,8 +63910,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1007130"
   },
@@ -63600,8 +63955,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "2008740"
   },
@@ -63644,8 +64000,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1411300"
   },
@@ -63693,8 +64050,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1413260"
   },
@@ -63743,8 +64101,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1413940"
   },
@@ -63792,8 +64151,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1414470"
   },
@@ -63880,8 +64240,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1075940"
   },
@@ -63924,8 +64285,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1414920"
   },
@@ -63968,8 +64330,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1596780"
   },
@@ -64012,8 +64375,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1445790"
   },
@@ -64050,8 +64414,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1007310"
   },
@@ -64094,8 +64459,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1596930"
   },
@@ -64138,8 +64504,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1404700"
   },
@@ -64182,8 +64549,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1518070"
   },
@@ -64226,8 +64594,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1369940"
   },
@@ -64270,8 +64639,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1376600"
   },
@@ -64314,8 +64684,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1356750"
   },
@@ -64358,8 +64729,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1551530"
   },
@@ -64402,8 +64774,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1257330"
   },
@@ -64446,8 +64819,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1556370"
   },
@@ -64490,8 +64864,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1416700"
   },
@@ -64539,8 +64914,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1207250"
   },
@@ -64584,8 +64960,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    }
   },
   {
@@ -64628,8 +65005,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1634500"
   },
@@ -64712,8 +65090,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1409110"
   },
@@ -64756,8 +65135,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1404740"
   },
@@ -64800,8 +65180,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1420160"
   },
@@ -64844,8 +65225,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1419860"
   },
@@ -64888,8 +65270,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1255060"
   },
@@ -64938,8 +65321,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1077550"
   },
@@ -64990,8 +65374,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1077560"
   },
@@ -65036,8 +65421,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1077570"
   },
@@ -65080,8 +65466,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1554820"
   },
@@ -65125,8 +65512,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1007560"
   },
@@ -65212,8 +65600,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1426530"
   },
@@ -65256,8 +65645,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1423650"
   },
@@ -65300,8 +65690,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1426590"
   },
@@ -65344,8 +65735,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1426920"
   },
@@ -65388,8 +65780,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1421540"
   },
@@ -65432,8 +65825,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1597780"
   },
@@ -65476,8 +65870,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1255430"
   },
@@ -65525,8 +65920,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1444980"
   },
@@ -65569,8 +65965,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1441870"
   },
@@ -65613,8 +66010,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1405790"
   },
@@ -65657,8 +66055,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1405800"
   },
@@ -65701,8 +66100,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1584060"
   },
@@ -65839,8 +66239,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1434120"
   },
@@ -65883,8 +66284,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1559290"
   },
@@ -65927,8 +66329,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1427360"
   },
@@ -65976,8 +66379,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1079290"
   },
@@ -66020,8 +66424,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1437450"
   },
@@ -66058,8 +66463,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1340460"
   },
@@ -66102,8 +66508,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1328190"
   },
@@ -66152,8 +66559,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1080000"
   },
@@ -66196,8 +66604,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1328090"
   },
@@ -66245,8 +66654,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1315240"
   },
@@ -66289,8 +66699,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1441390"
   },
@@ -66336,7 +66747,7 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-    "learningBasis": "scene_convenience_reviewed_2026-08-22"
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1440670"
   },
@@ -66379,8 +66790,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1438770"
   },
@@ -66423,8 +66835,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1443660"
   },
@@ -66467,8 +66880,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1443760"
   },
@@ -66511,8 +66925,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1440660"
   },
@@ -66555,8 +66970,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1621470"
   },
@@ -66599,8 +67015,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1454180"
   },
@@ -66680,8 +67097,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1451490"
   },
@@ -66729,8 +67147,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1177820"
   },
@@ -66773,8 +67192,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1433030"
   },
@@ -66817,8 +67237,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1454670"
   },
@@ -66861,8 +67282,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1455280"
   },
@@ -66906,8 +67328,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    }
   },
   {
@@ -66949,8 +67372,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1582200"
   },
@@ -66993,8 +67417,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1454750"
   },
@@ -67037,8 +67462,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1457210"
   },
@@ -67081,8 +67507,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1310670"
   },
@@ -67131,8 +67558,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1326830"
   },
@@ -67175,8 +67603,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1599340"
   },
@@ -67219,8 +67648,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1009320"
   },
@@ -67263,8 +67693,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1599390"
   },
@@ -67307,8 +67738,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "2846390"
   },
@@ -67351,8 +67783,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1599400"
   },
@@ -67397,8 +67830,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    }
   },
   {
@@ -67440,8 +67874,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1529550"
   },
@@ -67484,8 +67919,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1518540"
   },
@@ -67528,8 +67964,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1447000"
   },
@@ -67573,8 +68010,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1157090"
   },
@@ -67623,8 +68061,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1375620"
   },
@@ -67668,8 +68107,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1375820"
   },
@@ -67712,8 +68152,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1212670"
   },
@@ -67757,8 +68198,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1599760"
   },
@@ -67801,8 +68243,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1244310"
   },
@@ -67845,8 +68288,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1599800"
   },
@@ -67889,8 +68333,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1450330"
   },
@@ -67933,8 +68378,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1463930"
   },
@@ -67977,8 +68423,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1465720"
   },
@@ -68021,8 +68468,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1465850"
   },
@@ -68065,8 +68513,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1314600"
   },
@@ -68109,8 +68558,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1367120"
   },
@@ -68153,8 +68603,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1448440"
   },
@@ -68197,8 +68648,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1444270"
   },
@@ -68242,8 +68694,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1467620"
   },
@@ -68287,8 +68740,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    }
   },
   {
@@ -68330,8 +68784,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1467710"
   },
@@ -68380,8 +68835,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    }
   },
   {
@@ -68423,8 +68879,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1360320"
   },
@@ -68472,8 +68929,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1529330"
   },
@@ -68516,8 +68974,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1529390"
   },
@@ -68560,8 +69019,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1304510"
   },
@@ -68604,8 +69064,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1600280"
   },
@@ -68653,8 +69114,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1600470"
   },
@@ -68697,8 +69159,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1600530"
   },
@@ -68741,8 +69204,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1546550"
   },
@@ -68785,8 +69249,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1355810"
   },
@@ -68829,8 +69294,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1100810"
   },
@@ -68873,8 +69339,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1473230"
   },
@@ -68917,8 +69384,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1472270"
   },
@@ -68961,8 +69429,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1313080"
   },
@@ -69005,8 +69474,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1172660"
   },
@@ -69049,8 +69519,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1307550"
   },
@@ -69093,8 +69564,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1355850"
   },
@@ -69176,8 +69648,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1421630"
   },
@@ -69228,8 +69701,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1101520"
   },
@@ -69278,8 +69752,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1101570"
   },
@@ -69322,8 +69797,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1477170"
   },
@@ -69366,8 +69842,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1010150"
   },
@@ -69410,8 +69887,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1194660"
   },
@@ -69459,8 +69937,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1555440"
   },
@@ -69507,7 +69986,7 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-    "learningBasis": "scene_convenience_reviewed_2026-08-22"
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1501620"
   },
@@ -69550,8 +70029,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1482340"
   },
@@ -69594,8 +70074,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1480670"
   },
@@ -69644,8 +70125,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1096770"
   },
@@ -69688,8 +70170,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1463770"
   },
@@ -69732,8 +70215,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1193610"
   },
@@ -69782,8 +70266,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1106400"
   },
@@ -69826,8 +70311,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1556630"
   },
@@ -69870,8 +70356,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1272780"
   },
@@ -69914,8 +70401,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1272820"
   },
@@ -69958,8 +70446,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1601650"
   },
@@ -70002,8 +70491,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1601660"
   },
@@ -70046,8 +70536,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1601810"
   },
@@ -70090,8 +70581,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1485520"
   },
@@ -70139,8 +70631,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1227370"
   },
@@ -70183,8 +70676,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1486460"
   },
@@ -70227,8 +70721,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1484930"
   },
@@ -70265,8 +70760,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1226360"
   },
@@ -70309,8 +70805,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1169340"
   },
@@ -70353,8 +70850,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1487660"
   },
@@ -70398,8 +70896,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1602060"
   },
@@ -70442,8 +70941,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1202440"
   },
@@ -70535,8 +71035,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1581710"
   },
@@ -70579,8 +71080,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1426290"
   },
@@ -70623,8 +71125,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1332570"
   },
@@ -70667,8 +71170,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1108180"
   },
@@ -70711,8 +71215,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1602440"
   },
@@ -70755,8 +71260,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1362640"
   },
@@ -70799,8 +71305,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1501350"
   },
@@ -70843,8 +71350,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1500800"
   },
@@ -70887,8 +71395,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1499460"
   },
@@ -70931,8 +71440,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1497190"
   },
@@ -70975,8 +71485,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1499230"
   },
@@ -71019,8 +71530,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1408220"
   },
@@ -71063,8 +71575,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1496890"
   },
@@ -71107,8 +71620,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1602800"
   },
@@ -71151,8 +71665,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1494860"
   },
@@ -71195,8 +71710,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1450270"
   },
@@ -71244,8 +71760,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1282770"
   },
@@ -71294,8 +71811,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1116840"
   },
@@ -71338,8 +71856,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1505120"
   },
@@ -71382,8 +71901,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1505190"
   },
@@ -71426,8 +71946,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1505600"
   },
@@ -71470,8 +71991,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1509430"
   },
@@ -71557,8 +72079,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1510640"
   },
@@ -71601,8 +72124,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1512220"
   },
@@ -71645,8 +72169,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1520120"
   },
@@ -71689,8 +72214,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1516750"
   },
@@ -71733,8 +72259,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1517480"
   },
@@ -71777,8 +72304,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1521400"
   },
@@ -71821,8 +72349,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1376310"
   },
@@ -71872,8 +72401,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1436510"
   },
@@ -71917,8 +72447,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1522050"
   },
@@ -71962,8 +72493,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    }
   },
   {
@@ -72005,8 +72537,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1523400"
   },
@@ -72049,8 +72582,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1302070"
   },
@@ -72093,8 +72627,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1497980"
   },
@@ -72138,8 +72673,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    }
   },
   {
@@ -72181,8 +72717,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1387240"
   },
@@ -72219,8 +72756,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1524990"
   },
@@ -72268,8 +72806,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1215330"
   },
@@ -72312,8 +72851,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1215260"
   },
@@ -72356,8 +72896,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1604290"
   },
@@ -72400,8 +72941,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1604300"
   },
@@ -72444,8 +72986,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1526920"
   },
@@ -72488,8 +73031,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1604350"
   },
@@ -72532,8 +73076,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1259140"
   },
@@ -72576,8 +73121,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1267280"
   },
@@ -72620,8 +73166,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1527040"
   },
@@ -72664,8 +73211,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1604550"
   },
@@ -72708,8 +73256,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1604570"
   },
@@ -72752,8 +73301,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1279990"
   },
@@ -72796,8 +73346,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1604800"
   },
@@ -72840,8 +73391,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1253190"
   },
@@ -72884,8 +73436,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1382370"
   },
@@ -72928,8 +73481,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1426680"
   },
@@ -72972,8 +73526,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1404390"
   },
@@ -73016,8 +73571,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1531190"
   },
@@ -73060,8 +73616,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1530970"
   },
@@ -73109,8 +73666,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1346370"
   },
@@ -73153,8 +73711,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1431850"
   },
@@ -73202,8 +73761,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1362950"
   },
@@ -73246,8 +73806,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1363090"
   },
@@ -73284,8 +73845,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "2015610"
   },
@@ -73372,8 +73934,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1535780"
   },
@@ -73416,8 +73979,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1293700"
   },
@@ -73460,8 +74024,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1535880"
   },
@@ -73504,8 +74069,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1534870"
   },
@@ -73549,8 +74115,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1535910"
   },
@@ -73593,8 +74160,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1362490"
   },
@@ -73637,8 +74205,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1350600"
   },
@@ -73681,8 +74250,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1538130"
   },
@@ -73719,8 +74289,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1537980"
   },
@@ -73763,8 +74334,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1350610"
   },
@@ -73812,8 +74384,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1539040"
   },
@@ -73856,8 +74429,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1605510"
   },
@@ -73900,8 +74474,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1012800"
   },
@@ -73945,8 +74520,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1012810"
   },
@@ -73990,8 +74566,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "2772770"
   },
@@ -74034,8 +74611,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1310640"
   },
@@ -74078,8 +74656,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1605630"
   },
@@ -74122,8 +74701,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1448580"
   },
@@ -74166,8 +74746,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1538820"
   },
@@ -74210,8 +74791,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1538870"
   },
@@ -74254,8 +74836,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1309650"
   },
@@ -74298,8 +74881,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1310050"
   },
@@ -74342,8 +74926,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1529410"
   },
@@ -74386,8 +74971,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1545710"
   },
@@ -74430,8 +75016,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1546200"
   },
@@ -74474,8 +75061,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1546220"
   },
@@ -74518,8 +75106,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1546300"
   },
@@ -74562,8 +75151,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1179005"
   },
@@ -74606,8 +75196,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1543070"
   },
@@ -74650,8 +75241,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1543240"
   },
@@ -74694,8 +75286,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1543750"
   },
@@ -74738,8 +75331,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1219680"
   },
@@ -74782,8 +75376,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1218760"
   },
@@ -74832,8 +75427,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1224880"
   },
@@ -74876,8 +75472,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1145990"
   },
@@ -74920,8 +75517,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1550140"
   },
@@ -74964,8 +75562,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1549660"
   },
@@ -75013,8 +75612,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1554010"
   },
@@ -75057,8 +75657,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1553130"
   },
@@ -75101,8 +75702,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1552760"
   },
@@ -75145,8 +75747,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1557290"
   },
@@ -75189,8 +75792,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1558050"
   },
@@ -75236,7 +75840,7 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-    "learningBasis": "scene_convenience_reviewed_2026-08-22"
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1145130"
   },
@@ -75289,7 +75893,7 @@
     "dictionary": true,
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
-    "learningBasis": "scene_convenience_reviewed_2026-08-22"
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1145060"
   },
@@ -75338,8 +75942,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1145990"
   },
@@ -75382,8 +75987,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1559900"
   },
@@ -75426,8 +76032,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1148520"
   },
@@ -75470,8 +76077,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1501660"
   },
@@ -75514,8 +76122,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1606590"
   },
@@ -75558,8 +76167,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1606680"
   },
@@ -75604,8 +76214,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1538330"
   },
@@ -75648,8 +76259,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1519230"
   },
@@ -75692,8 +76304,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1351360"
   },
@@ -75736,8 +76349,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1606810"
   },
@@ -75780,8 +76394,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n4_refined_relocked_2026-08-24"
    },
    "jmdictSeq": "1208020"
   },
