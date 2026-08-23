@@ -1,22 +1,30 @@
-# 当前状态 · Harness v0
+# 当前状态 · PLAN v2 第六批
 
-> 状态：Harness v0 已就位；下一步是 PLAN v2 第六批。
+> 状态：B6-1 至 B6-4 已完成；内容包停在 2.4，未执行线上发布。
 >
 > 更新日期：2026-08-24
 
 ## 本轮完成
 
-- 新增只读 `scripts/audit.mjs`，串起 `content-stats.mjs`、`validate-content.js`、`meaning-audit.mjs`。
-- 新增 `npm run audit`，补上用户侧断言扫描、内容包 SHA/Git 状态检查与硬不变量断言。
-- 未修改业务代码、内容 JSON、SRS、进度键或契约目录。
+- B6-1：用 `staging/jmdict-eng-3.6.2.json` 按“词面+读音”回锁。实际 N4 目标 615、N5 目标 197；自动通过 688 个级别目标，对应 687 条唯一词条。冲突 65、未命中 59 留在 `staging/b6-1-*` 报告，未猜。
+- B6-2：按自动回锁、非 `zh_drafted`、例句和 `coreChunk` 齐全开 N4；新开 608 条，`publication.learning` 579 → 1187。`kanji_anchor` 仍为 563。
+- B6-3：主 CTA 使用独立混合队列，词库单元仍问读音，深内容可进入一条拼句；没有合并两个入口的队列。
+- B6-4：8 条候选加 12 条主线词条，共 20 条词场；`auditWordFields()` 返回空数组，复习单元新增 20 条。
 
-## 验收
+## 提交与验收
 
-- `npm run audit`：exit 0，`FAIL: 0`，`WARN: 7`。
-- 人为把 `EXPECTED_KANJI_ANCHOR_TOTAL` 改成 562：`npm run audit` exit 1，输出 `FAIL invariant kanji_anchor.total=563, expected 562`；已恢复为 563，错误改动未提交。
-- `npm test`：594 passed；`npm run typecheck`：passed。
-- 脚本运行两次未写入仓库文件；既有未跟踪文件保持原样。
+- `7da71ce`：B6-1 机器回锁与冲突/未命中报告。
+- `6e98925`：B6-2 按回锁结果开 N4 池，版本 2.3 → 2.4。
+- `429e7dc`：B6-3 主 CTA 混入深内容。
+- `b64984b`：B6-4 首批 20 条词场。
+- 每个提交均执行 `npm test && npm run typecheck`，594 tests 全部通过，typecheck 通过。
+- 最终 `npm run audit`：exit 0，FAIL 0，WARN 8；两份内容包 SHA 一致。
+- `bash ../tools/check-content-release.sh`：schema、fallback 同步、wordBank、地点审计通过；线上发布仍由项目负责人执行。
 
-## 下一步
+## 明确未做
 
-第六批每个内容步骤前后运行 `npm run audit`，把输出追加到 `CC-REPORT.md`，重点观察 `publication.learning`、`kanji_anchor.total` 与两份内容包 SHA。
+没有做 N3/N2/N1 回锁、词源、深卡扩展、口袋、语料频率、英日优先、地铁游戏化、手账、地图性能、内容缺口或线上发布；没有改 `srs.js`、`yanFeatures`、进度键或内容契约。
+
+## 诚实说明
+
+B6-4 的 8 条候选日语自然度**未经母语者确认**；机器成员存在性与句中出现检查通过，不等于母语者确认。

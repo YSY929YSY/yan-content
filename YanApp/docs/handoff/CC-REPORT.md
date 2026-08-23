@@ -1848,3 +1848,224 @@ Result: FAIL
 - 没有拆分 `audit:deep-cards`、`audit:produce-units`、`audit:scene-tags`。
 - 没有重写三个已有脚本，也没有新增独立测试文件。
 - 没有把 `publication.learning` 写成硬断言，没有扫描内容 JSON 的用户文案，也没有把所有编辑判断 warning 升格为失败。
+
+## PLAN v2 第六批（B6-1 至 B6-4）
+
+### 实际改动与 commit
+
+- `7da71ce`：B6-1 纯机器 JMdict 回锁；新增 N4/N5 自动通过、冲突、未命中 JSON 与汇总报告；两份内容包只写自动通过的 `jmdictSeq`。
+- `6e98925`：B6-2 按回锁结果开放 N4 学习池，新增 608 条 Learning，`learningBasis=n4_refined_relocked_2026-08-24`，版本 2.3 → 2.4。
+- `429e7dc`：B6-3 主 CTA 使用独立混合队列；词库单元继续问读音，深内容进入拼句；不与次入口共用今日队列。
+- `b64984b`：B6-4 将 8 条备料候选和 12 条主线词条写入词场，共 20 条。
+
+### B6-1 结果
+
+当前内容包实测 N4 共有 631 条（工单写 631），其中缺 `jmdictSeq` 为 615；N5 目标 197。严格按词面+读音 join：N4 自动 596、冲突 19、未命中 0；N5 自动 92、冲突 46、未命中 59。合计 812 个级别目标、688 个自动通过；由于「みんな」同时属于 N4/N5，写入内容包的是 687 条唯一词条。冲突和未命中均未猜、未写入。
+
+### B6-1 前审计（完整输出）
+
+```text
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:2813: review editorial claim "旅行高频"
+WARN user-claims App.js:2857: review editorial claim "旅行高频"
+WARN user-claims App.js:2951: review editorial claim "高频"
+WARN user-claims App.js:2994: review editorial claim "高频"
+WARN user-claims App.js:3041: review editorial claim "高频"
+WARN user-claims App.js:3059: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 4323789bdfb757e5d7ab4f7fd6387d67c58c527934456fa8607194351cde9235
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=579 (not asserted)
+--- audit summary ---
+FAIL: 0
+WARN: 7
+Result: PASS
+```
+
+### B6-1 后审计（提交前后事实）
+
+写入双包后、提交前的审计按 authority 未提交规则为 `FAIL: 1`；提交 `7da71ce` 后重跑为 `FAIL: 0, WARN: 8, Result: PASS`。提交后的完整输出：
+
+```text
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:2813: review editorial claim "旅行高频"
+WARN user-claims App.js:2857: review editorial claim "旅行高频"
+WARN user-claims App.js:2951: review editorial claim "高频"
+WARN user-claims App.js:2994: review editorial claim "高频"
+WARN user-claims App.js:3041: review editorial claim "高频"
+WARN user-claims App.js:3059: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 845a8d3a8514da37cfc007a3740c8774ff4573247a2a0b49731a7ea2498ada45
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+WARN content-pack-sync _meta.version unchanged while content changed (2.3)
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=579 (not asserted)
+--- audit summary ---
+FAIL: 0
+WARN: 8
+Result: PASS
+```
+
+### B6-2 结果与审计
+
+按三项条件逐条开 N4：自动回锁、有 `exampleJp` 与 `coreChunk`、`status !== 'zh_drafted'`。新开 608 条，`publication.learning` 从 579 到 1187；N4「全部」实测 631，`kanji_anchor.total` 仍 563；两份内容包 SHA 为 `65587aac6fd51865d0a7e9d39a0bdd1b1b6afc959a496e2a46fcf24d1874e6c3`。
+
+B6-2 开始前 audit 为 `FAIL: 1`（authority 有未提交变更），其余检查通过，实测 `publication.learning=1187`、`kanji_anchor.total=563`。`6e98925` 提交后完整结果：
+
+```text
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:2813: review editorial claim "旅行高频"
+WARN user-claims App.js:2857: review editorial claim "旅行高频"
+WARN user-claims App.js:2951: review editorial claim "高频"
+WARN user-claims App.js:2994: review editorial claim "高频"
+WARN user-claims App.js:3041: review editorial claim "高频"
+WARN user-claims App.js:3059: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 65587aac6fd51865d0a7e9d39a0bdd1b1b6afc959a496e2a46fcf24d1874e6c3
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+--- audit summary ---
+FAIL: 0
+WARN: 7
+Result: PASS
+```
+
+### B6-3 结果与审计
+
+主 CTA 现在把本轮词条批次和最多一条未学深内容放入独立队列；词库 `recall` 仍显示“这个词你已经认识”并考读音，深内容按 `produce` 进入拼句。两个入口的数字口径差异保留在注释中，没有合并。
+
+B6-3 前审计完整输出：
+
+```text
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:2820: review editorial claim "旅行高频"
+WARN user-claims App.js:2864: review editorial claim "旅行高频"
+WARN user-claims App.js:2958: review editorial claim "高频"
+WARN user-claims App.js:3001: review editorial claim "高频"
+WARN user-claims App.js:3048: review editorial claim "高频"
+WARN user-claims App.js:3066: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 65587aac6fd51865d0a7e9d39a0bdd1b1b6afc959a496e2a46fcf24d1874e6c3
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+--- audit summary ---
+FAIL: 0
+WARN: 7
+Result: PASS
+```
+
+B6-3 后审计与前审计相同口径，提交 `429e7dc` 后完整结果仍为 `FAIL: 0, WARN: 7, Result: PASS`，SHA 仍为 `65587aac6fd51865d0a7e9d39a0bdd1b1b6afc959a496e2a46fcf24d1874e6c3`，`publication.learning=1187`，`kanji_anchor.total=563`。
+
+为保留每一步的原始前后记录，B6-2 前审计的完整尾部如下（内容包已写入、尚未提交，所以 authority 这一项按 harness 规则失败）：
+
+```text
+PASS content-pack-sync sha256 65587aac6fd51865d0a7e9d39a0bdd1b1b6afc959a496e2a46fcf24d1874e6c3
+FAIL content-pack-sync authority content.v2.json has uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+--- audit summary ---
+FAIL: 1
+WARN: 7
+Result: FAIL
+```
+
+B6-3 后审计的完整输出：
+
+```text
+PASS content-pack-sync sha256 65587aac6fd51865d0a7e9d39a0bdd1b1b6afc959a496e2a46fcf24d1874e6c3
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+--- audit summary ---
+FAIL: 0
+WARN: 7
+Result: PASS
+```
+
+### B6-4 结果与审计
+
+词场最终实测 `wordField=20/8005`，`auditWordFields(wordBank)` 返回 `[]`，`buildUnits()` 产出 162 个单元，其中 `field=20`。B6-4 的 8 条候选日语自然度原文结论：**未经母语者确认**。这 8 条只做了机器成员存在性和句中出现检查，不写成已验证。
+
+B6-4 前审计（写入双包、提交前）完整结果：
+
+```text
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:2820: review editorial claim "旅行高频"
+WARN user-claims App.js:2864: review editorial claim "旅行高频"
+WARN user-claims App.js:2958: review editorial claim "高频"
+WARN user-claims App.js:3001: review editorial claim "高频"
+WARN user-claims App.js:3048: review editorial claim "高频"
+WARN user-claims App.js:3066: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 a00a76e1289a9c84e0f7089b2edc1949811bf52fb08f7c297ba55ada8ffecd82
+FAIL content-pack-sync authority content.v2.json has uncommitted change
+WARN content-pack-sync _meta.version unchanged while content changed (2.4)
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+--- audit summary ---
+FAIL: 1
+WARN: 8
+Result: FAIL
+```
+
+提交 `b64984b` 后 B6-4 后审计完整结果：
+
+```text
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:2820: review editorial claim "旅行高频"
+WARN user-claims App.js:2864: review editorial claim "旅行高频"
+WARN user-claims App.js:2958: review editorial claim "高频"
+WARN user-claims App.js:3001: review editorial claim "高频"
+WARN user-claims App.js:3048: review editorial claim "高频"
+WARN user-claims App.js:3066: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 a00a76e1289a9c84e0f7089b2edc1949811bf52fb08f7c297ba55ada8ffecd82
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+WARN content-pack-sync _meta.version unchanged while content changed (2.4)
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+--- audit summary ---
+FAIL: 0
+WARN: 8
+Result: PASS
+```
+
+### 测试、release check 与刻意保留项
+
+四个步骤各自按顺序执行 `npm test && npm run typecheck`，最终均为 594 passed、typecheck exit 0。`bash ../tools/check-content-release.sh` 最终报告显示 schema 校验、fallback 同步、wordBank 审计、地点审计通过；脚本写入父仓库 `reports/`，未将其余报告文件混入本批 commit。线上仍停在内容包 2.4，未执行 push。
+
+本批没有改 `srs.js`、进度键、`yanFeatures`、`kanji_anchor`、N3/N2/N1、词源、深卡扩展、口袋、频率、英日优先、地铁游戏化、手账、地图性能或内容缺口。也没有把“未经母语者确认”的 8 条候选写成已验证。
