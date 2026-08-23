@@ -51,7 +51,8 @@
     "date": "2026-08-24",
     "changes": [
      "B6-1：按词面+读音从 JMdict 3.6.2 自动回锁 N4/N5；仅自动通过写入 jmdictSeq，冲突与未命中留在 staging 报告",
-     "B6-2：按回锁结果开放 608 条 N4 学习池，learningBasis=n4_refined_relocked_2026-08-24；kanji_anchor 保持 563 条"
+     "B6-2：按回锁结果开放 608 条 N4 学习池，learningBasis=n4_refined_relocked_2026-08-24；kanji_anchor 保持 563 条",
+     "B6-4：为 20 条主线词条落入首批词场，候选 8 条的日语自然度未经母语者确认"
     ]
    }
   ]
@@ -16013,6 +16014,18 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_tomodachi"
+     }
+    ],
+    "sentence": {
+     "jp": "明日、友達と会います。",
+     "roma": "あした、ともだちとあいます。",
+     "zh": "明天和朋友见面。"
+    }
    }
   },
   {
@@ -16254,6 +16267,18 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kutsu"
+     }
+    ],
+    "sentence": {
+     "jp": "新しい靴を買います。",
+     "roma": "あたらしいくつをかいます。",
+     "zh": "买新鞋。"
+    }
    }
   },
   {
@@ -17494,6 +17519,18 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ie"
+     }
+    ],
+    "sentence": {
+     "jp": "家で朝ご飯を食べます。",
+     "roma": "いえであさごはんをたべます。",
+     "zh": "在家吃早饭。"
+    }
    }
   },
   {
@@ -17678,6 +17715,18 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "scene_convenience_reviewed_2026-08-22"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_okane"
+     }
+    ],
+    "sentence": {
+     "jp": "お金はいくらですか？",
+     "roma": "Okane wa ikura desu ka?",
+     "zh": "钱是多少？"
+    }
    }
   },
   {
@@ -19210,6 +19259,21 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ashita"
+     },
+     {
+      "id": "n5_umi"
+     }
+    ],
+    "sentence": {
+     "jp": "明日、海へ行きます。",
+     "roma": "あした、うみへいきます。",
+     "zh": "明天去海边。"
+    }
    }
   },
   {
@@ -19643,6 +19707,18 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_densha"
+     }
+    ],
+    "sentence": {
+     "jp": "駅で電車を待ちます。",
+     "roma": "えきででんしゃをまちます。",
+     "zh": "在车站等电车。"
+    }
    }
   },
   {
@@ -19835,6 +19911,18 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ryouri"
+     }
+    ],
+    "sentence": {
+     "jp": "おいしい料理を食べます。",
+     "roma": "おいしいりょうりをたべます。",
+     "zh": "吃好吃的菜。"
+    }
    }
   },
   {
@@ -20124,6 +20212,18 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_okashi"
+     }
+    ],
+    "sentence": {
+     "jp": "お菓子を買いました。",
+     "roma": "おかしをかいました。",
+     "zh": "买了点心。"
+    }
    }
   },
   {
@@ -22080,6 +22180,21 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_asa"
+     },
+     {
+      "id": "n5_kaisha"
+     }
+    ],
+    "sentence": {
+     "jp": "朝、会社へ行きます。",
+     "roma": "あさ、かいしゃへいきます。",
+     "zh": "早上去公司。"
+    }
    }
   },
   {
@@ -23019,6 +23134,21 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_sensei"
+     },
+     {
+      "id": "n5_gakkou"
+     }
+    ],
+    "sentence": {
+     "jp": "学校で先生に会います。",
+     "roma": "がっこうでせんせいにあいます。",
+     "zh": "在学校见老师。"
+    }
    }
   },
   {
@@ -27878,7 +28008,19 @@
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "scene_convenience_reviewed_2026-08-22"
    },
-   "jmdictSeq": "1053280"
+   "jmdictSeq": "1053280",
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_obentou"
+     }
+    ],
+    "sentence": {
+     "jp": "コンビニでお弁当を買いました。",
+     "roma": "Konbini de obentou o kaimashita.",
+     "zh": "我在便利店买了便当。"
+    }
+   }
   },
   {
    "word": "さあ",
@@ -27970,6 +28112,18 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_okane"
+     }
+    ],
+    "sentence": {
+     "jp": "財布からお金を出します。",
+     "roma": "Saifu kara okane o dashimasu.",
+     "zh": "从钱包里拿出钱。"
+    }
    }
   },
   {
@@ -31307,6 +31461,21 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_gakkou"
+     },
+     {
+      "id": "n5_sensei"
+     }
+    ],
+    "sentence": {
+     "jp": "先生と学校の話をします。",
+     "roma": "せんせいとがっこうのはなしをします。",
+     "zh": "和老师聊学校的事。"
+    }
    }
   },
   {
@@ -34617,6 +34786,18 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_tegami"
+     }
+    ],
+    "sentence": {
+     "jp": "手紙を読みます。",
+     "roma": "てがみをよみます。",
+     "zh": "读信。"
+    }
    }
   },
   {
@@ -41037,6 +41218,18 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ryouri"
+     }
+    ],
+    "sentence": {
+     "jp": "昼に料理を食べます。",
+     "roma": "ひるにりょうりをたべます。",
+     "zh": "中午吃饭。"
+    }
    }
   },
   {
@@ -58884,7 +59077,22 @@
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "n4_refined_relocked_2026-08-24"
    },
-   "jmdictSeq": "1593670"
+   "jmdictSeq": "1593670",
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_yasui"
+     },
+     {
+      "id": "n5_obentou"
+     }
+    ],
+    "sentence": {
+     "jp": "安いお弁当を探します。",
+     "roma": "Yasui obentou o sagashimasu.",
+     "zh": "寻找便宜的便当。"
+    }
+   }
   },
   {
    "id": "n4_sagaru",
@@ -66749,7 +66957,19 @@
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "n4_refined_relocked_2026-08-24"
    },
-   "jmdictSeq": "1440670"
+   "jmdictSeq": "1440670",
+   "wordField": {
+    "members": [
+     {
+      "id": "n3_kado"
+     }
+    ],
+    "sentence": {
+     "jp": "店員にカードを見せます。",
+     "roma": "Ten'in ni kaado o misemasu.",
+     "zh": "给店员看卡。"
+    }
+   }
   },
   {
    "id": "n4_tenkiyohou",
@@ -75842,7 +76062,19 @@
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "n4_refined_relocked_2026-08-24"
    },
-   "jmdictSeq": "1145130"
+   "jmdictSeq": "1145130",
+   "wordField": {
+    "members": [
+     {
+      "id": "n3_genkin"
+     }
+    ],
+    "sentence": {
+     "jp": "レジで現金を払います。",
+     "roma": "Reji de genkin o haraimasu.",
+     "zh": "在收银台用现金付款。"
+    }
+   }
   },
   {
    "id": "n4_reshito",
@@ -75895,7 +76127,19 @@
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "n4_refined_relocked_2026-08-24"
    },
-   "jmdictSeq": "1145060"
+   "jmdictSeq": "1145060",
+   "wordField": {
+    "members": [
+     {
+      "id": "n3_fukuro"
+     }
+    ],
+    "sentence": {
+     "jp": "レシートを袋に入れます。",
+     "roma": "Reshiito o fukuro ni iremasu.",
+     "zh": "把小票放进袋子。"
+    }
+   }
   },
   {
    "id": "n4_repo_to",
@@ -363407,6 +363651,18 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "scene_convenience_reviewed_2026-08-22"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n3_kado"
+     }
+    ],
+    "sentence": {
+     "jp": "ポイントカードがあります。",
+     "roma": "Pointo kaado ga arimasu.",
+     "zh": "有积分卡。"
+    }
    }
   },
   {
