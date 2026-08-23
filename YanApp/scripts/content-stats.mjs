@@ -71,6 +71,15 @@ console.log(`kanji_anchor.missing: ${JSON.stringify({
 
 const confidenceAgreeZero = Object.values(levels).filter((entry) => entry?.agree === 0).length;
 console.log('known_differences:');
-console.log(`  _meta.note says 8026; measured wordBank.total is ${wordBank.length}; difference=${8026 - wordBank.length}`);
+// ⚠️ 这里原本把 8026 写死在脚本里。于是 2026-08-22 把 _meta.note 改成 8005 之后,
+// 这个专门用来「让准确性可测量」的脚本自己开始报一个不存在的差异 ——
+// 同一类毛病:把一次性的观察抄成常量,数据变了它不会跟着变。
+// 改成从 note 里现读,对得上就说对得上。
+const notedCount = Number((content._meta?.note || '').match(/词库\s*(\d+)\s*条/)?.[1]);
+console.log(Number.isFinite(notedCount)
+  ? (notedCount === wordBank.length
+    ? `  _meta.note says ${notedCount}; measured ${wordBank.length}; aligned`
+    : `  _meta.note says ${notedCount}; measured wordBank.total is ${wordBank.length}; difference=${notedCount - wordBank.length}`)
+  : '  _meta.note 里没有可解析的词条数,无法比对');
 console.log(`  staging/pitch-confidence.json agree=0 is ${confidenceAgreeZero}; commit 81efe21 said 15; difference=${confidenceAgreeZero - 15}`);
 
