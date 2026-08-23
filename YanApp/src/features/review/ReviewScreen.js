@@ -148,6 +148,7 @@ export default function ReviewScreen({ content, onBack, onOpenOrigin }) {
             </TouchableOpacity>
             <Text style={s.dimSmall}>先自己想一遍再翻 —— 想不起来本身就是有用的信息</Text>
             </>}
+          </>
         ) : (
           <>
             <View style={s.answerBox}>
