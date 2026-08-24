@@ -1868,18 +1868,57 @@ Result: FAIL
 
 ### 交报告前原始门禁输出
 
-以下两段是在报告整理完成后按 `AGENTS.md` 第六节执行的原始输出；audit 的 23 个 FAIL 是 Harness v1 已知的文档引用基线，不是本批 A/B 改动引入。
+以下两段是在报告整理完成后按 `AGENTS.md` 第六节执行的原始输出；最终 audit 为 `FAIL: 0`，保留 14 条 WARN。
 
 #### `git status --short`
 
 ```text
-（最终提交报告后执行，见下方补录）
+?? "\350\260\224\347\240\224/"
+?? ../YanApp_backup_0501/
+?? ../resources/
+?? ../yan-content/README.md
+?? ../yan-content/content.json
+?? ../yan-content/content.v1.json
+?? "../yan-content/yan_word_story\350\276\223\205\245\350\250\236\345\\274\\217\346\\216\\242\350\\256\\25026.6.2.html"
 ```
 
 #### `npm run audit`
 
 ```text
-（最终提交报告后执行，见下方补录）
+> yanapp@1.0.0 audit
+> node scripts/audit.mjs
+
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:2859: review editorial claim "旅行高频"
+WARN user-claims App.js:2903: review editorial claim "旅行高频"
+WARN user-claims App.js:2997: review editorial claim "高频"
+WARN user-claims App.js:3040: review editorial claim "高频"
+WARN user-claims App.js:3087: review editorial claim "高频"
+WARN user-claims App.js:3105: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 a00a76e1289a9c84e0f7089b2edc1949811bf52fb08f7c297ba55ada8ffecd82
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+INFO doc-refs scanned 724 references (323 unique)
+WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:16: missing 调研/…/red调研重新规划_编号修正版.md
+WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:286: missing red调研重新规划_编号修正版.md
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:804: missing src/content/publication.ts
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:803: missing src/content/schema.ts
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:278: missing src/content/contentValidation.ts
+WARN doc-refs docs/TICKET-jmdict-followup.md:86: missing staging/duplicate-seq-plan.md
+WARN doc-refs docs/TICKET-jmdict-followup.md:86: missing staging/duplicate-seq-groups.json
+PASS doc-refs 所有引用都已入库（7 条指向不存在的路径，见 WARN）
+PASS workspace-clean docs markdown tracked
+--- audit summary ---
+FAIL: 0
+WARN: 14
+Result: PASS
 ```
 
 随后已把断言恢复为 563；错误数字没有进入提交。

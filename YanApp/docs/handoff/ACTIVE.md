@@ -23,7 +23,7 @@
 - `npm test`：603 passed，0 failed。
 - `npm run typecheck`：exit 0。
 - `git diff --check`：通过。
-- `npm run audit`：当前仍受 Harness v1 已知的 23 个 `doc-refs` FAIL 阻断；详见 `docs/handoff/CC-REPORT.md` 的 batch8 原始输出。该 FAIL 不由本批改动引入，也未在本批越界修复。
+- `npm run audit`：`FAIL: 0`、`WARN: 14`、`Result: PASS`；14 条 WARN 是既有 editorial claim 与失效旧路径提示，详见 `docs/handoff/CC-REPORT.md` 的 batch8 原始输出。
 
 ## 明确未做与剩余事项
 
