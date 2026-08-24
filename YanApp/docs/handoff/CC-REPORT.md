@@ -2153,3 +2153,113 @@ Result: PASS
 ### 本批忍住没改
 
 没有重跑 4400 条例句覆盖率、没有改 `build-example-tokens.py` 保存辞书形、没有把逐词中文写入内容包、没有用 LLM 补空、没有改 `units.js` 或内容包，也没有顺手处理 B7 之外的视觉样式。
+
+## Harness v1
+
+### 实际改动
+
+本轮只扩展 `scripts/audit.mjs`，加入：
+
+- `doc-refs`：扫描 `AGENTS.md`、`CLAUDE.md`、`RULE.md`、`SOUL.md` 与 `docs/**/*.md`；排除 Markdown 围栏、外部 URL、锚点和明显示例路径；检查目标存在且 `git ls-files` 可查到。
+- `workspace-clean`：`docs/` 下未跟踪 Markdown 输出 WARN；四份根契约未跟踪输出 FAIL。
+
+未新建脚本，未改 v0 既有检查逻辑，未改业务代码和内容包，未执行 `git add`。
+
+### doc-refs 数量
+
+最终基线扫描到 **695 次引用，312 条去重后的“文档+原文”引用**。这个数量包含 Markdown 链接、行内反引号和正文中明确的 `docs/`、`src/`、`scripts/`、`tools/`、`staging/` 路径；围栏代码块没有计入。数量本身已由 audit 输出 `INFO doc-refs scanned ...`，用于后续判断判据是否过严或过宽。两次人为验收发生在本节追加前，当时输出为 681 次、307 条去重引用。
+
+### 当前基线事实
+
+当前工作区的审计结果不是 FAIL 0：最终 `doc-refs` 实际报告 23 个既有问题，主要是文档引用的未跟踪 `staging/`、`tools/`、`reports/` 工件，以及当前不存在的旧路径；这符合本工单“存在但未跟踪也 FAIL”的规则。本轮没有替这些文件执行 `git add`，也没有自动修复。四份根契约当前均已被 Git 跟踪，`workspace-clean` 没有额外的 docs WARN。
+
+### 人为验收 A：不存在路径
+
+临时把 `AGENTS.md` 的一个现有引用改为不存在路径，手动单独运行 `npm run audit`：
+
+```text
+exit=1
+FAIL doc-refs AGENTS.md:13: missing docs/handoff/__audit_missing__.md
+FAIL: 24
+Result: FAIL
+```
+
+随后已恢复原引用，错误修改没有提交。
+
+### 人为验收 B：未跟踪 docs Markdown
+
+临时创建一个未跟踪 Markdown 文件，手动单独运行 `npm run audit`：
+
+```text
+exit=1
+INFO doc-refs scanned 681 references (307 unique)
+WARN workspace-clean untracked docs: docs/_tmp.md
+FAIL: 23
+WARN: 8
+Result: FAIL
+```
+
+随后已删除该临时文件。这个删除只针对验收临时文件，不是 audit 脚本行为。
+
+### 最终门禁与未做
+
+- `npm test`：596 passed，0 failed。
+- `npm run typecheck`：exit 0。
+- `npm run audit`：保留 v0 的 7 条既有 WARN；新增 `doc-refs` 如上报告当前工作区的 23 个 FAIL，`workspace-clean` 当前无额外 docs WARN。
+- 两次人为验证后，AGENTS、内容包和其余工作区文件均恢复；审计运行没有写入文件。
+
+本轮没有检查图片/链接可访问性、Markdown 标题结构、孤儿文档、文档内容新鲜度、代码注释引用、JSON 内部路径，也没有自动清理或暂存任何文件；这些留给 Harness v2。
+
+### npm run audit 完整基线输出
+
+```text
+> yanapp@1.0.0 audit
+> node scripts/audit.mjs
+
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:2847: review editorial claim "旅行高频"
+WARN user-claims App.js:2891: review editorial claim "旅行高频"
+WARN user-claims App.js:2985: review editorial claim "高频"
+WARN user-claims App.js:3028: review editorial claim "高频"
+WARN user-claims App.js:3075: review editorial claim "高频"
+WARN user-claims App.js:3093: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 a00a76e1289a9c84e0f7089b2edc1949811bf52fb08f7c297ba55ada8ffecd82
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+INFO doc-refs scanned 695 references (312 unique)
+FAIL doc-refs docs/handoff/TICKET-plan-v2-batch3.md:78: untracked scripts/push-content.sh
+FAIL doc-refs docs/handoff/TICKET-plan-v2-batch3.md:77: untracked tools/check-content-release.sh
+FAIL doc-refs RULE.md:43: untracked reports/wordbank-audit-report.md
+FAIL doc-refs RULE.md:44: untracked reports/example-roma-report.md
+FAIL doc-refs docs/AUDIT-source-trust-2026-08-22.md:16: missing 调研/…/red调研重新规划_编号修正版.md
+FAIL doc-refs docs/AUDIT-source-trust-2026-08-22.md:286: missing red调研重新规划_编号修正版.md
+FAIL doc-refs docs/HANDOFF-learning.md:232: untracked tools/audit-wordbank-examples.py
+FAIL doc-refs docs/handoff/TICKET-source-audit-contract.md:189: untracked staging/jmdict-eng-3.6.2.json
+FAIL doc-refs docs/handoff/TICKET-source-audit-implementation.md:26: untracked staging/pitch-confidence.json
+FAIL doc-refs docs/ROADMAP-content-trust-structure-ui.md:804: missing src/content/publication.ts
+FAIL doc-refs docs/ROADMAP-content-trust-structure-ui.md:803: missing src/content/schema.ts
+FAIL doc-refs docs/ROADMAP-content-trust-structure-ui.md:278: missing src/content/contentValidation.ts
+FAIL doc-refs docs/handoff/CC-REPORT.md:1322: untracked staging/jmdict-join-report.md
+FAIL doc-refs docs/TICKET-jmdict-followup.md:50: untracked staging/jmdict-join-sample.json
+FAIL doc-refs docs/TICKET-jmdict-followup.md:60: untracked staging/vs-sample-50.md
+FAIL doc-refs docs/TICKET-jmdict-followup.md:86: missing staging/duplicate-seq-plan.md
+FAIL doc-refs docs/TICKET-jmdict-followup.md:86: missing staging/duplicate-seq-groups.json
+FAIL doc-refs docs/content-standard-wordfield.md:125: untracked staging/tags-plan.md
+FAIL doc-refs docs/handoff/TICKET-publication-migration.md:80: untracked tools/stamp-wordbank-publication.py
+FAIL doc-refs docs/sources/jmdict-notice.md:3: untracked staging/jmdict-eng.json.tgz
+FAIL doc-refs docs/handoff/CC-REPORT.md:1344: untracked tools/stamp-pitch-confidence.py
+FAIL doc-refs docs/handoff/TICKET-source-audit-contract.md:189: untracked jmdict-join-report.md
+FAIL doc-refs docs/handoff/TICKET-source-audit-contract.md:192: untracked staging/wordbank-pilot.json
+PASS workspace-clean docs markdown tracked
+--- audit summary ---
+FAIL: 23
+WARN: 7
+Result: FAIL
+```
