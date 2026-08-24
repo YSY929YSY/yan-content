@@ -2069,3 +2069,87 @@ Result: PASS
 四个步骤各自按顺序执行 `npm test && npm run typecheck`，最终均为 594 passed、typecheck exit 0。`bash ../tools/check-content-release.sh` 最终报告显示 schema 校验、fallback 同步、wordBank 审计、地点审计通过；脚本写入父仓库 `reports/`，未将其余报告文件混入本批 commit。线上仍停在内容包 2.4，未执行 push。
 
 本批没有改 `srs.js`、进度键、`yanFeatures`、`kanji_anchor`、N3/N2/N1、词源、深卡扩展、口袋、频率、英日优先、地铁游戏化、手账、地图性能或内容缺口。也没有把“未经母语者确认”的 8 条候选写成已验证。
+
+## PLAN v2 第七批（B7-1 至 B7-4）
+
+### 实际改动与 commit
+
+- `2a798ab`：纯代码提交，修改 `App.js` 的口袋提示、词性标签、词场渲染；新增 `src/features/wordbank/wordFieldAlignment.js` 和对应 `__tests__/wordFieldAlignment.test.mjs`。
+- 未修改 `assets/content.fallback.json`、`yan-content/content.v2.json`、`units.js`、内容管线或内容包版本。
+
+### B7-1 · 口袋文案
+
+删除“收进来后会进入复习，之后还会再问你。”，保留“已存本机，联网后同步”。空口袋列表的引导不属于按钮下方的同步状态提示，未扩大改动范围。
+
+### B7-2 · 词性标签
+
+只调整词详情页 `wd.posTag`：固定内边距、取消多余的横向占位，让 `名词`、`动词`、`名词（する动词）` 随文字宽度变化；词书列表的 `wb.posTag` 未改。
+
+### B7-3 · 词场
+
+最终标签措辞：**“这句话里，它和这些词碰面”**。
+
+成员通过 `wordField.members[].id` 查词，按成员的词面或 reading 在句子中标色并加下划线；成员查不到时跳过，不报错、不生成假高亮。20 条现有词场均使用同一运行时渲染路径。
+
+### B7-4 · 逐词中文样板
+
+只对内容包中已有的 20 条词场句运行派生对齐。算法顺序是：固定语法成分表 → 词面查词库 → reading 查词库 → 未命中留空；没有写入内容包，也没有使用 LLM。正常语序中文继续读取现有 `wordField.sentence.zh`。
+
+实际数字（手动单独运行 `node --input-type=module` 统计）：
+
+- 20 条句子。
+- 133 个 token。
+- 115 个 token 有中文，覆盖率 `115 / 133 = 86.5%`。
+- 18 个 token 留空，占 `13.5%`。
+- 留空最多的类别：**活用碎片，18 个（全部留空项）**。
+- 本样板没有因表记差异留下空项；reading 查命中了 `美味しい/おいしい`、`朝御飯/朝ご飯` 等表记差异。
+
+留空示例是 `会い`、`買い`、`食べ`、`行き`、`待ち`、`出し`、`探し`、`見せ`、`払い`、`入れ`、`あり`、`読み` 等活用碎片；没有猜测中文。
+
+### 验收
+
+```text
+npm test
+ℹ tests 596
+ℹ pass 596
+ℹ fail 0
+
+npm run typecheck
+exit 0
+
+npm run audit
+--- audit summary ---
+FAIL: 0
+WARN: 7
+Result: PASS
+```
+
+最终 `npm run audit` 完整输出：
+
+```text
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:2847: review editorial claim "旅行高频"
+WARN user-claims App.js:2891: review editorial claim "旅行高频"
+WARN user-claims App.js:2985: review editorial claim "高频"
+WARN user-claims App.js:3028: review editorial claim "高频"
+WARN user-claims App.js:3075: review editorial claim "高频"
+WARN user-claims App.js:3093: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 a00a76e1289a9c84e0f7089b2edc1949811bf52fb08f7c297ba55ada8ffecd82
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+--- audit summary ---
+FAIL: 0
+WARN: 7
+Result: PASS
+```
+
+### 本批忍住没改
+
+没有重跑 4400 条例句覆盖率、没有改 `build-example-tokens.py` 保存辞书形、没有把逐词中文写入内容包、没有用 LLM 补空、没有改 `units.js` 或内容包，也没有顺手处理 B7 之外的视觉样式。
