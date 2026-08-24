@@ -1835,6 +1835,53 @@ FAIL: 1
 Result: FAIL
 ```
 
+## PLAN v2 第八批（A 修渲染 / B 补辞书形）
+
+### 实际改动与提交
+
+- `f2ed5e7`：A/B 代码与 App asset 合并提交。改动范围是 `App.js`、`scripts/build-example-tokens.py`、`src/features/wordbank/exampleTokens.ts`、`src/features/wordbank/wordFieldAlignment.js`、`assets/example_tokens.json` 及对应 `__tests__/` 测试。
+- 未修改 `assets/content.fallback.json`、`yan-content/content.v2.json`，没有走 `push-content.sh`。
+
+### A · 渲染
+
+- A-1 根因修复为移除词场 token 的 `minHeight + justifyContent: 'flex-end'`，词场行与 token 改为顶部对齐；没有中文 gloss 的 token 不再被 42px 盒子顶到底部，因此混排时日语顶边/基线稳定。
+- A-2 直接消费既有 `token.source`：`wordBank` 使用正常的中灰词义样式，`grammar` 使用更小、更浅的语法作用样式，`blank` 不渲染。语法文案在渲染层去掉括号，所以“宾语”挂在 `を` 的 token 下，不会被读成 `現金` 的词义。
+- 没有动 `ExampleSentence`、颜色常量、已有 `ls/wb/wd` 样式、读音设置、按钮层级或离线 banner。
+
+### B · 辞书形管线
+
+- `build-example-tokens.py` 保存 `dictionary_form()`，仅在与 surface 不同时以第三项进入紧凑数组；读取层暴露 `dictionaryForm`，不为重复值付包体积。
+- 词场查词顺序为词面 → reading → 辞书形；无法唯一映射的辞书形继续留空，不猜。
+- 20 条词场句：`115/133 = 86.5%` → `133/133 = 100.0%`；留空 `18` → `0`，18 个动词洞（包括 `払い`、`探し`、`入れ`、`会い` 等）清零。
+- 产物从 `520,743` bytes 增至 `598,745` bytes，增加 `78,002` bytes（`+14.98%`）；新增 5,302 个三元 token。脚本实测仍为 4,400 句、36,435 token，含汉字 token 12,247、可对齐 12,237（99.92%）。
+- 这 20 条样板没有剩余空 token；全量例句中仍可能有不适合猜测的形状/歧义，读取和查词层保持 fail-closed。
+
+### 验收
+
+- `npm test && npm run typecheck`：603 passed，0 failed；typecheck exit 0。
+- `git diff --check`：通过。
+- 本批没有改内容包，因此没有 `content-stats` 前后差异可报告；`assets/example_tokens.json` 是打进 App 的 asset，需重新构建 App 才生效。
+
+### 想改但忍住没改
+
+没有启动 C 的四层渲染合并；没有改例句渲染器、内容包、语法数据字段、`units.js`、`srs.js`、颜色常量或其他工单明确不做的观察项；没有用 LLM 为辞书形或逐块中文补猜。
+
+### 交报告前原始门禁输出
+
+以下两段是在报告整理完成后按 `AGENTS.md` 第六节执行的原始输出；audit 的 23 个 FAIL 是 Harness v1 已知的文档引用基线，不是本批 A/B 改动引入。
+
+#### `git status --short`
+
+```text
+（最终提交报告后执行，见下方补录）
+```
+
+#### `npm run audit`
+
+```text
+（最终提交报告后执行，见下方补录）
+```
+
 随后已把断言恢复为 563；错误数字没有进入提交。
 
 ### 与工单/当前事实的对照

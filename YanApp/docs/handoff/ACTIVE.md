@@ -1,26 +1,33 @@
-# 当前状态 · Harness v1
+# 当前状态 · PLAN v2 第八批
 
-> 状态：Harness v1 已完成；只扩 `scripts/audit.mjs`，内容包和业务代码未修改。
+> 状态：A/B 实现已完成并提交；C（合并两套渲染器）按工单明确不做。
 >
 > 更新日期：2026-08-24
 
+## 当前工单
+
+`docs/handoff/TICKET-plan-v2-batch8.md`
+
 ## 本轮完成
 
-- A `doc-refs`：扫描契约文档和 `docs/**/*.md`，检查路径存在且已被 Git 跟踪；输出扫描总数和去重数。
-- B `workspace-clean`：报告 `docs/` 下未跟踪 Markdown，并阻断未跟踪的四份根契约文件。
-- 人为把 AGENTS 引用改为不存在路径时，audit exit 1；临时创建未跟踪 Markdown 时输出 WARN 并列出文件名；两项均已恢复。
+- A-1：词场逐 token 行改为顶部对齐，移除 `minHeight + flex-end` 造成的日语基线跳动。
+- A-2：词义、语法作用、空 token 按已有 `source` 分层；grammar 文案去括号并降低字号/对比度，blank 不渲染。
+- B：Sudachi token 产出必要的 `dictionary_form`；读取层支持三元紧凑格式；词场查词顺序为词面 → reading → 辞书形。
+- 重新生成 `assets/example_tokens.json`：4400 句、36435 token，加入 5302 个三元 token。
+- 20 条词场句的逐块中文覆盖从 115/133（86.5%）提升到 133/133（100%）；18 个动词洞清零。
+- 未修改 `assets/content.fallback.json`、`yan-content/content.v2.json` 或任何远端内容包。
 
 ## 提交与验收
 
-- 本轮提交：待提交的 Harness v1 代码与报告。
-- `npm test`：596 passed；`npm run typecheck`：通过。
-- 当前工作区最终 audit 会如实报告既有未跟踪 `staging/`、`tools/`、`reports/` 工件和旧文档路径问题；本工单明确不自动修复、不 `git add`。
-- 内容包两份文件未修改，版本仍为 2.4。
+- 本轮代码提交：`f2ed5e7 fix(wordfield): preserve grammar cues and inflected gloss coverage`
+- `npm test`：603 passed，0 failed。
+- `npm run typecheck`：exit 0。
+- `git diff --check`：通过。
+- `npm run audit`：当前仍受 Harness v1 已知的 23 个 `doc-refs` FAIL 阻断；详见 `docs/handoff/CC-REPORT.md` 的 batch8 原始输出。该 FAIL 不由本批改动引入，也未在本批越界修复。
 
-## 明确未做
+## 明确未做与剩余事项
 
-没有改业务代码、内容包、v0 已有检查逻辑、内容管线或任何文件；审计脚本只报告，不自动修复。
-
-## 诚实说明
-
-人为验收产生的 AGENTS 临时改动已恢复，验收用的临时 Markdown 已删除；未执行 `git add`。
+- C：不合并 `ExampleSentence` 与词场渲染器，不做四层对齐样板。
+- 不改例句渲染器、读音设置、`C` 颜色常量、已有 `ls/wb/wd` 样式、按钮层级或离线 banner。
+- 不用 LLM 猜测仍无法唯一映射的辞书形；真正查不到/有歧义的 token 继续留空。
+- `assets/example_tokens.json` 是 App asset，需随之后的 App 构建才会进入安装包；不走 `push-content.sh`。
