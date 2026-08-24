@@ -61,6 +61,7 @@ import { PitchLine, pitchOf, hasMultiAccent, pitchUnconfirmed } from './src/feat
 import { SenseList } from './src/features/wordbank/SenseList';
 import { Furigana } from './src/features/wordbank/FuriganaText';
 import { ExampleSentence } from './src/features/wordbank/ExampleSentence';
+import { buildWordFieldAlignment } from './src/features/wordbank/wordFieldAlignment';
 import EXAMPLE_TOKENS from './assets/example_tokens.json';
 import { primaryReading, altReadings } from './src/features/wordbank/furigana';
 import {
@@ -1827,6 +1828,7 @@ function WordBookShelfScreen({ wordBank, onBack, onSelect }) {
     return (
       <WBDetailPage
         entry={picked}
+        wordBank={wordBank}
         record={pickedRecord}
         today={today}
         onBack={() => setPicked(null)}
@@ -1841,6 +1843,7 @@ function WordBookShelfScreen({ wordBank, onBack, onSelect }) {
         hasNext={pickedIdx < hits.length - 1}
         onPrev={() => { const i = pickedIdx - 1; setPicked(hits[i]); setPickedIdx(i); }}
         onNext={() => { const i = pickedIdx + 1; setPicked(hits[i]); setPickedIdx(i); }}
+        lookupWord={(id) => wordBank.find(word => word.id === id)}
       />
     );
   }
@@ -2187,6 +2190,7 @@ function WordBankScreen({ wordBank, book, onBack }) {
     return (
       <WBDetailPage
         entry={selectedWord}
+        wordBank={wordBank}
         record={progress[wordKey(selectedWord)] || null}
         today={today}
         onBack={goBack}
@@ -2358,7 +2362,18 @@ const LOAN_LANG = {
   lat: '拉丁语', gre: '希腊语',
 };
 
-function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKey, hasPrev, hasNext, onPrev, onNext, lookupWord, onOpenWord, pocketed, onPocketToggle, pocketSyncNote }) {
+function fieldMemberTerms(wordField, lookupWord) {
+  return (wordField?.members || [])
+    .map(member => lookupWord?.(member.id))
+    .filter(Boolean)
+    .flatMap(word => [word.word, word.reading].filter(Boolean));
+}
+
+function isFieldMemberToken(token, terms) {
+  return terms.some(term => term === token.jp);
+}
+
+function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, speakingKey, hasPrev, hasNext, lookupWord, onOpenWord, pocketed, onPocketToggle, pocketSyncNote }) {
   // 词场:这个词真实出现时,身边站着哪些词。
   // 关键是**一个句子**而不是并列的词块 —— 秋(季节)、山(地点)、温泉(要做的事)
   // 是三种不同的关系,摊成一排格子等于让用户自己猜关系。第一版就是这么翻的车。
@@ -2444,7 +2459,6 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
               <TouchableOpacity style={wd.pocketBtn} onPress={() => onPocketToggle(entry)}>
                 <Text style={wd.pocketBtnTxt}>{pocketed ? '移出口袋' : '收入口袋'}</Text>
               </TouchableOpacity>
-              <Text style={wd.pocketHint}>收进来后会进入复习，之后还会再问你。</Text>
               {!!pocketSyncNote && <Text style={wd.pocketNote}>{pocketSyncNote}</Text>}
             </View>
           )}
@@ -2474,12 +2488,20 @@ function WBDetailPage({ entry, record, today, onBack, onGrade, speak, speakingKe
         )}
         {wordFields.map((wordField, fi) => (
           <View key={fi} style={wd.section}>
-            {/* 标题跟着词走(「秋天会一起遇到」),不用固定的「相关词」——
-                固定标题会逼人把不同关系塞进同一个筐 */}
-            <Text style={wd.sectionLabel}>{wordField.label || '一起出现'}</Text>
+            <Text style={wd.sectionLabel}>这句话里，它和这些词碰面</Text>
             <View style={wd.exRow}>
               <View style={{ flex: 1, gap: 3 }}>
-                <ExampleSentence sentence={wordField.sentence.jp} tokens={null} size={17} />
+                <View style={wd.wfAlignRow}>
+                  {buildWordFieldAlignment(wordField.sentence.jp, wordBank).map((token, ti) => {
+                    const member = isFieldMemberToken(token, fieldMemberTerms(wordField, lookupWord));
+                    return (
+                      <View key={`${fi}-${ti}`} style={wd.wfAlignToken}>
+                        <Text style={[wd.wfAlignJp, member && wd.wfMemberJp]}>{token.jp}</Text>
+                        {!!token.zh && <Text style={wd.wfAlignZh}>{token.zh}</Text>}
+                      </View>
+                    );
+                  })}
+                </View>
                 {!!wordField.sentence.roma && <Text style={wd.exRoma}>{wordField.sentence.roma}</Text>}
                 <Text style={wd.exZh}>{wordField.sentence.zh}</Text>
               </View>
@@ -2566,7 +2588,7 @@ const wd = StyleSheet.create({
   //
   // 声调线的样式跟着组件搬去了 features/wordbank/PitchLine.js
   metaRow: { paddingHorizontal: 16, marginTop: 6, flexDirection: 'row', gap: 6 },
-  posTag: { backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 2 },
+  posTag: { backgroundColor: C.tag, borderRadius: 999, paddingHorizontal: 6, paddingVertical: 2, alignSelf: 'flex-start' },
   posTagTxt: { fontSize: 10, color: C.muted, fontWeight: '600' },
   pocketBtn: { borderWidth: 1, borderColor: C.lava, borderRadius: 999, paddingHorizontal: 9, paddingVertical: 2 },
   pocketBtnTxt: { fontSize: 10, color: C.lava, fontWeight: '600' },
@@ -2593,6 +2615,11 @@ const wd = StyleSheet.create({
   // 词场句比普通例句大一号:它是这张卡的主句,不是补充材料
   wfJp: { fontSize: 17, color: C.ink, fontWeight: '600', lineHeight: 26 },
   wfChips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 2 },
+  wfAlignRow: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'flex-end', gap: 5, paddingVertical: 2 },
+  wfAlignToken: { alignItems: 'center', minHeight: 42, justifyContent: 'flex-end' },
+  wfAlignJp: { fontSize: 17, color: C.ink, fontWeight: '600', lineHeight: 24 },
+  wfMemberJp: { color: C.lava, textDecorationLine: 'underline', textDecorationColor: C.lava },
+  wfAlignZh: { fontSize: 10, color: C.muted, lineHeight: 14, maxWidth: 70, textAlign: 'center' },
   wfChip: {
     flexDirection: 'row', alignItems: 'baseline', gap: 5,
     borderWidth: 1, borderColor: C.border, borderRadius: 999,
