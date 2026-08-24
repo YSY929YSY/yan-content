@@ -18,6 +18,9 @@ const INFLECTION_FRAGMENTS = ['買い', '食べ', '行き', '待ち', '出し', 
 
 const isKana = (value) => /[ぁ-ゖァ-ヺー]/.test(value);
 
+/** 只取第一个义项。分号分义项,逗号分同义词 —— 后者不拆。 */
+const firstSense = (value) => String(value || '').split(/[;；]/)[0].trim();
+
 const candidatesOf = (wordBank) => {
   const seen = new Set();
   const out = [];
@@ -26,7 +29,11 @@ const candidatesOf = (wordBank) => {
     for (const surface of values) {
       if (!surface || seen.has(surface) || GRAMMAR[surface]) continue;
       seen.add(surface);
-      out.push({ surface, zh: word.meaning_zh || '', source: 'wordBank' });
+      // 对齐行是**辅助行**,不能喧宾夺主(SOUL.md 视觉身份规则)。
+      // 词典释义常带多个义项 ——「袋 → 袋子；（橘子等的）瓤」,
+      // 「橘子等的瓤」出现在便利店句子的对齐行里纯属干扰。
+      // 只取第一个义项:分号是义项分隔,逗号是同义并列(「早上，早晨」要整段留)。
+      out.push({ surface, zh: firstSense(word.meaning_zh), source: 'wordBank' });
     }
   }
   return out.sort((a, b) => b.surface.length - a.surface.length);

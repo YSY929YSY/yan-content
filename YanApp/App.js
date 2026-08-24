@@ -2488,7 +2488,7 @@ function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, 
         )}
         {wordFields.map((wordField, fi) => (
           <View key={fi} style={wd.section}>
-            <Text style={wd.sectionLabel}>这句话里，它和这些词碰面</Text>
+            <Text style={wd.sectionLabel}>一起出现</Text>
             <View style={wd.exRow}>
               <View style={{ flex: 1, gap: 3 }}>
                 <View style={wd.wfAlignRow}>
