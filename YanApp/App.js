@@ -2373,7 +2373,7 @@ function isFieldMemberToken(token, terms) {
   return terms.some(term => term === token.jp);
 }
 
-function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, speakingKey, hasPrev, hasNext, lookupWord, onOpenWord, pocketed, onPocketToggle, pocketSyncNote }) {
+function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, speakingKey, hasPrev, hasNext, onPrev, onNext, lookupWord, onOpenWord, pocketed, onPocketToggle, pocketSyncNote }) {
   // 词场:这个词真实出现时,身边站着哪些词。
   // 关键是**一个句子**而不是并列的词块 —— 秋(季节)、山(地点)、温泉(要做的事)
   // 是三种不同的关系,摊成一排格子等于让用户自己猜关系。第一版就是这么翻的车。
