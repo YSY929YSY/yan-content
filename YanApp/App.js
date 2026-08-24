@@ -2494,10 +2494,18 @@ function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, 
                 <View style={wd.wfAlignRow}>
                   {buildWordFieldAlignment(wordField.sentence.jp, wordBank).map((token, ti) => {
                     const member = isFieldMemberToken(token, fieldMemberTerms(wordField, lookupWord));
+                    const glossStyle = token.source === 'wordBank'
+                      ? wd.wfAlignZh
+                      : token.source === 'grammar'
+                        ? wd.wfAlignGrammar
+                        : null;
+                    const gloss = token.source === 'grammar'
+                      ? String(token.zh || '').replace(/^[（(]/, '').replace(/[）)]$/, '')
+                      : token.zh;
                     return (
                       <View key={`${fi}-${ti}`} style={wd.wfAlignToken}>
                         <Text style={[wd.wfAlignJp, member && wd.wfMemberJp]}>{token.jp}</Text>
-                        {!!token.zh && <Text style={wd.wfAlignZh}>{token.zh}</Text>}
+                        {!!glossStyle && !!gloss && <Text style={glossStyle}>{gloss}</Text>}
                       </View>
                     );
                   })}
@@ -2615,11 +2623,15 @@ const wd = StyleSheet.create({
   // 词场句比普通例句大一号:它是这张卡的主句,不是补充材料
   wfJp: { fontSize: 17, color: C.ink, fontWeight: '600', lineHeight: 26 },
   wfChips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 2 },
-  wfAlignRow: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'flex-end', gap: 5, paddingVertical: 2 },
-  wfAlignToken: { alignItems: 'center', minHeight: 42, justifyContent: 'flex-end' },
+  // 日语 token 从行顶端开始排。不能让没有中文的 token 被 flex-end 顶到
+  // minHeight 盒子底部,否则同一句里日语基线会随 gloss 有无上下跳。
+  wfAlignRow: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'flex-start', gap: 5, paddingVertical: 2 },
+  wfAlignToken: { alignItems: 'center' },
   wfAlignJp: { fontSize: 17, color: C.ink, fontWeight: '600', lineHeight: 24 },
   wfMemberJp: { color: C.lava, textDecorationLine: 'underline', textDecorationColor: C.lava },
   wfAlignZh: { fontSize: 10, color: C.muted, lineHeight: 14, maxWidth: 70, textAlign: 'center' },
+  // 语法作用属于助词/语法块,不是前面实义词的词义;降低字号和对比度避免关系读反。
+  wfAlignGrammar: { fontSize: 9, color: C.mutedLight, lineHeight: 13, maxWidth: 70, textAlign: 'center' },
   wfChip: {
     flexDirection: 'row', alignItems: 'baseline', gap: 5,
     borderWidth: 1, borderColor: C.border, borderRadius: 999,

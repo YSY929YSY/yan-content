@@ -12,14 +12,37 @@ const GRAMMAR = {
   ください: '（请）', 下さい: '（请）',
 };
 
-// Sudachi 的辞书形没有随 token 一起带到运行时；这些是样板句里明确可识别的活用碎片。
-// 它们故意留空，不把词干误当成一个独立词。
+// 没有辞书形元数据的活用碎片仍然故意留空，不把词干误当成一个独立词。
 const INFLECTION_FRAGMENTS = ['買い', '食べ', '行き', '待ち', '出し', '入れ', '見せ', '探し', '払い', '会い', '読み', 'あり', 'しまし'];
 
 const isKana = (value) => /[ぁ-ゖァ-ヺー]/.test(value);
 
 /** 只取第一个义项。分号分义项,逗号分同义词 —— 后者不拆。 */
 const firstSense = (value) => String(value || '').split(/[;；]/)[0].trim();
+
+// 词场句没有自己的 id；它们借用例句管线产出的 surface → dictionary form
+// 索引。Metro 能直接 require JSON asset，Node 单测环境没有全局 require 时则
+// 回退为空索引，仍然遵守「查不到就留空」。
+const loadBundledDictionaryForms = () => {
+  try {
+    if (typeof require !== 'function') return new Map();
+    const raw = require('../../../assets/example_tokens.json');
+    const bySurface = new Map();
+    for (const tokens of Object.values(raw?.default || raw || {})) {
+      for (const token of Array.isArray(tokens) ? tokens : []) {
+        if (!Array.isArray(token) || typeof token[0] !== 'string' || typeof token[2] !== 'string' || !token[2]) continue;
+        const forms = bySurface.get(token[0]) || new Set();
+        forms.add(token[2]);
+        bySurface.set(token[0], forms);
+      }
+    }
+    return bySurface;
+  } catch {
+    return new Map();
+  }
+};
+
+const BUNDLED_DICTIONARY_FORMS = loadBundledDictionaryForms();
 
 const candidatesOf = (wordBank) => {
   const seen = new Set();
@@ -33,10 +56,35 @@ const candidatesOf = (wordBank) => {
       // 词典释义常带多个义项 ——「袋 → 袋子；（橘子等的）瓤」,
       // 「橘子等的瓤」出现在便利店句子的对齐行里纯属干扰。
       // 只取第一个义项:分号是义项分隔,逗号是同义并列(「早上，早晨」要整段留)。
-      out.push({ surface, zh: firstSense(word.meaning_zh), source: 'wordBank' });
+      out.push({ surface, zh: firstSense(word.meaning_zh), source: 'wordBank', priority: surface === word?.word ? 0 : 1 });
     }
   }
   return out.sort((a, b) => b.surface.length - a.surface.length);
+};
+
+const dictionaryCandidateAt = (sentence, start, candidates, dictionaryForms) => {
+  if (!(dictionaryForms instanceof Map)) return null;
+  const matches = [];
+  for (const [surface, forms] of dictionaryForms) {
+    if (typeof surface !== 'string' || !(forms instanceof Set) || !sentence.startsWith(surface, start)) continue;
+    const dictionaryCandidates = candidates.filter(candidate => forms.has(candidate.surface));
+    // 同一个活用表面可能对应多个辞书形（例如「行っ」），这种情况不猜。
+    if (dictionaryCandidates.length === 1) {
+      matches.push({ surface, candidate: dictionaryCandidates[0] });
+    }
+  }
+  matches.sort((a, b) => b.surface.length - a.surface.length);
+  return matches[0] || null;
+};
+
+const directCandidateAt = (sentence, start, candidates) => {
+  for (const priority of [0, 1]) {
+    const matches = candidates
+      .filter(candidate => candidate.priority === priority && sentence.startsWith(candidate.surface, start))
+      .sort((a, b) => b.surface.length - a.surface.length);
+    if (matches.length) return matches[0];
+  }
+  return null;
 };
 
 const nextKnownBoundary = (sentence, start, candidates) => {
@@ -56,7 +104,7 @@ const nextKnownBoundary = (sentence, start, candidates) => {
  * Greedy, fail-closed alignment for the twenty word-field sample sentences.
  * Unknown inflection fragments remain blank; no meaning is invented here.
  */
-export function buildWordFieldAlignment(sentence, wordBank) {
+export function buildWordFieldAlignment(sentence, wordBank, dictionaryForms = BUNDLED_DICTIONARY_FORMS) {
   const text = String(sentence || '');
   const candidates = candidatesOf(wordBank);
   const out = [];
@@ -72,17 +120,27 @@ export function buildWordFieldAlignment(sentence, wordBank) {
       continue;
     }
 
+    // 命中顺序：词面 → reading → 辞书形。前两级仍由 candidates 的
+    // word/reading 别名完成；最后一级用离线 token 的第三项把「探し」还原到「探す」。
+    // 候选之间取最长的完整表面，避免词库里的短词「你」先吃掉「你们」一类
+    // 活用 token；同长度时仍保持上面的命中顺序。
+    const word = directCandidateAt(text, cursor, candidates);
+    const dictionary = dictionaryCandidateAt(text, cursor, candidates, dictionaryForms);
+    if (word && (!dictionary || word.surface.length >= dictionary.surface.length)) {
+      out.push({ jp: word.surface, zh: word.zh, source: 'wordBank' });
+      cursor += word.surface.length;
+      continue;
+    }
+    if (dictionary) {
+      out.push({ jp: dictionary.surface, zh: dictionary.candidate.zh, source: 'wordBank' });
+      cursor += dictionary.surface.length;
+      continue;
+    }
+
     const inflection = INFLECTION_FRAGMENTS.find(fragment => text.startsWith(fragment, cursor));
     if (inflection) {
       out.push({ jp: inflection, zh: '', source: 'blank', blankKind: '活用碎片' });
       cursor += inflection.length;
-      continue;
-    }
-
-    const word = candidates.find(candidate => text.startsWith(candidate.surface, cursor));
-    if (word) {
-      out.push({ jp: word.surface, zh: word.zh, source: 'wordBank' });
-      cursor += word.surface.length;
       continue;
     }
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""例句分词 —— 离线跑,产物进内容包,运行时零依赖。
+"""例句分词 —— 离线跑,产物进 App 包的 asset,运行时零依赖。
 
 为什么必须离线:
   · 唯一能同时给「切分 + 读音 + 词性」的是带词典的分析器,而词典 207 MB
@@ -11,7 +11,7 @@
 **只分发派生的读音数据,不分发词典本身。** 上架前要在「数据来源」那一屏
 加一条 Sudachi 的 Apache-2.0 署名 —— 和已有的 JMdict / kanjium 并列。
 
-⚠️ 产物**只存 词面 + 读音**,不存对齐好的注音分段。
+⚠️ 产物**只存 词面 + 读音 + 必要时的辞书形**,不存对齐好的注音分段。
 对齐交给渲染时的 src/features/wordbank/furigana.ts(纯函数,有测试,
 含汉字词实测 6962/6963)。理由:对齐规则只该有一份实现;烤进数据的话
 以后改规则要重跑管线,而且两边会长歪。
@@ -131,7 +131,14 @@ def main():
         for m in tok.tokenize(sent, SplitMode.C):
             surface = m.surface()
             reading = to_hira(m.reading_form() or '')
-            toks.append({'t': surface, 'r': reading})
+            dictionary_form = m.dictionary_form() or ''
+            toks.append({
+                't': surface,
+                'r': reading,
+                # 辞书形只有在和句中词面不同时才进产物。字段名和重复值
+                # 都要付进包体积的运费；原形 token 不需要这项。
+                'd': dictionary_form if dictionary_form != surface else '',
+            })
             n_tok += 1
             if NEEDS_RUBY.search(surface):
                 n_kanji_tok += 1
@@ -152,10 +159,13 @@ def main():
         # ⚠️ 紧凑格式:这份东西要**打进 App 包**,每个字段名都要付一次运费。
         #     不需要注音的 token   → "きのこ"        (光秃秃一个字符串)
         #     需要注音的 token     → ["美味しい","おいしい"]
+        #     需要辞书形的 token   → ["探し","さがし","探す"]
         # 用 {"t":…,"r":…} 的话每个 token 多 14 个字节,3.6 万个 token 就是半兆。
         # 客户端判型只要 typeof === 'string',不值得为可读性多付这笔。
         out[wid] = [
-            t['t'] if t['r'] == to_hira(t['t']) else [t['t'], t['r']]
+            t['t'] if t['r'] == to_hira(t['t']) and not t['d'] else (
+                [t['t'], t['r']] + ([t['d']] if t['d'] else [])
+            )
             for t in toks
         ]
 

@@ -21,6 +21,16 @@ test('两种形状都认', () => {
   ]);
 });
 
+test('三元紧凑形状读取辞书形,且不接受重复的辞书形', () => {
+  assert.deepEqual(normalizeTokens([
+    ['探し', 'さがし', '探す'],
+    ['きのこ', 'きのこ', 'きのこ'],
+  ]), [
+    { text: '探し', reading: 'さがし', dictionaryForm: '探す' },
+    { text: 'きのこ', reading: 'きのこ' },
+  ]);
+});
+
 test('★ 什么脏东西都不能炸 —— 这份 JSON 是脚本生成的,脚本还会再改', () => {
   assert.deepEqual(normalizeTokens(null), []);
   assert.deepEqual(normalizeTokens('不是数组'), []);
@@ -95,4 +105,15 @@ test('★ 回归:含汉字的 token 绝大多数能对齐 —— 对不上的只
   assert.ok(aligned >= 12200, `只对上 ${aligned} / ${kanji}。失败样本:${failed.join(' ')}`);
   // 而且不能全对 —— 已知那 10 个全角数字对不上,全对说明对齐在瞎给
   assert.ok(aligned < kanji, '一个都不失败反而可疑,已知有 10 个全角数字量词对不上');
+});
+
+test('★ 回归:真实产物含辞书形,且第三项只在词面不同的时候出现', () => {
+  const tokens = load('../../../assets/example_tokens.json');
+  const triples = Object.values(tokens).flat().filter((t) => Array.isArray(t) && t.length === 3);
+  assert.ok(triples.length >= 5000, `辞书形三元 token 只有 ${triples.length}`);
+  assert.ok(triples.every((t) => t[2] !== t[0]), '不应存和词面相同的辞书形');
+  assert.deepEqual(
+    normalizeTokens(tokens.n5_au).find((t) => t.text === '会い'),
+    { text: '会い', reading: 'あい', dictionaryForm: '会う' },
+  );
 });
