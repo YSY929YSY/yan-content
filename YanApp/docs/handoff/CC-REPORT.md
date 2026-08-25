@@ -1879,6 +1879,72 @@ TokenColumnSentence
 
 例句和词场都调用同一个 `TokenColumnSentence`；例句传 `showGloss=false` 隐藏第三槽，词场传 `showGloss=true`。例句的 token 读音继续交给现有 `Furigana`，其内部继续复用 `furigana.ts`，不另写假名对齐规则。词场只在两句样板上切换到该 renderer，其他词场不推广。
 
+### B9-2 · 实际结果
+
+- `fe06d0e`：改动 `App.js`、`src/features/wordbank/ExampleSentence.js` 和 `src/lib/__tests__/token-column-renderer.test.mjs`。
+- 两句均按 token column 渲染：`店員 / に / カード(サイズ) / を / 見せ(聞き) / ます / 。`；每列由现有 `Furigana` 的读音+日语布局和第三行 gloss 组成，grammar 继续使用低权重样式，blank 只留槽位高度。
+- `店員にカードを見せます。` 中 `カード` 的 gloss 为“积分卡/银行卡，卡片”，`見せ` 的 gloss 为“给……看，展示”；`店員にサイズを聞きます。` 中 `サイズ`、`聞き` 同样有对应 gloss。两句的 `を` 下方是“宾语”，`ます` 下方是“礼貌”。
+- 例句 `店員にサイズを聞きます。` 与词场 `店員にカードを見せます。` 走同一个 renderer；例句隐藏第三槽。没有推全库词场，也没有改内容包。
+- `npm test`：606 passed；`npm run typecheck`：通过；`npm run audit`：`FAIL: 0`、`WARN: 14`、`Result: PASS`。
+- 真机显示、横竖屏和不同机型下是否无漂移：**待真机验证**。
+
+### B9 本轮想改但忍住没改
+
+没有把三槽位 renderer 推到其他词场，没有改内容包或例句数据，没有重写 `furigana.ts`，没有用句子专属坐标/字符宽度补偿布局，也没有顺手改按钮层级、灰阶或离线 banner。
+
+### B9 最终交报告前原始输出
+
+#### `git status --short`
+
+```text
+?? "\\350\\260\\224\\347\\240\\224/"
+?? ../YanApp_backup_0501/
+?? ../resources/
+?? ../yan-content/README.md
+?? ../yan-content/content.json
+?? ../yan-content/content.v1.json
+?? "../yan-content/yan_word_story\\350\\276\\223\\205\\245\\350\\250\\236\\345\\274\\217\\346\\216\\242\\350\\256\\25026.6.2.html"
+```
+
+#### `npm run audit`
+
+```text
+> yanapp@1.0.0 audit
+> node scripts/audit.mjs
+
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:2914: review editorial claim "旅行高频"
+WARN user-claims App.js:2958: review editorial claim "旅行高频"
+WARN user-claims App.js:3052: review editorial claim "高频"
+WARN user-claims App.js:3095: review editorial claim "高频"
+WARN user-claims App.js:3142: review editorial claim "高频"
+WARN user-claims App.js:3160: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 a00a76e1289a9c84e0f7089b2edc1949811bf52fb08f7c297ba55ada8ffecd82
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+INFO doc-refs scanned 738 references (328 unique)
+WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:16: missing 调研/…/red调研重新规划_编号修正版.md
+WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:286: missing red调研重新规划_编号修正版.md
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:804: missing src/content/publication.ts
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:803: missing src/content/schema.ts
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:278: missing src/content/contentValidation.ts
+WARN doc-refs docs/TICKET-jmdict-followup.md:86: missing staging/duplicate-seq-plan.md
+WARN doc-refs docs/TICKET-jmdict-followup.md:86: missing staging/duplicate-seq-groups.json
+PASS doc-refs 所有引用都已入库（7 条指向不存在的路径，见 WARN）
+PASS workspace-clean docs markdown tracked
+--- audit summary ---
+FAIL: 0
+WARN: 14
+Result: PASS
+```
+
 ## PLAN v2 第八批（A 修渲染 / B 补辞书形）
 
 ### 实际改动与提交

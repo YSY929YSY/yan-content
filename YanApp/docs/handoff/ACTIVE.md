@@ -1,6 +1,6 @@
 # 当前状态 · PLAN v2 第九批
 
-> 状态：B9-1 已完成并提交；B9-2 的实现方案已先写入报告，待按两句样板实施。
+> 状态：B9-1/B9-2 已完成并提交；两句样板的真机显示仍待验证。
 >
 > 更新日期：2026-08-25
 
@@ -14,7 +14,10 @@
 - B9-1 提交：`5471ec5 fix(wordfield): inject the example token dictionary forms`。
 - B9-1 守卫：真实 `assets/example_tokens.json` → Map，规模 `1083`（测试下限 ≥1000）；`grep require(` 无命中。
 - B9-1 验收：全量 `npm test` 604 passed，`npm run typecheck` 通过。
-- B9-2 尚未写代码。改前 View 层级与三槽位方案已记录在 `docs/handoff/CC-REPORT.md`，之后只做 `店員にカードを見せます。` 与 `店員にサイズを聞きます。` 两句样板。
+- B9-2 改前 View 层级与三槽位方案已先记录在 `docs/handoff/CC-REPORT.md`；实现只切换 `店員にカードを見せます。` 与 `店員にサイズを聞きます。` 两句样板。
+- B9-2 提交：`fe06d0e feat(wordfield): align the two sample sentences in token columns`。
+- 例句与两句样板词场共用 `TokenColumnSentence`；例句隐藏 gloss 槽，词场保留第三槽，空 gloss 留高度不顶位。
+- 样板的真机显示和横竖屏/不同机型位置稳定性：**待真机验证**。
 
 ## 不做
 
