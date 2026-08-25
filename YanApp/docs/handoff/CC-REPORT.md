@@ -1916,7 +1916,7 @@ PASS content-pack-sync version/content comparison
 PASS invariant kanji_anchor.total=563
 PASS invariant wordBank.total=8005; _meta.note=8005
 PASS metric publication.learning=1187 (not asserted)
-INFO doc-refs scanned 779 references (349 unique)
+INFO doc-refs scanned 782 references (349 unique)
 WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:16: missing 调研/…/red调研重新规划_编号修正版.md
 WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:286: missing red调研重新规划_编号修正版.md
 WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:804: missing src/content/publication.ts
