@@ -1875,6 +1875,8 @@ Result: FAIL
 ### 实现与门禁
 
 - `d9ec045 feat(wordfield): use native Tatoeba coverage to set the mainline frontier`：新增本地 Tatoeba 筛选脚本和 JSONL staging 产物；没有内容包改动。
+- `97df011 docs(wordfield): record the evidence before mainline review`：更新 `AGENTS.md` 主线覆盖数字、`ACTIVE.md` 当前工单、10 条样例报告，并加入工单指定的 `.mjs` 入口。
+- `eb2f971 docs(handoff): include the raw mainline gate output`：把交报告前的原始 `git status --short` 与 `npm run audit` 输出写入本报告。
 - 同一入口保留 Node `.mjs` 以对齐工单路径；它只注入参数并转交 Python，未复制筛选规则。
 - `npm test`：606 passed，0 failed。
 - `npm run typecheck`：exit 0。
