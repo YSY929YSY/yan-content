@@ -1,32 +1,32 @@
-# 当前状态 · 主线续批 T1/T3
+# 当前状态 · 主线词场 gloss 推广前评估
 
-> 状态：T1、T3 已完成；T2 **未落库**，等待项目负责人看过 T1 规范化后的样例并决定数量。
+> 状态：本轮测量已完成；未改业务代码、UI、内容包；未构建、未发 OTA。
 >
 > 更新日期：2026-08-25
 
 ## 当前工单
 
-`docs/handoff/TICKET-mainline-wordfield-2.md`
+`docs/handoff/TICKET-gloss-rollout-assessment.md`
 
-## 本轮进度
+## 本轮结果
 
-- T1 已完成：重跑 1,851 条 Tatoeba staging 中文，接入现成 `opencc.OpenCC("t2s")`；OpenCC 可转换繁体字符机器命中 **0**。
-- T1 机器回归：日文原句、`jp_sentence_id`、`zh_sentence_id` 均与 T1 前逐条一致；实际有 621 行中文发生规范化（工单的 368 条是较窄常用字口径，报告记录该差异）。
-- T3 已完成：对齐行 gloss 在第一个义项后再取第一个中文分隔符；不改 `meaning_zh`，不改 `TokenColumnSentence` 三槽位结构；对齐行 gloss 单行显示且不设截断宽度。
-- T3 测试覆盖真实词库 10 个词，并检查不以省略号截断。
-- T2：**0 条**。未改 `assets/content.fallback.json`、`yan-content/content.v2.json`，未自行决定落库数量。
-- T1 提交：`0d82268 fix(wordfield): normalize staged Tatoeba translations before review`。
-- T3 提交：`c839be5 fix(wordfield): keep alignment glosses short and single-line`。
-- EAS Update：preview / iOS 已发布，update group `94cd5add-ca1e-464d-81d2-997cc0fe5974`；这不是构建。
+- 4,400 条有例句词条全部完成测量。
+- 拼回一致：**4,400 / 4,400（100.00%）**。
+- 非标点 token gloss 覆盖：**29,521 / 33,566（87.95%）**；全覆盖句 **1,622 / 4,400**。
+- 覆盖分布：100% **1,622**；90–99% **378**；70–89% **2,200**；<70% **200**。
+- 空白 token：活用碎片 **2,627（64.74%）**；表记差异 **1,431（35.26%）**；不在词库 **0（0.00%）**。
+- 贪心分词与 `EXAMPLE_TOKENS` 不同：**3,074 / 4,400**。
+- 15 条稳定随机样本与 5 条最低覆盖样本已追加到 `docs/handoff/CC-REPORT.md`。
+- 深卡盘点已产出 [`staging/deep-card-audit.md`](../../staging/deep-card-audit.md)：8 张卡中，`すみません` 缺少可供意象复核的 notes/context；发现 `どこ`、`痛い` 两条未带来源的“完全同源”式断言。
 
 ## 下一步
 
-- 项目负责人先看 `docs/handoff/CC-REPORT.md` 中的 T1/T3 样例；确认前不做 T2。
-- 真机检查对齐行和系统字号是否撑散列布局：**待真机验证**。
-- 若负责人批准 T2，再由负责人决定落库条数；按两份内容包同一 commit 的规则执行。
+- 由项目负责人先看样本质量，再决定是否推进 gloss 展示或深卡修订。
+- 本轮没有根据覆盖率自行修改对齐逻辑，也没有把空白补成中文。
+- 真机、字号稳定性、UI 推广、构建和 OTA 均不在本轮；保持待后续明确安排。
 
 ## 不做
 
-- 不自行落库，不更新主线已落库数字（仍为 20/563；staging 覆盖仍为 459/563）。
-- 不改词条 `meaning_zh`，不改 `TokenColumnSentence` 三槽位，不推全库 B9-2。
-- 不构建；不做横竖屏结论；不把 EAS Update 发布写成真机已验证。
+- 不改 `App.js`、`wordFieldAlignment.js`、`TOKEN_COLUMN_SAMPLE_SENTENCES`。
+- 不改 `assets/content.fallback.json`、`yan-content/content.v2.json`。
+- 不推全库、不用 LLM 补 gloss、不构建、不发 OTA。
