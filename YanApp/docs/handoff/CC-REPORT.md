@@ -3137,3 +3137,222 @@ FAIL: 23
 WARN: 7
 Result: FAIL
 ```
+
+## 主线词场 · 343 条可审清单（2026-08-26）
+
+### 异常自查（5-2）
+
+1. 与上一轮相比，1851 → 343 不是候选质量骤降，而是从“候选行数”改为“不同 anchor_id 数”；本轮按每个 anchor 只保留一条。A/B/C 与风险数是本轮新增指标，没有上一轮可比值。没有发现相差 2 倍以上且无法解释的同口径数字。
+2. 没有无法解释的数字。所有计数都来自候选 JSONL、短名单 JSON 或脚本输出；人工可读样本只展示脚本确定性抽出的前 10 条。
+3. 三档数量和四条淘汰数是判据决定后的机械结果，不是母语者质量结论。风险数也是保守正则信号，不是人工确认结论。
+
+### 先回答：有没有源？
+
+有。343 条都来自本地 Tatoeba 候选，短名单逐条保留：
+
+- 日文原句与中文原译；
+- tatoeba.jp_sentence_id 与 tatoeba.zh_sentence_id；
+- source: "Tatoeba"；
+- 主线成员词与未知词。
+
+这意味着每条都能回到语料定位，但不意味着句子自然度已被项目负责人或母语者人工确认。343 条全部仍是待审材料；本轮没有使用 LLM 造句或改写任何语言，也没有把它们写入内容包。
+
+### 输入事实与复算
+
+| 指标 | 实测 |
+|---|---:|
+| 候选行数 | 1,851 |
+| 不同 anchor | 343 |
+| 每 anchor 候选数 min / median / max | 1 / 3 / 46 |
+| unknown_word_count（原候选）0 / 1 / 2 / 3 | 1,350 / 440 / 58 / 3 |
+| member_word_ids 长度 2 / 3 / 4 / 5 / 6 | 1,305 / 466 / 68 / 11 / 1 |
+| 中文缺失 | 0 |
+
+复算命令：
+
+~~~
+node --input-type=module -e 'import fs from "node:fs"; const r=fs.readFileSync("staging/wordfield-candidates-tatoeba.jsonl","utf8").trim().split("\n").map(JSON.parse); const counts=(f)=>{const a=r.map(f).sort((x,y)=>x-y); console.log(Math.min(...a),a[Math.floor(a.length/2)],Math.max(...a))}; console.log("rows",r.length,"anchors",new Set(r.map(x=>x.anchor_id)).size); counts(x=>r.filter(y=>y.anchor_id===x.anchor_id).length); console.log("unknown",Object.groupBy(r,x=>x.metrics.unknown_word_count)); console.log("members",Object.groupBy(r,x=>x.member_word_ids.length)); console.log("zh_missing",r.filter(x=>!x.zh).length)'
+~~~
+
+### 选取规则与淘汰
+
+脚本是 scripts/wordfield-shortlist.mjs，输入为已提交的
+staging/wordfield-candidates-tatoeba.jsonl，输出为
+staging/wordfield-shortlist-343.json。每个 anchor 独立执行以下顺序：
+
+1. 保留 unknown_word_count 最小的行；
+2. 在剩余行中保留 member_word_ids.length 最大的行；
+3. 若剩余行中存在 7–12 字的行，则只保留 7–12 字；若该 anchor 没有这一长度区间的行，则不因长度淘汰；
+4. 以最小 tatoeba.jp_sentence_id 选一条。
+
+没有随机数、当前时间或字典序兜底参与选取。四条规则的顺序淘汰数如下：
+
+| 规则 | 淘汰 |
+|---|---:|
+| unknown 最小 | 426 |
+| member 数最大 | 787 |
+| 7–12 字优先 | 131 |
+| 日句 ID 最小 | 164 |
+| 合计 | 1,508（1,851−343） |
+
+复算命令：
+
+~~~
+node scripts/wordfield-shortlist.mjs
+~~~
+
+### 三档与最终分布
+
+档位判据固定为：
+
+- A · 可直接落：unknown_word_count=0 且句长 7–12 且 member_word_ids.length>=2；
+- B · 需抽查：unknown_word_count=0，但句长或 member 不满足 A；
+- C · 需逐条看：unknown_word_count>=1。
+
+member_word_ids.length>=2 是输入候选已有的硬门槛，在本批 343 条中全部满足；真正拉开 A/B 的是句长。
+
+| 档 | 条数 |
+|---|---:|
+| A | 230 |
+| B | 66 |
+| C | 47 |
+
+复算命令：
+
+~~~
+node scripts/wordfield-shortlist.mjs | grep '^tiers:'
+~~~
+
+最终 unknown_word_count 分布：
+
+| unknown 数 | 条数 |
+|---:|---:|
+| 0 | 296 |
+| 1 | 43 |
+| 2 | 3 |
+| 3 | 1 |
+
+复算命令：
+
+~~~
+node scripts/wordfield-shortlist.mjs | grep '^unknown_word_count:'
+~~~
+
+最终句长分布（jp_char_count）：
+
+| 字数 | 条数 | 字数 | 条数 | 字数 | 条数 |
+|---:|---:|---:|---:|---:|---:|
+| 5 | 2 | 6 | 4 | 7 | 11 |
+| 8 | 17 | 9 | 40 | 10 | 48 |
+| 11 | 72 | 12 | 67 | 13 | 28 |
+| 14 | 27 | 15 | 12 | 16 | 9 |
+| 17 | 5 | 18 | 1 |  |  |
+
+复算命令：
+
+~~~
+node scripts/wordfield-shortlist.mjs | grep '^jp_char_count:'
+~~~
+
+### 30 条抽样
+
+以下每档按 anchor_id 排序取前 10 条，不是人工挑选。member 同时给出 ID 和词面；C 档的 unknown 是脚本记录的未知词，不是人工补写。
+
+#### A · 可直接落（10/230）
+
+| anchor | 日文 | 中文 | member 词 | unknown | 句长 |
+|---|---|---|---|---|---:|
+| n5_ageru | 彼女は頭を上げた。 | 她抬起了头。 | n5_ageru=上げる, n5_atama=頭 | — | 9 |
+| n5_aka | 私の大好きな色は赤です。 | 我最喜欢红色。 | n5_aka=赤, n5_daisuki=大好き, n5_iro=色, n5_watakushi=私 | — | 12 |
+| n5_akarui | 私は明るい色が好きです。 | 我喜欢明亮的颜色。 | n5_akarui=明るい, n5_iro=色, n5_suki=好き, n5_watakushi=私 | — | 12 |
+| n5_akeru | この箱の開け方分かる？ | 你知道如何打开这个箱子吗？ | n5_akeru=開ける, n5_hako=箱, n5_kata=方, n5_wakaru=分かる | — | 11 |
+| n5_aki | 私は秋より春が好きだ。 | 我喜欢春天胜过秋天。 | n5_aki=秋, n5_haru=春, n5_suki=好き, n5_watakushi=私 | — | 11 |
+| n5_aku | 靴下に穴が開いているよ。 | 你的袜子破了一个洞呀。 | n5_aku=開く, n5_kutsushita=靴下 | — | 12 |
+| n5_amai | 私の力を甘く見ないで。 | 不要小看我的力量。 | n5_amai=甘い, n5_miru=見る, n5_watakushi=私 | — | 11 |
+| n5_ame | 雨は一週間降り続いた。 | 雨下了一周。 | n5_ame=雨, n5_furu=降る, n5_ichi=一, n5_shuukan=～週間 | — | 11 |
+| n5_ane | 姉はタイプが上手です。 | 我姐妹是一个很棒的打字员。 | n5_ane=姉, n5_jouzu=上手 | — | 11 |
+| n5_ani | 私は兄が八人います。 | 我有八个哥哥。 | n5_ani=兄, n5_hachi=八, n5_nin=～人, n5_watakushi=私 | — | 10 |
+
+#### B · 需抽查（10/66）
+
+| anchor | 日文 | 中文 | member 词 | unknown | 句长 |
+|---|---|---|---|---|---:|
+| n5_abiru | 姉は毎朝シャワーを浴びます。 | 我姐姐每天都会洗澡。 | n5_abiru=浴びる, n5_ane=姉, n5_maiasa=毎朝 | — | 14 |
+| n5_abunai | 危ない！そこに大きな穴が。 | 小心！在那里有一个大洞。 | n5_abunai=危ない, n5_ookina=大きな | — | 13 |
+| n5_akai | 赤い屋根の家を見てごらん。 | 看看那间红色屋顶的房子。 | n5_akai=赤い, n5_ie=家, n5_miru=見る | — | 13 |
+| n5_arau | トイレから出たら手を洗いましょう！ | 便后请洗手。 | n5_arau=洗う, n5_deru=出る, n5_te=手 | — | 17 |
+| n5_atatakai | 三月にはもっと暖かくなるだろう。 | 到了三月会变的更温暖吧 | n5_atatakai=暖かい, n5_gatsu=～月, n5_san_2=三 | — | 16 |
+| n5_bunshou | 先生、この文章は正しいですか？ | 老师，这句话正确吗？ | n5_bunshou=文章, n5_sensei=先生 | — | 15 |
+| n5_chiisai | もう少し小さい声で話してください。 | 请再小声一点说话。 | n5_chiisai=小さい, n5_hanasu=話す, n5_koe=声, n5_sukoshi=少し | — | 17 |
+| n5_chiisana | 犬が小さな男の子を襲った。 | 狗攻击了小男孩儿。 | n5_chiisana=小さな, n5_inu=犬, n5_otokonoko=男の子 | — | 13 |
+| n5_daidokoro | 母は台所で忙しくしている。 | 我的母亲在厨房里正忙著。 | n5_daidokoro=台所, n5_haha=母, n5_isogashii=忙しい | — | 13 |
+| n5_daigaku | 四月から大学が始まります。 | 大学四月开学。 | n5_daigaku=大学, n5_gatsu=～月, n5_hajimaru=始まる, n5_shi=四 | — | 13 |
+
+#### C · 需逐条看（10/47）
+
+| anchor | 日文 | 中文 | member 词 | unknown | 句长 |
+|---|---|---|---|---|---:|
+| n5_butaniku | 豚肉は私には合わない。 | 猪肉不适合我。 | n5_butaniku=豚肉, n5_watakushi=私 | 合う | 11 |
+| n5_dai | 家にはテレビが２台ある。 | 我们家中有两台电视。 | n5_dai=～台, n5_ie=家 | 2 | 12 |
+| n5_do | 水は100度で沸騰する。 | 水在摄氏100度沸腾。 | n5_do=～度, n5_mizu=水 | 100 | 12 |
+| n5_eigakan | 私たちは映画館に行きます。 | 我们去影院。 | n5_eigakan=映画館, n5_iku=行く | 私たち | 13 |
+| n5_fun | もう５分待とう。 | 我还要等五分钟。 | n5_fun=～分, n5_matsu=待つ | 5 | 8 |
+| n5_furu | 昨晩は雪が降りました。 | 昨晚下了雪。 | n5_furu=降る, n5_yuki=雪 | 昨晩 | 11 |
+| n5_go_2 | トルコ語を習ってるんだ。 | 我学土耳其语。 | n5_go_2=～語, n5_narau=習う | トルコ | 12 |
+| n5_gozen | 彼女は午前７時に起きた。 | 她早上七点起床的。 | n5_gozen=午前, n5_ji=～時, n5_okiru=起きる | 7 | 12 |
+| n5_gyuuniku | ラム肉より牛肉の方が好きです。 | 比起羊肉我更喜欢牛肉。 | n5_gyuuniku=牛肉, n5_kata=方, n5_suki=好き | ラム肉 | 15 |
+| n5_han | 郵便局は半マイル向こうにある。 | 邮局离这儿有半英里。 | n5_han=半, n5_mukou=向こう, n5_yuubinkyoku=郵便局 | マイル | 15 |
+
+复算 30 条抽样：
+
+~~~
+node --input-type=module -e 'import fs from "node:fs"; const r=JSON.parse(fs.readFileSync("staging/wordfield-shortlist-343.json","utf8")); for(const tier of ["A","B","C"]) console.log(tier,r.filter(x=>x.review_tier===tier).slice(0,10).map(x=>x.anchor_id).join(","))'
+~~~
+
+### 风险扫描：13 条，全部实例
+
+这是脚本正则的“疑似”标记，不是人工判定。规则只标记明显的问句省略形，以及句尾 が/けど/のに/ので/から/し 等未完形；没有把这些句子自动剔除。风险实例的 13/343 计数复算：
+
+~~~
+node scripts/wordfield-shortlist.mjs | grep '^risk rows:'
+~~~
+
+| anchor | 日文 | 中文 | 信号 | Tatoeba 日句/中句 ID |
+|---|---|---|---|---|
+| n5_abunai | 危ない！そこに大きな穴が。 | 小心！在那里有一个大洞。 | 疑似残句 | 8802742 / 796972 |
+| n5_chikai | 映画館は駅から近いの？ | 电影院离电车站近吗？ | 疑似口语省略 | 3850777 / 3859480 |
+| n5_hiru | お昼一緒に食べない？ | 要一起吃午餐吗？ | 疑似口语省略 | 226818 / 8775792 |
+| n5_hito | 今好きな人いる？ | 你现在有喜欢的人吗？ | 疑似口语省略 | 3589664 / 4881620 |
+| n5_hitori | それ全部一人で食べるつもり？ | 你打算自己一人把它全部吃了吗？ | 疑似口语省略 | 4892684 / 5096428 |
+| n5_kau | お土産何買ったの？ | 你买了些什么特产呀？ | 疑似口语省略 | 4445365 / 5072427 |
+| n5_kesa | 今朝は何をしたの？ | 你今早做了甚么？ | 疑似口语省略 | 172280 / 10617207 |
+| n5_kyonen | 去年のクリスマスは何してた？ | 去年圣诞节做了什么了？ | 疑似口语省略 | 3689545 / 5097658 |
+| n5_megane | 私の眼鏡はどこ？ | 我的眼镜在哪里？ | 疑似口语省略 | 163890 / 408722 |
+| n5_miru | 何見てるの？ | 你在看什么？ | 疑似口语省略 | 3552883 / 7768300 |
+| n5_mondai | 何が問題なの？ | 哪里有问题? | 疑似口语省略 | 4848 / 60 |
+| n5_tsukau | もう私のものを使わないで！ | 别再用我的东西了！ | 疑似口语省略 | 13535099 / 13524170 |
+| n5_yomu | この雑誌を読みたいの？ | 想读这本杂志吗？ | 疑似口语省略 | 221868 / 2031456 |
+
+工单点名的 n5_atama 候选 頭痛い。/我头痛。 确实存在于 1,851 行输入，但没有被本轮四级规则选入最终 343 条；该 anchor 最终选的是 彼は私の頭をぶった。/他打了我的头。，所以它不在上述 13 条风险实例中。它仍然说明 Tatoeba 来源不等于自然度结论。
+
+### 确定性与交付边界
+
+脚本连续运行两次，输出逐字节一致：
+
+~~~
+node scripts/wordfield-shortlist.mjs > /tmp/wordfield-shortlist-run1.txt
+shasum -a 256 staging/wordfield-shortlist-343.json
+node scripts/wordfield-shortlist.mjs > /tmp/wordfield-shortlist-run2.txt
+shasum -a 256 staging/wordfield-shortlist-343.json
+diff -u /tmp/wordfield-shortlist-sha1.txt /tmp/wordfield-shortlist-sha2.txt
+
+e1d6ea9258589623973ebf0ba5214f34c862d8ae6586f980b572744bdee9f007  staging/wordfield-shortlist-343.json
+~~~
+
+本轮交付：
+
+- scripts/wordfield-shortlist.mjs
+- staging/wordfield-shortlist-343.json
+- 本节的 30 条抽样、三档数字和风险清单
+
+本轮忍住没做：不落库、不改两个内容包、不改 App/UI/gloss、不补剩余 220 个未覆盖 anchor、不修任何 Tatoeba 句子、不构建、不发 OTA。343 条仍需负责人审；下一步只在负责人给出 “A 档直接落 / A+B 落 / 再等” 后开始。
