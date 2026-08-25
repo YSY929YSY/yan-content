@@ -20,32 +20,54 @@ const dictionaryForms = dictionaryFormsFrom(exampleTokens);
 const punctuationOnly = /^[\s、。？！？，．.!?,:：;；「」『』（）()［］【】〔〕〈〉《》…・~〜]+$/u;
 const isPunctuation = (token) => punctuationOnly.test(String(token?.jp || ''));
 const filled = (token) => typeof token?.zh === 'string' && token.zh.trim().length > 0;
+const lexiconSurfaces = new Set(wordBank.flatMap((word) => [word?.word, word?.reading]
+  .filter((surface) => typeof surface === 'string' && surface)));
 const surfacesFromSudachi = (tokens) => (Array.isArray(tokens) ? tokens : [])
   .map((token) => Array.isArray(token) ? token[0] : token)
   .filter((surface) => typeof surface === 'string');
 const sameArray = (left, right) => left.length === right.length && left.every((value, index) => value === right[index]);
 
-// buildWordFieldAlignment is intentionally unchanged. Its candidatesOf() scans the
-// whole word bank on every call, so the assessment scopes inputs to surfaces that
-// actually occur in this sentence. A candidate/form absent from the sentence cannot
-// affect a direct match, boundary, or dictionary-form match, making this equivalent
-// for the sentence while keeping the full 4,400-row assessment tractable.
-const scopedInputs = (sentence) => ({
-  wordBank: wordBank.filter((word) => [word?.word, word?.reading]
-    .some((surface) => typeof surface === 'string' && surface && sentence.includes(surface))),
-  dictionaryForms: new Map([...dictionaryForms]
-    .filter(([surface]) => typeof surface === 'string' && sentence.includes(surface))),
-});
+const tokenSpans = (tokens) => {
+  let cursor = 0;
+  return surfacesFromSudachi(tokens).map((surface) => {
+    const span = { surface, start: cursor, end: cursor + surface.length };
+    cursor += surface.length;
+    return span;
+  });
+};
+
+// A blankKind from the runtime only distinguishes the shape of the blank. For this
+// report, determine whether the blank or its Sudachi dictionary form is actually in
+// the word bank. This keeps the three-way cause split in the measurement script and
+// leaves wordFieldAlignment.js untouched.
+const measuredBlankCause = (positionedToken, spans) => {
+  if (lexiconSurfaces.has(positionedToken.jp)) return '表记差异';
+  const overlaps = spans.filter((span) => positionedToken.start < span.end && positionedToken.end > span.start);
+  if (overlaps.some((span) => span.dictionaryForm && lexiconSurfaces.has(span.dictionaryForm))) return '活用碎片';
+  if (overlaps.some((span) => lexiconSurfaces.has(span.surface))) return '表记差异';
+  return '不在词库';
+};
 
 const records = entries.map((entry) => {
-  const scoped = scopedInputs(entry.exampleJp);
-  const rows = buildWordFieldAlignment(entry.exampleJp, scoped.wordBank, scoped.dictionaryForms);
+  const rows = buildWordFieldAlignment(entry.exampleJp, wordBank, dictionaryForms);
   const comparableRows = rows.filter((token) => !isPunctuation(token));
   const filledRows = comparableRows.filter(filled);
   const coverage = comparableRows.length ? filledRows.length / comparableRows.length : 1;
-  const sudachiSurfaces = surfacesFromSudachi(exampleTokens[entry.id]);
+  const sudachiTokens = Array.isArray(exampleTokens[entry.id]) ? exampleTokens[entry.id] : [];
+  const sudachiSurfaces = surfacesFromSudachi(sudachiTokens);
+  const spans = tokenSpans(sudachiTokens).map((span, index) => ({
+    ...span,
+    dictionaryForm: Array.isArray(sudachiTokens[index]) ? sudachiTokens[index][2] : null,
+  }));
   const greedySurfaces = rows.map((token) => token.jp);
-  const blanks = rows.filter((token) => !filled(token));
+  let cursor = 0;
+  const positionedRows = rows.map((token) => {
+    const positioned = { ...token, start: cursor, end: cursor + token.jp.length };
+    cursor += token.jp.length;
+    return positioned;
+  });
+  const blanks = positionedRows.filter((token) => !filled(token));
+  const blankDetails = blanks.map((token) => ({ token, cause: measuredBlankCause(token, spans) }));
   return {
     entry,
     rows,
@@ -54,6 +76,7 @@ const records = entries.map((entry) => {
     hasSudachiTokens: Array.isArray(exampleTokens[entry.id]),
     differsFromSudachi: Array.isArray(exampleTokens[entry.id]) && !sameArray(greedySurfaces, sudachiSurfaces),
     blanks,
+    blankDetails,
   };
 });
 
@@ -72,18 +95,19 @@ const buckets = Object.fromEntries(['100%', '90-99%', '70-89%', '<70%'].map((nam
   records.filter((record) => bucket(record) === name).length,
 ]));
 
-const blankCause = (token) => {
-  if (token.blankKind === '活用碎片') return '活用碎片';
-  if (token.blankKind === '表记差异') return '表记差异';
-  return '不在词库';
-};
 const blankCounts = Object.fromEntries(['活用碎片', '表记差异', '不在词库'].map((name) => [name, 0]));
 for (const record of records) {
-  for (const token of record.blanks) blankCounts[blankCause(token)] += 1;
+  for (const detail of record.blankDetails) blankCounts[detail.cause] += 1;
 }
 const blankTotal = Object.values(blankCounts).reduce((sum, count) => sum + count, 0);
 const comparableSudachi = records.filter((record) => record.hasSudachiTokens).length;
 const sudachiDifferences = records.filter((record) => record.differsFromSudachi).length;
+const allGlossedTokens = records.flatMap((record) => record.rows.filter(filled));
+const allNonPunctuationGlossedTokens = allGlossedTokens.filter((token) => !isPunctuation(token));
+const wordBankGlossedTokens = allGlossedTokens.filter((token) => token.source === 'wordBank');
+const singleCharGlossedTokens = allGlossedTokens.filter((token) => token.jp.length === 1);
+const singleCharNonPunctuationGlossedTokens = allNonPunctuationGlossedTokens.filter((token) => token.jp.length === 1);
+const singleCharWordBankGlossedTokens = wordBankGlossedTokens.filter((token) => token.jp.length === 1);
 
 // Stable pseudo-random order: the sample is reproducible without writing a seed file.
 const hash = (value) => {
@@ -98,6 +122,10 @@ const randomSample = [...records].sort((a, b) => hash(a.entry.id) - hash(b.entry
 const lowestSample = [...records]
   .sort((a, b) => a.coverage - b.coverage || a.entry.id.localeCompare(b.entry.id))
   .slice(0, 5);
+const singleCharSentenceSample = [...records]
+  .filter((record) => record.rows.some((token) => token.source === 'wordBank' && token.jp.length === 1 && filled(token)))
+  .sort((a, b) => hash(a.entry.id) - hash(b.entry.id))
+  .slice(0, 20);
 
 const tokenDisplay = (record) => record.rows
   .map((token) => `${token.jp}→${filled(token) ? token.zh : '∅'}`)
@@ -105,10 +133,22 @@ const tokenDisplay = (record) => record.rows
 const printSample = (title, sample) => {
   console.log(`\n## ${title}`);
   for (const record of sample) {
-    const blanks = record.blanks.map((token) => `${token.jp}（${blankCause(token)}）`).join('、') || '无';
+    const blanks = record.blankDetails.map(({ token, cause }) => `${token.jp}（${cause}）`).join('、') || '无';
     console.log(`- ${record.entry.id} | ${record.entry.exampleJp}`);
     console.log(`  tokens: ${tokenDisplay(record)}`);
     console.log(`  coverage: ${percentage(record.coverage)} | blanks: ${blanks}`);
+  }
+};
+const printSingleCharSample = () => {
+  console.log('\n## Single-character wordBank gloss hits (20 sentences)');
+  for (const record of singleCharSentenceSample) {
+    const hits = record.rows
+      .filter((token) => token.source === 'wordBank' && token.jp.length === 1 && filled(token))
+      .map((token) => `${token.jp}→${token.zh}`)
+      .join(' | ');
+    console.log(`- ${record.entry.id} | ${record.entry.exampleJp}`);
+    console.log(`  single-char wordBank hits: ${hits}`);
+    console.log(`  tokens: ${tokenDisplay(record)}`);
   }
 };
 
@@ -121,5 +161,9 @@ console.log(`coverage buckets: ${JSON.stringify(buckets)}`);
 console.log(`blank causes (all blank tokens: ${blankTotal}): ${JSON.stringify(Object.fromEntries(Object.entries(blankCounts).map(([name, count]) => [name, { count, share: percentage(count / blankTotal) }])))}`);
 console.log(`greedy vs EXAMPLE_TOKENS split differences: ${sudachiDifferences}/${comparableSudachi} comparable sentences`);
 console.log(`EXAMPLE_TOKENS unavailable for comparison: ${records.length - comparableSudachi}`);
+console.log(`single-character glossed tokens (all sources): ${singleCharGlossedTokens.length}/${allGlossedTokens.length} (${percentage(singleCharGlossedTokens.length / allGlossedTokens.length)})`);
+console.log(`single-character glossed tokens (non-punctuation): ${singleCharNonPunctuationGlossedTokens.length}/${allNonPunctuationGlossedTokens.length} (${percentage(singleCharNonPunctuationGlossedTokens.length / allNonPunctuationGlossedTokens.length)})`);
+console.log(`single-character wordBank gloss hits (mis-hit risk subset): ${singleCharWordBankGlossedTokens.length}/${wordBankGlossedTokens.length} wordBank-glossed tokens (${percentage(singleCharWordBankGlossedTokens.length / wordBankGlossedTokens.length)})`);
 printSample('Deterministic random sample (15)', randomSample);
 printSample('Lowest coverage sample (5)', lowestSample);
+printSingleCharSample();
