@@ -1987,6 +1987,12 @@ Result: FAIL
 
 主线仍是词库深度；本工单不额外推迟主线。改动限于 `scripts/gloss-coverage.mjs`、`src/features/wordbank/wordFieldAlignment.js` 及其 `__tests__`，再加根目录忽略规则、未跟踪物盘点和本报告。
 
+### 本轮 commits
+
+- `39aa7f2`：脚本四类归因、对齐机械修复、回归测试、ACTIVE、inventory、报告和根 `.gitignore` 初始规则。
+- `1c1462e`：补入最终 `git status --short`、测试、typecheck、audit raw 门禁输出。
+- `1fd1006`：将 `yan-content` 忽略范围收窄为工单点名的四个旧文件。
+
 ### 单字命中先测样本（修复前）
 
 以下 30 条来自修复前全量测量中的单字 `wordBank` 命中；“误”是人工按该句语境判读，不是自动证明。独立词条命中（如 `楽→舒适`、`服→衣服`、`嵐→暴风雨`、`私→我`、`熱→发烧`、`峠`、`窓`、`空`、`雲`、`夢`、`事`、`億`、`円`、`君`、`昔`、`角`、`左` 等）保留为对照；嵌在词内或明显为助词/活用碎片的命中判为误。
