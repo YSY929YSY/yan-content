@@ -107,6 +107,16 @@ const readingForFieldToken = (surface, wordBank) => {
   return candidates.size === 1 ? [...candidates][0] : surface;
 };
 
+/**
+ * 拼回去必须和原句一模一样,否则不用 column 版。
+ *
+ * 和 `ExampleSentence` 的 `tokensMatch` 同一条原则:分词器吞字、改字都不报错,
+ * 只会让屏幕上少一个字 —— 而日语句子少一个假名可能就是另一个意思。
+ * 这时候纯文本是对的,花哨但少了字的排版是错的。
+ */
+const fieldColumnsUsable = (sentence, columns) =>
+  columns.map(c => c.jp).join('') === String(sentence || '');
+
 const fieldTokenColumns = (sentence, wordBank) =>
   buildWordFieldAlignment(sentence, wordBank, EXAMPLE_DICTIONARY_FORMS).map(token => ({
     jp: token.jp,
@@ -2523,7 +2533,19 @@ function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, 
             </View>
             {/* 顺序是阅读顺序：日文（逐词假名）→ 罗马音 → 中文。
                 token 与原句不一致时 ExampleSentence 自己退回纯日文，绝不吞字。 */}
-            <ExampleSentence sentence={entry.exampleJp} tokens={EXAMPLE_TOKENS[entry.id]} size={19} style={wd.primaryExampleJp} />
+            {(() => {
+              // 项目负责人最初的要求就是**例句**按 interlinear gloss 排。
+              // 上一轮工单照抄了顾问「例句隐藏 gloss」的实现建议,把 gloss 加到了
+              // 词场而不是例句 —— 位置错了。这里让样板句也显示逐块理解。
+              if (!TOKEN_COLUMN_SAMPLE_SENTENCES.has(entry.exampleJp)) {
+                return <ExampleSentence sentence={entry.exampleJp} tokens={EXAMPLE_TOKENS[entry.id]} size={19} style={wd.primaryExampleJp} />;
+              }
+              const columns = fieldTokenColumns(entry.exampleJp, wordBank);
+              if (!fieldColumnsUsable(entry.exampleJp, columns)) {
+                return <ExampleSentence sentence={entry.exampleJp} tokens={EXAMPLE_TOKENS[entry.id]} size={19} style={wd.primaryExampleJp} />;
+              }
+              return <TokenColumnSentence columns={columns} size={19} style={wd.primaryExampleJp} showGloss />;
+            })()}
             <Text style={wd.primaryExampleRoma}>{entry.exampleRoma}</Text>
             <Text style={wd.primaryExampleZh}>{entry.exampleZh}</Text>
           </View>
