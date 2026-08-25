@@ -73,7 +73,10 @@ YanApp/supabase/.temp/
 # Local YanApp workspace material; never package or stage these from the repo root.
 /YanApp_backup_0501/
 /resources/
-/yan-content/
+/yan-content/content.json
+/yan-content/content.v1.json
+/yan-content/README.md
+/yan-content/yan_word_story输入模式探讨26.6.2.html
 /YanApp/调研/
 
 # Existing local/generated artifacts in the repository root; preserve them, but
