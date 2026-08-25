@@ -2076,7 +2076,62 @@ Result: FAIL
 
 ### 本轮门禁
 
-最终 raw `git status --short`、`npm test && npm run typecheck && npm run audit` 输出见本节末尾；audit 的既有文档引用问题如实保留，未借本工单顺手修复。没有构建或发 OTA。
+最终 raw `git status --short`、`npm test && npm run typecheck && npm run audit` 输出如下；audit 的既有文档引用问题如实保留，未借本工单顺手修复。没有构建或发 OTA。
+
+```text
+$ git status --short
+(无输出)
+
+$ npm test && npm run typecheck && npm run audit
+> yanapp@1.0.0 test
+> node --test --test-reporter=spec "src/**/__tests__/*.test.mjs" "src/**/__tests__/*.test.ts"
+ℹ tests 610
+ℹ suites 0
+ℹ pass 610
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9131.187441
+
+> yanapp@1.0.0 typecheck
+> tsc --noEmit
+
+> yanapp@1.0.0 audit
+> node scripts/audit.mjs
+
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:2937: review editorial claim "旅行高频"
+WARN user-claims App.js:2981: review editorial claim "旅行高频"
+WARN user-claims App.js:3075: review editorial claim "高频"
+WARN user-claims App.js:3118: review editorial claim "高频"
+WARN user-claims App.js:3165: review editorial claim "高频"
+WARN user-claims App.js:3183: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 a00a76e1289a9c84e0f7089b2edc1949811bf52fb08f7c297ba55ada8ffecd82
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+INFO doc-refs scanned 919 references (399 unique)
+WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:16: missing 调研/…/red调研重新规划_编号修正版.md
+WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:286: missing red调研重新规划_编号修正版.md
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:804: missing src/content/publication.ts
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:803: missing src/content/schema.ts
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:278: missing src/content/contentValidation.ts
+WARN doc-refs docs/TICKET-jmdict-followup.md:86: missing staging/duplicate-seq-plan.md
+WARN doc-refs docs/TICKET-jmdict-followup.md:86: missing staging/duplicate-seq-groups.json
+PASS doc-refs 所有引用都已入库（7 条指向不存在的路径，见 WARN）
+PASS workspace-clean docs markdown tracked
+--- audit summary ---
+FAIL: 0
+WARN: 14
+Result: PASS
+```
 
 ## Gloss coverage remeasure · 2026-08-25
 
