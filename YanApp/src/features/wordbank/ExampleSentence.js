@@ -34,20 +34,46 @@ export function ExampleSentence({ sentence, tokens, size = 15, style }) {
     return <Text style={[{ fontSize: size, color: C.ink, lineHeight: size * 1.5 }, style]}>{sentence}</Text>;
   }
 
+  return <TokenColumnSentence
+    columns={list.map((t) => ({ jp: t.text, reading: t.reading || t.text }))}
+    size={size}
+    style={style}
+    showGloss={false}
+  />;
+}
+
+/**
+ * 例句和词场共用的 token column renderer。
+ * 每个 token 是一个横向 column；`Furigana` 内部负责同一 token 的读音/日语
+ * 两槽，第三槽是可选 gloss。词场的空 gloss 仍保留 lineHeight，不能让后面的
+ * token 顶上来；例句则直接隐藏第三槽。
+ */
+export function TokenColumnSentence({ columns, size = 15, style, showGloss = false }) {
+  if (!Array.isArray(columns) || columns.length === 0) return null;
   return (
     <View style={[s.row, style]}>
-      {list.map((t, i) => (
-        // 标点不画下划线也不留词间距 —— 它不是一个词,画上去会让人以为是
-        <View key={i} style={[s.tok, !isPunct(t.text) && s.word]}>
-          <Furigana
-            word={t.text}
-            reading={t.reading || t.text}
-            size={size}
-            color={C.ink}
-            rubyColor={C.mutedLight}
-          />
-        </View>
-      ))}
+      {columns.map((column, i) => {
+        const glossStyle = column.source === 'grammar' ? s.glossGrammar : s.gloss;
+        const blank = column.source === 'blank' || !column.gloss;
+        return (
+          <View key={i} style={[s.column, !showGloss && !isPunct(column.jp) && s.word]}>
+            <View style={s.furiganaSlot}>
+              <Furigana
+                word={column.jp}
+                reading={column.reading || column.jp}
+                size={size}
+                color={column.member ? C.lava : C.ink}
+                rubyColor={C.mutedLight}
+              />
+            </View>
+            {showGloss && (
+              <Text style={[glossStyle, blank && s.glossBlank]}>
+                {column.gloss || ' '}
+              </Text>
+            )}
+          </View>
+        );
+      })}
     </View>
   );
 }
@@ -56,15 +82,14 @@ export function ExampleSentence({ sentence, tokens, size = 15, style }) {
 const isPunct = (s) => /^[、。，．・！？!?,.…「」『』()()〜~ー]+$/.test(s);
 
 const s = StyleSheet.create({
-  // 折行只会落在词边界上 —— 对学习 App 是优点,一个词不会被劈成两半
-  row: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'flex-end' },
-  tok: { marginBottom: 2 },
-  // 词底下那条线 + 词间距。线是「这是一个词」的唯一提示,
-  // 没有它按词切开只会看着像排版坏了
-  word: {
-    borderBottomWidth: 1, borderBottomColor: C.borderWarm,
-    marginRight: 5, paddingBottom: 1,
-  },
+  // 折行只会落在 token column 边界上；列宽由 Furigana 自己的文本布局决定。
+  row: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'flex-start', gap: 5 },
+  column: { alignItems: 'center' },
+  furiganaSlot: { alignItems: 'center' },
+  word: { borderBottomWidth: 1, borderBottomColor: C.borderWarm, paddingBottom: 1 },
+  gloss: { fontSize: 10, color: C.muted, lineHeight: 14, maxWidth: 70, textAlign: 'center' },
+  glossGrammar: { fontSize: 9, color: C.mutedLight, lineHeight: 13, maxWidth: 70, textAlign: 'center' },
+  glossBlank: { color: 'transparent' },
 });
 
 export default ExampleSentence;

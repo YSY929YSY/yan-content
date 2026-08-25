@@ -60,7 +60,7 @@ import WORDFIELD_PREVIEW from './src/features/wordbank/wordfield-preview.json';
 import { PitchLine, pitchOf, hasMultiAccent, pitchUnconfirmed } from './src/features/wordbank/PitchLine';
 import { SenseList } from './src/features/wordbank/SenseList';
 import { Furigana } from './src/features/wordbank/FuriganaText';
-import { ExampleSentence } from './src/features/wordbank/ExampleSentence';
+import { ExampleSentence, TokenColumnSentence } from './src/features/wordbank/ExampleSentence';
 import { buildWordFieldAlignment, dictionaryFormsFrom } from './src/features/wordbank/wordFieldAlignment';
 import EXAMPLE_TOKENS from './assets/example_tokens.json';
 import { primaryReading, altReadings } from './src/features/wordbank/furigana';
@@ -75,6 +75,47 @@ import Svg, { Circle, G, Path } from 'react-native-svg';
 
 // 例句 asset 已由上面 import；辞书形索引只构建一次，词卡渲染时复用。
 const EXAMPLE_DICTIONARY_FORMS = dictionaryFormsFrom(EXAMPLE_TOKENS);
+const TOKEN_COLUMN_SAMPLE_SENTENCES = new Set([
+  '店員にカードを見せます。',
+  '店員にサイズを聞きます。',
+]);
+
+// 词场样板没有自己的分词 asset；复用例句 asset 里相同 surface 的读音。
+// 索引只建一次，找不到或有多个读音时退回 surface，不猜。
+const EXAMPLE_SURFACE_READINGS = (() => {
+  const out = new Map();
+  for (const tokens of Object.values(EXAMPLE_TOKENS || {})) {
+    for (const token of Array.isArray(tokens) ? tokens : []) {
+      if (!Array.isArray(token) || typeof token[0] !== 'string' || !token[0]
+        || typeof token[1] !== 'string' || !token[1]) continue;
+      const readings = out.get(token[0]) || new Set();
+      readings.add(token[1].split(/[;；]/)[0].trim());
+      out.set(token[0], readings);
+    }
+  }
+  return out;
+})();
+
+const readingForFieldToken = (surface, wordBank) => {
+  const direct = (Array.isArray(wordBank) ? wordBank : [])
+    .filter(word => word?.word === surface || word?.reading === surface)
+    .map(word => String(word.reading || '').split(/[;；]/)[0].trim())
+    .filter(Boolean);
+  const candidates = new Set(direct);
+  const indexed = EXAMPLE_SURFACE_READINGS.get(surface);
+  if (indexed) for (const reading of indexed) candidates.add(reading);
+  return candidates.size === 1 ? [...candidates][0] : surface;
+};
+
+const fieldTokenColumns = (sentence, wordBank) =>
+  buildWordFieldAlignment(sentence, wordBank, EXAMPLE_DICTIONARY_FORMS).map(token => ({
+    jp: token.jp,
+    reading: readingForFieldToken(token.jp, wordBank),
+    gloss: token.source === 'grammar'
+      ? String(token.zh || '').replace(/^[（(]/, '').replace(/[）)]$/, '')
+      : token.zh,
+    source: token.source,
+  }));
 
 const { width: SW } = Dimensions.get('window');
 // 键值统一在 src/lib/storage.js 登记 —— 这里只做别名,不再手写字符串。
@@ -2494,25 +2535,36 @@ function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, 
             <Text style={wd.sectionLabel}>一起出现</Text>
             <View style={wd.exRow}>
               <View style={{ flex: 1, gap: 3 }}>
-                <View style={wd.wfAlignRow}>
-                  {buildWordFieldAlignment(wordField.sentence.jp, wordBank, EXAMPLE_DICTIONARY_FORMS).map((token, ti) => {
-                    const member = isFieldMemberToken(token, fieldMemberTerms(wordField, lookupWord));
-                    const glossStyle = token.source === 'wordBank'
-                      ? wd.wfAlignZh
-                      : token.source === 'grammar'
-                        ? wd.wfAlignGrammar
-                        : null;
-                    const gloss = token.source === 'grammar'
-                      ? String(token.zh || '').replace(/^[（(]/, '').replace(/[）)]$/, '')
-                      : token.zh;
-                    return (
-                      <View key={`${fi}-${ti}`} style={wd.wfAlignToken}>
-                        <Text style={[wd.wfAlignJp, member && wd.wfMemberJp]}>{token.jp}</Text>
-                        {!!glossStyle && !!gloss && <Text style={glossStyle}>{gloss}</Text>}
-                      </View>
-                    );
-                  })}
-                </View>
+                {TOKEN_COLUMN_SAMPLE_SENTENCES.has(wordField.sentence.jp) ? (
+                  <TokenColumnSentence
+                    columns={fieldTokenColumns(wordField.sentence.jp, wordBank).map((token) => ({
+                      ...token,
+                      member: isFieldMemberToken(token, fieldMemberTerms(wordField, lookupWord)),
+                    }))}
+                    size={17}
+                    showGloss
+                  />
+                ) : (
+                  <View style={wd.wfAlignRow}>
+                    {buildWordFieldAlignment(wordField.sentence.jp, wordBank, EXAMPLE_DICTIONARY_FORMS).map((token, ti) => {
+                      const member = isFieldMemberToken(token, fieldMemberTerms(wordField, lookupWord));
+                      const glossStyle = token.source === 'wordBank'
+                        ? wd.wfAlignZh
+                        : token.source === 'grammar'
+                          ? wd.wfAlignGrammar
+                          : null;
+                      const gloss = token.source === 'grammar'
+                        ? String(token.zh || '').replace(/^[（(]/, '').replace(/[）)]$/, '')
+                        : token.zh;
+                      return (
+                        <View key={`${fi}-${ti}`} style={wd.wfAlignToken}>
+                          <Text style={[wd.wfAlignJp, member && wd.wfMemberJp]}>{token.jp}</Text>
+                          {!!glossStyle && !!gloss && <Text style={glossStyle}>{gloss}</Text>}
+                        </View>
+                      );
+                    })}
+                  </View>
+                )}
                 {!!wordField.sentence.roma && <Text style={wd.exRoma}>{wordField.sentence.roma}</Text>}
                 <Text style={wd.exZh}>{wordField.sentence.zh}</Text>
               </View>
