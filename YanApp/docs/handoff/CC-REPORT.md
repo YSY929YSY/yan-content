@@ -1886,7 +1886,48 @@ Result: FAIL
 `git status --short` 与 `npm run audit` 在最后一个交接提交后执行，原始输出如下：
 
 ```text
-待最终门禁执行后填入，不以摘要替代原始输出。
+?? "\350\260\203\347\240\224/"
+?? ../YanApp_backup_0501/
+?? ../resources/
+?? ../yan-content/README.md
+?? ../yan-content/content.json
+?? ../yan-content/content.v1.json
+?? "../yan-content/yan_word_story\350\276\223\345\205\245\346\250\241\345\274\217\346\216\242\350\256\25026.6.2.html"
+
+> yanapp@1.0.0 audit
+> node scripts/audit.mjs
+
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:2914: review editorial claim "旅行高频"
+WARN user-claims App.js:2958: review editorial claim "旅行高频"
+WARN user-claims App.js:3052: review editorial claim "高频"
+WARN user-claims App.js:3095: review editorial claim "高频"
+WARN user-claims App.js:3142: review editorial claim "高频"
+WARN user-claims App.js:3160: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 a00a76e1289a9c84e0f7089b2edc1949811bf52fb08f7c297ba55ada8ffecd82
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+INFO doc-refs scanned 779 references (349 unique)
+WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:16: missing 调研/…/red调研重新规划_编号修正版.md
+WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:286: missing red调研重新规划_编号修正版.md
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:804: missing src/content/publication.ts
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:803: missing src/content/schema.ts
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:278: missing src/content/contentValidation.ts
+WARN doc-refs docs/TICKET-jmdict-followup.md:86: missing staging/duplicate-seq-plan.md
+WARN doc-refs docs/TICKET-jmdict-followup.md:86: missing staging/duplicate-seq-groups.json
+PASS doc-refs 所有引用都已入库（7 条指向不存在的路径，见 WARN）
+PASS workspace-clean docs markdown tracked
+--- audit summary ---
+FAIL: 0
+WARN: 14
+Result: PASS
 ```
 
 ## PLAN v2 第九批（B9-1 已完成；B9-2 开工前记录）
