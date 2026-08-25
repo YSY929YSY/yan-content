@@ -146,16 +146,60 @@ canReviewWord(word, record)     = Boolean(record)      // 与 publication 无关
 - `scripts/deep-card-audit.mjs`：只读深卡结构与词源式断言扫描脚本。
 - `staging/deep-card-audit.md`：深卡盘点产物；无内容包修改。
 - `docs/handoff/ACTIVE.md`、本节：交接与报告。
+- 本轮实现 commit：`77edc17 docs(assessment): measure gloss rollout before deciding`。
 - 内容包前后 `content-stats` 对比：**无**，内容包未改。
 - 本轮没有顺手修正短 token 误命中、活用覆盖、词源断言、UI、真机稳定性或内容质量；这些都留给负责人看完样本后的单独决定。
 
 ### 门禁原始输出
 
-以下为报告落盘前直接运行的原始命令输出；仓库中另有本轮范围外的既有未跟踪文件，audit 的既有 doc-refs FAIL 未在本轮修复。最终输出将在交报告前原样补入。
+以下为报告落盘前直接运行的原始命令输出；仓库中另有本轮范围外的既有未跟踪文件。两条命令均按要求原样保留。
 
 ```text
-待最终运行并原样贴入：git status --short
-待最终运行并原样贴入：npm run audit
+$ git status --short
+?? "\350\260\203\347\240\224/"
+?? ../YanApp_backup_0501/
+?? ../resources/
+?? ../yan-content/README.md
+?? ../yan-content/content.json
+?? ../yan-content/content.v1.json
+?? "../yan-content/yan_word_story\350\276\223\345\205\245\346\250\241\346\216\242\350\256\25026.6.2.html"
+
+$ npm run audit
+
+> yanapp@1.0.0 audit
+> node scripts/audit.mjs
+
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:2937: review editorial claim "旅行高频"
+WARN user-claims App.js:2981: review editorial claim "旅行高频"
+WARN user-claims App.js:3075: review editorial claim "高频"
+WARN user-claims App.js:3118: review editorial claim "高频"
+WARN user-claims App.js:3165: review editorial claim "高频"
+WARN user-claims App.js:3183: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 a00a76e1289a9c84e0f7089b2edc1949811bf52fb08f7c297ba55ada8ffecd82
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+INFO doc-refs scanned 865 references (381 unique)
+WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:16: missing 调研/…/red调研重新规划_编号修正版.md
+WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:286: missing red调研重新规划_编号修正版.md
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:804: missing src/content/publication.ts
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:803: missing src/content/schema.ts
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:278: missing src/content/contentValidation.ts
+WARN doc-refs docs/TICKET-jmdict-followup.md:86: missing staging/duplicate-seq-plan.md
+WARN doc-refs docs/TICKET-jmdict-followup.md:86: missing staging/duplicate-seq-groups.json
+PASS doc-refs 所有引用都已入库（7 条指向不存在的路径，见 WARN）
+PASS workspace-clean docs markdown tracked
+--- audit summary ---
+FAIL: 0
+WARN: 14
+Result: PASS
 ```
 
 | Selector | 应替换的调用点 | 兼容规则 | 所需测试 |
