@@ -100,6 +100,28 @@ yan-content/content.v2.json          ← 漏过一次，见下
 
 ---
 
+### 🌿 分支规矩：只有内容窗口开分支
+
+**默认在 `develop/v2` 上直接提交。** 脚本、文档、UI、测量 —— 都不开分支。
+
+**唯一例外：改 `assets/content.fallback.json` 的任务。**
+开 `content/<日期>-<主题>` 分支，窗口做完、`bash tools/check-content-release.sh` Blocker=0
+之后再合回 `develop/v2`。
+
+理由**不是**防冲突（工单是串行的，本来就不冲突），是**可回滚**：
+内容包是全局互斥文件，且发布即线上。
+
+### ⚠️ `main` 不是开发分支，是发布通道
+
+`scripts/push-content.sh` 把 `develop/v2` 的 `content.v2.json` 推到 `origin/main` ——
+**App 从 `origin/main` 读内容**。
+
+所以在这个仓库里，**merge 到 main = 给线上用户发内容包**，不是普通合并。
+任何"跑完门禁自动合进 main"的流水线建议，照搬就是直接推线上。别照搬。
+
+仓库没有 `.github/workflows`，**PR 上不会自动跑任何门禁**。门禁在本地：
+`npm test && npm run typecheck && npm run audit`。
+
 ## 三、并行规则
 
 | 能并行 | 不能并行 |
