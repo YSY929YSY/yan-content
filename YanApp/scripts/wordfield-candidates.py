@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Mapping, Sequence, Set, Tuple
 
 from sudachipy import dictionary, tokenizer
+import opencc
 
 
 REPO = Path(__file__).resolve().parents[1]
@@ -26,6 +27,7 @@ DEFAULT_OUTPUT = REPO / "staging" / "wordfield-candidates-tatoeba.jsonl"
 SENSE_SEP = re.compile(r"[;；/／,，、]")
 PUNCTUATION = {"記号", "補助記号"}
 GRAMMAR_POS = {"助詞", "助動詞", "記号"}
+_T2S = opencc.OpenCC("t2s")
 
 
 def split_forms(value: object) -> List[str]:
@@ -274,7 +276,7 @@ def main() -> None:
                 "anchor_id": member_ids[0],
                 "member_word_ids": member_ids,
                 "jp": row["jp"],
-                "zh": pair[1],
+                "zh": _T2S.convert(pair[1]),
                 "tatoeba": {
                     "jp_sentence_id": row["jp_sentence_id"],
                     "zh_sentence_id": pair[0],
