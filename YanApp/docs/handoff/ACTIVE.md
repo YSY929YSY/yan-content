@@ -1,33 +1,24 @@
-# 当前状态 · PLAN v2 第八批
+# 当前状态 · PLAN v2 第九批
 
-> 状态：A/B 实现已完成并提交；C（合并两套渲染器）按工单明确不做。
+> 状态：B9-1 已完成并提交；B9-2 的实现方案已先写入报告，待按两句样板实施。
 >
-> 更新日期：2026-08-24
+> 更新日期：2026-08-25
 
 ## 当前工单
 
-`docs/handoff/TICKET-plan-v2-batch8.md`
+`docs/handoff/TICKET-plan-v2-batch9.md`
 
-## 本轮完成
+## 本轮进度
 
-- A-1：词场逐 token 行改为顶部对齐，移除 `minHeight + flex-end` 造成的日语基线跳动。
-- A-2：词义、语法作用、空 token 按已有 `source` 分层；grammar 文案去括号并降低字号/对比度，blank 不渲染。
-- B：Sudachi token 产出必要的 `dictionary_form`；读取层支持三元紧凑格式；词场查词顺序为词面 → reading → 辞书形。
-- 重新生成 `assets/example_tokens.json`：4400 句、36435 token，加入 5302 个三元 token。
-- 20 条词场句的逐块中文覆盖从 115/133（86.5%）提升到 133/133（100%）；18 个动词洞清零。
-- 未修改 `assets/content.fallback.json`、`yan-content/content.v2.json` 或任何远端内容包。
+- B9-1 已完成：移除 `wordFieldAlignment.js` 内部 `require` 和静默空 Map，改为 `dictionaryFormsFrom(exampleTokens)` 依赖注入；`App.js` 对已 import 的 `EXAMPLE_TOKENS` 只构建一次索引并显式传入。
+- B9-1 提交：`5471ec5 fix(wordfield): inject the example token dictionary forms`。
+- B9-1 守卫：真实 `assets/example_tokens.json` → Map，规模 `1083`（测试下限 ≥1000）；`grep require(` 无命中。
+- B9-1 验收：全量 `npm test` 604 passed，`npm run typecheck` 通过。
+- B9-2 尚未写代码。改前 View 层级与三槽位方案已记录在 `docs/handoff/CC-REPORT.md`，之后只做 `店員にカードを見せます。` 与 `店員にサイズを聞きます。` 两句样板。
 
-## 提交与验收
+## 不做
 
-- 本轮代码提交：`f2ed5e7 fix(wordfield): preserve grammar cues and inflected gloss coverage`
-- `npm test`：603 passed，0 failed。
-- `npm run typecheck`：exit 0。
-- `git diff --check`：通过。
-- `npm run audit`：`FAIL: 0`、`WARN: 14`、`Result: PASS`；14 条 WARN 是既有 editorial claim 与失效旧路径提示，详见 `docs/handoff/CC-REPORT.md` 的 batch8 原始输出。
-
-## 明确未做与剩余事项
-
-- C：不合并 `ExampleSentence` 与词场渲染器，不做四层对齐样板。
-- 不改例句渲染器、读音设置、`C` 颜色常量、已有 `ls/wb/wd` 样式、按钮层级或离线 banner。
-- 不用 LLM 猜测仍无法唯一映射的辞书形；真正查不到/有歧义的 token 继续留空。
-- `assets/example_tokens.json` 是 App asset，需随之后的 App 构建才会进入安装包；不走 `push-content.sh`。
+- 不推全库，不改内容包，不动 `furigana.ts`、`units.js`、`srs.js`、`publication.ts`、`dailyTask.ts`。
+- 不用手工空格、字符数 margin、句子写死位置或整行 gloss 猜位置。
+- 不改「言」按钮层级、灰阶、离线 banner；不重构 `App.js`。
+- 真机显示验收尚未执行；完成后若没有真机证据，报告只写“待真机验证”。

@@ -1835,6 +1835,50 @@ FAIL: 1
 Result: FAIL
 ```
 
+## PLAN v2 第九批（B9-1 已完成；B9-2 开工前记录）
+
+### B9-1 · 消灭静默降级
+
+- `5471ec5`：改动 `App.js`、`src/features/wordbank/wordFieldAlignment.js` 和 `src/features/wordbank/__tests__/wordFieldAlignment.test.mjs`。
+- 删除 alignment 模块内部的 `require` / `loadBundledDictionaryForms` / 默认 bundled Map；新增纯函数 `dictionaryFormsFrom(exampleTokens)`。
+- `App.js` 使用已经 import 的 `EXAMPLE_TOKENS`，模块级只构建一次 `EXAMPLE_DICTIONARY_FORMS`，词场渲染显式传入。
+- 真实 `assets/example_tokens.json` 守卫结果：Map size `1083`，包含 `探し → 探す`；`grep -n "require(" src/features/wordbank/wordFieldAlignment.js` 无命中。
+- 20 条词场句覆盖率基线仍为 `133/133`；定向测试 5 passed；全量测试 604 passed；typecheck 通过。
+- 构建后的真机“店員にカードを見せます。”六个 token 是否都显示中文：**待真机验证**。
+
+### B9-2 · 实现前 View 层级与三槽位方案（负责人要求）
+
+当前层级是：
+
+```text
+WBDetailPage
+└─ wordFields.map
+   └─ View wd.section
+      ├─ Text wd.sectionLabel
+      └─ View wd.exRow
+         ├─ View { flex: 1, gap: 3 }
+         │  ├─ View wd.wfAlignRow  (row + wrap)
+         │  │  └─ View wd.wfAlignToken  (每个 token 一列)
+         │  │     ├─ Text wd.wfAlignJp
+         │  │     └─ Text wd.wfAlignZh / wd.wfAlignGrammar（有 gloss 才渲染）
+         │  ├─ Text wd.exRoma
+         │  └─ Text wd.exZh
+         └─ SpeakBtn
+```
+
+准备改成：
+
+```text
+TokenColumnSentence
+└─ View tokenRow  (row + wrap；横向单位始终是 token column)
+   └─ View tokenColumn
+      ├─ View readingSlot  (固定第一槽；用现有 Furigana/alignFurigana)
+      ├─ View japaneseSlot (固定第二槽；同一 token 的日语)
+      └─ Text glossSlot    (固定第三槽；词义/语法作用，blank 只留高度)
+```
+
+例句和词场都调用同一个 `TokenColumnSentence`；例句传 `showGloss=false` 隐藏第三槽，词场传 `showGloss=true`。例句的 token 读音继续交给现有 `Furigana`，其内部继续复用 `furigana.ts`，不另写假名对齐规则。词场只在两句样板上切换到该 renderer，其他词场不推广。
+
 ## PLAN v2 第八批（A 修渲染 / B 补辞书形）
 
 ### 实际改动与提交
