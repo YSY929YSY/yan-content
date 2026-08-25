@@ -2559,7 +2559,7 @@ function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, 
                       return (
                         <View key={`${fi}-${ti}`} style={wd.wfAlignToken}>
                           <Text style={[wd.wfAlignJp, member && wd.wfMemberJp]}>{token.jp}</Text>
-                          {!!glossStyle && !!gloss && <Text style={glossStyle}>{gloss}</Text>}
+                          {!!glossStyle && !!gloss && <Text numberOfLines={1} style={glossStyle}>{gloss}</Text>}
                         </View>
                       );
                     })}
@@ -2684,9 +2684,10 @@ const wd = StyleSheet.create({
   wfAlignToken: { alignItems: 'center' },
   wfAlignJp: { fontSize: 17, color: C.ink, fontWeight: '600', lineHeight: 24 },
   wfMemberJp: { color: C.lava, textDecorationLine: 'underline', textDecorationColor: C.lava },
-  wfAlignZh: { fontSize: 10, color: C.muted, lineHeight: 14, maxWidth: 70, textAlign: 'center' },
+  // 单行但不设截断宽度：收窄后的 gloss 必须完整显示，不能靠省略号遮掉半个词。
+  wfAlignZh: { fontSize: 10, color: C.muted, lineHeight: 14, textAlign: 'center' },
   // 语法作用属于助词/语法块,不是前面实义词的词义;降低字号和对比度避免关系读反。
-  wfAlignGrammar: { fontSize: 9, color: C.mutedLight, lineHeight: 13, maxWidth: 70, textAlign: 'center' },
+  wfAlignGrammar: { fontSize: 9, color: C.mutedLight, lineHeight: 13, textAlign: 'center' },
   wfChip: {
     flexDirection: 'row', alignItems: 'baseline', gap: 5,
     borderWidth: 1, borderColor: C.border, borderRadius: 999,

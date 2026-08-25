@@ -17,8 +17,11 @@ const INFLECTION_FRAGMENTS = ['買い', '食べ', '行き', '待ち', '出し', 
 
 const isKana = (value) => /[ぁ-ゖァ-ヺー]/.test(value);
 
-/** 只取第一个义项。分号分义项,逗号分同义词 —— 后者不拆。 */
-const firstSense = (value) => String(value || '').split(/[;；]/)[0].trim();
+/** 只取第一个义项，再取第一个 gloss 分隔符前的完整词义。 */
+const firstGloss = (value) => String(value || '')
+  .split(/[;；]/)[0]
+  .split(/[，、,／/]/)[0]
+  .trim();
 
 // 词场句没有自己的 id；它们借用例句管线产出的 surface → dictionary form
 // 索引。输入由调用方注入，避免这个纯函数模块偷偷加载 asset。
@@ -48,8 +51,8 @@ const candidatesOf = (wordBank) => {
       // 对齐行是**辅助行**,不能喧宾夺主(SOUL.md 视觉身份规则)。
       // 词典释义常带多个义项 ——「袋 → 袋子；（橘子等的）瓤」,
       // 「橘子等的瓤」出现在便利店句子的对齐行里纯属干扰。
-      // 只取第一个义项:分号是义项分隔,逗号是同义并列(「早上，早晨」要整段留)。
-      out.push({ surface, zh: firstSense(word.meaning_zh), source: 'wordBank', priority: surface === word?.word ? 0 : 1 });
+      // 对齐行是提示,不承载完整定义；只显示第一个完整 gloss，不加省略号。
+      out.push({ surface, zh: firstGloss(word.meaning_zh), source: 'wordBank', priority: surface === word?.word ? 0 : 1 });
     }
   }
   return out.sort((a, b) => b.surface.length - a.surface.length);

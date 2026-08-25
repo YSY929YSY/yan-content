@@ -75,3 +75,28 @@ test('★★ 20 条真实词场句的动词活用位置都有中文', () => {
   }
   assert.deepEqual(holes, []);
 });
+
+test('对齐行只显示第一个完整 gloss，不截断词义', () => {
+  const content = load('../../../../assets/content.fallback.json');
+  const cases = [
+    ['カード', '积分卡'],
+    ['見せる', '给……看'],
+    ['袋', '袋子'],
+    ['現金', '现金'],
+    ['聞く', '听'],
+    ['料理', '料理'],
+    ['果物', '水果'],
+    ['大好き', '非常喜欢'],
+    ['雨', '雨'],
+    ['出かける', '出门'],
+  ];
+
+  for (const [word, expected] of cases) {
+    const row = buildWordFieldAlignment(`${word}。`, content.wordBank)
+      .find(token => token.jp === word && token.source === 'wordBank');
+    assert.ok(row, `${word} 应该能在真实词库中命中`);
+    assert.equal(row.zh, expected, `${word} 的对齐提示应为第一个完整 gloss`);
+    assert.doesNotMatch(row.zh, /[，、,／/]/, `${word} 不应带后续并列释义`);
+    assert.doesNotMatch(row.zh, /…$|\.\.\.$/, `${word} 不应以省略号截断`);
+  }
+});

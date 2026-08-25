@@ -20,7 +20,8 @@ test('词场释义按 token.source 分层，语法文案去掉括号，blank 不
   assert.match(detail, /token\.source === 'wordBank'[\s\S]*?wd\.wfAlignZh/);
   assert.match(detail, /token\.source === 'grammar'[\s\S]*?wd\.wfAlignGrammar/);
   assert.match(detail, /String\(token\.zh \|\| ''\)\.replace\(\/\^\[（\(\]\/,[\s\S]*?replace\(\/\[）\)\]\$\//);
-  assert.match(detail, /!!glossStyle && !!gloss && <Text style=\{glossStyle\}>\{gloss\}<\/Text>/);
+  assert.match(detail, /!!glossStyle && !!gloss && <Text numberOfLines=\{1\} style=\{glossStyle\}>\{gloss\}<\/Text>/);
   assert.doesNotMatch(detail, /!!token\.zh && <Text style=\{wd\.wfAlignZh\}>\{token\.zh\}/);
   assert.match(styles, /wfAlignGrammar: \{[^}]*fontSize: 9[^}]*color: C\.mutedLight/);
+  assert.match(detail, /<Text numberOfLines=\{1\} style=\{glossStyle\}>\{gloss\}<\/Text>/);
 });
