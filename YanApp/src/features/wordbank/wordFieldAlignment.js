@@ -10,12 +10,17 @@ const GRAMMAR = {
   ません: '（否定）', でした: '（过去·是）',
   します: '（做·礼貌）',
   ください: '（请）', 下さい: '（请）',
+  られる: '（被动/可能）', れる: '（被动/可能）',
+  だろう: '（推测）', だ: '（断定）',
+  う: '（意志）', んだ: '（说明）', ん: '（说明）', ょう: '（意志）',
 };
 
 // 没有辞书形元数据的活用碎片仍然故意留空，不把词干误当成一个独立词。
 const INFLECTION_FRAGMENTS = ['買い', '食べ', '行き', '待ち', '出し', '入れ', '見せ', '探し', '払い', '会い', '読み', 'あり', 'しまし'];
 
 const isKana = (value) => /[ぁ-ゖァ-ヺー]/.test(value);
+const isSingleChar = (value) => Array.from(value).length === 1;
+const toHalfWidth = (value) => value.replace(/[０-９]/g, (char) => String.fromCharCode(char.charCodeAt(0) - 0xfee0));
 
 /** 只取第一个义项，再取第一个 gloss 分隔符前的完整词义。 */
 const firstGloss = (value) => String(value || '')
@@ -40,13 +45,14 @@ export function dictionaryFormsFrom(exampleTokens) {
   return bySurface;
 }
 
-const candidatesOf = (wordBank) => {
+const candidatesOf = (wordBank, allowedSingleCharSurfaces) => {
   const seen = new Set();
   const out = [];
   for (const word of Array.isArray(wordBank) ? wordBank : []) {
     const values = [word?.word, word?.reading];
     for (const surface of values) {
-      if (!surface || seen.has(surface) || GRAMMAR[surface]) continue;
+      if (!surface || seen.has(surface) || GRAMMAR[surface]
+        || (isSingleChar(surface) && allowedSingleCharSurfaces && !allowedSingleCharSurfaces.has(surface))) continue;
       seen.add(surface);
       // 对齐行是**辅助行**,不能喧宾夺主(SOUL.md 视觉身份规则)。
       // 词典释义常带多个义项 ——「袋 → 袋子；（橘子等的）瓤」,
@@ -58,11 +64,12 @@ const candidatesOf = (wordBank) => {
   return out.sort((a, b) => b.surface.length - a.surface.length);
 };
 
-const dictionaryCandidateAt = (sentence, start, candidates, dictionaryForms) => {
+const dictionaryCandidateAt = (sentence, start, candidates, dictionaryForms, allowedSingleCharSurfaces) => {
   if (!(dictionaryForms instanceof Map)) return null;
   const matches = [];
   for (const [surface, forms] of dictionaryForms) {
-    if (typeof surface !== 'string' || !(forms instanceof Set) || !sentence.startsWith(surface, start)) continue;
+    if (typeof surface !== 'string' || !(forms instanceof Set) || !sentence.startsWith(surface, start)
+      || (isSingleChar(surface) && allowedSingleCharSurfaces && !allowedSingleCharSurfaces.has(surface))) continue;
     const dictionaryCandidates = candidates.filter(candidate => forms.has(candidate.surface));
     // 同一个活用表面可能对应多个辞书形（例如「行っ」），这种情况不猜。
     if (dictionaryCandidates.length === 1) {
@@ -96,13 +103,21 @@ const nextKnownBoundary = (sentence, start, candidates) => {
   return boundaries.length ? Math.min(...boundaries) : sentence.length;
 };
 
+const singleCharSurfacesFrom = (exampleTokens) => {
+  if (!Array.isArray(exampleTokens)) return null;
+  return new Set(exampleTokens
+    .map(token => Array.isArray(token) ? token[0] : token)
+    .filter(token => typeof token === 'string' && isSingleChar(token)));
+};
+
 /**
  * Greedy, fail-closed alignment for the twenty word-field sample sentences.
  * Unknown inflection fragments remain blank; no meaning is invented here.
  */
-export function buildWordFieldAlignment(sentence, wordBank, dictionaryForms) {
+export function buildWordFieldAlignment(sentence, wordBank, dictionaryForms, exampleTokens) {
   const text = String(sentence || '');
-  const candidates = candidatesOf(wordBank);
+  const allowedSingleCharSurfaces = singleCharSurfacesFrom(exampleTokens);
+  const candidates = candidatesOf(wordBank, allowedSingleCharSurfaces);
   const out = [];
   let cursor = 0;
 
@@ -116,12 +131,19 @@ export function buildWordFieldAlignment(sentence, wordBank, dictionaryForms) {
       continue;
     }
 
+    const number = text.slice(cursor).match(/^[0-9０-９]+/u)?.[0];
+    if (number) {
+      out.push({ jp: number, zh: toHalfWidth(number), source: 'grammar' });
+      cursor += number.length;
+      continue;
+    }
+
     // 命中顺序：词面 → reading → 辞书形。前两级仍由 candidates 的
     // word/reading 别名完成；最后一级用离线 token 的第三项把「探し」还原到「探す」。
     // 候选之间取最长的完整表面，避免词库里的短词「你」先吃掉「你们」一类
     // 活用 token；同长度时仍保持上面的命中顺序。
     const word = directCandidateAt(text, cursor, candidates);
-    const dictionary = dictionaryCandidateAt(text, cursor, candidates, dictionaryForms);
+    const dictionary = dictionaryCandidateAt(text, cursor, candidates, dictionaryForms, allowedSingleCharSurfaces);
     if (word && (!dictionary || word.surface.length >= dictionary.surface.length)) {
       out.push({ jp: word.surface, zh: word.zh, source: 'wordBank' });
       cursor += word.surface.length;

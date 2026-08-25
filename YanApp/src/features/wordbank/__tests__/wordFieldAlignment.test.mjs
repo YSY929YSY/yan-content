@@ -47,6 +47,37 @@ test('辞书形命中活用词干,而真正歧义的辞书形留空', () => {
   assert.equal(ambiguous.some(row => row.jp.startsWith('行') && row.zh), false);
 });
 
+test('语法表按最长项优先覆盖稳定的助动词组合', () => {
+  const rows = buildWordFieldAlignment('だろうんだられるうょう。', []);
+  assert.deepEqual(rows.map(row => row.jp), ['だろう', 'んだ', 'られる', 'う', 'ょう', '。']);
+  assert.deepEqual(rows.slice(0, 5).map(row => row.zh), ['（推测）', '（说明）', '（被动/可能）', '（意志）', '（意志）']);
+});
+
+test('全角数字作为数字 token 转成半角 gloss', () => {
+  const rows = buildWordFieldAlignment('２０２６年。', [
+    { word: '年', reading: 'ねん', meaning_zh: '年' },
+  ]);
+  assert.deepEqual(rows.map(row => [row.jp, row.zh]), [
+    ['２０２６', '2026'],
+    ['年', '年'],
+    ['。', '。'],
+  ]);
+});
+
+test('方案 a: 单字候选只有在当前 EXAMPLE_TOKENS 独立成 span 时才参与命中', () => {
+  const bank = [
+    { word: '超', reading: 'ちょう', meaning_zh: '超' },
+    { word: '超える', reading: 'こえる', meaning_zh: '超过' },
+    { word: 'え', reading: 'え', meaning_zh: '画' },
+  ];
+  const forms = new Map([['超え', new Set(['超える'])]]);
+  const tokens = [['超え', 'こえ', '超える'], 'て', 'いる', '。'];
+  const rows = buildWordFieldAlignment('超えている。', bank, forms, tokens);
+  assert.deepEqual(rows.map(row => row.jp), ['超え', 'ている', '。']);
+  assert.equal(rows[0].zh, '超过');
+  assert.equal(rows.some(row => row.jp === 'え'), false, '超え 内部的な一文字候选不应抢先命中');
+});
+
 test('★★ 20 条真实词场句的动词活用位置都有中文', () => {
   const content = load('../../../../assets/content.fallback.json');
   const rawTokens = load('../../../../assets/example_tokens.json');

@@ -69,3 +69,17 @@ tools/data/
 
 # Supabase CLI 本地状态(含项目 ref,不该进仓库)
 YanApp/supabase/.temp/
+
+# Local YanApp workspace material; never package or stage these from the repo root.
+/YanApp_backup_0501/
+/resources/
+/yan-content/
+/YanApp/调研/
+
+# Existing local/generated artifacts in the repository root; preserve them, but
+# keep them out of status and EAS input.
+/.DS_Store
+/.expo/
+/staging/
+/docs/.DS_Store
+/docs/.Rhistory

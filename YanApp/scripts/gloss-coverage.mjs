@@ -20,6 +20,9 @@ const dictionaryForms = dictionaryFormsFrom(exampleTokens);
 const punctuationOnly = /^[\s、。？！？，．.!?,:：;；「」『』（）()［］【】〔〕〈〉《》…・~〜]+$/u;
 const isPunctuation = (token) => punctuationOnly.test(String(token?.jp || ''));
 const filled = (token) => typeof token?.zh === 'string' && token.zh.trim().length > 0;
+const isHiragana = (value) => /^[ぁ-ゖ]+$/u.test(value);
+const isKatakana = (value) => /^[ァ-ヺー]+$/u.test(value);
+const isNumber = (value) => /^[0-9０-９]+$/u.test(value);
 const lexiconSurfaces = new Set(wordBank.flatMap((word) => [word?.word, word?.reading]
   .filter((surface) => typeof surface === 'string' && surface)));
 const surfacesFromSudachi = (tokens) => (Array.isArray(tokens) ? tokens : [])
@@ -36,20 +39,22 @@ const tokenSpans = (tokens) => {
   });
 };
 
-// A blankKind from the runtime only distinguishes the shape of the blank. For this
-// report, determine whether the blank or its Sudachi dictionary form is actually in
-// the word bank. This keeps the three-way cause split in the measurement script and
-// leaves wordFieldAlignment.js untouched.
+// Runtime blankKind only describes the shape of a blank. This report uses the
+// sentence's Sudachi spans to separate grammar/inflection tails, split tokens,
+// proper names/loanwords/numbers, and genuine missing vocabulary.
 const measuredBlankCause = (positionedToken, spans) => {
-  if (lexiconSurfaces.has(positionedToken.jp)) return '表记差异';
-  const overlaps = spans.filter((span) => positionedToken.start < span.end && positionedToken.end > span.start);
-  if (overlaps.some((span) => span.dictionaryForm && lexiconSurfaces.has(span.dictionaryForm))) return '活用碎片';
-  if (overlaps.some((span) => lexiconSurfaces.has(span.surface))) return '表记差异';
-  return '不在词库';
+  if (isHiragana(positionedToken.jp)) return '语法/活用尾';
+  if (lexiconSurfaces.has(positionedToken.jp)) return '分词切碎';
+  const containingSpans = spans.filter((span) => positionedToken.start >= span.start
+    && positionedToken.end <= span.end
+    && (lexiconSurfaces.has(span.surface) || lexiconSurfaces.has(span.dictionaryForm)));
+  if (containingSpans.length) return '分词切碎';
+  if (isKatakana(positionedToken.jp) || isNumber(positionedToken.jp)) return '专名/外来语';
+  return '真·缺词';
 };
 
 const records = entries.map((entry) => {
-  const rows = buildWordFieldAlignment(entry.exampleJp, wordBank, dictionaryForms);
+  const rows = buildWordFieldAlignment(entry.exampleJp, wordBank, dictionaryForms, exampleTokens[entry.id]);
   const comparableRows = rows.filter((token) => !isPunctuation(token));
   const filledRows = comparableRows.filter(filled);
   const coverage = comparableRows.length ? filledRows.length / comparableRows.length : 1;
@@ -95,11 +100,21 @@ const buckets = Object.fromEntries(['100%', '90-99%', '70-89%', '<70%'].map((nam
   records.filter((record) => bucket(record) === name).length,
 ]));
 
-const blankCounts = Object.fromEntries(['活用碎片', '表记差异', '不在词库'].map((name) => [name, 0]));
+const blankCounts = Object.fromEntries(['语法/活用尾', '分词切碎', '专名/外来语', '真·缺词'].map((name) => [name, 0]));
 for (const record of records) {
   for (const detail of record.blankDetails) blankCounts[detail.cause] += 1;
 }
 const blankTotal = Object.values(blankCounts).reduce((sum, count) => sum + count, 0);
+const trueMissingSurfaces = new Map();
+for (const record of records) {
+  for (const detail of record.blankDetails) {
+    if (detail.cause !== '真·缺词') continue;
+    const surface = detail.token.jp;
+    trueMissingSurfaces.set(surface, (trueMissingSurfaces.get(surface) || 0) + 1);
+  }
+}
+const trueMissingList = [...trueMissingSurfaces.entries()]
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 const comparableSudachi = records.filter((record) => record.hasSudachiTokens).length;
 const sudachiDifferences = records.filter((record) => record.differsFromSudachi).length;
 const allGlossedTokens = records.flatMap((record) => record.rows.filter(filled));
@@ -125,7 +140,7 @@ const lowestSample = [...records]
 const singleCharSentenceSample = [...records]
   .filter((record) => record.rows.some((token) => token.source === 'wordBank' && token.jp.length === 1 && filled(token)))
   .sort((a, b) => hash(a.entry.id) - hash(b.entry.id))
-  .slice(0, 20);
+  .slice(0, 30);
 
 const tokenDisplay = (record) => record.rows
   .map((token) => `${token.jp}→${filled(token) ? token.zh : '∅'}`)
@@ -140,7 +155,7 @@ const printSample = (title, sample) => {
   }
 };
 const printSingleCharSample = () => {
-  console.log('\n## Single-character wordBank gloss hits (20 sentences)');
+  console.log('\n## Single-character wordBank gloss hits (30 sentences)');
   for (const record of singleCharSentenceSample) {
     const hits = record.rows
       .filter((token) => token.source === 'wordBank' && token.jp.length === 1 && filled(token))
@@ -164,6 +179,8 @@ console.log(`EXAMPLE_TOKENS unavailable for comparison: ${records.length - compa
 console.log(`single-character glossed tokens (all sources): ${singleCharGlossedTokens.length}/${allGlossedTokens.length} (${percentage(singleCharGlossedTokens.length / allGlossedTokens.length)})`);
 console.log(`single-character glossed tokens (non-punctuation): ${singleCharNonPunctuationGlossedTokens.length}/${allNonPunctuationGlossedTokens.length} (${percentage(singleCharNonPunctuationGlossedTokens.length / allNonPunctuationGlossedTokens.length)})`);
 console.log(`single-character wordBank gloss hits (mis-hit risk subset): ${singleCharWordBankGlossedTokens.length}/${wordBankGlossedTokens.length} wordBank-glossed tokens (${percentage(singleCharWordBankGlossedTokens.length / wordBankGlossedTokens.length)})`);
+console.log(`真·缺词 unique surfaces: ${trueMissingList.length}`);
+console.log(`真·缺词 list (surface x count): ${trueMissingList.map(([surface, count]) => `${surface}×${count}`).join(' | ')}`);
 printSample('Deterministic random sample (15)', randomSample);
 printSample('Lowest coverage sample (5)', lowestSample);
 printSingleCharSample();

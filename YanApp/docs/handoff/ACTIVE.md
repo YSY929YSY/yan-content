@@ -1,37 +1,41 @@
-# 当前状态 · 主线词场 gloss 覆盖率重测
+# 当前状态 · 主线词库 gloss 空白机械修复
 
-> 状态：重测已完成；上一轮 gloss 数字作废，本页与 CC-REPORT 以全量输入重测为准。
+> 状态：代码修复、全量重测与仓库盘点完成；等待最终门禁输出归档。
 >
 > 更新日期：2026-08-25
 
 ## 当前工单
 
-`docs/handoff/TICKET-gloss-coverage-remeasure.md`
+`docs/handoff/TICKET-gloss-blanks-and-cleanup.md`
 
-## 重测结果
+## 主线影响
 
-- 对全部 4,400 条有例句词条传入完整 8,005 条 wordBank 和完整辞书形索引。
-- 实际耗时：**143.54 秒**。
-- 拼回一致：**4,400 / 4,400（100.00%）**。
-- 非标点 gloss 覆盖：**29,817 / 32,037（93.07%）**；全覆盖句 **2,756 / 4,400**。
-- 分布：100% **2,756**；90–99% **312**；70–89% **1,238**；<70% **94**。
-- 空白成因：活用碎片 **140（6.27%）**；表记差异 **446（19.97%）**；不在词库 **1,647（73.76%）**。
-- 贪心分词与 `EXAMPLE_TOKENS` 不同：**2,416 / 4,400**。
-- 词库来源单字 gloss：**6,390 / 18,763（34.06%）**；20 条单字命中样本已追加报告。
+本工单不额外推迟主线。gloss 覆盖是词库深度可读性的一部分；仓库清理是机械整理，不碰内容包。
 
-## 重要结论
+## 已完成
 
-- `散れ！`、`黙れ！` 在全量输入下均为 100% 覆盖，上一轮的 0% 是裁剪输入造成的假象。
-- `た→田`、`え→画`、`き→树` 等短 token 误命中仍存在；本轮只记录，不修正。
-- 深卡盘点不受影响，沿用 [`staging/deep-card-audit.md`](../../staging/deep-card-audit.md)。
+- 脚本改为四类空白归因：语法/活用尾、分词切碎、专名/外来语、真·缺词。
+- `GRAMMAR` 补入稳定语法项；纯全角/半角数字输出半角形式。
+- 单字候选采用方案 (a)：只有当前 `EXAMPLE_TOKENS` 独立 span 才允许命中；测试已放在 `src/features/wordbank/__tests__/`。
+- 全量 4,400 条重测：实际耗时 92.09 秒；拼回一致 4,400/4,400（100.00%）；非标点 gloss 28,903/31,256（92.47%）。
+- 空白 2,365：语法/活用尾 940（39.75%）、分词切碎 286（12.09%）、专名/外来语 284（12.01%）、真·缺词 855（36.15%）；真·缺词去重 604 个，完整清单在 CC-REPORT。
+- 新增根目录 `.gitignore` 与 `UNTRACKED-INVENTORY.md`；未删除、未暂存任何原未跟踪内容。
+- 检查没有脚本读取 `yan-content/content.json` 或 `content.v1.json`。
 
-## 下一步
+## 关键判断
 
-- 项目负责人依据重测报告中的 20 条单字命中样本，决定是否继续推进 gloss。
-- 本轮不改对齐逻辑、不改 UI、不改内容包；不构建、不发 OTA。
+- 修复前 30 条单字样本人工判读为 68 个命中中的 38 个误命中（55.88%），因此采用可解释的独立 span 守卫。
+- 修复后覆盖率下降是准确性取舍，不能据此回滚。
+- “真·缺词”机械判据实测得到 604 个去重表面，明显高于工单背景估计；本轮只列清单，不使用 JMdict/LLM 补中文。
 
-## 不做
+## 尚未完成
 
-- 不改 `src/features/wordbank/wordFieldAlignment.js`、`App.js`、`TOKEN_COLUMN_SAMPLE_SENTENCES`。
-- 不改 `assets/content.fallback.json`、`yan-content/content.v2.json`。
-- 不修短 token 误命中、活用覆盖或分词逻辑；发现的问题只写报告。
+- 将最终 `npm test && npm run typecheck && npm run audit` 的 raw 输出贴入 CC-REPORT。
+- 提交本轮代码、测试、脚本和报告变更；提交前后各跑一次 `git status --short`。
+
+## 明确不做
+
+- 不改 `App.js`、UI、`TOKEN_COLUMN_SAMPLE_SENTENCES`。
+- 不碰 `assets/content.fallback.json`、`yan-content/content.v2.json`。
+- 不删除未跟踪文件，不使用 JMdict/LLM 补中文。
+- 不构建、不发 OTA，不顺手重构 `wordFieldAlignment.js` 的其他部分。
