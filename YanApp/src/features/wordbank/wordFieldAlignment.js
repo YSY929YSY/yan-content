@@ -21,28 +21,21 @@ const isKana = (value) => /[ぁ-ゖァ-ヺー]/.test(value);
 const firstSense = (value) => String(value || '').split(/[;；]/)[0].trim();
 
 // 词场句没有自己的 id；它们借用例句管线产出的 surface → dictionary form
-// 索引。Metro 能直接 require JSON asset，Node 单测环境没有全局 require 时则
-// 回退为空索引，仍然遵守「查不到就留空」。
-const loadBundledDictionaryForms = () => {
-  try {
-    if (typeof require !== 'function') return new Map();
-    const raw = require('../../../assets/example_tokens.json');
-    const bySurface = new Map();
-    for (const tokens of Object.values(raw?.default || raw || {})) {
-      for (const token of Array.isArray(tokens) ? tokens : []) {
-        if (!Array.isArray(token) || typeof token[0] !== 'string' || typeof token[2] !== 'string' || !token[2]) continue;
-        const forms = bySurface.get(token[0]) || new Set();
-        forms.add(token[2]);
-        bySurface.set(token[0], forms);
-      }
+// 索引。输入由调用方注入，避免这个纯函数模块偷偷加载 asset。
+export function dictionaryFormsFrom(exampleTokens) {
+  const bySurface = new Map();
+  if (!exampleTokens || typeof exampleTokens !== 'object' || Array.isArray(exampleTokens)) return bySurface;
+  for (const tokens of Object.values(exampleTokens)) {
+    for (const token of Array.isArray(tokens) ? tokens : []) {
+      if (!Array.isArray(token) || typeof token[0] !== 'string' || !token[0]
+        || typeof token[2] !== 'string' || !token[2] || token[2] === token[0]) continue;
+      const forms = bySurface.get(token[0]) || new Set();
+      forms.add(token[2]);
+      bySurface.set(token[0], forms);
     }
-    return bySurface;
-  } catch {
-    return new Map();
   }
-};
-
-const BUNDLED_DICTIONARY_FORMS = loadBundledDictionaryForms();
+  return bySurface;
+}
 
 const candidatesOf = (wordBank) => {
   const seen = new Set();
@@ -104,7 +97,7 @@ const nextKnownBoundary = (sentence, start, candidates) => {
  * Greedy, fail-closed alignment for the twenty word-field sample sentences.
  * Unknown inflection fragments remain blank; no meaning is invented here.
  */
-export function buildWordFieldAlignment(sentence, wordBank, dictionaryForms = BUNDLED_DICTIONARY_FORMS) {
+export function buildWordFieldAlignment(sentence, wordBank, dictionaryForms) {
   const text = String(sentence || '');
   const candidates = candidatesOf(wordBank);
   const out = [];

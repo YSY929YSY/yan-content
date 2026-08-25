@@ -2,9 +2,16 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
-import { buildWordFieldAlignment, wordFieldGrammar } from '../wordFieldAlignment.js';
+import { buildWordFieldAlignment, dictionaryFormsFrom, wordFieldGrammar } from '../wordFieldAlignment.js';
 
 const load = (rel) => JSON.parse(readFileSync(new URL(rel, import.meta.url), 'utf8'));
+
+test('真实例句 asset 仍是三元格式且能生成辞书形索引', () => {
+  const forms = dictionaryFormsFrom(load('../../../../assets/example_tokens.json'));
+  assert.ok(forms instanceof Map);
+  assert.ok(forms.size >= 1000, `辞书形 surface 只有 ${forms.size} 条`);
+  assert.ok(forms.get('探し')?.has('探す'), '探し → 探す 必须存在');
+});
 
 test('词场逐词中文优先查词库并固定识别语法成分', () => {
   const rows = buildWordFieldAlignment('レシートをください。', [

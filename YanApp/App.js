@@ -61,7 +61,7 @@ import { PitchLine, pitchOf, hasMultiAccent, pitchUnconfirmed } from './src/feat
 import { SenseList } from './src/features/wordbank/SenseList';
 import { Furigana } from './src/features/wordbank/FuriganaText';
 import { ExampleSentence } from './src/features/wordbank/ExampleSentence';
-import { buildWordFieldAlignment } from './src/features/wordbank/wordFieldAlignment';
+import { buildWordFieldAlignment, dictionaryFormsFrom } from './src/features/wordbank/wordFieldAlignment';
 import EXAMPLE_TOKENS from './assets/example_tokens.json';
 import { primaryReading, altReadings } from './src/features/wordbank/furigana';
 import {
@@ -72,6 +72,9 @@ import {
   Linking,
 } from 'react-native';
 import Svg, { Circle, G, Path } from 'react-native-svg';
+
+// 例句 asset 已由上面 import；辞书形索引只构建一次，词卡渲染时复用。
+const EXAMPLE_DICTIONARY_FORMS = dictionaryFormsFrom(EXAMPLE_TOKENS);
 
 const { width: SW } = Dimensions.get('window');
 // 键值统一在 src/lib/storage.js 登记 —— 这里只做别名,不再手写字符串。
@@ -2492,7 +2495,7 @@ function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, 
             <View style={wd.exRow}>
               <View style={{ flex: 1, gap: 3 }}>
                 <View style={wd.wfAlignRow}>
-                  {buildWordFieldAlignment(wordField.sentence.jp, wordBank).map((token, ti) => {
+                  {buildWordFieldAlignment(wordField.sentence.jp, wordBank, EXAMPLE_DICTIONARY_FORMS).map((token, ti) => {
                     const member = isFieldMemberToken(token, fieldMemberTerms(wordField, lookupWord));
                     const glossStyle = token.source === 'wordBank'
                       ? wd.wfAlignZh
