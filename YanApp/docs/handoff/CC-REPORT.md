@@ -3140,6 +3140,8 @@ Result: FAIL
 
 ## 主线词场 · 343 条可审清单（2026-08-26）
 
+本轮 commit：`f43cc41 docs: make Tatoeba wordfield reviewable`，包含 shortlist 脚本、343 条 staging JSON、ACTIVE 更新和本节报告。
+
 ### 异常自查（5-2）
 
 1. 与上一轮相比，1851 → 343 不是候选质量骤降，而是从“候选行数”改为“不同 anchor_id 数”；本轮按每个 anchor 只保留一条。A/B/C 与风险数是本轮新增指标，没有上一轮可比值。没有发现相差 2 倍以上且无法解释的同口径数字。
@@ -3356,3 +3358,56 @@ e1d6ea9258589623973ebf0ba5214f34c862d8ae6586f980b572744bdee9f007  staging/wordfi
 - 本节的 30 条抽样、三档数字和风险清单
 
 本轮忍住没做：不落库、不改两个内容包、不改 App/UI/gloss、不补剩余 220 个未覆盖 anchor、不修任何 Tatoeba 句子、不构建、不发 OTA。343 条仍需负责人审；下一步只在负责人给出 “A 档直接落 / A+B 落 / 再等” 后开始。
+
+### 最终门禁原始输出
+
+提交 f43cc41 后，git status --short 无输出。完整串联命令为 npm test && npm run typecheck && npm run audit；原始关键输出如下：
+
+~~~
+ℹ tests 610
+ℹ suites 0
+ℹ pass 610
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9988.774801
+
+> yanapp@1.0.0 typecheck
+> tsc --noEmit
+
+> yanapp@1.0.0 audit
+> node scripts/audit.mjs
+
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:2937: review editorial claim "旅行高频"
+WARN user-claims App.js:2981: review editorial claim "旅行高频"
+WARN user-claims App.js:3075: review editorial claim "高频"
+WARN user-claims App.js:3118: review editorial claim "高频"
+WARN user-claims App.js:3165: review editorial claim "高频"
+WARN user-claims App.js:3183: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 a00a76e1289a9c84e0f7089b2edc1949811bf52fb08f7c297ba55ada8ffecd82
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+INFO doc-refs scanned 962 references (412 unique)
+WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:16: missing 调研/…/red调研重新规划_编号修正版.md
+WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:286: missing red调研重新规划_编号修正版.md
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:804: missing src/content/publication.ts
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:803: missing src/content/schema.ts
+WARN doc-refs docs/ROADMAP-content-trust-structure-ui.md:278: missing src/content/contentValidation.ts
+WARN doc-refs docs/TICKET-jmdict-followup.md:86: missing staging/duplicate-seq-plan.md
+WARN doc-refs docs/TICKET-jmdict-followup.md:86: missing staging/duplicate-seq-groups.json
+PASS doc-refs 所有引用都已入库（7 条指向不存在的路径，见 WARN）
+PASS workspace-clean docs markdown tracked
+--- audit summary ---
+FAIL: 0
+WARN: 14
+Result: PASS
+~~~
