@@ -1835,6 +1835,53 @@ FAIL: 1
 Result: FAIL
 ```
 
+## 主线续批 T1/T3 · 繁转简与对齐行收窄（2026-08-25）
+
+### T1：Tatoeba 中文规范化
+
+- 入口仍为 `scripts/wordfield-candidates.mjs`，实际筛选逻辑为 `scripts/wordfield-candidates.py`；只接入现成的 `opencc.OpenCC("t2s")`，没有自造转换表。
+- staging 仍为 **1,851** 行；日语原句、`tatoeba.jp_sentence_id`、`tatoeba.zh_sentence_id` 逐条与修改前一致。
+- 机器自检：按 OpenCC 可转换字符检查，繁体字符命中 **0**；有 **621** 行中文发生规范化。
+- 工单写的 368/1851 是较窄的常用字命中口径；本次按 OpenCC 完整可转换字符统计，因此影响行数更高。最终产物以 OpenCC 规范化结果为准。
+- 没有改日文原句，没有新增字段，没有改内容包。
+
+### T3：对齐行 gloss
+
+`wordFieldAlignment.js` 现在先取第一个中文义项，再取第一个 `，`、`、`、`,`、`/` 分隔符之前的完整片段；不加省略号，不修改词条 `meaning_zh`。旧式对齐行的 gloss 使用 `numberOfLines={1}`，同时移除其截断宽度，避免自动把完整词义裁成半个词；`TokenColumnSentence` 三槽位结构未改。
+
+| 词 | 收窄前 | 收窄后 |
+|---|---|---|
+| カード | 积分卡/银行卡，卡片 | 积分卡 |
+| 見せる | 给……看，展示 | 给……看 |
+| 袋 | 袋子；（橘子等的）瓤 | 袋子 |
+| 現金 | 现金；现实，势利 | 现金 |
+| 聞く | 听；问 | 听 |
+| 料理 | 料理，做菜 | 料理 |
+| 果物 | 水果 | 水果（不变） |
+| 大好き | 非常喜欢 | 非常喜欢（不变） |
+| 雨 | 雨 | 雨（不变） |
+| 出かける | 出门 | 出门（不变） |
+
+新增测试用真实词库覆盖以上 10 个词，并断言不以分隔符或省略号结束；渲染测试断言对齐行 gloss 单行显示。
+
+### T2 状态
+
+T2 落库 **0 条**。没有项目负责人的质量确认和落库数量决定，本轮不自行选择、不改 `assets/content.fallback.json` 或 `yan-content/content.v2.json`；主线数字仍为已落库 20/563，M1 staging 覆盖 459/563。
+
+### 提交与 EAS Update
+
+- `0d82268 fix(wordfield): normalize staged Tatoeba translations before review`：OpenCC 规范化脚本与 staging 产物。
+- `c839be5 fix(wordfield): keep alignment glosses short and single-line`：对齐行纯函数、单行渲染与测试；未改三槽位 renderer。
+- EAS Update 已成功发布：preview / iOS，update group `94cd5add-ca1e-464d-81d2-997cc0fe5974`，iOS update ID `01a0380f-67e2-79d2-a6a2-986523106c3c`。
+- EAS 发布不等于真机验收；系统字号是否撑散对齐、不同设备实际显示：**待真机验证**。
+- 这次忍住没做：T2 落库、修改词条本身释义、改三槽位、推全库 B9-2、构建、横竖屏结论。
+
+### 交报告前原始输出
+
+```text
+待最终门禁执行后填入，不以摘要替代原始输出。
+```
+
 ## 主线 M1 · Tatoeba 词场候选（2026-08-25）
 
 ### 结果
