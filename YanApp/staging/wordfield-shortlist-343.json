@@ -19,8 +19,14 @@
     },
     "unknown_words": [],
     "zh": "我姐姐每天都会洗澡。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_abunai",
@@ -41,8 +47,16 @@
     },
     "unknown_words": [],
     "zh": "小心！在那里有一个大洞。",
-    "review_tier": "B",
-    "review_risks": [
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "SWAP",
+    "review_reasons": [
+      "疑似残句"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": [
       "疑似残句"
     ]
   },
@@ -65,8 +79,14 @@
     },
     "unknown_words": [],
     "zh": "她抬起了头。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_aka",
@@ -89,8 +109,14 @@
     },
     "unknown_words": [],
     "zh": "我最喜欢红色。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_akai",
@@ -112,8 +138,16 @@
     },
     "unknown_words": [],
     "zh": "看看那间红色屋顶的房子。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 6,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [
+      "〜てごらん"
+    ],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_akarui",
@@ -136,8 +170,14 @@
     },
     "unknown_words": [],
     "zh": "我喜欢明亮的颜色。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_akeru",
@@ -160,8 +200,14 @@
     },
     "unknown_words": [],
     "zh": "你知道如何打开这个箱子吗？",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 11,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_aki",
@@ -184,8 +230,14 @@
     },
     "unknown_words": [],
     "zh": "我喜欢春天胜过秋天。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_aku",
@@ -206,8 +258,14 @@
     },
     "unknown_words": [],
     "zh": "你的袜子破了一个洞呀。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 9,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_amai",
@@ -229,8 +287,16 @@
     },
     "unknown_words": [],
     "zh": "不要小看我的力量。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "SWAP",
+    "review_reasons": [
+      "固定搭配/引申义"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ame",
@@ -253,8 +319,16 @@
     },
     "unknown_words": [],
     "zh": "雨下了一周。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 19,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [
+      "降り続く"
+    ],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ane",
@@ -275,8 +349,19 @@
     },
     "unknown_words": [],
     "zh": "我姐妹是一个很棒的打字员。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "SWAP",
+    "review_reasons": [
+      "日语搭配别扭",
+      "姉被译成姐妹"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [
+      "姉→姐妹疑似错译"
+    ],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ani",
@@ -299,8 +384,14 @@
     },
     "unknown_words": [],
     "zh": "我有八个哥哥。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 8,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ao",
@@ -322,8 +413,14 @@
     },
     "unknown_words": [],
     "zh": "她眼睛是蓝色的。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_aoi",
@@ -345,8 +442,14 @@
     },
     "unknown_words": [],
     "zh": "我的眼睛是蓝色的。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 9,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_arau",
@@ -368,8 +471,14 @@
     },
     "unknown_words": [],
     "zh": "便后请洗手。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_aru_2",
@@ -390,8 +499,14 @@
     },
     "unknown_words": [],
     "zh": "他受到学生的欢迎。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_aruku",
@@ -414,8 +529,14 @@
     },
     "unknown_words": [],
     "zh": "稍微走两步就能出车站。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 13,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_asa",
@@ -438,8 +559,14 @@
     },
     "unknown_words": [],
     "zh": "她早上七点起床的。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 7,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ashi",
@@ -461,8 +588,14 @@
     },
     "unknown_words": [],
     "zh": "这些鞋子太紧了，伤脚。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 5,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ashita",
@@ -485,8 +618,14 @@
     },
     "unknown_words": [],
     "zh": "明天我一整天都在家。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 45,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_asobu",
@@ -508,8 +647,14 @@
     },
     "unknown_words": [],
     "zh": "我在花园里玩。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_atama",
@@ -530,8 +675,16 @@
     },
     "unknown_words": [],
     "zh": "他打了我的头。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 5,
+    "review_status": "SWAP",
+    "review_reasons": [
+      "负面动词:ぶつ"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_atarashii",
@@ -553,8 +706,14 @@
     },
     "unknown_words": [],
     "zh": "我想买一辆新的自行车。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 16,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_atatakai",
@@ -576,8 +735,16 @@
     },
     "unknown_words": [],
     "zh": "到了三月会变的更温暖吧",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [
+      "だろう"
+    ],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ato",
@@ -599,8 +766,14 @@
     },
     "unknown_words": [],
     "zh": "我晚点再来拿。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 8,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_atsui",
@@ -622,8 +795,14 @@
     },
     "unknown_words": [],
     "zh": "今天多么地热啊!",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_atsui_3",
@@ -646,8 +825,14 @@
     },
     "unknown_words": [],
     "zh": "你有没有看那本厚厚的书？",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_au",
@@ -669,8 +854,14 @@
     },
     "unknown_words": [],
     "zh": "我下星期的今天会和你见面。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 17,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ban",
@@ -692,8 +883,14 @@
     },
     "unknown_words": [],
     "zh": "她一整晚都在哭。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ban_2",
@@ -714,8 +911,14 @@
     },
     "unknown_words": [],
     "zh": "下次该轮到我开车了。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_benkyou",
@@ -737,8 +940,14 @@
     },
     "unknown_words": [],
     "zh": "我学英语。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 16,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_boushi",
@@ -760,8 +969,14 @@
     },
     "unknown_words": [],
     "zh": "请您摘下您的帽子。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_bunshou",
@@ -782,8 +997,14 @@
     },
     "unknown_words": [],
     "zh": "老师，这句话正确吗？",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_butaniku",
@@ -806,8 +1027,14 @@
       "合う"
     ],
     "zh": "猪肉不适合我。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_byouin",
@@ -828,8 +1055,14 @@
     },
     "unknown_words": [],
     "zh": "附近有一家医院。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_byouki",
@@ -851,8 +1084,14 @@
     },
     "unknown_words": [],
     "zh": "他病了，所以没有上学。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 7,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_chairo",
@@ -873,8 +1112,14 @@
     },
     "unknown_words": [],
     "zh": "那只猫是棕色的。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_chichi",
@@ -897,8 +1142,14 @@
     },
     "unknown_words": [],
     "zh": "我父亲开车去上班。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 32,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_chigau",
@@ -920,8 +1171,14 @@
     },
     "unknown_words": [],
     "zh": "你拿错钥匙了。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_chiisai",
@@ -944,8 +1201,14 @@
     },
     "unknown_words": [],
     "zh": "请再小声一点说话。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 7,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_chiisana",
@@ -967,8 +1230,16 @@
     },
     "unknown_words": [],
     "zh": "狗攻击了小男孩儿。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 7,
+    "review_status": "SWAP",
+    "review_reasons": [
+      "负面动词:襲う"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_chikai",
@@ -990,10 +1261,16 @@
     },
     "unknown_words": [],
     "zh": "电影院离电车站近吗？",
-    "review_tier": "A",
-    "review_risks": [
-      "疑似口语省略"
-    ]
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "SPOKEN",
+    "review_reasons": [
+      "真实口语缩约/省略"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_chikaku",
@@ -1014,8 +1291,14 @@
     },
     "unknown_words": [],
     "zh": "附近有狗在叫。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_chikatetsu",
@@ -1038,8 +1321,14 @@
     },
     "unknown_words": [],
     "zh": "我坐地铁上学。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 6,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_chizu",
@@ -1060,8 +1349,14 @@
     },
     "unknown_words": [],
     "zh": "地图挂在墙上。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_chuu",
@@ -1085,8 +1380,14 @@
     },
     "unknown_words": [],
     "zh": "他昨天干了一天活儿。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 18,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_dai",
@@ -1109,8 +1410,18 @@
       "2"
     ],
     "zh": "我们家中有两台电视。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 1,
+    "review_status": "DATA",
+    "review_reasons": [
+      "解析失败:2"
+    ],
+    "data_signals": [
+      "2"
+    ],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_daidokoro",
@@ -1132,8 +1443,18 @@
     },
     "unknown_words": [],
     "zh": "我的母亲在厨房里正忙著。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 1,
+    "review_status": "FIX_ZH",
+    "review_reasons": [
+      "明显不自然：厨房正忙著"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [
+      "明显不自然：厨房正忙著"
+    ],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_daigaku",
@@ -1156,8 +1477,18 @@
     },
     "unknown_words": [],
     "zh": "大学四月开学。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 2,
+    "review_status": "FIX_ZH",
+    "review_reasons": [
+      "明显不自然：大学四月开学"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [
+      "明显不自然：大学四月开学"
+    ],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_daijoubu",
@@ -1178,8 +1509,14 @@
     },
     "unknown_words": [],
     "zh": "周一可以吗？",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_daisuki",
@@ -1201,8 +1538,14 @@
     },
     "unknown_words": [],
     "zh": "我爱电影。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 12,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_dare",
@@ -1225,8 +1568,14 @@
     },
     "unknown_words": [],
     "zh": "妈妈起得比谁都早。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 45,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_dasu",
@@ -1248,8 +1597,14 @@
     },
     "unknown_words": [],
     "zh": "不要把脸探向窗外。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 5,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_dekakeru",
@@ -1270,8 +1625,14 @@
     },
     "unknown_words": [],
     "zh": "他正在出门。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_denki",
@@ -1292,8 +1653,14 @@
     },
     "unknown_words": [],
     "zh": "关灯。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_densha",
@@ -1316,8 +1683,14 @@
     },
     "unknown_words": [],
     "zh": "我坐火车回了家。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 7,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_denwa",
@@ -1339,8 +1712,14 @@
     },
     "unknown_words": [],
     "zh": "我的房里有部电话。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 14,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_deru",
@@ -1362,8 +1741,14 @@
     },
     "unknown_words": [],
     "zh": "该杂志每月出版。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 11,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_do",
@@ -1386,8 +1771,20 @@
       "100"
     ],
     "zh": "水在摄氏100度沸腾。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 3,
+    "review_status": "DATA",
+    "review_reasons": [
+      "解析失败:100"
+    ],
+    "data_signals": [
+      "100"
+    ],
+    "difficulty_signals": [
+      "沸騰する"
+    ],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_doubutsu",
@@ -1410,8 +1807,14 @@
     },
     "unknown_words": [],
     "zh": "我买了一本关于动物的书。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_doyoubi",
@@ -1433,8 +1836,14 @@
     },
     "unknown_words": [],
     "zh": "我下周六有空。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_e",
@@ -1456,8 +1865,14 @@
     },
     "unknown_words": [],
     "zh": "他画了一幅狗的画。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_eiga",
@@ -1479,8 +1894,14 @@
     },
     "unknown_words": [],
     "zh": "我喜欢看电影。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 11,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_eigakan",
@@ -1503,8 +1924,18 @@
       "私たち"
     ],
     "zh": "我们去影院。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "DATA",
+    "review_reasons": [
+      "解析失败:私たち"
+    ],
+    "data_signals": [
+      "私たち"
+    ],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_eigo",
@@ -1527,8 +1958,14 @@
     },
     "unknown_words": [],
     "zh": "我每天都说英语。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 24,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_eki",
@@ -1550,8 +1987,14 @@
     },
     "unknown_words": [],
     "zh": "她在下一个站下了车。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 7,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_en",
@@ -1572,8 +2015,14 @@
     },
     "unknown_words": [],
     "zh": "1000日元够不够？",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 7,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_enpitsu",
@@ -1595,8 +2044,14 @@
     },
     "unknown_words": [],
     "zh": "他手里拿着铅笔。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 8,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_fuku",
@@ -1619,8 +2074,18 @@
     },
     "unknown_words": [],
     "zh": "今天比昨天多风。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 4,
+    "review_status": "FIX_ZH",
+    "review_reasons": [
+      "明显不自然：多风"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [
+      "明显不自然：多风"
+    ],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_fuku_2",
@@ -1642,8 +2107,14 @@
     },
     "unknown_words": [],
     "zh": "我在脱衣服。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 8,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_fun",
@@ -1666,8 +2137,18 @@
       "5"
     ],
     "zh": "我还要等五分钟。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 4,
+    "review_status": "DATA",
+    "review_reasons": [
+      "解析失败:5"
+    ],
+    "data_signals": [
+      "5"
+    ],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_furu",
@@ -1690,8 +2171,14 @@
       "昨晩"
     ],
     "zh": "昨晚下了雪。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_furui",
@@ -1714,8 +2201,14 @@
     },
     "unknown_words": [],
     "zh": "我有一辆旧自行车。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 5,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_futari",
@@ -1736,8 +2229,14 @@
     },
     "unknown_words": [],
     "zh": "我有两个孩子。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_fuutou",
@@ -1758,8 +2257,14 @@
     },
     "unknown_words": [],
     "zh": "我已经有信封了。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_fuyu",
@@ -1780,8 +2285,14 @@
     },
     "unknown_words": [],
     "zh": "没有雪的冬天不是冬天。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_gaikoku",
@@ -1803,8 +2314,14 @@
     },
     "unknown_words": [],
     "zh": "我想去外国。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_gaikokujin",
@@ -1825,8 +2342,14 @@
     },
     "unknown_words": [],
     "zh": "她嫁给了一个外国人。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_gakkou",
@@ -1849,8 +2372,14 @@
     },
     "unknown_words": [],
     "zh": "该去上学了。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 21,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_gakusei",
@@ -1871,8 +2400,14 @@
     },
     "unknown_words": [],
     "zh": "我是个学生。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_gatsu",
@@ -1896,8 +2431,14 @@
     },
     "unknown_words": [],
     "zh": "今天是三月五号。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 6,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_genkan",
@@ -1918,8 +2459,14 @@
     },
     "unknown_words": [],
     "zh": "玄关有人来了耶。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_genki",
@@ -1940,8 +2487,14 @@
     },
     "unknown_words": [],
     "zh": "你家里人都还好吗？",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_getsuyoubi",
@@ -1964,8 +2517,14 @@
     },
     "unknown_words": [],
     "zh": "暑假从下星期一开始。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 9,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ginkou",
@@ -1987,8 +2546,14 @@
     },
     "unknown_words": [],
     "zh": "请去银行。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 5,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_go",
@@ -2012,8 +2577,14 @@
     },
     "unknown_words": [],
     "zh": "一，二，三，四，五。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_go_2",
@@ -2036,8 +2607,14 @@
       "トルコ"
     ],
     "zh": "我学土耳其语。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_gogo",
@@ -2059,8 +2636,14 @@
     },
     "unknown_words": [],
     "zh": "您下午有空吗？",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_gozen",
@@ -2084,8 +2667,18 @@
       "7"
     ],
     "zh": "她早上七点起床的。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 1,
+    "review_status": "DATA",
+    "review_reasons": [
+      "解析失败:7"
+    ],
+    "data_signals": [
+      "7"
+    ],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_gyuuniku",
@@ -2109,8 +2702,14 @@
       "ラム肉"
     ],
     "zh": "比起羊肉我更喜欢牛肉。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_gyuunyuu",
@@ -2132,8 +2731,14 @@
     },
     "unknown_words": [],
     "zh": "我喝了牛奶。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 8,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ha",
@@ -2157,8 +2762,14 @@
     },
     "unknown_words": [],
     "zh": "睡觉之前把牙给刷了啊。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_haha",
@@ -2181,8 +2792,14 @@
     },
     "unknown_words": [],
     "zh": "妈妈煮了十只蛋。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 14,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hai_2",
@@ -2203,8 +2820,14 @@
     },
     "unknown_words": [],
     "zh": "一杯咖啡。谢谢！",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hairu",
@@ -2226,8 +2849,14 @@
     },
     "unknown_words": [],
     "zh": "他进了自己房间。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 17,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hajimaru",
@@ -2248,8 +2877,14 @@
     },
     "unknown_words": [],
     "zh": "教育从家庭开始。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 6,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hajimete",
@@ -2270,8 +2905,14 @@
     },
     "unknown_words": [],
     "zh": "我昨天第一次打网球。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hako",
@@ -2292,8 +2933,14 @@
     },
     "unknown_words": [],
     "zh": "一箱多少钱？",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_han",
@@ -2317,8 +2964,16 @@
       "マイル"
     ],
     "zh": "邮局离这儿有半英里。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 1,
+    "review_status": "SWAP",
+    "review_reasons": [
+      "外国语料度量衡:マイル"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hana",
@@ -2339,8 +2994,14 @@
     },
     "unknown_words": [],
     "zh": "美好的星期五！",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 7,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hana_2",
@@ -2361,8 +3022,14 @@
     },
     "unknown_words": [],
     "zh": "大象鼻子长。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hanashi",
@@ -2383,8 +3050,14 @@
     },
     "unknown_words": [],
     "zh": "请继续讲你的故事。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 6,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hanasu",
@@ -2406,8 +3079,18 @@
     },
     "unknown_words": [],
     "zh": "他说得很大声。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 9,
+    "review_status": "FIX_ZH",
+    "review_reasons": [
+      "明显不自然：他说得很大声"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [
+      "明显不自然：他说得很大声"
+    ],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hareru",
@@ -2428,8 +3111,14 @@
     },
     "unknown_words": [],
     "zh": "希望星期天是晴天呢。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_haru",
@@ -2452,8 +3141,14 @@
     },
     "unknown_words": [],
     "zh": "我最喜欢春天。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hashi",
@@ -2474,8 +3169,14 @@
     },
     "unknown_words": [],
     "zh": "池塘上有座桥。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hashi_2",
@@ -2496,8 +3197,14 @@
     },
     "unknown_words": [],
     "zh": "筷子怎么用？",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hashiru",
@@ -2519,8 +3226,14 @@
     },
     "unknown_words": [],
     "zh": "车开得很快。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 9,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hataraku",
@@ -2542,8 +3255,14 @@
     },
     "unknown_words": [],
     "zh": "除了星期天我每一天都工作。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 7,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hayai",
@@ -2565,8 +3284,14 @@
     },
     "unknown_words": [],
     "zh": "赶快回家。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 9,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hayai_2",
@@ -2587,8 +3312,14 @@
     },
     "unknown_words": [],
     "zh": "快来这里。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 5,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_heya",
@@ -2610,8 +3341,14 @@
     },
     "unknown_words": [],
     "zh": "他讨厌打扫自己的房间。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 8,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hidari",
@@ -2633,8 +3370,14 @@
     },
     "unknown_words": [],
     "zh": "走左边的道路。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_higashi",
@@ -2655,8 +3398,14 @@
     },
     "unknown_words": [],
     "zh": "太阳在东方升起，西方落下。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hiki",
@@ -2678,8 +3427,14 @@
     },
     "unknown_words": [],
     "zh": "我捉了两条鱼。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hikouki",
@@ -2701,8 +3456,14 @@
     },
     "unknown_words": [],
     "zh": "我造了一架模型飞机。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hiku",
@@ -2724,8 +3485,14 @@
     },
     "unknown_words": [],
     "zh": "孩子感冒了。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hiku_2",
@@ -2747,8 +3514,14 @@
     },
     "unknown_words": [],
     "zh": "她小提琴演奏得非常好。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 5,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hikui",
@@ -2770,8 +3543,14 @@
     },
     "unknown_words": [],
     "zh": "我太矮了。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 5,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hima",
@@ -2792,8 +3571,14 @@
     },
     "unknown_words": [],
     "zh": "你周二有没有空？",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hiroi",
@@ -2814,8 +3599,14 @@
     },
     "unknown_words": [],
     "zh": "海非常宽。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hiru",
@@ -2837,10 +3628,16 @@
     },
     "unknown_words": [],
     "zh": "要一起吃午餐吗？",
-    "review_tier": "A",
-    "review_risks": [
-      "疑似口语省略"
-    ]
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "SPOKEN",
+    "review_reasons": [
+      "真实口语缩约/省略"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hito",
@@ -2862,10 +3659,16 @@
     },
     "unknown_words": [],
     "zh": "你现在有喜欢的人吗？",
-    "review_tier": "A",
-    "review_risks": [
-      "疑似口语省略"
-    ]
+    "old_review_tier": "A",
+    "alt_count": 14,
+    "review_status": "SPOKEN",
+    "review_reasons": [
+      "真实口语缩约/省略"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hitori",
@@ -2887,10 +3690,16 @@
     },
     "unknown_words": [],
     "zh": "你打算自己一人把它全部吃了吗？",
-    "review_tier": "B",
-    "review_risks": [
-      "疑似口语省略"
-    ]
+    "old_review_tier": "B",
+    "alt_count": 3,
+    "review_status": "SPOKEN",
+    "review_reasons": [
+      "真实口语缩约/省略"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hon",
@@ -2915,8 +3724,14 @@
     },
     "unknown_words": [],
     "zh": "每天晚上睡前我都会看书。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 28,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hontou",
@@ -2937,8 +3752,14 @@
     },
     "unknown_words": [],
     "zh": "他说得没错。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 9,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_hoshii",
@@ -2962,8 +3783,14 @@
     },
     "unknown_words": [],
     "zh": "我想喝冷饮。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 11,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ichi",
@@ -2986,8 +3813,14 @@
     },
     "unknown_words": [],
     "zh": "给我一张纸。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 16,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ichiban",
@@ -3009,8 +3842,14 @@
     },
     "unknown_words": [],
     "zh": "这是镇上最便宜的商店。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 18,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ie",
@@ -3033,8 +3872,14 @@
     },
     "unknown_words": [],
     "zh": "差不多该回家了。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 21,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ike",
@@ -3055,8 +3900,14 @@
     },
     "unknown_words": [],
     "zh": "在池塘游泳是危险的。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_iku",
@@ -3079,8 +3930,14 @@
     },
     "unknown_words": [],
     "zh": "我去河里游泳。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 44,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ima",
@@ -3102,8 +3959,14 @@
     },
     "unknown_words": [],
     "zh": "他正忙着做作业。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 22,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_imi",
@@ -3124,8 +3987,14 @@
     },
     "unknown_words": [],
     "zh": "告诉我人生的意义。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_imouto",
@@ -3147,8 +4016,14 @@
     },
     "unknown_words": [],
     "zh": "我给了我妹妹一本字典。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 7,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_inu",
@@ -3170,8 +4045,14 @@
     },
     "unknown_words": [],
     "zh": "别让狗进来。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 19,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ireru",
@@ -3193,8 +4074,14 @@
     },
     "unknown_words": [],
     "zh": "我将水倒入了桶中。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_iriguchi",
@@ -3215,8 +4102,14 @@
     },
     "unknown_words": [],
     "zh": "他站在入口的边上。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_iro",
@@ -3238,8 +4131,14 @@
     },
     "unknown_words": [],
     "zh": "这鱼的颜色一样。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 5,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_iru",
@@ -3262,8 +4161,14 @@
       "ボストン"
     ],
     "zh": "你在波士顿待了很久吗？",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_iru_2",
@@ -3284,8 +4189,14 @@
     },
     "unknown_words": [],
     "zh": "我不需要你口头上的温柔。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_isha",
@@ -3307,8 +4218,14 @@
     },
     "unknown_words": [],
     "zh": "请叫医生。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_isogashii",
@@ -3330,8 +4247,14 @@
     },
     "unknown_words": [],
     "zh": "我这礼拜一直很忙。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 14,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_issho",
@@ -3353,8 +4276,14 @@
     },
     "unknown_words": [],
     "zh": "真想一起吃晚餐。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_isu",
@@ -3375,8 +4304,14 @@
     },
     "unknown_words": [],
     "zh": "这把椅子很轻。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_itai",
@@ -3398,8 +4333,14 @@
     },
     "unknown_words": [],
     "zh": "医生，我胃痛。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 5,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_iu",
@@ -3421,8 +4362,14 @@
     },
     "unknown_words": [],
     "zh": "他说，“九点了”。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 14,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_iya",
@@ -3443,8 +4390,14 @@
     },
     "unknown_words": [],
     "zh": "如果你不想的话也没问题。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ji",
@@ -3468,8 +4421,14 @@
     },
     "unknown_words": [],
     "zh": "已将近十点了。该是睡觉的时候了。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 21,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_jibun",
@@ -3491,8 +4450,14 @@
     },
     "unknown_words": [],
     "zh": "我亲眼见到了它。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 7,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_jidousha",
@@ -3513,8 +4478,14 @@
     },
     "unknown_words": [],
     "zh": "这是我的车。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_jikan",
@@ -3537,8 +4508,14 @@
     },
     "unknown_words": [],
     "zh": "是关门的时候了。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 18,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_jisho",
@@ -3560,8 +4537,14 @@
     },
     "unknown_words": [],
     "zh": "我有词典。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 7,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_jitensha",
@@ -3582,8 +4565,14 @@
     },
     "unknown_words": [],
     "zh": "我没有脚踏车。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_jouzu",
@@ -3605,8 +4594,14 @@
     },
     "unknown_words": [],
     "zh": "我唱歌很好听。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 5,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_juu",
@@ -3627,8 +4622,14 @@
     },
     "unknown_words": [],
     "zh": "她十几岁时就结婚了。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kabin",
@@ -3651,8 +4652,14 @@
       "両手"
     ],
     "zh": "用双手握着花瓶。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kaeru",
@@ -3675,8 +4682,18 @@
       "2"
     ],
     "zh": "我两个礼拜就会回来。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "DATA",
+    "review_reasons": [
+      "解析失败:2"
+    ],
+    "data_signals": [
+      "2"
+    ],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kaesu",
@@ -3697,8 +4714,14 @@
     },
     "unknown_words": [],
     "zh": "车子方便什么时候还呢？",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kagetsu",
@@ -3720,8 +4743,14 @@
     },
     "unknown_words": [],
     "zh": "你怀孕几个月了？",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kagi",
@@ -3743,8 +4772,14 @@
     },
     "unknown_words": [],
     "zh": "钥匙在桌子上。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 6,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kai",
@@ -3767,8 +4802,18 @@
       "2"
     ],
     "zh": "他一周来这儿两次。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 2,
+    "review_status": "DATA",
+    "review_reasons": [
+      "解析失败:2"
+    ],
+    "data_signals": [
+      "2"
+    ],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kai_2",
@@ -3791,8 +4836,18 @@
       "5"
     ],
     "zh": "搭乘电梯到五楼。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 1,
+    "review_status": "DATA",
+    "review_reasons": [
+      "解析失败:5"
+    ],
+    "data_signals": [
+      "5"
+    ],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kaimono",
@@ -3813,8 +4868,14 @@
     },
     "unknown_words": [],
     "zh": "我每天早上购物。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kaisha",
@@ -3835,8 +4896,14 @@
     },
     "unknown_words": [],
     "zh": "他为一家广告公司工作。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kakeru",
@@ -3857,8 +4924,14 @@
     },
     "unknown_words": [],
     "zh": "我把日历挂在墙上。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kaku",
@@ -3880,8 +4953,14 @@
     },
     "unknown_words": [],
     "zh": "他有时会给我写信。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 10,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kami",
@@ -3903,8 +4982,14 @@
     },
     "unknown_words": [],
     "zh": "纸是由木制成的。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kanji",
@@ -3926,8 +5011,14 @@
     },
     "unknown_words": [],
     "zh": "汉字很难读。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_karada",
@@ -3949,8 +5040,14 @@
     },
     "unknown_words": [],
     "zh": "吃鱼有益于你的健康。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_karai",
@@ -3973,8 +5070,14 @@
       "トム"
     ],
     "zh": "汤姆喜欢辣咖哩。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kariru",
@@ -3996,8 +5099,14 @@
     },
     "unknown_words": [],
     "zh": "我向我父亲借钱。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_karui",
@@ -4019,8 +5128,18 @@
     },
     "unknown_words": [],
     "zh": "我每朝都会做轻量运动。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "FIX_ZH",
+    "review_reasons": [
+      "明显不自然：每朝轻量运动"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [
+      "明显不自然：每朝轻量运动"
+    ],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kasa",
@@ -4041,8 +5160,14 @@
     },
     "unknown_words": [],
     "zh": "我丢了我的伞。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kasu",
@@ -4064,8 +5189,14 @@
     },
     "unknown_words": [],
     "zh": "请洗耳恭听。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kata",
@@ -4087,8 +5218,14 @@
     },
     "unknown_words": [],
     "zh": "你应该再休息会。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 7,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kau",
@@ -4110,10 +5247,16 @@
     },
     "unknown_words": [],
     "zh": "你买了些什么特产呀？",
-    "review_tier": "A",
-    "review_risks": [
-      "疑似口语省略"
-    ]
+    "old_review_tier": "A",
+    "alt_count": 17,
+    "review_status": "SPOKEN",
+    "review_reasons": [
+      "真实口语缩约/省略"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kawa",
@@ -4134,8 +5277,14 @@
     },
     "unknown_words": [],
     "zh": "这条路与河流平行。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kaze",
@@ -4157,8 +5306,14 @@
     },
     "unknown_words": [],
     "zh": "今天风很大。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kaze_2",
@@ -4179,8 +5334,14 @@
     },
     "unknown_words": [],
     "zh": "我的感冒传染了他.",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kazoku",
@@ -4204,8 +5365,18 @@
       "4"
     ],
     "zh": "我家有四个人。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 4,
+    "review_status": "DATA",
+    "review_reasons": [
+      "解析失败:4"
+    ],
+    "data_signals": [
+      "4"
+    ],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kekkon",
@@ -4226,8 +5397,14 @@
     },
     "unknown_words": [],
     "zh": "她明年将要结婚。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kekkou",
@@ -4248,8 +5425,14 @@
     },
     "unknown_words": [],
     "zh": "任何一本杂志都行。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kesa",
@@ -4270,10 +5453,16 @@
     },
     "unknown_words": [],
     "zh": "你今早做了甚么？",
-    "review_tier": "A",
-    "review_risks": [
-      "疑似口语省略"
-    ]
+    "old_review_tier": "A",
+    "alt_count": 8,
+    "review_status": "SPOKEN",
+    "review_reasons": [
+      "真实口语缩约/省略"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kesu",
@@ -4294,8 +5483,14 @@
     },
     "unknown_words": [],
     "zh": "他忘了关灯。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ki",
@@ -4317,8 +5512,14 @@
     },
     "unknown_words": [],
     "zh": "鸟儿在树里筑巢。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kieru",
@@ -4339,8 +5540,14 @@
     },
     "unknown_words": [],
     "zh": "雪消失了。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kiiro",
@@ -4362,8 +5569,14 @@
     },
     "unknown_words": [],
     "zh": "我喜欢黄色。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kiiroi",
@@ -4384,8 +5597,14 @@
     },
     "unknown_words": [],
     "zh": "从来没看过什么黄色的牛。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kiku",
@@ -4407,8 +5626,14 @@
     },
     "unknown_words": [],
     "zh": "我听到我的名字。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 8,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kinou",
@@ -4431,8 +5656,14 @@
     },
     "unknown_words": [],
     "zh": "我昨天做了晚饭。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 28,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kippu",
@@ -4453,8 +5684,14 @@
     },
     "unknown_words": [],
     "zh": "请出示您的票子。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kirai",
@@ -4476,8 +5713,14 @@
     },
     "unknown_words": [],
     "zh": "我不喜欢夏天。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kirei",
@@ -4498,8 +5741,14 @@
     },
     "unknown_words": [],
     "zh": "这个夜晚真美丽。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kiru",
@@ -4521,8 +5770,14 @@
     },
     "unknown_words": [],
     "zh": "旅行前，我剪了头发。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kiru_2",
@@ -4543,8 +5798,18 @@
     },
     "unknown_words": [],
     "zh": "我匆匆忙忙低穿上和服。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "FIX_ZH",
+    "review_reasons": [
+      "明显错字：低穿上"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [
+      "明显错字：低穿上"
+    ],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kitte",
@@ -4565,8 +5830,14 @@
     },
     "unknown_words": [],
     "zh": "请让我看看你的集邮册。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ko",
@@ -4589,8 +5860,18 @@
       "2"
     ],
     "zh": "把面粉和两颗鸡蛋混合。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 2,
+    "review_status": "DATA",
+    "review_reasons": [
+      "解析失败:2"
+    ],
+    "data_signals": [
+      "2"
+    ],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kodomo",
@@ -4611,8 +5892,14 @@
     },
     "unknown_words": [],
     "zh": "我的童年很快乐。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_koe",
@@ -4635,8 +5922,14 @@
       "しーっ"
     ],
     "zh": "嘘，太大声啦。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_komaru",
@@ -4657,8 +5950,14 @@
     },
     "unknown_words": [],
     "zh": "她非常缺钱。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_konban",
@@ -4682,8 +5981,14 @@
       "ピザ"
     ],
     "zh": "我今晚想吃些批萨。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kongetsu",
@@ -4704,8 +6009,14 @@
     },
     "unknown_words": [],
     "zh": "本月结束之前请等待。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_konshuu",
@@ -4727,8 +6038,14 @@
     },
     "unknown_words": [],
     "zh": "我这个星期放假了。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kotaeru",
@@ -4750,8 +6067,14 @@
     },
     "unknown_words": [],
     "zh": "回答我。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kotoba",
@@ -4772,8 +6095,14 @@
     },
     "unknown_words": [],
     "zh": "音乐是人类共同的语言。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kotoshi",
@@ -4795,8 +6124,14 @@
     },
     "unknown_words": [],
     "zh": "今年夏天很冷。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_koucha",
@@ -4817,8 +6152,14 @@
     },
     "unknown_words": [],
     "zh": "红茶里要加糖吗？",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kuchi",
@@ -4842,8 +6183,14 @@
       "やつ"
     ],
     "zh": "他是刀子嘴。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kudamono",
@@ -4864,8 +6211,14 @@
     },
     "unknown_words": [],
     "zh": "我喜欢水果。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 6,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kudasai",
@@ -4887,8 +6240,14 @@
     },
     "unknown_words": [],
     "zh": "请稍等一下。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 18,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kumoru",
@@ -4909,8 +6268,14 @@
     },
     "unknown_words": [],
     "zh": "忽然天气转为多云。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kuni",
@@ -4931,8 +6296,14 @@
     },
     "unknown_words": [],
     "zh": "为了钱他背叛了国家。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kurai",
@@ -4954,8 +6325,14 @@
     },
     "unknown_words": [],
     "zh": "你在那么暗的地方做什么？",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kuroi",
@@ -4977,8 +6354,14 @@
     },
     "unknown_words": [],
     "zh": "你喜欢黑色的猫吗？",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 5,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kuru",
@@ -5000,8 +6383,14 @@
     },
     "unknown_words": [],
     "zh": "我收到了朋友的一封信。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 9,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kuruma",
@@ -5023,8 +6412,14 @@
     },
     "unknown_words": [],
     "zh": "我喜欢你的车。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 7,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kusuri",
@@ -5046,8 +6441,14 @@
     },
     "unknown_words": [],
     "zh": "别忘了吃药。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kutsu",
@@ -5068,8 +6469,14 @@
     },
     "unknown_words": [],
     "zh": "我找到我的鞋子。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kutsushita",
@@ -5090,8 +6497,14 @@
     },
     "unknown_words": [],
     "zh": "请脱下你的袜子。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kyonen",
@@ -5113,10 +6526,16 @@
     },
     "unknown_words": [],
     "zh": "去年圣诞节做了什么了？",
-    "review_tier": "B",
-    "review_risks": [
-      "疑似口语省略"
-    ]
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "SPOKEN",
+    "review_reasons": [
+      "真实口语缩约/省略"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kyou",
@@ -5138,8 +6557,14 @@
     },
     "unknown_words": [],
     "zh": "今天超级冷。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 19,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_kyoudai",
@@ -5161,8 +6586,14 @@
     },
     "unknown_words": [],
     "zh": "她有三个兄弟。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_machi",
@@ -5186,8 +6617,14 @@
       "神戸"
     ],
     "zh": "神户是我出生的城市。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_mado",
@@ -5210,8 +6647,14 @@
     },
     "unknown_words": [],
     "zh": "我望向窗外。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 7,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_mae",
@@ -5235,8 +6678,14 @@
     },
     "unknown_words": [],
     "zh": "我二十年前出生。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 6,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_maiasa",
@@ -5258,8 +6707,14 @@
     },
     "unknown_words": [],
     "zh": "他每天早晨读报。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 6,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_mainichi",
@@ -5280,8 +6735,14 @@
     },
     "unknown_words": [],
     "zh": "我每天打网球。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_mannenhitsu",
@@ -5302,8 +6763,14 @@
     },
     "unknown_words": [],
     "zh": "你有钢笔吗？",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_matsu",
@@ -5324,8 +6791,14 @@
     },
     "unknown_words": [],
     "zh": "只好坐下来等待。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_me",
@@ -5347,8 +6820,14 @@
     },
     "unknown_words": [],
     "zh": "我的右眼瞎了。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_megane",
@@ -5369,10 +6848,16 @@
     },
     "unknown_words": [],
     "zh": "我的眼镜在哪里？",
-    "review_tier": "A",
-    "review_risks": [
-      "疑似口语省略"
-    ]
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "SPOKEN",
+    "review_reasons": [
+      "真实口语缩约/省略"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_michi",
@@ -5395,8 +6880,14 @@
       "熟達"
     ],
     "zh": "熟能生巧。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_migi",
@@ -5417,8 +6908,14 @@
     },
     "unknown_words": [],
     "zh": "我往右拐了。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_mijikai",
@@ -5440,8 +6937,14 @@
     },
     "unknown_words": [],
     "zh": "我喜欢短发。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_mimi",
@@ -5464,8 +6967,14 @@
       "聴く"
     ],
     "zh": "我们用耳朵听。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_miru",
@@ -5487,10 +6996,16 @@
     },
     "unknown_words": [],
     "zh": "你在看什么？",
-    "review_tier": "B",
-    "review_risks": [
-      "疑似口语省略"
-    ]
+    "old_review_tier": "B",
+    "alt_count": 14,
+    "review_status": "SPOKEN",
+    "review_reasons": [
+      "真实口语缩约/省略"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_mise",
@@ -5512,8 +7027,14 @@
     },
     "unknown_words": [],
     "zh": "这家店在卖蔬菜。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_mizu",
@@ -5535,8 +7056,14 @@
     },
     "unknown_words": [],
     "zh": "我喝了水。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 6,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_mondai",
@@ -5557,10 +7084,16 @@
     },
     "unknown_words": [],
     "zh": "哪里有问题?",
-    "review_tier": "A",
-    "review_risks": [
-      "疑似口语省略"
-    ]
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "SPOKEN",
+    "review_reasons": [
+      "真实口语缩约/省略"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_mono",
@@ -5581,8 +7114,14 @@
     },
     "unknown_words": [],
     "zh": "别在通道上放东西。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_motsu",
@@ -5603,8 +7142,14 @@
     },
     "unknown_words": [],
     "zh": "你有钱吗？",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_muzukashii",
@@ -5625,8 +7170,14 @@
     },
     "unknown_words": [],
     "zh": "数学对我来说很难。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_naka",
@@ -5649,8 +7200,14 @@
       "風通し"
     ],
     "zh": "这里的通风很差呢。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_nakusu",
@@ -5671,8 +7228,14 @@
     },
     "unknown_words": [],
     "zh": "我丢了我的钢笔。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_namae",
@@ -5694,8 +7257,14 @@
     },
     "unknown_words": [],
     "zh": "我不知道他叫甚么名字。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 8,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_nan",
@@ -5717,8 +7286,14 @@
     },
     "unknown_words": [],
     "zh": "我什么都不知道。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 34,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_narau",
@@ -5741,8 +7316,14 @@
       "中国語"
     ],
     "zh": "我上周开始学中文了。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_natsu",
@@ -5763,8 +7344,14 @@
     },
     "unknown_words": [],
     "zh": "我不喜欢夏天。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_neko",
@@ -5787,8 +7374,14 @@
     },
     "unknown_words": [],
     "zh": "猫坐在桌子上。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 7,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_nen",
@@ -5812,8 +7405,18 @@
       "1979"
     ],
     "zh": "我在1979年出生。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 2,
+    "review_status": "DATA",
+    "review_reasons": [
+      "解析失败:1979"
+    ],
+    "data_signals": [
+      "1979"
+    ],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_neru",
@@ -5834,8 +7437,14 @@
     },
     "unknown_words": [],
     "zh": "我比平常睡得晚。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ni",
@@ -5860,8 +7469,14 @@
       "年下"
     ],
     "zh": "Sam比Tom小两岁。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_nichi",
@@ -5882,8 +7497,14 @@
     },
     "unknown_words": [],
     "zh": "我会在三天之内回复。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_nichiyoubi",
@@ -5905,8 +7526,14 @@
     },
     "unknown_words": [],
     "zh": "下个星期日请休息。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_nin",
@@ -5929,8 +7556,18 @@
       "50"
     ],
     "zh": "总共有五十个人。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 3,
+    "review_status": "DATA",
+    "review_reasons": [
+      "解析失败:50"
+    ],
+    "data_signals": [
+      "50"
+    ],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_niwa",
@@ -5953,8 +7590,18 @@
       "バラ"
     ],
     "zh": "在花园里的玫瑰正盛开著。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "FIX_ZH",
+    "review_reasons": [
+      "明显不自然：玫瑰句式"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [
+      "明显不自然：玫瑰句式"
+    ],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_noboru",
@@ -5977,8 +7624,14 @@
       "富士山"
     ],
     "zh": "我登上了富士山顶。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_nomu",
@@ -6000,8 +7653,14 @@
     },
     "unknown_words": [],
     "zh": "她有时会喝酒。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 5,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_noru",
@@ -6022,8 +7681,14 @@
     },
     "unknown_words": [],
     "zh": "我喜欢乘坐火车。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_nugu",
@@ -6044,8 +7709,14 @@
     },
     "unknown_words": [],
     "zh": "他脱掉大衣。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_oishii",
@@ -6066,8 +7737,14 @@
     },
     "unknown_words": [],
     "zh": "全都好吃！",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_okaasan",
@@ -6088,8 +7765,14 @@
     },
     "unknown_words": [],
     "zh": "我妈是秘书。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_okane",
@@ -6111,8 +7794,14 @@
     },
     "unknown_words": [],
     "zh": "我想要点钱。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_okiru",
@@ -6135,8 +7824,14 @@
       "遅く"
     ],
     "zh": "我很晚才睡。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_oku",
@@ -6158,8 +7853,14 @@
     },
     "unknown_words": [],
     "zh": "请把它放在桌子上。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_okusan",
@@ -6180,8 +7881,14 @@
     },
     "unknown_words": [],
     "zh": "他的妻子是我的一个朋友。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_omoi",
@@ -6204,8 +7911,18 @@
       "10"
     ],
     "zh": "他比我重十公斤。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "DATA",
+    "review_reasons": [
+      "解析失败:10"
+    ],
+    "data_signals": [
+      "10"
+    ],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_onaji",
@@ -6226,8 +7943,14 @@
     },
     "unknown_words": [],
     "zh": "我也是这么想的。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_onaka",
@@ -6248,8 +7971,14 @@
     },
     "unknown_words": [],
     "zh": "那么吃的话，肚子会吃坏的噢。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ongaku",
@@ -6270,8 +7999,14 @@
     },
     "unknown_words": [],
     "zh": "音乐我喜欢。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_oniisan",
@@ -6292,8 +8027,14 @@
     },
     "unknown_words": [],
     "zh": "他的哥哥上个月去世了。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_onna",
@@ -6314,8 +8055,14 @@
     },
     "unknown_words": [],
     "zh": "我是女人。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_onnanoko",
@@ -6339,8 +8086,14 @@
       "金髪"
     ],
     "zh": "汤姆喜欢黄头发的女生。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ooi",
@@ -6361,8 +8114,14 @@
     },
     "unknown_words": [],
     "zh": "这湖里有许多鱼。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ookii",
@@ -6383,8 +8142,14 @@
     },
     "unknown_words": [],
     "zh": "用大锅煲汤。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_oriru",
@@ -6405,8 +8170,14 @@
     },
     "unknown_words": [],
     "zh": "我从出租车上下来。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_oshieru",
@@ -6427,8 +8198,14 @@
     },
     "unknown_words": [],
     "zh": "老师教我的。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_osoi",
@@ -6450,8 +8227,14 @@
     },
     "unknown_words": [],
     "zh": "我比平常晚到。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_otokonoko",
@@ -6474,8 +8257,14 @@
       "野球"
     ],
     "zh": "大多数的男孩子喜欢棒球。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_otousan",
@@ -6497,8 +8286,14 @@
     },
     "unknown_words": [],
     "zh": "你爸爸很高。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_otouto",
@@ -6519,8 +8314,14 @@
     },
     "unknown_words": [],
     "zh": "我与我的弟弟相处融洽。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_oyogu",
@@ -6541,8 +8342,14 @@
     },
     "unknown_words": [],
     "zh": "他喜欢游泳。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_raigetsu",
@@ -6565,8 +8372,14 @@
       "私達"
     ],
     "zh": "我们打算下个月去旅游。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_rainen",
@@ -6590,8 +8403,14 @@
       "篠山"
     ],
     "zh": "我明年会住在筱山。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ryokou",
@@ -6613,8 +8432,14 @@
     },
     "unknown_words": [],
     "zh": "我喜欢旅行。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ryouri",
@@ -6635,8 +8460,14 @@
     },
     "unknown_words": [],
     "zh": "你喜欢做菜吗？",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_ryoushin",
@@ -6658,8 +8489,14 @@
     },
     "unknown_words": [],
     "zh": "我跟父母联络了一下。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_sai",
@@ -6683,8 +8520,18 @@
       "3"
     ],
     "zh": "我比你小三岁。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 5,
+    "review_status": "DATA",
+    "review_reasons": [
+      "解析失败:3"
+    ],
+    "data_signals": [
+      "3"
+    ],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_saifu",
@@ -6705,8 +8552,14 @@
     },
     "unknown_words": [],
     "zh": "我掉了我的钱包。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_saki",
@@ -6727,8 +8580,14 @@
     },
     "unknown_words": [],
     "zh": "覆水难收。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_samui",
@@ -6749,8 +8608,14 @@
     },
     "unknown_words": [],
     "zh": "夜晚很冷。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_sanpo",
@@ -6773,8 +8638,14 @@
       "休憩時間"
     ],
     "zh": "休息时间去散了一会儿步。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_satou",
@@ -6797,8 +8668,18 @@
       "私たち"
     ],
     "zh": "我们需要一些糖。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "DATA",
+    "review_reasons": [
+      "解析失败:私たち"
+    ],
+    "data_signals": [
+      "私たち"
+    ],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_sei",
@@ -6820,8 +8701,14 @@
     },
     "unknown_words": [],
     "zh": "他非常高大。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 5,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_sengetsu",
@@ -6844,8 +8731,14 @@
       "ロンドン"
     ],
     "zh": "上个月我在伦敦。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_sensei",
@@ -6866,8 +8759,14 @@
     },
     "unknown_words": [],
     "zh": "他和我是老师.",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_sentaku",
@@ -6889,8 +8788,14 @@
     },
     "unknown_words": [],
     "zh": "洗衣服是我的工作。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_shashin",
@@ -6911,8 +8816,14 @@
     },
     "unknown_words": [],
     "zh": "这些照片是在哪儿拍的？",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_shigoto",
@@ -6933,8 +8844,14 @@
     },
     "unknown_words": [],
     "zh": "星期三有工作。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 6,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_shimaru",
@@ -6955,8 +8872,14 @@
     },
     "unknown_words": [],
     "zh": "邮局还关着门吗？",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_shimeru",
@@ -6977,8 +8900,14 @@
     },
     "unknown_words": [],
     "zh": "关门。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_shinbun",
@@ -6999,8 +8928,14 @@
     },
     "unknown_words": [],
     "zh": "去拿一下报纸。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_shinu",
@@ -7021,8 +8956,14 @@
     },
     "unknown_words": [],
     "zh": "我会战斗至死。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_shio",
@@ -7045,8 +8986,14 @@
       "トム"
     ],
     "zh": "汤姆在蛋上撒盐。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_shiroi",
@@ -7067,8 +9014,14 @@
     },
     "unknown_words": [],
     "zh": "为什么雪是白色的呢？",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_shiru",
@@ -7089,8 +9042,14 @@
     },
     "unknown_words": [],
     "zh": "她认识我。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 7,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_shita",
@@ -7112,8 +9071,14 @@
     },
     "unknown_words": [],
     "zh": "我藏在桌子底下。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_shitsumon",
@@ -7134,8 +9099,14 @@
     },
     "unknown_words": [],
     "zh": "她问了我一个问题。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_shukudai",
@@ -7156,8 +9127,14 @@
     },
     "unknown_words": [],
     "zh": "我厌倦了功课。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_sora",
@@ -7178,8 +9155,14 @@
     },
     "unknown_words": [],
     "zh": "鸟在天上。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_soto",
@@ -7200,8 +9183,14 @@
     },
     "unknown_words": [],
     "zh": "我们今晚在外面吃饭吧。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_suki",
@@ -7223,8 +9212,14 @@
     },
     "unknown_words": [],
     "zh": "我很喜欢雪。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_sukoshi",
@@ -7245,8 +9240,14 @@
     },
     "unknown_words": [],
     "zh": "能便宜点儿吗？",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 7,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_sukunai",
@@ -7267,8 +9268,14 @@
     },
     "unknown_words": [],
     "zh": "我朋友很少。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_sumu",
@@ -7289,8 +9296,14 @@
     },
     "unknown_words": [],
     "zh": "我住在这里。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_suwaru",
@@ -7311,8 +9324,14 @@
     },
     "unknown_words": [],
     "zh": "坐我旁边。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_taberu",
@@ -7333,8 +9352,14 @@
     },
     "unknown_words": [],
     "zh": "我也想吃！",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 3,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_taihen",
@@ -7355,8 +9380,14 @@
     },
     "unknown_words": [],
     "zh": "我累死了。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_takai",
@@ -7377,8 +9408,14 @@
     },
     "unknown_words": [],
     "zh": "我对她的评价很好。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 4,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_tamago",
@@ -7401,8 +9438,18 @@
       "1"
     ],
     "zh": "蛋是按打卖的。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "DATA",
+    "review_reasons": [
+      "解析失败:1"
+    ],
+    "data_signals": [
+      "1"
+    ],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_tanoshii",
@@ -7423,8 +9470,14 @@
     },
     "unknown_words": [],
     "zh": "我也过得很愉快。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_te",
@@ -7445,8 +9498,14 @@
     },
     "unknown_words": [],
     "zh": "我拍手。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_tegami",
@@ -7467,8 +9526,14 @@
     },
     "unknown_words": [],
     "zh": "当你到达时寄封信给我。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_tobu",
@@ -7489,8 +9554,14 @@
     },
     "unknown_words": [],
     "zh": "鸟类飞行。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_toki",
@@ -7511,8 +9582,14 @@
     },
     "unknown_words": [],
     "zh": "青春只有一次。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_tomodachi",
@@ -7533,8 +9610,14 @@
     },
     "unknown_words": [],
     "zh": "我没有朋友。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_tonari",
@@ -7556,8 +9639,14 @@
     },
     "unknown_words": [],
     "zh": "邮局在图书馆旁边。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_tori",
@@ -7580,8 +9669,14 @@
       "小枝"
     ],
     "zh": "鸟用细树枝筑巢。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_toru",
@@ -7602,8 +9697,14 @@
     },
     "unknown_words": [],
     "zh": "她老了。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_tsugi",
@@ -7624,8 +9725,14 @@
     },
     "unknown_words": [],
     "zh": "下一个是我吗？",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_tsuitachi",
@@ -7649,8 +9756,18 @@
       "ユーロ"
     ],
     "zh": "我一天赚一百欧元。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "DATA",
+    "review_reasons": [
+      "解析失败:100"
+    ],
+    "data_signals": [
+      "100"
+    ],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_tsukau",
@@ -7671,10 +9788,16 @@
     },
     "unknown_words": [],
     "zh": "别再用我的东西了！",
-    "review_tier": "B",
-    "review_risks": [
-      "疑似口语省略"
-    ]
+    "old_review_tier": "B",
+    "alt_count": 1,
+    "review_status": "SPOKEN",
+    "review_reasons": [
+      "真实口语缩约/省略"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_tsuku",
@@ -7695,8 +9818,14 @@
     },
     "unknown_words": [],
     "zh": "我不知道我们会到达哪里。",
-    "review_tier": "B",
-    "review_risks": []
+    "old_review_tier": "B",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_tsukue",
@@ -7717,8 +9846,14 @@
     },
     "unknown_words": [],
     "zh": "我们把书桌整理干净吧。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_tsukuru",
@@ -7741,8 +9876,14 @@
       "昨晩"
     ],
     "zh": "她昨晚做了蔬菜汤。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_umareru",
@@ -7765,8 +9906,14 @@
       "京都"
     ],
     "zh": "我生于京都。",
-    "review_tier": "C",
-    "review_risks": []
+    "old_review_tier": "C",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_uta",
@@ -7787,8 +9934,14 @@
     },
     "unknown_words": [],
     "zh": "他唱了一首歌。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_warui",
@@ -7809,8 +9962,14 @@
     },
     "unknown_words": [],
     "zh": "这是我的错。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_wasureru",
@@ -7831,8 +9990,14 @@
     },
     "unknown_words": [],
     "zh": "我忘了会议的日期。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 1,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_watakushi",
@@ -7853,8 +10018,14 @@
     },
     "unknown_words": [],
     "zh": "我以前在山里。",
-    "review_tier": "A",
-    "review_risks": []
+    "old_review_tier": "A",
+    "alt_count": 2,
+    "review_status": "LAND",
+    "review_reasons": [],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   },
   {
     "anchor_id": "n5_yomu",
@@ -7875,9 +10046,15 @@
     },
     "unknown_words": [],
     "zh": "想读这本杂志吗？",
-    "review_tier": "A",
-    "review_risks": [
-      "疑似口语省略"
-    ]
+    "old_review_tier": "A",
+    "alt_count": 0,
+    "review_status": "SPOKEN",
+    "review_reasons": [
+      "真实口语缩约/省略"
+    ],
+    "data_signals": [],
+    "difficulty_signals": [],
+    "chinese_signals": [],
+    "risk_signals": []
   }
 ]

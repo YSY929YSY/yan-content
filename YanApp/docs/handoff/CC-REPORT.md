@@ -3173,6 +3173,262 @@ Result: FAIL
 复算命令：
 
 ~~~
+
+
+## Wordfield rubric v2 · 2026-08-26
+
+### 异常自查
+
+1. 与上一轮相比，没有一个可比数字发生两倍以上变化。上一轮的 230 / 66 / 47 是词表覆盖度 A/B/C；本轮的 301 / 7 / 6 / 17 / 12 是质量信号状态，不能把它们当成同一指标做倍数比较。输入规模仍为 1851 行、343 个 anchor，未因本轮重排改变。
+2. 没有未解释的计算数字。机械规则的边界仍有局限：LAND 只表示“没有命中本轮固定信号”，不是母语者确认；中文质量规则只覆盖明确可机械识别的短语，查不了的中文问题不会被伪装成已解决。
+3. 下列类别的数量由判据决定，不是语言学真值：SPOKEN 使用上一轮已列出的 12 条逐条复核清单；中文质量使用脚本内的显式短语模式；负面动词只有在它被用来教中性 anchor 时自动触发 SWAP。其余句子的自然度、难度和中文语感仍需负责人审。
+
+### 结论先行
+
+Tatoeba 是有源的：343 条都保留日语原句、Tatoeba 日句 ID、对应中文句 ID和原始中文对齐句。源能让每条句子可定位、可回读，但不等于项目负责人或母语者已经确认自然度，也不等于中文可以直接落库。本轮因此只重排 staging 清单，不落库。
+
+五状态结果为：LAND 301、FIX_ZH 7、SWAP 6、DATA 17、SPOKEN 12，共 343 条。交叉表显示旧 C 档的 47 条中有 28 条没有命中本轮质量信号、17 条只是数字或覆盖解析问题；所以旧 C 不能直接当成“坏句子”。旧 A 档的 230 条中仍有 3 条 SWAP、2 条 FIX_ZH、8 条 SPOKEN。
+
+复算：
+~~~
+node scripts/wordfield-shortlist.mjs
+~~~
+
+### 方法与清单字段
+
+脚本保留原 shortlist 的确定性选句规则：先取 unknown_word_count 最小，再取 member_word_ids 最多；若剩余组内有 7–12 字句子，只在该长度范围内比较；最后取最小 jp_sentence_id。此次没有重新生成句子，也没有改动日文或中文。新增字段为 old_review_tier、alt_count、review_status、review_reasons、data_signals、difficulty_signals、chinese_signals、risk_signals。
+
+原始输入 1851 行、不同 anchor 343、输出 343 行：
+复算：
+~~~
+node scripts/wordfield-shortlist.mjs | sed -n '1,3p'
+~~~
+
+输出字段的 Tatoeba ID 完整性：
+复算：
+~~~
+node -e 'const r=require("./staging/wordfield-shortlist-343.json");console.log(r.length,new Set(r.map(x=>x.anchor_id)).size,r.every(x=>Number.isInteger(x.tatoeba.jp_sentence_id)&&Number.isInteger(x.tatoeba.zh_sentence_id)))'
+~~~
+
+### 有没有备选
+
+266 / 343 个 anchor 还有备选，77 个是独苗；剩余备选共 1508 条。alt_count 是同 anchor 的候选总数减去当前这一条，不把当前行算作备选。
+
+复算：
+~~~
+node -e 'const fs=require("fs");const r=require("./staging/wordfield-shortlist-343.json");const raw=fs.readFileSync("staging/wordfield-candidates-tatoeba.jsonl","utf8").trim().split("\n").map(JSON.parse);const p={};for(const x of raw)p[x.anchor_id]=(p[x.anchor_id]||0)+1;const a=r.map(x=>p[x.anchor_id]-1);console.log(a.filter(n=>n>0).length,a.filter(n=>n===0).length,a.reduce((s,n)=>s+n,0))'
+~~~
+
+SWAP 且 alt_count=0 只有 1 条：
+- n5_abunai｜危ない！そこに大きな穴が。｜小心！在那里有一个大洞。｜疑似残句｜jp 8802742 / zh 796972
+
+复算：
+~~~
+node -e 'const r=require("./staging/wordfield-shortlist-343.json");console.log(r.filter(x=>x.review_status==="SWAP"&&x.alt_count===0).map(x=>[x.anchor_id,x.jp,x.tatoeba.jp_sentence_id,x.tatoeba.zh_sentence_id]))'
+~~~
+
+### 五状态分布与旧 A/B/C 交叉表
+
+| 新状态 | 条数 | 动作 |
+|---|---:|---|
+| LAND | 301 | 没有命中本轮固定阻断信号；不是“已被母语者确认” |
+| FIX_ZH | 7 | 只标记中文问题，本轮不改中文 |
+| SWAP | 6 | 从同 anchor 备选池换句；独苗另列 |
+| DATA | 17 | 句子暂不因数字/覆盖解析失败降档，修脚本或词库 |
+| SPOKEN | 12 | 保留，等待将来的 register 字段；本轮只打标 |
+| 合计 | 343 | — |
+
+复算：
+~~~
+node scripts/wordfield-shortlist.mjs | grep '^statuses:'
+~~~
+
+| 旧档 | LAND | FIX_ZH | SWAP | DATA | SPOKEN | 合计 |
+|---|---:|---:|---:|---:|---:|---:|
+| A | 217 | 2 | 3 | 0 | 8 | 230 |
+| B | 56 | 4 | 2 | 0 | 4 | 66 |
+| C | 28 | 1 | 1 | 17 | 0 | 47 |
+| 合计 | 301 | 7 | 6 | 17 | 12 | 343 |
+
+复算：
+~~~
+node -e 'const r=require("./staging/wordfield-shortlist-343.json");const c={};for(const x of r){const k=x.old_review_tier+"=>"+x.review_status;c[k]=(c[k]||0)+1}console.log(c)'
+~~~
+
+旧 A/B/C 是旧覆盖度 rubric，不是教学质量结论。特别是旧 C → DATA 17 条和旧 C → LAND 28 条，说明 unknown 数量本身不能决定换句。
+
+### 新增判据的全部实例
+
+#### 语义不得体：负面动词
+
+脚本扫描的词表为：襲う、ぶつ、殴る、殺す、死ぬ、盗む、打つ。命中 3 条；其中 2 条是负面动词用于教中性 anchor，触发 SWAP。n5_shinu 的目标本身就是「死ぬ」，所以只保留命中信号，不把它机械降级为 SWAP。
+
+| anchor | 日语 | 中文 | 命中 | Tatoeba |
+|---|---|---|---|---|
+| n5_atama | 彼は私の頭をぶった。 | 他打了我的头。 | ぶつ；教中性词「頭」→ SWAP | 105721 / 343980 |
+| n5_chiisana | 犬が小さな男の子を襲った。 | 狗攻击了小男孩儿。 | 襲う；教中性词「小さな」→ SWAP | 175350 / 10540045 |
+| n5_shinu | 私は死ぬまで戦う。 | 我会战斗至死。 | 死ぬ；目标就是负面词，未自动 SWAP | 156512 / 5978346 |
+
+复算：
+~~~
+node scripts/wordfield-shortlist.mjs | grep '^negative instances:'
+~~~
+
+#### 翻译腔 / 外国语料度量衡
+
+命中 1 条，全部实例如下；它同时是 SWAP，仍有 1 条备选。
+
+| anchor | 日语 | 中文 | 命中 | Tatoeba |
+|---|---|---|---|---|
+| n5_han | 郵便局は半マイル向こうにある。 | 邮局离这儿有半英里。 | マイル → SWAP | 79162 / 10278342 |
+
+复算：
+~~~
+node scripts/wordfield-shortlist.mjs | grep '^foreign instances:'
+~~~
+
+#### 难度超标信号
+
+命中 4 条。本轮只标记，不自动改成 SWAP；其中 n5_do 还命中 DATA，因此由负责人决定是否保留。
+
+| anchor | 日语 | 命中 | 当前状态 | Tatoeba |
+|---|---|---|---|---|
+| n5_akai | 赤い屋根の家を見てごらん。 | 〜てごらん | LAND | 1151723 / 348624 |
+| n5_ame | 雨は一週間降り続いた。 | 降り続く | LAND | 189550 / 333989 |
+| n5_atatakai | 三月にはもっと暖かくなるだろう。 | だろう | LAND | 169507 / 5849914 |
+| n5_do | 水は100度で沸騰する。 | 沸騰する | DATA | 143785 / 868077 |
+
+复算：
+~~~
+node scripts/wordfield-shortlist.mjs | grep '^difficulty instances:'
+~~~
+
+#### 数字 / 量词解析
+
+命中 17 条，全部作为 DATA，不因这个信号降为 SWAP；n5_tsuitachi 的未知项还包含「ユーロ」，但本行是由数字 100 触发 DATA。
+
+| anchor | 日语 | unknown_words 中的解析信号 | Tatoeba |
+|---|---|---|---|
+| n5_dai | 家にはテレビが２台ある。 | 2 | 187111 / 337309 |
+| n5_do | 水は100度で沸騰する。 | 100 | 143785 / 868077 |
+| n5_eigakan | 私たちは映画館に行きます。 | 私たち | 628066 / 627353 |
+| n5_fun | もう５分待とう。 | 5 | 194515 / 504639 |
+| n5_gozen | 彼女は午前７時に起きた。 | 7 | 90175 / 751862 |
+| n5_kaeru | ２週間で帰ってきます。 | 2 | 235480 / 706426 |
+| n5_kai | 彼は週２回ここに来る。 | 2 | 197180 / 149869 |
+| n5_kai_2 | ５階へはエレベーターに乗りなさい。 | 5 | 387926 / 1130075 |
+| n5_kazoku | 私は４人家族です。 | 4 | 183647 / 337304 |
+| n5_ko | 粉と卵２個を混ぜなさい。 | 2 | 186253 / 343626 |
+| n5_nen | 私は１９７９年に生まれた。 | 1979 | 191738 / 343610 |
+| n5_nin | 全部で５０人いた。 | 50 | 155547 / 343617 |
+| n5_omoi | 彼は私より１０キロ重い。 | 10 | 198536 / 343639 |
+| n5_sai | 私はあなたより３歳若い。 | 3 | 195137 / 343632 |
+| n5_satou | 私たちは少し砂糖が必要だ。 | 私たち | 185607 / 343622 |
+| n5_tamago | 卵は１ダース単位で売られる。 | 1 | 235737 / 343653 |
+| n5_tsuitachi | 私は一日に100ユーロ稼ぎます。 | 100（另有 unknown：ユーロ） | 170119 / 10512248 |
+
+复算：
+~~~
+node -e 'const r=require("./staging/wordfield-shortlist-343.json");console.log(r.filter(x=>x.review_status==="DATA").map(x=>[x.anchor_id,x.unknown_words,x.tatoeba.jp_sentence_id,x.tatoeba.zh_sentence_id]))'
+~~~
+
+#### 中文质量
+
+脚本只查明确模式，不改任何中文。共命中 8 条；n5_ane 同时因日语搭配别扭进入 SWAP，其余 7 条为 FIX_ZH。
+
+| anchor | 日语 | 当前中文 | 机械信号 | Tatoeba |
+|---|---|---|---|---|
+| n5_ane | 姉はタイプが上手です。 | 我姐妹是一个很棒的打字员。 | 姉→姐妹疑似错译；SWAP | 168917 / 353671 |
+| n5_daidokoro | 母は台所で忙しくしている。 | 我的母亲在厨房里正忙著。 | 厨房正忙著；FIX_ZH | 82897 / 890518 |
+| n5_daigaku | 四月から大学が始まります。 | 大学四月开学。 | 大学四月开学；FIX_ZH | 10983336 / 12686379 |
+| n5_fuku | 今日は昨日より風がよく吹く。 | 今天比昨天多风。 | 多风；FIX_ZH | 171620 / 760809 |
+| n5_hanasu | 彼はとても大きな声で話した。 | 他说得很大声。 | 他说得很大声；FIX_ZH | 111543 / 332473 |
+| n5_karui | 私は毎朝軽い運動をする。 | 我每朝都会做轻量运动。 | 每朝轻量运动；FIX_ZH | 152740 / 339228 |
+| n5_kiru_2 | 私は急いで着物を着た。 | 我匆匆忙忙低穿上和服。 | 低穿上；FIX_ZH | 157681 / 805831 |
+| n5_niwa | 庭のバラが咲いている。 | 在花园里的玫瑰正盛开著。 | 玫瑰句式；FIX_ZH | 125508 / 895630 |
+
+复算：
+~~~
+node scripts/wordfield-shortlist.mjs | grep '^Chinese instances:'
+~~~
+
+### 30 条抽样
+
+表中长度是 jp_char_count；alt 是该 anchor 剩余备选数；最后一列是 jp_sentence_id / zh_sentence_id。以下每个状态按 anchor_id 排序取前 6 条，纯机械取样，不代表质量抽查结论。
+
+复算：
+~~~
+node - <<'NODE'
+const r=require('./staging/wordfield-shortlist-343.json');
+for(const status of ['LAND','FIX_ZH','SWAP','DATA','SPOKEN'])
+  for(const x of r.filter(x=>x.review_status===status).slice(0,6))
+    console.log(status,x.anchor_id,x.jp,x.zh,x.member_word_ids,x.unknown_words,x.metrics.jp_char_count,x.alt_count,x.tatoeba);
+NODE
+~~~
+
+#### LAND · 6 条
+
+| anchor | 日语 | 中文 | member 词 | unknown 词 | 长度 | alt | Tatoeba 日 / 中 ID |
+|---|---|---|---|---|---:|---:|---:|
+| n5_abiru | 姉は毎朝シャワーを浴びます。 | 我姐姐每天都会洗澡。 | n5_abiru、n5_ane、n5_maiasa | — | 14 | 2 | 163535 / 432945 |
+| n5_ageru | 彼女は頭を上げた。 | 她抬起了头。 | n5_ageru、n5_atama | — | 9 | 1 | 87708 / 11254309 |
+| n5_aka | 私の大好きな色は赤です。 | 我最喜欢红色。 | n5_aka、n5_daisuki、n5_iro、n5_watakushi | — | 12 | 2 | 163100 / 9955413 |
+| n5_akai | 赤い屋根の家を見てごらん。 | 看看那间红色屋顶的房子。 | n5_akai、n5_ie、n5_miru | — | 13 | 6 | 1151723 / 348624 |
+| n5_akarui | 私は明るい色が好きです。 | 我喜欢明亮的颜色。 | n5_akarui、n5_iro、n5_suki、n5_watakushi | — | 12 | 1 | 1820284 / 4455614 |
+| n5_akeru | この箱の開け方分かる？ | 你知道如何打开这个箱子吗？ | n5_akeru、n5_hako、n5_kata、n5_wakaru | — | 11 | 11 | 3453243 / 872376 |
+
+#### FIX_ZH · 6 条
+
+| anchor | 日语 | 中文 | member 词 | unknown 词 | 长度 | alt | Tatoeba 日 / 中 ID |
+|---|---|---|---|---|---:|---:|---:|
+| n5_daidokoro | 母は台所で忙しくしている。 | 我的母亲在厨房里正忙著。 | n5_daidokoro、n5_haha、n5_isogashii | — | 13 | 1 | 82897 / 890518 |
+| n5_daigaku | 四月から大学が始まります。 | 大学四月开学。 | n5_daigaku、n5_gatsu、n5_hajimaru、n5_shi | — | 13 | 2 | 10983336 / 12686379 |
+| n5_fuku | 今日は昨日より風がよく吹く。 | 今天比昨天多风。 | n5_fuku、n5_kaze、n5_kinou、n5_kyou | — | 14 | 4 | 171620 / 760809 |
+| n5_hanasu | 彼はとても大きな声で話した。 | 他说得很大声。 | n5_hanasu、n5_koe、n5_ookina | — | 14 | 9 | 111543 / 332473 |
+| n5_karui | 私は毎朝軽い運動をする。 | 我每朝都会做轻量运动。 | n5_karui、n5_maiasa、n5_watakushi | — | 12 | 2 | 152740 / 339228 |
+| n5_kiru_2 | 私は急いで着物を着た。 | 我匆匆忙忙低穿上和服。 | n5_kiru_2、n5_watakushi | — | 11 | 0 | 157681 / 805831 |
+
+#### SWAP · 6 条
+
+| anchor | 日语 | 中文 | member 词 | unknown 词 | 长度 | alt | Tatoeba 日 / 中 ID |
+|---|---|---|---|---|---:|---:|---:|
+| n5_abunai | 危ない！そこに大きな穴が。 | 小心！在那里有一个大洞。 | n5_abunai、n5_ookina | — | 13 | 0 | 8802742 / 796972 |
+| n5_amai | 私の力を甘く見ないで。 | 不要小看我的力量。 | n5_amai、n5_miru、n5_watakushi | — | 11 | 4 | 4878 / 335028 |
+| n5_ane | 姉はタイプが上手です。 | 我姐妹是一个很棒的打字员。 | n5_ane、n5_jouzu | — | 11 | 3 | 168917 / 353671 |
+| n5_atama | 彼は私の頭をぶった。 | 他打了我的头。 | n5_atama、n5_watakushi | — | 10 | 5 | 105721 / 343980 |
+| n5_chiisana | 犬が小さな男の子を襲った。 | 狗攻击了小男孩儿。 | n5_chiisana、n5_inu、n5_otokonoko | — | 13 | 7 | 175350 / 10540045 |
+| n5_han | 郵便局は半マイル向こうにある。 | 邮局离这儿有半英里。 | n5_han、n5_mukou、n5_yuubinkyoku | マイル | 15 | 1 | 79162 / 10278342 |
+
+#### DATA · 6 条
+
+| anchor | 日语 | 中文 | member 词 | unknown 词 | 长度 | alt | Tatoeba 日 / 中 ID |
+|---|---|---|---|---|---:|---:|---:|
+| n5_dai | 家にはテレビが２台ある。 | 我们家中有两台电视。 | n5_dai、n5_ie | 2 | 12 | 1 | 187111 / 337309 |
+| n5_do | 水は100度で沸騰する。 | 水在摄氏100度沸腾。 | n5_do、n5_mizu | 100 | 12 | 3 | 143785 / 868077 |
+| n5_eigakan | 私たちは映画館に行きます。 | 我们去影院。 | n5_eigakan、n5_iku | 私たち | 13 | 0 | 628066 / 627353 |
+| n5_fun | もう５分待とう。 | 我还要等五分钟。 | n5_fun、n5_matsu | 5 | 8 | 4 | 194515 / 504639 |
+| n5_gozen | 彼女は午前７時に起きた。 | 她早上七点起床的。 | n5_gozen、n5_ji、n5_okiru | 7 | 12 | 1 | 90175 / 751862 |
+| n5_kaeru | ２週間で帰ってきます。 | 我两个礼拜就会回来。 | n5_kaeru、n5_shuukan | 2 | 11 | 0 | 235480 / 706426 |
+
+#### SPOKEN · 6 条
+
+| anchor | 日语 | 中文 | member 词 | unknown 词 | 长度 | alt | Tatoeba 日 / 中 ID |
+|---|---|---|---|---|---:|---:|---:|
+| n5_chikai | 映画館は駅から近いの？ | 电影院离电车站近吗？ | n5_chikai、n5_eigakan、n5_eki | — | 11 | 0 | 3850777 / 3859480 |
+| n5_hiru | お昼一緒に食べない？ | 要一起吃午餐吗？ | n5_hiru、n5_issho、n5_taberu | — | 10 | 3 | 226818 / 8775792 |
+| n5_hito | 今好きな人いる？ | 你现在有喜欢的人吗？ | n5_hito、n5_ima、n5_suki | — | 8 | 14 | 3589664 / 4881620 |
+| n5_hitori | それ全部一人で食べるつもり？ | 你打算自己一人把它全部吃了吗？ | n5_hitori、n5_taberu、n5_zenbu | — | 14 | 3 | 4892684 / 5096428 |
+| n5_kau | お土産何買ったの？ | 你买了些什么特产呀？ | n5_kau、n5_nan、n5_nan_2 | — | 9 | 17 | 4445365 / 5072427 |
+| n5_kesa | 今朝は何をしたの？ | 你今早做了甚么？ | n5_kesa、n5_nan | — | 9 | 8 | 172280 / 10617207 |
+
+### 交付边界
+
+- 已更新 scripts/wordfield-shortlist.mjs；脚本只读取已有 Tatoeba JSONL，并写入工单明确指定的 staging shortlist。
+- 已更新 staging/wordfield-shortlist-343.json；每条附 alt_count 和五状态字段。
+- 已更新 ACTIVE.md 和本节报告。
+- 没有改两个内容包，没有生成或改写任何句子或中文，没有改 App/UI/gloss，没有实现 register，没有构建，没有发 OTA。
+- 本轮不能把 LAND 写成“已核验”；负责人仍需决定 A 档直接落 / A+B 落 / 再等。
+
 node --input-type=module -e 'import fs from "node:fs"; const r=fs.readFileSync("staging/wordfield-candidates-tatoeba.jsonl","utf8").trim().split("\n").map(JSON.parse); const counts=(f)=>{const a=r.map(f).sort((x,y)=>x-y); console.log(Math.min(...a),a[Math.floor(a.length/2)],Math.max(...a))}; console.log("rows",r.length,"anchors",new Set(r.map(x=>x.anchor_id)).size); counts(x=>r.filter(y=>y.anchor_id===x.anchor_id).length); console.log("unknown",Object.groupBy(r,x=>x.metrics.unknown_word_count)); console.log("members",Object.groupBy(r,x=>x.member_word_ids.length)); console.log("zh_missing",r.filter(x=>!x.zh).length)'
 ~~~
 
