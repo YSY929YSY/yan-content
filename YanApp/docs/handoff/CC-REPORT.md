@@ -3346,7 +3346,7 @@ node -e 'for(const p of ["assets/content.fallback.json","../yan-content/content.
 
 为避免带 source 的词场被永远跳过，测试现在保留 legacy 的严格 20 条检查，并将 Tatoeba 单独设成实测值减 1.54 个百分点的下限：
 
-- legacy：20 条词场、133/133 非标点对齐行有 gloss，100.00%，没有 kana 空白；
+- legacy：20 条词场、133/133 对齐行有 gloss，100.00%，没有 kana 空白；
 - Tatoeba：167 条词场、1,059/1,097 非标点对齐行有 gloss，96.54%；下限 95%，余量 1.54 个百分点。
 
 复算命令：
