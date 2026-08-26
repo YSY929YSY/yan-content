@@ -3175,6 +3175,56 @@ Result: FAIL
 ~~~
 
 
+### 交报告前最终复核原始输出
+
+执行命令：
+~~~bash
+git status --short && npm run audit
+~~~
+
+原始输出：
+~~~
+> yanapp@1.0.0 audit
+> node scripts/audit.mjs
+
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:2937: review editorial claim "旅行高频"
+WARN user-claims App.js:2981: review editorial claim "旅行高频"
+WARN user-claims App.js:3075: review editorial claim "高频"
+WARN user-claims App.js:3118: review editorial claim "高频"
+WARN user-claims App.js:3165: review editorial claim "高频"
+WARN user-claims App.js:3183: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 a00a76e1289a9c84e0f7089b2edc1949811bf52fb08f7c297ba55ada8ffecd82
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+INFO doc-refs scanned 1032 references (436 unique)
+WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:16: missing 调研/…/red调研重新规划_编号修正版.md
+WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:286: missing red调研重新规划_编号修正版.md
+WARN doc-refs docs/handoff/CC-REPORT.md:3731: missing src/content/publication.ts
+WARN doc-refs docs/handoff/CC-REPORT.md:3732: missing src/content/schema.ts
+WARN doc-refs docs/handoff/CC-REPORT.md:3733: missing src/content/contentValidation.ts
+WARN doc-refs docs/handoff/CC-REPORT.md:3734: missing staging/duplicate-seq-plan.md
+WARN doc-refs docs/handoff/CC-REPORT.md:3735: missing staging/duplicate-seq-groups.json
+WARN doc-refs docs/handoff/TICKET-correction-entry-minimal.md:62: missing scripts/corrections-export.mjs
+PASS doc-refs 所有引用都已入库（8 条指向不存在的路径，见 WARN）
+PASS workspace-clean docs markdown tracked
+--- audit summary ---
+FAIL: 0
+WARN: 15
+Result: PASS
+~~~
+
+git status --short 在该命令中没有输出。
+
+
+
 ### 提交范围与最终门禁原始输出
 
 本轮提交范围：
