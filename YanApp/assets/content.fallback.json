@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "version": "2.6",
+  "version": "2.7",
   "updated": "2026-08-22",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8005 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
@@ -16956,6 +16956,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ani"
+     },
+     {
+      "id": "n5_tomodachi"
+     },
+     {
+      "id": "n5_watakushi"
+     }
+    ],
+    "sentence": {
+     "jp": "彼は私の兄の友達だ。",
+     "zh": "他是我哥哥的朋友。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 105863,
+     "zh_sentence_id": 2029456
+    }
    }
   },
   {
@@ -18880,6 +18902,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_inu"
+     },
+     {
+      "id": "n5_neko"
+     },
+     {
+      "id": "n5_suki"
+     }
+    ],
+    "sentence": {
+     "jp": "犬と猫どっちが好き？",
+     "zh": "狗和猫你更喜欢哪一个？"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 3643242,
+     "zh_sentence_id": 4887666
+    }
    }
   },
   {
@@ -18996,6 +19040,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_imi"
+     },
+     {
+      "id": "n5_nan"
+     }
+    ],
+    "sentence": {
+     "jp": "この語句の意味は何ですか？",
+     "zh": "这句话是什么意思呀？"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 9161912,
+     "zh_sentence_id": 10474872
+    }
    }
   },
   {
@@ -19356,6 +19419,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_iro"
+     },
+     {
+      "id": "n5_sukoshi"
+     }
+    ],
+    "sentence": {
+     "jp": "色が少し暗すぎるなぁ。",
+     "zh": "颜色有点太暗了呢。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 11669302,
+     "zh_sentence_id": 13605736
+    }
    }
   },
   {
@@ -20032,6 +20114,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_e"
+     },
+     {
+      "id": "n5_miru"
+     }
+    ],
+    "sentence": {
+     "jp": "彼女は絵を見ました。",
+     "zh": "她看着那幅画。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 90746,
+     "zh_sentence_id": 348101
+    }
    }
   },
   {
@@ -20680,6 +20781,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ookii"
+     },
+     {
+      "id": "n5_suki"
+     }
+    ],
+    "sentence": {
+     "jp": "皆大きいピザが好きです。",
+     "zh": "所有人都喜欢大的比萨。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 1243657,
+     "zh_sentence_id": 1242091
+    }
    }
   },
   {
@@ -27089,6 +27209,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kuni"
+     },
+     {
+      "id": "n5_ooi"
+     }
+    ],
+    "sentence": {
+     "jp": "日本は地震の多い国だ。",
+     "zh": "日本地震很多。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 122423,
+     "zh_sentence_id": 517576
+    }
    }
   },
   {
@@ -31399,6 +31538,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_shimeru"
+     },
+     {
+      "id": "n5_shizuka"
+     }
+    ],
+    "sentence": {
+     "jp": "メアリーはドアを静かに閉めた。",
+     "zh": "玛丽悄悄地关上了门。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 194802,
+     "zh_sentence_id": 834707
+    }
    }
   },
   {
@@ -34886,6 +35044,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_dasu"
+     },
+     {
+      "id": "n5_haha"
+     },
+     {
+      "id": "n5_tegami"
+     }
+    ],
+    "sentence": {
+     "jp": "母に手紙を出します。",
+     "zh": "我会给我的母亲寄封信。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 2197706,
+     "zh_sentence_id": 5091340
+    }
    }
   },
   {
@@ -41897,6 +42077,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_hajimaru"
+     },
+     {
+      "id": "n5_hanashi"
+     }
+    ],
+    "sentence": {
+     "jp": "儀式は彼の話から始まった。",
+     "zh": "仪式以他的讲话开始。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 182936,
+     "zh_sentence_id": 1394872
+    }
    }
   },
   {
@@ -42415,6 +42614,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_hana"
+     },
+     {
+      "id": "n5_motsu"
+     }
+    ],
+    "sentence": {
+     "jp": "花を持ってきました。",
+     "zh": "我带了花。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 11508992,
+     "zh_sentence_id": 11508982
+    }
    }
   },
   {
@@ -42742,6 +42960,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_hayai_2"
+     },
+     {
+      "id": "n5_kawa"
+     }
+    ],
+    "sentence": {
+     "jp": "この川は流れが速い。",
+     "zh": "这条河水流湍急。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 4919569,
+     "zh_sentence_id": 334882
+    }
    }
   },
   {
@@ -47711,6 +47948,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_michi"
+     },
+     {
+      "id": "n5_watakushi"
+     }
+    ],
+    "sentence": {
+     "jp": "私は森で道に迷った。",
+     "zh": "我在树林里迷路了。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 155702,
+     "zh_sentence_id": 678189
+    }
    }
   },
   {
