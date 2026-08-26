@@ -1,6 +1,6 @@
-# 当前状态 · 词场 200 条 + 纠错入口已就位，等真机反馈
+# 当前状态 · 词场 200 条 + gloss 全库查询 + 纠错入口已就位，等真机反馈
 
-> 更新日期：2026-08-27
+> 更新日期：2026-08-26
 > **本轮无进行中工单。** 下一步在项目负责人手上，不是 AI 手上。
 
 ## 已完成并合入 `develop/v2`
@@ -11,16 +11,23 @@
 | 2 | 成员回填 + gloss 双基线 | members 空 0；两条基线都硬断言条数 |
 | 3 | JP 22 换句 → 落 13 条 | 187 → **200 / 563** |
 | 4 | 纠错入口（本地 only） | 词卡底部「去纠错」，无网络调用 |
+| 5 | `TICKET-gloss-fullbank-and-mastered.md` | 词场 gloss 查询改用全库；底部逃生口改为右上角垃圾桶图标 |
 
 **未发布。** `push-content.sh` 没跑，`origin/main` 没动，OTA 没推。
 
-## 词场现状
+## 词场与 gloss 现状
 
 ```
 200 条：N5 195 · N4 4 · N1 1
 Tatoeba 来源 180 条（带 jp/zh sentence ID，可回读）
 手工精选 20 条（无 source，有 roma）
-gloss 基线：legacy 零空洞 / Tatoeba ≥95%（实测 96.29%）
+gloss 基线：legacy 零空洞 / Tatoeba ≥95%（现有基线测试继续守住）
+
+设备条件决策指标：按每条 anchor 所属词书子集查询时，覆盖率 **87.71% → 96.60%**；修复后与全库基线一致。
+复算：`node scripts/gloss-device-coverage.mjs`
+
+这次没有改 `bookWords` 的列表、进度或复习口径；只新增 `glossLookupBank` 沿详情 props 传入完整 `content.wordBank`。
+「这个词不用再问我了」已移到右上角垃圾桶图标，底部只保留「去纠错」；图标带「以后不再问这个词」和「移出复习队列」无障碍文案。
 ```
 
 ⚠️ **词场只覆盖 N5。** 全词库 N5 有 724 个词，词场覆盖 195 个（≈27%）。
@@ -73,3 +80,12 @@ Tatoeba 候选池已耗尽，另一条同样不自然。**要么人写句子（�
 - 不发布、不推 `origin/main`（**merge 到 main = 推线上**）
 - 不构建（EAS 额度留给另一个项目）
 - 不并行任何两个改内容包的任务（内容窗口互斥）
+
+## 本轮已完成 · TICKET-gloss-fullbank-and-mastered
+
+- 实现提交：`d5a4db9`（未改内容包、未发布、未推 OTA）。
+- 覆盖率脚本：`scripts/gloss-device-coverage.mjs`；设备样本守卫：`src/lib/__tests__/glossFullBankWiring.test.mjs`。
+- 词书详情保留子集作为列表/进度/复习池；例句与词场 gloss 单独使用全库。
+- 右上角使用垃圾桶图标，不用「斩」（用户不一定理解）、不使用包包（语义不对应），也不再放底部长句；点击行为仍调用既有 `handleGrade('mastered')`。
+
+下一步仍由项目负责人决定是否推热更新包；本轮不构建、不发 OTA。

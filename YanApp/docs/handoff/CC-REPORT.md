@@ -4395,6 +4395,88 @@ $ git status --short
 
 审计中的 17 条 WARN 是既有 user-claims 与缺失规划文档引用，不是本轮内容 Blocker。
 
+## 2026-08-26 · TICKET-gloss-fullbank-and-mastered
+
+### 异常自查
+
+1. 本轮可比指标中，设备条件下的未覆盖 token 从 162 降到 44，超过两倍的变化来自根因修复：原来按词书子集查 gloss，会同时造成查不到和活用误拆；修复后改查全库。复算：`node scripts/gloss-device-coverage.mjs`。
+2. 没有说不清来源的数字。覆盖率、分子/分母、十大缺口都由同一只读脚本从当前 fallback、example token asset 和 200 条词场重算；测试总数由 `npm test` 给出。
+3. “按每条 anchor 的第一所属级别构造词书子集”是本轮测量口径；“十大”是按子集路径缺失 token 数降序的排序判据，不是人工估计。复算：`node scripts/gloss-device-coverage.mjs`。
+
+### 决策指标
+
+本轮决策指标 = 设备真实条件（按词书过滤的 `wordBank`）下的 gloss 覆盖率，因为它直接决定用户是否看到空白或错误中文。
+
+- 修复前：**1156 / 1318（87.71%）**。
+- 修复后：**1251 / 1295（96.60%）**，与完整词库基线同值。
+- 注意：修复前后分母分别为 1318 与 1295，是因为词书子集不仅少词，还会改变对齐分词（例如 `聞き` 被拆成 `聞` + `き`）；因此不能只比较空洞数量，覆盖率按各自设备路径的实际 token 计算。
+
+复算：`node scripts/gloss-device-coverage.mjs`
+
+### 设备样本与变异验证
+
+样本 `店員にサイズを聞きます。` 在 N4 子集下，修复后 `サイズ → 尺寸`、`聞き → 听`。旧路径的可观察错误是 `サイズ` 留空，`聞き` 被错误拆开并把 `き` 命中成「心情」。复算：
+
+```bash
+node --test src/lib/__tests__/glossFullBankWiring.test.mjs
+```
+
+变异验证写进了这条设备守卫：
+
+- 把 `glossLookupBank` 改回当前词书的 `wordBank`，App 接线断言会红；
+- 用 N4 子集直接跑同一句，`brokenSubsetResult` 与全库结果必须不相等，说明样本确实能抓住原 bug；
+- 当前实现再断言设备结果与全库结果一致。
+
+### 最大子集缺口（修复前路径）
+
+以下由脚本按每条句子的缺失 token 数降序输出；完整原始输出可直接复算：`node scripts/gloss-device-coverage.mjs`。
+
+```text
+n5_kurai 暗い N5: 4 missing [そ、な、ろ、る]
+n5_tsukuru 作る N5: 4 missing [彼、昨、スープ、た]
+n5_ban_2 ～番 N5: 3 missing [度、運転、番]
+n5_hajimaru 始まる N5: 3 missing [儀式、彼、た]
+n5_higashi 東 N5: 3 missing [太陽、昇り、沈む]
+n5_iu 言う N5: 3 missing [彼、時、た]
+n5_kodomo 子供 N5: 3 missing [頃、楽、ったなあ]
+n4_reshito レシート N4: 2 missing [袋、入れ]
+n4_tenin 店員 N4: 2 missing [カード、見せ]
+n5_ageru 上げる N5: 2 missing [彼、た]
+```
+
+### 实际改动与边界
+
+- `d5a4db9`：App 详情链路新增命名明确的 `glossLookupBank`；词书列表的 `wordBank` 子集保持不变；搜索详情显式传全库；例句/词场的三个 gloss 查询点全部改用全库。
+- `d5a4db9`：新增设备条件结构回归与只读覆盖率脚本；更新两个原本要求底部旧文案的 UI 源码守卫。
+- `d5a4db9`：把底部「这个词不用再问我了」移到右上角垃圾桶图标，保留 `handleGrade('mastered')` 行为；图标带人话无障碍标签，不做滑动手势。选择垃圾桶是因为「斩」不直观，「包包」与移出复习无关，「删除」作为底部长文案太直白且占空间。
+- 未改 `assets/content.fallback.json`、`yan-content/content.v2.json`，所以本轮没有内容 stats 前后对比，也没有递增内容版本；未改评分算法、进度键、服务端、数据库或 OTA。
+
+### 验收原始输出
+
+```text
+$ npm test
+ℹ tests 617
+ℹ pass 617
+ℹ fail 0
+
+$ npm run typecheck
+> yanapp@1.0.0 typecheck
+> tsc --noEmit
+
+$ npm run audit
+--- audit summary ---
+FAIL: 0
+WARN: 16
+Result: PASS
+
+$ git status --short
+(无输出)
+```
+
+复算命令分别为：`npm test`、`npm run typecheck`、`npm run audit`、`git status --short`。
+
+本轮没有构建、没有发布、没有推 `origin/main`，停在等待项目负责人决定是否推热更新包。
+
 ## 2026-08-26 · TICKET-correction-entry-minimal
 
 ### 异常自查
