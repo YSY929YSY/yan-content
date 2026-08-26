@@ -417,3 +417,79 @@ web 渲染验证：本地 Expo web 在 bundling 阶段失败，原始错误为�
 - 没有拆 `App.js`，也没有给例句、词场、首页增加入口。
 
 代码、测试与交接文档 commit：`6bff0e8`；内容包未改。
+
+## 2026-08-27 · TICKET-wordfield-lv-67
+
+### 异常自查
+
+1. 本轮没有与上一轮相差 2 倍以上且可直接比较的测量数字：上一轮测试为 616，本轮为 617；复算：`npm test`。本轮的 65 条是新工单首次建立的判定基线，不与上一轮的 0 条已完成结果比较。
+2. 没有说不清来源的数字。67、2、65、61、4、21、0 均由 `staging/gpt-verdicts-301.json`、内容包的 `wordField` 字段和本轮脚本复算；复算：`node scripts/wordfield-lv-review.mjs --stats`。
+3. `LAND 61 / SWAP 4` 是按三条项目判据人工重判的结果，不是语料统计；4 条替换是否可用由候选池排序和机械信号过滤测得。最终 65 条是 61 条保留加 4 条换句的确定性汇总；复算：`node scripts/wordfield-lv-review.mjs --stats`。
+
+### 决策指标
+
+本轮决策指标 = **重判后该落的条数**。
+
+- 修复前：**61 条**原句直接符合项目标准。
+- 修复后：**65 条**进入待人工审清单（61 条原句 + 4 条确定性换句）；复算：`node scripts/wordfield-lv-review.mjs --stats`。
+- 67 条外部 LV 中，2 条已有词场排除（`n5_kaisha`、`n5_tegami`）；复算：同上。
+
+### 与外部 LV 的交叉表
+
+| 外部审核判定 | 本轮结果 | 条数 |
+|---|---|---:|
+| LV | 原句 LAND | 61 |
+| LV | 原句 SWAP，换句后进入待审清单 | 4 |
+| LV | 已有词场，排除不重复落库 | 2 |
+| 合计 |  | 67 |
+
+复算：`node scripts/wordfield-lv-review.mjs --stats`。因此严格按“原句重判”的 `LV → LAND` 是 **61 条**；按最终可落审清单口径是 **65 条**。
+
+### 实际改动与边界
+
+- `85903bc`：新增 `scripts/wordfield-lv-review.mjs`，读取既有 LV 判定、Tatoeba 候选池、shortlist 和当前内容，仅输出确定性重判结果；不写两个内容包。
+- `85903bc`：新增并强制纳入版本库的 [`staging/lv-67-for-review.md`](../../staging/lv-67-for-review.md)，包含 61 条原句 LAND 与 4 条换句后的待审条目。
+- `85903bc`：更新 [`docs/handoff/ACTIVE.md`](ACTIVE.md)，将下一步交给项目负责人审清单。
+- 4 条 SWAP：`n5_kaesu`（超过 16 字）、`n5_kasu`（固定表达）、`n5_kata`（语法结构）、`n5_takai`（引申搭配）。4 条均找到可用备选；无可用备选的 SWAP 为 0；复算：`node scripts/wordfield-lv-review.mjs --stats`。
+- 外部 LV 全体中无备选共 21 条，其中属于 SWAP 的为 0 条；复算：同上。
+- 未改 `assets/content.fallback.json`、`yan-content/content.v2.json`，没有内容 stats 前后对比，也没有递增内容版本；未改 UI、评分、进度键、服务端、数据库、OTA 或 `App.js`。
+
+### 可复现性
+
+连续两次执行 `node scripts/wordfield-lv-review.mjs --stats` 并比较输出文件，结果为 `determinism: byte-identical`；复算：
+
+```bash
+cp staging/lv-67-for-review.md /tmp/lv-67-for-review.first.md
+node scripts/wordfield-lv-review.mjs --stats
+cmp -s staging/lv-67-for-review.md /tmp/lv-67-for-review.first.md
+```
+
+### 验收原始输出
+
+```text
+$ npm test
+ℹ tests 617
+ℹ pass 617
+ℹ fail 0
+
+$ npm run typecheck
+> yanapp@1.0.0 typecheck
+> tsc --noEmit
+
+$ npm run audit
+--- audit summary ---
+FAIL: 0
+WARN: 25
+Result: PASS
+
+$ git status --short
+(无输出)
+```
+
+复算命令分别为：`npm test`、`npm run typecheck`、`npm run audit`、`git status --short`。
+
+### 本轮忍住没改
+
+- 没有因为词汇超出 N5 而额外换句；这不是本工单的新判据。
+- 没有落库、改内容包或递增 `_meta.version`；负责人审完后另开内容窗口。
+- 没有把 `SWAP` 候选自动升级为发布内容，也没有生成或改写任何日文、中文。
