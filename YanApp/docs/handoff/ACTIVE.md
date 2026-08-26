@@ -1,37 +1,39 @@
-# 当前状态 · JP-22 换句与成员回填（内容窗口已合回）
+# 当前状态 · JP-13 换句落库（内容窗口已完成）
 
 > 更新日期：2026-08-27
 
 ## 当前工单
 
-`docs/handoff/TICKET-wordfield-jp-22.md` ← **本轮已完成，换句仍待负责人审核；不发布**
+`docs/handoff/TICKET-wordfield-land-jp13.md` ← **已完成；不发布**
 
-内容回填在 `content/2026-08-27-wordfield-members` 完成后已快进合回
-`develop/v2`。换句仅进入 staging，不覆盖内容包。
+13 条已通过审核的 JP 换句已落入两份内容包；没有推 `origin/main`，没有构建或 OTA。
 
 ## 到这里为止发生了什么
 
-1851 条 Tatoeba 候选 → 343 个 anchor 各选一条 → 五状态重排（LAND 301）
-→ 外部审核 301 条 → **OK 160 + SPOKEN 14 = 174 条候选** → 排除已有词场 7 条
-→ **167 条新词场落库，20 → 187 / 563** → JP 组 22 条机械换句：15 条有可用备选，
-7 条仍需负责人处理。
+JP-22 的 15 条可用换句中，按负责人裁决落库 13 条；`n5_futari`、`n5_sora` 仍不落库。
+当前词场从 **187 → 200 / 563**，Tatoeba 词场从 **167 → 180**。
 
-内容 commit：`cbba0b1`（落库）+ `d11f81c`（JP-22 成员回填）。167 条新增词场仍保留
-Tatoeba 日/中句 ID，`sentence.roma` 按裁决省略，未写确认字段；现有 20 条未覆盖、未回填。
-回填后 64 条词场新增 69 个成员 ID，空 `members` 为 0；日文、中文、source 均未改。
+复算：
 
-外部审核结果落盘在 `staging/gpt-verdicts-301.json`，五组：
+```bash
+node scripts/content-stats.mjs | grep '^  wordField'
+node --input-type=module -e 'const c=require("./assets/content.fallback.json"); console.log(c.wordBank.filter(w=>w.wordField?.source?.provider==="Tatoeba").length)'
+```
 
-| 组 | 数 | 状态 |
-|---|---:|---|
-| OK | 160 | **本轮落** |
-| SPOKEN | 14 | **本轮落**（真实口语是优点，不是问题） |
-| ZH | 38 | 挂着 —— 只改中文，日语有源不动 |
-| JP | 22 | 挂着 —— 从备选池换句（16 条有备选，6 条独苗） |
-| LV | 67 | 挂着 —— **判据本身要重定**，见下 |
+内容与测试 commit：`656a507`。版本从 `2.6 → 2.7`，29 个成员引用按候选句复算；
+`n5_iro` 的 `暗い` 没有被 `dictionaryFormsFrom(example_tokens)` 唯一还原，按 fail closed 不写。
+两份内容包 SHA 相同：
 
-两次独立测量互相印证：Codex 人工抽 40 条判出中文问题 15%，
-外部审核 301 条判出 ZH 12.6%。**测量可信。**
+```bash
+shasum -a 256 assets/content.fallback.json ../yan-content/content.v2.json
+```
+
+成员审计使用 `dictionaryFormsFrom(example_tokens)` 注入辞书形后为 0 错误；Tatoeba gloss
+实测为 **1,141 / 1,185（96.29%）**，仍高于 95% 下限。复算：
+
+```bash
+node --test src/features/wordbank/__tests__/wordFieldAlignment.test.mjs
+```
 
 ## 排队中的工单（本轮做完再动，不要并行改内容包）
 

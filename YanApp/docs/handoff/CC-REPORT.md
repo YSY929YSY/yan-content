@@ -4261,3 +4261,108 @@ FAIL: 0
 WARN: 14
 Result: PASS
 ~~~
+
+## Wordfield land JP-13 · 2026-08-27
+
+### 异常自查
+
+1. 本轮没有出现与上一轮相差 2 倍以上的数字：决策指标 **187 → 200 / 563**，Tatoeba 词场 **167 → 180**。工单写的“替换后仍为 167”与当前仓库事实矛盾：13 个 JP anchor 在当前包中没有 `wordField`，若保持 167 就无法满足工单的主指标 187→200；因此按实际包状态新增 13 条，并将测试断言从 167 修到 180。
+2. 没有说不清来源的数字。13 条、29 个成员引用、1,141/1,185 gloss 行均由下方命令复算。
+3. `n5_iro` 不写 `n5_kurai` 是判据决定的，不是漏测：`暗すぎる` 没有 `dictionaryFormsFrom(example_tokens)` 的唯一辞书形还原，按 fail closed 丢弃该成员；其余成员审计为 0 错误。
+
+### 本轮决策指标
+
+**词场落库数：187 / 563 → 200 / 563。**
+
+复算：
+
+```bash
+node scripts/content-stats.mjs | grep '^  wordField'
+```
+
+输出：`wordField: 200/8005 (2.5%)`；`kanji_anchor.total` 仍为 563。
+
+### 13 条落库对照
+
+下表中的旧句来自 `staging/gpt-verdicts-301.json` 的 JP 审核基线；新句和两个 Tatoeba ID 来自
+`staging/jp-22-swapped-for-review.md` 与 `staging/wordfield-candidates-tatoeba.jsonl` 的确定性回读。
+
+复算：
+
+```bash
+node --input-type=module -e 'const fs=require("fs"); const v=JSON.parse(fs.readFileSync("staging/gpt-verdicts-301.json")); const c=JSON.parse(fs.readFileSync("assets/content.fallback.json")); const ids=new Set(["n5_ani","n5_dasu","n5_e","n5_hajimaru","n5_hana","n5_hayai_2","n5_imi","n5_inu","n5_iro","n5_kuni","n5_michi","n5_ookii","n5_shimeru"]); const by=new Map(c.wordBank.map(x=>[x.id,x])); for(const x of v.JP.filter(x=>ids.has(x.anchor))){const y=by.get(x.anchor).wordField; console.log(x.anchor,"旧:",x.jp,"新:",y.sentence.jp,"ID:",y.source.jp_sentence_id,y.source.zh_sentence_id)}'
+```
+
+| anchor | 旧句 | 新句 | 新 Tatoeba 日 / 中 ID |
+|---|---|---|---:|
+| n5_ani | 私は兄が八人います。 | 彼は私の兄の友達だ。 | 105863 / 2029456 |
+| n5_dasu | 窓から顔を出すな。 | 母に手紙を出します。 | 2197706 / 5091340 |
+| n5_e | 彼は犬の絵を書いた。 | 彼女は絵を見ました。 | 90746 / 348101 |
+| n5_hajimaru | 教育は家庭に始まる。 | 儀式は彼の話から始まった。 | 182936 / 1394872 |
+| n5_hana | 花の金曜日だ！ | 花を持ってきました。 | 11508992 / 11508982 |
+| n5_hayai_2 | 速くここに来なさい。 | この川は流れが速い。 | 4919569 / 334882 |
+| n5_imi | 生きる意味を教えてくれ。 | この語句の意味は何ですか？ | 9161912 / 10474872 |
+| n5_inu | 犬を中に入れるな。 | 犬と猫どっちが好き？ | 3643242 / 4887666 |
+| n5_iro | この魚は同じ色だ。 | 色が少し暗すぎるなぁ。 | 11669302 / 13605736 |
+| n5_kuni | 彼は金で国を売った。 | 日本は地震の多い国だ。 | 122423 / 517576 |
+| n5_michi | 練習は熟達の道。 | 私は森で道に迷った。 | 155702 / 678189 |
+| n5_ookii | 大きい鍋で汁を作った。 | 皆大きいピザが好きです。 | 1243657 / 1242091 |
+| n5_shimeru | 戸を閉めろ。 | メアリーはドアを静かに閉めた。 | 194802 / 834707 |
+
+日文、中文和 source ID 均逐字采用审核后的候选；没有写 `roma` 或确认字段。`n5_futari` 的
+谚语对译仍未处理，留给 ZH-38 专项检查。
+
+### 成员、内容统计与同步
+
+13 条共写入 **29 个成员引用**，`members` 为空仍为 **0**；成员审计命令如下：
+
+```bash
+node --input-type=module -e 'import fs from "node:fs"; import {dictionaryFormsFrom} from "./src/features/wordbank/wordFieldAlignment.js"; import {auditWordFields} from "./src/features/review/units.js"; const c=JSON.parse(fs.readFileSync("assets/content.fallback.json")); const f=dictionaryFormsFrom(JSON.parse(fs.readFileSync("assets/example_tokens.json"))); console.log(auditWordFields(c.wordBank,f));'
+```
+
+输出：`[]`。
+
+| 项 | 2.6 | 2.7 |
+|---|---:|---:|
+| 词场 | 187 | 200 |
+| Tatoeba 词场 | 167 | 180 |
+| 决策指标主线覆盖 | 187 / 563 | 200 / 563 |
+| 版本 | 2.6 | 2.7 |
+
+复算前值：
+
+```bash
+git show HEAD^:YanApp/assets/content.fallback.json | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const c=JSON.parse(s); console.log({version:c._meta.version,wordField:c.wordBank.filter(w=>w.wordField).length,tatoeba:c.wordBank.filter(w=>w.wordField?.source?.provider==="Tatoeba").length,kanjiAnchor:c.wordBank.filter(w=>(w.yanFeatures||[]).includes("kanji_anchor")).length})})'
+node scripts/content-stats.mjs
+```
+
+前值实测 `wordField=187`、`Tatoeba=167`、版本 `2.6`；当前 `content-stats` 输出
+`wordField: 200/8005 (2.5%)`、版本 `2.7`，词库总量、状态分布和 563 条 anchor 未改变。
+
+两份文件 SHA：
+
+```bash
+shasum -a 256 assets/content.fallback.json ../yan-content/content.v2.json
+```
+
+输出：两份均为 `04ee995c85ea4357a1d4f6b6ea54c4ebff1a3b09efb76730a311bf44ec304c4b`。
+
+### Gloss 基线
+
+Tatoeba 词场为 **1,141 / 1,185（96.29%）**，高于 95% 下限；legacy 20 条检查不变且全绿。
+复算：
+
+```bash
+node --test src/features/wordbank/__tests__/wordFieldAlignment.test.mjs
+```
+
+全量测试中的 Tatoeba 断言因此从 167 条修为 180 条；若按工单原断言保留，新增 13 条会使验收
+在正确内容上必然失败。
+
+### Commit 与边界
+
+- `656a507`：同一 commit 修改两份内容包和 gloss 条数测试；内容版本 `2.6→2.7`。
+- 没有改现有 20 条手工词场，没有改 ZH/LV、App/UI、评分算法或进度键。
+- 没有发布、没有推 `origin/main`、没有构建、没有 OTA。
+- 想顺手做但忍住：没有落 `n5_futari` / `n5_sora`，没有处理剩余 9 条 JP，
+  没有改两条细微中文对译，也没有为新词场生成 roma。
