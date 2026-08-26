@@ -4366,3 +4366,31 @@ node --test src/features/wordbank/__tests__/wordFieldAlignment.test.mjs
 - 没有发布、没有推 `origin/main`、没有构建、没有 OTA。
 - 想顺手做但忍住：没有落 `n5_futari` / `n5_sora`，没有处理剩余 9 条 JP，
   没有改两条细微中文对译，也没有为新词场生成 roma。
+
+### 本轮交报告前最终门禁原始输出
+
+```text
+$ npm test
+ℹ tests 611
+ℹ pass 611
+ℹ fail 0
+
+$ npm run typecheck
+> yanapp@1.0.0 typecheck
+> tsc --noEmit
+
+$ npm run audit
+--- audit summary ---
+FAIL: 0
+WARN: 17
+Result: PASS
+
+$ bash tools/check-content-release.sh
+Blocker 数：0
+✓ 无 Blocker
+
+$ git status --short
+(无输出)
+```
+
+审计中的 17 条 WARN 是既有 user-claims 与缺失规划文档引用，不是本轮内容 Blocker。
