@@ -22,6 +22,9 @@
     "old_review_tier": "B",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -50,6 +53,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "SWAP",
+    "review_labels": [
+      "SWAP"
+    ],
     "review_reasons": [
       "疑似残句"
     ],
@@ -82,6 +88,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -112,6 +121,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -141,6 +153,9 @@
     "old_review_tier": "B",
     "alt_count": 6,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [
@@ -173,6 +188,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -203,6 +221,9 @@
     "old_review_tier": "A",
     "alt_count": 11,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -233,6 +254,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -261,6 +285,9 @@
     "old_review_tier": "A",
     "alt_count": 9,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -290,6 +317,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "SWAP",
+    "review_labels": [
+      "SWAP"
+    ],
     "review_reasons": [
       "固定搭配/引申义"
     ],
@@ -322,6 +352,9 @@
     "old_review_tier": "A",
     "alt_count": 19,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [
@@ -352,6 +385,10 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "SWAP",
+    "review_labels": [
+      "SWAP",
+      "FIX_ZH"
+    ],
     "review_reasons": [
       "日语搭配别扭",
       "姉被译成姐妹"
@@ -387,6 +424,9 @@
     "old_review_tier": "A",
     "alt_count": 8,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -416,6 +456,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -445,6 +488,9 @@
     "old_review_tier": "A",
     "alt_count": 9,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -474,6 +520,9 @@
     "old_review_tier": "B",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -502,6 +551,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -532,6 +584,9 @@
     "old_review_tier": "A",
     "alt_count": 13,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -562,6 +617,9 @@
     "old_review_tier": "A",
     "alt_count": 7,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -591,6 +649,9 @@
     "old_review_tier": "A",
     "alt_count": 5,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -621,6 +682,9 @@
     "old_review_tier": "A",
     "alt_count": 45,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -650,6 +714,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -678,6 +745,9 @@
     "old_review_tier": "A",
     "alt_count": 5,
     "review_status": "SWAP",
+    "review_labels": [
+      "SWAP"
+    ],
     "review_reasons": [
       "负面动词:ぶつ"
     ],
@@ -709,6 +779,9 @@
     "old_review_tier": "A",
     "alt_count": 16,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -738,6 +811,9 @@
     "old_review_tier": "B",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [
@@ -769,6 +845,9 @@
     "old_review_tier": "A",
     "alt_count": 8,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -798,6 +877,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -828,6 +910,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -857,6 +942,9 @@
     "old_review_tier": "A",
     "alt_count": 17,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -886,6 +974,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -914,6 +1005,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -943,6 +1037,9 @@
     "old_review_tier": "A",
     "alt_count": 16,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -972,6 +1069,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1000,6 +1100,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1030,6 +1133,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1058,6 +1164,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1087,6 +1196,9 @@
     "old_review_tier": "A",
     "alt_count": 7,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1115,6 +1227,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1145,6 +1260,9 @@
     "old_review_tier": "A",
     "alt_count": 32,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1174,6 +1292,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1204,6 +1325,9 @@
     "old_review_tier": "B",
     "alt_count": 7,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1233,6 +1357,9 @@
     "old_review_tier": "B",
     "alt_count": 7,
     "review_status": "SWAP",
+    "review_labels": [
+      "SWAP"
+    ],
     "review_reasons": [
       "负面动词:襲う"
     ],
@@ -1264,6 +1391,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "SPOKEN",
+    "review_labels": [
+      "SPOKEN"
+    ],
     "review_reasons": [
       "真实口语缩约/省略"
     ],
@@ -1294,6 +1424,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1324,6 +1457,9 @@
     "old_review_tier": "A",
     "alt_count": 6,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1352,6 +1488,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1383,6 +1522,9 @@
     "old_review_tier": "A",
     "alt_count": 18,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1413,6 +1555,9 @@
     "old_review_tier": "C",
     "alt_count": 1,
     "review_status": "DATA",
+    "review_labels": [
+      "DATA"
+    ],
     "review_reasons": [
       "解析失败:2"
     ],
@@ -1446,6 +1591,9 @@
     "old_review_tier": "B",
     "alt_count": 1,
     "review_status": "FIX_ZH",
+    "review_labels": [
+      "FIX_ZH"
+    ],
     "review_reasons": [
       "明显不自然：厨房正忙著"
     ],
@@ -1480,6 +1628,9 @@
     "old_review_tier": "B",
     "alt_count": 2,
     "review_status": "FIX_ZH",
+    "review_labels": [
+      "FIX_ZH"
+    ],
     "review_reasons": [
       "明显不自然：大学四月开学"
     ],
@@ -1512,6 +1663,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1541,6 +1695,9 @@
     "old_review_tier": "A",
     "alt_count": 12,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1571,6 +1728,9 @@
     "old_review_tier": "A",
     "alt_count": 45,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1600,6 +1760,9 @@
     "old_review_tier": "A",
     "alt_count": 5,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1628,6 +1791,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1656,6 +1822,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1686,6 +1855,9 @@
     "old_review_tier": "A",
     "alt_count": 7,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1715,6 +1887,9 @@
     "old_review_tier": "A",
     "alt_count": 14,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1744,6 +1919,9 @@
     "old_review_tier": "A",
     "alt_count": 11,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1774,6 +1952,9 @@
     "old_review_tier": "C",
     "alt_count": 3,
     "review_status": "DATA",
+    "review_labels": [
+      "DATA"
+    ],
     "review_reasons": [
       "解析失败:100"
     ],
@@ -1810,6 +1991,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1839,6 +2023,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1868,6 +2055,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1897,6 +2087,9 @@
     "old_review_tier": "A",
     "alt_count": 11,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1927,6 +2120,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "DATA",
+    "review_labels": [
+      "DATA"
+    ],
     "review_reasons": [
       "解析失败:私たち"
     ],
@@ -1961,6 +2157,9 @@
     "old_review_tier": "A",
     "alt_count": 24,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -1990,6 +2189,9 @@
     "old_review_tier": "A",
     "alt_count": 7,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2018,6 +2220,9 @@
     "old_review_tier": "A",
     "alt_count": 7,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2047,6 +2252,9 @@
     "old_review_tier": "A",
     "alt_count": 8,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2077,6 +2285,9 @@
     "old_review_tier": "B",
     "alt_count": 4,
     "review_status": "FIX_ZH",
+    "review_labels": [
+      "FIX_ZH"
+    ],
     "review_reasons": [
       "明显不自然：多风"
     ],
@@ -2110,6 +2321,9 @@
     "old_review_tier": "A",
     "alt_count": 8,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2140,14 +2354,21 @@
     "old_review_tier": "C",
     "alt_count": 4,
     "review_status": "DATA",
+    "review_labels": [
+      "DATA",
+      "FIX_ZH"
+    ],
     "review_reasons": [
-      "解析失败:5"
+      "解析失败:5",
+      "意向形语气误译：待とう"
     ],
     "data_signals": [
       "5"
     ],
     "difficulty_signals": [],
-    "chinese_signals": [],
+    "chinese_signals": [
+      "意向形语气误译：待とう"
+    ],
     "risk_signals": []
   },
   {
@@ -2174,6 +2395,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2204,6 +2428,9 @@
     "old_review_tier": "B",
     "alt_count": 5,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2232,6 +2459,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2260,6 +2490,9 @@
     "old_review_tier": "B",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2288,6 +2521,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2317,6 +2553,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2345,6 +2584,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2375,6 +2617,9 @@
     "old_review_tier": "A",
     "alt_count": 21,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2403,6 +2648,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2434,6 +2682,9 @@
     "old_review_tier": "A",
     "alt_count": 6,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2462,6 +2713,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2490,6 +2744,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2520,6 +2777,9 @@
     "old_review_tier": "B",
     "alt_count": 9,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2549,6 +2809,9 @@
     "old_review_tier": "A",
     "alt_count": 5,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2580,6 +2843,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2610,6 +2876,9 @@
     "old_review_tier": "C",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2639,6 +2908,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2670,6 +2942,9 @@
     "old_review_tier": "C",
     "alt_count": 1,
     "review_status": "DATA",
+    "review_labels": [
+      "DATA"
+    ],
     "review_reasons": [
       "解析失败:7"
     ],
@@ -2705,6 +2980,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2734,6 +3012,9 @@
     "old_review_tier": "A",
     "alt_count": 8,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2765,6 +3046,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2795,6 +3079,9 @@
     "old_review_tier": "A",
     "alt_count": 14,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2823,6 +3110,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2852,6 +3142,9 @@
     "old_review_tier": "A",
     "alt_count": 17,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2880,6 +3173,9 @@
     "old_review_tier": "A",
     "alt_count": 6,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2908,6 +3204,9 @@
     "old_review_tier": "B",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2936,6 +3235,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -2967,6 +3269,9 @@
     "old_review_tier": "C",
     "alt_count": 1,
     "review_status": "SWAP",
+    "review_labels": [
+      "SWAP"
+    ],
     "review_reasons": [
       "外国语料度量衡:マイル"
     ],
@@ -2997,6 +3302,9 @@
     "old_review_tier": "A",
     "alt_count": 7,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3025,6 +3333,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3053,6 +3364,9 @@
     "old_review_tier": "A",
     "alt_count": 6,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3082,6 +3396,9 @@
     "old_review_tier": "B",
     "alt_count": 9,
     "review_status": "FIX_ZH",
+    "review_labels": [
+      "FIX_ZH"
+    ],
     "review_reasons": [
       "明显不自然：他说得很大声"
     ],
@@ -3114,6 +3431,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3144,6 +3464,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3172,6 +3495,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3200,6 +3526,9 @@
     "old_review_tier": "B",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3229,6 +3558,9 @@
     "old_review_tier": "A",
     "alt_count": 9,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3258,6 +3590,9 @@
     "old_review_tier": "A",
     "alt_count": 7,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3287,6 +3622,9 @@
     "old_review_tier": "A",
     "alt_count": 9,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3315,6 +3653,9 @@
     "old_review_tier": "A",
     "alt_count": 5,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3344,6 +3685,9 @@
     "old_review_tier": "A",
     "alt_count": 8,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3373,6 +3717,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3401,6 +3748,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3430,6 +3780,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3459,6 +3812,9 @@
     "old_review_tier": "B",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3488,6 +3844,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3517,6 +3876,9 @@
     "old_review_tier": "B",
     "alt_count": 5,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3546,6 +3908,9 @@
     "old_review_tier": "A",
     "alt_count": 5,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3574,6 +3939,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3602,6 +3970,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3631,6 +4002,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "SPOKEN",
+    "review_labels": [
+      "SPOKEN"
+    ],
     "review_reasons": [
       "真实口语缩约/省略"
     ],
@@ -3662,6 +4036,9 @@
     "old_review_tier": "A",
     "alt_count": 14,
     "review_status": "SPOKEN",
+    "review_labels": [
+      "SPOKEN"
+    ],
     "review_reasons": [
       "真实口语缩约/省略"
     ],
@@ -3693,6 +4070,9 @@
     "old_review_tier": "B",
     "alt_count": 3,
     "review_status": "SPOKEN",
+    "review_labels": [
+      "SPOKEN"
+    ],
     "review_reasons": [
       "真实口语缩约/省略"
     ],
@@ -3727,6 +4107,9 @@
     "old_review_tier": "B",
     "alt_count": 28,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3755,6 +4138,9 @@
     "old_review_tier": "A",
     "alt_count": 9,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3786,6 +4172,9 @@
     "old_review_tier": "B",
     "alt_count": 11,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3816,6 +4205,9 @@
     "old_review_tier": "A",
     "alt_count": 16,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3845,6 +4237,9 @@
     "old_review_tier": "A",
     "alt_count": 18,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3875,6 +4270,9 @@
     "old_review_tier": "A",
     "alt_count": 21,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3903,6 +4301,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3933,6 +4334,9 @@
     "old_review_tier": "A",
     "alt_count": 44,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3962,6 +4366,9 @@
     "old_review_tier": "A",
     "alt_count": 22,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -3990,6 +4397,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4019,6 +4429,9 @@
     "old_review_tier": "A",
     "alt_count": 7,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4048,6 +4461,9 @@
     "old_review_tier": "A",
     "alt_count": 19,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4077,6 +4493,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4105,6 +4524,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4134,6 +4556,9 @@
     "old_review_tier": "A",
     "alt_count": 5,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4164,6 +4589,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4192,6 +4620,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4221,6 +4652,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4250,6 +4684,9 @@
     "old_review_tier": "A",
     "alt_count": 14,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4279,6 +4716,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4307,6 +4747,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4336,6 +4779,9 @@
     "old_review_tier": "A",
     "alt_count": 5,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4365,6 +4811,9 @@
     "old_review_tier": "A",
     "alt_count": 14,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4393,6 +4842,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4424,6 +4876,9 @@
     "old_review_tier": "B",
     "alt_count": 21,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4453,6 +4908,9 @@
     "old_review_tier": "A",
     "alt_count": 7,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4481,6 +4939,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4511,6 +4972,9 @@
     "old_review_tier": "A",
     "alt_count": 18,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4540,6 +5004,9 @@
     "old_review_tier": "A",
     "alt_count": 7,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4568,6 +5035,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4597,6 +5067,9 @@
     "old_review_tier": "A",
     "alt_count": 5,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4625,6 +5098,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4655,6 +5131,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4685,6 +5164,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "DATA",
+    "review_labels": [
+      "DATA"
+    ],
     "review_reasons": [
       "解析失败:2"
     ],
@@ -4717,6 +5199,9 @@
     "old_review_tier": "B",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4746,6 +5231,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4775,6 +5263,9 @@
     "old_review_tier": "A",
     "alt_count": 6,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4805,6 +5296,9 @@
     "old_review_tier": "C",
     "alt_count": 2,
     "review_status": "DATA",
+    "review_labels": [
+      "DATA"
+    ],
     "review_reasons": [
       "解析失败:2"
     ],
@@ -4839,6 +5333,9 @@
     "old_review_tier": "C",
     "alt_count": 1,
     "review_status": "DATA",
+    "review_labels": [
+      "DATA"
+    ],
     "review_reasons": [
       "解析失败:5"
     ],
@@ -4871,6 +5368,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4899,6 +5399,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4927,6 +5430,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4956,6 +5462,9 @@
     "old_review_tier": "A",
     "alt_count": 10,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -4985,6 +5494,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5014,6 +5526,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5043,6 +5558,9 @@
     "old_review_tier": "B",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5073,6 +5591,9 @@
     "old_review_tier": "C",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5102,6 +5623,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5131,6 +5655,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "FIX_ZH",
+    "review_labels": [
+      "FIX_ZH"
+    ],
     "review_reasons": [
       "明显不自然：每朝轻量运动"
     ],
@@ -5163,6 +5690,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5192,6 +5722,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5221,6 +5754,9 @@
     "old_review_tier": "A",
     "alt_count": 7,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5250,6 +5786,9 @@
     "old_review_tier": "A",
     "alt_count": 17,
     "review_status": "SPOKEN",
+    "review_labels": [
+      "SPOKEN"
+    ],
     "review_reasons": [
       "真实口语缩约/省略"
     ],
@@ -5280,6 +5819,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5309,6 +5851,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5337,6 +5882,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5368,6 +5916,9 @@
     "old_review_tier": "C",
     "alt_count": 4,
     "review_status": "DATA",
+    "review_labels": [
+      "DATA"
+    ],
     "review_reasons": [
       "解析失败:4"
     ],
@@ -5400,6 +5951,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5428,6 +5982,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5456,6 +6013,9 @@
     "old_review_tier": "A",
     "alt_count": 8,
     "review_status": "SPOKEN",
+    "review_labels": [
+      "SPOKEN"
+    ],
     "review_reasons": [
       "真实口语缩约/省略"
     ],
@@ -5486,6 +6046,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5515,6 +6078,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5543,6 +6109,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5572,6 +6141,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5600,6 +6172,9 @@
     "old_review_tier": "B",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5629,6 +6204,9 @@
     "old_review_tier": "B",
     "alt_count": 8,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5659,6 +6237,9 @@
     "old_review_tier": "A",
     "alt_count": 28,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5687,6 +6268,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5716,6 +6300,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5744,6 +6331,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5773,6 +6363,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5801,6 +6394,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "FIX_ZH",
+    "review_labels": [
+      "FIX_ZH"
+    ],
     "review_reasons": [
       "明显错字：低穿上"
     ],
@@ -5833,6 +6429,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5863,6 +6462,9 @@
     "old_review_tier": "C",
     "alt_count": 2,
     "review_status": "DATA",
+    "review_labels": [
+      "DATA"
+    ],
     "review_reasons": [
       "解析失败:2"
     ],
@@ -5895,6 +6497,9 @@
     "old_review_tier": "B",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5925,6 +6530,9 @@
     "old_review_tier": "C",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5953,6 +6561,9 @@
     "old_review_tier": "B",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -5984,6 +6595,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6012,6 +6626,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6041,6 +6658,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6070,6 +6690,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6098,6 +6721,9 @@
     "old_review_tier": "B",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6127,6 +6753,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6155,6 +6784,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6186,6 +6818,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6214,6 +6849,9 @@
     "old_review_tier": "A",
     "alt_count": 6,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6243,6 +6881,9 @@
     "old_review_tier": "A",
     "alt_count": 18,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6271,6 +6912,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6299,6 +6943,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6328,6 +6975,9 @@
     "old_review_tier": "B",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6357,6 +7007,9 @@
     "old_review_tier": "A",
     "alt_count": 5,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6386,6 +7039,9 @@
     "old_review_tier": "A",
     "alt_count": 9,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6415,6 +7071,9 @@
     "old_review_tier": "A",
     "alt_count": 7,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6444,6 +7103,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6472,6 +7134,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6500,6 +7165,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6529,6 +7197,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "SPOKEN",
+    "review_labels": [
+      "SPOKEN"
+    ],
     "review_reasons": [
       "真实口语缩约/省略"
     ],
@@ -6560,6 +7231,9 @@
     "old_review_tier": "A",
     "alt_count": 19,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6589,6 +7263,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6620,6 +7297,9 @@
     "old_review_tier": "C",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6650,6 +7330,9 @@
     "old_review_tier": "A",
     "alt_count": 7,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6681,6 +7364,9 @@
     "old_review_tier": "A",
     "alt_count": 6,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6710,6 +7396,9 @@
     "old_review_tier": "A",
     "alt_count": 6,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6738,6 +7427,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6766,6 +7458,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6794,6 +7489,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6823,6 +7521,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6851,6 +7552,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "SPOKEN",
+    "review_labels": [
+      "SPOKEN"
+    ],
     "review_reasons": [
       "真实口语缩约/省略"
     ],
@@ -6883,6 +7587,9 @@
     "old_review_tier": "C",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6911,6 +7618,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6940,6 +7650,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6970,6 +7683,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -6999,6 +7715,9 @@
     "old_review_tier": "B",
     "alt_count": 14,
     "review_status": "SPOKEN",
+    "review_labels": [
+      "SPOKEN"
+    ],
     "review_reasons": [
       "真实口语缩约/省略"
     ],
@@ -7030,6 +7749,9 @@
     "old_review_tier": "B",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7059,6 +7781,9 @@
     "old_review_tier": "A",
     "alt_count": 6,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7087,6 +7812,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "SPOKEN",
+    "review_labels": [
+      "SPOKEN"
+    ],
     "review_reasons": [
       "真实口语缩约/省略"
     ],
@@ -7117,6 +7845,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7145,6 +7876,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7173,6 +7907,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7203,6 +7940,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7231,6 +7971,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7260,6 +8003,9 @@
     "old_review_tier": "A",
     "alt_count": 8,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7289,6 +8035,9 @@
     "old_review_tier": "A",
     "alt_count": 34,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7319,6 +8068,9 @@
     "old_review_tier": "C",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7347,6 +8099,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7377,6 +8132,9 @@
     "old_review_tier": "A",
     "alt_count": 7,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7408,6 +8166,9 @@
     "old_review_tier": "C",
     "alt_count": 2,
     "review_status": "DATA",
+    "review_labels": [
+      "DATA"
+    ],
     "review_reasons": [
       "解析失败:1979"
     ],
@@ -7440,6 +8201,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7472,6 +8236,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7500,6 +8267,9 @@
     "old_review_tier": "B",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7529,6 +8299,9 @@
     "old_review_tier": "B",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7559,6 +8332,9 @@
     "old_review_tier": "C",
     "alt_count": 3,
     "review_status": "DATA",
+    "review_labels": [
+      "DATA"
+    ],
     "review_reasons": [
       "解析失败:50"
     ],
@@ -7593,6 +8369,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "FIX_ZH",
+    "review_labels": [
+      "FIX_ZH"
+    ],
     "review_reasons": [
       "明显不自然：玫瑰句式"
     ],
@@ -7627,6 +8406,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7656,6 +8438,9 @@
     "old_review_tier": "B",
     "alt_count": 5,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7684,6 +8469,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7712,6 +8500,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7740,6 +8531,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7768,6 +8562,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7797,6 +8594,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7827,6 +8627,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7856,6 +8659,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7884,6 +8690,9 @@
     "old_review_tier": "B",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7914,6 +8723,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "DATA",
+    "review_labels": [
+      "DATA"
+    ],
     "review_reasons": [
       "解析失败:10"
     ],
@@ -7946,6 +8758,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -7974,6 +8789,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8002,6 +8820,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8030,6 +8851,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8058,6 +8882,9 @@
     "old_review_tier": "B",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8089,6 +8916,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8117,6 +8947,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8145,6 +8978,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8173,6 +9009,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8201,6 +9040,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8230,6 +9072,9 @@
     "old_review_tier": "B",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8260,6 +9105,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8289,6 +9137,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8317,6 +9168,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8345,6 +9199,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8375,6 +9232,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8406,6 +9266,9 @@
     "old_review_tier": "C",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8435,6 +9298,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8463,6 +9329,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8492,6 +9361,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8523,6 +9395,9 @@
     "old_review_tier": "C",
     "alt_count": 5,
     "review_status": "DATA",
+    "review_labels": [
+      "DATA"
+    ],
     "review_reasons": [
       "解析失败:3"
     ],
@@ -8555,6 +9430,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8583,6 +9461,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8611,6 +9492,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8641,6 +9525,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8671,6 +9558,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "DATA",
+    "review_labels": [
+      "DATA"
+    ],
     "review_reasons": [
       "解析失败:私たち"
     ],
@@ -8704,6 +9594,9 @@
     "old_review_tier": "A",
     "alt_count": 5,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8734,6 +9627,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8762,6 +9658,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8791,6 +9690,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8819,6 +9721,9 @@
     "old_review_tier": "B",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8847,6 +9752,9 @@
     "old_review_tier": "A",
     "alt_count": 6,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8875,6 +9783,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8903,6 +9814,9 @@
     "old_review_tier": "B",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8931,6 +9845,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8959,6 +9876,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -8989,6 +9909,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9017,6 +9940,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9045,6 +9971,9 @@
     "old_review_tier": "A",
     "alt_count": 7,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9074,6 +10003,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9102,6 +10034,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9130,6 +10065,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9158,6 +10096,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9186,6 +10127,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9215,6 +10159,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9243,6 +10190,9 @@
     "old_review_tier": "A",
     "alt_count": 7,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9271,6 +10221,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9299,6 +10252,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9327,6 +10283,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9355,6 +10314,9 @@
     "old_review_tier": "A",
     "alt_count": 3,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9383,6 +10345,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9411,6 +10376,9 @@
     "old_review_tier": "A",
     "alt_count": 4,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9441,6 +10409,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "DATA",
+    "review_labels": [
+      "DATA"
+    ],
     "review_reasons": [
       "解析失败:1"
     ],
@@ -9473,6 +10444,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9501,6 +10475,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9529,6 +10506,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9557,6 +10537,9 @@
     "old_review_tier": "B",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9585,6 +10568,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9613,6 +10599,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9642,6 +10631,9 @@
     "old_review_tier": "B",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9672,6 +10664,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9700,6 +10695,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9728,6 +10726,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9759,6 +10760,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "DATA",
+    "review_labels": [
+      "DATA"
+    ],
     "review_reasons": [
       "解析失败:100"
     ],
@@ -9791,6 +10795,9 @@
     "old_review_tier": "B",
     "alt_count": 1,
     "review_status": "SPOKEN",
+    "review_labels": [
+      "SPOKEN"
+    ],
     "review_reasons": [
       "真实口语缩约/省略"
     ],
@@ -9821,6 +10828,9 @@
     "old_review_tier": "B",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9849,6 +10859,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9879,6 +10892,9 @@
     "old_review_tier": "C",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9909,6 +10925,9 @@
     "old_review_tier": "C",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9937,6 +10956,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9965,6 +10987,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -9993,6 +11018,9 @@
     "old_review_tier": "A",
     "alt_count": 1,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -10021,6 +11049,9 @@
     "old_review_tier": "A",
     "alt_count": 2,
     "review_status": "LAND",
+    "review_labels": [
+      "LAND"
+    ],
     "review_reasons": [],
     "data_signals": [],
     "difficulty_signals": [],
@@ -10049,6 +11080,9 @@
     "old_review_tier": "A",
     "alt_count": 0,
     "review_status": "SPOKEN",
+    "review_labels": [
+      "SPOKEN"
+    ],
     "review_reasons": [
       "真实口语缩约/省略"
     ],

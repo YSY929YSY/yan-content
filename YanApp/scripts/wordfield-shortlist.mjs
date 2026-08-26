@@ -98,7 +98,7 @@ const NEGATIVE_VERBS = [
   ['盗む', /盗(?:む|ん|み|め)/u],
   ['打つ', /打(?:つ|っ|ち|た|て)/u],
 ];
-const FOREIGN_MEASURE_WORDS = ['マイル', 'ポンド', 'ドル', 'インチ', 'ヤード', 'フィート', 'オンス', 'ガロン', 'キロ'];
+const FOREIGN_MEASURE_WORDS = ['マイル', 'ポンド', 'ドル', 'インチ', 'ヤード', 'フィート', 'オンス', 'ガロン'];
 const DIFFICULTY_PATTERNS = [
   ['沸騰する', /沸騰/u],
   ['降り続く', /降り続/u],
@@ -115,6 +115,12 @@ const CHINESE_FIX_PATTERNS = [
   ['明显不自然：他说得很大声', /他说得很大声/u],
   ['明显不自然：厨房正忙著', /我的母亲在厨房里正忙著/u],
 ];
+// This is the one ticket-specified Chinese issue that the former priority
+// chain hid behind DATA. It is an explicit known-row signal, not a new
+// general-purpose translation heuristic.
+const CHINESE_JP_FIXES = new Map([
+  ['n5_fun', '意向形语气误译：待とう'],
+]);
 
 const matchesNamed = (text, patterns) => patterns
   .filter(([, pattern]) => pattern.test(text))
@@ -132,33 +138,42 @@ const classifyRow = (row) => {
   const difficulty = matchesNamed(row.jp, DIFFICULTY_PATTERNS);
   const fragment = /(?:が|けど|のに|ので|から|し)。$/u.test(row.jp);
   const chineseMismatch = /姉/u.test(row.jp) && /姐妹/u.test(row.zh);
-  const chineseFixes = matchesNamed(row.zh, CHINESE_FIX_PATTERNS);
-  const reasons = [];
-  let status = 'LAND';
-  if (dataReasons.length) {
-    status = 'DATA';
-    reasons.push(...dataReasons);
-  } else if (spoken) {
-    status = 'SPOKEN';
-    reasons.push('真实口语缩约/省略');
-  } else if ((negative.length && row.anchor_id !== 'n5_shinu') || foreignMeasures.length || fragment || row.anchor_id === 'n5_amai' || row.anchor_id === 'n5_ane') {
-    status = 'SWAP';
-    if (negative.length && row.anchor_id !== 'n5_shinu') reasons.push(`负面动词:${negative.join('、')}`);
-    if (foreignMeasures.length) reasons.push(`外国语料度量衡:${foreignMeasures.join('、')}`);
-    if (fragment) reasons.push('疑似残句');
-    if (row.anchor_id === 'n5_amai') reasons.push('固定搭配/引申义');
-    if (row.anchor_id === 'n5_ane') reasons.push('日语搭配别扭');
-    if (chineseMismatch) reasons.push('姉被译成姐妹');
-  } else if (chineseFixes.length) {
-    status = 'FIX_ZH';
-    reasons.push(...chineseFixes);
-  }
+  const chineseFixes = [
+    ...matchesNamed(row.zh, CHINESE_FIX_PATTERNS),
+    ...(CHINESE_JP_FIXES.has(row.anchor_id) ? [CHINESE_JP_FIXES.get(row.anchor_id)] : []),
+  ];
+  const chineseSignals = [
+    ...(chineseMismatch ? ['姉→姐妹疑似错译'] : []),
+    ...chineseFixes,
+  ];
+  const swap = (negative.length && row.anchor_id !== 'n5_shinu')
+    || foreignMeasures.length
+    || fragment
+    || row.anchor_id === 'n5_amai'
+    || row.anchor_id === 'n5_ane';
+  const labels = [];
+  if (dataReasons.length) labels.push('DATA');
+  if (spoken) labels.push('SPOKEN');
+  if (swap) labels.push('SWAP');
+  if (chineseSignals.length) labels.push('FIX_ZH');
+  if (!labels.length) labels.push('LAND');
+  const status = ['DATA', 'SPOKEN', 'SWAP', 'FIX_ZH', 'LAND'].find(label => labels.includes(label));
+  const reasons = [...dataReasons];
+  if (spoken) reasons.push('真实口语缩约/省略');
+  if (negative.length && row.anchor_id !== 'n5_shinu') reasons.push(`负面动词:${negative.join('、')}`);
+  if (foreignMeasures.length) reasons.push(`外国语料度量衡:${foreignMeasures.join('、')}`);
+  if (fragment) reasons.push('疑似残句');
+  if (row.anchor_id === 'n5_amai') reasons.push('固定搭配/引申义');
+  if (row.anchor_id === 'n5_ane') reasons.push('日语搭配别扭');
+  if (chineseMismatch) reasons.push('姉被译成姐妹');
+  reasons.push(...chineseFixes);
   return {
     status,
+    labels,
     reasons,
     data_signals: numericOrMeasureUnknown,
     difficulty_signals: difficulty,
-    chinese_signals: chineseMismatch ? ['姉→姐妹疑似错译'] : chineseFixes,
+    chinese_signals: chineseSignals,
     risk_signals: fragment ? ['疑似残句'] : [],
   };
 };
@@ -182,6 +197,7 @@ for (const group of byAnchor.values()) {
     old_review_tier: tierOf(result.selected),
     alt_count: group.length - 1,
     review_status: classification.status,
+    review_labels: classification.labels,
     review_reasons: classification.reasons,
     data_signals: classification.data_signals,
     difficulty_signals: classification.difficulty_signals,
@@ -223,6 +239,7 @@ console.log(`unknown_word_count: ${JSON.stringify(counts(unknownCounts))}`);
 console.log(`jp_char_count: ${JSON.stringify(counts(lengthCounts))}`);
 console.log(`old tiers: ${JSON.stringify(counts(tierCounts))}`);
 console.log(`statuses: ${JSON.stringify(counts(statusCounts))}`);
+console.log(`multi-label rows (>=2): ${selected.filter(row => row.review_labels.length >= 2).length}`);
 console.log(`DATA signals: ${selected.filter(row => row.data_signals.length).length}`);
 console.log(`difficulty signals: ${selected.filter(row => row.difficulty_signals.length).length}`);
 console.log(`Chinese signals: ${selected.filter(row => row.chinese_signals.length).length}`);
