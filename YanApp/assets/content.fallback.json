@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "version": "2.5",
+  "version": "2.6",
   "updated": "2026-08-22",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8005 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
@@ -14132,7 +14132,11 @@
     "learningBasis": "legacy_mainline_anchor"
    },
    "wordField": {
-    "members": [],
+    "members": [
+     {
+      "id": "n5_narau"
+     }
+    ],
     "sentence": {
      "jp": "トルコ語を習ってるんだ。",
      "zh": "我学土耳其语。"
@@ -14740,6 +14744,9 @@
    },
    "wordField": {
     "members": [
+     {
+      "id": "n5_hataraku"
+     },
      {
       "id": "n5_ichi"
      },
@@ -15908,6 +15915,9 @@
    "wordField": {
     "members": [
      {
+      "id": "n5_akeru"
+     },
+     {
       "id": "n5_hako"
      },
      {
@@ -15977,6 +15987,9 @@
    },
    "wordField": {
     "members": [
+     {
+      "id": "n5_ageru"
+     },
      {
       "id": "n5_atama"
      }
@@ -16341,6 +16354,9 @@
    },
    "wordField": {
     "members": [
+     {
+      "id": "n5_asobu"
+     },
      {
       "id": "n5_niwa"
      },
@@ -16716,6 +16732,9 @@
      },
      {
       "id": "n5_hon"
+     },
+     {
+      "id": "n5_yomu"
      }
     ],
     "sentence": {
@@ -16828,6 +16847,12 @@
     "members": [
      {
       "id": "n5_ato"
+     },
+     {
+      "id": "n5_kuru"
+     },
+     {
+      "id": "n5_toru"
      }
     ],
     "sentence": {
@@ -17130,6 +17155,9 @@
    },
    "wordField": {
     "members": [
+     {
+      "id": "n5_abiru"
+     },
      {
       "id": "n5_ane"
      },
@@ -17766,6 +17794,9 @@
    "wordField": {
     "members": [
      {
+      "id": "n5_iu"
+     },
+     {
       "id": "n5_kyuu"
      }
     ],
@@ -17934,6 +17965,12 @@
    },
    "wordField": {
     "members": [
+     {
+      "id": "n5_kawa"
+     },
+     {
+      "id": "n5_oyogu"
+     },
      {
       "id": "n5_watakushi"
      }
@@ -18153,6 +18190,9 @@
      },
      {
       "id": "n5_kudasai"
+     },
+     {
+      "id": "n5_yobu"
      }
     ],
     "sentence": {
@@ -18690,6 +18730,9 @@
     "members": [
      {
       "id": "n5_issho"
+     },
+     {
+      "id": "n5_taberu"
      },
      {
       "id": "n5_yuuhan"
@@ -19567,6 +19610,9 @@
     "members": [
      {
       "id": "n5_uta"
+     },
+     {
+      "id": "n5_utau"
      }
     ],
     "sentence": {
@@ -19719,6 +19765,9 @@
    },
    "wordField": {
     "members": [
+     {
+      "id": "n5_umareru"
+     },
      {
       "id": "n5_watakushi"
      }
@@ -20159,6 +20208,9 @@
       "id": "n5_eigo"
      },
      {
+      "id": "n5_hanasu"
+     },
+     {
       "id": "n5_mainichi"
      },
      {
@@ -20389,6 +20441,9 @@
     "members": [
      {
       "id": "n5_enpitsu"
+     },
+     {
+      "id": "n5_motsu"
      },
      {
       "id": "n5_te"
@@ -20968,6 +21023,9 @@
    "wordField": {
     "members": [
      {
+      "id": "n5_okiru"
+     },
+     {
       "id": "n5_watakushi"
      }
     ],
@@ -21031,6 +21089,9 @@
    },
    "wordField": {
     "members": [
+     {
+      "id": "n5_oku"
+     },
      {
       "id": "n5_tsukue"
      },
@@ -21430,6 +21491,12 @@
    },
    "wordField": {
     "members": [
+     {
+      "id": "n5_osoi"
+     },
+     {
+      "id": "n5_tsuku"
+     },
      {
       "id": "n5_watakushi"
      }
@@ -22899,6 +22966,9 @@
     "members": [
      {
       "id": "n5_gaikoku"
+     },
+     {
+      "id": "n5_iku"
      },
      {
       "id": "n5_watakushi"
@@ -24705,6 +24775,9 @@
    "wordField": {
     "members": [
      {
+      "id": "n5_kariru"
+     },
+     {
       "id": "n5_okane"
      },
      {
@@ -25181,6 +25254,9 @@
     "members": [
      {
       "id": "n5_kiiroi"
+     },
+     {
+      "id": "n5_miru"
      }
     ],
     "sentence": {
@@ -25242,6 +25318,9 @@
    },
    "wordField": {
     "members": [
+     {
+      "id": "n5_kieru"
+     },
      {
       "id": "n5_yuki"
      }
@@ -25663,6 +25742,9 @@
       "id": "n5_kinou"
      },
      {
+      "id": "n5_tsukuru"
+     },
+     {
       "id": "n5_watakushi"
      },
      {
@@ -25851,6 +25933,9 @@
     "members": [
      {
       "id": "n5_gyuunyuu"
+     },
+     {
+      "id": "n5_nomu"
      },
      {
       "id": "n5_watakushi"
@@ -26690,6 +26775,9 @@
       "id": "n5_kudasai"
      },
      {
+      "id": "n5_matsu"
+     },
+     {
       "id": "n5_sukoshi"
      }
     ],
@@ -26940,6 +27028,9 @@
     "members": [
      {
       "id": "n5_kutsushita"
+     },
+     {
+      "id": "n5_nugu"
      }
     ],
     "sentence": {
@@ -27301,6 +27392,9 @@
    },
    "wordField": {
     "members": [
+     {
+      "id": "n5_kuru"
+     },
      {
       "id": "n5_tegami"
      },
@@ -27894,6 +27988,9 @@
     "members": [
      {
       "id": "n5_genkan"
+     },
+     {
+      "id": "n5_kuru"
      }
     ],
     "sentence": {
@@ -29583,6 +29680,9 @@
       "id": "n5_konban"
      },
      {
+      "id": "n5_taberu"
+     },
+     {
       "id": "n5_watakushi"
      }
     ],
@@ -30629,6 +30729,9 @@
       "id": "n5_jisho"
      },
      {
+      "id": "n5_motsu"
+     },
+     {
       "id": "n5_watakushi"
      }
     ],
@@ -30931,6 +31034,9 @@
     "members": [
      {
       "id": "n5_jitensha"
+     },
+     {
+      "id": "n5_motsu"
      }
     ],
     "sentence": {
@@ -31165,6 +31271,9 @@
      },
      {
       "id": "n5_me"
+     },
+     {
+      "id": "n5_miru"
      }
     ],
     "sentence": {
@@ -31226,6 +31335,9 @@
    },
    "wordField": {
     "members": [
+     {
+      "id": "n5_shimaru"
+     },
      {
       "id": "n5_yuubinkyoku"
      }
@@ -31937,6 +32049,9 @@
    "wordField": {
     "members": [
      {
+      "id": "n5_shiru"
+     },
+     {
       "id": "n5_watakushi"
      }
     ],
@@ -32116,6 +32231,9 @@
     "members": [
      {
       "id": "n5_shinbun"
+     },
+     {
+      "id": "n5_toru"
      }
     ],
     "sentence": {
@@ -32788,6 +32906,9 @@
    },
    "wordField": {
     "members": [
+     {
+      "id": "n5_sumu"
+     },
      {
       "id": "n5_watakushi"
      }
@@ -33928,6 +34049,9 @@
     "members": [
      {
       "id": "n5_soto"
+     },
+     {
+      "id": "n5_taberu"
      }
     ],
     "sentence": {
@@ -35210,6 +35334,9 @@
    "wordField": {
     "members": [
      {
+      "id": "n5_taberu"
+     },
+     {
       "id": "n5_watakushi"
      }
     ],
@@ -35524,6 +35651,9 @@
       "id": "n5_chiisai"
      },
      {
+      "id": "n5_hanasu"
+     },
+     {
       "id": "n5_koe"
      },
      {
@@ -35690,6 +35820,9 @@
      },
      {
       "id": "n5_kagi"
+     },
+     {
+      "id": "n5_toru"
      }
     ],
     "sentence": {
@@ -35932,6 +36065,9 @@
     "members": [
      {
       "id": "n5_chichi"
+     },
+     {
+      "id": "n5_iku"
      },
      {
       "id": "n5_kuruma"
@@ -36527,6 +36663,9 @@
    },
    "wordField": {
     "members": [
+     {
+      "id": "n5_tsukuru"
+     },
      {
       "id": "n5_yasai"
      }
@@ -37611,6 +37750,9 @@
      },
      {
       "id": "n5_ie"
+     },
+     {
+      "id": "n5_kaeru"
      },
      {
       "id": "n5_watakushi"
@@ -39173,6 +39315,9 @@
    "wordField": {
     "members": [
      {
+      "id": "n5_toru"
+     },
+     {
       "id": "n5_toshi"
      }
     ],
@@ -40177,6 +40322,9 @@
       "id": "n5_nan"
      },
      {
+      "id": "n5_shiru"
+     },
+     {
       "id": "n5_watakushi"
      }
     ],
@@ -40474,6 +40622,9 @@
      },
      {
       "id": "n5_tsugi"
+     },
+     {
+      "id": "n5_yasumu"
      }
     ],
     "sentence": {
@@ -40893,7 +41044,14 @@
     "learningBasis": "legacy_mainline_anchor"
    },
    "wordField": {
-    "members": [],
+    "members": [
+     {
+      "id": "n5_neru"
+     },
+     {
+      "id": "n5_osoi"
+     }
+    ],
     "sentence": {
      "jp": "普段より遅く寝たんです。",
      "zh": "我比平常睡得晚。"
@@ -41408,6 +41566,9 @@
    "wordField": {
     "members": [
      {
+      "id": "n5_hairu"
+     },
+     {
       "id": "n5_heya"
      },
      {
@@ -41675,6 +41836,9 @@
     "members": [
      {
       "id": "n5_hashi_2"
+     },
+     {
+      "id": "n5_tsukau"
      }
     ],
     "sentence": {
@@ -41897,6 +42061,9 @@
    },
    "wordField": {
     "members": [
+     {
+      "id": "n5_hashiru"
+     },
      {
       "id": "n5_jidousha"
      }
@@ -42509,7 +42676,13 @@
    "wordField": {
     "members": [
      {
+      "id": "n5_hayai"
+     },
+     {
       "id": "n5_ie"
+     },
+     {
+      "id": "n5_kaeru"
      }
     ],
     "sentence": {
@@ -43908,6 +44081,9 @@
      },
      {
       "id": "n5_gakkou"
+     },
+     {
+      "id": "n5_yasumu"
      }
     ],
     "sentence": {
@@ -44423,6 +44599,9 @@
       "id": "n5_fuku_2"
      },
      {
+      "id": "n5_nugu"
+     },
+     {
       "id": "n5_watakushi"
      }
     ],
@@ -44837,6 +45016,9 @@
      },
      {
       "id": "n5_jitensha"
+     },
+     {
+      "id": "n5_motsu"
      },
      {
       "id": "n5_watakushi"
@@ -45437,6 +45619,9 @@
      },
      {
       "id": "n5_kudasai"
+     },
+     {
+      "id": "n5_nugu"
      }
     ],
     "sentence": {
@@ -45942,6 +46127,9 @@
      },
      {
       "id": "n5_neru"
+     },
+     {
+      "id": "n5_yomu"
      }
     ],
     "sentence": {
@@ -46457,6 +46645,9 @@
       "id": "n5_mae"
      },
      {
+      "id": "n5_umareru"
+     },
+     {
       "id": "n5_watakushi"
      }
     ],
@@ -46700,6 +46891,9 @@
       "id": "n5_machi"
      },
      {
+      "id": "n5_umareru"
+     },
+     {
       "id": "n5_watakushi"
      }
     ],
@@ -46912,6 +47106,9 @@
       "id": "n5_mado"
      },
      {
+      "id": "n5_miru"
+     },
+     {
       "id": "n5_soto"
      },
      {
@@ -47080,6 +47277,9 @@
     "members": [
      {
       "id": "n5_mannenhitsu"
+     },
+     {
+      "id": "n5_motsu"
      }
     ],
     "sentence": {
@@ -47330,6 +47530,9 @@
       "id": "n5_mizu"
      },
      {
+      "id": "n5_nomu"
+     },
+     {
       "id": "n5_watakushi"
      }
     ],
@@ -47395,6 +47598,9 @@
     "members": [
      {
       "id": "n5_mise"
+     },
+     {
+      "id": "n5_uru"
      },
      {
       "id": "n5_yasai"
@@ -48493,6 +48699,9 @@
    },
    "wordField": {
     "members": [
+     {
+      "id": "n5_motsu"
+     },
      {
       "id": "n5_okane"
      }
