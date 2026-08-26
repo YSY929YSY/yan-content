@@ -94,7 +94,9 @@ test('★★ 20 条真实词场句的动词活用位置都有中文', () => {
   const fields = [];
   for (const word of content.wordBank || []) {
     const wordFields = Array.isArray(word.wordField) ? word.wordField : (word.wordField ? [word.wordField] : []);
-    for (const field of wordFields) if (field?.sentence?.jp) fields.push(field.sentence.jp);
+    for (const field of wordFields) {
+      if (field?.sentence?.jp && !field.source) fields.push(field.sentence.jp);
+    }
   }
   assert.equal(fields.length, 20);
 
