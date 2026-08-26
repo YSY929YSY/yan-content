@@ -10,7 +10,7 @@
 提交追加到本机 `documentDirectory/yan_corrections_v1.jsonl`，不联网、不进内容包。
 新增 `scripts/corrections-export.mjs`，按 `kind` 与 `wordId` 汇总到 stdout。
 
-代码与测试 commit 待本轮提交后补入；没有内容包改动。
+代码、测试与交接文档 commit：`6bff0e8`；没有内容包改动。
 
 ## 本轮验收
 
