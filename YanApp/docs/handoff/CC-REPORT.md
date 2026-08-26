@@ -4261,3 +4261,93 @@ FAIL: 0
 WARN: 14
 Result: PASS
 ~~~
+
+## 2026-08-26 · TICKET-correction-entry-minimal
+
+### 异常自查
+
+1. 本轮可比数字没有出现两倍以上变化。测试总数从上一轮报告的 610 增至本轮 616，来自新增的纠错纯函数与入口结构守卫；复算：`npm test`。
+2. 没有说不清来源的数字。测试数来自 `npm test`，审计结果来自 `npm run audit`，其余是代码结构或人工观察门槛。
+3. 「入口位于详情页底部、低权重」是结构判据，不是统计测量；实际 web 渲染被项目既有 Expo web 依赖解析错误挡住，不能把静态守卫写成截图已通过。
+
+### 决策指标
+
+本轮决策指标 = 一周内真实点击纠错入口的次数，因为它直接决定这个入口是否值得留在产品里。
+
+- 修复前：0（此前没有显式入口）。
+- 修复后：待负责人用热更新包观察一周，低于工单约定的点击门槛就删除；这是人工判读，判读对象是真机一周的入口点击记录，当前没有可复算的本地数据。
+
+### 实际改动
+
+- `App.js`：在 `WBDetailPage` 内容底部加入低权重「去纠错」；弹层固定「中文意思不对 / 日语不自然 / 例句和这个词对不上」三项、可选说明、取消/提交；成功提示「记下了」，读写失败提示「没记上」。
+- `src/lib/correctionsModel.js`：抽出 JSONL 追加纯函数，读失败或写失败均返回 `false`。
+- `src/lib/corrections.js`：使用 Expo 现有的 `FileSystem` 适配，把记录追加到 `documentDirectory/yan_corrections_v1.jsonl`；不发网络请求。
+- `scripts/corrections-export.mjs`：只读 JSONL，按 `kind` 和 `wordId` 输出汇总。
+- `src/lib/__tests__/corrections.test.mjs`：覆盖追加保留旧行、三种类型、读写失败。
+- `src/lib/__tests__/correctionEntry.test.mjs`：守住入口只在详情页、位于底部导航之前且不使用主色背景。
+
+没有改 `assets/content.fallback.json`、`yan-content/content.v2.json`、服务端、积分或 OTA 配置。
+
+### 验收原始输出
+
+新增测试单独运行：
+
+~~~
+node --test src/lib/__tests__/corrections.test.mjs
+✔ 追加 JSONL 时保留旧行，并且新记录只占一行
+✔ 三种纠错类型都能追加成功
+✔ 读失败或写失败都返回 false，不报成功
+ℹ tests 3
+ℹ pass 3
+ℹ fail 0
+~~~
+
+完整测试：
+
+~~~
+> yanapp@1.0.0 test
+> node --test --test-reporter=spec "src/**/__tests__/*.test.mjs" "src/**/__tests__/*.test.ts"
+
+ℹ tests 616
+ℹ suites 0
+ℹ pass 616
+ℹ fail 0
+~~~
+
+复算：`npm test`
+
+类型检查：
+
+~~~
+> yanapp@1.0.0 typecheck
+> tsc --noEmit
+~~~
+
+复算：`npm run typecheck`
+
+审计：
+
+~~~
+> yanapp@1.0.0 audit
+> node scripts/audit.mjs
+
+--- audit summary ---
+FAIL: 0
+WARN: 16
+Result: PASS
+~~~
+
+复算：`npm run audit`
+
+web 渲染验证：本地 Expo web 在 bundling 阶段失败，原始错误为无法解析
+`react-native-web/dist/exports/DeviceEventEmitter`，随后同样无法解析
+`react-native-web/dist/exports/AppRegistry`。这是现有 web 依赖基线问题；本轮保留了结构守卫，
+没有为了截图验收引入或升级依赖。
+
+### 本轮忍住没改
+
+- 没有顺手修 Expo web 的依赖版本或升级 `react-native-web`。
+- 没有把纠错记录接入服务端、登录补传、积分或内容自动修正。
+- 没有拆 `App.js`，也没有给例句、词场、首页增加入口。
+
+代码 commit：待提交；内容包未改。

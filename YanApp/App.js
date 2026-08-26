@@ -32,7 +32,10 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 
 
 import fallbackContent from './assets/content.fallback.json';
+import appConfig from './app.json';
 import { fetchContent } from './src/lib/contentCache';
+import { CORRECTION_KINDS } from './src/lib/correctionsModel';
+import { saveCorrection } from './src/lib/corrections';
 import { searchPlace, searchPlaceDetailed } from './src/lib/geocode';
 import WorldMap from './src/features/world/WorldMap';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -75,6 +78,7 @@ import Svg, { Circle, G, Path } from 'react-native-svg';
 
 // 例句 asset 已由上面 import；辞书形索引只构建一次，词卡渲染时复用。
 const EXAMPLE_DICTIONARY_FORMS = dictionaryFormsFrom(EXAMPLE_TOKENS);
+const APP_VERSION = appConfig?.expo?.version || 'unknown';
 const TOKEN_COLUMN_SAMPLE_SENTENCES = new Set([
   '店員にカードを見せます。',
   '店員にサイズを聞きます。',
@@ -2438,6 +2442,10 @@ function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, 
   const rawField = entry.wordField || (__DEV__ ? WORDFIELD_PREVIEW[entry.id] : null);
   const wordFields = (Array.isArray(rawField) ? rawField : (rawField ? [rawField] : []))
     .filter(f => f?.sentence?.jp);
+  const [correctionOpen, setCorrectionOpen] = useState(false);
+  const [correctionKind, setCorrectionKind] = useState('');
+  const [correctionNote, setCorrectionNote] = useState('');
+  const [correctionSaving, setCorrectionSaving] = useState(false);
   useEffect(() => {
     // ⚠️ 喂读音不是汉字。TTS 拿汉字自己挑读音,而这张卡上写着的是**某一个**读音:
     // `私` 有 わたし / わたくし 两条词条,卡上写 わたくし、念出来是 わたし,
@@ -2463,6 +2471,39 @@ function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, 
   // 都不进入这个主学习面：没有 token 就不能安全逐词注音；没有罗马音或中文，
   // 用户读到一半还要自己在页面别处补信息。
   const hasPrimaryExample = hasCompleteExample(entry) && !!EXAMPLE_TOKENS[entry.id];
+
+  const closeCorrection = () => {
+    if (correctionSaving) return;
+    setCorrectionOpen(false);
+    setCorrectionKind('');
+    setCorrectionNote('');
+  };
+
+  const submitCorrection = async () => {
+    if (!CORRECTION_KINDS.includes(correctionKind)) {
+      Alert.alert('选一项', '先告诉我们哪里不对。');
+      return;
+    }
+    setCorrectionSaving(true);
+    const ok = await saveCorrection({
+      ts: new Date().toISOString(),
+      wordId: entry.id,
+      word: entry.word,
+      reading: primaryReading(entry.reading),
+      kind: correctionKind,
+      note: correctionNote.trim(),
+      appVersion: APP_VERSION,
+    });
+    setCorrectionSaving(false);
+    if (!ok) {
+      Alert.alert('没记上');
+      return;
+    }
+    setCorrectionOpen(false);
+    setCorrectionKind('');
+    setCorrectionNote('');
+    Alert.alert('记下了');
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: C.paper }}>
@@ -2646,6 +2687,9 @@ function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, 
             <Text style={wd.readonlyTxt}>仅供查询，暂未开放学习</Text>
           </View>
         )}
+        <TouchableOpacity style={wd.correctionBtn} onPress={() => setCorrectionOpen(true)} activeOpacity={0.7}>
+          <Text style={wd.correctionTxt}>去纠错</Text>
+        </TouchableOpacity>
       </ScrollView>
       <View style={wd.bottomNav}>
         <TouchableOpacity style={[wd.bottomNavBtn, !hasPrev && wd.bottomNavBtnDisabled]} onPress={hasPrev ? onPrev : undefined} activeOpacity={hasPrev ? 0.7 : 1}>
@@ -2655,6 +2699,42 @@ function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, 
           <Text style={[wd.bottomNavTxt, !hasNext && wd.bottomNavTxtDisabled]}>下一词 ›</Text>
         </TouchableOpacity>
       </View>
+      <Modal visible={correctionOpen} transparent animationType="fade" onRequestClose={closeCorrection}>
+        <View style={wd.correctionOverlay}>
+          <Pressable style={StyleSheet.absoluteFill} onPress={closeCorrection} />
+          <View style={wd.correctionSheet}>
+            <Text style={wd.correctionTitle}>这条哪里不对？</Text>
+            {[
+              ['meaning', '中文意思不对'],
+              ['unnatural', '日语不自然'],
+              ['example_mismatch', '例句和这个词对不上'],
+            ].map(([kind, label]) => (
+              <TouchableOpacity key={kind} style={wd.correctionOption} onPress={() => setCorrectionKind(kind)} activeOpacity={0.7}>
+                <View style={[wd.correctionRadio, correctionKind === kind && wd.correctionRadioSelected]} />
+                <Text style={wd.correctionOptionTxt}>{label}</Text>
+              </TouchableOpacity>
+            ))}
+            <TextInput
+              style={wd.correctionInput}
+              value={correctionNote}
+              onChangeText={setCorrectionNote}
+              placeholder="想补一句说明…"
+              placeholderTextColor={C.mutedLight}
+              multiline
+              maxLength={500}
+              editable={!correctionSaving}
+            />
+            <View style={wd.correctionActions}>
+              <TouchableOpacity style={wd.correctionCancel} onPress={closeCorrection} disabled={correctionSaving}>
+                <Text style={wd.correctionCancelTxt}>取消</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={wd.correctionSubmit} onPress={submitCorrection} disabled={correctionSaving}>
+                <Text style={wd.correctionSubmitTxt}>{correctionSaving ? '记录中…' : '提交'}</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -2741,6 +2821,21 @@ const wd = StyleSheet.create({
   bottomNavBtnDisabled: { opacity: 0.3 },
   bottomNavTxt: { fontSize: 13, fontWeight: '600', color: C.lava },
   bottomNavTxtDisabled: { color: C.muted },
+  correctionBtn: { marginHorizontal: 16, marginTop: 16, paddingVertical: 8, alignItems: 'center' },
+  correctionTxt: { fontSize: 11, color: C.mutedLight, fontWeight: '600' },
+  correctionOverlay: { flex: 1, justifyContent: 'center', paddingHorizontal: 24, backgroundColor: 'rgba(0,0,0,0.28)' },
+  correctionSheet: { backgroundColor: C.white, borderRadius: 14, padding: 18, shadowColor: C.ink, shadowOpacity: 0.12, shadowRadius: 14, shadowOffset: { width: 0, height: 5 } },
+  correctionTitle: { fontSize: 16, fontWeight: '700', color: C.ink, marginBottom: 10 },
+  correctionOption: { flexDirection: 'row', alignItems: 'center', paddingVertical: 8, gap: 10 },
+  correctionRadio: { width: 18, height: 18, borderRadius: 9, borderWidth: 1, borderColor: C.border },
+  correctionRadioSelected: { borderWidth: 5, borderColor: C.ink },
+  correctionOptionTxt: { fontSize: 14, color: C.ink },
+  correctionInput: { minHeight: 72, marginTop: 8, paddingHorizontal: 11, paddingVertical: 9, borderWidth: 1, borderColor: C.border, borderRadius: 9, color: C.ink, fontSize: 13, textAlignVertical: 'top' },
+  correctionActions: { flexDirection: 'row', justifyContent: 'flex-end', gap: 10, marginTop: 14 },
+  correctionCancel: { paddingHorizontal: 12, paddingVertical: 8 },
+  correctionCancelTxt: { fontSize: 13, color: C.muted },
+  correctionSubmit: { paddingHorizontal: 14, paddingVertical: 8, borderRadius: 8, backgroundColor: C.ink },
+  correctionSubmitTxt: { fontSize: 13, color: C.white, fontWeight: '700' },
 });
 
 // ─────────────────────────────────────────────

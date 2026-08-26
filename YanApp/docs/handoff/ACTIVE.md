@@ -1,37 +1,32 @@
-# 当前状态 · JP-22 换句与成员回填（内容窗口已合回）
+# 当前状态 · 纠错入口（本地 only）
 
-> 更新日期：2026-08-27
+> 更新日期：2026-08-26
 
 ## 当前工单
 
-`docs/handoff/TICKET-wordfield-jp-22.md` ← **本轮已完成，换句仍待负责人审核；不发布**
+`docs/handoff/TICKET-correction-entry-minimal.md` ← **本轮已完成；不发布、不发 OTA**
 
-内容回填在 `content/2026-08-27-wordfield-members` 完成后已快进合回
-`develop/v2`。换句仅进入 staging，不覆盖内容包。
+已在词卡详情页底部加入低权重「去纠错」入口。弹层固定三类问题、可选说明，
+提交追加到本机 `documentDirectory/yan_corrections_v1.jsonl`，不联网、不进内容包。
+新增 `scripts/corrections-export.mjs`，按 `kind` 与 `wordId` 汇总到 stdout。
 
-## 到这里为止发生了什么
+代码与测试 commit 待本轮提交后补入；没有内容包改动。
 
-1851 条 Tatoeba 候选 → 343 个 anchor 各选一条 → 五状态重排（LAND 301）
-→ 外部审核 301 条 → **OK 160 + SPOKEN 14 = 174 条候选** → 排除已有词场 7 条
-→ **167 条新词场落库，20 → 187 / 563** → JP 组 22 条机械换句：15 条有可用备选，
-7 条仍需负责人处理。
+## 本轮验收
 
-内容 commit：`cbba0b1`（落库）+ `d11f81c`（JP-22 成员回填）。167 条新增词场仍保留
-Tatoeba 日/中句 ID，`sentence.roma` 按裁决省略，未写确认字段；现有 20 条未覆盖、未回填。
-回填后 64 条词场新增 69 个成员 ID，空 `members` 为 0；日文、中文、source 均未改。
+- `npm test`：616 / 616 通过。复算：`npm test`
+- `npm run typecheck`：通过。复算：`npm run typecheck`
+- `npm run audit`：`FAIL: 0`、`WARN: 16`、`Result: PASS`。复算：`npm run audit`
+- 导出脚本已用临时 JSONL 验证能按 `kind` 与 `wordId` 汇总；样例文件已在验证后删除。
 
-外部审核结果落盘在 `staging/gpt-verdicts-301.json`，五组：
+web 实际渲染未能启动：Expo web 基线在 bundling 阶段报既有依赖解析错误，缺少
+`react-native-web/dist/exports/DeviceEventEmitter` 与 `AppRegistry`；本轮没有改依赖。
+因此 UI 位置以结构守卫通过为准，真机视觉仍待负责人在热更新包上确认。
 
-| 组 | 数 | 状态 |
-|---|---:|---|
-| OK | 160 | **本轮落** |
-| SPOKEN | 14 | **本轮落**（真实口语是优点，不是问题） |
-| ZH | 38 | 挂着 —— 只改中文，日语有源不动 |
-| JP | 22 | 挂着 —— 从备选池换句（16 条有备选，6 条独苗） |
-| LV | 67 | 挂着 —— **判据本身要重定**，见下 |
+## 使用反馈门槛
 
-两次独立测量互相印证：Codex 人工抽 40 条判出中文问题 15%，
-外部审核 301 条判出 ZH 12.6%。**测量可信。**
+负责人自己用一周观察使用量；一周内点击少于 3 次，就删掉这个入口。
+这个指标是产品验收门槛，不是本轮代码测试可以证明的事实。
 
 ## 排队中的工单（本轮做完再动，不要并行改内容包）
 
