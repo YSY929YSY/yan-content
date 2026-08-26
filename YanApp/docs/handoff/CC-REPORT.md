@@ -3175,6 +3175,79 @@ Result: FAIL
 ~~~
 
 
+### 提交范围与最终门禁原始输出
+
+本轮提交范围：
+- a51505d：更新 scripts/wordfield-shortlist.mjs 的五状态和机械信号；重生成 staging/wordfield-shortlist-343.json；更新 ACTIVE.md；追加本节报告。
+- 未改 assets/content.fallback.json、yan-content/content.v2.json、App.js、UI 或 gloss 代码。
+
+实际运行的命令是：
+~~~bash
+npm test && npm run typecheck && npm run audit
+~~~
+
+原始输出中的测试汇总：
+~~~
+ℹ tests 610
+ℹ suites 0
+ℹ pass 610
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 13813.428638
+
+> yanapp@1.0.0 typecheck
+> tsc --noEmit
+~~~
+
+原始 audit 输出：
+~~~
+> yanapp@1.0.0 audit
+> node scripts/audit.mjs
+
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:2937: review editorial claim "旅行高频"
+WARN user-claims App.js:2981: review editorial claim "旅行高频"
+WARN user-claims App.js:3075: review editorial claim "高频"
+WARN user-claims App.js:3118: review editorial claim "高频"
+WARN user-claims App.js:3165: review editorial claim "高频"
+WARN user-claims App.js:3183: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 a00a76e1289a9c84e0f7089b2edc1949811bf52fb08f7c297ba55ada8ffecd82
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+INFO doc-refs scanned 1014 references (434 unique)
+WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:16: missing 调研/…/red调研重新规划_编号修正版.md
+WARN doc-refs docs/AUDIT-source-trust-2026-08-22.md:286: missing red调研重新规划_编号修正版.md
+WARN doc-refs docs/handoff/CC-REPORT.md:3658: missing src/content/publication.ts
+WARN doc-refs docs/handoff/CC-REPORT.md:3659: missing src/content/schema.ts
+WARN doc-refs docs/handoff/CC-REPORT.md:3660: missing src/content/contentValidation.ts
+WARN doc-refs docs/handoff/CC-REPORT.md:3661: missing staging/duplicate-seq-plan.md
+WARN doc-refs docs/handoff/CC-REPORT.md:3662: missing staging/duplicate-seq-groups.json
+WARN doc-refs docs/handoff/TICKET-correction-entry-minimal.md:62: missing scripts/corrections-export.mjs
+PASS doc-refs 所有引用都已入库（8 条指向不存在的路径，见 WARN）
+PASS workspace-clean docs markdown tracked
+--- audit summary ---
+FAIL: 0
+WARN: 15
+Result: PASS
+~~~
+
+交报告前的原始 git status 命令：
+~~~bash
+git status --short
+~~~
+（此时输出为空。）
+
+
+
 ## Wordfield rubric v2 · 2026-08-26
 
 ### 异常自查
