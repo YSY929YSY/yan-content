@@ -1,7 +1,22 @@
-# 当前状态 · 词场 200 条 + gloss 全库查询 + 纠错入口已就位，等真机反馈
+# 当前状态 · LV 67 条已按项目标准重判，待负责人审清单
 
-> 更新日期：2026-08-26
-> **本轮无进行中工单。** 下一步在项目负责人手上，不是 AI 手上。
+> 更新日期：2026-08-27
+> **本轮工单：`TICKET-wordfield-lv-67.md`，已完成脚本重判与待审清单导出。**
+
+## 本轮完成 · TICKET-wordfield-lv-67
+
+| 项 | 结果 |
+|---|---|
+| 外部审核 LV | 67 条；复算：`node scripts/wordfield-lv-review.mjs --stats` |
+| 已有词场排除 | 2 条（`n5_kaisha`、`n5_tegami`）；复算：同上 |
+| 待重判 | 65 条；原句 LAND 61 条、SWAP 4 条；复算：同上 |
+| 确定性换句 | 4 / 4 成功，无可用备选的 SWAP 0 条；复算：同上 |
+| 决策指标：最终可进待审清单 | **65 条**，即 61 条保留 + 4 条换句；复算：同上 |
+| 主产出 | [`staging/lv-67-for-review.md`](../../staging/lv-67-for-review.md) |
+
+脚本：[`scripts/wordfield-lv-review.mjs`](../../scripts/wordfield-lv-review.mjs)。只读两个内容包，按 `unknown_word_count → member 数 → 7–12 字优先 → jp_sentence_id` 选换句；不落库。
+
+下一步由项目负责人审 65 条清单；审完后另开落库工单。本轮没有改内容包、没有发布、没有推 OTA。
 
 ## 已完成并合入 `develop/v2`
 
