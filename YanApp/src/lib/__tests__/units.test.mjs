@@ -10,6 +10,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
+import { dictionaryFormsFrom } from '../../features/wordbank/wordFieldAlignment.js';
 import {
   SOURCES, unitKey, sourceOf,
   fromWord, fromCard, fromPlace, fromScenePhrase, fromSubwayPhrase, fromWordField,
@@ -18,6 +19,9 @@ import {
 
 const content = JSON.parse(
   readFileSync(new URL('../../../assets/content.fallback.json', import.meta.url), 'utf8')
+);
+const exampleTokens = JSON.parse(
+  readFileSync(new URL('../../../assets/example_tokens.json', import.meta.url), 'utf8')
 );
 
 // ── 键 ────────────────────────────────────────────────────────
@@ -243,7 +247,7 @@ test('★ 合格的词场一个问题都不报', () => {
 });
 
 test('★ 真实内容包的词场必须干净(暂时没有词场,写词场后这条自动生效)', () => {
-  assert.deepEqual(auditWordFields(content.wordBank), []);
+  assert.deepEqual(auditWordFields(content.wordBank, dictionaryFormsFrom(exampleTokens)), []);
 });
 
 // ── 地点记忆卡的形状 ──────────────────────────────────────────

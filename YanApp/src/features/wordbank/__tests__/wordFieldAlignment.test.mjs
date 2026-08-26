@@ -109,6 +109,30 @@ test('★★ 20 条真实词场句的动词活用位置都有中文', () => {
   assert.deepEqual(holes, []);
 });
 
+test('★★ Tatoeba 词场 gloss 基线不得跌破 95%', () => {
+  const content = load('../../../../assets/content.fallback.json');
+  const rawTokens = load('../../../../assets/example_tokens.json');
+  const dictionaryForms = dictionaryFormsFrom(rawTokens);
+  const punctuationOnly = /^[\s、。？！？，．.!?,:：;；「」『』（）()［］【】〔〕〈〉《》…・~〜]+$/u;
+  const fields = (content.wordBank || [])
+    .filter(word => word.wordField?.source?.provider === 'Tatoeba')
+    .map(word => word.wordField.sentence.jp);
+  assert.equal(fields.length, 167);
+
+  let total = 0;
+  let covered = 0;
+  for (const sentence of fields) {
+    const rows = buildWordFieldAlignment(sentence, content.wordBank, dictionaryForms);
+    for (const row of rows) {
+      if (punctuationOnly.test(row.jp)) continue;
+      total += 1;
+      if (row.zh?.trim()) covered += 1;
+    }
+  }
+  const coverage = covered / total;
+  assert.ok(coverage >= 0.95, `Tatoeba gloss coverage ${covered}/${total} = ${(coverage * 100).toFixed(2)}% < 95%`);
+});
+
 test('对齐行只显示第一个完整 gloss，不截断词义', () => {
   const content = load('../../../../assets/content.fallback.json');
   const cases = [

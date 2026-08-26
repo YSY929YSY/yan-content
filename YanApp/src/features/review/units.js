@@ -290,10 +290,26 @@ export function buildUnits(content) {
  *
  * @returns 问题描述数组,空数组 = 没问题
  */
-export function auditWordFields(wordBank) {
+export function auditWordFields(wordBank, dictionaryForms = null) {
   const bank = Array.isArray(wordBank) ? wordBank : [];
   const byId = new Map(bank.filter(w => w?.id).map(w => [w.id, w]));
   const out = [];
+
+  const memberVariants = (member) => String(member || '')
+    .split(/[;；|]/)
+    .map(value => value.trim())
+    .filter(Boolean);
+  const appearsInSentence = (sentence, member) => {
+    const variants = memberVariants(member.word);
+    if (variants.some(value => sentence.includes(value))) return true;
+    if (!(dictionaryForms instanceof Map)) return sentence.includes(member.reading);
+    for (const [surface, forms] of dictionaryForms) {
+      if (typeof surface !== 'string' || !(forms instanceof Set) || !sentence.includes(surface)) continue;
+      if (forms.size !== 1) continue;
+      if (variants.some(value => forms.has(value)) || forms.has(member.reading)) return true;
+    }
+    return false;
+  };
 
   for (const w of bank) {
     const raw = w?.wordField;
@@ -306,7 +322,9 @@ export function auditWordFields(wordBank) {
       const mw = m?.id && byId.get(m.id);
       if (!mw) { out.push(`${w.word} 的词场成员 ${m?.id || '(没有 id)'} 不在词库里`); continue; }
       // 成员必须真的出现在句子里 —— 否则「同框」是假的,词场就退回成了近义词列表
-      if (!f.sentence.jp.includes(mw.word) && !f.sentence.jp.includes(mw.reading)) {
+      // 词场成员允许用辞书形登记；注入的离线索引把活用表面还原到该辞书形。
+      // 没有索引时保持旧的直接子串契约，避免把缺失数据当成命中。
+      if (!appearsInSentence(f.sentence.jp, mw)) {
         out.push(`${w.word} 的句子里找不到成员 ${mw.word}`);
       }
     }
