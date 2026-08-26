@@ -39,8 +39,12 @@ test('★★ 搜索与词书详情都按同一个 canGradeWord 决定是否交�
 
 test('★★ 详情页没有 onGrade 就完全不渲染评分区', () => {
   assert.match(app, /if \(!onGrade\) return;/, '即使未来误接按钮，handler 也不能写 progress');
-  assert.match(app, /\{onGrade \? <View style=\{wd\.section\}>[\s\S]{0,1400}这个词不用再问我了[\s\S]{0,500}<View style=\{wd\.readonlyBox\}>/,
-    '评分和 mastered 按钮必须与只读说明互斥');
+  assert.match(app, /\{onGrade \? <View style=\{wd\.section\}>/, '评分区必须受 onGrade 控制');
+  assert.match(app, /statusRow/);
+  assert.match(app, /<\/View> : \(\s*<View style=\{wd\.readonlyBox\}>/, '只读说明必须与评分区互斥');
+  assert.doesNotMatch(app, /这个词不用再问我了/, '旧的底部文字入口必须移除');
+  assert.match(app, /accessibilityLabel="以后不再问这个词"/);
+  assert.match(app, /accessibilityHint="移出复习队列"/);
   assert.match(app, /仅供查询，暂未开放学习/);
 });
 

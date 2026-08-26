@@ -20,7 +20,7 @@ test('B9-2 只切换两句样板，横向单位是 token column', () => {
   assert.match(app, /'店員にカードを見せます。'/);
   assert.match(app, /'店員にサイズを聞きます。'/);
   assert.match(app, /TOKEN_COLUMN_SAMPLE_SENTENCES\.has\(wordField\.sentence\.jp\)/);
-  assert.match(app, /fieldTokenColumns\(wordField\.sentence\.jp, wordBank\)/);
+  assert.match(app, /fieldTokenColumns\(wordField\.sentence\.jp, glossLookupBank\)/);
   assert.doesNotMatch(app, /店員にカードを見せます。[^\n]*marginLeft/);
   assert.doesNotMatch(app, /店員にサイズを聞きます。[^\n]*marginLeft/);
 });

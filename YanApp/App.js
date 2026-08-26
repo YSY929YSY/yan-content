@@ -1615,6 +1615,7 @@ function PieTabInner({ content, setTab, subTab, setSubTab, sceneState, setSceneS
           return (
             <WordBankScreen
               wordBank={bookWords}
+              glossLookupBank={content.wordBank || []}
               book={activeBook}
               onBack={() => setWbBookId(null)}
             />
@@ -1887,6 +1888,7 @@ function WordBookShelfScreen({ wordBank, onBack, onSelect }) {
       <WBDetailPage
         entry={picked}
         wordBank={wordBank}
+        glossLookupBank={wordBank}
         record={pickedRecord}
         today={today}
         onBack={() => setPicked(null)}
@@ -2045,7 +2047,7 @@ const normalizeDate = (v) => {
 
 const wordKey = (item) => `${item.word}-${item.reading}`;
 
-function WordBankScreen({ wordBank, book, onBack }) {
+function WordBankScreen({ wordBank, glossLookupBank, book, onBack }) {
   // 读写进度的逻辑不再写在这个页面里,统一走 useReviewProgress ——
   // 复习页读写的是同一份数据,两处各写一套迁移和落盘,迟早会长歪成两个口径。
   //
@@ -2249,6 +2251,7 @@ function WordBankScreen({ wordBank, book, onBack }) {
       <WBDetailPage
         entry={selectedWord}
         wordBank={wordBank}
+        glossLookupBank={glossLookupBank}
         record={progress[wordKey(selectedWord)] || null}
         today={today}
         onBack={goBack}
@@ -2431,7 +2434,7 @@ function isFieldMemberToken(token, terms) {
   return terms.some(term => term === token.jp);
 }
 
-function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, speakingKey, hasPrev, hasNext, onPrev, onNext, lookupWord, onOpenWord, pocketed, onPocketToggle, pocketSyncNote }) {
+function WBDetailPage({ entry, wordBank, glossLookupBank = wordBank, record, today, onBack, onGrade, speak, speakingKey, hasPrev, hasNext, onPrev, onNext, lookupWord, onOpenWord, pocketed, onPocketToggle, pocketSyncNote }) {
   // 词场:这个词真实出现时,身边站着哪些词。
   // 关键是**一个句子**而不是并列的词块 —— 秋(季节)、山(地点)、温泉(要做的事)
   // 是三种不同的关系,摊成一排格子等于让用户自己猜关系。第一版就是这么翻的车。
@@ -2511,6 +2514,18 @@ function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, 
         <TouchableOpacity onPress={onBack}>
           <Text style={wd.navBack}>‹ 返回词库</Text>
         </TouchableOpacity>
+        {onGrade && record?.status !== 'mastered' ? (
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityLabel="以后不再问这个词"
+            accessibilityHint="移出复习队列"
+            style={wd.masterIconBtn}
+            onPress={() => handleGrade('mastered')}
+            activeOpacity={0.7}
+          >
+            <Text style={wd.masterIcon}>🗑️</Text>
+          </TouchableOpacity>
+        ) : <View style={wd.masterIconSpacer} />}
       </View>
       <ScrollView contentContainerStyle={wd.scroll} showsVerticalScrollIndicator={false}>
         <View style={wd.hero}>
@@ -2581,7 +2596,7 @@ function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, 
               if (!TOKEN_COLUMN_SAMPLE_SENTENCES.has(entry.exampleJp)) {
                 return <ExampleSentence sentence={entry.exampleJp} tokens={EXAMPLE_TOKENS[entry.id]} size={19} style={wd.primaryExampleJp} />;
               }
-              const columns = fieldTokenColumns(entry.exampleJp, wordBank);
+              const columns = fieldTokenColumns(entry.exampleJp, glossLookupBank);
               if (!fieldColumnsUsable(entry.exampleJp, columns)) {
                 return <ExampleSentence sentence={entry.exampleJp} tokens={EXAMPLE_TOKENS[entry.id]} size={19} style={wd.primaryExampleJp} />;
               }
@@ -2600,7 +2615,7 @@ function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, 
               <View style={{ flex: 1, gap: 3 }}>
                 {TOKEN_COLUMN_SAMPLE_SENTENCES.has(wordField.sentence.jp) ? (
                   <TokenColumnSentence
-                    columns={fieldTokenColumns(wordField.sentence.jp, wordBank).map((token) => ({
+                    columns={fieldTokenColumns(wordField.sentence.jp, glossLookupBank).map((token) => ({
                       ...token,
                       member: isFieldMemberToken(token, fieldMemberTerms(wordField, lookupWord)),
                     }))}
@@ -2609,7 +2624,7 @@ function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, 
                   />
                 ) : (
                   <View style={wd.wfAlignRow}>
-                    {buildWordFieldAlignment(wordField.sentence.jp, wordBank, EXAMPLE_DICTIONARY_FORMS).map((token, ti) => {
+                    {buildWordFieldAlignment(wordField.sentence.jp, glossLookupBank, EXAMPLE_DICTIONARY_FORMS).map((token, ti) => {
                       const member = isFieldMemberToken(token, fieldMemberTerms(wordField, lookupWord));
                       const glossStyle = token.source === 'wordBank'
                         ? wd.wfAlignZh
@@ -2677,11 +2692,6 @@ function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, 
               <Text style={[wd.statusTxt, wd.statusTxtCheck]}>会了</Text>
             </TouchableOpacity>
           </View>
-          {record?.status !== 'mastered' && (
-            <TouchableOpacity style={wd.masterBtn} onPress={() => handleGrade('mastered')}>
-              <Text style={wd.masterTxt}>这个词不用再问我了</Text>
-            </TouchableOpacity>
-          )}
         </View> : (
           <View style={wd.readonlyBox}>
             <Text style={wd.readonlyTxt}>仅供查询，暂未开放学习</Text>
@@ -2739,8 +2749,11 @@ function WBDetailPage({ entry, wordBank, record, today, onBack, onGrade, speak, 
   );
 }
 const wd = StyleSheet.create({
-  nav: { paddingHorizontal: 16, paddingTop: 14, paddingBottom: 4 },
+  nav: { paddingHorizontal: 16, paddingTop: 14, paddingBottom: 4, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   navBack: { fontSize: 13, color: C.lava, fontWeight: '600' },
+  masterIconBtn: { width: 32, height: 32, alignItems: 'center', justifyContent: 'center' },
+  masterIcon: { fontSize: 17, opacity: 0.7 },
+  masterIconSpacer: { width: 32, height: 32 },
   scroll: { paddingBottom: 60 },
   hero: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingTop: 16, paddingBottom: 4, gap: 10 },
   word: { fontSize: 32, fontWeight: '700', color: C.ink },
@@ -2813,8 +2826,6 @@ const wd = StyleSheet.create({
   statusTxtCheck: { color: C.white },
   gradeMeta: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 },
   gradeHint: { fontSize: 11, color: C.muted },
-  masterBtn: { marginTop: 8, alignItems: 'center', paddingVertical: 6 },
-  masterTxt: { fontSize: 11, color: C.mutedLight, fontWeight: '600' },
   bottomNav: { flexDirection: 'row', borderTopWidth: 1, borderTopColor: C.border, backgroundColor: C.white },
   bottomNavBtn: { flex: 1, paddingVertical: 13, alignItems: 'center' },
   bottomNavBtnNext: { borderLeftWidth: 1, borderLeftColor: C.border },
