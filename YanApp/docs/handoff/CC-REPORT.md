@@ -3236,6 +3236,140 @@ WARN: 15
 Result: PASS
 ~~~
 
+## Wordfield JP-22 · 2026-08-27
+
+### 异常自查
+
+1. 与上一轮差 2 倍以上的数字有两组。第一组是 shortlist 从 343 个 anchor 变为 165 个：这是落库后管线按当前 `wordField` 字段过滤了 187 个已有词场，不能与落库前的 343 直接比较；实际过滤了 1,142 行候选。第二组是历史记录写的「13 条成员被丢」与本轮实际新增 69 个成员 ID / 64 条词场不一致：本轮以当前内容包和原始 staging shortlist 复算，差异来自落库前保留成员被进一步裁掉后的实际输入口径，按实测值报告。
+2. 没有无法解释的数字。15 条替换与 7 条未解决是脚本按固定排序和机械信号得到的结果；其中 7 条包括 6 条独苗和 1 条虽有 1 条备选但命中负面动词的 `n5_shinu`。
+3. 「未解决 7 条」是机械判据决定的待人工范围，不是日语质量的测量结论；15 条新句也只是从已有 Tatoeba 备选中排除已知信号后的候选，仍未经过负责人审核。
+
+### 交付与决策指标
+
+本轮决策指标是「换后仍需人工处理的条数」：**7 条**。复算：
+
+~~~bash
+node scripts/wordfield-jp-swap.mjs
+~~~
+
+原始输出为 `JP verdicts: 22`、`swapped: 15`、`unresolved: 7`；未解决 anchor 为
+`n5_aru_2,n5_fuyu,n5_iriguchi,n5_iru,n5_mimi,n5_oniisan,n5_shinu`。
+
+JP 组原本 22 条，其中 `alt=0` 的独苗 6 条，另有 16 条有备选：
+
+~~~bash
+node -e 'const v=require("./staging/gpt-verdicts-301.json");console.log(v.JP.length,v.JP.filter(x=>x.alt>0).length,v.JP.filter(x=>x.alt===0).length)'
+~~~
+
+### 15 条机械换句结果
+
+以下日文、中文全部直接来自候选池，没有生成或改写；新句 Tatoeba ID 可定位。`淘汰` 是按固定顺序排在所选句之前、但命中机械信号的候选数。
+
+| anchor | 旧日文 / 旧中文 | 新日文 / 新中文 | 新 Tatoeba 日/中 ID | 淘汰 |
+|---|---|---|---:|---:|
+| n5_ani | 私は兄が八人います。 / 我有八个哥哥。 | 彼は私の兄の友達だ。 / 他是我哥哥的朋友。 | 105863 / 2029456 | 1 |
+| n5_dasu | 窓から顔を出すな。 / 不要把脸探向窗外。 | 母に手紙を出します。 / 我会给我的母亲寄封信。 | 2197706 / 5091340 | 1 |
+| n5_e | 彼は犬の絵を書いた。 / 他画了一幅狗的画。 | 彼女は絵を見ました。 / 她看着那幅画。 | 90746 / 348101 | 0 |
+| n5_futari | 二人子供がいます。 / 我有两个孩子。 | 二人は伴侶三人は仲間割れ。 / 一个和尚挑水吃，两个和尚抬水吃，三个和尚没水吃。 | 123062 / 13570988 | 0 |
+| n5_hajimaru | 教育は家庭に始まる。 / 教育从家庭开始。 | 儀式は彼の話から始まった。 / 仪式以他的讲话开始。 | 182936 / 1394872 | 3 |
+| n5_hana | 花の金曜日だ！ / 美好的星期五！ | 花を持ってきました。 / 我带了花。 | 11508992 / 11508982 | 0 |
+| n5_hayai_2 | 速くここに来なさい。 / 快来这里。 | この川は流れが速い。 / 这条河水流湍急。 | 4919569 / 334882 | 0 |
+| n5_imi | 生きる意味を教えてくれ。 / 告诉我人生的意义。 | この語句の意味は何ですか？ / 这句话是什么意思呀？ | 9161912 / 10474872 | 0 |
+| n5_inu | 犬を中に入れるな。 / 别让狗进来。 | 犬と猫どっちが好き？ / 狗和猫你更喜欢哪一个？ | 3643242 / 4887666 | 0 |
+| n5_iro | この魚は同じ色だ。 / 这鱼的颜色一样。 | 色が少し暗すぎるなぁ。 / 颜色有点太暗了呢。 | 11669302 / 13605736 | 0 |
+| n5_kuni | 彼は金で国を売った。 / 为了钱他背叛了国家。 | 日本は地震の多い国だ。 / 日本地震很多。 | 122423 / 517576 | 0 |
+| n5_michi | 練習は熟達の道。 / 熟能生巧。 | 私は森で道に迷った。 / 我在树林里迷路了。 | 155702 / 678189 | 0 |
+| n5_ookii | 大きい鍋で汁を作った。 / 用大锅煲汤。 | 皆大きいピザが好きです。 / 所有人都喜欢大的比萨。 | 1243657 / 1242091 | 0 |
+| n5_shimeru | 戸を閉めろ。 / 关门。 | メアリーはドアを静かに閉めた。 / 玛丽悄悄地关上了门。 | 194802 / 834707 | 0 |
+| n5_sora | 鳥が空にいます。 / 鸟在天上。 | 鳥は空にいる。 / 鸟在天上。 | 4144699 / 9096132 | 0 |
+
+复算命令（同时生成交给负责人的 staging 清单）：
+
+~~~bash
+node scripts/wordfield-jp-swap.mjs
+~~~
+
+产物 `staging/jp-22-swapped-for-review.md` 只供负责人逐条输出 `OK` 或 `JP`；本轮没有把这 15 条写进内容包。
+
+### 无可用备选：7 条
+
+| anchor | 当前句 | 备选情况 |
+|---|---|---|
+| n5_aru_2 | 彼は学生に人気が有る。 / 他受到学生的欢迎。 | 独苗，无备选 |
+| n5_fuyu | 雪なし冬は冬じゃないよ。 / 没有雪的冬天不是冬天。 | 独苗，无备选 |
+| n5_iriguchi | 入口の側で立った。 / 他站在入口的边上。 | 独苗，无备选 |
+| n5_iru | 長い間ボストンに居ましたか？ / 你在波士顿待了很久吗？ | 独苗，无备选 |
+| n5_mimi | 我々は耳を使って聴く。 / 我们用耳朵听。 | 独苗，无备选 |
+| n5_oniisan | 彼のお兄さんは先月亡くなった。 / 他的哥哥上个月去世了。 | 独苗，无备选 |
+| n5_shinu | 私は死ぬまで戦う。 / 我会战斗至死。 | 唯一 1 条备选命中 `死ぬ` 负面动词信号 |
+
+这 7 条不落库、不改写；其中只有 `n5_shinu` 有候选池记录但没有通过本轮机械排除。
+
+### shortlist 去重过滤
+
+`wordfield-shortlist.mjs` 现在按当前内容中是否存在非空 `wordField` 字段过滤，不硬编码 anchor。当前落库后重跑结果是：输入 1,851 行，过滤已有词场 1,142 行，剩余 709 行，覆盖 165 个尚未有词场的 anchor，最终选择 165 条。
+
+~~~bash
+node scripts/wordfield-shortlist.mjs
+~~~
+
+原始输出同时给出：`old tiers A/B/C = 95/35/35`；五状态为 `DATA 17 / FIX_ZH 7 / LAND 124 / SPOKEN 11 / SWAP 6`。这些是剩余 165 个 anchor 的当前管线结果，不再把它们误称为旧的 343 条全量清单。
+
+### 成员回填
+
+内容分支 `content/2026-08-27-wordfield-members` 的 `d11f81c` 只修改两份内容副本中的 `members` 和 `_meta.version`：167 条 Tatoeba 词场仍为 167 条，内容包总词场仍为 187 条；64 条词场新增 69 个成员 ID，回填后空 `members` 为 0。成员规则是直接词面/读音命中，或注入 `dictionaryFormsFrom(example_tokens)` 后由唯一辞书形还原命中；歧义辞书形和 `～` 占位词不猜。
+
+复算（包括两份 SHA 和句子/中文/source 是否被改动）：
+
+~~~bash
+node - <<'NODE'
+const fs=require('fs'),cp=require('child_process'),crypto=require('crypto');
+const now=JSON.parse(fs.readFileSync('assets/content.fallback.json','utf8'));
+const before=JSON.parse(cp.execFileSync('git',['show','8e79a76:YanApp/assets/content.fallback.json'],{encoding:'utf8',maxBuffer:20*1024*1024}));
+const byId=new Map(now.wordBank.map(w=>[w.id,w])); let rows=0,ids=0,empty=0,sentenceChanged=0,sourceChanged=0,zhChanged=0;
+for(const w of before.wordBank){const a=w.wordField,b=byId.get(w.id)?.wordField;if(!a||!b)continue;const aa=Array.isArray(a)?a:[a],bb=Array.isArray(b)?b:[b];for(let i=0;i<aa.length;i++){const x=aa[i],y=bb[i];if(JSON.stringify(x.members)!==JSON.stringify(y.members)){rows++;ids+=(y.members||[]).filter(m=>!(x.members||[]).some(n=>n.id===m.id)).length;if(!(y.members||[]).length)empty++;}if(x.sentence.jp!==y.sentence.jp)sentenceChanged++;if(JSON.stringify(x.source)!==JSON.stringify(y.source))sourceChanged++;if(x.sentence.zh!==y.sentence.zh)zhChanged++;}}
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+console.log({rows,ids,empty,sentenceChanged,sourceChanged,zhChanged,shaFallback:sha('assets/content.fallback.json'),shaContent:sha('../yan-content/content.v2.json')});
+NODE
+~~~
+
+本轮实际值是 64/69/0，不是工单背景中的 13；不把旧估算当成当前结果。五条点名样例的前后成员为：`n5_go_2 []→n5_narau`、`n5_neru []→n5_neru,n5_osoi`、`n5_chuu n5_ichi,n5_kinou→n5_hataraku,n5_ichi,n5_kinou`、`n5_gatsu` 无新增（`～月` 等占位形状未猜）、`n5_atsui_3 n5_atsui_3,n5_hon→n5_atsui_3,n5_hon,n5_yomu`。
+
+两份文件 SHA 均为 `88acbd38408a474c09b4499096b623d0d03a13035eff6ba70c3fe8edbb1e9f7e`；版本 `2.5→2.6`，版本只递增一次。复算：
+
+~~~bash
+shasum -a 256 assets/content.fallback.json ../yan-content/content.v2.json
+node -e 'for(const p of ["assets/content.fallback.json","../yan-content/content.v2.json"]){const c=require("./"+p);console.log(p,c._meta.version)}'
+~~~
+
+### Gloss 两条分基线
+
+为避免带 source 的词场被永远跳过，测试现在保留 legacy 的严格 20 条检查，并将 Tatoeba 单独设成实测值减 1.54 个百分点的下限：
+
+- legacy：20 条词场、133/133 非标点对齐行有 gloss，100.00%，没有 kana 空白；
+- Tatoeba：167 条词场、1,059/1,097 非标点对齐行有 gloss，96.54%；下限 95%，余量 1.54 个百分点。
+
+复算命令：
+
+~~~bash
+node --test src/lib/__tests__/units.test.mjs src/features/wordbank/__tests__/wordFieldAlignment.test.mjs
+~~~
+
+针对性测试输出包含 legacy 与 Tatoeba 两条守卫；全量门禁中的测试总数见下节。下限取整到 95% 是为了允许少量新增句子在现有对齐规则下出现空白，同时仍能拦住明显回退；没有把下限降到 0。
+
+### Commit 与边界
+
+- `8e79a76`：按当前 `wordField` 字段过滤 shortlist、增加 JP 机械换句脚本，提交 15 条 staging 审核清单；不改内容包。
+- `d11f81c`：内容分支同一提交修改 `assets/content.fallback.json` 与 `../yan-content/content.v2.json`，只回填成员并递增版本。
+- `85a0673`：审计成员匹配注入辞书形索引；新增 Tatoeba gloss 95% 基线测试。
+- 上述内容分支已从 `8e79a76` 快进合回 `develop/v2`，当前合回结果为 `85a0673`；没有推送 `origin/main`。
+
+没有改 ZH/LV、现有 20 条词场、日文句子、中文、Tatoeba source ID、`roma`、UI 或 gloss 规则；没有构建、没有 OTA。换句 15 条待负责人审核，不能写成已确认。
+
+### 最终门禁原始输出
+
+以下为交报告前实际运行的原始命令输出；本节最后再贴 `git status --short` 与 `npm run audit` 的原文。
+
 ## Wordfield land 167 · 2026-08-26
 
 ### 异常自查

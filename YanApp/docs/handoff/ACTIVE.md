@@ -1,24 +1,24 @@
-# 当前状态 · 落 167 条新词场（内容窗口）
+# 当前状态 · JP-22 换句与成员回填（内容窗口已合回）
 
-> 更新日期：2026-08-26
+> 更新日期：2026-08-27
 
 ## 当前工单
 
-`docs/handoff/TICKET-wordfield-land-174.md` ← **已完成内容落库，等待负责人查看；别的先别碰**
+`docs/handoff/TICKET-wordfield-jp-22.md` ← **本轮已完成，换句仍待负责人审核；不发布**
 
-⚠️ **本轮改内容包，必须开分支 `content/2026-08-26-wordfield-land-174`，
-两份文件同一个 commit。做完停下，不要发布。**
+内容回填在 `content/2026-08-27-wordfield-members` 完成后已快进合回
+`develop/v2`。换句仅进入 staging，不覆盖内容包。
 
 ## 到这里为止发生了什么
 
 1851 条 Tatoeba 候选 → 343 个 anchor 各选一条 → 五状态重排（LAND 301）
 → 外部审核 301 条 → **OK 160 + SPOKEN 14 = 174 条候选** → 排除已有词场 7 条
-→ **167 条新词场落库，20 → 187 / 563**。
+→ **167 条新词场落库，20 → 187 / 563** → JP 组 22 条机械换句：15 条有可用备选，
+7 条仍需负责人处理。
 
-内容 commit：`cbba0b1`。167 条新增词场保留 Tatoeba 日/中句 ID，`sentence.roma`
-按裁决省略，未写确认字段；现有 20 条未覆盖、未回填。为满足既有
-`auditWordFields` 的“成员必须逐字出现在句子里”契约，成员列表只保留句面命中的 ID，
-2 条没有可保留成员的词场使用空 `members`，详见 `CC-REPORT.md`。
+内容 commit：`cbba0b1`（落库）+ `d11f81c`（JP-22 成员回填）。167 条新增词场仍保留
+Tatoeba 日/中句 ID，`sentence.roma` 按裁决省略，未写确认字段；现有 20 条未覆盖、未回填。
+回填后 64 条词场新增 69 个成员 ID，空 `members` 为 0；日文、中文、source 均未改。
 
 外部审核结果落盘在 `staging/gpt-verdicts-301.json`，五组：
 
@@ -38,8 +38,7 @@
 | | 工单 | 说明 |
 |---|---|---|
 | 1 | `TICKET-wordfield-zh-38.md`（**待写**） | 38 条中文，日语不动 |
-| 2 | `TICKET-wordfield-jp-22.md`（**待写**） | 从 1508 条备选池换句 |
-| 3 | `TICKET-wordfield-lv-67.md`（**待写**） | 先重定判据再处理 |
+| 2 | `TICKET-wordfield-lv-67.md`（**待写**） | 先重定判据再处理 |
 | 4 | `TICKET-mishit-after-value.md` | gloss 误命中率修复后值，已写未发 |
 | 5 | `TICKET-correction-entry-minimal.md` | 纠错入口，已写未发 |
 
