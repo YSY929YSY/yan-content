@@ -262,3 +262,37 @@ B6-3 把主 CTA 的落点从 `LearnBatchScreen` 换成了 `ReviewScreen`（比�
 
 **记这条是因为**：以后任何人再动主 CTA 的落点，都必须先确认这两条还在。
 换实现可以，换判断不行。
+
+---
+
+## 上架前必须人工核验（触发词：「上架前审核」）
+
+> 记于 2026-08-26。项目负责人说「上架前审核」时，**直接执行这一节**，不要重新设计流程。
+
+### 第一优先：代码证明不了的五项（`CLAUDE.md` §7）
+
+这五项**只有负责人能做**，AI 帮不上，但要主动提醒他逐条确认：
+
+1. 生产 `APPLE_AUDIENCE` 是否正确
+2. `JWT_SECRET` 是否变更过
+3. SQLite 卷是否挂对
+4. OSS 配置是否指向生产
+5. **删账号是否真的回收了旧前缀的照片**
+
+### 第二优先：一次限定范围的结构审查
+
+**只回答一个问题：「上架前必须修的有哪些」。**
+
+- 输出一份带优先级的清单（必修 / 建议 / 可延后），**不许改任何代码**
+- 范围限定在：发布契约（`publication.ts`）、进度键（`keyAliases.js` / `wordIds.manifest.txt`）、
+  内容包双份一致、fail-closed 判断是否有回退成「可以」的路径
+- **不要审 `App.js` 的代码结构** —— 那是 ROADMAP 工作包 5，是独立的事，
+  和能不能上架无关（`AGENTS.md` 不变量 5）
+
+**为什么要限定**：无边界的「审查一遍」会烧掉一整轮 token 还给不出可执行结论。
+历史记录见 `docs/ROADMAP-content-trust-structure-ui.md`、`docs/AUDIT-replan-2026-08-22.md`。
+
+### 第三：常规门禁
+
+`npm test && npm run typecheck && npm run audit` + `bash tools/check-content-release.sh` Blocker=0，
+`pubspec` 不适用（言是 Expo，版本在 `app.json`）。EAS 构建额度先确认。
