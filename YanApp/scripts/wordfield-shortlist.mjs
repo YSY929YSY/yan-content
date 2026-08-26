@@ -24,6 +24,7 @@ for (let index = 2; index < process.argv.length; index += 1) {
 
 const inputPath = path.resolve(args.get('--input') || defaultInput);
 const outputPath = path.resolve(args.get('--output') || defaultOutput);
+const contentPath = path.join(repo, 'assets/content.fallback.json');
 
 const readRows = (filePath) => fs.readFileSync(filePath, 'utf8')
   .split('\n')
@@ -178,8 +179,17 @@ const classifyRow = (row) => {
   };
 };
 
-const rows = readRows(inputPath);
-rows.forEach(assertCandidate);
+const inputRows = readRows(inputPath);
+inputRows.forEach(assertCandidate);
+const content = JSON.parse(fs.readFileSync(contentPath, 'utf8'));
+const hasWordField = value => {
+  const fields = Array.isArray(value) ? value : (value ? [value] : []);
+  return fields.some(field => typeof field?.sentence?.jp === 'string' && field.sentence.jp.trim());
+};
+const existingWordFieldIds = new Set((content.wordBank || [])
+  .filter(word => hasWordField(word.wordField))
+  .map(word => word.id));
+const rows = inputRows.filter(row => !existingWordFieldIds.has(row.anchor_id));
 const byAnchor = new Map();
 for (const row of rows) {
   if (!byAnchor.has(row.anchor_id)) byAnchor.set(row.anchor_id, []);
@@ -207,8 +217,8 @@ for (const group of byAnchor.values()) {
 }
 selected.sort((left, right) => left.anchor_id.localeCompare(right.anchor_id));
 
-if (selected.length !== byAnchor.size || selected.length !== 343) {
-  throw new Error(`expected 343 selected anchors, got ${selected.length} from ${byAnchor.size}`);
+if (selected.length !== byAnchor.size) {
+  throw new Error(`selected ${selected.length} anchors from ${byAnchor.size} remaining anchors`);
 }
 
 fs.writeFileSync(outputPath, `${JSON.stringify(selected, null, 2)}\n`, 'utf8');
@@ -231,7 +241,9 @@ for (const row of selected) {
   lengthCounts.set(length, (lengthCounts.get(length) || 0) + 1);
 }
 
-console.log(`input candidates: ${rows.length}`);
+console.log(`input candidates: ${inputRows.length}`);
+console.log(`filtered existing wordField candidates: ${inputRows.length - rows.length}`);
+console.log(`remaining candidates: ${rows.length}`);
 console.log(`distinct anchors: ${byAnchor.size}`);
 console.log(`selected rows: ${selected.length}`);
 console.log(`rule eliminated: unknown=${ruleEliminated[0]}, members=${ruleEliminated[1]}, length=${ruleEliminated[2]}, jp_sentence_id=${ruleEliminated[3]}`);
