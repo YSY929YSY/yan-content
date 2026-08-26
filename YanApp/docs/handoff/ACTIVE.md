@@ -1,10 +1,10 @@
-# 当前状态 · 落 174 条词场（内容窗口）
+# 当前状态 · 落 167 条新词场（内容窗口）
 
 > 更新日期：2026-08-26
 
 ## 当前工单
 
-`docs/handoff/TICKET-wordfield-land-174.md` ← **这一轮做这个，别的都先别碰**
+`docs/handoff/TICKET-wordfield-land-174.md` ← **已完成内容落库，等待负责人查看；别的先别碰**
 
 ⚠️ **本轮改内容包，必须开分支 `content/2026-08-26-wordfield-land-174`，
 两份文件同一个 commit。做完停下，不要发布。**
@@ -12,7 +12,13 @@
 ## 到这里为止发生了什么
 
 1851 条 Tatoeba 候选 → 343 个 anchor 各选一条 → 五状态重排（LAND 301）
-→ 外部审核 301 条 → **OK 160 + SPOKEN 14 = 174 条落库**。
+→ 外部审核 301 条 → **OK 160 + SPOKEN 14 = 174 条候选** → 排除已有词场 7 条
+→ **167 条新词场落库，20 → 187 / 563**。
+
+内容 commit：`cbba0b1`。167 条新增词场保留 Tatoeba 日/中句 ID，`sentence.roma`
+按裁决省略，未写确认字段；现有 20 条未覆盖、未回填。为满足既有
+`auditWordFields` 的“成员必须逐字出现在句子里”契约，成员列表只保留句面命中的 ID，
+2 条没有可保留成员的词场使用空 `members`，详见 `CC-REPORT.md`。
 
 外部审核结果落盘在 `staging/gpt-verdicts-301.json`，五组：
 

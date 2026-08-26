@@ -3236,6 +3236,118 @@ WARN: 15
 Result: PASS
 ~~~
 
+## Wordfield land 167 · 2026-08-26
+
+### 异常自查
+
+1. 决策指标从 20/563 变为 187/563，超过上一轮两倍；原因是本轮按裁决新增 167 个 anchor，且没有覆盖旧词场。复算见下方内容统计命令。
+2. 没有无法解释的数字。`OK=160`、`SPOKEN=14`、排除已有词场 `7`、实际新增 `167` 均由 staging 与内容包字段计算得出。
+3. “未经母语者确认”不是测量结果，而是 fail closed 判据：167 条都不写 `nativeChecked`，缺字段即未确认；没有把它描述成已确认。
+
+### 实际改动与裁决
+
+按 `staging/gpt-verdicts-301.json` 的 `OK` 160 条与 `SPOKEN` 14 条取集合，共 174 个唯一 anchor；按内容包中已有非空 `wordField` 字段排除 7 条，实际新增 167 条。7 条被跳过的是：
+
+`n5_ashita`、`n5_atarashii`、`n5_eki`、`n5_gakkou`、`n5_ie`、`n5_oishii`、`n5_sensei`。
+
+复算：
+
+~~~bash
+node --input-type=module -e 'import fs from "node:fs"; const c=JSON.parse(fs.readFileSync("assets/content.fallback.json","utf8")); const v=JSON.parse(fs.readFileSync("staging/gpt-verdicts-301.json","utf8")); const chosen=[...v.OK,...v.SPOKEN]; const existing=new Set(c.wordBank.filter(w=>w.wordField && !w.wordField.source).map(w=>w.id)); console.log({OK:v.OK.length,SPOKEN:v.SPOKEN.length,chosen:chosen.length,distinct:new Set(chosen.map(x=>x.anchor)).size,skipped:chosen.filter(x=>existing.has(x.anchor)).length,landed:chosen.filter(x=>!existing.has(x.anchor)).length});'
+~~~
+
+新增字段按工单追加裁决执行：167 条的 `wordField.source` 为 `{ provider: "Tatoeba", jp_sentence_id, zh_sentence_id }`；现有 20 条不回填来源。日文与中文逐字取 staging，未改写。`sentence.roma` 省略；未写 `nativeChecked`。`members` 保持 `[{"id":"..."}]` 形状。
+
+现有 `auditWordFields` 要求成员的 `word` 或 `reading` 逐字出现在句面。staging 成员列表中有 458 个引用，其中 364 个满足该既有契约，94 个仅对应辞书形、活用形或带 `～` 的占位写法，因此内容包只保留句面命中的成员；`n5_go_2` 与 `n5_neru` 没有可保留的成员，使用空数组。这个机械调整没有改句子、中文或来源 ID。
+
+复算：
+
+~~~bash
+node --input-type=module <<'NODE'
+import fs from 'node:fs';
+const c=JSON.parse(fs.readFileSync('assets/content.fallback.json','utf8'));
+const s=JSON.parse(fs.readFileSync('staging/wordfield-shortlist-343.json','utf8'));
+const v=JSON.parse(fs.readFileSync('staging/gpt-verdicts-301.json','utf8'));
+const old=new Set(c.wordBank.filter(w=>w.wordField && !w.wordField.source).map(w=>w.id));
+const chosen=[...v.OK,...v.SPOKEN].filter(x=>!old.has(x.anchor));
+const byS=new Map(s.map(x=>[x.anchor_id,x]));
+const bank=new Map(c.wordBank.map(w=>[w.id,w]));
+let stagingRefs=0, contentRefs=0, empty=0;
+for(const x of chosen){ const source=byS.get(x.anchor); const w=bank.get(x.anchor); stagingRefs+=source.member_word_ids.length; contentRefs+=w.wordField.members.length; if(!w.wordField.members.length) empty++; }
+console.log({rows:chosen.length,stagingRefs,contentRefs,empty,dropped:stagingRefs-contentRefs});
+NODE
+~~~
+
+### content-stats 前后
+
+复算命令：
+
+~~~bash
+node --input-type=module -e 'import {execFileSync} from "node:child_process"; const c=JSON.parse(execFileSync("git",["show","cbba0b1^:YanApp/assets/content.fallback.json"],{encoding:"utf8"})); console.log({wordBankTotal:c.wordBank.length,wordField:c.wordBank.filter(w=>w.wordField).length,kanjiAnchor:c.wordBank.filter(w=>(w.yanFeatures||[]).includes("kanji_anchor")).length,version:c._meta.version});'
+node scripts/content-stats.mjs
+~~~
+
+前版关键输出：`wordBank.total: 8005`、`coverage wordField: 20/8005 (0.2%)`、`kanji_anchor.total: 563`、`_meta.version: 2.4`。本版关键输出：`wordBank.total: 8005`、`coverage wordField: 187/8005 (2.3%)`、`kanji_anchor.total: 563`、`_meta.version: 2.5`。其余词库总量、状态分布、发布数量和主线 anchor 完整度未因本轮变化而改变。
+
+决策指标复算：
+
+~~~bash
+node scripts/content-stats.mjs | grep '^  wordField'
+~~~
+
+### Commit 与同步
+
+- `cbba0b1`：内容窗口实际改动；`assets/content.fallback.json` 与 `../yan-content/content.v2.json` 同一 commit，新增 167 条词场并将版本从 2.4 升到 2.5。
+- `1d88230`：回归测试只继续覆盖没有 `source` 的旧 20 条手工词场；新增 Tatoeba 词场仍由真实内容包单元测试和内容审计覆盖。
+
+两份内容包 SHA：
+
+~~~text
+78c95d345aa9516d53d03b36a6272323ac6f7c955b267ea58bd50d5b63c36bbf  assets/content.fallback.json
+78c95d345aa9516d53d03b36a6272323ac6f7c955b267ea58bd50d5b63c36bbf  ../yan-content/content.v2.json
+~~~
+
+复算：`shasum -a 256 assets/content.fallback.json ../yan-content/content.v2.json`
+
+### 不变量与边界
+
+- 进度键未改；没有触碰 `unitKey('word', …)` 或 `srs.js`。
+- `kanji_anchor` 仍为 563，没有给任何词新增该 feature。
+- 词场作为 `wordBank` 子对象写入；复习单元测试实际产出 187 个 `field` 单元，说明同步链能读到新增字段。
+- 新增内容没有确认字段，也没有在用户可见句子中加入内部审核状态；现有 20 条不补来源、不覆盖。
+- 没有推 `origin/main`，没有构建，没有 OTA；下一步由负责人在真机查看这 167 条的显示效果。
+- 忍住没做：不落 ZH/JP/LV 其余候选，不为 7 个旧 anchor 选替换句，不生成 roma，不回填旧词场来源，不修候选管线去重。
+
+### 最终门禁原始输出
+
+~~~text
+$ npm test
+ℹ tests 610
+ℹ pass 610
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+
+$ npm run typecheck
+> yanapp@1.0.0 typecheck
+> tsc --noEmit
+
+$ bash ../tools/check-content-release.sh
+  Blocker 数：0
+  ✓ 无 Blocker
+
+$ npm run audit
+--- audit summary ---
+FAIL: 0
+WARN: 18
+Result: PASS
+
+$ git status --short
+
+~~~
+
+`npm test` 完整输出包含 610 条测试及 Node 的模块类型 warning；上面保留命令原始最终汇总。`npm run audit` 的 18 条 WARN 是既有 claim/doc-refs 提示，不是本轮新增的内容包 Blocker。
+
 git status --short 在本轮提交前没有输出。
 
 
