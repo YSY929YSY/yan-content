@@ -18,9 +18,12 @@
 个字符的对齐调用由 **10 → 0**，这是按旧的每次渲染调用路径与当前 memo 依赖做的源码级调用计数，
 不是耗时估算。复算：`node --test src/lib/__tests__/wordfieldRenderGuards.test.mjs`。
 
-代码提交 `d94ea35`。项目验收 **631 / 631**，类型检查通过，审计 `FAIL: 0`、`WARN: 25`；复算：
+代码提交 `d94ea35`。项目验收 **631 / 631**，类型检查通过，审计 `FAIL: 0`、`WARN: 26`；复算：
 `npm test && npm run typecheck && npm run audit`。本轮未改内容包、未改 `カード → 积分卡`，未处理 **218 / 249**
 条自成员 chip；后两项留给负责人决定。按工单要求，本轮完成后停在热更新就绪，不发布、不推 OTA。
+
+最后一次审计发现与本轮无关的未跟踪目录 `docs/china-launch/`（两个 Markdown 文件），因此当前
+`git status --short` 不是空输出；没有擅自删除或纳入本轮提交，待负责人决定归属。
 
 ## ✅ 本轮完成 · `TICKET-sync-data-loss.md`
 
