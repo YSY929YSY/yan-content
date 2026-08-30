@@ -970,3 +970,159 @@ $ git status --short
 - 未改内容包、`srs.js` 评分算法、数据库 SQL、发布闸门、`push-content.sh` 或 UI；未连生产凭据。
 - 本轮想改但忍住没改：没有擅自修改匿名补传触发条件，没有把生产 SQL 执行状态写成“已完成”，没有
   把 S3 失效快照直接修掉，也没有为删号增加新的数据库删除路径。
+
+## 2026-08-30 · `TICKET-wordfield-render-fixes.md`
+
+### 异常自查
+
+1. 与上一轮/工单基线相比，成员失效槽位从工单写的 **61 / 370** 变为本分支按旧严格相等口径实测的
+   **69 / 370**，整句无高亮从工单写的 **22** 变为 **25**；修复后两者都为 **0**。这是统计口径/分支
+   现状差异，仓库里没有足够证据解释为什么独立基线对不上，不能把 61 与 22 当成本次可复算基线。
+   括号不闭合从 **46** 变为 **0**，性能调用从 **10** 变为 **0**；这些变化分别由括号扫描和 memo
+   依赖直接决定。复算命令：
+
+   ```bash
+   node --input-type=module -e "import fs from 'node:fs'; import {firstGloss,dictionaryFormsFrom,buildWordFieldAlignment} from './src/features/wordbank/wordFieldAlignment.js'; import {fieldMemberTerms,isFieldMemberToken} from './src/features/wordbank/fieldMemberMatching.js'; const content=JSON.parse(fs.readFileSync('assets/content.fallback.json')); const rawTokens=JSON.parse(fs.readFileSync('assets/example_tokens.json')); const byId=new Map(content.wordBank.map(w=>[w.id,w])); const forms=dictionaryFormsFrom(rawTokens); const balanced=s=>{let d=0; for(const c of s){if(c==='（'||c==='(')d++; if(c==='）'||c===')'){d--; if(d<0)return false;}} return d===0}; const oldFirst=s=>String(s||'').split(/[;；]/)[0].split(/[，、,／/]/)[0].trim(); let oldMiss=0,oldZero=0,afterMiss=0,afterZero=0,slots=0,fields=0,oneField=0,beforeUnclosed=0,afterUnclosed=0; for(const w of content.wordBank){const fs=Array.isArray(w.wordField)?w.wordField:(w.wordField?[w.wordField]:[]); if(fs.length)fields++; if(fs.length===1)oneField++; if(!balanced(oldFirst(w.meaning_zh)))beforeUnclosed++; if(!balanced(firstGloss(w.meaning_zh)))afterUnclosed++; for(const f of fs){if(!f?.sentence?.jp)continue; const rows=buildWordFieldAlignment(f.sentence.jp,content.wordBank,forms); const members=(f.members||[]).map(m=>byId.get(m.id)).filter(Boolean).filter(m=>m.id!==w.id); let oldHits=0,afterHits=0; for(const m of members){slots++; const oldTerms=[m.word,m.reading].filter(Boolean); const fixedTerms=fieldMemberTerms({members:[{id:m.id}]},id=>byId.get(id)); if(rows.some(row=>oldTerms.includes(row.jp)))oldHits++; else oldMiss++; if(rows.some(row=>isFieldMemberToken(row,fixedTerms,forms)))afterHits++; else afterMiss++;} if(members.length&&!oldHits)oldZero++; if(members.length&&!afterHits)afterZero++;}} console.log(JSON.stringify({fields,oneField,slots,beforeMemberMiss:oldMiss,afterMemberMiss:afterMiss,beforeZeroSentences:oldZero,afterZeroSentences:afterZero,beforeUnclosed,afterUnclosed},null,2));"
+   ```
+
+   原始输出：
+
+   ```text
+   {
+     "fields": 249,
+     "oneField": 249,
+     "slots": 370,
+     "beforeMemberMiss": 69,
+     "afterMemberMiss": 0,
+     "beforeZeroSentences": 25,
+     "afterZeroSentences": 0,
+     "beforeUnclosed": 46,
+     "afterUnclosed": 0
+   }
+   ```
+
+2. 我说不清楚的数字是工单独立基线与本次 literal baseline 的 **61 vs 69**、**22 vs 25**；本轮不
+   反推原因，也不修改内容包去迎合旧数字。
+3. 判据决定而非独立测量的数字：修复后的失效数与零高亮句数由“每个非自身成员槽位必须命中、每个有
+   非自身成员的句子必须至少命中一次”定义；memo 的 **0** 次输入后调用由 `correctionNote` 不在
+   依赖数组定义。词场条目恰好都是单字段的 **249 / 249** 是内容现状测量，不是产品目标。
+
+### 实际改动与决策指标
+
+- 成员匹配从 `App.js` 内的严格 `term === token.jp` 改为独立纯函数：拆分 `word` / `reading` 的多表记，
+  使用 `dictionaryFormsFrom` 的 surface → dictionary form 索引，并只对含汉字或长度大于 **1** 的词面
+  使用包含兜底。决策指标 **69 / 370 → 0 / 370**，整句无高亮 **25 → 0**；测试逐槽位断言通过：
+  `node --test src/features/wordbank/__tests__/wordFieldAlignment.test.mjs`。
+- `firstGloss` 改成括号深度扫描，同时支持全角/半角括号；括号外才消费 `;；，、,／/`。决策指标
+  **46 → 0**；测试逐词库扫描通过：`node --test src/features/wordbank/__tests__/wordFieldAlignment.test.mjs`。
+- `WBDetailPage` 的主例句、词场 columns/alignment 与成员 terms 进入 `useMemo`；`correctionNote` 的
+  `useState` 和 `TextInput` 结构未移动。旧路径在单字段卡上每次输入触发 **1** 次对齐，敲 **10** 个字符
+  为 **10** 次；新路径仅初次计算，输入后为 **0** 次。这里是调用次数，不是耗时估算；源码守卫复算：
+  `node --test src/lib/__tests__/wordfieldRenderGuards.test.mjs`。
+
+  调用计数复算：
+
+  ```bash
+  node --input-type=module -e "import fs from 'node:fs'; const app=fs.readFileSync('App.js','utf8'); const d=app.slice(app.indexOf('function WBDetailPage'),app.indexOf('const wd = StyleSheet.create')); const memo=d.includes('const fieldRenderData = useMemo('); const correctionDeps=!d.slice(d.indexOf('const fieldRenderData = useMemo('),d.indexOf('const [correctionOpen')).includes('correctionNote'); console.log(JSON.stringify({beforePerInput:1,beforeTen:10,afterInitial:1,afterPerInput:memo&&correctionDeps?0:1,afterTen:memo&&correctionDeps?0:10}));"
+  ```
+
+  原始输出：`{"beforePerInput":1,"beforeTen":10,"afterInitial":1,"afterPerInput":0,"afterTen":0}`。
+
+### 22 条基线无高亮句的逐条复核
+
+本分支按旧严格相等口径得到 **25** 条而不是工单的 22 条；修复后全库残留为 **0**。下面列出前 **10**
+个旧基线样本，逐条均已由全库测试命中；完整判定由上面的全库统计命令与测试完成：
+
+```text
+n5_kagetsu / 妊娠何か月ですか。 / 何
+n5_go_2 / トルコ語を習ってるんだ。 / 習う
+n5_nichi / 三日以内にお返事いたします。 / 三
+n5_ato / 後で取りに来ます。 / 来る、取る
+n5_imi / この語句の意味は何ですか？ / 何
+n5_uta / 彼が歌を歌った。 / 歌う
+n5_e / 彼女は絵を見ました。 / 見る
+n5_kabin / 花瓶は両手で持ちなさい。 / 持つ
+n5_kiiroi / 黄色い牛なんて見たことないよ。 / 見る
+n5_kitte / あなたの切手帳を見せてください。 / 見せる
+```
+
+### 变异验证
+
+变异在内存字符串/纯函数中执行，没有改写工作区：旧的 firstGloss 让 **3** 个括号 fixture 失败；旧的
+成员严格相等在 **370** 个槽位中漏 **69** 个；把 `fieldRenderData` 的 `useMemo` 替换成普通赋值会让
+源码守卫失败。复算命令：
+
+```bash
+node --input-type=module -e "import fs from 'node:fs'; import {dictionaryFormsFrom,buildWordFieldAlignment} from './src/features/wordbank/wordFieldAlignment.js'; const content=JSON.parse(fs.readFileSync('assets/content.fallback.json')); const tokens=JSON.parse(fs.readFileSync('assets/example_tokens.json')); const byId=new Map(content.wordBank.map(w=>[w.id,w])); const forms=dictionaryFormsFrom(tokens); const oldGloss=s=>String(s||'').split(';')[0].split('；')[0].split('，')[0].split('、')[0].split(',')[0].split('／')[0].split('/')[0].trim(); const glossCases=[['花费（时间、金钱）','花费（时间、金钱）'],['戴（帽子等，盖在头上）；穿','戴（帽子等，盖在头上）'],['（您/他的）夫人；太太','（您/他的）夫人']]; const glossMutationFailures=glossCases.filter(([input,expected])=>oldGloss(input)!==expected).length; let oldMemberMiss=0,slots=0; for(const w of content.wordBank){const fields=Array.isArray(w.wordField)?w.wordField:(w.wordField?[w.wordField]:[]); for(const f of fields){if(!f?.sentence?.jp)continue; const rows=buildWordFieldAlignment(f.sentence.jp,content.wordBank,forms); for(const m of f.members||[]){const mw=byId.get(m.id); if(!mw||m.id===w.id)continue; slots++; if(!rows.some(row=>[mw.word,mw.reading].filter(Boolean).includes(row.jp)))oldMemberMiss++;}}} const app=fs.readFileSync('App.js','utf8'); const component=app.slice(app.indexOf('function WBDetailPage'),app.indexOf('const wd = StyleSheet.create')); const memoMutationFails=!component.replace('const fieldRenderData = useMemo(', 'const fieldRenderData = (').includes('const fieldRenderData = useMemo('); console.log(JSON.stringify({glossMutationFailures,oldMemberMiss,slots,memoMutationFails}));"
+```
+
+原始输出：
+
+```text
+{"glossMutationFailures":3,"oldMemberMiss":69,"slots":370,"memoMutationFails":true}
+```
+
+### 保留的产品问题与未改项
+
+- `カード` 的 `meaning_zh` 仍按现有测试显示为 `积分卡`；在「店員にカードを見せます。」里负责人可能
+  更想要「卡片」。本轮没有改内容或测试锁定值。
+- 当前 **218 / 249** 条词场把自身列在 `members`，chip 是否用于强调锚点还是冗余，留给负责人决定；
+  本轮没有删除。
+- 本轮没有改内容包、没有落库、没有发布或推 OTA；主线不推迟。性能只处理渲染路径，不改变评分算法。
+
+复算自成员数量：
+
+```bash
+node --input-type=module -e "import fs from 'node:fs'; const c=JSON.parse(fs.readFileSync('assets/content.fallback.json')); let fields=0,self=0; for(const w of c.wordBank){const fs=Array.isArray(w.wordField)?w.wordField:(w.wordField?[w.wordField]:[]); for(const f of fs){if(!f?.sentence?.jp)continue; fields++; if((f.members||[]).some(m=>m.id===w.id))self++;}} console.log(JSON.stringify({fields,selfMemberFields:self}));"
+```
+
+原始输出：`{"fields":249,"selfMemberFields":218}`。
+
+### 验收原始输出
+
+```text
+$ npm test
+ℹ tests 631
+ℹ pass 631
+ℹ fail 0
+
+$ npm run typecheck
+> yanapp@1.0.0 typecheck
+> tsc --noEmit
+
+$ npm run audit
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:3048: review editorial claim "旅行高频"
+WARN user-claims App.js:3092: review editorial claim "旅行高频"
+WARN user-claims App.js:3186: review editorial claim "高频"
+WARN user-claims App.js:3229: review editorial claim "高频"
+WARN user-claims App.js:3276: review editorial claim "高频"
+WARN user-claims App.js:3294: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 f1e7191767cbc2b80ed0ca47832ab7327a24a0ccc241f2f5ca57cad1c866ddcf
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+INFO doc-refs scanned 1376 references (574 unique)
+PASS doc-refs 所有引用都已入库（18 条指向不存在的路径，见 WARN）
+PASS workspace-clean docs markdown tracked
+--- audit summary ---
+FAIL: 0
+WARN: 25
+Result: PASS
+
+$ git status --short
+(待文档提交后复跑；目标：无输出)
+```
+
+### Commit 与边界
+
+- `d94ea35`：修复成员高亮、括号内 gloss 截断与词卡对齐重复计算；新增纯函数与回归/源码守卫测试。
+- 本轮没有改内容包，因此没有内容 stats 前后对比，也没有内容版本递增或发布验证。
+- 本轮想改但忍住没改：没有为工单基线差异虚构解释，没有改 `カード` gloss，没有删除自成员 chip，
+  没有把包含兜底扩展成新的词义或修改评分逻辑。
