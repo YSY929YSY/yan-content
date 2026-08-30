@@ -493,3 +493,343 @@ $ git status --short
 - 没有因为词汇超出 N5 而额外换句；这不是本工单的新判据。
 - 没有落库、改内容包或递增 `_meta.version`；负责人审完后另开内容窗口。
 - 没有把 `SWAP` 候选自动升级为发布内容，也没有生成或改写任何日文、中文。
+
+## TICKET-wordfield-land-lv49 · 49 条落库验收（2026-08-30）
+
+### 范围与决策
+
+本轮按负责人最新指令执行 49 条：从 65 条外部复核记录中落库 49 条 OK，15 条 ZH 与 1 条 JP 留待后续；`n5_kata` 的指定换句不在本轮落库。仓库内工单后来写成 50 条，但本报告以最新执行口径为准。
+
+决策指标：词场落库数 **200 / 563 → 249 / 563**。
+
+复算：
+
+```bash
+git show 7193d19:YanApp/assets/content.fallback.json | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{const c=JSON.parse(s),f=c.wordBank.flatMap(w=>{const x=w.wordField;return Array.isArray(x)?x:(x?[x]:[])}).filter(x=>x?.sentence?.jp);console.log(f.length+"/563")})'
+node scripts/content-stats.mjs
+```
+
+### 异常自查
+
+1. 本轮没有任何数字相对上一轮变化超过 2 倍：词场 200→249、Tatoeba 180→229、成员 487→588，均未达到 2 倍；对应复算命令见下文。
+2. 没有无法解释来源的数字。49 = 65 − 16；16 个排除项是工单明确列出的 15 条 ZH 与 1 条 JP。成员少于候选原始数的部分，是按运行时同一套 `dictionaryFormsFrom` 规则过滤无法在句中还原的 ID。
+3. **49 条是审核判据决定的数量，不是质量测量结果**；质量门槛另由词场审计、gloss 覆盖率和内容发布门禁测量。
+
+### 内容包前后值
+
+| 指标 | 落库前 | 落库后 |
+|---|---:|---:|
+| 内容版本 | 2.7 | 2.8 |
+| 词场 | 200 / 563 | 249 / 563 |
+| Tatoeba 词场 | 180 | 229 |
+| 成员总数 | 487 | 588 |
+| 空成员词场 | 0 | 0 |
+
+前值复算：
+
+```bash
+git show 7193d19:YanApp/assets/content.fallback.json | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{const c=JSON.parse(s),f=c.wordBank.flatMap(w=>{const x=w.wordField;return Array.isArray(x)?x:(x?[x]:[])}).filter(x=>x?.sentence?.jp);console.log({version:c._meta.version,fields:f.length,tatoeba:f.filter(x=>x.source?.provider==="Tatoeba").length,members:f.reduce((n,x)=>n+(x.members?.length||0),0),empty:f.filter(x=>!(x.members?.length)).length})})'
+```
+
+后值复算：
+
+```bash
+node scripts/content-stats.mjs
+node -e 'const c=require("./assets/content.fallback.json"),f=c.wordBank.flatMap(w=>{const x=w.wordField;return Array.isArray(x)?x:(x?[x]:[])}).filter(x=>x?.sentence?.jp);console.log({version:c._meta.version,fields:f.length,tatoeba:f.filter(x=>x.source?.provider==="Tatoeba").length,members:f.reduce((n,x)=>n+(x.members?.length||0),0),empty:f.filter(x=>!(x.members?.length)).length})'
+```
+
+两份内容包 SHA-256 完全一致，且版本只从 2.7 递增到 2.8：
+
+```text
+f1e7191767cbc2b80ed0ca47832ab7327a24a0ccc241f2f5ca57cad1c866ddcf  assets/content.fallback.json
+f1e7191767cbc2b80ed0ca47832ab7327a24a0ccc241f2f5ca57cad1c866ddcf  ../yan-content/content.v2.json
+```
+
+复算：`shasum -a 256 assets/content.fallback.json ../yan-content/content.v2.json`
+
+### 49 条对照表
+
+以下为实际落库的 anchor、日语、中文及 Tatoeba 日/中句 ID。整表复算：`node scripts/wordfield-land-lv49.mjs`（该脚本在已有字段上会按保护规则拒绝覆盖；落库前执行输出为 `review rows: 65`、`rejected: 16`、`selected: 49`）。
+
+| # | anchor | 日语 | 中文 | Tatoeba JP / ZH ID |
+|---:|---|---|---|---|
+| 1 | n5_akai | 赤い屋根の家を見てごらん。 | 看看那间红色屋顶的房子。 | 1151723 / 348624 |
+| 2 | n5_ame | 雨は一週間降り続いた。 | 雨下了一周。 | 189550 / 333989 |
+| 3 | n5_ban | 彼女は一晩中泣き通した。 | 她一整晚都在哭。 | 91111 / 333193 |
+| 4 | n5_butaniku | 豚肉は私には合わない。 | 猪肉不适合我。 | 123261 / 8789278 |
+| 5 | n5_chikaku | 近くで犬が吠えている。 | 附近有狗在叫。 | 2860740 / 2843700 |
+| 6 | n5_chizu | 地図は壁に貼ってある。 | 地图挂在墙上。 | 991942 / 8869384 |
+| 7 | n5_dare | 母は誰よりも先に起きる。 | 妈妈起得比谁都早。 | 82892 / 8723671 |
+| 8 | n5_denki | 電気を消しなさい。 | 关灯。 | 124840 / 771563 |
+| 9 | n5_doubutsu | 動物に関する本を買った。 | 我买了一本关于动物的书。 | 1115260 / 9545088 |
+| 10 | n5_fuutou | 私はすでに封筒をもっている。 | 我已经有信封了。 | 160504 / 403758 |
+| 11 | n5_hareru | 日曜日は晴れてほしいですね。 | 希望星期天是晴天呢。 | 11604217 / 13607689 |
+| 12 | n5_hashi | 池には橋がかかっている。 | 池塘上有座桥。 | 126791 / 8800731 |
+| 13 | n5_hiki | 魚を二匹捕まえた。 | 我捉了两条鱼。 | 13511266 / 10324290 |
+| 14 | n5_ike | その池で泳ぐのは危険です。 | 在池塘游泳是危险的。 | 207859 / 1928620 |
+| 15 | n5_ireru | 私はバケツに水を入れた。 | 我将水倒入了桶中。 | 159141 / 2032270 |
+| 16 | n5_iya | 嫌なら結構です。 | 如果你不想的话也没问题。 | 175403 / 8777619 |
+| 17 | n5_juu | 彼女は十代で結婚した。 | 她十几岁时就结婚了。 | 88779 / 802500 |
+| 18 | n5_kabin | 花瓶は両手で持ちなさい。 | 用双手握着花瓶。 | 186559 / 9433043 |
+| 19 | n5_kaesu | 財布を返せ。 | 把钱包还我。 | 4216180 / 8703977 |
+| 20 | n5_kagetsu | 妊娠何か月ですか。 | 你怀孕几个月了？ | 122036 / 2007114 |
+| 21 | n5_kami | 紙は木から作られる。 | 纸是由木制成的。 | 151205 / 406363 |
+| 22 | n5_kanji | 漢字は読むのが難しい。 | 汉字很难读。 | 183899 / 339311 |
+| 23 | n5_kasu | ナイフを貸して下さい。 | 请借我你的刀。 | 199334 / 840780 |
+| 24 | n5_kawa | 道は川に平行している。 | 这条路与河流平行。 | 123578 / 6477585 |
+| 25 | n5_kekkou | どんな雑誌でも結構です。 | 任何一本杂志都行。 | 199449 / 924632 |
+| 26 | n5_kesu | 彼は電灯を消し忘れた。 | 他忘了关灯。 | 101885 / 884175 |
+| 27 | n5_kitte | あなたの切手帳を見せてください。 | 请让我看看你的集邮册。 | 233124 / 786403 |
+| 28 | n5_kotoba | 音楽は人類共通の言葉である。 | 音乐是人类共同的语言。 | 188270 / 10272583 |
+| 29 | n5_kusuri | 薬、飲み忘れるなよ。 | 别忘了吃药。 | 10473146 / 12510973 |
+| 30 | n5_matsu | 座って待つしかなかった。 | 只好坐下来等待。 | 170846 / 361697 |
+| 31 | n5_mono | 通路に物を置くな。 | 别在通道上放东西。 | 125570 / 1423369 |
+| 32 | n5_naka | この中は風通しが悪いですね。 | 这里的通风很差呢。 | 220561 / 13187219 |
+| 33 | n5_narau | 先週中国語を習い始めました。 | 我上周开始学中文了。 | 5224 / 502851 |
+| 34 | n5_ni | サムはトムより二歳年下です。 | Sam比Tom小两岁。 | 216723 / 333708 |
+| 35 | n5_nichi | 三日以内にお返事いたします。 | 我会在三天之内回复。 | 3468510 / 595622 |
+| 36 | n5_noboru | 私は富士山の頂上に登った。 | 我登上了富士山顶。 | 153052 / 411703 |
+| 37 | n5_otokonoko | ほとんどの男の子は野球が好きだ。 | 大多数的男孩子喜欢棒球。 | 196136 / 13651526 |
+| 38 | n5_raigetsu | 私達は来月旅行にいくつもりです。 | 我们打算下个月去旅游。 | 151243 / 8761472 |
+| 39 | n5_rainen | 私は来年篠山に住むつもりです。 | 我明年会住在筱山。 | 152384 / 889127 |
+| 40 | n5_ryoushin | 私は両親と連絡を取った。 | 我跟父母联络了一下。 | 152327 / 330586 |
+| 41 | n5_sanpo | 休憩時間に少し散歩をした。 | 休息时间去散了一会儿步。 | 13059106 / 13875798 |
+| 42 | n5_shukudai | 私は宿題に飽きた。 | 我厌倦了功课。 | 155993 / 926788 |
+| 43 | n5_sukoshi | 少し安くなりませんか。 | 能便宜点儿吗？ | 146823 / 11484520 |
+| 44 | n5_suwaru | 私のそばに座りなさい。 | 坐我旁边。 | 164167 / 1424389 |
+| 45 | n5_toki | 若い時は、一度しかない。 | 青春只有一次。 | 148817 / 604475 |
+| 46 | n5_tori | 鳥は小枝で巣を作る。 | 鸟用细树枝筑巢。 | 125788 / 786116 |
+| 47 | n5_tsuku | 何処に着くかも分からない。 | 我不知道我们会到达哪里。 | 187397 / 792386 |
+| 48 | n5_warui | それは私が悪いのだ。 | 这是我的错。 | 205175 / 790573 |
+| 49 | n5_wasureru | 私は会議の日付を忘れた。 | 我忘了会议的日期。 | 157961 / 876708 |
+
+`n5_kata` 未落库；工单指定的 `あの方は八十歳です。 / 那位老人八十岁。` 留待下一轮。未改写任何日文或中文，未覆盖已有手工词场。
+
+### Gloss 与成员质量基线
+
+- Tatoeba 词场 gloss：**1141 / 1185（96.29%）→ 1467 / 1533（95.69%）**，仍高于 95% 下限。复算当前值：`node --input-type=module -e "import fs from 'node:fs'; import {buildWordFieldAlignment,dictionaryFormsFrom} from './src/features/wordbank/wordFieldAlignment.js'; const c=JSON.parse(fs.readFileSync('assets/content.fallback.json')),d=dictionaryFormsFrom(JSON.parse(fs.readFileSync('assets/example_tokens.json'))),p=/^[\\s、。？！？，．.!?,:：;；「」『』（）()［］【】〔〕〈〉《》…・~〜]+$/u; let t=0,g=0; for(const w of c.wordBank.filter(w=>w.wordField?.source?.provider==='Tatoeba')) for(const x of buildWordFieldAlignment(w.wordField.sentence.jp,c.wordBank,d)){if(p.test(x.jp))continue;t++;if(x.zh)g++} console.log(g,t,(g/t*100).toFixed(2)+'%')"`。
+- 设备条件 gloss：**86.17% → 95.98%**，当前全库基线与设备条件相同。复算：`node scripts/gloss-device-coverage.mjs`。
+- `auditWordFields` 结果为 **0** 个问题；新增成员均走 `dictionaryFormsFrom` 还原路径，13 个无法还原的候选成员未写入。复算：`bash ../tools/check-content-release.sh`（wordBank 审计）。
+
+### 验收原始输出
+
+```text
+$ npm test
+ℹ tests 617
+ℹ pass 617
+ℹ fail 0
+
+$ npm run typecheck
+> yanapp@1.0.0 typecheck
+> tsc --noEmit
+
+$ npm run audit
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+PASS content-pack-sync sha256 f1e7191767cbc2b80ed0ca47832ab7327a24a0ccc241f2f5ca57cad1c866ddcf
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+
+$ bash ../tools/check-content-release.sh
+Blocker 数：0
+✓ 无 Blocker
+
+$ git status --short
+(无输出)
+```
+
+复算命令分别为：`npm test`、`npm run typecheck`、`npm run audit`、`bash ../tools/check-content-release.sh`、`git status --short`。
+
+### Commit 与边界
+
+- `54c118e`：落库本轮 49 条复核通过的 Tatoeba 词场；同步 `assets/content.fallback.json` 与 `../yan-content/content.v2.json`，内容版本从 2.7 递增到 2.8；新增确定性落库脚本；更新必要的 gloss 对齐测试、全库 gloss 接线和 `ACTIVE.md`。
+- 本轮没有发布、推送 `origin/main`、构建或发 OTA。
+- 本轮想改但忍住没改：没有落 `n5_kata` 的换句；没有把 15 条 ZH 混入；没有生成 `roma`、改写例句、改变词库进度键或评分算法；没有修改换句规则的义项判据。
+
+## 2026-08-30 · `TICKET-gloss-single-kana.md` · 单假名消费闸门
+
+### 异常自查
+
+1. 本轮与上一轮相差 2 倍以上的数字只有单假名误命中：词场句 **82 → 0**，token **88 → 0**；这是把错误单假名命中改为空白后的预期结果。覆盖率 **95.69% → 92.34%**，未达到 2 倍变化，下降来自错误 gloss 被计为空白以及 token 分段变化。以上所有统计复算：`node scripts/gloss-single-kana-stats.mjs`。
+2. 没有无法解释来源的数字。基线由 `e20addf^` 的旧对齐实现复算，修复值由工作树实现复算，统计脚本固定使用当前 249 条词场和同一份 `example_tokens.json`。
+3. **0** 是决策底线和测试硬断言，不是“抽样测得为零”；覆盖率下限 **91.80%** 是在实测 **92.34%** 上保留 **0.54 个百分点**余量的测试判据。复算：`node scripts/gloss-single-kana-stats.mjs`；闸门：`node --test src/features/wordbank/__tests__/wordFieldAlignment.test.mjs`。
+
+### 结果与决策指标
+
+- 决策指标：含单假名误命中的词场句数 **82 / 249 → 0 / 249**；单假名 wordBank token **88 → 0**。目标 **0** 已达到。复算：`node scripts/gloss-single-kana-stats.mjs`。
+- Tatoeba gloss 覆盖：**1467 / 1533（95.69%）→ 1375 / 1489（92.34%）**。新的质量底线是 **91.80%**，余量 **0.54 个百分点**。复算：`node scripts/gloss-single-kana-stats.mjs`。
+- F-3（跨 word / reading 取最长、同长度 word 优先）在真实 249 条词场中影响 **0 句 / 0 token**；合成回归覆盖了真实数据未触发的冲突形状。复算：`node scripts/gloss-single-kana-stats.mjs`。
+- F-4（更长词库命中让位于 GRAMMAR）独立影响 **10 句 / 62 个对齐位置**。统计中的 token 定义是：固定句子顺序后，修复实现与只关闭 F-4 的变体在同一行位置的 `jp / zh / source` 不同，新增或消失的行也计一处。复算：`node scripts/gloss-single-kana-stats.mjs`。
+
+### 实现范围
+
+- `wordFieldAlignment.js`：单假名在 direct 和 dictionary 的消费点 fail closed；单汉字仍保留；跨 priority 取最长；同表面重复候选按 word 优先；GRAMMAR 只在没有更长有效词库边界时消费。
+- `App.js`：`WordBookShelfScreen` 的搜索详情显式传入全库 `glossLookupBank`，与词书详情入口一致。
+- `glossFullBankWiring.test.mjs`：删除恒真的 `deviceResult === expected`，改为验证货架入口和详情入口的真实全库接线。
+- 新增 `scripts/gloss-single-kana-stats.mjs`：只读复算脚本，不写内容包。
+- 未改 `assets/content.fallback.json`、`yan-content/content.v2.json`，未落库、未发布、未推 OTA。
+
+### 变异验证
+
+- F-3：把 `directCandidateAt` 改回 priority-first；独立守卫在 `たべもの` 样例中得到 `たべ / も / の / 。`，测试转红。复算：运行该变体的内存测试，或执行 `node --test src/features/wordbank/__tests__/wordFieldAlignment.test.mjs` 查看 F-3 守卫。
+- F-4：把语法判断改回无条件 grammar-first；独立守卫在 `とてもだれか` 样例中得到 `と / て / も / だ / れ / か / 。`，测试转红。复算：运行该变体的内存测试，或执行 `node --test src/features/wordbank/__tests__/wordFieldAlignment.test.mjs` 查看 F-4 守卫。
+
+### 三条样板句
+
+```text
+私もとても楽しかったです。
+  → 私[我（郑重说法）] も[（也）] とても[非常] 楽[舒适] しか[牙科] った[∅] です[（是）] 。[。]
+だれか玄関に来てるよ。
+  → だれか[某人] 玄関[玄关] に[（向/于）] 来[下（年] てる[照耀] よ[（强调）] 。[。]
+私は先月ロンドンにいました。
+  → 私[我（郑重说法）] は[（主题）] 先月[上个月] ロンドン[∅] に[（向/于）] いま[现在] した[下面] 。[。]
+```
+
+三句的单假名 wordBank 命中均为 **0**；复算：`node scripts/gloss-single-kana-stats.mjs`。
+
+### 验收原始输出
+
+```text
+$ npm test
+ℹ tests 619
+ℹ pass 619
+ℹ fail 0
+
+$ npm run typecheck
+> yanapp@1.0.0 typecheck
+> tsc --noEmit
+
+$ npm run audit
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+PASS content-pack-sync sha256 f1e7191767cbc2b80ed0ca47832ab7327a24a0ccc241f2f5ca57cad1c866ddcf
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+PASS workspace-clean docs markdown tracked
+INFO doc-refs scanned 1342 references (562 unique)
+--- audit summary ---
+FAIL: 0
+WARN: 24
+Result: PASS
+
+$ git status --short
+(在本报告提交完成后复算；应无输出)
+```
+
+验收命令：`npm test && npm run typecheck && npm run audit`；报告前置检查：`git status --short`、`npm run audit`。audit 的 24 条 WARN 是既有文档/用户 claim 提示，本轮未新增 FAIL。
+
+### Commit 与边界
+
+- `1275481`：修复单假名消费闸门、F-3/F-4 对齐优先级、词书货架全库 gloss 接线；删除恒真设备断言，加入质量闸门、统计脚本和回归测试。复核范围：`git show --stat --oneline 1275481`。
+- 本轮想改但忍住没改：没有改任何句子的日文或中文；没有追修 `楽しかった` 的其他词义误配、`来`/`した` 的已有 gloss 质量、F-7/F-8/F-11；没有改评分算法、内容包、发布闸门或 OTA。
+
+## 2026-08-30 · `TICKET-release-gate-blindspot.md` · 发布闸门提交态护栏
+
+### 异常自查
+
+1. 本轮与修复前提交相比，决策指标从 **Blocker 0 → Blocker 2**，超过 2 倍；原因是旧闸门只比较
+   两份磁盘文件，修复后新增了「当前分支必须是 `develop/v2`」和「两份磁盘文件必须分别等于
+   `develop/v2` 提交 blob」两层阻断。基线复算：在 `09f0d82^` 临时 worktree 运行
+   `bash tools/check-content-release.sh`；修复后复算：在当前分支运行同一命令。
+2. 没有说不清来源的数字。词条/词场规模来自 `develop/v2` 的提交内容，测试数来自 `npm test`，审计
+   结果来自 `npm run audit`。
+3. **Blocker 2** 的拆分包含一个产品选择：当前分支不是 `develop/v2` 也算 Blocker；
+   **200 个词场**的计数口径是 `wordField` 中带非空 `sentence.jp` 的项，不是人工判读数字。
+
+### 结果与决策指标
+
+- 本轮决策指标 = **磁盘内容与 `develop/v2` 提交不一致时，闸门必须从放行变为 Blocker**。
+  修复前 **0 → 修复后 2**，即 **No → Yes**。修复后当前分支的原始输出：
+
+  ```text
+  【3/6】develop/v2 提交态检查...
+    ✗ 当前分支：content/2026-08-27-wordfield-lv49
+    ✗ yan-content/content.v2.json 与 develop/v2 提交不一致
+    ✗ YanApp/assets/content.fallback.json 与 develop/v2 提交不一致
+  审计结果
+    Blocker 数：2
+    ✗ 当前不在 develop/v2
+    ✗ 磁盘内容与 develop/v2 提交不一致
+  ```
+
+  复算：`bash tools/check-content-release.sh`（从 `/Users/yangshiyao/my-app` 运行）。修复前基线命令：
+  `tmp=$(mktemp -d /private/tmp/yanapp-release-gate-before.XXXXXX); git worktree add "$tmp" 09f0d82^; bash "$tmp/tools/check-content-release.sh"; git worktree remove --force "$tmp"`。
+
+- 模拟把修复后的 gate 放进临时 `develop/v2` worktree，实测 **Blocker 0**、无 Blocker。复算命令：
+  `tmp=$(mktemp -d /private/tmp/yanapp-release-gate.XXXXXX); git worktree add "$tmp" develop/v2; git -C "$tmp" checkout content/2026-08-27-wordfield-lv49 -- tools/check-content-release.sh; bash "$tmp/tools/check-content-release.sh"; git worktree remove --force "$tmp"`。
+
+- `tools/check-content-release.sh` 现在分别用 `git rev-parse "develop/v2:<path>"` 与
+  `git hash-object <disk path>` 对照 `yan-content/content.v2.json` 和
+  `YanApp/assets/content.fallback.json`；错误信息包含下一步。当前分支规则明确报 Blocker。
+
+- `scripts/push-content.sh` 保留 `git show develop/v2:yan-content/content.v2.json` 作为权威源，发布前打印
+  **8005 条词条、200 条词场**，默认要求确认；仅 `--yes` 跳过确认。复算：
+  `git show develop/v2:yan-content/content.v2.json | python3 -c 'import json,sys; c=json.load(sys.stdin); w=c.get("wordBank") or []; f=sum(1 for x in w if isinstance(x.get("wordField"),dict) and x["wordField"].get("sentence",{}).get("jp")); print(len(w), f)'`。
+
+- `src/lib/__tests__/wordIds.test.mjs` 新增磁盘/提交 blob 变异护栏（追加一个字节必须不匹配），并静态锁定两份路径都接入 gate；同时锁定发布脚本的规模打印、默认确认和 `--yes` 入口。非 Git 或没有
+  `develop/v2` 时测试 skip，符合浅克隆降级要求。定向测试 **10 / 10**；复算：
+  `node --test src/lib/__tests__/wordIds.test.mjs`。
+
+### 变异验证
+
+- 删除 gate 中的 `git hash-object` 对照，`wordIds.test.mjs` 的静态断言转红；把提交内容在内存中追加
+  一个换行，blob 匹配断言转红。复算：`node --test src/lib/__tests__/wordIds.test.mjs`。
+- 将当前工作分支改回修复前提交运行，旧闸门自然输出 **Blocker 0**；将修复脚本放入临时
+  `develop/v2` worktree 运行，输出 **Blocker 0**；当前内容分支运行修复后脚本输出 **Blocker 2**。
+  三者命令见上方“结果与决策指标”。
+- 未执行 `scripts/push-content.sh`，因此没有触发 `fetch`、切换 `main`、提交或推送；这是工单明确边界。
+
+### 验收原始输出
+
+```text
+$ npm test
+ℹ tests 621
+ℹ pass 621
+ℹ fail 0
+
+$ npm run typecheck
+> yanapp@1.0.0 typecheck
+> tsc --noEmit
+
+$ npm run audit
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+PASS content-pack-sync sha256 f1e7191767cbc2b80ed0ca47832ab7327a24a0ccc241f2f5ca57cad1c866ddcf
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+INFO doc-refs scanned 1358 references (565 unique)
+```
+
+复算：`npm test && npm run typecheck && npm run audit`。audit 原始输出中的既有 `WARN user-claims` 未由本轮
+改动产生，且没有 FAIL。
+
+报告前置检查：
+
+```text
+$ git status --short
+(无输出，代码提交后)
+```
+
+复算：`git status --short`。
+
+### Commit 与边界
+
+- `09f0d82`：修复发布闸门与 `develop/v2` 提交态绑定，给发布脚本增加提交内容规模回显和默认人工确认，
+  新增提交态/变异回归测试；复核：`git show --stat --oneline 09f0d82`。
+- 未改 `assets/content.fallback.json`、`yan-content/content.v2.json`、同步链、评分算法或 `App.js`；
+  未发布、未推送 `origin/main`、未执行 `scripts/push-content.sh`。
+- 本轮想改但忍住没改：没有把发布动作改成自动化，没有放宽当前分支规则，没有改 `git show develop/v2`
+  的权威源，也没有顺手修审计中的既有 claim WARN。

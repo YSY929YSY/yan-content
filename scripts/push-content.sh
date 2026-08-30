@@ -4,8 +4,21 @@
 #
 # 发布前请先在 develop/v2 上跑：bash tools/check-content-release.sh
 # Blocker 为 0 再执行本脚本。
+# 默认会要求人工确认 develop/v2 提交里的词条数与词场数；自动化调用可传 --yes。
 
 set -e
+
+ASSUME_YES=0
+if [ "$#" -gt 1 ]; then
+  echo "用法：bash scripts/push-content.sh [--yes]"
+  exit 2
+elif [ "${1:-}" = "--yes" ]; then
+  ASSUME_YES=1
+elif [ -n "${1:-}" ]; then
+  echo "✗ 未知参数：$1"
+  echo "用法：bash scripts/push-content.sh [--yes]"
+  exit 2
+fi
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 CURRENT_BRANCH=$(git -C "$REPO_ROOT" branch --show-current)
@@ -44,6 +57,34 @@ fi
 # 取权威源（用 git show，不依赖当前检出的是哪个分支）
 git -C "$REPO_ROOT" show develop/v2:yan-content/content.v2.json > "$TMP_JSON"
 python3 -m json.tool "$TMP_JSON" > /dev/null && echo "→ JSON 校验通过" || { echo "✗ JSON 有错误"; exit 1; }
+
+read -r WORD_COUNT FIELD_COUNT <<EOF
+$(python3 - "$TMP_JSON" <<'PY'
+import json, sys
+
+content = json.load(open(sys.argv[1]))
+words = content.get('wordBank') or []
+fields = 0
+for word in words:
+    raw = word.get('wordField')
+    if isinstance(raw, list):
+        fields += sum(1 for field in raw if isinstance(field, dict) and field.get('sentence', {}).get('jp'))
+    elif isinstance(raw, dict) and raw.get('sentence', {}).get('jp'):
+        fields += 1
+print(len(words), fields)
+PY
+)
+EOF
+echo "→ develop/v2 提交内容：词条 $WORD_COUNT 条，词场 $FIELD_COUNT 条"
+if [ "$ASSUME_YES" -eq 1 ]; then
+  echo "→ 已使用 --yes，跳过人工确认"
+else
+  read -r -p "确认发布这份 develop/v2 内容？[y/N] " CONFIRM
+  case "$CONFIRM" in
+    y|Y|yes|YES) echo "→ 已确认" ;;
+    *) echo "✗ 未确认，发布已取消"; exit 1 ;;
+  esac
+fi
 
 # 和线上比一下规模，避免闭眼发布
 git -C "$REPO_ROOT" fetch origin main

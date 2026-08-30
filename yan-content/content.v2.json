@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "version": "2.7",
+  "version": "2.8",
   "updated": "2026-08-22",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8005 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
@@ -13869,6 +13869,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_nan"
+     }
+    ],
+    "sentence": {
+     "jp": "妊娠何か月ですか。",
+     "zh": "你怀孕几个月了？"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 122036,
+     "zh_sentence_id": 2007114
+    }
    }
   },
   {
@@ -14843,6 +14859,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_wakai"
+     }
+    ],
+    "sentence": {
+     "jp": "若い時は、一度しかない。",
+     "zh": "青春只有一次。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 148817,
+     "zh_sentence_id": 604475
+    }
    }
   },
   {
@@ -14922,6 +14954,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_san_2"
+     }
+    ],
+    "sentence": {
+     "jp": "三日以内にお返事いたします。",
+     "zh": "我会在三天之内回复。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 3468510,
+     "zh_sentence_id": 595622
+    }
    }
   },
   {
@@ -15141,6 +15189,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ni"
+     },
+     {
+      "id": "n5_sakana"
+     }
+    ],
+    "sentence": {
+     "jp": "魚を二匹捕まえた。",
+     "zh": "我捉了两条鱼。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 13511266,
+     "zh_sentence_id": 10324290
+    }
    }
   },
   {
@@ -15666,6 +15733,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_akai"
+     },
+     {
+      "id": "n5_ie"
+     },
+     {
+      "id": "n5_miru"
+     }
+    ],
+    "sentence": {
+     "jp": "赤い屋根の家を見てごらん。",
+     "zh": "看看那间红色屋顶的房子。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 1151723,
+     "zh_sentence_id": 348624
+    }
    }
   },
   {
@@ -17398,6 +17487,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ame"
+     },
+     {
+      "id": "n5_ichi"
+     }
+    ],
+    "sentence": {
+     "jp": "雨は一週間降り続いた。",
+     "zh": "雨下了一周。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 189550,
+     "zh_sentence_id": 333989
+    }
    }
   },
   {
@@ -18155,6 +18263,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ike"
+     },
+     {
+      "id": "n5_oyogu"
+     }
+    ],
+    "sentence": {
+     "jp": "その池で泳ぐのは危険です。",
+     "zh": "在池塘游泳是危险的。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 207859,
+     "zh_sentence_id": 1928620
+    }
    }
   },
   {
@@ -19177,6 +19304,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_iya"
+     },
+     {
+      "id": "n5_kekkou"
+     }
+    ],
+    "sentence": {
+     "jp": "嫌なら結構です。",
+     "zh": "如果你不想的话也没问题。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 175403,
+     "zh_sentence_id": 8777619
+    }
    }
   },
   {
@@ -19371,6 +19517,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ireru"
+     },
+     {
+      "id": "n5_mizu"
+     },
+     {
+      "id": "n5_watakushi"
+     }
+    ],
+    "sentence": {
+     "jp": "私はバケツに水を入れた。",
+     "zh": "我将水倒入了桶中。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 159141,
+     "zh_sentence_id": 2032270
+    }
    }
   },
   {
@@ -21940,6 +22108,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_otokonoko"
+     },
+     {
+      "id": "n5_suki"
+     }
+    ],
+    "sentence": {
+     "jp": "ほとんどの男の子は野球が好きだ。",
+     "zh": "大多数的男孩子喜欢棒球。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 196136,
+     "zh_sentence_id": 13651526
+    }
    }
   },
   {
@@ -23441,6 +23628,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_saifu"
+     }
+    ],
+    "sentence": {
+     "jp": "財布を返せ。",
+     "zh": "把钱包还我。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 4216180,
+     "zh_sentence_id": 8703977
+    }
    }
   },
   {
@@ -23984,6 +24187,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kasu"
+     },
+     {
+      "id": "n5_kudasai"
+     }
+    ],
+    "sentence": {
+     "jp": "ナイフを貸して下さい。",
+     "zh": "请借我你的刀。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 199334,
+     "zh_sentence_id": 840780
+    }
    }
   },
   {
@@ -24539,6 +24761,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kabin"
+     },
+     {
+      "id": "n5_motsu"
+     }
+    ],
+    "sentence": {
+     "jp": "花瓶は両手で持ちなさい。",
+     "zh": "用双手握着花瓶。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 186559,
+     "zh_sentence_id": 9433043
+    }
    }
   },
   {
@@ -24631,6 +24872,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kami"
+     },
+     {
+      "id": "n5_ki"
+     },
+     {
+      "id": "n5_tsukuru"
+     }
+    ],
+    "sentence": {
+     "jp": "紙は木から作られる。",
+     "zh": "纸是由木制成的。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 151205,
+     "zh_sentence_id": 406363
+    }
    }
   },
   {
@@ -25109,6 +25372,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kawa"
+     },
+     {
+      "id": "n5_michi"
+     }
+    ],
+    "sentence": {
+     "jp": "道は川に平行している。",
+     "zh": "这条路与河流平行。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 123578,
+     "zh_sentence_id": 6477585
+    }
    }
   },
   {
@@ -25203,6 +25485,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kanji"
+     },
+     {
+      "id": "n5_muzukashii"
+     },
+     {
+      "id": "n5_yomu"
+     }
+    ],
+    "sentence": {
+     "jp": "漢字は読むのが難しい。",
+     "zh": "汉字很难读。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 183899,
+     "zh_sentence_id": 339311
+    }
    }
   },
   {
@@ -25758,6 +26062,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kitte"
+     },
+     {
+      "id": "n5_miseru"
+     }
+    ],
+    "sentence": {
+     "jp": "あなたの切手帳を見せてください。",
+     "zh": "请让我看看你的集邮册。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 233124,
+     "zh_sentence_id": 786403
+    }
    }
   },
   {
@@ -26840,6 +27163,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kusuri"
+     },
+     {
+      "id": "n5_nomu"
+     },
+     {
+      "id": "n5_wasureru"
+     }
+    ],
+    "sentence": {
+     "jp": "薬、飲み忘れるなよ。",
+     "zh": "别忘了吃药。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 10473146,
+     "zh_sentence_id": 12510973
+    }
    }
   },
   {
@@ -27880,6 +28225,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kesu"
+     },
+     {
+      "id": "n5_wasureru"
+     }
+    ],
+    "sentence": {
+     "jp": "彼は電灯を消し忘れた。",
+     "zh": "他忘了关灯。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 101885,
+     "zh_sentence_id": 884175
+    }
    }
   },
   {
@@ -27934,6 +28298,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kekkou"
+     },
+     {
+      "id": "n5_zasshi"
+     }
+    ],
+    "sentence": {
+     "jp": "どんな雑誌でも結構です。",
+     "zh": "任何一本杂志都行。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 199449,
+     "zh_sentence_id": 924632
+    }
    }
   },
   {
@@ -29232,6 +29615,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kotoba"
+     },
+     {
+      "id": "n5_ongaku"
+     }
+    ],
+    "sentence": {
+     "jp": "音楽は人類共通の言葉である。",
+     "zh": "音乐是人类共同的语言。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 188270,
+     "zh_sentence_id": 10272583
+    }
    }
   },
   {
@@ -30539,6 +30941,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_sanpo"
+     },
+     {
+      "id": "n5_sukoshi"
+     }
+    ],
+    "sentence": {
+     "jp": "休憩時間に少し散歩をした。",
+     "zh": "休息时间去散了一会儿步。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 13059106,
+     "zh_sentence_id": 13875798
+    }
    }
   },
   {
@@ -31842,6 +32263,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_juu"
+     },
+     {
+      "id": "n5_kekkon"
+     }
+    ],
+    "sentence": {
+     "jp": "彼女は十代で結婚した。",
+     "zh": "她十几岁时就结婚了。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 88779,
+     "zh_sentence_id": 802500
+    }
    }
   },
   {
@@ -31938,6 +32378,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_shukudai"
+     },
+     {
+      "id": "n5_watakushi"
+     }
+    ],
+    "sentence": {
+     "jp": "私は宿題に飽きた。",
+     "zh": "我厌倦了功课。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 155993,
+     "zh_sentence_id": 926788
+    }
    }
   },
   {
@@ -32767,6 +33226,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_sukoshi"
+     }
+    ],
+    "sentence": {
+     "jp": "少し安くなりませんか。",
+     "zh": "能便宜点儿吗？"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 146823,
+     "zh_sentence_id": 11484520
+    }
    }
   },
   {
@@ -33165,6 +33640,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_watakushi"
+     }
+    ],
+    "sentence": {
+     "jp": "私のそばに座りなさい。",
+     "zh": "坐我旁边。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 164167,
+     "zh_sentence_id": 1424389
+    }
    }
   },
   {
@@ -35629,6 +36120,31 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_dare"
+     },
+     {
+      "id": "n5_haha"
+     },
+     {
+      "id": "n5_okiru"
+     },
+     {
+      "id": "n5_saki"
+     }
+    ],
+    "sentence": {
+     "jp": "母は誰よりも先に起きる。",
+     "zh": "妈妈起得比谁都早。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 82892,
+     "zh_sentence_id": 8723671
+    }
    }
   },
   {
@@ -36067,6 +36583,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_chikaku"
+     },
+     {
+      "id": "n5_inu"
+     }
+    ],
+    "sentence": {
+     "jp": "近くで犬が吠えている。",
+     "zh": "附近有狗在叫。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 2860740,
+     "zh_sentence_id": 2843700
+    }
    }
   },
   {
@@ -36187,6 +36722,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_chizu"
+     },
+     {
+      "id": "n5_haru_2"
+     }
+    ],
+    "sentence": {
+     "jp": "地図は壁に貼ってある。",
+     "zh": "地图挂在墙上。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 991942,
+     "zh_sentence_id": 8869384
+    }
    }
   },
   {
@@ -36745,6 +37299,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_tsuku"
+     },
+     {
+      "id": "n5_wakaru"
+     }
+    ],
+    "sentence": {
+     "jp": "何処に着くかも分からない。",
+     "zh": "我不知道我们会到达哪里。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 187397,
+     "zh_sentence_id": 792386
+    }
    }
   },
   {
@@ -37867,6 +38440,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_denki"
+     },
+     {
+      "id": "n5_kesu"
+     }
+    ],
+    "sentence": {
+     "jp": "電気を消しなさい。",
+     "zh": "关灯。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 124840,
+     "zh_sentence_id": 771563
+    }
    }
   },
   {
@@ -38329,6 +38921,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_doubutsu"
+     },
+     {
+      "id": "n5_hon"
+     },
+     {
+      "id": "n5_kau"
+     }
+    ],
+    "sentence": {
+     "jp": "動物に関する本を買った。",
+     "zh": "我买了一本关于动物的书。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 1115260,
+     "zh_sentence_id": 9545088
+    }
    }
   },
   {
@@ -39395,6 +40009,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_tori"
+     },
+     {
+      "id": "n5_tsukuru"
+     }
+    ],
+    "sentence": {
+     "jp": "鳥は小枝で巣を作る。",
+     "zh": "鸟用细树枝筑巢。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 125788,
+     "zh_sentence_id": 786116
+    }
    }
   },
   {
@@ -39785,6 +40418,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_naka"
+     },
+     {
+      "id": "n5_warui"
+     }
+    ],
+    "sentence": {
+     "jp": "この中は風通しが悪いですね。",
+     "zh": "这里的通风很差呢。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 220561,
+     "zh_sentence_id": 13187219
+    }
    }
   },
   {
@@ -40317,6 +40969,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_narau"
+     },
+     {
+      "id": "n5_senshuu"
+     }
+    ],
+    "sentence": {
+     "jp": "先週中国語を習い始めました。",
+     "zh": "我上周开始学中文了。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 5224,
+     "zh_sentence_id": 502851
+    }
    }
   },
   {
@@ -40604,6 +41275,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ni"
+     }
+    ],
+    "sentence": {
+     "jp": "サムはトムより二歳年下です。",
+     "zh": "Sam比Tom小两岁。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 216723,
+     "zh_sentence_id": 333708
+    }
    }
   },
   {
@@ -41341,6 +42028,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_noboru"
+     },
+     {
+      "id": "n5_watakushi"
+     }
+    ],
+    "sentence": {
+     "jp": "私は富士山の頂上に登った。",
+     "zh": "我登上了富士山顶。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 153052,
+     "zh_sentence_id": 411703
+    }
    }
   },
   {
@@ -41963,6 +42669,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_hashi"
+     },
+     {
+      "id": "n5_ike"
+     }
+    ],
+    "sentence": {
+     "jp": "池には橋がかかっている。",
+     "zh": "池塘上有座桥。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 126791,
+     "zh_sentence_id": 8800731
+    }
    }
   },
   {
@@ -43195,6 +43920,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_hareru"
+     },
+     {
+      "id": "n5_nichiyoubi"
+     }
+    ],
+    "sentence": {
+     "jp": "日曜日は晴れてほしいですね。",
+     "zh": "希望星期天是晴天呢。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 11604217,
+     "zh_sentence_id": 13607689
+    }
    }
   },
   {
@@ -43289,6 +44033,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ban"
+     },
+     {
+      "id": "n5_ichi"
+     }
+    ],
+    "sentence": {
+     "jp": "彼女は一晩中泣き通した。",
+     "zh": "她一整晚都在哭。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 91111,
+     "zh_sentence_id": 333193
+    }
    }
   },
   {
@@ -44629,6 +45392,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_fuutou"
+     },
+     {
+      "id": "n5_watakushi"
+     }
+    ],
+    "sentence": {
+     "jp": "私はすでに封筒をもっている。",
+     "zh": "我已经有信封了。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 160504,
+     "zh_sentence_id": 403758
+    }
    }
   },
   {
@@ -44946,6 +45728,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_butaniku"
+     },
+     {
+      "id": "n5_watakushi"
+     }
+    ],
+    "sentence": {
+     "jp": "豚肉は私には合わない。",
+     "zh": "猪肉不适合我。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 123261,
+     "zh_sentence_id": 8789278
+    }
    }
   },
   {
@@ -47190,6 +47991,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_matsu"
+     },
+     {
+      "id": "n5_suwaru"
+     }
+    ],
+    "sentence": {
+     "jp": "座って待つしかなかった。",
+     "zh": "只好坐下来等待。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 170846,
+     "zh_sentence_id": 361697
+    }
    }
   },
   {
@@ -49070,6 +49890,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_mono"
+     },
+     {
+      "id": "n5_oku"
+     }
+    ],
+    "sentence": {
+     "jp": "通路に物を置くな。",
+     "zh": "别在通道上放东西。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 125570,
+     "zh_sentence_id": 1423369
+    }
    }
   },
   {
@@ -50488,6 +51327,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_raigetsu"
+     },
+     {
+      "id": "n5_ryokou"
+     }
+    ],
+    "sentence": {
+     "jp": "私達は来月旅行にいくつもりです。",
+     "zh": "我们打算下个月去旅游。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 151243,
+     "zh_sentence_id": 8761472
+    }
    }
   },
   {
@@ -50583,6 +51441,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_rainen"
+     },
+     {
+      "id": "n5_sumu"
+     },
+     {
+      "id": "n5_watakushi"
+     }
+    ],
+    "sentence": {
+     "jp": "私は来年篠山に住むつもりです。",
+     "zh": "我明年会住在筱山。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 152384,
+     "zh_sentence_id": 889127
+    }
    }
   },
   {
@@ -50823,6 +51703,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ryoushin"
+     },
+     {
+      "id": "n5_toru"
+     },
+     {
+      "id": "n5_watakushi"
+     }
+    ],
+    "sentence": {
+     "jp": "私は両親と連絡を取った。",
+     "zh": "我跟父母联络了一下。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 152327,
+     "zh_sentence_id": 330586
+    }
    }
   },
   {
@@ -51489,6 +52391,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_wasureru"
+     },
+     {
+      "id": "n5_watakushi"
+     }
+    ],
+    "sentence": {
+     "jp": "私は会議の日付を忘れた。",
+     "zh": "我忘了会议的日期。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 157961,
+     "zh_sentence_id": 876708
+    }
    }
   },
   {
@@ -51727,6 +52648,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_warui"
+     },
+     {
+      "id": "n5_watakushi"
+     }
+    ],
+    "sentence": {
+     "jp": "それは私が悪いのだ。",
+     "zh": "这是我的错。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 205175,
+     "zh_sentence_id": 790573
+    }
    }
   },
   {

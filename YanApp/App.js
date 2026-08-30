@@ -1604,6 +1604,7 @@ function PieTabInner({ content, setTab, subTab, setSubTab, sceneState, setSceneS
         {subTab === 'wordbank' && !wbBookId && (
           <WordBookShelfScreen
             wordBank={content.wordBank || []}
+            glossLookupBank={content.wordBank || []}
             onBack={() => setSubTab('learn')}
             onSelect={(id) => setWbBookId(id)}
           />
@@ -1846,7 +1847,7 @@ const JLPT_COLORS = {
  *   搜索 = 获准 Dictionary 的全库词条,不受词书级别限制,是「查」。
  * “有例句”只是内容形状,不是学习准入；准入只读 publication selector。
  */
-function WordBookShelfScreen({ wordBank, onBack, onSelect }) {
+function WordBookShelfScreen({ wordBank, glossLookupBank, onBack, onSelect }) {
   const [query, setQuery] = useState('');
   const [picked, setPicked] = useState(null);
   const [pickedIdx, setPickedIdx] = useState(0);
@@ -1888,7 +1889,7 @@ function WordBookShelfScreen({ wordBank, onBack, onSelect }) {
       <WBDetailPage
         entry={picked}
         wordBank={wordBank}
-        glossLookupBank={wordBank}
+        glossLookupBank={glossLookupBank}
         record={pickedRecord}
         today={today}
         onBack={() => setPicked(null)}
@@ -2434,7 +2435,7 @@ function isFieldMemberToken(token, terms) {
   return terms.some(term => term === token.jp);
 }
 
-function WBDetailPage({ entry, wordBank, glossLookupBank = wordBank, record, today, onBack, onGrade, speak, speakingKey, hasPrev, hasNext, onPrev, onNext, lookupWord, onOpenWord, pocketed, onPocketToggle, pocketSyncNote }) {
+function WBDetailPage({ entry, wordBank, glossLookupBank, record, today, onBack, onGrade, speak, speakingKey, hasPrev, hasNext, onPrev, onNext, lookupWord, onOpenWord, pocketed, onPocketToggle, pocketSyncNote }) {
   // 词场:这个词真实出现时,身边站着哪些词。
   // 关键是**一个句子**而不是并列的词块 —— 秋(季节)、山(地点)、温泉(要做的事)
   // 是三种不同的关系,摊成一排格子等于让用户自己猜关系。第一版就是这么翻的车。
