@@ -14,7 +14,7 @@
 `node -e "const s=require('fs').readFileSync('staging/zh-54-candidates.md','utf8'); for(const h of ['## A','## D','## B','## C','## OK']){const i=s.indexOf(h),j=s.indexOf('\\n## ',i+1); console.log(h,(s.slice(i,j<0?undefined:j).match(/^\\| \\d+ \\|/gm)||[]).length)}"`。
 
 本轮未改日语、两个内容包、`publication`、UI、gloss 或对齐，未发布也未推 OTA。验收：`npm test`
-**631 / 631**、`npm run typecheck` 通过、`npm run audit` **FAIL: 0, WARN: 25**。完整原始输出及异常自查见
+**631 / 631**、`npm run typecheck` 通过、`npm run audit` 退出码 **0**。完整原始输出及异常自查见
 本轮 `CC-REPORT.md`。下一步仅限负责人逐条确认候选，确认后另开落库工单与内容分支。
 
 ## ✅ 本轮完成 · `TICKET-wordfield-render-fixes.md`

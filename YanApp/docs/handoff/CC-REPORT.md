@@ -1180,7 +1180,13 @@ audit: read-only harness
 PASS content-stats (exit 0)
 PASS validate-content (exit 0)
 PASS meaning-audit (exit 0)
-WARN user-claims: 25
+WARN user-claims App.js:3048: review editorial claim "旅行高频"
+WARN user-claims App.js:3092: review editorial claim "旅行高频"
+WARN user-claims App.js:3186: review editorial claim "高频"
+WARN user-claims App.js:3229: review editorial claim "高频"
+WARN user-claims App.js:3276: review editorial claim "高频"
+WARN user-claims App.js:3294: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1954: review editorial claim "旅行高频"
 PASS content-pack-sync sha256 f1e7191767cbc2b80ed0ca47832ab7327a24a0ccc241f2f5ca57cad1c866ddcf
 PASS content-pack-sync authority content.v2.json has no uncommitted change
 PASS content-pack-sync version/content comparison
@@ -1188,8 +1194,6 @@ PASS invariant kanji_anchor.total=563
 PASS invariant wordBank.total=8005; _meta.note=8005
 PASS metric publication.learning=1187 (not asserted)
 INFO doc-refs scanned 1411 references (589 unique)
-FAIL: 0
-WARN: 25
 ```
 
 `git status --short`（提交前）：
