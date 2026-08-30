@@ -928,7 +928,7 @@ order by table_name, ordinal_position;
 
 ### 仍未改的 publication 守卫（S3 建议）
 
-`tools/stamp-wordbank-publication.py --check` 目前把字节数和 SHA 快照写死；内容一变化就会红，且
+`../tools/stamp-wordbank-publication.py --check` 目前把字节数和 SHA 快照写死；内容一变化就会红，且
 `publication-content.test.mjs` 只间接依赖它，发布闸门也不调用它。建议另立小工单：把 publication
 形状检查、两份内容字节同步、`kanji_anchor` 产品契约拆成可读的只读检查，并接入 `scripts/audit.mjs`
 与发布闸门；固定的产品数量应放进版本化契约文件，内容窗口变更时同一 commit 更新契约和测试。
