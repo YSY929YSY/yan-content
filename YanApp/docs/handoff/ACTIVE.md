@@ -1,7 +1,24 @@
-# 当前状态 · 单假名误命中已修复，待热更新与发布决策
+# 当前状态 · 发布闸门已补上提交态护栏，待负责人决定发布
 
 > 更新日期：2026-08-30
 > **新窗口开局只读这一份就够，不要回溯 CC-REPORT。**
+
+## ✅ 本轮完成 · `TICKET-release-gate-blindspot.md`
+
+本轮决策指标 = **磁盘内容与 `develop/v2` 提交不一致时，闸门必须从放行变为 Blocker**。
+修复前的自然失败样本会被旧闸门判为 Blocker 0；修复后当前分支实测为 **Blocker 2**（当前分支不对
+与磁盘不对应 `develop/v2` 提交各占一项）。复算：从仓库根目录运行 `bash tools/check-content-release.sh`。
+
+闸门现在分别用 `git rev-parse develop/v2:<path>` 与 `git hash-object <disk path>` 对照两份内容，且
+当前分支不是 `develop/v2` 时直接报 Blocker，并输出下一步。模拟在临时 `develop/v2` worktree 上运行同一
+修复脚本，实测 **Blocker 0**；复算方式见本轮 `CC-REPORT.md` 的原始命令记录。
+
+`push-content.sh` 发布前从 `develop/v2` 提交打印 **8005 条词条、200 条词场**，默认要求人工确认，
+只有 `--yes` 才跳过确认；复算：
+`git show develop/v2:yan-content/content.v2.json | python3 -c 'import json,sys; c=json.load(sys.stdin); w=c.get("wordBank") or []; f=sum(1 for x in w if isinstance(x.get("wordField"),dict) and x["wordField"].get("sentence",{}).get("jp")); print(len(w), f)'`。
+
+新增提交态回归与发布脚本静态护栏测试；完整验收 **621 / 621**，类型检查通过，审计 `FAIL: 0`。
+复算：`npm test && npm run typecheck && npm run audit`。本轮没有执行发布脚本、没有发布或推送线上。
 
 ## ✅ 本轮完成 · `TICKET-gloss-single-kana.md`
 
@@ -21,23 +38,10 @@ F-3 在真实 249 条词场中影响 **0 句 / 0 token**，由合成回归测试
 `私は先月ロンドンにいました。`。本轮按工单定义**不推迟词库主线**；热更新由负责人决定。
 
 
-## 🔴 第二条：不要跑 `scripts/push-content.sh`
+## 🟡 发布边界：不要跑 `scripts/push-content.sh`
 
-**发布闸门此刻会放行一次错误发布。** 已复算：
-
-```
-当前分支      content/2026-08-27-wordfield-lv49
-磁盘两份      bb964fd… = bb964fd…    ← 闸门只比这两个 → 报 Blocker 0 → 提示「下一步 push-content.sh」
-develop/v2    cf89950…               ← push 实际发的是这一份
-
-develop/v2 提交里 200 条词场，磁盘 249 条，差 49 条
-```
-
-`tools/check-content-release.sh:27` 比的是**磁盘 vs 磁盘**，
-`scripts/push-content.sh:45` 发的是 **`develop/v2` 的提交**，
-而闸门**从不检查当前分支**。照它的指示做就是把旧内容推到线上。
-
-**修好 `TICKET-release-gate-blindspot.md` 之前，闸门报绿也不要信。**
+发布闸门已经修好，但本轮只验证了它在错误分支阻断、在模拟 `develop/v2` 环境通过；没有执行
+`scripts/push-content.sh`，也没有发布或推送 `origin/main`。线上发布仍由负责人决定。
 
 ## 已落库（未发布）
 
@@ -52,7 +56,7 @@ develop/v2 提交里 200 条词场，磁盘 249 条，差 49 条
 | 序 | 工单 | 状态 |
 |---|---|---|
 | 1 | `TICKET-gloss-single-kana.md` | **已完成**，待负责人决定是否热更新 |
-| 2 | `TICKET-release-gate-blindspot.md` | **待发，最高优先** —— 闸门会放行误发布 |
+| 2 | `TICKET-release-gate-blindspot.md` | **已完成**，待负责人决定是否发布 |
 | 3 | `TICKET-sync-data-loss.md` | 待发，M1/M2/M3 上架前必修，零测试覆盖 |
 | 4 | `TICKET-wordfield-render-fixes.md` | 待发，前置是 1（同一处代码） |
 | 5 | `TICKET-wordfield-furigana.md` | 待发，229 条补读音行 |

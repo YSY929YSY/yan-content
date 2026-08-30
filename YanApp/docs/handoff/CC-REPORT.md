@@ -730,3 +730,106 @@ $ git status --short
 
 - `1275481`：修复单假名消费闸门、F-3/F-4 对齐优先级、词书货架全库 gloss 接线；删除恒真设备断言，加入质量闸门、统计脚本和回归测试。复核范围：`git show --stat --oneline 1275481`。
 - 本轮想改但忍住没改：没有改任何句子的日文或中文；没有追修 `楽しかった` 的其他词义误配、`来`/`した` 的已有 gloss 质量、F-7/F-8/F-11；没有改评分算法、内容包、发布闸门或 OTA。
+
+## 2026-08-30 · `TICKET-release-gate-blindspot.md` · 发布闸门提交态护栏
+
+### 异常自查
+
+1. 本轮与修复前提交相比，决策指标从 **Blocker 0 → Blocker 2**，超过 2 倍；原因是旧闸门只比较
+   两份磁盘文件，修复后新增了「当前分支必须是 `develop/v2`」和「两份磁盘文件必须分别等于
+   `develop/v2` 提交 blob」两层阻断。基线复算：在 `09f0d82^` 临时 worktree 运行
+   `bash tools/check-content-release.sh`；修复后复算：在当前分支运行同一命令。
+2. 没有说不清来源的数字。词条/词场规模来自 `develop/v2` 的提交内容，测试数来自 `npm test`，审计
+   结果来自 `npm run audit`。
+3. **Blocker 2** 的拆分包含一个产品选择：当前分支不是 `develop/v2` 也算 Blocker；
+   **200 个词场**的计数口径是 `wordField` 中带非空 `sentence.jp` 的项，不是人工判读数字。
+
+### 结果与决策指标
+
+- 本轮决策指标 = **磁盘内容与 `develop/v2` 提交不一致时，闸门必须从放行变为 Blocker**。
+  修复前 **0 → 修复后 2**，即 **No → Yes**。修复后当前分支的原始输出：
+
+  ```text
+  【3/6】develop/v2 提交态检查...
+    ✗ 当前分支：content/2026-08-27-wordfield-lv49
+    ✗ yan-content/content.v2.json 与 develop/v2 提交不一致
+    ✗ YanApp/assets/content.fallback.json 与 develop/v2 提交不一致
+  审计结果
+    Blocker 数：2
+    ✗ 当前不在 develop/v2
+    ✗ 磁盘内容与 develop/v2 提交不一致
+  ```
+
+  复算：`bash tools/check-content-release.sh`（从 `/Users/yangshiyao/my-app` 运行）。修复前基线命令：
+  `tmp=$(mktemp -d /private/tmp/yanapp-release-gate-before.XXXXXX); git worktree add "$tmp" 09f0d82^; bash "$tmp/tools/check-content-release.sh"; git worktree remove --force "$tmp"`。
+
+- 模拟把修复后的 gate 放进临时 `develop/v2` worktree，实测 **Blocker 0**、无 Blocker。复算命令：
+  `tmp=$(mktemp -d /private/tmp/yanapp-release-gate.XXXXXX); git worktree add "$tmp" develop/v2; git -C "$tmp" checkout content/2026-08-27-wordfield-lv49 -- tools/check-content-release.sh; bash "$tmp/tools/check-content-release.sh"; git worktree remove --force "$tmp"`。
+
+- `tools/check-content-release.sh` 现在分别用 `git rev-parse "develop/v2:<path>"` 与
+  `git hash-object <disk path>` 对照 `yan-content/content.v2.json` 和
+  `YanApp/assets/content.fallback.json`；错误信息包含下一步。当前分支规则明确报 Blocker。
+
+- `scripts/push-content.sh` 保留 `git show develop/v2:yan-content/content.v2.json` 作为权威源，发布前打印
+  **8005 条词条、200 条词场**，默认要求确认；仅 `--yes` 跳过确认。复算：
+  `git show develop/v2:yan-content/content.v2.json | python3 -c 'import json,sys; c=json.load(sys.stdin); w=c.get("wordBank") or []; f=sum(1 for x in w if isinstance(x.get("wordField"),dict) and x["wordField"].get("sentence",{}).get("jp")); print(len(w), f)'`。
+
+- `src/lib/__tests__/wordIds.test.mjs` 新增磁盘/提交 blob 变异护栏（追加一个字节必须不匹配），并静态锁定两份路径都接入 gate；同时锁定发布脚本的规模打印、默认确认和 `--yes` 入口。非 Git 或没有
+  `develop/v2` 时测试 skip，符合浅克隆降级要求。定向测试 **10 / 10**；复算：
+  `node --test src/lib/__tests__/wordIds.test.mjs`。
+
+### 变异验证
+
+- 删除 gate 中的 `git hash-object` 对照，`wordIds.test.mjs` 的静态断言转红；把提交内容在内存中追加
+  一个换行，blob 匹配断言转红。复算：`node --test src/lib/__tests__/wordIds.test.mjs`。
+- 将当前工作分支改回修复前提交运行，旧闸门自然输出 **Blocker 0**；将修复脚本放入临时
+  `develop/v2` worktree 运行，输出 **Blocker 0**；当前内容分支运行修复后脚本输出 **Blocker 2**。
+  三者命令见上方“结果与决策指标”。
+- 未执行 `scripts/push-content.sh`，因此没有触发 `fetch`、切换 `main`、提交或推送；这是工单明确边界。
+
+### 验收原始输出
+
+```text
+$ npm test
+ℹ tests 621
+ℹ pass 621
+ℹ fail 0
+
+$ npm run typecheck
+> yanapp@1.0.0 typecheck
+> tsc --noEmit
+
+$ npm run audit
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+PASS content-pack-sync sha256 f1e7191767cbc2b80ed0ca47832ab7327a24a0ccc241f2f5ca57cad1c866ddcf
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+INFO doc-refs scanned 1342 references (561 unique)
+```
+
+复算：`npm test && npm run typecheck && npm run audit`。audit 原始输出中的既有 `WARN user-claims` 未由本轮
+改动产生，且没有 FAIL。
+
+报告前置检查：
+
+```text
+$ git status --short
+(无输出，代码提交后)
+```
+
+复算：`git status --short`。
+
+### Commit 与边界
+
+- `09f0d82`：修复发布闸门与 `develop/v2` 提交态绑定，给发布脚本增加提交内容规模回显和默认人工确认，
+  新增提交态/变异回归测试；复核：`git show --stat --oneline 09f0d82`。
+- 未改 `assets/content.fallback.json`、`yan-content/content.v2.json`、同步链、评分算法或 `App.js`；
+  未发布、未推送 `origin/main`、未执行 `scripts/push-content.sh`。
+- 本轮想改但忍住没改：没有把发布动作改成自动化，没有放宽当前分支规则，没有改 `git show develop/v2`
+  的权威源，也没有顺手修审计中的既有 claim WARN。
