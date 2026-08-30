@@ -1137,6 +1137,7 @@ $ git status --short
 
 ### 结果
 
+- 提交 `c2b980d`（`docs: keep Chinese wordfield fixes awaiting review`）新增候选稿，并更新本轮状态与验收记录；提交 `bfb69f9`（`docs: record wordfield audit output faithfully`）把审计记录校正为实际输出。两次提交均未触碰内容包或运行时代码。复算：`git show --stat c2b980d && git show --stat bfb69f9`。
 - 新增 `staging/zh-54-candidates.md`：A 26、D 2、B 17、C 5、OK 4，共 54 条。每条含原中文、候选中文和原因；D 类有前后对照。复算：
   `node -e "const s=require('fs').readFileSync('staging/zh-54-candidates.md','utf8'); for(const h of ['## A','## D','## B','## C','## OK']){const i=s.indexOf(h),j=s.indexOf('\\n## ',i+1); console.log(h,(s.slice(i,j<0?undefined:j).match(/^\\| \\d+ \\|/gm)||[]).length)}"`
 - 决策指标「A 类 26 条改完并经负责人确认的条数」为 **0 → 0**：本工单只包含候选步骤，尚未得到负责人逐条确认，因而可落库数仍为 0。待确认 A 类为 **26 条**。复算：
