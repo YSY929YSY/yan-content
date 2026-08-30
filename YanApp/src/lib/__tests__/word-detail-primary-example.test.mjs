@@ -23,7 +23,7 @@ test('★★ 词条主例句只接受完整且有逐词注音的数据', () => {
 test('★★ 主例句在释义后、词场前，按日文→罗马音→中文阅读', () => {
   const meaning = detail.indexOf('style={wd.meaningBlock}');
   const primary = detail.indexOf('style={wd.primaryExample}');
-  const wordFields = detail.indexOf('{wordFields.map');
+  const wordFields = detail.indexOf('{fieldRenderData.map');
   assert.ok(meaning >= 0 && primary > meaning && wordFields > primary,
     '主例句须处于词义与补充词场之间');
 

@@ -23,11 +23,27 @@ const isSingleChar = (value) => Array.from(value).length === 1;
 const isSingleKana = (value) => isSingleChar(value) && isKana(value);
 const toHalfWidth = (value) => value.replace(/[０-９]/g, (char) => String.fromCharCode(char.charCodeAt(0) - 0xfee0));
 
-/** 只取第一个义项，再取第一个 gloss 分隔符前的完整词义。 */
-const firstGloss = (value) => String(value || '')
-  .split(/[;；]/)[0]
-  .split(/[，、,／/]/)[0]
-  .trim();
+/** 只取第一个义项，再取第一个 gloss 分隔符前的完整词义。括号内分隔符不截断。 */
+export const firstGloss = (value) => {
+  const text = String(value || '');
+  let depth = 0;
+  let out = '';
+  for (const char of text) {
+    if (char === '（' || char === '(') {
+      depth += 1;
+      out += char;
+      continue;
+    }
+    if (char === '）' || char === ')') {
+      depth = Math.max(0, depth - 1);
+      out += char;
+      continue;
+    }
+    if (depth === 0 && /[;；，、,／/]/u.test(char)) break;
+    out += char;
+  }
+  return out.trim();
+};
 
 // 词场句没有自己的 id；它们借用例句管线产出的 surface → dictionary form
 // 索引。输入由调用方注入，避免这个纯函数模块偷偷加载 asset。

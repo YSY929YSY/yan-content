@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
-import { buildWordFieldAlignment, dictionaryFormsFrom, wordFieldGrammar } from '../wordFieldAlignment.js';
+import { fieldMemberTerms, isFieldMemberToken } from '../fieldMemberMatching.js';
+import { buildWordFieldAlignment, dictionaryFormsFrom, firstGloss, wordFieldGrammar } from '../wordFieldAlignment.js';
 
 const load = (rel) => JSON.parse(readFileSync(new URL(rel, import.meta.url), 'utf8'));
 
@@ -196,4 +197,67 @@ test('对齐行只显示第一个完整 gloss，不截断词义', () => {
     assert.doesNotMatch(row.zh, /[，、,／/]/, `${word} 不应带后续并列释义`);
     assert.doesNotMatch(row.zh, /…$|\.\.\.$/, `${word} 不应以省略号截断`);
   }
+});
+
+test('firstGloss 保留括号内的分隔符，再截断括号外的后续义项', () => {
+  assert.equal(firstGloss('花费（时间、金钱）'), '花费（时间、金钱）');
+  assert.equal(firstGloss('戴（帽子等，盖在头上）；穿'), '戴（帽子等，盖在头上）');
+  assert.equal(firstGloss('（您/他的）夫人；太太'), '（您/他的）夫人');
+  assert.equal(firstGloss('使用(time, money), usage'), '使用(time, money)');
+});
+
+test('全库 firstGloss 不留下未闭合的半角或全角括号', () => {
+  const content = load('../../../../assets/content.fallback.json');
+  const unclosed = [];
+  for (const word of content.wordBank || []) {
+    const gloss = firstGloss(word.meaning_zh);
+    let depth = 0;
+    let valid = true;
+    for (const char of gloss) {
+      if (char === '（' || char === '(') depth += 1;
+      if (char === '）' || char === ')') {
+        depth -= 1;
+        if (depth < 0) valid = false;
+      }
+    }
+    if (!valid || depth !== 0) unclosed.push(`${word.id}: ${gloss}`);
+  }
+  assert.deepEqual(unclosed, []);
+});
+
+test('全库词场成员都能在对齐行中找到，包括活用、复合 token 与多表记', () => {
+  const content = load('../../../../assets/content.fallback.json');
+  const rawTokens = load('../../../../assets/example_tokens.json');
+  const dictionaryForms = dictionaryFormsFrom(rawTokens);
+  const byId = new Map((content.wordBank || []).map(word => [word.id, word]));
+  let slots = 0;
+  const misses = [];
+  const zeroSentences = [];
+
+  for (const word of content.wordBank || []) {
+    const fields = Array.isArray(word.wordField) ? word.wordField : (word.wordField ? [word.wordField] : []);
+    for (const field of fields) {
+      if (!field?.sentence?.jp) continue;
+      const rows = buildWordFieldAlignment(field.sentence.jp, content.wordBank, dictionaryForms);
+      let sentenceHits = 0;
+      for (const member of field.members || []) {
+        const memberWord = byId.get(member.id);
+        if (!memberWord || member.id === word.id) continue;
+        slots += 1;
+        const memberTerms = fieldMemberTerms({ members: [member] }, id => byId.get(id));
+        if (rows.some(row => isFieldMemberToken(row, memberTerms, dictionaryForms))) {
+          sentenceHits += 1;
+        } else {
+          misses.push(`${word.id} / ${field.sentence.jp} / ${memberWord.word}`);
+        }
+      }
+      if ((field.members || []).some(member => member.id !== word.id) && sentenceHits === 0) {
+        zeroSentences.push(`${word.id} / ${field.sentence.jp}`);
+      }
+    }
+  }
+
+  assert.equal(slots, 370);
+  assert.deepEqual(misses, []);
+  assert.deepEqual(zeroSentences, []);
 });

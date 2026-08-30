@@ -65,6 +65,7 @@ import { SenseList } from './src/features/wordbank/SenseList';
 import { Furigana } from './src/features/wordbank/FuriganaText';
 import { ExampleSentence, TokenColumnSentence } from './src/features/wordbank/ExampleSentence';
 import { buildWordFieldAlignment, dictionaryFormsFrom } from './src/features/wordbank/wordFieldAlignment';
+import { fieldMemberTerms, isFieldMemberToken } from './src/features/wordbank/fieldMemberMatching';
 import EXAMPLE_TOKENS from './assets/example_tokens.json';
 import { primaryReading, altReadings } from './src/features/wordbank/furigana';
 import {
@@ -2424,17 +2425,6 @@ const LOAN_LANG = {
   lat: '拉丁语', gre: '希腊语',
 };
 
-function fieldMemberTerms(wordField, lookupWord) {
-  return (wordField?.members || [])
-    .map(member => lookupWord?.(member.id))
-    .filter(Boolean)
-    .flatMap(word => [word.word, word.reading].filter(Boolean));
-}
-
-function isFieldMemberToken(token, terms) {
-  return terms.some(term => term === token.jp);
-}
-
 function WBDetailPage({ entry, wordBank, glossLookupBank, record, today, onBack, onGrade, speak, speakingKey, hasPrev, hasNext, onPrev, onNext, lookupWord, onOpenWord, pocketed, onPocketToggle, pocketSyncNote }) {
   // 词场:这个词真实出现时,身边站着哪些词。
   // 关键是**一个句子**而不是并列的词块 —— 秋(季节)、山(地点)、温泉(要做的事)
@@ -2444,8 +2434,23 @@ function WBDetailPage({ entry, wordBank, glossLookupBank, record, today, onBack,
   // 一个词可以有多个词场(大丈夫 的「没事」和「婉拒」是两个完全不同的场合),
   // 但**仍然是一张卡** —— 分成两张会让用户以为是两个词。
   const rawField = entry.wordField || (__DEV__ ? WORDFIELD_PREVIEW[entry.id] : null);
-  const wordFields = (Array.isArray(rawField) ? rawField : (rawField ? [rawField] : []))
-    .filter(f => f?.sentence?.jp);
+  const wordFields = useMemo(() => (Array.isArray(rawField) ? rawField : (rawField ? [rawField] : []))
+    .filter(f => f?.sentence?.jp), [rawField]);
+  const primaryColumns = useMemo(() => (
+    TOKEN_COLUMN_SAMPLE_SENTENCES.has(entry.exampleJp)
+      ? fieldTokenColumns(entry.exampleJp, glossLookupBank)
+      : null
+  ), [entry.exampleJp, glossLookupBank]);
+  const fieldRenderData = useMemo(() => wordFields.map(wordField => ({
+    wordField,
+    memberTerms: fieldMemberTerms(wordField, lookupWord),
+    columns: TOKEN_COLUMN_SAMPLE_SENTENCES.has(wordField.sentence.jp)
+      ? fieldTokenColumns(wordField.sentence.jp, glossLookupBank)
+      : null,
+    alignment: TOKEN_COLUMN_SAMPLE_SENTENCES.has(wordField.sentence.jp)
+      ? null
+      : buildWordFieldAlignment(wordField.sentence.jp, glossLookupBank, EXAMPLE_DICTIONARY_FORMS),
+  })), [wordFields, glossLookupBank, lookupWord]);
   const [correctionOpen, setCorrectionOpen] = useState(false);
   const [correctionKind, setCorrectionKind] = useState('');
   const [correctionNote, setCorrectionNote] = useState('');
@@ -2597,11 +2602,10 @@ function WBDetailPage({ entry, wordBank, glossLookupBank, record, today, onBack,
               if (!TOKEN_COLUMN_SAMPLE_SENTENCES.has(entry.exampleJp)) {
                 return <ExampleSentence sentence={entry.exampleJp} tokens={EXAMPLE_TOKENS[entry.id]} size={19} style={wd.primaryExampleJp} />;
               }
-              const columns = fieldTokenColumns(entry.exampleJp, glossLookupBank);
-              if (!fieldColumnsUsable(entry.exampleJp, columns)) {
+              if (!fieldColumnsUsable(entry.exampleJp, primaryColumns)) {
                 return <ExampleSentence sentence={entry.exampleJp} tokens={EXAMPLE_TOKENS[entry.id]} size={19} style={wd.primaryExampleJp} />;
               }
-              return <TokenColumnSentence columns={columns} size={19} style={wd.primaryExampleJp} showGloss />;
+              return <TokenColumnSentence columns={primaryColumns} size={19} style={wd.primaryExampleJp} showGloss />;
             })()}
             <Text style={wd.primaryExampleRoma}>{entry.exampleRoma}</Text>
             <Text style={wd.primaryExampleZh}>{entry.exampleZh}</Text>
@@ -2609,24 +2613,24 @@ function WBDetailPage({ entry, wordBank, glossLookupBank, record, today, onBack,
         ) : (
           <Text style={wd.contentNote}>暂无例句</Text>
         )}
-        {wordFields.map((wordField, fi) => (
+        {fieldRenderData.map(({ wordField, memberTerms, columns, alignment }, fi) => (
           <View key={fi} style={wd.section}>
             <Text style={wd.sectionLabel}>一起出现</Text>
             <View style={wd.exRow}>
               <View style={{ flex: 1, gap: 3 }}>
                 {TOKEN_COLUMN_SAMPLE_SENTENCES.has(wordField.sentence.jp) ? (
                   <TokenColumnSentence
-                    columns={fieldTokenColumns(wordField.sentence.jp, glossLookupBank).map((token) => ({
+                    columns={columns.map((token) => ({
                       ...token,
-                      member: isFieldMemberToken(token, fieldMemberTerms(wordField, lookupWord)),
+                      member: isFieldMemberToken(token, memberTerms, EXAMPLE_DICTIONARY_FORMS),
                     }))}
                     size={17}
                     showGloss
                   />
                 ) : (
                   <View style={wd.wfAlignRow}>
-                    {buildWordFieldAlignment(wordField.sentence.jp, glossLookupBank, EXAMPLE_DICTIONARY_FORMS).map((token, ti) => {
-                      const member = isFieldMemberToken(token, fieldMemberTerms(wordField, lookupWord));
+                    {alignment.map((token, ti) => {
+                      const member = isFieldMemberToken(token, memberTerms, EXAMPLE_DICTIONARY_FORMS);
                       const glossStyle = token.source === 'wordBank'
                         ? wd.wfAlignZh
                         : token.source === 'grammar'
