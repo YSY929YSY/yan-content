@@ -1127,3 +1127,75 @@ $ git status --short
 - 最终状态干净；审计的 **25** 条 WARN 均为既有 user-claims/doc-refs 提示，不是本轮词场修复引入。
 - 本轮想改但忍住没改：没有为工单基线差异虚构解释，没有改 `カード` gloss，没有删除自成员 chip，
   没有把包含兜底扩展成新的词义或修改评分逻辑。
+## 2026-08-30 · TICKET-wordfield-zh-54（候选稿，未落库）
+
+### 异常自查
+
+1. 本轮没有与上一轮可比且相差两倍以上的数：本轮第一次产出候选稿，之前只记录待判读的 54 条。
+2. 没有说不清来源的数字；分类数来自工单已给出的负责人判读，候选条数由下方命令按 Markdown 表格行复算。
+3. A/B/C/D/OK 是负责人判据决定的分类，不是本轮测量结果；候选中文是 LLM 候选，尚未成为可发布内容。
+
+### 结果
+
+- 新增 `staging/zh-54-candidates.md`：A 26、D 2、B 17、C 5、OK 4，共 54 条。每条含原中文、候选中文和原因；D 类有前后对照。复算：
+  `node -e "const s=require('fs').readFileSync('staging/zh-54-candidates.md','utf8'); for(const h of ['## A','## D','## B','## C','## OK']){const i=s.indexOf(h),j=s.indexOf('\\n## ',i+1); console.log(h,(s.slice(i,j<0?undefined:j).match(/^\\| \\d+ \\|/gm)||[]).length)}"`
+- 决策指标「A 类 26 条改完并经负责人确认的条数」为 **0 → 0**：本工单只包含候选步骤，尚未得到负责人逐条确认，因而可落库数仍为 0。待确认 A 类为 **26 条**。复算：
+  `node -e "const s=require('fs').readFileSync('staging/zh-54-candidates.md','utf8'); const a=s.slice(s.indexOf('## A'),s.indexOf('## D')); console.log((a.match(/^\\| \\d+ \\|/gm)||[]).length)"`
+- 未改日语、`assets/content.fallback.json`、`yan-content/content.v2.json`、`publication`、UI、gloss 或对齐；没有发布、没有推 OTA。想改但忍住的地方：没有把候选中文直接写入内容包，也没有顺手调整词场渲染或日语原句。
+
+### 验收原始输出
+
+候选数量检查：
+
+```text
+A 26 expected 26
+D 2 expected 2
+B 17 expected 17
+C 5 expected 5
+OK 4 expected 4
+```
+
+`npm test`：
+
+```text
+ℹ tests 631
+ℹ suites 0
+ℹ pass 631
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+```
+
+`npm run typecheck`：
+
+```text
+> tsc --noEmit
+```
+
+`npm run audit`：
+
+```text
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims: 25
+PASS content-pack-sync sha256 f1e7191767cbc2b80ed0ca47832ab7327a24a0ccc241f2f5ca57cad1c866ddcf
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+INFO doc-refs scanned 1411 references (589 unique)
+FAIL: 0
+WARN: 25
+```
+
+`git status --short`（提交前）：
+
+```text
+ M docs/handoff/ACTIVE.md
+ M docs/handoff/CC-REPORT.md
+?? staging/zh-54-candidates.md
+```

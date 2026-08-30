@@ -1,7 +1,21 @@
-# 当前状态 · 词场渲染三处缺陷已阻断，待负责人决定热更新
+# 当前状态 · ZH 54 候选稿已备妥，待负责人逐条确认
 
 > 更新日期：2026-08-30
 > **新窗口开局只读这一份就够，不要回溯 CC-REPORT。**
+
+## ✅ 本轮完成 · `TICKET-wordfield-zh-54.md`（第 2 步）
+
+本轮决策指标 = **A 类 26 条改完并经负责人确认的条数 0 → 0**；候选稿不构成确认，负责人尚未逐条确认，
+因此没有任何条目可落库。待确认 A 类 **26 条**；复算：
+`node -e "const s=require('fs').readFileSync('staging/zh-54-candidates.md','utf8'); const a=s.slice(s.indexOf('## A'),s.indexOf('## D')); console.log((a.match(/^\\| \\d+ \\|/gm)||[]).length)"`。
+
+候选稿在 `staging/zh-54-candidates.md`：A 26、D 2、B 17、C 5、OK 4，共 54 条；每条均含原中文、
+候选中文和原因，D 类另列修改前后。复算：
+`node -e "const s=require('fs').readFileSync('staging/zh-54-candidates.md','utf8'); for(const h of ['## A','## D','## B','## C','## OK']){const i=s.indexOf(h),j=s.indexOf('\\n## ',i+1); console.log(h,(s.slice(i,j<0?undefined:j).match(/^\\| \\d+ \\|/gm)||[]).length)}"`。
+
+本轮未改日语、两个内容包、`publication`、UI、gloss 或对齐，未发布也未推 OTA。验收：`npm test`
+**631 / 631**、`npm run typecheck` 通过、`npm run audit` **FAIL: 0, WARN: 25**。完整原始输出及异常自查见
+本轮 `CC-REPORT.md`。下一步仅限负责人逐条确认候选，确认后另开落库工单与内容分支。
 
 ## ✅ 本轮完成 · `TICKET-wordfield-render-fixes.md`
 
@@ -96,7 +110,7 @@ F-3 在真实 249 条词场中影响 **0 句 / 0 token**，由合成回归测试
 | 3 | `TICKET-sync-data-loss.md` | **已完成**，待生产库/真机核验 |
 | 4 | `TICKET-wordfield-render-fixes.md` | **已完成**，待负责人决定热更新 |
 | 5 | `TICKET-wordfield-furigana.md` | 待发，229 条补读音行 |
-| 6 | `TICKET-wordfield-zh-54.md` | 待发，**待审文件已备好**：`staging/zh-54-for-review.md` |
+| 6 | `TICKET-wordfield-zh-54.md` | 第 2 步已完成，待负责人确认 `staging/zh-54-candidates.md`；确认后另开落库工单 |
 
 **上限 303 / 563**（ZH 54 全救回来）。
 
@@ -104,7 +118,7 @@ F-3 在真实 249 条词场中影响 **0 句 / 0 token**，由合成回归测试
 
 | 卡在 | 事 | 谁能解 |
 |---|---|---|
-| **人** | ZH 54 条中文要审（LLM 产出不能进 publication） | 负责人 |
+| **人** | ZH 54 条候选中文逐条确认（A 26 条优先；LLM 产出不能进 publication） | 负责人 |
 | **人** | 218/249 条把自己列进 `members`，chip 指向自己 —— 设计还是冗余？ | 负责人 |
 | **人** | `カード → 积分卡` 在「見せます」句里应是「卡片」，且被测试硬编码锁死 | 负责人 |
 | **人** | 内容包什么时候发布（`push-content.sh` = 推线上） | 负责人 |
