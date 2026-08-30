@@ -67,6 +67,15 @@ tools/data/
 !YanApp/staging/wordfield-candidates*.json
 !YanApp/staging/wordfield-merge-log.json
 
+# 外部审核的判读结果同理:它们是**人做过的决定**,不是可再生的中间产物。
+# 重审一遍 = 重新花掉一次外部额度 + 负责人的时间。
+# 2026-08-30 发现 gpt-verdicts-301.json(301 条判读)一直没进仓库。
+!YanApp/staging/*-for-review.md
+!YanApp/staging/gpt-verdicts-*.json
+!YanApp/staging/wordfield-shortlist-*.json
+!YanApp/staging/*-candidates.md
+!YanApp/staging/deep-card-audit.md
+
 # Supabase CLI 本地状态(含项目 ref,不该进仓库)
 YanApp/supabase/.temp/
 
