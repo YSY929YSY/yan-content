@@ -1108,22 +1108,22 @@ PASS content-pack-sync version/content comparison
 PASS invariant kanji_anchor.total=563
 PASS invariant wordBank.total=8005; _meta.note=8005
 PASS metric publication.learning=1187 (not asserted)
-INFO doc-refs scanned 1383 references (578 unique)
+INFO doc-refs scanned 1401 references (588 unique)
 PASS doc-refs 所有引用都已入库（18 条指向不存在的路径，见 WARN）
-WARN workspace-clean untracked docs: docs/china-launch/README.md, docs/china-launch/opinions-2026-08-30.md
+PASS workspace-clean docs markdown tracked
 --- audit summary ---
 FAIL: 0
-WARN: 26
+WARN: 25
 Result: PASS
 
 $ git status --short
-?? docs/china-launch/
+(无输出)
 ```
 
 ### Commit 与边界
 
 - `d94ea35`：修复成员高亮、括号内 gloss 截断与词卡对齐重复计算；新增纯函数与回归/源码守卫测试。
 - 本轮没有改内容包，因此没有内容 stats 前后对比，也没有内容版本递增或发布验证。
-- 最终状态仍有与本轮无关的未跟踪 `docs/china-launch/`，审计因此为 WARN **26**；没有删除或代为提交。
+- 最终状态干净；审计的 **25** 条 WARN 均为既有 user-claims/doc-refs 提示，不是本轮词场修复引入。
 - 本轮想改但忍住没改：没有为工单基线差异虚构解释，没有改 `カード` gloss，没有删除自成员 chip，
   没有把包含兜底扩展成新的词义或修改评分逻辑。
