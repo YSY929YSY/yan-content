@@ -27,6 +27,25 @@
 所以「单字误命中 34.06% → 27.39%」那轮的修复，**设备上一次都没生效**。
 审计侧（Claude）当时验的是纯函数输出，没验调用方能否拿到那个参数 —— **这条是审计侧漏的。**
 
+
+## 🔴 第二条：不要跑 `scripts/push-content.sh`
+
+**发布闸门此刻会放行一次错误发布。** 已复算：
+
+```
+当前分支      content/2026-08-27-wordfield-lv49
+磁盘两份      bb964fd… = bb964fd…    ← 闸门只比这两个 → 报 Blocker 0 → 提示「下一步 push-content.sh」
+develop/v2    cf89950…               ← push 实际发的是这一份
+
+develop/v2 提交里 200 条词场，磁盘 249 条，差 49 条
+```
+
+`tools/check-content-release.sh:27` 比的是**磁盘 vs 磁盘**，
+`scripts/push-content.sh:45` 发的是 **`develop/v2` 的提交**，
+而闸门**从不检查当前分支**。照它的指示做就是把旧内容推到线上。
+
+**修好 `TICKET-release-gate-blindspot.md` 之前，闸门报绿也不要信。**
+
 ## 已落库（未发布）
 
 | | 结果 |
@@ -39,11 +58,12 @@
 
 | 序 | 工单 | 状态 |
 |---|---|---|
-| 1 | `TICKET-gloss-single-kana.md` | **已发 Codex**，最高优先，阻塞发布 |
-| 2 | `TICKET-wordfield-render-fixes.md` | 待发，前置是 1（同一处代码，串行） |
-| 3 | `TICKET-wordfield-furigana.md` | 待发，229 条补读音行（运行时派生，不写内容包） |
-| 4 | `TICKET-wordfield-zh-54.md`（**待写**） | ZH 54 条中文，**要负责人 + 外部审核** |
-| 5 | 换句规则接 `meaning_zh` 义项 | 待写，收益低（历史只 1 条命中） |
+| 1 | `TICKET-gloss-single-kana.md` | **已发 Codex**，阻塞发布 |
+| 2 | `TICKET-release-gate-blindspot.md` | **待发，最高优先** —— 闸门会放行误发布 |
+| 3 | `TICKET-sync-data-loss.md` | 待发，M1/M2/M3 上架前必修，零测试覆盖 |
+| 4 | `TICKET-wordfield-render-fixes.md` | 待发，前置是 1（同一处代码） |
+| 5 | `TICKET-wordfield-furigana.md` | 待发，229 条补读音行 |
+| 6 | `TICKET-wordfield-zh-54.md` | 待发，**待审文件已备好**：`staging/zh-54-for-review.md` |
 
 **上限 303 / 563**（ZH 54 全救回来）。
 
@@ -71,6 +91,24 @@
 
 **数据完整性无问题**：成员 id 全部存在、无重复无空、Tatoeba ID 无冲突无复用、
 分词拼回原句 249/249 精确一致。
+
+
+## 第二次冷启动审计 · 同步链与发布契约（2026-08-30）
+
+审计方未看过任何此前对话与报告。**成立的不变量**（它自己跑过，非复述）：
+进度键裸格式 ✓ · `kanji_anchor` 563 ✓ · 别名表 269 条无链式无自映射 ✓ ·
+8005 个 id 唯一 ✓ · `publication` / `meaningTrust` fail-closed ✓ ·
+删账号 DB 侧靠 `on delete cascade` 回收 ✓ · RLS 缺 `with check` **不是洞**（PG 用 USING 兼作 CHECK）
+
+**必修四条** → 工单 2（M4）与工单 3（M1/M2/M3）。
+
+**建议档**：口袋不做别名折算（269 个别名源键在内容里已全部不存在，
+合并前收藏的词从口袋消失）· `pushProgress` 不接 DB error ·
+`stamp-wordbank-publication.py --check` 已失效且不在闸门里
+——**所以现在没有任何自动检查在守 563 这个数**。
+
+**必须人工核验（代码证明不了）**：生产库到底跑没跑 `schema.apply-all.sql` ·
+删账号是否真回收旧前缀照片 · `origin/main` 上现在挂的是哪一版 content。
 
 ## 已知放弃 · 9 条无词场
 
