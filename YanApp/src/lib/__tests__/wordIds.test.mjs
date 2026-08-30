@@ -18,10 +18,15 @@
 //   3. id 和「词-读音」进度键一一对应 —— 两套键必须能互相换算
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { execFileSync } from 'node:child_process';
 
 const ROOT = new URL('../../../../', import.meta.url);          // my-app/
 const read = (p) => JSON.parse(readFileSync(new URL(p, ROOT), 'utf8'));
+const REPO_ROOT = fileURLToPath(ROOT);
+const gateSource = readFileSync(new URL('tools/check-content-release.sh', ROOT), 'utf8');
 
 const bundled = read('YanApp/assets/content.fallback.json').wordBank;
 const remote = read('yan-content/content.v2.json').wordBank;
@@ -36,6 +41,52 @@ const wordKey = (w) => `${w.word}-${w.reading}`;
 test('两份词库条数一致 —— 远端和内置分叉了没人会发现', () => {
   assert.equal(bundled.length, remote.length,
     `内置 ${bundled.length} 条,远端 ${remote.length} 条`);
+});
+
+test('★ 磁盘与 develop/v2 提交不一致时发布闸门必须失败', (t) => {
+  let committed;
+  let commitHash;
+  try {
+    committed = execFileSync(
+      'git',
+      ['-C', REPO_ROOT, 'show', 'develop/v2:yan-content/content.v2.json'],
+      { maxBuffer: 32 * 1024 * 1024 },
+    );
+    commitHash = execFileSync(
+      'git',
+      ['-C', REPO_ROOT, 'rev-parse', 'develop/v2:yan-content/content.v2.json'],
+      { encoding: 'utf8' },
+    ).trim();
+  } catch {
+    t.skip('非 git 环境或没有 develop/v2：跳过提交态护栏测试');
+    return;
+  }
+
+  const gitBlobHash = (bytes) => createHash('sha1')
+    .update(`blob ${bytes.length}\0`)
+    .update(bytes)
+    .digest('hex');
+  const matchesCommit = (bytes) => gitBlobHash(bytes) === commitHash;
+
+  assert.equal(matchesCommit(committed), true, '提交内容自身应与它的 Git blob hash 一致');
+  const mutated = Buffer.concat([committed, Buffer.from('\n')]);
+  assert.equal(matchesCommit(mutated), false,
+    'mutation guard: 磁盘多一个字节时必须视为与 develop/v2 提交不一致');
+  assert.match(gateSource, /git rev-parse "develop\/v2:\$commit_path"/);
+  assert.match(gateSource, /git hash-object "\$disk_path"/);
+  assert.match(gateSource,
+    /develop_blob_matches_disk "yan-content\/content\.v2\.json" "yan-content\/content\.v2\.json"/);
+  assert.match(gateSource,
+    /develop_blob_matches_disk "YanApp\/assets\/content\.fallback\.json" "YanApp\/assets\/content\.fallback\.json"/);
+  assert.match(gateSource, /先把内容变更合回 develop\/v2/);
+});
+
+test('发布脚本在发布前打印规模并默认要求确认', () => {
+  const pushSource = readFileSync(new URL('scripts/push-content.sh', ROOT), 'utf8');
+  assert.match(pushSource, /push-content\.sh \[--yes\]/);
+  assert.match(pushSource, /develop\/v2 提交内容：词条 \$WORD_COUNT 条，词场 \$FIELD_COUNT 条/);
+  assert.match(pushSource, /read -r -p "确认发布这份 develop\/v2 内容/);
+  assert.match(pushSource, /ASSUME_YES=1/);
 });
 
 test('每一条都有非空 id', () => {
