@@ -122,6 +122,42 @@ yan-content/content.v2.json          ← 漏过一次，见下
 仓库没有 `.github/workflows`，**PR 上不会自动跑任何门禁**。门禁在本地：
 `npm test && npm run typecheck && npm run audit`。
 
+
+### 🔓 功能线可以并行（功能早就拆好了，不要再说"都挤在 App.js"）
+
+```
+src/features/journal/   手账
+src/features/travel/    分账 / 行程
+src/features/world/     世界打卡
+src/features/wordbank/  词库 / 词场 / gloss
+src/features/review/    复习    src/features/kana/  五十音
+src/features/home/      首页    src/features/learn/ 学习
+```
+
+**不同 `src/features/*` 目录的任务可以同时进行，不需要开分支隔离，
+也不需要拆 `App.js`（`App.js` 只是壳 + 词卡详情页，31 个顶层函数）。**
+
+### 🔒 但这几个是全线共享的，必须串行
+
+```
+src/lib/sync.js              ← 同步链，每条线都碰
+src/lib/storage.js           ← 本地存储
+src/lib/supabase.js          ← 远端
+src/lib/schema*.sql          ← 表结构（尤其 schema.apply-all.sql）
+assets/content.fallback.json ← 内容包（见上，全局互斥）
+App.js                       ← 挂载点；改动通常只有几行，按 commit 顺序串行
+```
+
+**新功能的正确形状**：写成 `src/features/<线>/` 下的新文件，
+**在 `App.js` 只留几行挂载点**。这样两条功能线的唯一交点是那几行，
+按 commit 顺序落地即可，不会真冲突。
+
+### 并行前必须回答的两句
+
+1. **这两条线碰同一个共享文件吗？** 碰了就串行。
+2. **哪条需要负责人做决定？** 两条都需要的话，并行只会让他同时被两边等着 ——
+   这不是加速，是把瓶颈翻倍（见 ACTIVE.md「卡在谁身上」那张表）。
+
 ## 三、并行规则
 
 | 能并行 | 不能并行 |
