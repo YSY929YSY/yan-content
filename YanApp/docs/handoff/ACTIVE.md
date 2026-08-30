@@ -1,7 +1,24 @@
-# 当前状态 · 发布闸门已补上提交态护栏，待负责人决定发布
+# 当前状态 · 同步链三处数据丢失已阻断，待生产核验
 
 > 更新日期：2026-08-30
 > **新窗口开局只读这一份就够，不要回溯 CC-REPORT。**
+
+## ✅ 本轮完成 · `TICKET-sync-data-loss.md`
+
+本轮决策指标 = **能造成不可逆用户数据丢失的路径数 3 → 0**。M1 口袋空表覆盖、M2 补传途中
+铸造匿名账号、M3 删号 Storage 清理失败后仍删账号，均已加 fail-closed 守卫与回归测试；复算：
+`node --test src/lib/__tests__/syncDataLoss.test.mjs`。
+
+M1 现在区分拉取失败与云端空表，口袋拉取成功取本机与云端并集；M2 的同步路径只读取现有会话，
+匿名账号创建只保留在 `ensureUser()` 首次启动入口；M3 Storage 列举分页、错误向上传播，任一步
+Storage 清理失败都不会调用删号 RPC，并返回“删除未完成，请重试”。S1/S2 建议项也已处理：口袋
+读盘按既有别名表折算，进度 upsert/delete 检查数据库错误。
+
+代码验收 **627 / 627**，类型检查通过，审计 `FAIL: 0`；复算：
+`npm test && npm run typecheck && npm run audit`。本轮未改内容包、未改评分算法、未连生产凭据。
+
+仍待负责人确认：生产库是否实际执行过 `schema.apply-all.sql`；删号后两桶旧前缀照片是否真已回收；
+以及把失效的 `stamp-wordbank-publication.py --check` 改成新的内容契约守卫（本轮只写建议，不改）。
 
 ## ✅ 本轮完成 · `TICKET-release-gate-blindspot.md`
 
@@ -57,7 +74,7 @@ F-3 在真实 249 条词场中影响 **0 句 / 0 token**，由合成回归测试
 |---|---|---|
 | 1 | `TICKET-gloss-single-kana.md` | **已完成**，待负责人决定是否热更新 |
 | 2 | `TICKET-release-gate-blindspot.md` | **已完成**，待负责人决定是否发布 |
-| 3 | `TICKET-sync-data-loss.md` | 待发，M1/M2/M3 上架前必修，零测试覆盖 |
+| 3 | `TICKET-sync-data-loss.md` | **已完成**，待生产库/真机核验 |
 | 4 | `TICKET-wordfield-render-fixes.md` | 待发，前置是 1（同一处代码） |
 | 5 | `TICKET-wordfield-furigana.md` | 待发，229 条补读音行 |
 | 6 | `TICKET-wordfield-zh-54.md` | 待发，**待审文件已备好**：`staging/zh-54-for-review.md` |

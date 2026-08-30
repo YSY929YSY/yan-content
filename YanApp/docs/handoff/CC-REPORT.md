@@ -833,3 +833,140 @@ $ git status --short
   未发布、未推送 `origin/main`、未执行 `scripts/push-content.sh`。
 - 本轮想改但忍住没改：没有把发布动作改成自动化，没有放宽当前分支规则，没有改 `git show develop/v2`
   的权威源，也没有顺手修审计中的既有 claim WARN。
+
+## 2026-08-30 · `TICKET-sync-data-loss.md` · 同步链 M1/M2/M3
+
+### 异常自查
+
+1. 本轮与工单基线相比，唯一需要解释的两倍以上变化是决策指标 **3 → 0**：工单点名的三条不可逆
+   路径各自增加了阻断守卫和测试；这是修复目标，不是内容规模变化。复算：
+   `node --test src/lib/__tests__/syncDataLoss.test.mjs`。
+2. 没有说不清来源的数字。**1000** 是原有 Storage 单页 limit，本轮保留这个单页大小、改为带 offset
+   持续翻页；复算：`rg -n 'STORAGE_LIST_PAGE_SIZE|offset' src/lib/supabase.js`。
+3. **3 → 0** 是工单定义的决策指标；M1 的“空表”判据、M2 的“无会话”、M3 的“Storage 失败”都是
+   代码分支判据，不是抽样估计。生产库是否已执行 SQL、真机文件是否已回收，代码不能证明。
+
+### 结果与决策指标
+
+- 本轮决策指标 = **能造成不可逆用户数据丢失的路径数：3 → 0**。
+  三条路径现在均有独立守卫：
+
+  - M1：`pullPocket()` 返回 `{ ok, ids, error }`；拉取失败不再伪装成空表，调用方用本机与云端并集，
+    云端空表不能清掉本机口袋。
+  - M2：同步链改用只读取现有会话的 `requireSession()`；`signInAnonymously()` 不再出现在
+    `sync.js`，创建匿名身份只保留在 `supabase.js` 的 `ensureUser()` 首次启动入口。补传失败继续写入
+    `K.backfillPending`，不会以新匿名账号伪装成功。
+  - M3：Storage `list()` 按 offset 翻页；列举错误和 `remove()` 错误都会向上传播，任何一步失败都不会
+    调用 `rpc('delete_my_account')`，并返回用户可见的“删除未完成，请重试”。
+
+  复算：`node --test src/lib/__tests__/syncDataLoss.test.mjs`；M1 的纯合并行为复算：
+  `node --test src/features/wordbank/__tests__/pocket.test.mjs`。
+
+- 一并处理 S1：`pocketKey()` 与 `normalizePocket()` 在读盘时调用既有 `canonicalKey()`，仍保持裸的
+  `词-读音` 格式；旧口袋键会折算到现行键，不改进度键格式，也没有修改 `srs.js`。
+
+- 一并处理 S2：`pushProgress()` 对 `word_progress` 的 upsert 和 delete 都解构并检查数据库 `error`，
+  失败进入既有 catch/warn 路径，不再把 RLS/约束错误当成成功。复算：
+  `node --test src/lib/__tests__/syncDataLoss.test.mjs`。
+
+### 变异验证
+
+- M1：将 `!remote?.ok` 守卫改回只判断 `null`，或把 `mergePocketPull(result.value, remote)` 改回直接
+  `normalizePocket(remote)`，`syncDataLoss.test.mjs` 的调用方静态守卫转红；口袋纯函数的空表用例也转红。
+- M2：在 `sync.js` 任一同步路径重新加入 `signInAnonymously()`，测试的 `doesNotMatch` 转红；把
+  `requireSession()` 改回会造账号的函数，调用点/实现契约测试转红。
+- M3：删掉 `offset` 翻页、把 `list()` 错误吞成空数组、恢复 `remove()` 的内层吞错，或把 RPC 移到
+  Storage 清理之前，M3 测试分别转红。
+- S2：删除 upsert/delete 任一处 `if (error) throw error`，S2 测试中的双处计数断言转红。
+
+这些是源码契约测试：同步模块依赖 React Native/Supabase 运行时，当前 node harness 不接生产凭据；
+没有把静态通过描述成远端运行时验证。
+
+### 生产库核验（待负责人执行）
+
+代码只能证明客户端按这些表/列工作，不能证明生产库真的跑过 `schema.apply-all.sql`。请在 Supabase
+Dashboard → SQL Editor/Database Inspector 确认以下清单：
+
+- `public.word_progress`：`user_id`, `word_key`, `book_id`, `status`, `updated_at`, `box`, `due_at`,
+  `reps`, `lapses`, `last_seen_at`。
+- `public.place_checkin`：`user_id`, `place_id`, `status`, `note`, `photo_path`, `updated_at`,
+  `checked_in_at`；`public.user_places`：`id`, `user_id`, `name`, `visited_on`, `photo_path`。
+- `public.trip_notebooks`：`user_id`, `payload`, `device_rev`, `updated_at`；`public.profiles`：`id`。
+- 共享账本：`public.trip_ledgers` 的 `id`, `created_by`；`public.ledger_members` 的 `id`, `ledger_id`,
+  `user_id`, `display_name`, `is_tag`；`public.ledger_expenses` 的 `id`, `ledger_id`, `created_by`。
+- 手账：`public.moments` 的 `id`, `user_id`；`public.moment_photos` 的 `id`, `user_id`, `moment_id`,
+  `storage_path`；`public.moment_tags` 的 `id`, `user_id`, `moment_id`, `kind`, `value`；
+  `public.journal_pages` 的 `id`, `user_id`；`public.journal_items` 的 `id`, `user_id`, `page_id`。
+- Storage：`storage.buckets.id` 中有 `checkin-photos` 与 `moment-photos`；`storage.objects` 至少能查
+  `bucket_id`, `name`；同时确认 `public.delete_my_account()` 存在、可执行、且为当前版本。
+
+可粘贴的列清单查询：
+
+```sql
+select table_schema, table_name, column_name
+from information_schema.columns
+where table_schema = 'public'
+  and table_name in (
+    'profiles', 'word_progress', 'place_checkin', 'user_places', 'trip_ledgers',
+    'ledger_members', 'ledger_expenses', 'trip_notebooks', 'moments', 'moment_photos',
+    'moment_tags', 'journal_pages', 'journal_items'
+  )
+order by table_name, ordinal_position;
+```
+
+### 删号真机核验步骤（待负责人执行）
+
+1. 用可丢弃的 Apple 账号登录测试包，先记录当前 user id；上传一张精选地点打卡照片，再创建一条带
+   照片的手账瞬间/素材。
+2. 在 Dashboard 查询 `storage.objects`，确认两个桶下都出现该 user id 前缀：
+   `select bucket_id, name from storage.objects where name like '<USER_ID>/%' order by bucket_id, name;`
+   同时记录 `place_checkin`, `moments`, `moment_photos`, `journal_pages`, `journal_items` 中该用户的行。
+3. 在 App 内完成两次删除确认。若客户端返回失败，必须看到“删除未完成，请重试”，并且 Auth 用户仍在；
+   不得出现“已删除”。
+4. 若返回成功，刷新两个桶的对象列表，旧 user id 前缀应为空；检查 Auth → Users 中账号消失，且上述
+   业务表不再有该 `user_id` 的行。这个步骤验证的是线上实际回收，不是本地代码推断。
+
+### 仍未改的 publication 守卫（S3 建议）
+
+`tools/stamp-wordbank-publication.py --check` 目前把字节数和 SHA 快照写死；内容一变化就会红，且
+`publication-content.test.mjs` 只间接依赖它，发布闸门也不调用它。建议另立小工单：把 publication
+形状检查、两份内容字节同步、`kanji_anchor` 产品契约拆成可读的只读检查，并接入 `scripts/audit.mjs`
+与发布闸门；固定的产品数量应放进版本化契约文件，内容窗口变更时同一 commit 更新契约和测试。
+本轮不改这条，也不宣称当前已有自动检查守住 563。
+
+### 验收原始输出
+
+```text
+$ node --test src/lib/__tests__/syncDataLoss.test.mjs src/features/wordbank/__tests__/pocket.test.mjs
+ℹ tests 10
+ℹ pass 10
+ℹ fail 0
+
+$ npm test
+ℹ tests 627
+ℹ pass 627
+ℹ fail 0
+
+$ npm run typecheck
+> yanapp@1.0.0 typecheck
+> tsc --noEmit
+
+$ npm run audit
+--- audit summary ---
+FAIL: 0
+WARN: 24
+Result: PASS
+
+$ git status --short
+(无输出)
+```
+
+复算：以上各命令逐条运行；`npm run audit` 的既有 WARN 未由本轮改动产生。
+
+### Commit 与边界
+
+- `7c888e8`：修复 M1/M2/M3 与 S1/S2，新增 `syncDataLoss.test.mjs`，扩展口袋测试；复核：
+  `git show --stat --oneline 7c888e8`。
+- 未改内容包、`srs.js` 评分算法、数据库 SQL、发布闸门、`push-content.sh` 或 UI；未连生产凭据。
+- 本轮想改但忍住没改：没有擅自修改匿名补传触发条件，没有把生产 SQL 执行状态写成“已完成”，没有
+  把 S3 失效快照直接修掉，也没有为删号增加新的数据库删除路径。
