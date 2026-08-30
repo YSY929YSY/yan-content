@@ -104,6 +104,7 @@ export async function signInWithApple() {
  * 手账的素材和瞬间照片共用 `moment-photos`(见 schema.journal.sql 第 190 行)。
  */
 const BUCKETS = ['checkin-photos', 'moment-photos'];
+const STORAGE_LIST_PAGE_SIZE = 1000;
 
 /**
  * 列出某个前缀下的**全部**文件路径,包括子目录里的。
@@ -117,16 +118,25 @@ const BUCKETS = ['checkin-photos', 'moment-photos'];
  * 删号是用户点了「删除」正在等的操作,不能卡住。
  */
 async function listAllUnder(bucket, prefix, depth = 3) {
-  const { data, error } = await supabase.storage.from(bucket).list(prefix, { limit: 1000 });
-  if (error || !data?.length) return [];
   const out = [];
-  for (const entry of data) {
-    const path = `${prefix}/${entry.name}`;
-    if (entry.id == null) {
-      if (depth > 1) out.push(...await listAllUnder(bucket, path, depth - 1));
-    } else {
-      out.push(path);
+  for (let offset = 0; ; offset += STORAGE_LIST_PAGE_SIZE) {
+    const { data, error } = await supabase.storage.from(bucket).list(prefix, {
+      limit: STORAGE_LIST_PAGE_SIZE,
+      offset,
+    });
+    if (error) throw error;
+    if (!Array.isArray(data)) throw new Error(`Storage list returned invalid data for ${bucket}/${prefix}`);
+    if (!data.length) break;
+
+    for (const entry of data) {
+      const path = `${prefix}/${entry.name}`;
+      if (entry.id == null) {
+        if (depth > 1) out.push(...await listAllUnder(bucket, path, depth - 1));
+      } else {
+        out.push(path);
+      }
     }
+    if (data.length < STORAGE_LIST_PAGE_SIZE) break;
   }
   return out;
 }
@@ -146,12 +156,10 @@ export async function deleteAccount() {
     // 的代码,于是手账上线时 moment-photos 会被整个漏掉 ——
     // schema.journal.sql 第 195 行早就写了这条,但那是注释,拦不住谁。
     for (const bucket of BUCKETS) {
-      try {
-        const paths = await listAllUnder(bucket, session.user.id);
-        if (paths.length) await supabase.storage.from(bucket).remove(paths);
-      } catch (e) {
-        // 文件删不掉不该挡住账号删除 —— 用户的诉求是「把我删掉」
-        console.warn(`[Auth] remove ${bucket} failed:`, e.message);
+      const paths = await listAllUnder(bucket, session.user.id);
+      if (paths.length) {
+        const { error } = await supabase.storage.from(bucket).remove(paths);
+        if (error) throw error;
       }
     }
 
@@ -171,7 +179,7 @@ export async function deleteAccount() {
     return { ok: true, error: null };
   } catch (e) {
     console.warn('[Auth] delete account failed:', e.message);
-    return { ok: false, error: e.message };
+    return { ok: false, error: '删除未完成，请重试' };
   }
 }
 

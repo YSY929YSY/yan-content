@@ -53,7 +53,7 @@ import {
   canGradeWord, canIntroduceWord, canReviewWord, hasCompleteExample, isDictionaryEntry,
 } from './src/features/wordbank/publication';
 import { meaningTrust } from './src/features/wordbank/meaningTrust';
-import { addToPocket, isPocketed, normalizePocket, pocketKey, removeFromPocket } from './src/features/wordbank/pocket';
+import { addToPocket, isPocketed, mergePocketPull, normalizePocket, pocketKey, removeFromPocket } from './src/features/wordbank/pocket';
 import { usePrefs } from './src/lib/prefs';
 import { pullPocket, pushPocket } from './src/lib/sync';
 import { scenesOfWord } from './src/features/wordbank/sceneWords';
@@ -2082,8 +2082,8 @@ function WordBankScreen({ wordBank, glossLookupBank, book, onBack }) {
       pocketGuard.current.onRead(result);
       setPocket(normalizePocket(result.value));
       pullPocket().then((remote) => {
-        if (!alive || remote === null) return;
-        const next = normalizePocket(remote);
+        if (!alive || !remote?.ok) return;
+        const next = mergePocketPull(result.value, remote);
         setPocket(next);
         if (pocketGuard.current.allow()) writeJson(K.pocket, next);
       });

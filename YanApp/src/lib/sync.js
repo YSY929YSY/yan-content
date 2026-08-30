@@ -7,14 +7,10 @@ import { toCloudRow, fromCloudRow } from '../features/wordbank/srs';
 
 const CHECKIN_PHOTO_BUCKET = 'checkin-photos';
 
-async function getSessionUser() {
+async function requireSession() {
   if (!supabase) return null;
   const { data: { session } } = await supabase.auth.getSession();
-  if (session?.user) return session.user;
-
-  const { data, error } = await supabase.auth.signInAnonymously();
-  if (error) throw error;
-  return data.user || null;
+  return session?.user || null;
 }
 
 /**
@@ -32,13 +28,15 @@ export async function pushProgress(wordKey, rec, bookId = 'n5') {
 
     const row = toCloudRow(wordKey, rec, { userId: session.user.id, bookId });
     if (!row) {
-      await supabase.from('word_progress')
+      const { error } = await supabase.from('word_progress')
         .delete()
         .eq('user_id', session.user.id)
         .eq('word_key', wordKey);
+      if (error) throw error;
     } else {
-      await supabase.from('word_progress')
+      const { error } = await supabase.from('word_progress')
         .upsert(row, { onConflict: 'user_id,word_key' });
+      if (error) throw error;
     }
   } catch (e) {
     console.warn('[Sync] push failed:', e.message);
@@ -86,7 +84,7 @@ export async function backfillProgress(progressMap, bookId = 'n5') {
   const entries = Object.entries(progressMap || {});
   if (!entries.length) return { count: 0, error: null };
   try {
-    const user = await getSessionUser();
+    const user = await requireSession();
     if (!user) return { count: 0, error: 'no session' };
     const now = new Date().toISOString();
     // toCloudRow 顺带做了归一:本机可能还留着旧版写的字符串,那批也要补传,
@@ -120,7 +118,7 @@ export async function backfillPocket(pocketList) {
     .filter(key => typeof key === 'string' && key.trim()))];
   if (!keys.length) return { count: 0, error: null };
   try {
-    const user = await getSessionUser();
+    const user = await requireSession();
     if (!user) return { count: 0, error: 'no session' };
     let done = 0;
     for (let i = 0; i < keys.length; i += 400) {
@@ -150,7 +148,7 @@ export async function backfillCheckins(visitedIds, { notes = {}, dates = {}, pho
   const ids = (visitedIds || []).filter(Boolean);
   if (!ids.length) return { count: 0, error: null };
   try {
-    const user = await getSessionUser();
+    const user = await requireSession();
     if (!user) return { count: 0, error: 'no session' };
     const now = new Date().toISOString();
     const rows = ids.map(place_id => ({
@@ -323,24 +321,28 @@ export async function pullProgress() {
 }
 
 export async function pullPocket() {
-  if (!supabase) return null;
+  if (!supabase) return { ok: false, ids: [], error: 'offline' };
   try {
     const { data: { session } } = await supabase.auth.getSession();
-    if (!session) return null;
+    if (!session) return { ok: false, ids: [], error: 'no session' };
     const { data, error } = await supabase.from('word_pocket')
       .select('word_key').eq('user_id', session.user.id);
     if (error) throw error;
-    return (data || []).map(row => row.word_key).filter(Boolean);
+    return {
+      ok: true,
+      ids: (data || []).map(row => row.word_key).filter(Boolean),
+      error: null,
+    };
   } catch (e) {
     console.warn('[Sync] pocket pull failed:', e.message);
-    return null;
+    return { ok: false, ids: [], error: e.message };
   }
 }
 
 export async function pullPlaceCheckins() {
   if (!supabase) return null;
   try {
-    const user = await getSessionUser();
+    const user = await requireSession();
     if (!user) return null;
 
     const { data, error } = await supabase
@@ -382,7 +384,7 @@ export async function pullPlaceCheckins() {
 export async function pushPlaceCheckin(placeId, status, patch = {}) {
   if (!supabase) return null;
   try {
-    const user = await getSessionUser();
+    const user = await requireSession();
     if (!user) return null;
 
     const row = {
@@ -418,7 +420,7 @@ export async function pushPlaceCheckin(placeId, status, patch = {}) {
 export async function uploadPlaceCheckinPhoto(placeId, localUri, contentType = 'image/jpeg') {
   if (!supabase || !localUri) return null;
   try {
-    const user = await getSessionUser();
+    const user = await requireSession();
     if (!user) return null;
 
     const response = await fetch(localUri);

@@ -1,9 +1,25 @@
 // 口袋只保存裸的「词-读音」键；它不是 SRS 来源，也不加前缀。
-export const pocketKey = (word) => (word?.word && word?.reading ? `${word.word}-${word.reading}` : '');
+import { canonicalKey } from './keyAliases.js';
+
+export const pocketKey = (word) => (
+  word?.word && word?.reading ? canonicalKey(`${word.word}-${word.reading}`) : ''
+);
 
 export function normalizePocket(value) {
   const list = Array.isArray(value) ? value : [];
-  return [...new Set(list.filter((key) => typeof key === 'string' && key.trim()))];
+  return [...new Set(list
+    .filter((key) => typeof key === 'string' && key.trim())
+    .map((key) => canonicalKey(key)))];
+}
+
+/**
+ * 云端口袋拉取的 fail-closed 合并。
+ * 拉取失败保留本地；拉取成功取并集，尤其不能让云端空表覆盖本地选择。
+ */
+export function mergePocketPull(local, remote) {
+  const localKeys = normalizePocket(local);
+  if (!remote?.ok) return localKeys;
+  return normalizePocket([...localKeys, ...normalizePocket(remote.ids)]);
 }
 
 export function isPocketed(pocket, word) {
