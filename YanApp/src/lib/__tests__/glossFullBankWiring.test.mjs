@@ -29,7 +29,7 @@ test('设备条件：N4 词书子集的 gloss 查询使用全库结果', () => {
 
   assert.match(appSource, /<WordBankScreen\s+[\s\S]*?wordBank=\{bookWords\}[\s\S]*?glossLookupBank=\{content\.wordBank \|\| \[\]\}/);
   assert.match(appSource, /function WordBankScreen\(\{ wordBank, glossLookupBank, book, onBack \}\)/);
-  assert.match(appSource, /function WBDetailPage\(\{ entry, wordBank, glossLookupBank = wordBank,/);
+  assert.match(appSource, /function WBDetailPage\(\{ entry, wordBank, glossLookupBank,/);
   assert.match(appSource, /fieldTokenColumns\(entry\.exampleJp, glossLookupBank\)/);
   assert.match(appSource, /fieldTokenColumns\(wordField\.sentence\.jp, glossLookupBank\)/);
   assert.match(appSource, /buildWordFieldAlignment\(wordField\.sentence\.jp, glossLookupBank,/);

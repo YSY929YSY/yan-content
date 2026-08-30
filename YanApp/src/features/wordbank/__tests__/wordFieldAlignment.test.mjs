@@ -117,7 +117,7 @@ test('★★ Tatoeba 词场 gloss 基线不得跌破 95%', () => {
   const fields = (content.wordBank || [])
     .filter(word => word.wordField?.source?.provider === 'Tatoeba')
     .map(word => word.wordField.sentence.jp);
-  assert.equal(fields.length, 180);
+  assert.equal(fields.length, 229);
 
   let total = 0;
   let covered = 0;

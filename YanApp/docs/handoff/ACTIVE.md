@@ -1,24 +1,23 @@
-# 当前状态 · LV 67 条已按项目标准重判，待负责人审清单
+# 当前状态 · LV 49 条已落库，待内容门禁与发布决策
 
-> 更新日期：2026-08-27
-> **本轮工单：`TICKET-wordfield-lv-67.md`，已完成脚本重判与待审清单导出。**
+> 更新日期：2026-08-30
+> **本轮工单：`TICKET-wordfield-land-lv49.md`，已完成落库；不发布、不推 OTA。**
 
-## 本轮完成 · TICKET-wordfield-lv-67
+## 本轮完成 · TICKET-wordfield-land-lv49
 
 | 项 | 结果 |
 |---|---|
-| 外部审核 LV | 67 条；复算：`node scripts/wordfield-lv-review.mjs --stats` |
-| 已有词场排除 | 2 条（`n5_kaisha`、`n5_tegami`）；复算：同上 |
-| 待重判 | 65 条；原句 LAND 61 条、SWAP 4 条；复算：同上 |
-| 确定性换句 | 4 / 4 成功，无可用备选的 SWAP 0 条；复算：同上 |
-| 决策指标：最终可进待审清单 | **65 条**，即 61 条保留 + 4 条换句；复算：同上 |
-| 主产出 | [`staging/lv-67-for-review.md`](../../staging/lv-67-for-review.md) |
+| 复核结果 | 65 条中 49 条 OK 落库，15 条 ZH 与 1 条 JP 排除；复算：`node scripts/wordfield-land-lv49.mjs` |
+| 决策指标：词场落库数 | **200 → 249 / 563**；复算：`node scripts/content-stats.mjs` |
+| 内容版本 | 2.7 → **2.8**，只递增一次；复算：`node -e "console.log(require('./assets/content.fallback.json')._meta.version)"` |
+| 成员 | 总数 487 → 588，空成员 0 → 0；13 个无法由 `dictionaryFormsFrom` 还原的成员不写入；复算：`node -e 'const c=require("./assets/content.fallback.json");const f=c.wordBank.flatMap(w=>{const x=w.wordField;return Array.isArray(x)?x:(x?[x]:[])}).filter(x=>x?.sentence?.jp);console.log(f.reduce((n,x)=>n+(x.members?.length||0),0),f.filter(x=>!(x.members?.length)).length)'`（前值见本轮报告） |
+| 主产出 | 两份内容包已同步；待审原始清单仍在 [`staging/lv-67-for-review.md`](../../staging/lv-67-for-review.md) |
 
-脚本：[`scripts/wordfield-lv-review.mjs`](../../scripts/wordfield-lv-review.mjs)。只读两个内容包，按 `unknown_word_count → member 数 → 7–12 字优先 → jp_sentence_id` 选换句；不落库。
+落库脚本：[`scripts/wordfield-land-lv49.mjs`](../../scripts/wordfield-land-lv49.mjs)。从已审清单读取 49 条，成员按候选 ID 映射，并通过 `dictionaryFormsFrom` / alignment 做活用回拼校验；不生成、不改写日文或中文。
 
-下一步由项目负责人审 65 条清单；审完后另开落库工单。本轮没有改内容包、没有发布、没有推 OTA。
+下一步是完成内容门禁并由项目负责人决定是否合并/发布。本轮没有推 `origin/main`、没有构建、没有 OTA。
 
-## 已完成并合入 `develop/v2`
+## 之前已完成并合入 `develop/v2`
 
 | | 事 | 结果 |
 |---|---|---|
@@ -33,8 +32,8 @@
 ## 词场与 gloss 现状
 
 ```
-200 条：N5 195 · N4 4 · N1 1
-Tatoeba 来源 180 条（带 jp/zh sentence ID，可回读）
+249 条：N5 244 · N4 4 · N1 1
+Tatoeba 来源 229 条（带 jp/zh sentence ID，可回读）
 手工精选 20 条（无 source，有 roma）
 gloss 基线：legacy 零空洞 / Tatoeba ≥95%（现有基线测试继续守住）
 
@@ -45,12 +44,12 @@ gloss 基线：legacy 零空洞 / Tatoeba ≥95%（现有基线测试继续守�
 「这个词不用再问我了」已移到右上角垃圾桶图标，底部只保留「去纠错」；图标带「以后不再问这个词」和「移出复习队列」无障碍文案。
 ```
 
-⚠️ **词场只覆盖 N5。** 全词库 N5 有 724 个词，词场覆盖 195 个（≈27%）。
+⚠️ **词场只覆盖 N5。** 全词库 N5 有 724 个词，词场覆盖 244 个（≈34%）。复算：`node scripts/content-stats.mjs`
 翻 N3/N2/N1 的词一个词场都看不到 —— **这是设计如此**
 （`docs/content-standard-wordfield.md:134`：词场是选出来的两三百个词才有的一层），
 **不是 bug**。真机测试时要知道，否则会误判成没生效。
 
-⚠️ **180 条 Tatoeba 词场没有读音行。** 现有 20 条手工词场有 `roma`，
+⚠️ **229 条 Tatoeba 词场没有读音行。** 现有 20 条手工词场有 `roma`，
 新的没有（不生成假名 = 不产出无源内容）。渲染端 `App.js:2590` 已 fail-safe，
 不会崩，但视觉上少一行。如果碍眼，`furigana.ts` 批量派生是独立的一张小工单。
 
@@ -59,7 +58,7 @@ gloss 基线：legacy 零空洞 / Tatoeba ≥95%（现有基线测试继续守�
 1. **推 OTA**（JS 改动，不吃构建额度）：
    `npx eas-cli update --branch preview --platform ios --message "…"`
    ⚠️ 开着 App 前台别动 1–2 分钟再杀掉重开，否则下载每次从头开始
-2. **真机翻这 200 条词场**，边翻边点「去纠错」
+2. **真机翻这 249 条词场**，边翻边点「去纠错」
 3. 攒一批一起反馈（`CLAUDE.md` 第 5 节）
 
 **纠错入口的真正验收**：用一周看点几次。**点不到三次就该删掉**
@@ -69,11 +68,10 @@ gloss 基线：legacy 零空洞 / Tatoeba ≥95%（现有基线测试继续守�
 
 | | 工单 | 说明 |
 |---|---|---|
-| 1 | `TICKET-wordfield-zh-38.md`（**待写**） | 38 条中文，日语不动；**要负责人 + 外部审核，最贵** |
-| 2 | `TICKET-wordfield-lv-67.md`（**待写**） | **判据要先重定** —— 原判据「适合作 N5 主例句」是外部给的，不是项目标准 |
-| 3 | `TICKET-mishit-after-value.md` | gloss 单字误命中率的修复后值（55.88% → ?），已写未发 |
+| 1 | `TICKET-wordfield-zh-38.md`（**待写**） | 53 条中文，日语不动；**要负责人 + 外部审核，最贵** |
+| 2 | `TICKET-mishit-after-value.md` | gloss 单字误命中率的修复后值（55.88% → ?），已写未发 |
 
-**上限 267 / 563**（ZH 38 + LV 67 全救回来的情况）。
+**当前词场 249 / 563**；ZH 53 条仍未落库。复算：`node scripts/content-stats.mjs`。
 
 ## 已知放弃 · 9 条无词场
 
