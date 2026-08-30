@@ -7,13 +7,13 @@
 
 | 项 | 结果 |
 |---|---|
-| 复核结果 | 65 条中 49 条 OK 落库，15 条 ZH 与 1 条 JP 排除；复算：`node scripts/wordfield-land-lv49.mjs` |
+| 复核结果 | 按负责人最新口径，65 条中 49 条 OK 落库，15 条 ZH 与 1 条 JP 留待后续；复算：`node -e 'const fs=require("fs"),r=fs.readFileSync("staging/lv-67-for-review.md","utf8").split("\\n").filter(x=>/^\\| \\d+ \\|/.test(x)),x=new Set([3,4,10,14,17,19,22,30,32,34,39,44,49,51,59,63]);console.log(r.length,x.size,r.length-x.size)'` |
 | 决策指标：词场落库数 | **200 → 249 / 563**；复算：`node scripts/content-stats.mjs` |
 | 内容版本 | 2.7 → **2.8**，只递增一次；复算：`node -e "console.log(require('./assets/content.fallback.json')._meta.version)"` |
 | 成员 | 总数 487 → 588，空成员 0 → 0；13 个无法由 `dictionaryFormsFrom` 还原的成员不写入；复算：`node -e 'const c=require("./assets/content.fallback.json");const f=c.wordBank.flatMap(w=>{const x=w.wordField;return Array.isArray(x)?x:(x?[x]:[])}).filter(x=>x?.sentence?.jp);console.log(f.reduce((n,x)=>n+(x.members?.length||0),0),f.filter(x=>!(x.members?.length)).length)'`（前值见本轮报告） |
 | 主产出 | 两份内容包已同步；待审原始清单仍在 [`staging/lv-67-for-review.md`](../../staging/lv-67-for-review.md) |
 
-落库脚本：[`scripts/wordfield-land-lv49.mjs`](../../scripts/wordfield-land-lv49.mjs)。从已审清单读取 49 条，成员按候选 ID 映射，并通过 `dictionaryFormsFrom` / alignment 做活用回拼校验；不生成、不改写日文或中文。
+落库脚本：[`scripts/wordfield-land-lv49.mjs`](../../scripts/wordfield-land-lv49.mjs)。从已审清单读取 49 条，成员按候选 ID 映射，并通过 `dictionaryFormsFrom` / alignment 做活用回拼校验；不生成、不改写日文或中文。`n5_kata` 的换句留到下一轮。
 
 下一步是完成内容门禁并由项目负责人决定是否合并/发布。本轮没有推 `origin/main`、没有构建、没有 OTA。
 
