@@ -64,18 +64,53 @@ test('全角数字作为数字 token 转成半角 gloss', () => {
   ]);
 });
 
-test('方案 a: 单字候选只有在当前 EXAMPLE_TOKENS 独立成 span 时才参与命中', () => {
+test('单假名永不作为 wordBank token 消费，单汉字仍可命中', () => {
   const bank = [
     { word: '超', reading: 'ちょう', meaning_zh: '超' },
     { word: '超える', reading: 'こえる', meaning_zh: '超过' },
     { word: 'え', reading: 'え', meaning_zh: '画' },
+    { word: '照る', reading: 'てる', meaning_zh: '照耀' },
   ];
   const forms = new Map([['超え', new Set(['超える'])]]);
-  const tokens = [['超え', 'こえ', '超える'], 'て', 'いる', '。'];
-  const rows = buildWordFieldAlignment('超えている。', bank, forms, tokens);
+  const rows = buildWordFieldAlignment('超えている。', bank, forms, [['超え', 'こえ', '超える'], 'て', 'いる', '。']);
   assert.deepEqual(rows.map(row => row.jp), ['超え', 'ている', '。']);
   assert.equal(rows[0].zh, '超过');
   assert.equal(rows.some(row => row.jp === 'え'), false, '超え 内部的な一文字候选不应抢先命中');
+
+  const standaloneKana = buildWordFieldAlignment('て。', bank, new Map([['て', new Set(['照る'])]]));
+  assert.equal(standaloneKana.some(row => row.source === 'wordBank'), false);
+  assert.equal(standaloneKana.find(row => row.jp === 'て')?.zh, '');
+
+  const kanji = buildWordFieldAlignment('超。', bank);
+  assert.equal(kanji.find(row => row.jp === '超')?.zh, '超');
+});
+
+test('F-3: 跨 word 与 reading 取最长消费表面，同长度保持 word 优先', () => {
+  const bank = [
+    { word: 'たべ', reading: 'たべ', meaning_zh: '吃' },
+    { word: '食べ物', reading: 'たべもの', meaning_zh: '食物' },
+  ];
+  const rows = buildWordFieldAlignment('たべもの。', bank);
+  assert.deepEqual(rows.map(row => row.jp), ['たべもの', '。']);
+  assert.equal(rows[0].zh, '食物');
+
+  const tie = buildWordFieldAlignment('たべ。', bank);
+  assert.equal(tie.find(row => row.jp === 'たべ')?.zh, '吃');
+
+  const duplicateSurface = buildWordFieldAlignment('たべ。', [
+    { word: '食べ', reading: 'たべ', meaning_zh: '读音候选' },
+    { word: 'たべ', reading: 'タベ', meaning_zh: '表记候选' },
+  ]);
+  assert.equal(duplicateSurface.find(row => row.jp === 'たべ')?.zh, '表记候选');
+});
+
+test('F-4: 更长 wordBank 命中让位于同位置的 GRAMMAR token', () => {
+  const rows = buildWordFieldAlignment('とてもだれか。', [
+    { word: 'とても', reading: 'とても', meaning_zh: '非常' },
+    { word: 'だれか', reading: 'だれか', meaning_zh: '某人' },
+  ]);
+  assert.deepEqual(rows.map(row => row.jp), ['とても', 'だれか', '。']);
+  assert.deepEqual(rows.map(row => row.source), ['wordBank', 'wordBank', 'grammar']);
 });
 
 test('★★ 20 条真实词场句的动词活用位置都有中文', () => {
@@ -109,7 +144,7 @@ test('★★ 20 条真实词场句的动词活用位置都有中文', () => {
   assert.deepEqual(holes, []);
 });
 
-test('★★ Tatoeba 词场 gloss 基线不得跌破 95%', () => {
+test('★★ Tatoeba 词场 gloss 覆盖率守住修复后下限且单假名 wordBank 命中为零', () => {
   const content = load('../../../../assets/content.fallback.json');
   const rawTokens = load('../../../../assets/example_tokens.json');
   const dictionaryForms = dictionaryFormsFrom(rawTokens);
@@ -121,16 +156,21 @@ test('★★ Tatoeba 词场 gloss 基线不得跌破 95%', () => {
 
   let total = 0;
   let covered = 0;
+  let singleKanaWordBankHits = 0;
   for (const sentence of fields) {
     const rows = buildWordFieldAlignment(sentence, content.wordBank, dictionaryForms);
     for (const row of rows) {
       if (punctuationOnly.test(row.jp)) continue;
       total += 1;
       if (row.zh?.trim()) covered += 1;
+      if (row.source === 'wordBank' && /^[ぁ-ゖァ-ヺー]$/u.test(row.jp)) singleKanaWordBankHits += 1;
     }
   }
   const coverage = covered / total;
-  assert.ok(coverage >= 0.95, `Tatoeba gloss coverage ${covered}/${total} = ${(coverage * 100).toFixed(2)}% < 95%`);
+  assert.equal(singleKanaWordBankHits, 0, `单假名 wordBank 命中 ${singleKanaWordBankHits} 条`);
+  // 修复后实测 92.34%；留 0.54 个百分点余量，既容纳小幅词库变动，也不会把
+  // 覆盖率闸门放低到失去意义。
+  assert.ok(coverage >= 0.918, `Tatoeba gloss coverage ${covered}/${total} = ${(coverage * 100).toFixed(2)}% < 91.80%`);
 });
 
 test('对齐行只显示第一个完整 gloss，不截断词义', () => {

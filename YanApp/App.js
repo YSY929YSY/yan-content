@@ -1604,6 +1604,7 @@ function PieTabInner({ content, setTab, subTab, setSubTab, sceneState, setSceneS
         {subTab === 'wordbank' && !wbBookId && (
           <WordBookShelfScreen
             wordBank={content.wordBank || []}
+            glossLookupBank={content.wordBank || []}
             onBack={() => setSubTab('learn')}
             onSelect={(id) => setWbBookId(id)}
           />
@@ -1846,7 +1847,7 @@ const JLPT_COLORS = {
  *   搜索 = 获准 Dictionary 的全库词条,不受词书级别限制,是「查」。
  * “有例句”只是内容形状,不是学习准入；准入只读 publication selector。
  */
-function WordBookShelfScreen({ wordBank, onBack, onSelect }) {
+function WordBookShelfScreen({ wordBank, glossLookupBank, onBack, onSelect }) {
   const [query, setQuery] = useState('');
   const [picked, setPicked] = useState(null);
   const [pickedIdx, setPickedIdx] = useState(0);
@@ -1888,7 +1889,7 @@ function WordBookShelfScreen({ wordBank, onBack, onSelect }) {
       <WBDetailPage
         entry={picked}
         wordBank={wordBank}
-        glossLookupBank={wordBank}
+        glossLookupBank={glossLookupBank}
         record={pickedRecord}
         today={today}
         onBack={() => setPicked(null)}
