@@ -1108,7 +1108,7 @@ PASS content-pack-sync version/content comparison
 PASS invariant kanji_anchor.total=563
 PASS invariant wordBank.total=8005; _meta.note=8005
 PASS metric publication.learning=1187 (not asserted)
-INFO doc-refs scanned 1376 references (574 unique)
+INFO doc-refs scanned 1383 references (578 unique)
 PASS doc-refs 所有引用都已入库（18 条指向不存在的路径，见 WARN）
 PASS workspace-clean docs markdown tracked
 --- audit summary ---
@@ -1117,7 +1117,7 @@ WARN: 25
 Result: PASS
 
 $ git status --short
-(待文档提交后复跑；目标：无输出)
+(无输出)
 ```
 
 ### Commit 与边界
