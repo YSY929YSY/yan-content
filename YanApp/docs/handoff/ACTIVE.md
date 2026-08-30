@@ -6,8 +6,8 @@
 ## ✅ 本轮完成 · `TICKET-release-gate-blindspot.md`
 
 本轮决策指标 = **磁盘内容与 `develop/v2` 提交不一致时，闸门必须从放行变为 Blocker**。
-修复前的自然失败样本会被旧闸门判为 Blocker 0；修复后当前分支实测为 **Blocker 2**（当前分支不对
-与磁盘不对应 `develop/v2` 提交各占一项）。复算：从仓库根目录运行 `bash tools/check-content-release.sh`。
+修复前的自然失败样本会被旧闸门判为 Blocker 0；修复后当前分支实测为 **Blocker 2**（当前分支不对，且
+磁盘不对应 `develop/v2` 提交，各占一项）。复算：从仓库根目录运行 `bash tools/check-content-release.sh`。
 
 闸门现在分别用 `git rev-parse develop/v2:<path>` 与 `git hash-object <disk path>` 对照两份内容，且
 当前分支不是 `develop/v2` 时直接报 Blocker，并输出下一步。模拟在临时 `develop/v2` worktree 上运行同一
