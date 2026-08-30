@@ -648,3 +648,85 @@ $ git status --short
 - `54c118e`：落库本轮 49 条复核通过的 Tatoeba 词场；同步 `assets/content.fallback.json` 与 `../yan-content/content.v2.json`，内容版本从 2.7 递增到 2.8；新增确定性落库脚本；更新必要的 gloss 对齐测试、全库 gloss 接线和 `ACTIVE.md`。
 - 本轮没有发布、推送 `origin/main`、构建或发 OTA。
 - 本轮想改但忍住没改：没有落 `n5_kata` 的换句；没有把 15 条 ZH 混入；没有生成 `roma`、改写例句、改变词库进度键或评分算法；没有修改换句规则的义项判据。
+
+## 2026-08-30 · `TICKET-gloss-single-kana.md` · 单假名消费闸门
+
+### 异常自查
+
+1. 本轮与上一轮相差 2 倍以上的数字只有单假名误命中：词场句 **82 → 0**，token **88 → 0**；这是把错误单假名命中改为空白后的预期结果。覆盖率 **95.69% → 92.34%**，未达到 2 倍变化，下降来自错误 gloss 被计为空白以及 token 分段变化。以上所有统计复算：`node scripts/gloss-single-kana-stats.mjs`。
+2. 没有无法解释来源的数字。基线由 `e20addf^` 的旧对齐实现复算，修复值由工作树实现复算，统计脚本固定使用当前 249 条词场和同一份 `example_tokens.json`。
+3. **0** 是决策底线和测试硬断言，不是“抽样测得为零”；覆盖率下限 **91.80%** 是在实测 **92.34%** 上保留 **0.54 个百分点**余量的测试判据。复算：`node scripts/gloss-single-kana-stats.mjs`；闸门：`node --test src/features/wordbank/__tests__/wordFieldAlignment.test.mjs`。
+
+### 结果与决策指标
+
+- 决策指标：含单假名误命中的词场句数 **82 / 249 → 0 / 249**；单假名 wordBank token **88 → 0**。目标 **0** 已达到。复算：`node scripts/gloss-single-kana-stats.mjs`。
+- Tatoeba gloss 覆盖：**1467 / 1533（95.69%）→ 1375 / 1489（92.34%）**。新的质量底线是 **91.80%**，余量 **0.54 个百分点**。复算：`node scripts/gloss-single-kana-stats.mjs`。
+- F-3（跨 word / reading 取最长、同长度 word 优先）在真实 249 条词场中影响 **0 句 / 0 token**；合成回归覆盖了真实数据未触发的冲突形状。复算：`node scripts/gloss-single-kana-stats.mjs`。
+- F-4（更长词库命中让位于 GRAMMAR）独立影响 **10 句 / 62 个对齐位置**。统计中的 token 定义是：固定句子顺序后，修复实现与只关闭 F-4 的变体在同一行位置的 `jp / zh / source` 不同，新增或消失的行也计一处。复算：`node scripts/gloss-single-kana-stats.mjs`。
+
+### 实现范围
+
+- `wordFieldAlignment.js`：单假名在 direct 和 dictionary 的消费点 fail closed；单汉字仍保留；跨 priority 取最长；同表面重复候选按 word 优先；GRAMMAR 只在没有更长有效词库边界时消费。
+- `App.js`：`WordBookShelfScreen` 的搜索详情显式传入全库 `glossLookupBank`，与词书详情入口一致。
+- `glossFullBankWiring.test.mjs`：删除恒真的 `deviceResult === expected`，改为验证货架入口和详情入口的真实全库接线。
+- 新增 `scripts/gloss-single-kana-stats.mjs`：只读复算脚本，不写内容包。
+- 未改 `assets/content.fallback.json`、`yan-content/content.v2.json`，未落库、未发布、未推 OTA。
+
+### 变异验证
+
+- F-3：把 `directCandidateAt` 改回 priority-first；独立守卫在 `たべもの` 样例中得到 `たべ / も / の / 。`，测试转红。复算：运行该变体的内存测试，或执行 `node --test src/features/wordbank/__tests__/wordFieldAlignment.test.mjs` 查看 F-3 守卫。
+- F-4：把语法判断改回无条件 grammar-first；独立守卫在 `とてもだれか` 样例中得到 `と / て / も / だ / れ / か / 。`，测试转红。复算：运行该变体的内存测试，或执行 `node --test src/features/wordbank/__tests__/wordFieldAlignment.test.mjs` 查看 F-4 守卫。
+
+### 三条样板句
+
+```text
+私もとても楽しかったです。
+  → 私[我（郑重说法）] も[（也）] とても[非常] 楽[舒适] しか[牙科] った[∅] です[（是）] 。[。]
+だれか玄関に来てるよ。
+  → だれか[某人] 玄関[玄关] に[（向/于）] 来[下（年] てる[照耀] よ[（强调）] 。[。]
+私は先月ロンドンにいました。
+  → 私[我（郑重说法）] は[（主题）] 先月[上个月] ロンドン[∅] に[（向/于）] いま[现在] した[下面] 。[。]
+```
+
+三句的单假名 wordBank 命中均为 **0**；复算：`node scripts/gloss-single-kana-stats.mjs`。
+
+### 验收原始输出
+
+```text
+$ npm test
+ℹ tests 619
+ℹ pass 619
+ℹ fail 0
+
+$ npm run typecheck
+> yanapp@1.0.0 typecheck
+> tsc --noEmit
+
+$ npm run audit
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+PASS content-pack-sync sha256 f1e7191767cbc2b80ed0ca47832ab7327a24a0ccc241f2f5ca57cad1c866ddcf
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+PASS workspace-clean docs markdown tracked
+INFO doc-refs scanned 1342 references (562 unique)
+--- audit summary ---
+FAIL: 0
+WARN: 24
+Result: PASS
+
+$ git status --short
+(在本报告提交完成后复算；应无输出)
+```
+
+验收命令：`npm test && npm run typecheck && npm run audit`；报告前置检查：`git status --short`、`npm run audit`。audit 的 24 条 WARN 是既有文档/用户 claim 提示，本轮未新增 FAIL。
+
+### Commit 与边界
+
+- `1275481`：修复单假名消费闸门、F-3/F-4 对齐优先级、词书货架全库 gloss 接线；删除恒真设备断言，加入质量闸门、统计脚本和回归测试。复核范围：`git show --stat --oneline 1275481`。
+- 本轮想改但忍住没改：没有改任何句子的日文或中文；没有追修 `楽しかった` 的其他词义误配、`来`/`した` 的已有 gloss 质量、F-7/F-8/F-11；没有改评分算法、内容包、发布闸门或 OTA。
