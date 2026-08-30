@@ -810,7 +810,7 @@ PASS content-pack-sync version/content comparison
 PASS invariant kanji_anchor.total=563
 PASS invariant wordBank.total=8005; _meta.note=8005
 PASS metric publication.learning=1187 (not asserted)
-INFO doc-refs scanned 1342 references (561 unique)
+INFO doc-refs scanned 1358 references (565 unique)
 ```
 
 复算：`npm test && npm run typecheck && npm run audit`。audit 原始输出中的既有 `WARN user-claims` 未由本轮
