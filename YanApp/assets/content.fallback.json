@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "version": "2.8",
+  "version": "2.9",
   "updated": "2026-08-22",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8005 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
@@ -15092,6 +15092,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ichi"
+     }
+    ],
+    "sentence": {
+     "jp": "コーヒー一杯ください。",
+     "zh": "请给（我）一杯咖啡。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 224848,
+     "zh_sentence_id": 1109528
+    }
    }
   },
   {
@@ -15953,6 +15969,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_aku"
+     },
+     {
+      "id": "n5_kutsushita"
+     }
+    ],
+    "sentence": {
+     "jp": "靴下に穴が開いているよ。",
+     "zh": "袜子上破了个洞呀。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 179233,
+     "zh_sentence_id": 8593083
+    }
    }
   },
   {
@@ -16285,6 +16320,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ashi"
+     },
+     {
+      "id": "n5_itai"
+     },
+     {
+      "id": "n5_kutsu"
+     }
+    ],
+    "sentence": {
+     "jp": "靴がきつくて足が痛い。",
+     "zh": "鞋太紧了，脚疼。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 179262,
+     "zh_sentence_id": 1783815
+    }
    }
   },
   {
@@ -16509,6 +16566,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_atatakai"
+     },
+     {
+      "id": "n5_san_2"
+     }
+    ],
+    "sentence": {
+     "jp": "三月にはもっと暖かくなるだろう。",
+     "zh": "到了三月会变得更温暖吧。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 169507,
+     "zh_sentence_id": 5849914
+    }
    }
   },
   {
@@ -17744,6 +17820,31 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_aruku"
+     },
+     {
+      "id": "n5_deru"
+     },
+     {
+      "id": "n5_eki"
+     },
+     {
+      "id": "n5_sukoshi"
+     }
+    ],
+    "sentence": {
+     "jp": "少し歩くと駅に出ます。",
+     "zh": "走一小段路就到车站了。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 146778,
+     "zh_sentence_id": 13942584
+    }
    }
   },
   {
@@ -18537,6 +18638,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_itai"
+     },
+     {
+      "id": "n5_onaka"
+     },
+     {
+      "id": "n5_sensei"
+     }
+    ],
+    "sentence": {
+     "jp": "先生、お腹が痛いんです。",
+     "zh": "老师，（我）肚子疼。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 1126049,
+     "zh_sentence_id": 10540451
+    }
    }
   },
   {
@@ -19469,6 +19592,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_iru_2"
+     },
+     {
+      "id": "n5_kotoba"
+     }
+    ],
+    "sentence": {
+     "jp": "言葉だけの優しさなんて要らない。",
+     "zh": "（我）不需要只停留在嘴上的温柔。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 3309009,
+     "zh_sentence_id": 11122919
+    }
    }
   },
   {
@@ -21629,6 +21771,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_oshieru"
+     },
+     {
+      "id": "n5_sensei"
+     }
+    ],
+    "sentence": {
+     "jp": "先生が教えた。",
+     "zh": "老师教了。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 6828208,
+     "zh_sentence_id": 8835055
+    }
    }
   },
   {
@@ -23902,6 +24063,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kaku"
+     },
+     {
+      "id": "n5_tegami"
+     },
+     {
+      "id": "n5_tokidoki"
+     }
+    ],
+    "sentence": {
+     "jp": "彼は時々手紙を書いた。",
+     "zh": "他偶尔写信。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 105279,
+     "zh_sentence_id": 10275159
+    }
    }
   },
   {
@@ -24324,6 +24507,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kaze_2"
+     },
+     {
+      "id": "n5_watakushi"
+     }
+    ],
+    "sentence": {
+     "jp": "私は彼に風邪をうつした。",
+     "zh": "我把感冒传染给他了。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 154058,
+     "zh_sentence_id": 1423995
+    }
    }
   },
   {
@@ -24418,6 +24620,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kata"
+     }
+    ],
+    "sentence": {
+     "jp": "あの方は八十歳です。",
+     "zh": "那位八十岁了。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 13225083,
+     "zh_sentence_id": 13526849
+    }
    }
   },
   {
@@ -25107,6 +25325,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_karada"
+     },
+     {
+      "id": "n5_sakana"
+     },
+     {
+      "id": "n5_taberu"
+     }
+    ],
+    "sentence": {
+     "jp": "魚を食べることは体にいい。",
+     "zh": "吃鱼对身体有好处。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 182091,
+     "zh_sentence_id": 1878291
+    }
    }
   },
   {
@@ -25555,6 +25795,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ki"
+     },
+     {
+      "id": "n5_tori"
+     },
+     {
+      "id": "n5_tsukuru"
+     }
+    ],
+    "sentence": {
+     "jp": "鳥は木に巣を作る。",
+     "zh": "鸟儿在树上筑巢。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 125775,
+     "zh_sentence_id": 9453440
+    }
    }
   },
   {
@@ -25805,6 +26067,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kiku"
+     },
+     {
+      "id": "n5_namae"
+     }
+    ],
+    "sentence": {
+     "jp": "名前が呼ばれるのを聞いた。",
+     "zh": "（我）听到有人叫（我的）名字。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 80788,
+     "zh_sentence_id": 495606
+    }
    }
   },
   {
@@ -26561,6 +26842,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kyoudai"
+     },
+     {
+      "id": "n5_san_2"
+     }
+    ],
+    "sentence": {
+     "jp": "彼女には兄弟が三人いる。",
+     "zh": "她有三个兄弟姐妹。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 89846,
+     "zh_sentence_id": 8940730
+    }
    }
   },
   {
@@ -27370,6 +27670,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kuchi"
+     },
+     {
+      "id": "n5_warui"
+     }
+    ],
+    "sentence": {
+     "jp": "あいつは口の悪いやつだ。",
+     "zh": "他这人说话很刻薄。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 234619,
+     "zh_sentence_id": 8508417
+    }
    }
   },
   {
@@ -29351,6 +29670,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kotaeru"
+     },
+     {
+      "id": "n5_shitsumon"
+     },
+     {
+      "id": "n5_watakushi"
+     }
+    ],
+    "sentence": {
+     "jp": "私の質問に答えなさい。",
+     "zh": "回答我的问题。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 163451,
+     "zh_sentence_id": 784532
+    }
    }
   },
   {
@@ -32114,6 +32455,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_shashin"
+     }
+    ],
+    "sentence": {
+     "jp": "この写真はどこで撮ったの？",
+     "zh": "这张照片是在哪儿拍的？"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 2998816,
+     "zh_sentence_id": 2998814
+    }
    }
   },
   {
@@ -37365,6 +37722,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_tsukue"
+     },
+     {
+      "id": "n5_ue"
+     }
+    ],
+    "sentence": {
+     "jp": "机の上を片付けよう。",
+     "zh": "把桌面收拾一下吧。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 183412,
+     "zh_sentence_id": 333524
+    }
    }
   },
   {
@@ -37884,6 +38260,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_dekakeru"
+     },
+     {
+      "id": "n5_ima"
+     }
+    ],
+    "sentence": {
+     "jp": "彼は今出かけるところだ。",
+     "zh": "他正要出门。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 107131,
+     "zh_sentence_id": 8499945
+    }
    }
   },
   {
@@ -40922,6 +41317,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_namae"
+     },
+     {
+      "id": "n5_shiru"
+     },
+     {
+      "id": "n5_watakushi"
+     }
+    ],
+    "sentence": {
+     "jp": "私は彼の名前を知らない。",
+     "zh": "我不知道他叫什么名字。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 153785,
+     "zh_sentence_id": 505677
+    }
    }
   },
   {
@@ -41691,6 +42108,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_nugu"
+     },
+     {
+      "id": "n5_uwagi"
+     }
+    ],
+    "sentence": {
+     "jp": "彼は上着を脱いだ。",
+     "zh": "他脱下了外套。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 103995,
+     "zh_sentence_id": 1071000
+    }
    }
   },
   {
@@ -42148,6 +42584,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_nomu"
+     },
+     {
+      "id": "n5_sukoshi"
+     },
+     {
+      "id": "n5_tokidoki"
+     }
+    ],
+    "sentence": {
+     "jp": "彼女は時々ワインを少し飲む。",
+     "zh": "她偶尔喝点葡萄酒。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 89165,
+     "zh_sentence_id": 342762
+    }
    }
   },
   {
@@ -43472,6 +43930,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_hanashi"
+     },
+     {
+      "id": "n5_kudasai"
+     }
+    ],
+    "sentence": {
+     "jp": "話を続けて下さい。",
+     "zh": "请继续说下去。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 77144,
+     "zh_sentence_id": 2004697
+    }
    }
   },
   {
@@ -44558,6 +45035,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_hikui"
+     },
+     {
+      "id": "n5_sei"
+     },
+     {
+      "id": "n5_watakushi"
+     }
+    ],
+    "sentence": {
+     "jp": "私はとても背が低い。",
+     "zh": "我个子很矮。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 2349246,
+     "zh_sentence_id": 512866
+    }
    }
   },
   {
@@ -46119,6 +46618,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_bunshou"
+     },
+     {
+      "id": "n5_sensei"
+     }
+    ],
+    "sentence": {
+     "jp": "先生、この文章は正しいですか？",
+     "zh": "老师，这段文字写得对吗？"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 11243008,
+     "zh_sentence_id": 13920702
+    }
    }
   },
   {
@@ -52459,6 +52977,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_watakushi"
+     },
+     {
+      "id": "n5_yama"
+     }
+    ],
+    "sentence": {
+     "jp": "私は山にいました。",
+     "zh": "我在山里。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 4715,
+     "zh_sentence_id": 15
+    }
    }
   },
   {

@@ -153,7 +153,8 @@ test('★★ Tatoeba 词场 gloss 覆盖率守住修复后下限且单假名 wor
   const fields = (content.wordBank || [])
     .filter(word => word.wordField?.source?.provider === 'Tatoeba')
     .map(word => word.wordField.sentence.jp);
-  assert.equal(fields.length, 229);
+  // ZH 54 内容窗口新增 27 条可追溯 Tatoeba 词场。
+  assert.equal(fields.length, 256);
 
   let total = 0;
   let covered = 0;
@@ -257,7 +258,8 @@ test('全库词场成员都能在对齐行中找到，包括活用、复合 toke
     }
   }
 
-  assert.equal(slots, 370);
+  // 内容窗口落入 27 个词场后，非 anchor 成员槽位从 370 增至 406。
+  assert.equal(slots, 406);
   assert.deepEqual(misses, []);
   assert.deepEqual(zeroSentences, []);
 });
