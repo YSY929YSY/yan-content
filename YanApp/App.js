@@ -65,6 +65,11 @@ import { SenseList } from './src/features/wordbank/SenseList';
 import { Furigana } from './src/features/wordbank/FuriganaText';
 import { ExampleSentence, TokenColumnSentence } from './src/features/wordbank/ExampleSentence';
 import { buildWordFieldAlignment, dictionaryFormsFrom } from './src/features/wordbank/wordFieldAlignment';
+import {
+  deriveWordFieldReadingDetailsFromTokens,
+  surfaceReadingsFrom,
+  surfaceReadingsFromWordBank,
+} from './src/features/wordbank/wordFieldFurigana';
 import { fieldMemberChips, fieldMemberTerms, isFieldMemberToken } from './src/features/wordbank/fieldMemberMatching';
 import { splitParentheticalZh } from './src/features/wordbank/parentheticalZh';
 import EXAMPLE_TOKENS from './assets/example_tokens.json';
@@ -89,17 +94,7 @@ const TOKEN_COLUMN_SAMPLE_SENTENCES = new Set([
 // 词场样板没有自己的分词 asset；复用例句 asset 里相同 surface 的读音。
 // 索引只建一次，找不到或有多个读音时退回 surface，不猜。
 const EXAMPLE_SURFACE_READINGS = (() => {
-  const out = new Map();
-  for (const tokens of Object.values(EXAMPLE_TOKENS || {})) {
-    for (const token of Array.isArray(tokens) ? tokens : []) {
-      if (!Array.isArray(token) || typeof token[0] !== 'string' || !token[0]
-        || typeof token[1] !== 'string' || !token[1]) continue;
-      const readings = out.get(token[0]) || new Set();
-      readings.add(token[1].split(/[;；]/)[0].trim());
-      out.set(token[0], readings);
-    }
-  }
-  return out;
+  return surfaceReadingsFrom(EXAMPLE_TOKENS);
 })();
 
 const readingForFieldToken = (surface, wordBank) => {
@@ -2442,6 +2437,10 @@ function WBDetailPage({ entry, wordBank, glossLookupBank, record, today, onBack,
       ? fieldTokenColumns(entry.exampleJp, glossLookupBank)
       : null
   ), [entry.exampleJp, glossLookupBank]);
+  const wordBankSurfaceReadings = useMemo(
+    () => surfaceReadingsFromWordBank(glossLookupBank),
+    [glossLookupBank],
+  );
   const fieldRenderData = useMemo(() => wordFields.map(wordField => ({
     wordField,
     memberTerms: fieldMemberTerms(wordField, lookupWord),
@@ -2452,7 +2451,14 @@ function WBDetailPage({ entry, wordBank, glossLookupBank, record, today, onBack,
     alignment: TOKEN_COLUMN_SAMPLE_SENTENCES.has(wordField.sentence.jp)
       ? null
       : buildWordFieldAlignment(wordField.sentence.jp, glossLookupBank, EXAMPLE_DICTIONARY_FORMS),
-  })), [wordFields, entry.id, glossLookupBank, lookupWord]);
+  })).map((data) => ({
+    ...data,
+    roma: data.wordField.sentence.roma || deriveWordFieldReadingDetailsFromTokens(
+      data.alignment || [],
+      wordBankSurfaceReadings,
+      EXAMPLE_SURFACE_READINGS,
+    ).reading,
+  })), [wordFields, entry.id, glossLookupBank, lookupWord, wordBankSurfaceReadings]);
   const [correctionOpen, setCorrectionOpen] = useState(false);
   const [correctionKind, setCorrectionKind] = useState('');
   const [correctionNote, setCorrectionNote] = useState('');
@@ -2615,7 +2621,7 @@ function WBDetailPage({ entry, wordBank, glossLookupBank, record, today, onBack,
         ) : (
           <Text style={wd.contentNote}>暂无例句</Text>
         )}
-        {fieldRenderData.map(({ wordField, memberTerms, memberChips, columns, alignment }, fi) => (
+        {fieldRenderData.map(({ wordField, roma, memberTerms, memberChips, columns, alignment }, fi) => (
           <View key={fi} style={wd.section}>
             <Text style={wd.sectionLabel}>一起出现</Text>
             <View style={wd.exRow}>
@@ -2650,7 +2656,7 @@ function WBDetailPage({ entry, wordBank, glossLookupBank, record, today, onBack,
                     })}
                   </View>
                 )}
-                {!!wordField.sentence.roma && <Text style={wd.exRoma}>{wordField.sentence.roma}</Text>}
+                {!!roma && <Text style={wd.exRoma}>{roma}</Text>}
                 <Text style={wd.exZh}>
                   {(splitParentheticalZh(wordField.sentence.zh) || [{ kind: 'text', text: wordField.sentence.zh }]).map((part, index) => (
                     part.kind === 'note'
