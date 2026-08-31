@@ -19,7 +19,7 @@ test('词场逐词中文优先查词库并固定识别语法成分', () => {
     { word: 'レシート', reading: 'れしーと', meaning_zh: '小票' },
   ]);
   assert.deepEqual(rows.map(row => row.jp), ['レシート', 'を', 'ください', '。']);
-  assert.deepEqual(rows.map(row => row.zh), ['小票', '（宾语）', '（请）', '。']);
+  assert.deepEqual(rows.map(row => row.zh), ['小票', '（宾语）', '（请）', '']);
 });
 
 test('读音命中表记差异，查不到的活用片段留空', () => {
@@ -61,8 +61,17 @@ test('全角数字作为数字 token 转成半角 gloss', () => {
   assert.deepEqual(rows.map(row => [row.jp, row.zh]), [
     ['２０２６', '2026'],
     ['年', '年'],
-    ['。', '。'],
+    ['。', ''],
   ]);
+});
+
+test('标点保留对齐列但不产生无信息的注解', () => {
+  const rows = buildWordFieldAlignment('聞きます。', [
+    { word: '聞く', reading: 'きく', meaning_zh: '听' },
+  ], new Map([['聞き', new Set(['聞く'])]]));
+  const punctuation = rows.filter(row => /^[、。？！]$/u.test(row.jp));
+  assert.deepEqual(punctuation.map(row => row.zh), ['']);
+  assert.equal(rows.map(row => row.jp).join(''), '聞きます。');
 });
 
 test('单假名永不作为 wordBank token 消费，单汉字仍可命中', () => {
@@ -262,4 +271,21 @@ test('全库词场成员都能在对齐行中找到，包括活用、复合 toke
   assert.equal(slots, 406);
   assert.deepEqual(misses, []);
   assert.deepEqual(zeroSentences, []);
+});
+
+test('全库词场对齐保持原句列数与顺序，标点列仍在', () => {
+  const content = load('../../../../assets/content.fallback.json');
+  const dictionaryForms = dictionaryFormsFrom(load('../../../../assets/example_tokens.json'));
+  const fields = [];
+  for (const word of content.wordBank || []) {
+    const wordFields = Array.isArray(word.wordField) ? word.wordField : (word.wordField ? [word.wordField] : []);
+    for (const field of wordFields) if (field?.sentence?.jp) fields.push(field.sentence.jp);
+  }
+  assert.equal(fields.length, 276);
+  for (const sentence of fields) {
+    const rows = buildWordFieldAlignment(sentence, content.wordBank, dictionaryForms);
+    assert.equal(rows.length, rows.map(row => row.jp).length);
+    assert.equal(rows.map(row => row.jp).join(''), sentence, `对齐列吞字或改字: ${sentence}`);
+    assert.ok(rows.every(row => Object.hasOwn(row, 'zh')), `缺少注解槽位: ${sentence}`);
+  }
 });

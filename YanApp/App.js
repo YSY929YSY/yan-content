@@ -65,7 +65,7 @@ import { SenseList } from './src/features/wordbank/SenseList';
 import { Furigana } from './src/features/wordbank/FuriganaText';
 import { ExampleSentence, TokenColumnSentence } from './src/features/wordbank/ExampleSentence';
 import { buildWordFieldAlignment, dictionaryFormsFrom } from './src/features/wordbank/wordFieldAlignment';
-import { fieldMemberTerms, isFieldMemberToken } from './src/features/wordbank/fieldMemberMatching';
+import { fieldMemberChips, fieldMemberTerms, isFieldMemberToken } from './src/features/wordbank/fieldMemberMatching';
 import { splitParentheticalZh } from './src/features/wordbank/parentheticalZh';
 import EXAMPLE_TOKENS from './assets/example_tokens.json';
 import { primaryReading, altReadings } from './src/features/wordbank/furigana';
@@ -2445,13 +2445,14 @@ function WBDetailPage({ entry, wordBank, glossLookupBank, record, today, onBack,
   const fieldRenderData = useMemo(() => wordFields.map(wordField => ({
     wordField,
     memberTerms: fieldMemberTerms(wordField, lookupWord),
+    memberChips: fieldMemberChips(wordField, entry.id, lookupWord),
     columns: TOKEN_COLUMN_SAMPLE_SENTENCES.has(wordField.sentence.jp)
       ? fieldTokenColumns(wordField.sentence.jp, glossLookupBank)
       : null,
     alignment: TOKEN_COLUMN_SAMPLE_SENTENCES.has(wordField.sentence.jp)
       ? null
       : buildWordFieldAlignment(wordField.sentence.jp, glossLookupBank, EXAMPLE_DICTIONARY_FORMS),
-  })), [wordFields, glossLookupBank, lookupWord]);
+  })), [wordFields, entry.id, glossLookupBank, lookupWord]);
   const [correctionOpen, setCorrectionOpen] = useState(false);
   const [correctionKind, setCorrectionKind] = useState('');
   const [correctionNote, setCorrectionNote] = useState('');
@@ -2614,7 +2615,7 @@ function WBDetailPage({ entry, wordBank, glossLookupBank, record, today, onBack,
         ) : (
           <Text style={wd.contentNote}>暂无例句</Text>
         )}
-        {fieldRenderData.map(({ wordField, memberTerms, columns, alignment }, fi) => (
+        {fieldRenderData.map(({ wordField, memberTerms, memberChips, columns, alignment }, fi) => (
           <View key={fi} style={wd.section}>
             <Text style={wd.sectionLabel}>一起出现</Text>
             <View style={wd.exRow}>
@@ -2660,21 +2661,17 @@ function WBDetailPage({ entry, wordBank, glossLookupBank, record, today, onBack,
               </View>
               <SpeakBtn onPress={() => speak(wordField.sentence.jp, 'ja-JP', `wd-wf${fi}`)} speaking={speakingKey === `wd-wf${fi}`} size="sm" color={C.muted} />
             </View>
-            <View style={wd.wfChips}>
-              {(wordField.members || []).map((m) => {
-                const w = lookupWord?.(m.id);
-                // 查不到就不显示这一个,而不是显示一个点不动的空壳 ——
-                // 标准里那条硬规则:成员必须对得上词库里真实存在的词条
-                if (!w) return null;
+            {memberChips.length > 0 && <View style={wd.wfChips}>
+              {memberChips.map(({ id, word: w }) => {
                 return (
-                  <TouchableOpacity key={`${fi}-${m.id}`} style={wd.wfChip} activeOpacity={0.7}
+                  <TouchableOpacity key={`${fi}-${id}`} style={wd.wfChip} activeOpacity={0.7}
                     onPress={() => onOpenWord?.(w)}>
                     <Text style={wd.wfChipJp}>{w.word}</Text>
                     <Text style={wd.wfChipZh}>{w.meaning_zh}</Text>
                   </TouchableOpacity>
                 );
               })}
-            </View>
+            </View>}
           </View>
         ))}
         {Array.isArray(entry.loanSource) && entry.loanSource.length > 0 && (

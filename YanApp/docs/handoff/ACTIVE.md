@@ -54,6 +54,20 @@ channel `preview` → branch `preview`，映射正常。
 
 > **新窗口开局只读这一份就够，不要回溯 CC-REPORT。**
 
+## ✅ 本轮完成 · `TICKET-wordfield-chip-noise.md`
+
+本轮决策指标 = **渲染出的自指 chip 244 / 276 → 0 / 276**。内容包不改；运行时 chip 筛选只保留可查到且
+不是当前词条自己的成员，8 条只有自己的成员词场在过滤后不渲染空行。复算：
+`node --test src/features/wordbank/__tests__/wordFieldChipNoise.test.mjs`。
+
+对齐行的标点仍保留原列，但 `、。？！` 的 gloss 改为空；全库 **276 / 276** 条词场均可回拼原句，
+没有列错位。复算：`node --test --test-name-pattern='全库词场对齐保持原句列数与顺序' src/features/wordbank/__tests__/wordFieldAlignment.test.mjs`。
+
+实现与 web 视觉验收已完成：改前/改后截图为 `/tmp/wordfield-chip-noise-before.png` 和
+`/tmp/wordfield-chip-noise-after.png`。全量 `npm test` **648 / 648**、`npm run typecheck` 通过、
+`npm run audit` `FAIL: 0`、`WARN: 24`；web 导出到 `/tmp/webcheck` 通过。完整原始输出、变异验证和
+未改范围见 `CC-REPORT.md`。内容包未改、未发布、未推 OTA。
+
 ## ✅ 本轮完成 · `TICKET-zh-54-land.md`
 
 本轮决策指标 = **新落库词场里会把用户教错的中文条数 25 → 0**。27 条已逐字回读，中文、可渲染的

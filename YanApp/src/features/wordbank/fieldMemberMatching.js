@@ -18,6 +18,16 @@ export function fieldMemberTerms(wordField, lookupWord) {
     ]);
 }
 
+// Chip 是跳转入口，不是对齐数据的副本；词场自己的词已经在卡头展示过，
+// 这里过滤掉它。查不到词库成员也不渲染，避免留下点不动的空壳。
+export function fieldMemberChips(wordField, entryId, lookupWord) {
+  if (!entryId || typeof lookupWord !== 'function') return [];
+  return (wordField?.members || [])
+    .filter(member => member?.id && member.id !== entryId)
+    .map(member => ({ id: member.id, word: lookupWord(member.id) }))
+    .filter(({ word }) => word);
+}
+
 const hasDictionaryForm = (surface, term, dictionaryForms) => {
   if (!(dictionaryForms instanceof Map)) return false;
   for (const [inflectedSurface, forms] of dictionaryForms) {

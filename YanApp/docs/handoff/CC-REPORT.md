@@ -1535,3 +1535,107 @@ INFO doc-refs scanned 1579 references (667 unique)
 ?? YanApp/src/features/wordbank/__tests__/parentheticalZhWiring.test.mjs
 ?? YanApp/src/features/wordbank/parentheticalZh.js
 ```
+
+## 2026-08-31 · TICKET-wordfield-chip-noise（词场对齐行与 chip 行去噪）
+
+### 异常自查
+
+1. 与上一轮相比，没有数字变化超过 2 倍：测试 638 → 648，audit WARN 仍为 24；本轮新增的决策基线
+   是内容包自指成员 244 / 276，不是上一轮指标，修复后渲染值为 0。
+2. 没有说不清来源的数字。244 / 276 来自工单给定的内容包命令；0 / 276、8 条单成员词场和 276 / 276
+   对齐结果均由本轮测试直接计算。
+3. 8 条单成员词场是内容形状判据，不是视觉测量；“整行不渲染”由 `memberChips.length > 0` 的接线
+   判据决定。截图是 web 视觉验收，不能替代全库统计。
+
+### 实现与决策指标
+
+- 本轮决策指标 = **渲染出的自指 chip 244 / 276 → 0 / 276**。旧值复算：
+  `node -e 'const w=require("./assets/content.fallback.json").wordBank;const f=w.filter(x=>x.wordField?.sentence?.jp);console.log(f.filter(x=>(x.wordField.members||[]).some(m=>m.id===x.id)).length+" / "+f.length)'`。
+  新值复算：`node --test src/features/wordbank/__tests__/wordFieldChipNoise.test.mjs`，其中真实内容包
+  用 `fieldMemberChips` 走与 App 相同的可见成员筛选。
+- 新增 `fieldMemberChips(wordField, entryId, lookupWord)`：过滤当前词条自己及查不到的成员；App 只在
+  `memberChips.length > 0` 时渲染 chip 容器。真实内容包的 8 条单成员词场为：
+  `n5_ie n5_okashi n5_kata n5_kodomo n5_shashin n5_sukoshi n5_tegami n5_ni`。复算：上述 chip 测试。
+- `wordFieldAlignment.js` 只把 `、。？！` 映射值从自身改为空字符串；token 列保留。全库 **276 / 276**
+  条词场句均能按原顺序回拼，所有行均保留 `zh` 注解槽位。复算：
+  `node --test --test-name-pattern='全库词场对齐保持原句列数与顺序' src/features/wordbank/__tests__/wordFieldAlignment.test.mjs`。
+
+### 变异验证
+
+- 改坏什么：去掉 `member.id !== entryId` 过滤；红测：`wordFieldChipNoise.test.mjs`，真实内容包自指
+  chip **244**，且 3 / 4 个测试失败。
+- 改坏什么：把 `memberChips.length > 0 && <View ...>` 改成无条件容器；红测：同一文件的 App 接线测试
+  1 / 4 失败，空行守卫正则不匹配。
+- 改坏什么：把标点 gloss 恢复为 `、。？！`；红测：
+  `node --test --test-name-pattern='标点保留' src/features/wordbank/__tests__/wordFieldAlignment.test.mjs`
+  1 个测试失败，实际标点注为 `。` 而非空字符串。
+
+三处变异均已恢复，恢复后定向验收 **3 / 3** 通过；复算：
+`node --test --test-name-pattern='标点保留|真实内容包渲染出的自指 chip|App 接线' src/features/wordbank/__tests__/wordFieldAlignment.test.mjs src/features/wordbank/__tests__/wordFieldChipNoise.test.mjs`。
+
+### Web 视觉验收
+
+从提交 `016ceda` 导出基线 `/tmp/webcheck-before`，从当前代码导出 `/tmp/webcheck`，均用 web 预览进入
+词书搜索 `聞く` 后在同一滚动位置截图：
+
+- 改前：`/tmp/wordfield-chip-noise-before.png`，可见 `聞く 听；问` 自指 chip 和标点 `。` 注解。
+- 改后：`/tmp/wordfield-chip-noise-after.png`，自指 chip 与 `。` 注解消失，`名前 名字` 保留。
+- 导出命令：`npx expo export --platform web --output-dir /tmp/webcheck`；退出码 0，bundle 成功。
+  基线命令：`npx expo export --platform web --output-dir /tmp/webcheck-before`；退出码 0，bundle 成功。
+
+### 验收原始输出
+
+`npm test`：
+
+```text
+ℹ tests 648
+ℹ pass 648
+ℹ fail 0
+```
+
+`npm run typecheck`：
+
+```text
+> tsc --noEmit
+```
+
+`npm run audit`：
+
+```text
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+PASS content-pack-sync sha256 098aa5071beb98510dfd7a2e5f005212f0f8478aeff2be96531dd6e7e990238c
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+--- audit summary ---
+FAIL: 0
+WARN: 24
+Result: PASS
+```
+
+`git status --short`（本轮代码与报告提交前；以下 3 个脚本/测试文件是本轮开始前已存在的并行词场
+读音工作，未改、未暂存、未纳入本轮 commit）：
+
+```text
+ M App.js
+ M docs/handoff/ACTIVE.md
+ M docs/handoff/CC-REPORT.md
+ M src/features/wordbank/__tests__/wordFieldAlignment.test.mjs
+ M src/features/wordbank/fieldMemberMatching.js
+ M src/features/wordbank/wordFieldAlignment.js
+?? scripts/wordfield-furigana-stats.mjs
+?? src/features/wordbank/__tests__/wordFieldChipNoise.test.mjs
+?? src/features/wordbank/__tests__/wordFieldFurigana.test.mjs
+?? src/features/wordbank/wordFieldFurigana.js
+```
+
+### 实际改动范围与克制项
+
+本轮改动：`App.js` 的词场 chip 接线、`fieldMemberMatching.js` 的显示筛选、
+`wordFieldAlignment.js` 的标点 gloss、`wordFieldAlignment.test.mjs` 回归，以及新增
+`wordFieldChipNoise.test.mjs`。未改内容包、members 数据、高亮/对齐消费算法、publication、评分算法，
+未拆 App.js，未发布、未推 OTA。想改但忍住：没有删除内容包里的自指 members（它们仍参与高亮与对齐），
+没有顺手清理既有 web/audit WARN，也没有纳入并行的词场读音工作。
