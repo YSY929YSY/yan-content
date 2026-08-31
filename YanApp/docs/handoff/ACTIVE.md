@@ -1,6 +1,37 @@
 # 当前状态 · ZH 54 候选稿已备妥，待负责人逐条确认
 
 > 更新日期：2026-08-31
+
+---
+
+## 🔴 第一件事：OTA 推了但设备上没生效（2026-08-31 悬案）
+
+**代码是好的，别以为改动没做。已排查：**
+
+```
+「你学过词，所以首页不拦你」全仓库已删干净（grep 零命中）
+855f944（修复）确实在 OTA commit 688c9390 的历史里
+app.json  runtimeVersion "2"  ←→ update 的 Runtime version 2   对上
+eas.json  preview channel     ←→ --branch preview              对上
+```
+
+**配置对、代码对，但手机上还是旧界面 → 设备跑着旧 bundle。**
+
+**最可能的原因**：设备装的是 **production build**（App Store 正式版，
+或用 production profile 打的 TestFlight 包），channel 是 `production`，
+**永远收不到 `preview` 分支的更新**。
+那样此前「纠错入口出现了」可能是装了新 build，不是 OTA 生效。
+
+**排查顺序**：
+
+1. 看 [那条 update 的 Dashboard](https://expo.dev/accounts/lyra-ysy/projects/YanApp/updates/a4a67433-0d3d-422e-bbf2-8e3c87ffe368)
+   有没有下载记录 —— **零下载 = channel 不匹配**；有下载 = 网络慢
+2. 确认手机上那个包是用哪个 profile 打的
+3. 若 channel 不对：推 `--branch production`（免费，线上用户也会收到），
+   或打一个 preview 的 TestFlight 包（吃一次 EAS 构建额度）
+
+---
+
 > **新窗口开局只读这一份就够，不要回溯 CC-REPORT。**
 
 ## ✅ 本轮完成 · `TICKET-kana-header.md`（五十音头部重排）
