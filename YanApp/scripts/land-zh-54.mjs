@@ -75,6 +75,13 @@ for (const row of approved) {
 }
 
 const renderedMembers = row => row.members.filter(id => appearsInSentence(row.jp, byId.get(id)));
+const sourceMembersFiltered = approved.reduce(
+  (total, row) => total + row.members.length - renderedMembers(row).length,
+  0,
+);
+if (sourceMembersFiltered !== 6) {
+  throw new Error(`expected 6 source members to be filtered, got ${sourceMembersFiltered}`);
+}
 for (const row of approved) {
   if (!renderedMembers(row).length) throw new Error(`no renderable member remains: ${row.anchor}`);
 }
@@ -116,4 +123,5 @@ if (process.argv.includes('--write')) {
 
 console.log(`approved: ${approved.length}`);
 console.log(`wordField: ${countFields(fallback)} -> 276`);
+console.log(`source members filtered: ${sourceMembersFiltered}`);
 console.log(`write: ${process.argv.includes('--write')}`);

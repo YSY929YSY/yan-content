@@ -1406,3 +1406,65 @@ FAIL: 0
 WARN: 24
 Result: PASS
 ```
+## 2026-08-31 · TICKET-zh-54-land（27 个新词场，未发布）
+
+### 异常自查
+
+1. 词场数从 249 到 276，变化为 27 条，不是两倍以上；Tatoeba 词场从 229 到 256，同因。可渲染的非 anchor 成员槽位从 370 到 406，增加 36，原因是 27 条新句带来成员，且 6 个 staging 成员被运行时匹配闸门过滤（复算：`node scripts/land-zh-54.mjs | grep '^source members filtered'`）。
+2. 没有说不清来源的数字：27 条及其来源/成员由 `scripts/land-zh-54.mjs` 固定表和 Tatoeba staging 双重校验；内容统计由 `node scripts/content-stats.mjs` 输出。
+3. 「应过滤 6 个成员」是运行时匹配判据决定的，不是内容质量测量；判据是 `dictionaryFormsFrom` 能否在对应日语句面解析，避免设备上成员高亮失效。
+
+### 结果
+
+- 提交 `1080de1`（`content: land approved ZH word fields without teaching errors`）：两份内容包同一提交新增 27 个负责人确认的词场、版本 2.8 → 2.9；新增可复跑落库脚本；将两个内容规模断言更新为 Tatoeba 229 → 256、可渲染非 anchor 槽位 370 → 406。复算：`git show --stat 1080de1`。
+- 决策指标「会把用户教错的中文条数」**25 → 0**。回读 27 / 27：中文、成员和 Tatoeba 日中句 ID 均与工单表一致；复算：`node scripts/land-zh-54.mjs`。
+- 词场 **249 → 276 / 563**（3.1% → 3.4%）；Tatoeba 词场 **229 → 256**；词条 **8005 → 8005**、`kanji_anchor` **563 → 563**。复算：`node scripts/content-stats.mjs`。
+- 两份内容包 SHA-256 一致：`098aa5071beb98510dfd7a2e5f005212f0f8478aeff2be96531dd6e7e990238c`。复算：`shasum -a 256 assets/content.fallback.json ../yan-content/content.v2.json`。
+- 与工单初版不符的事实：27 条是新增词场，不是修改既有 `sentence.zh`；`n5_saifu` 已有更短的在库词场，按负责人裁决撤出。staging 的 `～杯`、`～月`、`～歳`、`呼ぶ`、`～人`、`撮る` 不能由运行时匹配器在句面识别，已从 members 过滤而未改任何句面或来源。想改但忍住的地方：没有改日语、中文、gloss、对齐算法、publication、评分或发布链；没有发布或推送 main。
+
+### 验收原始输出
+
+`npm test`：
+
+```text
+ℹ tests 638
+ℹ pass 638
+ℹ fail 0
+ℹ skipped 0
+ℹ todo 0
+```
+
+`npm run typecheck`：
+
+```text
+> tsc --noEmit
+```
+
+`bash ../tools/check-content-release.sh`：
+
+```text
+✓ fallback.json 同步
+✓ 当前分支：develop/v2
+✓ yan-content/content.v2.json 与 develop/v2 提交一致
+✓ YanApp/assets/content.fallback.json 与 develop/v2 提交一致
+Blocker 数：0
+✓ 无 Blocker
+```
+
+`npm run audit`：
+
+```text
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+PASS content-pack-sync sha256 098aa5071beb98510dfd7a2e5f005212f0f8478aeff2be96531dd6e7e990238c
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+```
+
+`git status --short`（内容提交和报告修改前）：
+
+```text
+(empty)
+```
