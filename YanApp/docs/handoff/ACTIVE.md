@@ -17,35 +17,36 @@
 
 ---
 
-## 🔴 第一件事：OTA 推了但设备上没生效（2026-08-31 悬案）
+## ✅ 已结案 · OTA 悬案（2026-08-31）
 
-> ⚠️ **工单 9 的验收卡在这里。** `（）`降级显示是纯 JS 改动，只能靠 OTA 到设备。
-> OTA 没通之前去看真机，看到的是旧 bundle，会误判成「样式没生效」。
-> **先解这条，再看 #19。**
+**结论：配置一直是对的，OTA 一直在生效。悬案本身是误判。**
 
-**代码是好的，别以为改动没做。已排查：**
+权威来源（不要再靠猜，直接跑这两条）：
 
 ```
-「你学过词，所以首页不拦你」全仓库已删干净（grep 零命中）
-855f944（修复）确实在 OTA commit 688c9390 的历史里
-app.json  runtimeVersion "2"  ←→ update 的 Runtime version 2   对上
-eas.json  preview channel     ←→ --branch preview              对上
+npx eas build:list --limit 5    # 装机包的 profile / channel / runtimeVersion
+npx eas channel:view preview    # channel 指向哪个 branch、最近一条更新是什么
 ```
 
-**配置对、代码对，但手机上还是旧界面 → 设备跑着旧 bundle。**
+实测：**全部 build 都是 `preview` profile、channel `preview`、runtimeVersion 2**，
+channel `preview` → branch `preview`，映射正常。
 
-**最可能的原因**：设备装的是 **production build**（App Store 正式版，
-或用 production profile 打的 TestFlight 包），channel 是 `production`，
-**永远收不到 `preview` 分支的更新**。
-那样此前「纠错入口出现了」可能是装了新 build，不是 OTA 生效。
+原悬案猜「设备装的是 production build，收不到 preview 分支」——**猜反了**。
+而且 9 小时前那条 `五十音头部重排` 其实已经到了设备（20:26 截图里计数块已消失，
+正是那次改动的效果）。
 
-**排查顺序**：
+**真正没到的是 ZH 27 条词场那批**：负责人说「没有客户，可以 production」，
+我照字面推到了 `--branch production`，而设备在 `preview` channel 上 ——
+**往一个没人听的频道广播了一次。** 已重推 `--branch preview`（`d9e28772`）。
 
-1. 看 [那条 update 的 Dashboard](https://expo.dev/accounts/lyra-ysy/projects/YanApp/updates/a4a67433-0d3d-422e-bbf2-8e3c87ffe368)
-   有没有下载记录 —— **零下载 = channel 不匹配**；有下载 = 网络慢
-2. 确认手机上那个包是用哪个 profile 打的
-3. 若 channel 不对：推 `--branch production`（免费，线上用户也会收到），
-   或打一个 preview 的 TestFlight 包（吃一次 EAS 构建额度）
+### 留下的规矩
+
+1. **推 OTA 前先 `eas channel:view <channel>` 确认设备在哪个 channel**，
+   不要根据「有没有用户」决定推哪个分支 —— 那是两件事。
+2. **判断 OTA 有没有到设备，找「一起出现」四个字**（`聞く` 词卡，例句卡下面）。
+   它在 276 条词场上都会出现，比找 4 条括号可靠。
+3. `eas update` **不能用 `--platform=all`**：web 链路会因缺依赖打包失败而整条命令失败，
+   一律带 `--platform ios`。
 
 ---
 
