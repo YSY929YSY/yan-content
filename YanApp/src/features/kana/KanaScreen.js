@@ -1585,7 +1585,7 @@ const theoryText =
                 activeOpacity={0.85}
               >
                 <Text style={[kn.pairMiniTxt, showPair && kn.pairMiniTxtAct]}>
-                  {showPair ? '✓ 对照' : '对照'}
+                  {showPair ? '📖 对照' : '📖 对照'}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -2190,9 +2190,17 @@ const kn = StyleSheet.create({
     color: C.white,
   },
 
+// 平假名/片假名是**互斥视图**,所以合成一个带底轨的分段控件;
+// 对照是**第三种模式**(两者同时显示),留在轨外做独立按钮。
+// 三个一模一样的药丸并排,会把「二选一」和「另一种模式」压成同一层 ——
+// 负责人 2026-08-31 反馈的「割裂」就是这个。
 modeRow: {
   flexDirection: 'row',
-  gap: 10,
+  height: 42,
+  padding: 3,
+  borderRadius: 21,
+  backgroundColor: C.border,
+  alignItems: 'center',
   flexShrink: 1,
 },
 
@@ -2226,17 +2234,17 @@ tapHint: {
   fontSize: 12,
   color: C.muted,
 },
+// 轨内两段:不画各自的边框,靠底轨统一;选中段填色。
 modeBtn: {
-  paddingHorizontal: 12,
-  paddingVertical: 6,
-  borderRadius: 14,
-  borderWidth: 1.5,
-  borderColor: C.border,
-  backgroundColor: C.white,
+  height: 36,
+  paddingHorizontal: 14,
+  borderRadius: 18,
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: 'transparent',
 },
 modeBtnAct: {
   backgroundColor: C.lava,
-  borderColor: C.lava,
 },
 modeTxt: {
   fontSize: 12,

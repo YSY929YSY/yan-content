@@ -34,13 +34,25 @@ export const KANA_SEGMENT_MARGIN_TOP = 12;
 export const KANA_SCROLL_PADDING_TOP = 16;
 
 /**
- * 提示卡最小高度。按五段理论文案里最长的一段（外来语，66 字）估算：
- * 256px 可用宽度（320 屏 − scroll padding 32 − 卡片 padding 32）÷ 12.5px/字
- * ≈ 20 字/行，66 字 ≈ 4 行，多留 1 行安全余量按 5 行算 —— 这是估算，
- * 不是在真实渲染器里量出来的（这个仓库没有 RN 渲染测试基建）。
- * 复算：`node -e "console.log(Math.ceil(66/20))"`。
+ * 提示卡最小高度。**实测值，不再是估算。**
+ *
+ * 2026-08-31 补上 react-native-web 后，在真实渲染器里逐个子标签量过卡片外框：
+ * 320 屏（最窄）下五段文案**全部渲染成 140px**，414 屏下更矮。取最窄屏的最大值 → 140。
+ *
+ * 原值 180 是按「66 字 ÷ 20 字/行 ≈ 4 行 + 1 行余量」估的，估大了 —— 
+ * 414 屏上浪费 76px，就是负责人看到的那块空白。
+ *
+ * ⚠️ 中途取过 124（只加了子元素高度、漏了它们之间的 margin）。124 比真实内容矮，
+ * minHeight 就不再生效、卡片变回内容撑开 —— 那等于把上一轮修掉的闪跳放回来。
+ * **这个数必须量卡片外框，不是量子元素之和。**
+ *
+ * 复算（需要先 `npx expo export --platform web` 起预览）：
+ * 逐个点五个子标签，量 minHeight 卡片的子元素高度合计 + padding。
+ * 命令与输出见 `docs/handoff/CC-REPORT.md` 2026-08-31 一节。
+ *
+ * ⚠️ 改文案就要重量。文案变长而这个数没跟着改 = 切标签重新开始闪跳。
  */
-export const KANA_THEORY_CARD_MIN_HEIGHT = 180;
+export const KANA_THEORY_CARD_MIN_HEIGHT = 140;
 export const KANA_THEORY_CARD_MARGIN_BOTTOM = 20;
 
 /**
