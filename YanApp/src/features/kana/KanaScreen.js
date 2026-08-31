@@ -18,7 +18,13 @@ import Svg, { Path } from 'react-native-svg';
 import { C } from '../../theme';
 import { useSpeech, SpeakBtn } from '../../components/Speech';
 import { useKanaProgress } from './KanaProgressContext';
-import { useKanaGate } from './useKanaGate';
+import {
+  KANA_HD_PADDING_TOP, KANA_HD_PADDING_BOTTOM,
+  KANA_HEADER_ROW1_HEIGHT, KANA_HEADER_ROW1_MARGIN_TOP,
+  KANA_SEGMENT_HEIGHT, KANA_SEGMENT_MARGIN_TOP,
+  KANA_SCROLL_PADDING_TOP,
+  KANA_THEORY_CARD_MIN_HEIGHT, KANA_THEORY_CARD_MARGIN_BOTTOM,
+} from './kanaHeaderLayout';
 
 const { width: SW } = Dimensions.get('window');
 
@@ -898,14 +904,27 @@ const ksd = StyleSheet.create({
   },
 });
 
+// 五个子标签的静态数据 —— 分段控件按这份数组渲染,不再是五个手写的 chip。
+const KANA_SECTION_TABS = [
+  { key: 'clear', label: '清音' },
+  { key: 'voiced', label: '浊·半浊' },
+  { key: 'yoon', label: '拗音' },
+  { key: 'special', label: '特殊音' },
+  { key: 'loanword', label: '外来语' },
+];
+
 function KanaScreen({ kanaRows, specialSounds, specialRows, voicedRows, yoonRows, loanwordRows }) {
   // 主线的第一道门就在这一页上。在这之前这个页面**没有任何持久化** ——
   // 它不会「完成」,于是 dailyTask 的第一条规则(五十音没走完 → 先走五十音)
   // 对新用户是个死循环。见 kanaProgress.ts 开头。
-  const { see, declare } = useKanaProgress();
-  // 判据走 useKanaGate,和首页今日卡是同一份 —— 两处各判各的会让老用户
-  // 在首页看到「门过了」、在这一页看到「0 / 46」。
-  const gate = useKanaGate(kanaRows);
+  //
+  // ⚠️ 这一页曾经用「看过 X/46」计数块 + 「我已经会了」按钮显式呈现这道门,
+  // 但那个块只在清音屏渲染,切走时整块消失导致下面所有内容往上跳
+  // (docs/handoff/TICKET-kana-header.md)。本轮删掉了这一整块 UI,
+  // 门本身(useKanaGate / declareKnown)没有删 —— 首页今日卡仍然靠它判断,
+  // 老用户的「学过词即视为过关」兜底照常生效。唯一消失的是：一个还没学过
+  // 任何词、又不想逐个点 46 个假名的新用户,在这一页上已经没有显式跳过入口了。
+  const { see } = useKanaProgress();
 
   const [sel, setSel] = useState(null);
   const [showConfuse, setShowConfuse] = useState(false);
@@ -1518,160 +1537,87 @@ const theoryText =
     return (
 <View style={{ flex: 1 }}>
       <View style={kn.hd}>
-<Text style={kn.title}>{sectionTitle}</Text>
-<Text style={kn.sub}>{sectionSubtitle}</Text>
-{/* 这道门只画在清音那一屏 —— 浊音/拗音/特殊音/外来语不是主线的前提,
-    在那些屏上显示「离开始学词还差 N 个」是在催一件不该催的事。
-    kanaReady 之前不画:空的进度和「真的没看过」长得一样,
-    这时候渲染出来的是一句错话(0/46),而它会让老用户以为进度没了。 */}
-{/* ⚠️ 这一块原本是**一行两用**:门过了就只显示「✓ 过了」,不过才显示计数。
-    真机上第一眼就露馅了 —— 老用户走兜底判据,门天然是过的,
-    于是「看过几个」**永远看不见**,点开假名也不知道有没有记上。
-    这两件事本来就不是一件:
-      · 看过几个 —— **这一页自己的进度**,任何时候都该看得见
-      · 门过了没 —— 影响的是主线,是另一层的事
-    现在计数常驻,门的状态是它旁边的一句注解。 */}
-{gate.ready && kanaSection === 'clear' ? (
-  <View style={kn.gateRow}>
-    <View style={{ flex: 1 }}>
-      <Text style={kn.gateTxt}>
-        {gate.required.length > 0
-          ? `看过 ${gate.seen} / ${gate.required.length} 个平假名`
-          : '假名表没能载入'}
-      </Text>
-      <Text style={kn.gateNote}>
-        {/* ⚠️ 靠兜底过的要**说实话**。这个用户没走过五十音,是因为他已经学过词
-            才被放行的 —— 显示成「✓ 走完了」就是一句他没做过的事,
-            而且他会以为自己的进度丢了(明明写着 0 / 46 却说过了)。 */}
-        {gate.legacy
-          ? '你学过词,所以首页不拦你 —— 这里的数字只是你自己点过多少'
-          : gate.done
-            ? '✓ 这道门过了 —— 首页现在会给你词'
-            : '双击一个假名看记忆钩子,就算看过了'}
-      </Text>
-    </View>
-    {/* 显式出口。学过一点日语的人不该被迫点 46 下 ——
-        而这个 App 的第一个用户(开发者本人)正是这种人。
-        **不连带把 46 个 seen 填上**(见 declareKnown):
-        「他说他会」和「他逐个看过」是两件事,合并了就分不开。
-        ⚠️ 这个按钮的渲染条件里**不能带 `required.length > 0`** ——
-        内容包筛不出假名时 isKanaDone 只认显式声明,而那正是它被藏起来的时候,
-        用户会被锁死在这个功能本来要修的那个死循环里。 */}
-    {!gate.done ? (
-      <TouchableOpacity style={kn.gateBtn} onPress={declare}>
-        <Text style={kn.gateBtnTxt}>我已经会了</Text>
-      </TouchableOpacity>
-    ) : null}
-  </View>
-) : null}
-{!isLoanwordMode ? (
-<View style={kn.modeTopRow}>
-    <View style={kn.modeRow}>
-    <TouchableOpacity
-      style={[kn.modeBtn, kanaMode === 'hira' && kn.modeBtnAct]}
-      onPress={() => {
-        setKanaMode('hira');
-        setDetailScriptMode('hira');
-        setSel(kanaSection === 'special' && sel ? getSpecialCharForMode(sel, 'hira') : null);
-        setShowConfuse(false);
-        setShowWords(false);
-      }}
-    >
-      <Text style={[kn.modeTxt, kanaMode === 'hira' && kn.modeTxtAct]}>平假名</Text>
-    </TouchableOpacity>
+        {/* 头部固定两行,高度都是与 kanaSection 无关的常量(kanaHeaderLayout.ts)——
+            这是防跳的关键。行一右侧的切换/对照在外来语屏不渲染,但槽位高度不变,
+            不是内容撑出来的。 */}
+        <View style={kn.headerRow1}>
+          <View style={kn.headerTitleBlock}>
+            <Text style={kn.title} numberOfLines={1}>{sectionTitle}</Text>
+            <Text style={kn.sub} numberOfLines={1} ellipsizeMode="tail">{sectionSubtitle}</Text>
+          </View>
+          {!isLoanwordMode ? (
+            <View style={kn.headerControls}>
+              <View style={kn.modeRow}>
+                <TouchableOpacity
+                  style={[kn.modeBtn, kanaMode === 'hira' && kn.modeBtnAct]}
+                  onPress={() => {
+                    setKanaMode('hira');
+                    setDetailScriptMode('hira');
+                    setSel(kanaSection === 'special' && sel ? getSpecialCharForMode(sel, 'hira') : null);
+                    setShowConfuse(false);
+                    setShowWords(false);
+                  }}
+                >
+                  <Text style={[kn.modeTxt, kanaMode === 'hira' && kn.modeTxtAct]}>平假名</Text>
+                </TouchableOpacity>
 
-    <TouchableOpacity
-      style={[kn.modeBtn, kanaMode === 'kata' && kn.modeBtnAct]}
-      onPress={() => {
-        setKanaMode('kata');
-        setDetailScriptMode('kata');
-        setSel(kanaSection === 'special' && sel ? getSpecialCharForMode(sel, 'kata') : null);
-        setShowConfuse(false);
-        setShowWords(false);
-      }}
-    >
-      <Text style={[kn.modeTxt, kanaMode === 'kata' && kn.modeTxtAct]}>片假名</Text>
-    </TouchableOpacity>
-  </View>
+                <TouchableOpacity
+                  style={[kn.modeBtn, kanaMode === 'kata' && kn.modeBtnAct]}
+                  onPress={() => {
+                    setKanaMode('kata');
+                    setDetailScriptMode('kata');
+                    setSel(kanaSection === 'special' && sel ? getSpecialCharForMode(sel, 'kata') : null);
+                    setShowConfuse(false);
+                    setShowWords(false);
+                  }}
+                >
+                  <Text style={[kn.modeTxt, kanaMode === 'kata' && kn.modeTxtAct]}>片假名</Text>
+                </TouchableOpacity>
+              </View>
 
-  <TouchableOpacity
-    style={[kn.pairMini, showPair && kn.pairMiniAct]}
-    onPress={() => {
-  setShowPair(!showPair);
-  setShowConfuse(false);
-  setShowWords(false);
-}}
-    activeOpacity={0.85}
-  >
-    <Text style={[kn.pairMiniTxt, showPair && kn.pairMiniTxtAct]}>
-      {showPair ? '✓ 对照' : '对照'}
-    </Text>
-  </TouchableOpacity>
-</View>
-) : null}
-<View style={kn.sectionRow}>
-  <TouchableOpacity
-    style={[kn.sectionBtn, kanaSection === 'clear' && kn.sectionBtnAct]}
-    onPress={() => {
-      setKanaSection('clear');
-      setSel(null);
-      setShowConfuse(false);
-      setShowWords(false);
-    }}
-  >
-    <Text style={[kn.sectionTxt, kanaSection === 'clear' && kn.sectionTxtAct]}>清音</Text>
-  </TouchableOpacity>
+              <TouchableOpacity
+                style={[kn.pairMini, showPair && kn.pairMiniAct]}
+                onPress={() => {
+                  setShowPair(!showPair);
+                  setShowConfuse(false);
+                  setShowWords(false);
+                }}
+                activeOpacity={0.85}
+              >
+                <Text style={[kn.pairMiniTxt, showPair && kn.pairMiniTxtAct]}>
+                  {showPair ? '✓ 对照' : '对照'}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ) : null}
+        </View>
 
-  <TouchableOpacity
-    style={[kn.sectionBtn, kanaSection === 'voiced' && kn.sectionBtnAct]}
-    onPress={() => {
-      setKanaSection('voiced');
-      setSel(null);
-      setShowConfuse(false);
-      setShowWords(false);
-    }}
-  >
-    <Text style={[kn.sectionTxt, kanaSection === 'voiced' && kn.sectionTxtAct]}>浊·半浊</Text>
-  </TouchableOpacity>
-
-  <TouchableOpacity
-    style={[kn.sectionBtn, kanaSection === 'yoon' && kn.sectionBtnAct]}
-    onPress={() => {
-      setKanaSection('yoon');
-      setSel(null);
-      setShowConfuse(false);
-      setShowWords(false);
-    }}
-  >
-    <Text style={[kn.sectionTxt, kanaSection === 'yoon' && kn.sectionTxtAct]}>拗音</Text>
-  </TouchableOpacity>
-
-  <TouchableOpacity
-    style={[kn.sectionBtn, kanaSection === 'special' && kn.sectionBtnAct]}
-    onPress={() => {
-      setKanaSection('special');
-      setSel(null);
-      setDetailScriptMode(kanaMode);
-      setShowConfuse(false);
-      setShowWords(false);
-    }}
-  >
-    <Text style={[kn.sectionTxt, kanaSection === 'special' && kn.sectionTxtAct]}>特殊音</Text>
-  </TouchableOpacity>
-
-  <TouchableOpacity
-    style={[kn.sectionBtn, kanaSection === 'loanword' && kn.sectionBtnAct]}
-    onPress={() => {
-      setKanaSection('loanword');
-      setSel(null);
-      setShowConfuse(false);
-      setShowWords(false);
-    }}
-  >
-    <Text style={[kn.sectionTxt, kanaSection === 'loanword' && kn.sectionTxtAct]}>外来语</Text>
-  </TouchableOpacity>
-</View>
-</View>
+        {/* 行二:一个带底轨的分段控件,五段等宽、不换行 —— 换行会让高度
+            随屏宽变化,重新引入闪跳。将来要再加回计数/进度:要么每段都有、
+            要么都没有,不对称就会再跳一次(TICKET-kana-header.md)。 */}
+        <View style={kn.segmentTrack}>
+          {KANA_SECTION_TABS.map(tab => (
+            <TouchableOpacity
+              key={tab.key}
+              style={[kn.segmentBtn, kanaSection === tab.key && kn.segmentBtnAct]}
+              onPress={() => {
+                setKanaSection(tab.key);
+                setSel(null);
+                setShowConfuse(false);
+                setShowWords(false);
+                if (tab.key === 'special') setDetailScriptMode(kanaMode);
+              }}
+            >
+              <Text
+                style={[kn.segmentTxt, kanaSection === tab.key && kn.segmentTxtAct]}
+                numberOfLines={1}
+              >
+                {tab.label}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
 
 <ScrollView contentContainerStyle={kn.scroll} showsVerticalScrollIndicator={false}>
   <View style={kn.theoryCard}>
@@ -2189,30 +2135,60 @@ const theoryText =
   );
 }
 const kn = StyleSheet.create({
-  hd: { padding: 20, paddingBottom: 12, borderBottomWidth: 1, borderBottomColor: C.border },
+  hd: {
+    paddingTop: KANA_HD_PADDING_TOP,
+    paddingHorizontal: 20,
+    paddingBottom: KANA_HD_PADDING_BOTTOM,
+    borderBottomWidth: 1,
+    borderBottomColor: C.border,
+  },
   title: { fontSize: 22, fontWeight: '700', color: C.ink },
   sub: { fontSize: 12, color: C.muted, marginTop: 3 },
-  // 这一页自己的进度条(顺带说一句门的状态)。做得克制 —— 不是这一屏的主角
-  gateRow: {
-    flexDirection: 'row', alignItems: 'center', gap: 10,
-    marginTop: 10, backgroundColor: C.tag, borderRadius: 8,
-    paddingLeft: 12, paddingRight: 6, paddingVertical: 8,
+  // 行一:标题/副标题(左)+ 平假名|片假名 切换 + 对照(右)。
+  // 固定 height —— 外来语屏右侧不渲染时,槽位高度不变,不是内容撑出来的。
+  headerRow1: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: KANA_HEADER_ROW1_HEIGHT,
+    marginTop: KANA_HEADER_ROW1_MARGIN_TOP,
+    gap: 10,
   },
-  gateTxt: { fontSize: 12.5, color: C.ink, fontWeight: '600', fontVariant: ['tabular-nums'] },
-  gateNote: { fontSize: 10.5, color: C.mutedWarm, marginTop: 2, lineHeight: 15 },
-  gateBtn: {
-    backgroundColor: C.white, borderRadius: 6, borderWidth: 1, borderColor: C.border,
-    paddingHorizontal: 11, paddingVertical: 5,
+  headerTitleBlock: {
+    flex: 1,
   },
-  gateBtnTxt: { fontSize: 11.5, color: C.ink, fontWeight: '600' },
- modeTopRow: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  marginTop: 16,
-  marginBottom: 12,
-  gap: 10,
-},
+  headerControls: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  // 行二:五段等宽、带底轨的分段控件。固定 height,不换行 —— 见头部注释。
+  segmentTrack: {
+    flexDirection: 'row',
+    height: KANA_SEGMENT_HEIGHT,
+    marginTop: KANA_SEGMENT_MARGIN_TOP,
+    backgroundColor: '#f6f3ec',
+    borderRadius: 12,
+    padding: 3,
+    gap: 3,
+  },
+  segmentBtn: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 9,
+  },
+  segmentBtnAct: {
+    backgroundColor: C.ink,
+  },
+  segmentTxt: {
+    fontSize: 11,
+    color: C.muted,
+    fontWeight: '600',
+  },
+  segmentTxtAct: {
+    color: C.white,
+  },
 
 modeRow: {
   flexDirection: 'row',
@@ -2550,31 +2526,6 @@ writeHint: {
   lineHeight: 21,
   color: '#5a5048',
   fontFamily: Platform.OS === 'ios' ? 'PingFang SC' : 'sans-serif',
-},
-sectionRow: {
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  gap: 10,
-},
-sectionBtn: {
-  paddingHorizontal: 12,
-  paddingVertical: 6,
-  borderRadius: 14,
-  borderWidth: 1.5,
-  borderColor: C.border,
-  backgroundColor: '#f6f3ec',
-},
-sectionBtnAct: {
-  backgroundColor: C.ink,
-  borderColor: C.ink,
-},
-sectionTxt: {
-  fontSize: 12,
-  color: C.muted,
-  fontWeight: '600',
-},
-sectionTxtAct: {
-  color: C.white,
 },
 specialWrap: {
   gap: 12,
@@ -3194,12 +3145,16 @@ exampleZh: {
   color: C.ink,
   marginTop: 2,
 },
-  scroll: { padding: 16 },
+  scroll: { padding: KANA_SCROLL_PADDING_TOP },
+  // minHeight 按五段理论文案里最长的一段估算(kanaHeaderLayout.ts),
+  // 保证切子标签时「提示卡下沿」—— 假名格区域的起点 —— 不随文案长短跳动。
+  // 短文案会在卡片底部留白,这是刻意的取舍,不是没量够。
   theoryCard: {
     backgroundColor: '#FDFAF6',
     borderRadius: 14,
     padding: 16,
-    marginBottom: 20,
+    minHeight: KANA_THEORY_CARD_MIN_HEIGHT,
+    marginBottom: KANA_THEORY_CARD_MARGIN_BOTTOM,
     borderWidth: 1,
     borderColor: C.borderSoft,
   },
