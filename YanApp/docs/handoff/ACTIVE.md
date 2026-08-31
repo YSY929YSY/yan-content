@@ -54,6 +54,22 @@ channel `preview` → branch `preview`，映射正常。
 
 > **新窗口开局只读这一份就够，不要回溯 CC-REPORT。**
 
+## ✅ 本轮完成 · `TICKET-wordfield-furigana.md`
+
+本轮决策指标 = **原工单 229 条 Tatoeba 词场中能正确派生整句读音的条数 0 → 78**；当前内容包因上一轮新增 27 条，
+实测 Tatoeba 词场为 **256 条，其中 89 条全句可派生、167 条部分可派生、0 条完全不可派生**。部分 token 或多音字
+无法安全确定时整行不渲染；复算：`node scripts/wordfield-furigana-stats.mjs`。原工单 229 条的历史口径复算命令见本轮
+`CC-REPORT.md`，当前内容包数字以实测为准。
+
+运行时复用词库读音、`example_tokens.json` 的表面读音和既有 `wordFieldAlignment.js`；没有新增依赖、没有改
+`furigana.ts`、没有写入两个内容包。新增 `wordFieldFurigana.js` 与测试，词卡词场的已有 `roma` 优先，缺失时仅显示
+完整派生结果。20 条手工读音逐字比对为 **8 / 20 一致**；其余 4 条因多音/活用无法安全派生，8 条是手工字段采用罗马字
+而运行时派生采用假名，详见报告。复算：`node scripts/wordfield-furigana-stats.mjs`。
+
+定向测试 **4 / 4**，类型检查通过，审计 `FAIL: 0`、`WARN: 24`；复算：
+`node --test src/features/wordbank/__tests__/wordFieldFurigana.test.mjs`、`npm run typecheck`、`npm run audit`。
+未构建、未发布、未推 OTA；本轮后停在热更新就绪，由负责人决定推送时机。
+
 ## ✅ 本轮完成 · `TICKET-wordfield-chip-noise.md`
 
 本轮决策指标 = **渲染出的自指 chip 244 / 276 → 0 / 276**。内容包不改；运行时 chip 筛选只保留可查到且
@@ -223,7 +239,7 @@ F-3 在真实 249 条词场中影响 **0 句 / 0 token**，由合成回归测试
 | 2 | `TICKET-release-gate-blindspot.md` | **已完成**，待负责人决定是否发布 |
 | 3 | `TICKET-sync-data-loss.md` | **已完成**，待生产库/真机核验 |
 | 4 | `TICKET-wordfield-render-fixes.md` | **已完成**，待负责人决定热更新 |
-| 5 | `TICKET-wordfield-furigana.md` | 待发，229 条补读音行 |
+| 5 | `TICKET-wordfield-furigana.md` | **已完成**，89 / 256 当前 Tatoeba 词场可整句派生；未发布 |
 | 6 | `TICKET-wordfield-zh-54.md` | **判读全部完成**。A 26 + D 2 已经负责人逐条确认，确认栏在 `REVIEW-zh-54-A.md`；B 17 + C 5 另起一轮 |
 | 7 | `TICKET-kana-header.md` | **已完成**，待负责人确认「我已经会了」按钮一并删除是否符合预期 |
 | 8 | `TICKET-zh-54-land.md` | **已完成**，27 个新词场落库；未发布 |

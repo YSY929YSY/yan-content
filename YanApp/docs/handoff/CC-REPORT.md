@@ -1639,3 +1639,118 @@ Result: PASS
 `wordFieldChipNoise.test.mjs`。未改内容包、members 数据、高亮/对齐消费算法、publication、评分算法，
 未拆 App.js，未发布、未推 OTA。想改但忍住：没有删除内容包里的自指 members（它们仍参与高亮与对齐），
 没有顺手清理既有 web/audit WARN，也没有纳入并行的词场读音工作。
+
+## 2026-08-31 · TICKET-wordfield-furigana
+
+### 异常自查
+
+1. 与上一轮直接可比的词场来源数从 **229 → 256**，不是两倍变化；原因是上一轮已把 27 条新 Tatoeba 词场落进内容包，本轮工单正文仍保留旧的 229 条口径。复算：`node scripts/wordfield-furigana-stats.mjs`；历史 229 条复算命令见下文。
+2. 没有自己说不清来源的数字：全句/部分/完全不可用由同一派生函数的 `status` 输出，人工标准答案一致率由 20 条现有 `sentence.roma` 与同一函数结果逐字相等计算。样本正文和原始输出均贴在本节。
+3. **0 条完全不可用**包含判据成分：只要句子里还有可保留的假名或标点，就不会进入 `none`；含汉字 token 无唯一读音或无法通过 `alignFurigana` 时进入 `partial`，整句不显示。
+
+### 决策指标与实际范围
+
+本轮决策指标 = **原工单 229 条 Tatoeba 词场中可正确派生整句读音的条数 0 → 78**。
+
+工单正文写 229 条，但当前内容包实际有 256 条 Tatoeba 词场：**89 / 256 全句可派生，167 / 256 部分可派生，0 / 256 完全不可派生**。复算：
+
+```bash
+node scripts/wordfield-furigana-stats.mjs
+```
+
+原工单 229 条历史 cohort 的结果是 **78 / 229 全句、151 / 229 部分、0 / 229 完全不可用**；复算：
+
+```bash
+node --input-type=module - <<'NODE'
+import { execFileSync } from 'node:child_process';
+import fs from 'node:fs';
+import { dictionaryFormsFrom } from './src/features/wordbank/wordFieldAlignment.js';
+import { deriveWordFieldReadingDetails, surfaceReadingsFrom, surfaceReadingsFromWordBank } from './src/features/wordbank/wordFieldFurigana.js';
+const old = JSON.parse(execFileSync('git', ['show', '1080de1^:yan-content/content.v2.json'], { encoding: 'utf8', maxBuffer: 20 * 1024 * 1024 }));
+const tokens = JSON.parse(fs.readFileSync('assets/example_tokens.json', 'utf8'));
+const df = dictionaryFormsFrom(tokens), er = surfaceReadingsFrom(tokens), wr = surfaceReadingsFromWordBank(old.wordBank);
+const fields = old.wordBank.flatMap(w => { const f = Array.isArray(w.wordField) ? w.wordField : (w.wordField ? [w.wordField] : []); return f.filter(x => x?.source?.provider === 'Tatoeba' && x.sentence?.jp); });
+const results = fields.map(f => deriveWordFieldReadingDetails(f.sentence.jp, old.wordBank, df, er, wr));
+console.log(fields.length, results.reduce((out, x) => (out[x.status]++, out), { full: 0, partial: 0, none: 0 }));
+NODE
+```
+
+当前实现只复用三处已有数据：完整内容包的 `word.reading`、`assets/example_tokens.json` 的 surface 读音、以及既有 `wordFieldAlignment.js` token 结果。`example_tokens.json` 按例句词条 id 索引，词场句没有自己的 token-reading 索引；因此没有把 Tatoeba source id 当成读音来源，也没有从网络或猜测补读音。含汉字 token 只有拿到唯一读音并通过 `alignFurigana` 才参与拼接；任一 token 失败，返回 `null`，App 不渲染整行。
+
+### 实际改动与验证
+
+- `61d0244`：新增 `src/features/wordbank/wordFieldFurigana.js`，为词库表面读音和例句 token 读音建立索引；App 在 `fieldRenderData` 中复用既有 alignment，保留已有 `sentence.roma`，Tatoeba 缺失时才使用完整派生结果；新增 `src/features/wordbank/__tests__/wordFieldFurigana.test.mjs` 与 `scripts/wordfield-furigana-stats.mjs`。复算：`git show --stat 61d0244`。
+- 内容包未改：`assets/content.fallback.json` 与 `yan-content/content.v2.json` 均未触碰；`furigana.ts`、`wordFieldAlignment.js`、评分、publication、同步链均未改。未构建、未发布、未推 OTA。
+- 定向测试：**4 / 4**；复算：`node --test src/features/wordbank/__tests__/wordFieldFurigana.test.mjs`。
+- 全量测试：**652 / 652**；复算：`npm test`。
+- 类型检查：通过；复算：`npm run typecheck`。
+- 审计：`FAIL: 0`、`WARN: 24`；复算：`npm run audit`。
+
+### 20 条 Tatoeba 派生样本
+
+复算：`node scripts/wordfield-furigana-stats.mjs`。
+
+```text
+千円で足りる？ → せんえんでたりる？
+妊娠何か月ですか。 → 不显示（部分）
+今日は三月五日です。 → 不显示（部分）
+トルコ語を習ってるんだ。 → トルコごをならってるんだ。
+彼は昨日、一日中働いた。 → 不显示（部分）
+若い時は、一度しかない。 → 不显示（部分）
+三日以内にお返事いたします。 → みっかいないにおへんじいたします。
+コーヒー一杯ください。 → 不显示（部分）
+今度は私が運転する番よ。 → 不显示（部分）
+魚を二匹捕まえた。 → 不显示（部分）
+彼女の目の色は青です。 → かのじょのめのいろはあおです。
+私の目は青いです。 → 不显示（部分）
+赤い屋根の家を見てごらん。 → 不显示（部分）
+私は明るい色が好きです。 → 不显示（部分）
+私は秋より春が好きだ。 → 不显示（部分）
+靴下に穴が開いているよ。 → くつしたにあながひらいているよ。
+この箱の開け方分かる？ → 不显示（部分）
+彼女は頭を上げた。 → かのじょはあたまをあげた。
+靴がきつくて足が痛い。 → 不显示（部分）
+私は庭で遊びます。 → 不显示（部分）
+```
+
+### 手工 20 条标准答案逐字比对
+
+复算：`node scripts/wordfield-furigana-stats.mjs`。结果为 **8 / 20 一致**。
+
+- 无法安全派生的 4 条：`明日、友達と会います。`（明日多音）、`家で朝ご飯を食べます。`（家多音）、`明日、海へ行きます。`（明日多音且行き无唯一标准）、`朝、会社へ行きます。`（行き无唯一标准）。这是 fail closed，不是派生错读。
+- 可派生但逐字不一致的 8 条：`お金はいくらですか？`、`コンビニでお弁当を買いました。`、`財布からお金を出します。`、`安いお弁当を探します。`、`店員にカードを見せます。`、`レジで現金を払います。`、`レシートを袋に入れます。`、`ポイントカードがあります。`。这 8 条的人工 `roma` 使用罗马字/混合格式，而运行时派生按 token 已有读音输出假名；不是读音算法不一致。
+- 其余 8 条逐字一致：`新しい靴を買います。`、`駅で電車を待ちます。`、`おいしい料理を食べます。`、`お菓子を買いました。`、`学校で先生に会います。`、`先生と学校の話をします。`、`手紙を読みます。`、`昼に料理を食べます。`
+
+### 想改但忍住的地方
+
+没有把读音写回两个内容包；没有新引依赖或编写活用/假名推测规则；没有修改 `furigana.ts`、`wordFieldAlignment.js`、Tatoeba 数据、手工 `roma`、例句 token 资产、构建/发布链。没有为了补覆盖率放宽多音字或部分 token 的整行门槛，也没有处理当前工作区之外的真机/OTA 验收。
+
+### 验收原始输出
+
+```text
+node --test src/features/wordbank/__tests__/wordFieldFurigana.test.mjs
+ℹ tests 4
+ℹ pass 4
+ℹ fail 0
+
+npm test
+ℹ tests 652
+ℹ pass 652
+ℹ fail 0
+
+npm run typecheck
+> tsc --noEmit
+
+npm run audit
+--- audit summary ---
+FAIL: 0
+WARN: 24
+Result: PASS
+```
+
+最终 `git status --short` 与 `git status --short --branch` 的复算命令：
+
+```bash
+git status --short
+git status --short --branch
+```
