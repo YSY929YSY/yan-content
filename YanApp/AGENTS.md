@@ -15,6 +15,7 @@
 |---|---|
 | **言是什么、moat 是什么、为什么有手账和打卡** | `docs/WHAT-IS-YAN.md` |
 | **反复犯过的错（新窗口必读）** | `docs/handoff/REPEATED-MISTAKES.md` |
+| 派冷启动审计（通用配方，馋了也能用） | `docs/handoff/COLD-AUDIT-RECIPE.md` |
 | 产品身份、moat、永不做 | `CLAUDE.md` |
 | 工程操作：发版、EAS、路由、词书架构 | `RULE.md` |
 | 审美、词卡九标准、例句规则、中文语感 | `SOUL.md` |
