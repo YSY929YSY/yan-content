@@ -1204,3 +1204,205 @@ INFO doc-refs scanned 1411 references (589 unique)
  M docs/handoff/CC-REPORT.md
 ?? staging/zh-54-candidates.md
 ```
+
+## 2026-08-31 · `TICKET-kana-header.md` · 五十音头部重排
+
+### 异常自查（5-2）
+
+1. **和上一轮差 2 倍以上的数字**：无可比数字（本轮是布局改动，之前的验收轮次都不涉及五十音这一屏的高度）。
+2. **说不清是怎么来的数**：`KANA_THEORY_CARD_MIN_HEIGHT = 180`（提示卡最小高度）是**估算**，不是量出来的 ——
+   这个仓库没有 RN 渲染测试基建（`npm test` 只跑 `node --test` 的纯函数测试），没法像 web 项目那样
+   开预览拿真实 DOM 坐标。估算方法：320 屏可用宽度 256px（scroll padding 32 + 卡片 padding 32）
+   ÷ 12.5px/字（12 号字 CJK 全角字宽估值）≈ 20 字/行；五段理论文案里最长的一段（外来语，66 字）
+   ≈ 4 行，多留 1 行安全余量按 5 行算，加卡片自身 padding/标题/提示行凑成 180。**这是按字数估算的
+   上界，不是任何一个真实设备上实测的行数** —— 如果理论文案以后改得更长，这个常量要跟着调，
+   见 `kanaHeaderLayout.ts` 顶部注释。
+3. **判据决定、不是测出来的**：决策指标（假名格区域顶部偏移=0）现在是**按构造成立**，不是抽样量出来的——
+   头部两行和提示卡都改成了显式 `height`/`minHeight`（不是 `marginTop` 堆出来的），这三块高度
+   与 `kanaSection` 无关是代码结构本身保证的，测试断言的是「这个保证真的接在组件上，没有各写各的」。
+   这比在某一个屏宽下量一次更强，但前提是提示卡永远不会被内容撑爆 —— 第 2 条的估算就是这个前提的
+   来源，值得单独标出来。
+
+### 本轮决策指标
+
+**切换子标签（清音 / 浊·半浊 / 拗音 / 特殊音 / 外来语）时，假名格区域顶部的位移：现状 → 0。**
+
+- **修复前**：只在 `kanaSection === 'clear'` 渲染的「看过 X/46」计数块（原 `kn.gateRow`，
+  `marginTop:10` + `paddingVertical:8×2=16` + 单行文案内容约 33px）造成约 **59px** 的位移
+  （note 换行时更多）。这是按删除前的样式字面量算出来的估算，不是实测像素；复算：
+  `git show HEAD~0:src/features/kana/KanaScreen.js` 已经删了这块，历史版本在
+  `git log -p -- src/features/kana/KanaScreen.js` 里能找到删除前的 `gateRow` 样式定义。
+- **修复后**：**0**。头部第一行（标题/副标题 + 平假名|片假名 + 对照）固定 `height: 48`，
+  外来语屏不渲染右侧控件时槽位高度不变；第二行（五段分段控件）固定 `height: 40`，五段等宽、
+  不换行；提示卡固定 `minHeight: 180`。三块高度都与 `kanaSection` 无关，见
+  `src/features/kana/kanaHeaderLayout.ts`。复算：
+  `node --test src/features/kana/__tests__/kanaHeaderLayout.test.mjs`（7/7）。
+
+### 做了什么
+
+1. **删掉计数块整块**（含「看过 X/46」文案、三种状态的注解文案、**以及「我已经会了」按钮**）。
+   `useKanaGate` 在这一页的引用、`declare` 的解构都一并删除（不删会留下死代码）。
+   **`useKanaGate.js` / `kanaProgress.ts` / `declareKnown` 本身一个字节都没动** ——
+   首页今日卡（`App.js`）仍然用同一份 `useKanaGate` 判断这道门过没过，老用户「学过任何词即视为
+   过关」的兜底完全不受影响。
+2. **头部压成两行**：行一 = 标题/副标题（左，`numberOfLines={1}` 防止长副标题在窄屏下把行高撑高）
+   + 平假名|片假名切换 + 对照（右，外来语屏隐藏但槽位高度不变）；行二 = 一个带底轨的分段控件
+   （`KANA_SECTION_TABS` 数据驱动，五段等宽共享一行，不再是五个各写各的 chip）。
+3. **提示卡给了 `minHeight`**（估算方法与局限见上面异常自查第 2 条）。
+
+### ⚠️ 有意的功能取舍：「我已经会了」按钮消失了
+
+工单原文「删掉计数块（整块，含那句解释）」——那个块除了计数文案，还包含 `!gate.done` 时显示的
+「我已经会了」显式跳过按钮（`declareKnown`，学过一点日语的人不用被迫点 46 下）。工单给的新头部
+结构（行一 = 标题+切换+对照，行二 = 分段控件）里没有为这个按钮留位置，我按字面理解把它一并删了。
+
+**影响范围很窄**：`gate.done` 已经把「学过任意一个词」当兜底，所以只有「一个词都没学过、又不想
+逐个点 46 个假名的新用户」会失去这个显式出口 —— 其余情况门本来就是过的。**这是本轮唯一一处
+「工单字面上要求删，但删了会去掉一个可用功能」的地方**，写在这里供负责人核对：如果这个判断错了，
+按钮的数据层（`declareKnown`）完好，加回来只是加一行 JSX。
+
+### 验收原始输出
+
+`npm test`：
+
+```text
+ℹ tests 638
+ℹ suites 0
+ℹ pass 638
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+```
+
+新增测试单独跑（`src/features/kana/__tests__/kanaHeaderLayout.test.mjs`，7 条）：
+
+```text
+✔ ★ 决策指标:假名格区域顶部偏移与 kanaSection 无关,五段算出来必须相等
+✔ 头部自身高度(kn.hd)是正数常量,不依赖任何外部输入
+✔ 头部三块(行一/分段控件/提示卡)的样式确实引用了共享常量,不是各写各的字面量
+✔ 删掉的「看过 X/46」计数块(含「我已经会了」按钮)没有再出现
+✔ ★ 变异防护:头部区域不许再出现「按 kanaSection 字面量做条件渲染」
+✔ 分段控件按 KANA_SECTION_TABS 数据渲染五段,不是五个各写各的 chip
+✔ 行一右侧的切换/对照只按 isLoanwordMode 隐藏,不按其余四个子标签分别决定
+ℹ pass 7, fail 0
+```
+
+`npm run typecheck`：
+
+```text
+> tsc --noEmit
+```
+（无输出，退出码 0）
+
+`npm run audit`：
+
+```text
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:3048: review editorial claim "旅行高频"
+WARN user-claims App.js:3092: review editorial claim "旅行高频"
+WARN user-claims App.js:3186: review editorial claim "高频"
+WARN user-claims App.js:3229: review editorial claim "高频"
+WARN user-claims App.js:3276: review editorial claim "高频"
+WARN user-claims App.js:3294: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1900: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 f1e7191767cbc2b80ed0ca47832ab7327a24a0ccc241f2f5ca57cad1c866ddcf
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+--- audit summary ---
+FAIL: 0
+WARN: 24
+Result: PASS
+```
+
+`WARN: 24` 与改动前基线相同（`git stash` 后重跑核对过，那条 KanaScreen.js 的 `旅行高频` 警告
+改动前就存在，只是行号从 1954 变成 1900，是本轮插入/删除行数导致的行号漂移，不是新增内容）。
+
+**变异验证**（手动做，按工单要求）：把「行二不许出现按 `kanaSection` 字面量条件渲染」测试保护的
+那一行临时改回 `{kanaSection === 'clear' ? <Text style={kn.sub}>看过 1 / 46 个平假名</Text> : null}`，
+`npm test` 单跑该文件从 7/7 转 6/7（`★ 变异防护` 那条转红，报错原文见改动记录）；
+另外把 `theoryCard` 的 `minHeight: KANA_THEORY_CARD_MIN_HEIGHT` 临时改成字面量 `180`，
+「样式确实引用了共享常量」那条同样转红。两处都已改回，`npm test` 复跑回到 638/638。
+
+`git status --short`（`npm run audit` 提示两个新文件「存在但未入库」——`doc-refs` 检查按
+`git ls-files` 判断入库，只要 `git add` 到暂存区就算数，不需要 commit；已 `git add`，
+未 commit）：
+
+```text
+ M docs/handoff/ACTIVE.md
+ M docs/handoff/CC-REPORT.md
+ M src/features/kana/KanaScreen.js
+A  src/features/kana/__tests__/kanaHeaderLayout.test.mjs
+A  src/features/kana/kanaHeaderLayout.ts
+```
+
+`npm run audit`（`git add` 之后复跑）：
+
+```text
+--- audit summary ---
+FAIL: 0
+WARN: 24
+Result: PASS
+```
+
+本轮未改内容包、未改假名数据/发音/记忆钩子、未改底部三个 tab、未改评分算法、未连生产、
+未发布、未推 OTA。改的是 JS，走热更新，做完停下。
+
+### 提交
+
+三个代码/测试文件已提交，commit `855f944`：
+
+```text
+fix(kana): 头部改固定高度模型，消除切子标签时的闪跳
+
+计数块「看过 X/46」只在清音屏渲染，切走时整块消失，下面所有内容
+往上跳——不是渲染 bug，是布局不对称。删掉计数块（含「我已经会了」
+按钮，declareKnown/useKanaGate 本身未动），把头部两行和提示卡的
+高度都改成与 kanaSection 无关的常量（kanaHeaderLayout.ts），让「位移
+为 0」从需要每次核对变成代码结构本身保证的事。
+```
+
+`docs/handoff/ACTIVE.md`、`docs/handoff/CC-REPORT.md` 本身未提交（改报告不改代码，留给下一次
+一起进）。
+
+提交后 `git status --short`：
+
+```text
+ M docs/handoff/ACTIVE.md
+ M docs/handoff/CC-REPORT.md
+```
+
+提交后 `npm run audit`：
+
+```text
+audit: read-only harness
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+WARN user-claims App.js:3048: review editorial claim "旅行高频"
+WARN user-claims App.js:3092: review editorial claim "旅行高频"
+WARN user-claims App.js:3186: review editorial claim "高频"
+WARN user-claims App.js:3229: review editorial claim "高频"
+WARN user-claims App.js:3276: review editorial claim "高频"
+WARN user-claims App.js:3294: review editorial claim "旅行最高频框架"
+WARN user-claims src/features/kana/KanaScreen.js:1900: review editorial claim "旅行高频"
+PASS content-pack-sync sha256 f1e7191767cbc2b80ed0ca47832ab7327a24a0ccc241f2f5ca57cad1c866ddcf
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+PASS metric publication.learning=1187 (not asserted)
+INFO doc-refs scanned 1447 references (603 unique)
+PASS doc-refs 所有引用都已入库（17 条指向不存在的路径，见 WARN）
+PASS workspace-clean docs markdown tracked
+--- audit summary ---
+FAIL: 0
+WARN: 24
+Result: PASS
+```
