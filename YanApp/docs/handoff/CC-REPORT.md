@@ -1468,3 +1468,70 @@ PASS invariant wordBank.total=8005; _meta.note=8005
 ```text
 (empty)
 ```
+
+## 2026-08-31 · TICKET-zh-54-paren-style（实现完成，待真机视觉验收）
+
+### 异常自查
+
+1. 本轮的决策指标从两个消费点中的 2 处全字号括号到 0 处，但这是由接线测试点数得出，**不是**截图测量；复算：`node --test src/features/wordbank/__tests__/parentheticalZhWiring.test.mjs`。
+2. 没有无法复算的数字：真实带全角括号的词场为 4 条，#19 含 2 个注；复算：`node -e "const c=require('./assets/content.fallback.json'); console.log(c.wordBank.flatMap(w=>Array.isArray(w.wordField)?w.wordField:[w.wordField]).filter(f=>f?.sentence?.zh?.includes('（')).map(f=>f.sentence.zh))"`。
+3. 「2 → 0」是消费点/样式接线的判据，而不是肉眼量出的字体比例；视觉是否会在复习提问面变成过强提示，必须由真机观察决定。
+
+### 实现与变异验证
+
+- 新增 `src/features/wordbank/parentheticalZh.js`：只有完整、非嵌套、非空的全角 `（…）` 才切出 `{ kind: 'note' }`；半角括号不介入。其他输入返回 `null`，两处调用方遂原样整句渲染。单元测试覆盖 #19 的双注、无括号/半角括号、未配对/嵌套/空括号；复算：`node --test src/features/wordbank/__tests__/parentheticalZh.test.mjs`。
+- `App.js` 的词场中文行调用同一函数，并以 `wd.exZhNote`（10px、`C.mutedLight`）渲染注；`ReviewScreen.js` 的 `unit.ask` 调用同一函数，并以 `s.askNote`（15px、`C.muted`）渲染注。接线守卫会在任一消费点删调用或删注样式时失败；复算：`node --test src/features/wordbank/__tests__/parentheticalZhWiring.test.mjs`。
+- 变异一（改坏什么：把未闭合 `（` 也切为 note）→ `node --test src/features/wordbank/__tests__/parentheticalZh.test.mjs` 实测 **2 pass / 1 fail**，断言 `请给（我一杯咖啡。` 必须返回 `null`。
+- 变异二（改坏什么：将复习面的 `splitParentheticalZh(unit?.ask)` 替换为 `null`）→ `node --test src/features/wordbank/__tests__/parentheticalZhWiring.test.mjs` 实测 **0 pass / 1 fail**，缺失复习调用的正则断言失败。
+
+### 真机/预览验收：环境阻塞，未宣称完成
+
+按工单尝试 `xcrun simctl list devices available`，输出 `unable to find utility \"simctl\"`，本机无可用 iOS 模拟器。随后运行 `npx expo start --web --port 8083`，Metro 在 Web 打包时报 `Unable to resolve \"react-native-web/dist/exports/AppRegistry\"`，因此无法用浏览器预览替代真机。没有截图，也没有把「代码接线」写成「已肉眼确认」。
+
+负责人待验：在词卡词场中文行与复习提问面各打开 #19 `（我）听到有人叫（我的）名字。`，确认两个括号及其内容均比正文小、淡，且复习面没有变成不舒服的提示。若复习面别扭，按工单不自行改规则，另交负责人决定。
+
+### 未做的事
+
+未改内容包、`units.js`、评分、进度键或其他词场样式；未安装缺失依赖、未发布、未推 OTA。`react-native-web` 的缺失是既有预览环境问题，本轮不顺手修。
+
+### 本轮验收原始输出
+
+`npm test`：
+
+```text
+tests 642
+pass 642
+fail 0
+```
+
+`npm run typecheck`：
+
+```text
+> tsc --noEmit
+```
+
+`npm run audit`：
+
+```text
+PASS content-stats (exit 0)
+PASS validate-content (exit 0)
+PASS meaning-audit (exit 0)
+PASS content-pack-sync sha256 098aa5071beb98510dfd7a2e5f005212f0f8478aeff2be96531dd6e7e990238c
+PASS content-pack-sync authority content.v2.json has no uncommitted change
+PASS content-pack-sync version/content comparison
+PASS invariant kanji_anchor.total=563
+PASS invariant wordBank.total=8005; _meta.note=8005
+INFO doc-refs scanned 1579 references (667 unique)
+```
+
+`git status --short`（提交前）：
+
+```text
+ M YanApp/App.js
+ M YanApp/docs/handoff/ACTIVE.md
+ M YanApp/docs/handoff/CC-REPORT.md
+ M YanApp/src/features/review/ReviewScreen.js
+?? YanApp/src/features/wordbank/__tests__/parentheticalZh.test.mjs
+?? YanApp/src/features/wordbank/__tests__/parentheticalZhWiring.test.mjs
+?? YanApp/src/features/wordbank/parentheticalZh.js
+```

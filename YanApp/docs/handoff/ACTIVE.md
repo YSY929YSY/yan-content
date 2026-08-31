@@ -1,4 +1,4 @@
-# 当前状态 · ZH 54 的 27 个词场已落库，括号显示工单已解锁
+# 当前状态 · ZH 54 的 27 个词场已落库，括号显示待真机验收
 
 > 更新日期：2026-08-31
 
@@ -45,6 +45,22 @@ staging 原始成员中有 6 个不能被运行时匹配器在句面识别（`�
 全量验收 `npm test` **638 / 638**、`npm run typecheck` 通过、`npm run audit` 退出码 0；发布闸门
 Blocker 0。未执行 `push-content.sh`、未推 `origin/main`、未推 OTA。完整原始输出与内容统计对比见本轮
 `CC-REPORT.md`。
+
+## ⏳ 实现完成、待真机验收 · `TICKET-zh-54-paren-style.md`
+
+括号注的切分与两处接线已实现：词场中文行和复习提问面都共用
+`src/features/wordbank/parentheticalZh.js` 的 `splitParentheticalZh`。#19
+`（我）听到有人叫（我的）名字。` 会把两个全角括号（括号本身含在内）降为较小、较淡的嵌套文本；
+不成对、嵌套、空全角括号或没有全角括号一律原样显示，半角 `()` 不处理。
+
+决策指标的代码接线点数 **2 → 0**：两处原本整段同字号的输出均已改为注样式；复算：
+`node --test src/features/wordbank/__tests__/parentheticalZhWiring.test.mjs`。变异验证已实际运行：放宽
+不成对括号会令 `parentheticalZh.test.mjs` 红；移除复习调用会令接线测试红。全量 `npm test`、
+`npm run typecheck` 通过。
+
+**尚未完成视觉验收。** 当前机器没有 `xcrun simctl`；`npx expo start --web --port 8083` 也因缺少
+`react-native-web/dist/exports/AppRegistry` 打包失败。因此还需负责人在现有真机/开发客户端上分别查看 #19
+的词卡词场和复习提问面，确认注没有变成过强提示或影响换行；完整命令、报错和建议观察点见本轮报告。
 
 ## ✅ 本轮完成 · `TICKET-kana-header.md`（五十音头部重排）
 
@@ -177,7 +193,7 @@ F-3 在真实 249 条词场中影响 **0 句 / 0 token**，由合成回归测试
 | 6 | `TICKET-wordfield-zh-54.md` | **判读全部完成**。A 26 + D 2 已经负责人逐条确认，确认栏在 `REVIEW-zh-54-A.md`；B 17 + C 5 另起一轮 |
 | 7 | `TICKET-kana-header.md` | **已完成**，待负责人确认「我已经会了」按钮一并删除是否符合预期 |
 | 8 | `TICKET-zh-54-land.md` | **已完成**，27 个新词场落库；未发布 |
-| 9 | `TICKET-zh-54-paren-style.md` | 已解锁，待发，`（）`降级显示 |
+| 9 | `TICKET-zh-54-paren-style.md` | **实现完成，待负责人真机验收**：`（）`降级显示 |
 
 **上限 302 / 563**（ZH 54 救回 53 条；`n5_saifu` 撤出，见 `DECISIONS.md` 裁决一）。
 本轮工单 8 落 27 条：**249 → 276**。
@@ -192,7 +208,7 @@ F-3 在真实 249 条词场中影响 **0 句 / 0 token**，由合成回归测试
 | **人** | 内容包什么时候发布（`push-content.sh` = 推线上） | 负责人 |
 | **人** | 纠错入口一周后点几次（**点不到三次就删**） | 负责人 |
 | **人** | 五十音「我已经会了」按钮随计数块一起删了，没有新位置安放 —— 要不要加回来（哪里加） | 负责人 |
-| 技术 | ZH 54 落库已完成；括号降级显示（工单 9）待做 | Codex |
+| 人 | #19 在词卡词场与复习提问面各看一次：括号注是否过强提示、是否影响换行 | 负责人 |
 
 ## 外部审计确认、已写进工单的其余缺陷
 

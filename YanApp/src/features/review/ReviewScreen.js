@@ -17,6 +17,7 @@ import { useReviewProgress } from './ReviewProgressContext';
 import { fromWord, indexUnits, buildUnits, sourceOf } from './units';
 import { buildProduceChoices, evaluateProduceSubmission } from './produceChoices';
 import { sceneWordsOf } from '../wordbank/sceneWords';
+import { splitParentheticalZh } from '../wordbank/parentheticalZh';
 
 const SOURCE_LABEL = {
   word: '词库', card: '词卡', place: '足迹', scene: '场景', subway: '地铁',
@@ -99,6 +100,7 @@ export default function ReviewScreen({ content, onBack, onOpenOrigin, mainlineWo
 
   const key = remaining[0];
   const unit = resolve(key);
+  const askParts = splitParentheticalZh(unit?.ask);
   const produce = unit?.mode === 'produce' ? buildProduceChoices(unit, sceneWords) : null;
   if (!unit) {
     // 理论上进不来(队列已经过滤过),但内容包是远端下发的,不能假设它永远自洽。
@@ -139,7 +141,13 @@ export default function ReviewScreen({ content, onBack, onOpenOrigin, mainlineWo
           {unit.mode === 'recall' ? (mainlineWords ? '这个词你已经认识' : '这个词什么意思') : '这时候该怎么说'}
         </Text>
 
-        <Text style={unit.mode === 'recall' ? s.askWord : s.askLine}>{unit.ask}</Text>
+        <Text style={unit.mode === 'recall' ? s.askWord : s.askLine}>
+          {(askParts || [{ kind: 'text', text: unit.ask }]).map((part, index) => (
+            part.kind === 'note'
+              ? <Text key={index} style={s.askNote}>{part.text}</Text>
+              : part.text
+          ))}
+        </Text>
         {mainlineWords && unit.mode === 'recall'
           ? <Text style={s.askSub}>{unit.answer}</Text>
           : !!unit.askSub && <Text style={s.askSub}>{unit.askSub}</Text>}
@@ -285,6 +293,7 @@ const s = StyleSheet.create({
   // 词只有几个字,给它足够大的字号让它独占视线;句子会换行,大字号会挤成一团
   askWord: { fontSize: 40, fontWeight: '700', color: C.ink, textAlign: 'center' },
   askLine: { fontSize: 20, fontWeight: '600', color: C.ink, textAlign: 'center', lineHeight: 30 },
+  askNote: { fontSize: 15, color: C.muted, fontWeight: '500' },
   askSub: { fontSize: 13, color: C.muted },
   hintBox: {
     backgroundColor: C.tag, borderRadius: 8, paddingHorizontal: 14, paddingVertical: 10, marginTop: 8,

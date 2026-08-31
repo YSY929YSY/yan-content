@@ -66,6 +66,7 @@ import { Furigana } from './src/features/wordbank/FuriganaText';
 import { ExampleSentence, TokenColumnSentence } from './src/features/wordbank/ExampleSentence';
 import { buildWordFieldAlignment, dictionaryFormsFrom } from './src/features/wordbank/wordFieldAlignment';
 import { fieldMemberTerms, isFieldMemberToken } from './src/features/wordbank/fieldMemberMatching';
+import { splitParentheticalZh } from './src/features/wordbank/parentheticalZh';
 import EXAMPLE_TOKENS from './assets/example_tokens.json';
 import { primaryReading, altReadings } from './src/features/wordbank/furigana';
 import {
@@ -2649,7 +2650,13 @@ function WBDetailPage({ entry, wordBank, glossLookupBank, record, today, onBack,
                   </View>
                 )}
                 {!!wordField.sentence.roma && <Text style={wd.exRoma}>{wordField.sentence.roma}</Text>}
-                <Text style={wd.exZh}>{wordField.sentence.zh}</Text>
+                <Text style={wd.exZh}>
+                  {(splitParentheticalZh(wordField.sentence.zh) || [{ kind: 'text', text: wordField.sentence.zh }]).map((part, index) => (
+                    part.kind === 'note'
+                      ? <Text key={index} style={wd.exZhNote}>{part.text}</Text>
+                      : part.text
+                  ))}
+                </Text>
               </View>
               <SpeakBtn onPress={() => speak(wordField.sentence.jp, 'ja-JP', `wd-wf${fi}`)} speaking={speakingKey === `wd-wf${fi}`} size="sm" color={C.muted} />
             </View>
@@ -2817,6 +2824,7 @@ const wd = StyleSheet.create({
   wfChipZh: { fontSize: 11, color: C.muted },
   exRoma: { fontSize: 11, color: C.mutedLight, lineHeight: 16 },
   exZh: { fontSize: 12, color: C.muted },
+  exZhNote: { fontSize: 10, color: C.mutedLight },
   contentNote: { marginHorizontal: 16, marginTop: 16, fontSize: 12, color: C.mutedLight },
   readonlyBox: { marginHorizontal: 16, marginTop: 16, padding: 12, borderRadius: 8, backgroundColor: C.tag },
   readonlyTxt: { fontSize: 13, color: C.muted, textAlign: 'center' },
