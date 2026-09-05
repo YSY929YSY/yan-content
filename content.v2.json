@@ -1,7 +1,7 @@
 {
  "_meta": {
-  "version": "3.8",
-  "updated": "2026-09-03",
+  "version": "3.10",
+  "updated": "2026-09-04",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8005 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
    "n4_core": {
@@ -91,6 +91,18 @@
     "date": "2026-09-03",
     "changes": [
      "开放有完整中日例句的 N3 词条 1373 条；无例句的 339 条继续仅供查询。"
+    ]
+   },
+   {
+    "date": "2026-09-04",
+    "changes": [
+     "按负责人确认修正 N5/N4 中文例句与例句词形，清理さっき释义，并开放 31 条接尾辞与句型；learningBasis=n5n4_closed_2026-09-04。"
+    ]
+   },
+   {
+    "date": "2026-09-04",
+    "changes": [
+     "补齐 n5_tachi 与子供たち对应的中文例句；内容版本 3.9 → 3.10。"
     ]
    }
   ]
@@ -14008,7 +14020,7 @@
    },
    "coreChunk": "寒がる",
    "exampleJp": "子供が寒がっています。",
-   "exampleZh": "孩子在喊冷。",
+   "exampleZh": "孩子一副怕冷的样子。",
    "id": "n5_garu",
    "levels": [
     "N5"
@@ -14022,8 +14034,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -14102,8 +14115,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -14239,8 +14253,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -14343,7 +14358,7 @@
    },
    "coreChunk": "田中さん",
    "exampleJp": "田中さん。",
-   "exampleZh": "先生/女士。",
+   "exampleZh": "田中先生/女士。",
    "id": "n5_san",
    "levels": [
     "N5"
@@ -14357,8 +14372,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -14600,8 +14616,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -14638,8 +14655,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -14715,8 +14733,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -14737,8 +14756,8 @@
     "memory": []
    },
    "coreChunk": "友だちたち",
-   "exampleJp": "友だちたち。",
-   "exampleZh": "朋友们。",
+   "exampleJp": "子供たち。",
+   "exampleZh": "孩子们。",
    "id": "n5_tachi",
    "levels": [
     "N5"
@@ -14752,8 +14771,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -14948,8 +14968,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -32529,7 +32550,7 @@
    },
    "coreChunk": "じゃあ、行こう",
    "exampleJp": "じゃあ、行こう。",
-   "exampleZh": "那么。",
+   "exampleZh": "那么，走吧。",
    "id": "n5_ja",
    "levels": [
     "N5"
@@ -32546,8 +32567,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -33678,7 +33700,7 @@
    },
    "coreChunk": "すぐに来て",
    "exampleJp": "すぐに来て。",
-   "exampleZh": "马上，立刻。",
+   "exampleZh": "请马上过来。",
    "id": "n5_suguni",
    "levels": [
     "N5"
@@ -33692,8 +33714,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    },
    "jmdictSeq": "1430620"
   },
@@ -36185,7 +36208,7 @@
    },
    "coreChunk": "たての長さ",
    "exampleJp": "たての長さ。",
-   "exampleZh": "长度，高度。",
+   "exampleZh": "竖着的长度。",
    "id": "n5_tate",
    "levels": [
     "N5"
@@ -36199,8 +36222,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -53655,8 +53679,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -54536,8 +54561,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -54669,8 +54695,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -56323,8 +56350,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -58918,8 +58946,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -62873,8 +62902,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -64913,7 +64943,7 @@
     "N4"
    ],
    "pos": "副词",
-   "meaning_zh": "刚才；时间",
+   "meaning_zh": "刚才",
    "meaning_en": "a short while ago; a moment ago; just now",
    "status": "candidate",
    "tags": {
@@ -64937,8 +64967,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -68552,8 +68583,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -69267,8 +69299,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -70019,7 +70052,7 @@
    },
    "yanFeatures": [],
    "coreChunk": "たいていの場合",
-   "exampleJp": "朝は大ていパンを食べます。",
+   "exampleJp": "朝はたいていパンを食べます。",
    "exampleRoma": "Asa wa taitei pan o tabemasu.",
    "exampleZh": "早上通常吃面包。",
    "freq": {
@@ -70036,8 +70069,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -70875,7 +70909,7 @@
     "light_grammar"
    ],
    "coreChunk": "自分のため",
-   "exampleJp": "健康の為めに歩きます。",
+   "exampleJp": "健康のために歩きます。",
    "exampleRoma": "Kenkou no tame ni arukimasu.",
    "exampleZh": "为了健康而走路。",
    "freq": {
@@ -70885,8 +70919,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -71399,8 +71434,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -71992,8 +72028,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -72021,7 +72058,7 @@
     "light_grammar"
    ],
    "coreChunk": "行くつもり",
-   "exampleJp": "明日行く積もりです。",
+   "exampleJp": "明日行くつもりです。",
    "exampleRoma": "Ashita iku tsumori desu.",
    "exampleZh": "打算明天去。",
    "freq": {
@@ -72038,8 +72075,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -72899,7 +72937,7 @@
    },
    "yanFeatures": [],
    "coreChunk": "とうとう始まる",
-   "exampleJp": "到頭、試験の日が来ました。",
+   "exampleJp": "とうとう、試験の日が来ました。",
    "exampleRoma": "Toutou, shiken no hi ga kimashita.",
    "exampleZh": "终于，考试的日子来了。",
    "freq": {
@@ -72909,8 +72947,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -75460,8 +75499,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -76852,8 +76892,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -77897,8 +77938,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -79751,8 +79793,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n5n4_closed_2026-09-04"
    }
   },
   {
@@ -138303,7 +138346,7 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "とにかく有難う。",
+   "exampleJp": "とにかくありがとう。",
    "exampleRoma": "Tonikaku arigatou .",
    "exampleZh": "还是要说谢谢的。",
    "loanSource": [],
