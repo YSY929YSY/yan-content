@@ -1,7 +1,7 @@
 {
  "_meta": {
-  "version": "3.10",
-  "updated": "2026-09-04",
+  "version": "3.15",
+  "updated": "2026-09-06",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8005 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
    "n4_core": {
@@ -103,6 +103,36 @@
     "date": "2026-09-04",
     "changes": [
      "补齐 n5_tachi 与子供たち对应的中文例句；内容版本 3.9 → 3.10。"
+    ]
+   },
+   {
+    "date": "2026-09-05",
+    "changes": [
+     "开放 N2 首批 90 条中日例句齐全词条中的 88 条；n2_doku / n2_dokeru 因例句读音与卡片不匹配继续仅供查询。"
+    ]
+   },
+   {
+    "date": "2026-09-06",
+    "changes": [
+     "按工单 H 修正 11 条例句中文只抄释义的问题；5 条单词句/寒暄语保留为门禁豁免。"
+    ]
+   },
+   {
+    "date": "2026-09-06",
+    "changes": [
+     "按负责人确认落库 N2 第 2 批 3 条例句中文改译，并开放这 3 条学习。"
+    ]
+   },
+   {
+    "date": "2026-09-06",
+    "changes": [
+     "按负责人确认落库 N2 第 3 批 6 条例句中文改译与回数券释义联动；按 JMdict 补齐書き取り的抄写练习义并开放本批 7 条学习。"
+    ]
+   },
+   {
+    "date": "2026-09-06",
+    "changes": [
+     "按负责人确认修正 N2 第 4 批 3 条例句中文、1 条日文惯用语正字与固まる电脑义释义；唇条目因例句源句不成立保留仅供查询。"
     ]
    }
   ]
@@ -14479,7 +14509,7 @@
    },
    "coreChunk": "一日中勉強する",
    "exampleJp": "一日中勉強します。",
-   "exampleZh": "整个……期间。",
+   "exampleZh": "学了一整天。",
    "id": "n5_juu_2",
    "levels": [
     "N5"
@@ -30385,7 +30415,7 @@
    },
    "coreChunk": "道に迷って困る",
    "exampleJp": "道に迷って困ります。",
-   "exampleZh": "为难，困扰。",
+   "exampleZh": "迷路了，很为难。",
    "id": "n5_komaru",
    "jmdictSeq": "1289590",
    "levels": [
@@ -32948,7 +32978,7 @@
    },
    "coreChunk": "料理が上手",
    "exampleJp": "料理が上手。",
-   "exampleZh": "擅长，拿手。",
+   "exampleZh": "做菜很拿手。",
    "id": "n5_jouzu",
    "jmdictSeq": "1353320",
    "levels": [
@@ -33019,7 +33049,7 @@
    },
    "coreChunk": "丈夫な体",
    "exampleJp": "丈夫な体。",
-   "exampleZh": "结实，健壮。",
+   "exampleZh": "结实的身体。",
    "id": "n5_joubu",
    "jmdictSeq": "1580480",
    "levels": [
@@ -33739,7 +33769,7 @@
    },
    "coreChunk": "少し待つ",
    "exampleJp": "少し待ちます。",
-   "exampleZh": "一点儿，稍微。",
+   "exampleZh": "稍等一下。",
    "id": "n5_sukoshi",
    "jmdictSeq": "1348870",
    "levels": [
@@ -33962,7 +33992,7 @@
    },
    "coreChunk": "スポーツをする",
    "exampleJp": "スポーツをします。",
-   "exampleZh": "运动，体育。",
+   "exampleZh": "做运动。",
    "id": "n5_supootsu",
    "levels": [
     "N5"
@@ -34244,7 +34274,7 @@
    },
    "coreChunk": "背が高い",
    "exampleJp": "背が高いです。",
-   "exampleZh": "身高，个子。",
+   "exampleZh": "个子很高。",
    "id": "n5_sei",
    "levels": [
     "N5"
@@ -36361,7 +36391,7 @@
    },
    "coreChunk": "友だちに頼む",
    "exampleJp": "友だちに頼みます。",
-   "exampleZh": "拜托，请求。",
+   "exampleZh": "拜托朋友。",
    "id": "n5_tanomu",
    "jmdictSeq": "1548370",
    "levels": [
@@ -36454,7 +36484,7 @@
    },
    "coreChunk": "多分雨が降る",
    "exampleJp": "多分雨が降ります。",
-   "exampleZh": "大概，也许。",
+   "exampleZh": "大概会下雨。",
    "id": "n5_tabun",
    "jmdictSeq": "1407980",
    "levels": [
@@ -38702,7 +38732,7 @@
    },
    "coreChunk": "テストを受ける",
    "exampleJp": "テストを受ける。",
-   "exampleZh": "考试，测验。",
+   "exampleZh": "参加考试。",
    "id": "n5_tesuto",
    "levels": [
     "N5"
@@ -47296,7 +47326,7 @@
    },
    "coreChunk": "この辺",
    "exampleJp": "この辺。",
-   "exampleZh": "一带，附近。",
+   "exampleZh": "这一带。",
    "id": "n5_hen",
    "jmdictSeq": "1512070",
    "levels": [
@@ -163286,8 +163316,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -163343,8 +163374,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -163440,8 +163472,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -163718,8 +163751,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -163764,8 +163798,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -163815,8 +163850,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -163861,8 +163897,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -163907,8 +163944,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -163953,8 +163991,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -164045,8 +164084,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -164096,8 +164136,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -164142,8 +164183,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -164217,7 +164259,7 @@
    "coreChunk": "",
    "exampleJp": "私は火に当たって体を暖めた。",
    "exampleRoma": "Watashi ha hi ni ata tte karada wo atatame ta .",
-   "exampleZh": "靠近火光后身体感到很温暖。",
+   "exampleZh": "我烤火取暖。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1586440",
@@ -164234,8 +164276,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -164281,8 +164324,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -164466,8 +164510,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -164514,8 +164559,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -164731,7 +164777,7 @@
    "coreChunk": "",
    "exampleJp": "春になると川がここであふれる。",
    "exampleRoma": "Haru ninaruto kawa gakokodeafureru .",
-   "exampleZh": "每当春天来到，这条河流总是泛滥成灾。",
+   "exampleZh": "每到春天，这条河都会溢出河岸。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1167610",
@@ -164749,8 +164795,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -164989,8 +165036,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -165040,8 +165088,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -165091,8 +165140,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -165142,8 +165192,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -165188,8 +165239,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -165466,8 +165518,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -165608,8 +165661,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -165710,8 +165764,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -166338,7 +166393,7 @@
    "coreChunk": "",
    "exampleJp": "衣食住は生活の基本です。",
    "exampleRoma": "Ishokujuu ha seikatsu no kihon desu .",
-   "exampleZh": "衣食住是生存的基础。",
+   "exampleZh": "衣食住是生活的基本要素。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1158780",
@@ -166355,7 +166410,8 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
+    "learning": true,
+    "learningBasis": "n2_opened_2026-09-06",
     "dictionaryBasis": "legacy_dictionary_compat"
    }
   },
@@ -166436,7 +166492,7 @@
    "coreChunk": "",
    "exampleJp": "私が今言ったことに、いちいち細かいケチをつけないでよ。",
    "exampleRoma": "Watashi ga ima itta kotoni , ichiichi komakai kechi wotsukenaideyo .",
-   "exampleZh": "不用计较我刚刚的话。",
+   "exampleZh": "别老挑我刚才说的话里的毛病。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1587320",
@@ -166454,7 +166510,8 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
+    "learning": true,
+    "learningBasis": "n2_opened_2026-09-06",
     "dictionaryBasis": "legacy_dictionary_compat"
    }
   },
@@ -169859,7 +169916,7 @@
    "coreChunk": "",
    "exampleJp": "私はイギリス演劇を勉強しています。",
    "exampleRoma": "Watashi ha igirisu engeki wo benkyou shiteimasu .",
-   "exampleZh": "我正在学习英文戏剧。",
+   "exampleZh": "我正在学习英国戏剧。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1176860",
@@ -169876,7 +169933,8 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
+    "learning": true,
+    "learningBasis": "n2_opened_2026-09-06",
     "dictionaryBasis": "legacy_dictionary_compat"
    }
   },
@@ -171707,8 +171765,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -171848,8 +171907,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -172270,8 +172330,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -172869,8 +172930,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -173758,7 +173820,7 @@
     "N2"
    ],
    "pos": "名词",
-   "meaning_zh": "回数票，套票",
+   "meaning_zh": "回数票，多次乘车票",
    "meaning_en": "coupon tickets; discount tickets; book of tickets",
    "status": "zh_drafted",
    "tags": {
@@ -173774,7 +173836,7 @@
    "coreChunk": "回数券を買う",
    "exampleJp": "回数券を買ったほうが安いよ。",
    "exampleRoma": "Kaisuuken o katta hou ga yasui yo.",
-   "exampleZh": "买套票更便宜哦。",
+   "exampleZh": "买多次乘车票更便宜哦。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1199520",
@@ -173791,7 +173853,8 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
+    "learning": true,
+    "learningBasis": "n2_opened_2026-09-06",
     "dictionaryBasis": "legacy_dictionary_compat"
    }
   },
@@ -174680,7 +174743,7 @@
     "N1"
    ],
    "pos": "名词",
-   "meaning_zh": "听写，默写",
+   "meaning_zh": "听写，默写；抄写练习",
    "meaning_en": "writing down from other written material; writing kanji text from hiragana | transcription (of spoken material); dictation",
    "status": "zh_drafted",
    "tags": {
@@ -174696,7 +174759,7 @@
    "coreChunk": "",
    "exampleJp": "漢字の書き取り練習なんて、かったるくてやりたくないよ。",
    "exampleRoma": "Kanji no kaki tori renshuu nante , kattarukuteyaritakunaiyo .",
-   "exampleZh": "汉字的写作练习太烦人了，我不想做。",
+   "exampleZh": "汉字书写练习太烦人了，我不想做。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1589970",
@@ -174713,7 +174776,8 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
+    "learning": true,
+    "learningBasis": "n2_opened_2026-09-06",
     "dictionaryBasis": "legacy_dictionary_compat"
    }
   },
@@ -176185,7 +176249,7 @@
    "coreChunk": "",
    "exampleJp": "彼は大学卒業後１０年間親のすねをかじって生活してきた。",
    "exampleRoma": "Kareha daigakusotsugyou nochi 1 0 nenkan oya nosunewokajitte seikatsu shitekita .",
-   "exampleZh": "他大学毕业已经十年了，但还没有学会独立生活。",
+   "exampleZh": "他大学毕业后靠父母养活了十年。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1610640",
@@ -176203,7 +176267,8 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
+    "learning": true,
+    "learningBasis": "n2_opened_2026-09-06",
     "dictionaryBasis": "legacy_dictionary_compat"
    }
   },
@@ -176543,8 +176608,8 @@
     "N2"
    ],
    "pos": "动词",
-   "meaning_zh": "凝固，变硬；（人群）聚集",
-   "meaning_en": "to harden; to solidify | to become firm; to become certain",
+   "meaning_zh": "凝固，变硬；（人群）聚集；（电脑）卡住",
+   "meaning_en": "to harden; to solidify | to become firm; to become certain | to freeze, to hang, to stop responding",
    "status": "zh_drafted",
    "tags": {
     "scene": [
@@ -176576,8 +176641,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-06"
    }
   },
   {
@@ -178044,7 +178110,7 @@
    "coreChunk": "",
    "exampleJp": "この農場の鶏卵は殻の色が濃く、卵黄が特に美味しいです。",
    "exampleRoma": "Kono noujou no keiran ha kara no iro ga koku , ran'ou ga tokuni oishii desu .",
-   "exampleZh": "这家农场的草鸡蛋颜色偏深，蛋黄特别鲜美。",
+   "exampleZh": "这家农场的鸡蛋蛋壳颜色深，蛋黄特别鲜美。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1205740",
@@ -178061,8 +178127,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-06"
    }
   },
   {
@@ -182261,7 +182328,7 @@
    "coreChunk": "",
    "exampleJp": "車の前面ガラスは砕けて粉々になった。",
    "exampleRoma": "Kuruma no zenmen garasu ha kudake te konagona ninatta .",
-   "exampleZh": "车头的挡风玻璃被砸至粉碎。",
+   "exampleZh": "车的前挡风玻璃碎成了粉末。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1295190",
@@ -182278,8 +182345,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-06"
    }
   },
   {
@@ -182460,7 +182528,8 @@
    "publication": {
     "dictionary": true,
     "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "queryOnlyReason": "例句源句不成立"
    }
   },
   {
@@ -184244,9 +184313,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "彼らは互いに凌ぎを削った。",
+   "exampleJp": "彼らは互いに鎬を削った。",
    "exampleRoma": "Karera ha tagaini shinogi wo kezutsu ta .",
-   "exampleZh": "他们互相超越。",
+   "exampleZh": "他们势均力敌地展开激烈竞争。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1298090",
@@ -184263,8 +184332,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-06"
    }
   },
   {
@@ -188368,7 +188438,7 @@
    "coreChunk": "ごちそうさまでした",
    "exampleJp": "ごちそうさまでした。おいしかったです。",
    "exampleRoma": "Gochisousama deshita. Oishikatta desu.",
-   "exampleZh": "我吃好了，很好吃。",
+   "exampleZh": "谢谢款待，很好吃。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1270520",
@@ -188379,7 +188449,8 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
+    "learning": true,
+    "learningBasis": "n2_opened_2026-09-06",
     "dictionaryBasis": "legacy_dictionary_compat"
    }
   },
@@ -192166,8 +192237,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -194327,7 +194399,7 @@
    "coreChunk": "",
    "exampleJp": "尻尾のない猫もいる。",
    "exampleRoma": "Shippo nonai neko moiru .",
-   "exampleZh": "有没有尾巴的猫。",
+   "exampleZh": "也有不长尾巴的猫。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1358800",
@@ -194344,8 +194416,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -196882,7 +196955,7 @@
    "coreChunk": "受験勉強",
    "exampleJp": "妹は今年、受験だ。",
    "exampleRoma": "Imouto wa kotoshi, juken da.",
-   "exampleZh": "妹妹今年要考试。",
+   "exampleZh": "妹妹今年要参加升学考试。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1329740",
@@ -196899,7 +196972,8 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
+    "learning": true,
+    "learningBasis": "n2_opened_2026-09-06",
     "dictionaryBasis": "legacy_dictionary_compat"
    }
   },
@@ -202069,8 +202143,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -207512,8 +207587,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -208352,8 +208428,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -209498,7 +209575,7 @@
    "coreChunk": "",
    "exampleJp": "騙すならもっと上手に騙してよ。",
    "exampleRoma": "Damasu naramotto jouzu ni damashi teyo .",
-   "exampleZh": "下次你要骗我的话骗得更有点水平吧。",
+   "exampleZh": "如果要骗，就骗得高明点吧。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1574550",
@@ -209515,8 +209592,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -209613,8 +209691,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -209793,8 +209872,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -210255,8 +210335,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -210301,8 +210382,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -210444,8 +210526,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -210689,8 +210772,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -210735,8 +210819,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -211057,8 +211142,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -211200,8 +211286,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -211798,8 +211885,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -211987,8 +212075,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -212084,8 +212173,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -212273,8 +212363,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -212319,8 +212410,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -212457,8 +212549,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -212549,8 +212642,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -212595,8 +212689,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -212733,8 +212828,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -215150,8 +215246,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -215282,7 +215379,7 @@
    "coreChunk": "",
    "exampleJp": "トムと一緒に出掛けてもいい？",
    "exampleRoma": "Tomu to isshoni dekake temoii ？",
-   "exampleZh": "我跟汤姆出去逛，行吗？",
+   "exampleZh": "我可以和汤姆一起出去吗？",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1598550",
@@ -215299,8 +215396,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -216019,7 +216117,7 @@
    "coreChunk": "",
    "exampleJp": "私は彼を東京駅で出迎えた。",
    "exampleRoma": "Watashi ha kare wo toukyoueki de demukae ta .",
-   "exampleZh": "我去东京站见他。",
+   "exampleZh": "我去东京站接他。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1338720",
@@ -216041,8 +216139,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -216276,8 +216375,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -216414,8 +216514,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -216655,8 +216756,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -216804,8 +216906,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -216896,8 +216999,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -217126,8 +217230,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -217361,8 +217466,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -217960,8 +218066,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -218841,8 +218948,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -219457,8 +219565,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -220039,7 +220148,7 @@
    "coreChunk": "",
    "exampleJp": "彼は殴られて青あざができた。",
    "exampleRoma": "Kareha nagura rete ao azagadekita .",
-   "exampleZh": "他被打得鼻青脸肿的。",
+   "exampleZh": "他被打出了淤青。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1181390",
@@ -220056,8 +220165,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -223208,8 +223318,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -223767,8 +223878,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -224400,8 +224512,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -224567,7 +224680,7 @@
    "coreChunk": "",
    "exampleJp": "先月、僕の叔父の会社が新製品を発売しました。",
    "exampleRoma": "Sengetsu , boku no oji no kaisha ga shinseihin wo hatsubai shimashita .",
-   "exampleZh": "舅舅的公司上个月推出了一款新产品。",
+   "exampleZh": "我叔叔的公司上个月推出了一款新产品。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1477810",
@@ -224584,7 +224697,8 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
+    "learning": true,
+    "learningBasis": "n2_opened_2026-09-06",
     "dictionaryBasis": "legacy_dictionary_compat"
    }
   },
@@ -225426,8 +225540,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -225702,8 +225817,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -225937,8 +226053,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -226784,8 +226901,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -227626,8 +227744,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -231235,8 +231354,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -231470,8 +231590,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -231797,8 +231918,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -232441,8 +232563,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -232487,8 +232610,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -232533,8 +232657,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -232769,8 +232894,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -233009,8 +233135,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -233239,8 +233366,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -233498,7 +233626,7 @@
    "coreChunk": "",
    "exampleJp": "放っといて。",
    "exampleRoma": "Houtsutsu toite .",
-   "exampleZh": "算了。",
+   "exampleZh": "别管我。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1516530",
@@ -233515,7 +233643,8 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
+    "learning": true,
+    "learningBasis": "n2_opened_2026-09-06",
     "dictionaryBasis": "legacy_dictionary_compat"
    }
   },
@@ -233561,8 +233690,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -233636,7 +233766,7 @@
    "coreChunk": "",
    "exampleJp": "牛が牧場で草を食べている。",
    "exampleRoma": "Ushi ga bokujou de kusa wo tabete iru .",
-   "exampleZh": "牛在牧地上吃草。",
+   "exampleZh": "牛在牧场上吃草。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1584250",
@@ -233653,8 +233783,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -233791,8 +233922,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
@@ -242083,8 +242215,9 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": false,
-    "dictionaryBasis": "legacy_dictionary_compat"
+    "learning": true,
+    "dictionaryBasis": "legacy_dictionary_compat",
+    "learningBasis": "n2_opened_2026-09-05"
    }
   },
   {
