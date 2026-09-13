@@ -1,7 +1,7 @@
 {
  "_meta": {
-  "version": "3.15",
-  "updated": "2026-09-06",
+  "version": "3.35",
+  "updated": "2026-09-13",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8005 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
    "n4_core": {
@@ -23,6 +23,30 @@
    }
   },
   "changelog": [
+   {
+    "date": "2026-09-13",
+    "changes": [
+     "修正数词+量词例句的派生罗马音：按数字 surface 组合 cardinal reading 与量词音便；１０軒改为 Jukken。"
+    ]
+   },
+   {
+    "date": "2026-09-12",
+    "changes": [
+     "实施 Shared C 剩余 7 条结构处置：後/ご与上/じょう改为 pattern，後/のち与直/じき迁移到假名面，直/なお修复至 JMdict seq 1349300，かみ/うわ保留词典记录并退出学习。"
+    ]
+   },
+   {
+    "date": "2026-09-12",
+    "changes": [
+     "按人工批准实施 Example Replacement Batch 1 的 8 条；仅为 空=から、間=ま、実=み、値=ね、今日=こんにち 补定点分词器读音修正。"
+    ]
+   },
+   {
+    "date": "2026-09-11",
+    "changes": [
+     "按人工批准实施 Example Replacement pilot 6 条；仅为 梅雨=ばいう、工場=こうば、下=げ 补定点分词器读音修正。"
+    ]
+   },
    {
     "date": "2026-08-08",
     "changes": [
@@ -14011,9 +14035,6 @@
    "wordField": {
     "members": [
      {
-      "id": "n5_go"
-     },
-     {
       "id": "n5_kyou"
      },
      {
@@ -15241,7 +15262,7 @@
    "wordField": {
     "members": [
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -15731,7 +15752,7 @@
       "id": "n5_me"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -15791,6 +15812,29 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_aka"
+     },
+     {
+      "id": "n5_jitensha"
+     },
+     {
+      "id": "n5_motsu"
+     }
+    ],
+    "sentence": {
+     "jp": "赤の自転車持ってる。",
+     "zh": "我有一辆红色的自行车。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 2976174,
+     "zh_sentence_id": 6451981,
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -15928,7 +15972,7 @@
       "id": "n5_suki"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -16000,7 +16044,7 @@
       "id": "n5_suki"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -16264,6 +16308,29 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_asa"
+     },
+     {
+      "id": "n5_hachi"
+     },
+     {
+      "id": "n5_ji"
+     }
+    ],
+    "sentence": {
+     "jp": "朝の八時です。",
+     "zh": "现在是早上八点。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 126233,
+     "zh_sentence_id": 590092,
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -16598,7 +16665,7 @@
       "id": "n5_niwa"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -17225,7 +17292,7 @@
       "id": "n5_tomodachi"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -17285,6 +17352,29 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ane"
+     },
+     {
+      "id": "n5_ani"
+     },
+     {
+      "id": "n5_watashi"
+     }
+    ],
+    "sentence": {
+     "jp": "私の姉は兄より年上です。",
+     "zh": "我姐姐比我哥哥大。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 431675,
+     "zh_sentence_id": 707704,
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -17774,6 +17864,29 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_arau"
+     },
+     {
+      "id": "n5_deru"
+     },
+     {
+      "id": "n5_te"
+     }
+    ],
+    "sentence": {
+     "jp": "トイレから出たら手を洗いましょう！",
+     "zh": "上完厕所后洗手吧！"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 347251,
+     "zh_sentence_id": 347252,
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -18304,7 +18417,7 @@
       "id": "n5_oyogu"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -18680,7 +18793,7 @@
       "id": "n5_konshuu"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -19472,7 +19585,7 @@
       "id": "n5_jisho"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -19773,7 +19886,7 @@
       "id": "n5_mizu"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -20266,7 +20379,7 @@
       "id": "n5_umareru"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -20611,7 +20724,7 @@
       "id": "n5_suki"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -20731,7 +20844,7 @@
       "id": "n5_mainichi"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -21370,7 +21483,7 @@
       "id": "n5_okaasan"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -21500,7 +21613,7 @@
       "id": "n5_sukoshi"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -21566,7 +21679,7 @@
       "id": "n5_okiru"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -22058,7 +22171,7 @@
       "id": "n5_tsuku"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -22641,7 +22754,7 @@
       "id": "n5_onaji"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -23277,7 +23390,7 @@
    "wordField": {
     "members": [
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -23437,7 +23550,7 @@
       "id": "n5_onna"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -23554,7 +23667,7 @@
       "id": "n5_iku"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -24254,7 +24367,7 @@
       "id": "n5_gakusei"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -24321,7 +24434,7 @@
       "id": "n5_kakeru"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -24427,7 +24540,7 @@
       "id": "n5_kasa"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -24630,7 +24743,7 @@
       "id": "n5_kaze_2"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -25532,7 +25645,7 @@
       "id": "n5_okane"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -26013,7 +26126,7 @@
       "id": "n5_suki"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -26609,7 +26722,7 @@
       "id": "n5_tsukuru"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      },
      {
       "id": "n5_yuuhan"
@@ -26728,9 +26841,6 @@
       "id": "n5_gyuuniku"
      },
      {
-      "id": "n5_kata"
-     },
-     {
       "id": "n5_suki"
      }
     ],
@@ -26802,7 +26912,7 @@
       "id": "n5_nomu"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -27106,7 +27216,7 @@
       "id": "n5_natsu"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -27899,7 +28009,7 @@
       "id": "n5_kutsu"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -28438,7 +28548,7 @@
       "id": "n5_suki"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -29797,6 +29907,29 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_gozen"
+     },
+     {
+      "id": "n5_ji"
+     },
+     {
+      "id": "n5_okiru"
+     }
+    ],
+    "sentence": {
+     "jp": "彼女は午前７時に起きる。",
+     "zh": "她早上7点起床。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 1006922,
+     "zh_sentence_id": 375361,
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -29859,7 +29992,7 @@
       "id": "n5_shitsumon"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -30636,7 +30769,7 @@
       "id": "n5_konshuu"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      },
      {
       "id": "n5_yasumi"
@@ -30754,7 +30887,7 @@
       "id": "n5_taberu"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -30986,7 +31119,10 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   }
+   },
+   "legacyReadings": [
+    "うお"
+   ]
   },
   {
    "word": "先",
@@ -31496,7 +31632,7 @@
   },
   {
    "word": "四",
-   "reading": "し",
+   "reading": "よん",
    "level": "N5",
    "pos": "名词",
    "meaning_zh": "四",
@@ -31512,20 +31648,23 @@
     "memory": []
    },
    "coreChunk": "四時に起きる",
-   "exampleJp": "四時に起きます。",
-   "exampleZh": "四点起床。",
+   "exampleJp": "四は偶数です。",
+   "exampleZh": "四是偶数。",
    "id": "n5_shi",
    "jmdictSeq": "1579470",
+   "legacyReadings": [
+    "し"
+   ],
    "levels": [
     "N5"
    ],
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Yoji ni okimasu.",
+   "exampleRoma": "Yon ha guusuu desu .",
    "pitch": {
     "accent": 1,
-    "mora": 1,
+    "mora": 2,
     "source": "kanjium",
     "agree": 2
    },
@@ -31825,7 +31964,7 @@
       "id": "n5_motsu"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -31943,7 +32082,7 @@
       "id": "n5_tsukue"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -32056,7 +32195,7 @@
       "id": "n5_shitsumon"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -32202,7 +32341,7 @@
       "id": "n5_jidousha"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -32945,7 +33084,7 @@
       "id": "n5_shukudai"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -33016,7 +33155,7 @@
       "id": "n5_uta"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -33229,7 +33368,7 @@
       "id": "n5_shiru"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -33628,7 +33767,7 @@
       "id": "n5_suki"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      },
      {
       "id": "n5_yuki"
@@ -34139,7 +34278,7 @@
       "id": "n5_sumu"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -34241,7 +34380,7 @@
    "wordField": {
     "members": [
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -34297,9 +34436,8 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": true,
-    "dictionaryBasis": "legacy_dictionary_compat",
-    "learningBasis": "legacy_mainline_anchor"
+    "learning": false,
+    "dictionaryBasis": "legacy_dictionary_compat"
    },
    "wordField": {
     "members": [
@@ -34725,7 +34863,7 @@
       "id": "n5_sengetsu"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -34905,7 +35043,7 @@
       "id": "n5_shigoto"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -35796,7 +35934,7 @@
       "id": "n5_eiga"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -35902,6 +36040,29 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_daidokoro"
+     },
+     {
+      "id": "n5_haha"
+     },
+     {
+      "id": "n5_isogashii"
+     }
+    ],
+    "sentence": {
+     "jp": "母は台所で忙しくしている。",
+     "zh": "妈妈正在厨房里忙着。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 82897,
+     "zh_sentence_id": 890518,
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -36358,7 +36519,7 @@
    "wordField": {
     "members": [
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -36623,7 +36784,7 @@
       "id": "n5_taberu"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -37028,6 +37189,29 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_chiisana"
+     },
+     {
+      "id": "n5_machi"
+     },
+     {
+      "id": "n5_watashi"
+     }
+    ],
+    "sentence": {
+     "jp": "私は小さな町で育ちました。",
+     "zh": "我在小城镇长大。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 11320479,
+     "zh_sentence_id": 13667861,
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -37076,6 +37260,29 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_chikai"
+     },
+     {
+      "id": "n5_eigakan"
+     },
+     {
+      "id": "n5_eki"
+     }
+    ],
+    "sentence": {
+     "jp": "映画館は駅から近いの？",
+     "zh": "电影院离车站近吗？"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 3850777,
+     "zh_sentence_id": 3859480,
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -37278,7 +37485,7 @@
       "id": "n5_iku"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -37851,7 +38058,7 @@
       "id": "n5_tsugi"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -39215,7 +39422,7 @@
       "id": "n5_kaeru"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -39284,7 +39491,7 @@
       "id": "n5_heya"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -39725,7 +39932,7 @@
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Jukko.",
+   "exampleRoma": "Juu ko .",
    "pitch": {
     "accent": 1,
     "mora": 2,
@@ -39739,9 +39946,8 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": true,
-    "dictionaryBasis": "legacy_dictionary_compat",
-    "learningBasis": "legacy_mainline_anchor"
+    "learning": false,
+    "dictionaryBasis": "legacy_dictionary_compat"
    }
   },
   {
@@ -40593,7 +40799,7 @@
       "id": "n5_tomodachi"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -41659,7 +41865,7 @@
       "id": "n5_shiru"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -41926,7 +42132,7 @@
       "id": "n5_shiru"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -42817,7 +43023,7 @@
       "id": "n5_noboru"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -44362,6 +44568,29 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_hanasu"
+     },
+     {
+      "id": "n5_koe"
+     },
+     {
+      "id": "n5_ookina"
+     }
+    ],
+    "sentence": {
+     "jp": "もっと大きな声で話しなさい。",
+     "zh": "说话再大声一点。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 193230,
+     "zh_sentence_id": 10021133,
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -44410,6 +44639,29 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_haha"
+     },
+     {
+      "id": "n5_mainichi"
+     },
+     {
+      "id": "n5_sentaku"
+     }
+    ],
+    "sentence": {
+     "jp": "母は毎日洗濯する。",
+     "zh": "我妈妈每天洗衣服。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 82853,
+     "zh_sentence_id": 858804,
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -44608,7 +44860,7 @@
       "id": "n5_suki"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -45416,7 +45668,7 @@
       "id": "n5_sei"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -45475,6 +45727,29 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_hikouki"
+     },
+     {
+      "id": "n5_tsukuru"
+     },
+     {
+      "id": "n5_watashi"
+     }
+    ],
+    "sentence": {
+     "jp": "私は模型の飛行機を作った。",
+     "zh": "我造了一架模型飞机。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 152589,
+     "zh_sentence_id": 340090,
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -45523,6 +45798,29 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_hidari"
+     },
+     {
+      "id": "n5_kudasai"
+     },
+     {
+      "id": "n5_michi"
+     }
+    ],
+    "sentence": {
+     "jp": "左の道を行って下さい。",
+     "zh": "请走左边的路。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 170931,
+     "zh_sentence_id": 798155,
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -45570,6 +45868,29 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_hito"
+     },
+     {
+      "id": "n5_ima"
+     },
+     {
+      "id": "n5_suki"
+     }
+    ],
+    "sentence": {
+     "jp": "今好きな人いる？",
+     "zh": "你现在有喜欢的人吗？"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 3589664,
+     "zh_sentence_id": 4881620,
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -45712,6 +46033,29 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_hitori"
+     },
+     {
+      "id": "n5_taberu"
+     },
+     {
+      "id": "n5_zenbu"
+     }
+    ],
+    "sentence": {
+     "jp": "それ全部一人で食べるつもり？",
+     "zh": "你打算一个人把这些全吃掉吗？"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 4892684,
+     "zh_sentence_id": 5096428,
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -46277,7 +46621,7 @@
       "id": "n5_fuutou"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -46451,6 +46795,29 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_fuku"
+     },
+     {
+      "id": "n5_kaze"
+     },
+     {
+      "id": "n5_kita"
+     }
+    ],
+    "sentence": {
+     "jp": "風は北から吹いている。",
+     "zh": "风从北边吹来。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 84004,
+     "zh_sentence_id": 2456085,
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -46509,7 +46876,7 @@
       "id": "n5_nugu"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -46623,7 +46990,7 @@
       "id": "n5_butaniku"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -46947,7 +47314,7 @@
       "id": "n5_motsu"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -47463,7 +47830,7 @@
       "id": "n5_eigo"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -47817,7 +48184,7 @@
       "id": "n5_tsumetai"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -48454,7 +48821,7 @@
       "id": "n5_mainichi"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -48623,7 +48990,7 @@
       "id": "n5_umareru"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -48872,7 +49239,7 @@
       "id": "n5_umareru"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -49112,7 +49479,7 @@
       "id": "n5_soto"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -49393,7 +49760,7 @@
       "id": "n5_migi"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -49462,7 +49829,7 @@
       "id": "n5_suki"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -49533,7 +49900,7 @@
       "id": "n5_nomu"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -49718,7 +50085,7 @@
       "id": "n5_michi"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -50279,7 +50646,7 @@
       "id": "n5_muzukashii"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -50434,6 +50801,29 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_me"
+     },
+     {
+      "id": "n5_migi"
+     },
+     {
+      "id": "n5_watashi"
+     }
+    ],
+    "sentence": {
+     "jp": "私は右の目が見えない。",
+     "zh": "我的右眼看不见。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 158402,
+     "zh_sentence_id": 919860,
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -51533,7 +51923,7 @@
    }
   },
   {
-   "word": "昨夜",
+   "word": "ゆうべ",
    "reading": "ゆうべ",
    "level": "N5",
    "pos": "名词",
@@ -51550,8 +51940,8 @@
     "memory": []
    },
    "coreChunk": "昨夜遅く帰った",
-   "exampleJp": "昨夜は遅く帰りました。",
-   "exampleZh": "昨晚很晚才回来。",
+   "exampleJp": "ゆうべは家で映画を見ました。",
+   "exampleZh": "昨晚我在家看了电影。",
    "id": "n5_yuube",
    "jmdictSeq": "1542640",
    "levels": [
@@ -51560,7 +51950,7 @@
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Yuube wa osoku kaerimashita.",
+   "exampleRoma": "Yuube ha ie de eiga wo mimashita .",
    "pitch": {
     "accent": 3,
     "mora": 3,
@@ -51577,7 +51967,10 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   }
+   },
+   "legacySurfaces": [
+    "昨夜"
+   ]
   },
   {
    "word": "有名",
@@ -52109,6 +52502,9 @@
    "exampleZh": "工作到很晚。",
    "id": "n5_yoru",
    "jmdictSeq": "1536350",
+   "legacyReadings": [
+    "よ"
+   ],
    "levels": [
     "N5"
    ],
@@ -52404,7 +52800,7 @@
       "id": "n5_sumu"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -52682,7 +53078,7 @@
       "id": "n5_toru"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -52821,7 +53217,7 @@
       "id": "n5_suki"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -53380,7 +53776,7 @@
       "id": "n5_wasureru"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -53441,25 +53837,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_watakushi"
-     },
-     {
-      "id": "n5_yama"
-     }
-    ],
-    "sentence": {
-     "jp": "私は山にいました。",
-     "zh": "我在山里。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 4715,
-     "zh_sentence_id": 15
-    }
    }
   },
   {
@@ -53507,6 +53884,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_watashi"
+     },
+     {
+      "id": "n5_yama"
+     }
+    ],
+    "sentence": {
+     "jp": "私は山にいました。",
+     "zh": "我在山里。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 4715,
+     "zh_sentence_id": 15
+    }
    }
   },
   {
@@ -53656,7 +54052,7 @@
       "id": "n5_warui"
      },
      {
-      "id": "n5_watakushi"
+      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -68558,9 +68954,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "部屋の隅",
-   "exampleJp": "部屋の隅に箱があります。",
-   "exampleRoma": "Heya no sumi ni hako ga arimasu.",
-   "exampleZh": "房间角落里有箱子。",
+   "exampleJp": "部屋の隅に椅子があります。",
+   "exampleRoma": "Heya no sumi ni isu ga arimasu .",
+   "exampleZh": "房间角落里有一把椅子。",
    "pitch": {
     "accent": 1,
     "mora": 2,
@@ -72858,6 +73254,16 @@
    "id": "n4_to",
    "word": "都",
    "reading": "と",
+   "cardType": "pattern",
+   "pattern": "都（と）",
+   "register": "administrative",
+   "relatedForms": [
+    "東京都",
+    "都内",
+    "都知事"
+   ],
+   "legacySurface": "都",
+   "legacyReading": "と",
    "level": "N4",
    "levels": [
     "N4"
@@ -72877,9 +73283,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "東京都内",
-   "exampleJp": "東京都は大きな都です。",
-   "exampleRoma": "Toukyou-to wa ookina to desu.",
-   "exampleZh": "东京都是一座大都市。",
+   "exampleJp": "東京都に住んでいます。",
+   "exampleRoma": "Toukyouto ni sun de imasu .",
+   "exampleZh": "我住在东京都。",
    "pitch": {
     "accent": 1,
     "mora": 1,
@@ -86145,9 +86551,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "駅は市の中央にある。",
-   "exampleRoma": "Eki ha shi no chuuou niaru .",
-   "exampleZh": "火车站在市中心。",
+   "exampleJp": "朝市で野菜を買いました。",
+   "exampleRoma": "Asaichi de yasai o kaimashita.",
+   "exampleZh": "我在早市买了蔬菜。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1308080",
@@ -88298,10 +88704,12 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": true,
-    "dictionaryBasis": "legacy_dictionary_compat",
-    "learningBasis": "n3_opened_2026-09-03"
-   }
+    "learning": false,
+    "dictionaryBasis": "legacy_dictionary_compat"
+   },
+   "legacyReadings": [
+    "うお"
+   ]
   },
   {
    "id": "n3_ugai",
@@ -88613,9 +89021,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "後で考えとく。",
-   "exampleRoma": "Atode kangae toku .",
-   "exampleZh": "我之后再考虑。",
+   "exampleJp": "私の後ろに立ってください。",
+   "exampleRoma": "Watashi no ushiro ni tatte kudasai .",
+   "exampleZh": "请站在我后面。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1269410",
@@ -89307,6 +89715,8 @@
    "id": "n3_uwa",
    "word": "上",
    "reading": "うわ",
+   "legacySurface": "上",
+   "legacyReading": "うわ",
    "level": "N3",
    "levels": [
     "N3"
@@ -89339,9 +89749,8 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": true,
-    "dictionaryBasis": "legacy_dictionary_compat",
-    "learningBasis": "n3_opened_2026-09-03"
+    "learning": false,
+    "dictionaryBasis": "legacy_dictionary_compat"
    }
   },
   {
@@ -90356,6 +90765,15 @@
    "id": "n3_o",
    "word": "御",
    "reading": "お",
+   "cardType": "pattern",
+   "pattern": "お〜/ご〜",
+   "register": "honorific/polite",
+   "relatedForms": [
+    "お水",
+    "ご飯"
+   ],
+   "legacySurface": "御",
+   "legacyReading": "お",
    "level": "N3",
    "levels": [
     "N3"
@@ -90375,9 +90793,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "御出身はどちらですか。",
-   "exampleRoma": "Goshusshin hadochiradesuka .",
-   "exampleZh": "您是哪里人？",
+   "exampleJp": "お水をください。",
+   "exampleRoma": "O mizu wo kudasai .",
+   "exampleZh": "请给我水。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "2826528",
@@ -92457,6 +92875,14 @@
    "id": "n3_oru",
    "word": "居る",
    "reading": "おる",
+   "cardType": "pattern",
+   "pattern": "おります",
+   "register": "humble/polite",
+   "relatedForms": [
+    "おります"
+   ],
+   "legacySurface": "居る",
+   "legacyReading": "おる",
    "level": "N3",
    "levels": [
     "N3"
@@ -92476,9 +92902,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "トムは家の中に居る。",
-   "exampleRoma": "Tomu ha ie no nakani iru .",
-   "exampleZh": "汤姆在家里。",
+   "exampleJp": "担当の者は一階におります。",
+   "exampleRoma": "Tantou no mono ha ichi kai ni orimasu .",
+   "exampleZh": "负责人在一楼。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1577985",
@@ -92635,9 +93061,8 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": true,
-    "dictionaryBasis": "legacy_dictionary_compat",
-    "learningBasis": "n3_opened_2026-09-03"
+    "learning": false,
+    "dictionaryBasis": "legacy_dictionary_compat"
    }
   },
   {
@@ -95641,9 +96066,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "血液型何型？",
-   "exampleRoma": "Ketsuekigata nanigata ？",
-   "exampleZh": "你的血型是什么？",
+   "exampleJp": "この型はもう古いです。",
+   "exampleRoma": "Kono kata wa mou furui desu.",
+   "exampleZh": "这个型号已经旧了。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1250090",
@@ -96350,9 +96775,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "華金だ！",
-   "exampleRoma": "Hana kin da !",
-   "exampleZh": "星期五！",
+   "exampleJp": "金を払います。",
+   "exampleRoma": "Kane wo haraimasu .",
+   "exampleZh": "我来付钱。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1242590",
@@ -96613,6 +97038,8 @@
    "id": "n3_kami",
    "word": "上",
    "reading": "かみ",
+   "legacySurface": "上",
+   "legacyReading": "かみ",
    "level": "N3",
    "levels": [
     "N3"
@@ -96651,9 +97078,8 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": true,
-    "dictionaryBasis": "legacy_dictionary_compat",
-    "learningBasis": "n3_opened_2026-09-03"
+    "learning": false,
+    "dictionaryBasis": "legacy_dictionary_compat"
    }
   },
   {
@@ -96966,9 +97392,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "鳥は空にいる。",
-   "exampleRoma": "Tori ha sora niiru .",
-   "exampleZh": "鸟在天上。",
+   "exampleJp": "この箱は空です。",
+   "exampleRoma": "Kono hako wa kara desu.",
+   "exampleZh": "这个箱子是空的。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1245280",
@@ -104524,9 +104950,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "私は机の下に隠れた。",
-   "exampleRoma": "Watashi ha tsukue no shitani kakure ta .",
-   "exampleZh": "我藏在桌子底下。",
+   "exampleJp": "座席は上・中・下の三等級に分かれています。",
+   "exampleRoma": "Zaseki wa jou chuu ge no santoukyuu ni wakarete imasu.",
+   "exampleZh": "座位分为上、中、下三个等级。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "2080200",
@@ -105998,7 +106424,7 @@
    "yanFeatures": [],
    "coreChunk": "",
    "exampleJp": "１０軒の家がすっかり燃えた。",
-   "exampleRoma": "1 0 ken no ie gasukkari moe ta .",
+   "exampleRoma": "Jukken no ie ga sukkari moe ta .",
    "exampleZh": "十间房屋被烧毁了。",
    "loanSource": [],
    "conceptCluster": "",
@@ -106872,6 +107298,11 @@
    "id": "n3_go",
    "word": "後",
    "reading": "ご",
+   "cardType": "pattern",
+   "pattern": "〜後",
+   "register": "neutral",
+   "legacySurface": "後",
+   "legacyReading": "ご",
    "level": "N3",
    "levels": [
     "N3"
@@ -106891,9 +107322,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "後で考えとく。",
-   "exampleRoma": "Atode kangae toku .",
-   "exampleZh": "我之后再考虑。",
+   "exampleJp": "卒業後、旅行します。",
+   "exampleRoma": "Sotsugyougo , ryokou shimasu .",
+   "exampleZh": "毕业后去旅行。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "2147630",
@@ -108067,9 +108498,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "父は工場で働いている。",
-   "exampleRoma": "Chichi ha koujou de hatarai teiru .",
-   "exampleZh": "我爸在工厂工作。",
+   "exampleJp": "父は町工場で働いています。",
+   "exampleRoma": "Chichi wa machikouba de hataraite imasu.",
+   "exampleZh": "父亲在一家小工厂工作。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1578700",
@@ -109621,7 +110052,7 @@
    "yanFeatures": [],
    "coreChunk": "",
    "exampleJp": "粉と卵２個を混ぜなさい。",
-   "exampleRoma": "Kona to tamago 2 ko wo maze nasai .",
+   "exampleRoma": "Kona to tamago niko wo maze nasai .",
    "exampleZh": "把面粉和两颗鸡蛋混合。",
    "loanSource": [],
    "conceptCluster": "",
@@ -110327,9 +110758,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "今日は雪です。",
-   "exampleRoma": "Konnichiha yuki desu .",
-   "exampleZh": "今天下雪。",
+   "exampleJp": "今日では、現金を使わない人も増えています。",
+   "exampleRoma": "Konnichi dewa, genkin o tsukawanai hito mo fuete imasu.",
+   "exampleZh": "如今，不用现金的人也越来越多了。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1579110",
@@ -113238,8 +113669,10 @@
   },
   {
    "id": "n3_jiki",
-   "word": "直",
+   "word": "じき",
    "reading": "じき",
+   "legacySurface": "直",
+   "legacyReading": "じき",
    "level": "N3",
    "levels": [
     "N3"
@@ -113259,9 +113692,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "英国大使は大統領と直に会見することを要求した。",
-   "exampleRoma": "Eikoku taishi ha daitouryou to suguni kaiken surukotowo youkyuu shita .",
-   "exampleZh": "英国大使要求直接会见总统。",
+   "exampleJp": "じきに雨はやみます。",
+   "exampleRoma": "Jiki ni ame ha yamimasu .",
+   "exampleZh": "雨很快就会停。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1581790",
@@ -114987,9 +115420,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "洗濯機はすばらしい発明品だ。",
-   "exampleRoma": "Sentakuki hasubarashii hatsumeihin da .",
-   "exampleZh": "洗衣机是个绝妙的发明。",
+   "exampleJp": "この品をください。",
+   "exampleRoma": "Kono shina wo kudasai .",
+   "exampleZh": "请给我这个商品。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1583470",
@@ -115775,9 +116208,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "私は机の下に隠れた。",
-   "exampleRoma": "Watashi ha tsukue no shitani kakure ta .",
-   "exampleZh": "我藏在桌子底下。",
+   "exampleJp": "川下に小さな町があります。",
+   "exampleRoma": "Kawashimo ni chiisana machi ga arimasu.",
+   "exampleZh": "河的下游有一座小镇。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "2080210",
@@ -117975,6 +118408,11 @@
    "id": "n3_jou",
    "word": "上",
    "reading": "じょう",
+   "cardType": "pattern",
+   "pattern": "〜上",
+   "register": "grammar",
+   "legacySurface": "上",
+   "legacyReading": "じょう",
    "level": "N3",
    "levels": [
     "N3"
@@ -117994,9 +118432,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "その上に座るな。",
-   "exampleRoma": "Sono ueni suwaru na .",
-   "exampleZh": "不要坐在上面。",
+   "exampleJp": "法律上の問題です。",
+   "exampleRoma": "Houritsujou no mondai desu .",
+   "exampleZh": "这是法律上的问题。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1352170",
@@ -122054,9 +122492,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "良いご週末を。",
-   "exampleRoma": "Yoi go shuumatsu wo .",
-   "exampleZh": "周末愉快。",
+   "exampleJp": "今月の末に旅行します。",
+   "exampleRoma": "Kongetsu no sue ni ryokou shimasu.",
+   "exampleZh": "这个月底去旅行。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1525250",
@@ -123223,10 +123661,12 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": true,
-    "dictionaryBasis": "legacy_dictionary_compat",
-    "learningBasis": "n3_opened_2026-09-03"
-   }
+    "learning": false,
+    "dictionaryBasis": "legacy_dictionary_compat"
+   },
+   "legacySurfaces": [
+    "角"
+   ]
   },
   {
    "id": "n3_sumimasen",
@@ -123387,9 +123827,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "日本ではしばしば魚を生で食べる。",
-   "exampleRoma": "Nippon dehashibashiba sakana wo nama de tabe ru .",
-   "exampleZh": "我们在日本常常吃生鱼。",
+   "exampleJp": "生と死について考える。",
+   "exampleRoma": "Sei to shi nitsuite kangaeru .",
+   "exampleZh": "思考生与死。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "2088240",
@@ -127469,9 +127909,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "他に方法はない。",
-   "exampleRoma": "Hokani houhou hanai .",
-   "exampleZh": "除此之外，别无办法。",
+   "exampleJp": "その他は不要です。",
+   "exampleRoma": "Sonota wa fuyou desu .",
+   "exampleZh": "其他的就不需要了。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1949190",
@@ -130170,9 +130610,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "直角は９０度である。",
-   "exampleRoma": "Chokkaku ha 9 0 do dearu .",
-   "exampleZh": "直角是九十度。",
+   "exampleJp": "旅行の度に写真を撮ります。",
+   "exampleRoma": "Ryokou no tabi ni shashin wo torimasu .",
+   "exampleZh": "每次旅行我都会拍照。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1445150",
@@ -132382,9 +132822,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "中へ。",
-   "exampleRoma": "Naka he .",
-   "exampleZh": "进到里面去。",
+   "exampleJp": "サイズは中でお願いします。",
+   "exampleRoma": "Saizu wa chuu de onegaishimasu .",
+   "exampleZh": "尺寸请给我中号。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1620400",
@@ -137245,9 +137685,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "今７時です。",
-   "exampleRoma": "Ima 7 toki desu .",
-   "exampleZh": "七点了。",
+   "exampleJp": "時間がある時に来てください。",
+   "exampleRoma": "Jikan ga aru toki ni kite kudasai .",
+   "exampleZh": "有时间的时候请来。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1315840",
@@ -139381,9 +139821,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "何名様ですか。",
-   "exampleRoma": "Nanmei sama desuka .",
-   "exampleZh": "几位？",
+   "exampleJp": "子どもの名を書いてください。",
+   "exampleRoma": "Kodomo no na o kaite kudasai.",
+   "exampleZh": "请写下孩子的名字。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1531330",
@@ -139454,15 +139894,17 @@
   },
   {
    "id": "n3_nao",
-   "word": "直",
+   "word": "なお",
    "reading": "なお",
+   "legacySurface": "直",
+   "legacyReading": "なお",
    "level": "N3",
    "levels": [
     "N3"
    ],
-   "pos": "な形容词",
+   "pos": "副词",
    "meaning_zh": "仍，还；更加",
-   "meaning_en": "straight | ordinary; common",
+   "meaning_en": "still; yet | more; still more; greater; further",
    "status": "zh_drafted",
    "tags": {
     "scene": [
@@ -139475,12 +139917,12 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "英国大使は大統領と直に会見することを要求した。",
-   "exampleRoma": "Eikoku taishi ha daitouryou to suguni kaiken surukotowo youkyuu shita .",
-   "exampleZh": "英国大使要求直接会见总统。",
+   "exampleJp": "なお、詳しい説明が必要です。",
+   "exampleRoma": "Nao , kuwashii setsumei ga hitsuyou desu .",
+   "exampleZh": "另外，还需要详细说明。",
    "loanSource": [],
    "conceptCluster": "",
-   "jmdictSeq": "1430580",
+   "jmdictSeq": "1349300",
    "pitch": {
     "accent": 1,
     "mora": 2,
@@ -140062,7 +140504,7 @@
   },
   {
    "id": "n3_nado",
-   "word": "等",
+   "word": "など",
    "reading": "など",
    "level": "N3",
    "levels": [
@@ -140083,9 +140525,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "彼は三等賞を得た。",
-   "exampleRoma": "Kareha santou shou wo eta .",
-   "exampleZh": "他赢了三等奖。",
+   "exampleJp": "果物などを買いました。",
+   "exampleRoma": "Kudamono nado wo kaimashita .",
+   "exampleZh": "我买了水果之类的东西。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1582300",
@@ -140105,7 +140547,10 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "n3_opened_2026-09-03"
-   }
+   },
+   "legacySurfaces": [
+    "等"
+   ]
   },
   {
    "id": "n3_nanika",
@@ -140946,6 +141391,10 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "2083100",
+   "splitTargets": [
+    "n5_nichiyoubi",
+    "n5_nichi"
+   ],
    "pitch": {
     "accent": 1,
     "mora": 2,
@@ -140959,9 +141408,8 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": true,
-    "dictionaryBasis": "legacy_dictionary_compat",
-    "learningBasis": "n3_opened_2026-09-03"
+    "learning": false,
+    "dictionaryBasis": "legacy_dictionary_compat"
    }
   },
   {
@@ -141653,9 +142101,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "彼の謙遜さは賞賛に値する。",
-   "exampleRoma": "Kano kenson saha shousan ni atai suru .",
-   "exampleZh": "他的谦逊值得称赞。",
+   "exampleJp": "この時計は値が張ります。",
+   "exampleRoma": "Kono tokei wa ne ga harimasu.",
+   "exampleZh": "这块表价格不菲。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "2836242",
@@ -142552,9 +143000,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "１０軒の家がすっかり燃えた。",
-   "exampleRoma": "1 0 ken no ie gasukkari moe ta .",
-   "exampleZh": "十间房屋被烧毁了。",
+   "exampleJp": "軒から雨水が落ちています。",
+   "exampleRoma": "Noki kara amamizu ga ochite imasu .",
+   "exampleZh": "雨水正从屋檐落下来。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1260330",
@@ -142866,8 +143314,10 @@
   },
   {
    "id": "n3_nochi",
-   "word": "後",
+   "word": "のち",
    "reading": "のち",
+   "legacySurface": "後",
+   "legacyReading": "のち",
    "level": "N3",
    "levels": [
     "N3"
@@ -142887,9 +143337,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "後で考えとく。",
-   "exampleRoma": "Atode kangae toku .",
-   "exampleZh": "我之后再考虑。",
+   "exampleJp": "のちに結果を発表します。",
+   "exampleRoma": "Nochi ni kekka wo happyou shimasu .",
+   "exampleZh": "之后公布结果。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1269330",
@@ -143411,9 +143861,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "日本では梅雨は普通六月に始まる。",
-   "exampleRoma": "Nippon deha tsuyu ha futsuu rokugatsu ni hajima ru .",
-   "exampleZh": "在日本，梅雨季一般在六月开始。",
+   "exampleJp": "梅雨前線が近づいています。",
+   "exampleRoma": "Baiuzensen ga chikazuite imasu.",
+   "exampleZh": "梅雨锋面正在靠近。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1582960",
@@ -144740,9 +145190,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "彼は一日二十ドル稼ぐ。",
-   "exampleRoma": "Kareha tsuitachi nijuu doru kasegu .",
-   "exampleZh": "他一天赚二十美元。",
+   "exampleJp": "妹は今年二十になります。",
+   "exampleRoma": "Imouto wa kotoshi hatachi ni narimasu .",
+   "exampleZh": "我妹妹今年满二十岁。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1600790",
@@ -148411,9 +148861,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "もう５分待とう。",
-   "exampleRoma": "Mou 5 fun mato u .",
-   "exampleZh": "再等五分钟吧。",
+   "exampleJp": "厚さ一分の板です。",
+   "exampleRoma": "Atsusa ichi bu no ita desu .",
+   "exampleZh": "这是一分厚的板子。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1502850",
@@ -148933,9 +149383,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "中秋節には家族が集まり、一緒に月餅を食べて月見をします。",
-   "exampleRoma": "Chuushuu fushi niha kazoku ga atsumari , isshoni geppei wo tabete tsukimi woshimasu .",
-   "exampleZh": "在中秋节，家人团聚，一起吃月饼、赏月。",
+   "exampleJp": "この歌の節が好きです。",
+   "exampleRoma": "Kono uta no fushi ga sukidesu .",
+   "exampleZh": "我喜欢这首歌的旋律。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1386160",
@@ -150449,9 +150899,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "もう５分待とう。",
-   "exampleRoma": "Mou 5 fun mato u .",
-   "exampleZh": "再等五分钟吧。",
+   "exampleJp": "私の分を取っておいてください。",
+   "exampleRoma": "Watashi no bun wo totte oite kudasai .",
+   "exampleZh": "请把我的那份留出来。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1502860",
@@ -151787,9 +152237,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "ロシア：人質事件の犠牲となった方々に哀悼の意を表す。",
-   "exampleRoma": "Roshia : hitojichi jiken no gisei tonatta katagata ni aitou no i wo arawasu .",
-   "exampleZh": "俄罗斯对在人质事件中牺牲的人们表示哀悼。",
+   "exampleJp": "方々探しましたが、見つかりませんでした。",
+   "exampleRoma": "Houbou sagashimashita ga , mitsukarimasendeshita .",
+   "exampleZh": "到处都找过了，但还是没找到。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1584105",
@@ -152620,7 +153070,7 @@
   },
   {
    "id": "n3_hobo",
-   "word": "略",
+   "word": "ほぼ",
    "reading": "ほぼ",
    "level": "N3",
    "levels": [
@@ -152641,9 +153091,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "ＡＩは人工知能の略です。",
-   "exampleRoma": "A i ha jinkouchinou no ryaku desu .",
-   "exampleZh": "AI是人工智能的略称。",
+   "exampleJp": "ほぼ全員が時間どおりに来ました。",
+   "exampleRoma": "Hobo zen'in ga jikandoori ni kimashita .",
+   "exampleZh": "几乎所有人都准时到了。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1551940",
@@ -152663,7 +153113,10 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "n3_opened_2026-09-03"
-   }
+   },
+   "legacySurfaces": [
+    "略"
+   ]
   },
   {
    "id": "n3_hohoemu",
@@ -152970,9 +153423,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "嵐の間停電した。",
-   "exampleRoma": "Arashi no kan teiden shita .",
-   "exampleZh": "暴风雨中，停电了。",
+   "exampleJp": "少し間を置きましょう。",
+   "exampleRoma": "Sukoshi ma o okimashou.",
+   "exampleZh": "我们先稍等一下吧。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1215240",
@@ -153655,7 +154108,7 @@
   },
   {
    "id": "n3_mada",
-   "word": "未だ",
+   "word": "まだ",
    "reading": "まだ",
    "level": "N3",
    "levels": [
@@ -153676,9 +154129,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "未だにあなたのことが大好きです。",
-   "exampleRoma": "Imada nianatanokotoga daisuki desu .",
-   "exampleZh": "我依旧爱你。",
+   "exampleJp": "まだ宿題が終わっていません。",
+   "exampleRoma": "Mada shukudai ga owatte imasen .",
+   "exampleZh": "作业还没有完成。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1527110",
@@ -153698,7 +154151,10 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "n3_opened_2026-09-03"
-   }
+   },
+   "legacySurfaces": [
+    "未だ"
+   ]
   },
   {
    "id": "n3_machi",
@@ -154666,9 +155122,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "実は君が悪い。",
-   "exampleRoma": "Jitsuha kun ga warui .",
-   "exampleZh": "其实这是你的错。",
+   "exampleJp": "木に実がなっています。",
+   "exampleRoma": "Ki ni mi ga natte imasu.",
+   "exampleZh": "树上结着果实。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1320810",
@@ -157621,9 +158077,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "彼は生物学者だ。",
-   "exampleRoma": "Kareha seibutsugakusha da .",
-   "exampleZh": "他是一个生物学家。",
+   "exampleJp": "担当の者を呼びます。",
+   "exampleRoma": "Tantou no mono o yobimasu.",
+   "exampleZh": "我去叫负责人来。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1322990",
@@ -157934,7 +158390,7 @@
   {
    "id": "n3_monji",
    "word": "文字",
-   "reading": "もんじ",
+   "reading": "もじ",
    "level": "N3",
    "levels": [
     "N3"
@@ -157954,9 +158410,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "これはなんの文字ですか。",
-   "exampleRoma": "Korehananno moji desuka .",
-   "exampleZh": "这是什么文字？",
+   "exampleJp": "文字を大きく書いてください。",
+   "exampleRoma": "Moji wo ookiku kaite kudasai .",
+   "exampleZh": "请把字写大一些。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1505390",
@@ -157976,7 +158432,10 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "n3_opened_2026-09-03"
-   }
+   },
+   "legacyReadings": [
+    "もんじ"
+   ]
   },
   {
    "id": "n3_yagate",
@@ -159528,6 +159987,9 @@
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1536350",
+   "legacyReadings": [
+    "よ"
+   ],
    "pitch": {
     "accent": 1,
     "mora": 1,
@@ -159541,9 +160003,8 @@
    },
    "publication": {
     "dictionary": true,
-    "learning": true,
-    "dictionaryBasis": "legacy_dictionary_compat",
-    "learningBasis": "n3_opened_2026-09-03"
+    "learning": false,
+    "dictionaryBasis": "legacy_dictionary_compat"
    }
   },
   {
@@ -159597,6 +160058,16 @@
    "id": "n3_you",
    "word": "様",
    "reading": "よう",
+   "cardType": "pattern",
+   "pattern": "このように",
+   "register": "grammar",
+   "relatedForms": [
+    "ように",
+    "ような",
+    "このような"
+   ],
+   "legacySurface": "様",
+   "legacyReading": "よう",
    "level": "N3",
    "levels": [
     "N3"
@@ -159616,9 +160087,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "何名様ですか。",
-   "exampleRoma": "Nanmei sama desuka .",
-   "exampleZh": "几位？",
+   "exampleJp": "このように書いてください。",
+   "exampleRoma": "Kono you ni kaite kudasai .",
+   "exampleZh": "请像这样书写。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1605840",
@@ -182144,7 +182615,7 @@
    "coreChunk": "",
    "exampleJp": "トムはバランスを崩して転んだ。",
    "exampleRoma": "Tomu ha baransu wo kuzushi te koron da .",
-   "exampleZh": "汤姆失去了平衡摔落下来。",
+   "exampleZh": "汤姆失去平衡，摔倒了。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1516260",
@@ -183112,7 +183583,7 @@
    "coreChunk": "",
    "exampleJp": "悔しい？",
    "exampleRoma": "Kuyashii ？",
-   "exampleZh": "后悔吗？",
+   "exampleZh": "不甘心吗？",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1592350",
@@ -183256,7 +183727,7 @@
    "coreChunk": "",
    "exampleJp": "別々に包んでください。",
    "exampleRoma": "Betsubetsu ni tsutsun dekudasai .",
-   "exampleZh": "请你分开包装好吗？",
+   "exampleZh": "请分开包装。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "2831360",
@@ -219455,7 +219926,7 @@
    "yanFeatures": [],
    "coreChunk": "",
    "exampleJp": "きのう魚を３匹捕った。",
-   "exampleRoma": "Kinou sakana wo 3 hiki toratsu ta .",
+   "exampleRoma": "Kinou sakana wo sanbiki totsu ta .",
    "exampleZh": "昨天我钓了三条鱼。",
    "loanSource": [],
    "conceptCluster": "",
@@ -235116,7 +235587,7 @@
    "coreChunk": "",
    "exampleJp": "トムがマスクを外したよ。",
    "exampleRoma": "Tomu ga masuku wo hazushi tayo .",
-   "exampleZh": "汤姆脱了口罩。",
+   "exampleZh": "汤姆摘下口罩了。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1127870",
@@ -235537,7 +236008,7 @@
    "coreChunk": "顔が真っ青",
    "exampleJp": "顔が真っ青だよ、大丈夫？",
    "exampleRoma": "Kao ga massao da yo, daijoubu?",
-   "exampleZh": "你脸色发青，没事吧？",
+   "exampleZh": "你脸色都煞白了，没事吧？",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1604080",
@@ -236298,7 +236769,7 @@
    "coreChunk": "",
    "exampleJp": "パパは、うちのマンション下にある事務所にいた。",
    "exampleRoma": "Papa ha , uchino manshon shitani aru jimusho niita .",
-   "exampleZh": "爸爸在他的办公室里，在我们公寓楼下。",
+   "exampleZh": "爸爸在我们公寓楼下的办公室里。",
    "loanSource": [
     {
      "lang": "eng",
@@ -236673,7 +237144,7 @@
    "coreChunk": "",
    "exampleJp": "以前、お婆ちゃんはミシンを使い過ぎました。",
    "exampleRoma": "Izen , o baa chanha mishin wo tsukai sugi mashita .",
-   "exampleZh": "以前奶奶经常用缝纫机。",
+   "exampleZh": "以前奶奶缝纫机用得太多了。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1130640",
@@ -238827,9 +239298,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "大統領は目下マイアミにいる。",
-   "exampleRoma": "Daitouryou ha meshita maiami niiru .",
-   "exampleZh": "总统目前在迈阿密。",
+   "exampleJp": "目下の者をないがしろにするな。",
+   "exampleRoma": "Meshita no mono o naigashiro ni suru na.",
+   "exampleZh": "不要怠慢你的下属。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1535320",
@@ -239633,7 +240104,7 @@
    "coreChunk": "",
    "exampleJp": "紙は木材からできている。",
    "exampleRoma": "Kami ha mokuzai karadekiteiru .",
-   "exampleZh": "纸是由木制成的。",
+   "exampleZh": "纸是由木材制成的。",
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1534660",
