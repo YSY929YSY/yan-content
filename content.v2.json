@@ -1,8 +1,8 @@
 {
  "_meta": {
-  "version": "3.36",
-  "updated": "2026-09-13",
-  "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8005 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
+  "version": "3.37",
+  "updated": "2026-09-16",
+  "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8003 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
    "n4_core": {
     "source": "stephenmk/yomitan-jlpt-vocab original_data/n4.csv",
@@ -154107,56 +154107,6 @@
    }
   },
   {
-   "id": "n3_mada",
-   "word": "まだ",
-   "reading": "まだ",
-   "level": "N3",
-   "levels": [
-    "N3"
-   ],
-   "pos": "副词",
-   "meaning_zh": "还，仍；尚（未）",
-   "meaning_en": "still; as yet; only | (not) yet",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "まだ宿題が終わっていません。",
-   "exampleRoma": "Mada shukudai ga owatte imasen.",
-   "exampleZh": "作业还没有完成。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1527110",
-   "pitch": {
-    "accent": 1,
-    "mora": 2,
-    "source": "kanjium",
-    "agree": 2
-   },
-   "freq": {
-    "df": 34,
-    "source": "tatoeba",
-    "method": "lemma"
-   },
-   "publication": {
-    "dictionary": true,
-    "learning": true,
-    "dictionaryBasis": "legacy_dictionary_compat",
-    "learningBasis": "n3_opened_2026-09-03"
-   },
-   "legacySurfaces": [
-    "未だ"
-   ]
-  },
-  {
    "id": "n3_machi",
    "word": "街",
    "reading": "まち",
@@ -158386,56 +158336,6 @@
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "n3_opened_2026-09-03"
    }
-  },
-  {
-   "id": "n3_monji",
-   "word": "文字",
-   "reading": "もじ",
-   "level": "N3",
-   "levels": [
-    "N3"
-   ],
-   "pos": "名词",
-   "meaning_zh": "文字，字符",
-   "meaning_en": "letter (of an alphabet); character | writing",
-   "status": "zh_drafted",
-   "tags": {
-    "scene": [
-     "daily"
-    ],
-    "type": [
-     "uncategorized"
-    ],
-    "memory": []
-   },
-   "yanFeatures": [],
-   "coreChunk": "",
-   "exampleJp": "文字を大きく書いてください。",
-   "exampleRoma": "Moji o ookiku kaite kudasai.",
-   "exampleZh": "请把字写大一些。",
-   "loanSource": [],
-   "conceptCluster": "",
-   "jmdictSeq": "1505390",
-   "pitch": {
-    "accent": 1,
-    "mora": 3,
-    "source": "kanjium",
-    "agree": 2
-   },
-   "freq": {
-    "df": 97,
-    "source": "tatoeba",
-    "method": "lemma"
-   },
-   "publication": {
-    "dictionary": true,
-    "learning": true,
-    "dictionaryBasis": "legacy_dictionary_compat",
-    "learningBasis": "n3_opened_2026-09-03"
-   },
-   "legacyReadings": [
-    "もんじ"
-   ]
   },
   {
    "id": "n3_yagate",
