@@ -1,7 +1,7 @@
 {
  "_meta": {
-  "version": "3.37",
-  "updated": "2026-09-16",
+  "version": "3.38",
+  "updated": "2026-09-17",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8003 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
    "n4_core": {
@@ -20372,25 +20372,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_umareru"
-     },
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "私は京都で生まれた。",
-     "zh": "我生于京都。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 157635,
-     "zh_sentence_id": 414046
-    }
    }
   },
   {
@@ -21476,25 +21457,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_okaasan"
-     },
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "私のお母さんは秘書です。",
-     "zh": "我妈是秘书。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 13108779,
-     "zh_sentence_id": 3362988
-    }
    }
   },
   {
@@ -21672,25 +21634,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_okiru"
-     },
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "私は遅くまで起きていた。",
-     "zh": "我很晚才睡。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 155114,
-     "zh_sentence_id": 344235
-    }
    }
   },
   {
@@ -22747,25 +22690,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_onaji"
-     },
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "私も同じこと考えてた。",
-     "zh": "我也是这么想的。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 2835421,
-     "zh_sentence_id": 1227132
-    }
    }
   },
   {
@@ -23543,25 +23467,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_onna"
-     },
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "私は女だ。",
-     "zh": "我是女人。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 764118,
-     "zh_sentence_id": 747591
-    }
    }
   },
   {
@@ -24360,25 +24265,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_gakusei"
-     },
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "私は学生です。",
-     "zh": "我是个学生。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 157843,
-     "zh_sentence_id": 7768226
-    }
    }
   },
   {
@@ -24434,7 +24320,7 @@
       "id": "n5_kakeru"
      },
      {
-      "id": "n5_watashi"
+      "id": "n5_karendaa"
      }
     ],
     "sentence": {
@@ -24540,7 +24426,7 @@
       "id": "n5_kasa"
      },
      {
-      "id": "n5_watashi"
+      "id": "n5_nakusu"
      }
     ],
     "sentence": {
@@ -24736,25 +24622,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_kaze_2"
-     },
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "私は彼に風邪をうつした。",
-     "zh": "我把感冒传染给他了。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 154058,
-     "zh_sentence_id": 1423995
-    }
    }
   },
   {
@@ -28009,7 +27876,7 @@
       "id": "n5_kutsu"
      },
      {
-      "id": "n5_watashi"
+      "id": "n4_mitsukeru"
      }
     ],
     "sentence": {
@@ -32188,25 +32055,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_shitsumon"
-     },
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "彼女は私に質問をした。",
-     "zh": "她问了我一个问题。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 89497,
-     "zh_sentence_id": 842291
-    }
    }
   },
   {
@@ -32334,25 +32182,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_jidousha"
-     },
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "これは私の自動車です。",
-     "zh": "这是我的车。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 4659110,
-     "zh_sentence_id": 789581
-    }
    }
   },
   {
@@ -33084,7 +32913,7 @@
       "id": "n5_shukudai"
      },
      {
-      "id": "n5_watashi"
+      "id": "n3_akiru"
      }
     ],
     "sentence": {
@@ -33361,25 +33190,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_shiru"
-     },
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "彼女は私を知っている。",
-     "zh": "她认识我。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 89252,
-     "zh_sentence_id": 4970146
-    }
    }
   },
   {
@@ -34271,25 +34081,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_sumu"
-     },
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "私はここに住んでいます。",
-     "zh": "我住在这里。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 2113125,
-     "zh_sentence_id": 11264800
-    }
    }
   },
   {
@@ -34856,25 +34647,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_sengetsu"
-     },
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "私は先月ロンドンにいました。",
-     "zh": "上个月我在伦敦。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 155493,
-     "zh_sentence_id": 862691
-    }
    }
   },
   {
@@ -36777,25 +36549,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_taberu"
-     },
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "私も食べたい！",
-     "zh": "我也想吃！"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 12218067,
-     "zh_sentence_id": 12218066
-    }
    }
   },
   {
@@ -38051,25 +37804,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_tsugi"
-     },
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "次は私ですか？",
-     "zh": "下一个是我吗？"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 13537458,
-     "zh_sentence_id": 13275168
-    }
    }
   },
   {
@@ -40792,25 +40526,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_tomodachi"
-     },
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "私は友達がいない。",
-     "zh": "我没有朋友。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 152494,
-     "zh_sentence_id": 7768285
-    }
    }
   },
   {
@@ -43023,7 +42738,7 @@
       "id": "n5_noboru"
      },
      {
-      "id": "n5_watashi"
+      "id": "n3_choujou"
      }
     ],
     "sentence": {
@@ -46621,7 +46336,7 @@
       "id": "n5_fuutou"
      },
      {
-      "id": "n5_watashi"
+      "id": "n5_motsu"
      }
     ],
     "sentence": {
@@ -46983,25 +46698,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_butaniku"
-     },
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "豚肉は私には合わない。",
-     "zh": "猪肉不适合我。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 123261,
-     "zh_sentence_id": 8789278
-    }
    }
   },
   {
@@ -48814,25 +48510,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_mainichi"
-     },
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "私は毎日テニスをします。",
-     "zh": "我每天打网球。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 152719,
-     "zh_sentence_id": 2607356
-    }
    }
   },
   {
@@ -49760,7 +49437,7 @@
       "id": "n5_migi"
      },
      {
-      "id": "n5_watashi"
+      "id": "n5_magaru"
      }
     ],
     "sentence": {
@@ -50085,7 +49762,7 @@
       "id": "n5_michi"
      },
      {
-      "id": "n5_watashi"
+      "id": "n4_mori"
      }
     ],
     "sentence": {
@@ -50646,7 +50323,7 @@
       "id": "n5_muzukashii"
      },
      {
-      "id": "n5_watashi"
+      "id": "n4_suugaku"
      }
     ],
     "sentence": {
@@ -53776,7 +53453,7 @@
       "id": "n5_wasureru"
      },
      {
-      "id": "n5_watashi"
+      "id": "n3_hizuke"
      }
     ],
     "sentence": {
@@ -53884,25 +53561,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_watashi"
-     },
-     {
-      "id": "n5_yama"
-     }
-    ],
-    "sentence": {
-     "jp": "私は山にいました。",
-     "zh": "我在山里。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 4715,
-     "zh_sentence_id": 15
-    }
    }
   },
   {
