@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "version": "3.38",
+  "version": "3.39",
   "updated": "2026-09-17",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8003 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
@@ -15262,7 +15262,7 @@
    "wordField": {
     "members": [
      {
-      "id": "n5_watashi"
+      "id": "n4_unten"
      }
     ],
     "sentence": {
@@ -15750,9 +15750,6 @@
      },
      {
       "id": "n5_me"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -15970,9 +15967,6 @@
      },
      {
       "id": "n5_suki"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -16042,9 +16036,6 @@
      },
      {
       "id": "n5_suki"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -16663,9 +16654,6 @@
      },
      {
       "id": "n5_niwa"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -17290,9 +17278,6 @@
      },
      {
       "id": "n5_tomodachi"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -17360,9 +17345,6 @@
      },
      {
       "id": "n5_ani"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -18415,9 +18397,6 @@
      },
      {
       "id": "n5_oyogu"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -18791,9 +18770,6 @@
      },
      {
       "id": "n5_konshuu"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -19585,7 +19561,7 @@
       "id": "n5_jisho"
      },
      {
-      "id": "n5_watashi"
+      "id": "n5_ageru"
      }
     ],
     "sentence": {
@@ -19884,9 +19860,6 @@
      },
      {
       "id": "n5_mizu"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -20703,9 +20676,6 @@
      },
      {
       "id": "n5_suki"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -20823,9 +20793,6 @@
      },
      {
       "id": "n5_mainichi"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -21573,9 +21540,6 @@
      },
      {
       "id": "n5_sukoshi"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -22112,9 +22076,6 @@
      },
      {
       "id": "n5_tsuku"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -23314,7 +23275,7 @@
    "wordField": {
     "members": [
      {
-      "id": "n5_watashi"
+      "id": "n5_takushii"
      }
     ],
     "sentence": {
@@ -23570,9 +23531,6 @@
      },
      {
       "id": "n5_iku"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -25510,9 +25468,6 @@
      },
      {
       "id": "n5_okane"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -25991,9 +25946,6 @@
      },
      {
       "id": "n5_suki"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -26589,9 +26541,6 @@
       "id": "n5_tsukuru"
      },
      {
-      "id": "n5_watashi"
-     },
-     {
       "id": "n5_yuuhan"
      }
     ],
@@ -26777,9 +26726,6 @@
      },
      {
       "id": "n5_nomu"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -27081,9 +27027,6 @@
      },
      {
       "id": "n5_natsu"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -28413,9 +28356,6 @@
      },
      {
       "id": "n5_suki"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -29857,9 +29797,6 @@
      },
      {
       "id": "n5_shitsumon"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -30636,9 +30573,6 @@
       "id": "n5_konshuu"
      },
      {
-      "id": "n5_watashi"
-     },
-     {
       "id": "n5_yasumi"
      }
     ],
@@ -30752,9 +30686,6 @@
      },
      {
       "id": "n5_taberu"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -31829,9 +31760,6 @@
      },
      {
       "id": "n5_motsu"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -31947,9 +31875,6 @@
      },
      {
       "id": "n5_tsukue"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -32982,9 +32907,6 @@
      },
      {
       "id": "n5_uta"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -33575,9 +33497,6 @@
     "members": [
      {
       "id": "n5_suki"
-     },
-     {
-      "id": "n5_watashi"
      },
      {
       "id": "n5_yuki"
@@ -34171,7 +34090,7 @@
    "wordField": {
     "members": [
      {
-      "id": "n5_watashi"
+      "id": "n5_soba"
      }
     ],
     "sentence": {
@@ -34813,9 +34732,6 @@
      },
      {
       "id": "n5_shigoto"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -35704,9 +35620,6 @@
      },
      {
       "id": "n5_eiga"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -36287,22 +36200,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_watashi"
-     }
-    ],
-    "sentence": {
-     "jp": "私もとても楽しかったです。",
-     "zh": "我也过得很愉快。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 152203,
-     "zh_sentence_id": 333496
-    }
    }
   },
   {
@@ -36950,9 +36847,6 @@
      },
      {
       "id": "n5_machi"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -37236,9 +37130,6 @@
      },
      {
       "id": "n5_iku"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -39154,9 +39045,6 @@
      },
      {
       "id": "n5_kaeru"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -39225,7 +39113,7 @@
       "id": "n5_heya"
      },
      {
-      "id": "n5_watashi"
+      "id": "n5_aru"
      }
     ],
     "sentence": {
@@ -41578,9 +41466,6 @@
      },
      {
       "id": "n5_shiru"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -41845,9 +41730,6 @@
      },
      {
       "id": "n5_shiru"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -44573,9 +44455,6 @@
      },
      {
       "id": "n5_suki"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -45381,9 +45260,6 @@
      },
      {
       "id": "n5_sei"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -45450,9 +45326,6 @@
      },
      {
       "id": "n5_tsukuru"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -46589,9 +46462,6 @@
      },
      {
       "id": "n5_nugu"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -47008,9 +46878,6 @@
      },
      {
       "id": "n5_motsu"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -47524,9 +47391,6 @@
      },
      {
       "id": "n5_eigo"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -47878,9 +47742,6 @@
      },
      {
       "id": "n5_tsumetai"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -48667,7 +48528,7 @@
       "id": "n5_umareru"
      },
      {
-      "id": "n5_watashi"
+      "id": "n5_nen"
      }
     ],
     "sentence": {
@@ -48914,9 +48775,6 @@
      },
      {
       "id": "n5_umareru"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -49154,9 +49012,6 @@
      },
      {
       "id": "n5_soto"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -49506,7 +49361,7 @@
       "id": "n5_suki"
      },
      {
-      "id": "n5_watashi"
+      "id": "n4_kami"
      }
     ],
     "sentence": {
@@ -49575,9 +49430,6 @@
      },
      {
       "id": "n5_nomu"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -50486,9 +50338,6 @@
      },
      {
       "id": "n5_migi"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -52475,9 +52324,6 @@
      },
      {
       "id": "n5_sumu"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
@@ -52755,7 +52601,7 @@
       "id": "n5_toru"
      },
      {
-      "id": "n5_watashi"
+      "id": "n4_renraku"
      }
     ],
     "sentence": {
@@ -52892,9 +52738,6 @@
      },
      {
       "id": "n5_suki"
-     },
-     {
-      "id": "n5_watashi"
      }
     ],
     "sentence": {
