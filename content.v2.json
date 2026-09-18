@@ -1,7 +1,7 @@
 {
  "_meta": {
-  "version": "3.39",
-  "updated": "2026-09-17",
+  "version": "3.40",
+  "updated": "2026-09-18",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8003 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
    "n4_core": {
@@ -15456,6 +15456,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_mai"
+     },
+     {
+      "id": "n5_kami"
+     },
+     {
+      "id": "n5_go"
+     }
+    ],
+    "sentence": {
+     "jp": "紙を五枚ください。",
+     "zh": "请给我五张纸。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:7ff8d1ac5d76",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -17917,6 +17939,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_aru"
+     },
+     {
+      "id": "n5_tsukue"
+     },
+     {
+      "id": "n5_jisho"
+     }
+    ],
+    "sentence": {
+     "jp": "机の上に辞書があります。",
+     "zh": "桌上有一本词典。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:b2b7f957b3ab",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -19688,6 +19732,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_iriguchi"
+     },
+     {
+      "id": "n5_soba"
+     },
+     {
+      "id": "n5_tatsu"
+     }
+    ],
+    "sentence": {
+     "jp": "入口のそばに立っています。",
+     "zh": "站在入口旁边。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:c91204033ba0",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -23334,6 +23400,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_owaru"
+     },
+     {
+      "id": "n5_eiga"
+     },
+     {
+      "id": "n5_ji"
+     }
+    ],
+    "sentence": {
+     "jp": "映画は十時に終わります。",
+     "zh": "电影十点结束。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:6c74ff73265e",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -36200,6 +36288,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_tanoshii"
+     },
+     {
+      "id": "n5_ryokou"
+     },
+     {
+      "id": "n5_kinou"
+     }
+    ],
+    "sentence": {
+     "jp": "昨日の旅行はとても楽しかったです。",
+     "zh": "昨天的旅行非常开心。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:aab7a009cffd",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -36247,6 +36357,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_tanomu"
+     },
+     {
+      "id": "n5_haha"
+     },
+     {
+      "id": "n5_kaimono"
+     }
+    ],
+    "sentence": {
+     "jp": "母に買い物を頼みました。",
+     "zh": "我拜托妈妈去买东西。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:c5aaecf72f57",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -37554,6 +37686,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_tsuitachi"
+     },
+     {
+      "id": "n5_gatsu"
+     },
+     {
+      "id": "n5_gakkou"
+     }
+    ],
+    "sentence": {
+     "jp": "五月一日に学校が始まります。",
+     "zh": "五月一号学校开学。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:1626a5ef9262",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -37648,6 +37802,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_tsukareru"
+     },
+     {
+      "id": "n5_shigoto"
+     }
+    ],
+    "sentence": {
+     "jp": "仕事でとても疲れました。",
+     "zh": "工作累得不行。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:5514f060f64c",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -38075,6 +38248,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_tsumetai"
+     },
+     {
+      "id": "n5_mizu"
+     },
+     {
+      "id": "n5_nomu"
+     }
+    ],
+    "sentence": {
+     "jp": "冷たい水が飲みたいです。",
+     "zh": "想喝凉水。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:6f23d9b86953",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -39948,6 +40143,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_toshokan"
+     },
+     {
+      "id": "n5_hon"
+     },
+     {
+      "id": "n5_kariru"
+     }
+    ],
+    "sentence": {
+     "jp": "図書館で本を借ります。",
+     "zh": "在图书馆借书。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:60d50eab0337",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
