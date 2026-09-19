@@ -1,7 +1,7 @@
 {
  "_meta": {
-  "version": "3.40",
-  "updated": "2026-09-18",
+  "version": "3.41",
+  "updated": "2026-09-19",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8003 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
    "n4_core": {
@@ -13931,6 +13931,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kai_2"
+     },
+     {
+      "id": "n5_heya"
+     },
+     {
+      "id": "n5_san_2"
+     }
+    ],
+    "sentence": {
+     "jp": "部屋は三階にあります。",
+     "zh": "房间在三楼。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:2e4252a075cd",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -14128,6 +14150,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_gawa"
+     },
+     {
+      "id": "n5_michi"
+     },
+     {
+      "id": "n5_aruku"
+     }
+    ],
+    "sentence": {
+     "jp": "道の右側を歩きましょう。",
+     "zh": "走路的右边吧。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:cfaa2c60150a",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -14467,6 +14511,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ji"
+     },
+     {
+      "id": "n5_densha"
+     },
+     {
+      "id": "n5_tsuku"
+     }
+    ],
+    "sentence": {
+     "jp": "電車は五時に着きます。",
+     "zh": "电车五点到。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:2428276a02c0",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -15120,6 +15186,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_nin"
+     },
+     {
+      "id": "n5_kodomo"
+     }
+    ],
+    "sentence": {
+     "jp": "子供が三人います。",
+     "zh": "有三个孩子。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:5df793230eee",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -17705,6 +17790,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_amari"
+     },
+     {
+      "id": "n5_suki"
+     },
+     {
+      "id": "n5_amai"
+     }
+    ],
+    "sentence": {
+     "jp": "甘い物はあまり好きじゃない。",
+     "zh": "不太喜欢甜的东西。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:388628b05f86",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -19802,6 +19909,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_iru"
+     },
+     {
+      "id": "n5_neko"
+     },
+     {
+      "id": "n5_niwa"
+     }
+    ],
+    "sentence": {
+     "jp": "猫が庭にいます。",
+     "zh": "猫在院子里。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:6f666d514a51",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -20052,6 +20181,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_iroiro"
+     },
+     {
+      "id": "n5_hon"
+     },
+     {
+      "id": "n5_yomu"
+     }
+    ],
+    "sentence": {
+     "jp": "色々な本を読みました。",
+     "zh": "读了各种各样的书。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:620fb057429e",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -20206,6 +20357,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_usui"
+     },
+     {
+      "id": "n5_kami"
+     },
+     {
+      "id": "n5_kaku"
+     }
+    ],
+    "sentence": {
+     "jp": "薄い紙に書いてください。",
+     "zh": "请写在薄纸上。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:10cf78a31db8",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -20522,6 +20695,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_uru"
+     },
+     {
+      "id": "n5_kippu"
+     },
+     {
+      "id": "n5_mise"
+     }
+    ],
+    "sentence": {
+     "jp": "あの店は切符を売っています。",
+     "zh": "那家店卖车票。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:4c7084073374",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -22082,6 +22277,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_osu"
+     },
+     {
+      "id": "n5_botan"
+     },
+     {
+      "id": "n5_akai"
+     }
+    ],
+    "sentence": {
+     "jp": "赤いボタンを押してください。",
+     "zh": "请按红色的按钮。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:9ebfddcf7f53",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -23178,6 +23395,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_omoshiroi"
+     },
+     {
+      "id": "n5_eiga"
+     }
+    ],
+    "sentence": {
+     "jp": "あの映画はとても面白かったです。",
+     "zh": "那部电影非常有意思。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:598063ac4beb",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -24032,6 +24268,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kaeru"
+     },
+     {
+      "id": "n5_ie"
+     }
+    ],
+    "sentence": {
+     "jp": "もう家に帰ります。",
+     "zh": "我要回家了。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:e9c99e99e349",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -26454,6 +26709,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kissaten"
+     },
+     {
+      "id": "n5_matsu"
+     },
+     {
+      "id": "n5_tomodachi"
+     }
+    ],
+    "sentence": {
+     "jp": "喫茶店で友達を待ちます。",
+     "zh": "在咖啡店等朋友。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:bb7b1636bb2b",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -28151,6 +28428,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kumoru"
+     },
+     {
+      "id": "n5_sora"
+     }
+    ],
+    "sentence": {
+     "jp": "空が曇ってきました。",
+     "zh": "天阴下来了。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:2c6a4870d7cb",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -29202,6 +29498,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kouen"
+     },
+     {
+      "id": "n5_asobu"
+     },
+     {
+      "id": "n5_kodomo"
+     }
+    ],
+    "sentence": {
+     "jp": "公園で子供が遊んでいます。",
+     "zh": "孩子们在公园玩。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:4d3249022e52",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -32290,6 +32608,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_jibiki"
+     },
+     {
+      "id": "n5_atsui_3"
+     },
+     {
+      "id": "n5_tsukau"
+     }
+    ],
+    "sentence": {
+     "jp": "厚い字引を使います。",
+     "zh": "用厚厚的字典。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:2a0012e4f2b8",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -37584,6 +37924,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_choudo"
+     },
+     {
+      "id": "n5_ji"
+     },
+     {
+      "id": "n5_tsuku"
+     }
+    ],
+    "sentence": {
+     "jp": "丁度三時に着きました。",
+     "zh": "正好三点到了。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:ae2f6d38b0c7",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -41998,6 +42360,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_nan_2"
+     },
+     {
+      "id": "n5_zenbu"
+     }
+    ],
+    "sentence": {
+     "jp": "全部で何人ですか。",
+     "zh": "一共几个人？"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:4297a762a458",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -44039,6 +44420,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_hataraku"
+     },
+     {
+      "id": "n4_tsumori"
+     }
+    ],
+    "sentence": {
+     "jp": "来年から働くつもりです。",
+     "zh": "我打算明年开始工作。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:08aa253551ba",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -47270,6 +47670,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_heta"
+     },
+     {
+      "id": "n5_uta"
+     }
+    ],
+    "sentence": {
+     "jp": "歌が下手です。",
+     "zh": "歌唱得不好。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:aa91cd5af625",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -48805,6 +49224,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_magaru"
+     },
+     {
+      "id": "n5_kado"
+     },
+     {
+      "id": "n5_tsugi"
+     }
+    ],
+    "sentence": {
+     "jp": "次の角を曲がってください。",
+     "zh": "请在下一个路口拐弯。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:633b322566de",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -49454,6 +49895,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_migaku"
+     },
+     {
+      "id": "n5_ha"
+     }
+    ],
+    "sentence": {
+     "jp": "歯を磨きましょう。",
+     "zh": "刷牙吧。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:b5f1c47cb053",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -51236,6 +51696,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_yasashii"
+     },
+     {
+      "id": "n5_mondai"
+     }
+    ],
+    "sentence": {
+     "jp": "この問題は易しいです。",
+     "zh": "这道题很简单。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:2ef533ad5ede",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
@@ -51379,6 +51858,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_yasumu"
+     },
+     {
+      "id": "n5_nichiyoubi"
+     }
+    ],
+    "sentence": {
+     "jp": "日曜日は休みます。",
+     "zh": "星期天休息。"
+    },
+    "source": {
+     "provider": "Yan",
+     "sentenceId": "yan:ce2bdf826fcf",
+     "review": "owner_reviewed"
+    }
    }
   },
   {
