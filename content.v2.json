@@ -1,7 +1,7 @@
 {
  "_meta": {
-  "version": "3.41",
-  "updated": "2026-09-19",
+  "version": "3.45",
+  "updated": "2026-09-22",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8003 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
    "n4_core": {
@@ -23,6 +23,12 @@
    }
   },
   "changelog": [
+   {
+    "date": "2026-09-21",
+    "changes": [
+     "owner ruling（范围锁死单字段）：n5_gawa（～側/～がわ）pos 量词 → 接尾词。側 是方位接尾词（右側/左側/内側），不接数词，原标注为上游错误；见 tools/replication-freeze-exceptions.jsonl 与 staging/pattern-card-pos-audit.md。未改 word/reading/meaning_zh/publication，未动其它任何卡。"
+    ]
+   },
    {
     "date": "2026-09-13",
     "changes": [
@@ -555,18 +561,22 @@
     ],
     "phrases": [
      {
+      "phraseId": "p1",
       "jp": "Suicaをください",
       "zh": "请给我一张Suica"
      },
      {
+      "phraseId": "p2",
       "jp": "乗り換えはどこですか？",
       "zh": "换乘在哪里？"
      },
      {
+      "phraseId": "p3",
       "jp": "次は〇〇です",
       "zh": "下一站是〇〇（广播）"
      },
      {
+      "phraseId": "p4",
       "jp": "出口はどこですか？",
       "zh": "出口在哪里？"
      }
@@ -659,14 +669,17 @@
     ],
     "phrases": [
      {
+      "phraseId": "p1",
       "jp": "南口はどこですか？",
       "zh": "南口在哪里？"
      },
      {
+      "phraseId": "p2",
       "jp": "大江戸線はどこですか？",
       "zh": "大江户线在哪里？"
      },
      {
+      "phraseId": "p3",
       "jp": "西口をお願いします",
       "zh": "请去西口（告诉司机）"
      }
@@ -740,14 +753,17 @@
     ],
     "phrases": [
      {
+      "phraseId": "p1",
       "jp": "東口はどこですか？",
       "zh": "东口在哪里？"
      },
      {
+      "phraseId": "p2",
       "jp": "これをください",
       "zh": "给我这个"
      },
      {
+      "phraseId": "p3",
       "jp": "ありがとうございました",
       "zh": "谢谢您（道别）"
      }
@@ -821,14 +837,17 @@
     ],
     "phrases": [
      {
+      "phraseId": "p1",
       "jp": "大人一枚ください",
       "zh": "一张成人票"
      },
      {
+      "phraseId": "p2",
       "jp": "動物園はどこですか？",
       "zh": "动物园在哪里？"
      },
      {
+      "phraseId": "p3",
       "jp": "〇〇はどこですか？",
       "zh": "〇〇在哪里？（万能）"
      }
@@ -921,14 +940,17 @@
     ],
     "phrases": [
      {
+      "phraseId": "p1",
       "jp": "新幹線の乗り場はどこですか？",
       "zh": "新干线乘车处在哪里？"
      },
      {
+      "phraseId": "p2",
       "jp": "終点です",
       "zh": "终点站（广播）"
      },
      {
+      "phraseId": "p3",
       "jp": "ありがとうございます",
       "zh": "非常感谢"
      }
@@ -14116,7 +14138,7 @@
    "word": "～側",
    "reading": "～がわ",
    "level": "N5",
-   "pos": "量词",
+   "pos": "接尾词",
    "meaning_zh": "……边，……侧",
    "meaning_en": "~ side",
    "status": "draft",
@@ -14658,6 +14680,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_yasumi"
+     }
+    ],
+    "sentence": {
+     "jp": "来週から一週間、休みを取ります。",
+     "zh": "从下周开始休假一周。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:51a12a5b9ac9",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -15646,6 +15684,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_yasai"
+     },
+     {
+      "id": "n5_kau"
+     }
+    ],
+    "sentence": {
+     "jp": "八百屋で野菜を買いました。",
+     "zh": "在蔬菜店买了蔬菜。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:7fc804ff9437",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -17095,6 +17152,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_oyu"
+     },
+     {
+      "id": "n5_koohii"
+     }
+    ],
+    "sentence": {
+     "jp": "お湯で熱いコーヒーを入れます。",
+     "zh": "用热水冲一杯热咖啡。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:ee34886d31d7",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -18116,6 +18192,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_mondai"
+     },
+     {
+      "id": "n4_kotae"
+     }
+    ],
+    "sentence": {
+     "jp": "この問題には答えが二つあります。",
+     "zh": "这道题有两个答案。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:fcc5b93e285d",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -18281,6 +18376,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "n5_final_opened_2026-09-02"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_tenki"
+     }
+    ],
+    "sentence": {
+     "jp": "今日はいい天気ですね。",
+     "zh": "今天天气真好。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:e49dbdf2d7ae",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -20763,6 +20874,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "n5_final_opened_2026-09-02"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n4_oto"
+     }
+    ],
+    "sentence": {
+     "jp": "テレビの音が少しうるさいです。",
+     "zh": "电视的声音有点吵。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:aafb37d42da0",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -21638,6 +21765,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_hito"
+     }
+    ],
+    "sentence": {
+     "jp": "駅の前に人が大勢います。",
+     "zh": "车站前有很多人。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:37e392db8f61",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -25292,6 +25435,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_magaru"
+     }
+    ],
+    "sentence": {
+     "jp": "次の角を左に曲がってください。",
+     "zh": "请在下一个路口左转。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:39ae467ee303",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -27222,6 +27381,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_jugyou"
+     }
+    ],
+    "sentence": {
+     "jp": "今から教室で授業があります。",
+     "zh": "现在开始在教室上课。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:7057c385fe8c",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -32630,6 +32805,13 @@
      "sentenceId": "yan:2a0012e4f2b8",
      "review": "owner_reviewed"
     }
+   },
+   "lexicalAging": {
+    "status": "aging_observed",
+    "since": "2026-09-19",
+    "basis": "blind_naturalness + corpus_df",
+    "note": "现代日语一般说「辞書」。本卡保留可学状态,仅登记老化。",
+    "register": "tools/lexical-aging-register.jsonl"
    }
   },
   {
@@ -36817,6 +36999,28 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_ame"
+     },
+     {
+      "id": "n5_ashita"
+     },
+     {
+      "id": "n4_omou"
+     }
+    ],
+    "sentence": {
+     "jp": "明日は多分雨だと思います。",
+     "zh": "明天大概会下雨吧。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:bdfd43815096",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -39967,7 +40171,23 @@
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "n5_final_opened_2026-09-02"
    },
-   "jmdictSeq": "1189130"
+   "jmdictSeq": "1189130",
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_saki"
+     }
+    ],
+    "sentence": {
+     "jp": "お先にどうぞ。",
+     "zh": "您先请。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:a3c4711733a2",
+     "batchId": "authored-prod-02"
+    }
+   }
   },
   {
    "word": "動物",
@@ -40457,6 +40677,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_atarashii"
+     },
+     {
+      "id": "n5_hajimaru"
+     }
+    ],
+    "sentence": {
+     "jp": "新しい年が始まりました。",
+     "zh": "新的一年开始了。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:d2ba8b12510a",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -42216,6 +42455,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_osara"
+     },
+     {
+      "id": "n5_teeburu"
+     }
+    ],
+    "sentence": {
+     "jp": "テーブルにお皿を並べてください。",
+     "zh": "请把盘子摆在桌上。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:93727ba37adf",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -45131,6 +45389,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_hagaki"
+     },
+     {
+      "id": "n5_kitte"
+     }
+    ],
+    "sentence": {
+     "jp": "葉書に切手を貼ります。",
+     "zh": "在明信片上贴邮票。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:5eb3a3739f3f",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -45179,6 +45456,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_tenki"
+     },
+     {
+      "id": "n5_ashita"
+     }
+    ],
+    "sentence": {
+     "jp": "明日の天気は晴れです。",
+     "zh": "明天是晴天。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:0757f7cc9ccd",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -48491,6 +48787,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_michi"
+     }
+    ],
+    "sentence": {
+     "jp": "家の前に細い道があります。",
+     "zh": "家门前有一条窄路。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:8194ae5480e5",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -48959,6 +49271,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_doyoubi"
+     },
+     {
+      "id": "n5_renshuu"
+     }
+    ],
+    "sentence": {
+     "jp": "毎週土曜日にギターの練習をします。",
+     "zh": "每周六练吉他。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:4e80354e0123",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -49735,6 +50066,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_teeburu"
+     }
+    ],
+    "sentence": {
+     "jp": "丸いテーブルを買いました。",
+     "zh": "买了一张圆桌。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:0c1b8c657ba5",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -50236,6 +50583,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_kippu"
+     }
+    ],
+    "sentence": {
+     "jp": "駅で切符を見せてください。",
+     "zh": "请在车站出示车票。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:6c4de159c919",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -50793,6 +51156,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_eki"
+     },
+     {
+      "id": "n5_hashi"
+     }
+    ],
+    "sentence": {
+     "jp": "駅は橋の向こうにあります。",
+     "zh": "车站在桥的对面。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:e613dd032bfb",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -51265,7 +51647,23 @@
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "n5_final_opened_2026-09-02"
    },
-   "jmdictSeq": "1012550"
+   "jmdictSeq": "1012550",
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_denwa"
+     }
+    ],
+    "sentence": {
+     "jp": "もしもし、今お電話いいですか。",
+     "zh": "喂，现在方便接电话吗？"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:63e363e63d35",
+     "batchId": "authored-prod-02"
+    }
+   }
   },
   {
    "word": "持つ",
@@ -52161,6 +52559,25 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_hagaki"
+     },
+     {
+      "id": "n5_kitte"
+     }
+    ],
+    "sentence": {
+     "jp": "郵便局で葉書と切手を買いました。",
+     "zh": "在邮局买了明信片和邮票。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:fbf6f9c1b729",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -52258,6 +52675,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_resutoran"
+     }
+    ],
+    "sentence": {
+     "jp": "あのレストランはとても有名です。",
+     "zh": "那家餐厅非常有名。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:997e462a093e",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
@@ -54214,6 +54647,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_michi"
+     }
+    ],
+    "sentence": {
+     "jp": "気をつけて道を渡ってください。",
+     "zh": "过马路请小心。"
+    },
+    "source": {
+     "provider": "authored",
+     "sentenceId": "yan:47c8c556ed5b",
+     "batchId": "authored-prod-02"
+    }
    }
   },
   {
