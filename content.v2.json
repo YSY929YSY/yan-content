@@ -1,7 +1,7 @@
 {
  "_meta": {
-  "version": "3.45",
-  "updated": "2026-09-22",
+  "version": "3.46",
+  "updated": "2026-09-23",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8003 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
    "n4_core": {
@@ -23,6 +23,12 @@
    }
   },
   "changelog": [
+   {
+    "date": "2026-09-23",
+    "changes": [
+     "SCENE-LOCALE-01：为全部 6 个场景（subway/restaurant/convenience/hotel/directions/emergency）补显式 lang: \"ja-JP\"，场景短语的朗读语言从此由内容声明而非运行时兜底投影；未改 jp/zh 文案、未增删场景或短语、未改场景/短语 id、未触及 wordBank 与 eligibility 字段。"
+    ]
+   },
    {
     "date": "2026-09-21",
     "changes": [
@@ -967,6 +973,7 @@
    "color": "#d4401a",
    "bgColor": "#fce8e0",
    "ready": true,
+   "lang": "ja-JP",
    "cultureIds": [
     "sumimasen",
     "quiet_public"
@@ -1540,6 +1547,7 @@
    "color": "#a07020",
    "bgColor": "#faf0d8",
    "ready": true,
+   "lang": "ja-JP",
    "cultureIds": [
     "thanks_levels",
     "restaurant_rules",
@@ -1847,6 +1855,7 @@
    "color": "#2a7a6a",
    "bgColor": "#e0f0ec",
    "ready": true,
+   "lang": "ja-JP",
    "cultureIds": [
     "thanks_levels"
    ],
@@ -2350,6 +2359,7 @@
    "color": "#2d5fa0",
    "bgColor": "#e6eef8",
    "ready": true,
+   "lang": "ja-JP",
    "cultureIds": [
     "thanks_levels",
     "quiet_public"
@@ -2791,6 +2801,7 @@
    "color": "#5a3a9a",
    "bgColor": "#eeebff",
    "ready": true,
+   "lang": "ja-JP",
    "cultureIds": [
     "sumimasen",
     "soft_refusal"
@@ -3239,6 +3250,7 @@
    "color": "#aa3355",
    "bgColor": "#fce8ee",
    "ready": true,
+   "lang": "ja-JP",
    "cultureIds": [
     "sumimasen"
    ],
