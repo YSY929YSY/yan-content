@@ -1,7 +1,7 @@
 {
  "_meta": {
-  "version": "3.46",
-  "updated": "2026-09-23",
+  "version": "3.47",
+  "updated": "2026-09-24",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8003 条（例句覆盖 55.0%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
    "n4_core": {
@@ -23,6 +23,12 @@
    }
   },
   "changelog": [
+   {
+    "date": "2026-09-24",
+    "changes": [
+     "CARD-ID-01A：为 8 张深卡的全部 32 条骨架替换写入显式 skeletonId（s1..s4，按冻结前的原数组顺序一次性发号）。纯增字段，未改 jp/zh/chipLabel 文案、未增删或重排骨架、未改 cardId、未改核心句内容、未触及 wordBank。运行时键构造未变，此卡不含身份迁移。"
+    ]
+   },
    {
     "date": "2026-09-23",
     "changes": [
@@ -394505,21 +394511,25 @@
    "skeletonSuffix": "をお願いします",
    "skeletons": [
     {
+     "skeletonId": "s1",
      "jp": "注文をお願いします",
      "zh": "麻烦点餐",
      "chipLabel": "点餐"
     },
     {
+     "skeletonId": "s2",
      "jp": "会計をお願いします",
      "zh": "麻烦结账",
      "chipLabel": "结账"
     },
     {
+     "skeletonId": "s3",
      "jp": "予約をお願いします",
      "zh": "麻烦预约",
      "chipLabel": "预约"
     },
     {
+     "skeletonId": "s4",
      "jp": "写真をお願いします",
      "zh": "麻烦帮我拍照",
      "chipLabel": "拍照"
@@ -394663,21 +394673,25 @@
    "skeletonSuffix": "",
    "skeletons": [
     {
+     "skeletonId": "s1",
      "jp": "すみません、写真をお願いします。",
      "zh": "麻烦帮我拍照",
      "chipLabel": "拍照"
     },
     {
+     "skeletonId": "s2",
      "jp": "すみません、〇〇はどこですか？",
      "zh": "请问〇〇在哪里",
      "chipLabel": "问路"
     },
     {
+     "skeletonId": "s3",
      "jp": "すみません、通してください。",
      "zh": "让我过一下",
      "chipLabel": "让路"
     },
     {
+     "skeletonId": "s4",
      "jp": "すみません、もう一度お願いします。",
      "zh": "请再说一遍",
      "chipLabel": "再说一遍"
@@ -394799,21 +394813,25 @@
    "skeletonSuffix": "のですが…",
    "skeletons": [
     {
+     "skeletonId": "s1",
      "jp": "お湯が出ないのですが…",
      "zh": "热水出不来",
      "chipLabel": "热水"
     },
     {
+     "skeletonId": "s2",
      "jp": "シャワーが壊れているのですが…",
      "zh": "淋浴坏了",
      "chipLabel": "淋浴"
     },
     {
+     "skeletonId": "s3",
      "jp": "エアコンが動かないのですが…",
      "zh": "空调不动了",
      "chipLabel": "空调"
     },
     {
+     "skeletonId": "s4",
      "jp": "カギが開かないのですが…",
      "zh": "钥匙打不开",
      "chipLabel": "钥匙"
@@ -394951,21 +394969,25 @@
    "skeletonSuffix": "をお願いします",
    "skeletons": [
     {
+     "skeletonId": "s1",
      "jp": "お会計をお願いします",
      "zh": "麻烦结账",
      "chipLabel": "结账"
     },
     {
+     "skeletonId": "s2",
      "jp": "お箸をお願いします",
      "zh": "麻烦给我筷子",
      "chipLabel": "筷子"
     },
     {
+     "skeletonId": "s3",
      "jp": "キャンセルをお願いします",
      "zh": "麻烦取消",
      "chipLabel": "取消"
     },
     {
+     "skeletonId": "s4",
      "jp": "領収書をお願いします",
      "zh": "麻烦给我收据",
      "chipLabel": "收据"
@@ -395100,21 +395122,25 @@
    "skeletonSuffix": "はどこですか？",
    "skeletons": [
     {
+     "skeletonId": "s1",
      "jp": "乗り換えはどこですか？",
      "zh": "换乘在哪里",
      "chipLabel": "换乘"
     },
     {
+     "skeletonId": "s2",
      "jp": "改札口はどこですか？",
      "zh": "检票口在哪里",
      "chipLabel": "检票口"
     },
     {
+     "skeletonId": "s3",
      "jp": "出口はどこですか？",
      "zh": "出口在哪里",
      "chipLabel": "出口"
     },
     {
+     "skeletonId": "s4",
      "jp": "トイレはどこですか？",
      "zh": "厕所在哪里",
      "chipLabel": "厕所"
@@ -395230,21 +395256,25 @@
    "skeletonSuffix": "はどこですか？",
    "skeletons": [
     {
+     "skeletonId": "s1",
      "jp": "トイレはどこですか？",
      "zh": "厕所在哪",
      "chipLabel": "厕所"
     },
     {
+     "skeletonId": "s2",
      "jp": "駅はどこですか？",
      "zh": "车站在哪",
      "chipLabel": "车站"
     },
     {
+     "skeletonId": "s3",
      "jp": "出口はどこですか？",
      "zh": "出口在哪",
      "chipLabel": "出口"
     },
     {
+     "skeletonId": "s4",
      "jp": "コンビニはどこですか？",
      "zh": "便利店在哪",
      "chipLabel": "便利店"
@@ -395371,18 +395401,22 @@
    "skeletonSuffix": "が痛いです。",
    "skeletons": [
     {
+     "skeletonId": "s1",
      "jp": "頭が痛いです。",
      "zh": "头疼"
     },
     {
+     "skeletonId": "s2",
      "jp": "お腹が痛いです。",
      "zh": "肚子疼"
     },
     {
+     "skeletonId": "s3",
      "jp": "喉が痛いです。",
      "zh": "喉咙疼"
     },
     {
+     "skeletonId": "s4",
      "jp": "背中が痛いです。",
      "zh": "背疼"
     }
@@ -395524,21 +395558,25 @@
    "skeletonSuffix": "",
    "skeletons": [
     {
+     "skeletonId": "s1",
      "jp": "お世話になりました。ありがとうございました。",
      "zh": "承蒙关照，非常感谢",
      "chipLabel": "感谢"
     },
     {
+     "skeletonId": "s2",
      "jp": "お世話になりました。またよろしくお願いします。",
      "zh": "承蒙关照，下次再来",
      "chipLabel": "再来"
     },
     {
+     "skeletonId": "s3",
      "jp": "お世話になりました。楽しかったです。",
      "zh": "承蒙关照，很开心",
      "chipLabel": "说开心"
     },
     {
+     "skeletonId": "s4",
      "jp": "お世話になりました。お体に気をつけて。",
      "zh": "承蒙关照，保重身体",
      "chipLabel": "祝保重"
