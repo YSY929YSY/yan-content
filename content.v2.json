@@ -1,7 +1,7 @@
 {
  "_meta": {
-  "version": "3.50",
-  "updated": "2026-09-26",
+  "version": "3.51",
+  "updated": "2026-09-27",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8003 条（例句覆盖 53.1%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
    "n4_core": {
@@ -14412,8 +14412,8 @@
     "memory": []
    },
    "coreChunk": "二十歳になる",
-   "exampleJp": "二十歳になります。",
-   "exampleZh": "到二十岁。",
+   "exampleJp": "私は16歳です。",
+   "exampleZh": "我16岁了。",
    "id": "n5_sai",
    "levels": [
     "N5"
@@ -14421,7 +14421,7 @@
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Hatachi ni narimasu.",
+   "exampleRoma": "Watashi wa juuroku sai desu.",
    "freq": {
     "df": null,
     "source": "tatoeba",
@@ -15165,8 +15165,8 @@
     "memory": []
    },
    "coreChunk": "三日に来る",
-   "exampleJp": "三日に来ます。",
-   "exampleZh": "三号来。",
+   "exampleJp": "私の誕生日は3月22日です。",
+   "exampleZh": "我三月二十二号生日。",
    "id": "n5_nichi",
    "levels": [
     "N5"
@@ -15175,7 +15175,7 @@
     "kanji_anchor",
     "etymology_image"
    ],
-   "exampleRoma": "Mikka ni kimasu.",
+   "exampleRoma": "Watashi no tanjoubi wa sangatsu nijuuninichi desu.",
    "freq": {
     "df": null,
     "source": "tatoeba",
@@ -38547,8 +38547,8 @@
     "memory": []
    },
    "coreChunk": "机に座る",
-   "exampleJp": "机に座る。",
-   "exampleZh": "坐在桌旁。",
+   "exampleJp": "君の本は机の上にある。",
+   "exampleZh": "你的书在书桌上。",
    "id": "n5_tsukue",
    "jmdictSeq": "1220210",
    "levels": [
@@ -38557,7 +38557,7 @@
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Tsukue ni suwaru.",
+   "exampleRoma": "Kimi no hon wa tsukue no ue ni aru.",
    "pitch": {
     "accent": 0,
     "mora": 3,
@@ -40129,14 +40129,14 @@
     "memory": []
    },
    "coreChunk": "どうして来ない",
-   "exampleJp": "どうして来ないです。",
-   "exampleZh": "为什么不来？",
+   "exampleJp": "どうして学校に行かないの？",
+   "exampleZh": "你为什么不去上学？",
    "id": "n5_doushite",
    "levels": [
     "N5"
    ],
    "yanFeatures": [],
-   "exampleRoma": "Doushite ki nai desu.",
+   "exampleRoma": "Doushite gakkou ni ika nai no?",
    "freq": {
     "df": 1065,
     "source": "tatoeba",
@@ -41579,14 +41579,14 @@
     "memory": []
    },
    "coreChunk": "どれがいい",
-   "exampleJp": "どれがいいです。",
-   "exampleZh": "哪个好？",
+   "exampleJp": "あなたの鞄はどれですか。",
+   "exampleZh": "你的包是哪一个？",
    "id": "n5_dore",
    "levels": [
     "N5"
    ],
    "yanFeatures": [],
-   "exampleRoma": "Dore ga ii desu.",
+   "exampleRoma": "Anata no kaban wa dore desu ka.",
    "freq": {
     "df": 597,
     "source": "tatoeba",
@@ -48836,7 +48836,7 @@
    "reading": "ボタン",
    "level": "N5",
    "pos": "名词",
-   "meaning_zh": "纽扣",
+   "meaning_zh": "纽扣；按钮",
    "meaning_en": "button",
    "status": "draft",
    "tags": {
@@ -75684,7 +75684,7 @@
     "N4"
    ],
    "pos": "动词",
-   "meaning_zh": "弄湿",
+   "meaning_zh": "淋湿，变湿",
    "meaning_en": "to get wet",
    "status": "candidate",
    "tags": {
@@ -82152,7 +82152,7 @@
     "N4"
    ],
    "pos": "动词",
-   "meaning_zh": "弄脏；变脏",
+   "meaning_zh": "变脏",
    "meaning_en": "to get dirty; to become dirty",
    "status": "candidate",
    "tags": {
@@ -140074,9 +140074,9 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "トランプは今７０代です。",
-   "exampleRoma": "Toranpu wa ima 7 0 dai desu.",
-   "exampleZh": "川普现在70多岁。",
+   "exampleJp": "私たちは日曜日によくトランプをする。",
+   "exampleRoma": "Watashitachi wa nichiyoubi ni yoku toranpu o suru.",
+   "exampleZh": "我们常常在周日打牌。",
    "loanSource": [
     {
      "lang": "eng",
@@ -142775,7 +142775,7 @@
     "N3"
    ],
    "pos": "动词",
-   "meaning_zh": "淋湿，弄湿",
+   "meaning_zh": "淋湿，变湿",
    "meaning_en": "to get wet",
    "status": "zh_drafted",
    "tags": {
