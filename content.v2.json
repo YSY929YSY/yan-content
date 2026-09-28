@@ -1,7 +1,7 @@
 {
  "_meta": {
-  "version": "3.51",
-  "updated": "2026-09-27",
+  "version": "3.52",
+  "updated": "2026-09-28",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8003 条（例句覆盖 53.1%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
    "n4_core": {
@@ -27115,8 +27115,8 @@
     "memory": []
    },
    "coreChunk": "九時に来る",
-   "exampleJp": "九時に来ます。",
-   "exampleZh": "九点来。",
+   "exampleJp": "九ページを開きなさい。",
+   "exampleZh": "请翻到第九页。",
    "id": "n5_kyuu",
    "jmdictSeq": "1578150",
    "levels": [
@@ -27126,7 +27126,7 @@
     "kanji_anchor",
     "sound_change"
    ],
-   "exampleRoma": "Kuji ni kimasu.",
+   "exampleRoma": "Kyuu peeji o hiraki nasai.",
    "pitch": {
     "accent": 1,
     "mora": 2,
@@ -167986,9 +167986,13 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "一旦風呂＆飯落ち、４０分ぐらいして帰還！",
-   "exampleRoma": "Ittan furo & meshi ochi , 4 0 fun guraishite kikan!",
-   "exampleZh": "暂时下线洗澡吃饭，过40分左右回来！",
+   "suppressedExample": {
+    "jp": "一旦風呂＆飯落ち、４０分ぐらいして帰還！",
+    "zh": "暂时下线洗澡吃饭，过40分左右回来！",
+    "roma": "Ittan furo & meshi ochi , 4 0 fun guraishite kikan!",
+    "reason": "example_unnatural",
+    "auditRef": "ANNOTATION-LAYER-01@965e3831"
+   },
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1164650",
@@ -334989,9 +334993,13 @@
    },
    "yanFeatures": [],
    "coreChunk": "",
-   "exampleJp": "作業着に着替えなきゃ。",
-   "exampleRoma": "Sagyougi ni kigae nakya.",
-   "exampleZh": "我得换工服了。",
+   "suppressedExample": {
+    "jp": "作業着に着替えなきゃ。",
+    "zh": "我得换工服了。",
+    "roma": "Sagyougi ni kigae nakya.",
+    "reason": "example_identity_mismatch",
+    "auditRef": "ANNOTATION-LAYER-01@965e3831"
+   },
    "loanSource": [],
    "conceptCluster": "",
    "jmdictSeq": "1597470",
