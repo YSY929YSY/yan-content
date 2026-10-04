@@ -1,7 +1,7 @@
 {
  "_meta": {
-  "version": "3.52",
-  "updated": "2026-09-28",
+  "version": "3.53",
+  "updated": "2026-10-04",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8003 条（例句覆盖 53.1%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
    "n4_core": {
@@ -14936,7 +14936,7 @@
     "N5"
    ],
    "yanFeatures": [],
-   "exampleRoma": "Tomodachitachi.",
+   "exampleRoma": "Kodomotachi.",
    "freq": {
     "df": null,
     "source": "tatoeba",
@@ -18329,7 +18329,7 @@
     "N5"
    ],
    "yanFeatures": [],
-   "exampleRoma": "Are wa nani desu ka.",
+   "exampleRoma": "Are wa nan desu ka.",
    "freq": {
     "df": 499,
     "source": "tatoeba",
@@ -21651,7 +21651,7 @@
    "yanFeatures": [
     "kanji_anchor"
    ],
-   "exampleRoma": "Mou sukoshi ookii koe de hanashi shite kudasai.",
+   "exampleRoma": "Mou sukoshi ookii koe de hanashite kudasai.",
    "pitch": {
     "accent": 3,
     "mora": 4,
@@ -33771,7 +33771,7 @@
     "kanji_anchor",
     "scene_color"
    ],
-   "exampleRoma": "Shiroiro no shatsu.",
+   "exampleRoma": "Hakushoku no shatsu.",
    "pitch": {
     "accent": 1,
     "mora": 2,
@@ -42568,7 +42568,7 @@
     "kanji_anchor",
     "spoken_written"
    ],
-   "exampleRoma": "Nani desu ka.",
+   "exampleRoma": "Nan desu ka.",
    "pitch": {
     "accent": 1,
     "mora": 2,
@@ -49232,7 +49232,7 @@
     "spoken_written",
     "etymology_image"
    ],
-   "exampleRoma": "Maigetsu harau.",
+   "exampleRoma": "Maitsuki harau.",
    "pitch": {
     "accent": 0,
     "mora": 4,
@@ -49394,7 +49394,7 @@
     "kanji_anchor",
     "spoken_written"
    ],
-   "exampleRoma": "Mainen kimasu.",
+   "exampleRoma": "Maitoshi kimasu.",
    "pitch": {
     "accent": 0,
     "mora": 4,
@@ -53592,7 +53592,7 @@
    "yanFeatures": [
     "loanword"
    ],
-   "exampleRoma": "Rajiokase de kikimasu.",
+   "exampleRoma": "Rajikase de kikimasu.",
    "pitch": {
     "accent": 0,
     "mora": 4,
@@ -76210,7 +76210,7 @@
    "yanFeatures": [],
    "coreChunk": "葉が落ちる",
    "exampleJp": "木の葉が落ちています。",
-   "exampleRoma": "Ki no ha ga ochite imasu.",
+   "exampleRoma": "Konoha ga ochite imasu.",
    "exampleZh": "树叶落下来了。",
    "pitch": {
     "accent": 0,
