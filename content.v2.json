@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "version": "3.53",
+  "version": "3.54",
   "updated": "2026-10-04",
   "note": "完整版：旅游场景 + 地铁冒险 + 五十音46字（清音完整） + JLPT 词库 8003 条（例句覆盖 53.1%）+ 43 处世界打卡（35 处有可练短语、17 张记忆卡）",
   "wordBankSources": {
@@ -15186,22 +15186,6 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
-   },
-   "wordField": {
-    "members": [
-     {
-      "id": "n5_san_2"
-     }
-    ],
-    "sentence": {
-     "jp": "三日以内にお返事いたします。",
-     "zh": "我会在三天之内回复。"
-    },
-    "source": {
-     "provider": "Tatoeba",
-     "jp_sentence_id": 3468510,
-     "zh_sentence_id": 595622
-    }
    }
   },
   {
@@ -50741,6 +50725,22 @@
     "learning": true,
     "dictionaryBasis": "legacy_dictionary_compat",
     "learningBasis": "legacy_mainline_anchor"
+   },
+   "wordField": {
+    "members": [
+     {
+      "id": "n5_mikka"
+     }
+    ],
+    "sentence": {
+     "jp": "三日以内にお返事いたします。",
+     "zh": "我会在三天之内回复。"
+    },
+    "source": {
+     "provider": "Tatoeba",
+     "jp_sentence_id": 3468510,
+     "zh_sentence_id": 595622
+    }
    }
   },
   {
